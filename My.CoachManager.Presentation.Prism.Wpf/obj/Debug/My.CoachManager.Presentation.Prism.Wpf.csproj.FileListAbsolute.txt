@@ -183,3 +183,6 @@ C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachMan
 C:\Users\E0214719\Documents\Visual Studio 2012\Projects\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Wpf\bin\Debug\My.CoachManager.Presentation.Prism.Wpf.exe.config
 C:\Users\E0214719\Documents\Visual Studio 2012\Projects\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Wpf\obj\Debug\My.CoachManager.Presentation.Prism.Wpf.exe
 C:\Users\E0214719\Documents\Visual Studio 2012\Projects\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Wpf\obj\Debug\My.CoachManager.Presentation.Prism.Wpf.pdb
+C:\Applications\Tools\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Wpf\bin\Debug\My.CoachManager.Presentation.Prism.Wpf.exe.config
+C:\Applications\Tools\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Wpf\obj\Debug\My.CoachManager.Presentation.Prism.Wpf.exe
+C:\Applications\Tools\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Wpf\obj\Debug\My.CoachManager.Presentation.Prism.Wpf.pdb
