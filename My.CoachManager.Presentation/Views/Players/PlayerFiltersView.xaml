@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="My.CoachManager.Presentation.Views.Players.PlayerFiltersView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cal="http://www.caliburnproject.org"
+        mc:Ignorable="d"
+             xmlns:players="clr-namespace:My.CoachManager.Presentation.ViewModels.Players"
+             xmlns:entities="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
+             d:DataContext="{d:DesignInstance Type=players:PlayerFiltersViewModel}"
+        cal:Bind.AtDesignTime="True"
+        d:DesignHeight="400" d:DesignWidth="300">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static entities:PersonResources.LastName}" />
+        <TextBox Grid.Row="0" Grid.Column="1" CharacterCasing="Upper" Style="{StaticResource TextBoxStyle}" Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" />
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static entities:PersonResources.FirstName}" />
+        <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBoxStyle}" Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" />
+    </Grid>
+</UserControl>

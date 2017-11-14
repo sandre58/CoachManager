@@ -4,7 +4,7 @@
 library
 C#
 .cs
-C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Home\obj\Debug\
+D:\stephane.andre\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\obj\Debug\
 My.CoachManager.Presentation.Prism.Home
 none
 false
@@ -13,8 +13,8 @@ DEBUG;TRACE
 3-464886648
 
 81806335563
-661719621479
+66-395922182
 App.xaml;Views\HomeNavigationView.xaml;Views\HomeView.xaml;
 
-False
+True
 

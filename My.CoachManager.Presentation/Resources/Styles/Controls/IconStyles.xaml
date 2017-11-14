@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:extra="http://schemas.extra.com/ui">
+
+    <ResourceDictionary.MergedDictionaries>
+        <!--<ResourceDictionary Source="../Base/Brushes.xaml" />-->
+        <ResourceDictionary Source="/Framework.UI;component/Themes/ElysiumExtra/Icon.xaml" />
+        <ResourceDictionary Source="/Framework.UI;component/Themes/ElysiumExtra/GeometryIcon.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="QuestionMessageIconStyle" TargetType="{x:Type extra:Icon}" BasedOn="{StaticResource QuestionIconStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource InformationActionBrush}" />
+    </Style>
+
+    <Style x:Key="WarningMessage1IconStyle" TargetType="{x:Type extra:Icon}" BasedOn="{StaticResource WarningMessageIconStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource WarningActionBrush}" />
+    </Style>
+
+    <Style x:Key="ErroMessageIconStyle" TargetType="{x:Type extra:Icon}" BasedOn="{StaticResource Delete1IconStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource NegativeActionBrush}" />
+    </Style>
+
+    <Style x:Key="InfoMessageIconStyle" TargetType="{x:Type extra:Icon}" BasedOn="{StaticResource Information1IconStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource InformationActionBrush}" />
+    </Style>
+</ResourceDictionary>

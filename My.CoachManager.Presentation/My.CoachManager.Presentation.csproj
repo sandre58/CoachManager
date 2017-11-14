@@ -1,0 +1,947 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8C19716D-DAE8-459C-A3DA-7C245E688404}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>My.CoachManager.Presentation</RootNamespace>
+    <AssemblyName>My.CoachManager.Presentation</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - Home|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug - Home\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - Merial|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug - Merial\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper.Collection, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.Collection.3.0.0\lib\net45\AutoMapper.Collection.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Caliburn.Micro">
+      <HintPath>..\packages\Caliburn.Micro.Core.3.0.3\lib\net45\Caliburn.Micro.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro.Platform">
+      <HintPath>..\packages\Caliburn.Micro.3.0.3\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Elysium, Version=2.0.1042.4, Culture=neutral, PublicKeyToken=afa220db249e5b15, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elysium.Theme.2.0.4\lib\net45\Elysium.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Framework.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elysium.Extra.1.1.7\lib\net45\Framework.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro">
+      <HintPath>..\packages\MahApps.Metro.1.4.3\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.Interception.4.0.1\lib\Net45\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception.Configuration">
+      <HintPath>..\packages\Unity.Interception.4.0.1\lib\Net45\Microsoft.Practices.Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Reactive.Core, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Core.3.1.1\lib\net45\System.Reactive.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Interfaces.3.1.1\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Linq.3.1.1\lib\net45\System.Reactive.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Controls\CommandButton.cs" />
+    <Compile Include="Controls\Dialogs\PopupWindow.cs" />
+    <Compile Include="Controls\Dialogs\ProgressMessageDialog.cs" />
+    <Compile Include="Controls\ImagePicker.cs" />
+    <Compile Include="Controls\Dialogs\CustomDialog.cs" />
+    <Compile Include="Controls\Dialogs\MessageDialog.cs" />
+    <Compile Include="Controls\Views\WorkspaceView.cs" />
+    <Compile Include="Controls\DefaultApplicationBar.cs" />
+    <Compile Include="Controls\Views\FiltersView.cs" />
+    <Compile Include="Converters\FlyoutPositionConverter.cs" />
+    <Compile Include="Converters\FlyoutThemeConverter.cs" />
+    <Compile Include="Converters\StringToThemeConverter.cs" />
+    <Compile Include="Converters\StringToAccentConverter.cs" />
+    <Compile Include="ConfigurationManager.cs" />
+    <Compile Include="Parameters\ComboBoxParameters.cs" />
+    <Compile Include="Parameters\TextBoxParameters.cs" />
+    <Compile Include="Parameters\PasswordHelper.cs" />
+    <Compile Include="Parameters\FormParameters.cs" />
+    <Compile Include="Parameters\ControlParameters.cs" />
+    <Compile Include="Resources\Strings\Screens\AdminResources.Designer.cs">
+      <DependentUpon>AdminResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Strings\Screens\DialogResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DialogResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ScreenLocator.cs" />
+    <Compile Include="Resources\Strings\MessageResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MessageResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Factories\MenuFactory.cs" />
+    <Compile Include="Resources\Strings\Screens\StaffResources.Designer.cs">
+      <DependentUpon>StaffResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Services\AuthenticationService.cs" />
+    <Compile Include="ViewModels\Admin\CategoriesListViewModel.cs" />
+    <Compile Include="ViewModels\Admin\EditCategoryViewModel.cs" />
+    <Compile Include="ViewModels\Core\DataListViewModel.cs" />
+    <Compile Include="ViewModels\Core\ReadOnlyListViewModel.cs" />
+    <Compile Include="ViewModels\Core\NavigatableViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\MessagePopupViewModel.cs" />
+    <Compile Include="ViewModels\Players\EditPlayerViewModel.Contacts.cs" />
+    <Compile Include="ViewModels\Players\PlayerFiltersViewModel.cs" />
+    <Compile Include="ViewModels\Core\EditViewModel.cs" />
+    <Compile Include="ViewModels\Core\DetailViewModel.cs" />
+    <Compile Include="ViewModels\Core\ListViewModel.cs" />
+    <Compile Include="ViewModels\Core\FiltersViewModel.cs" />
+    <Compile Include="ViewModels\Home\HomeViewModel.cs" />
+    <Compile Include="ViewModels\Shell\SplashScreenViewModel.cs" />
+    <Compile Include="ViewModels\Shell\LoginViewModel.cs" />
+    <Compile Include="Views\Admin\CategoriesListView.xaml.cs">
+      <DependentUpon>CategoriesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\EditDataView.xaml.cs">
+      <DependentUpon>EditDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\EditCategoryView.xaml.cs">
+      <DependentUpon>EditCategoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\MessagePopupView.xaml.cs">
+      <DependentUpon>MessagePopupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Players\EditPlayerViewModel.cs" />
+    <Compile Include="ViewModels\Players\PlayerDetailViewModel.cs" />
+    <Compile Include="ViewModels\Staff\StaffListViewModel.cs" />
+    <Compile Include="ViewModels\Players\PlayersListViewModel.cs" />
+    <Compile Include="Views\Players\EmailsControl.xaml.cs">
+      <DependentUpon>EmailsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Players\PhonesControl.xaml.cs">
+      <DependentUpon>PhonesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Players\EditPlayerView.xaml.cs">
+      <DependentUpon>EditPlayerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Players\PlayerDetailView.xaml.cs">
+      <DependentUpon>PlayerDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Players\PlayerFiltersView.xaml.cs">
+      <DependentUpon>PlayerFiltersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shell\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Staff\StaffListView.xaml.cs">
+      <DependentUpon>StaffListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Players\PlayersListView.xaml.cs">
+      <DependentUpon>PlayersListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Shell\AboutViewModel.cs" />
+    <Compile Include="ViewModels\Shell\MainViewModel.cs" />
+    <Compile Include="ViewModels\Shell\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\Shell\ShellViewModel.cs" />
+    <Compile Include="Views\Shell\SplashScreenView.xaml.cs">
+      <DependentUpon>SplashScreenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shell\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shell\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shell\ShellView.xaml.cs">
+      <DependentUpon>ShellView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceLocator.cs" />
+    <Compile Include="Services\MetroDialogService.cs" />
+    <Compile Include="Resources\Strings\ControlResources.Designer.cs">
+      <DependentUpon>ControlResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Strings\Screens\MenuResources.Designer.cs">
+      <DependentUpon>MenuResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Strings\Screens\PlayersResources.Designer.cs">
+      <DependentUpon>PlayersResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Strings\Screens\HomeResources.Designer.cs">
+      <DependentUpon>HomeResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Strings\Screens\AboutResources.Designer.cs">
+      <DependentUpon>AboutResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Strings\Screens\SettingsResources.Designer.cs">
+      <DependentUpon>SettingsResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Strings\Screens\ShellResources.Designer.cs">
+      <DependentUpon>ShellResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Services\AppearanceService.cs" />
+    <Page Include="Resources\Styles\Base\Sizes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Controls\Calendar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Controls\SeparatorStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Controls\CheckBoxStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Controls\ContentPresenterStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Controls\LoadingStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Controls\NumericUpDownStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Controls\ValidationErrorStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Controls\ImagePickerStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Controls\IconStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Controls\DialogStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Controls\ButtonStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Controls\DatePickerStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Controls\RadioButtonStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Views\EditViewStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Views\ListViewStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Views\WorkspaceViewStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Views\FiltersViewStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Controls\TextBoxStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Controls\DataGridStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Admin\CategoriesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Admin\EditDataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Admin\EditCategoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\MessagePopupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\ProgressMessageDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\PopupWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Players\EmailsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Players\PhonesControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Shell\LoginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\MessageDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Home\HomeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Players\EditPlayerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Players\PlayerDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Players\PlayerFiltersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Shell\AboutView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Staff\StaffListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Players\PlayersListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Shell\SplashScreenView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Shell\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Shell\SettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Shell\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Base\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Base\Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Base\Geometry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Base\Fonts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Base\Images.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Base\Margins.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Controls\ApplicationBarStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Controls\BorderFixStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Controls\ComboboxStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Controls\CommandButtonStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Controls\FlyoutStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Controls\MenuStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Controls\TextBlockStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\MyAccent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings\ControlResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings\MessageResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MessageResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings\Screens\AdminResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings\Screens\DialogResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DialogResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings\Screens\StaffResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StaffResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings\Screens\MenuResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MenuResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings\Screens\PlayersResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PlayersResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings\Screens\HomeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HomeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings\Screens\AboutResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AboutResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings\Screens\SettingsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SettingsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings\Screens\ShellResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ShellResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="App.Debug - Home.config">
+      <DependentUpon>App.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App.Debug - Merial.config">
+      <DependentUpon>App.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App.Debug.config">
+      <DependentUpon>App.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App.Release.config">
+      <DependentUpon>App.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\Pictures\Countries\ad.png" />
+    <Resource Include="Resources\Pictures\Countries\ae.png" />
+    <Resource Include="Resources\Pictures\Countries\af.png" />
+    <Resource Include="Resources\Pictures\Countries\ag.png" />
+    <Resource Include="Resources\Pictures\Countries\ai.png" />
+    <Resource Include="Resources\Pictures\Countries\al.png" />
+    <Resource Include="Resources\Pictures\Countries\am.png" />
+    <Resource Include="Resources\Pictures\Countries\ao.png" />
+    <Resource Include="Resources\Pictures\Countries\aq.png" />
+    <Resource Include="Resources\Pictures\Countries\ar.png" />
+    <Resource Include="Resources\Pictures\Countries\as.png" />
+    <Resource Include="Resources\Pictures\Countries\at.png" />
+    <Resource Include="Resources\Pictures\Countries\au.png" />
+    <Resource Include="Resources\Pictures\Countries\aw.png" />
+    <Resource Include="Resources\Pictures\Countries\ax.png" />
+    <Resource Include="Resources\Pictures\Countries\az.png" />
+    <Resource Include="Resources\Pictures\Countries\ba.png" />
+    <Resource Include="Resources\Pictures\Countries\bb.png" />
+    <Resource Include="Resources\Pictures\Countries\bd.png" />
+    <Resource Include="Resources\Pictures\Countries\be.png" />
+    <Resource Include="Resources\Pictures\Countries\bf.png" />
+    <Resource Include="Resources\Pictures\Countries\bg.png" />
+    <Resource Include="Resources\Pictures\Countries\bh.png" />
+    <Resource Include="Resources\Pictures\Countries\bi.png" />
+    <Resource Include="Resources\Pictures\Countries\bj.png" />
+    <Resource Include="Resources\Pictures\Countries\bl.png" />
+    <Resource Include="Resources\Pictures\Countries\bm.png" />
+    <Resource Include="Resources\Pictures\Countries\bn.png" />
+    <Resource Include="Resources\Pictures\Countries\bo.png" />
+    <Resource Include="Resources\Pictures\Countries\bq.png" />
+    <Resource Include="Resources\Pictures\Countries\br.png" />
+    <Resource Include="Resources\Pictures\Countries\bs.png" />
+    <Resource Include="Resources\Pictures\Countries\bt.png" />
+    <Resource Include="Resources\Pictures\Countries\bv.png" />
+    <Resource Include="Resources\Pictures\Countries\bw.png" />
+    <Resource Include="Resources\Pictures\Countries\by.png" />
+    <Resource Include="Resources\Pictures\Countries\bz.png" />
+    <Resource Include="Resources\Pictures\Countries\ca.png" />
+    <Resource Include="Resources\Pictures\Countries\cc.png" />
+    <Resource Include="Resources\Pictures\Countries\cd.png" />
+    <Resource Include="Resources\Pictures\Countries\cf.png" />
+    <Resource Include="Resources\Pictures\Countries\cg.png" />
+    <Resource Include="Resources\Pictures\Countries\ch.png" />
+    <Resource Include="Resources\Pictures\Countries\ci.png" />
+    <Resource Include="Resources\Pictures\Countries\ck.png" />
+    <Resource Include="Resources\Pictures\Countries\cl.png" />
+    <Resource Include="Resources\Pictures\Countries\cm.png" />
+    <Resource Include="Resources\Pictures\Countries\cn.png" />
+    <Resource Include="Resources\Pictures\Countries\co.png" />
+    <Resource Include="Resources\Pictures\Countries\cr.png" />
+    <Resource Include="Resources\Pictures\Countries\cu.png" />
+    <Resource Include="Resources\Pictures\Countries\cv.png" />
+    <Resource Include="Resources\Pictures\Countries\cw.png" />
+    <Resource Include="Resources\Pictures\Countries\cx.png" />
+    <Resource Include="Resources\Pictures\Countries\cy.png" />
+    <Resource Include="Resources\Pictures\Countries\cz.png" />
+    <Resource Include="Resources\Pictures\Countries\de.png" />
+    <Resource Include="Resources\Pictures\Countries\dj.png" />
+    <Resource Include="Resources\Pictures\Countries\dk.png" />
+    <Resource Include="Resources\Pictures\Countries\dm.png" />
+    <Resource Include="Resources\Pictures\Countries\do.png" />
+    <Resource Include="Resources\Pictures\Countries\dz.png" />
+    <Resource Include="Resources\Pictures\Countries\ec.png" />
+    <Resource Include="Resources\Pictures\Countries\ee.png" />
+    <Resource Include="Resources\Pictures\Countries\eg.png" />
+    <Resource Include="Resources\Pictures\Countries\eh.png" />
+    <Resource Include="Resources\Pictures\Countries\er.png" />
+    <Resource Include="Resources\Pictures\Countries\es.png" />
+    <Resource Include="Resources\Pictures\Countries\et.png" />
+    <Resource Include="Resources\Pictures\Countries\fi.png" />
+    <Resource Include="Resources\Pictures\Countries\fj.png" />
+    <Resource Include="Resources\Pictures\Countries\fk.png" />
+    <Resource Include="Resources\Pictures\Countries\fm.png" />
+    <Resource Include="Resources\Pictures\Countries\fo.png" />
+    <Resource Include="Resources\Pictures\Countries\fr.png" />
+    <Resource Include="Resources\Pictures\Countries\ga.png" />
+    <Resource Include="Resources\Pictures\Countries\gb.png" />
+    <Resource Include="Resources\Pictures\Countries\gd.png" />
+    <Resource Include="Resources\Pictures\Countries\ge.png" />
+    <Resource Include="Resources\Pictures\Countries\gf.png" />
+    <Resource Include="Resources\Pictures\Countries\gg.png" />
+    <Resource Include="Resources\Pictures\Countries\gh.png" />
+    <Resource Include="Resources\Pictures\Countries\gi.png" />
+    <Resource Include="Resources\Pictures\Countries\gl.png" />
+    <Resource Include="Resources\Pictures\Countries\gm.png" />
+    <Resource Include="Resources\Pictures\Countries\gn.png" />
+    <Resource Include="Resources\Pictures\Countries\gp.png" />
+    <Resource Include="Resources\Pictures\Countries\gq.png" />
+    <Resource Include="Resources\Pictures\Countries\gr.png" />
+    <Resource Include="Resources\Pictures\Countries\gs.png" />
+    <Resource Include="Resources\Pictures\Countries\gt.png" />
+    <Resource Include="Resources\Pictures\Countries\gu.png" />
+    <Resource Include="Resources\Pictures\Countries\gw.png" />
+    <Resource Include="Resources\Pictures\Countries\gy.png" />
+    <Resource Include="Resources\Pictures\Countries\hk.png" />
+    <Resource Include="Resources\Pictures\Countries\hm.png" />
+    <Resource Include="Resources\Pictures\Countries\hn.png" />
+    <Resource Include="Resources\Pictures\Countries\hr.png" />
+    <Resource Include="Resources\Pictures\Countries\ht.png" />
+    <Resource Include="Resources\Pictures\Countries\hu.png" />
+    <Resource Include="Resources\Pictures\Countries\id.png" />
+    <Resource Include="Resources\Pictures\Countries\ie.png" />
+    <Resource Include="Resources\Pictures\Countries\il.png" />
+    <Resource Include="Resources\Pictures\Countries\im.png" />
+    <Resource Include="Resources\Pictures\Countries\in.png" />
+    <Content Include="Resources\Pictures\Countries\index.html" />
+    <Resource Include="Resources\Pictures\Countries\io.png" />
+    <Resource Include="Resources\Pictures\Countries\iq.png" />
+    <Resource Include="Resources\Pictures\Countries\ir.png" />
+    <Resource Include="Resources\Pictures\Countries\is.png" />
+    <Resource Include="Resources\Pictures\Countries\it.png" />
+    <Resource Include="Resources\Pictures\Countries\je.png" />
+    <Resource Include="Resources\Pictures\Countries\jm.png" />
+    <Resource Include="Resources\Pictures\Countries\jo.png" />
+    <Resource Include="Resources\Pictures\Countries\jp.png" />
+    <Resource Include="Resources\Pictures\Countries\ke.png" />
+    <Resource Include="Resources\Pictures\Countries\kg.png" />
+    <Resource Include="Resources\Pictures\Countries\kh.png" />
+    <Resource Include="Resources\Pictures\Countries\ki.png" />
+    <Resource Include="Resources\Pictures\Countries\km.png" />
+    <Resource Include="Resources\Pictures\Countries\kn.png" />
+    <Resource Include="Resources\Pictures\Countries\kp.png" />
+    <Resource Include="Resources\Pictures\Countries\kr.png" />
+    <Resource Include="Resources\Pictures\Countries\kw.png" />
+    <Resource Include="Resources\Pictures\Countries\ky.png" />
+    <Resource Include="Resources\Pictures\Countries\kz.png" />
+    <Resource Include="Resources\Pictures\Countries\la.png" />
+    <Resource Include="Resources\Pictures\Countries\lb.png" />
+    <Resource Include="Resources\Pictures\Countries\lc.png" />
+    <Resource Include="Resources\Pictures\Countries\li.png" />
+    <Resource Include="Resources\Pictures\Countries\lk.png" />
+    <Resource Include="Resources\Pictures\Countries\lr.png" />
+    <Resource Include="Resources\Pictures\Countries\ls.png" />
+    <Resource Include="Resources\Pictures\Countries\lt.png" />
+    <Resource Include="Resources\Pictures\Countries\lu.png" />
+    <Resource Include="Resources\Pictures\Countries\lv.png" />
+    <Resource Include="Resources\Pictures\Countries\ly.png" />
+    <Resource Include="Resources\Pictures\Countries\ma.png" />
+    <Resource Include="Resources\Pictures\Countries\mc.png" />
+    <Resource Include="Resources\Pictures\Countries\md.png" />
+    <Resource Include="Resources\Pictures\Countries\me.png" />
+    <Resource Include="Resources\Pictures\Countries\mf.png" />
+    <Resource Include="Resources\Pictures\Countries\mg.png" />
+    <Resource Include="Resources\Pictures\Countries\mh.png" />
+    <Resource Include="Resources\Pictures\Countries\mk.png" />
+    <Resource Include="Resources\Pictures\Countries\ml.png" />
+    <Resource Include="Resources\Pictures\Countries\mm.png" />
+    <Resource Include="Resources\Pictures\Countries\mn.png" />
+    <Resource Include="Resources\Pictures\Countries\mo.png" />
+    <Resource Include="Resources\Pictures\Countries\mp.png" />
+    <Resource Include="Resources\Pictures\Countries\mq.png" />
+    <Resource Include="Resources\Pictures\Countries\mr.png" />
+    <Resource Include="Resources\Pictures\Countries\ms.png" />
+    <Resource Include="Resources\Pictures\Countries\mt.png" />
+    <Resource Include="Resources\Pictures\Countries\mu.png" />
+    <Resource Include="Resources\Pictures\Countries\mv.png" />
+    <Resource Include="Resources\Pictures\Countries\mw.png" />
+    <Resource Include="Resources\Pictures\Countries\mx.png" />
+    <Resource Include="Resources\Pictures\Countries\my.png" />
+    <Resource Include="Resources\Pictures\Countries\mz.png" />
+    <Resource Include="Resources\Pictures\Countries\na.png" />
+    <Resource Include="Resources\Pictures\Countries\nc.png" />
+    <Resource Include="Resources\Pictures\Countries\ne.png" />
+    <Resource Include="Resources\Pictures\Countries\nf.png" />
+    <Resource Include="Resources\Pictures\Countries\ng.png" />
+    <Resource Include="Resources\Pictures\Countries\ni.png" />
+    <Resource Include="Resources\Pictures\Countries\nl.png" />
+    <Resource Include="Resources\Pictures\Countries\no.png" />
+    <Resource Include="Resources\Pictures\Countries\np.png" />
+    <Resource Include="Resources\Pictures\Countries\nr.png" />
+    <Resource Include="Resources\Pictures\Countries\nu.png" />
+    <Resource Include="Resources\Pictures\Countries\nz.png" />
+    <Resource Include="Resources\Pictures\Countries\om.png" />
+    <Resource Include="Resources\Pictures\Countries\pa.png" />
+    <Resource Include="Resources\Pictures\Countries\pe.png" />
+    <Resource Include="Resources\Pictures\Countries\pf.png" />
+    <Resource Include="Resources\Pictures\Countries\pg.png" />
+    <Resource Include="Resources\Pictures\Countries\ph.png" />
+    <Resource Include="Resources\Pictures\Countries\pk.png" />
+    <Resource Include="Resources\Pictures\Countries\pl.png" />
+    <Resource Include="Resources\Pictures\Countries\pm.png" />
+    <Resource Include="Resources\Pictures\Countries\pn.png" />
+    <Resource Include="Resources\Pictures\Countries\pr.png" />
+    <Resource Include="Resources\Pictures\Countries\ps.png" />
+    <Resource Include="Resources\Pictures\Countries\pt.png" />
+    <Resource Include="Resources\Pictures\Countries\pw.png" />
+    <Resource Include="Resources\Pictures\Countries\py.png" />
+    <Resource Include="Resources\Pictures\Countries\qa.png" />
+    <Resource Include="Resources\Pictures\Countries\re.png" />
+    <Resource Include="Resources\Pictures\Countries\ro.png" />
+    <Resource Include="Resources\Pictures\Countries\rs.png" />
+    <Resource Include="Resources\Pictures\Countries\ru.png" />
+    <Resource Include="Resources\Pictures\Countries\rw.png" />
+    <Resource Include="Resources\Pictures\Countries\sa.png" />
+    <Resource Include="Resources\Pictures\Countries\sb.png" />
+    <Resource Include="Resources\Pictures\Countries\sc.png" />
+    <Resource Include="Resources\Pictures\Countries\sd.png" />
+    <Resource Include="Resources\Pictures\Countries\se.png" />
+    <Resource Include="Resources\Pictures\Countries\sg.png" />
+    <Resource Include="Resources\Pictures\Countries\sh.png" />
+    <Resource Include="Resources\Pictures\Countries\si.png" />
+    <Resource Include="Resources\Pictures\Countries\sj.png" />
+    <Resource Include="Resources\Pictures\Countries\sk.png" />
+    <Resource Include="Resources\Pictures\Countries\sl.png" />
+    <Resource Include="Resources\Pictures\Countries\sm.png" />
+    <Resource Include="Resources\Pictures\Countries\sn.png" />
+    <Resource Include="Resources\Pictures\Countries\so.png" />
+    <Resource Include="Resources\Pictures\Countries\sr.png" />
+    <Resource Include="Resources\Pictures\Countries\ss.png" />
+    <Resource Include="Resources\Pictures\Countries\st.png" />
+    <Resource Include="Resources\Pictures\Countries\sv.png" />
+    <Resource Include="Resources\Pictures\Countries\sx.png" />
+    <Resource Include="Resources\Pictures\Countries\sy.png" />
+    <Resource Include="Resources\Pictures\Countries\sz.png" />
+    <Resource Include="Resources\Pictures\Countries\tc.png" />
+    <Resource Include="Resources\Pictures\Countries\td.png" />
+    <Resource Include="Resources\Pictures\Countries\tf.png" />
+    <Resource Include="Resources\Pictures\Countries\tg.png" />
+    <Resource Include="Resources\Pictures\Countries\th.png" />
+    <Resource Include="Resources\Pictures\Countries\tj.png" />
+    <Resource Include="Resources\Pictures\Countries\tk.png" />
+    <Resource Include="Resources\Pictures\Countries\tl.png" />
+    <Resource Include="Resources\Pictures\Countries\tm.png" />
+    <Resource Include="Resources\Pictures\Countries\tn.png" />
+    <Resource Include="Resources\Pictures\Countries\to.png" />
+    <Resource Include="Resources\Pictures\Countries\tr.png" />
+    <Resource Include="Resources\Pictures\Countries\tt.png" />
+    <Resource Include="Resources\Pictures\Countries\tv.png" />
+    <Resource Include="Resources\Pictures\Countries\tw.png" />
+    <Resource Include="Resources\Pictures\Countries\tz.png" />
+    <Resource Include="Resources\Pictures\Countries\ua.png" />
+    <Resource Include="Resources\Pictures\Countries\ug.png" />
+    <Resource Include="Resources\Pictures\Countries\um.png" />
+    <Resource Include="Resources\Pictures\Countries\us.png" />
+    <Resource Include="Resources\Pictures\Countries\uy.png" />
+    <Resource Include="Resources\Pictures\Countries\uz.png" />
+    <Resource Include="Resources\Pictures\Countries\va.png" />
+    <Resource Include="Resources\Pictures\Countries\vc.png" />
+    <Resource Include="Resources\Pictures\Countries\ve.png" />
+    <Resource Include="Resources\Pictures\Countries\vg.png" />
+    <Resource Include="Resources\Pictures\Countries\vi.png" />
+    <Resource Include="Resources\Pictures\Countries\vn.png" />
+    <Resource Include="Resources\Pictures\Countries\vu.png" />
+    <Resource Include="Resources\Pictures\Countries\wf.png" />
+    <Resource Include="Resources\Pictures\Countries\ws.png" />
+    <Resource Include="Resources\Pictures\Countries\ye.png" />
+    <Resource Include="Resources\Pictures\Countries\yt.png" />
+    <Resource Include="Resources\Pictures\Countries\za.png" />
+    <Resource Include="Resources\Pictures\Countries\zm.png" />
+    <Resource Include="Resources\Pictures\Countries\zw.png" />
+    <Content Include="Unity\PresentationUnity.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Resource Include="Resources\Fonts\segoeui.ttf" />
+    <Resource Include="Resources\Fonts\segoeuib.ttf" />
+    <Resource Include="Resources\Fonts\segoeuii.ttf" />
+    <Resource Include="Resources\Fonts\segoeuil.ttf" />
+    <Resource Include="Resources\Fonts\segoeuiz.ttf" />
+    <Resource Include="Resources\Fonts\seguisb.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+      <TransformOnBuild>true</TransformOnBuild>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\My.CoachManager.Application.Dtos\My.CoachManager.Application.Dtos.csproj">
+      <Project>{2A887BE7-A2F5-4CD8-9FD6-AF1ADB53B874}</Project>
+      <Name>My.CoachManager.Application.Dtos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.CrossCutting.Core\My.CoachManager.CrossCutting.Core.csproj">
+      <Project>{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}</Project>
+      <Name>My.CoachManager.CrossCutting.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.CrossCutting.Logging.Supervision\My.CoachManager.CrossCutting.Logging.Supervision.csproj">
+      <Project>{ff822bfd-cb92-482d-ba26-a1398012777a}</Project>
+      <Name>My.CoachManager.CrossCutting.Logging.Supervision</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.CrossCutting.Logging\My.CoachManager.CrossCutting.Logging.csproj">
+      <Project>{381D433D-9F76-4286-B0F5-7209E477B22B}</Project>
+      <Name>My.CoachManager.CrossCutting.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.CrossCutting.Unity\My.CoachManager.CrossCutting.Unity.csproj">
+      <Project>{e9776f93-3c59-4dae-bb28-dcefe01678d4}</Project>
+      <Name>My.CoachManager.CrossCutting.Unity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Core\My.CoachManager.Presentation.Core.csproj">
+      <Project>{137BC5A7-D929-4DB8-B1EB-4EF04AB64BBC}</Project>
+      <Name>My.CoachManager.Presentation.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.ServiceAgent\My.CoachManager.Presentation.ServiceAgent.csproj">
+      <Project>{1a6aeeab-7175-4cea-90a6-68b064ab65dc}</Project>
+      <Name>My.CoachManager.Presentation.ServiceAgent</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.ViewModels\My.CoachManager.Presentation.ViewModels.csproj">
+      <Project>{CD1BE4C7-0CFB-4FE2-85C9-AD8A63B2CCA4}</Project>
+      <Name>My.CoachManager.Presentation.ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Services.Core\My.CoachManager.Services.Core.csproj">
+      <Project>{196ca01e-80fc-4807-9af4-ef97f1c90aae}</Project>
+      <Name>My.CoachManager.Services.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Services.Wcf\My.CoachManager.Services.Wcf.csproj">
+      <Project>{15B3E0D2-6217-493A-A690-158C497F5318}</Project>
+      <Name>My.CoachManager.Services.Wcf</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pictures\CoachManager.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pictures\CoachManagerIcon.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\SlowCheetah.2.5.48\build\SlowCheetah.targets" Condition="Exists('..\packages\SlowCheetah.2.5.48\build\SlowCheetah.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\SlowCheetah.2.5.48\build\SlowCheetah.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SlowCheetah.2.5.48\build\SlowCheetah.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

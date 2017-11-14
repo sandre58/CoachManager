@@ -1,0 +1,45 @@
+﻿<controls:WorkspaceView x:Class="My.CoachManager.Presentation.Views.Admin.EditCategoryView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cal="http://www.caliburnproject.org"
+        mc:Ignorable="d"
+        xmlns:entities="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
+        xmlns:params="clr-namespace:My.CoachManager.Presentation.Parameters"
+        xmlns:admin="clr-namespace:My.CoachManager.Presentation.ViewModels.Admin"
+        xmlns:controls="clr-namespace:My.CoachManager.Presentation.Controls.Views"
+        xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:elysium="http://schemas.extra.com/ui"
+        xmlns:views="clr-namespace:My.CoachManager.Presentation.Views.Admin"
+        d:DataContext="{d:DesignInstance Type=admin:EditCategoryViewModel}"
+        cal:Bind.AtDesignTime="True"
+        Height="250" Width="600"
+        Style="{StaticResource EditViewStyle}">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <views:EditDataView Grid.Column="0" Grid.Row="0" DataContext="{Binding Item}" />
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <elysium:Icon Grid.Column="0" Grid.Row="0" Size="Medium" Style="{StaticResource CalendarYearIconStyle}" HorizontalAlignment="Center"  Foreground="#FF4D4D4D" />
+
+            <mahapps:NumericUpDown
+                Grid.Column="1" Grid.Row="0"
+                    Minimum="1900" Interval="1"
+                    Width="{StaticResource MediumWidth}"
+                    Value="{Binding Item.Year, UpdateSourceTrigger=PropertyChanged}"
+                    params:FormParameters.Label="{x:Static entities:CategoryResources.Year}" />
+        </Grid>
+    </Grid>
+</controls:WorkspaceView>

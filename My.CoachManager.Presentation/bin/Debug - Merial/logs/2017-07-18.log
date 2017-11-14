@@ -1,0 +1,412 @@
+12|2017-07-18 12:10:30.8319|ERROR||My.CoachManager.CrossCutting.Logging.Supervision.Logger|My.CoachManager.CrossCutting.Core.Exceptions.BusinessException: Ceci est un test. ---> My.CoachManager.CrossCutting.Core.Exceptions.BusinessException: Ceci est un test.
+   à DynamicModule.ns.Wrapped_ICategoriesListAppService_730c10bbf4b84451b48d38d226b266bd.GetCategories()
+   à My.CoachManager.Services.Wcf.AdminService.GetCategories() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Services.Wcf\AdminService.cs:ligne 19
+   à SyncInvokeGetCategories(Object , Object[] , Object[] )
+   à System.ServiceModel.Dispatcher.SyncMethodInvoker.Invoke(Object instance, Object[] inputs, Object[]& outputs)
+   à System.ServiceModel.Dispatcher.DispatchOperationRuntime.InvokeBegin(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage5(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage11(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.MessageRpc.Process(Boolean isOperationContextSet)
+   --- Fin de la trace de la pile d'exception interne ---
+
+Server stack trace: 
+   à My.CoachManager.Services.Core.MessageInspectors.ThrownExceptionsClientMessageInspector.AfterReceiveReply(Message& reply, Object correlationState) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Services.Core\MessageInspectors\ThrownExceptionsClientMessageInspector.cs:ligne 54
+   à System.ServiceModel.Dispatcher.ImmutableClientRuntime.AfterReceiveReply(ProxyRpc& rpc)
+   à System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs)
+   à System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   à System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   à System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   à System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   à My.CoachManager.Presentation.ServiceAgent.AdminServiceReference.IAdminService.GetCategories()
+   à My.CoachManager.Presentation.ServiceAgent.AdminServiceReference.AdminServiceClient.GetCategories() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.ServiceAgent\Service References\AdminServiceReference\Reference.cs:ligne 71
+   à My.CoachManager.Presentation.ViewModels.Admin.CategoriesListViewModel.LoadDataCore() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Admin\CategoriesListViewModel.cs:ligne 72
+   à My.CoachManager.Presentation.Core.ViewModels.Screens.WorkspaceViewModel.<LoadData>b__2() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\ViewModels\Screens\WorkspaceViewModel.cs:ligne 63
+8|2017-07-18 12:11:52.4616|FATAL||My.CoachManager.CrossCutting.Logging.Supervision.Logger|My.CoachManager.CrossCutting.Core.Exceptions.BusinessException: L'élément "U12" existe déjà. ---> My.CoachManager.CrossCutting.Core.Exceptions.BusinessException: L'élément "U12" existe déjà.
+   à DynamicModule.ns.Wrapped_ICategoryAppService_62db0fd6c20e44708a3dadb9fc3e29d0.CreateCategory(CategoryDto categoryDto)
+   à My.CoachManager.Services.Wcf.AdminService.CreateCategory(CategoryDto categoryDto) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Services.Wcf\AdminService.cs:ligne 39
+   à SyncInvokeCreateCategory(Object , Object[] , Object[] )
+   à System.ServiceModel.Dispatcher.SyncMethodInvoker.Invoke(Object instance, Object[] inputs, Object[]& outputs)
+   à System.ServiceModel.Dispatcher.DispatchOperationRuntime.InvokeBegin(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage5(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage11(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.MessageRpc.Process(Boolean isOperationContextSet)
+   --- Fin de la trace de la pile d'exception interne ---
+
+Server stack trace: 
+   à My.CoachManager.Services.Core.MessageInspectors.ThrownExceptionsClientMessageInspector.AfterReceiveReply(Message& reply, Object correlationState) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Services.Core\MessageInspectors\ThrownExceptionsClientMessageInspector.cs:ligne 54
+   à System.ServiceModel.Dispatcher.ImmutableClientRuntime.AfterReceiveReply(ProxyRpc& rpc)
+   à System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   à System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   à System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   à System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   à My.CoachManager.Presentation.ServiceAgent.AdminServiceReference.IAdminService.CreateCategory(CategoryDto playerDto)
+   à My.CoachManager.Presentation.ServiceAgent.AdminServiceReference.AdminServiceClient.CreateCategory(CategoryDto playerDto) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.ServiceAgent\Service References\AdminServiceReference\Reference.cs:ligne 87
+   à My.CoachManager.Presentation.ViewModels.Admin.EditCategoryViewModel.SaveDataCore() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Admin\EditCategoryViewModel.cs:ligne 70
+   à My.CoachManager.Presentation.ViewModels.Core.EditViewModel`1.SaveAndClose() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Core\EditViewModel.cs:ligne 236
+   à My.CoachManager.Presentation.Core.Commands.DelegateCommand.Execute() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\Commands\DelegateCommand.cs:ligne 79
+   à My.CoachManager.Presentation.Core.Commands.DelegateCommand.System.Windows.Input.ICommand.Execute(Object parameter) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\Commands\DelegateCommand.cs:ligne 94
+   à MS.Internal.Commands.CommandHelpers.CriticalExecuteCommandSource(ICommandSource commandSource, Boolean userInitiated)
+   à System.Windows.Controls.Primitives.ButtonBase.OnClick()
+   à Elysium.Controls.CommandButton.OnClick()
+   à System.Windows.Controls.Primitives.ButtonBase.OnMouseLeftButtonUp(MouseButtonEventArgs e)
+   à System.Windows.UIElement.OnMouseLeftButtonUpThunk(Object sender, MouseButtonEventArgs e)
+   à System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   à System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   à System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   à System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   à System.Windows.UIElement.ReRaiseEventAs(DependencyObject sender, RoutedEventArgs args, RoutedEvent newEvent)
+   à System.Windows.UIElement.OnMouseUpThunk(Object sender, MouseButtonEventArgs e)
+   à System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   à System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   à System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   à System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   à System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   à System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   à System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   à System.Windows.Input.InputManager.ProcessStagingArea()
+   à System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   à System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   à System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   à System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   à System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   à System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+10|2017-07-18 12:15:41.5893|FATAL||My.CoachManager.CrossCutting.Logging.Supervision.Logger|My.CoachManager.CrossCutting.Core.Exceptions.BusinessException: L'élément "U12" existe déjà. ---> My.CoachManager.CrossCutting.Core.Exceptions.BusinessException: L'élément "U12" existe déjà.
+   à DynamicModule.ns.Wrapped_ICategoryAppService_bf58fb7cadd14ed7a48a5c433ae9deb6.CreateCategory(CategoryDto categoryDto)
+   à My.CoachManager.Services.Wcf.AdminService.CreateCategory(CategoryDto categoryDto) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Services.Wcf\AdminService.cs:ligne 39
+   à SyncInvokeCreateCategory(Object , Object[] , Object[] )
+   à System.ServiceModel.Dispatcher.SyncMethodInvoker.Invoke(Object instance, Object[] inputs, Object[]& outputs)
+   à System.ServiceModel.Dispatcher.DispatchOperationRuntime.InvokeBegin(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage5(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage11(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.MessageRpc.Process(Boolean isOperationContextSet)
+   --- Fin de la trace de la pile d'exception interne ---
+
+Server stack trace: 
+   à My.CoachManager.Services.Core.MessageInspectors.ThrownExceptionsClientMessageInspector.AfterReceiveReply(Message& reply, Object correlationState) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Services.Core\MessageInspectors\ThrownExceptionsClientMessageInspector.cs:ligne 54
+   à System.ServiceModel.Dispatcher.ImmutableClientRuntime.AfterReceiveReply(ProxyRpc& rpc)
+   à System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   à System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   à System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   à System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   à My.CoachManager.Presentation.ServiceAgent.AdminServiceReference.IAdminService.CreateCategory(CategoryDto playerDto)
+   à My.CoachManager.Presentation.ServiceAgent.AdminServiceReference.AdminServiceClient.CreateCategory(CategoryDto playerDto) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.ServiceAgent\Service References\AdminServiceReference\Reference.cs:ligne 87
+   à My.CoachManager.Presentation.ViewModels.Admin.EditCategoryViewModel.SaveDataCore() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Admin\EditCategoryViewModel.cs:ligne 70
+   à My.CoachManager.Presentation.ViewModels.Core.EditViewModel`1.SaveAndClose() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Core\EditViewModel.cs:ligne 236
+   à My.CoachManager.Presentation.Core.Commands.DelegateCommand.Execute() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\Commands\DelegateCommand.cs:ligne 79
+   à My.CoachManager.Presentation.Core.Commands.DelegateCommand.System.Windows.Input.ICommand.Execute(Object parameter) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\Commands\DelegateCommand.cs:ligne 94
+   à MS.Internal.Commands.CommandHelpers.CriticalExecuteCommandSource(ICommandSource commandSource, Boolean userInitiated)
+   à System.Windows.Controls.Primitives.ButtonBase.OnClick()
+   à Elysium.Controls.CommandButton.OnClick()
+   à System.Windows.Controls.Primitives.ButtonBase.OnMouseLeftButtonUp(MouseButtonEventArgs e)
+   à System.Windows.UIElement.OnMouseLeftButtonUpThunk(Object sender, MouseButtonEventArgs e)
+   à System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   à System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   à System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   à System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   à System.Windows.UIElement.ReRaiseEventAs(DependencyObject sender, RoutedEventArgs args, RoutedEvent newEvent)
+   à System.Windows.UIElement.OnMouseUpThunk(Object sender, MouseButtonEventArgs e)
+   à System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   à System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   à System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   à System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   à System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   à System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   à System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   à System.Windows.Input.InputManager.ProcessStagingArea()
+   à System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   à System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   à System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   à System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   à System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   à System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+13|2017-07-18 12:17:06.6202|ERROR||My.CoachManager.CrossCutting.Logging.Supervision.Logger|My.CoachManager.CrossCutting.Core.Exceptions.BusinessException: Ceci est un test. ---> My.CoachManager.CrossCutting.Core.Exceptions.BusinessException: Ceci est un test.
+   à DynamicModule.ns.Wrapped_ICategoriesListAppService_3eac5c30184840339402a86246e230a5.GetCategories()
+   à My.CoachManager.Services.Wcf.AdminService.GetCategories() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Services.Wcf\AdminService.cs:ligne 19
+   à SyncInvokeGetCategories(Object , Object[] , Object[] )
+   à System.ServiceModel.Dispatcher.SyncMethodInvoker.Invoke(Object instance, Object[] inputs, Object[]& outputs)
+   à System.ServiceModel.Dispatcher.DispatchOperationRuntime.InvokeBegin(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage5(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage11(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.MessageRpc.Process(Boolean isOperationContextSet)
+   --- Fin de la trace de la pile d'exception interne ---
+
+Server stack trace: 
+   à My.CoachManager.Services.Core.MessageInspectors.ThrownExceptionsClientMessageInspector.AfterReceiveReply(Message& reply, Object correlationState) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Services.Core\MessageInspectors\ThrownExceptionsClientMessageInspector.cs:ligne 54
+   à System.ServiceModel.Dispatcher.ImmutableClientRuntime.AfterReceiveReply(ProxyRpc& rpc)
+   à System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   à System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   à System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   à System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   à My.CoachManager.Presentation.ServiceAgent.AdminServiceReference.IAdminService.GetCategories()
+   à My.CoachManager.Presentation.ServiceAgent.AdminServiceReference.AdminServiceClient.GetCategories() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.ServiceAgent\Service References\AdminServiceReference\Reference.cs:ligne 71
+   à My.CoachManager.Presentation.ViewModels.Admin.CategoriesListViewModel.LoadDataCore() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Admin\CategoriesListViewModel.cs:ligne 72
+   à My.CoachManager.Presentation.Core.ViewModels.Screens.WorkspaceViewModel.<LoadData>b__2() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\ViewModels\Screens\WorkspaceViewModel.cs:ligne 63
+7|2017-07-18 12:17:27.4541|FATAL||My.CoachManager.CrossCutting.Logging.Supervision.Logger|My.CoachManager.CrossCutting.Core.Exceptions.BusinessException: L'élément "U12" existe déjà. ---> My.CoachManager.CrossCutting.Core.Exceptions.BusinessException: L'élément "U12" existe déjà.
+   à DynamicModule.ns.Wrapped_ICategoryAppService_03dc1de671154fb2b9fc8bd79f006487.CreateCategory(CategoryDto categoryDto)
+   à My.CoachManager.Services.Wcf.AdminService.CreateCategory(CategoryDto categoryDto) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Services.Wcf\AdminService.cs:ligne 39
+   à SyncInvokeCreateCategory(Object , Object[] , Object[] )
+   à System.ServiceModel.Dispatcher.SyncMethodInvoker.Invoke(Object instance, Object[] inputs, Object[]& outputs)
+   à System.ServiceModel.Dispatcher.DispatchOperationRuntime.InvokeBegin(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage5(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage11(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.MessageRpc.Process(Boolean isOperationContextSet)
+   --- Fin de la trace de la pile d'exception interne ---
+
+Server stack trace: 
+   à My.CoachManager.Services.Core.MessageInspectors.ThrownExceptionsClientMessageInspector.AfterReceiveReply(Message& reply, Object correlationState) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Services.Core\MessageInspectors\ThrownExceptionsClientMessageInspector.cs:ligne 54
+   à System.ServiceModel.Dispatcher.ImmutableClientRuntime.AfterReceiveReply(ProxyRpc& rpc)
+   à System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   à System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   à System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   à System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   à My.CoachManager.Presentation.ServiceAgent.AdminServiceReference.IAdminService.CreateCategory(CategoryDto playerDto)
+   à My.CoachManager.Presentation.ServiceAgent.AdminServiceReference.AdminServiceClient.CreateCategory(CategoryDto playerDto) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.ServiceAgent\Service References\AdminServiceReference\Reference.cs:ligne 87
+   à My.CoachManager.Presentation.ViewModels.Admin.EditCategoryViewModel.SaveDataCore() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Admin\EditCategoryViewModel.cs:ligne 70
+   à My.CoachManager.Presentation.ViewModels.Core.EditViewModel`1.SaveAndClose() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Core\EditViewModel.cs:ligne 236
+   à My.CoachManager.Presentation.Core.Commands.DelegateCommand.Execute() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\Commands\DelegateCommand.cs:ligne 79
+   à My.CoachManager.Presentation.Core.Commands.DelegateCommand.System.Windows.Input.ICommand.Execute(Object parameter) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\Commands\DelegateCommand.cs:ligne 94
+   à MS.Internal.Commands.CommandHelpers.CriticalExecuteCommandSource(ICommandSource commandSource, Boolean userInitiated)
+   à System.Windows.Controls.Primitives.ButtonBase.OnClick()
+   à Elysium.Controls.CommandButton.OnClick()
+   à System.Windows.Controls.Primitives.ButtonBase.OnMouseLeftButtonUp(MouseButtonEventArgs e)
+   à System.Windows.UIElement.OnMouseLeftButtonUpThunk(Object sender, MouseButtonEventArgs e)
+   à System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   à System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   à System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   à System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   à System.Windows.UIElement.ReRaiseEventAs(DependencyObject sender, RoutedEventArgs args, RoutedEvent newEvent)
+   à System.Windows.UIElement.OnMouseUpThunk(Object sender, MouseButtonEventArgs e)
+   à System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   à System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   à System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   à System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   à System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   à System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   à System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   à System.Windows.Input.InputManager.ProcessStagingArea()
+   à System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   à System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   à System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   à System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   à System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   à System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+8|2017-07-18 12:20:35.5291|FATAL||My.CoachManager.CrossCutting.Logging.Supervision.Logger|My.CoachManager.CrossCutting.Core.Exceptions.BusinessException: L'élément "U12" existe déjà. ---> My.CoachManager.CrossCutting.Core.Exceptions.BusinessException: L'élément "U12" existe déjà.
+   à DynamicModule.ns.Wrapped_ICategoryAppService_f9fd6ef1ecf74517b32200f490b43401.CreateCategory(CategoryDto categoryDto)
+   à My.CoachManager.Services.Wcf.AdminService.CreateCategory(CategoryDto categoryDto) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Services.Wcf\AdminService.cs:ligne 39
+   à SyncInvokeCreateCategory(Object , Object[] , Object[] )
+   à System.ServiceModel.Dispatcher.SyncMethodInvoker.Invoke(Object instance, Object[] inputs, Object[]& outputs)
+   à System.ServiceModel.Dispatcher.DispatchOperationRuntime.InvokeBegin(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage5(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage11(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.MessageRpc.Process(Boolean isOperationContextSet)
+   --- Fin de la trace de la pile d'exception interne ---
+
+Server stack trace: 
+   à My.CoachManager.Services.Core.MessageInspectors.ThrownExceptionsClientMessageInspector.AfterReceiveReply(Message& reply, Object correlationState) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Services.Core\MessageInspectors\ThrownExceptionsClientMessageInspector.cs:ligne 54
+   à System.ServiceModel.Dispatcher.ImmutableClientRuntime.AfterReceiveReply(ProxyRpc& rpc)
+   à System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs)
+   à System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   à System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   à System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   à System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   à My.CoachManager.Presentation.ServiceAgent.AdminServiceReference.IAdminService.CreateCategory(CategoryDto playerDto)
+   à My.CoachManager.Presentation.ServiceAgent.AdminServiceReference.AdminServiceClient.CreateCategory(CategoryDto playerDto) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.ServiceAgent\Service References\AdminServiceReference\Reference.cs:ligne 87
+   à My.CoachManager.Presentation.ViewModels.Admin.EditCategoryViewModel.SaveDataCore() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Admin\EditCategoryViewModel.cs:ligne 70
+   à My.CoachManager.Presentation.ViewModels.Core.EditViewModel`1.SaveAndClose() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Core\EditViewModel.cs:ligne 236
+   à My.CoachManager.Presentation.Core.Commands.DelegateCommand.Execute() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\Commands\DelegateCommand.cs:ligne 79
+   à My.CoachManager.Presentation.Core.Commands.DelegateCommand.System.Windows.Input.ICommand.Execute(Object parameter) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\Commands\DelegateCommand.cs:ligne 94
+   à MS.Internal.Commands.CommandHelpers.CriticalExecuteCommandSource(ICommandSource commandSource, Boolean userInitiated)
+   à System.Windows.Controls.Primitives.ButtonBase.OnClick()
+   à Elysium.Controls.CommandButton.OnClick()
+   à System.Windows.Controls.Primitives.ButtonBase.OnMouseLeftButtonUp(MouseButtonEventArgs e)
+   à System.Windows.UIElement.OnMouseLeftButtonUpThunk(Object sender, MouseButtonEventArgs e)
+   à System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   à System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   à System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   à System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   à System.Windows.UIElement.ReRaiseEventAs(DependencyObject sender, RoutedEventArgs args, RoutedEvent newEvent)
+   à System.Windows.UIElement.OnMouseUpThunk(Object sender, MouseButtonEventArgs e)
+   à System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   à System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   à System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   à System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   à System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   à System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   à System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   à System.Windows.Input.InputManager.ProcessStagingArea()
+   à System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   à System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   à System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   à System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   à System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   à System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+8|2017-07-18 12:23:23.4969|FATAL||My.CoachManager.CrossCutting.Logging.Supervision.Logger|My.CoachManager.CrossCutting.Core.Exceptions.BusinessException: L'élément "U12" existe déjà. ---> My.CoachManager.CrossCutting.Core.Exceptions.BusinessException: L'élément "U12" existe déjà.
+   à DynamicModule.ns.Wrapped_ICategoryAppService_c88c7395d6de4519ad80370d1c33f066.CreateCategory(CategoryDto categoryDto)
+   à My.CoachManager.Services.Wcf.AdminService.CreateCategory(CategoryDto categoryDto) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Services.Wcf\AdminService.cs:ligne 39
+   à SyncInvokeCreateCategory(Object , Object[] , Object[] )
+   à System.ServiceModel.Dispatcher.SyncMethodInvoker.Invoke(Object instance, Object[] inputs, Object[]& outputs)
+   à System.ServiceModel.Dispatcher.DispatchOperationRuntime.InvokeBegin(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage5(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage11(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.MessageRpc.Process(Boolean isOperationContextSet)
+   --- Fin de la trace de la pile d'exception interne ---
+
+Server stack trace: 
+   à My.CoachManager.Services.Core.MessageInspectors.ThrownExceptionsClientMessageInspector.AfterReceiveReply(Message& reply, Object correlationState) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Services.Core\MessageInspectors\ThrownExceptionsClientMessageInspector.cs:ligne 54
+   à System.ServiceModel.Dispatcher.ImmutableClientRuntime.AfterReceiveReply(ProxyRpc& rpc)
+   à System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs)
+   à System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   à System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   à System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   à System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   à My.CoachManager.Presentation.ServiceAgent.AdminServiceReference.IAdminService.CreateCategory(CategoryDto playerDto)
+   à My.CoachManager.Presentation.ServiceAgent.AdminServiceReference.AdminServiceClient.CreateCategory(CategoryDto playerDto) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.ServiceAgent\Service References\AdminServiceReference\Reference.cs:ligne 87
+   à My.CoachManager.Presentation.ViewModels.Admin.EditCategoryViewModel.SaveDataCore() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Admin\EditCategoryViewModel.cs:ligne 70
+   à My.CoachManager.Presentation.ViewModels.Core.EditViewModel`1.SaveAndClose() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Core\EditViewModel.cs:ligne 236
+   à My.CoachManager.Presentation.Core.Commands.DelegateCommand.Execute() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\Commands\DelegateCommand.cs:ligne 79
+   à My.CoachManager.Presentation.Core.Commands.DelegateCommand.System.Windows.Input.ICommand.Execute(Object parameter) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\Commands\DelegateCommand.cs:ligne 94
+   à MS.Internal.Commands.CommandHelpers.CriticalExecuteCommandSource(ICommandSource commandSource, Boolean userInitiated)
+   à System.Windows.Controls.Primitives.ButtonBase.OnClick()
+   à Elysium.Controls.CommandButton.OnClick()
+   à System.Windows.Controls.Primitives.ButtonBase.OnMouseLeftButtonUp(MouseButtonEventArgs e)
+   à System.Windows.UIElement.OnMouseLeftButtonUpThunk(Object sender, MouseButtonEventArgs e)
+   à System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   à System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   à System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   à System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   à System.Windows.UIElement.ReRaiseEventAs(DependencyObject sender, RoutedEventArgs args, RoutedEvent newEvent)
+   à System.Windows.UIElement.OnMouseUpThunk(Object sender, MouseButtonEventArgs e)
+   à System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   à System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   à System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   à System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   à System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   à System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   à System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   à System.Windows.Input.InputManager.ProcessStagingArea()
+   à System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   à System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   à System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   à System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   à System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   à System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+9|2017-07-18 12:24:21.9895|FATAL||My.CoachManager.CrossCutting.Logging.Supervision.Logger|My.CoachManager.CrossCutting.Core.Exceptions.BusinessException: L'élément "U12" existe déjà. ---> My.CoachManager.CrossCutting.Core.Exceptions.BusinessException: L'élément "U12" existe déjà.
+   à DynamicModule.ns.Wrapped_ICategoryAppService_1b845f266cdf4ef6aafeb36654762906.CreateCategory(CategoryDto categoryDto)
+   à My.CoachManager.Services.Wcf.AdminService.CreateCategory(CategoryDto categoryDto) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Services.Wcf\AdminService.cs:ligne 39
+   à SyncInvokeCreateCategory(Object , Object[] , Object[] )
+   à System.ServiceModel.Dispatcher.SyncMethodInvoker.Invoke(Object instance, Object[] inputs, Object[]& outputs)
+   à System.ServiceModel.Dispatcher.DispatchOperationRuntime.InvokeBegin(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage5(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage11(MessageRpc& rpc)
+   à System.ServiceModel.Dispatcher.MessageRpc.Process(Boolean isOperationContextSet)
+   --- Fin de la trace de la pile d'exception interne ---
+
+Server stack trace: 
+   à My.CoachManager.Services.Core.MessageInspectors.ThrownExceptionsClientMessageInspector.AfterReceiveReply(Message& reply, Object correlationState) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Services.Core\MessageInspectors\ThrownExceptionsClientMessageInspector.cs:ligne 54
+   à System.ServiceModel.Dispatcher.ImmutableClientRuntime.AfterReceiveReply(ProxyRpc& rpc)
+   à System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs)
+   à System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   à System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   à System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   à System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   à My.CoachManager.Presentation.ServiceAgent.AdminServiceReference.IAdminService.CreateCategory(CategoryDto playerDto)
+   à My.CoachManager.Presentation.ServiceAgent.AdminServiceReference.AdminServiceClient.CreateCategory(CategoryDto playerDto) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.ServiceAgent\Service References\AdminServiceReference\Reference.cs:ligne 87
+   à My.CoachManager.Presentation.ViewModels.Admin.EditCategoryViewModel.SaveDataCore() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Admin\EditCategoryViewModel.cs:ligne 70
+   à My.CoachManager.Presentation.ViewModels.Core.EditViewModel`1.SaveAndClose() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Core\EditViewModel.cs:ligne 236
+   à My.CoachManager.Presentation.Core.Commands.DelegateCommand.Execute() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\Commands\DelegateCommand.cs:ligne 79
+   à My.CoachManager.Presentation.Core.Commands.DelegateCommand.System.Windows.Input.ICommand.Execute(Object parameter) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\Commands\DelegateCommand.cs:ligne 94
+   à MS.Internal.Commands.CommandHelpers.CriticalExecuteCommandSource(ICommandSource commandSource, Boolean userInitiated)
+   à System.Windows.Controls.Primitives.ButtonBase.OnClick()
+   à Elysium.Controls.CommandButton.OnClick()
+   à System.Windows.Controls.Primitives.ButtonBase.OnMouseLeftButtonUp(MouseButtonEventArgs e)
+   à System.Windows.UIElement.OnMouseLeftButtonUpThunk(Object sender, MouseButtonEventArgs e)
+   à System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   à System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   à System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   à System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   à System.Windows.UIElement.ReRaiseEventAs(DependencyObject sender, RoutedEventArgs args, RoutedEvent newEvent)
+   à System.Windows.UIElement.OnMouseUpThunk(Object sender, MouseButtonEventArgs e)
+   à System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   à System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   à System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   à System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   à System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   à System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   à System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   à System.Windows.Input.InputManager.ProcessStagingArea()
+   à System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   à System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   à System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   à System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   à MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   à System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   à System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+8|2017-07-18 15:58:36.9272|FATAL||My.CoachManager.CrossCutting.Logging.Supervision.Logger|System.InvalidOperationException: Une liaison TwoWay ou OneWayToSource ne peut pas fonctionner sur la propriété en lecture seule 'CanOrder' de type 'My.CoachManager.Presentation.ViewModels.Admin.CategoriesListViewModel'.
+   à MS.Internal.Data.PropertyPathWorker.CheckReadOnly(Object item, Object info)
+   à MS.Internal.Data.PropertyPathWorker.ReplaceItem(Int32 k, Object newO, Object parent)
+   à MS.Internal.Data.PropertyPathWorker.UpdateSourceValueState(Int32 k, ICollectionView collectionView, Object newValue, Boolean isASubPropertyChange)
+   à MS.Internal.Data.ClrBindingWorker.AttachDataItem()
+   à System.Windows.Data.BindingExpression.Activate(Object item)
+   à System.Windows.Data.BindingExpression.AttachToContext(AttachAttempt attempt)
+   à System.Windows.Data.BindingExpression.MS.Internal.Data.IDataBindEngineClient.AttachToContext(Boolean lastChance)
+   à MS.Internal.Data.DataBindEngine.Task.Run(Boolean lastChance)
+   à MS.Internal.Data.DataBindEngine.Run(Object arg)
+   à MS.Internal.Data.DataBindEngine.OnLayoutUpdated(Object sender, EventArgs e)
+   à System.Windows.ContextLayoutManager.fireLayoutUpdateEvent()
+   à System.Windows.ContextLayoutManager.UpdateLayout()
+   à System.Windows.ContextLayoutManager.UpdateLayoutCallback(Object arg)
+   à System.Windows.Media.MediaContext.InvokeOnRenderCallback.DoWork()
+   à System.Windows.Media.MediaContext.FireInvokeOnRenderCallbacks()
+   à System.Windows.Media.MediaContext.RenderMessageHandlerCore(Object resizedCompositionTarget)
+   à System.Windows.Media.MediaContext.RenderMessageHandler(Object resizedCompositionTarget)
+   à System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   à System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)

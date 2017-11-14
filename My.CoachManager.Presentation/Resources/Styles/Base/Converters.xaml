@@ -1,0 +1,40 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:extra="http://schemas.extra.com/ui"
+                    xmlns:myconverters="clr-namespace:My.CoachManager.Presentation.Core.Converters;assembly=My.CoachManager.Presentation.Core"
+                    xmlns:converters="clr-namespace:My.CoachManager.Presentation.Converters">
+
+    <!-- My Converters -->
+    <converters:FlyoutPositionConverter x:Key="FlyoutPositionConverter" />
+    <converters:FlyoutThemeConverter x:Key="FlyoutThemeConverter" />
+    <myconverters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+    <myconverters:NullOrEmptyToBooleanConverter x:Key="NullOrEmptyToBooleanConverter" />
+    <myconverters:AnyToVisibilityConverter x:Key="AnyToVisibilityConverter" />
+    <myconverters:AnyToBoolConverter x:Key="AnyToBoolConverter" />
+    <myconverters:StringToUpperConverter x:Key="StringToUpperConverter" />
+    <myconverters:IsGreaterThanConverter x:Key="IsGreaterThanConverter" />
+    <myconverters:ThicknessToDoubleConverter x:Key="ThicknessToDoubleConverter" />
+    <myconverters:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+    <myconverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <myconverters:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter" />
+    <myconverters:StringToImageConverter x:Key="StringToImageConverter" />
+    <myconverters:EnumToStringConverter x:Key="EnumToStringConverter" />
+    <myconverters:BytesToImageConverter x:Key="BytesToImageConverter" />
+    <myconverters:NotConverter x:Key="NotConverter" />
+
+    <!-- Converters -->
+    <extra:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <extra:InverseBoolConverter x:Key="InverseBoolConverter" />
+    <extra:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" />
+    <extra:InverseNullToVisibilityConverter x:Key="InverseNullToVisibilityConverter" />
+    <extra:LessThanToBoolConverter x:Key="LessThanToBoolConverter" />
+    <extra:LessThanEqualToBoolConverter x:Key="LessThanEqualToBoolConverter" />
+    <extra:LessThanEqualToVisibilityConverter x:Key="LessThanEqualToVisibilityConverter" />
+    <extra:MoreThanToBoolConverter x:Key="MoreThanToBoolConverter" />
+    <extra:MoreThanEqualToBoolConverter x:Key="MoreThanEqualToBoolConverter" />
+    <extra:MoreThanEqualToVisibilityConverter x:Key="MoreThanEqualToVisibilityConverter" />
+    <extra:NullToBoolConverter x:Key="NullToBoolConverter" />
+    <extra:NullOrEmptyToVisibilityConverter x:Key="NullOrEmptyToVisibilityConverter" />
+    <extra:StringFormatConverter x:Key="StringFormatConverter" />
+    <extra:VisibilityToBoolConverter x:Key="VisibilityToBoolConverter" />
+</ResourceDictionary>

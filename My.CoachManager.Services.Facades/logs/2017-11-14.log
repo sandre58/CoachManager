@@ -1,0 +1,391 @@
+29|2017-11-14 14:39:03.8801|DEBUG||My.CoachManager.CrossCutting.Logging.Supervision.Logger|******* START ******* IPlayerAppService.CreateOrUpdate *******
+29|2017-11-14 14:39:03.8801|DEBUG||My.CoachManager.CrossCutting.Logging.Supervision.Logger|******* START ******* IPlayerDomainService.IsValid *******
+29|2017-11-14 14:39:03.8801|DEBUG||My.CoachManager.CrossCutting.Logging.Supervision.Logger|******* END ******* IPlayerDomainService.IsValid ******* 0ms
+29|2017-11-14 14:39:03.8821|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Opened connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.8821|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|SELECT 
+    CASE WHEN ( EXISTS (SELECT 
+        1 AS [C1]
+        FROM [dbo].[Players] AS [Extent1]
+        WHERE [Extent1].[Id] = @p__linq__0
+    )) THEN cast(1 as bit) ELSE cast(0 as bit) END AS [C1]
+    FROM  ( SELECT 1 AS X ) AS [SingleRowTable1]
+29|2017-11-14 14:39:03.8821|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.8821|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- p__linq__0: '3' (Type = Int32, IsNullable = false)
+
+29|2017-11-14 14:39:03.8821|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Executing at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.8821|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Completed in 4 ms with result: SqlDataReader
+
+29|2017-11-14 14:39:03.8821|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.8821|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Closed connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.8821|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Opened connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.8821|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|SELECT 
+    '3X0X' AS [C1], 
+    [Extent2].[Id] AS [Id], 
+    [Extent2].[Label] AS [Label], 
+    [Extent2].[Default] AS [Default], 
+    [Extent2].[Value] AS [Value], 
+    [Extent2].[CreatedDate] AS [CreatedDate], 
+    [Extent2].[CreatedBy] AS [CreatedBy], 
+    [Extent2].[ModifiedDate] AS [ModifiedDate], 
+    [Extent2].[ModifiedBy] AS [ModifiedBy]
+    FROM  [dbo].[Players] AS [Extent1]
+    INNER JOIN [dbo].[Contacts] AS [Extent2] ON ([Extent1].[Id] = [Extent2].[Person_Id]) AND ([Extent2].[Discriminator] = N'Email')
+    WHERE [Extent1].[Id] = @p__linq__0
+29|2017-11-14 14:39:03.8821|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.8821|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- p__linq__0: '3' (Type = Int32, IsNullable = false)
+
+29|2017-11-14 14:39:03.8821|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Executing at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9001|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Completed in 5 ms with result: SqlDataReader
+
+29|2017-11-14 14:39:03.9001|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9001|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Closed connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9001|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Opened connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9001|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|SELECT 
+    CASE WHEN ( EXISTS (SELECT 
+        1 AS [C1]
+        FROM [dbo].[Contacts] AS [Extent1]
+        WHERE ([Extent1].[Discriminator] = N'Email') AND ([Extent1].[Id] = @p__linq__0)
+    )) THEN cast(1 as bit) ELSE cast(0 as bit) END AS [C1]
+    FROM  ( SELECT 1 AS X ) AS [SingleRowTable1]
+29|2017-11-14 14:39:03.9001|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9001|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- p__linq__0: '4' (Type = Int32, IsNullable = false)
+
+29|2017-11-14 14:39:03.9001|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Executing at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9001|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Completed in 2 ms with result: SqlDataReader
+
+29|2017-11-14 14:39:03.9001|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9001|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Closed connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9001|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Opened connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9001|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|SELECT 
+    [Limit1].[Id] AS [Id], 
+    [Limit1].[C1] AS [C1], 
+    [Limit1].[C2] AS [C2], 
+    [Limit1].[C3] AS [C3], 
+    [Limit1].[C4] AS [C4], 
+    [Limit1].[C5] AS [C5], 
+    [Limit1].[C6] AS [C6], 
+    [Limit1].[C7] AS [C7], 
+    [Limit1].[C8] AS [C8]
+    FROM ( SELECT TOP (2) 
+        [Extent1].[Id] AS [Id], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[Id] END AS [C1], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[Label] END AS [C2], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[Default] END AS [C3], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[Value] END AS [C4], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[CreatedDate] END AS [C5], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[CreatedBy] END AS [C6], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[ModifiedDate] END AS [C7], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[ModifiedBy] END AS [C8]
+        FROM [dbo].[Contacts] AS [Extent1]
+        WHERE ([Extent1].[Discriminator] IN (N'Email',N'Phone')) AND (((CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[Id] END) = @p0) OR ((CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[Id] END IS NULL) AND (@p0 IS NULL)))
+    )  AS [Limit1]
+29|2017-11-14 14:39:03.9001|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9001|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- p0: '4' (Type = Int32)
+
+29|2017-11-14 14:39:03.9001|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Executing at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Completed in 4 ms with result: SqlDataReader
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Closed connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Opened connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|SELECT 
+    CASE WHEN ( EXISTS (SELECT 
+        1 AS [C1]
+        FROM [dbo].[Contacts] AS [Extent1]
+        WHERE ([Extent1].[Discriminator] = N'Email') AND ([Extent1].[Id] = @p__linq__0)
+    )) THEN cast(1 as bit) ELSE cast(0 as bit) END AS [C1]
+    FROM  ( SELECT 1 AS X ) AS [SingleRowTable1]
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- p__linq__0: '7' (Type = Int32, IsNullable = false)
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Executing at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Completed in 0 ms with result: SqlDataReader
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Closed connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Opened connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|SELECT 
+    [Limit1].[Id] AS [Id], 
+    [Limit1].[C1] AS [C1], 
+    [Limit1].[C2] AS [C2], 
+    [Limit1].[C3] AS [C3], 
+    [Limit1].[C4] AS [C4], 
+    [Limit1].[C5] AS [C5], 
+    [Limit1].[C6] AS [C6], 
+    [Limit1].[C7] AS [C7], 
+    [Limit1].[C8] AS [C8]
+    FROM ( SELECT TOP (2) 
+        [Extent1].[Id] AS [Id], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[Id] END AS [C1], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[Label] END AS [C2], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[Default] END AS [C3], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[Value] END AS [C4], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[CreatedDate] END AS [C5], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[CreatedBy] END AS [C6], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[ModifiedDate] END AS [C7], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[ModifiedBy] END AS [C8]
+        FROM [dbo].[Contacts] AS [Extent1]
+        WHERE ([Extent1].[Discriminator] IN (N'Email',N'Phone')) AND (((CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[Id] END) = @p0) OR ((CASE WHEN ([Extent1].[Discriminator] = N'Email') THEN [Extent1].[Id] END IS NULL) AND (@p0 IS NULL)))
+    )  AS [Limit1]
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- p0: '7' (Type = Int32)
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Executing at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Completed in 2 ms with result: SqlDataReader
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9141|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Closed connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9391|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Opened connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9391|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|SELECT 
+    '3X0X' AS [C1], 
+    [Extent2].[Id] AS [Id], 
+    [Extent2].[Label] AS [Label], 
+    [Extent2].[Default] AS [Default], 
+    [Extent2].[Value] AS [Value], 
+    [Extent2].[CreatedDate] AS [CreatedDate], 
+    [Extent2].[CreatedBy] AS [CreatedBy], 
+    [Extent2].[ModifiedDate] AS [ModifiedDate], 
+    [Extent2].[ModifiedBy] AS [ModifiedBy]
+    FROM  [dbo].[Players] AS [Extent1]
+    INNER JOIN [dbo].[Contacts] AS [Extent2] ON ([Extent1].[Id] = [Extent2].[Person_Id1]) AND ([Extent2].[Discriminator] = N'Phone')
+    WHERE [Extent1].[Id] = @p__linq__0
+29|2017-11-14 14:39:03.9391|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9391|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- p__linq__0: '3' (Type = Int32, IsNullable = false)
+
+29|2017-11-14 14:39:03.9391|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Executing at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9391|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Completed in 3 ms with result: SqlDataReader
+
+29|2017-11-14 14:39:03.9391|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9391|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Closed connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Opened connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|SELECT 
+    CASE WHEN ( EXISTS (SELECT 
+        1 AS [C1]
+        FROM [dbo].[Contacts] AS [Extent1]
+        WHERE ([Extent1].[Discriminator] = N'Phone') AND ([Extent1].[Id] = @p__linq__0)
+    )) THEN cast(1 as bit) ELSE cast(0 as bit) END AS [C1]
+    FROM  ( SELECT 1 AS X ) AS [SingleRowTable1]
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- p__linq__0: '5' (Type = Int32, IsNullable = false)
+
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Executing at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Completed in 2 ms with result: SqlDataReader
+
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Closed connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Opened connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|SELECT 
+    [Limit1].[Id] AS [Id], 
+    [Limit1].[C1] AS [C1], 
+    [Limit1].[C2] AS [C2], 
+    [Limit1].[C3] AS [C3], 
+    [Limit1].[C4] AS [C4], 
+    [Limit1].[C5] AS [C5], 
+    [Limit1].[C6] AS [C6], 
+    [Limit1].[C7] AS [C7], 
+    [Limit1].[C8] AS [C8]
+    FROM ( SELECT TOP (2) 
+        [Extent1].[Id] AS [Id], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Phone') THEN [Extent1].[Id] END AS [C1], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Phone') THEN [Extent1].[Label] END AS [C2], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Phone') THEN [Extent1].[Default] END AS [C3], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Phone') THEN [Extent1].[Value] END AS [C4], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Phone') THEN [Extent1].[CreatedDate] END AS [C5], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Phone') THEN [Extent1].[CreatedBy] END AS [C6], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Phone') THEN [Extent1].[ModifiedDate] END AS [C7], 
+        CASE WHEN ([Extent1].[Discriminator] = N'Phone') THEN [Extent1].[ModifiedBy] END AS [C8]
+        FROM [dbo].[Contacts] AS [Extent1]
+        WHERE ([Extent1].[Discriminator] IN (N'Email',N'Phone')) AND (((CASE WHEN ([Extent1].[Discriminator] = N'Phone') THEN [Extent1].[Id] END) = @p0) OR ((CASE WHEN ([Extent1].[Discriminator] = N'Phone') THEN [Extent1].[Id] END IS NULL) AND (@p0 IS NULL)))
+    )  AS [Limit1]
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- p0: '5' (Type = Int32)
+
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Executing at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Completed in 4 ms with result: SqlDataReader
+
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Closed connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9441|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Opened connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9591|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|SELECT 
+    [Limit1].[C1] AS [C1], 
+    [Limit1].[C2] AS [C2], 
+    [Limit1].[C3] AS [C3], 
+    [Limit1].[C4] AS [C4], 
+    [Limit1].[C5] AS [C5], 
+    [Limit1].[C6] AS [C6], 
+    [Limit1].[C7] AS [C7], 
+    [Limit1].[C8] AS [C8], 
+    [Limit1].[C9] AS [C9], 
+    [Limit1].[C10] AS [C10], 
+    [Limit1].[C11] AS [C11], 
+    [Limit1].[C12] AS [C12], 
+    [Limit1].[C13] AS [C13], 
+    [Limit1].[C14] AS [C14], 
+    [Limit1].[C15] AS [C15], 
+    [Limit1].[C16] AS [C16], 
+    [Limit1].[C17] AS [C17], 
+    [Limit1].[C18] AS [C18], 
+    [Limit1].[C19] AS [C19], 
+    [Limit1].[C20] AS [C20], 
+    [Limit1].[C21] AS [C21], 
+    [Limit1].[C22] AS [C22]
+    FROM ( SELECT TOP (2) 
+        [UnionAll1].[Id] AS [C1], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [UnionAll1].[Id] END AS [C2], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[LastName] END AS [C3], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[FirstName] END AS [C4], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[Birthdate] END AS [C5], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[PlaceOfBirth] END AS [C6], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[CountryId] END AS [C7], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[Photo] END AS [C8], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[Address] END AS [C9], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[PostalCode] END AS [C10], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[City] END AS [C11], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[Gender] END AS [C12], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[LicenseNumber] END AS [C13], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[Description] END AS [C14], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[Size] END AS [C15], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[CreatedDate] END AS [C16], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[CreatedBy] END AS [C17], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[ModifiedDate] END AS [C18], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [Extent3].[ModifiedBy] END AS [C19], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN CASE WHEN ([UnionAll1].[C1] = 1) THEN CAST(NULL AS int) ELSE [UnionAll1].[CategoryId] END END AS [C20], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN CASE WHEN ([UnionAll1].[C1] = 1) THEN CAST(NULL AS int) ELSE [UnionAll1].[Laterality] END END AS [C21], 
+        CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN CASE WHEN ([UnionAll1].[C1] = 1) THEN CAST(NULL AS int) ELSE [UnionAll1].[ShoesSize] END END AS [C22]
+        FROM   (SELECT 
+            [Extent1].[Id] AS [Id], 
+            [Extent1].[CategoryId] AS [CategoryId], 
+            [Extent1].[Laterality] AS [Laterality], 
+            [Extent1].[ShoesSize] AS [ShoesSize], 
+            cast(0 as bit) AS [C1]
+            FROM [dbo].[Players] AS [Extent1]
+        UNION ALL
+            SELECT 
+            [Extent2].[Id] AS [Id], 
+            CAST(NULL AS int) AS [C1], 
+            CAST(NULL AS int) AS [C2], 
+            CAST(NULL AS int) AS [C3], 
+            cast(1 as bit) AS [C4]
+            FROM [dbo].[Coachs] AS [Extent2]) AS [UnionAll1]
+        INNER JOIN [dbo].[Persons] AS [Extent3] ON [UnionAll1].[Id] = [Extent3].[Id]
+        WHERE ((CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [UnionAll1].[Id] END) = @p0) OR ((CASE WHEN (CASE WHEN ([UnionAll1].[C1] = 1) THEN '0X0X' ELSE '0X1X' END LIKE '0X1X%') THEN [UnionAll1].[Id] END IS NULL) AND (@p0 IS NULL))
+    )  AS [Limit1]
+29|2017-11-14 14:39:03.9591|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9591|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- p0: '3' (Type = Int32)
+
+29|2017-11-14 14:39:03.9591|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Executing at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9751|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Completed in 15 ms with result: SqlDataReader
+
+29|2017-11-14 14:39:03.9751|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9751|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Closed connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9751|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Opened connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9751|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Started transaction at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9751|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|UPDATE [dbo].[Contacts]
+SET [Label] = @0, [Default] = @1, [Value] = @2, [ModifiedDate] = @3, [ModifiedBy] = @4
+WHERE ([Id] = @5)
+
+29|2017-11-14 14:39:03.9751|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- @0: 'Toto' (Type = String, Size = -1)
+
+29|2017-11-14 14:39:03.9751|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- @1: 'False' (Type = Boolean)
+
+29|2017-11-14 14:39:03.9751|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- @2: 'andre.cs2i@gmail.com' (Type = String, Size = -1)
+
+29|2017-11-14 14:39:03.9751|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- @3: '14/11/2017 13:39:03' (Type = DateTime2)
+
+29|2017-11-14 14:39:03.9751|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- @4: '' (Type = String, Size = -1)
+
+29|2017-11-14 14:39:03.9751|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- @5: '4' (Type = Int32)
+
+29|2017-11-14 14:39:03.9751|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Executing at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9931|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Completed in 7 ms with result: 1
+
+29|2017-11-14 14:39:03.9931|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:03.9931|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Committed transaction at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9931|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Closed connection at 14/11/2017 14:39:03 +01:00
+
+29|2017-11-14 14:39:03.9931|DEBUG||My.CoachManager.CrossCutting.Logging.Supervision.Logger|******* END ******* IPlayerAppService.CreateOrUpdate ******* 113ms
+29|2017-11-14 14:39:04.2511|DEBUG||My.CoachManager.CrossCutting.Logging.Supervision.Logger|******* START ******* IPlayerAppService.GetList *******
+29|2017-11-14 14:39:04.2511|DEBUG||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Get All Invoke of Type Player
+29|2017-11-14 14:39:04.2511|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Opened connection at 14/11/2017 14:39:04 +01:00
+
+29|2017-11-14 14:39:04.2511|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|SELECT 
+    [Extent1].[Id] AS [Id], 
+    [Extent2].[FirstName] AS [FirstName], 
+    [Extent2].[LastName] AS [LastName], 
+    [Extent2].[Address] AS [Address], 
+    [Extent2].[Birthdate] AS [Birthdate], 
+    [Extent2].[City] AS [City], 
+    [Extent2].[Gender] AS [Gender], 
+    [Extent2].[LicenseNumber] AS [LicenseNumber], 
+    [Extent2].[Photo] AS [Photo], 
+    [Extent2].[PostalCode] AS [PostalCode], 
+    [Extent2].[PlaceOfBirth] AS [PlaceOfBirth], 
+    [Extent1].[Laterality] AS [Laterality]
+    FROM  [dbo].[Players] AS [Extent1]
+    INNER JOIN [dbo].[Persons] AS [Extent2] ON [Extent1].[Id] = [Extent2].[Id]
+29|2017-11-14 14:39:04.2511|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:04.2511|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Executing at 14/11/2017 14:39:04 +01:00
+
+29|2017-11-14 14:39:04.2511|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|-- Completed in 2 ms with result: SqlDataReader
+
+29|2017-11-14 14:39:04.2511|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|
+
+29|2017-11-14 14:39:04.2561|TRACE||My.CoachManager.CrossCutting.Logging.Supervision.Logger|Closed connection at 14/11/2017 14:39:04 +01:00
+
+29|2017-11-14 14:39:04.2561|DEBUG||My.CoachManager.CrossCutting.Logging.Supervision.Logger|******* END ******* IPlayerAppService.GetList ******* 4ms

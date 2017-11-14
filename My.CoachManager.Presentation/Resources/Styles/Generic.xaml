@@ -1,0 +1,44 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+
+        <ResourceDictionary Source="/Framework.UI;component/Themes/ElysiumExtra/Icon.xaml" />
+        <ResourceDictionary Source="/Framework.UI;component/Themes/ElysiumExtra/GeometryIcon.xaml" />
+
+        <!-- Base -->
+        <ResourceDictionary Source="Base/Converters.xaml" />
+        <ResourceDictionary Source="Base/Images.xaml" />
+        <ResourceDictionary Source="Base/Margins.xaml" />
+        <ResourceDictionary Source="Base/Fonts.xaml" />
+        <ResourceDictionary Source="Base/Geometry.xaml" />
+        <ResourceDictionary Source="Base/Sizes.xaml" />
+
+        <!-- Controls -->
+        <ResourceDictionary Source="Controls/ContentPresenterStyles.xaml" />
+        <ResourceDictionary Source="Controls/ValidationErrorStyles.xaml" />
+        <ResourceDictionary Source="Controls/ButtonStyles.xaml" />
+        <ResourceDictionary Source="Controls/RadioButtonStyles.xaml" />
+        <ResourceDictionary Source="Controls/CommandButtonStyles.xaml" />
+        <ResourceDictionary Source="Controls/ApplicationBarStyles.xaml" />
+        <ResourceDictionary Source="Controls/BorderFixStyles.xaml" />
+        <ResourceDictionary Source="Controls/ComboboxStyles.xaml" />
+        <ResourceDictionary Source="Controls/FlyoutStyles.xaml" />
+        <ResourceDictionary Source="Controls/TextBlockStyles.xaml" />
+        <ResourceDictionary Source="Controls/TextBoxStyles.xaml" />
+        <ResourceDictionary Source="Controls/DatePickerStyles.xaml" />
+        <ResourceDictionary Source="Controls/DataGridStyles.xaml" />
+        <ResourceDictionary Source="Controls/NumericUpDownStyles.xaml" />
+        <ResourceDictionary Source="Controls/CheckBoxStyles.xaml" />
+        <ResourceDictionary Source="Controls/MenuStyles.xaml" />
+        <ResourceDictionary Source="Controls/LoadingStyles.xaml" />
+        <ResourceDictionary Source="Controls/DialogStyles.xaml" />
+        <ResourceDictionary Source="Controls/IconStyles.xaml" />
+        <ResourceDictionary Source="Controls/ImagePickerStyles.xaml" />
+
+        <ResourceDictionary Source="Views/WorkspaceViewStyles.xaml" />
+        <ResourceDictionary Source="Views/ListViewStyles.xaml" />
+        <ResourceDictionary Source="Views/EditViewStyles.xaml" />
+        <ResourceDictionary Source="Views/FiltersViewStyles.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

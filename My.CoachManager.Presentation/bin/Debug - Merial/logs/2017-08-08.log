@@ -1,0 +1,83 @@
+8|2017-08-08 11:41:21.5664|FATAL||My.CoachManager.CrossCutting.Logging.Supervision.Logger|System.Windows.Markup.XamlParseException: L'initialisation de 'Elysium.Controls.ToggleCommandButton' a levé une exception. ---> System.InvalidOperationException: Les membres de la collection Triggers doivent être de type EventTrigger.
+   à System.Windows.EventTrigger.ProcessOneTrigger(FrameworkElement triggersHost, TriggerBase triggerBase)
+   à System.Windows.EventTrigger.ProcessTriggerCollection(FrameworkElement triggersHost)
+   à System.Windows.FrameworkElement.TryFireInitialized()
+   à System.Windows.FrameworkElement.EndInit()
+   à MS.Internal.Xaml.Runtime.ClrObjectRuntime.InitializationGuard(XamlType xamlType, Object obj, Boolean begin)
+   --- Fin de la trace de la pile d'exception interne ---
+   à System.Windows.FrameworkTemplate.LoadTemplateXaml(XamlReader templateReader, XamlObjectWriter currentWriter)
+   à System.Windows.FrameworkTemplate.LoadTemplateXaml(XamlObjectWriter objectWriter)
+   à System.Windows.FrameworkTemplate.LoadOptimizedTemplateContent(DependencyObject container, IComponentConnector componentConnector, IStyleConnector styleConnector, List`1 affectedChildren, UncommonField`1 templatedNonFeChildrenField)
+   à System.Windows.FrameworkTemplate.LoadContent(DependencyObject container, List`1 affectedChildren)
+   à System.Windows.StyleHelper.ApplyTemplateContent(UncommonField`1 dataField, DependencyObject container, FrameworkElementFactory templateRoot, Int32 lastChildIndex, HybridDictionary childIndexFromChildID, FrameworkTemplate frameworkTemplate)
+   à System.Windows.FrameworkTemplate.ApplyTemplateContent(UncommonField`1 templateDataField, FrameworkElement container)
+   à System.Windows.FrameworkElement.ApplyTemplate()
+   à System.Windows.FrameworkElement.MeasureCore(Size availableSize)
+   à System.Windows.UIElement.Measure(Size availableSize)
+   à MS.Internal.Helper.MeasureElementWithSingleChild(UIElement element, Size constraint)
+   à System.Windows.Controls.ContentPresenter.MeasureOverride(Size constraint)
+   à System.Windows.FrameworkElement.MeasureCore(Size availableSize)
+   à System.Windows.UIElement.Measure(Size availableSize)
+   à System.Windows.Controls.Grid.MeasureOverride(Size constraint)
+   à System.Windows.FrameworkElement.MeasureCore(Size availableSize)
+   à System.Windows.UIElement.Measure(Size availableSize)
+   à System.Windows.Controls.Border.MeasureOverride(Size constraint)
+   à System.Windows.FrameworkElement.MeasureCore(Size availableSize)
+   à System.Windows.UIElement.Measure(Size availableSize)
+   à System.Windows.Controls.Control.MeasureOverride(Size constraint)
+   à System.Windows.FrameworkElement.MeasureCore(Size availableSize)
+   à System.Windows.UIElement.Measure(Size availableSize)
+   à System.Windows.Controls.Grid.MeasureCell(Int32 cell, Boolean forceInfinityV)
+   à System.Windows.Controls.Grid.MeasureCellsGroup(Int32 cellsHead, Size referenceSize, Boolean ignoreDesiredSizeU, Boolean forceInfinityV, Boolean& hasDesiredSizeUChanged)
+   à System.Windows.Controls.Grid.MeasureCellsGroup(Int32 cellsHead, Size referenceSize, Boolean ignoreDesiredSizeU, Boolean forceInfinityV)
+   à System.Windows.Controls.Grid.MeasureOverride(Size constraint)
+   à System.Windows.FrameworkElement.MeasureCore(Size availableSize)
+   à System.Windows.UIElement.Measure(Size availableSize)
+   à System.Windows.ContextLayoutManager.UpdateLayout()
+   à System.Windows.ContextLayoutManager.UpdateLayoutCallback(Object arg)
+   à System.Windows.Media.MediaContext.InvokeOnRenderCallback.DoWork()
+   à System.Windows.Media.MediaContext.FireInvokeOnRenderCallbacks()
+   à System.Windows.Media.MediaContext.RenderMessageHandlerCore(Object resizedCompositionTarget)
+   à System.Windows.Media.MediaContext.RenderMessageHandler(Object resizedCompositionTarget)
+   à System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   à System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+14|2017-08-08 14:14:56.3845|ERROR||My.CoachManager.CrossCutting.Logging.Supervision.Logger|System.InvalidCastException: Impossible d'effectuer un cast d'un objet de type 'System.Collections.ObjectModel.ObservableCollection`1[My.CoachManager.Presentation.ViewModels.CategoryViewModel]' en type 'System.Collections.ObjectModel.ObservableCollection`1[My.CoachManager.Presentation.ViewModels.DataEntityViewModel]'.
+   à My.CoachManager.Presentation.ViewModels.Admin.CategoriesListViewModel.<LoadDataCore>b__c(CategoryViewModel e) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Admin\CategoriesListViewModel.cs:ligne 49
+   à Microsoft.Practices.ObjectBuilder2.EnumerableExtensions.ForEach[TItem](IEnumerable`1 sequence, Action`1 action)
+   à My.CoachManager.Presentation.ViewModels.Admin.CategoriesListViewModel.LoadDataCore() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Admin\CategoriesListViewModel.cs:ligne 47
+   à My.CoachManager.Presentation.Core.ViewModels.Screens.WorkspaceViewModel.<LoadData>b__2() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\ViewModels\Screens\WorkspaceViewModel.cs:ligne 63
+8|2017-08-08 14:15:05.1403|ERROR||My.CoachManager.CrossCutting.Logging.Supervision.Logger|System.InvalidOperationException: Le thread appelant doit être en mode STA, comme l'exigent de nombreux composants de l'interface utilisateur.
+   à System.Windows.Input.InputManager..ctor()
+   à System.Windows.Input.InputManager.GetCurrentInputManagerImpl()
+   à System.Windows.Input.KeyboardNavigation..ctor()
+   à System.Windows.FrameworkElement.FrameworkServices..ctor()
+   à System.Windows.FrameworkElement.EnsureFrameworkServices()
+   à System.Windows.FrameworkElement..ctor()
+   à System.Windows.Controls.Control..ctor()
+   à System.Windows.Controls.ContentControl..ctor()
+   à MahApps.Metro.Controls.Dialogs.BaseMetroDialog..ctor(MetroWindow owningWindow, MetroDialogSettings settings) dans d:\projects\git\MahApps.Metro\src\MahApps.Metro\MahApps.Metro.Shared\Controls\Dialogs\BaseMetroDialog.cs:ligne 90
+   à My.CoachManager.Presentation.Controls.Dialogs.MessageDialog..ctor(MetroWindow parentWindow, MetroDialogSettings settings) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\Controls\Dialogs\MessageDialog.cs:ligne 34
+   à My.CoachManager.Presentation.Controls.Dialogs.MessageDialog..ctor(MetroDialogSettings settings) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\Controls\Dialogs\MessageDialog.cs:ligne 29
+   à My.CoachManager.Presentation.Services.MetroDialogService.GetMessageDialog(String message, MessageDialogSettings settings) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\Services\MetroDialogService.cs:ligne 698
+   à My.CoachManager.Presentation.Services.MetroDialogService.GetMessageDialog(String message, MessageDialogStyle type) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\Services\MetroDialogService.cs:ligne 714
+   à My.CoachManager.Presentation.Services.MetroDialogService.ShowMessage(String message, MessageDialogStyle type) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\Services\MetroDialogService.cs:ligne 119
+   à My.CoachManager.Presentation.Services.MetroDialogService.ShowError(String message) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\Services\MetroDialogService.cs:ligne 172
+   à My.CoachManager.Presentation.ViewModels.Core.NavigatableViewModel.OnFailureLoadingData(Exception e) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Core\NavigatableViewModel.cs:ligne 105
+   à My.CoachManager.Presentation.Core.ViewModels.Screens.WorkspaceViewModel.<LoadData>b__2() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\ViewModels\Screens\WorkspaceViewModel.cs:ligne 71
+   à System.Threading.Tasks.Task.InnerInvoke()
+   à System.Threading.Tasks.Task.Execute()
+--- Fin de la trace de la pile à partir de l'emplacement précédent au niveau duquel l'exception a été levée ---
+   à System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   à System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   à System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   à My.CoachManager.Presentation.Core.ViewModels.Screens.WorkspaceViewModel.<LoadData>d__4.MoveNext() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\ViewModels\Screens\WorkspaceViewModel.cs:ligne 59
+12|2017-08-08 14:15:51.6160|ERROR||My.CoachManager.CrossCutting.Logging.Supervision.Logger|System.InvalidCastException: Impossible d'effectuer un cast d'un objet de type 'System.Collections.ObjectModel.ObservableCollection`1[My.CoachManager.Presentation.ViewModels.CategoryViewModel]' en type 'System.Collections.ObjectModel.ObservableCollection`1[My.CoachManager.Presentation.ViewModels.DataEntityViewModel]'.
+   à My.CoachManager.Presentation.ViewModels.Admin.CategoriesListViewModel.<LoadDataCore>b__c(CategoryViewModel e) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Admin\CategoriesListViewModel.cs:ligne 49
+   à Microsoft.Practices.ObjectBuilder2.EnumerableExtensions.ForEach[TItem](IEnumerable`1 sequence, Action`1 action)
+   à My.CoachManager.Presentation.ViewModels.Admin.CategoriesListViewModel.LoadDataCore() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Admin\CategoriesListViewModel.cs:ligne 47
+   à My.CoachManager.Presentation.Core.ViewModels.Screens.WorkspaceViewModel.<LoadData>b__2() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\ViewModels\Screens\WorkspaceViewModel.cs:ligne 63
+12|2017-08-08 14:20:31.1959|ERROR||My.CoachManager.CrossCutting.Logging.Supervision.Logger|System.InvalidCastException: Impossible d'effectuer un cast d'un objet de type 'System.Collections.ObjectModel.ObservableCollection`1[My.CoachManager.Presentation.ViewModels.CategoryViewModel]' en type 'System.Collections.ObjectModel.ObservableCollection`1[My.CoachManager.Presentation.ViewModels.DataEntityViewModel]'.
+   à My.CoachManager.Presentation.ViewModels.Admin.CategoriesListViewModel.<LoadDataCore>b__c(CategoryViewModel e) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Admin\CategoriesListViewModel.cs:ligne 49
+   à Microsoft.Practices.ObjectBuilder2.EnumerableExtensions.ForEach[TItem](IEnumerable`1 sequence, Action`1 action)
+   à My.CoachManager.Presentation.ViewModels.Admin.CategoriesListViewModel.LoadDataCore() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation\ViewModels\Admin\CategoriesListViewModel.cs:ligne 47
+   à My.CoachManager.Presentation.Core.ViewModels.Screens.WorkspaceViewModel.<LoadData>b__2() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Core\ViewModels\Screens\WorkspaceViewModel.cs:ligne 63
