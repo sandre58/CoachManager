@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>My.CoachManager.Presentation.Prism.Controls</RootNamespace>
+    <AssemblyName>My.CoachManager.Presentation.Prism.Controls</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Xaml.2.2.5\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdornedControl\AdornedControl.cs" />
+    <Compile Include="AdornedControl\AdornerPlacement.cs" />
+    <Compile Include="AdornedControl\FrameworkElementAdorner.cs" />
+    <Compile Include="Behaviours\DatePickerTextBoxBehavior.cs" />
+    <Compile Include="Behaviours\FadeBehavior.cs" />
+    <Compile Include="Behaviours\ReloadBehavior.cs" />
+    <Compile Include="Behaviours\SlideBehavior.cs" />
+    <Compile Include="CommandButton.cs" />
+    <Compile Include="Commands\CloseCommand.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="ApplicationBar.cs" />
+    <Compile Include="Datagrid\Columns\DataGridOrderColumn.cs" />
+    <Compile Include="Enums\CharacterCasing.cs" />
+    <Compile Include="Parameters\ComboBoxParameters.cs" />
+    <Compile Include="Parameters\ToggleButtonParameters.cs" />
+    <Compile Include="Specific\TacticControl.cs" />
+    <Compile Include="ToggleCommandButton.cs" />
+    <Compile Include="DragAndDrop\DragCommand.cs" />
+    <Compile Include="DragAndDrop\DragManager.cs" />
+    <Compile Include="DragAndDrop\DragViewer.cs" />
+    <Compile Include="Enums\ButtonsAlignment.cs" />
+    <Compile Include="Enums\NotificationPosition.cs" />
+    <Compile Include="NumericUpDown.cs" />
+    <Compile Include="NumericUpDownChangedRoutedEventArgs.cs" />
+    <Compile Include="NumericUpDownChangedRoutedEventHandler.cs" />
+    <Compile Include="Parameters\FormParameters.cs" />
+    <Compile Include="Parameters\TextBoxParameters.cs" />
+    <Compile Include="Parameters\UiElementParameters.cs" />
+    <Compile Include="ProgressRing.cs" />
+    <Compile Include="TimePicker\AmPmComparer.cs" />
+    <Compile Include="TimePicker\DateTimePicker.cs" />
+    <Compile Include="TimePicker\TimePartVisibility.cs" />
+    <Compile Include="TimePicker\TimePicker.cs" />
+    <Compile Include="TimePicker\TimePickerBase.cs" />
+    <Compile Include="TimePicker\TimePickerBaseSelectionChangedEventArgs.cs" />
+    <Compile Include="NotificationPopup.cs" />
+    <Compile Include="WorkspaceDialog.cs" />
+    <Compile Include="Datagrid\Columns\DataGridCheckBoxColumn.cs" />
+    <Compile Include="Datagrid\Columns\DataGridColumnToolTipHelper.cs" />
+    <Compile Include="Datagrid\Columns\DataGridComboBoxColumn.cs" />
+    <Compile Include="Datagrid\Columns\DataGridDateColumn.cs" />
+    <Compile Include="Datagrid\Columns\DataGridDateTimeColumn.cs" />
+    <Compile Include="Datagrid\Columns\DataGridHyperlinkColumn.cs" />
+    <Compile Include="Datagrid\Columns\DataGridMultiLineTextColumn.cs" />
+    <Compile Include="Datagrid\Columns\DataGridTemplateColumn.cs" />
+    <Compile Include="Datagrid\Columns\DataGridTextColumn.cs" />
+    <Compile Include="Parameters\PanelParameters.cs" />
+    <Compile Include="Parameters\ScrollBarParameters.cs" />
+    <Compile Include="Parameters\DataGridParameters.cs" />
+    <Compile Include="Parameters\DataGridColumnParameters.cs" />
+    <Compile Include="Datagrid\DataGridColumnInfo.cs" />
+    <Compile Include="Parameters\DataGridRowParameters.cs" />
+    <Compile Include="Datagrid\GroupSummary\DataGridGroupSummary.cs" />
+    <Compile Include="Datagrid\GroupSummary\DataGridGroupSummaryCollection.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\TreeHelper.cs" />
+    <Compile Include="Helpers\VisualStates.cs" />
+    <Compile Include="Helpers\XamlHelper.cs" />
+    <Compile Include="MetroContentControl.cs" />
+    <Compile Include="NavigationItem.cs" />
+    <Compile Include="DpiAwareWindow.cs" />
+    <Compile Include="DpiInformation.cs" />
+    <Compile Include="Helpers\AppHelper.cs" />
+    <Compile Include="Icon.cs" />
+    <Compile Include="MetroWindow.cs" />
+    <Compile Include="Native\MonitorDpiType.cs" />
+    <Compile Include="Native\NativeMethods.cs" />
+    <Compile Include="Native\OSVersionHelper.cs" />
+    <Compile Include="Native\RECT.cs" />
+    <Compile Include="NavigationExpander.cs" />
+    <Compile Include="Parameters\ControlParameters.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="TransitioningContentControl.cs" />
+    <Compile Include="WorkspaceView.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Core\My.CoachManager.Presentation.Prism.Core.csproj">
+      <Project>{3f11e745-d328-4654-a3c9-4bfc9bf6b9ab}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

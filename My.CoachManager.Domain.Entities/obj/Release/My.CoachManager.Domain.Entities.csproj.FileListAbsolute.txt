@@ -1,0 +1,7 @@
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Domain.Entities\bin\Release\My.CoachManager.Domain.Entities.dll
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Domain.Entities\bin\Release\My.CoachManager.Domain.Entities.pdb
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Domain.Entities\bin\Release\My.CoachManager.Domain.Core.dll
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Domain.Entities\bin\Release\My.CoachManager.Domain.Core.pdb
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Domain.Entities\obj\Release\My.CoachManager.Domain.Entities.csprojResolveAssemblyReference.cache
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Domain.Entities\obj\Release\My.CoachManager.Domain.Entities.dll
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Domain.Entities\obj\Release\My.CoachManager.Domain.Entities.pdb

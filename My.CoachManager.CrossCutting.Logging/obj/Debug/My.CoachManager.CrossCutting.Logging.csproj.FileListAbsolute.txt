@@ -1,0 +1,7 @@
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.CrossCutting.Logging\bin\Debug\My.CoachManager.CrossCutting.Logging.dll
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.CrossCutting.Logging\bin\Debug\My.CoachManager.CrossCutting.Logging.pdb
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.CrossCutting.Logging\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.CrossCutting.Logging\bin\Debug\Microsoft.Practices.Unity.Interception.xml
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.CrossCutting.Logging\obj\Debug\My.CoachManager.CrossCutting.Logging.dll
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.CrossCutting.Logging\obj\Debug\My.CoachManager.CrossCutting.Logging.pdb
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.CrossCutting.Logging\bin\Debug\CodeContracts\My.CoachManager.CrossCutting.Logging.noReferenceAssembly

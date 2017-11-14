@@ -1,0 +1,20 @@
+﻿My.CoachManager.Presentation.Prism.Administration
+
+
+library
+C#
+.cs
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Administration\obj\Debug\
+My.CoachManager.Presentation.Prism.Administration
+none
+false
+DEBUG;TRACE
+
+13471851185
+
+34414593139
+72495256679
+App.xaml;Views\PhonesEditView.xaml;Views\EmailsEditView.xaml;Views\PlayersListView.xaml;Views\CategoriesListView.xaml;Views\AdministrationNavigationView.xaml;Views\CategoryEditView.xaml;Views\PlayerEditView.xaml;Views\SeasonsListView.xaml;Views\SeasonEditView.xaml;Views\PositionsListView.xaml;Views\PositionEditView.xaml;Views\DataEditView.xaml;
+
+False
+

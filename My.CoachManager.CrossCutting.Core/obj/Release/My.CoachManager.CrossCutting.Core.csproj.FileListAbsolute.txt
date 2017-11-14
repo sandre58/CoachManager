@@ -1,0 +1,6 @@
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.CrossCutting.Core\bin\Release\My.CoachManager.CrossCutting.Core.dll
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.CrossCutting.Core\bin\Release\My.CoachManager.CrossCutting.Core.pdb
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.CrossCutting.Core\obj\Release\My.CoachManager.CrossCutting.Core.Resources.CommonMessage.resources
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.CrossCutting.Core\obj\Release\My.CoachManager.CrossCutting.Core.csproj.GenerateResource.Cache
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.CrossCutting.Core\obj\Release\My.CoachManager.CrossCutting.Core.dll
+C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.CrossCutting.Core\obj\Release\My.CoachManager.CrossCutting.Core.pdb

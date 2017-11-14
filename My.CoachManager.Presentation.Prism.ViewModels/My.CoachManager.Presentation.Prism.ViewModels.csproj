@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EEC17382-357C-4CD4-B493-23659FEE0E94}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>My.CoachManager.Presentation.Prism.ViewModels</RootNamespace>
+    <AssemblyName>My.CoachManager.Presentation.Prism.ViewModels</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism">
+      <HintPath>..\packages\Prism.Core.6.3.0\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CategoryViewModel.cs" />
+    <Compile Include="CityViewModel.cs" />
+    <Compile Include="CoachViewModel.cs" />
+    <Compile Include="ContactsCollection.cs" />
+    <Compile Include="ContactViewModel.cs" />
+    <Compile Include="PlayerWeightViewModel.cs" />
+    <Compile Include="PlayerHeightViewModel.cs" />
+    <Compile Include="Mapping\PersonProfile.cs" />
+    <Compile Include="PlayerPositionViewModel.cs" />
+    <Compile Include="CountryViewModel.cs" />
+    <Compile Include="EmailViewModel.cs" />
+    <Compile Include="PersonViewModel.cs" />
+    <Compile Include="PhoneViewModel.cs" />
+    <Compile Include="PlayerViewModel.cs" />
+    <Compile Include="Mapping\PositionProfile.cs" />
+    <Compile Include="Mapping\SeasonProfile.cs" />
+    <Compile Include="PositionViewModel.cs" />
+    <Compile Include="SeasonViewModel.cs" />
+    <Compile Include="DataEntityViewModel.cs" />
+    <Compile Include="Mapping\AutoMapperExtension.cs" />
+    <Compile Include="Mapping\CategoryProfile.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\My.CoachManager.Application.Dtos\My.CoachManager.Application.Dtos.csproj">
+      <Project>{2a887be7-a2f5-4cd8-9fd6-af1adb53b874}</Project>
+      <Name>My.CoachManager.Application.Dtos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.CrossCutting.Core\My.CoachManager.CrossCutting.Core.csproj">
+      <Project>{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}</Project>
+      <Name>My.CoachManager.CrossCutting.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Core\My.CoachManager.Presentation.Prism.Core.csproj">
+      <Project>{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

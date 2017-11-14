@@ -1,0 +1,63 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:Double x:Key="SmallMarginLeftValue">2</sys:Double>
+    <sys:Double x:Key="SmallMarginRightValue">2</sys:Double>
+    <sys:Double x:Key="SmallMarginTopValue">2</sys:Double>
+    <sys:Double x:Key="SmallMarginBottomValue">2</sys:Double>
+
+    <sys:Double x:Key="DefaultMarginLeftValue">5</sys:Double>
+    <sys:Double x:Key="DefaultMarginRightValue">5</sys:Double>
+    <sys:Double x:Key="DefaultMarginTopValue">5</sys:Double>
+    <sys:Double x:Key="DefaultMarginBottomValue">5</sys:Double>
+
+    <sys:Double x:Key="LargeMarginLeftValue">10</sys:Double>
+    <sys:Double x:Key="LargeMarginRightValue">10</sys:Double>
+    <sys:Double x:Key="LargeMarginTopValue">10</sys:Double>
+    <sys:Double x:Key="LargeMarginBottomValue">10</sys:Double>
+
+    <sys:Double x:Key="VeryLargeMarginLeftValue">20</sys:Double>
+    <sys:Double x:Key="VeryLargeMarginRightValue">20</sys:Double>
+    <sys:Double x:Key="VeryLargeMarginTopValue">20</sys:Double>
+    <sys:Double x:Key="VeryLargeMarginBottomValue">20</sys:Double>
+
+    <Thickness x:Key="SmallHorizontalMargin" Left="{StaticResource SmallMarginLeftValue}" Top="0" Right="{StaticResource SmallMarginRightValue}" Bottom="0" />
+    <Thickness x:Key="SmallVerticalMargin" Left="0" Top="{StaticResource SmallMarginTopValue}" Right="0" Bottom="{StaticResource SmallMarginBottomValue}" />
+    <Thickness x:Key="SmallLeftMargin" Left="{StaticResource SmallMarginLeftValue}" Top="0" Right="0" Bottom="0" />
+    <Thickness x:Key="SmallRightMargin" Left="0" Top="0" Right="{StaticResource SmallMarginLeftValue}" Bottom="0" />
+
+    <Thickness x:Key="DefaultHorizontalMargin" Left="{StaticResource DefaultMarginLeftValue}" Top="0" Right="{StaticResource DefaultMarginRightValue}" Bottom="0" />
+    <Thickness x:Key="DefaultVerticalMargin" Left="0" Top="{StaticResource DefaultMarginTopValue}" Right="0" Bottom="{StaticResource DefaultMarginBottomValue}" />
+    <Thickness x:Key="DefaultLeftMargin" Left="{StaticResource DefaultMarginLeftValue}" Top="0" Right="0" Bottom="0" />
+    <Thickness x:Key="DefaultRightMargin" Left="0" Top="0" Right="{StaticResource DefaultMarginLeftValue}" Bottom="0" />
+
+    <Thickness x:Key="LargeMargin" Left="{StaticResource LargeMarginLeftValue}" Top="{StaticResource LargeMarginTopValue}" Right="{StaticResource LargeMarginRightValue}" Bottom="{StaticResource LargeMarginBottomValue}" />
+    <Thickness x:Key="LargeHorizontalMargin" Left="{StaticResource LargeMarginLeftValue}" Top="0" Right="{StaticResource LargeMarginRightValue}" Bottom="0" />
+    <Thickness x:Key="LargeVerticalMargin" Left="0" Top="{StaticResource LargeMarginTopValue}" Right="0" Bottom="{StaticResource LargeMarginBottomValue}" />
+    <Thickness x:Key="LargeLeftMargin" Left="{StaticResource LargeMarginLeftValue}" Top="0" Right="0" Bottom="0" />
+    <Thickness x:Key="LargeRightMargin" Left="0" Top="0" Right="{StaticResource LargeMarginLeftValue}" Bottom="0" />
+    <Thickness x:Key="LargeTopMargin" Left="0" Top="{StaticResource LargeMarginLeftValue}" Right="0" Bottom="0" />
+    <Thickness x:Key="LargeBottomMargin" Left="0" Top="0" Right="0" Bottom="{StaticResource LargeMarginLeftValue}" />
+
+    <Thickness x:Key="VeryLargeHorizontalMargin" Left="{StaticResource VeryLargeMarginLeftValue}" Top="0" Right="{StaticResource VeryLargeMarginRightValue}" Bottom="0" />
+    <Thickness x:Key="VeryLargeVerticalMargin" Left="0" Top="{StaticResource VeryLargeMarginTopValue}" Right="0" Bottom="{StaticResource VeryLargeMarginBottomValue}" />
+
+    <Thickness x:Key="NoHorizontalMargin"
+               Left="0"
+               Top="{StaticResource DefaultMarginTopValue}"
+               Right="0"
+               Bottom="{StaticResource DefaultMarginBottomValue}" />
+
+    <Thickness x:Key="DefaultMargin"
+               Left="{StaticResource DefaultMarginLeftValue}"
+               Top="{StaticResource DefaultMarginTopValue}"
+               Right="{StaticResource DefaultMarginRightValue}"
+               Bottom="{StaticResource DefaultMarginBottomValue}" />
+
+    <Thickness x:Key="FieldMargin"
+               Left="{StaticResource DefaultMarginLeftValue}"
+               Top="{StaticResource LargeMarginTopValue}"
+               Right="{StaticResource DefaultMarginRightValue}"
+               Bottom="{StaticResource LargeMarginBottomValue}" />
+</ResourceDictionary>

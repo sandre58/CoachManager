@@ -1,0 +1,85 @@
+﻿<controls:MetroWindow x:Class="My.CoachManager.Presentation.Prism.Wpf.Views.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:core="clr-namespace:My.CoachManager.Presentation.Prism.Core;assembly=My.CoachManager.Presentation.Prism.Core"
+        xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
+        xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings;assembly=My.CoachManager.Presentation.Prism.Resources"
+        xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.ViewModels"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:interactivity="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.Interactivity"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel}"
+        Title="{x:Static strings:GlobalResources.ApplicationTitle}"
+        Icon="{StaticResource IcoImageSource}"
+        WindowState="Maximized"
+        Style="{StaticResource ModernWindowStyle}">
+
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding WindowDialogInteractionRequest}">
+            <interactivity:WindowDialogAction IsModal="True" CenterOverAssociatedObject="True" />
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding WorkspaceDialogInteractionRequest}">
+            <interactivity:WorkspaceDialogAction WorkspaceDialog="{Binding ElementName=WorkspaceDialog}" />
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding NotificationPopupInteractionRequest}">
+            <interactivity:NotificationPopupAction PopupStyle="{StaticResource NotificationPopupStyle}" />
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid x:Name="Main">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Main Region -->
+            <Grid Grid.Row="0" Grid.Column="1">
+                <controls:TransitioningContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.WorkspaceRegion}" />
+            </Grid>
+
+            <!-- Left Region -->
+            <Border Grid.Row="0" Grid.Column="0" Width="300" Background="{DynamicResource MainMenuBackground}">
+                <Border.Effect>
+                    <DropShadowEffect Color="{DynamicResource ShadowColor}" Direction="0" ShadowDepth="5" Opacity="0.5" BlurRadius="15" />
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="200" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Title -->
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=Title, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Converter={StaticResource ToUpperConverter}}"
+                           Style="{StaticResource ModernWindowTitle}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Typography.Capitals="AllSmallCaps" />
+
+                    <!-- Logo -->
+                    <Image Grid.Row="1" Grid.Column="0"
+                       Source="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/CoachManager.png"
+                       Margin="{DynamicResource VeryLargeVerticalMargin}" />
+
+                    <!-- Navigation Region -->
+                    <ItemsControl Grid.Row="2" Grid.Column="0" prism:RegionManager.RegionName="{x:Static core:RegionNames.NavigationRegion}" />
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Dialog Region -->
+        <controls:WorkspaceDialog x:Name="WorkspaceDialog" Grid.Column="0" Grid.Row="0" Owner="{Binding ElementName=Main}" />
+    </Grid>
+
+    <!-- Status Bar -->
+    <controls:MetroWindow.StatusBar>
+        <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.StatusBarRegion}" Focusable="False" IsTabStop="False" />
+    </controls:MetroWindow.StatusBar>
+</controls:MetroWindow>

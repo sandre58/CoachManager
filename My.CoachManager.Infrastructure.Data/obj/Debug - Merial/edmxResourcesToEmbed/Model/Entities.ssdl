@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Test.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Label" Type="varchar(max)" Nullable="false" />
+    <Property Name="Abbreviation" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="Flag" Type="text" />
+  </EntityType>
+  <EntityType Name="Permission">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Label" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LastName" Type="varchar(max)" Nullable="false" />
+    <Property Name="FirstName" Type="varchar(max)" Nullable="false" />
+    <Property Name="Birthdate" Type="date" />
+    <Property Name="PlaceOfBirth" Type="varchar(max)" />
+    <Property Name="Photo" Type="text" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="Address" Type="varchar(max)" />
+    <Property Name="PostalCode" Type="varchar" MaxLength="5" />
+    <Property Name="City" Type="varchar(max)" />
+    <Property Name="Gender" Type="int" Nullable="false" />
+    <Property Name="Foot" Type="int" />
+    <Property Name="LicenseNumber" Type="varchar" MaxLength="10" />
+    <Property Name="LicenseState" Type="int" />
+    <Property Name="Mutation" Type="bit" />
+    <Property Name="Number" Type="int" />
+    <Property Name="ShoesSize" Type="int" />
+    <Property Name="Size" Type="varchar" MaxLength="4" />
+    <Property Name="Height" Type="int" />
+    <Property Name="Weight" Type="int" />
+    <Property Name="Description" Type="text" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="varchar(max)" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Label" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="text" />
+  </EntityType>
+  <EntityType Name="RolePermission">
+    <Key>
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="PermissionId" />
+    </Key>
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="PermissionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Stage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Label" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Training">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Theme" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TypeId" Type="int" Nullable="false" />
+    <Property Name="Duration" Type="float" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="varchar(max)" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="TrainingStage">
+    <Key>
+      <PropertyRef Name="TrainingId" />
+      <PropertyRef Name="StageId" />
+    </Key>
+    <Property Name="TrainingId" Type="int" Nullable="false" />
+    <Property Name="StageId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Player_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Player" Type="Self.Player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolePermission_Permission">
+    <End Role="Permission" Type="Self.Permission" Multiplicity="1" />
+    <End Role="RolePermission" Type="Self.RolePermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Permission">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RolePermission">
+        <PropertyRef Name="PermissionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolePermission_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="RolePermission" Type="Self.RolePermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RolePermission">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrainingStage_Stage">
+    <End Role="Stage" Type="Self.Stage" Multiplicity="1" />
+    <End Role="TrainingStage" Type="Self.TrainingStage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TrainingStage">
+        <PropertyRef Name="StageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrainingStage_Training">
+    <End Role="Training" Type="Self.Training" Multiplicity="1" />
+    <End Role="TrainingStage" Type="Self.TrainingStage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Training">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TrainingStage">
+        <PropertyRef Name="TrainingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TestStoreContainer">
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Permission" EntityType="Self.Permission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RolePermission" EntityType="Self.RolePermission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stage" EntityType="Self.Stage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Training" EntityType="Self.Training" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TrainingStage" EntityType="Self.TrainingStage" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Player_Country" Association="Self.FK_Player_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Player" EntitySet="Player" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolePermission_Permission" Association="Self.FK_RolePermission_Permission">
+      <End Role="Permission" EntitySet="Permission" />
+      <End Role="RolePermission" EntitySet="RolePermission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolePermission_Role" Association="Self.FK_RolePermission_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="RolePermission" EntitySet="RolePermission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrainingStage_Stage" Association="Self.FK_TrainingStage_Stage">
+      <End Role="Stage" EntitySet="Stage" />
+      <End Role="TrainingStage" EntitySet="TrainingStage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrainingStage_Training" Association="Self.FK_TrainingStage_Training">
+      <End Role="Training" EntitySet="Training" />
+      <End Role="TrainingStage" EntitySet="TrainingStage" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

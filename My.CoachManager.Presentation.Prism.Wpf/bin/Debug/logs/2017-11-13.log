@@ -1,0 +1,54 @@
+13|2017-11-13 16:15:45.1714|FATAL||My.CoachManager.CrossCutting.Logging.Supervision.Logger|System.MissingMethodException: Impossible de créer une classe abstraite.
+   à System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   à System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   à System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   à System.Activator.CreateInstance[T]()
+   à My.CoachManager.Presentation.Prism.ViewModels.ContactsCollection`1.Add() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\ContactsCollection.cs:ligne 11
+   à My.CoachManager.Presentation.Prism.Administration.ViewModels.PlayerEditViewModel.AddEmail() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Administration\ViewModels\PlayerEditViewModel.Contacts.cs:ligne 90
+   à My.CoachManager.Presentation.Prism.Administration.ViewModels.PlayerEditViewModel.AfterLoadData(Boolean isFirstLoading) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Administration\ViewModels\PlayerEditViewModel.cs:ligne 186
+   à My.CoachManager.Presentation.Prism.Core.ViewModels.ScreenViewModel.<>c__DisplayClass2.<LoadData>b__0() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Core\ViewModels\ScreenViewModel.cs:ligne 97
+14|2017-11-13 16:21:39.9498|FATAL||My.CoachManager.CrossCutting.Logging.Supervision.Logger|System.InvalidOperationException: La collection a été modifiée ; l'opération d'énumération peut ne pas s'exécuter.
+   à System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   à System.Collections.Generic.List`1.Enumerator.MoveNextRare()
+   à System.Collections.Generic.List`1.Enumerator.MoveNext()
+   à My.CoachManager.Presentation.Prism.ViewModels.ContactsCollection`1.UpdateCanAdd() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\ContactsCollection.cs:ligne 41
+   à My.CoachManager.Presentation.Prism.ViewModels.ContactsCollection`1.InsertItem(Int32 index, T addedItem) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\ContactsCollection.cs:ligne 19
+   à System.Collections.ObjectModel.Collection`1.Add(T item)
+   à My.CoachManager.Presentation.Prism.ViewModels.ContactsCollection`1.Add() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\ContactsCollection.cs:ligne 11
+   à My.CoachManager.Presentation.Prism.Administration.ViewModels.PlayerEditViewModel.AddPhone() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Administration\ViewModels\PlayerEditViewModel.Contacts.cs:ligne 68
+   à My.CoachManager.Presentation.Prism.Administration.ViewModels.PlayerEditViewModel.AfterLoadData(Boolean isFirstLoading) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Administration\ViewModels\PlayerEditViewModel.cs:ligne 187
+   à My.CoachManager.Presentation.Prism.Core.ViewModels.ScreenViewModel.<>c__DisplayClass2.<LoadData>b__0() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Core\ViewModels\ScreenViewModel.cs:ligne 97
+3|2017-11-13 16:45:54.1903|FATAL||My.CoachManager.CrossCutting.Logging.Supervision.Logger|System.NullReferenceException: La référence d'objet n'est pas définie à une instance d'un objet.
+   à My.CoachManager.Presentation.Prism.Administration.ViewModels.PlayerEditViewModel.LoadDataCore(Boolean isFirstLoading) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Administration\ViewModels\PlayerEditViewModel.cs:ligne 151
+   à My.CoachManager.Presentation.Prism.Core.ViewModels.ScreenViewModel.<>c__DisplayClass2.<LoadData>b__0() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Core\ViewModels\ScreenViewModel.cs:ligne 96
+9|2017-11-13 16:51:58.8387|FATAL||My.CoachManager.CrossCutting.Logging.Supervision.Logger|System.InvalidOperationException: La collection a été modifiée ; l'opération d'énumération peut ne pas s'exécuter.
+   à System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   à System.Collections.Generic.List`1.Enumerator.MoveNextRare()
+   à System.Collections.Generic.List`1.Enumerator.MoveNext()
+   à My.CoachManager.Presentation.Prism.ViewModels.ContactsCollection`1.UpdateCanAdd() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\ContactsCollection.cs:ligne 41
+   à My.CoachManager.Presentation.Prism.ViewModels.ContactsCollection`1.InsertItem(Int32 index, T addedItem) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\ContactsCollection.cs:ligne 19
+   à System.Collections.ObjectModel.Collection`1.Add(T item)
+   à My.CoachManager.Presentation.Prism.ViewModels.ContactsCollection`1.Add() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\ContactsCollection.cs:ligne 11
+   à My.CoachManager.Presentation.Prism.Administration.ViewModels.PlayerEditViewModel.AddPhone() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Administration\ViewModels\PlayerEditViewModel.Contacts.cs:ligne 68
+   à My.CoachManager.Presentation.Prism.Administration.ViewModels.PlayerEditViewModel.AfterLoadData(Boolean isFirstLoading) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Administration\ViewModels\PlayerEditViewModel.cs:ligne 187
+   à My.CoachManager.Presentation.Prism.Core.ViewModels.ScreenViewModel.<>c__DisplayClass2.<LoadData>b__0() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Core\ViewModels\ScreenViewModel.cs:ligne 97
+17|2017-11-13 16:52:34.1782|FATAL||My.CoachManager.CrossCutting.Logging.Supervision.Logger|System.NullReferenceException: La référence d'objet n'est pas définie à une instance d'un objet.
+   à My.CoachManager.Presentation.Prism.Administration.ViewModels.PlayerEditViewModel.LoadDataCore(Boolean isFirstLoading) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Administration\ViewModels\PlayerEditViewModel.cs:ligne 151
+   à My.CoachManager.Presentation.Prism.Core.ViewModels.ScreenViewModel.<>c__DisplayClass2.<LoadData>b__0() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Core\ViewModels\ScreenViewModel.cs:ligne 96
+10|2017-11-13 16:52:37.2606|FATAL||My.CoachManager.CrossCutting.Logging.Supervision.Logger|System.NullReferenceException: La référence d'objet n'est pas définie à une instance d'un objet.
+   à My.CoachManager.Presentation.Prism.Administration.ViewModels.PlayerEditViewModel.LoadDataCore(Boolean isFirstLoading) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Administration\ViewModels\PlayerEditViewModel.cs:ligne 151
+   à My.CoachManager.Presentation.Prism.Core.ViewModels.ScreenViewModel.<>c__DisplayClass2.<LoadData>b__0() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Core\ViewModels\ScreenViewModel.cs:ligne 96
+13|2017-11-13 16:52:47.0935|FATAL||My.CoachManager.CrossCutting.Logging.Supervision.Logger|System.NullReferenceException: La référence d'objet n'est pas définie à une instance d'un objet.
+   à My.CoachManager.Presentation.Prism.Administration.ViewModels.PlayerEditViewModel.LoadDataCore(Boolean isFirstLoading) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Administration\ViewModels\PlayerEditViewModel.cs:ligne 151
+   à My.CoachManager.Presentation.Prism.Core.ViewModels.ScreenViewModel.<>c__DisplayClass2.<LoadData>b__0() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Core\ViewModels\ScreenViewModel.cs:ligne 96
+16|2017-11-13 16:58:31.3150|FATAL||My.CoachManager.CrossCutting.Logging.Supervision.Logger|System.InvalidOperationException: La collection a été modifiée ; l'opération d'énumération peut ne pas s'exécuter.
+   à System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   à System.Collections.Generic.List`1.Enumerator.MoveNextRare()
+   à System.Collections.Generic.List`1.Enumerator.MoveNext()
+   à My.CoachManager.Presentation.Prism.ViewModels.ContactsCollection`1.UpdateCanAdd() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\ContactsCollection.cs:ligne 41
+   à My.CoachManager.Presentation.Prism.ViewModels.ContactsCollection`1.InsertItem(Int32 index, T addedItem) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\ContactsCollection.cs:ligne 19
+   à System.Collections.ObjectModel.Collection`1.Add(T item)
+   à My.CoachManager.Presentation.Prism.ViewModels.ContactsCollection`1.Add() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\ContactsCollection.cs:ligne 11
+   à My.CoachManager.Presentation.Prism.Administration.ViewModels.PlayerEditViewModel.AddPhone() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Administration\ViewModels\PlayerEditViewModel.Contacts.cs:ligne 68
+   à My.CoachManager.Presentation.Prism.Administration.ViewModels.PlayerEditViewModel.AfterLoadData(Boolean isFirstLoading) dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Administration\ViewModels\PlayerEditViewModel.cs:ligne 187
+   à My.CoachManager.Presentation.Prism.Core.ViewModels.ScreenViewModel.<>c__DisplayClass2.<LoadData>b__0() dans c:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.Core\ViewModels\ScreenViewModel.cs:ligne 97

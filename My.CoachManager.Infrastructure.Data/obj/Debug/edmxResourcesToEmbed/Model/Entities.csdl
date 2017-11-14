@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Test" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Birthdate" Type="DateTime" Precision="0" />
+    <Property Name="PlaceOfBirth" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Adresse" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PostalCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="Int32" Nullable="false" />
+    <Property Name="Foot" Type="Int32" />
+    <Property Name="LicenseNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LicenseState" Type="Int32" />
+    <Property Name="Mutation" Type="Boolean" />
+    <Property Name="Number" Type="Int32" />
+    <Property Name="ShoesSize" Type="Int32" />
+    <Property Name="Size" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="Height" Type="Int32" />
+    <Property Name="Weight" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Stage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Label" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Trainings" Relationship="Self.TrainingStage" FromRole="Stage" ToRole="Training" />
+  </EntityType>
+  <EntityType Name="Training">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Theme" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TypeId" Type="Int32" Nullable="false" />
+    <Property Name="Duration" Type="Double" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Type" Relationship="Self.FK_Training_Type" FromRole="Training" ToRole="Type" />
+    <NavigationProperty Name="Stages" Relationship="Self.TrainingStage" FromRole="Training" ToRole="Stage" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Label" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ModifedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Trainings" Relationship="Self.FK_Training_Type" FromRole="Type" ToRole="Training" />
+  </EntityType>
+  <Association Name="FK_Training_Type">
+    <End Role="Type" Type="Self.Type" Multiplicity="1" />
+    <End Role="Training" Type="Self.Training" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Training">
+        <PropertyRef Name="TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TrainingStage">
+    <End Role="Stage" Type="Self.Stage" Multiplicity="*" />
+    <End Role="Training" Type="Self.Training" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Players" EntityType="Self.Player" />
+    <EntitySet Name="Stages" EntityType="Self.Stage" />
+    <EntitySet Name="Trainings" EntityType="Self.Training" />
+    <EntitySet Name="Types" EntityType="Self.Type" />
+    <AssociationSet Name="FK_Training_Type" Association="Self.FK_Training_Type">
+      <End Role="Type" EntitySet="Types" />
+      <End Role="Training" EntitySet="Trainings" />
+    </AssociationSet>
+    <AssociationSet Name="TrainingStage" Association="Self.TrainingStage">
+      <End Role="Stage" EntitySet="Stages" />
+      <End Role="Training" EntitySet="Trainings" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
