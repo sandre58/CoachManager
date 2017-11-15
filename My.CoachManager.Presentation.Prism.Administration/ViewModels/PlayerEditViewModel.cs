@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
@@ -8,6 +9,7 @@ using System.Linq;
 using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.Presentation.Prism.Administration.Resources.Strings;
+using My.CoachManager.Presentation.Prism.Controls.Extensions;
 using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
 using Prism.Commands;
 
@@ -113,6 +115,45 @@ namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
         #endregion Members
 
         #region Methods
+
+        /// <summary>
+        /// Select the photo.
+        /// </summary>
+        public void SelectPhoto()
+        {
+            //var filename = DialogService.ShowOpenFileDialog(.AllImages);
+
+            //if (!string.IsNullOrEmpty(filename))
+            //{
+            //    Item.Photo = File.ReadAllBytes(filename);
+            //}
+        }
+
+        /// <summary>
+        /// Can select the photo ?
+        /// </summary>
+        /// <returns></returns>
+        public bool CanSelectPhoto()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Delete the photo.
+        /// </summary>
+        public void DeletePhoto()
+        {
+            Item.Photo = null;
+        }
+
+        /// <summary>
+        /// Can delete the photo ?
+        /// </summary>
+        /// <returns></returns>
+        public bool CanDeletePhoto()
+        {
+            return Item.Photo != null;
+        }
 
         protected override void BeforeSave()
         {

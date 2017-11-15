@@ -4,7 +4,7 @@
 library
 C#
 .cs
-D:\stephane.andre\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.StatusBar\obj\Debug\
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.StatusBar\obj\Debug\
 My.CoachManager.Presentation.Prism.StatusBar
 none
 false
@@ -13,8 +13,8 @@ DEBUG;TRACE
 21727205919
 
 81524710
-65-716641075
+65-1342113301
 App.xaml;Views\StatusBarView.xaml;
 
-True
+False
 

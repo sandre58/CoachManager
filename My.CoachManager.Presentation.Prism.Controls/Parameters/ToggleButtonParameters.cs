@@ -1,13 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using My.CoachManager.Presentation.Prism.Controls;
 
-namespace MahApps.Metro.Controls
+namespace My.CoachManager.Presentation.Prism.Controls.Parameters
 {
-    using System.ComponentModel;
-    using System.Windows.Controls;
-
     public static class ToggleButtonParameters
     {
         /// <summary>

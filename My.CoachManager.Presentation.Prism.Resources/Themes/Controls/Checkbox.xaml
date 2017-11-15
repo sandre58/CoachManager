@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
-                    xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=My.CoachManager.Presentation.Prism.Controls">
+                    xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Margins.xaml" />
@@ -107,7 +106,7 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
-                        <Trigger Property="controls:ToggleButtonParameters.ContentDirection" Value="RightToLeft">
+                        <Trigger Property="parameters:ToggleButtonParameters.ContentDirection" Value="RightToLeft">
                             <Setter Property="Padding" Value="0 0 6 0" />
                             <Setter TargetName="LeftCol" Property="Width" Value="*" />
                             <Setter TargetName="PART_CHECKBOX" Property="Grid.Column" Value="1" />
