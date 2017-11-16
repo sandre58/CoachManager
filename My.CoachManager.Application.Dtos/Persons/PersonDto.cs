@@ -9,6 +9,8 @@ namespace My.CoachManager.Application.Dtos.Persons
     /// Players list Dtos.
     /// </summary>
     [DataContract]
+    [KnownType(typeof(PlayerDto))]
+    [KnownType(typeof(CoachDto))]
     public class PersonDto : EntityDto
     {
         [DataMember]

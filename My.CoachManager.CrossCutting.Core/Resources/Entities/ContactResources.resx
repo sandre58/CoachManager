@@ -144,11 +144,11 @@
   <data name="Other" xml:space="preserve">
     <value>Autre</value>
   </data>
+  <data name="Person" xml:space="preserve">
+    <value>Personne</value>
+  </data>
   <data name="Phone" xml:space="preserve">
     <value>Téléphone</value>
-  </data>
-  <data name="Player" xml:space="preserve">
-    <value>Joueur</value>
   </data>
   <data name="Professional" xml:space="preserve">
     <value>Professionnel</value>

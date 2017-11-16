@@ -14,7 +14,8 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
         public PersonViewModel()
         {
             Gender = PlayerConstants.DefaultGender;
-            Contacts = new ContactsCollection<ContactViewModel>();
+            Emails = new ContactsCollection<EmailViewModel>();
+            Phones = new ContactsCollection<PhoneViewModel>();
         }
 
         private string _lastName;
@@ -129,12 +130,11 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
             set { SetProperty(ref _size, value); }
         }
 
-        private ContactsCollection<ContactViewModel> _contacts;
-        public ContactsCollection<ContactViewModel> Contacts { get { return _contacts; } set { SetProperty(ref _contacts, value); } }
-        
-        public ContactsCollection<PhoneViewModel> Phones { get { return new ContactsCollection<PhoneViewModel>(_contacts.OfType<PhoneViewModel>()); } }
+        private ContactsCollection<PhoneViewModel> _phones;
+        public ContactsCollection<PhoneViewModel> Phones { get { return _phones; } set { SetProperty(ref _phones, value); } }
 
-        public ContactsCollection<EmailViewModel> Emails { get { return new ContactsCollection<EmailViewModel>(_contacts.OfType<EmailViewModel>()); } }
+        private ContactsCollection<EmailViewModel> _emails;
+        public ContactsCollection<EmailViewModel> Emails { get { return _emails; } set { SetProperty(ref _emails, value); } }
 
         /// <summary>
         /// Get the full name.

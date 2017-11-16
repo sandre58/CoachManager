@@ -14,6 +14,6 @@ namespace My.CoachManager.Domain.Entities
 
         public int PersonId { get; set; }
         
-        public Person CurrentPerson { get; set; }
+        public Person Person { get; set; }
     }
 }

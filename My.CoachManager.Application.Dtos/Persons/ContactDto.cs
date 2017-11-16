@@ -6,6 +6,8 @@ namespace My.CoachManager.Application.Dtos.Persons
     /// Contact Dto
     /// </summary>
     [DataContract]
+    [KnownType(typeof(EmailDto))]
+    [KnownType(typeof(PhoneDto))]
     public class ContactDto : EntityDto
     {
         [DataMember]

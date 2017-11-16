@@ -8,15 +8,27 @@ namespace My.CoachManager.Application.Dtos.Mapping
     {
         public PersonProfile()
         {
+            // Persons
+            CreateMap<Player, PlayerDto>().ReverseMap();
+            CreateMap<Coach, CoachDto>().ReverseMap();
+            CreateMap<Person, PersonDto>()
+                .Include<Player, PlayerDto>()
+                .Include<Coach, CoachDto>().ReverseMap();
+
+            // Contacts
             CreateMap<Email, EmailDto>().ReverseMap();
             CreateMap<Phone, PhoneDto>().ReverseMap();
+            CreateMap<Contact, ContactDto>()
+                .Include<Email, EmailDto>()
+                .Include<Phone, PhoneDto>().ReverseMap();
+
+            // Foreign properties
             CreateMap<PlayerPosition, PlayerPositionDto>().ReverseMap();
             CreateMap<PlayerHeight, PlayerHeightDto>().ReverseMap();
             CreateMap<PlayerWeight, PlayerWeight>().ReverseMap();
-            CreateMap<Player, PlayerDto>().ReverseMap();
-            CreateMap<Coach, CoachDto>().ReverseMap();
+
+            // Misc
             CreateMap<Country, CountryDto>().ReverseMap();
-            CreateMap<Contact, ContactDto>().ReverseMap().ForMember(x => x.CurrentPerson, opt => opt.Ignore());
         }
     }
 }

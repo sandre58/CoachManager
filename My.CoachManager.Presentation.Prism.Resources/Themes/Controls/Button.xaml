@@ -12,11 +12,11 @@
 
     <Style x:Key="ButtonBaseStyle" TargetType="{x:Type ButtonBase}">
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Dark}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
         <Setter Property="Background" Value="{DynamicResource Light}" />
         <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource Light}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource ControlMouseOverGray}" />
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource AccentForeground}" />
         <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource Accent}" />

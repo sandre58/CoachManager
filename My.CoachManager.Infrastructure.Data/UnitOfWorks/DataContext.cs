@@ -79,8 +79,6 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 }));
             
             modelBuilder.Entity<Player>().HasRequired(p => p.Category).WithMany().WillCascadeOnDelete(false);
-            modelBuilder.Entity<Contact>().HasRequired(x => x.CurrentPerson).WithMany(g => g.Contacts).HasForeignKey(x => x.PersonId);
-            modelBuilder.Entity<Person>().HasMany(x => x.Contacts).WithRequired(x => x.CurrentPerson).WillCascadeOnDelete();
             
             base.OnModelCreating(modelBuilder);
         }

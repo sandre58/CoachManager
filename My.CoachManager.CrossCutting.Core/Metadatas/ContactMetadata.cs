@@ -15,8 +15,8 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public virtual string Value { get; set; }
 
+        [Display(Name = "Person", ResourceType = typeof(ContactResources))]
+        [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public int PersonId { get; set; }
-
-        public object CurrentPerson { get; set; }
     }
 }

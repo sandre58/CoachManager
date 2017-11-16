@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.CrossCutting.Core.Metadatas;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 
