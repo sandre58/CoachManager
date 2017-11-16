@@ -255,9 +255,11 @@ C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Pri
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\My.CoachManager.Presentation.Prism.Resources.csprojResolveAssemblyReference.cache
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Base\Converters.baml
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Base\Shadows.baml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Base\Images.baml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Base\Margins.baml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Base\Geometry.baml
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Base\Fonts.baml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Base\Sizes.baml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Controls\ApplicationBar.baml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Controls\Calendar.baml
@@ -285,10 +287,10 @@ C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Pri
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Controls\TextBlock.baml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Controls\TransitioningContentControl.baml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Generic.baml
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Specific\Tactic.baml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Theme.baml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\My.CoachManager.Presentation.Prism.Resources_MarkupCompile.cache
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\My.CoachManager.Presentation.Prism.Resources_MarkupCompile.lref
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Controls\ImagePicker.baml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Controls\CommandButton.baml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Controls\Button.baml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Resources\obj\Debug\Themes\Controls\DataGrid.baml

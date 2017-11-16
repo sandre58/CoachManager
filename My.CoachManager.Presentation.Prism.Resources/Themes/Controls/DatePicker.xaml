@@ -15,9 +15,9 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="DatePickerTextBoxStyle" TargetType="{x:Type DatePickerTextBox}">
-        <Setter Property="Foreground" Value="{DynamicResource ControlForeground}" />
-        <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorder}" />
+        <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
+        <Setter Property="Background" Value="{DynamicResource Light}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
         <Setter Property="parameters:TextBoxParameters.IsMonitoring" Value="True" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
@@ -134,9 +134,9 @@
         <Setter Property="CalendarStyle" Value="{StaticResource CalendarStyle}" />
         <Setter Property="IsTodayHighlighted" Value="True" />
         <Setter Property="SelectedDateFormat" Value="Short" />
-        <Setter Property="Foreground" Value="{DynamicResource ControlForeground}" />
-        <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorder}" />
+        <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
+        <Setter Property="Background" Value="{DynamicResource Light}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="ContextMenu" Value="{StaticResource TextBoxContextMenuStyle}" />
         <Setter Property="parameters:TextBoxParameters.IsMonitoring" Value="True" />
@@ -148,8 +148,8 @@
         <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource ControlFocusBorder}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource ControlMouseOverBorder}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
         <Setter Property="parameters:TextBoxParameters.Watermark" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:FormParameters.Label), Mode=OneWay}" />
         <Setter Property="parameters:TextBoxParameters.UseFloatingWatermark" Value="True" />
         <Setter Property="parameters:TextBoxParameters.ButtonWidth" Value="18" />
@@ -186,8 +186,8 @@
                                                Foreground="{TemplateBinding Foreground}"
                                                FontSize="{TemplateBinding FontSize}"
                                                parameters:TextBoxParameters.Watermark="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.Watermark), Mode=OneWay}"
-                                               CaretBrush="{DynamicResource ControlCaret}"
-                                               SelectionBrush="{DynamicResource ControlSelection}"
+                                               CaretBrush="{DynamicResource NormalForeground}"
+                                               SelectionBrush="{DynamicResource HightLight}"
                                                ContextMenu="{TemplateBinding ContextMenu}"
                                                Focusable="{TemplateBinding Focusable}">
                                 </DatePickerTextBox>

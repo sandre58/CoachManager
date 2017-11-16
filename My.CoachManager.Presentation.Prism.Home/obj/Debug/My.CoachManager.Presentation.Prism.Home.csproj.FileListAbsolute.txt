@@ -151,16 +151,6 @@ C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Pri
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\bin\Debug\My.CoachManager.CrossCutting.Core.pdb
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\bin\Debug\System.Reactive.Interfaces.xml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\bin\Debug\EntityFramework.xml
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\bin\Debug\de\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\bin\Debug\en\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\bin\Debug\es\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\bin\Debug\fr\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\bin\Debug\it\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\bin\Debug\ja\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\bin\Debug\ko\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\bin\Debug\ru\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\obj\Debug\My.CoachManager.Presentation.Prism.Home.csprojResolveAssemblyReference.cache
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\obj\Debug\App.baml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Home\obj\Debug\Views\HomeView.baml

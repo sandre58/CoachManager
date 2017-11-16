@@ -6,7 +6,7 @@
         <ResourceDictionary Source="../Base/Converters.xaml" />
         <ResourceDictionary Source="../Base/Margins.xaml" />
         <ResourceDictionary Source="../Base/Geometry.xaml" />
-        <ResourceDictionary Source="../Theme.xaml" />
+        <ResourceDictionary Source="../Base/Sizes.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Storyboard x:Key="ScaleYUp">
@@ -16,10 +16,10 @@
         <DoubleAnimation From="1" To="0" Duration="0:0:0.25" Storyboard.TargetName="ExpandSite" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(ScaleTransform.ScaleY)" />
     </Storyboard>
     <Storyboard x:Key="ScaleXLeft">
-        <DoubleAnimation From="0" To="{StaticResource MainMenuItemHeight}" Duration="0:0:0.1" Storyboard.TargetName="OverlayBorder" Storyboard.TargetProperty="Width" />
+        <DoubleAnimation From="0" To="{StaticResource LargeHeight}" Duration="0:0:0.1" Storyboard.TargetName="OverlayBorder" Storyboard.TargetProperty="Width" />
     </Storyboard>
     <Storyboard x:Key="ScaleXRight">
-        <DoubleAnimation From="{StaticResource MainMenuItemHeight}" To="0" Duration="0:0:0.1" Storyboard.TargetName="OverlayBorder" Storyboard.TargetProperty="Width" />
+        <DoubleAnimation From="{StaticResource LargeHeight}" To="0" Duration="0:0:0.1" Storyboard.TargetName="OverlayBorder" Storyboard.TargetProperty="Width" />
     </Storyboard>
 
     <!--Toggle Button -->
@@ -91,7 +91,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0" Width="{DynamicResource MainMenuItemHeight}">
+            <Border Grid.Column="0" Width="{DynamicResource LargeHeight}">
                 <Border  x:Name="OverlayBorder" Background="{Binding Path=Color, RelativeSource={RelativeSource AncestorType={x:Type controls:NavigationExpander}}}" HorizontalAlignment="Left" />
             </Border>
             <controls:Icon Grid.Column="0" x:Name="Icon" Size="Medium"
@@ -136,7 +136,7 @@
                                           FontWeight="{TemplateBinding FontWeight}" FontStyle="{TemplateBinding FontStyle}" FontStretch="{TemplateBinding FontStretch}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}"
                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                           IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                          MinWidth="0" MinHeight="0" Height="{DynamicResource MainMenuItemHeight}"
+                                          MinWidth="0" MinHeight="0" Height="{DynamicResource LargeHeight}"
                               FocusVisualStyle="{StaticResource NavigationExpanderToggleButtonFocusVisualStyle}" Style="{StaticResource NavigationExpanderToggleButtonStyle}">
                 </ToggleButton>
                 <ContentPresenter x:Name="ExpandSite" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" DockPanel.Dock="Bottom" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
@@ -165,7 +165,7 @@
 
     <ControlTemplate x:Key="NavigationItemTemplate" TargetType="{x:Type controls:NavigationItem}">
         <Border x:Name="border"
-                Height="{DynamicResource MainMenuSubItemHeight}"
+                Height="{DynamicResource SmallLargeHeight}"
                             Background="{TemplateBinding Background}"
                             SnapsToDevicePixels="True">
             <ContentPresenter x:Name="contentPresenter"
@@ -199,11 +199,11 @@
         <Setter Property="Margin" Value="0,3,0,0" />
         <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
         <Setter Property="IsExpanded" Value="False" />
-        <Setter Property="Foreground" Value="{DynamicResource MainMenuItemForeground}" />
-        <Setter Property="Background" Value="{DynamicResource MainMenuItemBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource MainMenuItemBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource ControlLightForeground}" />
+        <Setter Property="Background" Value="{DynamicResource ControlMouseOverGray}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="Color" Value="{DynamicResource Accent}" />
-        <Setter Property="FontSize" Value="{DynamicResource MainMenuItemFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="BorderThickness" Value="4,0,0,0" />
@@ -217,8 +217,8 @@
     <Style TargetType="{x:Type controls:NavigationItem}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource MainMenuItemForeground}" />
-        <Setter Property="FontSize" Value="{DynamicResource MainMenuSubItemFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource ControlLightForeground}" />
+        <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />

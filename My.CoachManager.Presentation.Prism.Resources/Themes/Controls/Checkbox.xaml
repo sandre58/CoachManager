@@ -11,12 +11,12 @@
     <Style x:Key="CheckBoxBaseStyle" TargetType="{x:Type CheckBox}">
         <Setter Property="Margin" Value="{StaticResource LargeMargin}" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
-        <Setter Property="Background" Value="{DynamicResource CheckBoxBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource CheckBoxBorder}" />
+        <Setter Property="Background" Value="{DynamicResource Light}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource CheckBoxMouseOverBorder}" />
-        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{DynamicResource CheckBoxPressedBorder}" />
-        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource CheckBoxFocusBorder}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
+        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />

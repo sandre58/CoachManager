@@ -33,8 +33,8 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Center">
-                <controls:CommandButton Style="{StaticResource BackCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource MediumCommandButtonDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoBackCommand}" />
-                <controls:CommandButton Style="{StaticResource NextCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource MediumCommandButtonDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoForwardCommand}" />
+                <controls:CommandButton Style="{StaticResource BackCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoBackCommand}" />
+                <controls:CommandButton Style="{StaticResource NextCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoForwardCommand}" />
             </StackPanel>
             <TextBlock Grid.Column="1" Text="{Binding Title}" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Center" />
         </Grid>
@@ -143,7 +143,7 @@
 
     <Style x:Key="WorkspaceDialogViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource {x:Type controls:WorkspaceView}}">
         <Setter Property="HeaderHeight" Value="70" />
-        <Setter Property="HeaderBackground" Value="{DynamicResource Header2Background}" />
+        <Setter Property="HeaderBackground" Value="{DynamicResource TransparentGray3}" />
         <Setter Property="ApplicationBarStyle" Value="{StaticResource ApplicationBarGrayStyle}" />
         <Setter Property="HeaderTemplate" Value="{StaticResource DefaultWorkspaceDialogViewHeaderTemplate}" />
     </Style>

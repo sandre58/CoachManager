@@ -14,17 +14,17 @@
     <Style x:Key="CommandButtonBaseStyle" TargetType="{x:Type controls:CommandButton}">
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Background" Value="{DynamicResource CommandButtonBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource CommandButtonBorder}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
-        <Setter Property="parameters:ControlParameters.Foreground" Value="{DynamicResource CommandButtonForeground}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource CommandButtonMouseOverBackground}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource CommandButtonMouseOverBorder}" />
-        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource CommandButtonMouseOverForeground}" />
-        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource CommandButtonPressedBackground}" />
-        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{DynamicResource CommandButtonPressedBorder}" />
-        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource CommandButtonPressedForeground}" />
-        <Setter Property="ButtonDiameter" Value="{DynamicResource CommandButtonDiameter}" />
+        <Setter Property="parameters:ControlParameters.Foreground" Value="{DynamicResource ControlDarkForeground}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource ControlDarkForeground}" />
+        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource Accent}" />
+        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource ControlDarkForeground}" />
+        <Setter Property="ButtonDiameter" Value="{DynamicResource LargeDiameter}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
@@ -60,6 +60,11 @@
                         </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="icon" Property="Fill" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.FocusForeground)}" />
+                            <Setter TargetName="ellipse" Property="Stroke" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.FocusBorderBrush)}" />
+                            <Setter TargetName="ellipse" Property="Fill" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.FocusBackground)}" />
+                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="icon" Property="Fill" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.MouseOverForeground)}" />
                             <Setter TargetName="ellipse" Property="Stroke" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.MouseOverBorderBrush)}" />
@@ -82,13 +87,13 @@
     <Style TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonBaseStyle}" />
 
     <Style x:Key="MediumCommandButtonStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonBaseStyle}">
-        <Setter Property="ButtonDiameter" Value="{DynamicResource MediumCommandButtonDiameter}" />
+        <Setter Property="ButtonDiameter" Value="{DynamicResource NormalDiameter}" />
     </Style>
 
     <Style x:Key="CommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonBaseStyle}">
-        <Setter Property="ButtonDiameter" Value="{DynamicResource ApplicationBarButtonDiameter}" />
+        <Setter Property="ButtonDiameter" Value="{DynamicResource VeryLargeDiameter}" />
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ApplicationBarForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentForeground}" />
         <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ApplicationBar}, Path=Foreground}" />
         <Setter Property="parameters:ControlParameters.Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush}" />
         <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource Transparent}" />
@@ -105,6 +110,9 @@
         <Setter Property="parameters:ControlParameters.PressedBackground" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush}" />
         <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush}" />
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ApplicationBar}, Path=Background}" />
+        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Transparent}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush}" />
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Foreground)}" />
         <Style.Triggers>
             <DataTrigger Value="True">
                 <DataTrigger.Binding>

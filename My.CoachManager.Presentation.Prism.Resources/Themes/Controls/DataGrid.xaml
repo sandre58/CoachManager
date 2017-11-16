@@ -31,10 +31,10 @@
     </Style>
 
     <Style x:Key="DataGridColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
-        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
-        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource DataGridHeaderBorder}" />
-        <Setter Property="FontSize" Value="{DynamicResource DataGridHeaderFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
+        <Setter Property="Background" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Light}" />
+        <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}" />
         <Setter Property="BorderThickness" Value="0,0,2,0" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
@@ -105,14 +105,12 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderMouseOverForeground}" />
-                <Setter Property="Background" Value="{DynamicResource DataGridHeaderMouseOverBackground}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource DataGridHeaderMouseOverBorder}" />
+                <Setter Property="Foreground" Value="{DynamicResource ControlLightForeground}" />
+                <Setter Property="Background" Value="{DynamicResource ControlMouseOverDarkGray}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderPressedForeground}" />
-                <Setter Property="Background" Value="{DynamicResource DataGridHeaderPressedBackground}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource DataGridHeaderPressedBorder}" />
+                <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+                <Setter Property="Background" Value="{DynamicResource Accent}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="{DynamicResource DisabledOpacity}" />
@@ -121,10 +119,10 @@
     </Style>
 
     <Style x:Key="ButtonDataGridColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
-        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Transparent}" />
-        <Setter Property="FontSize" Value="{DynamicResource DataGridHeaderFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="SeparatorBrush" Value="{DynamicResource Transparent}" />
@@ -242,22 +240,20 @@
 
     <!-- Row Header -->
     <Style x:Key="DataGridRowHeaderStyle" TargetType="{x:Type DataGridRowHeader}">
-        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource DataGridHeaderBorder}" />
+        <Setter Property="Background" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Light}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
         <Setter Property="SeparatorBrush" Value="{DynamicResource Transparent}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource DatagridHeaderMouseOverForeground}" />
-                <Setter Property="Background" Value="{DynamicResource DatagridHeaderMouseOverBackground}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource DatagridHeaderMouseOverBorder}" />
+                <Setter Property="Foreground" Value="{DynamicResource ControlLightForeground}" />
+                <Setter Property="Background" Value="{DynamicResource ControlMouseOverDarkGray}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource DatagridHeaderPressedForeground}" />
-                <Setter Property="Background" Value="{DynamicResource DatagridHeaderPressedBackground}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource DatagridHeaderPressedBorder}" />
+                <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+                <Setter Property="Background" Value="{DynamicResource Accent}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="{DynamicResource DisabledOpacity}" />
@@ -272,7 +268,7 @@
         <Setter Property="parameters:DataGridRowParameters.KeyDownCommand" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=(parameters:DataGridParameters.KeyDownRowCommand)}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridRowForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
         <Setter Property="FontStretch" Value="Medium" />
         <Setter Property="FontStyle" Value="Normal" />
@@ -303,7 +299,7 @@
                             <Border Grid.Column="1"
                                     Grid.Row="1">
                                 <DataGridDetailsPresenter SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                          TextBlock.Foreground="{DynamicResource DataGridForeground}"
+                                                          TextBlock.Foreground="{DynamicResource NormalForeground}"
                                                           MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Border}}}"
                                                           Visibility="{TemplateBinding DetailsVisibility}" />
                             </Border>
@@ -318,14 +314,11 @@
                         <Trigger Property="IsFocused" Value="False">
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DataGridMouseOverBackground}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource DataGridMouseOverBorder}" />
-                            <Setter Property="Foreground" Value="{DynamicResource DataGridMouseOverForeground}" />
+                            <Setter Property="Background" Value="{DynamicResource ControlMouseOverGray}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DataGridPressedBackground}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource DataGridPressedBorder}" />
-                            <Setter Property="Foreground" Value="{DynamicResource DataGridPressedForeground}" />
+                            <Setter Property="Background" Value="{DynamicResource Accent}" />
+                            <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="{DynamicResource DisabledOpacity}" />
@@ -402,7 +395,7 @@
                             <Border Grid.Column="1"
                                     Grid.Row="1">
                                 <DataGridDetailsPresenter SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                          TextBlock.Foreground="{DynamicResource DataGridForeground}"
+                                                          TextBlock.Foreground="{DynamicResource NormalForeground}"
                                                           MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Border}}}"
                                                           Visibility="{TemplateBinding DetailsVisibility}" />
                             </Border>
@@ -417,12 +410,10 @@
                         <Trigger Property="IsFocused" Value="False">
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource DataGridMouseOverBackground}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource DataGridMouseOverBorder}" />
+                            <Setter Property="Background" Value="{DynamicResource ControlMouseOverGray}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" Value="{DynamicResource DataGridFocusBackground}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource DataGridFocusBorder}" />
                             <Setter Property="Foreground" Value="{DynamicResource DataGridFocusForeground}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
@@ -436,10 +427,10 @@
 
     <!-- Cells -->
     <Style x:Key="{ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}" TargetType="{x:Type Button}">
-        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource DataGridHeaderBorder}" />
+        <Setter Property="Background" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Light}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -494,13 +485,12 @@
                     <Condition Binding="{Binding Path=SelectionUnit, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="Cell" />
                 </MultiDataTrigger.Conditions>
                 <MultiDataTrigger.Setters>
-                    <Setter Property="Background" Value="{DynamicResource DataGridMouseOverBackground}" />
-                    <Setter Property="Foreground" Value="{DynamicResource DataGridMouseOverForeground}" />
+                    <Setter Property="Background" Value="{DynamicResource ControlMouseOverGray}" />
                 </MultiDataTrigger.Setters>
             </MultiDataTrigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{DynamicResource DataGridPressedBackground}" />
-                <Setter Property="Foreground" Value="{DynamicResource DataGridPressedForeground}" />
+                <Setter Property="Background" Value="{DynamicResource Accent}" />
+                <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -533,8 +523,8 @@
         <Setter Property="parameters:UiElementParameters.IsBubblingMouseWheelEvents" Value="True" />
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
         <Setter Property="AutoGenerateColumns" Value="False" />
-        <Setter Property="Background" Value="{DynamicResource DataGridBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource DataGridBorder}" />
+        <Setter Property="Background" Value="{DynamicResource Light}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CanUserAddRows" Value="False" />
         <Setter Property="CanUserDeleteRows" Value="False" />
@@ -542,7 +532,7 @@
         <Setter Property="SelectionMode" Value="Single" />
         <Setter Property="SelectionUnit" Value="FullRow" />
         <Setter Property="IsReadOnly" Value="True" />
-        <Setter Property="Foreground" Value="{DynamicResource DataGridForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
         <Setter Property="FontStretch" Value="Medium" />
         <Setter Property="FontStyle" Value="Normal" />
@@ -554,8 +544,7 @@
         <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
-        <Setter Property="AlternatingRowBackground" Value="{DynamicResource DataGridRowAlternatingRowBackground}" />
-        <Setter Property="RowBackground" Value="{DynamicResource DataGridRowBackground}" />
+        <Setter Property="AlternatingRowBackground" Value="{DynamicResource ControlGray}" />
         <Setter Property="ColumnHeaderStyle" Value="{StaticResource DataGridColumnHeaderStyle}" />
         <Setter Property="RowHeaderStyle" Value="{StaticResource DataGridRowHeaderStyle}" />
         <Setter Property="RowStyle" Value="{StaticResource DataGridRowStyle}" />

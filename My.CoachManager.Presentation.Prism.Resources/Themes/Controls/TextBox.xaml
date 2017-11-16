@@ -13,12 +13,12 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="TextBoxBaseStyle" TargetType="{x:Type TextBox}">
-        <Setter Property="Foreground" Value="{DynamicResource ControlForeground}" />
-        <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorder}" />
+        <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
+        <Setter Property="Background" Value="{DynamicResource Light}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CaretBrush" Value="{DynamicResource ControlCaret}" />
-        <Setter Property="SelectionBrush" Value="{DynamicResource ControlSelection}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource NormalForeground}" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource HightLight}" />
         <Setter Property="ContextMenu" Value="{StaticResource TextBoxContextMenuStyle}" />
         <Setter Property="parameters:TextBoxParameters.IsMonitoring" Value="True" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
@@ -29,8 +29,8 @@
         <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource ControlFocusBorder}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource ControlMouseOverBorder}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
         <Setter Property="parameters:TextBoxParameters.Watermark" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:FormParameters.Label), Mode=OneWay}" />
         <Setter Property="parameters:TextBoxParameters.UseFloatingWatermark" Value="True" />
         <Setter Property="parameters:TextBoxParameters.ButtonWidth" Value="18" />

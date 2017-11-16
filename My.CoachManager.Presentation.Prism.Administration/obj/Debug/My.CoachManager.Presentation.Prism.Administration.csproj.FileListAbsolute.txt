@@ -235,16 +235,6 @@ C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Pri
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Administration\bin\Debug\System.Reactive.Windows.Threading.xml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Administration\bin\Debug\System.Reactive.Core.xml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Administration\bin\Debug\System.Reactive.Interfaces.xml
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Administration\bin\Debug\de\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Administration\bin\Debug\en\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Administration\bin\Debug\es\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Administration\bin\Debug\fr\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Administration\bin\Debug\it\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Administration\bin\Debug\ja\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Administration\bin\Debug\ko\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Administration\bin\Debug\ru\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Administration\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
-C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Administration\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Administration\obj\Debug\My.CoachManager.Presentation.Prism.Administration.csprojResolveAssemblyReference.cache
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Administration\obj\Debug\App.baml
 C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.Administration\obj\Debug\Views\DataEditView.baml

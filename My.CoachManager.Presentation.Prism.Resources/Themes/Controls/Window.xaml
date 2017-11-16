@@ -16,7 +16,7 @@
         <Setter Property="TextWrapping" Value="NoWrap" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
-        <Setter Property="FontSize" Value="{DynamicResource WindowHeaderFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
     </Style>
 
     <Style x:Key="ModernWindowStyle" TargetType="{x:Type controls:MetroWindow}">
@@ -130,7 +130,7 @@
                                     </Grid>
 
                                     <!-- Status Bar -->
-                                    <Border x:Name="StatusBar" Grid.Row="2" Background="{DynamicResource StatusBarBackground}" Height="{DynamicResource StatusBarHeight}" Focusable="False">
+                                    <Border x:Name="StatusBar" Grid.Row="2" Background="{DynamicResource StatusBarBackground}" MinHeight="25" Focusable="False">
                                         <ContentControl Content="{TemplateBinding StatusBar}" Foreground="{DynamicResource StatusBarForeground}" VerticalAlignment="Center" IsTabStop="False" />
                                     </Border>
 

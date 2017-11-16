@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace My.CoachManager.Presentation.Prism.Controls.Extensions
+namespace My.CoachManager.Presentation.Prism.Core.Extensions
 {
     public static class ImageExtensions
     {

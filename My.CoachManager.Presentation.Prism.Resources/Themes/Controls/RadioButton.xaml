@@ -10,9 +10,9 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="IconRadioButtonStyle" TargetType="{x:Type RadioButton}">
-        <Setter Property="Background" Value="{DynamicResource ControlBorder}" />
-        <Setter Property="Foreground" Value="{DynamicResource ControlBorder}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource ButtonMouseOverBorder}" />
+        <Setter Property="Background" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="Foreground" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource ControlMouseOverDarkGray}" />
         <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Accent}" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />

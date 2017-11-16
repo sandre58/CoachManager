@@ -2,6 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Base/Margins.xaml" />
+        <ResourceDictionary Source="../Base/Converters.xaml" />
+        <ResourceDictionary Source="../Base/Shadows.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
     <Style x:Key="CalendarDayButtonStyle" TargetType="{x:Type CalendarDayButton}">
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
@@ -288,14 +294,7 @@
 
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                            <Border.Effect>
-                                <DropShadowEffect BlurRadius="5"
-                                                      ShadowDepth="2"
-                                                      Direction="315"
-                                                      Opacity="0.3"
-                                                      Color="{DynamicResource ShadowColor}" />
-                            </Border.Effect>
+                                BorderThickness="{TemplateBinding BorderThickness}" Effect="{StaticResource BottomRightShadow}">
                             <Border BorderThickness="0">
                                 <Grid Margin="2">
                                     <Grid.Resources>

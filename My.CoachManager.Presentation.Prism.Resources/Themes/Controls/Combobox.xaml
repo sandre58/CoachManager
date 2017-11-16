@@ -6,6 +6,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Margins.xaml" />
         <ResourceDictionary Source="../Base/Converters.xaml" />
+        <ResourceDictionary Source="../Base/Shadows.xaml" />
         <ResourceDictionary Source="Button.xaml" />
         <ResourceDictionary Source="Validation.xaml" />
         <ResourceDictionary Source="TextBox.xaml" />
@@ -17,7 +18,7 @@
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
-        <Setter Property="Background" Value="{DynamicResource MenuItemBackground}" />
+        <Setter Property="Background" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Top" />
@@ -54,7 +55,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ItemBackground" Property="Background" Value="{DynamicResource MenuItemSelectedBackground}" />
+                            <Setter TargetName="ItemBackground" Property="Background" Value="{DynamicResource ControlMouseOverGray}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
@@ -115,9 +116,9 @@
     </Style>
 
     <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
-        <Setter Property="Foreground" Value="{DynamicResource ControlForeground}" />
-        <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorder}" />
+        <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
+        <Setter Property="Background" Value="{DynamicResource Light}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="ContextMenu" Value="{StaticResource TextBoxContextMenuStyle}" />
         <Setter Property="parameters:TextBoxParameters.IsMonitoring" Value="True" />
@@ -129,10 +130,10 @@
         <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource ControlFocusBorder}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource ControlMouseOverBorder}" />
-        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource ControlPressedBackground}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource ControlMouseOverBackground}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
+        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource ControlPressedGray}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource ControlMouseOverGray}" />
         <Setter Property="parameters:TextBoxParameters.Watermark" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:FormParameters.Label), Mode=OneWay}" />
         <Setter Property="parameters:TextBoxParameters.UseFloatingWatermark" Value="True" />
         <Setter Property="parameters:TextBoxParameters.ButtonWidth" Value="18" />
@@ -293,23 +294,15 @@
                                 <Border x:Name="PopupBorder"
                                         Height="Auto"
                                         HorizontalAlignment="Stretch"
-                                        Background="{DynamicResource MenuBackground}"
-                                        BorderBrush="{DynamicResource MenuBorder}"
-                                        BorderThickness="1">
-                                    <Border.Effect>
-                                        <DropShadowEffect BlurRadius="5"
-                                                      ShadowDepth="2"
-                                                      Direction="315"
-                                                      Opacity="0.3"
-                                                      Color="{DynamicResource ShadowColor}" />
-                                    </Border.Effect>
-                                </Border>
+                                        Background="{DynamicResource Light}"
+                                        BorderBrush="{DynamicResource Dark}"
+                                        BorderThickness="1" Effect="{StaticResource BottomRightShadow}" />
                                 <ScrollViewer x:Name="DropDownScrollViewer"
-                                              Background="{DynamicResource MenuBackground}"
+                                              Background="{DynamicResource Light}"
                                               Margin="2"
                                               Padding="1"
                                               BorderThickness="0">
-                                    <Grid RenderOptions.ClearTypeHint="Enabled"  Background="{DynamicResource MenuBackground}">
+                                    <Grid RenderOptions.ClearTypeHint="Enabled"  Background="{DynamicResource Light}">
                                         <ItemsPresenter Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                     </Grid>
                                 </ScrollViewer>

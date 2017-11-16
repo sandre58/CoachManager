@@ -59,6 +59,7 @@
     <Compile Include="Behaviours\DragAndDropEventArgs.cs" />
     <Compile Include="Converters\AnyToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToFontWeightConverter.cs" />
+    <Compile Include="Converters\BytesToImageConverter.cs" />
     <Compile Include="Converters\NullOrEmptyStringToBooleanConverter.cs" />
     <Compile Include="Converters\EnumCollection.cs" />
     <Compile Include="Converters\ToFirstLetterUpperConverter.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Converters\ToLowerConverter.cs" />
     <Compile Include="Converters\ToUpperConverter.cs" />
     <Compile Include="EventAggregator\ShowNotificationPopupRequestEvent.cs" />
+    <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Interactivity\InteractionRequest\INotificationPopup.cs" />
     <Compile Include="Interactivity\InteractionRequest\NotificationPopup.cs" />
     <Compile Include="Interactivity\KeyDownItemEventArgs.cs" />

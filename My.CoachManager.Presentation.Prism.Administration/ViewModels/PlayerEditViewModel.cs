@@ -6,10 +6,11 @@ using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using System.Linq;
+using System.Windows.Input;
 using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.Presentation.Prism.Administration.Resources.Strings;
-using My.CoachManager.Presentation.Prism.Controls.Extensions;
+using My.CoachManager.Presentation.Prism.Resources.Strings;
 using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
 using Prism.Commands;
 
@@ -49,6 +50,8 @@ namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
             RemoveEmailCommand = new DelegateCommand<EmailViewModel>(RemoveEmail);
             AddPhoneCommand = new DelegateCommand(AddPhone);
             RemovePhoneCommand = new DelegateCommand<PhoneViewModel>(RemovePhone);
+            SelectPhotoCommand = new DelegateCommand(SelectPhoto, CanSelectPhoto);
+            RemovePhotoCommand = new DelegateCommand(RemovePhoto, CanRemovePhoto);
         }
 
         #endregion Constructors
@@ -112,6 +115,16 @@ namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
             }
         }
 
+        /// <summary>
+        /// Get or Set Select Photo Command.
+        /// </summary>
+        public ICommand SelectPhotoCommand { get; set; }
+
+        /// <summary>
+        /// Get or Set Remove Photo Command.
+        /// </summary>
+        public ICommand RemovePhotoCommand { get; set; }
+
         #endregion Members
 
         #region Methods
@@ -121,12 +134,12 @@ namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
         /// </summary>
         public void SelectPhoto()
         {
-            //var filename = DialogService.ShowOpenFileDialog(.AllImages);
+            var filename = DialogService.ShowOpenFileDialog(ControlResources.AllImages);
 
-            //if (!string.IsNullOrEmpty(filename))
-            //{
-            //    Item.Photo = File.ReadAllBytes(filename);
-            //}
+            if (!string.IsNullOrEmpty(filename))
+            {
+                Item.Photo = File.ReadAllBytes(filename);
+            }
         }
 
         /// <summary>
@@ -141,7 +154,7 @@ namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
         /// <summary>
         /// Delete the photo.
         /// </summary>
-        public void DeletePhoto()
+        public void RemovePhoto()
         {
             Item.Photo = null;
         }
@@ -150,11 +163,14 @@ namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
         /// Can delete the photo ?
         /// </summary>
         /// <returns></returns>
-        public bool CanDeletePhoto()
+        public bool CanRemovePhoto()
         {
             return Item.Photo != null;
         }
 
+        /// <summary>
+        /// Called before save.
+        /// </summary>
         protected override void BeforeSave()
         {
             base.BeforeSave();

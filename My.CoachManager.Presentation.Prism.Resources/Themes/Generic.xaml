@@ -6,10 +6,12 @@
 
         <!-- Base -->
         <ResourceDictionary Source="Base/Converters.xaml" />
+        <ResourceDictionary Source="Base/Fonts.xaml" />
         <ResourceDictionary Source="Base/Margins.xaml" />
         <ResourceDictionary Source="Base/Images.xaml" />
         <ResourceDictionary Source="Base/Geometry.xaml" />
         <ResourceDictionary Source="Base/Sizes.xaml" />
+        <ResourceDictionary Source="Base/Shadows.xaml" />
 
         <!-- Controls -->
         <ResourceDictionary Source="Controls/TextBlock.xaml" />
@@ -30,6 +32,7 @@
         <ResourceDictionary Source="Controls/Popup.xaml" />
         <ResourceDictionary Source="Controls/Tooltip.xaml" />
         <ResourceDictionary Source="Controls/Calendar.xaml" />
+        <ResourceDictionary Source="Controls/ImagePicker.xaml" />
         <ResourceDictionary Source="Controls/Combobox.xaml" />
         <ResourceDictionary Source="Controls/DatePicker.xaml" />
         <ResourceDictionary Source="Controls/RadioButton.xaml" />
@@ -39,7 +42,5 @@
         <ResourceDictionary Source="Controls/Window.xaml" />
         <ResourceDictionary Source="Controls/WorkspaceView.xaml" />
         <ResourceDictionary Source="Controls/WorkspaceDialog.xaml" />
-
-        <ResourceDictionary Source="Specific/Tactic.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -47,15 +47,15 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <!--<controls:ImagePicker
+                <controls:ImagePicker
                 Grid.Column="0" Grid.Row="0"
                     Height="45" Width="45"
                     Image="{Binding Item.Photo, Converter={StaticResource BytesToImageConverter}}"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center" SelectPhotoCommand="{Binding SelectPhotoCommand}" RemovePhotoCommand="{Binding RemovePhotoCommand}">
                     <Grid>
-                        <elysium:Icon Style="{DynamicResource UsermaleIconStyle}" Size="Custom" Width="40" Height="30" />
+                        <controls:Icon Content="{StaticResource PeopleGeometry}" Size="Custom" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                     </Grid>
-                </controls:ImagePicker>-->
+                </controls:ImagePicker>
 
                 <Grid Grid.Column="1" Grid.Row="0">
                     <Grid.ColumnDefinitions>

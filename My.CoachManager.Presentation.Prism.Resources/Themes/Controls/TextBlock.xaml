@@ -29,15 +29,6 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="HeaderStyle" TargetType="TextBlock">
-        <Setter Property="TextWrapping" Value="NoWrap" />
-        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
-        <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
-        <Setter Property="FontSize" Value="{DynamicResource HeaderFontSize}" />
-        <Setter Property="Focusable" Value="False" />
-    </Style>
-
     <Style x:Key="FloatingMessageContainerStyle" TargetType="{x:Type ContentControl}">
         <Setter Property="Focusable" Value="False" />
         <Setter Property="IsHitTestVisible" Value="False" />
@@ -47,6 +38,15 @@
         <Setter Property="Visibility" Value="Visible" />
     </Style>
 
+    <Style x:Key="HeaderStyle" TargetType="TextBlock">
+        <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
+        <Setter Property="FontSize" Value="{DynamicResource HeaderFontSize}" />
+        <Setter Property="Focusable" Value="False" />
+    </Style>
+    
     <Style TargetType="{x:Type Label}" x:Key="HeaderIconStyle">
         <Setter Property="Foreground" Value="{DynamicResource GrayHeaderForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource GrayHeaderBorder}" />
