@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using Microsoft.Practices.ServiceLocation;
+using Microsoft.Win32;
 using My.CoachManager.Presentation.Prism.Core.EventAggregator;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Interactivity.InteractionRequest;
@@ -221,6 +222,27 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
             };
 
             _eventAggregator.GetEvent<ShowNotificationPopupRequestEvent>().Publish(new NotificationEventArgs(dialog));
+        }
+
+        /// <summary>
+        /// Show the dialog for open a file.
+        /// </summary>
+        public string ShowOpenFileDialog(string filter = "", bool multiselect = false, string initialDirectory = "", bool restoreDirectory = false)
+        {
+            var dialog = new OpenFileDialog()
+            {
+                Filter = filter,
+                Multiselect = multiselect,
+                InitialDirectory = initialDirectory,
+                RestoreDirectory = restoreDirectory
+            };
+
+            var result = dialog.ShowDialog();
+
+            if (result.HasValue && result.Value)
+                return dialog.FileName;
+
+            return string.Empty;
         }
 
         #endregion IDialogService Members

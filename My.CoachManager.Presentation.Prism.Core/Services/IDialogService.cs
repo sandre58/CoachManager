@@ -130,5 +130,11 @@ namespace My.CoachManager.Presentation.Prism.Core.Services
         /// </returns>
         void ShowNotificationPopup(string title, string message,
             MessageDialogStyle style = MessageDialogStyle.Information);
+
+        /// <summary>
+        /// Show the dialog for open a file.
+        /// </summary>
+        string ShowOpenFileDialog(string filter = "", bool multiselect = false, string initialDirectory = "",
+            bool restoreDirectory = false);
     }
 }

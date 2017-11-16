@@ -19,7 +19,7 @@
         <Setter Property="FontStretch" Value="Medium" />
         <Setter Property="FontStyle" Value="Normal" />
         <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Foreground" Value="{DynamicResource NormalIconBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource NormalIcon}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverlayBorderBrush" Value="{Binding Path=Foreground, RelativeSource={RelativeSource Self}}" />
         <Setter Property="OverlayMargin" Value="-2" />

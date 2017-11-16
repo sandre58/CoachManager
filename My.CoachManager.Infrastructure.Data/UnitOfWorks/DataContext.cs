@@ -4,7 +4,6 @@ using System.Data.Entity.Core.Objects.DataClasses;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Threading.Tasks;
 using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
@@ -164,15 +163,66 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         }
 
         /// <summary>
-        /// <see cref="IQueryableUnitOfWork.SetModified{TEntity}"/>
+        /// <see cref="IQueryableUnitOfWork.AddOrUpdate{TEntity}"/>
         /// </summary>
-        /// <typeparam name="TEntity"><see cref="IQueryableUnitOfWork.SetModified{TEntity}"/></typeparam>
-        /// <param name="item"><see cref="IQueryableUnitOfWork.SetModified{TEntity}"/></param>
-        public void SetModified<TEntity>(TEntity item)
-            where TEntity : class
+        /// <typeparam name="TEntity"><see cref="IQueryableUnitOfWork.AddOrUpdate{TEntity}"/></typeparam>
+        /// <param name="entity"><see cref="IQueryableUnitOfWork.AddOrUpdate{TEntity}"/></param>
+        /// <param name="ignoreProperties"></param>
+        public void AddOrUpdate<TEntity>(TEntity entity, params string[] ignoreProperties) where TEntity : class, IEntity
         {
-            if (Entry(item).State != EntityState.Modified)
-                Entry(item).State = EntityState.Modified;
+            if (entity == null || Entry(entity).State == EntityState.Added || Entry(entity).State == EntityState.Modified) { return; }
+
+            //var state = Set<TEntity>().Any(x => x.Id == entity.Id) ? EntityState.Modified : EntityState.Added;
+            var state = entity.Id != 0 ? EntityState.Modified : EntityState.Added;
+            Entry(entity).State = state;
+
+            var type = typeof(TEntity);
+            RelationshipManager relationship;
+            var stateManager = ((IObjectContextAdapter)this).ObjectContext.ObjectStateManager;
+            if (stateManager.TryGetRelationshipManager(entity, out relationship))
+            {
+                foreach (var end in relationship.GetAllRelatedEnds())
+                {
+                    var propertyInfo = end.GetType().GetProperty("IsForeignKey", BindingFlags.Instance | BindingFlags.NonPublic);
+                    if (propertyInfo != null)
+                    {
+                        var isForeignKey = propertyInfo.GetValue(end) as bool?;
+                        var memberInfo = end.GetType().GetProperty("NavigationProperty", BindingFlags.Instance | BindingFlags.NonPublic);
+                        if (memberInfo != null)
+                        {
+                            var navigationProperty = memberInfo.GetValue(end);
+                            if (navigationProperty != null)
+                            {
+                                var info = navigationProperty.GetType().GetProperty("Identity", BindingFlags.Instance | BindingFlags.NonPublic);
+                                if (info != null)
+                                {
+                                    var propertyName = info.GetValue(navigationProperty) as string;
+                                    if (string.IsNullOrWhiteSpace(propertyName) || ignoreProperties.Contains(propertyName)) { continue; }
+
+                                    var property = type.GetProperty(propertyName);
+                                    if (property == null) { continue; }
+
+                                    if (end is IEnumerable)
+                                    {
+                                        UpdateChildrenInternal(entity, property, isForeignKey == true);
+                                    }
+                                    else
+                                    {
+                                        var value = property.GetValue(entity) as IEntity;
+                                        if (value != null) AddOrUpdate(value, ignoreProperties);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (state == EntityState.Modified)
+            {
+                Entry(entity).OriginalValues.SetValues(Entry(entity).GetDatabaseValues());
+                Entry(entity).State = GetChangedProperties(Entry(entity)).Any() ? state : EntityState.Unchanged;
+            }
         }
 
         /// <summary>
@@ -310,64 +360,13 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             UnityFactory.Resolve<ILogger>().Trace(sqlQuery);
         }
 
-        #endregion ----- Methods -----
-
-        public void AddOrUpdate<T>(T entity, params string[] ignoreProperties) where T : class, IEntity
-        {
-            if (entity == null || Entry(entity).State == EntityState.Added || Entry(entity).State == EntityState.Modified) { return; }
-
-            var state = Set<T>().Any(x => x.Id == entity.Id) ? EntityState.Modified : EntityState.Added;
-            Entry(entity).State = state;
-
-            var type = typeof(T);
-            RelationshipManager relationship;
-            var stateManager = ((IObjectContextAdapter)this).ObjectContext.ObjectStateManager;
-            if (stateManager.TryGetRelationshipManager(entity, out relationship))
-            {
-                foreach (var end in relationship.GetAllRelatedEnds())
-                {
-                    var propertyInfo = end.GetType().GetProperty("IsForeignKey", BindingFlags.Instance | BindingFlags.NonPublic);
-                    if (propertyInfo != null)
-                    {
-                        var isForeignKey = propertyInfo.GetValue(end) as bool?;
-                        var memberInfo = end.GetType().GetProperty("NavigationProperty", BindingFlags.Instance | BindingFlags.NonPublic);
-                        if (memberInfo != null)
-                        {
-                            var navigationProperty = memberInfo.GetValue(end);
-                            if (navigationProperty != null)
-                            {
-                                var info = navigationProperty.GetType().GetProperty("Identity", BindingFlags.Instance | BindingFlags.NonPublic);
-                                if (info != null)
-                                {
-                                    var propertyName = info.GetValue(navigationProperty) as string;
-                                    if (string.IsNullOrWhiteSpace(propertyName) || ignoreProperties.Contains(propertyName)) { continue; }
-
-                                    var property = type.GetProperty(propertyName);
-                                    if (property == null) { continue; }
-
-                                    if (end is IEnumerable)
-                                    {
-                                        UpdateChildrenInternal(entity, property, isForeignKey == true);
-                                    }
-                                    else
-                                    {
-                                        var value = property.GetValue(entity) as IEntity;
-                                        if (value != null) AddOrUpdate(value, ignoreProperties);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (state == EntityState.Modified)
-            {
-                Entry(entity).OriginalValues.SetValues(Entry(entity).GetDatabaseValues());
-                Entry(entity).State = GetChangedProperties(Entry(entity)).Any() ? state : EntityState.Unchanged;
-            }
-        }
-
+        /// <summary>
+        /// Update the children.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        /// <param name="property"></param>
+        /// <param name="isForeignKey"></param>
         private void UpdateChildrenInternal<T>(T entity, PropertyInfo property, bool isForeignKey) where T : class,IEntity
         {
             var type = typeof(T);
@@ -389,6 +388,13 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             }
         }
 
+        /// <summary>
+        /// Update the foreign Children of a parent.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TProperty"></typeparam>
+        /// <param name="parent"></param>
+        /// <param name="childSelector"></param>
         public void UpdateForeignChildren<T, TProperty>(T parent, Expression<Func<T, IEnumerable<TProperty>>> childSelector)
             where T : class, IEntity
             where TProperty : class, IEntity
@@ -396,18 +402,25 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             var children = childSelector.Compile().Invoke(parent).ToList();
             foreach (var child in children) { AddOrUpdate(child); }
 
-            var existingChildren = Set<T>().Where(x => x.Id == parent.Id).SelectMany(childSelector).AsNoTracking().ToList();
+            var existingChildren = CreateSet<T>().Where(x => x.Id == parent.Id).SelectMany(childSelector).AsNoTracking().ToList();
 
             foreach (var child in existingChildren.Except(children)) { Entry(child).State = EntityState.Deleted; }
         }
 
+        /// <summary>
+        /// Uppdate the children of a parent.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TProperty"></typeparam>
+        /// <param name="parent"></param>
+        /// <param name="childSelector"></param>
         public void UpdateChildren<T, TProperty>(T parent, Expression<Func<T, IEnumerable<TProperty>>> childSelector)
             where T : class, IEntity
             where TProperty : class, IEntity
         {
             var stateManager = ((IObjectContextAdapter)this).ObjectContext.ObjectStateManager;
             var currentChildren = childSelector.Compile().Invoke(parent).ToList();
-            var existingChildren = Set<T>().Where(x => x.Id == parent.Id).SelectMany(childSelector).AsNoTracking().ToList();
+            var existingChildren = CreateSet<T>().Where(x => x.Id == parent.Id).SelectMany(childSelector).AsNoTracking().ToList();
 
             var addedChildren = currentChildren.Except(existingChildren).AsEnumerable();
             var deletedChildren = existingChildren.Except(currentChildren).AsEnumerable();
@@ -421,6 +434,11 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             }
         }
 
+        /// <summary>
+        /// Gets the changed property of an entry.
+        /// </summary>
+        /// <param name="dbEntry"></param>
+        /// <returns></returns>
         public static IEnumerable<string> GetChangedProperties(DbEntityEntry dbEntry)
         {
             var propertyNames = dbEntry.State == EntityState.Added ? dbEntry.CurrentValues.PropertyNames : dbEntry.OriginalValues.PropertyNames;
@@ -433,11 +451,23 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             }
         }
 
+        /// <summary>
+        /// Tests if the value changed.
+        /// </summary>
+        /// <param name="dbEntry"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
         private static bool IsValueChanged(DbEntityEntry dbEntry, string propertyName)
         {
             return !Equals(OriginalValue(dbEntry, propertyName), CurrentValue(dbEntry, propertyName));
         }
 
+        /// <summary>
+        /// Gets the original value of an entry by property name.
+        /// </summary>
+        /// <param name="dbEntry"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
         private static string OriginalValue(DbEntityEntry dbEntry, string propertyName)
         {
             string originalValue = null;
@@ -452,6 +482,12 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             return originalValue;
         }
 
+        /// <summary>
+        /// Gets the current value of an entry by property name.
+        /// </summary>
+        /// <param name="dbEntry"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
         private static string CurrentValue(DbEntityEntry dbEntry, string propertyName)
         {
             string newValue;
@@ -469,5 +505,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
 
             return newValue;
         }
+
+        #endregion ----- Methods -----
     }
 }

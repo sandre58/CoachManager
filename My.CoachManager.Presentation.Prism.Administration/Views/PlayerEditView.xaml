@@ -14,7 +14,7 @@
              xmlns:converters="clr-namespace:My.CoachManager.Presentation.Prism.Core.Converters;assembly=My.CoachManager.Presentation.Prism.Core"
              xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Administration.Views"
              d:DataContext="{d:DesignInstance Type=viewModels:PlayerEditViewModel}"
-             d:DesignHeight="1000" d:DesignWidth="750">
+             d:DesignHeight="1000" d:DesignWidth="750" MaxHeight="750">
 
     <controls:WorkspaceView FocusManager.FocusedElement="{Binding ElementName=LastName}">
         <Grid parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
@@ -47,15 +47,15 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <!--<controls:ImagePicker
+                <controls:ImagePicker
                 Grid.Column="0" Grid.Row="0"
                     Height="45" Width="45"
                     Image="{Binding Item.Photo, Converter={StaticResource BytesToImageConverter}}"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center" SelectPhotoCommand="{Binding SelectPhotoCommand}" RemovePhotoCommand="{Binding RemovePhotoCommand}">
                     <Grid>
-                        <elysium:Icon Style="{DynamicResource UsermaleIconStyle}" Size="Custom" Width="40" Height="30" />
+                        <controls:Icon Content="{StaticResource PeopleGeometry}" Size="Custom" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                     </Grid>
-                </controls:ImagePicker>-->
+                </controls:ImagePicker>
 
                 <Grid Grid.Column="1" Grid.Row="0">
                     <Grid.ColumnDefinitions>
@@ -119,7 +119,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <DatePicker Grid.Column="0" DisplayDate="{Binding Item.Birthdate}" Width="{StaticResource SmallLargeWidth}"
+                    <DatePicker Grid.Column="0" SelectedDate="{Binding Item.Birthdate}" Width="{StaticResource SmallLargeWidth}"
                             parameters:FormParameters.Label="{x:Static entities:PersonResources.Birthdate}" />
 
                     <TextBox Grid.Column="1"

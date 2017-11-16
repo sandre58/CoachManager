@@ -24,13 +24,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
         void Attach<TEntity>(TEntity item) where TEntity : class;
 
         /// <summary>
-        /// Set Object as Modified
-        /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
-        /// <param name="item"></param>
-        void SetModified<TEntity>(TEntity item) where TEntity : class;
-
-        /// <summary>
         /// Apply Current Value in <paramref name="original"/>
         /// </summary>
         /// <typeparam name="TEntity">The type of Entity</typeparam>
@@ -40,6 +33,12 @@ namespace My.CoachManager.Infrastructure.Data.Core
 
         void Lock<TEntity>(TEntity entity) where TEntity : class;
 
+        /// <summary>
+        /// Add or update an entity.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        /// <param name="ignoreProperties"></param>
         void AddOrUpdate<T>(T entity, params string[] ignoreProperties) where T : class, IEntity;
     }
 }

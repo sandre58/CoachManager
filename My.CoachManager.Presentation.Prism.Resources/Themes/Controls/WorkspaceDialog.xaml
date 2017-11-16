@@ -5,6 +5,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="WorkspaceView.xaml" />
         <ResourceDictionary Source="../Base/Margins.xaml" />
+        <ResourceDictionary Source="../Base/Shadows.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type controls:WorkspaceDialog}">
@@ -20,10 +21,7 @@
                     <Border Background="{TemplateBinding OverlayBackground}">
                         <Border VerticalAlignment="Center" HorizontalAlignment="Center"
                                 Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                                Margin="{StaticResource LargeMargin}">
-                            <Border.Effect>
-                                <DropShadowEffect Color="{DynamicResource ShadowColor}" Direction="0" ShadowDepth="0" Opacity="0.5" BlurRadius="15" />
-                            </Border.Effect>
+                                Margin="{StaticResource LargeMargin}" Effect="{StaticResource CenterShadow}">
                             <Grid>
                                 <ContentPresenter />
                             </Grid>

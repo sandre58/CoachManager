@@ -108,154 +108,52 @@
     <SolidColorBrush x:Key="Male" Color="{DynamicResource MaleColor}" />
     <SolidColorBrush x:Key="Female" Color="{DynamicResource FemaleColor}" />
 
+    <!-- OPACITY -->
     <sys:Double x:Key="DisabledOpacity">0.5</sys:Double>
 
-    <SolidColorBrush x:Key="ValidationBrush1" Color="#052A2E31" />
-    <SolidColorBrush x:Key="ValidationBrush2" Color="#152A2E31" />
-    <SolidColorBrush x:Key="ValidationBrush3" Color="#252A2E31" />
-    <SolidColorBrush x:Key="ValidationBrush4" Color="#352A2E31" />
-    <SolidColorBrush x:Key="ValidationBrush5" Color="#FFDC000C" />
-
     <!-- FONT -->
-    <FontFamily x:Key="NormalFontFamily">Segoe UI</FontFamily>
-    <sys:Double x:Key="MediumFontSize">17</sys:Double>
-    <sys:Double x:Key="NormalFontSize">14</sys:Double>
-    <sys:Double x:Key="SmallFontSize">10</sys:Double>
     <SolidColorBrush x:Key="NormalForeground" Color="{DynamicResource DarkColor}" />
     <SolidColorBrush x:Key="LightForeground" Color="{DynamicResource LightColor}" />
     <SolidColorBrush x:Key="AccentForeground" Color="{DynamicResource AccentTextColor}" />
 
     <!-- ICONS -->
-    <SolidColorBrush x:Key="NormalIconBrush" Color="{DynamicResource Gray7Color}" />
+    <SolidColorBrush x:Key="NormalIcon" Color="{DynamicResource Gray7Color}" />
 
     <!-- WINDOW -->
-    <sys:Double x:Key="WindowHeaderFontSize">15</sys:Double>
-    <SolidColorBrush x:Key="WindowHeaderForeground" Color="{DynamicResource AccentTextColor}" />
     <SolidColorBrush x:Key="WindowBackground" Color="{DynamicResource Gray1Color}" />
-    <SolidColorBrush x:Key="WindowBorder" Color="{DynamicResource AccentColor}" Opacity=".5" />
+    <SolidColorBrush x:Key="WindowBorder" Color="{DynamicResource AccentColor}" Opacity=".7" />
     <SolidColorBrush x:Key="WindowBorderActive" Color="{DynamicResource AccentColor}" />
     <SolidColorBrush x:Key="WindowHeaderBackground" Color="{DynamicResource AccentColor}" Opacity=".7" />
     <SolidColorBrush x:Key="WindowHeaderBackgroundActive" Color="{DynamicResource AccentColor}" />
-
-    <!-- HEADER -->
-    <SolidColorBrush x:Key="HeaderBackground" Color="{DynamicResource TransparentColor}" />
-    <SolidColorBrush x:Key="Header2Background" Color="{DynamicResource TransparentGray3Color}" />
-    <SolidColorBrush x:Key="HeaderForeground" Color="{DynamicResource VeryDarkColor}" />
-    <SolidColorBrush x:Key="GrayHeaderForeground" Color="{DynamicResource Gray7Color}" />
-    <SolidColorBrush x:Key="LightGrayHeaderForeground" Color="{DynamicResource Gray5Color}" />
-    <SolidColorBrush x:Key="GrayHeaderBorder" Color="{DynamicResource Gray3Color}" />
-    <SolidColorBrush x:Key="LightGrayHeaderBorder" Color="{DynamicResource Gray2Color}" />
-    <sys:Double x:Key="HeaderFontSize">30</sys:Double>
-    <sys:Double x:Key="MediumHeaderFontSize">26</sys:Double>
+    <SolidColorBrush x:Key="WindowHeaderForeground" Color="{DynamicResource AccentTextColor}" />
 
     <!-- STATUS BAR -->
-    <sys:Double x:Key="StatusBarHeight">25</sys:Double>
     <SolidColorBrush x:Key="StatusBarBackground" Color="{DynamicResource LightAccentColor}" />
     <SolidColorBrush x:Key="StatusBarForeground" Color="{DynamicResource LightColor}" />
+    
+    <!-- HEADER -->
+    <SolidColorBrush x:Key="HeaderForeground" Color="{DynamicResource VeryDarkColor}" />
+    <SolidColorBrush x:Key="GrayHeaderForeground" Color="{DynamicResource Gray7Color}" />
+    <SolidColorBrush x:Key="GrayHeaderBorder" Color="{DynamicResource Gray3Color}" />
+    <SolidColorBrush x:Key="LightGrayHeaderForeground" Color="{DynamicResource Gray5Color}" />
+    <SolidColorBrush x:Key="LightGrayHeaderBorder" Color="{DynamicResource Gray2Color}" />
 
-    <!-- MENU -->
-    <sys:Double x:Key="MainMenuItemHeight">45</sys:Double>
-    <sys:Double x:Key="MainMenuSubItemHeight">30</sys:Double>
-    <sys:Double x:Key="MainMenuItemFontSize">17</sys:Double>
-    <sys:Double x:Key="MainMenuSubItemFontSize">14</sys:Double>
-    <SolidColorBrush x:Key="MainMenuBackground" Color="{DynamicResource DarkColor}" />
-    <SolidColorBrush x:Key="MainMenuItemBackground" Color="{DynamicResource TransparentGray5Color}" />
-    <SolidColorBrush x:Key="MainMenuItemBorderBrush" Color="{DynamicResource AccentColor}" />
-    <SolidColorBrush x:Key="MainMenuItemForeground" Color="{DynamicResource LightColor}" />
-
-    <!-- DATAGRID -->
-
-    <!-- Row -->
-    <SolidColorBrush x:Key="DataGridBackground" Color="{DynamicResource LightColor}" />
-    <SolidColorBrush x:Key="DataGridBorder" Color="{DynamicResource AccentColor}" />
-    <SolidColorBrush x:Key="DataGridForeground" Color="{DynamicResource DarkColor}" />
-
-    <!-- Datagrid header -->
-    <sys:Double x:Key="DataGridHeaderFontSize">16</sys:Double>
-    <SolidColorBrush x:Key="DataGridHeaderBackground" Color="{DynamicResource Gray3Color}" />
-    <SolidColorBrush x:Key="DataGridHeaderBorder" Color="{DynamicResource LightColor}" />
-    <SolidColorBrush x:Key="DataGridHeaderForeground" Color="{DynamicResource DarkColor}" />
-    <SolidColorBrush x:Key="DataGridHeaderMouseOverBackground" Color="{DynamicResource Gray5Color}" />
-    <SolidColorBrush x:Key="DataGridHeaderMouseOverBorder" Color="{DynamicResource LightColor}" />
-    <SolidColorBrush x:Key="DataGridHeaderMouseOverForeground" Color="{DynamicResource LightColor}" />
-    <SolidColorBrush x:Key="DataGridHeaderPressedBackground" Color="{DynamicResource AccentColor}" />
-    <SolidColorBrush x:Key="DataGridHeaderPressedBorder" Color="{DynamicResource LightColor}" />
-    <SolidColorBrush x:Key="DataGridHeaderPressedForeground" Color="{DynamicResource AccentTextColor}" />
-
-    <!-- Row -->
-    <SolidColorBrush x:Key="DataGridRowBackground" Color="{DynamicResource TransparentColor}" />
-    <SolidColorBrush x:Key="DataGridRowAlternatingRowBackground" Color="{DynamicResource TransparentGray2Color}" />
-    <SolidColorBrush x:Key="DataGridRowBorder" Color="{DynamicResource TransparentColor}" />
-    <SolidColorBrush x:Key="DataGridRowForeground" Color="{DynamicResource DarkColor}" />
-    <SolidColorBrush x:Key="DataGridMouseOverBackground" Color="{DynamicResource TransparentGray4Color}" />
-    <SolidColorBrush x:Key="DataGridMouseOverBorder" Color="{DynamicResource TransparentColor}" />
-    <SolidColorBrush x:Key="DataGridMouseOverForeground" Color="{DynamicResource DarkColor}" />
-    <SolidColorBrush x:Key="DataGridPressedBackground" Color="{DynamicResource AccentColor}" />
-    <SolidColorBrush x:Key="DataGridPressedBorder" Color="{DynamicResource TransparentColor}" />
-    <SolidColorBrush x:Key="DataGridPressedForeground" Color="{DynamicResource AccentTextColor}" />
-
-    <!-- SCROLLBAR -->
-    <SolidColorBrush x:Key="ScrollBarBackground" Color="{DynamicResource TransparentGray3Color}" />
-    <SolidColorBrush x:Key="ScrollBarButtonBackground" Color="{DynamicResource Gray3Color}" />
-    <SolidColorBrush x:Key="ScrollBarBorder" Color="{DynamicResource TransparentColor}" />
-    <SolidColorBrush x:Key="ScrollBarMouseOverBackground" Color="{DynamicResource Gray5Color}" />
-    <SolidColorBrush x:Key="ScrollBarMouseOverBorder" Color="{DynamicResource TransparentColor}" />
-    <SolidColorBrush x:Key="ScrollBarPressedBackground" Color="{DynamicResource Gray7Color}" />
-    <SolidColorBrush x:Key="ScrollBarPressedBorder" Color="{DynamicResource TransparentColor}" />
-
-    <!-- APPLICATION BAR -->
-    <sys:Double x:Key="ApplicationBarHeight">75</sys:Double>
-    <sys:Double x:Key="ApplicationBarButtonDiameter">42</sys:Double>
-    <SolidColorBrush x:Key="ApplicationBarBackground" Color="{DynamicResource AccentColor}" />
-    <SolidColorBrush x:Key="ApplicationBarGrayBackground" Color="{DynamicResource TransparentGray5Color}" />
-    <SolidColorBrush x:Key="ApplicationBarGrayForeground" Color="{DynamicResource DarkColor}" />
-    <SolidColorBrush x:Key="ApplicationBarForeground" Color="{DynamicResource AccentTextColor}" />
-    <SolidColorBrush x:Key="ApplicationBarBorder" Color="{DynamicResource TransparentColor}" />
-
+    <!-- SEPARATOR -->
+    <SolidColorBrush x:Key="Separator" Color="{DynamicResource TransparentGray5Color}" />
+    
     <!-- CONTROLS -->
-    <SolidColorBrush x:Key="ControlBackground" Color="{DynamicResource LightColor}" />
-    <SolidColorBrush x:Key="ControlForeground" Color="{DynamicResource DarkColor}" />
-    <SolidColorBrush x:Key="ControlBorder" Color="{DynamicResource Gray2Color}" />
-    <SolidColorBrush x:Key="ControlMouseOverBackground" Color="{DynamicResource TransparentGray3Color}" />
-    <SolidColorBrush x:Key="ControlMouseOverBorder" Color="{DynamicResource Gray5Color}" />
-    <SolidColorBrush x:Key="ControlFocusBackground" Color="{DynamicResource LightColor}" />
-    <SolidColorBrush x:Key="ControlFocusBorder" Color="{DynamicResource HighLightColor}" />
-    <SolidColorBrush x:Key="ControlPressedBackground" Color="{DynamicResource TransparentGray5Color}" />
-    <SolidColorBrush x:Key="ControlPressedBorder" Color="{DynamicResource AccentColor}" />
-    <SolidColorBrush x:Key="ControlSelection" Color="{DynamicResource HighLightColor}" />
-    <SolidColorBrush x:Key="ControlCaret" Color="{DynamicResource DarkColor}" />
+    <SolidColorBrush x:Key="ControlGray" Color="{DynamicResource TransparentGray2Color}" />
+    <SolidColorBrush x:Key="ControlMouseOverGray" Color="{DynamicResource TransparentGray3Color}" />
+    <SolidColorBrush x:Key="ControlPressedGray" Color="{DynamicResource TransparentGray5Color}" />
+    <SolidColorBrush x:Key="ControlDarkGray" Color="{DynamicResource Gray2Color}" />
+    <SolidColorBrush x:Key="ControlMouseOverDarkGray" Color="{DynamicResource Gray5Color}" />
+    <SolidColorBrush x:Key="ControlPressedDarkGray" Color="{DynamicResource Gray7Color}" />
+    <SolidColorBrush x:Key="ControlLightForeground" Color="{DynamicResource LightColor}" />
+    <SolidColorBrush x:Key="ControlDarkForeground" Color="{DynamicResource Gray5Color}" />
 
-    <!-- BUTTONS -->
-    <SolidColorBrush x:Key="ButtonBackground" Color="{DynamicResource LightColor}" />
-    <SolidColorBrush x:Key="ButtonBorder" Color="{DynamicResource DarkColor}" />
-    <SolidColorBrush x:Key="ButtonForeground" Color="{DynamicResource DarkColor}" />
-    <SolidColorBrush x:Key="ButtonMouseOverBackground" Color="{DynamicResource LightColor}" />
-    <SolidColorBrush x:Key="ButtonMouseOverBorder" Color="{DynamicResource Gray5Color}" />
-    <SolidColorBrush x:Key="ButtonMouseOverForeground" Color="{DynamicResource DarkColor}" />
-    <SolidColorBrush x:Key="ButtonPressedBackground" Color="{DynamicResource Gray5Color}" />
-    <SolidColorBrush x:Key="ButtonPressedForeground" Color="{DynamicResource LightColor}" />
-    <SolidColorBrush x:Key="ButtonPressedBorder" Color="{DynamicResource Gray5Color}" />
-    <SolidColorBrush x:Key="ButtonFocusBackground" Color="{DynamicResource LightColor}" />
-    <SolidColorBrush x:Key="ButtonFocusForeground" Color="{DynamicResource DarkColor}" />
-    <SolidColorBrush x:Key="ButtonFocusBorder" Color="{DynamicResource HighLightColor}" />
-
-    <!-- Command Button -->
-    <sys:Double x:Key="CommandButtonDiameter">35</sys:Double>
-    <sys:Double x:Key="MediumCommandButtonDiameter">25</sys:Double>
-    <SolidColorBrush x:Key="CommandButtonBackground" Color="{DynamicResource TransparentColor}" />
-    <SolidColorBrush x:Key="CommandButtonBorder" Color="{DynamicResource Gray5Color}" />
-    <SolidColorBrush x:Key="CommandButtonForeground" Color="{DynamicResource Gray5Color}" />
-    <SolidColorBrush x:Key="CommandButtonMouseOverBackground" Color="{DynamicResource TransparentColor}" />
-    <SolidColorBrush x:Key="CommandButtonMouseOverBorder" Color="{DynamicResource DarkColor}" />
-    <SolidColorBrush x:Key="CommandButtonMouseOverForeground" Color="{DynamicResource Gray5Color}" />
-    <SolidColorBrush x:Key="CommandButtonPressedBackground" Color="{DynamicResource AccentColor}" />
-    <SolidColorBrush x:Key="CommandButtonPressedBorder" Color="{DynamicResource AccentColor}" />
-    <SolidColorBrush x:Key="CommandButtonPressedForeground" Color="{DynamicResource AccentTextColor}" />
+    <!-- SPECIALS BUTTONS -->
 
     <!-- System Button -->
-    <sys:Double x:Key="SystemButtonHeight">24</sys:Double>
-    <sys:Double x:Key="SystemButtonWidth">32</sys:Double>
-    <SolidColorBrush x:Key="SystemButtonBackground" Color="{DynamicResource TransparentColor}" />
     <SolidColorBrush x:Key="SystemButtonForeground" Color="{DynamicResource AccentTextColor}" />
     <SolidColorBrush x:Key="SystemButtonMouseOverBackground" Color="{DynamicResource TransparentLight3Color}" />
     <SolidColorBrush x:Key="SystemButtonMouseOverForeground" Color="{DynamicResource AccentTextColor}" />
@@ -263,34 +161,7 @@
     <SolidColorBrush x:Key="SystemButtonPressedForeground" Color="{DynamicResource AccentTextColor}" />
 
     <!-- Close Button -->
-    <sys:Double x:Key="CloseButtonWidth">32</sys:Double>
-    <SolidColorBrush x:Key="CloseButtonBackground" Color="{DynamicResource TransparentColor}" />
-    <SolidColorBrush x:Key="CloseButtonForeground" Color="{DynamicResource AccentTextColor}" />
-    <SolidColorBrush x:Key="CloseButtonMouseOverBackground" Color="{DynamicResource TransparentLight3Color}" />
-    <SolidColorBrush x:Key="CloseButtonMouseOverForeground" Color="{DynamicResource AccentTextColor}" />
-    <SolidColorBrush x:Key="CloseButtonPressedBackground" Color="#e51400" />
+    <SolidColorBrush x:Key="CloseButtonPressedBackground" Color="Red" />
     <SolidColorBrush x:Key="CloseButtonPressedForeground" Color="{DynamicResource AccentTextColor}" />
 
-    <!-- CHECKBOX -->
-    <SolidColorBrush x:Key="CheckBoxBackground" Color="{DynamicResource LightColor}" />
-    <SolidColorBrush x:Key="CheckBoxBorder" Color="{DynamicResource Gray3Color}" />
-    <SolidColorBrush x:Key="CheckBoxMouseOverBorder" Color="{DynamicResource Gray5Color}" />
-    <SolidColorBrush x:Key="CheckBoxPressedBorder" Color="{DynamicResource AccentColor}" />
-    <SolidColorBrush x:Key="CheckBoxFocusBorder" Color="{DynamicResource HighLightColor}" />
-
-    <!-- MENU -->
-    <SolidColorBrush x:Key="MenuBackground" Color="{DynamicResource LightColor}" />
-    <SolidColorBrush x:Key="MenuBorder" Color="{DynamicResource DarkColor}" />
-    <SolidColorBrush x:Key="MenuSeparator" Color="{DynamicResource TransparentGray5Color}" />
-    <SolidColorBrush x:Key="MenuItemBackground" Color="{DynamicResource TransparentColor}" />
-    <SolidColorBrush x:Key="MenuItemSelectedBackground" Color="{DynamicResource TransparentGray3Color}" />
-    <SolidColorBrush x:Key="MenuItemBorder" Color="{DynamicResource TransparentGray5Color}" />
-    <SolidColorBrush x:Key="MenuIcon" Color="{DynamicResource DarkColor}" />
-
-    <!-- TOOLTIP -->
-    <SolidColorBrush x:Key="TooltipBackground" Color="{DynamicResource LightColor}" />
-    <SolidColorBrush x:Key="TooltipBorder" Color="{DynamicResource DarkColor}" />
-
-    <!-- SEPARATOR -->
-    <SolidColorBrush x:Key="Separator" Color="{DynamicResource TransparentGray5Color}" />
 </ResourceDictionary>

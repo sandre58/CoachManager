@@ -4,11 +4,12 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Margins.xaml" />
         <ResourceDictionary Source="../Base/Converters.xaml" />
+        <ResourceDictionary Source="../Base/Shadows.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type ToolTip}">
-        <Setter Property="Background" Value="{DynamicResource TooltipBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource TooltipBorder}" />
+        <Setter Property="Background" Value="{DynamicResource Light}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Dark}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
@@ -51,15 +52,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasDropShadow" Value="True">
-                            <Setter TargetName="LayoutRoot" Property="Effect">
-                                <Setter.Value>
-                                    <DropShadowEffect BlurRadius="5"
-                                                      ShadowDepth="2"
-                                                      Direction="315"
-                                                      Opacity="0.3"
-                                                      Color="{DynamicResource ShadowColor}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="LayoutRoot" Property="Effect"  Value="{StaticResource BottomRightShadow}" />
                             <Setter TargetName="LayoutRoot" Value="{DynamicResource Transparent}" Property="Border.Background" />
                             <Setter TargetName="LayoutRoot" Property="Border.Padding" Value="0,0,6,6" />
                         </Trigger>

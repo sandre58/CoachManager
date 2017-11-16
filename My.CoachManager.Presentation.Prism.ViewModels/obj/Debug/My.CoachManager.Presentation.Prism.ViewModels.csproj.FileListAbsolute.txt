@@ -84,3 +84,46 @@ C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachMan
 C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
 C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\obj\Debug\My.CoachManager.Presentation.Prism.ViewModels.dll
 C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\obj\Debug\My.CoachManager.Presentation.Prism.ViewModels.pdb
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\My.CoachManager.Presentation.Prism.ViewModels.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\My.CoachManager.Presentation.Prism.ViewModels.pdb
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\AutoMapper.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\My.CoachManager.Application.Dtos.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\My.CoachManager.CrossCutting.Core.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\My.CoachManager.Presentation.Prism.Core.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\Prism.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\My.CoachManager.Domain.Core.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\My.CoachManager.Domain.Entities.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\EntityFramework.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\My.CoachManager.CrossCutting.Logging.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\Prism.Wpf.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\Microsoft.Practices.Unity.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\My.CoachManager.Application.Dtos.pdb
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\My.CoachManager.CrossCutting.Core.pdb
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\My.CoachManager.Presentation.Prism.Core.pdb
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\AutoMapper.xml
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\Prism.xml
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\My.CoachManager.Domain.Core.pdb
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\My.CoachManager.Domain.Entities.pdb
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\EntityFramework.xml
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\My.CoachManager.CrossCutting.Logging.pdb
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\Prism.Wpf.xml
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\Microsoft.Practices.Unity.Interception.xml
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\Microsoft.Practices.Unity.xml
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\de\System.Windows.Interactivity.resources.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\en\System.Windows.Interactivity.resources.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\es\System.Windows.Interactivity.resources.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\it\System.Windows.Interactivity.resources.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\ru\System.Windows.Interactivity.resources.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\obj\Debug\My.CoachManager.Presentation.Prism.ViewModels.csprojResolveAssemblyReference.cache
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\obj\Debug\My.CoachManager.Presentation.Prism.ViewModels.dll
+C:\Users\E0214719\Documents\GitHub\CoachManager\My.CoachManager.Presentation.Prism.ViewModels\obj\Debug\My.CoachManager.Presentation.Prism.ViewModels.pdb

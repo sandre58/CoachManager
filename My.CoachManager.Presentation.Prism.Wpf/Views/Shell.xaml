@@ -45,10 +45,7 @@
             </Grid>
 
             <!-- Left Region -->
-            <Border Grid.Row="0" Grid.Column="0" Width="300" Background="{DynamicResource MainMenuBackground}">
-                <Border.Effect>
-                    <DropShadowEffect Color="{DynamicResource ShadowColor}" Direction="0" ShadowDepth="5" Opacity="0.5" BlurRadius="15" />
-                </Border.Effect>
+            <Border Grid.Row="0" Grid.Column="0" Width="300" Background="{DynamicResource Dark}" Effect="{StaticResource RightShadow}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40" />

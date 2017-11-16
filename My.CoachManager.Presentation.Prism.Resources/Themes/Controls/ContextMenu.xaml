@@ -4,10 +4,11 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Converters.xaml" />
         <ResourceDictionary Source="../Base/Geometry.xaml" />
+        <ResourceDictionary Source="../Base/Shadows.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="{x:Type Separator}">
-        <Setter Property="Background" Value="{DynamicResource MenuSeparator}" />
+        <Setter Property="Background" Value="{DynamicResource Separator}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Margin" Value="6 2 6 2" />
         <Setter Property="Template">
@@ -28,8 +29,8 @@
 
     <Style x:Key="MenuStyle" TargetType="{x:Type Menu}">
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
-        <Setter Property="Background" Value="{DynamicResource MenuBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource MenuBorder}" />
+        <Setter Property="Background" Value="{DynamicResource Light}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Dark}" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
         <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MenuFontStyleKey}}" />
@@ -54,8 +55,8 @@
 
     <Style x:Key="ContextMenuStyle" TargetType="{x:Type ContextMenu}">
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
-        <Setter Property="Background" Value="{DynamicResource MenuBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource MenuBorder}" />
+        <Setter Property="Background" Value="{DynamicResource Light}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Dark}" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
         <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MenuFontStyleKey}}" />
@@ -94,15 +95,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasDropShadow" Value="True">
                             <Setter TargetName="Border" Property="Margin" Value="0 0 6 6" />
-                            <Setter TargetName="LayoutRoot" Property="Effect">
-                                <Setter.Value>
-                                    <DropShadowEffect Opacity="0.3"
-                                                      BlurRadius="4"
-                                                      Direction="315"
-                                                      ShadowDepth="2"
-                                                      Color="{DynamicResource ShadowColor}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="LayoutRoot" Property="Effect" Value="{StaticResource BottomRightShadow}" />
                             <Setter TargetName="LayoutRoot" Property="Margin" Value="0 0 6 6" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -115,7 +108,7 @@
     <Style TargetType="{x:Type Menu}" BasedOn="{StaticResource MenuStyle}" />
 
     <Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
-        <Setter Property="Background" Value="{DynamicResource MenuItemBackground}" />
+        <Setter Property="Background" Value="{DynamicResource Transparent}" />
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
@@ -254,8 +247,8 @@
     </Style>
 
     <ControlTemplate x:Key="{ComponentResourceKey ResourceId=SubmenuContent, TypeInTargetAssembly={x:Type FrameworkElement}}" TargetType="{x:Type ContentControl}">
-        <Border Background="{DynamicResource MenuItemBackground}"
-                BorderBrush="{DynamicResource MenuItemBorder}"
+        <Border Background="{DynamicResource Transparent}"
+                BorderBrush="{DynamicResource Separator}"
                 BorderThickness="1">
             <ContentPresenter />
         </Border>
@@ -278,7 +271,7 @@
                       Margin="8 0 0 0"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
-                      Fill="{DynamicResource MenuIcon}"
+                      Fill="{DynamicResource Dark}"
                       Data="{StaticResource CheckmarkGeometry}"
                       FlowDirection="LeftToRight"
                       Visibility="Collapsed" />
@@ -297,7 +290,7 @@
                    VerticalOffset="-1">
                 <Grid>
                     <Rectangle x:Name="LayoutRoot" Fill="{TemplateBinding Background}" />
-                    <ContentControl x:Name="SubMenuBorder"
+                    <ContentControl x:Name="SubDark"
                                     IsTabStop="False"
                                     Template="{DynamicResource {ComponentResourceKey ResourceId=SubmenuContent, TypeInTargetAssembly={x:Type FrameworkElement}}}">
                         <ScrollViewer x:Name="SubMenuScrollViewer"
@@ -326,28 +319,20 @@
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger SourceName="PART_Popup" Property="HasDropShadow" Value="True">
-                <Setter TargetName="LayoutRoot" Property="Effect">
-                    <Setter.Value>
-                        <DropShadowEffect Opacity="0.3"
-                                          BlurRadius="4"
-                                          Direction="315"
-                                          ShadowDepth="2"
-                                          Color="{DynamicResource ShadowColor}" />
-                    </Setter.Value>
-                </Setter>
-                <Setter TargetName="LayoutRoot" Property="Margin" Value="0 0 6 6" />
-                <Setter TargetName="SubMenuBorder" Property="Margin" Value="0 0 6 6" />
+                <Setter TargetName="LayoutRoot" Property="Effect" Value="{StaticResource BottomRightShadow}" />
+                    <Setter TargetName="LayoutRoot" Property="Margin" Value="0 0 6 6" />
+                <Setter TargetName="SubDark" Property="Margin" Value="0 0 6 6" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource MenuItemSelectedBackground}" />
+                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOverGray}" />
             </Trigger>
             <Trigger Property="IsKeyboardFocused" Value="True">
-                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource MenuItemSelectedBackground}" />
-                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource MenuItemSelectedBackground}" />
+                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource ControlMouseOverGray}" />
+                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOverGray}" />
             </Trigger>
             <Trigger Property="IsSubmenuOpen" Value="True">
-                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource MenuItemSelectedBackground}" />
-                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource MenuItemSelectedBackground}" />
+                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource ControlMouseOverGray}" />
+                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOverGray}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource Disabled}" />
@@ -373,7 +358,7 @@
                       Margin="8 0 0 0"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
-                      Fill="{DynamicResource MenuIcon}"
+                      Fill="{DynamicResource Dark}"
                       Data="{StaticResource CheckmarkGeometry}"
                       FlowDirection="LeftToRight"
                       Visibility="Collapsed" />
@@ -392,11 +377,11 @@
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource MenuItemSelectedBackground}" />
+                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOverGray}" />
             </Trigger>
             <Trigger Property="IsKeyboardFocused" Value="True">
-                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource MenuItemSelectedBackground}" />
-                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource MenuItemSelectedBackground}" />
+                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource ControlMouseOverGray}" />
+                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOverGray}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource Disabled}" />
@@ -431,7 +416,7 @@
                       Margin="5 0 0 0"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
-                      Fill="{DynamicResource MenuIcon}"
+                      Fill="{DynamicResource Dark}"
                       Data="{StaticResource CheckmarkGeometry}"
                       FlowDirection="LeftToRight"
                       Visibility="Collapsed" />
@@ -447,7 +432,7 @@
                 <Path Grid.Column="5"
                       Margin="4 0 0 0"
                       VerticalAlignment="Center"
-                      Fill="{DynamicResource MenuIcon}"
+                      Fill="{DynamicResource Dark}"
                       Data="{StaticResource RightArrowGeometry}" />
             </Grid>
             <Popup x:Name="PART_Popup"
@@ -460,7 +445,7 @@
                    VerticalOffset="-3">
                 <Grid>
                     <Rectangle x:Name="LayoutRoot" Fill="{TemplateBinding Background}" />
-                    <ContentControl x:Name="SubMenuBorder"
+                    <ContentControl x:Name="SubDark"
                                     IsTabStop="False"
                                     Template="{DynamicResource {ComponentResourceKey ResourceId=SubmenuContent, TypeInTargetAssembly={x:Type FrameworkElement}}}">
                         <ScrollViewer x:Name="SubMenuScrollViewer"
@@ -489,21 +474,13 @@
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger SourceName="PART_Popup" Property="HasDropShadow" Value="True">
-                <Setter TargetName="LayoutRoot" Property="Effect">
-                    <Setter.Value>
-                        <DropShadowEffect Opacity="0.3"
-                                          BlurRadius="4"
-                                          Direction="315"
-                                          ShadowDepth="2"
-                                          Color="{DynamicResource ShadowColor}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter TargetName="LayoutRoot" Property="Effect"  Value="{StaticResource BottomRightShadow}" />
                 <Setter TargetName="LayoutRoot" Property="Margin" Value="0 0 6 6" />
-                <Setter TargetName="SubMenuBorder" Property="Margin" Value="0 0 6 6" />
+                <Setter TargetName="SubDark" Property="Margin" Value="0 0 6 6" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource MenuItemSelectedBackground}" />
-                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource MenuItemSelectedBackground}" />
+                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource ControlMouseOverGray}" />
+                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOverGray}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource Disabled}" />
@@ -538,7 +515,7 @@
                       Margin="5 0 0 0"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
-                      Fill="{DynamicResource MenuIcon}"
+                      Fill="{DynamicResource Dark}"
                       Data="{StaticResource CheckmarkGeometry}"
                       FlowDirection="LeftToRight"
                       Visibility="Collapsed" />
@@ -561,8 +538,8 @@
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource MenuItemSelectedBackground}" />
-                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource MenuItemSelectedBackground}" />
+                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource ControlMouseOverGray}" />
+                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOverGray}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource Disabled}" />

@@ -188,7 +188,7 @@ namespace My.CoachManager.Infrastructure.Data.Core
             }
 
             // Apply changes for item object
-            _currentUnitOfWork.SetModified(item);
+            _currentUnitOfWork.AddOrUpdate(item);
 
             _logger.Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_ModifiedItemRepository, typeof(TEntity).Name, item.Id));
         }
@@ -210,7 +210,7 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 if (item != null)
                 {
-                    _currentUnitOfWork.SetModified(item);
+                    _currentUnitOfWork.AddOrUpdate(item);
                 }
             }
         }
@@ -226,11 +226,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentNullException("item");
             }
-
-            //if (item.Id > 0)
-            //    Modify(item);
-            //else
-            //    Add(item);
 
             CurrentUnitOfWork.AddOrUpdate(item);
         }
