@@ -16,6 +16,7 @@ namespace My.CoachManager.Application.Dtos.Mapping
             CreateMap<Player, PlayerDto>().ReverseMap();
             CreateMap<Coach, CoachDto>().ReverseMap();
             CreateMap<Country, CountryDto>().ReverseMap();
+            CreateMap<Contact, ContactDto>().ReverseMap().ForMember(x => x.CurrentPerson, opt => opt.Ignore());
         }
     }
 }

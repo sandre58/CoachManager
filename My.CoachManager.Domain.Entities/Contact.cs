@@ -11,5 +11,9 @@ namespace My.CoachManager.Domain.Entities
         public bool Default { get; set; }
 
         public string Value { get; set; }
+
+        public int PersonId { get; set; }
+        
+        public Person CurrentPerson { get; set; }
     }
 }

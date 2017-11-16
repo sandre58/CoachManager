@@ -16,5 +16,8 @@ namespace My.CoachManager.Application.Dtos.Persons
 
         [DataMember]
         public bool Default { get; set; }
+
+        [DataMember]
+        public int PersonId { get; set; }
     }
 }

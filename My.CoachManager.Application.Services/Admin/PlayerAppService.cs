@@ -118,7 +118,7 @@ namespace My.CoachManager.Application.Services.Admin
         /// <returns></returns>
         public PlayerDto GetById(int id)
         {
-            var item = _playerRepository.GetEntity(id, p => p.Emails, p => p.Phones);
+            var item = _playerRepository.GetEntity(id, p => p.Contacts);
             return item.ToDto<PlayerDto>();
         }
 

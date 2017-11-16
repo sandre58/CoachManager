@@ -14,9 +14,9 @@ namespace My.CoachManager.Domain.Entities
         public Player()
         {
             Laterality = PlayerConstants.DefaultLaterality;
-            Positions = new HashSet<PlayerPosition>();
-            Heights = new HashSet<PlayerHeight>();
-            Weights = new HashSet<PlayerWeight>();
+            Positions = new List<PlayerPosition>();
+            Heights = new List<PlayerHeight>();
+            Weights = new List<PlayerWeight>();
         }
 
         public int CategoryId { get; set; }

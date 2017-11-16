@@ -12,11 +12,10 @@ namespace My.CoachManager.Domain.Entities
     [MetadataType(typeof(PersonMetadata))]
     public abstract class Person : Entity
     {
-        public Person()
+        protected Person()
         {
             Gender = PlayerConstants.DefaultGender;
-            Emails = new HashSet<Email>();
-            Phones = new HashSet<Phone>();
+            Contacts = new List<Contact>();
         }
 
         public string LastName { get; set; }
@@ -47,8 +46,10 @@ namespace My.CoachManager.Domain.Entities
 
         public string Size { get; set; }
 
-        public ICollection<Email> Emails { get; set; }
+        //public ICollection<Phone> Phones { get; set; }
 
-        public ICollection<Phone> Phones { get; set; }
+        //public ICollection<Email> Emails { get; set; }
+
+        public ICollection<Contact> Contacts { get; set; }
     }
 }

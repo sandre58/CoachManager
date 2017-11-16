@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.CrossCutting.Core.Metadatas;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 
@@ -15,6 +16,9 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
 
         private string _value;
         public virtual string Value { get { return _value; } set { SetProperty(ref _value, value); } }
+
+        private int _personId;
+        public virtual int PersonId { get { return _personId; } set { SetProperty(ref _personId, value); } }
 
         private bool _canAdd;
         public virtual bool CanAdd { get { return _canAdd; } set { SetProperty(ref _canAdd, value); } }

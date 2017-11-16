@@ -56,10 +56,12 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
         [MaxLength(4, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public string Size { get; set; }
 
-        [Display(Name = "Phones", ResourceType = typeof(PersonResources))]
-        public object Phones { get; set; }
+        //[Display(Name = "Emails", ResourceType = typeof(PersonResources))]
+        //public object Emails { get; set; }
 
-        [Display(Name = "Emails", ResourceType = typeof(PersonResources))]
-        public object Emails { get; set; }
+        //[Display(Name = "Phones", ResourceType = typeof(PersonResources))]
+        //public object Phones { get; set; }
+
+        public object Contacts { get; set; }
     }
 }

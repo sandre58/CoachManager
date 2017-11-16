@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Infrastructure.Data.UnitOfWorks;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
+using My.CoachManager.CrossCutting.Core.Extensions;
 
 namespace My.CoachManager.Infrastructure.Data.Migrations
 {
@@ -66,23 +68,35 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                 ShoesSize = 44,
                 Size = "L"
             };
-            player1.Emails.Add(new Email()
+
+            var contacts = new List<Contact>
             {
-                Label = "Test",
-                Default = true,
-                Value = "andre.cs2i@gmail.com"
-            });
-            player1.Phones.Add(new Phone()
-            {
-                Label = "Test",
-                Default = true,
-                Value = "0664411391"
-            });
+                new Email
+                {
+                    Label = "Test",
+                    Default = true,
+                    Value = "andre.cs2i@gmail.com"
+                },
+                new Email
+                {
+                    Label = "Test2",
+                    Default = false,
+                    Value = "vincentsourdeix@gmail.com"
+                },
+                new Phone
+                {
+                    Label = "Test",
+                    Default = true,
+                    Value = "0664411391"
+                }
+            };
+
+            player1.Contacts.AddRange(contacts);
 
             context.Players.AddOrUpdate(x => x.LastName, player1);
             context.Commit();
 
-            player1.Emails.First().Label = "Toto";
+            player1.Contacts.First().Label = "Toto";
             context.Commit();
         }
 

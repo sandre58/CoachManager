@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace My.CoachManager.Presentation.Prism.ViewModels
@@ -6,6 +8,14 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
     public class ContactsCollection<T> : ObservableCollection<T>
         where T : ContactViewModel
     {
+        public ContactsCollection()
+        {
+        }
+
+        public ContactsCollection(IEnumerable<T> collection) : base(collection)
+        {
+        }
+
         public void Add()
         {
             Add(Activator.CreateInstance<T>());

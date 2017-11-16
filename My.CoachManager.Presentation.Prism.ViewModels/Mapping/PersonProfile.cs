@@ -16,6 +16,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
             CreateMap<PlayerWeightDto, PlayerWeightViewModel>().ReverseMap();
             CreateMap<PlayerDto, PlayerViewModel>().ReverseMap();
             CreateMap<CoachDto, CoachViewModel>().ReverseMap();
+            CreateMap<ContactDto, ContactViewModel>().ReverseMap();
         }
     }
 }
