@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using My.CoachManager.Application.Dtos.Admin;
 using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.Application.Services.Admin;
@@ -234,6 +235,15 @@ namespace My.CoachManager.Services.Wcf
         public IEnumerable<CategoryDto> GetCategoriesForPlayer()
         {
             return UnityFactory.Resolve<IPlayerAppService>().GetCategories();
+        }
+
+        /// <summary>
+        /// Get category from birthdate.
+        /// </summary>
+        /// <returns></returns>
+        public CategoryDto GetCategoryFromBirthdate(DateTime date)
+        {
+            return UnityFactory.Resolve<IPlayerAppService>().GetCategoryFromBirthdate(date);
         }
 
         #endregion Player

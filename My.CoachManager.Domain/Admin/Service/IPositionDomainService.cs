@@ -10,6 +10,6 @@ namespace My.CoachManager.Domain.Admin.Service
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        bool CheckPositionIsUnique(Position item);
+        bool IsUnique(Position item);
     }
 }

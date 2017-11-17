@@ -10,6 +10,6 @@ namespace My.CoachManager.Domain.Admin.Service
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        bool CheckSeasonIsUnique(Season item);
+        bool IsUnique(Season item);
     }
 }

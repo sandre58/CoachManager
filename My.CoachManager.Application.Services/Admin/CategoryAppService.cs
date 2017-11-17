@@ -51,9 +51,9 @@ namespace My.CoachManager.Application.Services.Admin
         public CategoryDto CreateOrUpdate(CategoryDto dto)
         {
             var entity = dto.ToEntity<Category>();
-            if (!_categoryDomainService.CheckCategoryIsUnique(entity))
+            if (!_categoryDomainService.IsUnique(entity))
             {
-                throw new BusinessException(string.Format(ValidationMessageResources.AlreadyExistMessage, entity.Code));
+                throw new BusinessException(string.Format(ValidationMessageResources.AlreadyExistMessage, entity.Label));
             }
 
             _categoryRepository.AddOrModify(entity);
@@ -69,7 +69,14 @@ namespace My.CoachManager.Application.Services.Admin
         /// <returns></returns>
         public void Remove(CategoryDto dto)
         {
-            _categoryRepository.Remove(dto.ToEntity<Category>());
+            var entity = dto.ToEntity<Category>();
+
+            if (_categoryDomainService.IsUsed(entity))
+            {
+                throw new BusinessException(MessageResources.RemovingFailed + " " +  string.Format(ValidationMessageResources.IsUsedMessage, entity.Label));
+            }
+
+            _categoryRepository.Remove(entity);
 
             _categoryRepository.UnitOfWork.Commit();
         }

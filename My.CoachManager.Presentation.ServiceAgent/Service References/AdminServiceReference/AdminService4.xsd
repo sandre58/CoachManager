@@ -283,4 +283,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetCategoryFromBirthdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCategoryFromBirthdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="GetCategoryFromBirthdateResult" nillable="true" type="q27:CategoryDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

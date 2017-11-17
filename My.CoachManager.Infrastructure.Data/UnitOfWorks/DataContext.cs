@@ -4,6 +4,7 @@ using System.Data.Entity.Core.Objects.DataClasses;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq.Expressions;
 using System.Reflection;
+using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
@@ -98,8 +99,11 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 var errorMessage = string.Empty;
 
                 foreach (var item in ex.EntityValidationErrors)
+                {
+                    errorMessage += string.Format(ValidationMessageResources.EntityErrorHeader, item.Entry.Entity.GetType().FullName) + "\r\n";
                     foreach (var error in item.ValidationErrors)
-                        errorMessage += String.Format(" - {0} on Entity {1}", error.ErrorMessage, item.Entry.Entity.GetType().FullName);
+                        errorMessage += string.Format(" - {0}", error.ErrorMessage) + "\r\n";
+                }
 
                 // Changes are canceled after an error
                 RollbackChanges();
@@ -107,6 +111,15 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 throw new InfrastructureDataException(errorMessage, ex);
             }
             catch (DbUpdateException ex)
+            {
+                // Log exception information
+                Trace.TraceError(ex.ToString());
+
+                // Changes are canceled after an error
+                RollbackChanges();
+                throw;
+            }
+            catch (Exception ex)
             {
                 // Log exception information
                 Trace.TraceError(ex.ToString());

@@ -535,7 +535,7 @@
         <Setter Property="GridLinesVisibility" Value="None" />
         <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />
         <Setter Property="RowHeaderWidth" Value="0" />
-        <Setter Property="RowHeight" Value="35" />
+        <Setter Property="MinRowHeight" Value="35" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />

@@ -18,6 +18,27 @@
 
         <DataGrid ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" Style="{StaticResource ItemsDataGridStyle}">
             <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="viewModels:PlayerViewModel">
+                            <Grid Width="35" Height="35" Margin="15, 5, 15, 5">
+                                <Ellipse Fill="{DynamicResource ControlGray}" Stroke="{DynamicResource ControlDarkGray}"
+                                         Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" StrokeThickness="1" />
+                                <controls:Icon Content="{DynamicResource PeopleGeometry}" Size="Custom" Width="30" Height="20"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" />
+                                <Ellipse Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                         Stroke="{DynamicResource ControlDarkGray}"
+                                         StrokeThickness="1"
+                                         Visibility="{Binding Photo, Converter={StaticResource NullToVisibilityConverter}}">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{Binding Photo, Converter={StaticResource BytesToImageConverter}}" Stretch="UniformToFill" AlignmentX="Center" AlignmentY="Center" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="{x:Static strings:PersonResources.LastName}" SortMemberPath="LastName">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="viewModels:PlayerViewModel">
@@ -28,24 +49,8 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{x:Static strings:PersonResources.Birthdate}" SortMemberPath="Birthdate">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate DataType="viewModels:PlayerViewModel">
-                            <StackPanel>
-                                <TextBlock Text="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}" ToolTip="{Binding PlaceOfBirth}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{x:Static strings:PlayerResources.Category}" SortMemberPath="Category.Year">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate DataType="viewModels:PlayerViewModel">
-                            <StackPanel>
-                                <TextBlock Text="{Binding Category.Label}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}" Header="{x:Static strings:PersonResources.Birthdate}" SortMemberPath="Birthdate" />
+                <DataGridTextColumn Binding="{Binding Category.Label}" Header="{x:Static strings:PlayerResources.Category}" SortMemberPath="Category.Order"/>
                 <DataGridTextColumn Header="{x:Static strings:PersonResources.LicenseNumber}" Binding="{Binding LicenseNumber, StringFormat='{}{0:# ### ### ###}'}" />
                 <DataGridTemplateColumn Header="{x:Static strings:PersonResources.Gender}" SortMemberPath="Gender">
                     <DataGridTemplateColumn.CellTemplate>
@@ -81,6 +86,8 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTextColumn Header="{x:Static strings:PersonResources.Phone}" Binding="{Binding Phone}" />
+                <DataGridTextColumn Header="{x:Static strings:PersonResources.Email}" Binding="{Binding Email}" />
             </DataGrid.Columns>
         </DataGrid>
 

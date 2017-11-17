@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
 using My.CoachManager.Presentation.Prism.ViewModels;
+using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
 {
@@ -39,22 +40,22 @@ namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
         /// <summary>
         /// Get or Set Add Phone Command.
         /// </summary>
-        public ICommand AddPhoneCommand { get; set; }
+        public DelegateCommand AddPhoneCommand { get; set; }
 
         /// <summary>
         /// Get or Set Remove Phone Command.
         /// </summary>
-        public ICommand RemovePhoneCommand { get; set; }
+        public DelegateCommand<PhoneViewModel> RemovePhoneCommand { get; set; }
 
         /// <summary>
         /// Get or Set Add Email Command.
         /// </summary>
-        public ICommand AddEmailCommand { get; set; }
+        public DelegateCommand AddEmailCommand { get; set; }
 
         /// <summary>
         /// Get or Set Remove Email Command.
         /// </summary>
-        public ICommand RemoveEmailCommand { get; set; }
+        public DelegateCommand<EmailViewModel> RemoveEmailCommand { get; set; }
 
         #endregion Properties
 

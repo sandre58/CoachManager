@@ -51,7 +51,7 @@ namespace My.CoachManager.Application.Services.Admin
         public SeasonDto CreateOrUpdate(SeasonDto dto)
         {
             var entity = dto.ToEntity<Season>();
-            if (!_seasonDomainService.CheckSeasonIsUnique(entity))
+            if (!_seasonDomainService.IsUnique(entity))
             {
                 throw new BusinessException(string.Format(ValidationMessageResources.AlreadyExistMessage, entity.Code));
             }

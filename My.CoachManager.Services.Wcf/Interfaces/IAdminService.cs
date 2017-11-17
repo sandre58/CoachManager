@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using My.CoachManager.Application.Dtos.Admin;
 using My.CoachManager.Application.Dtos.Persons;
@@ -137,7 +138,7 @@ namespace My.CoachManager.Services.Wcf.Interfaces
 
         #endregion Position
 
-        #region Position
+        #region Players
 
         /// <summary>
         /// Get Positions list.
@@ -190,6 +191,14 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// <returns></returns>
         [OperationContract]
         IEnumerable<CategoryDto> GetCategoriesForPlayer();
+
+
+        /// <summary>
+        /// Get category from birthdate.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        CategoryDto GetCategoryFromBirthdate(DateTime date);
 
         #endregion Position
     }

@@ -162,6 +162,9 @@
   <data name="PleaseWait" xml:space="preserve">
     <value>Veuillez patienter</value>
   </data>
+  <data name="RemovingFailed" xml:space="preserve">
+    <value>La suppression a échouée.</value>
+  </data>
   <data name="SavingFailed" xml:space="preserve">
     <value>La sauvegarde a échouée. Veuillez contacter l'administrateur.</value>
   </data>

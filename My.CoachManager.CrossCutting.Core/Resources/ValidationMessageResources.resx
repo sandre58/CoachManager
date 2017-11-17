@@ -126,8 +126,14 @@
   <data name="EmailFormatMessage" xml:space="preserve">
     <value>Le format ne correspond pas à une adresse mail.</value>
   </data>
+  <data name="EntityErrorHeader" xml:space="preserve">
+    <value>Erreurs lors de la sauvegarde de l'entité de type "{0}" : </value>
+  </data>
   <data name="IsRequiredFieldMessage" xml:space="preserve">
     <value>Ce champ est obligatoire.</value>
+  </data>
+  <data name="IsUsedMessage" xml:space="preserve">
+    <value>L'élément "{0}" est utilisée par d'autres entités.</value>
   </data>
   <data name="LabelIsRequiredMessage" xml:space="preserve">
     <value>Le champ "Label" est requis.</value>

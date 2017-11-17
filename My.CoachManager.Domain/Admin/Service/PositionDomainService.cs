@@ -34,7 +34,7 @@ namespace My.CoachManager.Domain.Admin.Service
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public bool CheckPositionIsUnique(Position position)
+        public bool IsUnique(Position position)
         {
             return !_positionRepository.Any(DataSpecification.IsUnique(position));
         }

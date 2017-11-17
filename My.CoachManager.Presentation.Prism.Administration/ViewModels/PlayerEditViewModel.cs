@@ -6,7 +6,6 @@ using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using System.Linq;
-using System.Windows.Input;
 using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.Presentation.Prism.Administration.Resources.Strings;
@@ -118,12 +117,12 @@ namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
         /// <summary>
         /// Get or Set Select Photo Command.
         /// </summary>
-        public ICommand SelectPhotoCommand { get; set; }
+        public DelegateCommand SelectPhotoCommand { get; set; }
 
         /// <summary>
         /// Get or Set Remove Photo Command.
         /// </summary>
-        public ICommand RemovePhotoCommand { get; set; }
+        public DelegateCommand RemovePhotoCommand { get; set; }
 
         #endregion Members
 
@@ -165,7 +164,7 @@ namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
         /// <returns></returns>
         public bool CanRemovePhoto()
         {
-            return Item.Photo != null;
+            return Item.Photo != null && Item.Photo.Length > 0;
         }
 
         /// <summary>
@@ -279,7 +278,27 @@ namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
                         Item.City = AllCities.Where(c => c.PostalCode == Item.PostalCode).Select(c => c.City).FirstOrDefault();
                     }
                     break;
+
+                case "Birthdate":
+                    if (Item.Birthdate.HasValue)
+                    {
+                        var category = _adminService.GetCategoryFromBirthdate(Item.Birthdate.Value);
+                        Item.CategoryId = category != null ? category.Id : 0;
+                    }
+                    break;
             }
+        }
+
+
+        /// <summary>
+        /// Calls when Item changed.
+        /// </summary>
+        protected override void OnItemChanged()
+        {
+            base.OnItemChanged();
+
+            if (RemovePhotoCommand != null) RemovePhotoCommand.RaiseCanExecuteChanged();
+            if (SelectPhotoCommand != null) SelectPhotoCommand.RaiseCanExecuteChanged();
         }
 
         #endregion Methods

@@ -6,8 +6,7 @@
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <converters:VisibilityToBooleanConverter x:Key="VisibilityToBooleanConverter" />
     <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
-    <converters:NullOrEmptyStringToVisibilityConverter x:Key="NullOrEmptyStringToVisibilityConverter" />
-    <converters:NullOrEmptyStringToBooleanConverter x:Key="NullOrEmptyStringToBooleanConverter" />
+    <converters:NullToBooleanConverter x:Key="NullToBooleanConverter" />
     <converters:ToUpperConverter x:Key="ToUpperConverter" />
     <converters:ToFirstLetterUpperConverter x:Key="ToFirstLetterUpperConverter" />
     <converters:ToLowerConverter x:Key="ToLowerConverter" />

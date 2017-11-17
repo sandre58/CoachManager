@@ -23,14 +23,26 @@ namespace My.CoachManager.Presentation.Prism.Core.Converters
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var flag = value != null;
+
+            var flag = value == null;
+            if (value is string)
+            {
+                flag = string.IsNullOrEmpty((string)value);
+            }
+
+            if (value is Array)
+            {
+                var array = (Array) value;
+                flag = array.Length == 0;
+            }
+
             var inverse = (parameter as string) == "inverse";
 
             if (inverse)
             {
                 return (flag ? Visibility.Collapsed : Visibility.Visible);
             }
-            return (flag ? Visibility.Visible : Visibility.Collapsed);
+            return (flag ? Visibility.Collapsed : Visibility.Visible);
         }
 
         /// <summary>

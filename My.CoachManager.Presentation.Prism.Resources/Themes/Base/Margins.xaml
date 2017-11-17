@@ -31,6 +31,8 @@
     <Thickness x:Key="DefaultVerticalMargin" Left="0" Top="{StaticResource DefaultMarginTopValue}" Right="0" Bottom="{StaticResource DefaultMarginBottomValue}" />
     <Thickness x:Key="DefaultLeftMargin" Left="{StaticResource DefaultMarginLeftValue}" Top="0" Right="0" Bottom="0" />
     <Thickness x:Key="DefaultRightMargin" Left="0" Top="0" Right="{StaticResource DefaultMarginLeftValue}" Bottom="0" />
+    <Thickness x:Key="DefaultTopMargin" Left="0" Top="{StaticResource DefaultMarginTopValue}" Right="0" Bottom="0" />
+    <Thickness x:Key="DefaultBottomMargin" Left="0" Top="0" Right="0" Bottom="{StaticResource DefaultMarginBottomValue}" />
 
     <Thickness x:Key="LargeMargin" Left="{StaticResource LargeMarginLeftValue}" Top="{StaticResource LargeMarginTopValue}" Right="{StaticResource LargeMarginRightValue}" Bottom="{StaticResource LargeMarginBottomValue}" />
     <Thickness x:Key="LargeHorizontalMargin" Left="{StaticResource LargeMarginLeftValue}" Top="0" Right="{StaticResource LargeMarginRightValue}" Bottom="0" />

@@ -332,7 +332,7 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsEditable}" Value="True" />
-                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=ContextMenu, Converter={StaticResource NullOrEmptyStringToBooleanConverter}}" Value="False" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=ContextMenu, Converter={StaticResource NullToBooleanConverter}}" Value="False" />
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="PART_EditableTextBox" Property="ContextMenu" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ContextMenu}" />
                         </MultiDataTrigger>
@@ -346,7 +346,7 @@
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem, Mode=OneWay, Converter={StaticResource NullOrEmptyStringToBooleanConverter}}" Value="True" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem, Mode=OneWay, Converter={StaticResource NullToBooleanConverter}}" Value="True" />
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsKeyboardFocusWithin}" Value="True" />
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsEditable}" Value="False" />
                             </MultiDataTrigger.Conditions>
@@ -359,7 +359,7 @@
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem, Mode=OneWay, Converter={StaticResource NullOrEmptyStringToBooleanConverter}}" Value="False" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem, Mode=OneWay, Converter={StaticResource NullToBooleanConverter}}" Value="False" />
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsEditable}" Value="False" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>
@@ -373,7 +373,7 @@
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Path=(parameters:TextBoxParameters.UseFloatingWatermark), RelativeSource={RelativeSource Self}}" Value="True" />
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsEditable}" Value="False" />
-                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem, Mode=OneWay, Converter={StaticResource NullOrEmptyStringToBooleanConverter}}" Value="False" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem, Mode=OneWay, Converter={StaticResource NullToBooleanConverter}}" Value="False" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard Storyboard="{StaticResource ShowFloatingMessageStoryboard}" />

@@ -8,6 +8,7 @@
         <ResourceDictionary Source="../Base/Converters.xaml" />
         <ResourceDictionary Source="../Base/Margins.xaml" />
         <ResourceDictionary Source="../Base/Geometry.xaml" />
+        <ResourceDictionary Source="../Base/Fonts.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="ButtonBaseStyle" TargetType="{x:Type ButtonBase}">
@@ -30,6 +31,8 @@
         <Setter Property="SnapsToDevicePixels"  Value="True" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="{StaticResource NormalFontSize}" />
         <Setter Property="parameters:ControlParameters.ContentCharacterCasing" Value="Upper" />
         <Setter Property="Template">
             <Setter.Value>
@@ -52,7 +55,8 @@
                                                    parameters:ControlParameters.ContentCharacterCasing="{TemplateBinding parameters:ControlParameters.ContentCharacterCasing}"
                                                    ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                                   TextBlock.FontWeight="Bold" />
+                                                   TextBlock.FontWeight="{TemplateBinding FontWeight}"
+                                                    TextBlock.FontSize="{TemplateBinding FontSize}"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -164,16 +168,23 @@
     <Style x:Key="TextButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource ButtonBaseStyle}">
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Foreground" Value="{DynamicResource Gray3}" />
+        <Setter Property="Foreground" Value="{DynamicResource ControlDarkGray}" />
         <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource Transparent}" />
-        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource Gray5}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource ControlMouseOverDarkGray}" />
         <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource Transparent}" />
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Transparent}" />
         <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource Accent}" />
+        <Setter Property="parameters:ControlParameters.ContentCharacterCasing" Value="Normal" />
+        <Setter Property="FontWeight" Value="Normal" />
     </Style>
 
-    <Style x:Key="IconButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextButtonStyle}">
+    <Style x:Key="HyperLinkButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextButtonStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource Accent}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource HightLight}" />
+        </Style>
+
+        <Style x:Key="IconButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextButtonStyle}">
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>

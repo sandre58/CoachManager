@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using My.CoachManager.Application.Core;
 using My.CoachManager.Application.Dtos.Admin;
 using My.CoachManager.Application.Dtos.Persons;
@@ -51,5 +52,11 @@ namespace My.CoachManager.Application.Services.Admin
         /// </summary>
         /// <returns></returns>
         IEnumerable<CategoryDto> GetCategories();
+
+        /// <summary>
+        /// Get category from birthdate.
+        /// </summary>
+        /// <returns></returns>
+        CategoryDto GetCategoryFromBirthdate(DateTime date);
     }
 }

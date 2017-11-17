@@ -51,7 +51,7 @@ namespace My.CoachManager.Application.Services.Admin
         public PositionDto CreateOrUpdate(PositionDto dto)
         {
             var entity = dto.ToEntity<Position>();
-            if (!_positionDomainService.CheckPositionIsUnique(entity))
+            if (!_positionDomainService.IsUnique(entity))
             {
                 throw new BusinessException(string.Format(ValidationMessageResources.AlreadyExistMessage, entity.Code));
             }

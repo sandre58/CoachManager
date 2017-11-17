@@ -47,15 +47,23 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <controls:ImagePicker
-                Grid.Column="0" Grid.Row="0"
-                    Height="45" Width="45"
-                    Image="{Binding Item.Photo, Converter={StaticResource BytesToImageConverter}}"
-                    HorizontalAlignment="Center" SelectPhotoCommand="{Binding SelectPhotoCommand}" RemovePhotoCommand="{Binding RemovePhotoCommand}">
-                    <Grid>
-                        <controls:Icon Content="{StaticResource PeopleGeometry}" Size="Custom" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                    </Grid>
-                </controls:ImagePicker>
+                <Grid Grid.Column="0" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="15" />
+                    </Grid.RowDefinitions>
+                    <controls:ImagePicker Grid.Row="0" parameters:PanelParameters.NotAffectMargin="True"
+                        Height="55" Width="55"
+                        Image="{Binding Item.Photo, Converter={StaticResource BytesToImageConverter}}"
+                        HorizontalAlignment="Center" Command="{Binding SelectPhotoCommand}">
+                        <Grid>
+                            <controls:Icon Content="{StaticResource PeopleGeometry}" Size="Custom" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                        </Grid>
+                    </controls:ImagePicker>
+                    <Button Grid.Row="1" parameters:PanelParameters.NotAffectMargin="True" Style="{StaticResource HyperLinkButtonStyle}" Content="{x:Static strings1:ControlResources.Delete}" Command="{Binding RemovePhotoCommand}"
+                            HorizontalAlignment="Center" FontSize="{StaticResource SmallFontSize}"
+                            Visibility="{Binding Item.Photo, Converter={StaticResource NullToVisibilityConverter}}"/>
+                </Grid>
 
                 <Grid Grid.Column="1" Grid.Row="0">
                     <Grid.ColumnDefinitions>

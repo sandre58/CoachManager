@@ -7,6 +7,7 @@
         <ResourceDictionary Source="../Base/Converters.xaml" />
         <ResourceDictionary Source="../Base/Margins.xaml" />
         <ResourceDictionary Source="../Base/Geometry.xaml" />
+        <ResourceDictionary Source="../Base/Fonts.xaml" />
         <ResourceDictionary Source="Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
@@ -18,81 +19,48 @@
         <Setter Property="ToolTip" Value="{x:Static strings:ControlResources.ModifyImage}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:ImagePicker}">
+                <ControlTemplate TargetType="controls:ImagePicker">
                     <Grid>
-                        <Button ToolTip="{TemplateBinding ToolTip}"
-                                Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                                Content="{TemplateBinding Content}"
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
-                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{x:Null}" Cursor="Hand"
-                                ContextMenu="{TemplateBinding ContextMenu}"
-                                Command="{TemplateBinding SelectPhotoCommand}">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <Ellipse x:Name="PART_Background" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" StrokeThickness="{TemplateBinding BorderThickness}" />
-                                        <ContentPresenter x:Name="PART_Content" Content="{TemplateBinding Content}"
+                        <Ellipse x:Name="PART_Background" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" StrokeThickness="{TemplateBinding BorderThickness}" />
+                        <ContentPresenter x:Name="PART_Content" Content="{TemplateBinding Content}"
                                                           ContentTemplate="{TemplateBinding ContentTemplate}"
                                                           ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                                           RecognizesAccessKey="True"
                                                           HorizontalAlignment="Stretch"
                                                           VerticalAlignment="Stretch" Margin="{StaticResource LargeMargin}" />
-                                        <Ellipse x:Name="PART_Image" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        <Ellipse x:Name="PART_Image" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                  Stroke="Transparent"
                                  StrokeThickness="{TemplateBinding BorderThickness}"
                                                  Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:ImagePicker}},Path=Image, Converter={StaticResource NullToVisibilityConverter}}">
-                                            <Ellipse.Fill>
-                                                <ImageBrush ImageSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:ImagePicker}},Path=Image,Mode=OneWay}" Stretch="UniformToFill" AlignmentX="Center" AlignmentY="Center" />
-                                            </Ellipse.Fill>
-                                        </Ellipse>
-                                        <Ellipse x:Name="PART_Mask" Fill="{DynamicResource ControlMouseOverGray}" Stroke="{DynamicResource Transparent}" Visibility="Collapsed" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" StrokeThickness="{TemplateBinding BorderThickness}" />
-                                        <controls:Icon x:Name="PART_MaskIcon" Content="{StaticResource EditBoxGeometry}" Margin="{StaticResource LargeMargin}" Foreground="{DynamicResource ControlLightForeground}"
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:ImagePicker}},Path=Image,Mode=OneWay}" Stretch="UniformToFill" AlignmentX="Center" AlignmentY="Center" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Ellipse x:Name="PART_Mask" Fill="{DynamicResource ControlMouseOverGray}" Stroke="{DynamicResource Transparent}" Visibility="Collapsed" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" StrokeThickness="{TemplateBinding BorderThickness}" />
+                        <controls:Icon x:Name="PART_MaskIcon" Content="{StaticResource EditBoxGeometry}" Margin="{StaticResource LargeMargin}" Foreground="{DynamicResource ControlLightForeground}"
                                                       HorizontalAlignment="Stretch"
                                                           VerticalAlignment="Stretch" Visibility="Collapsed" />
-                                    </Grid>
-
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsFocused" Value="True">
-                                            <Setter  TargetName="PART_Background" Property="Stroke" Value="{DynamicResource ControlMouseOverDarkGray}" />
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter  TargetName="PART_Background" Property="Fill" Value="{DynamicResource ControlMouseOverGray}" />
-                                            <Setter  TargetName="PART_Background" Property="Stroke" Value="{DynamicResource ControlMouseOverDarkGray}" />
-                                        </Trigger>
-                                        <Trigger Property="IsPressed" Value="True">
-                                            <Setter  TargetName="PART_Background" Property="Stroke" Value="{DynamicResource Accent}" />
-                                        </Trigger>
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPressed}" Value="True" />
-                                                <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ImagePicker}, Path=Image, Converter={StaticResource NullOrEmptyStringToBooleanConverter}}" Value="False" />
-                                            </MultiDataTrigger.Conditions>
-                                            <MultiDataTrigger.Setters>
-                                                <Setter TargetName="PART_Mask" Property="Visibility" Value="Visible" />
-                                                <Setter TargetName="PART_MaskIcon" Property="Visibility" Value="Visible" />
-                                            </MultiDataTrigger.Setters>
-                                        </MultiDataTrigger>
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsMouseOver}" Value="True" />
-                                                <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ImagePicker}, Path=Image, Converter={StaticResource NullOrEmptyStringToBooleanConverter}}" Value="False" />
-                                            </MultiDataTrigger.Conditions>
-                                            <MultiDataTrigger.Setters>
-                                                <Setter TargetName="PART_Mask" Property="Visibility" Value="Visible" />
-                                                <Setter TargetName="PART_MaskIcon" Property="Visibility" Value="Visible" />
-                                            </MultiDataTrigger.Setters>
-                                        </MultiDataTrigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                        <!--<Button Style="{StaticResource ClearTextBoxButtonStyle}" ToolTip="{x:Static strings:ControlResources.DeleteImage}" Command="{TemplateBinding RemovePhotoCommand}"
-                                Margin="0 -9 0 0" Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Top"
-                                Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:ImagePicker}},Path=Image, Converter={StaticResource NullToVisibilityConverter}}" />-->
                     </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter  TargetName="PART_Background" Property="Stroke" Value="{DynamicResource ControlMouseOverDarkGray}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter  TargetName="PART_Background" Property="Fill" Value="{DynamicResource ControlMouseOverGray}" />
+                            <Setter  TargetName="PART_Background" Property="Stroke" Value="{DynamicResource ControlMouseOverDarkGray}" />
+                            <Setter TargetName="PART_Mask" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_MaskIcon" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter  TargetName="PART_Background" Property="Stroke" Value="{DynamicResource Accent}" />
+                            <Setter TargetName="PART_Mask" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_MaskIcon" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

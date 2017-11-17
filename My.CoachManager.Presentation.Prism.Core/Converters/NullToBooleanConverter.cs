@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
 
 namespace My.CoachManager.Presentation.Prism.Core.Converters
@@ -8,7 +7,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Converters
     /// <summary>
     /// Converts a null or empty string value to Visibility.Visible and any other value to Visibility.Collapsed
     /// </summary>
-    public class NullOrEmptyStringToVisibilityConverter
+    public class NullToBooleanConverter
         : IValueConverter
     {
         /// <summary>
@@ -28,13 +27,21 @@ namespace My.CoachManager.Presentation.Prism.Core.Converters
             {
                 flag = string.IsNullOrEmpty((string)value);
             }
+
+            if (value is Array)
+            {
+                var array = (Array)value;
+                flag = array.Length == 0;
+            }
+
             var inverse = (parameter as string) == "inverse";
 
             if (inverse)
             {
-                return (flag ? Visibility.Collapsed : Visibility.Visible);
+                return !flag;
             }
-            return (flag ? Visibility.Visible : Visibility.Collapsed);
+            return flag;
+            
         }
 
         /// <summary>

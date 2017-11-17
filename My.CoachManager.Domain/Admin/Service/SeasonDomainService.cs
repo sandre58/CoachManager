@@ -34,7 +34,7 @@ namespace My.CoachManager.Domain.Admin.Service
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public bool CheckSeasonIsUnique(Season item)
+        public bool IsUnique(Season item)
         {
             return !_seasonRepository.Any(DataSpecification.IsUnique(item));
         }

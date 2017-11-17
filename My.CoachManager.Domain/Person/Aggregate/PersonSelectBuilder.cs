@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using My.CoachManager.Application.Dtos.Admin;
 using My.CoachManager.Application.Dtos.Persons;
+using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Domain.Person.Aggregate
 {
@@ -10,7 +12,7 @@ namespace My.CoachManager.Domain.Person.Aggregate
         /// <summary>
         /// Creates the select builder.
         /// </summary>
-        public static Expression<Func<Entities.Player, CityDto>> SelectCity()
+        public static Expression<Func<Player, CityDto>> SelectCity()
         {
             return x => new CityDto()
             {
@@ -22,7 +24,7 @@ namespace My.CoachManager.Domain.Person.Aggregate
         /// <summary>
         /// Creates the select builder.
         /// </summary>
-        public static Expression<Func<Entities.Country, CountryDto>> SelectCountries()
+        public static Expression<Func<Country, CountryDto>> SelectCountries()
         {
             return x => new CountryDto()
             {
@@ -36,7 +38,7 @@ namespace My.CoachManager.Domain.Person.Aggregate
         /// <summary>
         /// Creates the select builder.
         /// </summary>
-        public static Expression<Func<Entities.Category, CategoryDto>> SelectCategories()
+        public static Expression<Func<Category, CategoryDto>> SelectCategories()
         {
             return x => new CategoryDto()
             {
@@ -48,7 +50,7 @@ namespace My.CoachManager.Domain.Person.Aggregate
         /// <summary>
         /// Creates the select builder.
         /// </summary>
-        public static Expression<Func<Entities.Player, PlayerDto>> SelectPlayerForList()
+        public static Expression<Func<Player, PlayerDto>> SelectPlayerForList()
         {
             return x => new PlayerDto()
             {
@@ -63,7 +65,30 @@ namespace My.CoachManager.Domain.Person.Aggregate
                 Photo = x.Photo,
                 PostalCode = x.PostalCode,
                 PlaceOfBirth = x.PlaceOfBirth,
-                Laterality = x.Laterality
+                Laterality = x.Laterality,
+                Category = x.Category != null ? new CategoryDto()
+                {
+                    Id = x.Category.Id,
+                    Label = x.Category.Label,
+                    Order = x.Category.Order
+                } : null,
+                Country = x.Country != null ? new CountryDto()
+                {
+                    Id = x.Country.Id,
+                    Label = x.Country.Label,
+                    Flag = x.Country.Flag
+                } : null,
+                Contacts = x.Contacts.OfType<Email>().Select(e => new EmailDto()
+                {
+                    Id = e.Id,
+                    Label = e.Label,
+                    Value = e.Value
+                }).Union<ContactDto>(x.Contacts.OfType<Phone>().Select(e => new PhoneDto()
+                {
+                    Id = e.Id,
+                    Label = e.Label,
+                    Value = e.Value
+                })).ToList()
             };
         }
     }

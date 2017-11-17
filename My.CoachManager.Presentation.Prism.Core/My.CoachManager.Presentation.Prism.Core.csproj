@@ -60,7 +60,7 @@
     <Compile Include="Converters\AnyToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToFontWeightConverter.cs" />
     <Compile Include="Converters\BytesToImageConverter.cs" />
-    <Compile Include="Converters\NullOrEmptyStringToBooleanConverter.cs" />
+    <Compile Include="Converters\NullToBooleanConverter.cs" />
     <Compile Include="Converters\EnumCollection.cs" />
     <Compile Include="Converters\ToFirstLetterUpperConverter.cs" />
     <Compile Include="Converters\ObjectToPropertyConverter.cs" />
@@ -74,7 +74,6 @@
     <Compile Include="Converters\VisibilityToBooleanConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\IsGreaterThanConverter.cs" />
-    <Compile Include="Converters\NullOrEmptyStringToVisibilityConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\ThicknessToDoubleConverter.cs" />
     <Compile Include="Converters\ToLowerConverter.cs" />

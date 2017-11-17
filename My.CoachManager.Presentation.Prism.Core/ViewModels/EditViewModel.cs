@@ -57,9 +57,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
                 SetProperty(ref _item, value, () =>
                 {
                     if (value != null) _activeId = value.Id;
-                    RaisePropertyChanged(() => Title);
-                    RaisePropertyChanged(() => SaveCommand);
-                    RaisePropertyChanged(() => CancelCommand);
+                    OnItemChanged();
                 });
             }
         }
@@ -89,12 +87,12 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Get or Set Save Command.
         /// </summary>
-        public ICommand SaveCommand { get; set; }
+        public DelegateCommand SaveCommand { get; set; }
 
         /// <summary>
         /// Get or Set Cancel Command.
         /// </summary>
-        public ICommand CancelCommand { get; set; }
+        public DelegateCommand CancelCommand { get; set; }
 
         /// <summary>
         /// Get or Set Refresh Command.
@@ -287,6 +285,18 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             Item.ResetModified();
             base.ResetModified();
+        }
+
+
+        /// <summary>
+        /// Calls when Item changed.
+        /// </summary>
+        protected virtual void OnItemChanged()
+        {
+            RaisePropertyChanged(() => Title);
+
+            if(SaveCommand != null) SaveCommand.RaiseCanExecuteChanged();
+            if (CancelCommand != null) CancelCommand.RaiseCanExecuteChanged();
         }
 
         #endregion Methods

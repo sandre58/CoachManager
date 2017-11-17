@@ -1,6 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
@@ -198,8 +200,19 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
                     {
                         if (dialog.Result == DialogResult.Yes)
                         {
-                            RemoveItemCore(item);
-                            OnAfterRemoveItem(item);
+                            try
+                            {
+                                RemoveItemCore(item);
+                                OnAfterRemoveItem(item);
+                            }
+                            catch (BusinessException e)
+                            {
+                                OnBusinessExceptionOccured(e);
+                            }
+                            catch (Exception e)
+                            {
+                                OnExceptionOccured(e);
+                            }
                         }
                     });
                 }

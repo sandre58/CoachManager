@@ -10,6 +10,20 @@ namespace My.CoachManager.Domain.Admin.Service
         /// </summary>
         /// <param name="category"></param>
         /// <returns></returns>
-        bool CheckCategoryIsUnique(Category category);
+        bool IsUnique(Category category);
+
+        /// <summary>
+        /// Check if the category can be removed.
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        bool CanBeRemoved(Category category);
+
+        /// <summary>
+        /// Check if the category is used by others properties.
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        bool IsUsed(Category category);
     }
 }

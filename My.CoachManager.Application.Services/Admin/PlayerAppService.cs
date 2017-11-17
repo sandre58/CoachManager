@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using My.CoachManager.Application.Core;
 using My.CoachManager.Application.Dtos.Admin;
@@ -24,7 +25,6 @@ namespace My.CoachManager.Application.Services.Admin
         private readonly IPlayerRepository _playerRepository;
         private readonly ICountryRepository _countryRepository;
         private readonly ICategoryRepository _categoryRepository;
-        private readonly IEmailRepository _emailRepository;
         private readonly IPlayerDomainService _playerDomainService;
 
         #endregion ---- Fields ----
@@ -38,15 +38,13 @@ namespace My.CoachManager.Application.Services.Admin
         /// <param name="playerRepository"></param>
         /// <param name="countryRepository"></param>
         /// <param name="categoryRepository"></param>
-        /// <param name="emailRepository"></param>
         /// <param name="playerDomainService"></param>
-        public PlayerAppService(ILogger logger, IPlayerRepository playerRepository, ICountryRepository countryRepository, ICategoryRepository categoryRepository, IEmailRepository emailRepository, IPlayerDomainService playerDomainService)
+        public PlayerAppService(ILogger logger, IPlayerRepository playerRepository, ICountryRepository countryRepository, ICategoryRepository categoryRepository, IPlayerDomainService playerDomainService)
             : base(logger)
         {
             _playerRepository = playerRepository;
             _countryRepository = countryRepository;
             _categoryRepository = categoryRepository;
-            _emailRepository = emailRepository;
             _playerDomainService = playerDomainService;
         }
 
@@ -66,33 +64,6 @@ namespace My.CoachManager.Application.Services.Admin
             {
                 throw new BusinessException(ValidationMessageResources.NotValidMessage);
             }
-
-            //1- Get fresh data from database
-            //var player = _playerRepository.GetEntity(entity.Id, x => x.Emails);
-
-            //var existingEmails = player.Emails;
-
-            //var updatedEmails = entity.Emails;
-
-            ////2- Find newly added teachers by updatedTeachers (teacher came from client sided) - existingTeacher = newly added teacher
-            //var addedEmails = updatedEmails.Where(x => x.Id == 0).ToList();
-
-            ////3- Find deleted teachers by existing teachers - updatedTeachers = deleted teachers
-            //var deletedEmails = existingEmails.Where(x => updatedEmails.Any(y => y.Id != x.Id)).ToList();
-
-            ////4- Find modified teachers by updatedTeachers - addedTeachers = modified teachers
-            //var modifiedEmails = updatedEmails.Where(x => x.Id != 0).ToList();
-
-            ////5- Mark all added teachers entity state to Added
-            //_emailRepository.AddRange(addedEmails);
-
-            ////6- Mark all deleted teacher entity state to Deleted
-            //deletedEmails.ForEach(x => _emailRepository.Remove(x));
-
-            ////7- Apply modified teachers current property values to existing property values
-            //modifiedEmails.ForEach(x => _emailRepository.Modify(x));
-
-            //_playerRepository.AddOrModify(entity);
 
             _playerRepository.AddOrModify(entity);
 
@@ -128,7 +99,7 @@ namespace My.CoachManager.Application.Services.Admin
         /// <returns></returns>
         public IEnumerable<PlayerDto> GetList()
         {
-            return _playerRepository.GetAll(PersonSelectBuilder.SelectPlayerForList()).ToArray();
+            return _playerRepository.GetAll(PersonSelectBuilder.SelectPlayerForList(), x => x.Category.Order, true, x => x.Country, x => x.Category, x => x.Contacts).ToArray();
         }
 
         /// <summary>
@@ -147,6 +118,16 @@ namespace My.CoachManager.Application.Services.Admin
         public IEnumerable<CategoryDto> GetCategories()
         {
             return _categoryRepository.GetAll(PersonSelectBuilder.SelectCategories(), AdminOrderBuilder.OrderByOrder<Category>()).ToArray();
+        }
+
+        /// <summary>
+        /// Get category from birthdate.
+        /// </summary>
+        /// <returns></returns>
+        public CategoryDto GetCategoryFromBirthdate(DateTime date)
+        {
+            return _categoryRepository.GetByFilter(x => x.Year >= date.Year, x => x.Year, true).ToArray().ToDtos<CategoryDto>().FirstOrDefault();
+            
         }
 
         /// <summary>

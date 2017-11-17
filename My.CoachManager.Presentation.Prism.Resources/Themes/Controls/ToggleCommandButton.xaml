@@ -49,7 +49,7 @@
                                   VerticalAlignment="Center" />
                         </Grid>
                         <Grid Grid.Row="1" HorizontalAlignment="Center">
-                            <TextBlock x:Name="content" Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullOrEmptyStringToVisibilityConverter}, ConverterParameter=inverse}"
+                            <TextBlock x:Name="content" Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToVisibilityConverter}}"
                                        Text="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}"
                                        TextTrimming="CharacterEllipsis"
                                        Foreground="{TemplateBinding Foreground}"
