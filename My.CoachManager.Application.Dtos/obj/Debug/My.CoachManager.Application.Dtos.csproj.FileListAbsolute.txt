@@ -1,5 +1,0 @@
-C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Application.Dtos\bin\Debug\My.CoachManager.Application.Dtos.dll
-C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Application.Dtos\bin\Debug\My.CoachManager.Application.Dtos.pdb
-C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Application.Dtos\obj\Debug\My.CoachManager.Application.Dtos.dll
-C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Application.Dtos\obj\Debug\My.CoachManager.Application.Dtos.pdb
-C:\Users\E0214719\Documents\Visual Studio 2012\Projects\CoachManager\My.CoachManager.Application.Dtos\bin\Debug\CodeContracts\My.CoachManager.Application.Dtos.noReferenceAssembly
