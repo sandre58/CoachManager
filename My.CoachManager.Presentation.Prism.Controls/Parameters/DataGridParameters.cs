@@ -312,7 +312,7 @@ typeof(DataGridParameters));
 
             foreach (DataGridColumn dataGridColumn in dataGrid.Columns)
             {
-                DataGridGroupSummary item = groupSummary.FirstOrDefault(x => x.Column == dataGridColumn);
+                DataGridGroupSummary item = groupSummary.FirstOrDefault(x => Equals(x.Column, dataGridColumn));
                 if (item == null)
                 {
                     groupSummaryInternal.Add(
@@ -364,7 +364,7 @@ typeof(DataGridParameters));
         private static void OnDataGridMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DataGrid dataGrid = sender as DataGrid;
-            if ((dataGrid != null) && (dataGrid.SelectedItems != null) && (dataGrid.SelectedItems.Count > 0))
+            if ((dataGrid != null) && (dataGrid.SelectedItems.Count > 0))
             {
                 foreach (object selectedItem in dataGrid.SelectedItems.Cast<object>().ToList())
                 {

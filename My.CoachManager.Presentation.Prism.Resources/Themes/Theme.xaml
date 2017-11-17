@@ -110,6 +110,7 @@
 
     <!-- OPACITY -->
     <sys:Double x:Key="DisabledOpacity">0.5</sys:Double>
+    <sys:Double x:Key="ColorOpacity">0.6</sys:Double>
 
     <!-- FONT -->
     <SolidColorBrush x:Key="NormalForeground" Color="{DynamicResource DarkColor}" />

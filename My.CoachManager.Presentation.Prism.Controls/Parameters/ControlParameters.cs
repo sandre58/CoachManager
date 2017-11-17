@@ -67,6 +67,24 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
 
         #endregion Icon
 
+        #region Color
+
+        public static readonly DependencyProperty ColorProperty =
+            DependencyProperty.RegisterAttached("Color", typeof(SolidColorBrush), typeof(ControlParameters));
+
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
+        public static SolidColorBrush GetColor(FrameworkElement obj)
+        {
+            return (SolidColorBrush)obj.GetValue(IconProperty);
+        }
+
+        public static void SetColor(FrameworkElement obj, SolidColorBrush value)
+        {
+            obj.SetValue(IconProperty, value);
+        }
+
+        #endregion Icon
+
         #region Foreground
 
         public static readonly DependencyProperty ForegroundProperty =

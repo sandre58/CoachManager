@@ -13,6 +13,7 @@
         <ResourceDictionary Source="Separator.xaml" />
         <ResourceDictionary Source="ContextMenu.xaml" />
         <ResourceDictionary Source="Button.xaml" />
+        <ResourceDictionary Source="CommandButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- Column Header -->
@@ -196,11 +197,8 @@
                                 Margin="2,0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                parameters:ControlParameters.Foreground="{DynamicResource White}"
-                                parameters:ControlParameters.MouseOverForeground="{DynamicResource White}"
-                                Background="{DynamicResource Positive}"
-                                BorderBrush="{DynamicResource Positive}"
-                                parameters:ControlParameters.MouseOverBackground="{DynamicResource Positive}"
+                                Style="{StaticResource ColorCommandButtonStyle}"
+                                parameters:ControlParameters.Color="{DynamicResource Positive}"
                                 IconData="{StaticResource OkGeometry}"
                                 ToolTip="{x:Static strings1:ControlResources.ValidateOrder}"
                                 Command="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=ValidateOrderCommand}" />
@@ -210,11 +208,8 @@
                                 Margin="2,0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                parameters:ControlParameters.Foreground="{DynamicResource White}"
-                                parameters:ControlParameters.MouseOverForeground="{DynamicResource White}"
-                                Background="{DynamicResource Negative}"
-                                BorderBrush="{DynamicResource Negative}"
-                                parameters:ControlParameters.MouseOverBackground="{DynamicResource Negative}"
+                                Style="{StaticResource ColorCommandButtonStyle}"
+                                parameters:ControlParameters.Color="{DynamicResource Negative}"
                                 IconData="{StaticResource CancelGeometry}"
                                 ToolTip="{x:Static strings1:ControlResources.CancelOrder}"
                                 Command="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=CancelOrderCommand}" />
@@ -674,7 +669,7 @@
     <Style x:Key="OrderItemsDataGridStyle" TargetType="{x:Type DataGrid}" BasedOn="{StaticResource ItemsDataGridStyle}">
         <Setter Property="CanUserSortColumns" Value="{Binding CanOrder, Converter={StaticResource NotConverter}}" />
         <Setter Property="parameters:DataGridParameters.IsDragAndDropEnabled" Value="{Binding CanOrder}" />
-        <Setter Property="ItemContainerStyle">
+        <Setter Property="RowStyle">
             <Setter.Value>
                 <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource DraggableDataGridRowStyle}">
                     <Setter Property="parameters:DataGridRowParameters.MoveAboveCommand" Value="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=MoveAboveCommand}" />

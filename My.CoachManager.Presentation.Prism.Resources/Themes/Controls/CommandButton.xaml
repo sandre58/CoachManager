@@ -92,6 +92,37 @@
         <Setter Property="ButtonDiameter" Value="{DynamicResource NormalDiameter}" />
     </Style>
 
+    <Style x:Key="ColorCommandButtonStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonBaseStyle}">
+        <Setter Property="Background" >
+            <Setter.Value>
+                <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" >
+            <Setter.Value>
+                <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="parameters:ControlParameters.Foreground" Value="{DynamicResource White}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" >
+            <Setter.Value>
+                <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource White}" />
+        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
+        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
+        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource White}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
+        <Setter Property="parameters:ControlParameters.FocusBackground" >
+            <Setter.Value>
+                <SolidColorBrush Opacity="0.7" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource White}" />
+    </Style>
+
     <Style x:Key="CommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonBaseStyle}">
         <Setter Property="ButtonDiameter" Value="{DynamicResource VeryLargeDiameter}" />
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
