@@ -13,3 +13,18 @@ C:\Users\andre\Documents\Visual Studio 2015\Projects\CoachManager\My.CoachManage
 C:\Users\andre\Documents\Visual Studio 2015\Projects\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\obj\Debug - Home\My.CoachManager.CrossCutting.Logging.Supervision.csprojResolveAssemblyReference.cache
 C:\Users\andre\Documents\Visual Studio 2015\Projects\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\obj\Debug - Home\My.CoachManager.CrossCutting.Logging.Supervision.dll
 C:\Users\andre\Documents\Visual Studio 2015\Projects\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\obj\Debug - Home\My.CoachManager.CrossCutting.Logging.Supervision.pdb
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\bin\Debug - Home\My.CoachManager.CrossCutting.Logging.Supervision.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\bin\Debug - Home\My.CoachManager.CrossCutting.Logging.Supervision.pdb
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\bin\Debug - Home\My.CoachManager.CrossCutting.Core.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\bin\Debug - Home\My.CoachManager.CrossCutting.Logging.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\bin\Debug - Home\NLog.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\bin\Debug - Home\EntityFramework.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\bin\Debug - Home\Microsoft.Practices.Unity.Interception.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\bin\Debug - Home\My.CoachManager.CrossCutting.Core.pdb
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\bin\Debug - Home\My.CoachManager.CrossCutting.Logging.pdb
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\bin\Debug - Home\NLog.xml
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\bin\Debug - Home\EntityFramework.xml
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\bin\Debug - Home\Microsoft.Practices.Unity.Interception.xml
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\obj\Debug - Home\My.CoachManager.CrossCutting.Logging.Supervision.csprojResolveAssemblyReference.cache
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\obj\Debug - Home\My.CoachManager.CrossCutting.Logging.Supervision.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.CrossCutting.Logging.Supervision\obj\Debug - Home\My.CoachManager.CrossCutting.Logging.Supervision.pdb

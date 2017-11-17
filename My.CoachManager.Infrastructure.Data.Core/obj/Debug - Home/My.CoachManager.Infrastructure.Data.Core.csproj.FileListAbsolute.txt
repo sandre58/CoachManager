@@ -36,3 +36,22 @@ C:\Users\andre\Documents\Visual Studio 2015\Projects\CoachManager\My.CoachManage
 C:\Users\andre\Documents\Visual Studio 2015\Projects\CoachManager\My.CoachManager.Infrastructure.Data.Core\obj\Debug - Home\My.CoachManager.Infrastructure.Data.Core.dll
 C:\Users\andre\Documents\Visual Studio 2015\Projects\CoachManager\My.CoachManager.Infrastructure.Data.Core\obj\Debug - Home\My.CoachManager.Infrastructure.Data.Core.pdb
 C:\Users\andre\Documents\Visual Studio 2015\Projects\CoachManager\My.CoachManager.Infrastructure.Data.Core\obj\Debug - Home\My.CoachManager.Infrastructure.Data.Core.Resources.TraceResources.resources
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\bin\Debug - Home\My.CoachManager.Infrastructure.Data.Core.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\bin\Debug - Home\My.CoachManager.Infrastructure.Data.Core.pdb
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\bin\Debug - Home\EntityFramework.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\bin\Debug - Home\EntityFramework.SqlServer.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\bin\Debug - Home\My.CoachManager.CrossCutting.Core.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\bin\Debug - Home\My.CoachManager.CrossCutting.Logging.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\bin\Debug - Home\My.CoachManager.Domain.Core.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\bin\Debug - Home\Microsoft.Practices.Unity.Interception.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\bin\Debug - Home\My.CoachManager.CrossCutting.Core.pdb
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\bin\Debug - Home\My.CoachManager.CrossCutting.Logging.pdb
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\bin\Debug - Home\My.CoachManager.Domain.Core.pdb
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\bin\Debug - Home\EntityFramework.xml
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\bin\Debug - Home\EntityFramework.SqlServer.xml
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\bin\Debug - Home\Microsoft.Practices.Unity.Interception.xml
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\obj\Debug - Home\My.CoachManager.Infrastructure.Data.Core.csprojResolveAssemblyReference.cache
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\obj\Debug - Home\My.CoachManager.Infrastructure.Data.Core.Resources.TraceResources.resources
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\obj\Debug - Home\My.CoachManager.Infrastructure.Data.Core.csproj.GenerateResource.Cache
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\obj\Debug - Home\My.CoachManager.Infrastructure.Data.Core.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Infrastructure.Data.Core\obj\Debug - Home\My.CoachManager.Infrastructure.Data.Core.pdb

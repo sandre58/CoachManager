@@ -520,7 +520,7 @@
     <!-- DataGrid -->
     <Style TargetType="{x:Type DataGrid}">
         <Setter Property="parameters:DataGridParameters.IsDeselectionEnabled" Value="False" />
-        <Setter Property="parameters:UiElementParameters.IsBubblingMouseWheelEvents" Value="True" />
+        <Setter Property="parameters:UiElementParameters.IsBubblingMouseWheelEvents" Value="False" />
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
         <Setter Property="AutoGenerateColumns" Value="False" />
         <Setter Property="Background" Value="{DynamicResource Light}" />

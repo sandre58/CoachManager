@@ -16,6 +16,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
+        <Setter Property="Background" Value="{DynamicResource Light}" />
         <Setter Property="parameters:ControlParameters.Foreground" Value="{DynamicResource ControlDarkForeground}" />
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
         <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource ControlDarkForeground}" />
@@ -24,6 +25,7 @@
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource AccentForeground}" />
         <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource ControlDarkForeground}" />
+        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Light}" />
         <Setter Property="ButtonDiameter" Value="{DynamicResource LargeDiameter}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">

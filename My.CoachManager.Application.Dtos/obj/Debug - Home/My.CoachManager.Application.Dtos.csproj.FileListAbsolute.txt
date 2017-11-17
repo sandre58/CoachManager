@@ -14,3 +14,19 @@ C:\Users\andre\Documents\Visual Studio 2015\Projects\CoachManager\My.CoachManage
 C:\Users\andre\Documents\Visual Studio 2015\Projects\CoachManager\My.CoachManager.Application.Dtos\obj\Debug - Home\My.CoachManager.Application.Dtos.dll
 C:\Users\andre\Documents\Visual Studio 2015\Projects\CoachManager\My.CoachManager.Application.Dtos\obj\Debug - Home\My.CoachManager.Application.Dtos.pdb
 C:\Users\andre\Documents\Visual Studio 2015\Projects\CoachManager\My.CoachManager.Application.Dtos\bin\Debug - Home\CodeContracts\My.CoachManager.Application.Dtos.noReferenceAssembly
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Application.Dtos\bin\Debug - Home\CodeContracts\My.CoachManager.Application.Dtos.noReferenceAssembly
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Application.Dtos\bin\Debug - Home\My.CoachManager.Application.Dtos.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Application.Dtos\bin\Debug - Home\My.CoachManager.Application.Dtos.pdb
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Application.Dtos\bin\Debug - Home\AutoMapper.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Application.Dtos\bin\Debug - Home\My.CoachManager.CrossCutting.Core.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Application.Dtos\bin\Debug - Home\My.CoachManager.Domain.Core.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Application.Dtos\bin\Debug - Home\My.CoachManager.Domain.Entities.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Application.Dtos\bin\Debug - Home\EntityFramework.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Application.Dtos\bin\Debug - Home\My.CoachManager.CrossCutting.Core.pdb
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Application.Dtos\bin\Debug - Home\My.CoachManager.Domain.Core.pdb
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Application.Dtos\bin\Debug - Home\My.CoachManager.Domain.Entities.pdb
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Application.Dtos\bin\Debug - Home\AutoMapper.xml
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Application.Dtos\bin\Debug - Home\EntityFramework.xml
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Application.Dtos\obj\Debug - Home\My.CoachManager.Application.Dtos.csprojResolveAssemblyReference.cache
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Application.Dtos\obj\Debug - Home\My.CoachManager.Application.Dtos.dll
+C:\Users\andre\Documents\GitHub\CoachManager\My.CoachManager.Application.Dtos\obj\Debug - Home\My.CoachManager.Application.Dtos.pdb
