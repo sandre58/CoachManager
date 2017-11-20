@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.Domain.Entities;
 
@@ -12,8 +13,11 @@ namespace My.CoachManager.Application.Dtos.Mapping
             CreateMap<Player, PlayerDto>().ReverseMap();
             CreateMap<Coach, CoachDto>().ReverseMap();
             CreateMap<Person, PersonDto>()
+                .ForMember(x => x.Emails, opt => opt.MapFrom(x => x.Contacts.OfType<Email>().ToList()))
+                .ForMember(x => x.Phones, opt => opt.MapFrom(x => x.Contacts.OfType<Phone>().ToList()))
                 .Include<Player, PlayerDto>()
-                .Include<Coach, CoachDto>().ReverseMap();
+                .Include<Coach, CoachDto>().ReverseMap()
+                .ForMember(x => x.Contacts, opt => opt.MapFrom(x => x.Emails.ToList().Cast<ContactDto>().Union(x.Phones.ToList())));
 
             // Contacts
             CreateMap<Email, EmailDto>().ReverseMap();

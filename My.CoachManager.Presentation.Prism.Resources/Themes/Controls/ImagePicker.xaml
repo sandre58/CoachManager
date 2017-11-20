@@ -11,6 +11,38 @@
         <ResourceDictionary Source="Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <Style TargetType="{x:Type controls:ImageContent}">
+        <Setter Property="Background" Value="{DynamicResource ControlGray}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ImageContent">
+                    <Grid>
+                        <Ellipse x:Name="PART_Background" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" StrokeThickness="{TemplateBinding BorderThickness}" />
+                        <ContentPresenter x:Name="PART_Content" Content="{TemplateBinding Content}"
+                                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                          ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                          RecognizesAccessKey="True"
+                                                          HorizontalAlignment="Stretch"
+                                                          VerticalAlignment="Stretch" Margin="7" />
+                        <Ellipse x:Name="PART_Image" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                 Stroke="Transparent"
+                                 StrokeThickness="{TemplateBinding BorderThickness}"
+                                                 Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:ImageContent}},Path=Image, Converter={StaticResource NullToVisibilityConverter}}">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:ImageContent}},Path=Image,Mode=OneWay}" Stretch="UniformToFill" AlignmentX="Center" AlignmentY="Center" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="{x:Type controls:ImagePicker}">
         <Setter Property="Background" Value="{DynamicResource ControlGray}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
@@ -60,10 +92,13 @@
                             <Setter TargetName="PART_Mask" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_MaskIcon" Property="Visibility" Value="Visible" />
                         </Trigger>
+                        <Trigger Property="Command" Value="{x:Null}">
+                            <Setter TargetName="PART_Mask" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_MaskIcon" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
 </ResourceDictionary>

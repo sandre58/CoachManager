@@ -98,6 +98,7 @@
     <Compile Include="ApplicationBar.cs" />
     <Compile Include="Datagrid\Columns\DataGridOrderColumn.cs" />
     <Compile Include="Enums\CharacterCasing.cs" />
+    <Compile Include="ImageContent.cs" />
     <Compile Include="ImagePicker.cs" />
     <Compile Include="Parameters\ComboBoxParameters.cs" />
     <Compile Include="Parameters\PasswordParameters.cs" />

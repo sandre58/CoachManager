@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using My.CoachManager.Application.Dtos.Admin;
@@ -92,19 +91,19 @@ namespace My.CoachManager.Domain.Person.Aggregate
                     Label = x.Country.Label,
                     Flag = x.Country.Flag
                 } : null,
-                //Contacts = ToContacts(x.Contacts.OfType<Email>(), x.Contacts.OfType<Phone>())
+                Emails = x.Contacts.OfType<Email>().Select(e => new EmailDto()
+                {
+                    Id = e.Id,
+                    Label = e.Label,
+                    Value = e.Value
+                }).AsEnumerable(),
+                Phones = x.Contacts.OfType<Phone>().Select(p => new PhoneDto()
+                {
+                    Id = p.Id,
+                    Label = p.Label,
+                    Value = p.Value
+                }).AsEnumerable()
             };
-        }
-
-        private static ICollection<ContactDto> ToContacts(IEnumerable<Email> emails, IEnumerable<Phone> phones)
-        {
-            var list = new List<ContactDto>();
-
-            list.AddRange(emails.Select(SelectContact<EmailDto>()));
-
-            list.AddRange(phones.Select(SelectContact<PhoneDto>()));
-
-            return list;
         }
     }
 }

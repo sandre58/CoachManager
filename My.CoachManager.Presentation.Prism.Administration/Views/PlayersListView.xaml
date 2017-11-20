@@ -18,47 +18,42 @@
 
         <DataGrid ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" Style="{StaticResource ItemsDataGridStyle}">
             <DataGrid.Columns>
-                <DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="90" CanUserResize="False" CanUserSort="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="viewModels:PlayerViewModel">
-                            <Grid Width="40" Height="40" Margin="15, 5, 15, 5">
-                                <Ellipse Fill="{DynamicResource ControlGray}" Stroke="{DynamicResource ControlDarkGray}"
-                                         Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" StrokeThickness="1" />
-                                <controls:Icon Content="{DynamicResource PeopleGeometry}" Size="Custom" Width="30" Height="20"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center" />
-                                <Ellipse Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                         Stroke="{DynamicResource ControlDarkGray}"
-                                         StrokeThickness="1"
-                                         Visibility="{Binding Photo, Converter={StaticResource NullToVisibilityConverter}}">
-                                    <Ellipse.Fill>
-                                        <ImageBrush ImageSource="{Binding Photo, Converter={StaticResource BytesToImageConverter}}" Stretch="UniformToFill" AlignmentX="Center" AlignmentY="Center" />
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                            </Grid>
+                            <controls:ImageContent Width="45" Height="45" Image="{Binding Photo, Converter={StaticResource BytesToImageConverter}}" HorizontalAlignment="Center">
+                                <Grid>
+                                    <controls:Icon x:Name="Icon" Content="{StaticResource MalePeopleGeometry}" Size="Custom" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                </Grid>
+                            </controls:ImageContent>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Gender}" Value="{x:Static enum:GenderType.Female}">
+                                    <Setter TargetName="Icon" Property="Content" Value="{StaticResource FemalePeopleGeometry}" />
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{x:Static strings:PersonResources.LastName}" SortMemberPath="LastName">
+                <DataGridTemplateColumn Header="{x:Static strings:PersonResources.LastName}" SortMemberPath="LastName" MinWidth="150" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="viewModels:PlayerViewModel">
                             <StackPanel>
                                 <TextBlock Text="{Binding LastName, Converter={StaticResource ToUpperConverter}}" FontWeight="Bold" />
-                                <TextBlock Text="{Binding FirstName}" />
+                                <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}" Header="{x:Static strings:PersonResources.Birthdate}" SortMemberPath="Birthdate" />
-                <DataGridTextColumn Binding="{Binding Category.Label}" Header="{x:Static strings:PlayerResources.Category}" SortMemberPath="Category.Order"/>
+                <DataGridTextColumn Binding="{Binding Category.Label}" Header="{x:Static strings:PlayerResources.Category}" SortMemberPath="Category.Order" />
                 <DataGridTextColumn Header="{x:Static strings:PersonResources.LicenseNumber}" Binding="{Binding LicenseNumber, StringFormat='{}{0:# ### ### ###}'}" />
                 <DataGridTemplateColumn Header="{x:Static strings:PersonResources.Gender}" SortMemberPath="Gender">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="viewModels:PlayerViewModel">
                             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <controls:Icon Height="20" Foreground="{DynamicResource Male}"  Content="{DynamicResource GenderMaleGeometry}"
+                                <controls:Icon Height="25" Foreground="{DynamicResource Male}"  Content="{DynamicResource GenderMaleGeometry}"
                                                Visibility="{Binding Gender, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static enum:GenderType.Male}}" />
-                                <controls:Icon Height="20" Foreground="{DynamicResource Female}"  Content="{DynamicResource GenderFemaleGeometry}"
+                                <controls:Icon Height="25" Foreground="{DynamicResource Female}"  Content="{DynamicResource GenderFemaleGeometry}"
                                                Visibility="{Binding Gender, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static enum:GenderType.Female}}" />
                             </Grid>
                         </DataTemplate>

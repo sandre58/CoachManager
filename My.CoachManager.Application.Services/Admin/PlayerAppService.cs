@@ -127,7 +127,6 @@ namespace My.CoachManager.Application.Services.Admin
         public CategoryDto GetCategoryFromBirthdate(DateTime date)
         {
             return _categoryRepository.GetByFilter(x => x.Year >= date.Year, x => x.Year, true).ToArray().ToDtos<CategoryDto>().FirstOrDefault();
-            
         }
 
         /// <summary>

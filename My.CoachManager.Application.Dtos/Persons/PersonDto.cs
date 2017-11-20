@@ -55,13 +55,10 @@ namespace My.CoachManager.Application.Dtos.Persons
         [DataMember]
         public string Size { get; set; }
 
-        //[DataMember]
-        //public ICollection<PhoneDto> Phones { get; set; }
-
-        //[DataMember]
-        //public ICollection<EmailDto> Emails { get; set; }
+        [DataMember]
+        public IEnumerable<PhoneDto> Phones { get; set; }
 
         [DataMember]
-        public ICollection<ContactDto> Contacts { get; set; }
+        public IEnumerable<EmailDto> Emails { get; set; }
     }
 }

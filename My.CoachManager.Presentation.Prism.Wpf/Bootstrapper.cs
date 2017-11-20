@@ -89,7 +89,6 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// </summary>
         private void Initialize()
         {
-
             if (Connection())
             {
                 InitializeModule<StatusBarModule>();
@@ -108,7 +107,6 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             }
             else
             {
-                
             }
         }
 
@@ -134,7 +132,6 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             return isLogged;
         }
 
-
         /// <summary>
         /// Connection of the user.
         /// </summary>
@@ -145,9 +142,9 @@ namespace My.CoachManager.Presentation.Prism.Wpf
 
             if (ConfigurationManager.WindowsAuthentication)
             {
-               isConnected = ConnectUser();
+                isConnected = ConnectUser();
             }
-            
+
             if (!isConnected)
             {
                 var dialog = Container.TryResolve<IDialogService>();
@@ -211,7 +208,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
                 }
             );
         }
-        
+
         /// <summary>
         /// Hide the splash screen.
         /// </summary>
@@ -225,7 +222,6 @@ namespace My.CoachManager.Presentation.Prism.Wpf
                     splash.Hide();
                 }
             );
-
         }
 
         /// <summary>
@@ -235,7 +231,6 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         protected void InitializeModule<T>() where T : IModule
         {
             EventAggregator.GetEvent<SplashScreenMessageEvent>().Publish(string.Format(StatusResources.ModuleLoadingMessage, typeof(T).GetTypeInfo().Name));
-            Thread.Sleep(2000);
             IModule module = Container.Resolve<T>();
             System.Windows.Application.Current.Dispatcher.Invoke(
                 delegate
