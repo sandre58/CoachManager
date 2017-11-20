@@ -37,10 +37,11 @@
         <ResourceDictionary Source="Controls/DatePicker.xaml" />
         <ResourceDictionary Source="Controls/RadioButton.xaml" />
         <ResourceDictionary Source="Controls/ProgressRing.xaml" />
+        <ResourceDictionary Source="Controls/MetroProgressBar.xaml" />
         <ResourceDictionary Source="Controls/MetroContentControl.xaml" />
         <ResourceDictionary Source="Controls/TransitioningContentControl.xaml" />
         <ResourceDictionary Source="Controls/Window.xaml" />
         <ResourceDictionary Source="Controls/WorkspaceView.xaml" />
         <ResourceDictionary Source="Controls/WorkspaceDialog.xaml" />
-</ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -80,6 +80,8 @@
     <Compile Include="Converters\ToLowerConverter.cs" />
     <Compile Include="Converters\ToUpperConverter.cs" />
     <Compile Include="EventAggregator\ShowNotificationPopupRequestEvent.cs" />
+    <Compile Include="EventAggregator\SplashScreenMessageEvent.cs" />
+    <Compile Include="EventAggregator\CloseSplashScreenEvent.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Interactivity\InteractionRequest\INotificationPopup.cs" />
     <Compile Include="Interactivity\InteractionRequest\NotificationPopup.cs" />

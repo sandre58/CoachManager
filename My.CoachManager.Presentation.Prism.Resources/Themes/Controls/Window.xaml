@@ -19,7 +19,7 @@
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
     </Style>
 
-    <Style x:Key="ModernWindowStyle" TargetType="{x:Type controls:MetroWindow}">
+    <Style x:Key="ModernWindowStyle" TargetType="{x:Type controls:MetroWindow}" x:Shared="False">
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
