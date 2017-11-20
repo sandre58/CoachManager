@@ -120,6 +120,12 @@
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Coach Manager</value>
   </data>
+  <data name="ApplicationTitlePart1" xml:space="preserve">
+    <value>Coach</value>
+  </data>
+  <data name="ApplicationTitlePart2" xml:space="preserve">
+    <value>Manager</value>
+  </data>
   <data name="DefaultStatusMessage" xml:space="preserve">
     <value>Prêt</value>
   </data>
