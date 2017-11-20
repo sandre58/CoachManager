@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using My.CoachManager.Application.Dtos.Admin;
@@ -50,6 +51,19 @@ namespace My.CoachManager.Domain.Person.Aggregate
         /// <summary>
         /// Creates the select builder.
         /// </summary>
+        public static Func<Contact, TTarget> SelectContact<TTarget>() where TTarget : ContactDto, new()
+        {
+            return x => new TTarget
+            {
+                Id = x.Id,
+                Label = x.Label,
+                Value = x.Value
+            };
+        }
+
+        /// <summary>
+        /// Creates the select builder.
+        /// </summary>
         public static Expression<Func<Player, PlayerDto>> SelectPlayerForList()
         {
             return x => new PlayerDto()
@@ -78,18 +92,19 @@ namespace My.CoachManager.Domain.Person.Aggregate
                     Label = x.Country.Label,
                     Flag = x.Country.Flag
                 } : null,
-                Contacts = x.Contacts.OfType<Email>().Select(e => new EmailDto()
-                {
-                    Id = e.Id,
-                    Label = e.Label,
-                    Value = e.Value
-                }).Union<ContactDto>(x.Contacts.OfType<Phone>().Select(e => new PhoneDto()
-                {
-                    Id = e.Id,
-                    Label = e.Label,
-                    Value = e.Value
-                })).ToList()
+                //Contacts = ToContacts(x.Contacts.OfType<Email>(), x.Contacts.OfType<Phone>())
             };
+        }
+
+        private static ICollection<ContactDto> ToContacts(IEnumerable<Email> emails, IEnumerable<Phone> phones)
+        {
+            var list = new List<ContactDto>();
+
+            list.AddRange(emails.Select(SelectContact<EmailDto>()));
+
+            list.AddRange(phones.Select(SelectContact<PhoneDto>()));
+
+            return list;
         }
     }
 }

@@ -83,7 +83,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Interactivity
             var wrapper = GetPopup((INotificationPopup)args.Context);
             wrapper.Delay = Delay;
             wrapper.Position = Position;
-            wrapper.Owner = Application.Current.MainWindow;
+            wrapper.Owner = System.Windows.Application.Current.MainWindow;
             if (PopupStyle != null) wrapper.Style = PopupStyle;
 
             // We invoke the callback when the interaction's window is closed.

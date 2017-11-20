@@ -21,7 +21,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="viewModels:PlayerViewModel">
-                            <Grid Width="35" Height="35" Margin="15, 5, 15, 5">
+                            <Grid Width="40" Height="40" Margin="15, 5, 15, 5">
                                 <Ellipse Fill="{DynamicResource ControlGray}" Stroke="{DynamicResource ControlDarkGray}"
                                          Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" StrokeThickness="1" />
                                 <controls:Icon Content="{DynamicResource PeopleGeometry}" Size="Custom" Width="30" Height="20"
@@ -43,7 +43,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="viewModels:PlayerViewModel">
                             <StackPanel>
-                                <TextBlock Text="{Binding LastName}" FontWeight="Bold" parameters:ControlParameters.ContentCharacterCasing="Upper" />
+                                <TextBlock Text="{Binding LastName, Converter={StaticResource ToUpperConverter}}" FontWeight="Bold" />
                                 <TextBlock Text="{Binding FirstName}" />
                             </StackPanel>
                         </DataTemplate>

@@ -19,7 +19,7 @@
 
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding WindowDialogInteractionRequest}">
-            <interactivity:WindowDialogAction IsModal="True" CenterOverAssociatedObject="True" />
+            <interactivity:WindowDialogAction IsModal="True" CenterOverAssociatedObject="False" />
         </prism:InteractionRequestTrigger>
         <prism:InteractionRequestTrigger SourceObject="{Binding WorkspaceDialogInteractionRequest}">
             <interactivity:WorkspaceDialogAction WorkspaceDialog="{Binding ElementName=WorkspaceDialog}" />

@@ -32,6 +32,7 @@
         <ResourceDictionary Source="Controls/Popup.xaml" />
         <ResourceDictionary Source="Controls/Tooltip.xaml" />
         <ResourceDictionary Source="Controls/Calendar.xaml" />
+        <ResourceDictionary Source="Controls/PasswordBox.xaml" />
         <ResourceDictionary Source="Controls/ImagePicker.xaml" />
         <ResourceDictionary Source="Controls/Combobox.xaml" />
         <ResourceDictionary Source="Controls/DatePicker.xaml" />

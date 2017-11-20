@@ -99,7 +99,7 @@ namespace My.CoachManager.Application.Services.Admin
         /// <returns></returns>
         public IEnumerable<PlayerDto> GetList()
         {
-            return _playerRepository.GetAll(PersonSelectBuilder.SelectPlayerForList(), x => x.Category.Order, true, x => x.Country, x => x.Category, x => x.Contacts).ToArray();
+            return _playerRepository.GetAll(PersonSelectBuilder.SelectPlayerForList(), x => x.Category.Order, true).ToArray();
         }
 
         /// <summary>

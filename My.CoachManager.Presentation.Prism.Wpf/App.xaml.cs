@@ -13,5 +13,6 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             var bootstrapper = new Bootstrapper();
             bootstrapper.Run();
         }
+
     }
 }

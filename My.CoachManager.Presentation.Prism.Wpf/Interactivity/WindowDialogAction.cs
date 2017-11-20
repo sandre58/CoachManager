@@ -1,8 +1,10 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using My.CoachManager.Presentation.Prism.Core.Interactivity.InteractionRequest;
 using Prism.Interactivity;
 using Prism.Interactivity.InteractionRequest;
 using MessageDialog = My.CoachManager.Presentation.Prism.Wpf.Views.MessageDialog;
+using LoginDialog = My.CoachManager.Presentation.Prism.Wpf.Views.LoginDialog;
 
 namespace My.CoachManager.Presentation.Prism.Wpf.Interactivity
 {
@@ -25,13 +27,25 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Interactivity
                 wrapperWindow = new MessageDialog();
             }
 
+            if (notification is ILoginDialog)
+            {
+                wrapperWindow = new LoginDialog();
+            }
+
             if (wrapperWindow != null)
             {
                 wrapperWindow.DataContext = notification;
                 PrepareContentForWindow(notification, wrapperWindow);
 
-                if (AssociatedObject != null)
-                    wrapperWindow.Owner = Window.GetWindow(AssociatedObject);
+                try
+                {
+                    if (AssociatedObject != null)
+                        wrapperWindow.Owner = Window.GetWindow(AssociatedObject);
+                }
+                catch (Exception)
+                {
+                    // ignored
+                }
 
                 // If the user provided a Style for a Window we set it as the window's style.
                 if (WindowStyle != null)

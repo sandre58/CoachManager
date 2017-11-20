@@ -41,10 +41,11 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
             WindowDialogInteractionRequest = new InteractionRequest<IDialog>();
             NotificationPopupInteractionRequest = new InteractionRequest<INotificationPopup>();
 
-            eventAggregator.GetEvent<ShowWorkspaceDialogRequestEvent>().Subscribe(OnShowWorkspaceDialogRequested, ThreadOption.UIThread, true);
-            eventAggregator.GetEvent<ShowMessageDialogRequestEvent>().Subscribe(OnShowMessageDialogRequested, ThreadOption.UIThread, true);
-            eventAggregator.GetEvent<ShowNotificationPopupRequestEvent>().Subscribe(OnShowNotificationRequested, ThreadOption.UIThread, true);
-            eventAggregator.GetEvent<NavigateRequestEvent>().Subscribe(OnNavigateRequested, ThreadOption.UIThread, true);
+            _eventAggregator.GetEvent<ShowWorkspaceDialogRequestEvent>().Subscribe(OnShowWorkspaceDialogRequested, ThreadOption.UIThread, true);
+            _eventAggregator.GetEvent<ShowMessageDialogRequestEvent>().Subscribe(OnShowMessageDialogRequested, ThreadOption.UIThread, true);
+            _eventAggregator.GetEvent<ShowNotificationPopupRequestEvent>().Subscribe(OnShowNotificationRequested, ThreadOption.UIThread, true);
+            _eventAggregator.GetEvent<ShowLoginDialogRequestEvent>().Subscribe(OnShowLoginDialogRequested, ThreadOption.UIThread, true);
+            _eventAggregator.GetEvent<NavigateRequestEvent>().Subscribe(OnNavigateRequested, ThreadOption.UIThread, true);
 
             NavigateCommand = new DelegateCommand<string>(Navigate);
         }
@@ -113,6 +114,15 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// </summary>
         /// <param name="e"></param>
         protected void OnShowMessageDialogRequested(MessageDialogEventArgs e)
+        {
+            WindowDialogInteractionRequest.Raise(e.Dialog, e.Callback);
+        }
+
+        /// <summary>
+        /// Call when the window dialog is requested.
+        /// </summary>
+        /// <param name="e"></param>
+        protected void OnShowLoginDialogRequested(LoginDialogEventArgs e)
         {
             WindowDialogInteractionRequest.Raise(e.Dialog, e.Callback);
         }

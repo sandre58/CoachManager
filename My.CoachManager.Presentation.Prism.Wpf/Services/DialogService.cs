@@ -245,6 +245,25 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
             return string.Empty;
         }
 
+        /// <summary>
+        /// Displays a modal dialog of a type that is determined by the dialog type locator.
+        /// </summary>
+        /// <returns>
+        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
+        /// the user.
+        /// </returns>
+        public void ShowLoginDialog(string login, string password, string title, Action<IDialog> callback = null)
+        {
+            var dialog = new LoginDialog()
+            {
+                Title = title != "" ? title : ControlResources.Login,
+                Login = login,
+                Password = password,
+            };
+
+            _eventAggregator.GetEvent<ShowLoginDialogRequestEvent>().Publish(new LoginDialogEventArgs(dialog, callback));
+        }
+
         #endregion IDialogService Members
     }
 }

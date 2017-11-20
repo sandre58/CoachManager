@@ -126,9 +126,6 @@
   <data name="ApplicationTitlePart2" xml:space="preserve">
     <value>Manager</value>
   </data>
-  <data name="DefaultStatusMessage" xml:space="preserve">
-    <value>Prêt</value>
-  </data>
   <data name="Version" xml:space="preserve">
     <value>v.{0}</value>
   </data>

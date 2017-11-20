@@ -38,7 +38,7 @@ namespace My.CoachManager.Presentation.Prism.StatusBar.ViewModels
             Version = string.Format(GlobalResources.Version, assembly.GetName().Version);
             Copyright = (copyrightAttr != null) ? copyrightAttr.Copyright : "";
 
-            Message = GlobalResources.DefaultStatusMessage;
+            Message = StatusResources.DefaultStatusMessage;
         }
 
         #endregion Constructors

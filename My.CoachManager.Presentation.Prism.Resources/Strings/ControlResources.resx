@@ -150,6 +150,9 @@
   <data name="Edit" xml:space="preserve">
     <value>Modifier</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
   <data name="Maximize" xml:space="preserve">
     <value>Agrandir</value>
   </data>
@@ -168,6 +171,9 @@
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
   <data name="Refresh" xml:space="preserve">
     <value>Rafraîchir</value>
   </data>
@@ -179,6 +185,12 @@
   </data>
   <data name="Restore" xml:space="preserve">
     <value>Restaurer</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Se connecter</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
   </data>
   <data name="Validate" xml:space="preserve">
     <value>Valider</value>

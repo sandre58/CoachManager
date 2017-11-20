@@ -170,6 +170,8 @@
     <Compile Include="Admin\ICategoryAppService.cs" />
     <Compile Include="Admin\CategoryAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Users\UserAppService.cs" />
+    <Compile Include="Users\IUserAppService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\My.CoachManager.Application.Core\My.CoachManager.Application.Core.csproj">

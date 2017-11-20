@@ -11,7 +11,7 @@
         Title="{x:Static strings:GlobalResources.ApplicationTitle}" Height="300" Width="500"
         IsTitleOverlay="True" IsMinimizeButtonVisible="False" IsMaximizeButtonVisible="False" IsTitleVisible="False" ResizeMode="NoResize"
         Background="{DynamicResource Accent}" Foreground="{DynamicResource AccentForeground}" Style="{DynamicResource ModernWindowStyle}"
-                      Topmost="True" WindowStartupLocation="CenterScreen">
+                      WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

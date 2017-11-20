@@ -88,15 +88,6 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prêt.
-        /// </summary>
-        public static string DefaultStatusMessage {
-            get {
-                return ResourceManager.GetString("DefaultStatusMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to v.{0}.
         /// </summary>
         public static string Version {

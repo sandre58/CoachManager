@@ -100,6 +100,7 @@
     <Compile Include="Enums\CharacterCasing.cs" />
     <Compile Include="ImagePicker.cs" />
     <Compile Include="Parameters\ComboBoxParameters.cs" />
+    <Compile Include="Parameters\PasswordParameters.cs" />
     <Compile Include="Parameters\ToggleButtonParameters.cs" />
     <Compile Include="MetroProgressBar.cs" />
     <Compile Include="Specific\TacticControl.cs" />

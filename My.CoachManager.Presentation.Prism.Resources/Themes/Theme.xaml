@@ -118,7 +118,7 @@
     <SolidColorBrush x:Key="AccentForeground" Color="{DynamicResource AccentTextColor}" />
 
     <!-- ICONS -->
-    <SolidColorBrush x:Key="NormalIcon" Color="{DynamicResource Gray7Color}" />
+    <SolidColorBrush x:Key="NormalIcon" Color="{DynamicResource Gray5Color}" />
 
     <!-- WINDOW -->
     <SolidColorBrush x:Key="WindowBackground" Color="{DynamicResource Gray1Color}" />

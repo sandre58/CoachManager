@@ -33,16 +33,19 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
         {
             // User and permissions
             var perm1 = new Permission() { Id = 1, Code = PermissionConstants.ChangeUser, Label = "Changer d'utilisateur", Description = "Permet de se connecter à l'aplication en tant qu'un autre utilisateur." };
+            var perm2 = new Permission() { Id = 2, Code = PermissionConstants.AccessAdmin, Label = "Accès à l'administration", Description = "Permet d'accèder à tout le module d'administration." };
             var role1 = new Role() { Id = 1, Code = RoleConstants.Admin, Label = "Administrateur", Description = "Rôle permettant de gérer toutes les données utilisées dan l''application." };
 
             var user1 = new User() { Id = 1, Name = "Stéphane ANDRE (Home)", Login = "andre", Password = "qRBfE9MoPFs=", Mail = "andre.cs2i@gmail.com" };
             var user2 = new User() { Id = 2, Name = "Stéphane ANDRE (Merial)", Login = "E0214719", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@merial.com" };
 
             role1.Permissions.Add(perm1);
+            role1.Permissions.Add(perm2);
             user1.Roles.Add(role1);
             user2.Roles.Add(role1);
 
             context.Permissions.AddOrUpdate(r => r.Label, perm1);
+            context.Permissions.AddOrUpdate(r => r.Label, perm2);
             context.Commit();
 
             context.Roles.AddOrUpdate(r => r.Label, role1);

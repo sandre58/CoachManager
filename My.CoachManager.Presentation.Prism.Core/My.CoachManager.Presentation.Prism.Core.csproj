@@ -57,6 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviours\DragAndDropEventArgs.cs" />
+    <Compile Include="Behaviours\PasswordBoxBindingBehavior.cs" />
+    <Compile Include="Behaviours\StylizedBehaviorCollection.cs" />
+    <Compile Include="Behaviours\StylizedBehaviors.cs" />
     <Compile Include="Converters\AnyToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToFontWeightConverter.cs" />
     <Compile Include="Converters\BytesToImageConverter.cs" />
@@ -78,13 +81,17 @@
     <Compile Include="Converters\ThicknessToDoubleConverter.cs" />
     <Compile Include="Converters\ToLowerConverter.cs" />
     <Compile Include="Converters\ToUpperConverter.cs" />
+    <Compile Include="EventAggregator\ShowLoginDialogRequestEvent.cs" />
     <Compile Include="EventAggregator\ShowNotificationPopupRequestEvent.cs" />
     <Compile Include="EventAggregator\SplashScreenMessageEvent.cs" />
     <Compile Include="EventAggregator\CloseSplashScreenEvent.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
+    <Compile Include="Interactivity\InteractionRequest\ILoginDialog.cs" />
     <Compile Include="Interactivity\InteractionRequest\INotificationPopup.cs" />
+    <Compile Include="Interactivity\InteractionRequest\LoginDialog.cs" />
     <Compile Include="Interactivity\InteractionRequest\NotificationPopup.cs" />
     <Compile Include="Interactivity\KeyDownItemEventArgs.cs" />
+    <Compile Include="Interactivity\LoginDialogEventArgs.cs" />
     <Compile Include="Interactivity\NotificationEventArgs.cs" />
     <Compile Include="Interactivity\MessageDialogStyle.cs" />
     <Compile Include="Interactivity\MessageDialogType.cs" />
@@ -103,6 +110,7 @@
     <Compile Include="Interactivity\DialogResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionNames.cs" />
+    <Compile Include="Services\IAuthenticationService.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="ViewModels\EntityViewModel.cs" />
     <Compile Include="ViewModels\ICollectionnable.cs" />

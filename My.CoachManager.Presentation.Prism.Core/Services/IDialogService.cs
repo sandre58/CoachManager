@@ -136,5 +136,14 @@ namespace My.CoachManager.Presentation.Prism.Core.Services
         /// </summary>
         string ShowOpenFileDialog(string filter = "", bool multiselect = false, string initialDirectory = "",
             bool restoreDirectory = false);
+
+        /// <summary>
+        /// Displays a modal dialog of a type that is determined by the dialog type locator.
+        /// </summary>
+        /// <returns>
+        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
+        /// the user.
+        /// </returns>
+        void ShowLoginDialog(string login, string password, string title, Action<IDialog> callback = null);
     }
 }

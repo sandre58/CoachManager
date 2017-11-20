@@ -6,5 +6,6 @@
     public static class PermissionConstants
     {
         public const string ChangeUser = "CHANGE_USER";
+        public const string AccessAdmin = "ACCESS_ADMIN";
     }
 }

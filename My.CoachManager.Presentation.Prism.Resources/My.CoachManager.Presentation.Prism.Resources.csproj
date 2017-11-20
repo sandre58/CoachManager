@@ -71,6 +71,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Strings\StatusResources.Designer.cs">
+      <DependentUpon>StatusResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Strings\GlobalResources.Designer.cs">
       <DependentUpon>GlobalResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -88,6 +93,11 @@
     <EmbeddedResource Include="Strings\DialogResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DialogResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings\StatusResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StatusResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Strings\GlobalResources.resx">
@@ -595,6 +605,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Base\Sizes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls\PasswordBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

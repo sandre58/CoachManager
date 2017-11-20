@@ -75,9 +75,11 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConfigurationManager.cs" />
+    <Compile Include="Interactivity\LoginDialogAction.cs" />
     <Compile Include="Interactivity\WindowDialogAction.cs" />
     <Compile Include="Interactivity\NotificationPopupAction.cs" />
     <Compile Include="Interactivity\WorkspaceDialogAction.cs" />
+    <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="ViewModels\IShellViewModel.cs" />
     <Compile Include="ViewModels\ISplashScreenViewModel.cs" />
@@ -86,9 +88,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="Views\LoginDialog.xaml.cs">
+      <DependentUpon>LoginDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\LoginDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\MessageDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -144,6 +153,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\My.CoachManager.Application.Dtos\My.CoachManager.Application.Dtos.csproj">
+      <Project>{2A887BE7-A2F5-4CD8-9FD6-AF1ADB53B874}</Project>
+      <Name>My.CoachManager.Application.Dtos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.CrossCutting.Core\My.CoachManager.CrossCutting.Core.csproj">
       <Project>{69f4e1a5-acae-4431-9723-3db4de847bc9}</Project>
       <Name>My.CoachManager.CrossCutting.Core</Name>
