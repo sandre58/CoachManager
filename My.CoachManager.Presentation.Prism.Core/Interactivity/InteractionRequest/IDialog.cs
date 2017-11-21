@@ -8,11 +8,11 @@ namespace My.CoachManager.Presentation.Prism.Core.Interactivity.InteractionReque
         /// <summary>
         /// Gets the context.
         /// </summary>
-        IDialogViewModel Context { get; }
+        DialogResult Result { get; }
 
         /// <summary>
         /// Gets the context.
         /// </summary>
-        DialogResult Result { get; set; }
+        IDialogViewModel Context { get; }
     }
 }

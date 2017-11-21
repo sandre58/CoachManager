@@ -2,7 +2,7 @@
 
 namespace My.CoachManager.Presentation.Prism.Core.EventAggregator
 {
-    public class CloseSplashScreenEvent : PubSubEvent
+    public class LoginErrorRequestEvent : PubSubEvent<string>
     {
     }
 }

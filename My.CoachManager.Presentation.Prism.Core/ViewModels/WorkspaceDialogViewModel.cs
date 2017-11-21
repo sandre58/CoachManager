@@ -1,18 +1,27 @@
-﻿using System;
-using My.CoachManager.CrossCutting.Logging;
+﻿using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Services;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public abstract class WorkspaceDialogViewModel : WorkspaceViewModel, IWorkspaceDialogViewModel
+    public abstract class WorkspaceDialogViewModel : DialogViewModel, IWorkspaceDialogViewModel
     {
+        #region Fields
+
+        private string _title;
+
+        #endregion Fields
+
         #region Members
 
         /// <summary>
-        /// Gets or sets the result.
+        /// Gets or sets the title screen.
         /// </summary>
-        public DialogResult DialogResult { get; set; }
+        public virtual string Title
+        {
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
+        }
 
         #endregion Members
 
@@ -28,39 +37,5 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         }
 
         #endregion Constructors
-
-        #region Methods
-
-        /// <summary>
-        /// Closes the dialog.
-        /// </summary>
-        public virtual void Close(DialogResult dialogResult = DialogResult.Ok)
-        {
-            DialogResult = dialogResult;
-            OnCloseRequest(EventArgs.Empty);
-        }
-
-        /// <summary>
-        /// Closes the dialog.
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void OnCloseRequest(EventArgs e)
-        {
-            if (CloseRequest != null)
-            {
-                CloseRequest(this, e);
-            }
-        }
-
-        #endregion Methods
-
-        #region Events
-
-        /// <summary>
-        /// Closes the dialog.
-        /// </summary>
-        public event EventHandler CloseRequest;
-
-        #endregion Events
     }
 }

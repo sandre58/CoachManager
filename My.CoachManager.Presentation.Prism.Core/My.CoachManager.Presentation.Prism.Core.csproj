@@ -74,6 +74,7 @@
     <Compile Include="Converters\EnumToVisibilityConverter.cs" />
     <Compile Include="Converters\NotConverter.cs" />
     <Compile Include="Converters\NotEqualsConverter.cs" />
+    <Compile Include="Converters\ToFormatConverter.cs" />
     <Compile Include="Converters\VisibilityToBooleanConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\IsGreaterThanConverter.cs" />
@@ -81,17 +82,14 @@
     <Compile Include="Converters\ThicknessToDoubleConverter.cs" />
     <Compile Include="Converters\ToLowerConverter.cs" />
     <Compile Include="Converters\ToUpperConverter.cs" />
+    <Compile Include="EventAggregator\LoginErrorRequestEvent.cs" />
     <Compile Include="EventAggregator\ShowLoginDialogRequestEvent.cs" />
     <Compile Include="EventAggregator\ShowNotificationPopupRequestEvent.cs" />
     <Compile Include="EventAggregator\SplashScreenMessageEvent.cs" />
-    <Compile Include="EventAggregator\CloseSplashScreenEvent.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
-    <Compile Include="Interactivity\InteractionRequest\ILoginDialog.cs" />
     <Compile Include="Interactivity\InteractionRequest\INotificationPopup.cs" />
-    <Compile Include="Interactivity\InteractionRequest\LoginDialog.cs" />
     <Compile Include="Interactivity\InteractionRequest\NotificationPopup.cs" />
     <Compile Include="Interactivity\KeyDownItemEventArgs.cs" />
-    <Compile Include="Interactivity\LoginDialogEventArgs.cs" />
     <Compile Include="Interactivity\NotificationEventArgs.cs" />
     <Compile Include="Interactivity\MessageDialogStyle.cs" />
     <Compile Include="Interactivity\MessageDialogType.cs" />
@@ -100,9 +98,6 @@
     <Compile Include="EventAggregator\ShowMessageDialogRequestEvent.cs" />
     <Compile Include="EventAggregator\NavigateRequestEvent.cs" />
     <Compile Include="EventAggregator\ShowWorkspaceDialogRequestEvent.cs" />
-    <Compile Include="Interactivity\MessageDialogEventArgs.cs" />
-    <Compile Include="Interactivity\InteractionRequest\MessageDialog.cs" />
-    <Compile Include="Interactivity\InteractionRequest\IMessageDialog.cs" />
     <Compile Include="Interactivity\InteractionRequest\Dialog.cs" />
     <Compile Include="Interactivity\NavigationEventArgs.cs" />
     <Compile Include="Interactivity\DialogEventArgs.cs" />
@@ -124,6 +119,7 @@
     <Compile Include="ViewModels\IOrderableViewModel.cs" />
     <Compile Include="ViewModels\OrderedListViewModel.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceDialogViewModel.cs" />
     <Compile Include="ViewModels\IDialogViewModel.cs" />
     <Compile Include="ViewModels\IWorkspaceDialogViewModel.cs" />

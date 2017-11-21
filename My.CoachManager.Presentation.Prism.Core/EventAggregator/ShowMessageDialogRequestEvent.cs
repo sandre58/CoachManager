@@ -3,7 +3,7 @@ using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.EventAggregator
 {
-    public class ShowMessageDialogRequestEvent : PubSubEvent<MessageDialogEventArgs>
+    public class ShowMessageDialogRequestEvent : PubSubEvent<DialogEventArgs>
     {
     }
 }

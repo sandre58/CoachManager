@@ -23,7 +23,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         private readonly ILogger _logger;
         private readonly IUserService _userService;
 
-        #endregion
+        #endregion Fields
 
         #region Constructor
 
@@ -32,7 +32,9 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
             _userService = userService;
             _logger = logger;
         }
-#endregion
+
+        #endregion Constructor
+
         #region Public Methods
 
         /// <summary>
@@ -41,26 +43,24 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// <param name="login">The user name.</param>
         /// <param name="password">The password.</param>
         /// <returns></returns>
-        public bool Authenticate(string login, string password)
+        public IPrincipal Authenticate(string login, string password)
         {
             var user = GetAuthenticatedUser(login, password);
 
-            SetIdentity(user);
-            return user != null;
+            return GetPrincipalFromUser(user);
         }
 
         /// <summary>
         /// Authenticate an user.
         /// </summary>
         /// <returns></returns>
-        public bool AuthenticateByWindowsCredentials()
+        public IPrincipal AuthenticateByWindowsCredentials()
         {
             var currentWindowsIdentity = WindowsIdentity.GetCurrent();
             var login = currentWindowsIdentity.GetLogin();
             var user = GetAuthenticatedUser(login);
-            
-            SetIdentity(user);
-            return user != null;
+
+            return GetPrincipalFromUser(user);
         }
 
         #endregion Public Methods
@@ -75,8 +75,8 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// <returns></returns>
         protected UserDto GetAuthenticatedUser(string login, string password)
         {
-                var hashPassword = TripleDesEncryptor.Encrypt(password, login);
-                return _userService.GetUserByLoginAndPassword(login, hashPassword);
+            var hashPassword = TripleDesEncryptor.Encrypt(password, login);
+            return _userService.GetUserByLoginAndPassword(login, hashPassword);
         }
 
         /// <summary>
@@ -86,22 +86,21 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// <returns></returns>
         protected UserDto GetAuthenticatedUser(string login)
         {
-                return _userService.GetUserByLogin(login);
+            return _userService.GetUserByLogin(login);
         }
 
-        protected void SetIdentity(UserDto user)
+        protected IPrincipal GetPrincipalFromUser(UserDto user)
         {
             if (user != null)
             {
-                var principal = new Principal()
+                return new Principal()
                 {
                     Identity = new Identity(user.Login, user.Name, user.Mail,
                         user.Roles.SelectMany(r => r.Permissions).Select(p => p.Code))
                 };
-
-                AppDomain.CurrentDomain.SetThreadPrincipal(principal);
-                Thread.CurrentPrincipal = principal;
             }
+
+            return null;
         }
 
         #endregion Private Methods

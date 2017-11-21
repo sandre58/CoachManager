@@ -5,11 +5,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
     public interface IDialogViewModel : IScreenViewModel, ICloseable
     {
         /// <summary>
-        /// Gets or sets the title.
-        /// </summary>
-        string Title { get; set; }
-
-        /// <summary>
         /// Gets or sets the dialog result.
         /// </summary>
         DialogResult DialogResult { get; set; }

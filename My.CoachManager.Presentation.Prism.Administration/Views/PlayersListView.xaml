@@ -8,7 +8,6 @@
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.ViewModels;assembly=My.CoachManager.Presentation.Prism.ViewModels"
              xmlns:viewModels1="clr-namespace:My.CoachManager.Presentation.Prism.Administration.ViewModels"
-             xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:enum="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModels1:PlayersListViewModel}"
@@ -18,7 +17,7 @@
 
         <DataGrid ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" Style="{StaticResource ItemsDataGridStyle}">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Width="90" CanUserResize="False" CanUserSort="False">
+                <DataGridTemplateColumn MinWidth="90" CanUserResize="False" CanUserSort="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="viewModels:PlayerViewModel">
                             <controls:ImageContent Width="45" Height="45" Image="{Binding Photo, Converter={StaticResource BytesToImageConverter}}" HorizontalAlignment="Center">
@@ -34,7 +33,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{x:Static strings:PersonResources.LastName}" SortMemberPath="LastName" MinWidth="150" Width="*">
+                <DataGridTemplateColumn Header="{x:Static strings:PersonResources.LastName}" SortMemberPath="LastName" MinWidth="140">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="viewModels:PlayerViewModel">
                             <StackPanel>
@@ -44,10 +43,10 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}" Header="{x:Static strings:PersonResources.Birthdate}" SortMemberPath="Birthdate" />
-                <DataGridTextColumn Binding="{Binding Category.Label}" Header="{x:Static strings:PlayerResources.Category}" SortMemberPath="Category.Order" />
-                <DataGridTextColumn Header="{x:Static strings:PersonResources.LicenseNumber}" Binding="{Binding LicenseNumber, StringFormat='{}{0:# ### ### ###}'}" />
-                <DataGridTemplateColumn Header="{x:Static strings:PersonResources.Gender}" SortMemberPath="Gender">
+                <DataGridTextColumn Binding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}" Header="{x:Static strings:PersonResources.Birthdate}" SortMemberPath="Birthdate" MinWidth="100" />
+                <DataGridTextColumn Binding="{Binding Category.Label}" Header="{x:Static strings:PlayerResources.Category}" SortMemberPath="Category.Order" MinWidth="90" />
+                <DataGridTextColumn Header="{x:Static strings:PersonResources.LicenseNumber}" Binding="{Binding LicenseNumber, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0:# ### ### ###\}}" MinWidth="110" />
+                <DataGridTemplateColumn Header="{x:Static strings:PersonResources.Gender}" SortMemberPath="Gender" MinWidth="70">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="viewModels:PlayerViewModel">
                             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -59,7 +58,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{x:Static strings:PersonResources.Country}" SortMemberPath="Country.Label">
+                <DataGridTemplateColumn Header="{x:Static strings:PersonResources.Country}" SortMemberPath="Country.Label" MinWidth="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="viewModels:PlayerViewModel">
                             <Grid>
@@ -68,21 +67,21 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{x:Static strings:PersonResources.Address}" SortMemberPath="City">
+                <DataGridTemplateColumn Header="{x:Static strings:PersonResources.Address}" SortMemberPath="City" MinWidth="200">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="viewModels:PlayerViewModel">
                             <StackPanel>
                                 <TextBlock Text="{Binding Address}" />
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding PostalCode, StringFormat='{}{0} '}" />
-                                    <TextBlock Text="{Binding City}" parameters:ControlParameters.ContentCharacterCasing="Upper" />
+                                <StackPanel Orientation="Horizontal" Margin="{StaticResource DefaultHorizontalMargin}">
+                                    <TextBlock Text="{Binding PostalCode, StringFormat='{}{0} '}" Margin="0" />
+                                    <TextBlock Text="{Binding City, Converter={StaticResource ToUpperConverter}}" Margin="0" />
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="{x:Static strings:PersonResources.Phone}" Binding="{Binding Phone}" />
-                <DataGridTextColumn Header="{x:Static strings:PersonResources.Email}" Binding="{Binding Email}" />
+                <DataGridTextColumn Header="{x:Static strings:PersonResources.Phone}" Binding="{Binding Phone, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0:00 00 00 00 00\}}" MinWidth="110" />
+                <DataGridTextColumn Header="{x:Static strings:PersonResources.Email}" Binding="{Binding Email}" MinWidth="165" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
 

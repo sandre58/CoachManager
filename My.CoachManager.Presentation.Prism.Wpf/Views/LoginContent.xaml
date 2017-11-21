@@ -1,22 +1,19 @@
-﻿<controls:MetroWindow x:Class="My.CoachManager.Presentation.Prism.Wpf.Views.LoginDialog"
+﻿<UserControl x:Class="My.CoachManager.Presentation.Prism.Wpf.Views.LoginContent"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
         xmlns:prism="http://prismlibrary.com/"
-        xmlns:interactivity="clr-namespace:My.CoachManager.Presentation.Prism.Core.Interactivity.InteractionRequest;assembly=My.CoachManager.Presentation.Prism.Core"
         xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings;assembly=My.CoachManager.Presentation.Prism.Resources"
         xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
         xmlns:behaviours="clr-namespace:My.CoachManager.Presentation.Prism.Core.Behaviours;assembly=My.CoachManager.Presentation.Prism.Core"
+        xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.ViewModels"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        WindowStartupLocation="CenterOwner"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=interactivity:LoginDialog}"
-        Style="{StaticResource DialogWindowStyle}"
-        Title="{Binding Title}">
+        d:DataContext="{d:DesignInstance Type=viewModels:LoginViewModel}">
 
-    <Grid FocusManager.FocusedElement="{Binding ElementName=TxtLogin}">
+    <Grid FocusManager.FocusedElement="{Binding ElementName=TxtPassword}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -24,17 +21,17 @@
 
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Horizontal">
-                <controls:Icon Size="VeryLarge" Margin="{StaticResource VeryVeryLargeHorizontalMargin}" Content="{StaticResource LockGeometry}" 
+                <controls:Icon Size="VeryLarge" Margin="{StaticResource VeryVeryLargeHorizontalMargin}" Content="{StaticResource LockGeometry}"
                                VerticalAlignment="Center" Foreground="{DynamicResource Dark}" />
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <!--<TextBlock Text="{Binding ErrorMessage}" Foreground="{StaticResource NegativeActionBrush}" Margin="{StaticResource DefaultMargin}" Visibility="{Binding ErrorMessage, Converter={StaticResource NullOrEmptyToVisibilityConverter}}" />-->
+                    <TextBlock Text="{Binding Error}" Foreground="{DynamicResource Negative}" Margin="{StaticResource LargeVerticalMargin}" Visibility="{Binding Error, Converter={StaticResource NullToVisibilityConverter}}" />
                     <StackPanel Orientation="Horizontal">
                         <controls:Icon Size="Medium" Margin="{StaticResource DefaultHorizontalMargin}" Content="{StaticResource LoginGeometry}" />
-                        <TextBox x:Name="TxtLogin" Text="{Binding Login}" Width="{StaticResource LargeWidth}" parameters:TextBoxParameters.Watermark="{x:Static strings:ControlResources.Username}" parameters:TextBoxParameters.ClearTextButton="True" />
+                        <TextBox x:Name="TxtUsername" Text="{Binding UserName}" Width="{StaticResource LargeWidth}" parameters:TextBoxParameters.Watermark="{x:Static strings:ControlResources.Username}" parameters:TextBoxParameters.ClearTextButton="True" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <controls:Icon Size="Medium" Margin="{StaticResource DefaultHorizontalMargin}" Content="{StaticResource PasswordGeometry}" />
-                        <PasswordBox behaviours:PasswordBoxBindingBehavior.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <PasswordBox x:Name="TxtPassword" behaviours:PasswordBoxBindingBehavior.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                                   Width="{StaticResource LargeWidth}"
                                      parameters:TextBoxParameters.Watermark="{x:Static strings:ControlResources.Password}" parameters:TextBoxParameters.ClearTextButton="True" />
                     </StackPanel>
@@ -42,11 +39,11 @@
             </StackPanel>
         </ScrollViewer>
 
-        <StackPanel Grid.Row="1" Height="85" HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button x:Name="BtnLogin" Height="35" Content="{x:Static strings:ControlResources.SignIn}" Margin="{StaticResource DefaultMargin}" 
-                    Click="LoginButton_Click" IsDefault="True" />
+        <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal" Margin="{StaticResource VeryLargeMargin}">
+            <Button x:Name="BtnLogin" Height="35" Content="{x:Static strings:ControlResources.SignIn}" Margin="{StaticResource DefaultMargin}"
+                    Command="{Binding LoginCommand}" IsDefault="True" />
             <Button x:Name="BtnCancel" Width="{StaticResource MidSmallWidth}" Height="35" Content="{x:Static strings:ControlResources.Cancel}" Margin="{StaticResource DefaultMargin}"
-                    Click="CancelButton_Click" IsCancel="True" />
+                    Command="{Binding CancelCommand}" IsCancel="True" />
         </StackPanel>
     </Grid>
-</controls:MetroWindow>
+</UserControl>

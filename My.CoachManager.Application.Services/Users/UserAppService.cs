@@ -62,7 +62,6 @@ namespace My.CoachManager.Application.Services.Users
             return _userRepository.GetBySpec(UserSpecification.GetUserByLogin(login), x => x.Roles.Select(r => r.Permissions)).FirstOrDefault().ToDto<UserDto>();
         }
 
-
         #endregion Methods
     }
 }

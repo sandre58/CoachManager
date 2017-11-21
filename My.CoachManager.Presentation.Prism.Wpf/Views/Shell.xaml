@@ -18,8 +18,8 @@
         Style="{StaticResource ModernWindowStyle}">
 
     <i:Interaction.Triggers>
-        <prism:InteractionRequestTrigger SourceObject="{Binding WindowDialogInteractionRequest}">
-            <interactivity:WindowDialogAction IsModal="True" CenterOverAssociatedObject="False" />
+        <prism:InteractionRequestTrigger SourceObject="{Binding DialogInteractionRequest}">
+            <interactivity:WindowDialogAction IsModal="True" CenterOverAssociatedObject="False" Style="{StaticResource DialogWindowStyle}" />
         </prism:InteractionRequestTrigger>
         <prism:InteractionRequestTrigger SourceObject="{Binding WorkspaceDialogInteractionRequest}">
             <interactivity:WorkspaceDialogAction WorkspaceDialog="{Binding ElementName=WorkspaceDialog}" />

@@ -7,6 +7,7 @@ using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Interactivity.InteractionRequest;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
+using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Wpf.Services
@@ -146,15 +147,17 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// </returns>
         public void ShowMessageDialog(string title, string message, Action<IDialog> callback = null, MessageDialogType type = MessageDialogType.Okcancel, MessageDialogStyle style = MessageDialogStyle.Information)
         {
-            var dialog = new MessageDialog()
+            var content = _serviceLocator.GetInstance<IMessageViewModel>();
+            content.Message = message;
+            content.Type = type;
+            content.Style = style;
+            var dialog = new Dialog()
             {
-                Content = message,
-                Title = title,
-                Type = type,
-                Style = style
+                Content = content,
+                Title = title
             };
 
-            _eventAggregator.GetEvent<ShowMessageDialogRequestEvent>().Publish(new MessageDialogEventArgs(dialog, callback));
+            _eventAggregator.GetEvent<ShowMessageDialogRequestEvent>().Publish(new DialogEventArgs(dialog, callback));
         }
 
         /// <summary>
@@ -254,14 +257,16 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// </returns>
         public void ShowLoginDialog(string login, string password, string title, Action<IDialog> callback = null)
         {
-            var dialog = new LoginDialog()
+            var content = _serviceLocator.GetInstance<ILoginViewModel>();
+            content.UserName = login;
+            content.Password = password;
+            var dialog = new Dialog()
             {
-                Title = title != "" ? title : ControlResources.Login,
-                Login = login,
-                Password = password,
+                Content = content,
+                Title = !string.IsNullOrEmpty(title) ? title : ControlResources.Login
             };
 
-            _eventAggregator.GetEvent<ShowLoginDialogRequestEvent>().Publish(new LoginDialogEventArgs(dialog, callback));
+            _eventAggregator.GetEvent<ShowLoginDialogRequestEvent>().Publish(new DialogEventArgs(dialog, callback));
         }
 
         #endregion IDialogService Members
