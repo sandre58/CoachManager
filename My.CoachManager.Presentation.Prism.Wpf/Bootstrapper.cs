@@ -126,14 +126,14 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             EventAggregator.GetEvent<SplashScreenMessageEvent>().Publish(StatusResources.UserConnection);
             IPrincipal principal;
 
-            var authentificationServcice = Container.TryResolve<IAuthenticationService>();
+            var authentificationService = Container.TryResolve<IAuthenticationService>();
             if (byWindowsCreadentials)
             {
-                principal = authentificationServcice.AuthenticateByWindowsCredentials();
+                principal = authentificationService.AuthenticateByWindowsCredentials();
             }
             else
             {
-                principal = authentificationServcice.Authenticate(login, password);
+                principal = authentificationService.Authenticate(login, password);
             }
 
             return principal;
