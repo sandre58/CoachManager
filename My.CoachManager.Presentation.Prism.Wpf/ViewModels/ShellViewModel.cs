@@ -38,13 +38,13 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             WorkspaceDialogInteractionRequest = new InteractionRequest<IDialog>();
-            WindowDialogInteractionRequest = new InteractionRequest<IDialog>();
+            DialogInteractionRequest = new InteractionRequest<IDialog>();
             NotificationPopupInteractionRequest = new InteractionRequest<INotificationPopup>();
 
             _eventAggregator.GetEvent<ShowWorkspaceDialogRequestEvent>().Subscribe(OnShowWorkspaceDialogRequested, ThreadOption.UIThread, true);
-            _eventAggregator.GetEvent<ShowMessageDialogRequestEvent>().Subscribe(OnShowMessageDialogRequested, ThreadOption.UIThread, true);
+            _eventAggregator.GetEvent<ShowMessageDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
             _eventAggregator.GetEvent<ShowNotificationPopupRequestEvent>().Subscribe(OnShowNotificationRequested, ThreadOption.UIThread, true);
-            _eventAggregator.GetEvent<ShowLoginDialogRequestEvent>().Subscribe(OnShowLoginDialogRequested, ThreadOption.UIThread, true);
+            _eventAggregator.GetEvent<ShowLoginDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
             _eventAggregator.GetEvent<NavigateRequestEvent>().Subscribe(OnNavigateRequested, ThreadOption.UIThread, true);
 
             NavigateCommand = new DelegateCommand<string>(Navigate);
@@ -62,7 +62,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <summary>
         /// Gets or Set the dialog interraction.
         /// </summary>
-        public InteractionRequest<IDialog> WindowDialogInteractionRequest { get; set; }
+        public InteractionRequest<IDialog> DialogInteractionRequest { get; set; }
 
         /// <summary>
         /// Gets or Set the dialog interraction.
@@ -113,18 +113,9 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// Call when the window dialog is requested.
         /// </summary>
         /// <param name="e"></param>
-        protected void OnShowMessageDialogRequested(MessageDialogEventArgs e)
+        protected void OnShowDialogRequested(DialogEventArgs e)
         {
-            WindowDialogInteractionRequest.Raise(e.Dialog, e.Callback);
-        }
-
-        /// <summary>
-        /// Call when the window dialog is requested.
-        /// </summary>
-        /// <param name="e"></param>
-        protected void OnShowLoginDialogRequested(LoginDialogEventArgs e)
-        {
-            WindowDialogInteractionRequest.Raise(e.Dialog, e.Callback);
+            DialogInteractionRequest.Raise(e.Dialog, e.Callback);
         }
 
         /// <summary>

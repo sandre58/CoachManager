@@ -47,6 +47,7 @@
     <Thickness x:Key="LargeTopMargin" Left="0" Top="{StaticResource LargeMarginLeftValue}" Right="0" Bottom="0" />
     <Thickness x:Key="LargeBottomMargin" Left="0" Top="0" Right="0" Bottom="{StaticResource LargeMarginLeftValue}" />
 
+    <Thickness x:Key="VeryLargeMargin" Left="{StaticResource VeryLargeMarginLeftValue}" Top="{StaticResource VeryLargeMarginTopValue}" Right="{StaticResource VeryLargeMarginRightValue}" Bottom="{StaticResource VeryLargeMarginBottomValue}" />
     <Thickness x:Key="VeryLargeHorizontalMargin" Left="{StaticResource VeryLargeMarginLeftValue}" Top="0" Right="{StaticResource VeryLargeMarginRightValue}" Bottom="0" />
     <Thickness x:Key="VeryLargeVerticalMargin" Left="0" Top="{StaticResource VeryLargeMarginTopValue}" Right="0" Bottom="{StaticResource VeryLargeMarginBottomValue}" />
 

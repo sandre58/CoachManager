@@ -6,12 +6,12 @@ using System.Windows;
 using Microsoft.Practices.Unity;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Extensions;
+using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.CrossCutting.Logging.Supervision;
 using My.CoachManager.Presentation.Prism.Administration;
 using My.CoachManager.Presentation.Prism.Core.EventAggregator;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
-using My.CoachManager.Presentation.Prism.Core.Interactivity.InteractionRequest;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Home;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
@@ -60,6 +60,8 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             Container.RegisterType<Views.SplashScreen>(new ContainerControlledLifetimeManager());
 
             // ViewModels
+            Container.RegisterType<IMessageViewModel, MessageViewModel>();
+            Container.RegisterType<ILoginViewModel, LoginViewModel>();
             Container.RegisterType<ISplashScreenViewModel, SplashScreenViewModel>();
             Container.RegisterType<IShellViewModel, ShellViewModel>();
 
@@ -77,7 +79,26 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             ShowSplashScreen();
 
             // Create a new thread for the splash screen to run on
-            var thread = new Thread(Initialize);
+            var thread = new Thread(() =>
+            {
+                if (ConnectUser())
+                {
+                    OnLogginSuccess();
+                    Initialize();
+
+                    System.Windows.Application.Current.Dispatcher.Invoke(
+                        delegate
+                        {
+                            HideSplashScreen();
+                            OpenShell();
+                        }
+                    );
+                }
+                else
+                {
+                    OnLogginFailed();
+                }
+            });
             thread.SetApartmentState(ApartmentState.STA);
             thread.IsBackground = true;
             thread.Name = "Splash Screen";
@@ -89,67 +110,52 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// </summary>
         private void Initialize()
         {
-            if (Connection())
-            {
-                InitializeModule<StatusBarModule>();
-                InitializeModule<HomeModule>();
+            InitializeModule<StatusBarModule>();
+            InitializeModule<HomeModule>();
 
-                if (Thread.CurrentPrincipal.IsInRole(PermissionConstants.AccessAdmin))
-                    InitializeModule<AdministrationModule>();
-
-                System.Windows.Application.Current.Dispatcher.Invoke(
-                    delegate
-                    {
-                        HideSplashScreen();
-                        OpenShell();
-                    }
-                );
-            }
-            else
-            {
-            }
+            if (Thread.CurrentPrincipal.IsInRole(PermissionConstants.AccessAdmin))
+                InitializeModule<AdministrationModule>();
         }
 
         /// <summary>
         /// Connection of the user.
         /// </summary>
         /// <returns></returns>
-        private bool ConnectUser(string login = "", string password = "")
+        private IPrincipal GetConnectedUser(string login = "", string password = "", bool byWindowsCreadentials = true)
         {
             EventAggregator.GetEvent<SplashScreenMessageEvent>().Publish(StatusResources.UserConnection);
-            bool isLogged;
+            IPrincipal principal;
 
             var authentificationServcice = Container.TryResolve<IAuthenticationService>();
-            if (string.IsNullOrEmpty(login) && string.IsNullOrEmpty(password))
+            if (byWindowsCreadentials)
             {
-                isLogged = authentificationServcice.AuthenticateByWindowsCredentials();
+                principal = authentificationServcice.AuthenticateByWindowsCredentials();
             }
             else
             {
-                isLogged = authentificationServcice.Authenticate(login, password);
+                principal = authentificationServcice.Authenticate(login, password);
             }
 
-            return isLogged;
+            return principal;
         }
 
         /// <summary>
         /// Connection of the user.
         /// </summary>
         /// <returns></returns>
-        private bool Connection()
+        private bool ConnectUser()
         {
-            bool isConnected = false;
+            IPrincipal principal = null;
+            AutoResetEvent waitEvent = new AutoResetEvent(false);
 
             if (ConfigurationManager.WindowsAuthentication)
             {
-                isConnected = ConnectUser();
+                principal = GetConnectedUser();
             }
 
-            if (!isConnected)
+            if (principal == null)
             {
                 var dialog = Container.TryResolve<IDialogService>();
-
-                HideSplashScreen();
 
                 string defaultUsername;
                 var defaultPassword = "";
@@ -163,26 +169,40 @@ namespace My.CoachManager.Presentation.Prism.Wpf
                     defaultUsername = currentWindowsIdentity.GetLogin();
                 }
 
-                dialog.ShowLoginDialog(defaultUsername, defaultPassword, string.Empty, e =>
+                var failedConnection = true;
+                while (failedConnection)
+                {
+                    dialog.ShowLoginDialog(defaultUsername.ToUpper(), defaultPassword, string.Empty, e =>
                         {
-                            var loginDialog = (ILoginDialog)e;
-                            if (loginDialog.Result == DialogResult.Ok)
+                            failedConnection = false;
+                            var loginViewModel = (ILoginViewModel)e.Context;
+                            if (e.Result == DialogResult.Ok)
                             {
-                                ShowSplashScreen();
-                                isConnected = ConnectUser(loginDialog.Login, loginDialog.Password);
-                                defaultUsername = loginDialog.Login;
-                                defaultPassword = loginDialog.Password;
+                                principal = GetConnectedUser(loginViewModel.UserName, loginViewModel.Password, false);
+
+                                if (principal == null)
+                                {
+                                    defaultUsername = loginViewModel.UserName;
+                                    defaultPassword = loginViewModel.Password;
+                                    failedConnection = principal == null;
+                                    dialog.ShowErrorPopup(MessageResources.ConnectionFailed);
+                                }
                             }
-                            else
-                            {
-                                OnLogginFailed();
-                            }
-                        });
+                            waitEvent.Set();
+                        }
+                    );
+
+                    waitEvent.WaitOne();
+                }
             }
 
-            if (isConnected) OnLogginSuccess();
+            if (principal != null)
+            {
+                AppDomain.CurrentDomain.SetThreadPrincipal(principal);
+                Thread.CurrentPrincipal = principal;
+            }
 
-            return isConnected;
+            return Thread.CurrentPrincipal.Identity.IsAuthenticated;
         }
 
         /// <summary>
@@ -245,7 +265,12 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// </summary>
         protected void OnLogginFailed()
         {
-            System.Windows.Application.Current.Shutdown();
+            System.Windows.Application.Current.Dispatcher.Invoke(
+                delegate
+                {
+                    System.Windows.Application.Current.Shutdown();
+                }
+            );
         }
 
         /// <summary>

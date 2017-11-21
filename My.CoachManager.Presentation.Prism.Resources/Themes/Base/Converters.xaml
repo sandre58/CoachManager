@@ -22,6 +22,7 @@
     <converters:NotConverter x:Key="NotConverter" />
     <converters:ObjectToPropertyConverter x:Key="ObjectToPropertyConverter" />
     <converters:BytesToImageConverter x:Key="BytesToImageConverter" />
+    <converters:ToFormatConverter x:Key="ToFormatConverter" />
 
     <MenuScrollingVisibilityConverter x:Key="MenuScrollingVisibilityConverter" />
 </ResourceDictionary>

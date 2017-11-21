@@ -75,30 +75,43 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConfigurationManager.cs" />
-    <Compile Include="Interactivity\LoginDialogAction.cs" />
-    <Compile Include="Interactivity\WindowDialogAction.cs" />
     <Compile Include="Interactivity\NotificationPopupAction.cs" />
+    <Compile Include="Interactivity\WindowDialogAction.cs" />
     <Compile Include="Interactivity\WorkspaceDialogAction.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="ViewModels\IMessageViewModel.cs" />
+    <Compile Include="ViewModels\ILoginViewModel.cs" />
     <Compile Include="ViewModels\IShellViewModel.cs" />
     <Compile Include="ViewModels\ISplashScreenViewModel.cs" />
+    <Compile Include="ViewModels\MessageViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Compile Include="Views\LoginDialog.xaml.cs">
-      <DependentUpon>LoginDialog.xaml</DependentUpon>
+    <Compile Include="Views\LoginContent.xaml.cs">
+      <DependentUpon>LoginContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MessageContent.xaml.cs">
+      <DependentUpon>MessageContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowDialog.xaml.cs">
+      <DependentUpon>WindowDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\LoginDialog.xaml">
+    <Page Include="Views\LoginContent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\MessageDialog.xaml">
+    <Page Include="Views\MessageContent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WindowDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -108,9 +121,6 @@
     </Page>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="ViewModels\SplashScreenViewModel.cs" />
-    <Compile Include="Views\MessageDialog.xaml.cs">
-      <DependentUpon>MessageDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
       <SubType>Code</SubType>
