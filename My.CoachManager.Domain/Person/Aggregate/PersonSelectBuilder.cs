@@ -50,19 +50,6 @@ namespace My.CoachManager.Domain.Person.Aggregate
         /// <summary>
         /// Creates the select builder.
         /// </summary>
-        public static Func<Contact, TTarget> SelectContact<TTarget>() where TTarget : ContactDto, new()
-        {
-            return x => new TTarget
-            {
-                Id = x.Id,
-                Label = x.Label,
-                Value = x.Value
-            };
-        }
-
-        /// <summary>
-        /// Creates the select builder.
-        /// </summary>
         public static Expression<Func<Player, PlayerDto>> SelectPlayerForList()
         {
             return x => new PlayerDto()
@@ -79,6 +66,8 @@ namespace My.CoachManager.Domain.Person.Aggregate
                 PostalCode = x.PostalCode,
                 PlaceOfBirth = x.PlaceOfBirth,
                 Laterality = x.Laterality,
+                CategoryId = x.CategoryId,
+                CountryId = x.CountryId,
                 Category = x.Category != null ? new CategoryDto()
                 {
                     Id = x.Category.Id,
@@ -95,13 +84,17 @@ namespace My.CoachManager.Domain.Person.Aggregate
                 {
                     Id = e.Id,
                     Label = e.Label,
-                    Value = e.Value
+                    Default = e.Default,
+                    Value = e.Value,
+                    PersonId = e.PersonId
                 }).AsEnumerable(),
                 Phones = x.Contacts.OfType<Phone>().Select(p => new PhoneDto()
                 {
                     Id = p.Id,
                     Label = p.Label,
-                    Value = p.Value
+                    Default = p.Default,
+                    Value = p.Value,
+                    PersonId = p.PersonId
                 }).AsEnumerable()
             };
         }

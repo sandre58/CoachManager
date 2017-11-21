@@ -66,7 +66,10 @@ namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
         /// </summary>
         public void AddPhone()
         {
-            Item.Phones.Add();
+            Item.Phones.Add(new PhoneViewModel
+            {
+                PersonId = Item.Id
+            });
         }
 
         /// <summary>
@@ -88,7 +91,10 @@ namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
         /// </summary>
         public void AddEmail()
         {
-            Item.Emails.Add();
+            Item.Emails.Add(new EmailViewModel
+            {
+                PersonId = Item.Id
+            });
         }
 
         /// <summary>

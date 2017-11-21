@@ -45,11 +45,7 @@ namespace My.CoachManager.Domain.Entities
         public string Description { get; set; }
 
         public string Size { get; set; }
-
-        //public ICollection<Phone> Phones { get; set; }
-
-        //public ICollection<Email> Emails { get; set; }
-
+        
         public ICollection<Contact> Contacts { get; set; }
     }
 }

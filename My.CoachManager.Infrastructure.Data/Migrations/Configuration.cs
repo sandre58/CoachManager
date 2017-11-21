@@ -38,11 +38,13 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
 
             var user1 = new User() { Id = 1, Name = "Stéphane ANDRE (Home)", Login = "andre", Password = "qRBfE9MoPFs=", Mail = "andre.cs2i@gmail.com" };
             var user2 = new User() { Id = 2, Name = "Stéphane ANDRE (Merial)", Login = "E0214719", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@merial.com" };
+            var user3 = new User() { Id = 3, Name = "Vincent SOURDEIX (BI)", Login = "E0268620", Password = "qRBfE9MoPFs=", Mail = "vincentsourdeix@test.fr" };
 
             role1.Permissions.Add(perm1);
             role1.Permissions.Add(perm2);
             user1.Roles.Add(role1);
             user2.Roles.Add(role1);
+            user3.Roles.Add(role1);
 
             context.Permissions.AddOrUpdate(r => r.Label, perm1);
             context.Permissions.AddOrUpdate(r => r.Label, perm2);
@@ -53,6 +55,7 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
 
             context.Users.AddOrUpdate(u => u.Name, user1);
             context.Users.AddOrUpdate(u => u.Name, user2);
+            context.Users.AddOrUpdate(u => u.Name, user3);
             context.Commit();
 
             var player1 = new Player()
@@ -93,6 +96,46 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     Value = "0664411391"
                 }
             };
+
+            //var player2 = new Player()
+            //{
+            //    CategoryId = 3,
+            //    Address = "Impasse du Babory",
+            //    Birthdate = new DateTime(1986, 12, 4),
+            //    City = "Vic le comte",
+            //    CountryId = 76,
+            //    FirstName = "Vincent",
+            //    Gender = GenderType.Male,
+            //    LastName = "Sourdeix",
+            //    Laterality = Laterality.RightHander,
+            //    PlaceOfBirth = "Tulle",
+            //    PostalCode = "63270",
+            //    ShoesSize = 42,
+            //    Size = "L",
+            //    LicenseNumber = "123456789"
+            //};
+
+            //var contacts2 = new List<Contact>
+            //{
+            //    new Email
+            //    {
+            //        Label = "Principale",
+            //        Default = true,
+            //        Value = "visourdeix@gmail.com"
+            //    },
+            //    new Email
+            //    {
+            //        Label = "Pub",
+            //        Default = false,
+            //        Value = "vincentsourdeix@gmail.com"
+            //    },
+            //    new Phone
+            //    {
+            //        Label = "Portable",
+            //        Default = true,
+            //        Value = "0679189256"
+            //    }
+            //};
 
             player1.Contacts.AddRange(contacts);
 
