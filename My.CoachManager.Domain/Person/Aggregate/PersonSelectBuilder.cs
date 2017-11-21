@@ -84,6 +84,7 @@ namespace My.CoachManager.Domain.Person.Aggregate
                 {
                     Id = e.Id,
                     Label = e.Label,
+                    Default = e.Default,
                     Value = e.Value,
                     PersonId = e.PersonId
                 }).AsEnumerable(),
@@ -91,6 +92,7 @@ namespace My.CoachManager.Domain.Person.Aggregate
                 {
                     Id = p.Id,
                     Label = p.Label,
+                    Default = p.Default,
                     Value = p.Value,
                     PersonId = p.PersonId
                 }).AsEnumerable()

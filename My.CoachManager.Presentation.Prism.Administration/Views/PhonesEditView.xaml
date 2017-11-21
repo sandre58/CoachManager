@@ -32,7 +32,7 @@
 
                 <controls:Icon Grid.Column="0" Size="Medium" Content="{StaticResource PhoneGeometry}" HorizontalAlignment="Center" />
 
-                <TextBox x:Name="EmailValue" Grid.Column="1"
+                <TextBox x:Name="PhoneValue" Grid.Column="1"
                                  Width="{StaticResource SmallLargeWidth}"
                                  Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
                                  parameters:FormParameters.Label="{x:Static entities:ContactResources.Phone}" />
