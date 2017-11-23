@@ -1,16 +1,12 @@
 ﻿namespace My.CoachManager.Domain.Core
 {
     /// <summary>
-    /// Services to allow changes to an entity to be tracked.
+    /// Provides properties for an entity containing a label and a code.
     /// </summary>
     public interface ILabelable
     {
-        #region Properties
-
         string Label { get; set; }
 
         string Code { get; set; }
-
-        #endregion Properties
     }
 }

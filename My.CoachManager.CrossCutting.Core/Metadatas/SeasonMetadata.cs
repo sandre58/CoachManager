@@ -5,6 +5,9 @@ using My.CoachManager.CrossCutting.Core.Resources.Entities;
 
 namespace My.CoachManager.CrossCutting.Core.Metadatas
 {
+    /// <summary>
+    /// Provides metadata for a Season Entity.
+    /// </summary>
     public class SeasonMetadata : DataEntityMetadata
     {
         [Display(Name = "StartDate", ResourceType = typeof(SeasonResources))]

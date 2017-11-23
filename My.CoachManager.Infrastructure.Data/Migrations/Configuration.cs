@@ -61,16 +61,19 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
             var player1 = new Player()
             {
                 CategoryId = 3,
-                Address = "9 rue Marivaux",
+                Address = new Address()
+                {
+                    Row1 = "9 rue Marivaux",
+                    PostalCode = "63000",
+                    City = "Clermont-Ferrand"
+                },
                 Birthdate = new DateTime(1989, 12, 5),
-                City = "Clermont-Ferrand",
                 CountryId = 76,
                 FirstName = "Stéphane",
                 Gender = GenderType.Male,
                 LastName = "André",
                 Laterality = Laterality.LeftHander,
                 PlaceOfBirth = "Nevers",
-                PostalCode = "63000",
                 ShoesSize = 44,
                 Size = "L"
             };

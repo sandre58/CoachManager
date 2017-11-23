@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using My.CoachManager.Application.Dtos.Admin;
+using My.CoachManager.Application.Dtos.Administration;
 using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Application.Dtos.Mapping

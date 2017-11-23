@@ -5,6 +5,9 @@ using My.CoachManager.CrossCutting.Core.Resources.Entities;
 
 namespace My.CoachManager.CrossCutting.Core.Metadatas
 {
+    /// <summary>
+    /// Provides metadata for a User Entity.
+    /// </summary>
     public class UserMetadata : EntityMetadata
     {
         [Display(Name = "Name", ResourceType = typeof(UserResources))]

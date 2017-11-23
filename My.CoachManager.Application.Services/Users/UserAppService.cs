@@ -3,7 +3,7 @@ using My.CoachManager.Application.Core;
 using My.CoachManager.Application.Dtos.Mapping;
 using My.CoachManager.Application.Dtos.Users;
 using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Domain.User.Aggregate;
+using My.CoachManager.Domain.UserModule.Aggregate;
 
 namespace My.CoachManager.Application.Services.Users
 {

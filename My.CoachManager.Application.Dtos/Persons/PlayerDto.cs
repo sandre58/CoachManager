@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using My.CoachManager.Application.Dtos.Admin;
+using My.CoachManager.Application.Dtos.Administration;
 using My.CoachManager.CrossCutting.Core.Enums;
 
 namespace My.CoachManager.Application.Dtos.Persons
 {
     /// <summary>
-    /// Players list Dtos.
+    /// Data Transfer Object for Player item.
     /// </summary>
     [DataContract]
     public class PlayerDto : PersonDto
@@ -21,15 +21,15 @@ namespace My.CoachManager.Application.Dtos.Persons
         public Laterality Laterality { get; set; }
 
         [DataMember]
+        public int? Height { get; set; }
+
+        [DataMember]
+        public int? Weight { get; set; }
+
+        [DataMember]
         public int? ShoesSize { get; set; }
 
         [DataMember]
         public ICollection<PlayerPositionDto> Positions { get; set; }
-
-        [DataMember]
-        public ICollection<PlayerHeightDto> Heights { get; set; }
-
-        [DataMember]
-        public ICollection<PlayerWeightDto> Weights { get; set; }
     }
 }

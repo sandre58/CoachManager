@@ -30,21 +30,25 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
     {
         #region Properties
 
+        public virtual DbSet<Address> Adresses { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Country> Countries { get; set; }
-        public virtual DbSet<Contact> Contacts { get; set; }
-        public virtual DbSet<Player> Players { get; set; }
+        public virtual DbSet<Club> Clubs { get; set; }
         public virtual DbSet<Coach> Coachs { get; set; }
+        public virtual DbSet<Contact> Contacts { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Function> Functions { get; set; }
         public virtual DbSet<Permission> Permissions { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
+        public virtual DbSet<Player> Players { get; set; }
         public virtual DbSet<PlayerPosition> PlayerPositions { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Roster> Roster { get; set; }
+        public virtual DbSet<RosterPlayer> RosterPlayers { get; set; }
+        public virtual DbSet<RosterCoach> RosterCoachs { get; set; }
         public virtual DbSet<Season> Seasons { get; set; }
-        public virtual DbSet<SeasonCoach> SeasonCoaches { get; set; }
-        public virtual DbSet<SeasonPlayer> SeasonPlayers { get; set; }
-        public virtual DbSet<Squad> Squad { get; set; }
-        public virtual DbSet<SquadPlayer> SquadPlayers { get; set; }
+        public virtual DbSet<Squad> Squads { get; set; }
+        public virtual DbSet<Team> Teams { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         #endregion Properties
@@ -78,9 +82,9 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                     }
                     return value.ToString();
                 }));
-            
+
             modelBuilder.Entity<Player>().HasRequired(p => p.Category).WithMany().WillCascadeOnDelete(false);
-            
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -378,7 +382,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         /// <param name="entity"></param>
         /// <param name="property"></param>
         /// <param name="isForeignKey"></param>
-        private void UpdateChildrenInternal<T>(T entity, PropertyInfo property, bool isForeignKey) where T : class,IEntity
+        private void UpdateChildrenInternal<T>(T entity, PropertyInfo property, bool isForeignKey) where T : class, IEntity
         {
             var type = typeof(T);
             var objType = property.PropertyType.GetGenericArguments()[0];

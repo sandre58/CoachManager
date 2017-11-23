@@ -4,6 +4,9 @@ using My.CoachManager.CrossCutting.Core.Resources.Entities;
 
 namespace My.CoachManager.CrossCutting.Core.Metadatas
 {
+    /// <summary>
+    /// Provides metadata for a Contact Entity.
+    /// </summary>
     public abstract class ContactMetadata : EntityMetadata
     {
         [Display(Name = "Label", ResourceType = typeof(ContactResources))]

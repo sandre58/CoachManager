@@ -46,13 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressViewModel.cs" />
     <Compile Include="CategoryViewModel.cs" />
     <Compile Include="CityViewModel.cs" />
-    <Compile Include="CoachViewModel.cs" />
     <Compile Include="ContactsCollection.cs" />
     <Compile Include="ContactViewModel.cs" />
-    <Compile Include="PlayerWeightViewModel.cs" />
-    <Compile Include="PlayerHeightViewModel.cs" />
     <Compile Include="Mapping\PersonProfile.cs" />
     <Compile Include="PlayerPositionViewModel.cs" />
     <Compile Include="CountryViewModel.cs" />
@@ -60,13 +58,11 @@
     <Compile Include="PersonViewModel.cs" />
     <Compile Include="PhoneViewModel.cs" />
     <Compile Include="PlayerViewModel.cs" />
-    <Compile Include="Mapping\PositionProfile.cs" />
-    <Compile Include="Mapping\SeasonProfile.cs" />
     <Compile Include="PositionViewModel.cs" />
     <Compile Include="SeasonViewModel.cs" />
     <Compile Include="DataEntityViewModel.cs" />
     <Compile Include="Mapping\AutoMapperExtension.cs" />
-    <Compile Include="Mapping\CategoryProfile.cs" />
+    <Compile Include="Mapping\AdministrationProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

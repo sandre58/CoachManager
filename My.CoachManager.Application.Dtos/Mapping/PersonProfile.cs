@@ -11,12 +11,11 @@ namespace My.CoachManager.Application.Dtos.Mapping
         {
             // Persons
             CreateMap<Player, PlayerDto>().ReverseMap();
-            CreateMap<Coach, CoachDto>().ReverseMap();
             CreateMap<Person, PersonDto>()
                 .ForMember(x => x.Emails, opt => opt.MapFrom(x => x.Contacts.OfType<Email>().ToList()))
                 .ForMember(x => x.Phones, opt => opt.MapFrom(x => x.Contacts.OfType<Phone>().ToList()))
                 .Include<Player, PlayerDto>()
-                .Include<Coach, CoachDto>().ReverseMap()
+                .ReverseMap()
                 .ForMember(x => x.Contacts, opt => opt.MapFrom(x => x.Emails.ToList().Cast<ContactDto>().Union(x.Phones.ToList())));
 
             // Contacts
@@ -28,8 +27,6 @@ namespace My.CoachManager.Application.Dtos.Mapping
 
             // Foreign properties
             CreateMap<PlayerPosition, PlayerPositionDto>().ReverseMap();
-            CreateMap<PlayerHeight, PlayerHeightDto>().ReverseMap();
-            CreateMap<PlayerWeight, PlayerWeight>().ReverseMap();
 
             // Misc
             CreateMap<Country, CountryDto>().ReverseMap();

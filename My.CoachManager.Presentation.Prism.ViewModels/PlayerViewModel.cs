@@ -9,16 +9,20 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
     [MetadataType(typeof(PlayerMetadata))]
     public class PlayerViewModel : PersonViewModel
     {
+        /// <summary>
+        /// Initialise a new instance of <see cref="PlayerViewModel"/>.
+        /// </summary>
         public PlayerViewModel()
         {
             Laterality = PlayerConstants.DefaultLaterality;
             Positions = new ObservableCollection<PlayerPositionViewModel>();
-            Heights = new ObservableCollection<PlayerHeightViewModel>();
-            Weights = new ObservableCollection<PlayerWeightViewModel>();
         }
 
         private int? _categoryId;
 
+        /// <summary>
+        /// Gets or sets the category id.
+        /// </summary>
         public int? CategoryId
         {
             get { return _categoryId; }
@@ -27,6 +31,9 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
 
         private CategoryViewModel _category;
 
+        /// <summary>
+        /// Gets or sets the category.
+        /// </summary>
         public CategoryViewModel Category
         {
             get { return _category; }
@@ -35,14 +42,42 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
 
         private Laterality _laterality;
 
+        /// <summary>
+        /// Gets or sets the latérality.
+        /// </summary>
         public Laterality Laterality
         {
             get { return _laterality; }
             set { SetProperty(ref _laterality, value); }
         }
 
+        private int? _height;
+
+        /// <summary>
+        /// Gets or sets the height.
+        /// </summary>
+        public int? Height
+        {
+            get { return _height; }
+            set { SetProperty(ref _height, value); }
+        }
+
+        private int? _weight;
+
+        /// <summary>
+        /// Gets or sets the weight.
+        /// </summary>
+        public int? Weight
+        {
+            get { return _weight; }
+            set { SetProperty(ref _weight, value); }
+        }
+
         private int? _shoesSize;
 
+        /// <summary>
+        /// Gets or sets the shoes size.
+        /// </summary>
         public int? ShoesSize
         {
             get { return _shoesSize; }
@@ -51,34 +86,15 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
 
         private ObservableCollection<PlayerPositionViewModel> _positions;
 
+        /// <summary>
+        /// Gets or set the positions.
+        /// </summary>
         public ObservableCollection<PlayerPositionViewModel> Positions
         {
             get { return _positions; }
             set
             {
                 SetProperty(ref _positions, value);
-            }
-        }
-
-        private ObservableCollection<PlayerHeightViewModel> _heights;
-
-        public ObservableCollection<PlayerHeightViewModel> Heights
-        {
-            get { return _heights; }
-            set
-            {
-                SetProperty(ref _heights, value);
-            }
-        }
-
-        private ObservableCollection<PlayerWeightViewModel> _weights;
-
-        public ObservableCollection<PlayerWeightViewModel> Weights
-        {
-            get { return _weights; }
-            set
-            {
-                SetProperty(ref _weights, value);
             }
         }
     }

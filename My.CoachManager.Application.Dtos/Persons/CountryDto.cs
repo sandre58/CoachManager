@@ -3,7 +3,7 @@
 namespace My.CoachManager.Application.Dtos.Persons
 {
     /// <summary>
-    /// Players list Dtos.
+    /// Data Transfer Object for Country item.
     /// </summary>
     [DataContract]
     public class CountryDto : DataEntityDto

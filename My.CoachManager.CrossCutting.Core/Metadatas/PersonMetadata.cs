@@ -8,6 +8,9 @@ using My.CoachManager.CrossCutting.Core.Resources.Entities;
 
 namespace My.CoachManager.CrossCutting.Core.Metadatas
 {
+    /// <summary>
+    /// Provides metadata for a Person Entity.
+    /// </summary>
     public abstract class PersonMetadata : EntityMetadata
     {
         [Display(Name = "LastName", ResourceType = typeof(PersonResources))]
@@ -30,20 +33,13 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
         [Display(Name = "Photo", ResourceType = typeof(PersonResources))]
         public byte[] Photo { get; set; }
 
-        [Display(Name = "Address", ResourceType = typeof(PersonResources))]
-        public string Address { get; set; }
-
-        [Display(Name = "PostalCode", ResourceType = typeof(PersonResources))]
-        [MaxLength(5, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        public string PostalCode { get; set; }
-
-        [Display(Name = "City", ResourceType = typeof(PersonResources))]
-        public string City { get; set; }
-
         [Display(Name = "Gender", ResourceType = typeof(PersonResources))]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         [DefaultValue(PlayerConstants.DefaultGender)]
         public GenderType Gender { get; set; }
+
+        [Display(Name = "Address", ResourceType = typeof(PersonResources))]
+        public int? Address { get; set; }
 
         [Display(Name = "LicenseNumber", ResourceType = typeof(PersonResources))]
         [MaxLength(10, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
@@ -55,6 +51,5 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
         [Display(Name = "Size", ResourceType = typeof(PersonResources))]
         [MaxLength(4, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public string Size { get; set; }
-
     }
 }

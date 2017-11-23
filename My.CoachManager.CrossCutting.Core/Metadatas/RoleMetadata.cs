@@ -3,6 +3,9 @@ using My.CoachManager.CrossCutting.Core.Resources.Entities;
 
 namespace My.CoachManager.CrossCutting.Core.Metadatas
 {
+    /// <summary>
+    /// Provides metadata for a Role Entity.
+    /// </summary>
     public class RoleMetadata : DataEntityMetadata
     {
         [Display(Name = "Permissions", ResourceType = typeof(RoleResources))]

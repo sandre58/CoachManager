@@ -7,6 +7,9 @@ using My.CoachManager.CrossCutting.Core.Resources.Entities;
 
 namespace My.CoachManager.CrossCutting.Core.Metadatas
 {
+    /// <summary>
+    /// Provides metadata for a Player Entity.
+    /// </summary>
     public class PlayerMetadata : PersonMetadata
     {
         [Display(Name = "Category", ResourceType = typeof(PlayerResources))]
@@ -18,16 +21,16 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
         [DefaultValue(PlayerConstants.DefaultLaterality)]
         public Laterality Laterality { get; set; }
 
+        [Display(Name = "Height", ResourceType = typeof(PlayerResources))]
+        public int? Height { get; set; }
+
+        [Display(Name = "Weight", ResourceType = typeof(PlayerResources))]
+        public int? Weight { get; set; }
+
         [Display(Name = "ShoesSize", ResourceType = typeof(PlayerResources))]
         public int? ShoesSize { get; set; }
 
         [Display(Name = "Positions", ResourceType = typeof(PlayerResources))]
         public object Positions { get; set; }
-
-        [Display(Name = "Heights", ResourceType = typeof(PlayerResources))]
-        public object Heights { get; set; }
-
-        [Display(Name = "Weights", ResourceType = typeof(PlayerResources))]
-        public object Weights { get; set; }
     }
 }

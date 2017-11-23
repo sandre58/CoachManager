@@ -212,6 +212,7 @@
     <Compile Include="Constants\RoleConstants.cs" />
     <Compile Include="Constants\SqlConstants.cs" />
     <Compile Include="Cryptography\TripleDesEncryptor.cs" />
+    <Compile Include="Enums\Ground.cs" />
     <Compile Include="Enums\LicenseState.cs" />
     <Compile Include="Enums\Laterality.cs" />
     <Compile Include="Enums\GenderType.cs" />
@@ -225,15 +226,18 @@
     <Compile Include="Helpers\ConvertHelper.cs" />
     <Compile Include="Helpers\ParameterHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Metadatas\RosterPlayerMetadata.cs" />
+    <Compile Include="Metadatas\RosterCoachMetadata.cs" />
+    <Compile Include="Metadatas\RosterMetadata.cs" />
+    <Compile Include="Metadatas\AddressMetadata.cs" />
+    <Compile Include="Metadatas\ClubMetadata.cs" />
     <Compile Include="Metadatas\CategoryMetadata.cs" />
     <Compile Include="Metadatas\CoachMetadata.cs" />
-    <Compile Include="Metadatas\PlayerWeightMetadata.cs" />
-    <Compile Include="Metadatas\PlayerHeightMetadata.cs" />
-    <Compile Include="Metadatas\SeasonCoachMetadata.cs" />
+    <Compile Include="Metadatas\FunctionMetadata.cs" />
     <Compile Include="Metadatas\PersonMetadata.cs" />
+    <Compile Include="Metadatas\TeamMetadata.cs" />
+    <Compile Include="Metadatas\StadiumMetadata.cs" />
     <Compile Include="Metadatas\SquadMetadata.cs" />
-    <Compile Include="Metadatas\SquadPlayerMetadata.cs" />
-    <Compile Include="Metadatas\SeasonPlayerMetadata.cs" />
     <Compile Include="Metadatas\ForeignEntityMetadata.cs" />
     <Compile Include="Metadatas\EntityMetadataBase.cs" />
     <Compile Include="Metadatas\PlayerPositionMetadata.cs" />
@@ -252,6 +256,36 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Entities\CoachResources.Designer.cs">
       <DependentUpon>CoachResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Entities\RosterResources.Designer.cs">
+      <DependentUpon>RosterResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Entities\TeamResources.Designer.cs">
+      <DependentUpon>TeamResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Entities\StadiumResources.Designer.cs">
+      <DependentUpon>StadiumResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Enums\GroundResources.Designer.cs">
+      <DependentUpon>GroundResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Entities\AddressResources.Designer.cs">
+      <DependentUpon>AddressResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Entities\ClubResources.Designer.cs">
+      <DependentUpon>ClubResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -325,11 +359,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\Entities\PermissionResources.Designer.cs">
-      <DependentUpon>PermissionResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Resources\Entities\RoleResources.Designer.cs">
       <DependentUpon>RoleResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -362,6 +391,36 @@
     <EmbeddedResource Include="Resources\Entities\CoachResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CoachResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Entities\RosterResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RosterResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Entities\TeamResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TeamResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Entities\StadiumResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StadiumResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Enums\GroundResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GroundResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Entities\AddressResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddressResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Entities\ClubResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClubResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Entities\PersonResources.resx">
@@ -428,11 +487,6 @@
     <EmbeddedResource Include="Resources\Entities\UserResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UserResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Entities\PermissionResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>PermissionResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Entities\RoleResources.resx">

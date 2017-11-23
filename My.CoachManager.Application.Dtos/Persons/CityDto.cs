@@ -3,7 +3,7 @@
 namespace My.CoachManager.Application.Dtos.Persons
 {
     /// <summary>
-    /// Players list Dtos.
+    /// Data Transfer Object for City item.
     /// </summary>
     [DataContract]
     public class CityDto

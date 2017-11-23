@@ -1,36 +1,61 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Metadatas;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace My.CoachManager.Domain.Entities
 {
+    /// <summary>
+    /// Provides properties for a Player Entity.
+    /// </summary>
     [Table("Players")]
     [MetadataType(typeof(PlayerMetadata))]
     public class Player : Person
     {
+        /// <summary>
+        /// Initalize a new instance of <see cref="Player"/>.
+        /// </summary>
         public Player()
         {
             Laterality = PlayerConstants.DefaultLaterality;
             Positions = new List<PlayerPosition>();
-            Heights = new List<PlayerHeight>();
-            Weights = new List<PlayerWeight>();
         }
 
+        /// <summary>
+        /// Gets or sets the category id.
+        /// </summary>
         public int CategoryId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the category.
+        /// </summary>
         public Category Category { get; set; }
 
+        /// <summary>
+        /// Gets or sets the latérality.
+        /// </summary>
         public Laterality Laterality { get; set; }
 
+        /// <summary>
+        /// Gets or sets the height.
+        /// </summary>
+        public int? Height { get; set; }
+
+        /// <summary>
+        /// Gets or sets the weight.
+        /// </summary>
+        public int? Weight { get; set; }
+
+        /// <summary>
+        /// Gets or sets the shoes size.
+        /// </summary>
         public int? ShoesSize { get; set; }
 
+        /// <summary>
+        /// Gets or set the positions.
+        /// </summary>
         public ICollection<PlayerPosition> Positions { get; set; }
-
-        public ICollection<PlayerHeight> Heights { get; set; }
-
-        public ICollection<PlayerWeight> Weights { get; set; }
     }
 }
