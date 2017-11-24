@@ -7,8 +7,8 @@
     <ProjectGuid>{FA8B3D6E-F685-42BB-8225-20A4037A97BD}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>My.CoachManager.Presentation.Prism.StatusBar</RootNamespace>
-    <AssemblyName>My.CoachManager.Presentation.Prism.StatusBar</AssemblyName>
+    <RootNamespace>My.CoachManager.Presentation.Prism.StatusBarModule</RootNamespace>
+    <AssemblyName>My.CoachManager.Presentation.Prism.StatusBarModule</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

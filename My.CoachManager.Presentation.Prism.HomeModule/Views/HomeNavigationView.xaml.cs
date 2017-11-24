@@ -1,6 +1,6 @@
 ﻿using Prism.Regions;
 
-namespace My.CoachManager.Presentation.Prism.Home.Views
+namespace My.CoachManager.Presentation.Prism.HomeModule.Views
 {
     /// <summary>
     /// Logique d'interaction pour HomeNavigationItemView.xaml

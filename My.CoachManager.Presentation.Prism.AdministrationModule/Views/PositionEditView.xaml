@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="My.CoachManager.Presentation.Prism.Administration.Views.PositionEditView"
+﻿<UserControl x:Class="My.CoachManager.Presentation.Prism.AdministrationModule.Views.PositionEditView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,10 +6,10 @@
              mc:Ignorable="d"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
-             xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Administration.Views"
-             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Administration.ViewModels"
              xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings;assembly=My.CoachManager.Presentation.Prism.Resources"
              xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:views1="clr-namespace:My.CoachManager.Presentation.Prism.AdministrationModule.Views"
+             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.AdministrationModule.ViewModels"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:PositionEditViewModel}"
              d:DesignHeight="350" d:DesignWidth="600">
@@ -23,7 +23,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <views:DataEditView Grid.Column="0" Grid.Row="0" DataContext="{Binding Item}" Margin="0" />
+            <views1:DataEditView Grid.Column="0" Grid.Row="0" DataContext="{Binding Item}" Margin="0" />
         </Grid>
 
         <controls:WorkspaceView.Commands>

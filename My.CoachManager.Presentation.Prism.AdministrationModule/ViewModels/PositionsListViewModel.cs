@@ -2,15 +2,16 @@
 using System.Linq;
 using My.CoachManager.Application.Dtos.Administration;
 using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Presentation.Prism.Administration.Resources.Strings;
-using My.CoachManager.Presentation.Prism.Administration.Views;
+using My.CoachManager.Presentation.Prism.AdministrationModule.Resources.Strings;
+using My.CoachManager.Presentation.Prism.AdministrationModule.Views;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
+using Prism.Events;
 
-namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
+namespace My.CoachManager.Presentation.Prism.AdministrationModule.ViewModels
 {
     public class PositionsListViewModel : OrderedListViewModel<PositionViewModel, PositionEditView, PositionEditViewModel>, IPositionsListViewModel
     {
@@ -25,8 +26,8 @@ namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="PositionsListViewModel"/>.
         /// </summary>
-        public PositionsListViewModel(IAdminService adminService, IDialogService dialogService, ILogger logger)
-            : base(dialogService, logger)
+        public PositionsListViewModel(IAdminService adminService, IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
+            : base(dialogService, eventAggregator, logger)
         {
             _adminService = adminService;
 

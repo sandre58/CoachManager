@@ -7,8 +7,8 @@
     <ProjectGuid>{4CA93004-D321-4897-A8AD-EF368D5BD57E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>My.CoachManager.Presentation.Prism.Administration</RootNamespace>
-    <AssemblyName>My.CoachManager.Presentation.Prism.Administration</AssemblyName>
+    <RootNamespace>My.CoachManager.Presentation.Prism.AdministrationModule</RootNamespace>
+    <AssemblyName>My.CoachManager.Presentation.Prism.AdministrationModule</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

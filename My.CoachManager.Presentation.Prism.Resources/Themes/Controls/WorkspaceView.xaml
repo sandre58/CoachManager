@@ -17,29 +17,6 @@
         <ResourceDictionary Source="../Controls/ApplicationBar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <DataTemplate x:Key="DefaultWorkspaceViewHeaderTemplate" DataType="viewModels:WorkspaceViewModel">
-        <Grid>
-
-            <Grid.Resources>
-                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource HeaderStyle}" />
-                <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
-                    <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
-                </Style>
-            </Grid.Resources>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <StackPanel Orientation="Horizontal" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Center">
-                <controls:CommandButton Style="{StaticResource BackCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoBackCommand}" />
-                <controls:CommandButton Style="{StaticResource NextCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoForwardCommand}" />
-            </StackPanel>
-            <TextBlock Grid.Column="1" Text="{Binding Title}" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Center" />
-        </Grid>
-    </DataTemplate>
-
     <DataTemplate x:Key="DefaultWorkspaceDialogViewHeaderTemplate" DataType="viewModels:WorkspaceDialogViewModel">
         <Grid>
 
@@ -77,7 +54,6 @@
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="ApplicationBarStyle" Value="{StaticResource {x:Type controls:ApplicationBar}}" />
-        <Setter Property="HeaderTemplate" Value="{StaticResource DefaultWorkspaceViewHeaderTemplate}" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
         <Setter Property="Template">
             <Setter.Value>

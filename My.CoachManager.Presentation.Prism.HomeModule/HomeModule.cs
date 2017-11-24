@@ -1,13 +1,13 @@
 ﻿using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
-using My.CoachManager.Presentation.Prism.Home.Views;
 using My.CoachManager.Presentation.Prism.Core;
-using My.CoachManager.Presentation.Prism.Home.ViewModels;
+using My.CoachManager.Presentation.Prism.HomeModule.ViewModels;
+using My.CoachManager.Presentation.Prism.HomeModule.Views;
 using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
 
-namespace My.CoachManager.Presentation.Prism.Home
+namespace My.CoachManager.Presentation.Prism.HomeModule
 {
     public class HomeModule : IModule
     {

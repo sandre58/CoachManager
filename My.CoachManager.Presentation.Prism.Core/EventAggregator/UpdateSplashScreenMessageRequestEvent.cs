@@ -2,7 +2,7 @@
 
 namespace My.CoachManager.Presentation.Prism.Core.EventAggregator
 {
-    public class SplashScreenMessageEvent : PubSubEvent<string>
+    public class UpdateSplashScreenMessageRequestEvent : PubSubEvent<string>
     {
     }
 }

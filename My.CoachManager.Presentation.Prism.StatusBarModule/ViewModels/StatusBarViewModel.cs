@@ -6,7 +6,7 @@ using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
 using Prism.Events;
 
-namespace My.CoachManager.Presentation.Prism.StatusBar.ViewModels
+namespace My.CoachManager.Presentation.Prism.StatusBarModule.ViewModels
 {
     internal class StatusBarViewModel : ScreenViewModel, IStatusBarViewModel
     {
@@ -29,7 +29,7 @@ namespace My.CoachManager.Presentation.Prism.StatusBar.ViewModels
         public StatusBarViewModel(IEventAggregator eventAggregator, IDialogService dialogService, ILogger logger)
             : base(dialogService, logger)
         {
-            eventAggregator.GetEvent<StatusBarMessageEvent>().Subscribe(OnMessageChanged, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<UpdateStatusBarMessageRequestEvent>().Subscribe(OnMessageChanged, ThreadOption.UIThread, true);
 
             var assembly = Assembly.GetEntryAssembly();
 

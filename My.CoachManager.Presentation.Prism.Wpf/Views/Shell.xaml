@@ -41,7 +41,36 @@
 
             <!-- Main Region -->
             <Grid Grid.Row="0" Grid.Column="1">
-                <controls:TransitioningContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.WorkspaceRegion}" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!--Header -->
+                <Grid Grid.Row="0" Height="100" Visibility="{Binding ActiveWorkspace, Converter={StaticResource NullToVisibilityConverter}}">
+                    <Border Padding="{StaticResource VeryLargeBottomVerticalMargin}" Focusable="False">
+                        <Grid VerticalAlignment="Bottom" Margin="{StaticResource LargeHorizontalMargin}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Center">
+                                <controls:CommandButton Style="{StaticResource BackCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoBackCommand}" />
+                                <controls:CommandButton Style="{StaticResource NextCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoForwardCommand}" />
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Text="{Binding ActiveWorkspace.Title}" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Top" Style="{StaticResource HeaderStyle}" />
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <!-- Workspace -->
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <controls:TransitioningContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.WorkspaceRegion}" />
+                </Grid>
             </Grid>
 
             <!-- Left Region -->

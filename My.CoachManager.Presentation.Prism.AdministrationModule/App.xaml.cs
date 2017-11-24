@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace My.CoachManager.Presentation.Prism.Wpf
+﻿namespace My.CoachManager.Presentation.Prism.AdministrationModule
 {
     /// <summary>
     /// Logique d'interaction pour App.xaml

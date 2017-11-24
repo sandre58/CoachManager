@@ -1,6 +1,6 @@
-﻿using My.CoachManager.Presentation.Prism.Administration.ViewModels;
+﻿using My.CoachManager.Presentation.Prism.AdministrationModule.ViewModels;
 
-namespace My.CoachManager.Presentation.Prism.Administration.Views
+namespace My.CoachManager.Presentation.Prism.AdministrationModule.Views
 {
     /// <summary>
     /// Logique d'interaction pour CategoriesListView.xaml

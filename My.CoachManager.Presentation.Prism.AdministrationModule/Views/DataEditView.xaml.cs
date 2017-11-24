@@ -1,4 +1,4 @@
-﻿namespace My.CoachManager.Presentation.Prism.Administration.Views
+﻿namespace My.CoachManager.Presentation.Prism.AdministrationModule.Views
 {
     /// <summary>
     /// Logique d'interaction pour DataEditView.xaml

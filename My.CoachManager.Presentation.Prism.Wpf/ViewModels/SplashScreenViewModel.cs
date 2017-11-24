@@ -32,7 +32,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         {
             _eventAggregator = eventAggregator;
 
-            _eventAggregator.GetEvent<SplashScreenMessageEvent>().Subscribe(OnUpdateMessage, ThreadOption.UIThread, true);
+            _eventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Subscribe(OnUpdateMessage, ThreadOption.UIThread, true);
 
             var assembly = Assembly.GetEntryAssembly();
 

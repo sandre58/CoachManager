@@ -1,13 +1,13 @@
 ﻿using My.CoachManager.Application.Dtos.Administration;
 using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Presentation.Prism.Administration.Resources.Strings;
+using My.CoachManager.Presentation.Prism.AdministrationModule.Resources.Strings;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
 
-namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
+namespace My.CoachManager.Presentation.Prism.AdministrationModule.ViewModels
 {
     public class CategoryEditViewModel : EditViewModel<CategoryViewModel>, ICategoryEditViewModel
     {

@@ -7,8 +7,8 @@
     <ProjectGuid>{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>My.CoachManager.Presentation.Prism.Home</RootNamespace>
-    <AssemblyName>My.CoachManager.Presentation.Prism.Home</AssemblyName>
+    <RootNamespace>My.CoachManager.Presentation.Prism.HomeModule</RootNamespace>
+    <AssemblyName>My.CoachManager.Presentation.Prism.HomeModule</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -91,6 +91,10 @@
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Core\My.CoachManager.Presentation.Prism.Core.csproj">
       <Project>{3f11e745-d328-4654-a3c9-4bfc9bf6b9ab}</Project>
       <Name>My.CoachManager.Presentation.Prism.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Resources\My.CoachManager.Presentation.Prism.Resources.csproj">
+      <Project>{2d290fd9-5b64-4af4-a295-2b4cde6eb330}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

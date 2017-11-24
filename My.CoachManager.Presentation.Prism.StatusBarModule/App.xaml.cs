@@ -1,4 +1,4 @@
-﻿namespace My.CoachManager.Presentation.Prism.StatusBar
+﻿namespace My.CoachManager.Presentation.Prism.StatusBarModule
 {
     /// <summary>
     /// Logique d'interaction pour App.xaml

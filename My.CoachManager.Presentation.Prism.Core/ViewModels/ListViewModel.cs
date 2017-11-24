@@ -8,6 +8,7 @@ using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using Prism.Commands;
+using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
@@ -29,9 +30,10 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// Initialise a new instance of <see cref="ListViewModel{TEntityViewModel,TEditView,TEditViewModel}"/>.
         /// </summary>
         /// <param name="dialogService">The dialog service.</param>
+        /// <param name="eventAggregator"></param>
         /// <param name="logger">The logger.</param>
-        protected ListViewModel(IDialogService dialogService, ILogger logger)
-            : base(dialogService, logger)
+        protected ListViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
+            : base(dialogService, eventAggregator, logger)
         {
             AddCommand = new DelegateCommand(Add, CanAdd);
             RemoveCommand = new DelegateCommand<TEntityViewModel>(Remove, CanRemove);

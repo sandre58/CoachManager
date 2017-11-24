@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Presentation.Prism.Core.Services;
-using My.CoachManager.Presentation.Prism.Core.ViewModels;
-using My.CoachManager.Presentation.Prism.ViewModels;
-using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using System.Linq;
 using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.CrossCutting.Core.Constants;
-using My.CoachManager.Presentation.Prism.Administration.Resources.Strings;
+using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Presentation.Prism.AdministrationModule.Resources.Strings;
+using My.CoachManager.Presentation.Prism.Core.Services;
+using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
+using My.CoachManager.Presentation.Prism.ViewModels;
+using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
 using Prism.Commands;
 
-namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
+namespace My.CoachManager.Presentation.Prism.AdministrationModule.ViewModels
 {
     public partial class PlayerEditViewModel : EditViewModel<PlayerViewModel>, IPlayerEditViewModel
     {

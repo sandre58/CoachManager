@@ -1,13 +1,13 @@
 ﻿using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
-using My.CoachManager.Presentation.Prism.Administration.ViewModels;
-using My.CoachManager.Presentation.Prism.Administration.Views;
+using My.CoachManager.Presentation.Prism.AdministrationModule.ViewModels;
+using My.CoachManager.Presentation.Prism.AdministrationModule.Views;
 using My.CoachManager.Presentation.Prism.Core;
 using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
 
-namespace My.CoachManager.Presentation.Prism.Administration
+namespace My.CoachManager.Presentation.Prism.AdministrationModule
 {
     public class AdministrationModule : IModule
     {

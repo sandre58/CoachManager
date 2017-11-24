@@ -1,6 +1,6 @@
-﻿using My.CoachManager.Presentation.Prism.Home.ViewModels;
+﻿using My.CoachManager.Presentation.Prism.HomeModule.ViewModels;
 
-namespace My.CoachManager.Presentation.Prism.Home.Views
+namespace My.CoachManager.Presentation.Prism.HomeModule.Views
 {
     /// <summary>
     /// Logique d'interaction pour HomeView1.xaml

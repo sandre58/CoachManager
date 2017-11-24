@@ -2,7 +2,7 @@
 using My.CoachManager.Presentation.Prism.ViewModels;
 using Prism.Commands;
 
-namespace My.CoachManager.Presentation.Prism.Administration.ViewModels
+namespace My.CoachManager.Presentation.Prism.AdministrationModule.ViewModels
 {
     public partial class PlayerEditViewModel
     {

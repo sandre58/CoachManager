@@ -1,6 +1,6 @@
-﻿using My.CoachManager.Presentation.Prism.StatusBar.ViewModels;
+﻿using My.CoachManager.Presentation.Prism.StatusBarModule.ViewModels;
 
-namespace My.CoachManager.Presentation.Prism.StatusBar.Views
+namespace My.CoachManager.Presentation.Prism.StatusBarModule.Views
 {
     /// <summary>
     /// Logique d'interaction pour StatusBarView.xaml

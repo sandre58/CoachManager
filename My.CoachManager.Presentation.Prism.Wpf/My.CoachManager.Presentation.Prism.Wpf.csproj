@@ -199,6 +199,10 @@
       <Project>{2d290fd9-5b64-4af4-a295-2b4cde6eb330}</Project>
       <Name>My.CoachManager.Presentation.Prism.Resources</Name>
     </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.RosterModule\My.CoachManager.Presentation.Prism.RosterModule.csproj">
+      <Project>{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}</Project>
+      <Name>My.CoachManager.Presentation.Prism.RosterModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.StatusBarModule\My.CoachManager.Presentation.Prism.StatusBarModule.csproj">
       <Project>{fa8b3d6e-f685-42bb-8225-20a4037a97bd}</Project>
       <Name>My.CoachManager.Presentation.Prism.StatusBarModule</Name>

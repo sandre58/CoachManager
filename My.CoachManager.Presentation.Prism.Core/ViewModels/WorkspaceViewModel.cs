@@ -1,8 +1,8 @@
-﻿using System.Windows.Input;
-using My.CoachManager.CrossCutting.Logging;
+﻿using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Presentation.Prism.Core.EventAggregator;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Services;
-using Prism.Commands;
+using Prism.Events;
 using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
@@ -12,7 +12,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         #region Fields
 
         private string _title;
-        private IRegionNavigationJournal _journal;
+        private readonly IEventAggregator _eventAggregator;
 
         #endregion Fields
 
@@ -21,11 +21,10 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="ScreenViewModel"/>.
         /// </summary>
-        public WorkspaceViewModel(IDialogService dialogService, ILogger logger)
+        public WorkspaceViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
             : base(dialogService, logger)
         {
-            GoBackCommand = new DelegateCommand(GoBack, CanGoBack);
-            GoForwardCommand = new DelegateCommand(GoForward, CanGoForward);
+            _eventAggregator = eventAggregator;
         }
 
         #endregion Constructors
@@ -46,67 +45,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         public virtual bool KeepAlive { get { return false; } }
 
-        /// <summary>
-        /// Gets or sets the go back command.
-        /// </summary>
-        public ICommand GoBackCommand { get; set; }
-
-        /// <summary>
-        /// Gets or sets the go forward command.
-        /// </summary>
-        public ICommand GoForwardCommand { get; set; }
-
         #endregion Members
 
         #region Methods
-
-        #region GoBack
-
-        /// <summary>
-        /// Go back.
-        /// </summary>
-        public void GoBack()
-        {
-            if (_journal != null)
-            {
-                _journal.GoBack();
-            }
-        }
-
-        /// <summary>
-        /// Can go back.
-        /// </summary>
-        /// <returns></returns>
-        public bool CanGoBack()
-        {
-            return _journal != null ? _journal.CanGoBack : false;
-        }
-
-        #endregion GoBack
-
-        #region GoForward
-
-        /// <summary>
-        /// Go back.
-        /// </summary>
-        public void GoForward()
-        {
-            if (_journal != null)
-            {
-                _journal.GoForward();
-            }
-        }
-
-        /// <summary>
-        /// Can go back.
-        /// </summary>
-        /// <returns></returns>
-        public bool CanGoForward()
-        {
-            return _journal != null ? _journal.CanGoForward : false;
-        }
-
-        #endregion GoForward
 
         /// <summary>
         /// Called when the implementer has been navigated to.
@@ -114,7 +55,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <param name="navigationContext">The navigation context.</param>
         public virtual void OnNavigatedTo(NavigationContext navigationContext)
         {
-            _journal = navigationContext.NavigationService.Journal;
+            _eventAggregator.GetEvent<NotifyNavigationCompletedEvent>().Publish(new NavigationCompletedEventArgs(this, navigationContext));
+
             if (State == ScreenState.NotLoaded)
             {
                 RefreshData(true);
@@ -139,12 +81,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             if (Mode == ScreenMode.Creation || Mode == ScreenMode.Edition)
             {
-                DialogService.ShowQuestionDialog("dfjedfod", dialog =>
-                {
-                    if (dialog.Result != DialogResult.Yes)
-                    {
-                    }
-                });
             }
         }
 

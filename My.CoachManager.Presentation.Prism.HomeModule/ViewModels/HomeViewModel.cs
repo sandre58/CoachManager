@@ -1,9 +1,10 @@
 ﻿using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
-using My.CoachManager.Presentation.Prism.Home.Resources.Strings;
+using My.CoachManager.Presentation.Prism.HomeModule.Resources.Strings;
+using Prism.Events;
 
-namespace My.CoachManager.Presentation.Prism.Home.ViewModels
+namespace My.CoachManager.Presentation.Prism.HomeModule.ViewModels
 {
     public class HomeViewModel : WorkspaceViewModel, IHomeViewModel
     {
@@ -12,8 +13,8 @@ namespace My.CoachManager.Presentation.Prism.Home.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="HomeViewModel"/>.
         /// </summary>
-        public HomeViewModel(IDialogService dialogService, ILogger logger)
-            : base(dialogService, logger)
+        public HomeViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
+            : base(dialogService, eventAggregator, logger)
         {
             Title = HomeResources.HomeTitle;
         }

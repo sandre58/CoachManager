@@ -9,13 +9,10 @@ using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.CrossCutting.Logging.Supervision;
-using My.CoachManager.Presentation.Prism.Administration;
 using My.CoachManager.Presentation.Prism.Core.EventAggregator;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Services;
-using My.CoachManager.Presentation.Prism.Home;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
-using My.CoachManager.Presentation.Prism.StatusBar;
 using My.CoachManager.Presentation.Prism.Wpf.Services;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using My.CoachManager.Presentation.Prism.Wpf.Views;
@@ -110,11 +107,13 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// </summary>
         private void Initialize()
         {
-            InitializeModule<StatusBarModule>();
-            InitializeModule<HomeModule>();
+            InitializeModule<StatusBarModule.StatusBarModule>();
+            InitializeModule<HomeModule.HomeModule>();
 
             if (Thread.CurrentPrincipal.IsInRole(PermissionConstants.AccessAdmin))
-                InitializeModule<AdministrationModule>();
+                InitializeModule<AdministrationModule.AdministrationModule>();
+
+            InitializeModule<RosterModule.RosterModule>();
         }
 
         /// <summary>
@@ -123,7 +122,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// <returns></returns>
         private IPrincipal GetConnectedUser(string login = "", string password = "", bool byWindowsCreadentials = true)
         {
-            EventAggregator.GetEvent<SplashScreenMessageEvent>().Publish(StatusResources.UserConnection);
+            EventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Publish(StatusResources.UserConnection);
             IPrincipal principal;
 
             var authentificationService = Container.TryResolve<IAuthenticationService>();
@@ -250,7 +249,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// <typeparam name="T"></typeparam>
         protected void InitializeModule<T>() where T : IModule
         {
-            EventAggregator.GetEvent<SplashScreenMessageEvent>().Publish(string.Format(StatusResources.ModuleLoadingMessage, typeof(T).GetTypeInfo().Name));
+            EventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Publish(string.Format(StatusResources.ModuleLoadingMessage, typeof(T).GetTypeInfo().Name));
             IModule module = Container.Resolve<T>();
             System.Windows.Application.Current.Dispatcher.Invoke(
                 delegate
@@ -278,7 +277,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// </summary>
         protected void OnLogginSuccess()
         {
-            EventAggregator.GetEvent<SplashScreenMessageEvent>().Publish(string.Format(StatusResources.UserConnected, Thread.CurrentPrincipal.Identity.Name));
+            EventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Publish(string.Format(StatusResources.UserConnected, Thread.CurrentPrincipal.Identity.Name));
         }
     }
 }

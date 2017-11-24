@@ -1,12 +1,12 @@
 ﻿using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using My.CoachManager.Presentation.Prism.Core;
-using My.CoachManager.Presentation.Prism.StatusBar.ViewModels;
-using My.CoachManager.Presentation.Prism.StatusBar.Views;
+using My.CoachManager.Presentation.Prism.StatusBarModule.ViewModels;
+using My.CoachManager.Presentation.Prism.StatusBarModule.Views;
 using Prism.Modularity;
 using Prism.Regions;
 
-namespace My.CoachManager.Presentation.Prism.StatusBar
+namespace My.CoachManager.Presentation.Prism.StatusBarModule
 {
     public class StatusBarModule : IModule
     {

@@ -35,6 +35,7 @@
         <ResourceDictionary Source="Controls/PasswordBox.xaml" />
         <ResourceDictionary Source="Controls/ImagePicker.xaml" />
         <ResourceDictionary Source="Controls/Combobox.xaml" />
+        <ResourceDictionary Source="Controls/MetroTabControl.xaml" />
         <ResourceDictionary Source="Controls/DatePicker.xaml" />
         <ResourceDictionary Source="Controls/RadioButton.xaml" />
         <ResourceDictionary Source="Controls/ProgressRing.xaml" />
