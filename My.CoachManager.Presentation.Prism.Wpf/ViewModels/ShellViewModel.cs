@@ -21,7 +21,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
         private IRegionNavigationJournal _journal;
-        private IWorkspaceViewModel _activeWorkspace;
+        private INavigatableWorkspaceViewModel _activeWorkspace;
 
         #endregion Fields
 
@@ -35,7 +35,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <param name="dialogService"></param>
         /// <param name="logger"></param>
         public ShellViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IDialogService dialogService, ILogger logger)
-            : base(dialogService, logger)
+            : base(dialogService, eventAggregator, logger)
         {
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
@@ -65,7 +65,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <summary>
         /// Gets or sets the active workspace.
         /// </summary>
-        public IWorkspaceViewModel ActiveWorkspace
+        public INavigatableWorkspaceViewModel ActiveWorkspace
         {
             get { return _activeWorkspace; }
             private set { SetProperty(ref _activeWorkspace, value); }

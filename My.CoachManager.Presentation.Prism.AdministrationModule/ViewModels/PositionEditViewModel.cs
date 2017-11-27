@@ -6,6 +6,7 @@ using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
+using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.AdministrationModule.ViewModels
 {
@@ -22,8 +23,8 @@ namespace My.CoachManager.Presentation.Prism.AdministrationModule.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="PositionEditViewModel"/>.
         /// </summary>
-        public PositionEditViewModel(IAdminService adminService, IDialogService dialogService, ILogger logger)
-            : base(dialogService, logger)
+        public PositionEditViewModel(IAdminService adminService, IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
+            : base(dialogService, eventAggregator, logger)
         {
             _adminService = adminService;
             Title = AdministrationResources.PositionTitle;

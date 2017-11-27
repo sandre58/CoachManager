@@ -9,19 +9,19 @@ using Prism.Unity;
 
 namespace My.CoachManager.Presentation.Prism.RosterModule
 {
-    public class RosterModule : IModule
+    public class RosterModuleInit : IModule
     {
         private readonly IRegionManager _regionManager;
         private readonly IServiceLocator _serviceLocator;
         private readonly IUnityContainer _container;
 
         /// <summary>
-        /// Initialise a new instance of <see cref="RosterModule"/>.
+        /// Initialise a new instance of <see cref="RosterModuleInit"/>.
         /// </summary>
         /// <param name="container"></param>
         /// <param name="regionManager"></param>
         /// <param name="serviceLocator"></param>
-        public RosterModule(IUnityContainer container, IRegionManager regionManager, IServiceLocator serviceLocator)
+        public RosterModuleInit(IUnityContainer container, IRegionManager regionManager, IServiceLocator serviceLocator)
         {
             _regionManager = regionManager;
             _serviceLocator = serviceLocator;
@@ -35,6 +35,7 @@ namespace My.CoachManager.Presentation.Prism.RosterModule
         {
             // Register ViewModels
             _container.RegisterType<IRosterViewModel, RosterViewModel>();
+            _container.RegisterType<ISquadViewModel, SquadViewModel>();
 
             // Register Views (for navigation)
             _container.RegisterTypeForNavigation<RosterView>();

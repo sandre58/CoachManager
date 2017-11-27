@@ -11,7 +11,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Interactivity
         /// <summary>
         /// Gets or set the workspace.
         /// </summary>
-        public IWorkspaceViewModel Workspace { get; set; }
+        public INavigatableWorkspaceViewModel Workspace { get; set; }
 
         /// <summary>
         /// Gets or sets the context.
@@ -27,7 +27,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Interactivity
         /// </summary>
         /// <param name="workspace"></param>
         /// <param name="context"></param>
-        public NavigationCompletedEventArgs(IWorkspaceViewModel workspace, NavigationContext context)
+        public NavigationCompletedEventArgs(INavigatableWorkspaceViewModel workspace, NavigationContext context)
         {
             Workspace = workspace;
             Context = context;

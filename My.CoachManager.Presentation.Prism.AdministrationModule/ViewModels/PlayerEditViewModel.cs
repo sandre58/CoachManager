@@ -12,6 +12,7 @@ using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
 using Prism.Commands;
+using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.AdministrationModule.ViewModels
 {
@@ -39,8 +40,8 @@ namespace My.CoachManager.Presentation.Prism.AdministrationModule.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="CategoryEditViewModel"/>.
         /// </summary>
-        public PlayerEditViewModel(IAdminService adminService, IDialogService dialogService, ILogger logger)
-            : base(dialogService, logger)
+        public PlayerEditViewModel(IAdminService adminService, IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
+            : base(dialogService, eventAggregator, logger)
         {
             _adminService = adminService;
             Title = AdministrationResources.PlayerTitle;

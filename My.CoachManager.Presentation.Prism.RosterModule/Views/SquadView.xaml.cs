@@ -12,5 +12,10 @@ namespace My.CoachManager.Presentation.Prism.RosterModule.Views
             DataContext = viewModel;
             InitializeComponent();
         }
+
+        public SquadView()
+        {
+            InitializeComponent();
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Services;
+using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
@@ -30,8 +31,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="ScreenViewModel"/>.
         /// </summary>
-        public WorkspaceDialogViewModel(IDialogService dialogService, ILogger logger)
-            : base(dialogService, logger)
+        public WorkspaceDialogViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
+            : base(dialogService, eventAggregator, logger)
         {
             DialogResult = DialogResult.None;
         }

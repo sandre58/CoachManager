@@ -13,6 +13,7 @@ using My.CoachManager.Presentation.Prism.Core.EventAggregator;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
+using My.CoachManager.Presentation.Prism.RosterModule;
 using My.CoachManager.Presentation.Prism.Wpf.Services;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using My.CoachManager.Presentation.Prism.Wpf.Views;
@@ -107,13 +108,13 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// </summary>
         private void Initialize()
         {
-            InitializeModule<StatusBarModule.StatusBarModule>();
-            InitializeModule<HomeModule.HomeModule>();
+            InitializeModule<StatusBarModule.StatusBarModuleInit>();
+            InitializeModule<HomeModule.HomeModuleInit>();
 
             if (Thread.CurrentPrincipal.IsInRole(PermissionConstants.AccessAdmin))
-                InitializeModule<AdministrationModule.AdministrationModule>();
+                InitializeModule<AdministrationModule.AdministrationModuleInit>();
 
-            InitializeModule<RosterModule.RosterModule>();
+            InitializeModule<RosterModuleInit>();
         }
 
         /// <summary>

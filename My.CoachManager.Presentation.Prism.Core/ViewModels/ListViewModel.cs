@@ -12,7 +12,7 @@ using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public abstract class ListViewModel<TEntityViewModel, TEditView, TEditViewModel> : WorkspaceViewModel
+    public abstract class ListViewModel<TEntityViewModel, TEditView, TEditViewModel> : NavigatableWorkspaceViewModel
         where TEntityViewModel : class, IEntityViewModel
         where TEditView : FrameworkElement
         where TEditViewModel : class, IDialogViewModel, IEditViewModel

@@ -6,7 +6,7 @@ using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.HomeModule.ViewModels
 {
-    public class HomeViewModel : WorkspaceViewModel, IHomeViewModel
+    public class HomeViewModel : NavigatableWorkspaceViewModel, IHomeViewModel
     {
         #region Constructors
 

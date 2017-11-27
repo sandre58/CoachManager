@@ -9,13 +9,13 @@ using Prism.Unity;
 
 namespace My.CoachManager.Presentation.Prism.AdministrationModule
 {
-    public class AdministrationModule : IModule
+    public class AdministrationModuleInit : IModule
     {
         private readonly IRegionManager _regionManager;
         private readonly IServiceLocator _serviceLocator;
         private readonly IUnityContainer _container;
 
-        public AdministrationModule(IUnityContainer container, IRegionManager regionManager, IServiceLocator serviceLocator)
+        public AdministrationModuleInit(IUnityContainer container, IRegionManager regionManager, IServiceLocator serviceLocator)
         {
             _regionManager = regionManager;
             _serviceLocator = serviceLocator;

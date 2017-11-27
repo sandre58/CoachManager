@@ -6,7 +6,7 @@ using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
 {
-    public class RosterViewModel : WorkspaceViewModel, IRosterViewModel
+    public class RosterViewModel : NavigatableWorkspaceViewModel, IRosterViewModel
     {
         #region Constructors
 

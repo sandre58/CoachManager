@@ -50,9 +50,9 @@
                 </Grid.ColumnDefinitions>
 
                 <!--Header -->
-                <Grid Grid.Row="0" Height="100" Visibility="{Binding ActiveWorkspace, Converter={StaticResource NullToVisibilityConverter}}">
-                    <Border Padding="{StaticResource VeryLargeBottomVerticalMargin}" Focusable="False">
-                        <Grid VerticalAlignment="Bottom" Margin="{StaticResource LargeHorizontalMargin}">
+                <Grid Grid.Row="0" Height="90" Visibility="{Binding ActiveWorkspace, Converter={StaticResource NullToVisibilityConverter}}">
+                    <Border Focusable="False">
+                        <Grid VerticalAlignment="Center" Margin="{StaticResource LargeHorizontalMargin}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
@@ -62,7 +62,7 @@
                                 <controls:CommandButton Style="{StaticResource BackCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoBackCommand}" />
                                 <controls:CommandButton Style="{StaticResource NextCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoForwardCommand}" />
                             </StackPanel>
-                            <TextBlock Grid.Column="1" Text="{Binding ActiveWorkspace.Title}" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Top" Style="{StaticResource HeaderStyle}" />
+                            <TextBlock Grid.Column="1" Text="{Binding ActiveWorkspace.Title, Converter={StaticResource ToUpperConverter}}" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Top" Style="{StaticResource HeaderStyle}" />
                         </Grid>
                     </Border>
                 </Grid>
@@ -74,7 +74,7 @@
             </Grid>
 
             <!-- Left Region -->
-            <Border Grid.Row="0" Grid.Column="0" Width="300" Background="{DynamicResource Dark}" Effect="{StaticResource RightShadow}">
+            <Border Grid.Row="0" Grid.Column="0" Width="275" Background="{DynamicResource Dark}" Effect="{StaticResource RightShadow}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40" />

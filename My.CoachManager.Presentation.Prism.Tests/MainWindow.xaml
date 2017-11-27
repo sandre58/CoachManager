@@ -4,13 +4,24 @@
         xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
         Title="MainWindow" Height="350" Width="525" Style="{StaticResource ModernWindowStyle}" Background="LightBlue">
     <StackPanel Orientation="Vertical">
-        <DataGrid CanUserAddRows="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Toto" Width="50" />
-                <DataGridTextColumn Header="Toto" Width="20" />
-                <DataGridTextColumn Header="Toto" Width="100" />
-                <DataGridTextColumn Header="Toto" Width="200" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <TabControl>
+            <TabControl.Items>
+                <TabItem Header="Equipe A">
+                    <Grid>
+                        <TextBlock Text="Equipe A" />
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Equipe B">
+                    <Grid>
+                        <TextBlock Text="Equipe B" />
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Tous les joueurs">
+                    <Grid>
+                        <TextBlock Text="Tous les joueurs" />
+                    </Grid>
+                </TabItem>
+            </TabControl.Items>
+        </TabControl>
     </StackPanel>
 </controls:MetroWindow>

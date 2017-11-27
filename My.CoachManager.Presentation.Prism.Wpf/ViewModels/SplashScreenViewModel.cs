@@ -28,7 +28,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <param name="dialogService"></param>
         /// <param name="logger"></param>
         public SplashScreenViewModel(IEventAggregator eventAggregator, IDialogService dialogService, ILogger logger)
-            : base(dialogService, logger)
+            : base(dialogService, eventAggregator, logger)
         {
             _eventAggregator = eventAggregator;
 

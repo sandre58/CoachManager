@@ -1,43 +1,66 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace My.CoachManager.Presentation.Prism.Controls.Parameters
 {
+    using System.Windows;
+
+    /// <summary>
+    /// <see cref="TabControl"/> attached properties.
+    /// </summary>
     public static class TabControlParameters
     {
-        /// <summary>
-        /// Defines whether the underline below the <see cref="TabControl"/> is shown or not.
-        /// </summary>
-        public static readonly DependencyProperty IsUnderlinedProperty =
-            DependencyProperty.RegisterAttached("IsUnderlined", typeof(bool), typeof(TabControlParameters), new PropertyMetadata(false));
+        #region Dependency Properties
 
-        [AttachedPropertyBrowsableForType(typeof(TabControl))]
-        [AttachedPropertyBrowsableForType(typeof(TabItem))]
-        public static bool GetIsUnderlined(UIElement element)
+        public static readonly DependencyProperty IndicatorBrushProperty = DependencyProperty.RegisterAttached(
+            "IndicatorBrush",
+            typeof(SolidColorBrush),
+            typeof(TabControlParameters));
+
+        public static readonly DependencyProperty IndicatorThicknessProperty = DependencyProperty.RegisterAttached(
+            "IndicatorThickness",
+            typeof(int),
+            typeof(TabControlParameters));
+
+        public static readonly DependencyProperty HeaderStyleProperty = DependencyProperty.RegisterAttached(
+            "HeaderStyle",
+            typeof(Style),
+            typeof(TabControlParameters));
+
+        #endregion Dependency Properties
+
+        #region Public Static Methods
+
+        public static SolidColorBrush GetIndicatorBrush(TabControl tc)
         {
-            return (bool)element.GetValue(IsUnderlinedProperty);
+            return (SolidColorBrush)tc.GetValue(IndicatorBrushProperty);
         }
 
-        public static void SetIsUnderlined(UIElement element, bool value)
+        public static void SetIndicatorBrush(TabControl dataGrid, SolidColorBrush value)
         {
-            element.SetValue(IsUnderlinedProperty, value);
+            dataGrid.SetValue(IndicatorBrushProperty, value);
         }
 
-        /// <summary>
-        /// This property can be used to set the Transition for animated TabControls
-        /// </summary>
-        public static readonly DependencyProperty TransitionProperty =
-            DependencyProperty.RegisterAttached("Transition", typeof(TransitionType), typeof(TabControlParameters),
-                                                new FrameworkPropertyMetadata(TransitionType.Default, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.Inherits));
-
-        public static TransitionType GetTransition(DependencyObject obj)
+        public static int GetIndicatorThickness(FrameworkElement tc)
         {
-            return (TransitionType)obj.GetValue(TransitionProperty);
+            return (int)tc.GetValue(IndicatorThicknessProperty);
         }
 
-        public static void SetTransition(DependencyObject obj, TransitionType value)
+        public static void SetIndicatorThickness(FrameworkElement tc, int value)
         {
-            obj.SetValue(TransitionProperty, value);
+            tc.SetValue(IndicatorThicknessProperty, value);
         }
+
+        public static Style GetHeaderStyle(TabItem tc)
+        {
+            return (Style)tc.GetValue(HeaderStyleProperty);
+        }
+
+        public static void SetHeaderStyle(TabItem tc, Style value)
+        {
+            tc.SetValue(HeaderStyleProperty, value);
+        }
+
+        #endregion Public Static Methods
     }
 }

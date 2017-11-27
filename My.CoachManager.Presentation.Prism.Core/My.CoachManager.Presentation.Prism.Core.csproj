@@ -112,6 +112,7 @@
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="ViewModels\EntityViewModel.cs" />
     <Compile Include="ViewModels\ICollectionnable.cs" />
+    <Compile Include="ViewModels\INavigatableWorkspaceViewModel.cs" />
     <Compile Include="ViewModels\ScreenMode.cs" />
     <Compile Include="ViewModels\IModifiable.cs" />
     <Compile Include="ViewModels\EditViewModel.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="ViewModels\IWorkspaceViewModel.cs" />
     <Compile Include="ViewModels\IScreenViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
+    <Compile Include="ViewModels\NavigatableWorkspaceViewModel.cs" />
     <Compile Include="ViewModels\EntityViewModelBase.cs" />
     <Compile Include="ViewModels\IValidatable.cs" />
     <Compile Include="ViewModels\ScreenViewModel.cs" />

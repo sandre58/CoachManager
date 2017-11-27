@@ -27,7 +27,7 @@ namespace My.CoachManager.Presentation.Prism.StatusBarModule.ViewModels
         /// <param name="dialogService"></param>
         /// <param name="logger"></param>
         public StatusBarViewModel(IEventAggregator eventAggregator, IDialogService dialogService, ILogger logger)
-            : base(dialogService, logger)
+            : base(dialogService, eventAggregator, logger)
         {
             eventAggregator.GetEvent<UpdateStatusBarMessageRequestEvent>().Subscribe(OnMessageChanged, ThreadOption.UIThread, true);
 

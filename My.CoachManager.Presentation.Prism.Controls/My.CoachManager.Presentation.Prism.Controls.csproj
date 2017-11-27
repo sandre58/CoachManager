@@ -100,8 +100,6 @@
     <Compile Include="Enums\CharacterCasing.cs" />
     <Compile Include="ImageContent.cs" />
     <Compile Include="ImagePicker.cs" />
-    <Compile Include="MetroTabControl.cs" />
-    <Compile Include="MetroTabItem.cs" />
     <Compile Include="Parameters\ComboBoxParameters.cs" />
     <Compile Include="Parameters\PasswordParameters.cs" />
     <Compile Include="Parameters\TabControlParameters.cs" />

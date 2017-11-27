@@ -59,7 +59,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HomeModule.cs" />
+    <Compile Include="HomeModuleInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Strings\HomeResources.Designer.cs">
       <DependentUpon>HomeResources.resx</DependentUpon>

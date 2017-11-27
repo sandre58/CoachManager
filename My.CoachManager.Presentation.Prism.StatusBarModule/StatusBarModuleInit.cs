@@ -8,13 +8,13 @@ using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Prism.StatusBarModule
 {
-    public class StatusBarModule : IModule
+    public class StatusBarModuleInit : IModule
     {
         private readonly IRegionManager _regionManager;
         private readonly IServiceLocator _serviceLocator;
         private readonly IUnityContainer _container;
 
-        public StatusBarModule(IUnityContainer container, IRegionManager regionManager, IServiceLocator serviceLocator)
+        public StatusBarModuleInit(IUnityContainer container, IRegionManager regionManager, IServiceLocator serviceLocator)
         {
             _regionManager = regionManager;
             _serviceLocator = serviceLocator;

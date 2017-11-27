@@ -9,5 +9,6 @@
              d:DataContext="{d:DesignInstance Type=viewModels:SquadViewModel}"
              d:DesignHeight="500" d:DesignWidth="800">
     <controls:WorkspaceView>
+        <TextBlock Text="Equipe A" />
     </controls:WorkspaceView>
 </UserControl>

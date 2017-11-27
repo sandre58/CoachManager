@@ -4,6 +4,7 @@ using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Services;
+using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
@@ -21,10 +22,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="ScreenViewModel"/>.
         /// </summary>
-        public ScreenViewModel(IDialogService dialogService, ILogger logger)
+        public ScreenViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
         {
             Logger = logger;
             DialogService = dialogService;
+            EventAggregator = eventAggregator;
             State = ScreenState.NotLoaded;
             Mode = ScreenMode.Read;
         }
@@ -34,9 +36,14 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         #region Members
 
         /// <summary>
-        /// Gets the logger.
+        /// Gets the dialog service.
         /// </summary>
         protected IDialogService DialogService { get; private set; }
+
+        /// <summary>
+        /// Gets the event aggregator.
+        /// </summary>
+        protected IEventAggregator EventAggregator { get; private set; }
 
         /// <summary>
         /// Gets the logger.
