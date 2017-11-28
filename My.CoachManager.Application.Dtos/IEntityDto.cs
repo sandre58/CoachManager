@@ -3,7 +3,7 @@
     /// <summary>
     /// List Dto interface.
     /// </summary>
-    public interface IEntityDto
+    public interface IEntityDto : IEntityDtoBase
     {
         /// <summary>
         /// Gets or sets the id.

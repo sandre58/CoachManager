@@ -4,6 +4,9 @@ using My.CoachManager.CrossCutting.Core.Resources.Entities;
 
 namespace My.CoachManager.CrossCutting.Core.Metadatas
 {
+    /// <summary>
+    /// Provides metadata for an entity.
+    /// </summary>
     public abstract class EntityMetadata : EntityMetadataBase
     {
         #region Public Properties

@@ -1,7 +1,7 @@
 ﻿namespace My.CoachManager.Domain.Core
 {
     /// <summary>
-    /// Base entity interface.
+    /// Provides properties for a base entity.
     /// </summary>
     public interface IEntityBase
     {

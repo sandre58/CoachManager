@@ -179,9 +179,9 @@
       <Project>{381d433d-9f76-4286-b0f5-7209e477b22b}</Project>
       <Name>My.CoachManager.CrossCutting.Logging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Administration\My.CoachManager.Presentation.Prism.Administration.csproj">
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.AdministrationModule\My.CoachManager.Presentation.Prism.AdministrationModule.csproj">
       <Project>{4ca93004-d321-4897-a8ad-ef368d5bd57e}</Project>
-      <Name>My.CoachManager.Presentation.Prism.Administration</Name>
+      <Name>My.CoachManager.Presentation.Prism.AdministrationModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Controls\My.CoachManager.Presentation.Prism.Controls.csproj">
       <Project>{a554f212-3f08-4aef-b9aa-fa01a7491a7f}</Project>
@@ -191,17 +191,21 @@
       <Project>{3f11e745-d328-4654-a3c9-4bfc9bf6b9ab}</Project>
       <Name>My.CoachManager.Presentation.Prism.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Home\My.CoachManager.Presentation.Prism.Home.csproj">
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.HomeModule\My.CoachManager.Presentation.Prism.HomeModule.csproj">
       <Project>{b72a3d9c-efa7-43a8-a01e-cdeeb9f59c28}</Project>
-      <Name>My.CoachManager.Presentation.Prism.Home</Name>
+      <Name>My.CoachManager.Presentation.Prism.HomeModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Resources\My.CoachManager.Presentation.Prism.Resources.csproj">
       <Project>{2d290fd9-5b64-4af4-a295-2b4cde6eb330}</Project>
       <Name>My.CoachManager.Presentation.Prism.Resources</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.StatusBar\My.CoachManager.Presentation.Prism.StatusBar.csproj">
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.RosterModule\My.CoachManager.Presentation.Prism.RosterModule.csproj">
+      <Project>{f52d4433-de0a-4e5e-89d1-05ba575c5bba}</Project>
+      <Name>My.CoachManager.Presentation.Prism.RosterModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.StatusBarModule\My.CoachManager.Presentation.Prism.StatusBarModule.csproj">
       <Project>{fa8b3d6e-f685-42bb-8225-20a4037a97bd}</Project>
-      <Name>My.CoachManager.Presentation.Prism.StatusBar</Name>
+      <Name>My.CoachManager.Presentation.Prism.StatusBarModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.ServiceAgent\My.CoachManager.Presentation.ServiceAgent.csproj">
       <Project>{1A6AEEAB-7175-4CEA-90A6-68B064AB65DC}</Project>

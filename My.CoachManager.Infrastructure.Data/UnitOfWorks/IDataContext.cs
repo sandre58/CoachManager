@@ -11,26 +11,30 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
     ///</sumary>
     public interface IDataContext : IQueryableUnitOfWork
     {
-        #region ----- Properties -----
+        #region Properties
 
-        DbSet<Category> Categories { get; }
-        DbSet<Person> Persons { get; }
-        DbSet<Coach> Coachs { get; }
-        DbSet<Player> Players { get; }
-        DbSet<Country> Countries { get; }
+        DbSet<Address> Adresses { get; set; }
+        DbSet<Category> Categories { get; set; }
+        DbSet<Club> Clubs { get; set; }
+        DbSet<Coach> Coachs { get; set; }
         DbSet<Contact> Contacts { get; set; }
-        DbSet<Permission> Permissions { get; }
-        DbSet<PlayerPosition> PlayerPositions { get; }
-        DbSet<Position> Positions { get; }
+        DbSet<Country> Countries { get; set; }
+        DbSet<Function> Functions { get; set; }
+        DbSet<Permission> Permissions { get; set; }
+        DbSet<Person> Persons { get; set; }
+        DbSet<Player> Players { get; set; }
+        DbSet<PlayerPosition> PlayerPositions { get; set; }
+        DbSet<Position> Positions { get; set; }
         DbSet<Role> Roles { get; set; }
-        DbSet<Season> Seasons { get; }
-        DbSet<SeasonCoach> SeasonCoaches { get; }
-        DbSet<SeasonPlayer> SeasonPlayers { get; }
-        DbSet<Squad> Squad { get; set; }
-        DbSet<SquadPlayer> SquadPlayers { get; }
+        DbSet<Roster> Roster { get; set; }
+        DbSet<RosterPlayer> RosterPlayers { get; set; }
+        DbSet<RosterCoach> RosterCoachs { get; set; }
+        DbSet<Season> Seasons { get; set; }
+        DbSet<Squad> Squads { get; set; }
+        DbSet<Team> Teams { get; set; }
         DbSet<User> Users { get; set; }
 
-        #endregion ----- Properties -----
+        #endregion Properties
 
         #region ----- IQueryableUnitOfWork Methods -----
 

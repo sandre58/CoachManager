@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using My.CoachManager.Application.Dtos.Admin;
+using My.CoachManager.Application.Dtos.Administration;
 using My.CoachManager.Application.Dtos.Persons;
-using My.CoachManager.Application.Services.Admin;
+using My.CoachManager.Application.Services.Administration;
 using My.CoachManager.CrossCutting.Unity;
 using My.CoachManager.Services.Wcf.Interfaces;
 

@@ -6,6 +6,9 @@ using My.CoachManager.CrossCutting.Core.Resources.Entities;
 
 namespace My.CoachManager.CrossCutting.Core.Metadatas
 {
+    /// <summary>
+    /// Provides metadata for a entity containing Code, Label, Description and Order.
+    /// </summary>
     public class DataEntityMetadata : EntityMetadata
     {
         [Display(Name = "Label", ResourceType = typeof(DataEntityResources))]

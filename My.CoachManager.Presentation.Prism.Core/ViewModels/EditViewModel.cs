@@ -6,6 +6,7 @@ using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using Prism.Commands;
+using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
@@ -26,8 +27,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         /// <param name="dialogService">The dialog service.</param>
         /// <param name="logger">The logger.</param>
-        protected EditViewModel(IDialogService dialogService, ILogger logger)
-            : base(dialogService, logger)
+        protected EditViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
+            : base(dialogService, eventAggregator, logger)
         {
             Mode = ScreenMode.Creation;
             Item = new TEntityViewModel();
@@ -287,7 +288,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             base.ResetModified();
         }
 
-
         /// <summary>
         /// Calls when Item changed.
         /// </summary>
@@ -295,7 +295,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             RaisePropertyChanged(() => Title);
 
-            if(SaveCommand != null) SaveCommand.RaiseCanExecuteChanged();
+            if (SaveCommand != null) SaveCommand.RaiseCanExecuteChanged();
             if (CancelCommand != null) CancelCommand.RaiseCanExecuteChanged();
         }
 

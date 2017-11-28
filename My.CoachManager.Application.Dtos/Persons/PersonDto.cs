@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using My.CoachManager.Application.Dtos.Administration;
 using My.CoachManager.CrossCutting.Core.Enums;
 
 namespace My.CoachManager.Application.Dtos.Persons
 {
     /// <summary>
-    /// Players list Dtos.
+    /// Data Transfer Object for Person item.
     /// </summary>
     [DataContract]
     [KnownType(typeof(PlayerDto))]
-    [KnownType(typeof(CoachDto))]
     public class PersonDto : EntityDto
     {
         [DataMember]
@@ -35,16 +35,13 @@ namespace My.CoachManager.Application.Dtos.Persons
         public byte[] Photo { get; set; }
 
         [DataMember]
-        public string Address { get; set; }
-
-        [DataMember]
-        public string PostalCode { get; set; }
-
-        [DataMember]
-        public string City { get; set; }
-
-        [DataMember]
         public GenderType Gender { get; set; }
+
+        [DataMember]
+        public int? AddressId { get; set; }
+
+        [DataMember]
+        public AddressDto Address { get; set; }
 
         [DataMember]
         public string LicenseNumber { get; set; }

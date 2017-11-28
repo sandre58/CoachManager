@@ -3,7 +3,7 @@
 namespace My.CoachManager.Application.Dtos.Persons
 {
     /// <summary>
-    /// Contact Dto
+    /// Data Transfer Object for Contact item.
     /// </summary>
     [DataContract]
     [KnownType(typeof(EmailDto))]

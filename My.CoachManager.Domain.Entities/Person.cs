@@ -8,44 +8,90 @@ using My.CoachManager.CrossCutting.Core.Metadatas;
 
 namespace My.CoachManager.Domain.Entities
 {
+    /// <summary>
+    /// Provides properties for a Person Entity.
+    /// </summary>
     [Table("Persons")]
     [MetadataType(typeof(PersonMetadata))]
     public abstract class Person : Entity
     {
+        /// <summary>
+        /// Initalize a new instance of <see cref="Person"/>.
+        /// </summary>
         protected Person()
         {
             Gender = PlayerConstants.DefaultGender;
             Contacts = new List<Contact>();
         }
 
+        /// <summary>
+        /// Gets or sets the last name.
+        /// </summary>
         public string LastName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the first name.
+        /// </summary>
         public string FirstName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the birthdate.
+        /// </summary>
         public DateTime? Birthdate { get; set; }
 
+        /// <summary>
+        /// Gets or sets the place of birth.
+        /// </summary>
         public string PlaceOfBirth { get; set; }
 
+        /// <summary>
+        /// Gets or sets the nationality id.
+        /// </summary>
         public int? CountryId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the nationality.
+        /// </summary>
         public Country Country { get; set; }
 
+        /// <summary>
+        /// Gets or sets the photo.
+        /// </summary>
         public byte[] Photo { get; set; }
 
-        public string Address { get; set; }
-
-        public string PostalCode { get; set; }
-
-        public string City { get; set; }
-
+        /// <summary>
+        /// Gets or sets the gender.
+        /// </summary>
         public GenderType Gender { get; set; }
 
+        /// <summary>
+        /// Gets or sets the address id.
+        /// </summary>
+        public int? AddressId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the address.
+        /// </summary>
+        public Address Address { get; set; }
+
+        /// <summary>
+        /// Gets or sets the license number.
+        /// </summary>
         public string LicenseNumber { get; set; }
 
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        /// Gets or sets the size for clothes.
+        /// </summary>
         public string Size { get; set; }
-        
+
+        /// <summary>
+        /// Gets or sets the contacts.
+        /// </summary>
         public ICollection<Contact> Contacts { get; set; }
     }
 }

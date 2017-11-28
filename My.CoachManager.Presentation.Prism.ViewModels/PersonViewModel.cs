@@ -11,6 +11,9 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
     [MetadataType(typeof(PersonMetadata))]
     public abstract class PersonViewModel : EntityViewModel
     {
+        /// <summary>
+        /// Initialise a new instance of <see cref="PersonViewModel"/>.
+        /// </summary>
         public PersonViewModel()
         {
             Gender = PlayerConstants.DefaultGender;
@@ -20,6 +23,9 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
 
         private string _lastName;
 
+        /// <summary>
+        /// Gets or sets the last name.
+        /// </summary>
         public string LastName
         {
             get { return _lastName; }
@@ -28,6 +34,9 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
 
         private string _firstName;
 
+        /// <summary>
+        /// Gets or sets the first name.
+        /// </summary>
         public string FirstName
         {
             get { return _firstName; }
@@ -36,6 +45,9 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
 
         private DateTime? _birthdate;
 
+        /// <summary>
+        /// Gets or sets the birthdate.
+        /// </summary>
         public DateTime? Birthdate
         {
             get { return _birthdate; }
@@ -44,6 +56,9 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
 
         private string _placeOfBirth;
 
+        /// <summary>
+        /// Gets or sets the place of birth.
+        /// </summary>
         public string PlaceOfBirth
         {
             get { return _placeOfBirth; }
@@ -52,6 +67,9 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
 
         private int? _countryId;
 
+        /// <summary>
+        /// Gets or sets the nationality id.
+        /// </summary>
         public int? CountryId
         {
             get { return _countryId; }
@@ -60,6 +78,9 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
 
         private CountryViewModel _country;
 
+        /// <summary>
+        /// Gets or sets the nationality.
+        /// </summary>
         public CountryViewModel Country
         {
             get { return _country; }
@@ -68,46 +89,53 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
 
         private byte[] _photo;
 
+        /// <summary>
+        /// Gets or sets the photo.
+        /// </summary>
         public byte[] Photo
         {
             get { return _photo; }
             set { SetProperty(ref _photo, value); }
         }
 
-        private string _address;
-
-        public string Address
-        {
-            get { return _address; }
-            set { SetProperty(ref _address, value); }
-        }
-
-        private string _postalCode;
-
-        public string PostalCode
-        {
-            get { return _postalCode; }
-            set { SetProperty(ref _postalCode, value); }
-        }
-
-        private string _city;
-
-        public string City
-        {
-            get { return _city; }
-            set { SetProperty(ref _city, value); }
-        }
-
         private GenderType _gender;
 
+        /// <summary>
+        /// Gets or sets the gender.
+        /// </summary>
         public GenderType Gender
         {
             get { return _gender; }
             set { SetProperty(ref _gender, value); }
         }
 
+        private int? _addressId;
+
+        /// <summary>
+        /// Gets or sets the address id.
+        /// </summary>
+        public int? AddressId
+        {
+            get { return _addressId; }
+            set { SetProperty(ref _addressId, value); }
+        }
+
+        private AddressViewModel _address;
+
+        /// <summary>
+        /// Gets or sets the address.
+        /// </summary>
+        public AddressViewModel Address
+        {
+            get { return _address; }
+            set { SetProperty(ref _address, value); }
+        }
+
         private string _licenseNumber;
 
+        /// <summary>
+        /// Gets or sets the license number.
+        /// </summary>
         public string LicenseNumber
         {
             get { return _licenseNumber; }
@@ -116,6 +144,9 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
 
         private string _description;
 
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
         public string Description
         {
             get { return _description; }
@@ -124,6 +155,9 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
 
         private string _size;
 
+        /// <summary>
+        /// Gets or sets the size for clothes.
+        /// </summary>
         public string Size
         {
             get { return _size; }
@@ -131,13 +165,21 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
         }
 
         private ContactsCollection<PhoneViewModel> _phones;
+
+        /// <summary>
+        /// Gets or sets the phones.
+        /// </summary>
         public ContactsCollection<PhoneViewModel> Phones { get { return _phones; } set { SetProperty(ref _phones, value); } }
 
         private ContactsCollection<EmailViewModel> _emails;
+
+        /// <summary>
+        /// Gets or sets the emails.
+        /// </summary>
         public ContactsCollection<EmailViewModel> Emails { get { return _emails; } set { SetProperty(ref _emails, value); } }
 
         /// <summary>
-        /// Get the full name.
+        /// Get the full name (FirstName LastName).
         /// </summary>
         public string FullName
         {
@@ -145,7 +187,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
         }
 
         /// <summary>
-        /// Get the full name.
+        /// Get the inverse name (LastName FirstName).
         /// </summary>
         public string InverseName
         {
@@ -157,7 +199,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
         /// </summary>
         public string FullAddress
         {
-            get { return string.Join(" ", Address, PostalCode, City != null ? City.ToUpper() : ""); }
+            get { return Address != null ? Address.ToString() : ""; }
         }
 
         /// <summary>
@@ -195,7 +237,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
         }
 
         /// <summary>
-        /// Get the age.
+        /// Get the current age.
         /// </summary>
         public int? Age
         {

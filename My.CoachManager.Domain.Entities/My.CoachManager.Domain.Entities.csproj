@@ -153,18 +153,21 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Position.cs" />
+    <Compile Include="Function.cs" />
+    <Compile Include="Roster.cs" />
+    <Compile Include="Address.cs" />
+    <Compile Include="RosterCoach.cs" />
+    <Compile Include="PlayerPosition.cs" />
+    <Compile Include="Stadium.cs" />
+    <Compile Include="Team.cs" />
+    <Compile Include="Club.cs" />
     <Compile Include="Coach.cs" />
-    <Compile Include="PlayerWeight.cs" />
-    <Compile Include="PlayerHeight.cs" />
-    <Compile Include="SeasonCoach.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Squad.cs" />
-    <Compile Include="SquadPlayer.cs" />
-    <Compile Include="SeasonPlayer.cs" />
+    <Compile Include="RosterPlayer.cs" />
     <Compile Include="EntityBase.cs" />
     <Compile Include="ForeignEntity.cs" />
-    <Compile Include="PlayerPosition.cs" />
-    <Compile Include="Position.cs" />
     <Compile Include="Season.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="Phone.cs" />

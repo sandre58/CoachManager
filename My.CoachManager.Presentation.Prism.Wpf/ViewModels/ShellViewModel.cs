@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Windows.Input;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core;
 using My.CoachManager.Presentation.Prism.Core.EventAggregator;
+using My.CoachManager.Presentation.Prism.Core.Global;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Interactivity.InteractionRequest;
 using My.CoachManager.Presentation.Prism.Core.Services;
@@ -20,6 +20,8 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
+        private IRegionNavigationJournal _journal;
+        private INavigatableWorkspaceViewModel _activeWorkspace;
 
         #endregion Fields
 
@@ -33,7 +35,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <param name="dialogService"></param>
         /// <param name="logger"></param>
         public ShellViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IDialogService dialogService, ILogger logger)
-            : base(dialogService, logger)
+            : base(dialogService, eventAggregator, logger)
         {
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
@@ -46,8 +48,14 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
             _eventAggregator.GetEvent<ShowNotificationPopupRequestEvent>().Subscribe(OnShowNotificationRequested, ThreadOption.UIThread, true);
             _eventAggregator.GetEvent<ShowLoginDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
             _eventAggregator.GetEvent<NavigateRequestEvent>().Subscribe(OnNavigateRequested, ThreadOption.UIThread, true);
+            _eventAggregator.GetEvent<NotifyNavigationCompletedEvent>().Subscribe(OnNavigateCompleted, ThreadOption.UIThread, true);
 
-            NavigateCommand = new DelegateCommand<string>(Navigate);
+            var navigateCommand = new DelegateCommand<string>(Navigate, s => true);
+
+            GlobalCommands.NavigateCommand.RegisterCommand(navigateCommand);
+
+            GoBackCommand = new DelegateCommand(GoBack, CanGoBack);
+            GoForwardCommand = new DelegateCommand(GoForward, CanGoForward);
         }
 
         #endregion Constructors
@@ -55,9 +63,13 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         #region Members
 
         /// <summary>
-        /// Gets or Set the navigate command.
+        /// Gets or sets the active workspace.
         /// </summary>
-        public ICommand NavigateCommand { get; private set; }
+        public INavigatableWorkspaceViewModel ActiveWorkspace
+        {
+            get { return _activeWorkspace; }
+            private set { SetProperty(ref _activeWorkspace, value); }
+        }
 
         /// <summary>
         /// Gets or Set the dialog interraction.
@@ -73,6 +85,16 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// Gets or Set the dialog interraction.
         /// </summary>
         public InteractionRequest<INotificationPopup> NotificationPopupInteractionRequest { get; set; }
+
+        /// <summary>
+        /// Gets or sets the go back command.
+        /// </summary>
+        public DelegateCommand GoBackCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets the go forward command.
+        /// </summary>
+        public DelegateCommand GoForwardCommand { get; set; }
 
         #endregion Members
 
@@ -97,7 +119,24 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         protected void OnNavigateRequested(NavigationEventArgs e)
         {
             _regionManager.RequestNavigate(RegionNames.WorkspaceRegion, new Uri(e.Path, UriKind.Relative));
-            _eventAggregator.GetEvent<StatusBarMessageEvent>().Publish(e.Path);
+        }
+
+        /// <summary>
+        /// Call when the navigation is completed.
+        /// </summary>
+        /// <param name="e"></param>
+        protected void OnNavigateCompleted(NavigationCompletedEventArgs e)
+        {
+            _journal = e.Context.NavigationService.Journal;
+            ActiveWorkspace = e.Workspace;
+
+            GoForwardCommand.RaiseCanExecuteChanged();
+            GoBackCommand.RaiseCanExecuteChanged();
+
+            if (ActiveWorkspace != null)
+            {
+                _eventAggregator.GetEvent<UpdateStatusBarMessageRequestEvent>().Publish(ActiveWorkspace.Title);
+            }
         }
 
         /// <summary>
@@ -126,6 +165,54 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         {
             NotificationPopupInteractionRequest.Raise(e.Notification, e.Callback);
         }
+
+        #region GoBack
+
+        /// <summary>
+        /// Go back.
+        /// </summary>
+        public void GoBack()
+        {
+            if (_journal != null)
+            {
+                _journal.GoBack();
+            }
+        }
+
+        /// <summary>
+        /// Can go back.
+        /// </summary>
+        /// <returns></returns>
+        public bool CanGoBack()
+        {
+            return _journal != null ? _journal.CanGoBack : false;
+        }
+
+        #endregion GoBack
+
+        #region GoForward
+
+        /// <summary>
+        /// Go back.
+        /// </summary>
+        public void GoForward()
+        {
+            if (_journal != null)
+            {
+                _journal.GoForward();
+            }
+        }
+
+        /// <summary>
+        /// Can go back.
+        /// </summary>
+        /// <returns></returns>
+        public bool CanGoForward()
+        {
+            return _journal != null ? _journal.CanGoForward : false;
+        }
+
+        #endregion GoForward
 
         #endregion Methods
     }

@@ -3,12 +3,10 @@
 namespace My.CoachManager.Domain.Core
 {
     /// <summary>
-    /// Services to allow changes to an entity to be tracked.
+    /// Provides properties for an entity which is auditable.
     /// </summary>
     public interface IAuditable
     {
-        #region Properties
-
         /// <summary>
         /// Get or Set the creation date.
         /// </summary>
@@ -28,7 +26,5 @@ namespace My.CoachManager.Domain.Core
         /// Get or Set the modification user.
         /// </summary>
         string ModifiedBy { get; set; }
-
-        #endregion Properties
     }
 }

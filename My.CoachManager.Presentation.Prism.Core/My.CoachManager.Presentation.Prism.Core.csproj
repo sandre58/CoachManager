@@ -83,13 +83,16 @@
     <Compile Include="Converters\ToLowerConverter.cs" />
     <Compile Include="Converters\ToUpperConverter.cs" />
     <Compile Include="EventAggregator\LoginErrorRequestEvent.cs" />
+    <Compile Include="EventAggregator\NotifyNavigationCompletedEvent.cs" />
     <Compile Include="EventAggregator\ShowLoginDialogRequestEvent.cs" />
     <Compile Include="EventAggregator\ShowNotificationPopupRequestEvent.cs" />
-    <Compile Include="EventAggregator\SplashScreenMessageEvent.cs" />
+    <Compile Include="EventAggregator\UpdateSplashScreenMessageRequestEvent.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
+    <Compile Include="Global\GlobalCommands.cs" />
     <Compile Include="Interactivity\InteractionRequest\INotificationPopup.cs" />
     <Compile Include="Interactivity\InteractionRequest\NotificationPopup.cs" />
     <Compile Include="Interactivity\KeyDownItemEventArgs.cs" />
+    <Compile Include="Interactivity\NavigationCompletedEventArgs.cs" />
     <Compile Include="Interactivity\NotificationEventArgs.cs" />
     <Compile Include="Interactivity\MessageDialogStyle.cs" />
     <Compile Include="Interactivity\MessageDialogType.cs" />
@@ -101,7 +104,7 @@
     <Compile Include="Interactivity\InteractionRequest\Dialog.cs" />
     <Compile Include="Interactivity\NavigationEventArgs.cs" />
     <Compile Include="Interactivity\DialogEventArgs.cs" />
-    <Compile Include="EventAggregator\StatusBarMessageEvent.cs" />
+    <Compile Include="EventAggregator\UpdateStatusBarMessageRequestEvent.cs" />
     <Compile Include="Interactivity\DialogResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionNames.cs" />
@@ -109,6 +112,7 @@
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="ViewModels\EntityViewModel.cs" />
     <Compile Include="ViewModels\ICollectionnable.cs" />
+    <Compile Include="ViewModels\INavigatableWorkspaceViewModel.cs" />
     <Compile Include="ViewModels\ScreenMode.cs" />
     <Compile Include="ViewModels\IModifiable.cs" />
     <Compile Include="ViewModels\EditViewModel.cs" />
@@ -127,6 +131,7 @@
     <Compile Include="ViewModels\IWorkspaceViewModel.cs" />
     <Compile Include="ViewModels\IScreenViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
+    <Compile Include="ViewModels\NavigatableWorkspaceViewModel.cs" />
     <Compile Include="ViewModels\EntityViewModelBase.cs" />
     <Compile Include="ViewModels\IValidatable.cs" />
     <Compile Include="ViewModels\ScreenViewModel.cs" />

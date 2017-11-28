@@ -62,11 +62,17 @@
                         </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="icon" Property="Fill" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.FocusForeground)}" />
-                            <Setter TargetName="ellipse" Property="Stroke" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.FocusBorderBrush)}" />
-                            <Setter TargetName="ellipse" Property="Fill" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.FocusBackground)}" />
-                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsFocused" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="icon" Property="Fill" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.FocusForeground)}" />
+                                <Setter TargetName="ellipse" Property="Stroke" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.FocusBorderBrush)}" />
+                                <Setter TargetName="ellipse" Property="Fill" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.FocusBackground)}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="icon" Property="Fill" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.MouseOverForeground)}" />
                             <Setter TargetName="ellipse" Property="Stroke" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.MouseOverBorderBrush)}" />
@@ -93,18 +99,18 @@
     </Style>
 
     <Style x:Key="ColorCommandButtonStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonBaseStyle}">
-        <Setter Property="Background" >
+        <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="BorderBrush" >
+        <Setter Property="BorderBrush">
             <Setter.Value>
                 <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
             </Setter.Value>
         </Setter>
         <Setter Property="parameters:ControlParameters.Foreground" Value="{DynamicResource White}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBackground" >
+        <Setter Property="parameters:ControlParameters.MouseOverBackground">
             <Setter.Value>
                 <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
             </Setter.Value>
@@ -115,7 +121,7 @@
         <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource White}" />
         <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
-        <Setter Property="parameters:ControlParameters.FocusBackground" >
+        <Setter Property="parameters:ControlParameters.FocusBackground">
             <Setter.Value>
                 <SolidColorBrush Opacity="0.7" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
             </Setter.Value>

@@ -3,7 +3,7 @@
 namespace My.CoachManager.Application.Dtos.Persons
 {
     /// <summary>
-    /// Contact Dto
+    /// Data Transfer Object for Phone item.
     /// </summary>
     [DataContract]
     public class PhoneDto : ContactDto

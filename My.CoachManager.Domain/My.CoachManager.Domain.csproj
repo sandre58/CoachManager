@@ -151,31 +151,28 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\Aggregate\AdminSelectBuilder.cs" />
-    <Compile Include="Admin\Aggregate\AdminOrderBuilder.cs" />
-    <Compile Include="Person\Aggregate\IEmailRepository.cs" />
-    <Compile Include="Person\Aggregate\ICoachRepository.cs" />
-    <Compile Include="Admin\Service\CategoryDomainService.cs" />
-    <Compile Include="Person\Aggregate\PersonSelectBuilder.cs" />
-    <Compile Include="Person\Service\ICoachDomainService.cs" />
-    <Compile Include="Person\Service\CoachDomainService.cs" />
-    <Compile Include="Person\Service\PlayerDomainService.cs" />
-    <Compile Include="Person\Service\IPlayerDomainService.cs" />
-    <Compile Include="Admin\Service\IPositionDomainService.cs" />
-    <Compile Include="Admin\Service\PositionDomainService.cs" />
-    <Compile Include="Admin\Service\SeasonDomainService.cs" />
-    <Compile Include="Admin\Service\ISeasonDomainService.cs" />
-    <Compile Include="Admin\Service\ICategoryDomainService.cs" />
+    <Compile Include="AdministrationModule\Aggregate\AdminSelectBuilder.cs" />
+    <Compile Include="AdministrationModule\Aggregate\AdminOrderBuilder.cs" />
+    <Compile Include="AdministrationModule\Aggregate\IAddressRepository.cs" />
+    <Compile Include="AdministrationModule\Aggregate\IPositionRepository.cs" />
+    <Compile Include="AdministrationModule\Service\CategoryDomainService.cs" />
+    <Compile Include="PersonModule\Aggregate\PersonSelectBuilder.cs" />
+    <Compile Include="PersonModule\Service\PlayerDomainService.cs" />
+    <Compile Include="PersonModule\Service\IPlayerDomainService.cs" />
+    <Compile Include="AdministrationModule\Service\IPositionDomainService.cs" />
+    <Compile Include="AdministrationModule\Service\PositionDomainService.cs" />
+    <Compile Include="AdministrationModule\Service\SeasonDomainService.cs" />
+    <Compile Include="AdministrationModule\Service\ISeasonDomainService.cs" />
+    <Compile Include="AdministrationModule\Service\ICategoryDomainService.cs" />
     <Compile Include="DomainService.cs" />
-    <Compile Include="Admin\Aggregate\ISeasonRepository.cs" />
-    <Compile Include="Admin\Aggregate\IPositionRepository.cs" />
-    <Compile Include="Admin\Aggregate\ICategoryRepository.cs" />
-    <Compile Include="Person\Aggregate\ICountryRepository.cs" />
-    <Compile Include="User\Aggregate\IUserRepository.cs" />
-    <Compile Include="Person\Aggregate\IPlayerRepository.cs" />
+    <Compile Include="AdministrationModule\Aggregate\ISeasonRepository.cs" />
+    <Compile Include="AdministrationModule\Aggregate\ICategoryRepository.cs" />
+    <Compile Include="PersonModule\Aggregate\ICountryRepository.cs" />
+    <Compile Include="UserModule\Aggregate\IUserRepository.cs" />
+    <Compile Include="PersonModule\Aggregate\IPlayerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Admin\Aggregate\DataSpecification.cs" />
-    <Compile Include="User\Aggregate\UserSpecification.cs" />
+    <Compile Include="AdministrationModule\Aggregate\DataSpecification.cs" />
+    <Compile Include="UserModule\Aggregate\UserSpecification.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\My.CoachManager.Application.Dtos\My.CoachManager.Application.Dtos.csproj">
@@ -200,7 +197,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="User\Service\" />
+    <Folder Include="CalendarModule\Aggregate\" />
+    <Folder Include="CalendarModule\Service\" />
+    <Folder Include="CompetitionModule\Aggregate\" />
+    <Folder Include="CompetitionModule\Service\" />
+    <Folder Include="RosterModule\Aggregate\" />
+    <Folder Include="RosterModule\Service\" />
+    <Folder Include="TrainingModule\Aggregate\" />
+    <Folder Include="TrainingModule\Service\" />
+    <Folder Include="UserModule\Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

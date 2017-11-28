@@ -1,8 +1,14 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using My.CoachManager.CrossCutting.Core.Metadatas;
 using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.Entities
 {
+    /// <summary>
+    /// Provides properties for a base entity.
+    /// </summary>
+    [MetadataType(typeof(EntityMetadataBase))]
     public abstract class EntityBase : IAuditable, IEntityBase
     {
         /// <summary>

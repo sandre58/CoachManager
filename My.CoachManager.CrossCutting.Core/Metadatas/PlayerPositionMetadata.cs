@@ -7,6 +7,9 @@ using My.CoachManager.CrossCutting.Core.Resources.Entities;
 
 namespace My.CoachManager.CrossCutting.Core.Metadatas
 {
+    /// <summary>
+    /// Provides metadata for a Player Position Entity.
+    /// </summary>
     public class PlayerPositionMetadata : ForeignEntityMetadata
     {
         [Key]
@@ -18,11 +21,6 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
         [Column(Order = 2)]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public int PositionId { get; set; }
-
-        [Display(Name = "Natural", ResourceType = typeof(PositionResources))]
-        [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        [DefaultValue(false)]
-        public bool Natural { get; set; }
 
         [Display(Name = "Rating", ResourceType = typeof(PositionResources))]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]

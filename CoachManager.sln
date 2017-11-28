@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Infrastructure", "5 - Infrastructure", "{457CAA75-84B5-4A2F-811D-86234A78617A}"
 EndProject
@@ -73,17 +73,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Documents", "0 - Docume
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.ViewModels", "My.CoachManager.Presentation.Prism.ViewModels\My.CoachManager.Presentation.Prism.ViewModels.csproj", "{EEC17382-357C-4CD4-B493-23659FEE0E94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Administration", "My.CoachManager.Presentation.Prism.Administration\My.CoachManager.Presentation.Prism.Administration.csproj", "{4CA93004-D321-4897-A8AD-EF368D5BD57E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.AdministrationModule", "My.CoachManager.Presentation.Prism.AdministrationModule\My.CoachManager.Presentation.Prism.AdministrationModule.csproj", "{4CA93004-D321-4897-A8AD-EF368D5BD57E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Home", "My.CoachManager.Presentation.Prism.Home\My.CoachManager.Presentation.Prism.Home.csproj", "{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.HomeModule", "My.CoachManager.Presentation.Prism.HomeModule\My.CoachManager.Presentation.Prism.HomeModule.csproj", "{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Resources", "My.CoachManager.Presentation.Prism.Resources\My.CoachManager.Presentation.Prism.Resources.csproj", "{2D290FD9-5B64-4AF4-A295-2B4CDE6EB330}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Controls", "My.CoachManager.Presentation.Prism.Controls\My.CoachManager.Presentation.Prism.Controls.csproj", "{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.StatusBar", "My.CoachManager.Presentation.Prism.StatusBar\My.CoachManager.Presentation.Prism.StatusBar.csproj", "{FA8B3D6E-F685-42BB-8225-20A4037A97BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.StatusBarModule", "My.CoachManager.Presentation.Prism.StatusBarModule\My.CoachManager.Presentation.Prism.StatusBarModule.csproj", "{FA8B3D6E-F685-42BB-8225-20A4037A97BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Tests", "My.CoachManager.Presentation.Prism.Tests\My.CoachManager.Presentation.Prism.Tests.csproj", "{884D01D2-3FC9-4FD5-8A7A-FB20DE6CBB23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.RosterModule", "My.CoachManager.Presentation.Prism.RosterModule\My.CoachManager.Presentation.Prism.RosterModule.csproj", "{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -425,6 +427,18 @@ Global
 		{884D01D2-3FC9-4FD5-8A7A-FB20DE6CBB23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{884D01D2-3FC9-4FD5-8A7A-FB20DE6CBB23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{884D01D2-3FC9-4FD5-8A7A-FB20DE6CBB23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - BI|Any CPU.ActiveCfg = Debug|Any CPU
+		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - BI|Any CPU.Build.0 = Debug|Any CPU
+		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Home|Any CPU.ActiveCfg = Debug|Any CPU
+		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
+		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
+		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
+		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
+		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -461,6 +475,7 @@ Global
 		{A554F212-3F08-4AEF-B9AA-FA01A7491A7F} = {369B0030-ADD9-4BC4-A323-790D4675D8D0}
 		{FA8B3D6E-F685-42BB-8225-20A4037A97BD} = {65E6F15A-E231-4A23-867E-6C6EFB5A3679}
 		{884D01D2-3FC9-4FD5-8A7A-FB20DE6CBB23} = {369B0030-ADD9-4BC4-A323-790D4675D8D0}
+		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA} = {65E6F15A-E231-4A23-867E-6C6EFB5A3679}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27DA6BB0-2E1D-4795-AA23-8024B2737F57}

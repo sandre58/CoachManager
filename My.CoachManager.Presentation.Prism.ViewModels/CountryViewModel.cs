@@ -3,6 +3,9 @@ using My.CoachManager.CrossCutting.Core.Metadatas;
 
 namespace My.CoachManager.Presentation.Prism.ViewModels
 {
+    /// <summary>
+    /// Provides properties for a Country item.
+    /// </summary>
     [MetadataType(typeof(CountryMetadata))]
     public class CountryViewModel : DataEntityViewModel
     {
@@ -13,10 +16,14 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
         #endregion Constants
 
         private string _flag;
+
+        /// <summary>
+        /// Gets or sets the path of the flag image.
+        /// </summary>
         public virtual string Flag { get { return _flag; } set { SetProperty(ref _flag, value); } }
 
         /// <summary>
-        /// Get the full name.
+        /// Get the path of the flag image.
         /// </summary>
         public virtual string FullPath
         {

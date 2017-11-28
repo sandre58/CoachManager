@@ -123,9 +123,6 @@
   <data name="Birthdate" xml:space="preserve">
     <value>Né(e) le</value>
   </data>
-  <data name="City" xml:space="preserve">
-    <value>Ville</value>
-  </data>
   <data name="Country" xml:space="preserve">
     <value>Nationalité</value>
   </data>
@@ -150,9 +147,6 @@
   <data name="LicenseNumber" xml:space="preserve">
     <value>N° de licence</value>
   </data>
-  <data name="Person" xml:space="preserve">
-    <value>Personne</value>
-  </data>
   <data name="Phone" xml:space="preserve">
     <value>Téléphone</value>
   </data>
@@ -164,9 +158,6 @@
   </data>
   <data name="PlaceOfBirth" xml:space="preserve">
     <value>Lieu de naissance</value>
-  </data>
-  <data name="PostalCode" xml:space="preserve">
-    <value>Code Postal</value>
   </data>
   <data name="Size" xml:space="preserve">
     <value>Taille</value>

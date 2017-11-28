@@ -21,7 +21,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
         /// <param name="source">The entity source.</param>
         /// <returns>The new object.</returns>
         public static TDest ToDto<TDest>(this EntityViewModelBase source)
-            where TDest : IEntityDto
+            where TDest : IEntityDtoBase
         {
             return Mapper.Map<TDest>(source);
         }
@@ -32,7 +32,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
         /// <typeparam name="TDest">The destination type.</typeparam>
         /// <param name="source">The entity source.</param>
         /// <returns>The new object.</returns>
-        public static TDest ToViewModel<TDest>(this IEntityDto source)
+        public static TDest ToViewModel<TDest>(this IEntityDtoBase source)
             where TDest : EntityViewModelBase
         {
             return Mapper.Map<TDest>(source);
@@ -44,7 +44,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
         /// <typeparam name="TDest">The destination type.</typeparam>
         /// <returns>The new object.</returns>
         public static IEnumerable<TDest> ToDtos<TDest>(this IEnumerable<EntityViewModelBase> source)
-            where TDest : IEntityDto
+            where TDest : IEntityDtoBase
         {
             return Mapper.Map<IEnumerable<TDest>>(source);
         }
@@ -54,7 +54,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
         /// </summary>
         /// <typeparam name="TDest">The destination type.</typeparam>
         /// <returns>The new object.</returns>
-        public static IEnumerable<TDest> ToViewModels<TDest>(this IEnumerable<IEntityDto> source)
+        public static IEnumerable<TDest> ToViewModels<TDest>(this IEnumerable<IEntityDtoBase> source)
             where TDest : EntityViewModelBase
         {
             return Mapper.Map<IEnumerable<TDest>>(source);

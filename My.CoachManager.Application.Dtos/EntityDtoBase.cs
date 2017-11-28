@@ -7,7 +7,7 @@ namespace My.CoachManager.Application.Dtos
     /// Dto classe base.
     /// </summary>
     [DataContract]
-    public abstract class EntityDtoBase
+    public abstract class EntityDtoBase : IEntityDtoBase
     {
         [DataMember]
         public DateTime? CreatedDate { get; set; }

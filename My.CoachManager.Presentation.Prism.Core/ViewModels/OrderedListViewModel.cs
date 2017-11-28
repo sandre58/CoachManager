@@ -8,6 +8,7 @@ using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Behaviours;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using Prism.Commands;
+using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
@@ -28,9 +29,10 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// Initialise a new instance of <see cref="OrderedListViewModel{TEntityViewModel,TEditView,TEditViewModel}"/>.
         /// </summary>
         /// <param name="dialogService">The dialog service.</param>
+        /// <param name="eventAggregator"></param>
         /// <param name="logger">The logger.</param>
-        protected OrderedListViewModel(IDialogService dialogService, ILogger logger)
-            : base(dialogService, logger)
+        protected OrderedListViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
+            : base(dialogService, eventAggregator, logger)
         {
             CanOrder = false;
             ActivateOrderCommand = new DelegateCommand(ActivateOrder, CanActivateOrder);

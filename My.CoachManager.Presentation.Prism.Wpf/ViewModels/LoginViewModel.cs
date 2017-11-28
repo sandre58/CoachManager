@@ -79,12 +79,12 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 
         #region Constructors
 
-        public LoginViewModel(IEventAggregator eventAggregator, IDialogService dialogService, ILogger logger) : base(dialogService, logger)
+        public LoginViewModel(IEventAggregator eventAggregator, IDialogService dialogService, ILogger logger) : base(dialogService, eventAggregator, logger)
         {
             LoginCommand = new DelegateCommand(Login, CanLogin);
             CancelCommand = new DelegateCommand(Cancel, CanCancel);
 
-            eventAggregator.GetEvent<LoginErrorRequestEvent>().Subscribe(error => Error = error);
+            EventAggregator.GetEvent<LoginErrorRequestEvent>().Subscribe(error => Error = error);
         }
 
         #endregion Constructors

@@ -9,7 +9,6 @@ namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
         {
             // Persons
             CreateMap<PlayerDto, PlayerViewModel>().ReverseMap();
-            CreateMap<CoachDto, CoachViewModel>().ReverseMap();
 
             // Contacts
             CreateMap<EmailDto, EmailViewModel>().ReverseMap();
@@ -20,8 +19,6 @@ namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
 
             // Foreign properties
             CreateMap<PlayerPositionDto, PlayerPositionViewModel>().ReverseMap();
-            CreateMap<PlayerHeightDto, PlayerHeightViewModel>().ReverseMap();
-            CreateMap<PlayerWeightDto, PlayerWeightViewModel>().ReverseMap();
 
             // Misc
             CreateMap<CountryDto, CountryViewModel>().ReverseMap();

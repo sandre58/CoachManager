@@ -28,11 +28,11 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <param name="dialogService"></param>
         /// <param name="logger"></param>
         public SplashScreenViewModel(IEventAggregator eventAggregator, IDialogService dialogService, ILogger logger)
-            : base(dialogService, logger)
+            : base(dialogService, eventAggregator, logger)
         {
             _eventAggregator = eventAggregator;
 
-            _eventAggregator.GetEvent<SplashScreenMessageEvent>().Subscribe(OnUpdateMessage, ThreadOption.UIThread, true);
+            _eventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Subscribe(OnUpdateMessage, ThreadOption.UIThread, true);
 
             var assembly = Assembly.GetEntryAssembly();
 

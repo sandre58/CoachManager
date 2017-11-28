@@ -20,7 +20,7 @@ namespace My.CoachManager.Application.Dtos.Mapping
         /// <param name="source">The entity source.</param>
         /// <returns>The new object.</returns>
         public static TDest ToDto<TDest>(this IEntity source)
-            where TDest : IEntityDto
+            where TDest : IEntityDtoBase
         {
             return Mapper.Map<TDest>(source);
         }
@@ -31,7 +31,7 @@ namespace My.CoachManager.Application.Dtos.Mapping
         /// <typeparam name="TDest">The destination type.</typeparam>
         /// <param name="source">The entity source.</param>
         /// <returns>The new object.</returns>
-        public static TDest ToEntity<TDest>(this IEntityDto source)
+        public static TDest ToEntity<TDest>(this IEntityDtoBase source)
             where TDest : IEntity
         {
             return Mapper.Map<TDest>(source);
@@ -43,7 +43,7 @@ namespace My.CoachManager.Application.Dtos.Mapping
         /// <typeparam name="TDest">The destination type.</typeparam>
         /// <returns>The new object.</returns>
         public static IEnumerable<TDest> ToDtos<TDest>(this IEnumerable<IEntity> source)
-            where TDest : IEntityDto
+            where TDest : IEntityDtoBase
         {
             return Mapper.Map<IEnumerable<TDest>>(source);
         }
@@ -53,7 +53,7 @@ namespace My.CoachManager.Application.Dtos.Mapping
         /// </summary>
         /// <typeparam name="TDest">The destination type.</typeparam>
         /// <returns>The new object.</returns>
-        public static IEnumerable<TDest> ToEntities<TDest>(this IEnumerable<IEntityDto> source)
+        public static IEnumerable<TDest> ToEntities<TDest>(this IEnumerable<IEntityDtoBase> source)
             where TDest : IEntity
         {
             return Mapper.Map<IEnumerable<TDest>>(source);

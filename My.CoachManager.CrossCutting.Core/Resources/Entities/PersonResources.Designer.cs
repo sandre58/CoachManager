@@ -79,15 +79,6 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ville.
-        /// </summary>
-        public static string City {
-            get {
-                return ResourceManager.GetString("City", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Nationalité.
         /// </summary>
         public static string Country {
@@ -160,15 +151,6 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Personne.
-        /// </summary>
-        public static string Person {
-            get {
-                return ResourceManager.GetString("Person", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Téléphone.
         /// </summary>
         public static string Phone {
@@ -201,15 +183,6 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         public static string PlaceOfBirth {
             get {
                 return ResourceManager.GetString("PlaceOfBirth", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Code Postal.
-        /// </summary>
-        public static string PostalCode {
-            get {
-                return ResourceManager.GetString("PostalCode", resourceCulture);
             }
         }
         

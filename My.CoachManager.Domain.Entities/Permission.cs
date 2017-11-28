@@ -1,17 +1,13 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Metadatas;
 
 namespace My.CoachManager.Domain.Entities
 {
+    /// <summary>
+    /// Provides properties for a Permission Entity.
+    /// </summary>
     [MetadataType(typeof(PermissionMetadata))]
     public class Permission : DataEntity
     {
-        public Permission()
-        {
-            Roles = new HashSet<Role>();
-        }
-
-        public ICollection<Role> Roles { get; set; }
     }
 }
