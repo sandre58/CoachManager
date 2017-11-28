@@ -5,6 +5,7 @@ using System.Linq;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Infrastructure.Data.UnitOfWorks;
 using My.CoachManager.CrossCutting.Core.Constants;
+using My.CoachManager.CrossCutting.Core.Cryptography;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Extensions;
 
@@ -31,14 +32,20 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
 
         private void AddTestData(DataContext context)
         {
+            var password = "toto";
+            
             // User and permissions
             var perm1 = new Permission() { Id = 1, Code = PermissionConstants.ChangeUser, Label = "Changer d'utilisateur", Description = "Permet de se connecter à l'aplication en tant qu'un autre utilisateur." };
             var perm2 = new Permission() { Id = 2, Code = PermissionConstants.AccessAdmin, Label = "Accès à l'administration", Description = "Permet d'accèder à tout le module d'administration." };
             var role1 = new Role() { Id = 1, Code = RoleConstants.Admin, Label = "Administrateur", Description = "Rôle permettant de gérer toutes les données utilisées dan l''application." };
 
-            var user1 = new User() { Id = 1, Name = "Stéphane ANDRE (Home)", Login = "andre", Password = "qRBfE9MoPFs=", Mail = "andre.cs2i@gmail.com" };
-            var user2 = new User() { Id = 2, Name = "Stéphane ANDRE (Merial)", Login = "E0214719", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@merial.com" };
-            var user3 = new User() { Id = 3, Name = "Vincent SOURDEIX (BI)", Login = "E0268620", Password = "qRBfE9MoPFs=", Mail = "vincentsourdeix@test.fr" };
+            var user1 = new User() { Id = 1, Name = "Stéphane ANDRE (Home)", Login = "andre", Mail = "andre.cs2i@gmail.com" };
+            var user2 = new User() { Id = 2, Name = "Stéphane ANDRE (Merial)", Login = "E0214719", Mail = "stephane.andre@merial.com" };
+            var user3 = new User() { Id = 3, Name = "Vincent SOURDEIX (BI)", Login = "E0268620", Mail = "vincentsourdeix@test.fr" };
+            
+            user1.Password = TripleDesEncryptor.Encrypt(password, user1.Login);
+            user2.Password = TripleDesEncryptor.Encrypt(password, user2.Login);
+            user3.Password = TripleDesEncryptor.Encrypt(password, user3.Login);
 
             role1.Permissions.Add(perm1);
             role1.Permissions.Add(perm2);

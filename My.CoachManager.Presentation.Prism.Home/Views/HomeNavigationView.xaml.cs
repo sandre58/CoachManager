@@ -1,4 +1,5 @@
-﻿using Prism.Regions;
+﻿using System.Security.Permissions;
+using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Prism.Home.Views
 {
@@ -6,6 +7,7 @@ namespace My.CoachManager.Presentation.Prism.Home.Views
     /// Logique d'interaction pour HomeNavigationItemView.xaml
     /// </summary>
     [ViewSortHint("01")]
+    [PrincipalPermission(SecurityAction.Demand)]
     public partial class HomeNavigationView
     {
         public HomeNavigationView()
