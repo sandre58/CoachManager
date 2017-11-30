@@ -87,7 +87,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             {
                 if (ConnectUser())
                 {
-                    OnLogginSuccess();
+                    OnLoginSuccess();
                     Initialize();
 
                     System.Windows.Application.Current.Dispatcher.Invoke(
@@ -100,7 +100,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
                 }
                 else
                 {
-                    OnLogginFailed();
+                    OnLoginFailed();
                 }
             });
             thread.SetApartmentState(ApartmentState.STA);
@@ -136,13 +136,13 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// Connection of the user.
         /// </summary>
         /// <returns></returns>
-        private IPrincipal GetConnectedUser(string login = "", string password = "", bool byWindowsCreadentials = true)
+        private IPrincipal GetConnectedUser(string login = "", string password = "", bool byWindowsCredentials = true)
         {
             EventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Publish(StatusResources.UserConnection);
             IPrincipal principal;
 
             var authentificationService = Container.TryResolve<IAuthenticationService>();
-            if (byWindowsCreadentials)
+            if (byWindowsCredentials)
             {
                 principal = authentificationService.AuthenticateByWindowsCredentials();
             }
@@ -278,7 +278,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// <summary>
         /// On loggin failed.
         /// </summary>
-        protected void OnLogginFailed()
+        protected void OnLoginFailed()
         {
             System.Windows.Application.Current.Dispatcher.Invoke(
                 delegate
@@ -291,7 +291,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// <summary>
         /// On loggin failed.
         /// </summary>
-        protected void OnLogginSuccess()
+        protected void OnLoginSuccess()
         {
             EventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Publish(string.Format(StatusResources.UserConnected, Thread.CurrentPrincipal.Identity.Name));
         }
