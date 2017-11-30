@@ -18,6 +18,7 @@
     <converters:NotEqualsConverter x:Key="NotEqualsConverter" />
     <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
     <converters:EnumToStringConverter x:Key="EnumToStringConverter" />
+    <converters:EnumToIntegerConverter x:Key="EnumToIntegerConverter" />
     <converters:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter" />
     <converters:NotConverter x:Key="NotConverter" />
     <converters:ObjectToPropertyConverter x:Key="ObjectToPropertyConverter" />

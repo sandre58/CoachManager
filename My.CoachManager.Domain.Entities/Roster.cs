@@ -11,6 +11,16 @@ namespace My.CoachManager.Domain.Entities
     public class Roster : Entity
     {
         /// <summary>
+        /// Initialize a new instance of <see cref="Roster"/>.
+        /// </summary>
+        public Roster()
+        {
+            Squads = new List<Squad>();
+            Players = new List<RosterPlayer>();
+            Coachs = new List<RosterCoach>();
+        }
+
+        /// <summary>
         /// Gets or sets the name.
         /// </summary>
         public string Name { get; set; }

@@ -26,7 +26,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         DbSet<PlayerPosition> PlayerPositions { get; set; }
         DbSet<Position> Positions { get; set; }
         DbSet<Role> Roles { get; set; }
-        DbSet<Roster> Roster { get; set; }
+        DbSet<Roster> Rosters { get; set; }
         DbSet<RosterPlayer> RosterPlayers { get; set; }
         DbSet<RosterCoach> RosterCoachs { get; set; }
         DbSet<Season> Seasons { get; set; }

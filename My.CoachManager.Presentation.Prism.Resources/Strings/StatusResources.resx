@@ -117,10 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApplicationLoading" xml:space="preserve">
+    <value>Configuration de l'application...</value>
+  </data>
   <data name="DefaultStatusMessage" xml:space="preserve">
     <value>Prêt</value>
   </data>
-  <data name="ModuleLoadingMessage" xml:space="preserve">
+  <data name="ModuleLoading" xml:space="preserve">
     <value>Chargement du module "{0}"...</value>
   </data>
   <data name="UserConnected" xml:space="preserve">
@@ -128,5 +131,8 @@
   </data>
   <data name="UserConnection" xml:space="preserve">
     <value>Connexion de l'utilisateur...</value>
+  </data>
+  <data name="UserLoading" xml:space="preserve">
+    <value>Chargement du profil utilisateur...</value>
   </data>
 </root>

@@ -123,4 +123,7 @@
   <data name="Players" xml:space="preserve">
     <value>Joueurs</value>
   </data>
+  <data name="Roster" xml:space="preserve">
+    <value>Effectif</value>
+  </data>
 </root>

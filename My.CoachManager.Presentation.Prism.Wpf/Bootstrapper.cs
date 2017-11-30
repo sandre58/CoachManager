@@ -9,9 +9,11 @@ using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.CrossCutting.Logging.Supervision;
+using My.CoachManager.Presentation.Prism.Core;
 using My.CoachManager.Presentation.Prism.Core.EventAggregator;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Services;
+using My.CoachManager.Presentation.Prism.Manager;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
 using My.CoachManager.Presentation.Prism.RosterModule;
 using My.CoachManager.Presentation.Prism.Wpf.Services;
@@ -19,6 +21,7 @@ using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using My.CoachManager.Presentation.Prism.Wpf.Views;
 using My.CoachManager.Presentation.ServiceAgent;
 using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.UserServiceReference;
 using Prism.Events;
 using Prism.Modularity;
@@ -45,23 +48,26 @@ namespace My.CoachManager.Presentation.Prism.Wpf
 
         protected override void ConfigureContainer()
         {
+            Locator.SetContainer(Container);
+
             // Services
-            Container.RegisterInstance<IAdminService>(ServiceClientFactory.Create<AdminServiceClient, IAdminService>(), new ContainerControlledLifetimeManager());
-            Container.RegisterInstance<IUserService>(ServiceClientFactory.Create<UserServiceClient, IUserService>(), new ContainerControlledLifetimeManager());
+            Locator.RegisterInstance<IAdminService>(ServiceClientFactory.Create<AdminServiceClient, IAdminService>());
+            Locator.RegisterInstance<IUserService>(ServiceClientFactory.Create<UserServiceClient, IUserService>());
+            Locator.RegisterInstance<IRosterService>(ServiceClientFactory.Create<RosterServiceClient, IRosterService>());
 
             // Unity
-            Container.RegisterType<ILogger, Logger>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<IAuthenticationService, AuthenticationService>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<IDialogService, DialogService>(new ContainerControlledLifetimeManager());
+            Locator.RegisterType<ILogger, Logger>();
+            Locator.RegisterType<IAuthenticationService, AuthenticationService>();
+            Locator.RegisterType<IDialogService, DialogService>();
 
             // Views
-            Container.RegisterType<Views.SplashScreen>(new ContainerControlledLifetimeManager());
+            Locator.RegisterType<Views.SplashScreen>();
 
             // ViewModels
-            Container.RegisterType<IMessageViewModel, MessageViewModel>();
-            Container.RegisterType<ILoginViewModel, LoginViewModel>();
-            Container.RegisterType<ISplashScreenViewModel, SplashScreenViewModel>();
-            Container.RegisterType<IShellViewModel, ShellViewModel>();
+            Locator.RegisterType<IMessageViewModel, MessageViewModel>();
+            Locator.RegisterType<ILoginViewModel, LoginViewModel>();
+            Locator.RegisterType<ISplashScreenViewModel, SplashScreenViewModel>();
+            Locator.RegisterType<IShellViewModel, ShellViewModel>();
 
             // base
             base.ConfigureContainer();
@@ -108,6 +114,15 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// </summary>
         private void Initialize()
         {
+            // Load the application configuration
+            EventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Publish(StatusResources.ApplicationLoading);
+            //
+
+            // Load the application configuration
+            EventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Publish(StatusResources.UserLoading);
+            //
+
+            // Initialize the modules
             InitializeModule<StatusBarModule.StatusBarModuleInit>();
             InitializeModule<HomeModule.HomeModuleInit>();
 
@@ -250,7 +265,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// <typeparam name="T"></typeparam>
         protected void InitializeModule<T>() where T : IModule
         {
-            EventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Publish(string.Format(StatusResources.ModuleLoadingMessage, typeof(T).GetTypeInfo().Name));
+            EventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Publish(string.Format(StatusResources.ModuleLoading, typeof(T).GetTypeInfo().Name));
             IModule module = Container.Resolve<T>();
             System.Windows.Application.Current.Dispatcher.Invoke(
                 delegate

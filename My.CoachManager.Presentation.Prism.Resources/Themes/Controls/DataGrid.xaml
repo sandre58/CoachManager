@@ -14,6 +14,9 @@
         <ResourceDictionary Source="ContextMenu.xaml" />
         <ResourceDictionary Source="Button.xaml" />
         <ResourceDictionary Source="CommandButton.xaml" />
+        <ResourceDictionary Source="MetroProgressBar.xaml" />
+        <ResourceDictionary Source="Hyperlink.xaml" />
+        <ResourceDictionary Source="Icon.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- Column Header -->
@@ -512,8 +515,111 @@
         </Setter>
     </Style>
 
+    <!-- DataGridColumn -->
+    <Style x:Key="DataGridTemplateColumnCellStyle" BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="{x:Type DataGridCell}">
+        <Style.Resources>
+            <Style TargetType="{x:Type ContentPresenter}">
+                <Style.Triggers>
+                    <Trigger Property="Validation.HasError" Value="True">
+                        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style x:Key="DataGridHyperlinkColumnEditingElementStyle" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Transparent}" />
+                <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DataGridHyperlinkColumnElementStyle" BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
+        <Style.Resources>
+            <Style BasedOn="{StaticResource {x:Type Hyperlink}}" TargetType="{x:Type Hyperlink}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True">
+                        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Style.Resources>
+        <Setter Property="Padding" Value="{StaticResource DefaultMargin }" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="DataGridTextColumnEditingElementStyle" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+                <Setter Property="Background" Value="{DynamicResource Transparent}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DataGridTextColumnElementStyle" BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
+        <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="DataGridDateColumnEditingElementStyle" BasedOn="{StaticResource {x:Type DatePicker}}" TargetType="{x:Type DatePicker}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+                <Setter Property="Background" Value="{DynamicResource Transparent}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DataGridDateColumnElementStyle" BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="DataGridDateTimeColumnEditingElementStyle" BasedOn="{StaticResource {x:Type DatePicker}}" TargetType="{x:Type DatePicker}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+                <Setter Property="Background" Value="{DynamicResource Transparent}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DataGridDateTimeColumnElementStyle" BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="DataGridProgressBarColumnEditingElementStyle" BasedOn="{StaticResource {x:Type Slider}}" TargetType="{x:Type Slider}">
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DataGridProgressBarColumnElementStyle" BasedOn="{StaticResource {x:Type controls:MetroProgressBar}}" TargetType="{x:Type controls:MetroProgressBar}">
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!-- DataGrid -->
     <Style TargetType="{x:Type DataGrid}">
+        <Style.Resources>
+            <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True">
+                        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Style.Resources>
         <Setter Property="parameters:DataGridParameters.IsDeselectionEnabled" Value="False" />
         <Setter Property="parameters:UiElementParameters.IsBubblingMouseWheelEvents" Value="False" />
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />

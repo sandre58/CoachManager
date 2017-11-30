@@ -18,7 +18,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CaretBrush" Value="{DynamicResource NormalForeground}" />
-        <Setter Property="SelectionBrush" Value="{DynamicResource HightLight}" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource HighLight}" />
         <Setter Property="ContextMenu" Value="{StaticResource TextBoxContextMenuStyle}" />
         <Setter Property="parameters:TextBoxParameters.IsMonitoring" Value="True" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />

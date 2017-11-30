@@ -82,6 +82,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\RosterServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\UserServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -112,7 +117,11 @@
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Admin.CountryDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Admin.PositionDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Admin.SeasonDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Administration.CategoryDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Administration.PositionDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Administration.SeasonDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Categories.CategoryDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Competitions.ClubDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Countries.CountryDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Data.CategoriesListDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Data.CategoryDto.datasource" />
@@ -130,6 +139,8 @@
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.PlayerDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.PlayersInformationsListDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.PlayersListDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Rosters.PlayerDetailDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Rosters.SquadDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Users.UserDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Domain.Entities.Player.datasource" />
     <None Include="Service References\AdminServiceReference\AdminService.wsdl" />
@@ -152,6 +163,28 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\AdminServiceReference\AdminService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\RosterServiceReference\RosterService.wsdl" />
+    <None Include="Service References\RosterServiceReference\RosterService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\RosterServiceReference\RosterService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\RosterServiceReference\RosterService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\RosterServiceReference\RosterService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\RosterServiceReference\RosterService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\RosterServiceReference\RosterService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\RosterServiceReference\RosterService6.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\UserServiceReference\UserService.wsdl" />
@@ -180,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\AdminServiceReference\" />
+    <WCFMetadataStorage Include="Service References\RosterServiceReference\" />
     <WCFMetadataStorage Include="Service References\UserServiceReference\" />
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +242,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\UserServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RosterServiceReference\RosterService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RosterServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RosterServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RosterServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

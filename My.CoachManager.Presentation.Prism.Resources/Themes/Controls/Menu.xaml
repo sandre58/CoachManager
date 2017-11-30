@@ -46,7 +46,7 @@
                     <Border Background="Transparent">
                         <Grid SnapsToDevicePixels="False">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="250" />
+                                <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="45" />
                             </Grid.ColumnDefinitions>
 

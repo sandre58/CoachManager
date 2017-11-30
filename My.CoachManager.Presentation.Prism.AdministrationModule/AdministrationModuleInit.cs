@@ -1,47 +1,40 @@
-﻿using Microsoft.Practices.ServiceLocation;
-using Microsoft.Practices.Unity;
-using My.CoachManager.Presentation.Prism.AdministrationModule.ViewModels;
+﻿using My.CoachManager.Presentation.Prism.AdministrationModule.ViewModels;
 using My.CoachManager.Presentation.Prism.AdministrationModule.Views;
 using My.CoachManager.Presentation.Prism.Core;
 using Prism.Modularity;
 using Prism.Regions;
-using Prism.Unity;
 
 namespace My.CoachManager.Presentation.Prism.AdministrationModule
 {
     public class AdministrationModuleInit : IModule
     {
         private readonly IRegionManager _regionManager;
-        private readonly IServiceLocator _serviceLocator;
-        private readonly IUnityContainer _container;
 
-        public AdministrationModuleInit(IUnityContainer container, IRegionManager regionManager, IServiceLocator serviceLocator)
+        public AdministrationModuleInit(IRegionManager regionManager)
         {
             _regionManager = regionManager;
-            _serviceLocator = serviceLocator;
-            _container = container;
         }
 
         public void Initialize()
         {
             // Register ViewModels
-            _container.RegisterType<ICategoriesListViewModel, CategoriesListViewModel>();
-            _container.RegisterType<ICategoryEditViewModel, CategoryEditViewModel>();
-            _container.RegisterType<IPositionsListViewModel, PositionsListViewModel>();
-            _container.RegisterType<IPositionEditViewModel, PositionEditViewModel>();
-            _container.RegisterType<ISeasonsListViewModel, SeasonsListViewModel>();
-            _container.RegisterType<ISeasonEditViewModel, SeasonEditViewModel>();
-            _container.RegisterType<IPlayersListViewModel, PlayersListViewModel>();
-            _container.RegisterType<IPlayerEditViewModel, PlayerEditViewModel>();
+            Locator.RegisterType<ICategoriesListViewModel, CategoriesListViewModel>();
+            Locator.RegisterType<ICategoryEditViewModel, CategoryEditViewModel>();
+            Locator.RegisterType<IPositionsListViewModel, PositionsListViewModel>();
+            Locator.RegisterType<IPositionEditViewModel, PositionEditViewModel>();
+            Locator.RegisterType<ISeasonsListViewModel, SeasonsListViewModel>();
+            Locator.RegisterType<ISeasonEditViewModel, SeasonEditViewModel>();
+            Locator.RegisterType<IPlayersListViewModel, PlayersListViewModel>();
+            Locator.RegisterType<IPlayerEditViewModel, PlayerEditViewModel>();
 
             // Register Views (for navigation)
-            _container.RegisterTypeForNavigation<CategoriesListView>();
-            _container.RegisterTypeForNavigation<PositionsListView>();
-            _container.RegisterTypeForNavigation<SeasonsListView>();
-            _container.RegisterTypeForNavigation<PlayersListView>();
+            Locator.RegisterTypeForNavigation<CategoriesListView>();
+            Locator.RegisterTypeForNavigation<PositionsListView>();
+            Locator.RegisterTypeForNavigation<SeasonsListView>();
+            Locator.RegisterTypeForNavigation<PlayersListView>();
 
             // Register the navigation view
-            _regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion, () => _serviceLocator.GetInstance<AdministrationNavigationView>());
+            _regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion, Locator.GetInstance<AdministrationNavigationView>);
         }
     }
 }

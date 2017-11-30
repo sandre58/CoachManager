@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using My.CoachManager.Application.Dtos.Administration;
+using My.CoachManager.Application.Dtos.Competitions;
 using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.Domain.Entities;
 

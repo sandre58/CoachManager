@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:62863/Services/AdminService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" />
+  <xs:import schemaLocation="http://localhost:62863/Services/AdminService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" />
   <xs:complexType name="ArrayOfCategoryDto">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="CategoryDto" nillable="true" type="tns:CategoryDto" />
@@ -51,4 +52,21 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="PositionDto" nillable="true" type="tns:PositionDto" />
+  <xs:complexType name="AddressDto">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q4:EntityDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" minOccurs="0" name="Country" nillable="true" type="q5:CountryDto" />
+          <xs:element minOccurs="0" name="CountryId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="Latitude" type="xs:double" />
+          <xs:element minOccurs="0" name="Longitude" type="xs:double" />
+          <xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Row1" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Row2" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AddressDto" nillable="true" type="tns:AddressDto" />
 </xs:schema>

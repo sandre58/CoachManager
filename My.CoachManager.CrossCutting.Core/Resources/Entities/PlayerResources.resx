@@ -120,6 +120,9 @@
   <data name="Category" xml:space="preserve">
     <value>Catégorie</value>
   </data>
+  <data name="CategoryAbbr" xml:space="preserve">
+    <value>Cat.</value>
+  </data>
   <data name="Height" xml:space="preserve">
     <value>Taille</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="Number" xml:space="preserve">
     <value>Numéro</value>
+  </data>
+  <data name="NumberAbbr" xml:space="preserve">
+    <value>N°</value>
   </data>
   <data name="Positions" xml:space="preserve">
     <value>Postes</value>

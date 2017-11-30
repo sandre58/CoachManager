@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Exceptions;
@@ -12,18 +11,11 @@ using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public abstract class ListViewModel<TEntityViewModel, TEditView, TEditViewModel> : NavigatableWorkspaceViewModel
+    public abstract class ListViewModel<TEntityViewModel, TEditView, TEditViewModel> : ReadOnlyListViewModel<TEntityViewModel>
         where TEntityViewModel : class, IEntityViewModel
         where TEditView : FrameworkElement
         where TEditViewModel : class, IDialogViewModel, IEditViewModel
     {
-        #region Fields
-
-        private ObservableCollection<TEntityViewModel> _items;
-        private TEntityViewModel _selectedItem;
-
-        #endregion Fields
-
         #region Constructor
 
         /// <summary>
@@ -47,34 +39,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         #region Members
 
         /// <summary>
-        /// Gets or sets the items.
-        /// </summary>
-        public ObservableCollection<TEntityViewModel> Items
-        {
-            get { return _items; }
-            set
-            {
-                SetProperty(ref _items, value);
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the selected item.
-        /// </summary>
-        public TEntityViewModel SelectedItem
-        {
-            get { return _selectedItem; }
-            set
-            {
-                SetProperty(ref _selectedItem, value, () =>
-                {
-                    EditCommand.RaiseCanExecuteChanged();
-                    RemoveCommand.RaiseCanExecuteChanged();
-                });
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the add command.
         /// </summary>
         public DelegateCommand AddCommand { get; set; }
@@ -88,16 +52,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// Gets or sets the remove command.
         /// </summary>
         public DelegateCommand<TEntityViewModel> RemoveCommand { get; set; }
-
-        /// <summary>
-        /// Gets or sets the keyboard action command.
-        /// </summary>
-        public DelegateCommand<KeyDownItemEventArgs> KeyboardActionCommand { get; set; }
-
-        /// <summary>
-        /// Gets or sets the refresh command.
-        /// </summary>
-        public DelegateCommand RefreshCommand { get; set; }
 
         #endregion Members
 
@@ -246,32 +200,12 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         #endregion Remove
 
-        #region Refresh
-
-        /// <summary>
-        /// Refresh Items.
-        /// </summary>
-        public virtual void Refresh()
-        {
-            RefreshData();
-        }
-
-        /// <summary>
-        /// Can refresh item.
-        /// </summary>
-        public virtual bool CanRefresh()
-        {
-            return Mode == ScreenMode.Read;
-        }
-
-        #endregion Refresh
-
         #region Keyboard
 
         /// <summary>
         /// Do action by keyboard trigger.
         /// </summary>
-        public virtual void KeyboardAction(KeyDownItemEventArgs e)
+        public override void KeyboardAction(KeyDownItemEventArgs e)
         {
             if (CanKeyboardAction(e))
             {
@@ -290,15 +224,16 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             }
         }
 
-        /// <summary>
-        /// Can Remove item.
-        /// </summary>
-        public virtual bool CanKeyboardAction(KeyDownItemEventArgs e)
-        {
-            return Mode == ScreenMode.Read && e.Item != null;
-        }
-
         #endregion Keyboard
+
+        /// <summary>
+        /// Calls when selected item change.
+        /// </summary>
+        protected override void OnSelectedItemChanged()
+        {
+            EditCommand.RaiseCanExecuteChanged();
+            RemoveCommand.RaiseCanExecuteChanged();
+        }
 
         #endregion Methods
     }

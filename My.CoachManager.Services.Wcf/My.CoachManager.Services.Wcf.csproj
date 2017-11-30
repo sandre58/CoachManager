@@ -80,6 +80,8 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IRosterService.cs" />
+    <Compile Include="RosterService.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="AdminService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />

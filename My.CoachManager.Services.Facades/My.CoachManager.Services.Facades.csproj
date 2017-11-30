@@ -76,6 +76,7 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Services\RosterService.svc" />
     <Content Include="Services\UserService.svc" />
     <Content Include="Services\AdminService.svc" />
     <Content Include="Web.config">

@@ -5,6 +5,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Margins.xaml" />
+        <ResourceDictionary Source="../Base/Fonts.xaml" />
         <ResourceDictionary Source="../Base/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
@@ -46,11 +47,13 @@
         <Setter Property="FontSize" Value="{DynamicResource HeaderFontSize}" />
         <Setter Property="Focusable" Value="False" />
     </Style>
-    
+
     <Style TargetType="{x:Type Label}" x:Key="HeaderIconStyle">
         <Setter Property="Foreground" Value="{DynamicResource GrayHeaderForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource GrayHeaderBorder}" />
         <Setter Property="FontSize" Value="{DynamicResource HeaderFontSize}" />
+        <Setter Property="FontFamily" Value="{StaticResource HeaderFontFamily}" />
+        <Setter Property="FontStyle" Value="Italic" />
         <Setter Property="Margin" Value="3, 15, 3, 10" />
         <Setter Property="BorderThickness" Value="0,0,0,5" />
         <Setter Property="Padding" Value="0, 0, 0, 10" />

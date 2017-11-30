@@ -7,7 +7,7 @@ using System.Windows.Input;
 namespace My.CoachManager.Presentation.Prism.Controls.Datagrid.Columns
 {
     /// <summary>
-    /// The hyperlink column for the <see cref="DataGrid." />
+    /// The hyperlink column for the <see cref="DataGrid" />
     /// </summary>
     public sealed class DataGridHyperlinkColumn : System.Windows.Controls.DataGridHyperlinkColumn
     {
@@ -33,7 +33,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Datagrid.Columns
 
         #endregion Dependency Properties
 
-        private BindingBase tooltip;
+        private BindingBase _tooltip;
 
         #region Constructors
 
@@ -42,11 +42,11 @@ namespace My.CoachManager.Presentation.Prism.Controls.Datagrid.Columns
         /// </summary>
         public DataGridHyperlinkColumn()
         {
-            this.EditingElementStyle = (Style)Application.Current.FindResource("DataGridHyperlinkColumnEditingElementStyle");
+            EditingElementStyle = (Style)Application.Current.FindResource("DataGridHyperlinkColumnEditingElementStyle");
             Style elementStyle = (Style)Application.Current.FindResource("DataGridHyperlinkColumnElementStyle");
-            this.ElementStyle = new Style(typeof(System.Windows.Controls.TextBlock), elementStyle);
-            this.ElementStyle.Setters.Add(
-                new EventSetter(Hyperlink.ClickEvent, (RoutedEventHandler)this.OnHyperlinkClick));
+            ElementStyle = new Style(typeof(TextBlock), elementStyle);
+            ElementStyle.Setters.Add(
+                new EventSetter(Hyperlink.ClickEvent, (RoutedEventHandler)OnHyperlinkClick));
         }
 
         #endregion Constructors
@@ -61,8 +61,8 @@ namespace My.CoachManager.Presentation.Prism.Controls.Datagrid.Columns
         /// </value>
         public ICommand Command
         {
-            get { return (ICommand)this.GetValue(CommandProperty); }
-            set { this.SetValue(CommandProperty, value); }
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
         }
 
         /// <summary>
@@ -73,8 +73,8 @@ namespace My.CoachManager.Presentation.Prism.Controls.Datagrid.Columns
         /// </value>
         public ICommand NavigateCommand
         {
-            get { return (ICommand)this.GetValue(NavigateCommandProperty); }
-            set { this.SetValue(NavigateCommandProperty, value); }
+            get { return (ICommand)GetValue(NavigateCommandProperty); }
+            set { SetValue(NavigateCommandProperty, value); }
         }
 
         /// <summary>
@@ -87,13 +87,13 @@ namespace My.CoachManager.Presentation.Prism.Controls.Datagrid.Columns
         {
             get
             {
-                return this.tooltip;
+                return _tooltip;
             }
 
             set
             {
-                this.tooltip = value;
-                this.NotifyPropertyChanged("ToolTip");
+                _tooltip = value;
+                NotifyPropertyChanged("ToolTip");
             }
         }
 
@@ -105,8 +105,8 @@ namespace My.CoachManager.Presentation.Prism.Controls.Datagrid.Columns
         /// </value>
         public DataTemplate ToolTipTemplate
         {
-            get { return (DataTemplate)this.GetValue(ToolTipTemplateProperty); }
-            set { this.SetValue(ToolTipTemplateProperty, value); }
+            get { return (DataTemplate)GetValue(ToolTipTemplateProperty); }
+            set { SetValue(ToolTipTemplateProperty, value); }
         }
 
         #endregion Public Properties
@@ -124,7 +124,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Datagrid.Columns
         protected override FrameworkElement GenerateEditingElement(DataGridCell cell, object dataItem)
         {
             TextBox textBox = (TextBox)base.GenerateEditingElement(cell, dataItem);
-            DataGridColumnToolTipHelper.SetToolTip(textBox, this.ToolTip, this.ToolTipTemplate, dataItem);
+            DataGridColumnToolTipHelper.SetToolTip(textBox, ToolTip, ToolTipTemplate, dataItem);
             return textBox;
         }
 
@@ -141,8 +141,8 @@ namespace My.CoachManager.Presentation.Prism.Controls.Datagrid.Columns
             TextBlock textBlock = (TextBlock)base.GenerateElement(cell, dataItem);
             DataGridColumnToolTipHelper.SetToolTip(
                 textBlock,
-                this.ToolTip,
-                this.ToolTipTemplate,
+                ToolTip,
+                ToolTipTemplate,
                 dataItem,
                 "Inlines.FirstInline.NavigateUri");
             return textBlock;
@@ -161,19 +161,19 @@ namespace My.CoachManager.Presentation.Prism.Controls.Datagrid.Columns
         {
             Hyperlink hyperlink = (Hyperlink)e.OriginalSource;
 
-            if (this.Command != null)
+            if (Command != null)
             {
-                if (this.Command.CanExecute(hyperlink.DataContext))
+                if (Command.CanExecute(hyperlink.DataContext))
                 {
-                    this.Command.Execute(hyperlink.DataContext);
+                    Command.Execute(hyperlink.DataContext);
                 }
             }
 
-            if (this.NavigateCommand != null)
+            if (NavigateCommand != null)
             {
-                if (this.NavigateCommand.CanExecute(hyperlink.NavigateUri))
+                if (NavigateCommand.CanExecute(hyperlink.NavigateUri))
                 {
-                    this.NavigateCommand.Execute(hyperlink.NavigateUri);
+                    NavigateCommand.Execute(hyperlink.NavigateUri);
                 }
             }
         }

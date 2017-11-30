@@ -23,10 +23,12 @@
         <TextBlock Text="{Binding Copyright}" Margin="{StaticResource DefaultMargin}" />
         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="{StaticResource LargeHorizontalMargin}">
             <Image Source="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/CoachManager.png"
-                   VerticalAlignment="Top" HorizontalAlignment="Left" Margin="{StaticResource VeryLargeHorizontalMargin}" Width="150" />
+                   VerticalAlignment="Top" HorizontalAlignment="Left" Margin="{StaticResource LargeHorizontalMargin}" Width="150" />
             <StackPanel Orientation="Vertical" Margin="{StaticResource VeryLargeHorizontalMargin}">
-                <TextBlock Text="{x:Static strings:GlobalResources.ApplicationTitlePart1}" Margin="0 -20 0 0" FontWeight="Bold" Typography.Capitals="SmallCaps"  VerticalAlignment="Top" FontSize="80" />
-                <TextBlock Text="{x:Static strings:GlobalResources.ApplicationTitlePart2}" Margin="0 -30 0 0" FontWeight="Bold" Typography.Capitals="AllSmallCaps" VerticalAlignment="Top" FontSize="54" />
+                <TextBlock Text="{Binding Source={x:Static strings:GlobalResources.ApplicationTitlePart1}, Converter={StaticResource ToUpperConverter}}"
+                           FontFamily="{StaticResource HeaderFontFamily}" FontStyle="Italic" VerticalAlignment="Top" FontSize="85" />
+                <TextBlock  Text="{Binding Source={x:Static strings:GlobalResources.ApplicationTitlePart2}, Converter={StaticResource ToUpperConverter}}"
+                            FontFamily="{StaticResource HeaderFontFamily}" Margin="0,-20,0,0" FontStyle="Italic" VerticalAlignment="Top" FontSize="58" />
                 <TextBlock TextAlignment="Right" Text="{Binding Version}" />
             </StackPanel>
         </StackPanel>

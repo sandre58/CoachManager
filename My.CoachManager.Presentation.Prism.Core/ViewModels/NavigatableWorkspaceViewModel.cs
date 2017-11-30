@@ -26,7 +26,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Gets a value indicating whether this instance should be kept-alive upon deactivation.
         /// </summary>
-        public virtual bool KeepAlive { get { return false; } }
+        public virtual bool KeepAlive { get { return true; } }
 
         #endregion Members
 

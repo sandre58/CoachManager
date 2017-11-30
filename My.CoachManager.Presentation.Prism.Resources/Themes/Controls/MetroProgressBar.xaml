@@ -250,7 +250,9 @@
                                         BorderThickness="{TemplateBinding BorderThickness}" />
                                 <Rectangle x:Name="PART_Indicator"
                                            HorizontalAlignment="Left"
-                                           Fill="{TemplateBinding Foreground}" />
+                                           Fill="{TemplateBinding Foreground}"
+                                           Stroke="Transparent"
+                                           StrokeThickness="{TemplateBinding BorderThickness}" />
                             </Grid>
                         </Border>
                         <VisualStateManager.VisualStateGroups>

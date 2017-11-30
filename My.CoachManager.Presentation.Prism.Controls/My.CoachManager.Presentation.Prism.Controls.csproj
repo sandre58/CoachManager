@@ -97,7 +97,9 @@
     <Compile Include="Constants.cs" />
     <Compile Include="ApplicationBar.cs" />
     <Compile Include="Datagrid\Columns\DataGridOrderColumn.cs" />
+    <Compile Include="Datagrid\Columns\DataGridProgressBarColumn.cs" />
     <Compile Include="Enums\CharacterCasing.cs" />
+    <Compile Include="StateContent.cs" />
     <Compile Include="ImageContent.cs" />
     <Compile Include="ImagePicker.cs" />
     <Compile Include="Parameters\ComboBoxParameters.cs" />
@@ -127,14 +129,10 @@
     <Compile Include="TimePicker\TimePickerBaseSelectionChangedEventArgs.cs" />
     <Compile Include="NotificationPopup.cs" />
     <Compile Include="WorkspaceDialog.cs" />
-    <Compile Include="Datagrid\Columns\DataGridCheckBoxColumn.cs" />
     <Compile Include="Datagrid\Columns\DataGridColumnToolTipHelper.cs" />
-    <Compile Include="Datagrid\Columns\DataGridComboBoxColumn.cs" />
     <Compile Include="Datagrid\Columns\DataGridDateColumn.cs" />
     <Compile Include="Datagrid\Columns\DataGridDateTimeColumn.cs" />
     <Compile Include="Datagrid\Columns\DataGridHyperlinkColumn.cs" />
-    <Compile Include="Datagrid\Columns\DataGridMultiLineTextColumn.cs" />
-    <Compile Include="Datagrid\Columns\DataGridTemplateColumn.cs" />
     <Compile Include="Datagrid\Columns\DataGridTextColumn.cs" />
     <Compile Include="Parameters\PanelParameters.cs" />
     <Compile Include="Parameters\ScrollBarParameters.cs" />

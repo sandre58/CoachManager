@@ -90,18 +90,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ISquadViewModel.cs" />
-    <Compile Include="ViewModels\SquadViewModel.cs" />
-    <Compile Include="ViewModels\RosterViewModel.cs" />
-    <Compile Include="ViewModels\IRosterViewModel.cs" />
+    <Compile Include="ViewModels\IPlayersListViewModel.cs" />
+    <Compile Include="ViewModels\PlayersListViewModel.cs" />
+    <Compile Include="Views\PlayersListView.xaml.cs">
+      <DependentUpon>PlayersListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RosterNavigationView.xaml.cs">
       <DependentUpon>RosterNavigationView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SquadView.xaml.cs">
-      <DependentUpon>SquadView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\RosterView.xaml.cs">
-      <DependentUpon>RosterView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -148,20 +143,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\PlayersListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\RosterNavigationView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\SquadView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\RosterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\My.CoachManager.Application.Dtos\My.CoachManager.Application.Dtos.csproj">
+      <Project>{2A887BE7-A2F5-4CD8-9FD6-AF1ADB53B874}</Project>
+      <Name>My.CoachManager.Application.Dtos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.CrossCutting.Core\My.CoachManager.CrossCutting.Core.csproj">
+      <Project>{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}</Project>
+      <Name>My.CoachManager.CrossCutting.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.CrossCutting.Logging\My.CoachManager.CrossCutting.Logging.csproj">
       <Project>{381D433D-9F76-4286-B0F5-7209E477B22B}</Project>
       <Name>My.CoachManager.CrossCutting.Logging</Name>
@@ -177,6 +176,14 @@
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Resources\My.CoachManager.Presentation.Prism.Resources.csproj">
       <Project>{2d290fd9-5b64-4af4-a295-2b4cde6eb330}</Project>
       <Name>My.CoachManager.Presentation.Prism.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.ViewModels\My.CoachManager.Presentation.Prism.ViewModels.csproj">
+      <Project>{EEC17382-357C-4CD4-B493-23659FEE0E94}</Project>
+      <Name>My.CoachManager.Presentation.Prism.ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.ServiceAgent\My.CoachManager.Presentation.ServiceAgent.csproj">
+      <Project>{1A6AEEAB-7175-4CEA-90A6-68B064AB65DC}</Project>
+      <Name>My.CoachManager.Presentation.ServiceAgent</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

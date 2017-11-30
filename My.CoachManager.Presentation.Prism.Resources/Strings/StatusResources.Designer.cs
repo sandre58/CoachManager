@@ -61,6 +61,15 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Configuration de l&apos;application....
+        /// </summary>
+        public static string ApplicationLoading {
+            get {
+                return ResourceManager.GetString("ApplicationLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prêt.
         /// </summary>
         public static string DefaultStatusMessage {
@@ -72,9 +81,9 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Chargement du module &quot;{0}&quot;....
         /// </summary>
-        public static string ModuleLoadingMessage {
+        public static string ModuleLoading {
             get {
-                return ResourceManager.GetString("ModuleLoadingMessage", resourceCulture);
+                return ResourceManager.GetString("ModuleLoading", resourceCulture);
             }
         }
         
@@ -93,6 +102,15 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         public static string UserConnection {
             get {
                 return ResourceManager.GetString("UserConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chargement du profil utilisateur....
+        /// </summary>
+        public static string UserLoading {
+            get {
+                return ResourceManager.GetString("UserLoading", resourceCulture);
             }
         }
     }

@@ -2,13 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-<!-- FONT FAMILIES -->
+    <!-- FONT FAMILIES -->
     <FontFamily x:Key="NormalFontFamily">Segoe UI</FontFamily>
+    <FontFamily x:Key="NumberFontFamily">pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Fonts/#Jersey M54</FontFamily>
+    <FontFamily x:Key="HeaderFontFamily">pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Fonts/#DAGGERSQUARE</FontFamily>
 
     <!-- FONT SIZES-->
     <sys:Double x:Key="SmallFontSize">10</sys:Double>
     <sys:Double x:Key="NormalFontSize">14</sys:Double>
     <sys:Double x:Key="MediumFontSize">16</sys:Double>
+    <sys:Double x:Key="LargeFontSize">20</sys:Double>
     <sys:Double x:Key="MediumHeaderFontSize">26</sys:Double>
     <sys:Double x:Key="HeaderFontSize">30</sys:Double>
 </ResourceDictionary>

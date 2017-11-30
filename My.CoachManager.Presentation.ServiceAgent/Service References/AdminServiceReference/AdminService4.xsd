@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:62863/Services/AdminService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" />
+  <xs:import schemaLocation="http://localhost:62863/Services/AdminService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" />
   <xs:import schemaLocation="http://localhost:62863/Services/AdminService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:import schemaLocation="http://localhost:62863/Services/AdminService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" />
   <xs:element name="GetCategoriesList">
@@ -11,7 +11,7 @@
   <xs:element name="GetCategoriesListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="GetCategoriesListResult" nillable="true" type="q1:ArrayOfCategoryDto" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="GetCategoriesListResult" nillable="true" type="q1:ArrayOfCategoryDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -25,28 +25,28 @@
   <xs:element name="GetCategoryByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="GetCategoryByIdResult" nillable="true" type="q2:CategoryDto" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="GetCategoryByIdResult" nillable="true" type="q2:CategoryDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateOrUpdateCategory">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="playerDto" nillable="true" type="q3:CategoryDto" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="playerDto" nillable="true" type="q3:CategoryDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateOrUpdateCategoryResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="CreateOrUpdateCategoryResult" nillable="true" type="q4:CategoryDto" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="CreateOrUpdateCategoryResult" nillable="true" type="q4:CategoryDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RemoveCategory">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="playerDto" nillable="true" type="q5:CategoryDto" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="playerDto" nillable="true" type="q5:CategoryDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -75,7 +75,7 @@
   <xs:element name="GetSeasonsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="GetSeasonsListResult" nillable="true" type="q7:ArrayOfSeasonDto" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="GetSeasonsListResult" nillable="true" type="q7:ArrayOfSeasonDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -89,28 +89,28 @@
   <xs:element name="GetSeasonByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="GetSeasonByIdResult" nillable="true" type="q8:SeasonDto" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="GetSeasonByIdResult" nillable="true" type="q8:SeasonDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateOrUpdateSeason">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="dto" nillable="true" type="q9:SeasonDto" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="dto" nillable="true" type="q9:SeasonDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateOrUpdateSeasonResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="CreateOrUpdateSeasonResult" nillable="true" type="q10:SeasonDto" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="CreateOrUpdateSeasonResult" nillable="true" type="q10:SeasonDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RemoveSeason">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="dto" nillable="true" type="q11:SeasonDto" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="dto" nillable="true" type="q11:SeasonDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -139,7 +139,7 @@
   <xs:element name="GetPositionsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="GetPositionsListResult" nillable="true" type="q13:ArrayOfPositionDto" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="GetPositionsListResult" nillable="true" type="q13:ArrayOfPositionDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -153,28 +153,28 @@
   <xs:element name="GetPositionByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="GetPositionByIdResult" nillable="true" type="q14:PositionDto" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="GetPositionByIdResult" nillable="true" type="q14:PositionDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateOrUpdatePosition">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="dto" nillable="true" type="q15:PositionDto" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="dto" nillable="true" type="q15:PositionDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateOrUpdatePositionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="CreateOrUpdatePositionResult" nillable="true" type="q16:PositionDto" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="CreateOrUpdatePositionResult" nillable="true" type="q16:PositionDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RemovePosition">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="dto" nillable="true" type="q17:PositionDto" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="dto" nillable="true" type="q17:PositionDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -279,7 +279,7 @@
   <xs:element name="GetCategoriesForPlayerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="GetCategoriesForPlayerResult" nillable="true" type="q26:ArrayOfCategoryDto" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="GetCategoriesForPlayerResult" nillable="true" type="q26:ArrayOfCategoryDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -293,7 +293,7 @@
   <xs:element name="GetCategoryFromBirthdateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Admin" minOccurs="0" name="GetCategoryFromBirthdateResult" nillable="true" type="q27:CategoryDto" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="GetCategoryFromBirthdateResult" nillable="true" type="q27:CategoryDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

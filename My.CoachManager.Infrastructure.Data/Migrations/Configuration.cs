@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
-using System.Linq;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Infrastructure.Data.UnitOfWorks;
 using My.CoachManager.CrossCutting.Core.Constants;
@@ -31,53 +30,55 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
 
         private void AddTestData(DataContext context)
         {
-            // User and permissions
-            var perm1 = new Permission() { Id = 1, Code = PermissionConstants.ChangeUser, Label = "Changer d'utilisateur", Description = "Permet de se connecter à l'aplication en tant qu'un autre utilisateur." };
-            var perm2 = new Permission() { Id = 2, Code = PermissionConstants.AccessAdmin, Label = "Accès à l'administration", Description = "Permet d'accèder à tout le module d'administration." };
-            var role1 = new Role() { Id = 1, Code = RoleConstants.Admin, Label = "Administrateur", Description = "Rôle permettant de gérer toutes les données utilisées dan l''application." };
-
-            var user1 = new User() { Id = 1, Name = "Stéphane ANDRE (Home)", Login = "andre", Password = "qRBfE9MoPFs=", Mail = "andre.cs2i@gmail.com" };
-            var user2 = new User() { Id = 2, Name = "Stéphane ANDRE (Merial)", Login = "E0214719", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@merial.com" };
-            var user3 = new User() { Id = 3, Name = "Vincent SOURDEIX (BI)", Login = "E0268620", Password = "qRBfE9MoPFs=", Mail = "vincentsourdeix@test.fr" };
-
-            role1.Permissions.Add(perm1);
-            role1.Permissions.Add(perm2);
-            user1.Roles.Add(role1);
-            user2.Roles.Add(role1);
-            user3.Roles.Add(role1);
-
-            context.Permissions.AddOrUpdate(r => r.Label, perm1);
-            context.Permissions.AddOrUpdate(r => r.Label, perm2);
-            context.Commit();
-
-            context.Roles.AddOrUpdate(r => r.Label, role1);
-            context.Commit();
-
-            context.Users.AddOrUpdate(u => u.Name, user1);
-            context.Users.AddOrUpdate(u => u.Name, user2);
-            context.Users.AddOrUpdate(u => u.Name, user3);
-            context.Commit();
-
+            // Players
             var player1 = new Player()
             {
-                CategoryId = 3,
+                CategoryId = 13,
                 Address = new Address()
                 {
+                    Id = 1,
                     Row1 = "9 rue Marivaux",
                     PostalCode = "63000",
                     City = "Clermont-Ferrand"
                 },
+                AddressId = 1,
                 Birthdate = new DateTime(1989, 12, 5),
                 CountryId = 76,
                 FirstName = "Stéphane",
-                Gender = GenderType.Male,
+                Gender = GenderType.Female,
                 LastName = "André",
                 Laterality = Laterality.LeftHander,
                 PlaceOfBirth = "Nevers",
                 ShoesSize = 44,
-                Size = "L"
+                Size = "L",
+                Height = 175,
+                Weight = 75
             };
 
+            var player2 = new Player()
+            {
+                CategoryId = 3,
+                Birthdate = new DateTime(1986, 12, 4),
+                Address = new Address()
+                {
+                    Id = 2,
+                    Row1 = "Impasse du Babory",
+                    PostalCode = "63270",
+                    City = "Vic le comte"
+                },
+                AddressId = 2,
+                CountryId = 76,
+                FirstName = "Vincent",
+                Gender = GenderType.Male,
+                LastName = "Sourdeix",
+                Laterality = Laterality.RightHander,
+                PlaceOfBirth = "Tulle",
+                ShoesSize = 42,
+                Size = "L",
+                LicenseNumber = "123456789"
+            };
+
+            // Contacts
             var contacts = new List<Contact>
             {
                 new Email
@@ -100,52 +101,103 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                 }
             };
 
-            //var player2 = new Player()
-            //{
-            //    CategoryId = 3,
-            //    Address = "Impasse du Babory",
-            //    Birthdate = new DateTime(1986, 12, 4),
-            //    City = "Vic le comte",
-            //    CountryId = 76,
-            //    FirstName = "Vincent",
-            //    Gender = GenderType.Male,
-            //    LastName = "Sourdeix",
-            //    Laterality = Laterality.RightHander,
-            //    PlaceOfBirth = "Tulle",
-            //    PostalCode = "63270",
-            //    ShoesSize = 42,
-            //    Size = "L",
-            //    LicenseNumber = "123456789"
-            //};
-
-            //var contacts2 = new List<Contact>
-            //{
-            //    new Email
-            //    {
-            //        Label = "Principale",
-            //        Default = true,
-            //        Value = "visourdeix@gmail.com"
-            //    },
-            //    new Email
-            //    {
-            //        Label = "Pub",
-            //        Default = false,
-            //        Value = "vincentsourdeix@gmail.com"
-            //    },
-            //    new Phone
-            //    {
-            //        Label = "Portable",
-            //        Default = true,
-            //        Value = "0679189256"
-            //    }
-            //};
+            var contacts2 = new List<Contact>
+            {
+                new Email
+                {
+                    Label = "Principale",
+                    Default = true,
+                    Value = "visourdeix@gmail.com"
+                },
+                new Email
+                {
+                    Label = "Pub",
+                    Default = false,
+                    Value = "vincentsourdeix@gmail.com"
+                },
+                new Phone
+                {
+                    Label = "Portable",
+                    Default = true,
+                    Value = "0679189256"
+                }
+            };
 
             player1.Contacts.AddRange(contacts);
+            player2.Contacts.AddRange(contacts2);
 
             context.Players.AddOrUpdate(x => x.LastName, player1);
+            context.Players.AddOrUpdate(x => x.LastName, player2);
             context.Commit();
 
-            player1.Contacts.First().Label = "Toto";
+            // Rosters
+            var roster = new Roster()
+            {
+                Id = 1,
+                Name = "U15 2017/2018",
+                CategoryId = 7,
+                SeasonId = 1
+            };
+
+            var squad1 = new Squad()
+            {
+                Id = 1,
+                Name = "Equipe A"
+            };
+
+            var squad2 = new Squad()
+            {
+                Id = 2,
+                Name = "Equipe B"
+            };
+
+            roster.Players.Add(new RosterPlayer()
+            {
+                LicenseState = LicenseState.Back,
+                Number = 12,
+                IsMutation = true,
+                PlayerId = player1.Id,
+                RosterId = 1,
+                SquadId = 1,
+            });
+            roster.Players.Add(new RosterPlayer()
+            {
+                LicenseState = LicenseState.Given,
+                Number = 9,
+                PlayerId = player2.Id,
+                RosterId = 1,
+                SquadId = 2,
+            });
+            roster.Squads.Add(squad1);
+            roster.Squads.Add(squad2);
+            context.Rosters.AddOrUpdate(x => x.Id, roster);
+            context.Commit();
+
+            // User and permissions
+            var perm1 = new Permission() { Id = 1, Code = PermissionConstants.ChangeUser, Label = "Changer d'utilisateur", Description = "Permet de se connecter à l'aplication en tant qu'un autre utilisateur." };
+            var perm2 = new Permission() { Id = 2, Code = PermissionConstants.AccessAdmin, Label = "Accès à l'administration", Description = "Permet d'accèder à tout le module d'administration." };
+            var role1 = new Role() { Id = 1, Code = RoleConstants.Admin, Label = "Administrateur", Description = "Rôle permettant de gérer toutes les données utilisées dan l''application." };
+
+            var user1 = new User() { Id = 1, Name = "Stéphane ANDRE (Home)", Login = "andre", Password = "qRBfE9MoPFs=", Mail = "andre.cs2i@gmail.com", RosterId = 1 };
+            var user2 = new User() { Id = 2, Name = "Stéphane ANDRE (Merial)", Login = "E0214719", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@merial.com", RosterId = 1 };
+            var user3 = new User() { Id = 3, Name = "Vincent SOURDEIX (BI)", Login = "E0268620", Password = "qRBfE9MoPFs=", Mail = "vincentsourdeix@test.fr", RosterId = 1 };
+
+            role1.Permissions.Add(perm1);
+            role1.Permissions.Add(perm2);
+            user1.Roles.Add(role1);
+            user2.Roles.Add(role1);
+            user3.Roles.Add(role1);
+
+            context.Permissions.AddOrUpdate(r => r.Label, perm1);
+            context.Permissions.AddOrUpdate(r => r.Label, perm2);
+            context.Commit();
+
+            context.Roles.AddOrUpdate(r => r.Label, role1);
+            context.Commit();
+
+            context.Users.AddOrUpdate(u => u.Name, user1);
+            context.Users.AddOrUpdate(u => u.Name, user2);
+            context.Users.AddOrUpdate(u => u.Name, user3);
             context.Commit();
         }
 

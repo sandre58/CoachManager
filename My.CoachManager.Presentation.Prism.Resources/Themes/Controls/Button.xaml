@@ -181,7 +181,7 @@
 
     <Style x:Key="HyperLinkButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextButtonStyle}">
         <Setter Property="Foreground" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource HightLight}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource HighLight}" />
         </Style>
 
         <Style x:Key="IconButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextButtonStyle}">
