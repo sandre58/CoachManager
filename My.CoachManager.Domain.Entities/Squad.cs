@@ -8,12 +8,12 @@ namespace My.CoachManager.Domain.Entities
     /// Provides properties for a Squad Entity.
     /// </summary>
     [MetadataType(typeof(SquadMetadata))]
-    public class Squad : DataEntity
+    public class Squad : Entity
     {
         /// <summary>
         /// Initalize a new instance of <see cref="Squad"/>.
         /// </summary>
-        protected Squad()
+        public Squad()
         {
             Players = new List<RosterPlayer>();
         }
@@ -22,6 +22,16 @@ namespace My.CoachManager.Domain.Entities
         /// Gets or sets the name.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the roster Id.
+        /// </summary>
+        public int RosterId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the roster.
+        /// </summary>
+        public Roster Roster { get; set; }
 
         /// <summary>
         /// Gets or set the players.

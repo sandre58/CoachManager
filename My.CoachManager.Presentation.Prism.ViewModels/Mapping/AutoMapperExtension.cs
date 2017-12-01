@@ -23,6 +23,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
         public static TDest ToDto<TDest>(this EntityViewModelBase source)
             where TDest : IEntityDtoBase
         {
+            if (source == null) return default(TDest);
             return Mapper.Map<TDest>(source);
         }
 
@@ -35,6 +36,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
         public static TDest ToViewModel<TDest>(this IEntityDtoBase source)
             where TDest : EntityViewModelBase
         {
+            if (source == null) return default(TDest);
             return Mapper.Map<TDest>(source);
         }
 

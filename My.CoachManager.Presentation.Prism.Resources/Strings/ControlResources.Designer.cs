@@ -268,6 +268,24 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Afficher les colonnes.
+        /// </summary>
+        public static string ShowColumns {
+            get {
+                return ResourceManager.GetString("ShowColumns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Affichées les données.
+        /// </summary>
+        public static string ShowData {
+            get {
+                return ResourceManager.GetString("ShowData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Se connecter.
         /// </summary>
         public static string SignIn {

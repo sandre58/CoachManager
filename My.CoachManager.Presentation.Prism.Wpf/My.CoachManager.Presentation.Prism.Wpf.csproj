@@ -74,7 +74,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ConfigurationManager.cs" />
     <Compile Include="Interactivity\NotificationPopupAction.cs" />
     <Compile Include="Interactivity\WindowDialogAction.cs" />
     <Compile Include="Interactivity\WorkspaceDialogAction.cs" />
@@ -160,7 +159,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\My.CoachManager.Application.Dtos\My.CoachManager.Application.Dtos.csproj">
@@ -195,6 +196,10 @@
       <Project>{b72a3d9c-efa7-43a8-a01e-cdeeb9f59c28}</Project>
       <Name>My.CoachManager.Presentation.Prism.HomeModule</Name>
     </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Manager\My.CoachManager.Presentation.Prism.Manager.csproj">
+      <Project>{62955117-2937-47c4-9b42-fc8a0aab72a6}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Manager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Resources\My.CoachManager.Presentation.Prism.Resources.csproj">
       <Project>{2d290fd9-5b64-4af4-a295-2b4cde6eb330}</Project>
       <Name>My.CoachManager.Presentation.Prism.Resources</Name>
@@ -206,6 +211,10 @@
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.StatusBarModule\My.CoachManager.Presentation.Prism.StatusBarModule.csproj">
       <Project>{fa8b3d6e-f685-42bb-8225-20a4037a97bd}</Project>
       <Name>My.CoachManager.Presentation.Prism.StatusBarModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.ViewModels\My.CoachManager.Presentation.Prism.ViewModels.csproj">
+      <Project>{EEC17382-357C-4CD4-B493-23659FEE0E94}</Project>
+      <Name>My.CoachManager.Presentation.Prism.ViewModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.ServiceAgent\My.CoachManager.Presentation.ServiceAgent.csproj">
       <Project>{1A6AEEAB-7175-4CEA-90A6-68B064AB65DC}</Project>

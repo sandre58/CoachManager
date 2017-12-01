@@ -186,6 +186,12 @@
   <data name="Restore" xml:space="preserve">
     <value>Restaurer</value>
   </data>
+  <data name="ShowColumns" xml:space="preserve">
+    <value>Afficher les colonnes</value>
+  </data>
+  <data name="ShowData" xml:space="preserve">
+    <value>Affichées les données</value>
+  </data>
   <data name="SignIn" xml:space="preserve">
     <value>Se connecter</value>
   </data>

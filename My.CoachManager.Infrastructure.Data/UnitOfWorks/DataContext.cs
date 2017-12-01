@@ -43,7 +43,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         public virtual DbSet<PlayerPosition> PlayerPositions { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Roster> Roster { get; set; }
+        public virtual DbSet<Roster> Rosters { get; set; }
         public virtual DbSet<RosterPlayer> RosterPlayers { get; set; }
         public virtual DbSet<RosterCoach> RosterCoachs { get; set; }
         public virtual DbSet<Season> Seasons { get; set; }
@@ -83,6 +83,10 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                     return value.ToString();
                 }));
 
+            modelBuilder.Entity<Squad>()
+                .HasRequired(s => s.Roster)
+                .WithMany(g => g.Squads)
+                .HasForeignKey(s => s.RosterId).WillCascadeOnDelete(false);
             modelBuilder.Entity<Player>().HasRequired(p => p.Category).WithMany().WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);

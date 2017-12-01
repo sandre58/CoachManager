@@ -5,6 +5,8 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Converters.xaml" />
         <ResourceDictionary Source="../Base/Margins.xaml" />
+        <ResourceDictionary Source="../Base/Sizes.xaml" />
+        <ResourceDictionary Source="../Base/Shadows.xaml" />
         <ResourceDictionary Source="CommandButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 

@@ -17,6 +17,11 @@ namespace My.CoachManager.Presentation.Prism.Core.Interactivity
         /// </summary>
         public Action<NavigationResult> Callback { get; set; }
 
+        /// <summary>
+        /// Gets or sets the navigation parameters.
+        /// </summary>
+        public NavigationParameters Parameters { get; set; }
+
         #endregion Members
 
         #region Constructors
@@ -25,11 +30,13 @@ namespace My.CoachManager.Presentation.Prism.Core.Interactivity
         /// Initialise a new instance of <see cref="NavigationEventArgs"/>.
         /// </summary>
         /// <param name="path"></param>
+        /// <param name="parameters"></param>
         /// <param name="callback"></param>
-        public NavigationEventArgs(string path, Action<NavigationResult> callback = null)
+        public NavigationEventArgs(string path, NavigationParameters parameters = null, Action<NavigationResult> callback = null)
         {
             Path = path;
             Callback = callback;
+            Parameters = parameters;
         }
 
         #endregion Constructors

@@ -83,7 +83,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
             obj.SetValue(IconProperty, value);
         }
 
-        #endregion Icon
+        #endregion Color
 
         #region Foreground
 

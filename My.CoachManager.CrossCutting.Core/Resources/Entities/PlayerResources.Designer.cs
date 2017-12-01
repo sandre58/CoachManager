@@ -70,6 +70,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cat..
+        /// </summary>
+        public static string CategoryAbbr {
+            get {
+                return ResourceManager.GetString("CategoryAbbr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Taille.
         /// </summary>
         public static string Height {
@@ -111,6 +120,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         public static string Number {
             get {
                 return ResourceManager.GetString("Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to N°.
+        /// </summary>
+        public static string NumberAbbr {
+            get {
+                return ResourceManager.GetString("NumberAbbr", resourceCulture);
             }
         }
         

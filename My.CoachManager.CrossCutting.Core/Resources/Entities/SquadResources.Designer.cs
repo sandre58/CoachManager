@@ -77,5 +77,14 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
                 return ResourceManager.GetString("Players", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effectif.
+        /// </summary>
+        public static string Roster {
+            get {
+                return ResourceManager.GetString("Roster", resourceCulture);
+            }
+        }
     }
 }

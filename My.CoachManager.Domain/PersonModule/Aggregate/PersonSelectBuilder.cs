@@ -45,12 +45,14 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                 Id = x.Id,
                 FirstName = x.FirstName,
                 LastName = x.LastName,
-                //Address = x.Category != null ? new AddressDto()
-                //{
-                //    Id = x.Category.Id,
-                //    Label = x.Category.Label,
-                //    Order = x.Category.Order
-                //} : null,
+                Address = x.Address != null ? new AddressDto()
+                {
+                    Id = x.Address.Id,
+                    Row1 = x.Address.Row1,
+                    Row2 = x.Address.Row2,
+                    PostalCode = x.Address.PostalCode,
+                    City = x.Address.City,
+                } : null,
                 Birthdate = x.Birthdate,
                 Gender = x.Gender,
                 LicenseNumber = x.LicenseNumber,

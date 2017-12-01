@@ -2,14 +2,25 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         Title="MainWindow" Height="350" Width="525" Style="{StaticResource ModernWindowStyle}" Background="LightBlue">
     <StackPanel Orientation="Vertical">
         <TabControl>
             <TabControl.Items>
                 <TabItem Header="Equipe A">
-                    <Grid>
-                        <TextBlock Text="Equipe A" />
-                    </Grid>
+                    <StackPanel HorizontalAlignment="Center">
+                        <controls:DropDownButton Content="Coucouc" Margin="{StaticResource DefaultMargin}" Style="{StaticResource HyperLinkDropDownButtonStyle}">
+                            <controls:DropDownButton.Items>
+                                <system:String>OPtion 1</system:String>
+                                <system:String>OPtion 2</system:String>
+                                <system:String>OPtion 3</system:String>
+                                <system:String>OPtion 4</system:String>
+                                <system:String>OPtion 5</system:String>
+                                <system:String>OPtion 6</system:String>
+                            </controls:DropDownButton.Items>
+                        </controls:DropDownButton>
+                        <Button Content="Coucouc" Margin="{StaticResource DefaultMargin}" />
+                    </StackPanel>
                 </TabItem>
                 <TabItem Header="Equipe B">
                     <Grid>

@@ -126,6 +126,9 @@
   <data name="Country" xml:space="preserve">
     <value>Nationalité</value>
   </data>
+  <data name="CountryAbbr" xml:space="preserve">
+    <value>Nat.</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>

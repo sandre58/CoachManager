@@ -11,7 +11,7 @@
     <Color x:Key="LightAccentColor">#1ba1e2</Color>
     <Color x:Key="AccentColor">#0086C9</Color>
     <Color x:Key="DarkAccentColor">#006597</Color>
-    <Color x:Key="HighLightColor">#1ba1e2</Color>
+    <Color x:Key="HighLightColor">#03B6F2</Color>
     <Color x:Key="DisabledColor">#FFB8B5B2</Color>
     <Color x:Key="AccentTextColor">#ffffff</Color>
 
@@ -45,6 +45,7 @@
     <Color x:Key="TransparentDark5Color">#99333333</Color>
 
     <!-- Actions -->
+    <Color x:Key="NoneColor">#555555</Color>
     <Color x:Key="PositiveColor">#388A34</Color>
     <Color x:Key="NegativeColor">#A1260D</Color>
     <Color x:Key="ActionColor">#C27D1A</Color>
@@ -70,7 +71,7 @@
     <SolidColorBrush x:Key="LightAccent" Color="{DynamicResource LightAccentColor}" />
     <SolidColorBrush x:Key="Accent" Color="{DynamicResource AccentColor}" />
     <SolidColorBrush x:Key="DarkAccent" Color="{DynamicResource DarkAccentColor}" />
-    <SolidColorBrush x:Key="HightLight" Color="{DynamicResource HighLightColor}" />
+    <SolidColorBrush x:Key="HighLight" Color="{DynamicResource HighLightColor}" />
     <SolidColorBrush x:Key="Disabled" Color="{DynamicResource DisabledColor}" />
     <SolidColorBrush x:Key="Transparent" Color="{DynamicResource TransparentColor}" />
     <SolidColorBrush x:Key="TransparentGray1" Color="{DynamicResource TransparentGray1Color}" />
@@ -97,6 +98,7 @@
     <SolidColorBrush x:Key="Gray7" Color="{DynamicResource Gray7Color}" />
     <SolidColorBrush x:Key="Gray8" Color="{DynamicResource Gray8Color}" />
     <SolidColorBrush x:Key="Gray9" Color="{DynamicResource Gray9Color}" />
+    <SolidColorBrush x:Key="None" Color="{DynamicResource NoneColor}" />
     <SolidColorBrush x:Key="Positive" Color="{DynamicResource PositiveColor}" />
     <SolidColorBrush x:Key="Negative" Color="{DynamicResource NegativeColor}" />
     <SolidColorBrush x:Key="Action" Color="{DynamicResource ActionColor}" />
@@ -131,7 +133,7 @@
     <!-- STATUS BAR -->
     <SolidColorBrush x:Key="StatusBarBackground" Color="{DynamicResource LightAccentColor}" />
     <SolidColorBrush x:Key="StatusBarForeground" Color="{DynamicResource LightColor}" />
-    
+
     <!-- HEADER -->
     <SolidColorBrush x:Key="HeaderForeground" Color="{DynamicResource VeryDarkColor}" />
     <SolidColorBrush x:Key="GrayHeaderForeground" Color="{DynamicResource Gray7Color}" />
@@ -141,7 +143,7 @@
 
     <!-- SEPARATOR -->
     <SolidColorBrush x:Key="Separator" Color="{DynamicResource TransparentGray5Color}" />
-    
+
     <!-- CONTROLS -->
     <SolidColorBrush x:Key="ControlGray" Color="{DynamicResource TransparentGray2Color}" />
     <SolidColorBrush x:Key="ControlMouseOverGray" Color="{DynamicResource TransparentGray3Color}" />
@@ -164,5 +166,4 @@
     <!-- Close Button -->
     <SolidColorBrush x:Key="CloseButtonPressedBackground" Color="Red" />
     <SolidColorBrush x:Key="CloseButtonPressedForeground" Color="{DynamicResource AccentTextColor}" />
-
 </ResourceDictionary>

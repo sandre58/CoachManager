@@ -16,6 +16,9 @@ namespace My.CoachManager.Application.Dtos.Mapping
 
             // Seasons
             CreateMap<Season, SeasonDto>().ReverseMap();
+
+            // Functions
+            CreateMap<Function, FunctionDto>().ReverseMap();
         }
     }
 }

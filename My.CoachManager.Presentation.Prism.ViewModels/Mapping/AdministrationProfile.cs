@@ -11,6 +11,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
             CreateMap<PositionDto, PositionViewModel>().ReverseMap();
             CreateMap<SeasonDto, SeasonViewModel>().ReverseMap();
             CreateMap<AddressDto, AddressViewModel>().ReverseMap();
+            CreateMap<FunctionDto, FunctionViewModel>().ReverseMap();
         }
     }
 }

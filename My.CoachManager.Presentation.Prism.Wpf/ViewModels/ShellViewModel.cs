@@ -118,7 +118,12 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <param name="e"></param>
         protected void OnNavigateRequested(NavigationEventArgs e)
         {
-            _regionManager.RequestNavigate(RegionNames.WorkspaceRegion, new Uri(e.Path, UriKind.Relative));
+            var parameters = e.Parameters != null ? e.Parameters.ToString() : "";
+            var newUri = new Uri(e.Path + parameters, UriKind.Relative);
+            var currentEntry = _regionManager.Regions[RegionNames.WorkspaceRegion].NavigationService.Journal.CurrentEntry;
+            var activeUri = currentEntry != null ? currentEntry.Uri : null;
+            if (!Equals(newUri, activeUri))
+                _regionManager.RequestNavigate(RegionNames.WorkspaceRegion, newUri);
         }
 
         /// <summary>

@@ -8,7 +8,8 @@
         <ResourceDictionary Source="../Base/Margins.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="TabItemHeaderStyle" TargetType="{x:Type ContentControl}">
+    <!-- Tab Item -->
+    <Style TargetType="{x:Type TabItem}">
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
         <Setter Property="BorderThickness" Value="0" />
@@ -27,9 +28,10 @@
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Path=(params:TabControlParameters.IndicatorBrush)}" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ContentControl}">
+                <ControlTemplate TargetType="{x:Type TabItem}">
                     <Border Background="{TemplateBinding Background}"
                                    BorderBrush="{TemplateBinding BorderBrush}"
                                    BorderThickness="{TemplateBinding BorderThickness}">
@@ -50,10 +52,14 @@
                                        VerticalAlignment="Bottom"
                                        Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}},Path=(params:TabControlParameters.IndicatorBrush)}"
                                        Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Path=(params:TabControlParameters.IndicatorThickness)}" />
-                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                            <ContentPresenter  x:Name="ContentSite" ContentSource="Header" Margin="{TemplateBinding Padding}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              RecognizesAccessKey="True" />
+                                              RecognizesAccessKey="True"
+                                               TextOptions.TextFormattingMode="{TemplateBinding TextOptions.TextFormattingMode}"
+                                               TextOptions.TextRenderingMode="{TemplateBinding TextOptions.TextRenderingMode}"
+                                               RenderOptions.ClearTypeHint="{TemplateBinding RenderOptions.ClearTypeHint}"
+                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -61,6 +67,7 @@
                             <Setter TargetName="Indicator" Property="VerticalAlignment" Value="Top" />
                         </DataTrigger>
                         <DataTrigger Value="{x:Static Dock.Left}" Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}},Path=TabStripPlacement}">
+                            <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
                             <Setter Property="FrameworkElement.LayoutTransform">
                                 <Setter.Value>
                                     <RotateTransform Angle="-90" />
@@ -69,6 +76,7 @@
                             <Setter TargetName="Indicator" Property="VerticalAlignment" Value="Bottom" />
                         </DataTrigger>
                         <DataTrigger Value="{x:Static Dock.Right}" Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}},Path=TabStripPlacement}">
+                            <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
                             <Setter Property="FrameworkElement.LayoutTransform">
                                 <Setter.Value>
                                     <RotateTransform Angle="90" />
@@ -81,6 +89,9 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},Path=FontSize,Mode=OneWay,Converter={StaticResource IsGreaterThanConverter},ConverterParameter=18}">
+                <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+            </DataTrigger>
             <DataTrigger Value="{x:Static Dock.Left}" Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}},Path=TabStripPlacement}">
                 <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
             </DataTrigger>
@@ -93,55 +104,16 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Foreground" Value="{DynamicResource ControlMouseOverDarkGray}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
+                <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
             </Trigger>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}},Path=IsSelected}" Value="True">
+            <Trigger Property="IsSelected" Value="True">
                 <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
                 <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
-            </DataTrigger>
+                <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{DynamicResource Accent}" />
+            </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="BorderBrush" Value="{DynamicResource Disabled}" />
                 <Setter Property="Foreground" Value="{DynamicResource Disabled}" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <!-- Tab Item -->
-    <Style TargetType="{x:Type TabItem}">
-        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Path=Background,Mode=OneWay}" />
-        <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Path=BorderBrush,Mode=OneWay}" />
-        <Setter Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Path=BorderThickness,Mode=OneWay}" />
-        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Path=Foreground,Mode=OneWay}" />
-        <Setter Property="FontSize" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Path=FontSize,Mode=OneWay}" />
-        <Setter Property="FontStretch" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Path=FontStretch,Mode=OneWay}" />
-        <Setter Property="FontStyle" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Path=FontStyle,Mode=OneWay}" />
-        <Setter Property="FontWeight" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Path=FontWeight,Mode=OneWay}" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Path=(TextOptions.TextFormattingMode),Mode=OneWay}" />
-        <Setter Property="TextOptions.TextRenderingMode" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Path=(TextOptions.TextRenderingMode),Mode=OneWay}" />
-        <Setter Property="RenderOptions.ClearTypeHint" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Path=(RenderOptions.ClearTypeHint),Mode=OneWay}" />
-        <Setter Property="FocusVisualStyle" Value="{StaticResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
-        <Setter Property="Focusable" Value="True" />
-        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="VerticalContentAlignment" Value="Stretch" />
-        <Setter Property="Padding" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Path=Padding,Mode=OneWay}" />
-        <Setter Property="params:TabControlParameters.HeaderStyle" Value="{StaticResource TabItemHeaderStyle}" />
-        <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Path=(params:TabControlParameters.IndicatorBrush)}" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <ContentControl x:Name="ContentHost" Content="{TemplateBinding HeaderedContentControl.Header}" TextOptions.TextFormattingMode="{TemplateBinding TextOptions.TextFormattingMode}" TextOptions.TextRenderingMode="{TemplateBinding TextOptions.TextRenderingMode}" RenderOptions.ClearTypeHint="{TemplateBinding RenderOptions.ClearTypeHint}" Style="{TemplateBinding params:TabControlParameters.HeaderStyle}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},Path=FontSize,Mode=OneWay,Converter={StaticResource IsGreaterThanConverter},ConverterParameter=18}">
-                <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
-            </DataTrigger>
-            <Trigger Property="TabItem.IsMouseOver" Value="True">
-                <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
-            </Trigger>
-            <Trigger Property="TabItem.IsSelected" Value="True">
-                <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{DynamicResource Accent}" />
             </Trigger>
         </Style.Triggers>
     </Style>

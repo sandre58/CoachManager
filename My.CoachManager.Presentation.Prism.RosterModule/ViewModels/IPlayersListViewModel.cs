@@ -2,7 +2,7 @@
 
 namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
 {
-    public interface IRosterViewModel : IViewModel
+    public interface IPlayersListViewModel : IViewModel
     {
     }
 }

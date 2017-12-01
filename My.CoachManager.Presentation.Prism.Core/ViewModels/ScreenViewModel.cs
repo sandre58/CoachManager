@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
@@ -91,11 +92,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Load Data.
         /// </summary>
-        private async void LoadData(bool isFirstLoading = false)
+        private void LoadData(bool isFirstLoading = false)
         {
             try
             {
-                await Task.Run(() =>
+                var thread = new Thread(() =>
                 {
                     try
                     {
@@ -112,6 +113,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
                         OnExceptionOccured(e);
                     }
                 });
+                thread.SetApartmentState(ApartmentState.STA);
+                thread.IsBackground = true;
+                thread.Start();
             }
             catch (BusinessException e)
             {

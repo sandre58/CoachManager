@@ -87,6 +87,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.RosterModule", "My.CoachManager.Presentation.Prism.RosterModule\My.CoachManager.Presentation.Prism.RosterModule.csproj", "{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Manager", "My.CoachManager.Presentation.Prism.Manager\My.CoachManager.Presentation.Prism.Manager.csproj", "{62955117-2937-47C4-9B42-FC8A0AAB72A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug - BI|Any CPU = Debug - BI|Any CPU
@@ -439,6 +441,18 @@ Global
 		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62955117-2937-47C4-9B42-FC8A0AAB72A6}.Debug - BI|Any CPU.ActiveCfg = Debug|Any CPU
+		{62955117-2937-47C4-9B42-FC8A0AAB72A6}.Debug - BI|Any CPU.Build.0 = Debug|Any CPU
+		{62955117-2937-47C4-9B42-FC8A0AAB72A6}.Debug - Home|Any CPU.ActiveCfg = Debug|Any CPU
+		{62955117-2937-47C4-9B42-FC8A0AAB72A6}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
+		{62955117-2937-47C4-9B42-FC8A0AAB72A6}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
+		{62955117-2937-47C4-9B42-FC8A0AAB72A6}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{62955117-2937-47C4-9B42-FC8A0AAB72A6}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
+		{62955117-2937-47C4-9B42-FC8A0AAB72A6}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
+		{62955117-2937-47C4-9B42-FC8A0AAB72A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62955117-2937-47C4-9B42-FC8A0AAB72A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62955117-2937-47C4-9B42-FC8A0AAB72A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62955117-2937-47C4-9B42-FC8A0AAB72A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -476,6 +490,7 @@ Global
 		{FA8B3D6E-F685-42BB-8225-20A4037A97BD} = {65E6F15A-E231-4A23-867E-6C6EFB5A3679}
 		{884D01D2-3FC9-4FD5-8A7A-FB20DE6CBB23} = {369B0030-ADD9-4BC4-A323-790D4675D8D0}
 		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA} = {65E6F15A-E231-4A23-867E-6C6EFB5A3679}
+		{62955117-2937-47C4-9B42-FC8A0AAB72A6} = {369B0030-ADD9-4BC4-A323-790D4675D8D0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27DA6BB0-2E1D-4795-AA23-8024B2737F57}

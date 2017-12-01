@@ -47,23 +47,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressViewModel.cs" />
+    <Compile Include="FunctionViewModel.cs" />
     <Compile Include="CategoryViewModel.cs" />
     <Compile Include="CityViewModel.cs" />
+    <Compile Include="ClubViewModel.cs" />
     <Compile Include="ContactsCollection.cs" />
     <Compile Include="ContactViewModel.cs" />
+    <Compile Include="Mapping\RosterProfile.cs" />
+    <Compile Include="Mapping\CompetitionProfile.cs" />
     <Compile Include="Mapping\PersonProfile.cs" />
     <Compile Include="PlayerPositionViewModel.cs" />
     <Compile Include="CountryViewModel.cs" />
     <Compile Include="EmailViewModel.cs" />
     <Compile Include="PersonViewModel.cs" />
     <Compile Include="PhoneViewModel.cs" />
+    <Compile Include="CoachViewModel.cs" />
     <Compile Include="PlayerViewModel.cs" />
     <Compile Include="PositionViewModel.cs" />
+    <Compile Include="RosterCoachViewModel.cs" />
+    <Compile Include="PlayerDetailViewModel.cs" />
+    <Compile Include="RosterViewModel.cs" />
+    <Compile Include="RosterPlayerViewModel.cs" />
     <Compile Include="SeasonViewModel.cs" />
     <Compile Include="DataEntityViewModel.cs" />
     <Compile Include="Mapping\AutoMapperExtension.cs" />
     <Compile Include="Mapping\AdministrationProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SquadViewModel.cs" />
+    <Compile Include="TeamViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\My.CoachManager.Application.Dtos\My.CoachManager.Application.Dtos.csproj">

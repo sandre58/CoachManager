@@ -1,4 +1,8 @@
-﻿namespace My.CoachManager.Presentation.Prism.Controls.Parameters
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace My.CoachManager.Presentation.Prism.Controls.Parameters
 {
     using System.Windows;
     using System.Windows.Controls;

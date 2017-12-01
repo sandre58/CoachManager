@@ -19,6 +19,9 @@ namespace My.CoachManager.Application.Dtos.Users
         public string Mail { get; set; }
 
         [DataMember]
+        public int? RosterId { get; set; }
+
+        [DataMember]
         public ICollection<RoleDto> Roles { get; set; }
     }
 }

@@ -21,26 +21,24 @@ namespace My.CoachManager.Presentation.Prism.Core.Converters
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (!string.IsNullOrEmpty((string)value))
+            if (value == null) return string.Empty;
+            if (parameter == null) return value;
+
+            double res;
+            if (double.TryParse(value.ToString(), out res))
             {
-                if (parameter != null)
+                if (res != 0)
+                    return string.Format(parameter.ToString(), res);
+            }
+
+            if (value is string)
+            {
+                if (!string.IsNullOrEmpty((string)value))
                 {
-                    var str = value.ToString();
-                    double res;
-                    if (double.TryParse(str, out res))
-                    {
-                        return string.Format(parameter.ToString(), res);
-                    }
-                    else
-                    {
-                        return string.Format(parameter.ToString(), str);
-                    }
-                }
-                else
-                {
-                    return value;
+                    return string.Format(parameter.ToString(), value.ToString());
                 }
             }
+
             return string.Empty;
         }
 

@@ -62,6 +62,15 @@ namespace My.CoachManager.Presentation.Prism.RosterModule.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tous les joueurs.
+        /// </summary>
+        public static string PlayersTitle {
+            get {
+                return ResourceManager.GetString("PlayersTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Effectif.
         /// </summary>
         public static string RosterMenu {

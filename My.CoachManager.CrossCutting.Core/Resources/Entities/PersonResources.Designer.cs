@@ -88,6 +88,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nat..
+        /// </summary>
+        public static string CountryAbbr {
+            get {
+                return ResourceManager.GetString("CountryAbbr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
