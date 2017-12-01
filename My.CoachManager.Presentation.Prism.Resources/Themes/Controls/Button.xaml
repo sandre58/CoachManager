@@ -56,7 +56,7 @@
                                                    ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                    TextBlock.FontWeight="{TemplateBinding FontWeight}"
-                                                    TextBlock.FontSize="{TemplateBinding FontSize}"/>
+                                                    TextBlock.FontSize="{TemplateBinding FontSize}" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -182,9 +182,11 @@
     <Style x:Key="HyperLinkButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextButtonStyle}">
         <Setter Property="Foreground" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource HighLight}" />
-        </Style>
+        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource HighLight}" />
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource HighLight}" />
+    </Style>
 
-        <Style x:Key="IconButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextButtonStyle}">
+    <Style x:Key="IconButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextButtonStyle}">
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>

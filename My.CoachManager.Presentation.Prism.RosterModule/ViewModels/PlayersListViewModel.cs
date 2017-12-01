@@ -6,6 +6,7 @@ using My.CoachManager.Presentation.Prism.RosterModule.Resources.Strings;
 using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
+using Prism.Commands;
 using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
@@ -15,6 +16,22 @@ namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
         #region Fields
 
         private readonly IRosterService _rosterService;
+        private ObservableCollection<string> _activeVisibleColumns;
+        private ObservableCollection<ObservableCollection<string>> _defaultVisibleColumns;
+
+        public ObservableCollection<string> ActiveVisibleColumns
+        {
+            get { return _activeVisibleColumns; }
+            set { SetProperty(ref _activeVisibleColumns, value); }
+        }
+
+        public ObservableCollection<ObservableCollection<string>> DefaultVisibleColumns
+        {
+            get { return _defaultVisibleColumns; }
+            set { SetProperty(ref _defaultVisibleColumns, value); }
+        }
+
+        public DelegateCommand<ObservableCollection<string>> TestCommand { get; set; }
 
         #endregion Fields
 
@@ -29,6 +46,16 @@ namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
             _rosterService = rosterService;
 
             Title = RosterResources.PlayersTitle;
+
+            DefaultVisibleColumns = new ObservableCollection<ObservableCollection<string>>();
+            DefaultVisibleColumns.Add(new ObservableCollection<string>(new[] { "birthdate", "country", "category" }));
+            DefaultVisibleColumns.Add(new ObservableCollection<string>(new[] { "address", "phone", "email" }));
+            DefaultVisibleColumns.Add(new ObservableCollection<string>(new[] { "size", "height", "weight" }));
+
+            TestCommand = new DelegateCommand<ObservableCollection<string>>(col =>
+            {
+                ActiveVisibleColumns = col;
+            });
         }
 
         #endregion Constructors

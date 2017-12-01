@@ -33,6 +33,12 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
             typeof(DataGridParameters),
             new PropertyMetadata(null, OnColumnSettingsPropertyChanged));
 
+        public static readonly DependencyProperty VisibleColumnsProperty = DependencyProperty.RegisterAttached(
+            "VisibleColumns",
+            typeof(IEnumerable<string>),
+            typeof(DataGridParameters),
+            new PropertyMetadata(null, OnVisibleColumnsPropertyChanged));
+
         public static readonly DependencyProperty IsColumnSettingsEnabledProperty = DependencyProperty.RegisterAttached(
             "IsColumnSettingsEnabled",
             typeof(bool),
@@ -91,6 +97,16 @@ typeof(DataGridParameters));
         #endregion Dependency Properties
 
         #region Public Static Methods
+
+        public static IEnumerable<string> GetVisibleColumns(DataGrid dataGrid)
+        {
+            return (IEnumerable<string>)dataGrid.GetValue(VisibleColumnsProperty);
+        }
+
+        public static void SetVisibleColumns(DataGrid dataGrid, IEnumerable<string> value)
+        {
+            dataGrid.SetValue(VisibleColumnsProperty, value);
+        }
 
         public static string GetColumnSettings(DataGrid dataGrid)
         {
@@ -447,6 +463,19 @@ typeof(DataGridParameters));
         /// </summary>
         /// <param name="dependencyObject">The dependency object.</param>
         /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+        private static void OnVisibleColumnsPropertyChanged(
+            DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs e)
+        {
+            DataGrid dataGrid = (DataGrid)dependencyObject;
+            UpdateVisibleColumns(dataGrid);
+        }
+
+        /// <summary>
+        /// Called when the column settings property is changed.
+        /// </summary>
+        /// <param name="dependencyObject">The dependency object.</param>
+        /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnColumnSettingsPropertyChanged(
             DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs e)
@@ -545,6 +574,26 @@ typeof(DataGridParameters));
                 }
 
                 SetIsUpdatingColumnSettings(dataGrid, false);
+            }
+        }
+
+        /// <summary>
+        /// Updates the columns from column settings.
+        /// </summary>
+        /// <param name="dataGrid">The data grid.</param>
+        private static void UpdateVisibleColumns(DataGrid dataGrid)
+        {
+            IEnumerable<string> columns = GetVisibleColumns(dataGrid) != null ? GetVisibleColumns(dataGrid).ToArray() : new string[] { };
+            foreach (var column in dataGrid.Columns)
+            {
+                if (columns.Any(x => x.ToUpper() == AutomationProperties.GetName(column).ToUpper()) || !DataGridColumnParameters.GetCanUserHideColumn(column))
+                {
+                    column.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    column.Visibility = Visibility.Collapsed;
+                }
             }
         }
 

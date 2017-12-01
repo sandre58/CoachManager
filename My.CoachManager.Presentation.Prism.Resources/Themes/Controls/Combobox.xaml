@@ -103,7 +103,7 @@
                                       Height="6"
                                       HorizontalAlignment="Center"
                                       Fill="{TemplateBinding Foreground}"
-                                      Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z "
+                                      Data="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
                                       IsHitTestVisible="false"
                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                       Stretch="Uniform" />
