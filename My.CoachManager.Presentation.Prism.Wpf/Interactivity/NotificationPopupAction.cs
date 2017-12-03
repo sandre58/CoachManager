@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Interactivity;
-using My.CoachManager.Presentation.Prism.Controls.Enums;
+using My.CoachManager.Presentation.Prism.Controls.Windows;
 using My.CoachManager.Presentation.Prism.Core.Interactivity.InteractionRequest;
 using Prism.Interactivity.InteractionRequest;
 using NotificationPopup = My.CoachManager.Presentation.Prism.Controls.NotificationPopup;

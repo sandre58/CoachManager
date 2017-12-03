@@ -3,7 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
-using My.CoachManager.Presentation.Prism.Controls.Enums;
+using My.CoachManager.Presentation.Prism.Controls.ContentControls;
+using My.CoachManager.Presentation.Prism.Controls.Helpers;
 
 namespace My.CoachManager.Presentation.Prism.Controls.Parameters
 {
@@ -416,7 +417,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
         [Category(Constants.ParameterCategory)]
         [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
         [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
-        [AttachedPropertyBrowsableForType(typeof(NumericUpDown))]
+        [AttachedPropertyBrowsableForType(typeof(ExtendedNumericUpDown))]
         public static Visibility GetDisabledVisualElementVisibility(UIElement element)
         {
             var value = element.GetValue(DisabledVisualElementVisibilityProperty);

@@ -1,8 +1,8 @@
-﻿using My.CoachManager.Presentation.Prism.Controls.Datagrid.GroupSummary;
+﻿using My.CoachManager.Presentation.Prism.Controls.Datagrids;
+using My.CoachManager.Presentation.Prism.Controls.Datagrids.GroupSummary;
 
 namespace My.CoachManager.Presentation.Prism.Controls.Parameters
 {
-    using Datagrid;
     using Helpers;
     using System.Collections;
     using System.Collections.Generic;

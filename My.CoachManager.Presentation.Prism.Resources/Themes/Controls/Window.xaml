@@ -19,7 +19,7 @@
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
     </Style>
 
-    <Style x:Key="ModernWindowStyle" TargetType="{x:Type controls:MetroWindow}" x:Shared="False">
+    <Style x:Key="ModernWindowStyle" TargetType="{x:Type controls:ExtendedWindow}" x:Shared="False">
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
@@ -39,7 +39,7 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="controls:MetroWindow">
+                <ControlTemplate TargetType="controls:ExtendedWindow">
                     <Border x:Name="WindowBorder" Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}" Background="{TemplateBinding Background}">
                         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
                             <AdornerDecorator>
@@ -204,7 +204,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DialogWindowStyle" TargetType="{x:Type controls:MetroWindow}" BasedOn="{StaticResource ModernWindowStyle}">
+    <Style x:Key="DialogWindowStyle" TargetType="{x:Type controls:ExtendedWindow}" BasedOn="{StaticResource ModernWindowStyle}">
         <Setter Property="IsMaximizeButtonVisible" Value="False" />
         <Setter Property="IsMinimizeButtonVisible" Value="False" />
         <Setter Property="ResizeMode" Value="NoResize" />

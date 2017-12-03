@@ -268,7 +268,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <mahapps:NumericUpDown
+                    <mahapps:ExtendedNumericUpDown
                     Minimum="100" Maximum="250" Interval="1"
                     Width="{StaticResource MidSmallWidth}"
                     Value="{Binding Item.Height, UpdateSourceTrigger=PropertyChanged}"
@@ -277,7 +277,7 @@
 
                     <elysium:Icon Grid.Column="2" Size="Medium" Style="{StaticResource WeighingScaleIconStyle}" HorizontalAlignment="Center" />
 
-                    <mahapps:NumericUpDown
+                    <mahapps:ExtendedNumericUpDown
                     Grid.Column="3"
                     Minimum="20" Maximum="150" Interval="1"
                     Width="{StaticResource MidSmallWidth}"
@@ -320,7 +320,7 @@
 
                     <elysium:Icon Grid.Column="2" Size="Medium" Style="{StaticResource MeasureFootIconStyle}" HorizontalAlignment="Center" />
 
-                    <mahapps:NumericUpDown
+                    <mahapps:ExtendedNumericUpDown
                     Grid.Column="3"
                     Minimum="30" Maximum="50" Interval="1"
                     Width="{StaticResource MidSmallWidth}"

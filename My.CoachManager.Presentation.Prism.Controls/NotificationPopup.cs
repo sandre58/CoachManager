@@ -11,11 +11,11 @@ using System.Windows.Forms;
 using System.Windows.Interactivity;
 using System.Windows.Interop;
 using My.CoachManager.Presentation.Prism.Controls.Behaviours;
-using My.CoachManager.Presentation.Prism.Controls.Enums;
+using My.CoachManager.Presentation.Prism.Controls.Windows;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
-    public class NotificationPopup : Window
+    public class NotificationPopup : System.Windows.Window
     {
         /// <summary>
         /// Identifies the BackgroundContent dependency property.
@@ -117,7 +117,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
         /// </summary>
         /// <param name="window"> The window object</param>
         /// <param name="notificationFlowDirection"> Direction in which new notifications will appear.</param>
-        private void SetPopupDirection(Window window, NotificationPosition notificationFlowDirection)
+        private void SetPopupDirection(System.Windows.Window window, NotificationPosition notificationFlowDirection)
         {
             if (Owner != null)
             {
@@ -186,7 +186,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             /// <value>
             /// The window.
             /// </value>
-            public Window Window { get; set; }
+            public System.Windows.Window Window { get; set; }
         }
     }
 }

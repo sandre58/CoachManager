@@ -10,7 +10,7 @@
              xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings;assembly=My.CoachManager.Presentation.Prism.Resources"
              xmlns:views1="clr-namespace:My.CoachManager.Presentation.Prism.AdministrationModule.Views"
              xmlns:viewModels1="clr-namespace:My.CoachManager.Presentation.Prism.AdministrationModule.ViewModels"
-             mc:Ignorable="d"
+              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModels1:PlayerEditViewModel}"
              d:DesignHeight="300" d:DesignWidth="300">
     <ItemsControl.ItemsPanel>

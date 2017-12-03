@@ -31,7 +31,7 @@
 
                 <controls:Icon Grid.Column="0" Grid.Row="0" Size="Medium" Content="{StaticResource CalendarGeometry}" HorizontalAlignment="Center" />
 
-                <controls:NumericUpDown
+                <controls:ExtendedNumericUpDown
                 Grid.Column="1" Grid.Row="0"
                     Minimum="1900" Interval="1"
                     Width="{StaticResource MediumWidth}"

@@ -191,8 +191,8 @@
             <Setter.Value>
                 <DataTemplate>
                     <controls:Icon Size="Custom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                   Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=Content}"
-                                   Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=Foreground}" />
+                		Content="{Binding Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}"
+                		Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}" />
                 </DataTemplate>
             </Setter.Value>
         </Setter>
@@ -203,8 +203,8 @@
             <Setter.Value>
                 <DataTemplate>
                     <controls:Icon Size="Custom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                   Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=Content}"
-                                   Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=Foreground}" />
+                		Content="{Binding Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}"
+                		Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}" />
                 </DataTemplate>
             </Setter.Value>
         </Setter>

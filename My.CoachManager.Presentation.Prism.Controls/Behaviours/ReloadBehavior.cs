@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using My.CoachManager.Presentation.Prism.Controls.Helpers;
 
 namespace My.CoachManager.Presentation.Prism.Controls.Behaviours
 {
@@ -13,57 +14,57 @@ namespace My.CoachManager.Presentation.Prism.Controls.Behaviours
             DependencyProperty.RegisterAttached("OnDataContextChanged", typeof(bool), typeof(ReloadBehavior), new PropertyMetadata(OnDataContextChanged));
 
         [Category(Constants.ParameterCategory)]
-        public static bool GetOnDataContextChanged(MetroContentControl element)
+        public static bool GetOnDataContextChanged(ExtendedContentControl element)
         {
             var value = element.GetValue(OnDataContextChangedProperty);
             return value != null && (bool)value;
         }
 
-        public static void SetOnDataContextChanged(MetroContentControl element, bool value)
+        public static void SetOnDataContextChanged(ExtendedContentControl element, bool value)
         {
             element.SetValue(OnDataContextChangedProperty, value);
         }
 
         private static void OnDataContextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((MetroContentControl)d).DataContextChanged += ReloadDataContextChanged;
+            ((ExtendedContentControl)d).DataContextChanged += ReloadDataContextChanged;
         }
 
         private static void ReloadDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ((MetroContentControl)sender).Reload();
+            ((ExtendedContentControl)sender).Reload();
         }
 
         public static DependencyProperty OnSelectedTabChangedProperty =
             DependencyProperty.RegisterAttached("OnSelectedTabChanged", typeof(bool), typeof(ReloadBehavior), new PropertyMetadata(OnSelectedTabChanged));
 
         [Category(Constants.ParameterCategory)]
-        public static bool GetOnSelectedTabChanged(ContentControl element)
+        public static bool GetOnSelectedTabChanged(System.Windows.Controls.ContentControl element)
         {
             var value = element.GetValue(OnDataContextChangedProperty);
             return value != null && (bool)value;
         }
 
-        public static void SetOnSelectedTabChanged(ContentControl element, bool value)
+        public static void SetOnSelectedTabChanged(System.Windows.Controls.ContentControl element, bool value)
         {
             element.SetValue(OnDataContextChangedProperty, value);
         }
 
         private static void OnSelectedTabChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((ContentControl)d).Loaded += ReloadLoaded;
+            ((System.Windows.Controls.ContentControl)d).Loaded += ReloadLoaded;
         }
 
         private static void ReloadLoaded(object sender, RoutedEventArgs e)
         {
-            var metroContentControl = ((ContentControl)sender);
-            var tab = Ancestors(metroContentControl)
+            var ExtendedContentControl = ((ContentControl)sender);
+            var tab = Ancestors(ExtendedContentControl)
                 .OfType<TabControl>()
                 .FirstOrDefault();
 
             if (tab == null) return;
 
-            SetMetroContentControl(tab, metroContentControl);
+            SetExtendedContentControl(tab, ExtendedContentControl);
             tab.SelectionChanged -= ReloadSelectionChanged;
             tab.SelectionChanged += ReloadSelectionChanged;
         }
@@ -84,11 +85,11 @@ namespace My.CoachManager.Presentation.Prism.Controls.Behaviours
             if (e.OriginalSource != sender)
                 return;
 
-            var contentControl = GetMetroContentControl((TabControl)sender);
-            var metroContentControl = contentControl as MetroContentControl;
-            if (metroContentControl != null)
+            var contentControl = GetExtendedContentControl((TabControl)sender);
+            var ExtendedContentControl = contentControl as ExtendedContentControl;
+            if (ExtendedContentControl != null)
             {
-                metroContentControl.Reload();
+                ExtendedContentControl.Reload();
             }
 
             var transitioningContentControl = contentControl as TransitioningContentControl;
@@ -98,18 +99,18 @@ namespace My.CoachManager.Presentation.Prism.Controls.Behaviours
             }
         }
 
-        public static readonly DependencyProperty MetroContentControlProperty =
-            DependencyProperty.RegisterAttached("MetroContentControl", typeof(ContentControl), typeof(ReloadBehavior), new PropertyMetadata(default(ContentControl)));
+        public static readonly DependencyProperty ExtendedContentControlProperty =
+            DependencyProperty.RegisterAttached("ExtendedContentControl", typeof(ContentControl), typeof(ReloadBehavior), new PropertyMetadata(default(ContentControl)));
 
-        public static void SetMetroContentControl(UIElement element, ContentControl value)
+        public static void SetExtendedContentControl(UIElement element, ContentControl value)
         {
-            element.SetValue(MetroContentControlProperty, value);
+            element.SetValue(ExtendedContentControlProperty, value);
         }
 
         [Category(Constants.ParameterCategory)]
-        public static ContentControl GetMetroContentControl(UIElement element)
+        public static ContentControl GetExtendedContentControl(UIElement element)
         {
-            return (ContentControl)element.GetValue(MetroContentControlProperty);
+            return (ContentControl)element.GetValue(ExtendedContentControlProperty);
         }
     }
 }

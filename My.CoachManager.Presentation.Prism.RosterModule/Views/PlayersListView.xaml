@@ -9,8 +9,8 @@
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.ViewModels;assembly=My.CoachManager.Presentation.Prism.ViewModels"
              xmlns:enum="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
              xmlns:viewModels1="clr-namespace:My.CoachManager.Presentation.Prism.RosterModule.ViewModels"
-             xmlns:columns="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Datagrid.Columns;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:columns="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Datagrids.Columns;assembly=My.CoachManager.Presentation.Prism.Controls"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModels1:PlayersListViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="500" d:DesignWidth="800">
@@ -32,11 +32,12 @@
                                          ItemContainerStyle="{StaticResource ColumnContextMenuStyle}" />
                 <controls:DropDownButton Style="{StaticResource HyperLinkDropDownButtonStyle}"
                                          Content="{x:Static strings1:ControlResources.ShowData}"
-                                         ItemsSource="{Binding DefaultVisibleColumns}"
+                                         ItemsSource="{Binding PresetColumns.Keys}"
                                          HorizontalAlignment="Right" DockPanel.Dock="Right">
                     <controls:DropDownButton.ItemContainerStyle>
                         <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
-                            <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, Path=DataContext.TestCommand}" />
+                            <Setter Property="Header" Value="{Binding Converter={StaticResource EnumToStringConverter}}" />
+                            <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, Path=DataContext.ChangeDisplayedColumnsCommand}" />
                             <Setter Property="CommandParameter" Value="{Binding }" />
                         </Style>
                     </controls:DropDownButton.ItemContainerStyle>
@@ -47,7 +48,7 @@
                       ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"
                       Style="{StaticResource ItemsDataGridStyle}"
                       FrozenColumnCount="3"
-                      parameters:DataGridParameters.VisibleColumns="{Binding ActiveVisibleColumns}">
+                      parameters:DataGridParameters.VisibleColumns="{Binding DisplayedColumns}">
                 <DataGrid.Columns>
 
                     <!-- Number -->
@@ -97,7 +98,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate DataType="viewModels:PlayerDetailViewModel">
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <controls:MetroProgressBar Height="15" Width="100" HorizontalAlignment="Center"
+                                    <controls:ExtendedProgressBar Height="15" Width="100" HorizontalAlignment="Center"
                                                            Margin="{StaticResource DefaultHorizontalMargin}"
                                                            Foreground="{DynamicResource Positive}"
                                                            BorderBrush="{DynamicResource AccentForeground}"

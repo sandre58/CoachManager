@@ -1,10 +1,9 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
-    public class CommandButton : Button
+    public class CommandButton : System.Windows.Controls.Button
     {
         /// <summary>
         /// Identifies the IconData property.

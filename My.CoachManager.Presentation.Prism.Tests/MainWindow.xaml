@@ -1,9 +1,9 @@
-﻿<controls:MetroWindow x:Class="My.CoachManager.Presentation.Prism.Tests.MainWindow"
+﻿<controls:ExtendedWindow x:Class="My.CoachManager.Presentation.Prism.Tests.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
-        Title="MainWindow" Height="350" Width="525" Style="{StaticResource ModernWindowStyle}" Background="LightBlue">
+                         Title="MainWindow" Height="350" Width="525" Style="{StaticResource ModernWindowStyle}" Background="LightBlue">
     <StackPanel Orientation="Vertical">
         <TabControl>
             <TabControl.Items>
@@ -35,4 +35,4 @@
             </TabControl.Items>
         </TabControl>
     </StackPanel>
-</controls:MetroWindow>
+</controls:ExtendedWindow>

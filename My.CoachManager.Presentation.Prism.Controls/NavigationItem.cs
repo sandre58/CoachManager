@@ -1,10 +1,9 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
-    public class NavigationItem : Button
+    public class NavigationItem : System.Windows.Controls.Button
     {
         /// <summary>
         /// Identifies the Icon dependency property.

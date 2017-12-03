@@ -2,7 +2,7 @@
 using System.Windows.Controls.Primitives;
 using System.Windows.Interactivity;
 using System.Windows.Threading;
-using My.CoachManager.Presentation.Prism.Controls.Helpers;
+using My.CoachManager.Presentation.Prism.Controls.Extensions;
 using My.CoachManager.Presentation.Prism.Controls.Parameters;
 
 namespace My.CoachManager.Presentation.Prism.Controls.Behaviours

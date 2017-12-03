@@ -1,10 +1,9 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
-    public class Icon : ContentControl
+    public class Icon : System.Windows.Controls.ContentControl
     {
         #region Dependency Properties
 

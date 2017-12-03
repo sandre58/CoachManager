@@ -1,10 +1,9 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
-    public class ImageContent : ContentControl
+    public class ImageContent : System.Windows.Controls.ContentControl
     {
         #region Properties
 

@@ -8,7 +8,7 @@
         xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings;assembly=My.CoachManager.Presentation.Prism.Resources"
         xmlns:enums="clr-namespace:My.CoachManager.Presentation.Prism.Core.Interactivity;assembly=My.CoachManager.Presentation.Prism.Core"
         xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.ViewModels"
-        prism:ViewModelLocator.AutoWireViewModel="True"
+             prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewModels:MessageViewModel}">
 

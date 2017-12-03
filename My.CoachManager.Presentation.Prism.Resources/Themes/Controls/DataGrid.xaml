@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:drag="clr-namespace:My.CoachManager.Presentation.Prism.Controls.DragAndDrop;assembly=My.CoachManager.Presentation.Prism.Controls"
-                    xmlns:adornedControl="clr-namespace:My.CoachManager.Presentation.Prism.Controls.AdornedControl;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings">
 
@@ -14,7 +13,7 @@
         <ResourceDictionary Source="ContextMenu.xaml" />
         <ResourceDictionary Source="Button.xaml" />
         <ResourceDictionary Source="CommandButton.xaml" />
-        <ResourceDictionary Source="MetroProgressBar.xaml" />
+        <ResourceDictionary Source="ProgressBar.xaml" />
         <ResourceDictionary Source="Hyperlink.xaml" />
         <ResourceDictionary Source="Icon.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -357,16 +356,16 @@
                             </SelectiveScrollingGrid.RowDefinitions>
                             <Border Grid.Column="1"
                                     Background="{TemplateBinding Background}">
-                                <adornedControl:AdornedControl IsAdornerVisible="{Binding ElementName=MoveUpBorder, Path=(drag:DragCommand.IsDragOver)}">
-                                    <adornedControl:AdornedControl.AdornerContent>
+                                <controls:AdornedControl IsAdornerVisible="{Binding ElementName=MoveUpBorder, Path=(drag:DragCommand.IsDragOver)}">
+                                    <controls:AdornedControl.AdornerContent>
                                         <Separator Style="{StaticResource HorizontalDragSeparatorStyle}"
                                                    VerticalAlignment="Top" />
-                                    </adornedControl:AdornedControl.AdornerContent>
-                                    <adornedControl:AdornedControl IsAdornerVisible="{Binding ElementName=MoveDownBorder, Path=(drag:DragCommand.IsDragOver)}">
-                                        <adornedControl:AdornedControl.AdornerContent>
+                                    </controls:AdornedControl.AdornerContent>
+                                    <controls:AdornedControl IsAdornerVisible="{Binding ElementName=MoveDownBorder, Path=(drag:DragCommand.IsDragOver)}">
+                                        <controls:AdornedControl.AdornerContent>
                                             <Separator Style="{StaticResource HorizontalDragSeparatorStyle}"
                                                        VerticalAlignment="Bottom" />
-                                        </adornedControl:AdornedControl.AdornerContent>
+                                        </controls:AdornedControl.AdornerContent>
                                         <Grid drag:DragManager.ContentTemplate="{TemplateBinding parameters:DataGridRowParameters.MoveDragContentTemplate}"
                                               drag:DragManager.Data="{Binding}"
                                               drag:DragManager.Effects="Move"
@@ -398,8 +397,8 @@
                                                         Focusable="False" />
                                             </Grid>
                                         </Grid>
-                                    </adornedControl:AdornedControl>
-                                </adornedControl:AdornedControl>
+                                    </controls:AdornedControl>
+                                </controls:AdornedControl>
                             </Border>
                             <Border Grid.Column="1"
                                     Grid.Row="1">
@@ -612,7 +611,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style x:Key="DataGridProgressBarColumnElementStyle" BasedOn="{StaticResource {x:Type controls:MetroProgressBar}}" TargetType="{x:Type controls:MetroProgressBar}">
+    <Style x:Key="DataGridProgressBarColumnElementStyle" BasedOn="{StaticResource {x:Type controls:ExtendedProgressBar}}" TargetType="{x:Type controls:ExtendedProgressBar}">
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="True">
                 <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />

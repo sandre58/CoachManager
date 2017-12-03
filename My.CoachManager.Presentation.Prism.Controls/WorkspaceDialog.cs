@@ -4,12 +4,11 @@
 // All other rights reserved.
 
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
-    public class WorkspaceDialog : ContentControl
+    public class WorkspaceDialog : System.Windows.Controls.ContentControl
     {
         //private bool _hideRequest;
         private bool _result = false;

@@ -18,7 +18,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
     /// <summary>
     /// A ContentControl that animates content as it loads and unloads.
     /// </summary>
-    public class TransitioningContentControl : ContentControl
+    public class TransitioningContentControl : System.Windows.Controls.ContentControl
     {
         internal const string PresentationGroup = "PresentationStates";
         internal const string NormalState = "Normal";

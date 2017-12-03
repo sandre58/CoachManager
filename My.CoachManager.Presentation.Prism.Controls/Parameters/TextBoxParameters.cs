@@ -11,9 +11,10 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
-using My.CoachManager.Presentation.Prism.Controls.Enums;
+using My.CoachManager.Presentation.Prism.Controls.Buttons;
+using My.CoachManager.Presentation.Prism.Controls.Extensions;
 using My.CoachManager.Presentation.Prism.Controls.Helpers;
-using My.CoachManager.Presentation.Prism.Controls.TimePicker;
+using My.CoachManager.Presentation.Prism.Controls.TimePickers;
 
 namespace My.CoachManager.Presentation.Prism.Controls.Parameters
 {
@@ -266,7 +267,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
         public static readonly DependencyProperty IsClearTextButtonBehaviorEnabledProperty = DependencyProperty.RegisterAttached("IsClearTextButtonBehaviorEnabled", typeof(bool), typeof(TextBoxParameters), new FrameworkPropertyMetadata(false, IsClearTextButtonBehaviorEnabledChanged));
 
         /// <summary>
-        /// This property can be used to set the button width (PART_ClearText) of TextBox, PasswordBox, ComboBox, NumericUpDown
+        /// This property can be used to set the button width (PART_ClearText) of TextBox, PasswordBox, ComboBox, ExtendedNumericUpDown
         /// </summary>
         public static readonly DependencyProperty ButtonWidthProperty = DependencyProperty.RegisterAttached("ButtonWidth", typeof(double), typeof(TextBoxParameters), new FrameworkPropertyMetadata(22d, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.Inherits));
 
@@ -295,10 +296,10 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
                                                                                                     {
                                                                                                         { typeof(TextBox), TextBox.TextProperty },
                                                                                                         { typeof(ComboBox), Selector.SelectedItemProperty },
-                                                                                                        { typeof(NumericUpDown), NumericUpDown.ValueProperty },
+                                                                                                        { typeof(ExtendedNumericUpDown), ExtendedNumericUpDown.ValueProperty },
                                                                                                         { typeof(DatePicker), DatePicker.SelectedDateProperty },
-                                                                                                        { typeof(TimePicker.TimePicker), TimePickerBase.SelectedTimeProperty },
-                                                                                                        { typeof(DateTimePicker), DateTimePicker.SelectedDateProperty }
+                                                                                                        { typeof(ExtendedTimePicker), TimePickerBase.SelectedTimeProperty },
+                                                                                                        { typeof(ExtendedDateTimePicker), ExtendedDateTimePicker.SelectedDateProperty }
                                                                                                     };
 
         [Category(Constants.ParameterCategory)]
@@ -306,7 +307,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
         [AttachedPropertyBrowsableForType(typeof(ComboBox))]
         [AttachedPropertyBrowsableForType(typeof(DatePicker))]
         [AttachedPropertyBrowsableForType(typeof(TimePickerBase))]
-        [AttachedPropertyBrowsableForType(typeof(NumericUpDown))]
+        [AttachedPropertyBrowsableForType(typeof(ExtendedNumericUpDown))]
         public static bool GetAutoWatermark(DependencyObject element)
         {
             var value = element.GetValue(AutoWatermarkProperty);
@@ -393,10 +394,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
                 {
                     var resolvedType = bindingExpression.ResolvedSource.GetType();
 
-                    if (resolvedType != null)
-                    {
-                        return resolvedType.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
-                    }
+                    return resolvedType.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
                 }
             }
             return null;
@@ -438,7 +436,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
         [AttachedPropertyBrowsableForType(typeof(ComboBox))]
         [AttachedPropertyBrowsableForType(typeof(DatePicker))]
         [AttachedPropertyBrowsableForType(typeof(TimePickerBase))]
-        [AttachedPropertyBrowsableForType(typeof(NumericUpDown))]
+        [AttachedPropertyBrowsableForType(typeof(ExtendedNumericUpDown))]
         public static string GetWatermark(DependencyObject obj)
         {
             return (string)obj.GetValue(WatermarkProperty);
@@ -453,7 +451,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
         [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
         [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
         [AttachedPropertyBrowsableForType(typeof(ComboBox))]
-        [AttachedPropertyBrowsableForType(typeof(NumericUpDown))]
+        [AttachedPropertyBrowsableForType(typeof(ExtendedNumericUpDown))]
         public static bool GetUseFloatingWatermark(DependencyObject obj)
         {
             var value = obj.GetValue(UseFloatingWatermarkProperty);
@@ -473,7 +471,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
         [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
         [AttachedPropertyBrowsableForType(typeof(ComboBox))]
         [AttachedPropertyBrowsableForType(typeof(DatePicker))]
-        [AttachedPropertyBrowsableForType(typeof(NumericUpDown))]
+        [AttachedPropertyBrowsableForType(typeof(ExtendedNumericUpDown))]
         public static bool GetHasText(DependencyObject obj)
         {
             var value = obj.GetValue(HasTextProperty);
@@ -521,21 +519,21 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
                     passBox.GotFocus -= PasswordGotFocus;
                 }
             }
-            else if (d is NumericUpDown)
+            else if (d is ExtendedNumericUpDown)
             {
-                var numericUpDown = (NumericUpDown)d;
+                var numericUpDown = (ExtendedNumericUpDown)d;
                 if ((bool)e.NewValue)
                 {
                     // Fixes #1343 and #2514: also triggers the show of the floating watermark if necessary
-                    numericUpDown.BeginInvoke(() => OnNumericUpDownValueChaged(numericUpDown, new RoutedEventArgs(NumericUpDown.ValueChangedEvent, numericUpDown)));
+                    numericUpDown.BeginInvoke(() => OnExtendedNumericUpDownValueChaged(numericUpDown, new RoutedEventArgs(ExtendedNumericUpDown.ValueChangedEvent, numericUpDown)));
 
-                    numericUpDown.ValueChanged += OnNumericUpDownValueChaged;
-                    //numericUpDown.GotFocus += NumericUpDownGotFocus;
+                    numericUpDown.ValueChanged += OnExtendedNumericUpDownValueChaged;
+                    //ExtendedNumericUpDown.GotFocus += ExtendedNumericUpDownGotFocus;
                 }
                 else
                 {
-                    numericUpDown.ValueChanged -= OnNumericUpDownValueChaged;
-                    //numericUpDown.GotFocus -= NumericUpDownGotFocus;
+                    numericUpDown.ValueChanged -= OnExtendedNumericUpDownValueChaged;
+                    //ExtendedNumericUpDown.GotFocus -= ExtendedNumericUpDownGotFocus;
                 }
             }
             else if (d is TimePickerBase)
@@ -579,9 +577,9 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
             SetTextLength(sender as TextBox, textBox => textBox.Text.Length);
         }
 
-        private static void OnNumericUpDownValueChaged(object sender, RoutedEventArgs e)
+        private static void OnExtendedNumericUpDownValueChaged(object sender, RoutedEventArgs e)
         {
-            SetTextLength(sender as NumericUpDown, numericUpDown => numericUpDown.Value.HasValue ? 1 : 0);
+            SetTextLength(sender as ExtendedNumericUpDown, numericUpDown => numericUpDown.Value.HasValue ? 1 : 0);
         }
 
         private static void PasswordChanged(object sender, RoutedEventArgs e)
@@ -810,7 +808,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
             var parent = VisualTreeHelper.GetParent(button);
             while (!(parent is TextBox || parent is PasswordBox || parent is ComboBox))
             {
-                parent = VisualTreeHelper.GetParent(parent);
+                if (parent != null) parent = VisualTreeHelper.GetParent(parent);
             }
 
             var command = GetButtonCommand(parent);

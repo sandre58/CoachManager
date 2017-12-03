@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow x:Class="My.CoachManager.Presentation.Prism.Wpf.Views.SplashScreen"
+﻿<controls:ExtendedWindow x:Class="My.CoachManager.Presentation.Prism.Wpf.Views.SplashScreen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
         xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings;assembly=My.CoachManager.Presentation.Prism.Resources"
         xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.ViewModels"
-        mc:Ignorable="d"
+                         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewModels:SplashScreenViewModel}"
         Title="{x:Static strings:GlobalResources.ApplicationTitle}" Height="300" Width="500"
         IsTitleOverlay="True" IsMinimizeButtonVisible="False" IsMaximizeButtonVisible="False" IsTitleVisible="False" ResizeMode="NoResize" ShowInTaskbar="False"
@@ -34,7 +34,7 @@
         </StackPanel>
 
         <TextBlock Grid.Row="2" Text="{Binding Message}" FontStyle="Italic" Margin="{StaticResource DefaultMargin}" />
-        <controls:MetroProgressBar Grid.Row="3" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+        <controls:ExtendedProgressBar Grid.Row="3" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
                                   Height="6"
                                   HorizontalAlignment="Stretch"
                                   VerticalAlignment="Bottom"
@@ -44,4 +44,4 @@
                                   Maximum="1.0"
                                   Minimum="0.0" IsIndeterminate="True" Margin="0 0 0 2" />
     </Grid>
-</controls:MetroWindow>
+</controls:ExtendedWindow>

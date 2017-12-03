@@ -51,6 +51,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
@@ -85,74 +86,72 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdornedControl\AdornedControl.cs" />
-    <Compile Include="AdornedControl\AdornerPlacement.cs" />
-    <Compile Include="AdornedControl\FrameworkElementAdorner.cs" />
+    <Compile Include="AdornedControl.cs" />
+    <Compile Include="CommandButton.cs" />
+    <Compile Include="DropDownButton.cs" />
+    <Compile Include="ToggleCommandButton.cs" />
+    <Compile Include="ExtendedContentControl.cs" />
+    <Compile Include="TransitioningContentControl.cs" />
+    <Compile Include="AdornedControls\AdornerPlacement.cs" />
+    <Compile Include="AdornedControls\FrameworkElementAdorner.cs" />
     <Compile Include="Behaviours\DatePickerTextBoxBehavior.cs" />
     <Compile Include="Behaviours\FadeBehavior.cs" />
     <Compile Include="Behaviours\ReloadBehavior.cs" />
     <Compile Include="Behaviours\SlideBehavior.cs" />
-    <Compile Include="CommandButton.cs" />
-    <Compile Include="Commands\CloseCommand.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="Helpers\Constants.cs" />
     <Compile Include="ApplicationBar.cs" />
-    <Compile Include="Datagrid\Columns\DataGridOrderColumn.cs" />
-    <Compile Include="Datagrid\Columns\DataGridProgressBarColumn.cs" />
-    <Compile Include="DropDownButton.cs" />
-    <Compile Include="Enums\CharacterCasing.cs" />
+    <Compile Include="Datagrids\Columns\DataGridOrderColumn.cs" />
+    <Compile Include="Datagrids\Columns\DataGridProgressBarColumn.cs" />
+    <Compile Include="ContentControls\CharacterCasing.cs" />
     <Compile Include="ImageContent.cs" />
     <Compile Include="ImagePicker.cs" />
     <Compile Include="Parameters\ComboBoxParameters.cs" />
     <Compile Include="Parameters\PasswordParameters.cs" />
     <Compile Include="Parameters\TabControlParameters.cs" />
     <Compile Include="Parameters\ToggleButtonParameters.cs" />
-    <Compile Include="MetroProgressBar.cs" />
-    <Compile Include="Specific\TacticControl.cs" />
-    <Compile Include="ToggleCommandButton.cs" />
+    <Compile Include="ExtendedProgressBar.cs" />
     <Compile Include="DragAndDrop\DragCommand.cs" />
     <Compile Include="DragAndDrop\DragManager.cs" />
     <Compile Include="DragAndDrop\DragViewer.cs" />
-    <Compile Include="Enums\ButtonsAlignment.cs" />
-    <Compile Include="Enums\NotificationPosition.cs" />
-    <Compile Include="NumericUpDown.cs" />
-    <Compile Include="NumericUpDownChangedRoutedEventArgs.cs" />
-    <Compile Include="NumericUpDownChangedRoutedEventHandler.cs" />
+    <Compile Include="Buttons\ButtonsAlignment.cs" />
+    <Compile Include="Windows\NotificationPosition.cs" />
+    <Compile Include="ExtendedNumericUpDown.cs" />
+    <Compile Include="NumericUpDowns\NumericUpDownChangedRoutedEventArgs.cs" />
+    <Compile Include="NumericUpDowns\NumericUpDownChangedRoutedEventHandler.cs" />
     <Compile Include="Parameters\FormParameters.cs" />
     <Compile Include="Parameters\TextBoxParameters.cs" />
     <Compile Include="Parameters\UiElementParameters.cs" />
     <Compile Include="ProgressRing.cs" />
-    <Compile Include="TimePicker\AmPmComparer.cs" />
-    <Compile Include="TimePicker\DateTimePicker.cs" />
-    <Compile Include="TimePicker\TimePartVisibility.cs" />
-    <Compile Include="TimePicker\TimePicker.cs" />
-    <Compile Include="TimePicker\TimePickerBase.cs" />
-    <Compile Include="TimePicker\TimePickerBaseSelectionChangedEventArgs.cs" />
+    <Compile Include="TimePickers\AmPmComparer.cs" />
+    <Compile Include="ExtendedDateTimePicker.cs" />
+    <Compile Include="TimePickers\TimePartVisibility.cs" />
+    <Compile Include="ExtendedTimePicker.cs" />
+    <Compile Include="TimePickers\TimePickerBase.cs" />
+    <Compile Include="TimePickers\TimePickerBaseSelectionChangedEventArgs.cs" />
     <Compile Include="NotificationPopup.cs" />
-    <Compile Include="WorkspaceDialog.cs" />
-    <Compile Include="Datagrid\Columns\DataGridColumnToolTipHelper.cs" />
-    <Compile Include="Datagrid\Columns\DataGridDateColumn.cs" />
-    <Compile Include="Datagrid\Columns\DataGridDateTimeColumn.cs" />
-    <Compile Include="Datagrid\Columns\DataGridHyperlinkColumn.cs" />
-    <Compile Include="Datagrid\Columns\DataGridTextColumn.cs" />
+    <Compile Include="Datagrids\Columns\DataGridColumnToolTipHelper.cs" />
+    <Compile Include="Datagrids\Columns\DataGridDateColumn.cs" />
+    <Compile Include="Datagrids\Columns\DataGridDateTimeColumn.cs" />
+    <Compile Include="Datagrids\Columns\DataGridHyperlinkColumn.cs" />
+    <Compile Include="Datagrids\Columns\DataGridTextColumn.cs" />
     <Compile Include="Parameters\PanelParameters.cs" />
     <Compile Include="Parameters\ScrollBarParameters.cs" />
     <Compile Include="Parameters\DataGridParameters.cs" />
     <Compile Include="Parameters\DataGridColumnParameters.cs" />
-    <Compile Include="Datagrid\DataGridColumnInfo.cs" />
+    <Compile Include="Datagrids\DataGridColumnInfo.cs" />
     <Compile Include="Parameters\DataGridRowParameters.cs" />
-    <Compile Include="Datagrid\GroupSummary\DataGridGroupSummary.cs" />
-    <Compile Include="Datagrid\GroupSummary\DataGridGroupSummaryCollection.cs" />
-    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Datagrids\GroupSummary\DataGridGroupSummary.cs" />
+    <Compile Include="Datagrids\GroupSummary\DataGridGroupSummaryCollection.cs" />
+    <Compile Include="Extensions\DispatcherObjectExtensions.cs" />
     <Compile Include="Helpers\TreeHelper.cs" />
     <Compile Include="Helpers\VisualStates.cs" />
     <Compile Include="Helpers\XamlHelper.cs" />
-    <Compile Include="MetroContentControl.cs" />
     <Compile Include="NavigationItem.cs" />
-    <Compile Include="DpiAwareWindow.cs" />
-    <Compile Include="DpiInformation.cs" />
-    <Compile Include="Helpers\AppHelper.cs" />
+    <Compile Include="Windows\DpiAwareWindow.cs" />
+    <Compile Include="Windows\DpiInformation.cs" />
+    <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Icon.cs" />
-    <Compile Include="MetroWindow.cs" />
+    <Compile Include="ExtendedWindow.cs" />
     <Compile Include="Native\MonitorDpiType.cs" />
     <Compile Include="Native\NativeMethods.cs" />
     <Compile Include="Native\OSVersionHelper.cs" />
@@ -172,7 +171,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="TransitioningContentControl.cs" />
+    <Compile Include="WorkspaceDialog.cs" />
     <Compile Include="WorkspaceView.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -191,5 +190,6 @@
       <Name>My.CoachManager.Presentation.Prism.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

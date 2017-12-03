@@ -6,8 +6,8 @@
              xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
              xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings;assembly=My.CoachManager.Presentation.Prism.Resources"
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
-             xmlns:columns="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Datagrid.Columns;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.AdministrationModule.ViewModels"
+             xmlns:columns="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Datagrids.Columns;assembly=My.CoachManager.Presentation.Prism.Controls"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModels:CategoriesListViewModel}"
              d:DesignHeight="500" d:DesignWidth="800">

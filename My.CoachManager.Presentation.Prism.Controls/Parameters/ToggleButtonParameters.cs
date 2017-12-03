@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using My.CoachManager.Presentation.Prism.Controls.Helpers;
 
 namespace My.CoachManager.Presentation.Prism.Controls.Parameters
 {
@@ -15,7 +16,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
         public static readonly DependencyProperty ContentDirectionProperty =
             DependencyProperty.RegisterAttached("ContentDirection", typeof(FlowDirection), typeof(ToggleButtonParameters),
                                                 new FrameworkPropertyMetadata(FlowDirection.LeftToRight,
-            //FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.Inherits,
+                                                                              //FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.Inherits,
                                                                               ContentDirectionPropertyChanged));
 
         /// <summary>

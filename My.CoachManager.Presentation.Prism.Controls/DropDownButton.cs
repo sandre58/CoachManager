@@ -10,7 +10,7 @@ using System.Windows.Media;
 namespace My.CoachManager.Presentation.Prism.Controls
 {
     [ContentProperty("ItemsSource")]
-    [TemplatePart(Name = "PART_Button", Type = typeof(Button)),
+    [TemplatePart(Name = "PART_Button", Type = typeof(System.Windows.Controls.Button)),
      TemplatePart(Name = "PART_Menu", Type = typeof(ContextMenu))]
     public class DropDownButton : ItemsControl
     {
@@ -225,7 +225,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             set { SetValue(ArrowVisibilityProperty, value); }
         }
 
-        private Button _clickButton;
+        private System.Windows.Controls.Button _clickButton;
         private ContextMenu _menu;
 
         static DropDownButton()
@@ -243,7 +243,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            _clickButton = EnforceInstance<Button>("PART_Button");
+            _clickButton = EnforceInstance<System.Windows.Controls.Button>("PART_Button");
             _menu = EnforceInstance<ContextMenu>("PART_Menu");
             InitializeVisualElementsContainer();
             if (_menu != null && Items != null && ItemsSource == null)

@@ -1,11 +1,9 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
-    public class ImagePicker : Button
+    public class ImagePicker : System.Windows.Controls.Button
     {
         #region Properties
 
