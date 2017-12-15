@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using My.CoachManager.Presentation.Prism.Controls.Buttons;
-using My.CoachManager.Presentation.Prism.Controls.ExtendedNumericUpDowns;
+using My.CoachManager.Presentation.Prism.Controls.NumericUpDowns;
 using My.CoachManager.Presentation.Prism.Controls.Parameters;
 
 namespace My.CoachManager.Presentation.Prism.Controls
@@ -22,8 +22,8 @@ namespace My.CoachManager.Presentation.Prism.Controls
     [TemplatePart(Name = ElementTextBox, Type = typeof(TextBox))]
     public class ExtendedNumericUpDown : Control
     {
-        public static readonly RoutedEvent ValueIncrementedEvent = EventManager.RegisterRoutedEvent("ValueIncremented", RoutingStrategy.Bubble, typeof(ExtendedNumericUpDownChangedRoutedEventHandler), typeof(ExtendedNumericUpDown));
-        public static readonly RoutedEvent ValueDecrementedEvent = EventManager.RegisterRoutedEvent("ValueDecremented", RoutingStrategy.Bubble, typeof(ExtendedNumericUpDownChangedRoutedEventHandler), typeof(ExtendedNumericUpDown));
+        public static readonly RoutedEvent ValueIncrementedEvent = EventManager.RegisterRoutedEvent("ValueIncremented", RoutingStrategy.Bubble, typeof(NumericUpDownChangedRoutedEventHandler), typeof(ExtendedNumericUpDown));
+        public static readonly RoutedEvent ValueDecrementedEvent = EventManager.RegisterRoutedEvent("ValueDecremented", RoutingStrategy.Bubble, typeof(NumericUpDownChangedRoutedEventHandler), typeof(ExtendedNumericUpDown));
         public static readonly RoutedEvent DelayChangedEvent = EventManager.RegisterRoutedEvent("DelayChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ExtendedNumericUpDown));
         public static readonly RoutedEvent MaximumReachedEvent = EventManager.RegisterRoutedEvent("MaximumReached", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ExtendedNumericUpDown));
         public static readonly RoutedEvent MinimumReachedEvent = EventManager.RegisterRoutedEvent("MinimumReached", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ExtendedNumericUpDown));
@@ -219,13 +219,13 @@ namespace My.CoachManager.Presentation.Prism.Controls
             remove { RemoveHandler(MinimumReachedEvent, value); }
         }
 
-        public event ExtendedNumericUpDownChangedRoutedEventHandler ValueIncremented
+        public event NumericUpDownChangedRoutedEventHandler ValueIncremented
         {
             add { AddHandler(ValueIncrementedEvent, value); }
             remove { RemoveHandler(ValueIncrementedEvent, value); }
         }
 
-        public event ExtendedNumericUpDownChangedRoutedEventHandler ValueDecremented
+        public event NumericUpDownChangedRoutedEventHandler ValueDecremented
         {
             add { AddHandler(ValueDecrementedEvent, value); }
             remove { RemoveHandler(ValueDecrementedEvent, value); }
@@ -1099,9 +1099,9 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 return;
             }
 
-            ExtendedNumericUpDownChangedRoutedEventArgs routedEvent = interval > 0 ?
-                new ExtendedNumericUpDownChangedRoutedEventArgs(ValueIncrementedEvent, interval) :
-                new ExtendedNumericUpDownChangedRoutedEventArgs(ValueDecrementedEvent, interval);
+            NumericUpDownChangedRoutedEventArgs routedEvent = interval > 0 ?
+                new NumericUpDownChangedRoutedEventArgs(ValueIncrementedEvent, interval) :
+                new NumericUpDownChangedRoutedEventArgs(ValueDecrementedEvent, interval);
 
             RaiseEvent(routedEvent);
 

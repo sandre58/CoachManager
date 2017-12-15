@@ -173,10 +173,10 @@
                     </DockPanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="B1" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
-                            <Setter TargetName="L1" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
-                            <Setter TargetName="R1" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
-                            <Setter TargetName="T1" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+                            <Setter TargetName="B1" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+                            <Setter TargetName="L1" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+                            <Setter TargetName="R1" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+                            <Setter TargetName="T1" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -320,19 +320,19 @@
             </Trigger>
             <Trigger SourceName="PART_Popup" Property="HasDropShadow" Value="True">
                 <Setter TargetName="LayoutRoot" Property="Effect" Value="{StaticResource BottomRightShadow}" />
-                    <Setter TargetName="LayoutRoot" Property="Margin" Value="0 0 6 6" />
+                <Setter TargetName="LayoutRoot" Property="Margin" Value="0 0 6 6" />
                 <Setter TargetName="SubDark" Property="Margin" Value="0 0 6 6" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOverGray}" />
+                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOver}" />
             </Trigger>
             <Trigger Property="IsKeyboardFocused" Value="True">
-                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource ControlMouseOverGray}" />
-                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOverGray}" />
+                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource ControlMouseOver}" />
+                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOver}" />
             </Trigger>
             <Trigger Property="IsSubmenuOpen" Value="True">
-                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource ControlMouseOverGray}" />
-                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOverGray}" />
+                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource ControlMouseOver}" />
+                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOver}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource Disabled}" />
@@ -377,11 +377,11 @@
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOverGray}" />
+                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOver}" />
             </Trigger>
             <Trigger Property="IsKeyboardFocused" Value="True">
-                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource ControlMouseOverGray}" />
-                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOverGray}" />
+                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource ControlMouseOver}" />
+                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOver}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource Disabled}" />
@@ -479,8 +479,8 @@
                 <Setter TargetName="SubDark" Property="Margin" Value="0 0 6 6" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource ControlMouseOverGray}" />
-                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOverGray}" />
+                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource ControlMouseOver}" />
+                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOver}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource Disabled}" />
@@ -538,8 +538,8 @@
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource ControlMouseOverGray}" />
-                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOverGray}" />
+                <Setter TargetName="Bg" Property="Fill" Value="{DynamicResource ControlMouseOver}" />
+                <Setter TargetName="Bg" Property="Stroke" Value="{DynamicResource ControlMouseOver}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource Disabled}" />

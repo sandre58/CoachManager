@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Behaviours;
+using My.CoachManager.Presentation.Prism.Core.Filters;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using Prism.Commands;
 using Prism.Events;
@@ -13,7 +15,7 @@ using Prism.Events;
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
     public abstract class OrderedListViewModel<TEntityViewModel, TEditView, TEditViewModel> : ListViewModel<TEntityViewModel, TEditView, TEditViewModel>
-        where TEntityViewModel : class, IOrderableViewModel
+        where TEntityViewModel : class, IOrderableViewModel, INotifyPropertyChanged
         where TEditView : FrameworkElement
         where TEditViewModel : class, IDialogViewModel, IEditViewModel
     {

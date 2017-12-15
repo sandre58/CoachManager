@@ -141,6 +141,12 @@
   <data name="Close" xml:space="preserve">
     <value>Fermer</value>
   </data>
+  <data name="CountItems" xml:space="preserve">
+    <value>{0} élément(s)</value>
+  </data>
+  <data name="CountItemsToUpper" xml:space="preserve">
+    <value>{0} ELEMENT(S)</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Supprimer</value>
   </data>
@@ -192,8 +198,17 @@
   <data name="ShowData" xml:space="preserve">
     <value>Affichées les données</value>
   </data>
+  <data name="ShowFilters" xml:space="preserve">
+    <value>Afficher les filtres ({0})</value>
+  </data>
+  <data name="ShowItems" xml:space="preserve">
+    <value>Afficher les éléments</value>
+  </data>
   <data name="SignIn" xml:space="preserve">
     <value>Se connecter</value>
+  </data>
+  <data name="SpeedSearch" xml:space="preserve">
+    <value>Recherche rapide : </value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Nom d'utilisateur</value>

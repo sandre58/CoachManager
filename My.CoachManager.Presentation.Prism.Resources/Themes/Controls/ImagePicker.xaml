@@ -12,8 +12,8 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type controls:ImageContent}">
-        <Setter Property="Background" Value="{DynamicResource ControlGray}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="Background" Value="{DynamicResource Control}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -44,8 +44,8 @@
     </Style>
 
     <Style TargetType="{x:Type controls:ImagePicker}">
-        <Setter Property="Background" Value="{DynamicResource ControlGray}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="Background" Value="{DynamicResource Control}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
         <Setter Property="ToolTip" Value="{x:Static strings:ControlResources.ModifyImage}" />
@@ -71,24 +71,24 @@
                                 <ImageBrush ImageSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:ImagePicker}},Path=Image,Mode=OneWay}" Stretch="UniformToFill" AlignmentX="Center" AlignmentY="Center" />
                             </Ellipse.Fill>
                         </Ellipse>
-                        <Ellipse x:Name="PART_Mask" Fill="{DynamicResource ControlMouseOverGray}" Stroke="{DynamicResource Transparent}" Visibility="Collapsed" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" StrokeThickness="{TemplateBinding BorderThickness}" />
-                        <controls:Icon x:Name="PART_MaskIcon" Content="{StaticResource EditBoxGeometry}" Margin="{StaticResource LargeMargin}" Foreground="{DynamicResource ControlLightForeground}"
+                        <Ellipse x:Name="PART_Mask" Fill="{DynamicResource ControlMouseOver}" Stroke="{DynamicResource Transparent}" Visibility="Collapsed" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" StrokeThickness="{TemplateBinding BorderThickness}" />
+                        <controls:Icon x:Name="PART_MaskIcon" Content="{StaticResource EditBoxGeometry}" Margin="{StaticResource LargeMargin}" Foreground="{DynamicResource White}"
                                                       HorizontalAlignment="Stretch"
                                                           VerticalAlignment="Stretch" Visibility="Collapsed" />
                     </Grid>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter  TargetName="PART_Background" Property="Stroke" Value="{DynamicResource ControlMouseOverDarkGray}" />
+                            <Setter  TargetName="PART_Background" Property="Stroke" Value="{DynamicResource DarkControlMouseOver}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter  TargetName="PART_Background" Property="Fill" Value="{DynamicResource ControlMouseOverGray}" />
-                            <Setter  TargetName="PART_Background" Property="Stroke" Value="{DynamicResource ControlMouseOverDarkGray}" />
+                            <Setter  TargetName="PART_Background" Property="Fill" Value="{DynamicResource ControlMouseOver}" />
+                            <Setter  TargetName="PART_Background" Property="Stroke" Value="{DynamicResource DarkControlMouseOver}" />
                             <Setter TargetName="PART_Mask" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_MaskIcon" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter  TargetName="PART_Background" Property="Stroke" Value="{DynamicResource Accent}" />
+                            <Setter  TargetName="PART_Background" Property="Stroke" Value="{DynamicResource HighLight}" />
                             <Setter TargetName="PART_Mask" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_MaskIcon" Property="Visibility" Value="Visible" />
                         </Trigger>

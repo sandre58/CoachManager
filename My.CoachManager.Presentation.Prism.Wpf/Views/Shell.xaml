@@ -74,7 +74,7 @@
             </Grid>
 
             <!-- Left Region -->
-            <Border Grid.Row="0" Grid.Column="0" Width="275" Background="{DynamicResource Dark}" Effect="{StaticResource RightShadow}">
+            <Border Grid.Row="0" Grid.Column="0" Width="275" Background="{DynamicResource Accent}" Effect="{StaticResource RightShadow}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40" />
@@ -85,6 +85,7 @@
                     <!-- Title -->
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=Title, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedWindow}, Converter={StaticResource ToUpperConverter}}"
                            Style="{StaticResource ModernWindowTitle}"
+                               Foreground="{DynamicResource AccentForeground}"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            Typography.Capitals="AllSmallCaps" />

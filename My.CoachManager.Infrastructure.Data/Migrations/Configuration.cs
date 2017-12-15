@@ -127,6 +127,7 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
 
             context.Players.AddOrUpdate(x => x.LastName, player1);
             context.Players.AddOrUpdate(x => x.LastName, player2);
+
             context.Commit();
 
             // Rosters
@@ -167,6 +168,35 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                 RosterId = 1,
                 SquadId = 2,
             });
+
+            for (int i = 1; i <= 15; i++)
+            {
+                var player = new Player()
+                {
+                    Id = i + 10,
+                    CategoryId = i,
+                    Birthdate = new DateTime(1986, 12, i),
+                    CountryId = 76,
+                    FirstName = "FirstName" + i,
+                    Gender = GenderType.Male,
+                    LastName = "LastName" + i,
+                    Laterality = Laterality.RightHander,
+                    ShoesSize = 30 + i,
+                    Size = "L",
+                    LicenseNumber = "000000000"
+                };
+                context.Players.AddOrUpdate(x => x.LastName, player);
+
+                roster.Players.Add(new RosterPlayer()
+                {
+                    LicenseState = LicenseState.Given,
+                    Number = i,
+                    PlayerId = player.Id,
+                    RosterId = 1,
+                    SquadId = 1,
+                });
+            }
+
             roster.Squads.Add(squad1);
             roster.Squads.Add(squad2);
             context.Rosters.AddOrUpdate(x => x.Id, roster);

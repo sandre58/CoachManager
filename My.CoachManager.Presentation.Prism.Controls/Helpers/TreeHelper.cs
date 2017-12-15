@@ -94,6 +94,48 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
             return foundChild;
         }
 
+        public static DependencyObject FindPartByName(this DependencyObject ele, string name)
+        {
+            if (ele == null)
+            {
+                return null;
+            }
+            if (name.Equals(ele.GetValue(FrameworkElement.NameProperty)))
+            {
+                return ele;
+            }
+
+            var numVisuals = VisualTreeHelper.GetChildrenCount(ele);
+            for (var i = 0; i < numVisuals; i++)
+            {
+                DependencyObject vis = VisualTreeHelper.GetChild(ele, i);
+                DependencyObject result;
+                if ((result = FindPartByName(vis, name)) != null)
+                {
+                    return result;
+                }
+            }
+            return null;
+        }
+
+        public static T GetVisualChild<T>(this Visual parent) where T : Visual
+        {
+            T child = default(T);
+
+            int numVisuals = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < numVisuals; i++)
+            {
+                var v = (Visual)VisualTreeHelper.GetChild(parent, i);
+                child = v as T ?? GetVisualChild<T>(v);
+                if (child != null)
+                {
+                    break;
+                }
+            }
+
+            return child;
+        }
+
         /// <summary>
         /// Looks for a child control within a parent by type
         /// </summary>

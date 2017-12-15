@@ -4,7 +4,7 @@
 
     <Style TargetType="{x:Type controls:ExtendedProgressBar}">
         <Setter Property="Foreground" Value="{DynamicResource Accent}" />
-        <Setter Property="Background" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="Background" Value="{DynamicResource DarkControl}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="IsTabStop" Value="False" />

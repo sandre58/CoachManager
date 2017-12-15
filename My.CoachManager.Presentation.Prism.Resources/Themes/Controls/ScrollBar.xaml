@@ -9,8 +9,8 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="ScrollBarLineDownButtonStyle" TargetType="{x:Type RepeatButton}">
-        <Setter Property="Background" Value="{DynamicResource ControlGray}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="Background" Value="{DynamicResource DarkControl}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Control}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Focusable" Value="False" />
@@ -37,10 +37,10 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ControlMouseOver}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource HighLight}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="{DynamicResource DisabledOpacity}" />
@@ -89,7 +89,7 @@
         </Setter>
     </Style>
     <Style x:Key="ScrollBarThumbStyle" TargetType="{x:Type Thumb}">
-        <Setter Property="Background" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="Background" Value="{DynamicResource ControlMouseOver}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -112,10 +112,10 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ControlMouseOverDarkGray}" />
+                <Setter Property="Background" Value="{DynamicResource ControlPressed}" />
             </Trigger>
             <Trigger Property="IsDragging" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ControlPressedDarkGray}" />
+                <Setter Property="Background" Value="{DynamicResource Variation6}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="{DynamicResource DisabledOpacity}" />
@@ -206,7 +206,7 @@
         </Border>
     </ControlTemplate>
     <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
-        <Setter Property="Background" Value="{DynamicResource ControlGray}" />
+        <Setter Property="Background" Value="{DynamicResource DarkControl}" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="parameters:ScrollBarParameters.BarWidth" Value="18" />
         <Setter Property="parameters:ScrollBarParameters.ButtonsVisibility" Value="Visible" />

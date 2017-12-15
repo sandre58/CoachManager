@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Exceptions;
@@ -11,8 +12,9 @@ using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public abstract class ListViewModel<TEntityViewModel, TEditView, TEditViewModel> : ReadOnlyListViewModel<TEntityViewModel>
-        where TEntityViewModel : class, IEntityViewModel
+    public abstract class
+        ListViewModel<TEntityViewModel, TEditView, TEditViewModel> : ReadOnlyListViewModel<TEntityViewModel>
+        where TEntityViewModel : class, IEntityViewModel, INotifyPropertyChanged
         where TEditView : FrameworkElement
         where TEditViewModel : class, IDialogViewModel, IEditViewModel
     {

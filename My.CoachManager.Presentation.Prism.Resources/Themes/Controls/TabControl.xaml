@@ -11,9 +11,9 @@
     <!-- Tab Item -->
     <Style TargetType="{x:Type TabItem}">
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Foreground" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="Foreground" Value="{DynamicResource DarkControl}" />
         <Setter Property="FontSize" Value="{StaticResource MediumFontSize}" />
         <Setter Property="FontStretch" Value="Medium" />
         <Setter Property="FontStyle" Value="Normal" />
@@ -102,9 +102,9 @@
                 <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
             </DataTrigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource ControlMouseOverDarkGray}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
-                <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
+                <Setter Property="Foreground" Value="{DynamicResource DarkControlMouseOver}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource DarkControlMouseOver}" />
+                <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{DynamicResource DarkControlMouseOver}" />
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
@@ -121,9 +121,9 @@
     <!-- Tab Control -->
     <Style TargetType="{x:Type TabControl}">
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{DynamicResource DarkControl}" />
         <Setter Property="params:TabControlParameters.IndicatorThickness" Value="2" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="FontSize" Value="{StaticResource NormalFontSize}" />

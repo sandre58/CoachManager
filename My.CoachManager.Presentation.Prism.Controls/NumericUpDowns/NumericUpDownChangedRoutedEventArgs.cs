@@ -1,12 +1,12 @@
 using System.Windows;
 
-namespace My.CoachManager.Presentation.Prism.Controls.ExtendedNumericUpDowns
+namespace My.CoachManager.Presentation.Prism.Controls.NumericUpDowns
 {
-    public class ExtendedNumericUpDownChangedRoutedEventArgs : RoutedEventArgs
+    public class NumericUpDownChangedRoutedEventArgs : RoutedEventArgs
     {
         public double Interval { get; set; }
 
-        public ExtendedNumericUpDownChangedRoutedEventArgs(RoutedEvent routedEvent, double interval)
+        public NumericUpDownChangedRoutedEventArgs(RoutedEvent routedEvent, double interval)
             : base(routedEvent)
         {
             Interval = interval;

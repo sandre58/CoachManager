@@ -4,6 +4,7 @@ using My.CoachManager.Application.Dtos.Administration;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.AdministrationModule.Resources.Strings;
 using My.CoachManager.Presentation.Prism.AdministrationModule.Views;
+using My.CoachManager.Presentation.Prism.Core.Filters;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels;

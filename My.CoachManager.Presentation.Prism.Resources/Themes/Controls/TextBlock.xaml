@@ -48,9 +48,14 @@
         <Setter Property="Focusable" Value="False" />
     </Style>
 
+    <Style x:Key="SmallHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource HeaderStyle}">
+        <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
     <Style TargetType="{x:Type Label}" x:Key="HeaderIconStyle">
-        <Setter Property="Foreground" Value="{DynamicResource GrayHeaderForeground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource GrayHeaderBorder}" />
+        <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource HeaderBorder}" />
         <Setter Property="FontSize" Value="{DynamicResource HeaderFontSize}" />
         <Setter Property="FontFamily" Value="{StaticResource HeaderFontFamily}" />
         <Setter Property="FontStyle" Value="Italic" />
@@ -72,8 +77,8 @@
     </Style>
 
     <Style TargetType="{x:Type Label}" x:Key="MediumHeaderIconStyle" BasedOn="{StaticResource HeaderIconStyle}">
-        <Setter Property="Foreground" Value="{DynamicResource LightGrayHeaderForeground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource LightGrayHeaderBorder}" />
+        <Setter Property="Foreground" Value="{DynamicResource LightHeaderForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LightHeaderBorder}" />
         <Setter Property="FontSize" Value="{DynamicResource MediumHeaderFontSize}" />
         <Setter Property="Margin" Value="3, 12, 3, 8" />
         <Setter Property="BorderThickness" Value="0,0,0,3" />

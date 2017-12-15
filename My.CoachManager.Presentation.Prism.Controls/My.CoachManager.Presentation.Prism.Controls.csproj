@@ -81,14 +81,21 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdornedControl.cs" />
+    <Compile Include="Behaviours\PasswordBoxBindingBehavior.cs" />
+    <Compile Include="Behaviours\StylizedBehaviorCollection.cs" />
+    <Compile Include="Behaviours\StylizedBehaviors.cs" />
     <Compile Include="CommandButton.cs" />
     <Compile Include="DropDownButton.cs" />
+    <Compile Include="DropDownMenuButton.cs" />
+    <Compile Include="ExtendedDataGrid.cs" />
+    <Compile Include="NumericUpDowns\NumericUpDownChangedRoutedEventHandler.cs" />
     <Compile Include="ToggleCommandButton.cs" />
     <Compile Include="ExtendedContentControl.cs" />
     <Compile Include="TransitioningContentControl.cs" />
@@ -117,7 +124,6 @@
     <Compile Include="Windows\NotificationPosition.cs" />
     <Compile Include="ExtendedNumericUpDown.cs" />
     <Compile Include="NumericUpDowns\NumericUpDownChangedRoutedEventArgs.cs" />
-    <Compile Include="NumericUpDowns\NumericUpDownChangedRoutedEventHandler.cs" />
     <Compile Include="Parameters\FormParameters.cs" />
     <Compile Include="Parameters\TextBoxParameters.cs" />
     <Compile Include="Parameters\UiElementParameters.cs" />
@@ -185,6 +191,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\My.CoachManager.CrossCutting.Core\My.CoachManager.CrossCutting.Core.csproj">
+      <Project>{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}</Project>
+      <Name>My.CoachManager.CrossCutting.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Core\My.CoachManager.Presentation.Prism.Core.csproj">
       <Project>{3f11e745-d328-4654-a3c9-4bfc9bf6b9ab}</Project>
       <Name>My.CoachManager.Presentation.Prism.Core</Name>

@@ -7,7 +7,7 @@
         <ResourceDictionary Source="../Base/Converters.xaml" />
         <ResourceDictionary Source="../Base/Shadows.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <Style x:Key="CalendarDayButtonStyle" TargetType="{x:Type CalendarDayButton}">
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
@@ -29,7 +29,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}" />
                         <Rectangle x:Name="HighlightBackground"
-                                   Fill="{DynamicResource TransparentGray3}"
+                                   Fill="{DynamicResource Control}"
                                    Opacity="0" />
                         <Path x:Name="Blackout"
                               Margin="3"
@@ -167,7 +167,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}" />
                         <Rectangle x:Name="HighlightBackground"
-                                   Fill="{DynamicResource TransparentGray3}"
+                                   Fill="{DynamicResource Control}"
                                    Opacity="0" />
                         <Rectangle x:Name="SelectedBackground"
                                    Fill="{DynamicResource Accent}"

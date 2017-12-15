@@ -7,7 +7,7 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings;assembly=My.CoachManager.Presentation.Prism.Resources"
         xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
-        xmlns:behaviours="clr-namespace:My.CoachManager.Presentation.Prism.Core.Behaviours;assembly=My.CoachManager.Presentation.Prism.Core"
+        xmlns:behaviours="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Behaviours;assembly=My.CoachManager.Presentation.Prism.Controls"
         xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.ViewModels"
              prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"

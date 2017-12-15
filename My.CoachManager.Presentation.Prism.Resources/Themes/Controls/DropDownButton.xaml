@@ -12,10 +12,7 @@
         <ResourceDictionary Source="Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type controls:DropDownButton}">
-        <Setter Property="ArrowBrush" Value="{DynamicResource ControlDarkGray}" />
-        <Setter Property="ArrowMouseOverBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
-        <Setter Property="ArrowPressedBrush" Value="{DynamicResource Accent}" />
+    <Style TargetType="{x:Type controls:DropDownMenuButton}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
@@ -31,7 +28,7 @@
         <Setter Property="Padding" Value="{StaticResource DefaultHorizontalMargin}" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:DropDownButton}">
+                <ControlTemplate TargetType="{x:Type controls:DropDownMenuButton}">
                     <Button x:Name="PART_Button"
                                 HorizontalContentAlignment="Stretch"
                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -57,23 +54,12 @@
                                           Width="12"
                                           Height="6"
                                           HorizontalAlignment="Center"
-                                          Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:DropDownButton}, Path=ArrowBrush}"
+                                          Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=Foreground}"
                                           Data="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
                                           IsHitTestVisible="false"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                           Stretch="Uniform" />
                                 </Grid>
-                                <DataTemplate.Triggers>
-                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=IsMouseOver}" Value="True">
-                                        <Setter TargetName="BtnArrow" Property="Fill" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:DropDownButton}, Path=ArrowMouseOverBrush}" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=IsPressed}" Value="True">
-                                        <Setter TargetName="BtnArrow" Property="Fill" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=(parameters:ControlParameters.PressedForeground)}" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:DropDownButton}, Path=IsExpanded}" Value="True">
-                                        <Setter TargetName="BtnArrow" Property="Fill" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:DropDownButton}, Path=ArrowPressedBrush}" />
-                                    </DataTrigger>
-                                </DataTemplate.Triggers>
                             </DataTemplate>
                         </Button.ContentTemplate>
                         <Button.ContextMenu>
@@ -93,19 +79,158 @@
                                              StaysOpen="False" />
                         </Button.ContextMenu>
                     </Button>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="True">
+                            <Setter TargetName="PART_Button" Property="Background" Value="{Binding Source=PART_Button, Path=(parameters:ControlParameters.FocusBackground)}" />
+                            <Setter TargetName="PART_Button" Property="BorderBrush" Value="{Binding Source=PART_Button, Path=(parameters:ControlParameters.FocusBorderBrush)}" />
+                            <Setter TargetName="PART_Button" Property="Foreground" Value="{Binding Source=PART_Button, Path=(parameters:ControlParameters.FocusForeground)}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TextDropDownMenuButtonStyle" TargetType="{x:Type controls:DropDownMenuButton}" BasedOn="{StaticResource {x:Type controls:DropDownMenuButton}}">
+        <Setter Property="ButtonStyle" Value="{StaticResource TextButtonStyle}" />
+    </Style>
+
+    <Style x:Key="HyperLinkDropDownMenuButtonStyle" TargetType="{x:Type controls:DropDownMenuButton}" BasedOn="{StaticResource {x:Type controls:DropDownMenuButton}}">
+        <Setter Property="ButtonStyle" Value="{StaticResource HyperLinkButtonStyle}" />
+    </Style>
+
+    <Style TargetType="{x:Type controls:DropDownButton}">
+        <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
+        <Setter Property="Background" Value="{DynamicResource Light}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource NormalForeground}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource DarkControlMouseOver}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource ControlMouseOver}" />
+        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{DynamicResource HighLight}" />
+        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource HighLight}" />
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource NormalForeground}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource HighLight}" />
+        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Light}" />
+        <Setter Property="parameters:ControlParameters.CornerRadius" Value="0" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="MinHeight" Value="26" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Padding" Value="{StaticResource DefaultHorizontalMargin}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:DropDownButton}">
+                    <Grid>
+                        <Popup x:Name="PART_Popup"
+                               AllowsTransparency="True"
+                               Focusable="False"
+                               Margin="5 2 5 5"
+                               IsOpen="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
+                               StaysOpen="False"
+                               Placement="Bottom"
+                               PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                            <Grid MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}">
+                                <Border HorizontalAlignment="Stretch"
+                                        Background="{DynamicResource Light}"
+                                        BorderBrush="{DynamicResource Dark}"
+                                        BorderThickness="1" Effect="{StaticResource BottomRightShadow}" />
+                                <ScrollViewer x:Name="DropDownScrollViewer"
+                                              Background="{DynamicResource Light}"
+                                              Margin="2"
+                                              Padding="1"
+                                              VerticalScrollBarVisibility="Auto"
+                                              BorderThickness="0">
+                                    <Grid RenderOptions.ClearTypeHint="Enabled"  Background="{DynamicResource Light}">
+                                        <ContentControl Content="{TemplateBinding Content}"  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    </Grid>
+                                </ScrollViewer>
+                            </Grid>
+                        </Popup>
+                        <Button x:Name="PART_Button"
+                                HorizontalContentAlignment="Stretch"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                FocusVisualStyle="{TemplateBinding FocusVisualStyle}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                Padding="{TemplateBinding Padding}"
+                                Content="{Binding ButtonContent, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                Focusable="{TemplateBinding Focusable}"
+                                Foreground="{TemplateBinding Foreground}"
+                                BorderBrush="{TemplateBinding Foreground}"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                FontSize="{TemplateBinding FontSize}"
+                                FontWeight="{TemplateBinding FontWeight}"
+                                parameters:ControlParameters.MouseOverForeground="{TemplateBinding parameters:ControlParameters.MouseOverForeground}"
+                                parameters:ControlParameters.MouseOverBorderBrush="{TemplateBinding parameters:ControlParameters.MouseOverBorderBrush}"
+                                parameters:ControlParameters.MouseOverBackground="{TemplateBinding parameters:ControlParameters.MouseOverBackground}"
+                                parameters:ControlParameters.PressedForeground="{TemplateBinding parameters:ControlParameters.PressedForeground}"
+                                parameters:ControlParameters.PressedBorderBrush="{TemplateBinding parameters:ControlParameters.PressedBorderBrush}"
+                                parameters:ControlParameters.PressedBackground="{TemplateBinding parameters:ControlParameters.PressedBackground}"
+                                parameters:ControlParameters.FocusForeground="{TemplateBinding parameters:ControlParameters.FocusForeground}"
+                                parameters:ControlParameters.FocusBorderBrush="{TemplateBinding parameters:ControlParameters.FocusBorderBrush}"
+                                parameters:ControlParameters.FocusBackground="{TemplateBinding parameters:ControlParameters.FocusBackground}"
+                                parameters:ControlParameters.ContentCharacterCasing="{TemplateBinding parameters:ControlParameters.ContentCharacterCasing}">
+                            <Button.ContentTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <ContentPresenter Content="{Binding}" ContentTemplate="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:DropDownButton}, Path=ContentTemplate}" />
+                                        <Path Grid.Column="1" x:Name="BtnArrow"
+                                          Margin="{StaticResource DefaultHorizontalMargin}"
+                                          Width="12"
+                                          Height="6"
+                                          HorizontalAlignment="Center"
+                                          Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=Foreground}"
+                                          Data="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
+                                          IsHitTestVisible="false"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          Stretch="Uniform"
+                                              Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:DropDownButton}, Path=ArrowVisibility}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </Button.ContentTemplate>
+                        </Button>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="True">
+                            <Setter TargetName="PART_Button" Property="Background" Value="{Binding Source=PART_Button, Path=(parameters:ControlParameters.FocusBackground)}" />
+                            <Setter TargetName="PART_Button" Property="BorderBrush" Value="{Binding Source=PART_Button, Path=(parameters:ControlParameters.FocusBorderBrush)}" />
+                            <Setter TargetName="PART_Button" Property="Foreground" Value="{Binding Source=PART_Button, Path=(parameters:ControlParameters.FocusForeground)}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
     <Style x:Key="TextDropDownButtonStyle" TargetType="{x:Type controls:DropDownButton}" BasedOn="{StaticResource {x:Type controls:DropDownButton}}">
-        <Setter Property="ButtonStyle" Value="{StaticResource TextButtonStyle}" />
+        <Setter Property="Background" Value="{DynamicResource Transparent}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource DarkControl}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource Transparent}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource DarkControlMouseOver}" />
+        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource Transparent}" />
+        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource HighLight}" />
+        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Transparent}" />
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource HighLight}" />
+        <Setter Property="parameters:ControlParameters.ContentCharacterCasing" Value="Normal" />
+        <Setter Property="FontWeight" Value="Normal" />
     </Style>
 
-    <Style x:Key="HyperLinkDropDownButtonStyle" TargetType="{x:Type controls:DropDownButton}" BasedOn="{StaticResource {x:Type controls:DropDownButton}}">
-        <Setter Property="ButtonStyle" Value="{StaticResource HyperLinkButtonStyle}" />
-        <Setter Property="ArrowBrush" Value="{DynamicResource Accent}" />
-        <Setter Property="ArrowMouseOverBrush" Value="{DynamicResource HighLight}" />
-        <Setter Property="ArrowPressedBrush" Value="{DynamicResource HighLight}" />
+    <Style x:Key="HyperLinkDropDownButtonStyle" TargetType="{x:Type controls:DropDownButton}" BasedOn="{StaticResource TextDropDownButtonStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource HighLight}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource LightHighLight}" />
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource LightHighLight}" />
     </Style>
 </ResourceDictionary>

@@ -234,10 +234,10 @@
     <Style TargetType="{x:Type controls:NavigationItem}">
         <Setter Property="Margin" Value="0,3,0,0" />
         <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
-        <Setter Property="Foreground" Value="{DynamicResource ControlLightForeground}" />
-        <Setter Property="Background" Value="{DynamicResource ControlMouseOverGray}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
-        <Setter Property="Color" Value="{DynamicResource Accent}" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="Background" Value="{DynamicResource AccentControl}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="Color" Value="{DynamicResource AccentForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -269,10 +269,10 @@
         <Setter Property="Margin" Value="0,3,0,0" />
         <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
         <Setter Property="IsExpanded" Value="False" />
-        <Setter Property="Foreground" Value="{DynamicResource ControlLightForeground}" />
-        <Setter Property="Background" Value="{DynamicResource ControlMouseOverGray}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
-        <Setter Property="Color" Value="{DynamicResource Accent}" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="Background" Value="{DynamicResource AccentControl}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="Color" Value="{DynamicResource AccentForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />

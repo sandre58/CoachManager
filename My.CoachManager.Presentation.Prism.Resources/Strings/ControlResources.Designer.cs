@@ -133,6 +133,24 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} élément(s).
+        /// </summary>
+        public static string CountItems {
+            get {
+                return ResourceManager.GetString("CountItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} ELEMENT(S).
+        /// </summary>
+        public static string CountItemsToUpper {
+            get {
+                return ResourceManager.GetString("CountItemsToUpper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Supprimer.
         /// </summary>
         public static string Delete {
@@ -286,11 +304,38 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Afficher les filtres ({0}).
+        /// </summary>
+        public static string ShowFilters {
+            get {
+                return ResourceManager.GetString("ShowFilters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Afficher les éléments.
+        /// </summary>
+        public static string ShowItems {
+            get {
+                return ResourceManager.GetString("ShowItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Se connecter.
         /// </summary>
         public static string SignIn {
             get {
                 return ResourceManager.GetString("SignIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recherche rapide : .
+        /// </summary>
+        public static string SpeedSearch {
+            get {
+                return ResourceManager.GetString("SpeedSearch", resourceCulture);
             }
         }
         

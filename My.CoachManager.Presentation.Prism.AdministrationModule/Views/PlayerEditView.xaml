@@ -9,7 +9,6 @@
              xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings;assembly=My.CoachManager.Presentation.Prism.Resources"
              xmlns:entities="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
              xmlns:enums="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
-             xmlns:converters="clr-namespace:My.CoachManager.Presentation.Prism.Core.Converters;assembly=My.CoachManager.Presentation.Prism.Core"
              xmlns:views1="clr-namespace:My.CoachManager.Presentation.Prism.AdministrationModule.Views"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.AdministrationModule.ViewModels"
              xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.AdministrationModule.Resources.Strings"
@@ -95,14 +94,14 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Orientation="Horizontal">
-                        <RadioButton Style="{StaticResource IconRadioButtonStyle}" Content="{Binding Source={x:Static enums:GenderType.Male}, Converter={x:Static converters:EnumToStringConverter.Instance}}"
+                        <RadioButton Style="{StaticResource IconRadioButtonStyle}" Content="{Binding Source={x:Static enums:GenderType.Male}, Converter={StaticResource EnumToStringConverter}}"
                                      parameters:FormParameters.Icon="{DynamicResource GenderMaleGeometry}" parameters:ControlParameters.FocusBackground="{StaticResource Male}"
                                      parameters:ControlParameters.PressedBackground="{StaticResource Male}"
-                                          IsChecked="{Binding Item.Gender, Converter={x:Static converters:EnumToBooleanConverter.Instance}, ConverterParameter={x:Static enums:GenderType.Male}}" />
-                        <RadioButton Style="{StaticResource IconRadioButtonStyle}" Content="{Binding Source={x:Static enums:GenderType.Female}, Converter={x:Static converters:EnumToStringConverter.Instance}}"
+                                          IsChecked="{Binding Item.Gender, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:GenderType.Male}}" />
+                        <RadioButton Style="{StaticResource IconRadioButtonStyle}" Content="{Binding Source={x:Static enums:GenderType.Female}, Converter={StaticResource EnumToStringConverter}}"
                                      parameters:FormParameters.Icon="{DynamicResource GenderFemaleGeometry}" parameters:ControlParameters.FocusBackground="{StaticResource Female}"
                                      parameters:ControlParameters.PressedBackground="{StaticResource Female}"
-                                          IsChecked="{Binding Item.Gender, Converter={x:Static converters:EnumToBooleanConverter.Instance}, ConverterParameter={x:Static enums:GenderType.Female}}" />
+                                          IsChecked="{Binding Item.Gender, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:GenderType.Female}}" />
                     </StackPanel>
 
                     <controls:Icon Grid.Column="2" Size="Medium" Content="{StaticResource CountryGeometry}" HorizontalAlignment="Center" />

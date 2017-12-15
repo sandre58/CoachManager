@@ -13,7 +13,7 @@
             <Style TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource WorkspaceDialogViewStyle}" />
         </Style.Resources>
         <Setter Property="Background" Value="{DynamicResource Light}" />
-        <Setter Property="OverlayBackground" Value="{DynamicResource TransparentDark5}" />
+        <Setter Property="OverlayBackground" Value="{DynamicResource DarkControl}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Template">
             <Setter.Value>

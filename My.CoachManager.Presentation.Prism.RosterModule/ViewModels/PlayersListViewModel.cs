@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Presentation.Prism.Core.Filters;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.RosterModule.Enums;
@@ -32,6 +33,7 @@ namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
         private readonly IRosterService _rosterService;
         private ObservableCollection<string> _displayedColumns;
         private Dictionary<PresetColumnsType, string[]> _presetColumns;
+        private IFilter _speedFilter;
 
         #endregion Fields
 
@@ -60,6 +62,18 @@ namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
         /// </summary>
         public DelegateCommand<PresetColumnsType?> ChangeDisplayedColumnsCommand { get; set; }
 
+        /// <summary>
+        /// Gets or sets the filter for speed Search.
+        /// </summary>
+        public IFilter SpeedFilter
+        {
+            get { return _speedFilter; }
+            set
+            {
+                SetProperty(ref _speedFilter, value);
+            }
+        }
+
         #endregion Members
 
         #region Constructors
@@ -80,6 +94,9 @@ namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
             PresetColumns.Add(PresetColumnsType.BodyInformations, BodyInformationsColumns);
 
             ChangeDisplayedColumnsCommand = new DelegateCommand<PresetColumnsType?>(ChangeDisplayedColumns);
+
+            SpeedFilter = new StringFilter(typeof(PlayerDetailViewModel).GetProperty("FullName"), StringFilterMode.Contains);
+            FilteredItems.AddFilter(SpeedFilter);
         }
 
         #endregion Constructors
@@ -94,7 +111,10 @@ namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
         {
             var result = _rosterService.GetPlayers(1);
 
-            Items = new ObservableCollection<PlayerDetailViewModel>(result.ToViewModels<PlayerDetailViewModel>());
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                SetCollection(result.ToViewModels<PlayerDetailViewModel>());
+            });
         }
 
         /// <summary>

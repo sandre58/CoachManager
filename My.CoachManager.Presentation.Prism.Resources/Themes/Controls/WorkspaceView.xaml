@@ -5,7 +5,7 @@
                     xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Core.ViewModels;assembly=My.CoachManager.Presentation.Prism.Core"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                    xmlns:converters="clr-namespace:My.CoachManager.Presentation.Prism.Core.Converters;assembly=My.CoachManager.Presentation.Prism.Core"
+                    xmlns:converters="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Converters"
                     mc:Ignorable="d">
 
     <ResourceDictionary.MergedDictionaries>
@@ -85,7 +85,7 @@
                         </ScrollViewer>
 
                         <!-- Loading -->
-                        <Border x:Name="Loader"  Grid.Row="1" Background="{DynamicResource TransparentLight5}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
+                        <Border x:Name="Loader"  Grid.Row="1" Background="{DynamicResource LightVariation4}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
                             <Grid>
                                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                                     <controls:ProgressRing Width="70" Height="70" />
@@ -120,8 +120,7 @@
 
     <Style x:Key="WorkspaceDialogViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource {x:Type controls:WorkspaceView}}">
         <Setter Property="HeaderHeight" Value="70" />
-        <Setter Property="HeaderBackground" Value="{DynamicResource TransparentGray3}" />
-        <Setter Property="ApplicationBarStyle" Value="{StaticResource ApplicationBarGrayStyle}" />
+        <Setter Property="HeaderBackground" Value="{DynamicResource DarkVariation1}" />
         <Setter Property="HeaderTemplate" Value="{StaticResource DefaultWorkspaceDialogViewHeaderTemplate}" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
     </Style>

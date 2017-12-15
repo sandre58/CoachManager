@@ -13,16 +13,16 @@
     <Style x:Key="ToggleCommandButtonBaseStyle" TargetType="{x:Type controls:ToggleCommandButton}">
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
-        <Setter Property="parameters:ControlParameters.Foreground" Value="{DynamicResource ControlDarkForeground}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
-        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource ControlDarkForeground}" />
-        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="parameters:ControlParameters.Foreground" Value="{DynamicResource DarkControlMouseOver}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource DarkControlMouseOver}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource DarkControlMouseOver}" />
+        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource HighLight}" />
+        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{DynamicResource HighLight}" />
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource AccentForeground}" />
-        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource ControlDarkForeground}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource HighLight}" />
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource DarkControlMouseOver}" />
         <Setter Property="ButtonDiameter" Value="{DynamicResource LargeDiameter}" />
         <Setter Property="Template">
             <Setter.Value>

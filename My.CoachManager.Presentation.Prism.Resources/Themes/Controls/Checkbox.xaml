@@ -12,11 +12,11 @@
         <Setter Property="Margin" Value="{StaticResource LargeMargin}" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="Background" Value="{DynamicResource Light}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
-        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource DarkControlMouseOver}" />
+        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{DynamicResource HighLight}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource HighLight}" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -49,7 +49,7 @@
                             <Rectangle x:Name="IndeterminateCheck"
                                        Width="8"
                                        Height="3"
-                                       Fill="{DynamicResource Gray5}"
+                                       Fill="{DynamicResource Control}"
                                        Opacity="0" />
                         </Grid>
                         <ContentPresenter x:Name="contentPresenter"

@@ -1,0 +1,51 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Base/Converters.xaml" />
+        <ResourceDictionary Source="../Base/Margins.xaml" />
+        <ResourceDictionary Source="../Base/Geometry.xaml" />
+        <ResourceDictionary Source="Button.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource ButtonBaseStyle}">
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedBackground)}" />
+                <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedBorderBrush)}" />
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedForeground)}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="CircleToggleButtonStyle" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource CircleButtonBaseStyle}">
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedBackground)}" />
+                <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedBorderBrush)}" />
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedForeground)}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TextToggleButtonStyle" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource TextButtonStyle}">
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedBackground)}" />
+                <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedBorderBrush)}" />
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedForeground)}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="IconToggleButtonStyle" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource IconButtonStyle}">
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedBackground)}" />
+                <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedBorderBrush)}" />
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedForeground)}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

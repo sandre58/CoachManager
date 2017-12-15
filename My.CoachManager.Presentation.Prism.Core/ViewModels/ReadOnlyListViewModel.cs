@@ -1,5 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Presentation.Prism.Core.Filters;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using Prism.Commands;
@@ -8,7 +11,7 @@ using Prism.Events;
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
     public abstract class ReadOnlyListViewModel<TEntityViewModel> : NavigatableWorkspaceViewModel
-        where TEntityViewModel : class, IEntityViewModel
+        where TEntityViewModel : class, IEntityViewModel, INotifyPropertyChanged
     {
         #region Fields
 
@@ -30,6 +33,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             RefreshCommand = new DelegateCommand(Refresh, CanRefresh);
             KeyboardActionCommand = new DelegateCommand<KeyDownItemEventArgs>(KeyboardAction, CanKeyboardAction);
+            _items = new ObservableCollection<TEntityViewModel>();
+            FilteredItems = new FilteredCollectionView(Items);
         }
 
         #endregion Constructor
@@ -46,6 +51,17 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             {
                 SetProperty(ref _items, value);
             }
+        }
+
+        /// <summary>
+        /// Gets or sets the items.
+        /// </summary>
+        public FilteredCollectionView FilteredItems { get; private set; }
+
+        protected void SetCollection(IEnumerable<TEntityViewModel> collection)
+        {
+            Items.Clear();
+            Items.AddRange(collection);
         }
 
         /// <summary>

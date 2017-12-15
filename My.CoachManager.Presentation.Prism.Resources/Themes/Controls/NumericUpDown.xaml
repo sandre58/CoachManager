@@ -13,14 +13,14 @@
     <Style TargetType="{x:Type controls:ExtendedNumericUpDown}" x:Key="ExtendedNumericUpDownBaseStyle">
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="Background" Value="{DynamicResource Light}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlDarkGray}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
-        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource ControlMouseOverDarkGray}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource HighLight}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource DarkControlMouseOver}" />
         <Setter Property="parameters:TextBoxParameters.Watermark" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:FormParameters.Label), Mode=OneWay}" />
         <Setter Property="parameters:TextBoxParameters.UseFloatingWatermark" Value="True" />
         <Setter Property="parameters:TextBoxParameters.ButtonWidth" Value="13" />
@@ -86,12 +86,12 @@
                                 <RepeatButton x:Name="PART_NumericDown"
                                           Grid.Column="1"
                                           Grid.Row="1"
-                                          Style="{StaticResource MinusExtendedNumericUpDownButtonStyle}"
+                                          Style="{StaticResource MinusNumericUpDownButtonStyle}"
                                           Delay="{TemplateBinding Delay}" />
                                 <RepeatButton x:Name="PART_NumericUp"
                                           Grid.Column="2"
                                           Grid.Row="1"
-                                          Style="{StaticResource PlusExtendedNumericUpDownButtonStyle}"
+                                          Style="{StaticResource PlusNumericUpDownButtonStyle}"
                                           Delay="{TemplateBinding Delay}" />
                             </Grid>
                         </Border>

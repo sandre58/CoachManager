@@ -223,9 +223,12 @@
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Helpers\ClipboardHelper.cs" />
     <Compile Include="Helpers\ConvertHelper.cs" />
+    <Compile Include="Helpers\DoubleHelper.cs" />
     <Compile Include="Helpers\ParameterHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Helpers\Util.cs" />
     <Compile Include="Metadatas\RosterPlayerMetadata.cs" />
     <Compile Include="Metadatas\RosterCoachMetadata.cs" />
     <Compile Include="Metadatas\RosterMetadata.cs" />
