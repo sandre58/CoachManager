@@ -288,7 +288,7 @@
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
-                <Setter Property="Background" Value="{DynamicResource HighLight}" />
+                <Setter Property="Background" Value="{DynamicResource Accent}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="{DynamicResource DisabledOpacity}" />
@@ -352,7 +352,7 @@
                             <Setter Property="Background" Value="{DynamicResource LightControlMouseOver}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource HighLight}" />
+                            <Setter Property="Background" Value="{DynamicResource Accent}" />
                             <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
@@ -524,7 +524,7 @@
                 </MultiDataTrigger.Setters>
             </MultiDataTrigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{DynamicResource HighLight}" />
+                <Setter Property="Background" Value="{DynamicResource Accent}" />
                 <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
             </Trigger>
         </Style.Triggers>
@@ -663,7 +663,7 @@
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
         <Setter Property="AutoGenerateColumns" Value="False" />
         <Setter Property="Background" Value="{DynamicResource Light}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DarkAccent}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CanUserAddRows" Value="False" />
         <Setter Property="CanUserDeleteRows" Value="False" />

@@ -5,6 +5,7 @@
     <Color x:Key="LightColor">#333333</Color>
     <Color x:Key="DarkColor">#ffffff</Color>
     <Color x:Key="VeryDarkColor">#ffffff</Color>
+    <Color x:Key="DisabledColor">#FFB8B5B2</Color>
 
     <!-- VARIATIONS -->
     <Color x:Key="LightVariation1Color">#11ffffff</Color>

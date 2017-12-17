@@ -59,7 +59,7 @@
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
-                            <Setter TargetName="ItemBackground" Property="Background" Value="{DynamicResource HighLight}" />
+                            <Setter TargetName="ItemBackground" Property="Background" Value="{DynamicResource Accent}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -130,7 +130,7 @@
         <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource HighLight}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource DarkControlMouseOver}" />
         <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource ControlPressed}" />
         <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource ControlMouseOver}" />

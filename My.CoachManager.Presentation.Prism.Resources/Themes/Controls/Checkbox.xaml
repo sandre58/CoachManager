@@ -15,8 +15,8 @@
         <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource DarkControlMouseOver}" />
-        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{DynamicResource HighLight}" />
-        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource HighLight}" />
+        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -41,7 +41,7 @@
                             <Path x:Name="checkBox"
                                   Width="12"
                                   Height="10"
-                                  Fill="{DynamicResource Accent}"
+                                  Fill="{DynamicResource DarkAccent}"
                                   Opacity="0"
                                   Data="M 1145.607177734375,430 C1145.607177734375,430 1141.449951171875,435.0772705078125 1141.449951171875,435.0772705078125 1141.449951171875,435.0772705078125 1139.232177734375,433.0999755859375 1139.232177734375,433.0999755859375 1139.232177734375,433.0999755859375 1138,434.5538330078125 1138,434.5538330078125 1138,434.5538330078125 1141.482177734375,438 1141.482177734375,438 1141.482177734375,438 1141.96875,437.9375 1141.96875,437.9375 1141.96875,437.9375 1147,431.34619140625 1147,431.34619140625 1147,431.34619140625 1145.607177734375,430 1145.607177734375,430 z"
                                   Stretch="Fill"

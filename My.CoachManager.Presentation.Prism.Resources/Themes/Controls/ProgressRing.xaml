@@ -3,7 +3,7 @@
                     xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls">
 
     <Style TargetType="controls:ProgressRing">
-        <Setter Property="Foreground" Value="{DynamicResource Accent}" />
+        <Setter Property="Foreground" Value="{DynamicResource DarkAccent}" />
         <Setter Property="Height" Value="60" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />

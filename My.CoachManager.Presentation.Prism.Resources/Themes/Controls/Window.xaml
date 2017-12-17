@@ -23,9 +23,9 @@
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource LightAccent}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="Background" Value="{DynamicResource Light}" />
-        <Setter Property="HeaderBackground" Value="{DynamicResource LightAccent}" />
+        <Setter Property="HeaderBackground" Value="{DynamicResource Accent}" />
         <Setter Property="HeaderForeground" Value="{DynamicResource AccentForeground}" />
         <Setter Property="Width" Value="800" />
         <Setter Property="Height" Value="640" />
@@ -59,24 +59,24 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
-                                        <!-- Icon -->
-                                        <Border x:Name="Icon" Grid.Column="0"
-                                                DataContext="{TemplateBinding Icon}"
-                                                Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}}">
-                                            <Image Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding}" />
-                                        </Border>
+                                        <StackPanel Orientation="Horizontal" Grid.Column="0" Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedWindow}, Path=IsTitleVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <!-- Icon -->
+                                            <Border x:Name="Icon"
+                                                    DataContext="{TemplateBinding Icon}"
+                                                    Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}}">
+                                                <Image Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding}" />
+                                            </Border>
 
-                                        <!-- title -->
-                                        <TextBlock Grid.Column="1" Text="{TemplateBinding Title}" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource ModernWindowTitle}"
-                                                   DataContext="{TemplateBinding IsTitleVisible}"
-                                                   Foreground="{TemplateBinding HeaderForeground}"
-                                                   Visibility="{Binding Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                            <!-- title -->
+                                            <TextBlock Text="{TemplateBinding Title}" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource ModernWindowTitle}"
+                                                       DataContext="{TemplateBinding IsTitleVisible}"
+                                                       Foreground="{TemplateBinding HeaderForeground}" />
+                                        </StackPanel>
 
                                         <!-- window system buttons-->
-                                        <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Top" WindowChrome.IsHitTestVisibleInChrome="True">
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Top" WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Button Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
                                                     ToolTip="{x:Static strings:ControlResources.Minimize}"
                                                     Style="{StaticResource SystemButtonStyle}"
@@ -130,7 +130,7 @@
                                     </Grid>
 
                                     <!-- Status Bar -->
-                                    <Border x:Name="StatusBar" Grid.Row="2" Background="{DynamicResource LightAccent}" MinHeight="25" Focusable="False">
+                                    <Border x:Name="StatusBar" Grid.Row="2" Background="{DynamicResource Accent}" MinHeight="25" Focusable="False">
                                         <ContentControl Content="{TemplateBinding StatusBar}" Foreground="{DynamicResource AccentForeground}" VerticalAlignment="Center" IsTabStop="False" />
                                     </Border>
 
@@ -183,6 +183,7 @@
                         <Trigger Property="IsTitleOverlay" Value="True">
                             <Setter TargetName="Content" Property="Grid.Row" Value="0" />
                             <Setter TargetName="Content" Property="Grid.RowSpan" Value="2" />
+                            <Setter TargetName="Header" Property="Background" Value="{DynamicResource Transparent}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

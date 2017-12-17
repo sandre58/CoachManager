@@ -2,8 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- ACCENT -->
-    <Color x:Key="LightAccentColor">#38BAFF</Color>
-    <Color x:Key="AccentColor">#03B6F2</Color>
-    <Color x:Key="DarkAccentColor">#0086C9</Color>
+    <Color x:Key="LightAccentColor">#FB0000</Color>
+    <Color x:Key="AccentColor">#8F0000</Color>
+    <Color x:Key="DarkAccentColor">#520303</Color>
     <Color x:Key="AccentTextColor">#ffffff</Color>
 </ResourceDictionary>

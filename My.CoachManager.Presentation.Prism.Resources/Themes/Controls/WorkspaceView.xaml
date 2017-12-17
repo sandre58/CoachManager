@@ -89,7 +89,7 @@
                             <Grid>
                                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                                     <controls:ProgressRing Width="70" Height="70" />
-                                    <TextBlock Style="{StaticResource HeaderStyle}" Foreground="{DynamicResource Accent}" Text="{x:Static strings:MessageResources.Loading}" Margin="{StaticResource LargeVerticalMargin}" FontStyle="Italic" Visibility="Collapsed" />
+                                    <TextBlock Style="{StaticResource HeaderStyle}" Foreground="{DynamicResource DarkAccent}" Text="{x:Static strings:MessageResources.Loading}" Margin="{StaticResource LargeVerticalMargin}" FontStyle="Italic" Visibility="Collapsed" />
                                 </StackPanel>
                             </Grid>
                         </Border>

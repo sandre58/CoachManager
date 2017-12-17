@@ -2,9 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- BASE COLOR -->
-    <Color x:Key="LightColor">#ffffff</Color>
-    <Color x:Key="DarkColor">#333333</Color>
-    <Color x:Key="VeryDarkColor">#000000</Color>
+    <Color x:Key="LightColor">#171D31</Color>
+    <Color x:Key="DarkColor">#ffffff</Color>
+    <Color x:Key="VeryDarkColor">#ffffff</Color>
     <Color x:Key="DisabledColor">#FFB8B5B2</Color>
 
     <!-- VARIATIONS -->
@@ -18,15 +18,15 @@
     <Color x:Key="LightVariation8Color">#D1ffffff</Color>
     <Color x:Key="LightVariation9Color">#E1ffffff</Color>
 
-    <Color x:Key="Variation1Color">#11333333</Color>
-    <Color x:Key="Variation2Color">#22333333</Color>
-    <Color x:Key="Variation3Color">#44333333</Color>
-    <Color x:Key="Variation4Color">#66333333</Color>
-    <Color x:Key="Variation5Color">#88333333</Color>
-    <Color x:Key="Variation6Color">#A1333333</Color>
-    <Color x:Key="Variation7Color">#C1333333</Color>
-    <Color x:Key="Variation8Color">#D1333333</Color>
-    <Color x:Key="Variation9Color">#E1333333</Color>
+    <Color x:Key="Variation1Color">#11D2DCFF</Color>
+    <Color x:Key="Variation2Color">#22D2DCFF</Color>
+    <Color x:Key="Variation3Color">#44D2DCFF</Color>
+    <Color x:Key="Variation4Color">#66D2DCFF</Color>
+    <Color x:Key="Variation5Color">#88D2DCFF</Color>
+    <Color x:Key="Variation6Color">#A1D2DCFF</Color>
+    <Color x:Key="Variation7Color">#C1D2DCFF</Color>
+    <Color x:Key="Variation8Color">#D1D2DCFF</Color>
+    <Color x:Key="Variation9Color">#E1D2DCFF</Color>
 
     <Color x:Key="DarkVariation1Color">#11000000</Color>
     <Color x:Key="DarkVariation2Color">#22000000</Color>

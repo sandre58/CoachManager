@@ -304,7 +304,7 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Afficher les filtres ({0}).
+        ///   Looks up a localized string similar to Afficher les filtres.
         /// </summary>
         public static string ShowFilters {
             get {
@@ -336,6 +336,15 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         public static string SpeedSearch {
             get {
                 return ResourceManager.GetString("SpeedSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  ({0}).
+        /// </summary>
+        public static string SuffixCount {
+            get {
+                return ResourceManager.GetString("SuffixCount", resourceCulture);
             }
         }
         

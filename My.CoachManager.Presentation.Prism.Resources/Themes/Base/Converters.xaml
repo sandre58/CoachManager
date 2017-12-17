@@ -16,6 +16,7 @@
     <converters:AnyToVisibilityConverter x:Key="AnyToVisibilityConverter" />
     <converters:BrushToColorConverter x:Key="BrushToColorConverter" />
     <converters:NotEqualsConverter x:Key="NotEqualsConverter" />
+    <converters:NotEqualToVisibilityConverter x:Key="NotEqualToVisibilityConverter" />
     <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
     <converters:EnumToStringConverter x:Key="EnumToStringConverter" />
     <converters:EnumToIntegerConverter x:Key="EnumToIntegerConverter" />

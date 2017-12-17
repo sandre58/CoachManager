@@ -35,16 +35,11 @@
                                  parameters:TextBoxParameters.Watermark="{x:Static strings:PersonResources.LastName}" />
                         <controls:DropDownMenuButton Style="{StaticResource HyperLinkDropDownMenuButtonStyle}"
                                                      Content="{x:Static strings1:ControlResources.ShowItems}" />
-                        <controls:DropDownButton DataContext="{Binding FilteredItems}" ButtonContent="{Binding CountFilters, StringFormat={x:Static strings1:ControlResources.ShowFilters}}">
-                            <controls:DropDownButton.Style>
-                                <Style TargetType="controls:DropDownButton" BasedOn="{StaticResource HyperLinkDropDownButtonStyle}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding CountFilters}" Value="0">
-                                            <Setter Property="ButtonContent" Value="{x:Static strings1:ControlResources.ShowFilters}" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </controls:DropDownButton.Style>
+                        <controls:DropDownButton Style="{StaticResource HyperLinkDropDownButtonStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{x:Static strings1:ControlResources.ShowFilters}" />
+                                <TextBlock Margin="0" Text="{Binding FilteredItems.CountFilters, StringFormat={x:Static strings1:ControlResources.SuffixCount}}" Visibility="{Binding FilteredItems.CountFilters, Converter={StaticResource NotEqualToVisibilityConverter}, ConverterParameter=0}" />
+                            </StackPanel>
                         </controls:DropDownButton>
                     </WrapPanel>
                     <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right"

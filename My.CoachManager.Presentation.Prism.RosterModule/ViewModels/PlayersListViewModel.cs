@@ -33,7 +33,7 @@ namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
         private readonly IRosterService _rosterService;
         private ObservableCollection<string> _displayedColumns;
         private Dictionary<PresetColumnsType, string[]> _presetColumns;
-        private IFilter _speedFilter;
+        private StringFilter _speedFilter;
 
         #endregion Fields
 
@@ -65,7 +65,7 @@ namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
         /// <summary>
         /// Gets or sets the filter for speed Search.
         /// </summary>
-        public IFilter SpeedFilter
+        public StringFilter SpeedFilter
         {
             get { return _speedFilter; }
             set
@@ -96,7 +96,20 @@ namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
             ChangeDisplayedColumnsCommand = new DelegateCommand<PresetColumnsType?>(ChangeDisplayedColumns);
 
             SpeedFilter = new StringFilter(typeof(PlayerDetailViewModel).GetProperty("FullName"), StringFilterMode.Contains);
-            FilteredItems.AddFilter(SpeedFilter);
+            SpeedFilter.FilteringChanged += SpeedFilter_FilteringChanged;
+        }
+
+        private void SpeedFilter_FilteringChanged(object sender, System.EventArgs e)
+        {
+            if (SpeedFilter.Value != "")
+            {
+                FilteredItems.AddFilter(SpeedFilter);
+            }
+            else
+            {
+                FilteredItems.RemoveFilter(SpeedFilter);
+            }
+            RaisePropertyChanged(() => FilteredItems);
         }
 
         #endregion Constructors

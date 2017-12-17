@@ -148,7 +148,7 @@
         <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource HighLight}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource DarkControlMouseOver}" />
         <Setter Property="parameters:TextBoxParameters.Watermark" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:FormParameters.Label), Mode=OneWay}" />
         <Setter Property="parameters:TextBoxParameters.UseFloatingWatermark" Value="True" />
@@ -187,7 +187,7 @@
                                                FontSize="{TemplateBinding FontSize}"
                                                parameters:TextBoxParameters.Watermark="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.Watermark), Mode=OneWay}"
                                                CaretBrush="{DynamicResource NormalForeground}"
-                                               SelectionBrush="{DynamicResource HighLight}"
+                                               SelectionBrush="{DynamicResource Accent}"
                                                ContextMenu="{TemplateBinding ContextMenu}"
                                                Focusable="{TemplateBinding Focusable}">
                                 </DatePickerTextBox>

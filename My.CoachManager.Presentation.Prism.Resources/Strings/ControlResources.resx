@@ -199,7 +199,7 @@
     <value>Affichées les données</value>
   </data>
   <data name="ShowFilters" xml:space="preserve">
-    <value>Afficher les filtres ({0})</value>
+    <value>Afficher les filtres</value>
   </data>
   <data name="ShowItems" xml:space="preserve">
     <value>Afficher les éléments</value>
@@ -209,6 +209,9 @@
   </data>
   <data name="SpeedSearch" xml:space="preserve">
     <value>Recherche rapide : </value>
+  </data>
+  <data name="SuffixCount" xml:space="preserve">
+    <value> ({0})</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Nom d'utilisateur</value>

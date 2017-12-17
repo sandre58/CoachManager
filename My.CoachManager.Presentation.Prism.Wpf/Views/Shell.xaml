@@ -15,7 +15,9 @@
         Title="{x:Static strings:GlobalResources.ApplicationTitle}"
         Icon="{StaticResource IcoImageSource}"
         WindowState="Maximized"
-        Style="{StaticResource ModernWindowStyle}">
+        Style="{StaticResource ModernWindowStyle}"
+        IsTitleOverlay="True"
+                         IsTitleVisible="False">
 
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding DialogInteractionRequest}">
@@ -74,7 +76,7 @@
             </Grid>
 
             <!-- Left Region -->
-            <Border Grid.Row="0" Grid.Column="0" Width="275" Background="{DynamicResource Accent}" Effect="{StaticResource RightShadow}">
+            <Border Grid.Row="0" Grid.Column="0" Width="275" Background="{DynamicResource DarkAccent}" Effect="{StaticResource RightShadow}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40" />

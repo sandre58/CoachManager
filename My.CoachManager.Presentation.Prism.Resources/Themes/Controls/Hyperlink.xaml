@@ -9,14 +9,14 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type Hyperlink}">
-        <Setter Property="Foreground" Value="{DynamicResource HighLight}" />
+        <Setter Property="Foreground" Value="{DynamicResource Accent}" />
         <Setter Property="TextDecorations" Value="Underline" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource LightHighLight}" />
+                <Setter Property="Foreground" Value="{DynamicResource LightAccent}" />
             </Trigger>
             <Trigger Property="IsFocused" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource LightHighLight}" />
+                <Setter Property="Foreground" Value="{DynamicResource LightAccent}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource Disabled}" />

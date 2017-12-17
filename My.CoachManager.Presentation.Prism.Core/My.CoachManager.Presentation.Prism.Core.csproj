@@ -102,6 +102,7 @@
     <Compile Include="RegionNames.cs" />
     <Compile Include="Services\IAuthenticationService.cs" />
     <Compile Include="Services\IDialogService.cs" />
+    <Compile Include="Utilities\KeyboardUtilities.cs" />
     <Compile Include="ViewModels\EntityViewModel.cs" />
     <Compile Include="ViewModels\ICollectionnable.cs" />
     <Compile Include="ViewModels\INavigatableWorkspaceViewModel.cs" />

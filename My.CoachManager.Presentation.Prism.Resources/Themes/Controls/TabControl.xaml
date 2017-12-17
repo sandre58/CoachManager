@@ -107,9 +107,9 @@
                 <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{DynamicResource DarkControlMouseOver}" />
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource DarkAccent}" />
                 <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
-                <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{DynamicResource Accent}" />
+                <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{DynamicResource DarkAccent}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="BorderBrush" Value="{DynamicResource Disabled}" />

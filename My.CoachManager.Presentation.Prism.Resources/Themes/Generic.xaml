@@ -2,8 +2,8 @@
 
     <ResourceDictionary.MergedDictionaries>
 
-        <ResourceDictionary Source="Theme/Dark.xaml" />
-        <ResourceDictionary Source="Theme/Accents/Blue.xaml" />
+        <ResourceDictionary Source="Theme/DarkBlue.xaml" />
+        <ResourceDictionary Source="Theme/Accents/Red.xaml" />
         <ResourceDictionary Source="Theme.xaml" />
 
         <!-- Base -->

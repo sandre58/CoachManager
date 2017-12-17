@@ -65,7 +65,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
         /// </summary>
         public static readonly DependencyProperty ContentStringFormatProperty = DependencyProperty.Register("ContentStringFormat", typeof(string), typeof(DropDownMenuButton), new FrameworkPropertyMetadata((string)null));
 
-        public static readonly DependencyProperty ButtonStyleProperty = DependencyProperty.Register("ButtonStyle", typeof(Style), typeof(DropDownMenuButton), new FrameworkPropertyMetadata(default(Style), FrameworkPropertyMetadataOptions.Inherits | FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
         public static readonly DependencyProperty MenuStyleProperty = DependencyProperty.Register("MenuStyle", typeof(Style), typeof(DropDownMenuButton), new FrameworkPropertyMetadata(default(Style), FrameworkPropertyMetadataOptions.Inherits | FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
         public static readonly DependencyProperty ArrowVisibilityProperty = DependencyProperty.Register("ArrowVisibility", typeof(Visibility), typeof(DropDownMenuButton), new FrameworkPropertyMetadata(Visibility.Visible, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
@@ -166,15 +165,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
         {
             get { return (Orientation)GetValue(OrientationProperty); }
             set { SetValue(OrientationProperty, value); }
-        }
-
-        /// <summary>
-        /// Gets/sets the button style.
-        /// </summary>
-        public Style ButtonStyle
-        {
-            get { return (Style)GetValue(ButtonStyleProperty); }
-            set { SetValue(ButtonStyleProperty, value); }
         }
 
         /// <summary>

@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Converters\AnyToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToFontWeightConverter.cs" />
+    <Compile Include="Converters\NotEqualToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\BrushToColorConverter.cs" />
     <Compile Include="Converters\BytesToImageConverter.cs" />
@@ -606,6 +607,10 @@
     <Resource Include="Pictures\Countries\io.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Themes\Theme\Accents\Red.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Theme\Accents\Blue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -775,6 +780,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Controls\TextBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Theme\DarkBlue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
