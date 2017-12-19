@@ -5,7 +5,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
     /// <summary>
     /// Defines a string filter
     /// </summary>
-    public class StringFilter : Filter
+    public class StringFilter : Filter, IValueFilter<string>
     {
         /// <summary>
         /// The comparison mode
@@ -26,13 +26,9 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// Initializes a new instance of the <see cref="StringFilter"/> class.
         /// </summary>
         /// <param name="propertyInfo">The property info.</param>
-        /// <param name="filterMode">The filter mode.</param>
-        /// <param name="caseSensitive"></param>
-        public StringFilter(PropertyInfo propertyInfo, StringFilterMode filterMode, bool caseSensitive = false)
+        public StringFilter(PropertyInfo propertyInfo)
             : base(propertyInfo)
         {
-            _filterMode = filterMode;
-            _caseSensitive = caseSensitive;
         }
 
         /// <summary>
@@ -43,8 +39,10 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <param name="caseSensitive"></param>
         /// <param name="value">The value.</param>
         public StringFilter(PropertyInfo propertyInfo, StringFilterMode filterMode, bool caseSensitive, string value)
-            : this(propertyInfo, filterMode, caseSensitive)
+            : this(propertyInfo)
         {
+            _filterMode = filterMode;
+            _caseSensitive = caseSensitive;
             _value = value;
         }
 
@@ -58,11 +56,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             {
                 return _filterMode;
             }
-            set
-            {
-                _filterMode = value;
-                RaiseFilteringChanged();
-            }
+            set { SetProperty(ref _filterMode, value); }
         }
 
         /// <summary>
@@ -75,14 +69,20 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             {
                 return _value;
             }
-            set
+            set { SetProperty(ref _value, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the value to look for.
+        /// </summary>
+        /// <value>The value.</value>
+        public bool CaseSensitive
+        {
+            get
             {
-                if (_value != value)
-                {
-                    _value = value;
-                    RaiseFilteringChanged();
-                }
+                return _caseSensitive;
             }
+            set { SetProperty(ref _caseSensitive, value); }
         }
 
         /// <summary>

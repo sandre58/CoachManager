@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Metadatas;
+using My.CoachManager.CrossCutting.Core.Resources.Entities;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 
 namespace My.CoachManager.Presentation.Prism.ViewModels
@@ -181,6 +183,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
         /// <summary>
         /// Get the full name (FirstName LastName).
         /// </summary>
+        [Display(Name = "FullName", ResourceType = typeof(PersonResources))]
         public string FullName
         {
             get { return string.Join(" ", FirstName, LastName); }

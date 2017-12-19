@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Reflection;
+using My.CoachManager.Presentation.Prism.Core.ViewModels;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
     /// <summary>
     /// Base class for a filter
     /// </summary>
-    public abstract class Filter : IFilter
+    public abstract class Filter : ViewModelBase, IFilter
     {
-        private PropertyInfo _propertyInfo;
-
+        /// <inheritdoc />
         /// <summary>
-        /// Occurs when the filter has changed and the IsMatch logic has been affected.
-        /// </summary>
-        public event EventHandler FilteringChanged = delegate { };
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Filter"/> class.
+        /// Initializes a new instance of the <see cref="T:My.CoachManager.Presentation.Prism.Core.Filters.Filter" /> class.
         /// </summary>
         /// <param name="propertyInfo">The property info.</param>
         protected Filter(PropertyInfo propertyInfo)
@@ -25,25 +20,14 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             {
                 throw new ArgumentNullException("propertyInfo");
             }
-            _propertyInfo = propertyInfo;
-        }
-
-        /// <summary>
-        /// Raises the filtering changed event.
-        /// </summary>
-        protected void RaiseFilteringChanged()
-        {
-            FilteringChanged(this, EventArgs.Empty);
+            PropertyInfo = propertyInfo;
         }
 
         /// <summary>
         /// Gets the property info whose property name is filtered
         /// </summary>
         /// <value>The property info.</value>
-        public PropertyInfo PropertyInfo
-        {
-            get { return _propertyInfo; }
-        }
+        public PropertyInfo PropertyInfo { get; }
 
         /// <summary>
         /// Determines whether the specified target is a match.

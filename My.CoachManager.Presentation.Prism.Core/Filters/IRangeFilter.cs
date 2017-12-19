@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
@@ -7,8 +6,8 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
     /// Defines the contract for a range filter
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IRangeFilter<T> : IFilter<T>, INotifyPropertyChanged
-        where T :IComparable
+    public interface IRangeFilter<T> : IFilter<T>
+        where T : IComparable
     {
         /// <summary>
         /// Gets or sets the minimum value.
@@ -25,24 +24,6 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// </summary>
         /// <value>To.</value>
         T To
-        {
-            get;
-            set;
-        }
-    }
-
-    /// <summary>
-    /// Defines the contract for a compare filter
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public interface ICompareFilter<T> : IFilter<T>
-        where T : IComparable
-    {
-        /// <summary>
-        /// Gets or sets the value used in the comparison.
-        /// </summary>
-        /// <value>The compare to.</value>
-        T CompareTo
         {
             get;
             set;

@@ -9,25 +9,25 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
     /// Defines the logic for equality filter
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class EqualFilter<T> : Filter, IMultiValueFilter<T>
+    public class EqualMultiValuesFilter<T> : Filter, IMultiValueFilter<T>
     {
         /// <summary>
         /// Available values to check for equality
         /// </summary>
-        private ObservableCollection<T> _values = new ObservableCollection<T>();
+        private readonly ObservableCollection<T> _values = new ObservableCollection<T>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EqualFilter&lt;T&gt;"/> class.
+        /// Initializes a new instance of the <see cref="EqualMultiValuesFilter&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="propertyInfo">The property info.</param>
-        public EqualFilter(PropertyInfo propertyInfo)
+        public EqualMultiValuesFilter(PropertyInfo propertyInfo)
             : base(propertyInfo)
         {
             if (propertyInfo.PropertyType != typeof(T))
             {
                 throw new ArgumentException("Invalid property type, the return type is not matching the class generic type");
             }
-            _values.CollectionChanged += delegate { RaiseFilteringChanged(); };
+            _values.CollectionChanged += delegate { RaisePropertyChanged(() => Values); };
         }
 
         /// <summary>

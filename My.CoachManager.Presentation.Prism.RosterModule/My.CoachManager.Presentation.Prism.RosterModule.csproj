@@ -92,6 +92,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Enums\PresetColumnsType.cs" />
+    <Compile Include="Filters\CategoryFilter.cs" />
     <Compile Include="Resources\Strings\PresetColumnsTypeResources.Designer.cs">
       <DependentUpon>PresetColumnsTypeResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>

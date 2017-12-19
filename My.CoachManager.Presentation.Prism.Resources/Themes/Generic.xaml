@@ -2,7 +2,7 @@
 
     <ResourceDictionary.MergedDictionaries>
 
-        <ResourceDictionary Source="Theme/DarkBlue.xaml" />
+        <ResourceDictionary Source="Theme/Dark.xaml" />
         <ResourceDictionary Source="Theme/Accents/Red.xaml" />
         <ResourceDictionary Source="Theme.xaml" />
 
@@ -49,5 +49,8 @@
         <ResourceDictionary Source="Controls/Window.xaml" />
         <ResourceDictionary Source="Controls/WorkspaceDialog.xaml" />
         <ResourceDictionary Source="Controls/WorkspaceView.xaml" />
+
+        <!-- Specific -->
+        <ResourceDictionary Source="Specific/Filter.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -1,18 +1,15 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Reflection;
+using My.CoachManager.Presentation.Prism.Core.ViewModels;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
     /// <summary>
     /// Defines the contract for a filter used by the FilteredCollection
     /// </summary>
-    public interface IFilter
+    public interface IFilter : IViewModel, INotifyPropertyChanged
     {
-        /// <summary>
-        /// Occurs when the filter has changed and the IsMatch logic has been affected.
-        /// </summary>
-        event EventHandler FilteringChanged;
-
         /// <summary>
         /// Gets the property info.
         /// </summary>

@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Filters;
 using My.CoachManager.Presentation.Prism.Core.Services;
@@ -33,7 +36,9 @@ namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
         private readonly IRosterService _rosterService;
         private ObservableCollection<string> _displayedColumns;
         private Dictionary<PresetColumnsType, string[]> _presetColumns;
-        private StringFilter _speedFilter;
+        private IEnumerable<CategoryViewModel> _allCategories;
+        private IEnumerable<CountryViewModel> _allCountries;
+        private IEnumerable<CityViewModel> _allCities;
 
         #endregion Fields
 
@@ -63,14 +68,35 @@ namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
         public DelegateCommand<PresetColumnsType?> ChangeDisplayedColumnsCommand { get; set; }
 
         /// <summary>
-        /// Gets or sets the filter for speed Search.
+        /// Gets or sets categories.
         /// </summary>
-        public StringFilter SpeedFilter
+        public IEnumerable<CategoryViewModel> AllCategories
         {
-            get { return _speedFilter; }
+            get { return _allCategories; }
+            set { SetProperty(ref _allCategories, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets countries.
+        /// </summary>
+        public IEnumerable<CountryViewModel> AllCountries
+        {
+            get { return _allCountries; }
             set
             {
-                SetProperty(ref _speedFilter, value);
+                SetProperty(ref _allCountries, value);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets cities.
+        /// </summary>
+        public IEnumerable<CityViewModel> AllCities
+        {
+            get { return _allCities; }
+            set
+            {
+                SetProperty(ref _allCities, value);
             }
         }
 
@@ -88,28 +114,30 @@ namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
 
             Title = RosterResources.PlayersTitle;
 
-            PresetColumns = new Dictionary<PresetColumnsType, string[]>();
-            PresetColumns.Add(PresetColumnsType.GeneralInformations, GeneralInformationsColumns);
-            PresetColumns.Add(PresetColumnsType.ClubInformations, ClubInformationsColumns);
-            PresetColumns.Add(PresetColumnsType.BodyInformations, BodyInformationsColumns);
+            PresetColumns = new Dictionary<PresetColumnsType, string[]>
+            {
+                {PresetColumnsType.GeneralInformations, GeneralInformationsColumns},
+                {PresetColumnsType.ClubInformations, ClubInformationsColumns},
+                {PresetColumnsType.BodyInformations, BodyInformationsColumns}
+            };
 
             ChangeDisplayedColumnsCommand = new DelegateCommand<PresetColumnsType?>(ChangeDisplayedColumns);
 
-            SpeedFilter = new StringFilter(typeof(PlayerDetailViewModel).GetProperty("FullName"), StringFilterMode.Contains);
-            SpeedFilter.FilteringChanged += SpeedFilter_FilteringChanged;
-        }
+            SpeedFilter = new StringFilter(typeof(PlayerDetailViewModel).GetProperty("FullName"));
+            SpeedFilter.PropertyChanged += SpeedFilter_FilteringChanged;
 
-        private void SpeedFilter_FilteringChanged(object sender, System.EventArgs e)
-        {
-            if (SpeedFilter.Value != "")
-            {
-                FilteredItems.AddFilter(SpeedFilter);
-            }
-            else
-            {
-                FilteredItems.RemoveFilter(SpeedFilter);
-            }
-            RaisePropertyChanged(() => FilteredItems);
+            Filters = new ObservableCollection<FilterViewModel>();
+
+            _allFilters.Add("FullName", typeof(StringFilter));
+            _allFilters.Add("Number", typeof(IntegerCompareFilter));
+            _allFilters.Add("Category", typeof(StringFilter));
+
+            Filters.Add(GetFilter("FullName"));
+            Filters.Add(GetFilter("Number"));
+            Filters.Add(GetFilter("Category"));
+
+            AddFilterCommand = new DelegateCommand<string>(AddFilter, CanAddFilter);
+            RemoveFilterCommand = new DelegateCommand<string>(RemoveFilter, CanRemoveFilter);
         }
 
         #endregion Constructors
@@ -123,6 +151,13 @@ namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
         protected override void LoadDataCore(bool isFirstLoading = false)
         {
             var result = _rosterService.GetPlayers(1);
+            AllCategories = _adminService.GetCategoriesForPlayer().ToViewModels<CategoryViewModel>();
+            AllCountries = _adminService.GetCountriesForPlayer().ToViewModels<CountryViewModel>();
+            AllCities = _adminService.GetCitiesForPlayer().Select(c => new CityViewModel()
+            {
+                City = c.City,
+                PostalCode = c.PostalCode
+            }).ToArray();
 
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
@@ -149,5 +184,86 @@ namespace My.CoachManager.Presentation.Prism.RosterModule.ViewModels
         }
 
         #endregion Methods
+
+        private StringFilter _speedFilter;
+
+        /// <summary>
+        /// Gets or sets the filter for speed Search.
+        /// </summary>
+        public StringFilter SpeedFilter
+        {
+            get { return _speedFilter; }
+            set
+            {
+                SetProperty(ref _speedFilter, value);
+            }
+        }
+
+        private void SpeedFilter_FilteringChanged(object sender, EventArgs e)
+        {
+            if (SpeedFilter.Value != "")
+            {
+                FilteredItems.AddFilter(SpeedFilter);
+            }
+            else
+            {
+                FilteredItems.RemoveFilter(SpeedFilter);
+            }
+            RaisePropertyChanged(() => FilteredItems);
+        }
+
+        public DelegateCommand<string> AddFilterCommand { get; set; }
+        public DelegateCommand<string> RemoveFilterCommand { get; set; }
+
+        private ObservableCollection<FilterViewModel> _filters;
+
+        public ObservableCollection<FilterViewModel> Filters
+        {
+            get { return _filters; }
+            set { SetProperty(ref _filters, value); }
+        }
+
+        public Dictionary<string, Type> AllFilters
+        {
+            get { return _allFilters; }
+        }
+
+        private void AddFilter(string propertyName)
+        {
+            Filters.Add(GetFilter(propertyName));
+        }
+
+        private bool CanAddFilter(string propertyName)
+        {
+            return Filters.All(x => x.Filter.PropertyInfo.Name != propertyName);
+        }
+
+        private void RemoveFilter(string propertyName)
+        {
+            Filters.Remove(Filters.FirstOrDefault(x => x.Filter.PropertyInfo.Name == propertyName));
+        }
+
+        private bool CanRemoveFilter(string propertyName)
+        {
+            return Filters.Any(x => x.Filter.PropertyInfo.Name == propertyName);
+        }
+
+        private readonly Dictionary<string, Type> _allFilters = new Dictionary<string, Type>();
+
+        private FilterViewModel GetFilter(string propertyName)
+        {
+            var typeFilter = _allFilters[propertyName];
+            var propertyInfo = typeof(PlayerDetailViewModel).GetProperty(propertyName);
+            if (propertyInfo != null && typeFilter != null)
+            {
+                var filter = (IFilter)Activator.CreateInstance(typeFilter, propertyInfo);
+                var name = propertyInfo.GetDisplayName();
+                var title = !string.IsNullOrEmpty(name) ? name : propertyName;
+
+                return new FilterViewModel(title, filter);
+            }
+
+            return null;
+        }
     }
 }

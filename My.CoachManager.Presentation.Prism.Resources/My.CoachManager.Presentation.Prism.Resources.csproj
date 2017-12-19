@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.6.3.0\lib\net45\Prism.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Prism.Wpf, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\Prism.Wpf.dll</HintPath>
@@ -132,6 +136,7 @@
     <None Include="app.config" />
     <Resource Include="Fonts\Jersey M54.ttf" />
     <Resource Include="Fonts\DAGGERSQUARE.otf" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -607,6 +612,10 @@
     <Resource Include="Pictures\Countries\io.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Themes\Specific\Filter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Theme\Accents\Red.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

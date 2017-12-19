@@ -141,6 +141,9 @@
   <data name="FirstName" xml:space="preserve">
     <value>Prénom</value>
   </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
   <data name="Gender" xml:space="preserve">
     <value>Genre</value>
   </data>

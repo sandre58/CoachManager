@@ -133,6 +133,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nom.
+        /// </summary>
+        public static string FullName {
+            get {
+                return ResourceManager.GetString("FullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Genre.
         /// </summary>
         public static string Gender {

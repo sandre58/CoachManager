@@ -124,7 +124,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             if (!_filters.ContainsKey(filter.PropertyInfo.Name))
             {
                 _filters[filter.PropertyInfo.Name] = filter;
-                filter.FilteringChanged += OnFilterChanged;
+                filter.PropertyChanged += OnFilterChanged;
 
                 UpdateFilter();
             }
@@ -158,7 +158,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             if (_filters.ContainsKey(filter.PropertyInfo.Name))
             {
                 _filters.Remove(filter.PropertyInfo.Name);
-                filter.FilteringChanged -= OnFilterChanged;
+                filter.PropertyChanged -= OnFilterChanged;
 
                 UpdateFilter();
             }

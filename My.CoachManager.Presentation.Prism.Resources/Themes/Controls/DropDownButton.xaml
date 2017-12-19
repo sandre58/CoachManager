@@ -113,7 +113,7 @@
                                               VerticalScrollBarVisibility="Auto"
                                               BorderThickness="0">
                                     <Grid RenderOptions.ClearTypeHint="Enabled"  Background="{DynamicResource Light}">
-                                        <ContentControl Content="{TemplateBinding DropDownContent}"  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                        <ContentControl Content="{TemplateBinding DropDownContent}" Foreground="{DynamicResource NormalForeground}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                     </Grid>
                                 </ScrollViewer>
                             </Grid>

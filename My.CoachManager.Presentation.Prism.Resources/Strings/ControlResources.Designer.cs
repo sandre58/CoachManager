@@ -79,6 +79,15 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ajouter une condition.
+        /// </summary>
+        public static string AddCondition {
+            get {
+                return ResourceManager.GetString("AddCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ajouter un contact.
         /// </summary>
         public static string AddContact {

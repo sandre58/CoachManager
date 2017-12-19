@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Reflection;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
@@ -12,9 +11,6 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
     public class RangeFilter<T> : Filter, IRangeFilter<T>
         where T : IComparable
     {
-        private static readonly PropertyChangedEventArgs ArgsTo = new PropertyChangedEventArgs("To");
-        private static readonly PropertyChangedEventArgs ArgsFrom = new PropertyChangedEventArgs("From");
-
         /// <summary>
         /// Minimum value
         /// </summary>
@@ -24,11 +20,6 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// Maximum value
         /// </summary>
         private T _to;
-
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RangeFilter&lt;T&gt;"/> class.
@@ -76,20 +67,13 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             }
             set
             {
-                if (value == null)
+                SetProperty(ref _from, value, () =>
                 {
-                    throw new ArgumentNullException($"From");
-                }
-                if (_from.CompareTo(value) != 0)
-                {
-                    _from = value;
-                    if (value.CompareTo(_to) > 0)
+                    if (_from.CompareTo(_to) < 0)
                     {
                         To = _from;
                     }
-                    PropertyChanged(this, ArgsFrom);
-                    RaiseFilteringChanged();
-                }
+                });
             }
         }
 
@@ -105,20 +89,13 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             }
             set
             {
-                if (value == null)
+                SetProperty(ref _to, value, () =>
                 {
-                    throw new ArgumentNullException($"From");
-                }
-                if (_to.CompareTo(value) != 0)
-                {
-                    _to = value;
                     if (_to.CompareTo(_from) < 0)
                     {
                         From = _to;
                     }
-                    PropertyChanged(this, ArgsTo);
-                    RaiseFilteringChanged();
-                }
+                });
             }
         }
 
@@ -139,8 +116,6 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             T value = (T)PropertyInfo.GetValue(target, null);
 
             bool result = (value.CompareTo(_from) >= 0 && value.CompareTo(_to) <= 0);
-            Debug.WriteLine("Element:{0}", target);
-            Debug.WriteLine(" {0} ?<= {1} ?<= {2} : {3}", _from, value, _to, result);
             return result;
         }
     }
