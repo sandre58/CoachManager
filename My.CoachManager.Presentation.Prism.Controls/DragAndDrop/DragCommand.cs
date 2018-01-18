@@ -1,7 +1,7 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
-using My.CoachManager.Presentation.Prism.Core.Behaviours;
+using My.CoachManager.Presentation.Prism.Core.DragAndDrop;
 
 namespace My.CoachManager.Presentation.Prism.Controls.DragAndDrop
 {

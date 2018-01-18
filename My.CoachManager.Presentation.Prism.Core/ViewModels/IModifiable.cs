@@ -1,6 +1,6 @@
 ﻿namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public interface IModificable
+    public interface IModifiable
     {
         /// <summary>
         /// Gets if the object is modified.

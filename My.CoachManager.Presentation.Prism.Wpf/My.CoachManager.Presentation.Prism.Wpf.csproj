@@ -77,32 +77,68 @@
     <Compile Include="Interactivity\NotificationPopupAction.cs" />
     <Compile Include="Interactivity\WindowDialogAction.cs" />
     <Compile Include="Interactivity\WorkspaceDialogAction.cs" />
+    <Compile Include="Resources\Strings\SkinResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SkinResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="ViewModels\IMessageViewModel.cs" />
-    <Compile Include="ViewModels\ILoginViewModel.cs" />
     <Compile Include="ViewModels\IShellViewModel.cs" />
-    <Compile Include="ViewModels\ISplashScreenViewModel.cs" />
     <Compile Include="ViewModels\MessageViewModel.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Compile Include="Views\LoginContent.xaml.cs">
-      <DependentUpon>LoginContent.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\MessageContent.xaml.cs">
       <DependentUpon>MessageContent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WindowDialog.xaml.cs">
       <DependentUpon>WindowDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SplashScreen.xaml.cs">
-      <DependentUpon>SplashScreen.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Views\LoginContent.xaml">
+    <Page Include="Skins\Accent\Green.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Accent\Azur.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Accent\Pink.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Accent\Orange.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Accent\Yellow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Accent\Blue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Accent\Purple.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Accent\Red.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Theme\Dark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Theme\DarkBlue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Theme\Light.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -119,15 +155,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="ViewModels\SplashScreenViewModel.cs" />
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\SplashScreen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -146,6 +177,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings\SkinResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SkinResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="NLog.config">
       <SubType>Designer</SubType>
@@ -180,9 +215,13 @@
       <Project>{381d433d-9f76-4286-b0f5-7209e477b22b}</Project>
       <Name>My.CoachManager.CrossCutting.Logging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.AdministrationModule\My.CoachManager.Presentation.Prism.AdministrationModule.csproj">
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.About\My.CoachManager.Presentation.Prism.Modules.About.csproj">
+      <Project>{ff4df0df-34c2-4de3-9dc6-acfdff36d63e}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Modules.About</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Administration\My.CoachManager.Presentation.Prism.Modules.Administration.csproj">
       <Project>{4ca93004-d321-4897-a8ad-ef368d5bd57e}</Project>
-      <Name>My.CoachManager.Presentation.Prism.AdministrationModule</Name>
+      <Name>My.CoachManager.Presentation.Prism.Modules.Administration</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Controls\My.CoachManager.Presentation.Prism.Controls.csproj">
       <Project>{a554f212-3f08-4aef-b9aa-fa01a7491a7f}</Project>
@@ -192,25 +231,49 @@
       <Project>{3f11e745-d328-4654-a3c9-4bfc9bf6b9ab}</Project>
       <Name>My.CoachManager.Presentation.Prism.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.HomeModule\My.CoachManager.Presentation.Prism.HomeModule.csproj">
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Home\My.CoachManager.Presentation.Prism.Modules.Home.csproj">
       <Project>{b72a3d9c-efa7-43a8-a01e-cdeeb9f59c28}</Project>
-      <Name>My.CoachManager.Presentation.Prism.HomeModule</Name>
+      <Name>My.CoachManager.Presentation.Prism.Modules.Home</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Manager\My.CoachManager.Presentation.Prism.Manager.csproj">
-      <Project>{62955117-2937-47c4-9b42-fc8a0aab72a6}</Project>
-      <Name>My.CoachManager.Presentation.Prism.Manager</Name>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Login.Core\My.CoachManager.Presentation.Prism.Modules.Login.Core.csproj">
+      <Project>{A49A8323-1233-4728-ABBC-7DB09771383D}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Modules.Login.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Login\My.CoachManager.Presentation.Prism.Modules.Login.csproj">
+      <Project>{7A531799-AB21-4D25-BAEA-B4342A100410}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Modules.Login</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Settings\My.CoachManager.Presentation.Prism.Modules.Settings.csproj">
+      <Project>{d1aefa38-9e4d-4894-bde2-c69dcda711cf}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Modules.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.SplashScreen.Core\My.CoachManager.Presentation.Prism.Modules.SplashScreen.Core.csproj">
+      <Project>{123C2AED-3BA6-4CA2-8C3C-C68EC7CBE8D7}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Modules.SplashScreen.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.SplashScreen\My.CoachManager.Presentation.Prism.Modules.SplashScreen.csproj">
+      <Project>{79229C80-ABBD-43F5-A0F9-1CB5DFCCBA2B}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Modules.SplashScreen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.StatusBar.Core\My.CoachManager.Presentation.Prism.Modules.StatusBar.Core.csproj">
+      <Project>{F33E2854-108F-4AE6-A81C-B8F9BB41337D}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Modules.StatusBar.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Resources\My.CoachManager.Presentation.Prism.Resources.csproj">
       <Project>{2d290fd9-5b64-4af4-a295-2b4cde6eb330}</Project>
       <Name>My.CoachManager.Presentation.Prism.Resources</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.RosterModule\My.CoachManager.Presentation.Prism.RosterModule.csproj">
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Roster\My.CoachManager.Presentation.Prism.Modules.Roster.csproj">
       <Project>{f52d4433-de0a-4e5e-89d1-05ba575c5bba}</Project>
-      <Name>My.CoachManager.Presentation.Prism.RosterModule</Name>
+      <Name>My.CoachManager.Presentation.Prism.Modules.Roster</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.StatusBarModule\My.CoachManager.Presentation.Prism.StatusBarModule.csproj">
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.StatusBar\My.CoachManager.Presentation.Prism.Modules.StatusBar.csproj">
       <Project>{fa8b3d6e-f685-42bb-8225-20a4037a97bd}</Project>
-      <Name>My.CoachManager.Presentation.Prism.StatusBarModule</Name>
+      <Name>My.CoachManager.Presentation.Prism.Modules.StatusBar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.SkinManager\My.CoachManager.Presentation.Prism.SkinManager.csproj">
+      <Project>{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}</Project>
+      <Name>My.CoachManager.Presentation.Prism.SkinManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.ViewModels\My.CoachManager.Presentation.Prism.ViewModels.csproj">
       <Project>{EEC17382-357C-4CD4-B493-23659FEE0E94}</Project>

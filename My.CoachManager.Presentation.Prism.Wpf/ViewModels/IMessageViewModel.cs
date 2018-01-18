@@ -1,5 +1,5 @@
-﻿using My.CoachManager.Presentation.Prism.Core.Interactivity;
-using My.CoachManager.Presentation.Prism.Core.ViewModels;
+﻿using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 
 namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 {

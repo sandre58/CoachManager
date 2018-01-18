@@ -10,7 +10,7 @@ using Prism.Mvvm;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public abstract class ViewModelBase : BindableBase, IViewModel, IValidatable, IModificable
+    public abstract class ViewModelBase : BindableBase, IViewModel, IValidatable, IModifiable
     {
         #region Constructors and Destructors
 

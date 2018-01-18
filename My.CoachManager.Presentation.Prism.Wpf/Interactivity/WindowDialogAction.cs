@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Interactivity;
-using My.CoachManager.Presentation.Prism.Core.Interactivity.InteractionRequest;
+using My.CoachManager.Presentation.Prism.Core;
+using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Modules.Login.Core;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using My.CoachManager.Presentation.Prism.Wpf.Views;
 using Prism.Interactivity.InteractionRequest;
@@ -9,7 +11,7 @@ using Prism.Interactivity.InteractionRequest;
 namespace My.CoachManager.Presentation.Prism.Wpf.Interactivity
 {
     /// <summary>
-    /// Shows a popup window in response to an <see cref="My.CoachManager.Presentation.Prism.Core.Interactivity.InteractionRequest"/> being raised.
+    /// Shows a popup window in response to an <see cref="InteractionRequest{T}"/> being raised.
     /// </summary>
     public class WindowDialogAction : TriggerAction<FrameworkElement>
     {
@@ -241,7 +243,9 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Interactivity
                 }
                 else if (dialog.Context is ILoginViewModel)
                 {
-                    content = new LoginContent((ILoginViewModel)dialog.Context);
+                    var view = Locator.GetInstance<ILoginView>();
+                    view.Model = (ILoginViewModel)dialog.Context;
+                    content = view;
                 }
                 else
                 {

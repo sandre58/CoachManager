@@ -2,13 +2,13 @@
 using System.Windows;
 using System.Windows.Interactivity;
 using My.CoachManager.Presentation.Prism.Controls;
-using My.CoachManager.Presentation.Prism.Core.Interactivity.InteractionRequest;
+using My.CoachManager.Presentation.Prism.Core.Dialog;
 using Prism.Interactivity.InteractionRequest;
 
 namespace My.CoachManager.Presentation.Prism.Wpf.Interactivity
 {
     /// <summary>
-    /// Shows a popup window in response to an <see cref="My.CoachManager.Presentation.Prism.Core.Interactivity.InteractionRequest"/> being raised.
+    /// Shows a popup window in response to an <see cref="InteractionRequest{T}"/> being raised.
     /// </summary>
     public class WorkspaceDialogAction : TriggerAction<FrameworkElement>
     {

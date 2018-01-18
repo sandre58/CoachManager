@@ -1,0 +1,128 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
+                    xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
+                    xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Core.ViewModels;assembly=My.CoachManager.Presentation.Prism.Core"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:converters="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Converters"
+                    xmlns:screens="clr-namespace:My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;assembly=My.CoachManager.Presentation.Prism.Core"
+                    mc:Ignorable="d">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Base/Converters.xaml" />
+        <ResourceDictionary Source="../Base/Geometry.xaml" />
+        <ResourceDictionary Source="../Base/Margins.xaml" />
+        <ResourceDictionary Source="../Controls/TextBlock.xaml" />
+        <ResourceDictionary Source="../Controls/Icon.xaml" />
+        <ResourceDictionary Source="../Controls/ApplicationBar.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate x:Key="DefaultWorkspaceDialogViewHeaderTemplate" DataType="screens:WorkspaceDialogViewModel">
+        <Grid>
+
+            <Grid.Resources>
+                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource HeaderStyle}" />
+                <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
+                    <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
+                </Style>
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <controls:Icon x:Name="Icon" Width="40" Height="40" Size="Custom" Content="{StaticResource ChevronRightGeometry}" Grid.Column="0" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Center"
+                            Style="{StaticResource EllipseIconBaseStyle}"
+                           OverlayBackground="{DynamicResource HeaderForeground}" />
+            <TextBlock Grid.Column="1" Text="{Binding Title}" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Center" />
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Mode}" Value="{x:Static screens:ScreenMode.Creation}">
+                <Setter TargetName="Icon" Property="Content" Value="{StaticResource AddGeometry}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Mode}" Value="{x:Static screens:ScreenMode.Edition}">
+                <Setter TargetName="Icon" Property="Content" Value="{StaticResource EditGeometry}" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <Style TargetType="{x:Type controls:WorkspaceView}">
+        <Setter Property="MinWidth" Value="320" />
+        <Setter Property="MinHeight" Value="320" />
+        <Setter Property="HeaderHeight" Value="100" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="ApplicationBarStyle" Value="{StaticResource {x:Type controls:ApplicationBar}}" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:WorkspaceView}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Header -->
+                        <Grid Grid.Row="0" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HeaderHeight}" Visibility="{TemplateBinding HeaderTemplate, Converter={StaticResource NullToVisibilityConverter}}">
+                            <Border Padding="0,0,0,15" Background="{TemplateBinding HeaderBackground}" Focusable="False">
+                                <ContentControl Margin="{StaticResource LargeHorizontalMargin}" Content="{Binding}" ContentTemplate="{TemplateBinding HeaderTemplate}" VerticalAlignment="Bottom">
+                                    <ContentControl.Resources>
+                                        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource HeaderStyle}" />
+                                        <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
+                                            <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
+                                        </Style>
+                                    </ContentControl.Resources>
+                                </ContentControl>
+                            </Border>
+                        </Grid>
+
+                        <!-- Content -->
+                        <ScrollViewer Grid.Row="1"  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" Margin="{StaticResource DefaultMargin}">
+                            <ContentPresenter />
+                        </ScrollViewer>
+
+                        <!-- Loading -->
+                        <Border x:Name="Loader"  Grid.Row="1" Background="{DynamicResource LightVariation4}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
+                            <Grid>
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <controls:ProgressRing Width="70" Height="70" />
+                                    <TextBlock Style="{StaticResource HeaderStyle}" Foreground="{DynamicResource DarkAccent}" Text="{x:Static strings:MessageResources.Loading}" Margin="{StaticResource LargeVerticalMargin}" FontStyle="Italic" Visibility="Collapsed" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- Commands -->
+                        <controls:ApplicationBar Grid.Row="2" Grid.Column="0" ItemsSource="{TemplateBinding Commands}" Style="{TemplateBinding ApplicationBarStyle}" Visibility="{TemplateBinding Commands, Converter={StaticResource AnyToVisibilityConverter}}" />
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Value="True">
+                            <DataTrigger.Binding>
+                                <Binding Path="State" Converter="{StaticResource EnumToBooleanConverter}">
+                                    <Binding.ConverterParameter>
+                                        <converters:EnumCollection>
+                                            <x:Static Member="screens:ScreenState.Loading" />
+                                            <x:Static Member="screens:ScreenState.Saving" />
+                                        </converters:EnumCollection>
+                                    </Binding.ConverterParameter>
+                                </Binding>
+                            </DataTrigger.Binding>
+                            <Setter TargetName="Loader" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="WorkspaceDialogViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource {x:Type controls:WorkspaceView}}">
+        <Setter Property="HeaderHeight" Value="70" />
+        <Setter Property="HeaderBackground" Value="{DynamicResource DarkVariation1}" />
+        <Setter Property="HeaderTemplate" Value="{StaticResource DefaultWorkspaceDialogViewHeaderTemplate}" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+    </Style>
+</ResourceDictionary>

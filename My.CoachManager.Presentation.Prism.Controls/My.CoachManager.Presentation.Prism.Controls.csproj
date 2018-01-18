@@ -92,9 +92,27 @@
     <Compile Include="Behaviours\StylizedBehaviorCollection.cs" />
     <Compile Include="Behaviours\StylizedBehaviors.cs" />
     <Compile Include="CommandButton.cs" />
+    <Compile Include="Commands\SystemCommands.cs" />
     <Compile Include="DropDownButton.cs" />
     <Compile Include="DropDownMenuButton.cs" />
     <Compile Include="ExtendedDataGrid.cs" />
+    <Compile Include="Flyout.cs" />
+    <Compile Include="FlyoutsControl.cs" />
+    <Compile Include="Flyouts\FlyoutTheme.cs" />
+    <Compile Include="Flyouts\Position.cs" />
+    <Compile Include="Helpers\DpiHelper.cs" />
+    <Compile Include="IThumb.cs" />
+    <Compile Include="ExtendedThumb.cs" />
+    <Compile Include="Native\NativeConstants.cs" />
+    <Compile Include="ThumbContentControl.cs" />
+    <Compile Include="Native\ErrorCodes.cs" />
+    <Compile Include="Native\UnsafeNativeMethods.cs" />
+    <Compile Include="Native\SafeLibraryHandle.cs" />
+    <Compile Include="Windows\CloseCommand.cs" />
+    <Compile Include="Windows\ClosingWindowEventHandlerArgs.cs" />
+    <Compile Include="WindowButtonCommands.cs" />
+    <Compile Include="WindowCommands.cs" />
+    <Compile Include="Windows\WindowCommandsOverlayBehavior.cs" />
     <Compile Include="NumericUpDowns\NumericUpDownChangedRoutedEventHandler.cs" />
     <Compile Include="ToggleCommandButton.cs" />
     <Compile Include="ExtendedContentControl.cs" />
@@ -177,6 +195,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Windows\ProcessDpiAwareness.cs" />
+    <Compile Include="Windows\PropertyChangeNotifier.cs" />
+    <Compile Include="Windows\SideAlignement.cs" />
     <Compile Include="WorkspaceDialog.cs" />
     <Compile Include="WorkspaceView.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

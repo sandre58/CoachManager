@@ -5,7 +5,8 @@
         public const string WorkspaceRegion = "WorkspaceRegion";
         public const string NavigationRegion = "NavigationRegion";
         public const string StatusBarRegion = "StatusBarRegion";
-
-        public const string RosterTabRegion = "RosterTabRegion";
+        public const string SettingsRegion = "SettingsRegion";
+        public const string ToolbarRegion = "ToolbarRegion";
+        public const string FlyoutsRegion = "FlyoutsRegion";
     }
 }

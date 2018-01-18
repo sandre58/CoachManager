@@ -1,7 +1,7 @@
 ﻿using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Presentation.Prism.Core.Interactivity;
+using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Services;
-using My.CoachManager.Presentation.Prism.Core.ViewModels;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using Prism.Commands;
 using Prism.Events;
 
@@ -79,7 +79,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         public MessageViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
             : base(dialogService, eventAggregator, logger)
         {
-            OkCommand = new DelegateCommand(() => Close());
+            OkCommand = new DelegateCommand(() => Close(DialogResult.Ok));
             CancelCommand = new DelegateCommand(() => Close(DialogResult.Cancel));
             YesCommand = new DelegateCommand(() => Close(DialogResult.Yes));
             NoCommand = new DelegateCommand(() => Close(DialogResult.No));

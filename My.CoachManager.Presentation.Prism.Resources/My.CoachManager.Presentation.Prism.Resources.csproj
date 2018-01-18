@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\AnyToVisibilityConverter.cs" />
+    <Compile Include="Converters\BackgroundToForegroundConverter.cs" />
     <Compile Include="Converters\BooleanToFontWeightConverter.cs" />
     <Compile Include="Converters\NotEqualToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
@@ -71,6 +72,9 @@
     <Compile Include="Converters\NullToBooleanConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\ObjectToPropertyConverter.cs" />
+    <Compile Include="Converters\ResizeModeMinMaxButtonVisibilityConverter.cs" />
+    <Compile Include="Converters\StringToAccentConverter.cs" />
+    <Compile Include="Converters\StringToThemeConverter.cs" />
     <Compile Include="Converters\ThicknessToDoubleConverter.cs" />
     <Compile Include="Converters\ToFirstLetterUpperConverter.cs" />
     <Compile Include="Converters\ToFormatConverter.cs" />
@@ -612,207 +616,215 @@
     <Resource Include="Pictures\Countries\io.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Themes\Specific\Filter.xaml">
+    <Page Include="Styles\Base\Brushes.Accent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Theme\Accents\Red.xaml">
+    <Page Include="Styles\Base\Brushes.Theme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Theme\Accents\Blue.xaml">
+    <Page Include="Styles\Controls\Flyout.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Theme\Accents\Azur.xaml">
+    <Page Include="Styles\Controls\FlyoutsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Base\Converters.xaml">
+    <Page Include="Styles\Controls\Thumb.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Base\Shadows.xaml">
+    <Page Include="Styles\Controls\WindowCommands.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Base\Images.xaml">
+    <Page Include="Styles\Specific\Filter.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Base\Margins.xaml">
+    <Page Include="Styles\Skin\Accent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Base\Geometry.xaml">
+    <Page Include="Styles\Base\Converters.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Base\Fonts.xaml">
+    <Page Include="Styles\Base\Shadows.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Base\Sizes.xaml">
+    <Page Include="Styles\Base\Images.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\ToggleButton.xaml">
+    <Page Include="Styles\Base\Margins.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\DropDownButton.xaml">
+    <Page Include="Styles\Base\Geometry.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\Hyperlink.xaml">
+    <Page Include="Styles\Base\Fonts.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\TabControl.xaml">
+    <Page Include="Styles\Base\Sizes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\PasswordBox.xaml">
+    <Page Include="Styles\Controls\ToggleButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\ApplicationBar.xaml">
+    <Page Include="Styles\Controls\DropDownButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\ImagePicker.xaml">
+    <Page Include="Styles\Controls\Hyperlink.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\Calendar.xaml">
+    <Page Include="Styles\Controls\TabControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\Combobox.xaml">
+    <Page Include="Styles\Controls\PasswordBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\Checkbox.xaml">
+    <Page Include="Styles\Controls\ApplicationBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\ProgressBar.xaml">
+    <Page Include="Styles\Controls\ImagePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\RadioButton.xaml">
+    <Page Include="Styles\Controls\Calendar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\DatePicker.xaml">
+    <Page Include="Styles\Controls\Combobox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\Tooltip.xaml">
+    <Page Include="Styles\Controls\Checkbox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\ToggleCommandButton.xaml">
+    <Page Include="Styles\Controls\ProgressBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\Separator.xaml">
+    <Page Include="Styles\Controls\RadioButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\ProgressRing.xaml">
+    <Page Include="Styles\Controls\DatePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\CommandButton.xaml">
+    <Page Include="Styles\Controls\Tooltip.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\ContextMenu.xaml">
+    <Page Include="Styles\Controls\ToggleCommandButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\ContentControl.xaml">
+    <Page Include="Styles\Controls\Separator.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\Popup.xaml">
+    <Page Include="Styles\Controls\ProgressRing.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\NumericUpDown.xaml">
+    <Page Include="Styles\Controls\CommandButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\Storyboard.xaml">
+    <Page Include="Styles\Controls\ContextMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\TextBox.xaml">
+    <Page Include="Styles\Controls\ContentControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\Validation.xaml">
+    <Page Include="Styles\Controls\Popup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\WorkspaceDialog.xaml">
+    <Page Include="Styles\Controls\NumericUpDown.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\WorkspaceView.xaml">
+    <Page Include="Styles\Controls\Storyboard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\ScrollBar.xaml">
+    <Page Include="Styles\Controls\TextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\Button.xaml">
+    <Page Include="Styles\Controls\Validation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\DataGrid.xaml">
+    <Page Include="Styles\Controls\WorkspaceDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\Icon.xaml">
+    <Page Include="Styles\Controls\WorkspaceView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\Menu.xaml">
+    <Page Include="Styles\Controls\ScrollBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\Window.xaml">
+    <Page Include="Styles\Controls\Button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\TextBlock.xaml">
+    <Page Include="Styles\Controls\DataGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Theme\DarkBlue.xaml">
+    <Page Include="Styles\Controls\Icon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Theme\Light.xaml">
+    <Page Include="Styles\Controls\Menu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Generic.xaml">
+    <Page Include="Styles\Controls\Window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Base\Colors.xaml">
+    <Page Include="Styles\Controls\TextBlock.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Theme\Dark.xaml">
+    <Page Include="Styles\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Theme.xaml">
+    <Page Include="Styles\Base\Colors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Skin\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Base\Brushes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -829,6 +841,10 @@
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Core\My.CoachManager.Presentation.Prism.Core.csproj">
       <Project>{3f11e745-d328-4654-a3c9-4bfc9bf6b9ab}</Project>
       <Name>My.CoachManager.Presentation.Prism.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.SkinManager\My.CoachManager.Presentation.Prism.SkinManager.csproj">
+      <Project>{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}</Project>
+      <Name>My.CoachManager.Presentation.Prism.SkinManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.ViewModels\My.CoachManager.Presentation.Prism.ViewModels.csproj">
       <Project>{EEC17382-357C-4CD4-B493-23659FEE0E94}</Project>
