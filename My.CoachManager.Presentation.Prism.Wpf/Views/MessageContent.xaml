@@ -6,10 +6,12 @@
         xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
         xmlns:prism="http://prismlibrary.com/"
         xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings;assembly=My.CoachManager.Presentation.Prism.Resources"
-        xmlns:enums="clr-namespace:My.CoachManager.Presentation.Prism.Core.Interactivity;assembly=My.CoachManager.Presentation.Prism.Core"
         xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.ViewModels"
-             prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:dialog="clr-namespace:My.CoachManager.Presentation.Prism.Core.Dialog;assembly=My.CoachManager.Presentation.Prism.Core"
+        prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
+             Width="550"
+             Height="240"
         d:DataContext="{d:DesignInstance Type=viewModels:MessageViewModel}">
 
     <Grid FocusManager.FocusedElement="{Binding ElementName=BtnYes}">
@@ -28,27 +30,27 @@
                     <controls:Icon.Style>
                         <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Style}" Value="{x:Static enums:MessageDialogStyle.Information}">
+                                <DataTrigger Binding="{Binding Style}" Value="{x:Static dialog:MessageDialogStyle.Information}">
                                     <Setter Property="Content" Value="{StaticResource InformationGeometry}" />
                                     <Setter Property="Foreground" Value="{DynamicResource Information}" />
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Style}" Value="{x:Static enums:MessageDialogStyle.Error}">
+                                <DataTrigger Binding="{Binding Style}" Value="{x:Static dialog:MessageDialogStyle.Error}">
                                     <Setter Property="Content" Value="{StaticResource ErrorGeometry}" />
                                     <Setter Property="Foreground" Value="{DynamicResource Negative}" />
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Style}" Value="{x:Static enums:MessageDialogStyle.Question}">
+                                <DataTrigger Binding="{Binding Style}" Value="{x:Static dialog:MessageDialogStyle.Question}">
                                     <Setter Property="Content" Value="{StaticResource InformationGeometry}" />
                                     <Setter Property="Foreground" Value="{DynamicResource Information}" />
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Style}" Value="{x:Static enums:MessageDialogStyle.QuestionWithCancel}">
+                                <DataTrigger Binding="{Binding Style}" Value="{x:Static dialog:MessageDialogStyle.QuestionWithCancel}">
                                     <Setter Property="Content" Value="{StaticResource InformationGeometry}" />
                                     <Setter Property="Foreground" Value="{DynamicResource Information}" />
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Style}" Value="{x:Static enums:MessageDialogStyle.Warning}">
+                                <DataTrigger Binding="{Binding Style}" Value="{x:Static dialog:MessageDialogStyle.Warning}">
                                     <Setter Property="Content" Value="{StaticResource WarningGeometry}" />
                                     <Setter Property="Foreground" Value="{DynamicResource Warning}" />
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Style}" Value="{x:Static enums:MessageDialogStyle.Success}">
+                                <DataTrigger Binding="{Binding Style}" Value="{x:Static dialog:MessageDialogStyle.Success}">
                                     <Setter Property="Content" Value="{StaticResource SuccessGeometry}" />
                                     <Setter Property="Foreground" Value="{DynamicResource Positive}" />
                                 </DataTrigger>
@@ -68,9 +70,9 @@
                 <Button.Visibility>
                     <Binding Path="Type" Converter="{StaticResource EnumToVisibilityConverter}">
                         <Binding.ConverterParameter>
-                            <x:Array Type="{x:Type enums:MessageDialogType}">
-                                <x:Static Member="enums:MessageDialogType.YesNo" />
-                                <x:Static Member="enums:MessageDialogType.YesNoCancel" />
+                            <x:Array Type="{x:Type dialog:MessageDialogType}">
+                                <x:Static Member="dialog:MessageDialogType.YesNo" />
+                                <x:Static Member="dialog:MessageDialogType.YesNoCancel" />
                             </x:Array>
                         </Binding.ConverterParameter>
                     </Binding>
@@ -80,9 +82,9 @@
                 <Button.Visibility>
                     <Binding Path="Type" Converter="{StaticResource EnumToVisibilityConverter}">
                         <Binding.ConverterParameter>
-                            <x:Array Type="{x:Type enums:MessageDialogType}">
-                                <x:Static Member="enums:MessageDialogType.YesNo" />
-                                <x:Static Member="enums:MessageDialogType.YesNoCancel" />
+                            <x:Array Type="{x:Type dialog:MessageDialogType}">
+                                <x:Static Member="dialog:MessageDialogType.YesNo" />
+                                <x:Static Member="dialog:MessageDialogType.YesNoCancel" />
                             </x:Array>
                         </Binding.ConverterParameter>
                     </Binding>
@@ -92,9 +94,9 @@
                 <Button.Visibility>
                     <Binding Path="Type" Converter="{StaticResource EnumToVisibilityConverter}">
                         <Binding.ConverterParameter>
-                            <x:Array Type="{x:Type enums:MessageDialogType}">
-                                <x:Static Member="enums:MessageDialogType.Ok" />
-                                <x:Static Member="enums:MessageDialogType.Okcancel" />
+                            <x:Array Type="{x:Type dialog:MessageDialogType}">
+                                <x:Static Member="dialog:MessageDialogType.Ok" />
+                                <x:Static Member="dialog:MessageDialogType.Okcancel" />
                             </x:Array>
                         </Binding.ConverterParameter>
                     </Binding>
@@ -104,9 +106,9 @@
                 <Button.Visibility>
                     <Binding Path="Type" Converter="{StaticResource EnumToVisibilityConverter}">
                         <Binding.ConverterParameter>
-                            <x:Array Type="{x:Type enums:MessageDialogType}">
-                                <x:Static Member="enums:MessageDialogType.YesNoCancel" />
-                                <x:Static Member="enums:MessageDialogType.Okcancel" />
+                            <x:Array Type="{x:Type dialog:MessageDialogType}">
+                                <x:Static Member="dialog:MessageDialogType.YesNoCancel" />
+                                <x:Static Member="dialog:MessageDialogType.Okcancel" />
                             </x:Array>
                         </Binding.ConverterParameter>
                     </Binding>

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
-using My.CoachManager.Presentation.Prism.Core.Enums;
 using My.CoachManager.Presentation.Prism.Controls.Native;
+using My.CoachManager.Presentation.Prism.Controls.Windows;
 
 namespace My.CoachManager.Presentation.Prism.Controls.Helpers
 {
@@ -40,8 +40,8 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
             if (OsVersionHelper.IsWindows8Point1OrGreater)
             {
                 ProcessDpiAwareness value;
-                var result = NativeMethods.GetProcessDpiAwareness(IntPtr.Zero, out value);
-                if (result != NativeMethods.S_OK)
+                var result = UnsafeNativeMethods.GetProcessDpiAwareness(IntPtr.Zero, out value);
+                if (result != UnsafeNativeMethods.S_OK)
                 {
                     throw new Win32Exception(result);
                 }
@@ -51,7 +51,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
             if (OsVersionHelper.IsWindowsVistaOrGreater)
             {
                 // use older Win32 API to query system DPI awareness
-                return NativeMethods.IsProcessDPIAware() ? ProcessDpiAwareness.SystemDpiAware : ProcessDpiAwareness.DpiUnaware;
+                return UnsafeNativeMethods.IsProcessDPIAware() ? ProcessDpiAwareness.SystemDpiAware : ProcessDpiAwareness.DpiUnaware;
             }
 
             // assume WPF default
@@ -81,11 +81,11 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
             {
                 if (OsVersionHelper.IsWindows8Point1OrGreater)
                 {
-                    return NativeMethods.SetProcessDpiAwareness(ProcessDpiAwareness.PerMonitorDpiAware) == NativeMethods.S_OK;
+                    return UnsafeNativeMethods.SetProcessDpiAwareness(ProcessDpiAwareness.PerMonitorDpiAware) == UnsafeNativeMethods.S_OK;
                 }
 
                 // use older Win32 API to set the awareness to SystemDpiAware
-                return NativeMethods.SetProcessDPIAware() == NativeMethods.S_OK;
+                return UnsafeNativeMethods.SetProcessDPIAware() == UnsafeNativeMethods.S_OK;
             }
 
             // return true if per monitor was already enabled

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
-using My.CoachManager.Presentation.Prism.Core.Interactivity;
-using My.CoachManager.Presentation.Prism.Core.Interactivity.InteractionRequest;
+using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 
 namespace My.CoachManager.Presentation.Prism.Core.Services
 {
@@ -11,6 +11,34 @@ namespace My.CoachManager.Presentation.Prism.Core.Services
     /// </summary>
     public interface IDialogService
     {
+        /// <summary>
+        /// Displays a modal dialog of a type that is determined by the dialog type locator.
+        /// </summary>
+        /// <returns>
+        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
+        /// the user.
+        /// </returns>
+        void ShowCustomDialog(FrameworkElement view, IDialogViewModel model, string title,
+            Action<IDialog> callback = null);
+
+        /// <summary>
+        /// Displays a modal dialog of a type that is determined by the dialog type locator.
+        /// </summary>
+        /// <returns>
+        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
+        /// the user.
+        /// </returns>
+        void ShowCustomDialog(Type type, string title, Action<IDialog> callback = null);
+
+        /// <summary>
+        /// Displays a modal dialog of a type that is determined by the dialog type locator.
+        /// </summary>
+        /// <returns>
+        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
+        /// the user.
+        /// </returns>
+        void ShowCustomDialog<TView>(string title, Action<IDialog> callback = null);
+
         /// <summary>
         /// Displays a modal dialog of a type that is determined by the dialog type locator.
         /// </summary>

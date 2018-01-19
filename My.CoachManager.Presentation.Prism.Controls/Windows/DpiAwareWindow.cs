@@ -94,7 +94,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Windows
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            if (msg == NativeMethods.WM_DPICHANGED)
+            if (msg == UnsafeNativeMethods.WM_DPICHANGED)
             {
                 // Marshal the value in the lParam into a Rect.
                 var newDisplayRect = (RECT)Marshal.PtrToStructure(lParam, typeof(RECT));
@@ -183,11 +183,11 @@ namespace My.CoachManager.Presentation.Prism.Controls.Windows
             }
 
             // get the current DPI of the monitor of the window
-            var monitor = NativeMethods.MonitorFromWindow(_source.Handle, NativeMethods.MONITOR_DEFAULTTONEAREST);
+            var monitor = UnsafeNativeMethods.MonitorFromWindow(_source.Handle, UnsafeNativeMethods.MONITOR_DEFAULTTONEAREST);
 
             uint xDpi = 96;
             uint yDpi = 96;
-            if (NativeMethods.GetDpiForMonitor(monitor, (int)MonitorDpiType.EffectiveDpi, ref xDpi, ref yDpi) != NativeMethods.S_OK)
+            if (UnsafeNativeMethods.GetDpiForMonitor(monitor, (int)MonitorDpiType.EffectiveDpi, ref xDpi, ref yDpi) != UnsafeNativeMethods.S_OK)
             {
                 xDpi = 96;
                 yDpi = 96;

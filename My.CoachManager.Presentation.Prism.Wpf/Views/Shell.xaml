@@ -15,9 +15,9 @@
         Title="{x:Static strings:GlobalResources.ApplicationTitle}"
         Icon="{StaticResource IcoImageSource}"
         WindowState="Maximized"
-        Style="{StaticResource ModernWindowStyle}"
-        IsTitleOverlay="True"
-                         IsTitleVisible="False">
+                         ShowIconOnTitleBar="False"
+                         ShowTitleOnTitleBar="False"
+        Style="{StaticResource ModernWindowStyle}" IsTitleOverlay="True">
 
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding DialogInteractionRequest}">
@@ -30,6 +30,16 @@
             <interactivity:NotificationPopupAction PopupStyle="{StaticResource NotificationPopupStyle}" />
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
+
+    <!-- Commands -->
+    <controls:ExtendedWindow.RightWindowCommands>
+        <controls:WindowCommands prism:RegionManager.RegionName="{x:Static core:RegionNames.ToolbarRegion}" />
+    </controls:ExtendedWindow.RightWindowCommands>
+
+    <!-- Flyouts -->
+    <controls:ExtendedWindow.Flyouts>
+        <controls:FlyoutsControl prism:RegionManager.RegionName="{x:Static core:RegionNames.FlyoutsRegion}" />
+    </controls:ExtendedWindow.Flyouts>
 
     <Grid>
         <Grid x:Name="Main">
@@ -81,6 +91,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40" />
                         <RowDefinition Height="200" />
+                        <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 

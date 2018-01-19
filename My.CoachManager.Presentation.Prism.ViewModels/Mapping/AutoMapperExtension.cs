@@ -3,6 +3,7 @@ using System.Reflection;
 using AutoMapper;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 
 namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
 {

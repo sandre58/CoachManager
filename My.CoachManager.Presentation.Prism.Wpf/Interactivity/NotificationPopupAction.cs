@@ -2,14 +2,14 @@
 using System.Windows;
 using System.Windows.Interactivity;
 using My.CoachManager.Presentation.Prism.Controls.Windows;
-using My.CoachManager.Presentation.Prism.Core.Interactivity.InteractionRequest;
+using My.CoachManager.Presentation.Prism.Core.Dialog;
 using Prism.Interactivity.InteractionRequest;
 using NotificationPopup = My.CoachManager.Presentation.Prism.Controls.NotificationPopup;
 
 namespace My.CoachManager.Presentation.Prism.Wpf.Interactivity
 {
     /// <summary>
-    /// Shows a popup window in response to an <see cref="Core.Interactivity.InteractionRequest"/> being raised.
+    /// Shows a popup window in response to an <see cref="InteractionRequest{T}"/> being raised.
     /// </summary>
     public class NotificationPopupAction : TriggerAction<FrameworkElement>
     {

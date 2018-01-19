@@ -7,6 +7,16 @@ namespace My.CoachManager.Presentation.Prism.Core.Global
         /// <summary>
         /// Command to navigate in the application.
         /// </summary>
-        public static CompositeCommand NavigateCommand = new CompositeCommand();
+        public static readonly CompositeCommand NavigateCommand = new CompositeCommand();
+
+        /// <summary>
+        /// Command to show about view.
+        /// </summary>
+        public static readonly CompositeCommand ShowAboutViewCommand = new CompositeCommand();
+
+        /// <summary>
+        /// Command to toggle settings.
+        /// </summary>
+        public static readonly CompositeCommand ToggleSettingsCommand = new CompositeCommand();
     }
 }

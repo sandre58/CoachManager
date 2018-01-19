@@ -1,18 +1,16 @@
-﻿using System.ComponentModel;
-using System.Data;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace My.CoachManager.Presentation.Prism.Tests
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow
     {
         public MainWindow()
         {
             InitializeComponent();
-
-            DataContext = new PresentationModel();
         }
     }
 }

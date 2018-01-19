@@ -4,7 +4,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source= "pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Themes/Generic.xaml" />
+                <ResourceDictionary Source= "pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Styles/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

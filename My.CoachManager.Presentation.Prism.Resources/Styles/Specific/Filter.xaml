@@ -1,0 +1,60 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:filters="clr-namespace:My.CoachManager.Presentation.Prism.Core.Filters;assembly=My.CoachManager.Presentation.Prism.Core"
+                    xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Core.ViewModels;assembly=My.CoachManager.Presentation.Prism.Core"
+                    xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
+                    xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
+                    xmlns:screens="clr-namespace:My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;assembly=My.CoachManager.Presentation.Prism.Core">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Base/Converters.xaml" />
+        <ResourceDictionary Source="../Base/Margins.xaml" />
+        <ResourceDictionary Source="../Base/Sizes.xaml" />
+        <ResourceDictionary Source="../Controls/TextBox.xaml" />
+        <ResourceDictionary Source="../Controls/NumericUpDown.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate DataType="{x:Type screens:FilterViewModel}">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <CheckBox Grid.Column="0" x:Name="IsEnabled" IsChecked="{Binding IsEnabled}" HorizontalAlignment="Center" />
+            <TextBlock Grid.Column="1" Text="{Binding Title}" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
+            <ContentControl Grid.Column="2" Content="{Binding Filter}" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type filters:StringFilter}">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!--<ComboBox Grid.Column="0" ItemsSource="{Binding IsEnabled}" HorizontalAlignment="Center" />-->
+            <TextBox Grid.Column="1" Text="{Binding Value}" Width="{StaticResource MediumWidth}" Style="{StaticResource TextBoxBaseStyle}" />
+            <CheckBox Grid.Column="2" IsChecked="{Binding CaseSensitive}" Content="Sensible à la casse" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type filters:IntegerCompareFilter}">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!--<ComboBox Grid.Column="0" ItemsSource="{Binding IsEnabled}" HorizontalAlignment="Center" />-->
+            <controls:ExtendedNumericUpDown Grid.Column="1" Value="{Binding Value}" Width="{StaticResource MidSmallWidth}" Style="{StaticResource ExtendedNumericUpDownBaseStyle}" />
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

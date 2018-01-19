@@ -2,10 +2,10 @@
 using System.Windows;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Win32;
-using My.CoachManager.Presentation.Prism.Core.EventAggregator;
-using My.CoachManager.Presentation.Prism.Core.Interactivity;
-using My.CoachManager.Presentation.Prism.Core.Interactivity.InteractionRequest;
+using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Services;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
+using My.CoachManager.Presentation.Prism.Modules.Login.Core;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using Prism.Events;
@@ -158,6 +158,61 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
             };
 
             _eventAggregator.GetEvent<ShowMessageDialogRequestEvent>().Publish(new DialogEventArgs(dialog, callback));
+        }
+
+        /// <summary>
+        /// Displays a modal dialog of a type that is determined by the dialog type locator.
+        /// </summary>
+        /// <returns>
+        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
+        /// the user.
+        /// </returns>
+        public void ShowCustomDialog(FrameworkElement view, string title, Action<IDialog> callback = null)
+        {
+            var dialog = new Dialog()
+            {
+                Content = view,
+                Title = title
+            };
+
+            _eventAggregator.GetEvent<ShowCustomDialogRequestEvent>().Publish(new DialogEventArgs(dialog, callback));
+        }
+
+        /// <summary>
+        /// Displays a modal dialog of a type that is determined by the dialog type locator.
+        /// </summary>
+        /// <returns>
+        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
+        /// the user.
+        /// </returns>
+        public void ShowCustomDialog(FrameworkElement view, IDialogViewModel model, string title, Action<IDialog> callback = null)
+        {
+            view.DataContext = model;
+            ShowCustomDialog(view, title, callback);
+        }
+
+        /// <summary>
+        /// Displays a modal dialog of a type that is determined by the dialog type locator.
+        /// </summary>
+        /// <returns>
+        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
+        /// the user.
+        /// </returns>
+        public void ShowCustomDialog(Type type, string title, Action<IDialog> callback = null)
+        {
+            ShowCustomDialog((FrameworkElement)_serviceLocator.GetInstance(type), title, callback);
+        }
+
+        /// <summary>
+        /// Displays a modal dialog of a type that is determined by the dialog type locator.
+        /// </summary>
+        /// <returns>
+        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
+        /// the user.
+        /// </returns>
+        public void ShowCustomDialog<TView>(string title, Action<IDialog> callback = null)
+        {
+            ShowCustomDialog(typeof(TView), title, callback);
         }
 
         /// <summary>

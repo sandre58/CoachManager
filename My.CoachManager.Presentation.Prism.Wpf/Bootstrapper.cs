@@ -10,12 +10,20 @@ using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.CrossCutting.Logging.Supervision;
 using My.CoachManager.Presentation.Prism.Core;
-using My.CoachManager.Presentation.Prism.Core.EventAggregator;
-using My.CoachManager.Presentation.Prism.Core.Interactivity;
+using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Services;
-using My.CoachManager.Presentation.Prism.Manager;
+using My.CoachManager.Presentation.Prism.Modules.About;
+using My.CoachManager.Presentation.Prism.Modules.Administration;
+using My.CoachManager.Presentation.Prism.Modules.Home;
+using My.CoachManager.Presentation.Prism.Modules.Login;
+using My.CoachManager.Presentation.Prism.Modules.Login.Core;
+using My.CoachManager.Presentation.Prism.Modules.Roster;
+using My.CoachManager.Presentation.Prism.Modules.Settings;
+using My.CoachManager.Presentation.Prism.Modules.SplashScreen;
+using My.CoachManager.Presentation.Prism.Modules.SplashScreen.Core;
+using My.CoachManager.Presentation.Prism.Modules.SplashScreen.Views;
+using My.CoachManager.Presentation.Prism.Modules.StatusBar;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
-using My.CoachManager.Presentation.Prism.RosterModule;
 using My.CoachManager.Presentation.Prism.Wpf.Services;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using My.CoachManager.Presentation.Prism.Wpf.Views;
@@ -50,6 +58,10 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         {
             Locator.SetContainer(Container);
 
+            // Theme
+            SkinManager.SkinManager.ApplyTheme("dark");
+            SkinManager.SkinManager.ApplyAccent("blue");
+
             // Services
             Locator.RegisterInstance<IAdminService>(ServiceClientFactory.Create<AdminServiceClient, IAdminService>());
             Locator.RegisterInstance<IUserService>(ServiceClientFactory.Create<UserServiceClient, IUserService>());
@@ -60,13 +72,8 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             Locator.RegisterType<IAuthenticationService, AuthenticationService>();
             Locator.RegisterType<IDialogService, DialogService>();
 
-            // Views
-            Locator.RegisterType<Views.SplashScreen>();
-
             // ViewModels
             Locator.RegisterType<IMessageViewModel, MessageViewModel>();
-            Locator.RegisterType<ILoginViewModel, LoginViewModel>();
-            Locator.RegisterType<ISplashScreenViewModel, SplashScreenViewModel>();
             Locator.RegisterType<IShellViewModel, ShellViewModel>();
 
             // base
@@ -80,6 +87,12 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         [STAThread]
         protected override void InitializeModules()
         {
+            IModule module = Container.Resolve<SplashScreenModule>();
+            module.Initialize();
+
+            module = Container.Resolve<LoginModule>();
+            module.Initialize();
+
             ShowSplashScreen();
 
             // Create a new thread for the splash screen to run on
@@ -123,13 +136,15 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             //
 
             // Initialize the modules
-            InitializeModule<StatusBarModule.StatusBarModuleInit>();
-            InitializeModule<HomeModule.HomeModuleInit>();
+            InitializeModule<SettingsModule>();
+            InitializeModule<AboutModule>();
+            InitializeModule<StatusBarModule>();
+            InitializeModule<HomeModule>();
 
             if (Thread.CurrentPrincipal.IsInRole(PermissionConstants.AccessAdmin))
-                InitializeModule<AdministrationModule.AdministrationModuleInit>();
+                InitializeModule<AdministrationModule>();
 
-            InitializeModule<RosterModuleInit>();
+            InitializeModule<RosterModule>();
         }
 
         /// <summary>
@@ -234,14 +249,17 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// </summary>
         public void ShowSplashScreen()
         {
-            System.Windows.Application.Current.Dispatcher.Invoke(
-                delegate
-                {
-                    var splash = Container.Resolve<Views.SplashScreen>();
-                    if (splash == null) return;
-                    splash.Show();
-                }
-            );
+            var splash = Container.Resolve<SplashScreenView>();
+            if (splash == null) return;
+            splash.Show();
+            //System.Windows.Application.Current.Dispatcher.Invoke(
+            //    delegate
+            //    {
+            //        var splash = Container.Resolve<SplashScreenView>();
+            //        if (splash == null) return;
+            //        splash.Show();
+            //    }
+            //);
         }
 
         /// <summary>
@@ -249,14 +267,17 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// </summary>
         public void HideSplashScreen()
         {
-            System.Windows.Application.Current.Dispatcher.Invoke(
-                delegate
-                {
-                    var splash = Container.Resolve<Views.SplashScreen>();
-                    if (splash == null) return;
-                    splash.Hide();
-                }
-            );
+            var splash = Container.Resolve<SplashScreenView>();
+            if (splash == null) return;
+            splash.Visibility = Visibility.Hidden;
+            //System.Windows.Application.Current.Dispatcher.Invoke(
+            //    delegate
+            //    {
+            //        var splash = Container.Resolve<SplashScreenView>();
+            //        if (splash == null) return;
+            //        splash.Hide();
+            //    }
+            //);
         }
 
         /// <summary>
