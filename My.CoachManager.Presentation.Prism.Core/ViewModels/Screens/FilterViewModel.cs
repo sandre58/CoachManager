@@ -24,6 +24,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         {
             Title = title;
             Filter = filter;
+            IsEnabled = true;
         }
 
         #endregion Constructors
@@ -38,10 +39,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             get { return _filter; }
             private set
             {
-                SetProperty(ref _filter, value, () =>
-  {
-      _filter.PropertyChanged += delegate { RaisePropertyChanged(() => Filter); };
-  });
+                SetProperty(ref _filter, value);
             }
         }
 

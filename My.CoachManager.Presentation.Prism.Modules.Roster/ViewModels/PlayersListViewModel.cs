@@ -35,9 +35,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         private readonly IRosterService _rosterService;
         private ObservableCollection<string> _displayedColumns;
         private Dictionary<PresetColumnsType, string[]> _presetColumns;
-        private IEnumerable<CategoryViewModel> _allCategories;
-        private IEnumerable<CountryViewModel> _allCountries;
-        private IEnumerable<CityViewModel> _allCities;
+        private IFiltersViewModel _filters;
 
         #endregion Fields
 
@@ -67,35 +65,19 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         public DelegateCommand<PresetColumnsType?> ChangeDisplayedColumnsCommand { get; set; }
 
         /// <summary>
-        /// Gets or sets categories.
+        /// Gets or sets Show Filters Command.
         /// </summary>
-        public IEnumerable<CategoryViewModel> AllCategories
-        {
-            get { return _allCategories; }
-            set { SetProperty(ref _allCategories, value); }
-        }
+        public DelegateCommand ShowFiltersCommand { get; set; }
 
         /// <summary>
-        /// Gets or sets countries.
+        /// Gets or sets the filter for speed Search.
         /// </summary>
-        public IEnumerable<CountryViewModel> AllCountries
+        public IFiltersViewModel Filters
         {
-            get { return _allCountries; }
+            get { return _filters; }
             set
             {
-                SetProperty(ref _allCountries, value);
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets cities.
-        /// </summary>
-        public IEnumerable<CityViewModel> AllCities
-        {
-            get { return _allCities; }
-            set
-            {
-                SetProperty(ref _allCities, value);
+                SetProperty(ref _filters, value);
             }
         }
 
@@ -106,7 +88,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="PlayersListViewModel"/>.
         /// </summary>
-        public PlayersListViewModel(IRosterService rosterService, IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger, IFiltersViewModel filters)
+        public PlayersListViewModel(IRosterService rosterService, IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger, IPlayerFiltersViewModel filters)
             : base(dialogService, eventAggregator, logger)
         {
             _rosterService = rosterService;
@@ -126,6 +108,13 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
             SpeedFilter = new StringFilter(typeof(PlayerDetailViewModel).GetProperty("FullName"));
             SpeedFilter.PropertyChanged += SpeedFilter_FilteringChanged;
             Filters = filters;
+
+            Filters.FiltersChanged += Filters_FiltersChanged;
+        }
+
+        private void Filters_FiltersChanged(object sender, EventArgs e)
+        {
+            FilteredItems.ChangeFilters(Filters.AvailableFilters);
         }
 
         #endregion Constructors
@@ -161,23 +150,17 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
                 DisplayedColumns = new ObservableCollection<string>(PresetColumns[type.Value]);
         }
 
+        /// <summary>
+        /// Show Filters dialog.
+        /// </summary>
+        private void ShowFilter()
+        {
+            DialogService.ShowWorkspaceDialog<PlayerFiltersView>();
+        }
+
         #endregion Methods
 
-        private IFiltersViewModel _filters;
-
         private StringFilter _speedFilter;
-
-        /// <summary>
-        /// Gets or sets the filter for speed Search.
-        /// </summary>
-        public IFiltersViewModel Filters
-        {
-            get { return _filters; }
-            set
-            {
-                SetProperty(ref _filters, value);
-            }
-        }
 
         /// <summary>
         /// Gets or sets the filter for speed Search.
@@ -202,18 +185,6 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
                 FilteredItems.RemoveFilter(SpeedFilter);
             }
             RaisePropertyChanged(() => FilteredItems);
-        }
-
-        public DelegateCommand ShowFiltersCommand { get; set; }
-
-        private void ShowFilter()
-        {
-            DialogService.ShowWorkspaceDialog<FiltersView>(before =>
-                {
-                },
-                after =>
-                {
-                });
         }
     }
 }

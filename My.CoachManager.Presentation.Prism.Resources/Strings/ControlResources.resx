@@ -192,6 +192,9 @@
   <data name="RemoveContact" xml:space="preserve">
     <value>Supprimer le contact</value>
   </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Réinitialiser</value>
+  </data>
   <data name="Restore" xml:space="preserve">
     <value>Restaurer</value>
   </data>

@@ -33,7 +33,7 @@
                                  Width="{StaticResource MediumWidth}"
                                  parameters:TextBoxParameters.UseFloatingWatermark="False"
                                  parameters:TextBoxParameters.Watermark="{x:Static strings:PersonResources.LastName}" />
-                        <controls:Badged Badge="3">
+                        <controls:Badged Badge="{Binding Filters.Count}">
                             <Button Content="{x:Static strings1:ControlResources.ShowFilters}" Command="{Binding ShowFiltersCommand}" />
                         </controls:Badged>
                     </WrapPanel>

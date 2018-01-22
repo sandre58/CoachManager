@@ -1,11 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Helpers;
-using My.CoachManager.Presentation.Prism.Core.Filters;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
@@ -20,10 +16,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 new CommandBinding(ApplicationCommands.Paste,
                     OnExecutedPaste,
                     OnCanExecutePaste));
-        }
-
-        public ExtendedDataGrid()
-        {
         }
 
         #endregion Constructors
@@ -81,69 +73,5 @@ namespace My.CoachManager.Presentation.Prism.Controls
         }
 
         #endregion Clipboard Paste
-
-        #region Filters
-
-        private IEnumerable<IFilter> _filters;
-
-        internal ICollectionView CollectionView
-        {
-            get
-            {
-                return CollectionViewSource.GetDefaultView(ItemsSource);
-            }
-        }
-
-        ///// <summary>
-        ///// Apply the filters
-        ///// </summary>
-        //private void ApplyFilters()
-        //{
-        //    // Get the view
-        //    var view = CollectionView;
-        //    if (view != null)
-        //    {
-        //        // Create a filter
-        //        view.Filter = delegate (object item)
-        //        {
-        //            // Show the current object
-        //            bool show = true;
-        //            // Loop filters
-        //            var filters = GetFilters().ToArray();
-        //            foreach (var filter in filters)
-        //            {
-        //                if (filter != null)
-        //                {
-        //                    // Check if the current column contains a filter
-        //                    var containsFilter = filter.IsMatch(item);
-
-        //                    // Do the necessary things if the filter is not correct
-        //                    if (!containsFilter)
-        //                    {
-        //                        show = false;
-        //                        break;
-        //                    }
-        //                }
-        //            }
-
-        //            // Return if it's visible or not
-        //            return show;
-        //        };
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Gets filter.
-        ///// </summary>
-        ///// <returns></returns>
-        //private IEnumerable<IFilter> GetFilters()
-        //{
-        //    foreach (var column in Columns)
-        //    {
-        //        var filter = column.GetFilter();
-        //        if (filter != null) yield return filter;
-        //    }
-
-        #endregion Filters
     }
 }

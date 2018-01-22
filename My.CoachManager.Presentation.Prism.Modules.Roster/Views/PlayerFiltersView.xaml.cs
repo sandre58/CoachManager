@@ -5,9 +5,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.Views
     /// <summary>
     /// Interaction logic for FiltersView.xaml
     /// </summary>
-    public partial class FiltersView
+    public partial class PlayerFiltersView
     {
-        public FiltersView(IFiltersViewModel model)
+        public PlayerFiltersView(IPlayerFiltersViewModel model)
         {
             DataContext = model;
             InitializeComponent();

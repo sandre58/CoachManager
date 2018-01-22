@@ -66,8 +66,10 @@
     <Compile Include="Dialog\ShowCustomDialogRequestEvent.cs" />
     <Compile Include="ViewModels\Screens\DialogViewModel.cs" />
     <Compile Include="Dialog\IDialog.cs" />
+    <Compile Include="ViewModels\Screens\FiltersViewModel.cs" />
     <Compile Include="ViewModels\Screens\IDialogViewModel.cs" />
     <Compile Include="Dialog\INotificationPopup.cs" />
+    <Compile Include="ViewModels\Screens\IFiltersViewModel.cs" />
     <Compile Include="ViewModels\Screens\IWorkspaceDialogViewModel.cs" />
     <Compile Include="Dialog\MessageDialogStyle.cs" />
     <Compile Include="Dialog\MessageDialogType.cs" />

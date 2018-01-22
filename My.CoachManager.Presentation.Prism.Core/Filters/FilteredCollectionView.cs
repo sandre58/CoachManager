@@ -165,6 +165,36 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         }
 
         /// <summary>
+        /// Removes a filter from the collection.
+        /// </summary>
+        /// <param name="filters">The filter.</param>
+        public void ChangeFilters(IEnumerable<IFilter> filters)
+        {
+            if (filters == null)
+            {
+                throw new ArgumentNullException("filter");
+            }
+
+            _filters.Clear();
+
+            foreach (var filter in filters)
+            {
+                if (filter.PropertyInfo == null)
+                {
+                    throw new ArgumentException("Invalid filter, missing property info.");
+                }
+
+                if (!_filters.ContainsKey(filter.PropertyInfo.Name))
+                {
+                    _filters[filter.PropertyInfo.Name] = filter;
+                    filter.PropertyChanged += OnFilterChanged;
+                }
+            }
+
+            UpdateFilter();
+        }
+
+        /// <summary>
         /// Updates filter and refresh collection.
         /// </summary>
         protected void UpdateFilter()
