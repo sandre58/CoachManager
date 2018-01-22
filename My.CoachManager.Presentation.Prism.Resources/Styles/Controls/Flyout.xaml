@@ -224,6 +224,7 @@
         <Setter Property="Visibility" Value="Hidden" />
         <Setter Property="Position" Value="Right" />
         <Setter Property="Width" Value="300" />
+        <Setter Property="IsPinned" Value="False" />
     </Style>
 
     <Style x:Key="AccentFlyoutStyle" TargetType="{x:Type controls:Flyout}" BasedOn="{StaticResource FlyoutStyle}">

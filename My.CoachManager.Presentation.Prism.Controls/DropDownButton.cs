@@ -61,6 +61,24 @@ namespace My.CoachManager.Presentation.Prism.Controls
             }
         }
 
+        #region ShowArrow
+
+        public static readonly DependencyProperty ShowArrowroperty = DependencyProperty.Register("ShowArrow", typeof(bool), typeof(DropDownButton), new UIPropertyMetadata(true));
+
+        public bool ShowArrow
+        {
+            get
+            {
+                return (bool)GetValue(ShowArrowroperty);
+            }
+            set
+            {
+                SetValue(ShowArrowroperty, value);
+            }
+        }
+
+        #endregion ShowArrow
+
         #region DropDownContent
 
         public static readonly DependencyProperty DropDownContentProperty = DependencyProperty.Register("DropDownContent", typeof(object), typeof(DropDownButton), new UIPropertyMetadata(null, OnDropDownContentChanged));

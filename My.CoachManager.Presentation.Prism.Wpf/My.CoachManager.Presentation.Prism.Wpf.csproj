@@ -92,8 +92,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Compile Include="Views\MessageContent.xaml.cs">
-      <DependentUpon>MessageContent.xaml</DependentUpon>
+    <Compile Include="Views\MessageView.xaml.cs">
+      <DependentUpon>MessageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WindowDialog.xaml.cs">
       <DependentUpon>WindowDialog.xaml</DependentUpon>
@@ -142,7 +142,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\MessageContent.xaml">
+    <Page Include="Views\MessageView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

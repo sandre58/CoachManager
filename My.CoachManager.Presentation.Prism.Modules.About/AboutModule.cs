@@ -20,6 +20,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.About
         /// Initialise a new instance of <see cref="AboutModule"/>.
         /// </summary>
         /// <param name="regionManager"></param>
+        /// <param name="dialogService"></param>
         public AboutModule(IRegionManager regionManager, IDialogService dialogService)
         {
             _regionManager = regionManager;

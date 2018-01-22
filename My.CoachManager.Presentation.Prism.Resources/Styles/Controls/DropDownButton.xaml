@@ -89,7 +89,8 @@
                                       Data="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
                                       IsHitTestVisible="false"
                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                      Stretch="Uniform" />
+                                      Stretch="Uniform"
+                                      Visibility="{Binding ShowArrow, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             </Grid>
                         </ToggleButton>
                         <Popup x:Name="PART_Popup"
@@ -99,7 +100,7 @@
                                IsOpen="{Binding IsChecked, ElementName=PART_DropDownButton}"
                                StaysOpen="False"
                                Placement="{TemplateBinding DropDownPosition}"
-                               PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                               PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
                             <Grid MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}">
                                 <Border HorizontalAlignment="Stretch"
                                         Background="{DynamicResource Light}"

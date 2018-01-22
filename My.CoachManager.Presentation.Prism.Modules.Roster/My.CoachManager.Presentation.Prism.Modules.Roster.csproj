@@ -98,8 +98,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ViewModels\FiltersViewModel.cs" />
+    <Compile Include="ViewModels\IFiltersViewModel.cs" />
     <Compile Include="ViewModels\IPlayersListViewModel.cs" />
     <Compile Include="ViewModels\PlayersListViewModel.cs" />
+    <Compile Include="Views\FiltersView.xaml.cs">
+      <DependentUpon>FiltersView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlayersListView.xaml.cs">
       <DependentUpon>PlayersListView.xaml</DependentUpon>
     </Compile>
@@ -155,6 +160,10 @@
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FiltersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PlayersListView.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Filters;
 using My.CoachManager.Presentation.Prism.Core.Services;
-using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.Modules.Roster.Enums;
 using My.CoachManager.Presentation.Prism.Modules.Roster.Resources.Strings;
+using My.CoachManager.Presentation.Prism.Modules.Roster.Views;
 using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
@@ -108,7 +106,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="PlayersListViewModel"/>.
         /// </summary>
-        public PlayersListViewModel(IRosterService rosterService, IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
+        public PlayersListViewModel(IRosterService rosterService, IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger, IFiltersViewModel filters)
             : base(dialogService, eventAggregator, logger)
         {
             _rosterService = rosterService;
@@ -122,23 +120,12 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
                 {PresetColumnsType.BodyInformations, BodyInformationsColumns}
             };
 
+            ShowFiltersCommand = new DelegateCommand(ShowFilter);
             ChangeDisplayedColumnsCommand = new DelegateCommand<PresetColumnsType?>(ChangeDisplayedColumns);
 
             SpeedFilter = new StringFilter(typeof(PlayerDetailViewModel).GetProperty("FullName"));
             SpeedFilter.PropertyChanged += SpeedFilter_FilteringChanged;
-
-            Filters = new ObservableCollection<FilterViewModel>();
-
-            _allFilters.Add("FullName", typeof(StringFilter));
-            _allFilters.Add("Number", typeof(IntegerCompareFilter));
-            _allFilters.Add("Category", typeof(StringFilter));
-
-            Filters.Add(GetFilter("FullName"));
-            Filters.Add(GetFilter("Number"));
-            Filters.Add(GetFilter("Category"));
-
-            AddFilterCommand = new DelegateCommand<string>(AddFilter, CanAddFilter);
-            RemoveFilterCommand = new DelegateCommand<string>(RemoveFilter, CanRemoveFilter);
+            Filters = filters;
         }
 
         #endregion Constructors
@@ -152,13 +139,6 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         protected override void LoadDataCore()
         {
             var result = _rosterService.GetPlayers(1);
-            //AllCategories = _adminService.GetCategoriesForPlayer().ToViewModels<CategoryViewModel>();
-            //AllCountries = _adminService.GetCountriesForPlayer().ToViewModels<CountryViewModel>();
-            //AllCities = _adminService.GetCitiesForPlayer().Select(c => new CityViewModel()
-            //{
-            //    City = c.City,
-            //    PostalCode = c.PostalCode
-            //}).ToArray();
 
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
@@ -183,7 +163,21 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 
         #endregion Methods
 
+        private IFiltersViewModel _filters;
+
         private StringFilter _speedFilter;
+
+        /// <summary>
+        /// Gets or sets the filter for speed Search.
+        /// </summary>
+        public IFiltersViewModel Filters
+        {
+            get { return _filters; }
+            set
+            {
+                SetProperty(ref _filters, value);
+            }
+        }
 
         /// <summary>
         /// Gets or sets the filter for speed Search.
@@ -210,58 +204,16 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
             RaisePropertyChanged(() => FilteredItems);
         }
 
-        public DelegateCommand<string> AddFilterCommand { get; set; }
-        public DelegateCommand<string> RemoveFilterCommand { get; set; }
+        public DelegateCommand ShowFiltersCommand { get; set; }
 
-        private ObservableCollection<FilterViewModel> _filters;
-
-        public ObservableCollection<FilterViewModel> Filters
+        private void ShowFilter()
         {
-            get { return _filters; }
-            set { SetProperty(ref _filters, value); }
-        }
-
-        public Dictionary<string, Type> AllFilters
-        {
-            get { return _allFilters; }
-        }
-
-        private void AddFilter(string propertyName)
-        {
-            Filters.Add(GetFilter(propertyName));
-        }
-
-        private bool CanAddFilter(string propertyName)
-        {
-            return Filters.All(x => x.Filter.PropertyInfo.Name != propertyName);
-        }
-
-        private void RemoveFilter(string propertyName)
-        {
-            Filters.Remove(Filters.FirstOrDefault(x => x.Filter.PropertyInfo.Name == propertyName));
-        }
-
-        private bool CanRemoveFilter(string propertyName)
-        {
-            return Filters.Any(x => x.Filter.PropertyInfo.Name == propertyName);
-        }
-
-        private readonly Dictionary<string, Type> _allFilters = new Dictionary<string, Type>();
-
-        private FilterViewModel GetFilter(string propertyName)
-        {
-            var typeFilter = _allFilters[propertyName];
-            var propertyInfo = typeof(PlayerDetailViewModel).GetProperty(propertyName);
-            if (propertyInfo != null && typeFilter != null)
-            {
-                var filter = (IFilter)Activator.CreateInstance(typeFilter, propertyInfo);
-                var name = propertyInfo.GetDisplayName();
-                var title = !string.IsNullOrEmpty(name) ? name : propertyName;
-
-                return new FilterViewModel(title, filter);
-            }
-
-            return null;
+            DialogService.ShowWorkspaceDialog<FiltersView>(before =>
+                {
+                },
+                after =>
+                {
+                });
         }
     }
 }

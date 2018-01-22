@@ -624,6 +624,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Styles\Controls\Badged.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Styles\Controls\Flyout.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

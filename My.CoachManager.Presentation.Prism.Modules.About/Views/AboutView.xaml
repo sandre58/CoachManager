@@ -9,7 +9,7 @@
              xmlns:dialog="clr-namespace:My.CoachManager.Presentation.Prism.Core.Dialog;assembly=My.CoachManager.Presentation.Prism.Core"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModels:AboutViewModel}"
-             Height="300"
+             Height="320"
              Width="450">
     <Grid Margin="{StaticResource LargeMargin}">
         <Grid.ColumnDefinitions>
@@ -23,29 +23,37 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Image Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" Source="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/CoachManager.png" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="{StaticResource DefaultMargin}" />
         <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
             <TextBlock Text="{x:Static strings:AboutResources.Product}" />
+            <TextBlock Text="-" />
             <TextBlock Text="{Binding Product}" />
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
             <TextBlock Text="{x:Static strings:AboutResources.Version}" />
+            <TextBlock Text="-" />
             <TextBlock Text="{Binding Version}" />
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
             <TextBlock Text="{x:Static strings:AboutResources.Copyright}" />
+            <TextBlock Text="-" />
             <TextBlock Text="{Binding Copyright}" />
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal">
             <TextBlock Text="{x:Static strings:AboutResources.Company}" />
+            <TextBlock Text="-" />
             <TextBlock Text="{Binding Company}" />
         </StackPanel>
 
         <Border Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Background="{StaticResource Dark}" BorderThickness="1" BorderBrush="{StaticResource Accent}" Margin="2,30,2,2" Padding="5">
             <TextBlock  Text="{Binding Description}" Foreground="{DynamicResource Light}" VerticalAlignment="Top" TextWrapping="Wrap" />
         </Border>
-        <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="{StaticResource LargeTopMargin}">
+
+        <TextBlock  Grid.Row="5" Grid.Column="0"  Grid.ColumnSpan="2" Text="{x:Static strings:AboutResources.Warning}" TextWrapping="Wrap" FontSize="{StaticResource SmallFontSize}" />
+
+        <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="{StaticResource LargeTopMargin}">
             <Button HorizontalAlignment="Right" Content="{x:Static strings1:ControlResources.Close}" Command="{Binding CloseCommand}" CommandParameter="{x:Static dialog:DialogResult.Ok}" />
         </StackPanel>
     </Grid>

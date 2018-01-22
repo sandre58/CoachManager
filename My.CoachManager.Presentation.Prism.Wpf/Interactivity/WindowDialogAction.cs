@@ -239,7 +239,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Interactivity
             {
                 if (dialog.Context is IMessageViewModel)
                 {
-                    content = new MessageContent((IMessageViewModel)dialog.Context);
+                    content = new MessageView((IMessageViewModel)dialog.Context);
                 }
                 else if (dialog.Context is ILoginViewModel)
                 {

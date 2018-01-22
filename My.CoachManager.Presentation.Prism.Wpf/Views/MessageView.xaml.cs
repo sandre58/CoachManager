@@ -5,9 +5,9 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Views
     /// <summary>
     /// Logique d'interaction pour DialogWindow.xaml
     /// </summary>
-    public partial class MessageContent
+    public partial class MessageView
     {
-        public MessageContent(IMessageViewModel context)
+        public MessageView(IMessageViewModel context)
         {
             InitializeComponent();
             DataContext = context;

@@ -118,18 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About" xml:space="preserve">
-    <value>A propos</value>
+    <value>A propos de Coach Manager</value>
   </data>
   <data name="Company" xml:space="preserve">
-    <value>Entreprise - </value>
+    <value>Entreprise</value>
   </data>
   <data name="Copyright" xml:space="preserve">
-    <value>Copyright - </value>
+    <value>Copyright</value>
   </data>
   <data name="Product" xml:space="preserve">
-    <value>Produit - </value>
+    <value>Produit</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Version - </value>
+    <value>Version</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Avertissement : Ce programme est protégè par la loi relative au droit d'auteur et par les conventions internationales. Toute reproduction ou distribution partielle ou totale du logiciel, par quelque moyen que ce soit, est strictement interdite. Toute personne ne respectant pas ces dispostions se rendra coupable du délit de contrefaçon et sera passible des sanctions pénales prévues par la loi.</value>
   </data>
 </root>

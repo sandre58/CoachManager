@@ -7,12 +7,12 @@ using System.Windows;
 // Les informations générales relatives à un assembly dépendent de 
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
-[assembly: AssemblyTitle("My.CoachManager.Presentation.Prism.Wpf")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Coach Manager")]
+[assembly: AssemblyDescription("Ce produit permet de gérer tout au long de l'année un effectif sportif. Il permet de gérer les joueurs, les entrainements et les compétitions.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("My.CoachManager.Presentation.Prism.Wpf")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2017")]
+[assembly: AssemblyCompany("Personal")]
+[assembly: AssemblyProduct("Coach Manager")]
+[assembly: AssemblyCopyright("Copyright © Stéphane ANDRE 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

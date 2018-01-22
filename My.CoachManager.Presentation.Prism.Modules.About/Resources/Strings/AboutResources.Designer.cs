@@ -62,7 +62,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.About.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A propos.
+        ///   Looks up a localized string similar to A propos de Coach Manager.
         /// </summary>
         public static string About {
             get {
@@ -71,7 +71,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.About.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Entreprise - .
+        ///   Looks up a localized string similar to Entreprise.
         /// </summary>
         public static string Company {
             get {
@@ -80,7 +80,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.About.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copyright - .
+        ///   Looks up a localized string similar to Copyright.
         /// </summary>
         public static string Copyright {
             get {
@@ -89,7 +89,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.About.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Produit - .
+        ///   Looks up a localized string similar to Produit.
         /// </summary>
         public static string Product {
             get {
@@ -98,11 +98,20 @@ namespace My.CoachManager.Presentation.Prism.Modules.About.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version - .
+        ///   Looks up a localized string similar to Version.
         /// </summary>
         public static string Version {
             get {
                 return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avertissement : Ce programme est protégè par la loi relative au droit d&apos;auteur et par les conventions internationales. Toute reproduction ou distribution partielle ou totale du logiciel, par quelque moyen que ce soit, est strictement interdite. Toute personne ne respectant pas ces dispostions se rendra coupable du délit de contrefaçon et sera passible des sanctions pénales prévues par la loi..
+        /// </summary>
+        public static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
             }
         }
     }

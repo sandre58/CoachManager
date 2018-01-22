@@ -26,48 +26,16 @@
             <!-- Filters -->
             <StackPanel Grid.Row="0">
                 <DockPanel Background="{DynamicResource DarkVariation3}" parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}">
-                    <WrapPanel Margin="{StaticResource DefaultMargin}">
+                    <WrapPanel Margin="{StaticResource LargeMargin}">
                         <TextBlock Text="{x:Static strings1:ControlResources.SpeedSearch}" VerticalAlignment="Center" />
                         <TextBox Text="{Binding SpeedFilter.Value, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource TextBoxBaseStyle}"
                                  Width="{StaticResource MediumWidth}"
                                  parameters:TextBoxParameters.UseFloatingWatermark="False"
                                  parameters:TextBoxParameters.Watermark="{x:Static strings:PersonResources.LastName}" />
-                        <controls:DropDownButton Style="{StaticResource HyperLinkDropDownButtonStyle}">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{x:Static strings1:ControlResources.ShowFilters}" />
-                                <TextBlock Margin="0" Text="{Binding Filters.Count, StringFormat={x:Static strings1:ControlResources.SuffixCount}}" Visibility="{Binding Filters.Count, Converter={StaticResource NotEqualToVisibilityConverter}, ConverterParameter=0}" />
-                            </StackPanel>
-                            <controls:DropDownButton.DropDownContent>
-                                <Grid Margin="{StaticResource LargeMargin}" Width="550" Height="300">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <controls:DropDownMenuButton Style="{StaticResource HyperLinkDropDownMenuButtonStyle}"
-                                                                 Content="{x:Static strings1:ControlResources.AddCondition}"
-                                                                 ItemsSource="{Binding AllFilters.Keys}"
-                                                                 HorizontalAlignment="Right">
-                                        <controls:DropDownMenuButton.ItemContainerStyle>
-                                            <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
-                                                <Setter Property="Header" Value="{Binding }" />
-                                                <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, Path=DataContext.AddFilterCommand}" />
-                                                <Setter Property="CommandParameter" Value="{Binding }" />
-                                            </Style>
-                                        </controls:DropDownMenuButton.ItemContainerStyle>
-                                    </controls:DropDownMenuButton>
-                                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                                        <ItemsControl ItemsSource="{Binding Filters}">
-                                            <ItemsControl.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Vertical" />
-                                                </ItemsPanelTemplate>
-                                            </ItemsControl.ItemsPanel>
-                                        </ItemsControl>
-                                    </ScrollViewer>
-                                </Grid>
-                            </controls:DropDownButton.DropDownContent>
-                        </controls:DropDownButton>
+                        <controls:Badged Badge="3">
+                            <Button Content="{x:Static strings1:ControlResources.ShowFilters}" Command="{Binding ShowFiltersCommand}" />
+                        </controls:Badged>
                     </WrapPanel>
                     <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right"
                                Margin="{StaticResource DefaultMargin}"

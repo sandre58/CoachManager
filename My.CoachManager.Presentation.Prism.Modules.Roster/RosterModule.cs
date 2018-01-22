@@ -26,6 +26,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster
         {
             // Register ViewModels
             Locator.RegisterType<IPlayersListViewModel, PlayersListViewModel>();
+            Locator.RegisterType<IFiltersViewModel, FiltersViewModel>();
 
             // Register Views (for navigation)
             Locator.RegisterTypeForNavigation<PlayersListView>();

@@ -88,6 +88,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdornedControl.cs" />
+    <Compile Include="Badged.cs" />
+    <Compile Include="BadgedBase.cs" />
     <Compile Include="Behaviours\PasswordBoxBindingBehavior.cs" />
     <Compile Include="Behaviours\StylizedBehaviorCollection.cs" />
     <Compile Include="Behaviours\StylizedBehaviors.cs" />
