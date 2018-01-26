@@ -124,6 +124,24 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sensible à la casse.
+        /// </summary>
+        public static string CaseSensitive {
+            get {
+                return ResourceManager.GetString("CaseSensitive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effacer.
+        /// </summary>
+        public static string Clear {
+            get {
+                return ResourceManager.GetString("Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Effacer le texte.
         /// </summary>
         public static string ClearText {
@@ -277,6 +295,15 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Supprimer la condition.
+        /// </summary>
+        public static string RemoveCondition {
+            get {
+                return ResourceManager.GetString("RemoveCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Supprimer le contact.
         /// </summary>
         public static string RemoveContact {
@@ -336,6 +363,15 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         public static string ShowItems {
             get {
                 return ResourceManager.GetString("ShowItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voir l&apos;aperçu.
+        /// </summary>
+        public static string ShowOverview {
+            get {
+                return ResourceManager.GetString("ShowOverview", resourceCulture);
             }
         }
         

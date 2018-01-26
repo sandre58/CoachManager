@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
@@ -7,27 +8,24 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
     /// </summary>
     public class StringFilter : Filter, IValueFilter<string>
     {
-        /// <summary>
-        /// The comparison mode
-        /// </summary>
-        private StringFilterMode _filterMode;
+        #region Fields
 
-        /// <summary>
-        /// Case sensitive.
-        /// </summary>
         private bool _caseSensitive;
 
-        /// <summary>
-        /// value to search for
-        /// </summary>
         private string _value;
+
+        private StringOperator _operator;
+
+        #endregion Fields
+
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StringFilter"/> class.
         /// </summary>
         /// <param name="propertyInfo">The property info.</param>
         public StringFilter(PropertyInfo propertyInfo)
-            : base(propertyInfo)
+            : this(propertyInfo, StringOperator.Contains, false)
         {
         }
 
@@ -37,26 +35,23 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <param name="propertyInfo">The property info.</param>
         /// <param name="filterMode">The filter mode.</param>
         /// <param name="caseSensitive"></param>
-        /// <param name="value">The value.</param>
-        public StringFilter(PropertyInfo propertyInfo, StringFilterMode filterMode, bool caseSensitive, string value)
-            : this(propertyInfo)
+        public StringFilter(PropertyInfo propertyInfo, StringOperator filterMode, bool caseSensitive)
+            : base(propertyInfo)
         {
-            _filterMode = filterMode;
-            _caseSensitive = caseSensitive;
-            _value = value;
+            Operator = filterMode;
+            CaseSensitive = caseSensitive;
         }
 
+        #endregion Constructors
+
         /// <summary>
-        /// Gets or sets the mode.
+        /// Gets or sets the operator.
         /// </summary>
-        /// <value>The mode.</value>
-        public StringFilterMode Mode
+        /// <value>The property info.</value>
+        public StringOperator Operator
         {
-            get
-            {
-                return _filterMode;
-            }
-            set { SetProperty(ref _filterMode, value); }
+            get { return _operator; }
+            set { SetProperty(ref _operator, value); }
         }
 
         /// <summary>
@@ -89,6 +84,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// Determines whether the specified target is a match.
         /// </summary>
         /// <param name="target">The target.</param>
+        /// <exception cref="NotImplementedException"></exception>
         /// <returns>
         /// 	<c>true</c> if the specified target is a match; otherwise, <c>false</c>.
         /// </returns>
@@ -102,7 +98,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
 
             if (toCompare == null)
             {
-                if (_filterMode == StringFilterMode.Equals)
+                if (Operator == StringOperator.Is)
                 {
                     return _value == null;
                 }
@@ -121,19 +117,25 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
                 toCompare = toCompare.ToUpper();
             }
 
-            switch (_filterMode)
+            switch (Operator)
             {
-                case StringFilterMode.Contains:
+                case StringOperator.Contains:
                     return toCompare.Contains(value);
 
-                case StringFilterMode.StartsWith:
+                case StringOperator.StartsWith:
                     return toCompare.StartsWith(value);
 
-                case StringFilterMode.EndsWith:
+                case StringOperator.EndsWith:
                     return toCompare.EndsWith(value);
 
-                default:
+                case StringOperator.Is:
                     return toCompare.Equals(value);
+
+                case StringOperator.IsNot:
+                    return !toCompare.Equals(value);
+
+                default:
+                    throw new NotImplementedException();
             }
         }
     }

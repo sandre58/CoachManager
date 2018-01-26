@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Reflection;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 
@@ -28,12 +27,4 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// </returns>
         bool IsMatch(object target);
     }
-
-    /// <summary>
-    /// Generics
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public interface IFilter<T> : IFilter
-        where T : IComparable
-    { }
 }

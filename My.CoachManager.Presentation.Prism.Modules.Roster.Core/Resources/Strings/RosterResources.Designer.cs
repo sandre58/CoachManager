@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace My.CoachManager.Presentation.Prism.Modules.Roster.Resources.Strings {
+namespace My.CoachManager.Presentation.Prism.Modules.Roster.Core.Resources.Strings {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.Resources.Strings {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class PresetColumnsTypeResources {
+    public class RosterResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal PresetColumnsTypeResources() {
+        internal RosterResources() {
         }
         
         /// <summary>
@@ -39,8 +39,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.Resources.Strings {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("My.CoachManager.Presentation.Prism.Modules.Roster.Resources.Strings.PresetColumns" +
-                            "TypeResources", typeof(PresetColumnsTypeResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("My.CoachManager.Presentation.Prism.Modules.Roster.Core.Resources.Strings.RosterRe" +
+                            "sources", typeof(RosterResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,29 +62,29 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Informations Physique.
+        ///   Looks up a localized string similar to Tous les joueurs.
         /// </summary>
-        public static string BodyInformations {
+        public static string PlayersTitle {
             get {
-                return ResourceManager.GetString("BodyInformations", resourceCulture);
+                return ResourceManager.GetString("PlayersTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Informations Effectif.
+        ///   Looks up a localized string similar to Effectif.
         /// </summary>
-        public static string ClubInformations {
+        public static string RosterMenu {
             get {
-                return ResourceManager.GetString("ClubInformations", resourceCulture);
+                return ResourceManager.GetString("RosterMenu", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Informations Générales.
+        ///   Looks up a localized string similar to Effectif.
         /// </summary>
-        public static string GeneralInformations {
+        public static string RosterTitle {
             get {
-                return ResourceManager.GetString("GeneralInformations", resourceCulture);
+                return ResourceManager.GetString("RosterTitle", resourceCulture);
             }
         }
     }

@@ -70,6 +70,24 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Âge.
+        /// </summary>
+        public static string Age {
+            get {
+                return ResourceManager.GetString("Age", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} ans.
+        /// </summary>
+        public static string AgeFormat {
+            get {
+                return ResourceManager.GetString("AgeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Né(e) le.
         /// </summary>
         public static string Birthdate {

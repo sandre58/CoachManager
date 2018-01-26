@@ -138,6 +138,12 @@
   <data name="CancelOrder" xml:space="preserve">
     <value>Annuler les modifications.</value>
   </data>
+  <data name="CaseSensitive" xml:space="preserve">
+    <value>Sensible à la casse</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
   <data name="ClearText" xml:space="preserve">
     <value>Effacer le texte</value>
   </data>
@@ -189,6 +195,9 @@
   <data name="Remove" xml:space="preserve">
     <value>Supprimer</value>
   </data>
+  <data name="RemoveCondition" xml:space="preserve">
+    <value>Supprimer la condition</value>
+  </data>
   <data name="RemoveContact" xml:space="preserve">
     <value>Supprimer le contact</value>
   </data>
@@ -209,6 +218,9 @@
   </data>
   <data name="ShowItems" xml:space="preserve">
     <value>Afficher les éléments</value>
+  </data>
+  <data name="ShowOverview" xml:space="preserve">
+    <value>Voir l'aperçu</value>
   </data>
   <data name="SignIn" xml:space="preserve">
     <value>Se connecter</value>

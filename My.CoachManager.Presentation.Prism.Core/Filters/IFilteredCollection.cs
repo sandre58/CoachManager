@@ -13,7 +13,8 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// Adds the filter.
         /// </summary>
         /// <param name="filter">The filter.</param>
-        void AddFilter(IFilter filter);
+        /// <param name="logicalOperator"></param>
+        void AddFilter(IFilter filter, LogicalOperator logicalOperator);
 
         /// <summary>
         /// Removes the filter.

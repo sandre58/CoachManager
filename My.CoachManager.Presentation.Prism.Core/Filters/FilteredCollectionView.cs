@@ -16,7 +16,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <summary>
         /// Instance of the registered filters
         /// </summary>
-        private readonly Dictionary<string, IFilter> _filters = new Dictionary<string, IFilter>();
+        private readonly IList<Tuple<LogicalOperator, IFilter>> _filters = new List<Tuple<LogicalOperator, IFilter>>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FilteredCollectionView"/> class.
@@ -65,9 +65,9 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             bool result = true;
             if (CanFilter && (_filters.Count > 0))
             {
-                foreach (IFilter filter in _filters.Values)
+                foreach (var filter in _filters)
                 {
-                    if (!filter.IsMatch(item))
+                    if (!filter.Item2.IsMatch(item))
                     {
                         result = false;
                         break;
@@ -111,7 +111,8 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// Registers a filter withe the collection view.
         /// </summary>
         /// <param name="filter">The filter.</param>
-        public void AddFilter(IFilter filter)
+        /// <param name="logicalOperator"></param>
+        public void AddFilter(IFilter filter, LogicalOperator logicalOperator = LogicalOperator.And)
         {
             if (filter == null)
             {
@@ -121,13 +122,10 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             {
                 throw new ArgumentException("Invalid filter, missing property info.");
             }
-            if (!_filters.ContainsKey(filter.PropertyInfo.Name))
-            {
-                _filters[filter.PropertyInfo.Name] = filter;
-                filter.PropertyChanged += OnFilterChanged;
 
-                UpdateFilter();
-            }
+            _filters.Add(new Tuple<LogicalOperator, IFilter>(logicalOperator, filter));
+
+            OnFilterChanged(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -155,43 +153,35 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
                 throw new ArgumentException("Invalid filter, missing property info.");
             }
 
-            if (_filters.ContainsKey(filter.PropertyInfo.Name))
-            {
-                _filters.Remove(filter.PropertyInfo.Name);
-                filter.PropertyChanged -= OnFilterChanged;
+            _filters.Remove(_filters.FirstOrDefault(x => x.Item2.Equals(filter)));
 
-                UpdateFilter();
-            }
+            OnFilterChanged(this, EventArgs.Empty);
         }
 
         /// <summary>
         /// Removes a filter from the collection.
         /// </summary>
         /// <param name="filters">The filter.</param>
-        public void ChangeFilters(IEnumerable<IFilter> filters)
+        public void ChangeFilters(IEnumerable<Tuple<LogicalOperator, IFilter>> filters)
         {
             if (filters == null)
             {
-                throw new ArgumentNullException("filter");
+                throw new ArgumentNullException($"filter");
             }
 
             _filters.Clear();
 
             foreach (var filter in filters)
             {
-                if (filter.PropertyInfo == null)
+                if (filter.Item2.PropertyInfo == null)
                 {
                     throw new ArgumentException("Invalid filter, missing property info.");
                 }
 
-                if (!_filters.ContainsKey(filter.PropertyInfo.Name))
-                {
-                    _filters[filter.PropertyInfo.Name] = filter;
-                    filter.PropertyChanged += OnFilterChanged;
-                }
+                _filters.Add(filter);
             }
 
-            UpdateFilter();
+            OnFilterChanged(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -203,7 +193,31 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             {
                 Filter = delegate (object o)
                 {
-                    return _filters.Values.All(f => f.IsMatch(o));
+                    if (_filters.Count == 0)
+                        return true;
+
+                    var res = _filters.First().Item2.IsMatch(o);
+
+                    if (_filters.Count > 1)
+                    {
+                        for (int i = 1; i < _filters.Count; i++)
+                        {
+                            var filter = _filters[i];
+
+                            switch (filter.Item1)
+                            {
+                                case LogicalOperator.Or:
+                                    res = res || filter.Item2.IsMatch(o);
+                                    break;
+
+                                default:
+                                    res = res && filter.Item2.IsMatch(o);
+                                    break;
+                            }
+                        }
+                    }
+
+                    return res;
                 };
 
                 Refresh();

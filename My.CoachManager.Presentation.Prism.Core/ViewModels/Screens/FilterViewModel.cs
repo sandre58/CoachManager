@@ -1,4 +1,5 @@
-﻿using My.CoachManager.Presentation.Prism.Core.Filters;
+﻿using My.CoachManager.CrossCutting.Core.Extensions;
+using My.CoachManager.Presentation.Prism.Core.Filters;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
@@ -11,6 +12,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         private string _title;
         private bool _isEnabled;
+        private LogicalOperator _operator;
         private IFilter _filter;
 
         #endregion Fields
@@ -20,16 +22,41 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Initialises a new instance of <see cref="FilterViewModel"/>.
         /// </summary>
-        public FilterViewModel(string title, IFilter filter)
+        public FilterViewModel(IFilter filter, string title = "", LogicalOperator logicalOperator = LogicalOperator.And)
         {
-            Title = title;
+            Operator = logicalOperator;
             Filter = filter;
+            Filter.PropertyChanged += (sender, args) => OnPropertyChanged(args);
+
             IsEnabled = true;
+
+            if (string.IsNullOrEmpty(title))
+            {
+                if (filter != null)
+                {
+                    var name = filter.PropertyInfo.GetDisplayName();
+                    Title = !string.IsNullOrEmpty(name) ? name : filter.PropertyInfo.Name;
+                }
+            }
+            else
+            {
+                Title = title;
+            }
         }
 
         #endregion Constructors
 
         #region Members
+
+        /// <summary>
+        /// Gets or sets the operator.
+        /// </summary>
+        /// <value>The property info.</value>
+        public LogicalOperator Operator
+        {
+            get { return _operator; }
+            set { SetProperty(ref _operator, value); }
+        }
 
         /// <summary>
         /// Gets or sets the filter.

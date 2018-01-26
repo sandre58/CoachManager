@@ -2,28 +2,37 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
-using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Filters;
 using My.CoachManager.Presentation.Prism.Core.Services;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 using Prism.Commands;
 using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
-    public abstract class FiltersViewModel<T> : WorkspaceDialogViewModel, IFiltersViewModel
-        where T : IEntityViewModel
+    public abstract class FiltersViewModel : WorkspaceDialogViewModel, IFiltersViewModel
     {
         #region Fields
 
-        public ObservableCollection<FilterViewModel> AllowedFilters { get; }
         private ObservableCollection<FilterViewModel> _filters;
+        private bool _updateOnLive;
 
         #endregion Fields
 
         #region Members
+
+        /// <summary>
+        /// Gets or sets a methods that create a filter.
+        /// </summary>
+        public Func<string, IFilter> CreateFilter { get; set; }
+
+        /// <summary>
+        /// Gets the allowed filters.
+        /// </summary>
+        public Dictionary<string, string> AllowedFilters { get; }
 
         /// <summary>
         /// Gets or sets the filters.
@@ -31,43 +40,58 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         public ObservableCollection<FilterViewModel> Filters
         {
             get { return _filters; }
-            set { SetProperty(ref _filters, value); }
+            set
+            {
+                SetProperty(ref _filters, value);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the update on live.
+        /// </summary>
+        public bool UpdateOnLive
+        {
+            get { return _updateOnLive; }
+            set
+            {
+                SetProperty(ref _updateOnLive, value, () =>
+                {
+                    OnFiltersChanged(EventArgs.Empty);
+                });
+            }
         }
 
         /// <summary>
         /// Gets or sets the Add command.
         /// </summary>
-        public DelegateCommand<FilterViewModel> AddFilterCommand { get; set; }
+        public DelegateCommand<string> AddFilterCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the Remove command.
         /// </summary>
-        public DelegateCommand<FilterViewModel> RemoveFilterCommand { get; set; }
+        public DelegateCommand<IFilter> RemoveFilterCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the Reset command.
         /// </summary>
         public DelegateCommand ResetCommand { get; set; }
 
-        public int Count
-        {
-            get { return Filters.Count(x => x.IsEnabled); }
-        }
+        /// <summary>
+        /// Gets or sets the Validate command.
+        /// </summary>
+        public DelegateCommand ValidateCommand { get; set; }
 
         /// <summary>
-        /// Gets or sets filters.
+        /// Gets or sets the Validate command.
         /// </summary>
-        public IEnumerable<IFilter> AvailableFilters
-        {
-            get { return Filters.Where(x => x.IsEnabled).Select(x => x.Filter); }
-        }
+        public DelegateCommand CancelCommand { get; set; }
 
         #endregion Members
 
         #region Constructor
 
         /// <summary>
-        /// Initialise a new instance of <see cref="FiltersViewModel{T}"/>
+        /// Initialise a new instance of <see cref="FiltersViewModel"/>
         /// </summary>
         /// <param name="dialogService"></param>
         /// <param name="eventAggregator"></param>
@@ -77,16 +101,13 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             Filters = new ObservableCollection<FilterViewModel>();
             Filters.CollectionChanged += FiltersOnCollectionChanged;
 
-            AllowedFilters = new ObservableCollection<FilterViewModel>
-            {
-                GetFilter("FullName", typeof(StringFilter)),
-                GetFilter("Number", typeof(IntegerCompareFilter)),
-                GetFilter("Category", typeof(StringFilter))
-            };
+            AllowedFilters = new Dictionary<string, string>();
 
-            AddFilterCommand = new DelegateCommand<FilterViewModel>(AddFilter, CanAddFilter);
-            RemoveFilterCommand = new DelegateCommand<FilterViewModel>(RemoveFilter, CanRemoveFilter);
+            AddFilterCommand = new DelegateCommand<string>(AddFilter, CanAddFilter);
+            RemoveFilterCommand = new DelegateCommand<IFilter>(RemoveFilter, CanRemoveFilter);
             ResetCommand = new DelegateCommand(Reset, CanReset);
+            ValidateCommand = new DelegateCommand(() => Close(DialogResult.Ok));
+            CancelCommand = new DelegateCommand(() => Close(DialogResult.Cancel));
         }
 
         #endregion Constructor
@@ -96,32 +117,40 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Add a filter.
         /// </summary>
-        /// <param name="filter"></param>
-        private void AddFilter(FilterViewModel filter)
+        /// <param name="propertyName"></param>
+        private void AddFilter(string propertyName)
         {
-            Filters.Add(filter);
-            AddFilterCommand.RaiseCanExecuteChanged();
-            ResetCommand.RaiseCanExecuteChanged();
-            RemoveFilterCommand.RaiseCanExecuteChanged();
+            if (CreateFilter != null)
+            {
+                var filter = CreateFilter(propertyName);
+
+                if (filter != null)
+                {
+                    Filters.Add(new FilterViewModel(filter));
+                    AddFilterCommand.RaiseCanExecuteChanged();
+                    ResetCommand.RaiseCanExecuteChanged();
+                    RemoveFilterCommand.RaiseCanExecuteChanged();
+                }
+            }
         }
 
         /// <summary>
         /// Can Add a filter ?
         /// </summary>
-        /// <param name="filter"></param>
+        /// <param name="propertyName"></param>
         /// <returns></returns>
-        private bool CanAddFilter(FilterViewModel filter)
+        private bool CanAddFilter(string propertyName)
         {
-            return Filters.All(x => x != filter);
+            return true;
         }
 
         /// <summary>
         /// Remove a filter.
         /// </summary>
         /// <param name="filter"></param>
-        private void RemoveFilter(FilterViewModel filter)
+        private void RemoveFilter(IFilter filter)
         {
-            Filters.Remove(filter);
+            Filters.Remove(Filters.FirstOrDefault(x => x.Filter.Equals(filter)));
             AddFilterCommand.RaiseCanExecuteChanged();
             ResetCommand.RaiseCanExecuteChanged();
             RemoveFilterCommand.RaiseCanExecuteChanged();
@@ -132,9 +161,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        private bool CanRemoveFilter(FilterViewModel filter)
+        private bool CanRemoveFilter(IFilter filter)
         {
-            return Filters.Any(x => x == filter);
+            return true;
         }
 
         /// <summary>
@@ -159,40 +188,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         #endregion Methods
 
-        private FilterViewModel GetFilter(string propertyName, Type typeFilter)
-        {
-            var propertyInfo = typeof(T).GetProperty(propertyName);
-            if (propertyInfo != null && typeFilter != null)
-            {
-                var filter = (IFilter)Activator.CreateInstance(typeFilter, propertyInfo);
-                var name = propertyInfo.GetDisplayName();
-                var title = !string.IsNullOrEmpty(name) ? name : propertyName;
-
-                return new FilterViewModel(title, filter);
-            }
-
-            return null;
-        }
-
         #region Events
-
-        /// <summary>
-        /// Closes the dialog.
-        /// </summary>
-        public event EventHandler FiltersChanged;
-
-        /// <summary>
-        /// Closes the dialog.
-        /// </summary>
-        /// <param name="e"></param>
-        protected void OnFiltersChanged(EventArgs e)
-        {
-            RaisePropertyChanged(() => Count);
-            if (FiltersChanged != null)
-            {
-                FiltersChanged(this, e);
-            }
-        }
 
         private void FiltersOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
@@ -201,12 +197,38 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
                 case NotifyCollectionChangedAction.Add:
                     foreach (var item in notifyCollectionChangedEventArgs.NewItems)
                     {
-                        var i = item as FilterViewModel;
-                        //if (i != null) i.PropertyChanged += (o, args) => OnFiltersChanged(EventArgs.Empty);
+                        var i = (FilterViewModel)item;
+                        i.PropertyChanged += Filter_PropertyChanged;
+                    }
+                    break;
+
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (var item in notifyCollectionChangedEventArgs.OldItems)
+                    {
+                        var i = (FilterViewModel)item;
+                        i.PropertyChanged -= Filter_PropertyChanged;
                     }
                     break;
             }
 
+            OnFiltersChanged(EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// When Filters changed.
+        /// </summary>
+        public event EventHandler FiltersChanged;
+
+        protected void OnFiltersChanged(EventArgs e)
+        {
+            if (FiltersChanged != null)
+            {
+                FiltersChanged(this, e);
+            }
+        }
+
+        protected void Filter_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
             OnFiltersChanged(EventArgs.Empty);
         }
 

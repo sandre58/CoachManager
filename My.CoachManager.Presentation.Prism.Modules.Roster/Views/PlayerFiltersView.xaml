@@ -9,25 +9,28 @@
              xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModels1:PlayerFiltersViewModel, IsDesignTimeCreatable=True}"
-             Height="400" Width="500">
+             Height="500" Width="675">
     <controls:WorkspaceView HeaderTemplate="{x:Null}">
         <Grid parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <controls:DropDownMenuButton Style="{StaticResource HyperLinkDropDownMenuButtonStyle}"
-                                         Content="{x:Static strings1:ControlResources.AddCondition}"
-                                         ItemsSource="{Binding AllowedFilters}"
-                                         HorizontalAlignment="Right">
-                <controls:DropDownMenuButton.ItemContainerStyle>
-                    <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
-                        <Setter Property="Header" Value="{Binding Title}" />
-                        <Setter Property="Command" Value="{Binding DataContext.AddFilterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
-                        <Setter Property="CommandParameter" Value="{Binding }" />
-                    </Style>
-                </controls:DropDownMenuButton.ItemContainerStyle>
-            </controls:DropDownMenuButton>
+            <DockPanel>
+                <CheckBox Content="{x:Static strings1:ControlResources.ShowOverview}" IsChecked="{Binding UpdateOnLive}" />
+                <controls:DropDownMenuButton Style="{StaticResource HyperLinkDropDownMenuButtonStyle}"
+                                             Content="{x:Static strings1:ControlResources.AddCondition}"
+                                             ItemsSource="{Binding AllowedFilters}"
+                                             DockPanel.Dock="Right" HorizontalAlignment="Right">
+                    <controls:DropDownMenuButton.ItemContainerStyle>
+                        <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
+                            <Setter Property="Header" Value="{Binding Value}" />
+                            <Setter Property="Command" Value="{Binding DataContext.AddFilterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+                            <Setter Property="CommandParameter" Value="{Binding Key}" />
+                        </Style>
+                    </controls:DropDownMenuButton.ItemContainerStyle>
+                </controls:DropDownMenuButton>
+            </DockPanel>
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                 <ItemsControl ItemsSource="{Binding Filters}">
                     <ItemsControl.ItemsPanel>
@@ -40,7 +43,8 @@
         </Grid>
 
         <controls:WorkspaceView.Commands>
-            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CloseCommand}" IconData="{StaticResource CancelGeometry}" Content="{x:Static strings1:ControlResources.Close}" IsCancel="True" />
+            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CancelCommand}" Style="{StaticResource CancelCommandButtonApplicationBarStyle}" IsCancel="True" />
+            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding ValidateCommand}" Style="{StaticResource ValidateCommandButtonApplicationBarStyle}" IsDefault="True" />
             <controls:CommandButton DockPanel.Dock="Right" Command="{Binding ResetCommand}" IconData="{StaticResource TrashGeometry}" Content="{x:Static strings1:ControlResources.Reset}" />
         </controls:WorkspaceView.Commands>
     </controls:WorkspaceView>

@@ -1,17 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
     /// <summary>
     ///
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public interface IMultiValueFilter<T> : IFilter
+    public interface IValuesFilter : IFilter
     {
         /// <summary>
         /// Gets the available values used for filtering.
         /// </summary>
         /// <value>The values.</value>
-        IList<T> Values { get; }
+        IEnumerable Values { get; }
     }
 }

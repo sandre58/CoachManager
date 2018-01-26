@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Metadatas;
-using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 
 namespace My.CoachManager.Presentation.Prism.ViewModels
@@ -38,5 +38,13 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
         /// Gets or sets the sort order.
         /// </summary>
         public int Order { get { return _order; } set { SetProperty(ref _order, value); } }
+
+        public int CompareTo(object obj)
+        {
+            var other = obj as DataEntityViewModel;
+            if (other != null)
+                return string.Compare(Code, other.Code, StringComparison.Ordinal);
+            return -1;
+        }
     }
 }

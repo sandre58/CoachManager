@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using My.CoachManager.Presentation.Prism.Modules.Roster.Resources.Strings;
+using My.CoachManager.Presentation.Prism.Modules.Roster.Core.Resources.Strings;
 
-namespace My.CoachManager.Presentation.Prism.Modules.Roster.Enums
+namespace My.CoachManager.Presentation.Prism.Modules.Roster.Core.Enums
 {
     public enum PresetColumnsType
     {

@@ -26,20 +26,23 @@
             <!-- Filters -->
             <StackPanel Grid.Row="0">
                 <DockPanel Background="{DynamicResource DarkVariation3}" parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}">
-                    <WrapPanel Margin="{StaticResource LargeMargin}">
+                    <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="{StaticResource LargeMargin}">
                         <TextBlock Text="{x:Static strings1:ControlResources.SpeedSearch}" VerticalAlignment="Center" />
                         <TextBox Text="{Binding SpeedFilter.Value, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource TextBoxBaseStyle}"
                                  Width="{StaticResource MediumWidth}"
                                  parameters:TextBoxParameters.UseFloatingWatermark="False"
                                  parameters:TextBoxParameters.Watermark="{x:Static strings:PersonResources.LastName}" />
-                        <controls:Badged Badge="{Binding Filters.Count}">
-                            <Button Content="{x:Static strings1:ControlResources.ShowFilters}" Command="{Binding ShowFiltersCommand}" />
+                        <Button Content="{x:Static strings1:ControlResources.Clear}" Command="{Binding Filters.ResetCommand}" />
+                        <controls:Badged Badge="{Binding CountFilters}">
+                            <Button Content="{x:Static strings1:ControlResources.ShowFilters}" Command="{Binding ShowFiltersCommand}" Style="{StaticResource AccentButtonBaseStyle}" />
                         </controls:Badged>
                     </WrapPanel>
-                    <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right"
+                </DockPanel>
+                <DockPanel parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}">
+                    <TextBlock VerticalAlignment="Center"
+                               parameters:PanelParameters.NotAffectMargin="True"
                                Margin="{StaticResource DefaultMargin}"
-                               VerticalAlignment="Center"
                                DataContext="{Binding FilteredItems}"
                                Text="{Binding Count, StringFormat={x:Static strings1:ControlResources.CountItemsToUpper}}">
                         <TextBlock.Style>
@@ -53,9 +56,15 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-                </DockPanel>
-                <DockPanel parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}">
-                    <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="{StaticResource DefaultMargin}">
+                    <Rectangle Width="1"
+                               VerticalAlignment="Stretch"
+                               parameters:PanelParameters.NotAffectMargin="True"
+                               Margin="{StaticResource DefaultVerticalMargin}"
+                               Fill="{DynamicResource Control}"
+                               IsHitTestVisible="False"
+                               SnapsToDevicePixels="True"
+                               UseLayoutRounding="True" />
+                    <WrapPanel Margin="{StaticResource DefaultVerticalMargin}">
                         <controls:DropDownMenuButton Style="{StaticResource HyperLinkDropDownMenuButtonStyle}"
                                                      Content="{x:Static strings1:ControlResources.ShowData}"
                                                      ItemsSource="{Binding PresetColumns.Keys}">
@@ -114,6 +123,9 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
+                    <!-- Age -->
+                    <columns:DataGridTextColumn AutomationProperties.Name="Age" Binding="{Binding Age, StringFormat={x:Static strings:PersonResources.AgeFormat}}" Header="{x:Static strings:PersonResources.Age}" SortMemberPath="Age" MinWidth="50" />
 
                     <!-- Birthdate -->
                     <DataGridTextColumn AutomationProperties.Name="Birthdate" Binding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}" Header="{x:Static strings:PersonResources.Birthdate}" SortMemberPath="Birthdate" MinWidth="100" />

@@ -1,27 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using My.CoachManager.CrossCutting.Core.Extensions;
+using My.CoachManager.CrossCutting.Core.Resources.Entities;
 using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Presentation.Prism.Controls.Extensions;
+using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Filters;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
-using My.CoachManager.Presentation.Prism.Modules.Roster.Enums;
-using My.CoachManager.Presentation.Prism.Modules.Roster.Resources.Strings;
+using My.CoachManager.Presentation.Prism.Modules.Roster.Core.Enums;
 using My.CoachManager.Presentation.Prism.Modules.Roster.Views;
 using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
+using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using Prism.Commands;
 using Prism.Events;
+using RosterResources = My.CoachManager.Presentation.Prism.Modules.Roster.Core.Resources.Strings.RosterResources;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 {
+    [Serializable]
     public class PlayersListViewModel : ReadOnlyListViewModel<PlayerDetailViewModel>, IPlayersListViewModel
     {
         #region Constants
 
         private static readonly string[] GeneralInformationsColumns =
-            {"Birthdate", "Category", "Gender", "Country", "Address", "Phone", "Email"};
+            {"Age", "Birthdate", "Category", "Gender", "Country", "Address", "Phone", "Email"};
 
         private static readonly string[] ClubInformationsColumns = { "Number", "Category", "License", "LicenseState" };
 
@@ -32,10 +40,13 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 
         #region Fields
 
+        private readonly IAdminService _adminService;
         private readonly IRosterService _rosterService;
         private ObservableCollection<string> _displayedColumns;
         private Dictionary<PresetColumnsType, string[]> _presetColumns;
         private IFiltersViewModel _filters;
+        private IEnumerable<FilterViewModel> _saveFilters;
+        private IEnumerable<CategoryViewModel> _categories;
 
         #endregion Fields
 
@@ -75,10 +86,15 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         public IFiltersViewModel Filters
         {
             get { return _filters; }
-            set
-            {
-                SetProperty(ref _filters, value);
-            }
+            set { SetProperty(ref _filters, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the count filters.
+        /// </summary>
+        public int CountFilters
+        {
+            get { return Filters.Filters.Count(x => x.IsEnabled); }
         }
 
         #endregion Members
@@ -88,10 +104,13 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="PlayersListViewModel"/>.
         /// </summary>
-        public PlayersListViewModel(IRosterService rosterService, IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger, IPlayerFiltersViewModel filters)
+        public PlayersListViewModel(IRosterService rosterService, IAdminService adminService,
+            IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger,
+            IPlayerFiltersViewModel filters)
             : base(dialogService, eventAggregator, logger)
         {
             _rosterService = rosterService;
+            _adminService = adminService;
 
             Title = RosterResources.PlayersTitle;
 
@@ -108,18 +127,29 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
             SpeedFilter = new StringFilter(typeof(PlayerDetailViewModel).GetProperty("FullName"));
             SpeedFilter.PropertyChanged += SpeedFilter_FilteringChanged;
             Filters = filters;
-
-            Filters.FiltersChanged += Filters_FiltersChanged;
-        }
-
-        private void Filters_FiltersChanged(object sender, EventArgs e)
-        {
-            FilteredItems.ChangeFilters(Filters.AvailableFilters);
+            Filters.FiltersChanged += (sender, args) =>
+            {
+                if (Filters.UpdateOnLive) OnFiltersChanged(sender, args);
+            };
         }
 
         #endregion Constructors
 
         #region Methods
+
+        protected override void InitializeDataCore()
+        {
+            base.InitializeDataCore();
+
+            _categories = _adminService.GetCategoriesList().ToViewModels<CategoryViewModel>();
+
+            Filters.AllowedFilters.Add("FullName", PersonResources.FullName);
+            Filters.AllowedFilters.Add("Age", PersonResources.Age);
+            Filters.AllowedFilters.Add("Number", PlayerResources.Number);
+            Filters.AllowedFilters.Add("CategoryId", PlayerResources.Category);
+
+            Filters.CreateFilter = CreateFilter;
+        }
 
         /// <summary>
         /// Load Data.
@@ -155,7 +185,74 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// </summary>
         private void ShowFilter()
         {
-            DialogService.ShowWorkspaceDialog<PlayerFiltersView>();
+            DialogService.ShowWorkspaceDialog<PlayerFiltersView>(before =>
+            {
+                //if (_saveFilters != null)
+                //{
+                //    var model = before.Context as IFiltersViewModel;
+                //    if (model != null)
+                //    {
+                //        model.Filters = new ObservableCollection<FilterViewModel>(_saveFilters.Clone2());
+                //    }
+                //}
+            },
+                after =>
+                {
+                    //var model = after.Context as IFiltersViewModel;
+                    //if (model != null)
+                    //{
+                    //    if (after.Result == DialogResult.Ok)
+                    //    {
+                    //        OnFiltersChanged(this, EventArgs.Empty);
+                    //        _saveFilters = model.Filters.Clone2();
+                    //    }
+
+                    //    if (after.Result == DialogResult.Cancel && model.UpdateOnLive)
+                    //    {
+                    //        model.Filters = new ObservableCollection<FilterViewModel>(_saveFilters.Clone2());
+                    //        OnFiltersChanged(this, EventArgs.Empty);
+                    //    }
+                    //}
+                });
+        }
+
+        private void OnFiltersChanged(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                System.Windows.Application.Current.Invoke(() =>
+                {
+                    FilteredItems.ChangeFilters(Filters.Filters.Where(x => x.IsEnabled)
+                        .Select(x => new Tuple<LogicalOperator, IFilter>(x.Operator, x.Filter)));
+                    RaisePropertyChanged(() => CountFilters);
+                });
+            });
+        }
+
+        /// <summary>
+        /// Create a filter.
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        private IFilter CreateFilter(string propertyName)
+        {
+            var property = GetPropertyInfo(propertyName);
+            switch (propertyName)
+            {
+                case "FullName":
+                    return new StringFilter(property);
+
+                case "Age":
+                    return new IntegerFilter(property, ComparableOperator.IsBetween, 15, 45);
+
+                case "Number":
+                    return new IntegerFilter(property, ComparableOperator.EqualsTo, 1, 10);
+
+                case "CategoryId":
+                    return new SelectedLabelablesFilter(property, _categories);
+            }
+
+            return null;
         }
 
         #endregion Methods
@@ -168,10 +265,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         public StringFilter SpeedFilter
         {
             get { return _speedFilter; }
-            set
-            {
-                SetProperty(ref _speedFilter, value);
-            }
+            set { SetProperty(ref _speedFilter, value); }
         }
 
         private void SpeedFilter_FilteringChanged(object sender, EventArgs e)

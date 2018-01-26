@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reflection;
 using System.Windows.Input;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Filters;
@@ -146,6 +147,16 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         protected virtual void OnSelectedItemChanged()
         {
+        }
+
+        /// <summary>
+        /// Gets specified property info.
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        protected PropertyInfo GetPropertyInfo(string propertyName)
+        {
+            return typeof(TEntityViewModel).GetProperty(propertyName);
         }
 
         #endregion Methods

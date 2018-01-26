@@ -91,13 +91,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Enums\PresetColumnsType.cs" />
-    <Compile Include="Filters\CategoryFilter.cs" />
-    <Compile Include="Resources\Strings\PresetColumnsTypeResources.Designer.cs">
-      <DependentUpon>PresetColumnsTypeResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="ViewModels\PlayerFiltersViewModel.cs" />
     <Compile Include="ViewModels\IPlayerFiltersViewModel.cs" />
     <Compile Include="ViewModels\IPlayersListViewModel.cs" />
@@ -113,11 +106,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Resources\Strings\RosterResources.Designer.cs">
-      <DependentUpon>RosterResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="RosterModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -135,16 +123,6 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings\PresetColumnsTypeResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>PresetColumnsTypeResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings\RosterResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>RosterResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -194,6 +172,10 @@
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Core\My.CoachManager.Presentation.Prism.Core.csproj">
       <Project>{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB}</Project>
       <Name>My.CoachManager.Presentation.Prism.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Roster.Core\My.CoachManager.Presentation.Prism.Modules.Roster.Core.csproj">
+      <Project>{D55A1927-23BC-4C8B-B73E-D5143968B347}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Modules.Roster.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Resources\My.CoachManager.Presentation.Prism.Resources.csproj">
       <Project>{2d290fd9-5b64-4af4-a295-2b4cde6eb330}</Project>

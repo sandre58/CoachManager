@@ -1,14 +1,14 @@
-﻿using My.CoachManager.CrossCutting.Logging;
+﻿using System;
+using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
-using My.CoachManager.Presentation.Prism.ViewModels;
 using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 {
     #region Constructors
 
-    public class PlayerFiltersViewModel : FiltersViewModel<PlayerDetailViewModel>, IPlayerFiltersViewModel
+    public class PlayerFiltersViewModel : FiltersViewModel, IPlayerFiltersViewModel
     {
         /// <summary>
         /// Initialise a new instance of <see cref="PlayerFiltersViewModel"/>.

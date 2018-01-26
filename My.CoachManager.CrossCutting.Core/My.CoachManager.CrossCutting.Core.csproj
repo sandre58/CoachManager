@@ -328,6 +328,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\Enums\FilterOperatorResources.Designer.cs">
+      <DependentUpon>FilterOperatorResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\Enums\LicenseStateResources.Designer.cs">
       <DependentUpon>LicenseStateResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -461,6 +466,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DataEntityResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Enums\FilterOperatorResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FilterOperatorResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Enums\LicenseStateResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

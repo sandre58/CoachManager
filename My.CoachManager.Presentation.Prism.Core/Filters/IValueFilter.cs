@@ -7,7 +7,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
     ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IValueFilter<T> : IFilter<T> where T : IComparable
+    public interface IValueFilter<T> : IFilter
     {
         /// <summary>
         /// Gets the available value used for filtering.

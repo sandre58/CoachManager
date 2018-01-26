@@ -6,8 +6,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
     /// Defines the contract for a range filter
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IRangeFilter<T> : IFilter<T>
-        where T : IComparable
+    public interface IComparableFilter<T> : IFilter where T : IComparable
     {
         /// <summary>
         /// Gets or sets the minimum value.

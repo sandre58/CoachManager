@@ -1,24 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using My.CoachManager.Presentation.Prism.Core.Filters;
+using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
     public interface IFiltersViewModel
     {
         /// <summary>
+        /// Gets or sets a methods that create a filter.
+        /// </summary>
+        Func<string, IFilter> CreateFilter { get; set; }
+
+        /// <summary>
+        /// Gets the allowed filters.
+        /// </summary>
+        Dictionary<string, string> AllowedFilters { get; }
+
+        /// <summary>
+        /// Gets the update on live.
+        /// </summary>
+        bool UpdateOnLive { get; set; }
+
+        /// <summary>
+        /// Gets or sets the filters.
+        /// </summary>
+        ObservableCollection<FilterViewModel> Filters { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Reset command.
+        /// </summary>
+        DelegateCommand ResetCommand { get; set; }
+
+        /// <summary>
         /// When Filters changed.
         /// </summary>
         event EventHandler FiltersChanged;
-
-        /// <summary>
-        /// Gets or sets filters number.
-        /// </summary>
-        int Count { get; }
-
-        /// <summary>
-        /// Gets or sets filters.
-        /// </summary>
-        IEnumerable<IFilter> AvailableFilters { get; }
     }
 }

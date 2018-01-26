@@ -53,9 +53,13 @@
         <Setter Property="Focusable" Value="False" />
     </Style>
 
-    <Style x:Key="SmallHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource HeaderStyle}">
+    <Style x:Key="MediumHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource HeaderStyle}">
         <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}" />
         <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
+    <Style x:Key="SmallHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource MediumHeaderStyle}">
+        <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
     </Style>
 
     <Style TargetType="{x:Type Label}" x:Key="HeaderIconStyle">

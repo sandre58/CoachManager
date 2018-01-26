@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace My.CoachManager.CrossCutting.Core.Resources {
+namespace My.CoachManager.CrossCutting.Core.Resources.Enums {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace My.CoachManager.CrossCutting.Core.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class GlobalResources {
+    public class FilterOperatorResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal GlobalResources() {
+        internal FilterOperatorResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace My.CoachManager.CrossCutting.Core.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("My.CoachManager.CrossCutting.Core.Resources.GlobalResources", typeof(GlobalResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("My.CoachManager.CrossCutting.Core.Resources.Enums.FilterOperatorResources", typeof(FilterOperatorResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,56 @@ namespace My.CoachManager.CrossCutting.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Toute.
-        /// </summary>
-        public static string AllFemale {
-            get {
-                return ResourceManager.GetString("AllFemale", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Toutes.
-        /// </summary>
-        public static string AllFemales {
-            get {
-                return ResourceManager.GetString("AllFemales", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tout.
-        /// </summary>
-        public static string AllMale {
-            get {
-                return ResourceManager.GetString("AllMale", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tous.
-        /// </summary>
-        public static string AllMales {
-            get {
-                return ResourceManager.GetString("AllMales", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Et.
         /// </summary>
         public static string And {
             get {
                 return ResourceManager.GetString("And", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contient.
+        /// </summary>
+        public static string Contains {
+            get {
+                return ResourceManager.GetString("Contains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Se termine par.
+        /// </summary>
+        public static string EndsWith {
+            get {
+                return ResourceManager.GetString("EndsWith", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Egal à.
+        /// </summary>
+        public static string EqualsTo {
+            get {
+                return ResourceManager.GetString("EqualsTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supérieur ou égal à.
+        /// </summary>
+        public static string GreaterEqualThan {
+            get {
+                return ResourceManager.GetString("GreaterEqualThan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supérieur à.
+        /// </summary>
+        public static string GreaterThan {
+            get {
+                return ResourceManager.GetString("GreaterThan", resourceCulture);
             }
         }
         
@@ -124,83 +133,65 @@ namespace My.CoachManager.CrossCutting.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aucun(e).
+        ///   Looks up a localized string similar to N&apos;est pas.
         /// </summary>
-        public static string None {
+        public static string IsNot {
             get {
-                return ResourceManager.GetString("None", resourceCulture);
+                return ResourceManager.GetString("IsNot", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aucune.
+        ///   Looks up a localized string similar to N&apos;est pas entre.
         /// </summary>
-        public static string NoneFemale {
+        public static string IsNotBetween {
             get {
-                return ResourceManager.GetString("NoneFemale", resourceCulture);
+                return ResourceManager.GetString("IsNotBetween", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aucun.
+        ///   Looks up a localized string similar to Inférieur ou égal à.
         /// </summary>
-        public static string NoneMale {
+        public static string LessEqualThan {
             get {
-                return ResourceManager.GetString("NoneMale", resourceCulture);
+                return ResourceManager.GetString("LessEqualThan", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Non défini(e).
+        ///   Looks up a localized string similar to Inférieur à.
         /// </summary>
-        public static string Undefined {
+        public static string LessThan {
             get {
-                return ResourceManager.GetString("Undefined", resourceCulture);
+                return ResourceManager.GetString("LessThan", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Non définie.
+        ///   Looks up a localized string similar to Différent de.
         /// </summary>
-        public static string UndefinedFemale {
+        public static string NotEqualsTo {
             get {
-                return ResourceManager.GetString("UndefinedFemale", resourceCulture);
+                return ResourceManager.GetString("NotEqualsTo", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Non défini.
+        ///   Looks up a localized string similar to Ou.
         /// </summary>
-        public static string UndefinedMale {
+        public static string Or {
             get {
-                return ResourceManager.GetString("UndefinedMale", resourceCulture);
+                return ResourceManager.GetString("Or", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Non définies.
+        ///   Looks up a localized string similar to Commence par.
         /// </summary>
-        public static string UndefinedPluralFemale {
+        public static string StartsWith {
             get {
-                return ResourceManager.GetString("UndefinedPluralFemale", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Non défini(e)s.
-        /// </summary>
-        public static string UndefiniedPlural {
-            get {
-                return ResourceManager.GetString("UndefiniedPlural", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Non définis.
-        /// </summary>
-        public static string UndefiniedPluralMale {
-            get {
-                return ResourceManager.GetString("UndefiniedPluralMale", resourceCulture);
+                return ResourceManager.GetString("StartsWith", resourceCulture);
             }
         }
     }
