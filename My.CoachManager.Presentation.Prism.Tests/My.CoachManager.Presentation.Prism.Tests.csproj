@@ -97,9 +97,17 @@
       <Project>{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}</Project>
       <Name>My.CoachManager.Presentation.Prism.Controls</Name>
     </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Core\My.CoachManager.Presentation.Prism.Core.csproj">
+      <Project>{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Resources\My.CoachManager.Presentation.Prism.Resources.csproj">
       <Project>{2d290fd9-5b64-4af4-a295-2b4cde6eb330}</Project>
       <Name>My.CoachManager.Presentation.Prism.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.ViewModels\My.CoachManager.Presentation.Prism.ViewModels.csproj">
+      <Project>{EEC17382-357C-4CD4-B493-23659FEE0E94}</Project>
+      <Name>My.CoachManager.Presentation.Prism.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

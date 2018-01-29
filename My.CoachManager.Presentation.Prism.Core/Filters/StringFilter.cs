@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
     /// <summary>
     /// Defines a string filter
     /// </summary>
+    [Serializable]
     public class StringFilter : Filter, IValueFilter<string>
     {
         #region Fields
@@ -40,6 +43,13 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         {
             Operator = filterMode;
             CaseSensitive = caseSensitive;
+        }
+
+        /// <summary>
+        /// Constructor used by serialization.
+        /// </summary>
+        protected StringFilter()
+        {
         }
 
         #endregion Constructors
@@ -138,5 +148,36 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
                     throw new NotImplementedException();
             }
         }
+
+        #region ISerializable Implementation
+
+        /// <summary>
+        /// Save data for the serialization.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("Operator", Operator);
+            info.AddValue("Value", Value);
+            info.AddValue("CaseSensitive", CaseSensitive);
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Constructor used for the serialization.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected StringFilter(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            Operator = (StringOperator)info.GetValue("Operator", typeof(StringOperator));
+            Value = info.GetString("Value");
+            CaseSensitive = info.GetBoolean("CaseSensitive");
+        }
+
+        #endregion ISerializable Implementation
     }
 }

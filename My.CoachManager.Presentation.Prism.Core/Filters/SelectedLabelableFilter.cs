@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.Serialization;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
@@ -21,6 +22,17 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <param name="allowedValues"></param>
         public SelectedLabelableFilter(PropertyInfo propertyInfo, IEnumerable<ILabelableViewModel> allowedValues)
             : base(propertyInfo, allowedValues)
+        {
+        }
+
+        protected SelectedLabelableFilter(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+
+        /// <summary>
+        /// Constructor used by serialization.
+        /// </summary>
+        protected SelectedLabelableFilter()
         {
         }
     }

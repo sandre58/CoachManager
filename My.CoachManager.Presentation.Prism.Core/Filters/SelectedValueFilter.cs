@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
@@ -38,6 +39,13 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <param name="allowedValues"></param>
         public SelectedValueFilter(PropertyInfo propertyInfo, IEnumerable<TAllowedValues> allowedValues)
             : base(propertyInfo, allowedValues)
+        {
+        }
+
+        /// <summary>
+        /// Constructor used by serialization.
+        /// </summary>
+        protected SelectedValueFilter()
         {
         }
 
@@ -90,5 +98,31 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         }
 
         #endregion Methods
+
+        #region ISerializable Implementation
+
+        /// <summary>
+        /// Save data for the serialization.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("Value", Value);
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Constructor used for the serialization.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected SelectedValueFilter(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            Value = (TValue)info.GetValue("Value", typeof(TValue));
+        }
+
+        #endregion ISerializable Implementation
     }
 }

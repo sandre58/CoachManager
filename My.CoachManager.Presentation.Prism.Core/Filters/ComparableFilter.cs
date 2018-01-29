@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
@@ -55,6 +56,13 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             _to = to;
             _from = from;
             Operator = comparableOperator;
+        }
+
+        /// <summary>
+        /// Constructor used by serialization.
+        /// </summary>
+        protected ComparableFilter()
+        {
         }
 
         #endregion Constructors
@@ -175,7 +183,37 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
                     throw new NotImplementedException();
             }
         }
-    }
 
-    #endregion Methods
+        #endregion Methods
+
+        #region ISerializable Implementation
+
+        /// <summary>
+        /// Save data for the serialization.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("Operator", Operator);
+            info.AddValue("From", From);
+            info.AddValue("To", To);
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Constructor used for the serialization.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected ComparableFilter(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            Operator = (ComparableOperator)info.GetValue("Operator", typeof(ComparableOperator));
+            From = (T)info.GetValue("From", typeof(T));
+            To = (T)info.GetValue("To", typeof(T));
+        }
+
+        #endregion ISerializable Implementation
+    }
 }

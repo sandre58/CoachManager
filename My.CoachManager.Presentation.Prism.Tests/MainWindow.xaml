@@ -81,7 +81,7 @@
                                     ItemsSource="{Binding List}" DisplayMemberPath="Item2" ValueMemberPath="Item1" />
             <ComboBox Style="{StaticResource ComboBoxStyle}" Grid.Column="3" Grid.Row="5" Width="100" ItemsSource="{Binding List}" DisplayMemberPath="Item2" SelectedValuePath="Item1" />
 
-            <Button Content="Edit" Margin="10" Grid.Row="6" Grid.ColumnSpan="4" Width="100" Height="30" VerticalAlignment="Bottom" />
+            <Button Content="Edit" Margin="10" Grid.Row="6" Grid.ColumnSpan="4" Width="100" Height="30" VerticalAlignment="Bottom" Click="Button_Click" />
         </Grid>
     </Border>
 </controls:ExtendedWindow>

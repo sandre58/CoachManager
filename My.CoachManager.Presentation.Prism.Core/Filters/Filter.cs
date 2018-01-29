@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
@@ -7,7 +9,8 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
     /// <summary>
     /// Base class for a filter
     /// </summary>
-    public abstract class Filter : ViewModelBase, IFilter
+    [Serializable]
+    public abstract class Filter : ViewModelBase, IFilter, ISerializable
     {
         #region Constructors
 
@@ -16,13 +19,17 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// Initializes a new instance of the <see cref="T:My.CoachManager.Presentation.Prism.Core.Filters.Filter" /> class.
         /// </summary>
         /// <param name="propertyInfo">The property info.</param>
-        protected Filter(PropertyInfo propertyInfo)
+        protected Filter(PropertyInfo propertyInfo) : this()
         {
             if (propertyInfo == null)
             {
                 throw new ArgumentNullException("propertyInfo");
             }
             PropertyInfo = propertyInfo;
+        }
+
+        protected Filter()
+        {
             Id = Guid.NewGuid();
         }
 
@@ -39,7 +46,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <summary>
         /// Gets or set uniq id.
         /// </summary>
-        public Guid Id { get; private set; }
+        public Guid Id { get; }
 
         #endregion Members
 
@@ -73,5 +80,31 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         }
 
         #endregion Methods
+
+        #region ISerializable Implementation
+
+        /// <summary>
+        /// Save data for the serialization.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("PropertyInfo", PropertyInfo);
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Constructor used for the serialization.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected Filter(SerializationInfo info, StreamingContext context)
+        {
+            PropertyInfo = (PropertyInfo)info.GetValue("PropertyInfo", typeof(PropertyInfo));
+        }
+
+        #endregion ISerializable Implementation
     }
 }

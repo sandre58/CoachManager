@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
@@ -41,6 +41,13 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             AllowedValues = allowedValues;
         }
 
+        /// <summary>
+        /// Constructor used by serialization.
+        /// </summary>
+        protected SelectableFilter()
+        {
+        }
+
         #endregion Constructors
 
         #region Members
@@ -66,5 +73,33 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         }
 
         #endregion Members
+
+        #region ISerializable Implementation
+
+        /// <summary>
+        /// Save data for the serialization.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("Operator", Operator);
+            info.AddValue("AllowedValues", AllowedValues);
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Constructor used for the serialization.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected SelectableFilter(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            Operator = (BinaryOperator)info.GetValue("Operator", typeof(BinaryOperator));
+            AllowedValues = (IEnumerable<TAllowedValues>)info.GetValue("AllowedValues", typeof(IEnumerable<TAllowedValues>));
+        }
+
+        #endregion ISerializable Implementation
     }
 }
