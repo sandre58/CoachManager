@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
-using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.SkinManager;
-using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Settings.ViewModels
 {
@@ -65,8 +62,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Settings.ViewModels
         /// <summary>
         /// Initializes an instance of <see cref="SkinSettingsViewModel"/>.
         /// </summary>
-        public SkinSettingsViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
-            : base(dialogService, eventAggregator, logger)
+        public SkinSettingsViewModel()
         {
             Accents = SkinManager.SkinManager.Accents;
             Themes = SkinManager.SkinManager.Themes;

@@ -1,8 +1,5 @@
 ﻿using System.Reflection;
-using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
-using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Modules.About.ViewModels
 {
@@ -87,8 +84,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.About.ViewModels
         /// <summary>
         /// Initializes an instance of <see cref="AboutViewModel"/>.
         /// </summary>
-        public AboutViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
-            : base(dialogService, eventAggregator, logger)
+        public AboutViewModel()
         {
             var assembly = Assembly.GetEntryAssembly();
 

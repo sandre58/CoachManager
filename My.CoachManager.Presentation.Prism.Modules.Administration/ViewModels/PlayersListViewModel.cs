@@ -1,19 +1,16 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using My.CoachManager.Application.Dtos.Persons;
-using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Presentation.Prism.Core.Services;
-using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Resources.Strings;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Views;
 using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
-using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
-    public class PlayersListViewModel : ListViewModel<PlayerViewModel, PlayerEditView, PlayerEditViewModel>, IPlayersListViewModel
+    public class PlayersListViewModel : ListViewModel<PlayerViewModel, PlayerEditViewModel>, IPlayersListViewModel
     {
         #region Fields
 
@@ -26,8 +23,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="CategoriesListViewModel"/>.
         /// </summary>
-        public PlayersListViewModel(IAdminService adminService, IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
-            : base(dialogService, eventAggregator, logger)
+        public PlayersListViewModel(IAdminService adminService)
         {
             _adminService = adminService;
 
@@ -37,6 +33,15 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         #endregion Constructors
 
         #region Methods
+
+        /// <summary>
+        /// Get Item View Type.
+        /// </summary>
+        /// <returns></returns>
+        protected override Type GetEditViewType()
+        {
+            return typeof(PlayerEditView);
+        }
 
         /// <summary>
         /// Remove the item from data source.

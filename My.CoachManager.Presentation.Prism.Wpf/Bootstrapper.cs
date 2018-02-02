@@ -71,6 +71,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             Locator.RegisterType<ILogger, Logger>();
             Locator.RegisterType<IAuthenticationService, AuthenticationService>();
             Locator.RegisterType<IDialogService, DialogService>();
+            Locator.RegisterType<INavigationService, NavigationService>();
 
             // ViewModels
             Locator.RegisterType<IMessageViewModel, MessageViewModel>();

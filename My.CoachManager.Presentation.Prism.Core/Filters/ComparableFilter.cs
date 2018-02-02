@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Reflection;
-using System.Runtime.Serialization;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
@@ -16,6 +14,10 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
 
         private T _to;
 
+        private T _minimum;
+
+        private T _maximum;
+
         private ComparableOperator _operator;
 
         #endregion Fields
@@ -25,20 +27,20 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <summary>
         /// Initializes a new instance of the <see cref="ComparableFilter&lt;T&gt;"/> class.
         /// </summary>
-        /// <param name="propertyInfo">The property info.</param>
-        public ComparableFilter(PropertyInfo propertyInfo)
-            : base(propertyInfo)
+        /// <param name="propertyName">The property info.</param>
+        public ComparableFilter(string propertyName)
+            : base(propertyName)
         { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ComparableFilter&lt;T&gt;"/> class.
         /// </summary>
-        /// <param name="propertyInfo">The property info.</param>
+        /// <param name="propertyName">The property info.</param>
         /// <param name="comparableOperator"></param>
         /// <param name="from">From.</param>
         /// <param name="to">To.</param>
-        public ComparableFilter(PropertyInfo propertyInfo, ComparableOperator comparableOperator, T from, T to)
-            : this(propertyInfo)
+        public ComparableFilter(string propertyName, ComparableOperator comparableOperator, T from, T to)
+            : this(propertyName)
         {
             if (to == null)
             {
@@ -123,6 +125,38 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             }
         }
 
+        /// <summary>
+        /// Gets or sets the minimum.
+        /// </summary>
+        /// <value>From.</value>
+        public T Minimum
+        {
+            get
+            {
+                return _minimum;
+            }
+            set
+            {
+                SetProperty(ref _minimum, value);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets he maximum.
+        /// </summary>
+        /// <value>To.</value>
+        public T Maximum
+        {
+            get
+            {
+                return _maximum;
+            }
+            set
+            {
+                SetProperty(ref _maximum, value);
+            }
+        }
+
         #endregion Members
 
         #region Methods
@@ -130,26 +164,20 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <summary>
         /// Determines whether the specified target is a match.
         /// </summary>
-        /// <param name="target">The target.</param>
+        /// <param name="toCompare">The target.</param>
         /// <returns>
         /// 	<c>true</c> if the specified target is a match; otherwise, <c>false</c>.
         /// </returns>
-        public override bool IsMatch(object target)
+        protected override bool IsMatchProperty(object toCompare)
         {
-            if (target == null)
+            var toComparable = toCompare as IComparable;
+            if (toComparable == null)
             {
                 return false;
             }
 
-            var toCompare = PropertyInfo.GetValue(target, null) as IComparable;
-
-            if (toCompare == null)
-            {
-                return false;
-            }
-
-            var compareTo = toCompare.CompareTo(_to);
-            var compareFrom = toCompare.CompareTo(_from);
+            var compareTo = toComparable.CompareTo(_to);
+            var compareFrom = toComparable.CompareTo(_from);
 
             bool result = (compareFrom >= 0 && compareTo <= 0);
 
@@ -184,36 +212,42 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             }
         }
 
+        /// <summary>
+        /// Gets if the filter is empty.
+        /// </summary>
+        public override bool IsEmpty()
+        {
+            return (From == null || From.Equals(default(T))) && (To == null || To.Equals(default(T)));
+        }
+
+        /// <summary>
+        /// Gets if the filter is empty.
+        /// </summary>
+        public override void Reset()
+        {
+            From = default(T);
+            To = default(T);
+        }
+
+        public override bool Equals(object obj)
+        {
+            var o = obj as ComparableFilter<T>;
+
+            if (o == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            return base.Equals(obj) && Operator == o.Operator;
+        }
+
+        // override object.GetHashCode
+        public override int GetHashCode()
+        {
+            // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
+            return base.GetHashCode();
+        }
+
         #endregion Methods
-
-        #region ISerializable Implementation
-
-        /// <summary>
-        /// Save data for the serialization.
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData(info, context);
-            info.AddValue("Operator", Operator);
-            info.AddValue("From", From);
-            info.AddValue("To", To);
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Constructor used for the serialization.
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        protected ComparableFilter(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-            Operator = (ComparableOperator)info.GetValue("Operator", typeof(ComparableOperator));
-            From = (T)info.GetValue("From", typeof(T));
-            To = (T)info.GetValue("To", typeof(T));
-        }
-
-        #endregion ISerializable Implementation
     }
 }

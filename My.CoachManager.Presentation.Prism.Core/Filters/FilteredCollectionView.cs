@@ -11,7 +11,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
     /// <summary>
     /// View on top of a collection of INotifyPropertyChanged elements.
     /// </summary>
-    public class FilteredCollectionView : ListCollectionView, IFilteredCollection
+    public class FilteredCollectionView<T> : ListCollectionView, IFilteredCollection, IEnumerable<T>
     {
         /// <summary>
         /// Instance of the registered filters
@@ -19,7 +19,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         private readonly IList<Tuple<LogicalOperator, IFilter>> _filters = new List<Tuple<LogicalOperator, IFilter>>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FilteredCollectionView"/> class.
+        /// Initializes a new instance of the <see cref="FilteredCollectionView{T}"/> class.
         /// </summary>
         /// <param name="collection">The collection.</param>
         public FilteredCollectionView(IList collection) : base(collection)
@@ -118,10 +118,6 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             {
                 throw new ArgumentNullException("filter");
             }
-            if (filter.PropertyInfo == null)
-            {
-                throw new ArgumentException("Invalid filter, missing property info.");
-            }
 
             _filters.Add(new Tuple<LogicalOperator, IFilter>(logicalOperator, filter));
 
@@ -148,12 +144,8 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             {
                 throw new ArgumentNullException("filter");
             }
-            if (filter.PropertyInfo == null)
-            {
-                throw new ArgumentException("Invalid filter, missing property info.");
-            }
 
-            _filters.Remove(_filters.FirstOrDefault(x => x.Item2.Equals(filter)));
+            _filters.Remove(_filters.FirstOrDefault(x => ReferenceEquals(x.Item2, filter)));
 
             OnFilterChanged(this, EventArgs.Empty);
         }
@@ -173,11 +165,6 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
 
             foreach (var filter in filters)
             {
-                if (filter.Item2.PropertyInfo == null)
-                {
-                    throw new ArgumentException("Invalid filter, missing property info.");
-                }
-
                 _filters.Add(filter);
             }
 
@@ -225,5 +212,10 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         }
 
         #endregion IFilteredCollection Members
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            return (IEnumerator<T>)base.GetEnumerator();
+        }
     }
 }

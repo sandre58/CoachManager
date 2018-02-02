@@ -2,9 +2,6 @@
 using System.Threading;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
-using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Presentation.Prism.Core.Services;
-using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
@@ -23,33 +20,17 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Initialise a new instance of <see cref="ScreenViewModel"/>.
         /// </summary>
-        public ScreenViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
+        public ScreenViewModel()
         {
-            Logger = logger;
-            DialogService = dialogService;
-            EventAggregator = eventAggregator;
             State = ScreenState.NotLoaded;
             Mode = ScreenMode.Read;
+
+            Initialize();
         }
 
         #endregion Constructors
 
         #region Members
-
-        /// <summary>
-        /// Gets the dialog service.
-        /// </summary>
-        protected IDialogService DialogService { get; private set; }
-
-        /// <summary>
-        /// Gets the event aggregator.
-        /// </summary>
-        protected IEventAggregator EventAggregator { get; private set; }
-
-        /// <summary>
-        /// Gets the logger.
-        /// </summary>
-        protected ILogger Logger { get; private set; }
 
         /// <summary>
         /// Get or set the state.
@@ -59,7 +40,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         {
             get { return _state; }
 
-            protected set { SetProperty(ref _state, value, OnStateChanged); }
+            protected set { SetProperty(ref _state, value); }
         }
 
         /// <summary>
@@ -70,12 +51,41 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         {
             get { return _mode; }
 
-            protected set { SetProperty(ref _mode, value, OnModeChanged); }
+            protected set { SetProperty(ref _mode, value); }
         }
 
         #endregion Members
 
         #region Methods
+
+        #region Initialization
+
+        /// <summary>
+        /// Initializes in contructor.
+        /// </summary>
+        private void Initialize()
+        {
+            InitializeCommands();
+            InitializeData();
+        }
+
+        /// <summary>
+        /// Initializes commands in contrusctor.
+        /// </summary>
+        protected virtual void InitializeCommands()
+        {
+        }
+
+        /// <summary>
+        /// Initializes data in constructor.
+        /// </summary>
+        protected virtual void InitializeData()
+        {
+        }
+
+        #endregion Initialization
+
+        #region Loading data
 
         /// <summary>
         /// Refreshes Data.
@@ -126,14 +136,14 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         }
 
         /// <summary>
-        /// Initialize data.
+        /// Initialize data asynchronous.
         /// </summary>
         protected virtual void InitializeDataCore()
         {
         }
 
         /// <summary>
-        /// Load Data.
+        /// Load Data asynchronous.
         /// </summary>
         protected virtual void LoadDataCore()
         {
@@ -153,14 +163,18 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         {
         }
 
+        #endregion Loading data
+
+        #region Exceptions Management
+
         /// <summary>
         /// Call when error occurs.
         /// </summary>
         /// <param name="e"></param>
         protected virtual void OnExceptionOccured(Exception e)
         {
-            Logger.Fatal(e);
-            DialogService.ShowErrorDialog(MessageResources.GetDataError);
+            Locator.Logger.Fatal(e);
+            Locator.DialogService.ShowErrorDialog(MessageResources.GetDataError);
         }
 
         /// <summary>
@@ -169,22 +183,10 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <param name="e"></param>
         protected virtual void OnBusinessExceptionOccured(BusinessException e)
         {
-            DialogService.ShowErrorPopup(e.Message);
+            Locator.DialogService.ShowErrorPopup(e.Message);
         }
 
-        /// <summary>
-        /// Call when mode changed.
-        /// </summary>
-        protected virtual void OnModeChanged()
-        {
-        }
-
-        /// <summary>
-        /// Call when state changed.
-        /// </summary>
-        protected virtual void OnStateChanged()
-        {
-        }
+        #endregion Exceptions Management
 
         #endregion Methods
     }

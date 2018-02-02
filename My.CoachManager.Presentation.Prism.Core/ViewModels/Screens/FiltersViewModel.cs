@@ -4,12 +4,9 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Filters;
-using My.CoachManager.Presentation.Prism.Core.Services;
 using Prism.Commands;
-using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
@@ -27,7 +24,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Gets or sets a methods that create a filter.
         /// </summary>
-        public Func<string, IFilter> CreateFilter { get; set; }
+        public Func<string, IFilterViewModel> CreateFilter { get; set; }
 
         /// <summary>
         /// Gets the allowed filters.
@@ -42,7 +39,18 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             get { return _filters; }
             set
             {
-                SetProperty(ref _filters, value);
+                SetProperty(ref _filters, value, () =>
+                {
+                    if (_filters != null)
+                    {
+                        value.CollectionChanged -= FiltersOnCollectionChanged;
+                        value.CollectionChanged += FiltersOnCollectionChanged;
+                        foreach (var item in _filters)
+                        {
+                            item.PropertyChanged += Filter_PropertyChanged;
+                        }
+                    }
+                });
             }
         }
 
@@ -93,13 +101,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Initialise a new instance of <see cref="FiltersViewModel"/>
         /// </summary>
-        /// <param name="dialogService"></param>
-        /// <param name="eventAggregator"></param>
-        /// <param name="logger"></param>
-        public FiltersViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger) : base(dialogService, eventAggregator, logger)
+        public FiltersViewModel()
         {
             Filters = new ObservableCollection<FilterViewModel>();
-            Filters.CollectionChanged += FiltersOnCollectionChanged;
 
             AllowedFilters = new Dictionary<string, string>();
 
@@ -126,7 +130,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
                 if (filter != null)
                 {
-                    Filters.Add(new FilterViewModel(filter));
+                    Filters.Add((FilterViewModel)filter);
                     AddFilterCommand.RaiseCanExecuteChanged();
                     ResetCommand.RaiseCanExecuteChanged();
                     RemoveFilterCommand.RaiseCanExecuteChanged();
@@ -150,7 +154,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <param name="filter"></param>
         private void RemoveFilter(IFilter filter)
         {
-            Filters.Remove(Filters.FirstOrDefault(x => x.Filter.Equals(filter)));
+            Filters.Remove(Filters.FirstOrDefault(x => ReferenceEquals(x.Filter, filter)));
             AddFilterCommand.RaiseCanExecuteChanged();
             ResetCommand.RaiseCanExecuteChanged();
             RemoveFilterCommand.RaiseCanExecuteChanged();
@@ -197,7 +201,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
                 case NotifyCollectionChangedAction.Add:
                     foreach (var item in notifyCollectionChangedEventArgs.NewItems)
                     {
-                        var i = (FilterViewModel)item;
+                        var i = (IFilterViewModel)item;
                         i.PropertyChanged += Filter_PropertyChanged;
                     }
                     break;
@@ -205,7 +209,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
                 case NotifyCollectionChangedAction.Remove:
                     foreach (var item in notifyCollectionChangedEventArgs.OldItems)
                     {
-                        var i = (FilterViewModel)item;
+                        var i = (IFilterViewModel)item;
                         i.PropertyChanged -= Filter_PropertyChanged;
                     }
                     break;

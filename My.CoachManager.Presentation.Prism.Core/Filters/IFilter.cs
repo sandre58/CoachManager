@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Reflection;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
@@ -13,10 +12,21 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// Gets the property info.
         /// </summary>
         /// <value>The property info.</value>
-        PropertyInfo PropertyInfo
+        string PropertyName
         {
             get;
+            set;
         }
+
+        /// <summary>
+        /// Gets if the filter is empty.
+        /// </summary>
+        bool IsEmpty();
+
+        /// <summary>
+        /// Gets if the filter is empty.
+        /// </summary>
+        void Reset();
 
         /// <summary>
         /// Determines whether the specified target is matching the criteria

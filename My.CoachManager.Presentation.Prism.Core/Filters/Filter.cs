@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
@@ -9,8 +6,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
     /// <summary>
     /// Base class for a filter
     /// </summary>
-    [Serializable]
-    public abstract class Filter : ViewModelBase, IFilter, ISerializable
+    public abstract class Filter : ViewModelBase, IFilter
     {
         #region Constructors
 
@@ -18,19 +14,18 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <summary>
         /// Initializes a new instance of the <see cref="T:My.CoachManager.Presentation.Prism.Core.Filters.Filter" /> class.
         /// </summary>
-        /// <param name="propertyInfo">The property info.</param>
-        protected Filter(PropertyInfo propertyInfo) : this()
+        /// <param name="propertyName">The property info.</param>
+        protected Filter(string propertyName) : this()
         {
-            if (propertyInfo == null)
+            if (propertyName == null)
             {
-                throw new ArgumentNullException("propertyInfo");
+                throw new ArgumentNullException($"propertyName");
             }
-            PropertyInfo = propertyInfo;
+            PropertyName = propertyName;
         }
 
         protected Filter()
         {
-            Id = Guid.NewGuid();
         }
 
         #endregion Constructors
@@ -41,12 +36,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// Gets the property info whose property name is filtered
         /// </summary>
         /// <value>The property info.</value>
-        public PropertyInfo PropertyInfo { get; }
-
-        /// <summary>
-        /// Gets or set uniq id.
-        /// </summary>
-        public Guid Id { get; }
+        public string PropertyName { get; set; }
 
         #endregion Members
 
@@ -59,7 +49,42 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <returns>
         /// 	<c>true</c> if the specified target is a match; otherwise, <c>false</c>.
         /// </returns>
-        public abstract bool IsMatch(object target);
+        public virtual bool IsMatch(object target)
+        {
+            if (target == null)
+            {
+                return false;
+            }
+
+            var propertyInfo = target.GetType().GetProperty(PropertyName);
+            if (propertyInfo != null)
+            {
+                var toCompare = propertyInfo.GetValue(target, null);
+
+                return IsMatchProperty(toCompare);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Determines whether the specified target is a match.
+        /// </summary>
+        /// <param name="toCompare">The target.</param>
+        /// <returns>
+        /// 	<c>true</c> if the specified target is a match; otherwise, <c>false</c>.
+        /// </returns>
+        protected abstract bool IsMatchProperty(object toCompare);
+
+        /// <summary>
+        /// Gets if the filter is empty.
+        /// </summary>
+        public abstract bool IsEmpty();
+
+        /// <summary>
+        /// Gets if the filter is empty.
+        /// </summary>
+        public abstract void Reset();
 
         public override bool Equals(object obj)
         {
@@ -69,7 +94,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             {
                 return false;
             }
-            return Id == o.Id;
+            return PropertyName == o.PropertyName;
         }
 
         // override object.GetHashCode
@@ -80,31 +105,5 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         }
 
         #endregion Methods
-
-        #region ISerializable Implementation
-
-        /// <summary>
-        /// Save data for the serialization.
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("PropertyInfo", PropertyInfo);
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Constructor used for the serialization.
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        protected Filter(SerializationInfo info, StreamingContext context)
-        {
-            PropertyInfo = (PropertyInfo)info.GetValue("PropertyInfo", typeof(PropertyInfo));
-        }
-
-        #endregion ISerializable Implementation
     }
 }

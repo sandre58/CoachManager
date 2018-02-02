@@ -56,7 +56,7 @@ namespace My.CoachManager.Application.Services.Rosters
                 x => x.Players.Select(p => p.Player.Country),
                 x => x.Players.Select(p => p.Player.Contacts)).FirstOrDefault();
             if (roster != null)
-                return roster.Players.Select(RosterSelectBuilder.SelectPlayers()).ToArray();
+                return roster.Players.Select(RosterSelectBuilder.SelectPlayerDetail()).ToArray();
             return new List<PlayerDetailDto>();
         }
 

@@ -8,15 +8,12 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
     /// </summary>
     public class IntegerFilter : ComparableFilter<int>
     {
-        public IntegerFilter(PropertyInfo propertyInfo) : base(propertyInfo)
+        public IntegerFilter(string propertyName) : base(propertyName)
         {
         }
 
-        public IntegerFilter(PropertyInfo propertyInfo, ComparableOperator comparaison, int from, int to) : base(propertyInfo, comparaison, from, to)
-        {
-        }
-
-        protected IntegerFilter(SerializationInfo info, StreamingContext context) : base(info, context)
+        public IntegerFilter(string propertyName, ComparableOperator comparaison, int from, int to) : base(
+            propertyName, comparaison, from, to)
         {
         }
 

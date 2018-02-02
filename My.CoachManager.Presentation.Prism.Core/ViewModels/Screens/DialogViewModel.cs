@@ -1,9 +1,6 @@
 ﻿using System;
-using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
-using My.CoachManager.Presentation.Prism.Core.Services;
 using Prism.Commands;
-using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
@@ -30,8 +27,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Initialise a new instance of <see cref="DialogViewModel" />.
         /// </summary>
-        public DialogViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
-            : base(dialogService, eventAggregator, logger)
+        public DialogViewModel()
         {
             DialogResult = DialogResult.None;
 

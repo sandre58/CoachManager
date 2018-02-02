@@ -28,13 +28,14 @@
                 <DockPanel Background="{DynamicResource DarkVariation3}" parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}">
                     <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="{StaticResource LargeMargin}">
                         <TextBlock Text="{x:Static strings1:ControlResources.SpeedSearch}" VerticalAlignment="Center" />
-                        <TextBox Text="{Binding SpeedFilter.Value, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBox Text="{Binding SpeedFilter.Filter.Value, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource TextBoxBaseStyle}"
                                  Width="{StaticResource MediumWidth}"
+                                 CharacterCasing="Upper"
                                  parameters:TextBoxParameters.UseFloatingWatermark="False"
-                                 parameters:TextBoxParameters.Watermark="{x:Static strings:PersonResources.LastName}" />
-                        <Button Content="{x:Static strings1:ControlResources.Clear}" Command="{Binding Filters.ResetCommand}" />
-                        <controls:Badged Badge="{Binding CountFilters}">
+                                 parameters:TextBoxParameters.Watermark="{Binding SpeedFilter.Title}" />
+                        <Button Content="{x:Static strings1:ControlResources.Clear}" Command="{Binding ResetFiltersCommand}" />
+                        <controls:Badged Badge="{Binding CountActiveFilters}">
                             <Button Content="{x:Static strings1:ControlResources.ShowFilters}" Command="{Binding ShowFiltersCommand}" Style="{StaticResource AccentButtonBaseStyle}" />
                         </controls:Badged>
                     </WrapPanel>

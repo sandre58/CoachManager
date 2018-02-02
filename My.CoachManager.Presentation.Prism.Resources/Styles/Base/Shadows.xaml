@@ -4,4 +4,6 @@
     <DropShadowEffect x:Key="BottomRightShadow" BlurRadius="5" ShadowDepth="2" Direction="315" Opacity="0.5" Color="{DynamicResource ShadowColor}" />
     <DropShadowEffect x:Key="RightShadow"       BlurRadius="15" ShadowDepth="5" Direction="0" Opacity="0.5" Color="{DynamicResource ShadowColor}" />
     <DropShadowEffect x:Key="CenterShadow"       BlurRadius="15" ShadowDepth="0" Direction="0" Opacity="0.5" Color="{DynamicResource ShadowColor}" />
+    <DropShadowEffect x:Key="LightCenterShadow"       BlurRadius="15" ShadowDepth="0" Direction="0" Opacity="0.5" Color="{DynamicResource LightColor}" />
+    <DropShadowEffect x:Key="DarkCenterShadow"       BlurRadius="15" ShadowDepth="0" Direction="0" Opacity="0.5" Color="{DynamicResource DarkColor}" />
 </ResourceDictionary>

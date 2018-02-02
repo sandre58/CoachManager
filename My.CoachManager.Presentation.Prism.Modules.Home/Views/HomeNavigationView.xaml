@@ -8,5 +8,6 @@
              mc:Ignorable="d"
              Content="{x:Static strings:HomeResources.HomeMenu}"
                          Target="HomeView"
+                         Color="Purple"
              Icon="{StaticResource HomeGeometry}"
              Style="{StaticResource NavigationItemStyle}" />

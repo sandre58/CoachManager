@@ -10,7 +10,8 @@
         xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.ViewModels"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:interactivity="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.Interactivity"
-                         mc:Ignorable="d"
+        xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.Views"
+        mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel}"
         Title="{x:Static strings:GlobalResources.ApplicationTitle}"
         Icon="{StaticResource IcoImageSource}"
@@ -86,32 +87,7 @@
             </Grid>
 
             <!-- Left Region -->
-            <Border Grid.Row="0" Grid.Column="0" Width="275" Background="{DynamicResource DarkAccent}" Effect="{StaticResource RightShadow}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="200" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-
-                    <!-- Title -->
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=Title, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedWindow}, Converter={StaticResource ToUpperConverter}}"
-                           Style="{StaticResource ModernWindowTitle}"
-                               Foreground="{DynamicResource AccentForeground}"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Typography.Capitals="AllSmallCaps" />
-
-                    <!-- Logo -->
-                    <Image Grid.Row="1" Grid.Column="0"
-                       Source="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/CoachManager.png"
-                       Margin="{DynamicResource VeryLargeVerticalMargin}" />
-
-                    <!-- Navigation Region -->
-                    <ItemsControl Grid.Row="2" Grid.Column="0" prism:RegionManager.RegionName="{x:Static core:RegionNames.NavigationRegion}" />
-                </Grid>
-            </Border>
+            <views:MainMenuView Grid.Row="0" Grid.Column="0" />
         </Grid>
 
         <!-- Dialog Region -->

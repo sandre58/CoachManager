@@ -1,4 +1,6 @@
-﻿using My.CoachManager.CrossCutting.Core.Extensions;
+﻿using System;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 using My.CoachManager.Presentation.Prism.Core.Filters;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
@@ -6,7 +8,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
     /// <summary>
     /// Provides members and properties to manage a filter.
     /// </summary>
-    public class FilterViewModel : ViewModelBase, IWorkspaceViewModel
+    [Serializable]
+    public class FilterViewModel : ViewModelBase, IFilterViewModel, IWorkspaceViewModel, ISerializable
     {
         #region Fields
 
@@ -22,26 +25,20 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Initialises a new instance of <see cref="FilterViewModel"/>.
         /// </summary>
-        public FilterViewModel(IFilter filter, string title = "", LogicalOperator logicalOperator = LogicalOperator.And)
+        public FilterViewModel(IFilter filter, string title, LogicalOperator logicalOperator = LogicalOperator.And)
         {
             Operator = logicalOperator;
             Filter = filter;
-            Filter.PropertyChanged += (sender, args) => OnPropertyChanged(args);
 
             IsEnabled = true;
+            Title = title;
+        }
 
-            if (string.IsNullOrEmpty(title))
-            {
-                if (filter != null)
-                {
-                    var name = filter.PropertyInfo.GetDisplayName();
-                    Title = !string.IsNullOrEmpty(name) ? name : filter.PropertyInfo.Name;
-                }
-            }
-            else
-            {
-                Title = title;
-            }
+        /// <summary>
+        /// Constructor used by serialization.
+        /// </summary>
+        protected FilterViewModel()
+        {
         }
 
         #endregion Constructors
@@ -66,7 +63,13 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             get { return _filter; }
             private set
             {
-                SetProperty(ref _filter, value);
+                SetProperty(ref _filter, value, () =>
+                {
+                    if (_filter != null)
+                    {
+                        _filter.PropertyChanged += (sender, args) => OnPropertyChanged(args);
+                    }
+                });
             }
         }
 
@@ -89,5 +92,61 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         }
 
         #endregion Members
+
+        #region ISerializable Implementation
+
+        /// <summary>
+        /// Save data for the serialization.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Operator", Operator);
+            info.AddValue("Filter", Filter);
+            info.AddValue("IsEnabled", IsEnabled);
+            info.AddValue("Title", Title);
+            info.AddValue("Type", Filter.GetType());
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Constructor used for the serialization.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected FilterViewModel(SerializationInfo info, StreamingContext context)
+        {
+            var type = (Type)info.GetValue("Type", typeof(Type));
+            Operator = (LogicalOperator)info.GetValue("Operator", typeof(LogicalOperator));
+            Filter = (IFilter)info.GetValue("Filter", type);
+            Title = info.GetString("Title");
+            IsEnabled = info.GetBoolean("IsEnabled");
+        }
+
+        #endregion ISerializable Implementation
+
+        #region Equals
+
+        public override bool Equals(object obj)
+        {
+            var o = obj as FilterViewModel;
+
+            if (Filter == null || o == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Filter.Equals(o.Filter);
+        }
+
+        // override object.GetHashCode
+        public override int GetHashCode()
+        {
+            // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
+            return base.GetHashCode();
+        }
+
+        #endregion Equals
     }
 }

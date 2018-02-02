@@ -3,8 +3,7 @@ using System.IO;
 using System.Linq;
 using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.CrossCutting.Core.Constants;
-using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Presentation.Prism.Core.Services;
+using My.CoachManager.Presentation.Prism.Core;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Resources.Strings;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
@@ -12,7 +11,6 @@ using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
 using Prism.Commands;
-using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
@@ -38,10 +36,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         #region Constructors
 
         /// <summary>
-        /// Initialise a new instance of <see cref="CategoryEditViewModel"/>.
+        /// Initialise a new instance of <see cref="PlayerEditViewModel"/>.
         /// </summary>
-        public PlayerEditViewModel(IAdminService adminService, IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
-            : base(dialogService, eventAggregator, logger)
+        public PlayerEditViewModel(IAdminService adminService)
         {
             _adminService = adminService;
             Title = AdministrationResources.PlayerTitle;
@@ -134,7 +131,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// </summary>
         public void SelectPhoto()
         {
-            var filename = DialogService.ShowOpenFileDialog(ControlResources.AllImages);
+            var filename = Locator.DialogService.ShowOpenFileDialog(ControlResources.AllImages);
 
             if (!string.IsNullOrEmpty(filename))
             {

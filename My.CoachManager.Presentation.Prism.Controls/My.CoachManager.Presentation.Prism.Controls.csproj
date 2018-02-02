@@ -90,6 +90,8 @@
     <Compile Include="AdornedControl.cs" />
     <Compile Include="Badged.cs" />
     <Compile Include="BadgedBase.cs" />
+    <Compile Include="Behaviours\MainMenuExpanderBehavior.cs" />
+    <Compile Include="Behaviours\ToggleColumnSizeBehavior.cs" />
     <Compile Include="Behaviours\PasswordBoxBindingBehavior.cs" />
     <Compile Include="Behaviours\StylizedBehaviorCollection.cs" />
     <Compile Include="Behaviours\StylizedBehaviors.cs" />
@@ -103,14 +105,43 @@
     <Compile Include="FlyoutsControl.cs" />
     <Compile Include="Flyouts\FlyoutTheme.cs" />
     <Compile Include="Flyouts\Position.cs" />
+    <Compile Include="HamburgerMenu.cs" />
+    <Compile Include="HamburgerMenu.EventArgs.cs">
+      <DependentUpon>HamburgerMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HamburgerMenu.Events.cs">
+      <DependentUpon>HamburgerMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HamburgerMenu.HamburgerButton.cs">
+      <DependentUpon>HamburgerMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HamburgerMenu.Options.cs">
+      <DependentUpon>HamburgerMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HamburgerMenu.Properties.cs">
+      <DependentUpon>HamburgerMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HamburgerMenus\MenuItems\HamburgerMenuGlyphItem.cs" />
+    <Compile Include="HamburgerMenus\MenuItems\HamburgerMenuIconItem.cs" />
+    <Compile Include="HamburgerMenus\MenuItems\HamburgerMenuImageItem.cs" />
+    <Compile Include="HamburgerMenus\MenuItems\HamburgerMenuItem.cs" />
+    <Compile Include="HamburgerMenus\MenuItems\HamburgerMenuItemCollection.cs" />
+    <Compile Include="Helpers\CommandHelpers.cs" />
     <Compile Include="Helpers\DpiHelper.cs" />
     <Compile Include="Helpers\ValueChangeHelper.cs" />
     <Compile Include="IThumb.cs" />
     <Compile Include="ExtendedThumb.cs" />
     <Compile Include="MultiComboBox.cs" />
     <Compile Include="Native\NativeConstants.cs" />
+    <Compile Include="Parameters\ScrollViewerParameters.cs" />
     <Compile Include="SelectorControl.cs" />
     <Compile Include="SelectorItem.cs" />
+    <Compile Include="SplitView.cs" />
+    <Compile Include="SplitViews\GridLengthAnimation.cs" />
+    <Compile Include="SplitViews\SplitViewDisplayMode.cs" />
+    <Compile Include="SplitViews\SplitViewPaneClosingEventArgs.cs" />
+    <Compile Include="SplitViews\SplitViewPanePlacement.cs" />
+    <Compile Include="SplitViews\SplitViewTemplateSettings.cs" />
     <Compile Include="ThumbContentControl.cs" />
     <Compile Include="Native\ErrorCodes.cs" />
     <Compile Include="Native\UnsafeNativeMethods.cs" />

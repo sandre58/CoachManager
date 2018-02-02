@@ -2,21 +2,16 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
-using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.DragAndDrop;
-using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 using Prism.Commands;
-using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
-    public abstract class OrderedListViewModel<TEntityViewModel, TEditView, TEditViewModel> : ListViewModel<TEntityViewModel, TEditView, TEditViewModel>
+    public abstract class OrderedListViewModel<TEntityViewModel, TEditViewModel> : ListViewModel<TEntityViewModel, TEditViewModel>
         where TEntityViewModel : class, IOrderableViewModel, INotifyPropertyChanged
-        where TEditView : FrameworkElement
         where TEditViewModel : class, IDialogViewModel, IEditViewModel
     {
         #region Fields
@@ -28,13 +23,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         #region Constructor
 
         /// <summary>
-        /// Initialise a new instance of <see cref="OrderedListViewModel{TEntityViewModel,TEditView,TEditViewModel}"/>.
+        /// Initialise a new instance of <see cref="OrderedListViewModel{TEntityViewModel,TEditViewModel}"/>.
         /// </summary>
-        /// <param name="dialogService">The dialog service.</param>
-        /// <param name="eventAggregator"></param>
-        /// <param name="logger">The logger.</param>
-        protected OrderedListViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
-            : base(dialogService, eventAggregator, logger)
+        protected OrderedListViewModel()
         {
             CanOrder = false;
             ActivateOrderCommand = new DelegateCommand(ActivateOrder, CanActivateOrder);
@@ -171,7 +162,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         protected virtual void AfterValidateOrder()
         {
-            DialogService.ShowSuccessPopup(MessageResources.OrderSaved);
+            Locator.DialogService.ShowSuccessPopup(MessageResources.OrderSaved);
         }
 
         /// <summary>

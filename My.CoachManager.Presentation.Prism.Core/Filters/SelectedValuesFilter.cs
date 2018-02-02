@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
@@ -27,19 +27,19 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectedValuesFilter{T}"/> class.
         /// </summary>
-        /// <param name="propertyInfo">The property info.</param>
-        public SelectedValuesFilter(PropertyInfo propertyInfo)
-            : base(propertyInfo)
+        /// <param name="propertyName">The property info.</param>
+        public SelectedValuesFilter(string propertyName)
+            : base(propertyName)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectedValuesFilter{T}"/> class.
         /// </summary>
-        /// <param name="propertyInfo">The property info.</param>
+        /// <param name="propertyName">The property info.</param>
         /// <param name="allowedValues"></param>
-        public SelectedValuesFilter(PropertyInfo propertyInfo, IEnumerable<TAllowedValues> allowedValues)
-            : base(propertyInfo, allowedValues)
+        public SelectedValuesFilter(string propertyName, IEnumerable<TAllowedValues> allowedValues)
+            : base(propertyName, allowedValues)
         {
         }
 
@@ -69,20 +69,14 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <summary>
         /// Determines whether the specified target is a match.
         /// </summary>
-        /// <param name="target">The target.</param>
+        /// <param name="toCompare">The target.</param>
         /// <returns>
         /// 	<c>true</c> if the specified target is a match; otherwise, <c>false</c>.
         /// </returns>
-        public override bool IsMatch(object target)
+        protected override bool IsMatchProperty(object toCompare)
         {
-            if (target == null)
-            {
-                return false;
-            }
-            var value = PropertyInfo.GetValue(target, null);
-
             var result = Values != null && Values.Cast<object>()
-                             .Any(x => (x != null && x.Equals(value)) || (x == null && value == null));
+                             .Any(x => (x != null && x.Equals(toCompare)) || (x == null && toCompare == null));
 
             switch (Operator)
             {
@@ -97,6 +91,22 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             }
         }
 
+        /// <summary>
+        /// Gets if the filter is empty.
+        /// </summary>
+        public override bool IsEmpty()
+        {
+            return Values == null || !Values.Cast<object>().Any();
+        }
+
+        /// <summary>
+        /// Gets if the filter is empty.
+        /// </summary>
+        public override void Reset()
+        {
+            Values = default(IEnumerable);
+        }
+
         #region ISerializable Implementation
 
         /// <summary>
@@ -104,10 +114,20 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// </summary>
         /// <param name="info"></param>
         /// <param name="context"></param>
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue("Values", Values);
+
+            if (Values != null)
+            {
+                info.AddValue("TypeValues", Values.Cast<object>().ToList().GetType());
+                info.AddValue("Values", Values.Cast<object>().ToList());
+            }
+            else
+            {
+                info.AddValue("TypeValues", null);
+            }
         }
 
         /// <inheritdoc />
@@ -118,7 +138,12 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <param name="context"></param>
         protected SelectedValuesFilter(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            Values = (IEnumerable)info.GetValue("Values", typeof(IEnumerable));
+            var type = (Type)info.GetValue("TypeValues", typeof(Type));
+
+            if (type != null)
+            {
+                Values = (IEnumerable)info.GetValue("Values", type);
+            }
         }
 
         #endregion ISerializable Implementation

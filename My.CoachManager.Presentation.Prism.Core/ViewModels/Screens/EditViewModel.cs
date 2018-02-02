@@ -2,12 +2,9 @@
 using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
-using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
-using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 using Prism.Commands;
-using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
@@ -26,11 +23,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Initialise a new instance of <see cref="EditViewModel{TEntityViewModel}"/>.
         /// </summary>
-        /// <param name="dialogService">The dialog service.</param>
-        /// <param name="eventAggregator"></param>
-        /// <param name="logger">The logger.</param>
-        protected EditViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
-            : base(dialogService, eventAggregator, logger)
+        protected EditViewModel()
         {
             Mode = ScreenMode.Creation;
             Item = new TEntityViewModel();
@@ -163,7 +156,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         protected virtual void OnSaveCompleted()
         {
-            DialogService.ShowSuccessPopup(MessageResources.SavingSuccess);
+            Locator.DialogService.ShowSuccessPopup(MessageResources.SavingSuccess);
             Close(DialogResult.Ok);
         }
 
@@ -180,7 +173,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             {
                 if (Item.IsModified)
                 {
-                    DialogService.ShowWarningDialog(MessageResources.CancelModifications, dialog =>
+                    Locator.DialogService.ShowWarningDialog(MessageResources.CancelModifications, dialog =>
                     {
                         OnCancelCompleted(dialog.Result);
                     }, MessageDialogType.YesNo);
@@ -285,10 +278,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Called when mode changes.
         /// </summary>
-        protected override void OnModeChanged()
+        protected virtual void OnModeChanged()
         {
             Title = Mode == ScreenMode.Edition ? string.Format(MessageResources.EditItem, Title) : string.Format(MessageResources.CreateItem, Title);
-            base.OnModeChanged();
         }
 
         #endregion Methods

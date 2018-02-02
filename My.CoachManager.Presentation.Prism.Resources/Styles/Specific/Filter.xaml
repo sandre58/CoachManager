@@ -33,7 +33,7 @@
                       Width="60"
                       IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}"
                       ItemsSource="{Binding Source={extensions:Enum {x:Type filters:LogicalOperator}}}"
-                      DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
+                      DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Grid.Column="2" Text="{Binding Title}" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
             <ContentControl Grid.Column="3" Content="{Binding Filter}" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
             <Button Grid.Column="4"
@@ -84,10 +84,17 @@
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
             <controls:ExtendedNumericUpDown x:Name="From" Grid.Column="1"
                                             Value="{Binding From}"
+                                            Minimum="{Binding Minimum}"
+                                            Maximum="{Binding Maximum}"
                                             Width="{StaticResource MidSmallWidth}"
                                             Style="{StaticResource ExtendedNumericUpDownBaseStyle}" />
             <TextBlock x:Name="And" Grid.Column="2" Text="{x:Static resources:GlobalResources.And}" />
-            <controls:ExtendedNumericUpDown x:Name="To" Grid.Column="3" Value="{Binding To}" Width="{StaticResource MidSmallWidth}" Style="{StaticResource ExtendedNumericUpDownBaseStyle}" />
+            <controls:ExtendedNumericUpDown x:Name="To" Grid.Column="3"
+                                            Value="{Binding To}"
+                                            Minimum="{Binding Minimum}"
+                                            Maximum="{Binding Maximum}"
+                                            Width="{StaticResource MidSmallWidth}"
+                                            Style="{StaticResource ExtendedNumericUpDownBaseStyle}" />
         </Grid>
         <DataTemplate.Triggers>
             <DataTrigger Binding="{Binding Operator}" Value="{x:Static filters:ComparableOperator.EqualsTo}">
@@ -156,6 +163,48 @@
                       HorizontalAlignment="Center" Style="{StaticResource MultiComboBoxStyle}"
                       ItemsSource="{Binding AllowedValues}"
                       DisplayMemberPath="Label" ValueMemberPath="Id" SelectedValues="{Binding Values, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type filters:EnumValueFilter}">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <ComboBox Grid.Column="0"
+                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      Width="125"
+                      ItemsSource="{Binding Source={extensions:Enum {x:Type filters:BinaryOperator}}}"
+                      DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
+            <ComboBox Grid.Column="1" Width="{StaticResource MidSmallWidth}"
+                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      ItemsSource="{Binding AllowedValues}"
+                      DisplayMemberPath="Item1" SelectedValuePath="Item2" SelectedValue="{Binding Value}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type filters:EnumValuesFilter}">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <ComboBox Grid.Column="0"
+                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      Width="125"
+                      ItemsSource="{Binding Source={extensions:Enum {x:Type filters:BinaryOperator}}}"
+                      DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
+            <controls:MultiComboBox Grid.Column="1" Width="{StaticResource SmallLargeWidth}"
+                                    HorizontalAlignment="Center" Style="{StaticResource MultiComboBoxStyle}"
+                                    ItemsSource="{Binding AllowedValues}"
+                                    DisplayMemberPath="Item1" ValueMemberPath="Item2" SelectedValues="{Binding Values, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

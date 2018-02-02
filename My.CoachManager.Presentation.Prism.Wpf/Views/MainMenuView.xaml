@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="My.CoachManager.Presentation.Prism.Wpf.Views.MainMenuView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:core="clr-namespace:My.CoachManager.Presentation.Prism.Core;assembly=My.CoachManager.Presentation.Prism.Core"
+        xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
+        xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.ViewModels"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:behaviours="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Behaviours;assembly=My.CoachManager.Presentation.Prism.Controls"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel}"
+             d:DesignWidth="300"
+             d:DesignHeight="700">
+
+    <Grid>
+        <Border VerticalAlignment="Stretch" Background="{DynamicResource DarkAccent}" Effect="{StaticResource RightShadow}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="200" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition>
+                        <i:Interaction.Behaviors>
+                            <behaviours:ToggleColumnSizeBehavior CollapsedSize="50" ExpandedSize="275" ToggleValue="{Binding IsMenuExpended}" />
+                        </i:Interaction.Behaviors>
+                    </ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!-- Title -->
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=Title, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedWindow}, Converter={StaticResource ToUpperConverter}}"
+                           Style="{StaticResource ModernWindowTitle}"
+                               Foreground="{DynamicResource AccentForeground}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Typography.Capitals="AllSmallCaps"
+                           Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                <!-- Logo -->
+                <Image Grid.Row="1" Grid.Column="0"
+                       Source="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/CoachManager.png"
+                       Margin="5 20 5 20"
+                       SnapsToDevicePixels="False"
+                       RenderOptions.BitmapScalingMode="Fant" />
+
+                <!-- Navigation Region -->
+                <ItemsControl Grid.Row="2" Grid.Column="0" prism:RegionManager.RegionName="{x:Static core:RegionNames.NavigationRegion}" />
+            </Grid>
+        </Border>
+        <ToggleButton
+                      IsThreeState="False"
+                      IsChecked="{Binding IsMenuExpended}"
+                      Focusable="False"
+                      Style="{StaticResource MainMenuToggleButtonStyle}"
+                      Width="30" Height="30"
+                      VerticalAlignment="Top"
+                      HorizontalAlignment="Right"
+                      Margin="0 40 -15 0" />
+    </Grid>
+</UserControl>

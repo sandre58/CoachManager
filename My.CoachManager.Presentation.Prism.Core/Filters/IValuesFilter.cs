@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Runtime.Serialization;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
@@ -26,19 +24,19 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectedValueFilter{T,T}"/> class.
         /// </summary>
-        /// <param name="propertyInfo">The property info.</param>
-        public SelectedValueFilter(PropertyInfo propertyInfo)
-            : base(propertyInfo)
+        /// <param name="propertyName">The property info.</param>
+        public SelectedValueFilter(string propertyName)
+            : base(propertyName)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectedValueFilter{T,T}"/> class.
         /// </summary>
-        /// <param name="propertyInfo">The property info.</param>
+        /// <param name="propertyName">The property info.</param>
         /// <param name="allowedValues"></param>
-        public SelectedValueFilter(PropertyInfo propertyInfo, IEnumerable<TAllowedValues> allowedValues)
-            : base(propertyInfo, allowedValues)
+        public SelectedValueFilter(string propertyName, IEnumerable<TAllowedValues> allowedValues)
+            : base(propertyName, allowedValues)
         {
         }
 
@@ -70,19 +68,13 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <summary>
         /// Determines whether the specified target is a match.
         /// </summary>
-        /// <param name="target">The target.</param>
+        /// <param name="toCompare">The target.</param>
         /// <returns>
         /// 	<c>true</c> if the specified target is a match; otherwise, <c>false</c>.
         /// </returns>
-        public override bool IsMatch(object target)
+        protected override bool IsMatchProperty(object toCompare)
         {
-            if (target == null)
-            {
-                return false;
-            }
-            var value = PropertyInfo.GetValue(target, null);
-
-            var result = (value == null && Value == null) || (Value != null && Value.Equals(value));
+            var result = (toCompare == null && Value == null) || (Value != null && Value.Equals(toCompare));
 
             switch (Operator)
             {
@@ -97,32 +89,22 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             }
         }
 
+        /// <summary>
+        /// Gets if the filter is empty.
+        /// </summary>
+        public override bool IsEmpty()
+        {
+            return Value == null || Value.Equals(default(TValue));
+        }
+
+        /// <summary>
+        /// Gets if the filter is empty.
+        /// </summary>
+        public override void Reset()
+        {
+            Value = default(TValue);
+        }
+
         #endregion Methods
-
-        #region ISerializable Implementation
-
-        /// <summary>
-        /// Save data for the serialization.
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData(info, context);
-            info.AddValue("Value", Value);
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Constructor used for the serialization.
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        protected SelectedValueFilter(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-            Value = (TValue)info.GetValue("Value", typeof(TValue));
-        }
-
-        #endregion ISerializable Implementation
     }
 }

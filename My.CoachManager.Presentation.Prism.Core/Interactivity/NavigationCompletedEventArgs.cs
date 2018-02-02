@@ -1,5 +1,4 @@
 ﻿using System;
-using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using Prism.Regions;
 

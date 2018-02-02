@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
-using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Presentation.Prism.Core.Services;
-using My.CoachManager.Presentation.Prism.Core.ViewModels;
+using My.CoachManager.Presentation.Prism.Core;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.Modules.StatusBar.Core;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
@@ -24,13 +22,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.StatusBar.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="StatusBarViewModel"/>.
         /// </summary>
-        /// <param name="eventAggregator"></param>
-        /// <param name="dialogService"></param>
-        /// <param name="logger"></param>
-        public StatusBarViewModel(IEventAggregator eventAggregator, IDialogService dialogService, ILogger logger)
-            : base(dialogService, eventAggregator, logger)
+        public StatusBarViewModel()
         {
-            eventAggregator.GetEvent<UpdateStatusBarMessageRequestEvent>().Subscribe(OnMessageChanged, ThreadOption.UIThread, true);
+            Locator.GetInstance<IEventAggregator>().GetEvent<UpdateStatusBarMessageRequestEvent>().Subscribe(OnMessageChanged, ThreadOption.UIThread, true);
 
             var assembly = Assembly.GetEntryAssembly();
 

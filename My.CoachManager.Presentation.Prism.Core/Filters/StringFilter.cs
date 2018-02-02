@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
     /// <summary>
     /// Defines a string filter
     /// </summary>
-    [Serializable]
     public class StringFilter : Filter, IValueFilter<string>
     {
         #region Fields
@@ -26,20 +22,20 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <summary>
         /// Initializes a new instance of the <see cref="StringFilter"/> class.
         /// </summary>
-        /// <param name="propertyInfo">The property info.</param>
-        public StringFilter(PropertyInfo propertyInfo)
-            : this(propertyInfo, StringOperator.Contains, false)
+        /// <param name="propertyName">The property info.</param>
+        public StringFilter(string propertyName)
+            : this(propertyName, StringOperator.Contains, false)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StringFilter"/> class.
         /// </summary>
-        /// <param name="propertyInfo">The property info.</param>
+        /// <param name="propertyName">The property info.</param>
         /// <param name="filterMode">The filter mode.</param>
         /// <param name="caseSensitive"></param>
-        public StringFilter(PropertyInfo propertyInfo, StringOperator filterMode, bool caseSensitive)
-            : base(propertyInfo)
+        public StringFilter(string propertyName, StringOperator filterMode, bool caseSensitive)
+            : base(propertyName)
         {
             Operator = filterMode;
             CaseSensitive = caseSensitive;
@@ -93,29 +89,25 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <summary>
         /// Determines whether the specified target is a match.
         /// </summary>
-        /// <param name="target">The target.</param>
+        /// <param name="toCompare">The target.</param>
         /// <exception cref="NotImplementedException"></exception>
         /// <returns>
         /// 	<c>true</c> if the specified target is a match; otherwise, <c>false</c>.
         /// </returns>
-        public override bool IsMatch(object target)
+        protected override bool IsMatchProperty(object toCompare)
         {
-            if (target == null)
-            {
-                return false;
-            }
-            string toCompare = (string)PropertyInfo.GetValue(target, null);
-
             if (toCompare == null)
             {
                 if (Operator == StringOperator.Is)
                 {
-                    return _value == null;
+                    return Value == null;
                 }
                 return false;
             }
 
-            if (_value == null)
+            var toStringCompare = toCompare.ToString();
+
+            if (Value == null)
             {
                 return false;
             }
@@ -124,60 +116,63 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
             if (!_caseSensitive)
             {
                 value = _value.ToUpper();
-                toCompare = toCompare.ToUpper();
+                toStringCompare = toStringCompare.ToUpper();
             }
 
             switch (Operator)
             {
                 case StringOperator.Contains:
-                    return toCompare.Contains(value);
+                    return toStringCompare.Contains(value);
 
                 case StringOperator.StartsWith:
-                    return toCompare.StartsWith(value);
+                    return toStringCompare.StartsWith(value);
 
                 case StringOperator.EndsWith:
-                    return toCompare.EndsWith(value);
+                    return toStringCompare.EndsWith(value);
 
                 case StringOperator.Is:
-                    return toCompare.Equals(value);
+                    return toStringCompare.Equals(value);
 
                 case StringOperator.IsNot:
-                    return !toCompare.Equals(value);
+                    return !toStringCompare.Equals(value);
 
                 default:
                     throw new NotImplementedException();
             }
         }
 
-        #region ISerializable Implementation
-
         /// <summary>
-        /// Save data for the serialization.
+        /// Gets if the filter is empty.
         /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        public override bool IsEmpty()
         {
-            base.GetObjectData(info, context);
-            info.AddValue("Operator", Operator);
-            info.AddValue("Value", Value);
-            info.AddValue("CaseSensitive", CaseSensitive);
+            return string.IsNullOrEmpty(Value);
         }
 
-        /// <inheritdoc />
         /// <summary>
-        /// Constructor used for the serialization.
+        /// Gets if the filter is empty.
         /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        protected StringFilter(SerializationInfo info, StreamingContext context) : base(info, context)
+        public override void Reset()
         {
-            Operator = (StringOperator)info.GetValue("Operator", typeof(StringOperator));
-            Value = info.GetString("Value");
-            CaseSensitive = info.GetBoolean("CaseSensitive");
+            Value = string.Empty;
         }
 
-        #endregion ISerializable Implementation
+        public override bool Equals(object obj)
+        {
+            var o = obj as StringFilter;
+
+            if (o == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return base.Equals(obj) && Operator == o.Operator && CaseSensitive == o.CaseSensitive;
+        }
+
+        // override object.GetHashCode
+        public override int GetHashCode()
+        {
+            // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
+            return base.GetHashCode();
+        }
     }
 }

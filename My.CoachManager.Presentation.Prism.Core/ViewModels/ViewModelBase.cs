@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Prism.Mvvm;
 
@@ -150,6 +151,26 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         }
 
         /// <summary>
+        /// Gets default name for OnChanged method for properties.
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        public static string GetOnPropertyChangedMethodName(string propertyName)
+        {
+            return "On" + propertyName + "Changed";
+        }
+
+        /// <summary>
+        /// Gets default name for OnChanging method for properties.
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        public static string GetOnPropertyChangingMethodName(string propertyName)
+        {
+            return "On" + propertyName + "Changing";
+        }
+
+        /// <summary>
         /// Checks if a property already matches a desired value. Sets the property and
         /// notifies listeners only when necessary.
         /// </summary>
@@ -205,12 +226,45 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             // We check if the property is valid, which notifies if the property is in error.
             IsPropertyValid(propertyName, value);
 
-            storage = value;
+            // Executes On<Property>Changing(T oldvalue, T newValue) method if exists
+            var cancel = false;
+            if (propertyName != null)
+            {
+                var type = GetType();
+                var onChangedMethod = type
+                    .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(x => x.Name == GetOnPropertyChangingMethodName(propertyName) && x.GetParameters().Length == 1);
 
+                if (onChangedMethod != null)
+                {
+                    var propertyChangingEventArgs = new PropertyChangingEventArgs<T>(storage, value);
+                    var parameters = new object[1];
+                    parameters[0] = propertyChangingEventArgs;
+
+                    onChangedMethod.Invoke(this, parameters);
+                    cancel = propertyChangingEventArgs.Cancel;
+                }
+            }
+
+            if (!cancel)
+                storage = value;
+
+            // Executes On<Property>Changed() method if exists
+            if (propertyName != null)
+            {
+                var type = GetType();
+                var onChangedMethod = type
+                    .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(x => x.Name == GetOnPropertyChangedMethodName(propertyName) && x.GetParameters().Length == 0);
+
+                if (onChangedMethod != null) onChangedMethod.Invoke(this, null);
+            }
+
+            // Action OnChanged
             if (onChanged != null) onChanged.Invoke();
 
+            // Raise PropertyChanged Event
             RaisePropertyChanged(propertyName);
 
+            // Raise PropertyChanged Event for IsModified Property
             if (IsModified != oldModified)
             {
                 RaisePropertyChanged(() => IsModified);

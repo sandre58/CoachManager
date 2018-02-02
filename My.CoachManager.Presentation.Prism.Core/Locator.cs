@@ -1,4 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
+using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Presentation.Prism.Core.Services;
 using Prism.Unity;
 
 namespace My.CoachManager.Presentation.Prism.Core
@@ -10,6 +12,34 @@ namespace My.CoachManager.Presentation.Prism.Core
         private static IUnityContainer _container;
 
         #endregion Fields
+
+        #region Members
+
+        /// <summary>
+        /// Gets the navigation service.
+        /// </summary>
+        public static INavigationService NavigationService
+        {
+            get { return GetInstance<INavigationService>(); }
+        }
+
+        /// <summary>
+        /// Gets the logger service.
+        /// </summary>
+        public static ILogger Logger
+        {
+            get { return GetInstance<ILogger>(); }
+        }
+
+        /// <summary>
+        /// Gets the dialog service.
+        /// </summary>
+        public static IDialogService DialogService
+        {
+            get { return GetInstance<IDialogService>(); }
+        }
+
+        #endregion Members
 
         #region Methods
 

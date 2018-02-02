@@ -2,9 +2,9 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
-using System.Xml.Serialization;
 using My.CoachManager.Presentation.Prism.Core.Filters;
-using My.CoachManager.Presentation.Prism.ViewModels;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
+using Newtonsoft.Json;
 
 namespace My.CoachManager.Presentation.Prism.Tests
 {
@@ -33,15 +33,33 @@ namespace My.CoachManager.Presentation.Prism.Tests
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var test = new StringFilter(typeof(PlayerDetailViewModel).GetProperty("FullName"), StringOperator.Contains, true)
+            var test = new StringFilter("FullName", StringOperator.Contains, true)
             {
                 Value = "TOTO"
             };
 
-            XmlSerializer xs = new XmlSerializer(typeof(StringFilter));
-            using (StreamWriter wr = new StreamWriter("test.xml"))
+            JsonSerializer serializer = new JsonSerializer();
+
+            var vm = new FilterViewModel(test, "coucou", LogicalOperator.Or);
+
+            //IFormatter formatter = new BinaryFormatter();
+            //XmlSerializer xs = new XmlSerializer(typeof(StringFilter));
+            //using (FileStream wr = new FileStream("test.xml", FileMode.OpenOrCreate))
+            //{
+            //    formatter.Serialize(wr, vm);
+            //}
+
+            // serialize JSON directly to a file
+            using (StreamWriter file = File.CreateText(@"test.json"))
             {
-                xs.Serialize(wr, test);
+                serializer.Serialize(file, vm);
+            }
+
+            FilterViewModel vm2 = null;
+
+            using (StreamReader file = File.OpenText(@"test.json"))
+            {
+                vm2 = (FilterViewModel)serializer.Deserialize(file, typeof(FilterViewModel));
             }
         }
     }

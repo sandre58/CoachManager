@@ -1,35 +1,26 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows;
 using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
-using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
-using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 using Prism.Commands;
-using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
     public abstract class
-        ListViewModel<TEntityViewModel, TEditView, TEditViewModel> : ReadOnlyListViewModel<TEntityViewModel>
+        ListViewModel<TEntityViewModel, TEditViewModel> : ReadOnlyListViewModel<TEntityViewModel>
         where TEntityViewModel : class, IEntityViewModel, INotifyPropertyChanged
-        where TEditView : FrameworkElement
         where TEditViewModel : class, IDialogViewModel, IEditViewModel
     {
         #region Constructor
 
         /// <summary>
-        /// Initialise a new instance of <see cref="ListViewModel{TEntityViewModel,TEditView,TEditViewModel}"/>.
+        /// Initialise a new instance of <see cref="ListViewModel{TEntityViewModel,TEditViewModel}"/>.
         /// </summary>
-        /// <param name="dialogService">The dialog service.</param>
-        /// <param name="eventAggregator"></param>
-        /// <param name="logger">The logger.</param>
-        protected ListViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
-            : base(dialogService, eventAggregator, logger)
+        protected ListViewModel()
         {
             AddCommand = new DelegateCommand(Add, CanAdd);
             RemoveCommand = new DelegateCommand<TEntityViewModel>(Remove, CanRemove);
@@ -61,6 +52,15 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         #region Methods
 
+        /// <summary>
+        /// Get Item View Type.
+        /// </summary>
+        /// <returns></returns>
+        protected override Type GetItemViewType()
+        {
+            return null;
+        }
+
         #region Add
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         public virtual void Add()
         {
-            DialogService.ShowWorkspaceDialog<TEditView>(null, dialog =>
+            Locator.DialogService.ShowWorkspaceDialog(GetEditViewType(), null, dialog =>
             {
                 OnAddCompleted(dialog.Result);
             });
@@ -80,7 +80,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <returns></returns>
         public virtual bool CanAdd()
         {
-            return Mode == ScreenMode.Read;
+            return Mode == ScreenMode.Read && GetEditViewType() != null;
         }
 
         /// <summary>
@@ -97,13 +97,22 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         #region Edit
 
         /// <summary>
+        /// Get Item View Type.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual Type GetEditViewType()
+        {
+            return null;
+        }
+
+        /// <summary>
         /// Edit Item.
         /// </summary>
         public virtual void Edit(TEntityViewModel item)
         {
             if (CanEdit(item))
             {
-                DialogService.ShowWorkspaceDialog<TEditView>(before =>
+                Locator.DialogService.ShowWorkspaceDialog(GetEditViewType(), before =>
                     {
                         var vm = before.Context as TEditViewModel;
                         OnEditRequested(item, vm);
@@ -120,7 +129,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         public virtual bool CanEdit(TEntityViewModel item)
         {
-            return Mode == ScreenMode.Read && item != null;
+            return Mode == ScreenMode.Read && item != null && GetEditViewType() != null;
         }
 
         /// <summary>
@@ -156,7 +165,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             {
                 if (item != null)
                 {
-                    DialogService.ShowQuestionDialog(MessageResources.ConfirmationRemovingItem, dialog =>
+                    Locator.DialogService.ShowQuestionDialog(MessageResources.ConfirmationRemovingItem, dialog =>
                     {
                         if (dialog.Result == DialogResult.Yes)
                         {
@@ -213,13 +222,18 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         {
             if (CanKeyboardAction(e))
             {
-                switch (e.EventArgs.Key)
+                if (e.EventArgs.Key == Key.Enter)
                 {
-                    case Key.Enter:
+                    if (GetItemViewType() == null)
+                    {
                         Edit((TEntityViewModel)e.Item);
                         e.EventArgs.Handled = true;
-                        break;
+                        return;
+                    }
+                }
 
+                switch (e.EventArgs.Key)
+                {
                     case Key.Delete:
                         Remove((TEntityViewModel)e.Item);
                         e.EventArgs.Handled = true;
@@ -237,7 +251,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Calls when selected item change.
         /// </summary>
-        protected override void OnSelectedItemChanged()
+        protected virtual void OnSelectedItemChanged()
         {
             EditCommand.RaiseCanExecuteChanged();
             RemoveCommand.RaiseCanExecuteChanged();

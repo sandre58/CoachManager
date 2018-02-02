@@ -107,6 +107,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 return;
 
             UpdateSelectedValue();
+            UpdateSelectedValues();
         }
 
         #endregion Delimiter
@@ -236,18 +237,12 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         protected virtual void OnSelectedValuesChanged(object oldValue, object newValue)
         {
-            if (!IsInitialized || _updatingValues)
+            if (_ignoreSelectedValuesChanged)
                 return;
 
             var values = newValue as IList;
-            SelectedItems.Clear();
-            foreach (var item in ItemsCollection)
-            {
-                var value = GetItemValue(item);
-                if (values != null && values.Contains(value))
-                    SelectedItems.Add(GetItemValue(item));
-            }
-            UpdateFromSelectedItems();
+            if (values != null)
+                SelectedValue = string.Join(Delimiter, values.Cast<object>().ToList());
         }
 
         #endregion SelectedValues property
@@ -599,7 +594,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
         }
 
         private bool _updatingAll;
-        private bool _updatingValues;
+        private bool _ignoreSelectedValuesChanged;
 
         private void OnItemSelectionChangedCore(RoutedEventArgs args, bool unselected)
         {
@@ -620,12 +615,16 @@ namespace My.CoachManager.Presentation.Prism.Controls
                         if (unselected)
                         {
                             if (SelectedItems.Contains(i))
+                            {
                                 SelectedItems.Remove(i);
+                            }
                         }
                         else
                         {
                             if (!SelectedItems.Contains(i))
+                            {
                                 SelectedItems.Add(i);
+                            }
                         }
                     }
                 }
@@ -635,22 +634,22 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 if (unselected)
                 {
                     while (SelectedItems.Contains(item))
+                    {
                         SelectedItems.Remove(item);
+                    }
                 }
                 else
                 {
                     if (!SelectedItems.Contains(item))
+                    {
                         SelectedItems.Add(item);
+                    }
                 }
 
                 _updatingAll = true;
                 _allItem.IsSelected = SelectedItems.Count == Items.Count;
                 _updatingAll = false;
             }
-
-            _updatingValues = true;
-            SelectedValues = SelectedItems.Cast<object>().Select(GetItemValue);
-            _updatingValues = false;
 
             OnItemSelectionChanged(new ItemSelectionChangedEventArgs(ItemSelectionChangedEvent, this, item, !unselected));
         }
@@ -687,6 +686,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
         private void OnValueMemberPathValuesChanged()
         {
             UpdateSelectedValue();
+            UpdateSelectedValues();
         }
 
         private void UpdateSelectedMemberPathValuesBindings()
@@ -720,14 +720,32 @@ namespace My.CoachManager.Presentation.Prism.Controls
         /// </summary>
         private void UpdateSelectedValue()
         {
-            string newValue = String.Join(Delimiter, SelectedItems.Cast<object>().Select(x => GetItemValue(x)));
+            string newValue = string.Join(Delimiter, SelectedItems.Cast<object>().Select(x => GetItemValue(x)));
 
-            if (String.IsNullOrEmpty(SelectedValue) || !SelectedValue.Equals(newValue))
+            if (string.IsNullOrEmpty(SelectedValue) || !SelectedValue.Equals(newValue))
             {
                 _ignoreSelectedValueChanged = true;
                 SelectedValue = newValue;
                 _ignoreSelectedValueChanged = false;
             }
+        }
+
+        /// <summary>
+        /// Updates the SelectedValue property based on what is present in the SelectedItems property.
+        /// </summary>
+        private void UpdateSelectedValues()
+        {
+            var values = new List<object>();
+
+            foreach (var item in SelectedItems)
+            {
+                var value = GetItemValue(item);
+                values.Add(value);
+            }
+
+            _ignoreSelectedValuesChanged = true;
+            SelectedValues = values;
+            _ignoreSelectedValuesChanged = false;
         }
 
         /// <summary>
@@ -822,6 +840,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
             UpdateSelectedItem();
             UpdateSelectedValue();
+            UpdateSelectedValues();
         }
 
         /// <summary>
@@ -845,6 +864,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
             UpdateSelectedItem();
             UpdateSelectedValue();
+            UpdateSelectedValues();
         }
 
         private void AddAvailableRemovedItems()

@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Windows;
+using System.Windows.Data;
 using System.Windows.Markup;
+using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.CrossCutting.Core.Helpers;
 
 namespace My.CoachManager.Presentation.Prism.Controls.Extensions
@@ -99,48 +102,25 @@ namespace My.CoachManager.Presentation.Prism.Controls.Extensions
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            var enumValues = Enum.GetValues(EnumType);
+            if (EnumType != null)
+            {
+                var enumValues = Enum.GetValues(EnumType);
 
-            return (from object enumValue in enumValues
-                    where EnumsToExclude == null || !EnumsToExclude.Contains(enumValue)
-                    select
-                        new EnumerationMember
-                        {
-                            Value = enumValue,
-                            ValueAsString = enumValue.ToString(),
-                            Description = GetDescription(enumValue),
-                            Display = GetDisplay(enumValue)
-                        }).ToArray();
+                return (from Enum enumValue in enumValues
+                        where EnumsToExclude == null || !EnumsToExclude.Contains(enumValue)
+                        select
+                            new EnumerationMember
+                            {
+                                Value = enumValue,
+                                ValueAsString = enumValue.ToString(),
+                                Description = enumValue.ToDescription(),
+                                Display = enumValue.ToDisplay()
+                            }).ToArray();
+            }
+            return null;
         }
 
         #endregion Public Methods and Operators
-
-        #region Methods
-
-        private string GetDescription(object enumValue)
-        {
-            var descriptionAttribute =
-                EnumType.GetField(enumValue.ToString())
-                    .GetCustomAttributes(typeof(DescriptionAttribute), false)
-                    .FirstOrDefault() as DescriptionAttribute;
-
-            return descriptionAttribute != null ? descriptionAttribute.Description : enumValue.ToString();
-        }
-
-        private string GetDisplay(object enumValue)
-        {
-            var displayAttribute =
-                EnumType.GetField(enumValue.ToString())
-                    .GetCustomAttributes(typeof(DisplayAttribute), false)
-                    .FirstOrDefault() as DisplayAttribute;
-
-            return displayAttribute != null
-                       ? new System.Resources.ResourceManager(displayAttribute.ResourceType).GetString(
-                           displayAttribute.Name)
-                       : enumValue.ToString();
-        }
-
-        #endregion Methods
 
         public class EnumerationMember
         {

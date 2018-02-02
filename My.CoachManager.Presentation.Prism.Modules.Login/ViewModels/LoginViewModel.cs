@@ -1,7 +1,5 @@
-﻿using My.CoachManager.CrossCutting.Logging;
+﻿using My.CoachManager.Presentation.Prism.Core;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
-using My.CoachManager.Presentation.Prism.Core.Services;
-using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.Modules.Login.Core;
 using Prism.Commands;
@@ -80,12 +78,12 @@ namespace My.CoachManager.Presentation.Prism.Modules.Login.ViewModels
 
         #region Constructors
 
-        public LoginViewModel(IEventAggregator eventAggregator, IDialogService dialogService, ILogger logger) : base(dialogService, eventAggregator, logger)
+        public LoginViewModel()
         {
             LoginCommand = new DelegateCommand(Login, CanLogin);
             CancelCommand = new DelegateCommand(Cancel, CanCancel);
 
-            EventAggregator.GetEvent<LoginErrorRequestEvent>().Subscribe(error => Error = error);
+            Locator.GetInstance<IEventAggregator>().GetEvent<LoginErrorRequestEvent>().Subscribe(error => Error = error);
         }
 
         #endregion Constructors

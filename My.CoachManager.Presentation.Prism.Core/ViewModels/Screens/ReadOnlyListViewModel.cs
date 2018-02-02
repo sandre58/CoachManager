@@ -1,15 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Reflection;
 using System.Windows.Input;
-using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Filters;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 using Prism.Commands;
-using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
@@ -20,27 +18,10 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         private ObservableCollection<TEntityViewModel> _items;
         private TEntityViewModel _selectedItem;
+        private ObservableCollection<string> _displayedColumns;
+        private Dictionary<object, string[]> _presetColumns;
 
         #endregion Fields
-
-        #region Constructor
-
-        /// <summary>
-        /// Initialise a new instance of <see cref="ReadOnlyListViewModel{TEntityViewModel}"/>.
-        /// </summary>
-        /// <param name="dialogService">The dialog service.</param>
-        /// <param name="eventAggregator"></param>
-        /// <param name="logger">The logger.</param>
-        protected ReadOnlyListViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
-            : base(dialogService, eventAggregator, logger)
-        {
-            RefreshCommand = new DelegateCommand(Refresh, CanRefresh);
-            KeyboardActionCommand = new DelegateCommand<KeyDownItemEventArgs>(KeyboardAction, CanKeyboardAction);
-            _items = new ObservableCollection<TEntityViewModel>();
-            FilteredItems = new FilteredCollectionView(Items);
-        }
-
-        #endregion Constructor
 
         #region Members
 
@@ -59,7 +40,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Gets or sets the items.
         /// </summary>
-        public FilteredCollectionView FilteredItems { get; private set; }
+        public FilteredCollectionView<TEntityViewModel> FilteredItems { get; private set; }
 
         /// <summary>
         /// Gets or sets the selected item.
@@ -69,9 +50,32 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             get { return _selectedItem; }
             set
             {
-                SetProperty(ref _selectedItem, value, OnSelectedItemChanged);
+                SetProperty(ref _selectedItem, value);
             }
         }
+
+        /// <summary>
+        /// Gets or sets the columns to displayed.
+        /// </summary>
+        public ObservableCollection<string> DisplayedColumns
+        {
+            get { return _displayedColumns; }
+            set { SetProperty(ref _displayedColumns, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the preset columns to displayed.
+        /// </summary>
+        public Dictionary<object, string[]> PresetColumns
+        {
+            get { return _presetColumns; }
+            private set { SetProperty(ref _presetColumns, value); }
+        }
+
+        /// <summary>
+        /// Command to change displayed columns.
+        /// </summary>
+        public DelegateCommand<object> ChangeDisplayedColumnsCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the keyboard action command.
@@ -87,6 +91,43 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         #region Methods
 
+        #region Abstracts Methods
+
+        /// <summary>
+        /// Get Item View Type.
+        /// </summary>
+        /// <returns></returns>
+        protected abstract Type GetItemViewType();
+
+        #endregion Abstracts Methods
+
+        #region Initialization
+
+        /// <summary>
+        /// Initializes commands.
+        /// </summary>
+        protected override void InitializeCommands()
+        {
+            base.InitializeCommands();
+
+            RefreshCommand = new DelegateCommand(Refresh, CanRefresh);
+            KeyboardActionCommand = new DelegateCommand<KeyDownItemEventArgs>(KeyboardAction, CanKeyboardAction);
+            ChangeDisplayedColumnsCommand = new DelegateCommand<object>(ChangeDisplayedColumns);
+        }
+
+        /// <summary>
+        /// Initializes Data.
+        /// </summary>
+        protected override void InitializeData()
+        {
+            base.InitializeData();
+
+            _items = new ObservableCollection<TEntityViewModel>();
+            FilteredItems = new FilteredCollectionView<TEntityViewModel>(Items);
+
+            PresetColumns = new Dictionary<object, string[]>();
+        }
+
         /// <summary>
         /// Set Items Collection.
         /// </summary>
@@ -96,6 +137,31 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             Items.Clear();
             Items.AddRange(collection);
         }
+
+        #endregion Initialization
+
+        #region Open
+
+        /// <summary>
+        /// Edit Item.
+        /// </summary>
+        public virtual void Open(TEntityViewModel item)
+        {
+            if (CanOpen(item))
+            {
+                Locator.GetInstance<INavigationService>().NavigateTo(GetItemViewType(), item.Id);
+            }
+        }
+
+        /// <summary>
+        /// Can Edit item.
+        /// </summary>
+        public virtual bool CanOpen(TEntityViewModel item)
+        {
+            return Mode == ScreenMode.Read && item != null && GetItemViewType() != null;
+        }
+
+        #endregion Open
 
         #region Refresh
 
@@ -129,6 +195,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
                 case Key.F5:
                     Refresh();
                     break;
+
+                case Key.Enter:
+                    Open((TEntityViewModel)e.Item);
+                    e.EventArgs.Handled = true;
+                    break;
             }
         }
 
@@ -142,22 +213,31 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         #endregion Keyboard
 
+        #region Columns Management
+
         /// <summary>
-        /// Calls when selected item change.
+        /// Changes displayed columns.
         /// </summary>
-        protected virtual void OnSelectedItemChanged()
+        protected void ChangeDisplayedColumns(object type)
         {
+            if (type != null)
+                DisplayedColumns = new ObservableCollection<string>(PresetColumns[type]);
         }
 
         /// <summary>
-        /// Gets specified property info.
+        /// Add a preset columns.
         /// </summary>
-        /// <param name="propertyName"></param>
-        /// <returns></returns>
-        protected PropertyInfo GetPropertyInfo(string propertyName)
+        /// <param name="key"></param>
+        /// <param name="columns"></param>
+        protected void AddPresetColumns(object key, string[] columns)
         {
-            return typeof(TEntityViewModel).GetProperty(propertyName);
+            if (PresetColumns != null)
+            {
+                PresetColumns.Add(key, columns);
+            }
         }
+
+        #endregion Columns Management
 
         #endregion Methods
     }

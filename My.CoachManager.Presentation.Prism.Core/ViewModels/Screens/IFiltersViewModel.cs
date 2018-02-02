@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using My.CoachManager.Presentation.Prism.Core.Filters;
-using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
@@ -11,7 +9,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Gets or sets a methods that create a filter.
         /// </summary>
-        Func<string, IFilter> CreateFilter { get; set; }
+        Func<string, IFilterViewModel> CreateFilter { get; set; }
 
         /// <summary>
         /// Gets the allowed filters.
@@ -27,11 +25,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// Gets or sets the filters.
         /// </summary>
         ObservableCollection<FilterViewModel> Filters { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Reset command.
-        /// </summary>
-        DelegateCommand ResetCommand { get; set; }
 
         /// <summary>
         /// When Filters changed.

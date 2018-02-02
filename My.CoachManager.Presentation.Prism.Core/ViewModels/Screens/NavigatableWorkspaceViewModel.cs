@@ -1,7 +1,5 @@
-﻿using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Presentation.Prism.Core.Interactivity;
+﻿using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Navigation;
-using My.CoachManager.Presentation.Prism.Core.Services;
 using Prism.Events;
 using Prism.Regions;
 
@@ -9,18 +7,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
     public abstract class NavigatableWorkspaceViewModel : WorkspaceViewModel, INavigatableWorkspaceViewModel
     {
-        #region Constructors
-
-        /// <summary>
-        /// Initialise a new instance of <see cref="ScreenViewModel"/>.
-        /// </summary>
-        public NavigatableWorkspaceViewModel(IDialogService dialogService, IEventAggregator eventAggregator, ILogger logger)
-            : base(dialogService, eventAggregator, logger)
-        {
-        }
-
-        #endregion Constructors
-
         #region Members
 
         /// <summary>
@@ -32,13 +18,14 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         #region Methods
 
+        /// <inheritdoc />
         /// <summary>
         /// Called when the implementer has been navigated to.
         /// </summary>
         /// <param name="navigationContext">The navigation context.</param>
         public virtual void OnNavigatedTo(NavigationContext navigationContext)
         {
-            EventAggregator.GetEvent<NotifyNavigationCompletedEvent>().Publish(new NavigationCompletedEventArgs(this, navigationContext));
+            Locator.GetInstance<IEventAggregator>().GetEvent<NotifyNavigationCompletedEvent>().Publish(new NavigationCompletedEventArgs(this, navigationContext));
 
             if (State == ScreenState.NotLoaded)
             {
@@ -46,6 +33,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             }
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Called to determine if this instance can handle the navigation request.
         /// </summary>
@@ -56,6 +44,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             return true;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Called when the implementer is being navigated away from.
         /// </summary>

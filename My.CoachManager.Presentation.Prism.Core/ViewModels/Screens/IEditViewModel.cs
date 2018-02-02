@@ -1,10 +1,6 @@
 ﻿namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
-    public interface IEditViewModel
+    public interface IEditViewModel : IItemViewModel
     {
-        /// <summary>
-        /// Load an item by id.
-        /// </summary>
-        void LoadItemById(int id);
     }
 }

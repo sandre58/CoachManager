@@ -10,7 +10,7 @@ using System.Windows.Media;
 namespace My.CoachManager.Presentation.Prism.Controls
 {
     [ContentProperty("ItemsSource")]
-    [TemplatePart(Name = "PART_Button", Type = typeof(System.Windows.Controls.Button)),
+    [TemplatePart(Name = "PART_Button", Type = typeof(Button)),
      TemplatePart(Name = "PART_Menu", Type = typeof(ContextMenu))]
     public class DropDownMenuButton : ItemsControl
     {

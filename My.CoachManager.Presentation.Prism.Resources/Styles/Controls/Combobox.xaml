@@ -12,6 +12,7 @@
         <ResourceDictionary Source="Validation.xaml" />
         <ResourceDictionary Source="TextBox.xaml" />
         <ResourceDictionary Source="TextBlock.xaml" />
+        <ResourceDictionary Source="ScrollBar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- Combox Item -->
@@ -147,6 +148,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
                     <ControlTemplate.Resources>
+                        <Style BasedOn="{StaticResource SmallScrollBarStyle}" TargetType="{x:Type ScrollBar}" />
                         <Storyboard x:Key="EnterGotFocus">
                             <DoubleAnimation Duration="0:0:0.2"
                                              Storyboard.TargetName="PART_WatermarkMessage"
@@ -304,6 +306,7 @@
                                 <ScrollViewer x:Name="DropDownScrollViewer"
                                               Background="{DynamicResource Light}"
                                               Margin="2"
+                                              VerticalScrollBarVisibility="Auto"
                                               Padding="1"
                                               BorderThickness="0">
                                     <Grid RenderOptions.ClearTypeHint="Enabled"  Background="{DynamicResource Light}">
@@ -594,6 +597,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:MultiComboBox}">
                     <ControlTemplate.Resources>
+                        <Style BasedOn="{StaticResource SmallScrollBarStyle}" TargetType="{x:Type ScrollBar}" />
                         <Storyboard x:Key="EnterGotFocus">
                             <DoubleAnimation Duration="0:0:0.2"
                                              Storyboard.TargetName="PART_WatermarkMessage"
@@ -755,6 +759,7 @@
                                               Background="{DynamicResource Light}"
                                               Margin="2"
                                               Padding="1"
+                                              VerticalScrollBarVisibility="Auto"
                                               BorderThickness="0">
                                     <Grid RenderOptions.ClearTypeHint="Enabled"  Background="{DynamicResource Light}">
                                         <Grid.RowDefinitions>

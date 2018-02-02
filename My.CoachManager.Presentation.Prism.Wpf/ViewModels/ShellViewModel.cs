@@ -1,11 +1,8 @@
-﻿using System;
-using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Presentation.Prism.Core;
+﻿using My.CoachManager.Presentation.Prism.Core;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Global;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Navigation;
-using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.Modules.StatusBar.Core;
 using Prism.Commands;
@@ -19,10 +16,9 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
     {
         #region Fields
 
-        private readonly IRegionManager _regionManager;
-        private readonly IEventAggregator _eventAggregator;
         private IRegionNavigationJournal _journal;
         private INavigatableWorkspaceViewModel _activeWorkspace;
+        private bool _isMenuExpended;
 
         #endregion Fields
 
@@ -31,26 +27,18 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="ShellViewModel"/>.
         /// </summary>
-        /// <param name="regionManager"></param>
-        /// <param name="eventAggregator"></param>
-        /// <param name="dialogService"></param>
-        /// <param name="logger"></param>
-        public ShellViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IDialogService dialogService, ILogger logger)
-            : base(dialogService, eventAggregator, logger)
+        public ShellViewModel()
         {
-            _regionManager = regionManager;
-            _eventAggregator = eventAggregator;
             WorkspaceDialogInteractionRequest = new InteractionRequest<IDialog>();
             DialogInteractionRequest = new InteractionRequest<IDialog>();
             NotificationPopupInteractionRequest = new InteractionRequest<INotificationPopup>();
 
-            _eventAggregator.GetEvent<ShowWorkspaceDialogRequestEvent>().Subscribe(OnShowWorkspaceDialogRequested, ThreadOption.UIThread, true);
-            _eventAggregator.GetEvent<ShowCustomDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
-            _eventAggregator.GetEvent<ShowMessageDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
-            _eventAggregator.GetEvent<ShowNotificationPopupRequestEvent>().Subscribe(OnShowNotificationRequested, ThreadOption.UIThread, true);
-            _eventAggregator.GetEvent<ShowLoginDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
-            _eventAggregator.GetEvent<NavigateRequestEvent>().Subscribe(OnNavigateRequested, ThreadOption.UIThread, true);
-            _eventAggregator.GetEvent<NotifyNavigationCompletedEvent>().Subscribe(OnNavigateCompleted, ThreadOption.UIThread, true);
+            Locator.GetInstance<IEventAggregator>().GetEvent<ShowWorkspaceDialogRequestEvent>().Subscribe(OnShowWorkspaceDialogRequested, ThreadOption.UIThread, true);
+            Locator.GetInstance<IEventAggregator>().GetEvent<ShowCustomDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
+            Locator.GetInstance<IEventAggregator>().GetEvent<ShowMessageDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
+            Locator.GetInstance<IEventAggregator>().GetEvent<ShowNotificationPopupRequestEvent>().Subscribe(OnShowNotificationRequested, ThreadOption.UIThread, true);
+            Locator.GetInstance<IEventAggregator>().GetEvent<ShowLoginDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
+            Locator.GetInstance<IEventAggregator>().GetEvent<NotifyNavigationCompletedEvent>().Subscribe(OnNavigateCompleted, ThreadOption.UIThread, true);
 
             var navigateCommand = new DelegateCommand<string>(Navigate, s => true);
 
@@ -58,11 +46,22 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 
             GoBackCommand = new DelegateCommand(GoBack, CanGoBack);
             GoForwardCommand = new DelegateCommand(GoForward, CanGoForward);
+
+            IsMenuExpended = true;
         }
 
         #endregion Constructors
 
         #region Members
+
+        /// <summary>
+        /// Gets or sets the menu is expended.
+        /// </summary>
+        public bool IsMenuExpended
+        {
+            get { return _isMenuExpended; }
+            private set { SetProperty(ref _isMenuExpended, value); }
+        }
 
         /// <summary>
         /// Gets or sets the active workspace.
@@ -108,24 +107,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <param name="navigatePath"></param>
         private void Navigate(string navigatePath)
         {
-            if (navigatePath != null)
-            {
-                _eventAggregator.GetEvent<NavigateRequestEvent>().Publish(new NavigationEventArgs(navigatePath));
-            }
-        }
-
-        /// <summary>
-        /// Call when the navigation is requested.
-        /// </summary>
-        /// <param name="e"></param>
-        protected void OnNavigateRequested(NavigationEventArgs e)
-        {
-            var parameters = e.Parameters != null ? e.Parameters.ToString() : "";
-            var newUri = new Uri(e.Path + parameters, UriKind.Relative);
-            var currentEntry = _regionManager.Regions[RegionNames.WorkspaceRegion].NavigationService.Journal.CurrentEntry;
-            var activeUri = currentEntry != null ? currentEntry.Uri : null;
-            if (!Equals(newUri, activeUri))
-                _regionManager.RequestNavigate(RegionNames.WorkspaceRegion, newUri);
+            Locator.NavigationService.NavigateTo(navigatePath);
         }
 
         /// <summary>
@@ -142,7 +124,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 
             if (ActiveWorkspace != null)
             {
-                _eventAggregator.GetEvent<UpdateStatusBarMessageRequestEvent>().Publish(ActiveWorkspace.Title);
+                Locator.GetInstance<IEventAggregator>().GetEvent<UpdateStatusBarMessageRequestEvent>().Publish(ActiveWorkspace.Title);
             }
         }
 

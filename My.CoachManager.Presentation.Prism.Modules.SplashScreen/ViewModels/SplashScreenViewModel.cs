@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
-using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Presentation.Prism.Core.Services;
-using My.CoachManager.Presentation.Prism.Core.ViewModels;
+using My.CoachManager.Presentation.Prism.Core;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.Modules.SplashScreen.Core;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
@@ -24,13 +22,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.SplashScreen.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="SplashScreenViewModel"/>.
         /// </summary>
-        /// <param name="eventAggregator"></param>
-        /// <param name="dialogService"></param>
-        /// <param name="logger"></param>
-        public SplashScreenViewModel(IEventAggregator eventAggregator, IDialogService dialogService, ILogger logger)
-            : base(dialogService, eventAggregator, logger)
+        public SplashScreenViewModel()
         {
-            eventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Subscribe(OnUpdateMessage, ThreadOption.UIThread, true);
+            Locator.GetInstance<IEventAggregator>().GetEvent<UpdateSplashScreenMessageRequestEvent>().Subscribe(OnUpdateMessage, ThreadOption.UIThread, true);
 
             var assembly = Assembly.GetEntryAssembly();
 
