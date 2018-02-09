@@ -199,14 +199,14 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administration\AddressDto.cs" />
-    <Compile Include="Administration\FunctionDto.cs" />
+    <Compile Include="Persons\AddressDto.cs" />
+    <Compile Include="Persons\FunctionDto.cs" />
     <Compile Include="Competitions\ClubDto.cs" />
     <Compile Include="Competitions\TeamDto.cs" />
     <Compile Include="EntityDtoBase.cs" />
     <Compile Include="Categories\CategoryDto.cs" />
-    <Compile Include="Administration\SeasonDto.cs" />
-    <Compile Include="Administration\PositionDto.cs" />
+    <Compile Include="Seasons\SeasonDto.cs" />
+    <Compile Include="Positions\PositionDto.cs" />
     <Compile Include="IEntityDtoBase.cs" />
     <Compile Include="Mapping\RosterProfile.cs" />
     <Compile Include="Mapping\CompetitionProfile.cs" />

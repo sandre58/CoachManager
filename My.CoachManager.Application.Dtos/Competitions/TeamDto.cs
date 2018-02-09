@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using My.CoachManager.Application.Dtos.Administration;
+using My.CoachManager.Application.Dtos.Categories;
 using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Application.Dtos.Competitions

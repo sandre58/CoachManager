@@ -1,7 +1,6 @@
 ﻿using System.Runtime.Serialization;
-using My.CoachManager.Application.Dtos.Persons;
 
-namespace My.CoachManager.Application.Dtos.Administration
+namespace My.CoachManager.Application.Dtos.Persons
 {
     /// <summary>
     /// Data Transfer Object for Address item.

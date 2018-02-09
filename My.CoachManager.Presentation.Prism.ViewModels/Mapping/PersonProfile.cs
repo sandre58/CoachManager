@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using My.CoachManager.Application.Dtos.Administration;
 using My.CoachManager.Application.Dtos.Persons;
 
 namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping

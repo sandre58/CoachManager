@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
-using My.CoachManager.Application.Dtos.Administration;
+using My.CoachManager.Application.Dtos.Positions;
 using My.CoachManager.Domain.CategoryModule.Aggregate;
 using My.CoachManager.Domain.Entities;
 

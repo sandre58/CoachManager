@@ -1,4 +1,4 @@
-﻿using My.CoachManager.Application.Dtos.Administration;
+﻿using My.CoachManager.Application.Dtos.Positions;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Resources.Strings;
 using My.CoachManager.Presentation.Prism.ViewModels;

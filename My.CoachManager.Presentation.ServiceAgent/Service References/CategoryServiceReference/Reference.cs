@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using My.CoachManager.Application.Dtos.Categories;
+
 namespace My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference {
     
     
@@ -16,34 +18,34 @@ namespace My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference {
     public interface ICategoryService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetList", ReplyAction="http://tempuri.org/ICategoryService/GetListResponse")]
-        My.CoachManager.Application.Dtos.Administration.CategoryDto[] GetList();
+        CategoryDto[] GetList();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetList", ReplyAction="http://tempuri.org/ICategoryService/GetListResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Administration.CategoryDto[]> GetListAsync();
+        System.Threading.Tasks.Task<CategoryDto[]> GetListAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetLabels", ReplyAction="http://tempuri.org/ICategoryService/GetLabelsResponse")]
-        My.CoachManager.Application.Dtos.Administration.CategoryDto[] GetLabels();
+        CategoryDto[] GetLabels();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetLabels", ReplyAction="http://tempuri.org/ICategoryService/GetLabelsResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Administration.CategoryDto[]> GetLabelsAsync();
+        System.Threading.Tasks.Task<CategoryDto[]> GetLabelsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetById", ReplyAction="http://tempuri.org/ICategoryService/GetByIdResponse")]
-        My.CoachManager.Application.Dtos.Administration.CategoryDto GetById(int id);
+        CategoryDto GetById(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetById", ReplyAction="http://tempuri.org/ICategoryService/GetByIdResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Administration.CategoryDto> GetByIdAsync(int id);
+        System.Threading.Tasks.Task<CategoryDto> GetByIdAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/CreateOrUpdate", ReplyAction="http://tempuri.org/ICategoryService/CreateOrUpdateResponse")]
-        My.CoachManager.Application.Dtos.Administration.CategoryDto CreateOrUpdate(My.CoachManager.Application.Dtos.Administration.CategoryDto playerDto);
+        CategoryDto CreateOrUpdate(CategoryDto playerDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/CreateOrUpdate", ReplyAction="http://tempuri.org/ICategoryService/CreateOrUpdateResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Administration.CategoryDto> CreateOrUpdateAsync(My.CoachManager.Application.Dtos.Administration.CategoryDto playerDto);
+        System.Threading.Tasks.Task<CategoryDto> CreateOrUpdateAsync(CategoryDto playerDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/Remove", ReplyAction="http://tempuri.org/ICategoryService/RemoveResponse")]
-        void Remove(My.CoachManager.Application.Dtos.Administration.CategoryDto playerDto);
+        void Remove(CategoryDto playerDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/Remove", ReplyAction="http://tempuri.org/ICategoryService/RemoveResponse")]
-        System.Threading.Tasks.Task RemoveAsync(My.CoachManager.Application.Dtos.Administration.CategoryDto playerDto);
+        System.Threading.Tasks.Task RemoveAsync(CategoryDto playerDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/UpdateOrders", ReplyAction="http://tempuri.org/ICategoryService/UpdateOrdersResponse")]
         void UpdateOrders(System.Collections.Generic.Dictionary<int, int> entities);
@@ -79,43 +81,43 @@ namespace My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public My.CoachManager.Application.Dtos.Administration.CategoryDto[] GetList() {
+        public CategoryDto[] GetList() {
             return base.Channel.GetList();
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Administration.CategoryDto[]> GetListAsync() {
+        public System.Threading.Tasks.Task<CategoryDto[]> GetListAsync() {
             return base.Channel.GetListAsync();
         }
         
-        public My.CoachManager.Application.Dtos.Administration.CategoryDto[] GetLabels() {
+        public CategoryDto[] GetLabels() {
             return base.Channel.GetLabels();
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Administration.CategoryDto[]> GetLabelsAsync() {
+        public System.Threading.Tasks.Task<CategoryDto[]> GetLabelsAsync() {
             return base.Channel.GetLabelsAsync();
         }
         
-        public My.CoachManager.Application.Dtos.Administration.CategoryDto GetById(int id) {
+        public CategoryDto GetById(int id) {
             return base.Channel.GetById(id);
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Administration.CategoryDto> GetByIdAsync(int id) {
+        public System.Threading.Tasks.Task<CategoryDto> GetByIdAsync(int id) {
             return base.Channel.GetByIdAsync(id);
         }
         
-        public My.CoachManager.Application.Dtos.Administration.CategoryDto CreateOrUpdate(My.CoachManager.Application.Dtos.Administration.CategoryDto playerDto) {
+        public CategoryDto CreateOrUpdate(CategoryDto playerDto) {
             return base.Channel.CreateOrUpdate(playerDto);
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Administration.CategoryDto> CreateOrUpdateAsync(My.CoachManager.Application.Dtos.Administration.CategoryDto playerDto) {
+        public System.Threading.Tasks.Task<CategoryDto> CreateOrUpdateAsync(CategoryDto playerDto) {
             return base.Channel.CreateOrUpdateAsync(playerDto);
         }
         
-        public void Remove(My.CoachManager.Application.Dtos.Administration.CategoryDto playerDto) {
+        public void Remove(CategoryDto playerDto) {
             base.Channel.Remove(playerDto);
         }
         
-        public System.Threading.Tasks.Task RemoveAsync(My.CoachManager.Application.Dtos.Administration.CategoryDto playerDto) {
+        public System.Threading.Tasks.Task RemoveAsync(CategoryDto playerDto) {
             return base.Channel.RemoveAsync(playerDto);
         }
         

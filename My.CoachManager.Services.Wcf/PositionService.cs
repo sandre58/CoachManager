@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using My.CoachManager.Application.Dtos.Administration;
+using My.CoachManager.Application.Dtos.Positions;
 using My.CoachManager.Application.Services.Positions;
 using My.CoachManager.CrossCutting.Unity;
 using My.CoachManager.Services.Wcf.Interfaces;

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace My.CoachManager.Application.Dtos.Administration
+namespace My.CoachManager.Application.Dtos.Positions
 {
     /// <summary>
     /// Data Transfer Object for Position item.

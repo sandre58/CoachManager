@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using My.CoachManager.Application.Dtos.Administration;
+using My.CoachManager.Application.Dtos.Categories;
 using My.CoachManager.Application.Services.Categories;
 using My.CoachManager.CrossCutting.Unity;
 using My.CoachManager.Services.Wcf.Interfaces;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace My.CoachManager.Application.Dtos.Administration
+namespace My.CoachManager.Application.Dtos.Seasons
 {
     /// <summary>
     /// Data Transfer Object for Season item.

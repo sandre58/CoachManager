@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace My.CoachManager.Application.Dtos.Administration
+namespace My.CoachManager.Application.Dtos.Categories
 {
     /// <summary>
     /// Data Transfer Object for Category item.

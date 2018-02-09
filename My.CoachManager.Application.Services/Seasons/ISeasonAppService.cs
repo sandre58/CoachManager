@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using My.CoachManager.Application.Core;
-using My.CoachManager.Application.Dtos.Administration;
+using My.CoachManager.Application.Dtos.Seasons;
 
 namespace My.CoachManager.Application.Services.Seasons
 {

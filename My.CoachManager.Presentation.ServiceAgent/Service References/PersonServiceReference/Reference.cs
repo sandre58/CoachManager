@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using My.CoachManager.Application.Dtos.Categories;
+
 namespace My.CoachManager.Presentation.ServiceAgent.PersonServiceReference {
     
     
@@ -36,10 +38,10 @@ namespace My.CoachManager.Presentation.ServiceAgent.PersonServiceReference {
         System.Threading.Tasks.Task RemoveAsync(My.CoachManager.Application.Dtos.Persons.PlayerDto dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/GetCategoryFromBirthdate", ReplyAction="http://tempuri.org/IPersonService/GetCategoryFromBirthdateResponse")]
-        My.CoachManager.Application.Dtos.Administration.CategoryDto GetCategoryFromBirthdate(System.DateTime date);
+        CategoryDto GetCategoryFromBirthdate(System.DateTime date);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/GetCategoryFromBirthdate", ReplyAction="http://tempuri.org/IPersonService/GetCategoryFromBirthdateResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Administration.CategoryDto> GetCategoryFromBirthdateAsync(System.DateTime date);
+        System.Threading.Tasks.Task<CategoryDto> GetCategoryFromBirthdateAsync(System.DateTime date);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/GetCountries", ReplyAction="http://tempuri.org/IPersonService/GetCountriesResponse")]
         My.CoachManager.Application.Dtos.Persons.CountryDto[] GetCountries();
@@ -99,11 +101,11 @@ namespace My.CoachManager.Presentation.ServiceAgent.PersonServiceReference {
             return base.Channel.RemoveAsync(dto);
         }
         
-        public My.CoachManager.Application.Dtos.Administration.CategoryDto GetCategoryFromBirthdate(System.DateTime date) {
+        public CategoryDto GetCategoryFromBirthdate(System.DateTime date) {
             return base.Channel.GetCategoryFromBirthdate(date);
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Administration.CategoryDto> GetCategoryFromBirthdateAsync(System.DateTime date) {
+        public System.Threading.Tasks.Task<CategoryDto> GetCategoryFromBirthdateAsync(System.DateTime date) {
             return base.Channel.GetCategoryFromBirthdateAsync(date);
         }
         
