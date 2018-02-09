@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
+using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.Application.Dtos.Rosters;
 
 namespace My.CoachManager.Services.Wcf.Interfaces
@@ -18,10 +19,17 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         IEnumerable<SquadDto> GetSquads(int rosterId);
 
         /// <summary>
-        /// Get all roster's players.
+        /// Get a squad.
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        IEnumerable<PlayerDetailDto> GetPlayers(int rosterId);
+        SquadDto GetSquad(int squadId);
+
+        /// <summary>
+        /// Get a player.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        PlayerDetailDto GetPlayer(int playerId);
     }
 }

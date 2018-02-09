@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using AutoMapper;
+using My.CoachManager.Application.Dtos.Administration;
 using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.Domain.Entities;
 
@@ -32,6 +33,7 @@ namespace My.CoachManager.Application.Dtos.Mapping
 
             // Misc
             CreateMap<Country, CountryDto>().ReverseMap();
+            CreateMap<Address, AddressDto>().ReverseMap();
         }
     }
 }

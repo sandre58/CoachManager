@@ -1,6 +1,6 @@
 ﻿using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Domain.AdministrationModule.Aggregate;
 using My.CoachManager.Domain.Entities;
+using My.CoachManager.Domain.SeasonModule.Aggregate;
 using My.CoachManager.Infrastructure.Data.Core;
 
 namespace My.CoachManager.Infrastructure.Data.Repositories

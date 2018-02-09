@@ -35,7 +35,7 @@ namespace My.CoachManager.Presentation.Prism.Resources.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var enumerable = (IEnumerable<object>)value;
-            return (value == null || !enumerable.Any()) ? Visibility.Hidden : Visibility.Visible;
+            return (value == null || !enumerable.Any()) ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

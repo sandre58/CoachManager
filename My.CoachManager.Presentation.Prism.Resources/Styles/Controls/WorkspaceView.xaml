@@ -2,20 +2,26 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
-                    xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Core.ViewModels;assembly=My.CoachManager.Presentation.Prism.Core"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:converters="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Converters"
                     xmlns:screens="clr-namespace:My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;assembly=My.CoachManager.Presentation.Prism.Core"
+                    xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
+                    xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings"
                     mc:Ignorable="d">
 
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Base/Sizes.xaml" />
         <ResourceDictionary Source="../Base/Converters.xaml" />
         <ResourceDictionary Source="../Base/Geometry.xaml" />
         <ResourceDictionary Source="../Base/Margins.xaml" />
         <ResourceDictionary Source="../Controls/TextBlock.xaml" />
         <ResourceDictionary Source="../Controls/Icon.xaml" />
         <ResourceDictionary Source="../Controls/ApplicationBar.xaml" />
+        <ResourceDictionary Source="../Controls/TextBox.xaml" />
+        <ResourceDictionary Source="../Controls/DropDownButton.xaml" />
+        <ResourceDictionary Source="../Controls/DataGrid.xaml" />
+        <ResourceDictionary Source="../Controls/Badged.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate x:Key="DefaultWorkspaceDialogViewHeaderTemplate" DataType="screens:WorkspaceDialogViewModel">
@@ -48,8 +54,75 @@
         </DataTemplate.Triggers>
     </DataTemplate>
 
+    <DataTemplate x:Key="FilteredWorkspaceDialogViewHeaderTemplate" DataType="{x:Type screens:IFilteredListViewModel}">
+        <StackPanel>
+            <DockPanel Background="{DynamicResource DarkVariation3}" parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}">
+                <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="{StaticResource LargeMargin}">
+                    <TextBlock Text="{x:Static strings1:ControlResources.SpeedSearch}" VerticalAlignment="Center" />
+                    <TextBox Text="{Binding SpeedFilter.Filter.Value, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource TextBoxBaseStyle}"
+                                 Width="{StaticResource MediumWidth}"
+                                 CharacterCasing="Upper"
+                                 parameters:TextBoxParameters.UseFloatingWatermark="False"
+                                 parameters:TextBoxParameters.Watermark="{Binding SpeedFilter.Title}" />
+                    <Button Content="{x:Static strings1:ControlResources.Clear}" Command="{Binding ResetFiltersCommand}" />
+                    <controls:Badged Badge="{Binding CountActiveFilters}">
+                        <Button Content="{x:Static strings1:ControlResources.ShowFilters}" Command="{Binding ShowFiltersCommand}" Style="{StaticResource AccentButtonBaseStyle}" />
+                    </controls:Badged>
+                </WrapPanel>
+            </DockPanel>
+            <DockPanel parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}">
+                <TextBlock VerticalAlignment="Center"
+                               parameters:PanelParameters.NotAffectMargin="True"
+                               Margin="{StaticResource DefaultMargin}"
+                               DataContext="{Binding FilteredItems}"
+                               Text="{Binding Count, StringFormat={x:Static strings1:ControlResources.CountItemsToUpper}}">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource SmallHeaderStyle}">
+                            <Setter Property="Foreground" Value="{DynamicResource Positive}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Count}" Value="0">
+                                    <Setter Property="Foreground" Value="{DynamicResource Negative}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <Rectangle Width="1"
+                               VerticalAlignment="Stretch"
+                               parameters:PanelParameters.NotAffectMargin="True"
+                               Margin="{StaticResource DefaultVerticalMargin}"
+                               Fill="{DynamicResource Control}"
+                               IsHitTestVisible="False"
+                               SnapsToDevicePixels="True"
+                               UseLayoutRounding="True" />
+                <WrapPanel Margin="{StaticResource DefaultVerticalMargin}">
+                    <controls:DropDownMenuButton Style="{StaticResource HyperLinkDropDownMenuButtonStyle}"
+                                                     Content="{x:Static strings1:ControlResources.ShowData}"
+                                                     ItemsSource="{Binding PresetColumns.Keys}">
+                        <controls:DropDownMenuButton.ItemContainerStyle>
+                            <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
+                                <Setter Property="Header" Value="{Binding Converter={StaticResource EnumToStringConverter}}" />
+                                <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, Path=DataContext, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=ChangeDisplayedColumnsCommand}" />
+                                <Setter Property="CommandParameter" Value="{Binding }" />
+                            </Style>
+                        </controls:DropDownMenuButton.ItemContainerStyle>
+                    </controls:DropDownMenuButton>
+                    <controls:DropDownMenuButton Style="{StaticResource HyperLinkDropDownMenuButtonStyle}"
+                                                     Content="{x:Static strings1:ControlResources.ShowColumns}"
+                                                     ItemsSource="{Binding ElementName=ListGrid, Path=Columns}"
+                                                     ItemContainerStyle="{StaticResource ColumnContextMenuStyle}" />
+                </WrapPanel>
+            </DockPanel>
+        </StackPanel>
+    </DataTemplate>
+
     <Style TargetType="{x:Type controls:WorkspaceView}">
         <Setter Property="MinWidth" Value="320" />
+        <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
+        <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
+        <Setter Property="FontSize" Value="{StaticResource NormalFontSize}" />
+        <Setter Property="FontFamily" Value="{StaticResource NormalFontFamily}" />
         <Setter Property="MinHeight" Value="320" />
         <Setter Property="HeaderHeight" Value="100" />
         <Setter Property="UseLayoutRounding" Value="True" />
@@ -69,19 +142,12 @@
                         <!-- Header -->
                         <Grid Grid.Row="0" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HeaderHeight}" Visibility="{TemplateBinding HeaderTemplate, Converter={StaticResource NullToVisibilityConverter}}">
                             <Border Padding="0,0,0,15" Background="{TemplateBinding HeaderBackground}" Focusable="False">
-                                <ContentControl Margin="{StaticResource LargeHorizontalMargin}" Content="{Binding}" ContentTemplate="{TemplateBinding HeaderTemplate}" VerticalAlignment="Bottom">
-                                    <ContentControl.Resources>
-                                        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource HeaderStyle}" />
-                                        <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
-                                            <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
-                                        </Style>
-                                    </ContentControl.Resources>
-                                </ContentControl>
+                                <ContentControl Margin="{StaticResource LargeHorizontalMargin}" Content="{Binding}" ContentTemplate="{TemplateBinding HeaderTemplate}" VerticalAlignment="Bottom" />
                             </Border>
                         </Grid>
 
                         <!-- Content -->
-                        <ScrollViewer Grid.Row="1"  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" Margin="{StaticResource DefaultMargin}">
+                        <ScrollViewer Grid.Row="1"  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" Margin="{TemplateBinding Padding}">
                             <ContentPresenter />
                         </ScrollViewer>
 

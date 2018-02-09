@@ -118,12 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="PlayersTitle" xml:space="preserve">
-    <value>Tous les joueurs</value>
+    <value>Joueurs</value>
   </data>
   <data name="RosterMenu" xml:space="preserve">
     <value>Effectif</value>
   </data>
   <data name="RosterTitle" xml:space="preserve">
     <value>Effectif</value>
+  </data>
+  <data name="StaffTitle" xml:space="preserve">
+    <value>Staff</value>
   </data>
 </root>

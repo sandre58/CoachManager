@@ -230,5 +230,23 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
                 return ResourceManager.GetString("Size", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Age inconnu.
+        /// </summary>
+        public static string UnknownAge {
+            get {
+                return ResourceManager.GetString("UnknownAge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nationnalité inconnue.
+        /// </summary>
+        public static string UnknownCountry {
+            get {
+                return ResourceManager.GetString("UnknownCountry", resourceCulture);
+            }
+        }
     }
 }

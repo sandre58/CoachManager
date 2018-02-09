@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Rosters" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Rosters" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" />
-  <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" />
-  <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" />
-  <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" />
+  <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" />
+  <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" />
+  <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" />
   <xs:complexType name="ArrayOfSquadDto">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="SquadDto" nillable="true" type="tns:SquadDto" />
@@ -15,7 +15,7 @@
       <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q1:EntityDto">
         <xs:sequence>
           <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Players" nillable="true" type="tns:ArrayOfRosterPlayerDto" />
+          <xs:element minOccurs="0" name="Players" nillable="true" type="tns:ArrayOfSquadPlayerDto" />
           <xs:element minOccurs="0" name="Roster" nillable="true" type="tns:RosterDto" />
           <xs:element minOccurs="0" name="RosterId" type="xs:int" />
         </xs:sequence>
@@ -23,6 +23,42 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="SquadDto" nillable="true" type="tns:SquadDto" />
+  <xs:complexType name="ArrayOfSquadPlayerDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SquadPlayerDto" nillable="true" type="tns:SquadPlayerDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSquadPlayerDto" nillable="true" type="tns:ArrayOfSquadPlayerDto" />
+  <xs:complexType name="SquadPlayerDto">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" base="q2:PlayerDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IsMutation" type="xs:boolean" />
+          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" minOccurs="0" name="LicenseState" type="q3:LicenseState" />
+          <xs:element minOccurs="0" name="Number" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="Squad" nillable="true" type="tns:SquadDto" />
+          <xs:element minOccurs="0" name="SquadId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SquadPlayerDto" nillable="true" type="tns:SquadPlayerDto" />
+  <xs:complexType name="RosterDto">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q4:EntityDto">
+        <xs:sequence>
+          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="Category" nillable="true" type="q5:CategoryDto" />
+          <xs:element minOccurs="0" name="CategoryId" type="xs:int" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Players" nillable="true" type="tns:ArrayOfRosterPlayerDto" />
+          <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="Season" nillable="true" type="q6:SeasonDto" />
+          <xs:element minOccurs="0" name="SeasonId" type="xs:int" />
+          <xs:element minOccurs="0" name="Squads" nillable="true" type="tns:ArrayOfSquadDto" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RosterDto" nillable="true" type="tns:RosterDto" />
   <xs:complexType name="ArrayOfRosterPlayerDto">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="RosterPlayerDto" nillable="true" type="tns:RosterPlayerDto" />
@@ -31,12 +67,12 @@
   <xs:element name="ArrayOfRosterPlayerDto" nillable="true" type="tns:ArrayOfRosterPlayerDto" />
   <xs:complexType name="RosterPlayerDto">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q2:EntityDtoBase">
+      <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q7:EntityDtoBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="IsMutation" type="xs:boolean" />
-          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" minOccurs="0" name="LicenseState" type="q3:LicenseState" />
+          <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" minOccurs="0" name="LicenseState" type="q8:LicenseState" />
           <xs:element minOccurs="0" name="Number" nillable="true" type="xs:int" />
-          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" minOccurs="0" name="Player" nillable="true" type="q4:PlayerDto" />
+          <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" minOccurs="0" name="Player" nillable="true" type="q9:PlayerDto" />
           <xs:element minOccurs="0" name="PlayerId" type="xs:int" />
           <xs:element minOccurs="0" name="Roster" nillable="true" type="tns:RosterDto" />
           <xs:element minOccurs="0" name="RosterId" type="xs:int" />
@@ -47,40 +83,4 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="RosterPlayerDto" nillable="true" type="tns:RosterPlayerDto" />
-  <xs:complexType name="RosterDto">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q5:EntityDto">
-        <xs:sequence>
-          <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="Category" nillable="true" type="q6:CategoryDto" />
-          <xs:element minOccurs="0" name="CategoryId" type="xs:int" />
-          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Players" nillable="true" type="tns:ArrayOfRosterPlayerDto" />
-          <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="Season" nillable="true" type="q7:SeasonDto" />
-          <xs:element minOccurs="0" name="SeasonId" type="xs:int" />
-          <xs:element minOccurs="0" name="Squads" nillable="true" type="tns:ArrayOfSquadDto" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="RosterDto" nillable="true" type="tns:RosterDto" />
-  <xs:complexType name="ArrayOfPlayerDetailDto">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="PlayerDetailDto" nillable="true" type="tns:PlayerDetailDto" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfPlayerDetailDto" nillable="true" type="tns:ArrayOfPlayerDetailDto" />
-  <xs:complexType name="PlayerDetailDto">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q8="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" base="q8:PlayerDto">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="IsMutation" type="xs:boolean" />
-          <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" minOccurs="0" name="LicenseState" type="q9:LicenseState" />
-          <xs:element minOccurs="0" name="Number" nillable="true" type="xs:int" />
-          <xs:element minOccurs="0" name="Squad" nillable="true" type="tns:SquadDto" />
-          <xs:element minOccurs="0" name="SquadId" type="xs:int" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="PlayerDetailDto" nillable="true" type="tns:PlayerDetailDto" />
 </xs:schema>

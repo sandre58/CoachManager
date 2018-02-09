@@ -16,9 +16,9 @@ namespace My.CoachManager.Application.Services.Rosters
         IEnumerable<SquadDto> GetSquads(int rosterId);
 
         /// <summary>
-        /// Get all roster's players.
+        /// Get a squad.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<PlayerDetailDto> GetPlayers(int rosterId);
+        SquadDto GetSquad(int squadId);
     }
 }

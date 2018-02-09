@@ -14,7 +14,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource DarkControl}" />
-        <Setter Property="FontSize" Value="{StaticResource MediumFontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource LargeFontSize}" />
         <Setter Property="FontStretch" Value="Medium" />
         <Setter Property="FontStyle" Value="Normal" />
         <Setter Property="FontWeight" Value="Normal" />
@@ -52,10 +52,10 @@
                                        VerticalAlignment="Bottom"
                                        Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}},Path=(params:TabControlParameters.IndicatorBrush)}"
                                        Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Path=(params:TabControlParameters.IndicatorThickness)}" />
-                            <ContentPresenter  x:Name="ContentSite" ContentSource="Header" Margin="{TemplateBinding Padding}"
+                            <ContentControl  x:Name="ContentSite" Content="{TemplateBinding Header}" Margin="{TemplateBinding Padding}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              RecognizesAccessKey="True"
+                                               params:ControlParameters.ContentCharacterCasing="Upper"
                                                TextOptions.TextFormattingMode="{TemplateBinding TextOptions.TextFormattingMode}"
                                                TextOptions.TextRenderingMode="{TemplateBinding TextOptions.TextRenderingMode}"
                                                RenderOptions.ClearTypeHint="{TemplateBinding RenderOptions.ClearTypeHint}"
@@ -107,9 +107,9 @@
                 <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{DynamicResource DarkControlMouseOver}" />
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource DarkAccent}" />
-                <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
-                <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{DynamicResource DarkAccent}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+                <Setter Property="Foreground" Value="{DynamicResource Accent}" />
+                <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{DynamicResource Accent}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="BorderBrush" Value="{DynamicResource Disabled}" />
@@ -123,7 +123,7 @@
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{DynamicResource DarkControl}" />
+        <Setter Property="params:TabControlParameters.IndicatorBrush" Value="{DynamicResource Control}" />
         <Setter Property="params:TabControlParameters.IndicatorThickness" Value="2" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="FontSize" Value="{StaticResource NormalFontSize}" />
@@ -139,6 +139,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Padding" Value="{StaticResource LargeTopMargin}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -166,8 +167,10 @@
                                 <RowDefinition x:Name="FirstRowDefinition" Height="Auto" />
                                 <RowDefinition x:Name="SecondRowDefinition" Height="*" />
                             </Grid.RowDefinitions>
-                            <Rectangle x:Name="Indicator" Grid.Column="0" Grid.Row="0" Fill="{TemplateBinding params:TabControlParameters.IndicatorBrush}" Height="{Binding RelativeSource={RelativeSource TemplatedParent},Path=(params:TabControlParameters.IndicatorThickness)}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
-                            <TabPanel x:Name="HeaderPanel" Grid.Column="0" Grid.Row="0" IsItemsHost="True" KeyboardNavigation.TabIndex="1" />
+                            <Rectangle x:Name="Indicator" Grid.Column="0" Grid.Row="0" Fill="{TemplateBinding params:TabControlParameters.IndicatorBrush}" Height="{Binding RelativeSource={RelativeSource TemplatedParent},Path=(params:TabControlParameters.IndicatorThickness)}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                                       Margin="{StaticResource LargeHorizontalMargin}" />
+                            <TabPanel x:Name="HeaderPanel" Grid.Column="0" Grid.Row="0" IsItemsHost="True" KeyboardNavigation.TabIndex="1"
+                                      Margin="{StaticResource LargeHorizontalMargin}" />
                             <Border x:Name="ContentPanel"
                                         Grid.Column="0"
                                         Grid.Row="1"
@@ -177,18 +180,13 @@
                                         Background="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.Background)}"
                                         BorderBrush="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.BorderBrush)}"
                                         BorderThickness="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.BorderThickness)}"
-                                        TextBlock.Foreground="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.Foreground)}"
-                                        TextBlock.FontFamily="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.FontFamily)}"
-                                        TextBlock.FontSize="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.FontSize)}"
-                                        TextBlock.FontStretch="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.FontStretch)}"
-                                        TextBlock.FontStyle="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.FontStyle)}"
-                                        TextBlock.FontWeight="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.FontWeight)}"
                                         TextOptions.TextFormattingMode="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TextOptions.TextFormattingMode)}"
                                         TextOptions.TextRenderingMode="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TextOptions.TextRenderingMode)}"
                                         RenderOptions.ClearTypeHint="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(RenderOptions.ClearTypeHint)}">
                                 <ContentPresenter x:Name="PART_SelectedContentHost"
                                                               ContentSource="SelectedContent"
-                                                              Margin="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.Padding)}"
+TextBlock.Foreground="Red"
+                                                              Margin="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Padding}"
                                                               HorizontalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.HorizontalContentAlignment),Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
                                                               VerticalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.VerticalContentAlignment),Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
                             </Border>

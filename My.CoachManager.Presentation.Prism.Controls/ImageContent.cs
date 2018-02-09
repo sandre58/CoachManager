@@ -15,6 +15,14 @@ namespace My.CoachManager.Presentation.Prism.Controls
             set { SetValue(ImageProperty, value); }
         }
 
+        public static readonly DependencyProperty ImagePaddingProperty = DependencyProperty.Register("ImagePadding", typeof(Thickness), typeof(ImageContent), new PropertyMetadata());
+
+        public Thickness ImagePadding
+        {
+            get { return (Thickness)GetValue(ImagePaddingProperty); }
+            set { SetValue(ImagePaddingProperty, value); }
+        }
+
         #endregion Properties
     }
 }

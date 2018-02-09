@@ -797,7 +797,7 @@
     </Style>
 
     <Style x:Key="ItemsDataGridStyle" TargetType="{x:Type DataGrid}" BasedOn="{StaticResource {x:Type DataGrid}}">
-        <Setter Property="parameters:DataGridParameters.DoubleClickRowCommand" Value="{Binding EditCommand}" />
+        <Setter Property="parameters:DataGridParameters.DoubleClickRowCommand" Value="{Binding EnterCommand}" />
         <Setter Property="parameters:DataGridParameters.KeyDownRowCommand" Value="{Binding KeyboardActionCommand}" />
     </Style>
 

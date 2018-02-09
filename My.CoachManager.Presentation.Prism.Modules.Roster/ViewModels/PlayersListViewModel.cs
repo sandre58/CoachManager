@@ -8,14 +8,11 @@ using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.Modules.Roster.Core.Enums;
 using My.CoachManager.Presentation.Prism.Modules.Roster.Views;
 using My.CoachManager.Presentation.Prism.ViewModels;
-using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
-using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
-using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using RosterResources = My.CoachManager.Presentation.Prism.Modules.Roster.Core.Resources.Strings.RosterResources;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 {
-    public class PlayersListViewModel : FilteredListViewModel<PlayerDetailViewModel, PlayerFiltersView>, IPlayersListViewModel
+    public class PlayersListViewModel : FilteredListViewModel<SquadPlayerViewModel>, IPlayersListViewModel
     {
         #region Constants
 
@@ -31,29 +28,56 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 
         #region Fields
 
-        private readonly IAdminService _adminService;
-        private readonly IRosterService _rosterService;
-        private IEnumerable<CategoryViewModel> _categories;
-        private IEnumerable<CountryViewModel> _countries;
+        private readonly IEnumerable<CategoryViewModel> _categories;
+        private readonly IEnumerable<CountryViewModel> _countries;
 
         #endregion Fields
 
         #region Constructors
 
         /// <summary>
-        /// Initialise a new instance of <see cref="PlayersListViewModel"/>.
+        /// Constructor used by Design Mode.
         /// </summary>
-        public PlayersListViewModel(IRosterService rosterService, IAdminService adminService) : this()
+        public PlayersListViewModel(IEnumerable<SquadPlayerViewModel> players, IEnumerable<CategoryViewModel> categories, IEnumerable<CountryViewModel> countries)
         {
-            _rosterService = rosterService;
-            _adminService = adminService;
+            _categories = categories;
+            _countries = countries;
+            SetItems(players);
         }
 
         /// <summary>
-        /// Initialise a new instance of <see cref="PlayersListViewModel"/>.
+        /// Constructor used by Design Mode.
         /// </summary>
         public PlayersListViewModel()
         {
+        }
+
+        #endregion Constructors
+
+        #region Methods
+
+        #region Abstracts Methods
+
+        /// <summary>
+        /// Get Item View Type.
+        /// </summary>
+        /// <returns></returns>
+        protected override Type GetItemViewType()
+        {
+            return typeof(PlayerItemView);
+        }
+
+        #endregion Abstracts Methods
+
+        #region Initialization
+
+        /// <summary>
+        /// Initializes Data.
+        /// </summary>
+        protected override void InitializeData()
+        {
+            base.InitializeData();
+
             Title = RosterResources.PlayersTitle;
 
             AddPresetColumns(PresetColumnsType.GeneralInformations, GeneralInformationsColumns);
@@ -74,60 +98,13 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
             AddAllowedFilter("Weight", PlayerResources.Weight);
             AddAllowedFilter("Size", PersonResources.Size);
             AddAllowedFilter("ShoesSize", PlayerResources.ShoesSize);
-        }
 
-        #endregion Constructors
-
-        #region Methods
-
-        /// <summary>
-        /// Get Item View Type.
-        /// </summary>
-        /// <returns></returns>
-        protected override Type GetItemViewType()
-        {
-            return typeof(PlayerView);
-        }
-
-        /// <summary>
-        /// Initialize data.
-        /// </summary>
-        protected override void InitializeDataCore()
-        {
-            base.InitializeDataCore();
-
-            if (_adminService != null)
-            {
-                _categories = _adminService.GetCategoriesList().ToViewModels<CategoryViewModel>();
-                _countries = _adminService.GetCountriesForPlayer().ToViewModels<CountryViewModel>();
-            }
-        }
-
-        /// <summary>
-        /// Load Data.
-        /// </summary>
-        /// <returns></returns>
-        protected override void LoadDataCore()
-        {
-            if (_rosterService != null)
-            {
-                var result = _rosterService.GetPlayers(1);
-
-                System.Windows.Application.Current.Dispatcher.Invoke(() =>
-                {
-                    SetCollection(result.ToViewModels<PlayerDetailViewModel>());
-                });
-            }
-        }
-
-        /// <summary>
-        /// Call after load data.
-        /// </summary>
-        protected override void OnLoadDataCompleted()
-        {
             ChangeDisplayedColumns(PresetColumnsType.GeneralInformations);
-            base.OnLoadDataCompleted();
         }
+
+        #endregion Initialization
+
+        #region Filters
 
         /// <summary>
         /// Create a filter.
@@ -139,7 +116,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
             IFilter filter = null;
             string title = string.Empty;
 
-            var property = typeof(PlayerDetailViewModel).GetProperty(propertyName);
+            var property = typeof(SquadPlayerViewModel).GetProperty(propertyName);
             if (property != null)
             {
                 title = property.GetDisplayName();
@@ -218,6 +195,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 
             return new FilterViewModel(filter, title);
         }
+
+        #endregion Filters
 
         #endregion Methods
     }

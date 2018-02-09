@@ -4,14 +4,13 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using My.CoachManager.Presentation.Prism.Core.Filters;
-using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
-    public abstract class ReadOnlyListViewModel<TEntityViewModel> : NavigatableWorkspaceViewModel
+    public abstract class ReadOnlyListViewModel<TEntityViewModel> : NavigatableWorkspaceViewModel, IReadOnlyListViewModel
         where TEntityViewModel : class, IEntityViewModel, INotifyPropertyChanged
     {
         #region Fields
@@ -33,7 +32,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             get { return _items; }
             set
             {
-                SetProperty(ref _items, value);
+                SetItems(value);
+                RaisePropertyChanged(() => Items);
             }
         }
 
@@ -41,6 +41,14 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// Gets or sets the items.
         /// </summary>
         public FilteredCollectionView<TEntityViewModel> FilteredItems { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the items.
+        /// </summary>
+        IFilteredCollection IReadOnlyListViewModel.FilteredItems
+        {
+            get { return FilteredItems; }
+        }
 
         /// <summary>
         /// Gets or sets the selected item.
@@ -78,11 +86,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         public DelegateCommand<object> ChangeDisplayedColumnsCommand { get; set; }
 
         /// <summary>
-        /// Gets or sets the keyboard action command.
-        /// </summary>
-        public DelegateCommand<KeyDownItemEventArgs> KeyboardActionCommand { get; set; }
-
-        /// <summary>
         /// Gets or sets the refresh command.
         /// </summary>
         public DelegateCommand RefreshCommand { get; set; }
@@ -111,7 +114,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             base.InitializeCommands();
 
             RefreshCommand = new DelegateCommand(Refresh, CanRefresh);
-            KeyboardActionCommand = new DelegateCommand<KeyDownItemEventArgs>(KeyboardAction, CanKeyboardAction);
             ChangeDisplayedColumnsCommand = new DelegateCommand<object>(ChangeDisplayedColumns);
         }
 
@@ -132,8 +134,13 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// Set Items Collection.
         /// </summary>
         /// <param name="collection"></param>
-        protected void SetCollection(IEnumerable<TEntityViewModel> collection)
+        protected void SetItems(IEnumerable<TEntityViewModel> collection)
         {
+            if (_items == null)
+            {
+                _items = new ObservableCollection<TEntityViewModel>();
+            }
+
             Items.Clear();
             Items.AddRange(collection);
         }
@@ -170,7 +177,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         public virtual void Refresh()
         {
-            RefreshData();
+            RefreshDataAsync();
         }
 
         /// <summary>
@@ -186,29 +193,26 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         #region Keyboard
 
         /// <summary>
+        /// Action when "Enter" key is down.
+        /// </summary>
+        protected override void Enter()
+        {
+            Open(SelectedItem);
+        }
+
+        /// <summary>
         /// Do action by keyboard trigger.
         /// </summary>
-        public virtual void KeyboardAction(KeyDownItemEventArgs e)
+        protected override void KeyboardAction(KeyEventArgs e)
         {
-            switch (e.EventArgs.Key)
+            switch (e.Key)
             {
                 case Key.F5:
                     Refresh();
                     break;
-
-                case Key.Enter:
-                    Open((TEntityViewModel)e.Item);
-                    e.EventArgs.Handled = true;
-                    break;
             }
-        }
 
-        /// <summary>
-        /// Can Remove item.
-        /// </summary>
-        public virtual bool CanKeyboardAction(KeyDownItemEventArgs e)
-        {
-            return Mode == ScreenMode.Read;
+            base.KeyboardAction(e);
         }
 
         #endregion Keyboard

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 using Prism.Mvvm;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
@@ -202,7 +203,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// desired value.</returns>
         protected override bool SetProperty<T>(ref T storage, T value, Action onChanged, [CallerMemberName] string propertyName = null)
         {
-            if (Equals(storage, value)) return false;
+            if (storage is IEntityViewModel)
+            {
+                if (ReferenceEquals(storage, value)) return false;
+            }
+            else if (Equals(storage, value)) return false;
 
             object initalValue;
             var oldModified = IsModified;

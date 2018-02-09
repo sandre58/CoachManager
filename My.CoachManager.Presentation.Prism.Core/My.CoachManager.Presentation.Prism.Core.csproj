@@ -79,6 +79,8 @@
     <Compile Include="ViewModels\PropertyChangingEventArgs.cs" />
     <Compile Include="ViewModels\Screens\DialogViewModel.cs" />
     <Compile Include="Dialog\IDialog.cs" />
+    <Compile Include="ViewModels\Screens\IReadOnlyListViewModel.cs" />
+    <Compile Include="ViewModels\Screens\IFilteredListViewModel.cs" />
     <Compile Include="ViewModels\Screens\IEditViewModel.cs" />
     <Compile Include="ViewModels\Screens\ItemViewModel.cs" />
     <Compile Include="ViewModels\Screens\FiltersViewModel.cs" />
@@ -145,11 +147,11 @@
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\Screens\ScreenState.cs" />
+    <Compile Include="Views\IFiltersView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\My.CoachManager.CrossCutting.Core\My.CoachManager.CrossCutting.Core.csproj">
       <Project>{69f4e1a5-acae-4431-9723-3db4de847bc9}</Project>

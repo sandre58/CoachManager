@@ -17,20 +17,57 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Bottom" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ImageContent">
                     <Grid>
-                        <Ellipse x:Name="PART_Background" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" StrokeThickness="{TemplateBinding BorderThickness}" />
+                        <Border x:Name="PART_Background" Background="{TemplateBinding Background}"
+                                 BorderBrush="{TemplateBinding BorderBrush}"
+                                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                 BorderThickness="{TemplateBinding BorderThickness}" />
                         <ContentPresenter x:Name="PART_Content" Content="{TemplateBinding Content}"
                                                           ContentTemplate="{TemplateBinding ContentTemplate}"
                                                           ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                                           RecognizesAccessKey="True"
-                                                          HorizontalAlignment="Stretch"
-                                                          VerticalAlignment="Stretch" Margin="7" />
+                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                          VerticalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" />
+                        <Border x:Name="PART_Image" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                BorderBrush="Transparent"
+                                 Margin="{TemplateBinding ImagePadding}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                 Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:ImageContent}},Path=Image, Converter={StaticResource NullToVisibilityConverter}}">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:ImageContent}},Path=Image,Mode=OneWay}" Stretch="UniformToFill"
+                                            AlignmentX="Center" AlignmentY="Center" />
+                            </Border.Background>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="RoundedImageStyle" TargetType="{x:Type controls:ImageContent}" BasedOn="{StaticResource {x:Type controls:ImageContent}}">
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="7" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ImageContent">
+                    <Grid>
+                        <Ellipse x:Name="PART_Background" Fill="{TemplateBinding Background}"
+                                 Stroke="{TemplateBinding BorderBrush}" Stretch="Fill"
+                                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                 StrokeThickness="{TemplateBinding BorderThickness}" />
+                        <ContentPresenter x:Name="PART_Content" Content="{TemplateBinding Content}"
+                                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                          ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                          RecognizesAccessKey="True"
+                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                          VerticalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" />
                         <Ellipse x:Name="PART_Image" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                  Stroke="Transparent"
+                                 Margin="{TemplateBinding ImagePadding}"
                                  StrokeThickness="{TemplateBinding BorderThickness}"
                                                  Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:ImageContent}},Path=Image, Converter={StaticResource NullToVisibilityConverter}}">
                             <Ellipse.Fill>

@@ -38,7 +38,8 @@ namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
             where TDest : EntityViewModelBase
         {
             if (source == null) return default(TDest);
-            return Mapper.Map<TDest>(source);
+            var value = Mapper.Map<TDest>(source);
+            return value;
         }
 
         /// <summary>

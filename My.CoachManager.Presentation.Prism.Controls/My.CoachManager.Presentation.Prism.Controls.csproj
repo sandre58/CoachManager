@@ -90,6 +90,7 @@
     <Compile Include="AdornedControl.cs" />
     <Compile Include="Badged.cs" />
     <Compile Include="BadgedBase.cs" />
+    <Compile Include="Behaviours\FocusBehavior.cs" />
     <Compile Include="Behaviours\MainMenuExpanderBehavior.cs" />
     <Compile Include="Behaviours\ToggleColumnSizeBehavior.cs" />
     <Compile Include="Behaviours\PasswordBoxBindingBehavior.cs" />

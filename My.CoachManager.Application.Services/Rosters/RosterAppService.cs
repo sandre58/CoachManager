@@ -45,19 +45,23 @@ namespace My.CoachManager.Application.Services.Rosters
         }
 
         /// <summary>
-        /// Get all roster's players.
+        /// Get a squad.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<PlayerDetailDto> GetPlayers(int rosterId)
+        public SquadDto GetSquad(int squadId)
         {
-            var roster = _rosterRepository.GetByFilter(x => x.Id == rosterId, x => x.Players.Select(p => p.Player),
+            var squad = _squadRepository.GetEntity(squadId, x => x.Players.Select(p => p.Player),
                 x => x.Players.Select(p => p.Player.Category),
                 x => x.Players.Select(p => p.Player.Address),
                 x => x.Players.Select(p => p.Player.Country),
-                x => x.Players.Select(p => p.Player.Contacts)).FirstOrDefault();
-            if (roster != null)
-                return roster.Players.Select(RosterSelectBuilder.SelectPlayerDetail()).ToArray();
-            return new List<PlayerDetailDto>();
+                x => x.Players.Select(p => p.Player.Contacts));
+
+            return new SquadDto()
+            {
+                Id = squad.Id,
+                Name = squad.Name,
+                Players = squad.Players.Select(RosterSelectBuilder.SelectSquadPlayer()).ToArray()
+            };
         }
 
         #endregion Methods

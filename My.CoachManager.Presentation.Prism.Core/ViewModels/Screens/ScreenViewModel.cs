@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
+using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
@@ -54,6 +56,21 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             protected set { SetProperty(ref _mode, value); }
         }
 
+        /// <summary>
+        /// Gets or sets the keyboard action command.
+        /// </summary>
+        public DelegateCommand<KeyEventArgs> KeyboardActionCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets the keyboard action command.
+        /// </summary>
+        public DelegateCommand EnterCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets the keyboard action command.
+        /// </summary>
+        public DelegateCommand EscapeCommand { get; set; }
+
         #endregion Members
 
         #region Methods
@@ -74,6 +91,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         protected virtual void InitializeCommands()
         {
+            KeyboardActionCommand = new DelegateCommand<KeyEventArgs>(KeyboardAction);
+            EnterCommand = new DelegateCommand(Enter);
+            EscapeCommand = new DelegateCommand(Escape);
         }
 
         /// <summary>
@@ -90,49 +110,70 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Refreshes Data.
         /// </summary>
-        public virtual void RefreshData()
+        protected virtual async void RefreshDataAsync()
         {
-            LoadData();
+            await LoadDataAsync();
         }
 
         /// <summary>
         /// Load data.
         /// </summary>
-        protected void LoadData()
+        /// <returns></returns>
+        private async Task LoadDataAsync()
         {
+            var task = Task.Run(() =>
+            {
+                if (!_dataInitialized)
+                {
+                    InitializeDataCore();
+                    _dataInitialized = true;
+                }
+
+                LoadDataCore();
+            });
+
             State = ScreenState.Loading;
 
             OnLoadDataRequested();
 
-            ThreadPool.QueueUserWorkItem(obj =>
+            try
             {
-                try
+                await task.ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+
+            ResetModified();
+            State = ScreenState.Ready;
+
+            // Is Cancelled
+            if (task.IsCanceled)
+            {
+            }
+
+            // Exception
+            else if (task.IsFaulted)
+            {
+                if (task.Exception != null)
                 {
-                    if (!_dataInitialized)
+                    if (task.Exception.InnerException is BusinessException)
                     {
-                        InitializeDataCore();
-                        _dataInitialized = true;
+                        OnBusinessExceptionOccured((BusinessException)task.Exception.InnerException);
                     }
-
-                    LoadDataCore();
-
-                    ResetModified();
-
-                    OnLoadDataCompleted();
-
-                    State = ScreenState.Ready;
+                    else
+                    {
+                        OnExceptionOccured(task.Exception.InnerException);
+                    }
                 }
-                catch (BusinessException e)
-                {
-                    State = ScreenState.Ready;
-                    OnBusinessExceptionOccured(e);
-                }
-                catch (Exception e)
-                {
-                    State = ScreenState.Ready;
-                    OnExceptionOccured(e);
-                }
-            });
+            }
+
+            // Is Completed
+            else if (task.IsCompleted)
+            {
+                OnLoadDataCompleted();
+            }
         }
 
         /// <summary>
@@ -187,6 +228,43 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         }
 
         #endregion Exceptions Management
+
+        #region Keyboard
+
+        /// <summary>
+        /// Do action by keyboard trigger.
+        /// </summary>
+        protected virtual void KeyboardAction(KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Enter:
+                    Enter();
+                    e.Handled = true;
+                    break;
+
+                case Key.Escape:
+                    Escape();
+                    e.Handled = true;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Action when "Enter" key is down.
+        /// </summary>
+        protected virtual void Enter()
+        {
+        }
+
+        /// <summary>
+        /// Action when "Escape" key is down.
+        /// </summary>
+        protected virtual void Escape()
+        {
+        }
+
+        #endregion Keyboard
 
         #endregion Methods
     }

@@ -234,6 +234,7 @@
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\Util.cs" />
     <Compile Include="Metadatas\PlayerDetailMetadata.cs" />
+    <Compile Include="Metadatas\SquadPlayerMetadata.cs" />
     <Compile Include="Metadatas\RosterPlayerMetadata.cs" />
     <Compile Include="Metadatas\RosterCoachMetadata.cs" />
     <Compile Include="Metadatas\RosterMetadata.cs" />

@@ -80,12 +80,18 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryService.cs" />
+    <Compile Include="Interfaces\IPersonService.cs" />
+    <Compile Include="Interfaces\IPositionService.cs" />
+    <Compile Include="Interfaces\ICategoryService.cs" />
+    <Compile Include="SeasonService.cs" />
+    <Compile Include="PositionService.cs" />
     <Compile Include="Interfaces\IRosterService.cs" />
     <Compile Include="RosterService.cs" />
     <Compile Include="UserService.cs" />
-    <Compile Include="AdminService.cs" />
+    <Compile Include="PersonService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
-    <Compile Include="Interfaces\IAdminService.cs" />
+    <Compile Include="Interfaces\ISeasonService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

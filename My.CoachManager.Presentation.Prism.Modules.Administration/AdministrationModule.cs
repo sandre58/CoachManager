@@ -24,14 +24,11 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration
             Locator.RegisterType<IPositionEditViewModel, PositionEditViewModel>();
             Locator.RegisterType<ISeasonsListViewModel, SeasonsListViewModel>();
             Locator.RegisterType<ISeasonEditViewModel, SeasonEditViewModel>();
-            Locator.RegisterType<IPlayersListViewModel, PlayersListViewModel>();
-            Locator.RegisterType<IPlayerEditViewModel, PlayerEditViewModel>();
 
             // Register Views (for navigation)
             Locator.RegisterTypeForNavigation<CategoriesListView>();
             Locator.RegisterTypeForNavigation<PositionsListView>();
             Locator.RegisterTypeForNavigation<SeasonsListView>();
-            Locator.RegisterTypeForNavigation<PlayersListView>();
 
             // Register the navigation view
             _regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion, Locator.GetInstance<AdministrationNavigationView>);

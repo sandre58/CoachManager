@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Filters;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
+using My.CoachManager.Presentation.Prism.Core.Views;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
-    public abstract class FilteredListViewModel<T, TFilterView> : ReadOnlyListViewModel<T>
-        where T : class, IEntityViewModel, INotifyPropertyChanged where TFilterView : FrameworkElement
+    public abstract class FilteredListViewModel<TEntityViewModel> : ReadOnlyListViewModel<TEntityViewModel>, IFilteredListViewModel
+        where TEntityViewModel : class, IEntityViewModel, INotifyPropertyChanged
     {
         #region Fields
 
         private ObservableCollection<FilterViewModel> _filters;
         private IFilterViewModel _speedFilter;
+        private FiltersViewModel _filtersViewModel;
 
         #endregion Fields
 
@@ -87,15 +88,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         {
             base.InitializeData();
 
+            _filtersViewModel = new FiltersViewModel();
             Filters = new ObservableCollection<FilterViewModel>();
 
-            var filtersViewModel = GetFiltersViewModel();
-
-            if (filtersViewModel != null)
-            {
-                filtersViewModel.CreateFilter = CreateFilter;
-                filtersViewModel.FiltersChanged += OnFiltersViewChanged;
-            }
+            _filtersViewModel.CreateFilter = CreateFilter;
+            _filtersViewModel.FiltersChanged += OnFiltersViewChanged;
         }
 
         #endregion Initialization
@@ -107,7 +104,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         private void ShowFilter()
         {
-            Locator.DialogService.ShowWorkspaceDialog<TFilterView>(before =>
+            Locator.DialogService.ShowWorkspaceDialog(typeof(IFiltersView), _filtersViewModel, before =>
                 {
                     if (Filters != null)
                     {
@@ -197,26 +194,25 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <param name="title"></param>
         protected void AddAllowedFilter(string propertyName, string title)
         {
-            var filtersViewModel = GetFiltersViewModel();
-
-            if (filtersViewModel != null)
+            if (_filtersViewModel != null)
             {
-                filtersViewModel.AllowedFilters.Add(propertyName, title);
+                _filtersViewModel.AllowedFilters.Add(propertyName, title);
             }
         }
 
         #endregion Filter Items
 
         /// <summary>
-        /// Gets the filters view model.
+        /// Called when filters change.
         /// </summary>
-        /// <returns></returns>
-        protected IFiltersViewModel GetFiltersViewModel()
+        protected virtual void OnSpeedFilterChanged()
         {
-            return Locator.GetInstance<TFilterView>().DataContext as IFiltersViewModel;
+            if (_speedFilter != null)
+            {
+                _speedFilter.PropertyChanged -= SpeedFilter_FilterChanged;
+                _speedFilter.PropertyChanged += SpeedFilter_FilterChanged;
+            }
         }
-
-        #region Properties Changed
 
         /// <summary>
         /// Called when filters change.
@@ -226,19 +222,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             RaisePropertyChanged(() => CountActiveFilters);
             if (ResetFiltersCommand != null) ResetFiltersCommand.RaiseCanExecuteChanged();
         }
-
-        /// <summary>
-        /// Called when filters change.
-        /// </summary>
-        protected virtual void OnSpeedFilterChanged()
-        {
-            if (_speedFilter != null)
-            {
-                _speedFilter.PropertyChanged += SpeedFilter_FilterChanged;
-            }
-        }
-
-        #endregion Properties Changed
 
         /// <summary>
         /// Call when Filters View Change.

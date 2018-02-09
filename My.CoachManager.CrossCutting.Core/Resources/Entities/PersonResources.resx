@@ -174,4 +174,10 @@
   <data name="Size" xml:space="preserve">
     <value>Taille</value>
   </data>
+  <data name="UnknownAge" xml:space="preserve">
+    <value>Age inconnu</value>
+  </data>
+  <data name="UnknownCountry" xml:space="preserve">
+    <value>Nationnalité inconnue</value>
+  </data>
 </root>

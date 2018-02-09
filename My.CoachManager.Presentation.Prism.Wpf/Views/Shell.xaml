@@ -71,7 +71,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <StackPanel Orientation="Horizontal" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Margin="{StaticResource VeryLargeHorizontalMargin}" VerticalAlignment="Center">
                                 <controls:CommandButton Style="{StaticResource BackCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoBackCommand}" />
                                 <controls:CommandButton Style="{StaticResource NextCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoForwardCommand}" />
                             </StackPanel>

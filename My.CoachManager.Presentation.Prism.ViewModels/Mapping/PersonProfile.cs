@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using My.CoachManager.Application.Dtos.Administration;
 using My.CoachManager.Application.Dtos.Persons;
 
 namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
@@ -10,6 +11,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
             // Persons
             CreateMap<PlayerDto, PlayerViewModel>().ReverseMap();
             CreateMap<CoachDto, CoachViewModel>().ReverseMap();
+            CreateMap<PlayerDetailDto, PlayerDetailViewModel>().ReverseMap();
 
             // Contacts
             CreateMap<EmailDto, EmailViewModel>().ReverseMap();
@@ -24,6 +26,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
             // Misc
             CreateMap<CountryDto, CountryViewModel>().ReverseMap();
             CreateMap<CityDto, CityViewModel>().ReverseMap();
+            CreateMap<AddressDto, AddressViewModel>().ReverseMap();
         }
     }
 }

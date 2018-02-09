@@ -3,7 +3,7 @@ using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Resources.Strings;
 using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
-using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
@@ -11,7 +11,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
     {
         #region Fields
 
-        private readonly IAdminService _adminService;
+        private readonly IPositionService _positionService;
 
         #endregion Fields
 
@@ -20,9 +20,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="PositionEditViewModel"/>.
         /// </summary>
-        public PositionEditViewModel(IAdminService adminService)
+        public PositionEditViewModel(IPositionService positionService)
         {
-            _adminService = adminService;
+            _positionService = positionService;
             Title = AdministrationResources.PositionTitle;
         }
 
@@ -33,9 +33,10 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Save.
         /// </summary>
-        protected override void SaveItemCore()
+        protected override bool SaveItemCore()
         {
-            Item = _adminService.CreateOrUpdatePosition(Item.ToDto<PositionDto>()).ToViewModel<PositionViewModel>();
+            Item = _positionService.CreateOrUpdate(Item.ToDto<PositionDto>()).ToViewModel<PositionViewModel>();
+            return true;
         }
 
         /// <summary>
@@ -44,7 +45,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <param name="id"></param>
         protected override PositionViewModel LoadItemCore(int id)
         {
-            return _adminService.GetPositionById(id).ToViewModel<PositionViewModel>();
+            return _positionService.GetById(id).ToViewModel<PositionViewModel>();
         }
 
         #endregion Methods

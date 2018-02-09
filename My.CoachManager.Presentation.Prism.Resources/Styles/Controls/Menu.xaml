@@ -48,7 +48,7 @@
                         <DockPanel SnapsToDevicePixels="False">
                             <!-- Header content -->
                             <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              Content="{TemplateBinding Content}" Grid.Column="0"
+                                              Content="{TemplateBinding Content}"
                                               ContentStringFormat="{TemplateBinding ContentStringFormat}"
                                               HorizontalAlignment="Stretch" RecognizesAccessKey="True" SnapsToDevicePixels="True"
                                               VerticalAlignment="Stretch" />
@@ -266,7 +266,7 @@
         <Setter Property="behaviours:StylizedBehaviors.Behaviors">
             <Setter.Value>
                 <behaviours:StylizedBehaviorCollection>
-                    <behaviours:MainMenuExpanderBehavior IsMenuDisplayed="{Binding IsMenuExpended, Mode=TwoWay}" />
+                    <behaviours:MainMenuExpanderBehavior IsMenuDisplayed="{Binding DataContext.IsMenuExpended, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedWindow}}" />
                 </behaviours:StylizedBehaviorCollection>
             </Setter.Value>
         </Setter>

@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Unity;
+﻿using System;
+using Microsoft.Practices.Unity;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using Prism.Unity;
@@ -65,14 +66,24 @@ namespace My.CoachManager.Presentation.Prism.Core
         /// <summary>
         /// Resolve an instance of the specified type.
         /// </summary>
+        /// <returns></returns>
+        public static object GetInstance(Type type)
+        {
+            return _container != null ? _container.Resolve(type) : null;
+        }
+
+        /// <summary>
+        /// Resolve an instance of the specified type.
+        /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TInterface"></typeparam>
         /// <returns></returns>
-        public static void RegisterType<TInterface, T>() where T : TInterface
+        public static void RegisterType<TInterface, T>(LifetimeManager lifetimeManager = null) where T : TInterface
         {
             if (_container != null)
             {
-                _container.RegisterType<TInterface, T>(new ContainerControlledLifetimeManager());
+                var manager = lifetimeManager != null ? lifetimeManager : new ContainerControlledLifetimeManager();
+                _container.RegisterType<TInterface, T>(manager);
             }
         }
 
@@ -81,11 +92,12 @@ namespace My.CoachManager.Presentation.Prism.Core
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static void RegisterType<T>()
+        public static void RegisterType<T>(LifetimeManager lifetimeManager = null)
         {
             if (_container != null)
             {
-                _container.RegisterType<T>(new ContainerControlledLifetimeManager());
+                var manager = lifetimeManager != null ? lifetimeManager : new ContainerControlledLifetimeManager();
+                _container.RegisterType<T>(manager);
             }
         }
 
@@ -94,11 +106,12 @@ namespace My.CoachManager.Presentation.Prism.Core
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static void RegisterInstance<T>(T instance)
+        public static void RegisterInstance<T>(T instance, LifetimeManager lifetimeManager = null)
         {
             if (_container != null)
             {
-                _container.RegisterInstance(instance, new ContainerControlledLifetimeManager());
+                var manager = lifetimeManager != null ? lifetimeManager : new ContainerControlledLifetimeManager();
+                _container.RegisterInstance(instance, manager);
             }
         }
 

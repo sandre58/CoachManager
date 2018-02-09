@@ -1,54 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" />
-  <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" />
-  <xs:complexType name="AddressDto">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q1:EntityDto">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
-          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" minOccurs="0" name="Country" nillable="true" type="q2:CountryDto" />
-          <xs:element minOccurs="0" name="CountryId" nillable="true" type="xs:int" />
-          <xs:element minOccurs="0" name="Latitude" type="xs:double" />
-          <xs:element minOccurs="0" name="Longitude" type="xs:double" />
-          <xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Row1" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Row2" nillable="true" type="xs:string" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="AddressDto" nillable="true" type="tns:AddressDto" />
-  <xs:complexType name="CategoryDto">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q3:DataEntityDto">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="Year" nillable="true" type="xs:int" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="CategoryDto" nillable="true" type="tns:CategoryDto" />
-  <xs:complexType name="PositionDto">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q4:DataEntityDto">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="Column" type="xs:int" />
-          <xs:element minOccurs="0" name="Row" type="xs:int" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="PositionDto" nillable="true" type="tns:PositionDto" />
-  <xs:complexType name="SeasonDto">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q5:DataEntityDto">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
-          <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:dateTime" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="SeasonDto" nillable="true" type="tns:SeasonDto" />
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="GenderType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Male" />
+      <xs:enumeration value="Female" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="GenderType" nillable="true" type="tns:GenderType" />
+  <xs:simpleType name="Laterality">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="RightHander" />
+      <xs:enumeration value="LeftHander" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Laterality" nillable="true" type="tns:Laterality" />
+  <xs:simpleType name="LicenseState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Given" />
+      <xs:enumeration value="Back" />
+      <xs:enumeration value="Paid" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="LicenseState" nillable="true" type="tns:LicenseState" />
 </xs:schema>

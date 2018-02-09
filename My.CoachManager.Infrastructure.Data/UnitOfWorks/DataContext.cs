@@ -487,15 +487,13 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         /// <param name="dbEntry"></param>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        private static string OriginalValue(DbEntityEntry dbEntry, string propertyName)
+        private static object OriginalValue(DbEntityEntry dbEntry, string propertyName)
         {
-            string originalValue = null;
+            object originalValue = null;
 
             if (dbEntry.State == EntityState.Modified)
             {
-                originalValue = dbEntry.OriginalValues.GetValue<object>(propertyName) == null
-                    ? null
-                    : dbEntry.OriginalValues.GetValue<object>(propertyName).ToString();
+                originalValue = dbEntry.OriginalValues.GetValue<object>(propertyName);
             }
 
             return originalValue;
@@ -507,15 +505,13 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         /// <param name="dbEntry"></param>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        private static string CurrentValue(DbEntityEntry dbEntry, string propertyName)
+        private static object CurrentValue(DbEntityEntry dbEntry, string propertyName)
         {
-            string newValue;
+            object newValue;
 
             try
             {
-                newValue = dbEntry.CurrentValues.GetValue<object>(propertyName) == null
-                    ? null
-                    : dbEntry.CurrentValues.GetValue<object>(propertyName).ToString();
+                newValue = dbEntry.CurrentValues.GetValue<object>(propertyName);
             }
             catch (InvalidOperationException) // It will be invalid operation when its in deleted state. in that case, new value should be null
             {

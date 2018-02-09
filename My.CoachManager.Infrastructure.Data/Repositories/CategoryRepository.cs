@@ -1,5 +1,5 @@
 ﻿using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Domain.AdministrationModule.Aggregate;
+using My.CoachManager.Domain.CategoryModule.Aggregate;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Infrastructure.Data.Core;
 

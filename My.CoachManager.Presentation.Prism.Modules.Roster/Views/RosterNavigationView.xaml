@@ -7,7 +7,7 @@
              xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Roster.Core.Resources.Strings;assembly=My.CoachManager.Presentation.Prism.Modules.Roster.Core"
              mc:Ignorable="d"
              Content="{x:Static strings:RosterResources.RosterMenu}"
-                         Target="PlayersListView"
+             Target="SquadItemView"
              Color="Orange"
              Icon="{StaticResource RosterGeometry}"
              Style="{StaticResource NavigationItemStyle}" />

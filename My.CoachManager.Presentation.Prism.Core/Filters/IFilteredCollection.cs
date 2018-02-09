@@ -19,5 +19,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// </summary>
         /// <param name="filter">The filter.</param>
         void RemoveFilter(IFilter filter);
+
+        int Count { get; }
     }
 }

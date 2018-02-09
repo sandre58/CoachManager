@@ -3,7 +3,7 @@ using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Resources.Strings;
 using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
-using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.SeasonServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
@@ -11,7 +11,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
     {
         #region Fields
 
-        private readonly IAdminService _adminService;
+        private readonly ISeasonService _seasonService;
 
         #endregion Fields
 
@@ -20,9 +20,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="SeasonEditViewModel"/>.
         /// </summary>
-        public SeasonEditViewModel(IAdminService adminService)
+        public SeasonEditViewModel(ISeasonService seasonService)
         {
-            _adminService = adminService;
+            _seasonService = seasonService;
             Title = AdministrationResources.SeasonTitle;
         }
 
@@ -33,9 +33,10 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Save.
         /// </summary>
-        protected override void SaveItemCore()
+        protected override bool SaveItemCore()
         {
-            Item = _adminService.CreateOrUpdateSeason(Item.ToDto<SeasonDto>()).ToViewModel<SeasonViewModel>();
+            Item = _seasonService.CreateOrUpdate(Item.ToDto<SeasonDto>()).ToViewModel<SeasonViewModel>();
+            return true;
         }
 
         /// <summary>
@@ -44,7 +45,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <param name="id"></param>
         protected override SeasonViewModel LoadItemCore(int id)
         {
-            return _adminService.GetSeasonById(id).ToViewModel<SeasonViewModel>();
+            return _seasonService.GetById(id).ToViewModel<SeasonViewModel>();
         }
 
         #endregion Methods

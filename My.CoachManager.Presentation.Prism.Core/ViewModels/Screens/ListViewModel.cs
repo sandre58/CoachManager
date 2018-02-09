@@ -4,33 +4,15 @@ using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
-using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
     public abstract class
-        ListViewModel<TEntityViewModel, TEditViewModel> : ReadOnlyListViewModel<TEntityViewModel>
+        ListViewModel<TEntityViewModel> : ReadOnlyListViewModel<TEntityViewModel>
         where TEntityViewModel : class, IEntityViewModel, INotifyPropertyChanged
-        where TEditViewModel : class, IDialogViewModel, IEditViewModel
     {
-        #region Constructor
-
-        /// <summary>
-        /// Initialise a new instance of <see cref="ListViewModel{TEntityViewModel,TEditViewModel}"/>.
-        /// </summary>
-        protected ListViewModel()
-        {
-            AddCommand = new DelegateCommand(Add, CanAdd);
-            RemoveCommand = new DelegateCommand<TEntityViewModel>(Remove, CanRemove);
-            EditCommand = new DelegateCommand<TEntityViewModel>(Edit, CanEdit);
-            RefreshCommand = new DelegateCommand(Refresh, CanRefresh);
-            KeyboardActionCommand = new DelegateCommand<KeyDownItemEventArgs>(KeyboardAction, CanKeyboardAction);
-        }
-
-        #endregion Constructor
-
         #region Members
 
         /// <summary>
@@ -52,6 +34,14 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         #region Methods
 
+        #region Abstract Methods
+
+        /// <summary>
+        /// Get Item View Type.
+        /// </summary>
+        /// <returns></returns>
+        protected abstract Type GetEditViewType();
+
         /// <summary>
         /// Get Item View Type.
         /// </summary>
@@ -61,6 +51,25 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             return null;
         }
 
+        #endregion Abstract Methods
+
+        #region Initialization
+
+        /// <summary>
+        /// Initializes commands.
+        /// </summary>
+        protected override void InitializeCommands()
+        {
+            base.InitializeCommands();
+
+            AddCommand = new DelegateCommand(Add, CanAdd);
+            RemoveCommand = new DelegateCommand<TEntityViewModel>(Remove, CanRemove);
+            EditCommand = new DelegateCommand<TEntityViewModel>(Edit, CanEdit);
+            RefreshCommand = new DelegateCommand(Refresh, CanRefresh);
+        }
+
+        #endregion Initialization
+
         #region Add
 
         /// <summary>
@@ -68,7 +77,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         public virtual void Add()
         {
-            Locator.DialogService.ShowWorkspaceDialog(GetEditViewType(), null, dialog =>
+            Locator.DialogService.ShowWorkspaceDialog(GetEditViewType(), null, null, dialog =>
             {
                 OnAddCompleted(dialog.Result);
             });
@@ -89,21 +98,12 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <param name="result"></param>
         protected virtual void OnAddCompleted(DialogResult result)
         {
-            if (result == DialogResult.Ok) RefreshData();
+            if (result == DialogResult.Ok) RefreshDataAsync();
         }
 
         #endregion Add
 
         #region Edit
-
-        /// <summary>
-        /// Get Item View Type.
-        /// </summary>
-        /// <returns></returns>
-        protected virtual Type GetEditViewType()
-        {
-            return null;
-        }
 
         /// <summary>
         /// Edit Item.
@@ -112,9 +112,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         {
             if (CanEdit(item))
             {
-                Locator.DialogService.ShowWorkspaceDialog(GetEditViewType(), before =>
+                Locator.DialogService.ShowWorkspaceDialog(GetEditViewType(), null, before =>
                     {
-                        var vm = before.Context as TEditViewModel;
+                        var vm = before.Context as IEditViewModel;
                         OnEditRequested(item, vm);
                     },
                     after =>
@@ -137,7 +137,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         /// <param name="item">The item.</param>
         /// <param name="viewModel">The view model.</param>
-        protected virtual void OnEditRequested(TEntityViewModel item, TEditViewModel viewModel)
+        protected virtual void OnEditRequested(TEntityViewModel item, IEditViewModel viewModel)
         {
             if (viewModel != null) viewModel.LoadItemById(item.Id);
         }
@@ -149,7 +149,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <param name="result">The dialog result.</param>
         protected virtual void OnEditCompleted(TEntityViewModel item, DialogResult result)
         {
-            if (result == DialogResult.Ok) RefreshData();
+            if (result == DialogResult.Ok) RefreshDataAsync();
         }
 
         #endregion Edit
@@ -208,7 +208,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <param name="item">The item.</param>
         protected virtual void OnRemoveCompleted(TEntityViewModel item)
         {
-            RefreshData();
+            RefreshDataAsync();
         }
 
         #endregion Remove
@@ -218,35 +218,37 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Do action by keyboard trigger.
         /// </summary>
-        public override void KeyboardAction(KeyDownItemEventArgs e)
+        protected override void KeyboardAction(KeyEventArgs e)
         {
-            if (CanKeyboardAction(e))
+            switch (e.Key)
             {
-                if (e.EventArgs.Key == Key.Enter)
-                {
-                    if (GetItemViewType() == null)
-                    {
-                        Edit((TEntityViewModel)e.Item);
-                        e.EventArgs.Handled = true;
-                        return;
-                    }
-                }
+                case Key.Delete:
+                    Remove(SelectedItem);
+                    e.Handled = true;
+                    break;
+            }
 
-                switch (e.EventArgs.Key)
-                {
-                    case Key.Delete:
-                        Remove((TEntityViewModel)e.Item);
-                        e.EventArgs.Handled = true;
-                        break;
+            base.KeyboardAction(e);
+        }
 
-                    default:
-                        base.KeyboardAction(e);
-                        break;
-                }
+        /// <summary>
+        /// Action when "Enter" key is down.
+        /// </summary>
+        protected override void Enter()
+        {
+            if (GetItemViewType() == null)
+            {
+                Edit(SelectedItem);
+            }
+            else
+            {
+                base.Enter();
             }
         }
 
         #endregion Keyboard
+
+        #region Properties Changed
 
         /// <summary>
         /// Calls when selected item change.
@@ -256,6 +258,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             EditCommand.RaiseCanExecuteChanged();
             RemoveCommand.RaiseCanExecuteChanged();
         }
+
+        #endregion Properties Changed
 
         #endregion Methods
     }

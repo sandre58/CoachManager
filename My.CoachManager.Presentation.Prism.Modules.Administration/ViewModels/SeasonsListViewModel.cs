@@ -7,15 +7,15 @@ using My.CoachManager.Presentation.Prism.Modules.Administration.Resources.String
 using My.CoachManager.Presentation.Prism.Modules.Administration.Views;
 using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
-using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.SeasonServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
-    public class SeasonsListViewModel : OrderedListViewModel<SeasonViewModel, SeasonEditViewModel>, ISeasonsListViewModel
+    public class SeasonsListViewModel : OrderedListViewModel<SeasonViewModel>, ISeasonsListViewModel
     {
         #region Fields
 
-        private readonly IAdminService _adminService;
+        private readonly ISeasonService _seasonService;
 
         #endregion Fields
 
@@ -24,9 +24,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="SeasonsListViewModel"/>.
         /// </summary>
-        public SeasonsListViewModel(IAdminService adminService)
+        public SeasonsListViewModel(ISeasonService seasonService)
         {
-            _adminService = adminService;
+            _seasonService = seasonService;
 
             Title = AdministrationResources.SeasonsTitle;
         }
@@ -34,6 +34,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         #endregion Constructors
 
         #region Methods
+
+        #region Abstract Methods
 
         /// <summary>
         /// Get Item View Type.
@@ -44,13 +46,31 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
             return typeof(SeasonEditView);
         }
 
+        #endregion Abstract Methods
+
+        #region Initialization
+
+        /// <summary>
+        /// Initializes Data.
+        /// </summary>
+        protected override void InitializeData()
+        {
+            base.InitializeData();
+
+            Title = AdministrationResources.SeasonsTitle;
+        }
+
+        #endregion Initialization
+
+        #region Data
+
         /// <summary>
         /// Remove the item from data source.
         /// </summary>
         /// <param name="item"></param>
         protected override void RemoveItemCore(SeasonViewModel item)
         {
-            _adminService.RemoveSeason(item.ToDto<SeasonDto>());
+            _seasonService.Remove(item.ToDto<SeasonDto>());
         }
 
         /// <summary>
@@ -58,7 +78,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// </summary>
         protected override void ValidateOrderCore()
         {
-            _adminService.UpdateSeasonsOrders(Items.ToDictionary(c => c.Id, c => c.Order));
+            _seasonService.UpdateOrders(Items.ToDictionary(c => c.Id, c => c.Order));
         }
 
         /// <summary>
@@ -67,10 +87,12 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <returns></returns>
         protected override void LoadDataCore()
         {
-            var result = _adminService.GetSeasonsList();
+            var result = _seasonService.GetList();
 
             Items = new ObservableCollection<SeasonViewModel>(result.OrderBy(x => x.Order).ToViewModels<SeasonViewModel>());
         }
+
+        #endregion Data
 
         #endregion Methods
     }

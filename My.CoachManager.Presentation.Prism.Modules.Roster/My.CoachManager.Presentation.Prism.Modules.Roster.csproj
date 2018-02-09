@@ -91,20 +91,39 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\IPlayerViewModel.cs" />
-    <Compile Include="ViewModels\PlayerFiltersViewModel.cs" />
-    <Compile Include="ViewModels\IPlayerFiltersViewModel.cs" />
+    <Compile Include="ViewModels\IPlayerEditViewModel.cs" />
+    <Compile Include="ViewModels\ISquadItemViewModel.cs" />
+    <Compile Include="ViewModels\IPlayerItemViewModel.cs" />
     <Compile Include="ViewModels\IPlayersListViewModel.cs" />
-    <Compile Include="ViewModels\PlayerViewModel.cs" />
+    <Compile Include="ViewModels\PlayerEditViewModel.Contacts.cs" />
+    <Compile Include="ViewModels\PlayerEditViewModel.cs" />
+    <Compile Include="ViewModels\SquadsNavigationViewModel.cs" />
+    <Compile Include="ViewModels\SquadItemViewModel.cs" />
+    <Compile Include="ViewModels\PlayerItemViewModel.cs" />
     <Compile Include="ViewModels\PlayersListViewModel.cs" />
-    <Compile Include="Views\PlayerFiltersView.xaml.cs">
-      <DependentUpon>PlayerFiltersView.xaml</DependentUpon>
+    <Compile Include="Views\EmailsEditView.xaml.cs">
+      <DependentUpon>EmailsEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PhonesEditView.xaml.cs">
+      <DependentUpon>PhonesEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayerEditView.xaml.cs">
+      <DependentUpon>PlayerEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayerItemOverviewView.xaml.cs">
+      <DependentUpon>PlayerItemOverviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SquadItemView.xaml.cs">
+      <DependentUpon>SquadItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PlayersListView.xaml.cs">
       <DependentUpon>PlayersListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PlayerView.xaml.cs">
-      <DependentUpon>PlayerView.xaml</DependentUpon>
+    <Compile Include="Views\PlayerItemView.xaml.cs">
+      <DependentUpon>PlayerItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SquadsNavigationView.xaml.cs">
+      <DependentUpon>SquadsNavigationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RosterNavigationView.xaml.cs">
       <DependentUpon>RosterNavigationView.xaml</DependentUpon>
@@ -144,17 +163,37 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PlayerFiltersView.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Views\EmailsEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PhonesEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PlayerEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PlayerItemOverviewView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SquadItemView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\PlayersListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PlayerView.xaml">
+    <Page Include="Views\PlayerItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SquadsNavigationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\RosterNavigationView.xaml">
       <Generator>MSBuild:Compile</Generator>

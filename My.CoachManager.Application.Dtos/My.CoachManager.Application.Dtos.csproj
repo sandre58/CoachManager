@@ -204,7 +204,7 @@
     <Compile Include="Competitions\ClubDto.cs" />
     <Compile Include="Competitions\TeamDto.cs" />
     <Compile Include="EntityDtoBase.cs" />
-    <Compile Include="Administration\CategoryDto.cs" />
+    <Compile Include="Categories\CategoryDto.cs" />
     <Compile Include="Administration\SeasonDto.cs" />
     <Compile Include="Administration\PositionDto.cs" />
     <Compile Include="IEntityDtoBase.cs" />
@@ -222,12 +222,13 @@
     <Compile Include="Mapping\UserProfile.cs" />
     <Compile Include="Persons\ContactDto.cs" />
     <Compile Include="Persons\CityDto.cs" />
+    <Compile Include="Persons\PlayerDetailDto.cs" />
     <Compile Include="Persons\PlayerPositionDto.cs" />
     <Compile Include="Persons\EmailDto.cs" />
     <Compile Include="Persons\PersonDto.cs" />
     <Compile Include="Persons\PlayerDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rosters\PlayerDetailDto.cs" />
+    <Compile Include="Rosters\SquadPlayerDto.cs" />
     <Compile Include="Rosters\RosterCoachDto.cs" />
     <Compile Include="Rosters\RosterDto.cs" />
     <Compile Include="Rosters\RosterPlayerDto.cs" />

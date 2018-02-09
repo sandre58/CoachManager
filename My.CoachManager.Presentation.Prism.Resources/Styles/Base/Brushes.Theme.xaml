@@ -40,12 +40,14 @@
 
     <!-- FONT -->
     <SolidColorBrush x:Key="NormalForeground" Color="{DynamicResource DarkColor}" />
+    <SolidColorBrush x:Key="GrayForeground" Color="{DynamicResource Variation5Color}" />
     <SolidColorBrush x:Key="LightForeground" Color="{DynamicResource LightColor}" />
 
     <!-- ICONS -->
     <SolidColorBrush x:Key="NormalIcon" Color="{DynamicResource Variation6Color}" />
 
     <!-- HEADER -->
+    <SolidColorBrush x:Key="DarkHeaderBackground" Color="{DynamicResource DarkVariation3Color}" />
     <SolidColorBrush x:Key="HeaderForeground" Color="{DynamicResource DarkColor}" />
     <SolidColorBrush x:Key="HeaderBorder" Color="{DynamicResource Variation4Color}" />
     <SolidColorBrush x:Key="LightHeaderForeground" Color="{DynamicResource Variation5Color}" />

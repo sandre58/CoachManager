@@ -151,24 +151,25 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdministrationModule\Aggregate\AdminSelectBuilder.cs" />
-    <Compile Include="AdministrationModule\Aggregate\AdminOrderBuilder.cs" />
-    <Compile Include="AdministrationModule\Aggregate\IAddressRepository.cs" />
-    <Compile Include="AdministrationModule\Aggregate\IPositionRepository.cs" />
-    <Compile Include="AdministrationModule\Service\CategoryDomainService.cs" />
-    <Compile Include="CompetitionModule\Aggregate\IClubRepository.cs" />
+    <Compile Include="CategoryModule\Aggregate\CategorySelectBuilder.cs" />
+    <Compile Include="LabelableOrderBuilder.cs" />
+    <Compile Include="PersonModule\Aggregate\CountrySelectBuilder.cs" />
+    <Compile Include="PersonModule\Aggregate\PlayerFactory.cs" />
+    <Compile Include="PositionModule\Aggregate\PositionSelectBuilder.cs" />
+    <Compile Include="PositionModule\Aggregate\IPositionRepository.cs" />
+    <Compile Include="CategoryModule\Service\CategoryDomainService.cs" />
     <Compile Include="EntitySpecification.cs" />
-    <Compile Include="PersonModule\Aggregate\PersonSelectBuilder.cs" />
     <Compile Include="PersonModule\Service\PlayerDomainService.cs" />
     <Compile Include="PersonModule\Service\IPlayerDomainService.cs" />
-    <Compile Include="AdministrationModule\Service\IPositionDomainService.cs" />
-    <Compile Include="AdministrationModule\Service\PositionDomainService.cs" />
-    <Compile Include="AdministrationModule\Service\SeasonDomainService.cs" />
-    <Compile Include="AdministrationModule\Service\ISeasonDomainService.cs" />
-    <Compile Include="AdministrationModule\Service\ICategoryDomainService.cs" />
+    <Compile Include="PositionModule\Service\IPositionDomainService.cs" />
+    <Compile Include="PositionModule\Service\PositionDomainService.cs" />
+    <Compile Include="SeasonModule\Aggregate\SeasonSelectBuilder.cs" />
+    <Compile Include="SeasonModule\Service\SeasonDomainService.cs" />
+    <Compile Include="SeasonModule\Service\ISeasonDomainService.cs" />
+    <Compile Include="CategoryModule\Service\ICategoryDomainService.cs" />
     <Compile Include="DomainService.cs" />
-    <Compile Include="AdministrationModule\Aggregate\ISeasonRepository.cs" />
-    <Compile Include="AdministrationModule\Aggregate\ICategoryRepository.cs" />
+    <Compile Include="SeasonModule\Aggregate\ISeasonRepository.cs" />
+    <Compile Include="CategoryModule\Aggregate\ICategoryRepository.cs" />
     <Compile Include="PersonModule\Aggregate\ICountryRepository.cs" />
     <Compile Include="RosterModule\Aggregate\RosterSelectBuilder.cs" />
     <Compile Include="RosterModule\Aggregate\ISquadRepository.cs" />
@@ -176,7 +177,7 @@
     <Compile Include="UserModule\Aggregate\IUserRepository.cs" />
     <Compile Include="PersonModule\Aggregate\IPlayerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AdministrationModule\Aggregate\DataSpecification.cs" />
+    <Compile Include="DataSpecification.cs" />
     <Compile Include="UserModule\Aggregate\UserSpecification.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -202,12 +203,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CalendarModule\Aggregate\" />
-    <Folder Include="CalendarModule\Service\" />
-    <Folder Include="CompetitionModule\Service\" />
     <Folder Include="RosterModule\Service\" />
-    <Folder Include="TrainingModule\Aggregate\" />
-    <Folder Include="TrainingModule\Service\" />
     <Folder Include="UserModule\Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

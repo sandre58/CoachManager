@@ -161,17 +161,17 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administration\IPlayerAppService.cs" />
-    <Compile Include="Administration\IPositionAppService.cs" />
-    <Compile Include="Administration\PlayerAppService.cs" />
-    <Compile Include="Administration\PositionAppService.cs" />
-    <Compile Include="Administration\SeasonAppService.cs" />
-    <Compile Include="Administration\ISeasonAppService.cs" />
-    <Compile Include="Administration\ICategoryAppService.cs" />
-    <Compile Include="Administration\CategoryAppService.cs" />
+    <Compile Include="Persons\CountryAppService.cs" />
+    <Compile Include="Persons\ICountryAppService.cs" />
+    <Compile Include="Positions\IPositionAppService.cs" />
+    <Compile Include="Positions\PositionAppService.cs" />
+    <Compile Include="Seasons\SeasonAppService.cs" />
+    <Compile Include="Seasons\ISeasonAppService.cs" />
+    <Compile Include="Categories\ICategoryAppService.cs" />
+    <Compile Include="Categories\CategoryAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rosters\IPlayerAppService.cs" />
-    <Compile Include="Rosters\PlayerAppService.cs" />
+    <Compile Include="Persons\IPlayerAppService.cs" />
+    <Compile Include="Persons\PlayerAppService.cs" />
     <Compile Include="Rosters\RosterAppService.cs" />
     <Compile Include="Rosters\IRosterAppService.cs" />
     <Compile Include="Users\UserAppService.cs" />

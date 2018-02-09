@@ -25,9 +25,9 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
         /// <summary>
         /// Creates the select builder.
         /// </summary>
-        public static Func<RosterPlayer, PlayerDetailDto> SelectPlayerDetail()
+        public static Func<RosterPlayer, SquadPlayerDto> SelectSquadPlayer()
         {
-            return x => new PlayerDetailDto()
+            return x => new SquadPlayerDto()
             {
                 Id = x.Player.Id,
                 FirstName = x.Player.FirstName,

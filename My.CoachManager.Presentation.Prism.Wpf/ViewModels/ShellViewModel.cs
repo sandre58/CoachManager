@@ -1,4 +1,6 @@
-﻿using My.CoachManager.Presentation.Prism.Core;
+﻿using System.Collections.Generic;
+using System.Linq;
+using My.CoachManager.Presentation.Prism.Core;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Global;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
@@ -107,7 +109,18 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <param name="navigatePath"></param>
         private void Navigate(string navigatePath)
         {
-            Locator.NavigationService.NavigateTo(navigatePath);
+            var splitPath = navigatePath.Split('?');
+            var path = splitPath[0];
+
+            if (splitPath.Length > 1)
+            {
+                var parameters = new NavigationParameters(splitPath[1]);
+                Locator.NavigationService.NavigateTo(path, parameters.Select(x => new KeyValuePair<string, object>(x.Key, x.Value)));
+            }
+            else
+            {
+                Locator.NavigationService.NavigateTo(path);
+            }
         }
 
         /// <summary>

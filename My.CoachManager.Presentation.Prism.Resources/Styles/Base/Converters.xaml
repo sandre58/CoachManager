@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converters="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Converters">
 
+    <converters:IdNavigationParameterConverter x:Key="IdNavigationParameterConverter" />
     <converters:BooleanToFontWeightConverter x:Key="BooleanToFontWeightConverter" />
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <converters:VisibilityToBooleanConverter x:Key="VisibilityToBooleanConverter" />

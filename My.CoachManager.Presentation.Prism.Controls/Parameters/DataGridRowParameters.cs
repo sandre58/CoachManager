@@ -308,9 +308,9 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
         {
             var dataGridRow = sender as DataGridRow;
             var command = GetKeyDownCommand(dataGridRow);
-            if (dataGridRow != null && command != null && command.CanExecute(new KeyDownItemEventArgs(e, dataGridRow.Item)))
+            if (dataGridRow != null && command != null && command.CanExecute(e))
             {
-                command.Execute(new KeyDownItemEventArgs(e, dataGridRow.Item));
+                command.Execute(e);
             }
         }
 

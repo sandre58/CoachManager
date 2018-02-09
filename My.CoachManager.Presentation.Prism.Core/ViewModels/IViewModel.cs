@@ -1,6 +1,8 @@
-﻿namespace My.CoachManager.Presentation.Prism.Core.ViewModels
+﻿using System.ComponentModel;
+
+namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public interface IViewModel
+    public interface IViewModel : INotifyPropertyChanged
     {
     }
 }

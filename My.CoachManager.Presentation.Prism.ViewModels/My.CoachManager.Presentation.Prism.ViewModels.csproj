@@ -62,10 +62,11 @@
     <Compile Include="PersonViewModel.cs" />
     <Compile Include="PhoneViewModel.cs" />
     <Compile Include="CoachViewModel.cs" />
+    <Compile Include="PlayerDetailViewModel.cs" />
     <Compile Include="PlayerViewModel.cs" />
     <Compile Include="PositionViewModel.cs" />
     <Compile Include="RosterCoachViewModel.cs" />
-    <Compile Include="PlayerDetailViewModel.cs" />
+    <Compile Include="SquadPlayerViewModel.cs" />
     <Compile Include="RosterViewModel.cs" />
     <Compile Include="RosterPlayerViewModel.cs" />
     <Compile Include="SeasonViewModel.cs" />

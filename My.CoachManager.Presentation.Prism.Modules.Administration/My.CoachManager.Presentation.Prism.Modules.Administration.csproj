@@ -67,18 +67,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\Strings\PlayerResources.Designer.cs">
-      <DependentUpon>PlayerResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="ViewModels\PlayerEditViewModel.Contacts.cs" />
     <Compile Include="ViewModels\IPlayersListViewModel.cs" />
-    <Compile Include="ViewModels\PlayersListViewModel.cs" />
     <Compile Include="ViewModels\CategoriesListViewModel.cs" />
     <Compile Include="ViewModels\CategoryEditViewModel.cs" />
-    <Compile Include="ViewModels\IPlayerEditViewModel.cs" />
-    <Compile Include="ViewModels\PlayerEditViewModel.cs" />
     <Compile Include="ViewModels\IPositionsListViewModel.cs" />
     <Compile Include="ViewModels\SeasonsListViewModel.cs" />
     <Compile Include="ViewModels\PositionsListViewModel.cs" />
@@ -89,15 +80,6 @@
     <Compile Include="ViewModels\SeasonEditViewModel.cs" />
     <Compile Include="ViewModels\ICategoryEditViewModel.cs" />
     <Compile Include="ViewModels\ICategoriesListViewModel.cs" />
-    <Compile Include="Views\PhonesEditView.xaml.cs">
-      <DependentUpon>PhonesEditView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EmailsEditView.xaml.cs">
-      <DependentUpon>EmailsEditView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PlayersListView.xaml.cs">
-      <DependentUpon>PlayersListView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\CategoriesListView.xaml.cs">
       <DependentUpon>CategoriesListView.xaml</DependentUpon>
     </Compile>
@@ -106,9 +88,6 @@
     </Compile>
     <Compile Include="Views\CategoryEditView.xaml.cs">
       <DependentUpon>CategoryEditView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PlayerEditView.xaml.cs">
-      <DependentUpon>PlayerEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SeasonsListView.xaml.cs">
       <DependentUpon>SeasonsListView.xaml</DependentUpon>
@@ -165,18 +144,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PhonesEditView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\EmailsEditView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PlayersListView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\CategoriesListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -188,10 +155,6 @@
     <Page Include="Views\CategoryEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PlayerEditView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SeasonsListView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -222,11 +185,6 @@
     <EmbeddedResource Include="Resources\Strings\AdministrationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdministrationResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings\PlayerResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>PlayerResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

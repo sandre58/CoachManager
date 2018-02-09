@@ -31,6 +31,6 @@ namespace My.CoachManager.Application.Dtos.Rosters
         /// Gets or set the players.
         /// </summary>
         [DataMember]
-        public ICollection<RosterPlayerDto> Players { get; set; }
+        public ICollection<SquadPlayerDto> Players { get; set; }
     }
 }

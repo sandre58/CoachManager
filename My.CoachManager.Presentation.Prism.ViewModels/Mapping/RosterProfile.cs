@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.Application.Dtos.Rosters;
 
 namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
@@ -11,7 +12,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
             CreateMap<SquadDto, SquadViewModel>().ReverseMap();
             CreateMap<RosterPlayerDto, RosterPlayerViewModel>().ReverseMap();
             CreateMap<RosterCoachDto, RosterCoachViewModel>().ReverseMap();
-            CreateMap<PlayerDetailDto, PlayerDetailViewModel>().ReverseMap();
+            CreateMap<SquadPlayerDto, SquadPlayerViewModel>().ReverseMap();
         }
     }
 }

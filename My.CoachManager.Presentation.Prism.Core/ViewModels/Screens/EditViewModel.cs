@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
@@ -18,25 +19,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         #endregion Fields
 
-        #region Constructor
-
-        /// <summary>
-        /// Initialise a new instance of <see cref="EditViewModel{TEntityViewModel}"/>.
-        /// </summary>
-        protected EditViewModel()
-        {
-            Mode = ScreenMode.Creation;
-            Item = new TEntityViewModel();
-
-            SaveCommand = new DelegateCommand(Save, CanSave);
-            CancelCommand = new DelegateCommand(Cancel, CanCancel);
-            RefreshCommand = new DelegateCommand(Refresh, CanRefresh);
-
-            LoadData();
-        }
-
-        #endregion Constructor
-
         #region Members
 
         /// <summary>
@@ -50,11 +32,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             }
             protected set
             {
-                SetProperty(ref _item, value, () =>
-                {
-                    if (value != null) _activeId = value.Id;
-                    OnItemChanged();
-                });
+                SetProperty(ref _item, value);
             }
         }
 
@@ -77,33 +55,108 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         #region Methods
 
+        #region Initialization
+
+        /// <summary>
+        /// Initializes data in constructor.
+        /// </summary>
+        protected override void InitializeData()
+        {
+            base.InitializeData();
+
+            Mode = ScreenMode.Creation;
+            Item = new TEntityViewModel();
+        }
+
+        /// <summary>
+        /// Initializes commands.
+        /// </summary>
+        protected override void InitializeCommands()
+        {
+            base.InitializeCommands();
+
+            SaveCommand = new DelegateCommand(SaveAsync, CanSave);
+            CancelCommand = new DelegateCommand(Cancel, CanCancel);
+            RefreshCommand = new DelegateCommand(Refresh, CanRefresh);
+        }
+
+        #endregion Initialization
+
         #region Save
+
+        /// <summary>
+        /// Load data.
+        /// </summary>
+        /// <returns></returns>
+        private async Task SaveDataAsync()
+        {
+            var result = false;
+            var task = Task.Run(() =>
+            {
+                result = SaveItemCore();
+            });
+
+            State = ScreenState.Saving;
+
+            OnSaveRequested();
+
+            if (Item.IsValid())
+            {
+                try
+                {
+                    await task.ConfigureAwait(true);
+                }
+                catch (Exception)
+                {
+                    // ignored
+                }
+
+                ResetModified();
+                State = ScreenState.Ready;
+                Mode = ScreenMode.Edition;
+
+                // Is Cancelled
+                if (task.IsCanceled)
+                {
+                }
+
+                // Exception
+                else if (task.IsFaulted)
+                {
+                    if (task.Exception != null)
+                    {
+                        if (task.Exception.InnerException is BusinessException)
+                        {
+                            OnBusinessExceptionOccured((BusinessException)task.Exception.InnerException);
+                        }
+                        else
+                        {
+                            OnExceptionOccured(task.Exception.InnerException);
+                        }
+                    }
+                }
+
+                // Is Completed
+                else if (task.IsCompleted)
+                {
+                    if (result)
+                        OnSaveCompleted();
+                }
+            }
+            else
+            {
+                OnBusinessExceptionOccured(new BusinessException(MessageResources.InvalidForm));
+            }
+        }
 
         /// <summary>
         /// Add a new item.
         /// </summary>
-        public virtual void Save()
+        public virtual async void SaveAsync()
         {
             if (CanSave())
             {
-                State = ScreenState.Saving;
-
-                OnSaveRequested();
-
-                if (Item.IsValid())
-                {
-                    if (SaveItem())
-                    {
-                        Mode = ScreenMode.Edition;
-                        OnSaveCompleted();
-                    }
-                }
-                else
-                {
-                    OnBusinessExceptionOccured(new BusinessException(MessageResources.InvalidForm));
-                }
-
-                State = ScreenState.Ready;
+                await SaveDataAsync();
             }
         }
 
@@ -119,30 +172,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Save.
         /// </summary>
-        private bool SaveItem()
-        {
-            try
-            {
-                SaveItemCore();
-            }
-            catch (BusinessException e)
-            {
-                OnBusinessExceptionOccured(e);
-                return false;
-            }
-            catch (Exception e)
-            {
-                OnExceptionOccured(e);
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Save.
-        /// </summary>
-        protected abstract void SaveItemCore();
+        protected abstract bool SaveItemCore();
 
         /// <summary>
         /// Before Save.
@@ -211,7 +241,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         public virtual void Refresh()
         {
-            RefreshData();
+            RefreshDataAsync();
         }
 
         /// <summary>
@@ -224,6 +254,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         #endregion Refresh
 
+        #region Data
+
         /// <summary>
         /// Load an item by id.
         /// </summary>
@@ -231,7 +263,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         {
             _activeId = id;
             Mode = ScreenMode.Edition;
-            RefreshData();
+            RefreshDataAsync();
         }
 
         /// <summary>
@@ -255,20 +287,17 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <param name="id"></param>
         protected abstract TEntityViewModel LoadItemCore(int id);
 
-        /// <summary>
-        /// Reset modified property.
-        /// </summary>
-        public override void ResetModified()
-        {
-            Item.ResetModified();
-            base.ResetModified();
-        }
+        #endregion Data
+
+        #region Properties Changed
 
         /// <summary>
         /// Calls when Item changes.
         /// </summary>
         protected virtual void OnItemChanged()
         {
+            if (Item != null) _activeId = Item.Id;
+
             RaisePropertyChanged(() => Title);
 
             if (SaveCommand != null) SaveCommand.RaiseCanExecuteChanged();
@@ -282,6 +311,17 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         {
             Title = Mode == ScreenMode.Edition ? string.Format(MessageResources.EditItem, Title) : string.Format(MessageResources.CreateItem, Title);
         }
+
+        /// <summary>
+        /// Reset modified property.
+        /// </summary>
+        public override void ResetModified()
+        {
+            Item.ResetModified();
+            base.ResetModified();
+        }
+
+        #endregion Properties Changed
 
         #endregion Methods
     }

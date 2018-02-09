@@ -6,9 +6,9 @@
       <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Rosters" />
       <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IRosterService_GetSquads_InputMessage">
@@ -17,20 +17,30 @@
   <wsdl:message name="IRosterService_GetSquads_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetSquadsResponse" />
   </wsdl:message>
-  <wsdl:message name="IRosterService_GetPlayers_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetPlayers" />
+  <wsdl:message name="IRosterService_GetSquad_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSquad" />
   </wsdl:message>
-  <wsdl:message name="IRosterService_GetPlayers_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetPlayersResponse" />
+  <wsdl:message name="IRosterService_GetSquad_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSquadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_GetPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_GetPlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerResponse" />
   </wsdl:message>
   <wsdl:portType name="IRosterService">
     <wsdl:operation name="GetSquads">
       <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetSquads" message="tns:IRosterService_GetSquads_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/GetSquadsResponse" message="tns:IRosterService_GetSquads_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetPlayers">
-      <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetPlayers" message="tns:IRosterService_GetPlayers_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/GetPlayersResponse" message="tns:IRosterService_GetPlayers_OutputMessage" />
+    <wsdl:operation name="GetSquad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetSquad" message="tns:IRosterService_GetSquad_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/GetSquadResponse" message="tns:IRosterService_GetSquad_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetPlayer" message="tns:IRosterService_GetPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/GetPlayerResponse" message="tns:IRosterService_GetPlayer_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IRosterService" type="tns:IRosterService">
@@ -44,8 +54,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetPlayers">
-      <soap:operation soapAction="http://tempuri.org/IRosterService/GetPlayers" style="document" />
+    <wsdl:operation name="GetSquad">
+      <soap:operation soapAction="http://tempuri.org/IRosterService/GetSquad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayer">
+      <soap:operation soapAction="http://tempuri.org/IRosterService/GetPlayer" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -7,15 +7,15 @@ using My.CoachManager.Presentation.Prism.Modules.Administration.Resources.String
 using My.CoachManager.Presentation.Prism.Modules.Administration.Views;
 using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
-using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
-    public class PositionsListViewModel : OrderedListViewModel<PositionViewModel, PositionEditViewModel>, IPositionsListViewModel
+    public class PositionsListViewModel : OrderedListViewModel<PositionViewModel>, IPositionsListViewModel
     {
         #region Fields
 
-        private readonly IAdminService _adminService;
+        private readonly IPositionService _positionService;
 
         #endregion Fields
 
@@ -24,16 +24,16 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="PositionsListViewModel"/>.
         /// </summary>
-        public PositionsListViewModel(IAdminService adminService)
+        public PositionsListViewModel(IPositionService positionService)
         {
-            _adminService = adminService;
-
-            Title = AdministrationResources.PositionsTitle;
+            _positionService = positionService;
         }
 
         #endregion Constructors
 
         #region Methods
+
+        #region Abstract Methods
 
         /// <summary>
         /// Get Item View Type.
@@ -44,13 +44,31 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
             return typeof(PositionEditView);
         }
 
+        #endregion Abstract Methods
+
+        #region Initialization
+
+        /// <summary>
+        /// Initializes Data.
+        /// </summary>
+        protected override void InitializeData()
+        {
+            base.InitializeData();
+
+            Title = AdministrationResources.PositionsTitle;
+        }
+
+        #endregion Initialization
+
+        #region Data
+
         /// <summary>
         /// Remove the item from data source.
         /// </summary>
         /// <param name="item"></param>
         protected override void RemoveItemCore(PositionViewModel item)
         {
-            _adminService.RemovePosition(item.ToDto<PositionDto>());
+            _positionService.Remove(item.ToDto<PositionDto>());
         }
 
         /// <summary>
@@ -58,7 +76,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// </summary>
         protected override void ValidateOrderCore()
         {
-            _adminService.UpdatePositionsOrders(Items.ToDictionary(c => c.Id, c => c.Order));
+            _positionService.UpdateOrders(Items.ToDictionary(c => c.Id, c => c.Order));
         }
 
         /// <summary>
@@ -67,10 +85,12 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <returns></returns>
         protected override void LoadDataCore()
         {
-            var result = _adminService.GetPositionsList();
+            var result = _positionService.GetList();
 
             Items = new ObservableCollection<PositionViewModel>(result.OrderBy(x => x.Order).ToViewModels<PositionViewModel>());
         }
+
+        #endregion Data
 
         #endregion Methods
     }

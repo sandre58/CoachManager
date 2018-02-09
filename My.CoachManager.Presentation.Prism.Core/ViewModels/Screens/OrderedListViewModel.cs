@@ -10,32 +10,14 @@ using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
-    public abstract class OrderedListViewModel<TEntityViewModel, TEditViewModel> : ListViewModel<TEntityViewModel, TEditViewModel>
+    public abstract class OrderedListViewModel<TEntityViewModel> : ListViewModel<TEntityViewModel>
         where TEntityViewModel : class, IOrderableViewModel, INotifyPropertyChanged
-        where TEditViewModel : class, IDialogViewModel, IEditViewModel
     {
         #region Fields
 
         private bool _canOrder;
 
         #endregion Fields
-
-        #region Constructor
-
-        /// <summary>
-        /// Initialise a new instance of <see cref="OrderedListViewModel{TEntityViewModel,TEditViewModel}"/>.
-        /// </summary>
-        protected OrderedListViewModel()
-        {
-            CanOrder = false;
-            ActivateOrderCommand = new DelegateCommand(ActivateOrder, CanActivateOrder);
-            CancelOrderCommand = new DelegateCommand(CancelOrder, CanCancelOrder);
-            ValidateOrderCommand = new DelegateCommand(ValidateOrder, CanValidateOrder);
-            MoveAboveCommand = new DelegateCommand<DragAndDropEventArgs>(MoveAbove, CanMoveAbove);
-            MoveBelowCommand = new DelegateCommand<DragAndDropEventArgs>(MoveBelow, CanMoveBelow);
-        }
-
-        #endregion Constructor
 
         #region Members
 
@@ -54,6 +36,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
                     RemoveCommand.RaiseCanExecuteChanged();
                     RefreshCommand.RaiseCanExecuteChanged();
                     KeyboardActionCommand.RaiseCanExecuteChanged();
+                    EnterCommand.RaiseCanExecuteChanged();
+                    EscapeCommand.RaiseCanExecuteChanged();
                     MoveAboveCommand.RaiseCanExecuteChanged();
                     MoveBelowCommand.RaiseCanExecuteChanged();
                     ActivateOrderCommand.RaiseCanExecuteChanged();
@@ -92,6 +76,34 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         #region Methods
 
+        #region Initialization
+
+        /// <summary>
+        /// Initializes commands.
+        /// </summary>
+        protected override void InitializeCommands()
+        {
+            base.InitializeCommands();
+
+            ActivateOrderCommand = new DelegateCommand(ActivateOrder, CanActivateOrder);
+            CancelOrderCommand = new DelegateCommand(CancelOrder, CanCancelOrder);
+            ValidateOrderCommand = new DelegateCommand(ValidateOrder, CanValidateOrder);
+            MoveAboveCommand = new DelegateCommand<DragAndDropEventArgs>(MoveAbove, CanMoveAbove);
+            MoveBelowCommand = new DelegateCommand<DragAndDropEventArgs>(MoveBelow, CanMoveBelow);
+        }
+
+        /// <summary>
+        /// Initializes Data.
+        /// </summary>
+        protected override void InitializeData()
+        {
+            base.InitializeData();
+
+            CanOrder = false;
+        }
+
+        #endregion Initialization
+
         #region Activate Order
 
         /// <summary>
@@ -124,9 +136,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         {
             try
             {
-                BeforeValidateOrder();
+                ValidateOrderRequested();
                 ValidateOrderCore();
-                AfterValidateOrder();
+                ValidateOrderCompleted();
             }
             catch (BusinessException e)
             {
@@ -152,7 +164,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Call before loading data.
         /// </summary>
-        protected virtual void BeforeValidateOrder()
+        protected virtual void ValidateOrderRequested()
         {
             State = ScreenState.Saving;
         }
@@ -160,7 +172,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Call after load data.
         /// </summary>
-        protected virtual void AfterValidateOrder()
+        protected virtual void ValidateOrderCompleted()
         {
             Locator.DialogService.ShowSuccessPopup(MessageResources.OrderSaved);
         }
@@ -183,7 +195,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         private void CancelOrder()
         {
-            RefreshData();
+            RefreshDataAsync();
             State = ScreenState.Ready;
             Mode = ScreenMode.Read;
             CanOrder = false;

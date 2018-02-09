@@ -23,7 +23,6 @@ namespace My.CoachManager.Presentation.Prism.Resources.Converters
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
             var flag = value == null;
             if (value is string)
             {
@@ -32,7 +31,7 @@ namespace My.CoachManager.Presentation.Prism.Resources.Converters
 
             if (value is Array)
             {
-                var array = (Array) value;
+                var array = (Array)value;
                 flag = array.Length == 0;
             }
 
@@ -40,7 +39,7 @@ namespace My.CoachManager.Presentation.Prism.Resources.Converters
 
             if (inverse)
             {
-                return (flag ? Visibility.Collapsed : Visibility.Visible);
+                return (flag ? Visibility.Visible : Visibility.Collapsed);
             }
             return (flag ? Visibility.Collapsed : Visibility.Visible);
         }

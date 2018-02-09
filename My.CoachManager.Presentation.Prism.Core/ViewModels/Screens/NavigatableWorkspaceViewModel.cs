@@ -23,14 +23,23 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// Called when the implementer has been navigated to.
         /// </summary>
         /// <param name="navigationContext">The navigation context.</param>
-        public virtual void OnNavigatedTo(NavigationContext navigationContext)
+        public void OnNavigatedTo(NavigationContext navigationContext)
         {
             Locator.GetInstance<IEventAggregator>().GetEvent<NotifyNavigationCompletedEvent>().Publish(new NavigationCompletedEventArgs(this, navigationContext));
 
-            if (State == ScreenState.NotLoaded)
-            {
-                RefreshData();
-            }
+            //if (State == ScreenState.NotLoaded)
+            //{
+            OnNavigatedToCore(navigationContext);
+            //}
+        }
+
+        /// <summary>
+        /// Called when the implementer has been navigated to.
+        /// </summary>
+        /// <param name="navigationContext">The navigation context.</param>
+        protected virtual void OnNavigatedToCore(NavigationContext navigationContext)
+        {
+            RefreshDataAsync();
         }
 
         /// <inheritdoc />
@@ -49,11 +58,20 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// Called when the implementer is being navigated away from.
         /// </summary>
         /// <param name="navigationContext">The navigation context.</param>
-        public virtual void OnNavigatedFrom(NavigationContext navigationContext)
+        public void OnNavigatedFrom(NavigationContext navigationContext)
         {
             if (Mode == ScreenMode.Creation || Mode == ScreenMode.Edition)
             {
+                OnNavigatedFromCore(navigationContext);
             }
+        }
+
+        /// <summary>
+        /// Called when the implementer is being navigated away from.
+        /// </summary>
+        /// <param name="navigationContext">The navigation context.</param>
+        protected virtual void OnNavigatedFromCore(NavigationContext navigationContext)
+        {
         }
 
         #endregion Methods

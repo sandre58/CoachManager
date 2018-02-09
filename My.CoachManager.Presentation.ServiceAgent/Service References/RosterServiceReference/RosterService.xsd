@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Rosters" />
+  <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" />
   <xs:element name="GetSquads">
     <xs:complexType>
       <xs:sequence>
@@ -15,17 +16,31 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetPlayers">
+  <xs:element name="GetSquad">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="rosterId" type="xs:int" />
+        <xs:element minOccurs="0" name="squadId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetPlayersResponse">
+  <xs:element name="GetSquadResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Rosters" minOccurs="0" name="GetPlayersResult" nillable="true" type="q2:ArrayOfPlayerDetailDto" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Rosters" minOccurs="0" name="GetSquadResult" nillable="true" type="q2:SquadDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPlayer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="playerId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPlayerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" minOccurs="0" name="GetPlayerResult" nillable="true" type="q3:PlayerDetailDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

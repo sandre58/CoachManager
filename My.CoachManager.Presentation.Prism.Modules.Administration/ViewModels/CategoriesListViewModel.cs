@@ -7,15 +7,15 @@ using My.CoachManager.Presentation.Prism.Modules.Administration.Resources.String
 using My.CoachManager.Presentation.Prism.Modules.Administration.Views;
 using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
-using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
-    public class CategoriesListViewModel : OrderedListViewModel<CategoryViewModel, CategoryEditViewModel>, ICategoriesListViewModel
+    public class CategoriesListViewModel : OrderedListViewModel<CategoryViewModel>, ICategoriesListViewModel
     {
         #region Fields
 
-        private readonly IAdminService _adminService;
+        private readonly ICategoryService _categoryService;
 
         #endregion Fields
 
@@ -24,16 +24,16 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="CategoriesListViewModel"/>.
         /// </summary>
-        public CategoriesListViewModel(IAdminService adminService) : base()
+        public CategoriesListViewModel(ICategoryService categoryService)
         {
-            _adminService = adminService;
-
-            Title = AdministrationResources.CategoriesTitle;
+            _categoryService = categoryService;
         }
 
         #endregion Constructors
 
         #region Methods
+
+        #region Abstract Methods
 
         /// <summary>
         /// Get Item View Type.
@@ -44,13 +44,31 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
             return typeof(CategoryEditView);
         }
 
+        #endregion Abstract Methods
+
+        #region Initialization
+
+        /// <summary>
+        /// Initializes Data.
+        /// </summary>
+        protected override void InitializeData()
+        {
+            base.InitializeData();
+
+            Title = AdministrationResources.CategoriesTitle;
+        }
+
+        #endregion Initialization
+
+        #region Data
+
         /// <summary>
         /// Remove the item from data source.
         /// </summary>
         /// <param name="item"></param>
         protected override void RemoveItemCore(CategoryViewModel item)
         {
-            _adminService.RemoveCategory(item.ToDto<CategoryDto>());
+            _categoryService.Remove(item.ToDto<CategoryDto>());
         }
 
         /// <summary>
@@ -58,7 +76,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// </summary>
         protected override void ValidateOrderCore()
         {
-            _adminService.UpdateCategoriesOrders(Items.ToDictionary(c => c.Id, c => c.Order));
+            _categoryService.UpdateOrders(Items.ToDictionary(c => c.Id, c => c.Order));
         }
 
         /// <summary>
@@ -67,10 +85,12 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <returns></returns>
         protected override void LoadDataCore()
         {
-            var result = _adminService.GetCategoriesList();
+            var result = _categoryService.GetList();
 
             Items = new ObservableCollection<CategoryViewModel>(result.OrderBy(x => x.Order).ToViewModels<CategoryViewModel>());
         }
+
+        #endregion Data
 
         #endregion Methods
     }

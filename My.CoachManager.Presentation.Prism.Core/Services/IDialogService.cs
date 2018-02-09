@@ -46,7 +46,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Services
         /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
         /// the user.
         /// </returns>
-        void ShowWorkspaceDialog<TView>(Action<IDialog> callbackBefore = null, Action<IDialog> callbackAfter = null) where TView : FrameworkElement;
+        void ShowWorkspaceDialog<TView>(IWorkspaceDialogViewModel model = null, Action<IDialog> callbackBefore = null, Action<IDialog> callbackAfter = null) where TView : FrameworkElement;
 
         /// <summary>
         /// Displays a modal dialog of a type that is determined by the dialog type locator.
@@ -55,7 +55,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Services
         /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
         /// the user.
         /// </returns>
-        void ShowWorkspaceDialog(Type typeView, Action<IDialog> callbackBefore = null, Action<IDialog> callbackAfter = null);
+        void ShowWorkspaceDialog(Type typeView, IWorkspaceDialogViewModel model = null, Action<IDialog> callbackBefore = null, Action<IDialog> callbackAfter = null);
 
         /// <summary>
         /// Displays a modal dialog of a type that is determined by the dialog type locator.

@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Metadatas;
-using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 
 namespace My.CoachManager.Presentation.Prism.ViewModels
@@ -17,7 +16,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
         /// </summary>
         public SquadViewModel()
         {
-            Players = new ObservableCollection<RosterPlayerViewModel>();
+            Players = new ObservableCollection<SquadPlayerViewModel>();
         }
 
         private string _name;
@@ -53,12 +52,12 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
             set { SetProperty(ref _roster, value); }
         }
 
-        private ObservableCollection<RosterPlayerViewModel> _players;
+        private ObservableCollection<SquadPlayerViewModel> _players;
 
         /// <summary>
         /// Gets or set the players.
         /// </summary>
-        public ObservableCollection<RosterPlayerViewModel> Players
+        public ObservableCollection<SquadPlayerViewModel> Players
         {
             get { return _players; }
             set { SetProperty(ref _players, value); }

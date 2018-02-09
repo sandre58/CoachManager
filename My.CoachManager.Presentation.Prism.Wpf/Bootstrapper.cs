@@ -14,6 +14,7 @@ using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Modules.About;
 using My.CoachManager.Presentation.Prism.Modules.Administration;
+using My.CoachManager.Presentation.Prism.Modules.Core;
 using My.CoachManager.Presentation.Prism.Modules.Home;
 using My.CoachManager.Presentation.Prism.Modules.Login;
 using My.CoachManager.Presentation.Prism.Modules.Login.Core;
@@ -28,11 +29,15 @@ using My.CoachManager.Presentation.Prism.Wpf.Services;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using My.CoachManager.Presentation.Prism.Wpf.Views;
 using My.CoachManager.Presentation.ServiceAgent;
-using My.CoachManager.Presentation.ServiceAgent.AdminServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.SeasonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.UserServiceReference;
 using Prism.Events;
 using Prism.Modularity;
+using Prism.Mvvm;
 using Prism.Unity;
 
 namespace My.CoachManager.Presentation.Prism.Wpf
@@ -58,12 +63,18 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         {
             Locator.SetContainer(Container);
 
+            // View Model Locator
+            ViewModelLocationProvider.SetDefaultViewModelFactory(t => Container.Resolve(t));
+
             // Theme
             SkinManager.SkinManager.ApplyTheme("dark");
             SkinManager.SkinManager.ApplyAccent("blue");
 
             // Services
-            Locator.RegisterInstance<IAdminService>(ServiceClientFactory.Create<AdminServiceClient, IAdminService>());
+            Locator.RegisterInstance<ICategoryService>(ServiceClientFactory.Create<CategoryServiceClient, ICategoryService>());
+            Locator.RegisterInstance<IPositionService>(ServiceClientFactory.Create<PositionServiceClient, IPositionService>());
+            Locator.RegisterInstance<ISeasonService>(ServiceClientFactory.Create<SeasonServiceClient, ISeasonService>());
+            Locator.RegisterInstance<IPersonService>(ServiceClientFactory.Create<PersonServiceClient, IPersonService>());
             Locator.RegisterInstance<IUserService>(ServiceClientFactory.Create<UserServiceClient, IUserService>());
             Locator.RegisterInstance<IRosterService>(ServiceClientFactory.Create<RosterServiceClient, IRosterService>());
 
@@ -137,6 +148,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             //
 
             // Initialize the modules
+            InitializeModule<CoreModule>();
             InitializeModule<SettingsModule>();
             InitializeModule<AboutModule>();
             InitializeModule<StatusBarModule>();

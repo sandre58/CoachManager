@@ -47,9 +47,9 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
         /// the user.
         /// </returns>
-        public void ShowWorkspaceDialog<TView>(Action<IDialog> callbackBefore = null, Action<IDialog> callbackAfter = null) where TView : FrameworkElement
+        public void ShowWorkspaceDialog<TView>(IWorkspaceDialogViewModel model = null, Action<IDialog> callbackBefore = null, Action<IDialog> callbackAfter = null) where TView : FrameworkElement
         {
-            ShowWorkspaceDialog(typeof(TView), callbackBefore, callbackAfter);
+            ShowWorkspaceDialog(typeof(TView), model, callbackBefore, callbackAfter);
         }
 
         /// <summary>
@@ -59,11 +59,17 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
         /// the user.
         /// </returns>
-        public void ShowWorkspaceDialog(Type typeView, Action<IDialog> callbackBefore = null, Action<IDialog> callbackAfter = null)
+        public void ShowWorkspaceDialog(Type typeView, IWorkspaceDialogViewModel model = null, Action<IDialog> callbackBefore = null, Action<IDialog> callbackAfter = null)
         {
             var view = _serviceLocator.GetInstance(typeView) as FrameworkElement;
+
             if (view != null)
             {
+                if (model != null)
+                {
+                    view.DataContext = model;
+                }
+
                 var dialog = new Dialog()
                 {
                     Content = view

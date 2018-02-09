@@ -10,7 +10,7 @@ using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
-    public abstract class FiltersViewModel : WorkspaceDialogViewModel, IFiltersViewModel
+    public class FiltersViewModel : WorkspaceDialogViewModel, IFiltersViewModel
     {
         #region Fields
 
@@ -29,7 +29,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Gets the allowed filters.
         /// </summary>
-        public Dictionary<string, string> AllowedFilters { get; }
+        public Dictionary<string, string> AllowedFilters { get; private set; }
 
         /// <summary>
         /// Gets or sets the filters.
@@ -96,16 +96,16 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         #endregion Members
 
-        #region Constructor
+        #region Methods
+
+        #region Initialization
 
         /// <summary>
-        /// Initialise a new instance of <see cref="FiltersViewModel"/>
+        /// Initializes commands.
         /// </summary>
-        public FiltersViewModel()
+        protected override void InitializeCommands()
         {
-            Filters = new ObservableCollection<FilterViewModel>();
-
-            AllowedFilters = new Dictionary<string, string>();
+            base.InitializeCommands();
 
             AddFilterCommand = new DelegateCommand<string>(AddFilter, CanAddFilter);
             RemoveFilterCommand = new DelegateCommand<IFilter>(RemoveFilter, CanRemoveFilter);
@@ -114,9 +114,19 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             CancelCommand = new DelegateCommand(() => Close(DialogResult.Cancel));
         }
 
-        #endregion Constructor
+        /// <summary>
+        /// Initializes Data.
+        /// </summary>
+        protected override void InitializeData()
+        {
+            base.InitializeData();
 
-        #region Methods
+            Filters = new ObservableCollection<FilterViewModel>();
+
+            AllowedFilters = new Dictionary<string, string>();
+        }
+
+        #endregion Initialization
 
         /// <summary>
         /// Add a filter.

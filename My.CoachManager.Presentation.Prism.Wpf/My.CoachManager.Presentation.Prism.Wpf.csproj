@@ -239,6 +239,10 @@
       <Project>{3f11e745-d328-4654-a3c9-4bfc9bf6b9ab}</Project>
       <Name>My.CoachManager.Presentation.Prism.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Core\My.CoachManager.Presentation.Prism.Modules.Core.csproj">
+      <Project>{50A483C0-90E2-4C4A-BFC4-C53458A6A727}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Modules.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Home\My.CoachManager.Presentation.Prism.Modules.Home.csproj">
       <Project>{b72a3d9c-efa7-43a8-a01e-cdeeb9f59c28}</Project>
       <Name>My.CoachManager.Presentation.Prism.Modules.Home</Name>

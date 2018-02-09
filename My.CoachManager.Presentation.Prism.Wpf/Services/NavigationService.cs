@@ -50,7 +50,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// <param name="parameters">Optional parameters.</param>
         public void NavigateTo(Type typeView, IEnumerable<KeyValuePair<string, object>> parameters = null)
         {
-            var path = typeView.Name.ToLower();
+            var path = typeView.Name;
             NavigateTo(path, parameters);
         }
 

@@ -62,7 +62,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.Core.Resources.Strin
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tous les joueurs.
+        ///   Looks up a localized string similar to Joueurs.
         /// </summary>
         public static string PlayersTitle {
             get {
@@ -85,6 +85,15 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.Core.Resources.Strin
         public static string RosterTitle {
             get {
                 return ResourceManager.GetString("RosterTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Staff.
+        /// </summary>
+        public static string StaffTitle {
+            get {
+                return ResourceManager.GetString("StaffTitle", resourceCulture);
             }
         }
     }
