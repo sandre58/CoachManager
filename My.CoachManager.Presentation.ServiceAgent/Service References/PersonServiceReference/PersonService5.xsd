@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" />
-  <xs:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" />
+  <xs:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Categories" />
+  <xs:element name="GetPlayerDetails">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="playerId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPlayerDetailsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" minOccurs="0" name="GetPlayerDetailsResult" nillable="true" type="q1:PlayerDetailsDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetPlayer">
     <xs:complexType>
       <xs:sequence>
@@ -12,28 +26,28 @@
   <xs:element name="GetPlayerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" minOccurs="0" name="GetPlayerResult" nillable="true" type="q1:PlayerDetailDto" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" minOccurs="0" name="GetPlayerResult" nillable="true" type="q2:PlayerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateOrUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" minOccurs="0" name="dto" nillable="true" type="q2:PlayerDto" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" minOccurs="0" name="dto" nillable="true" type="q3:PlayerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateOrUpdateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" minOccurs="0" name="CreateOrUpdateResult" nillable="true" type="q3:PlayerDto" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" minOccurs="0" name="CreateOrUpdateResult" nillable="true" type="q4:PlayerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="Remove">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" minOccurs="0" name="dto" nillable="true" type="q4:PlayerDto" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" minOccurs="0" name="dto" nillable="true" type="q5:PlayerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -52,7 +66,7 @@
   <xs:element name="GetCategoryFromBirthdateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="GetCategoryFromBirthdateResult" nillable="true" type="q5:CategoryDto" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Categories" minOccurs="0" name="GetCategoryFromBirthdateResult" nillable="true" type="q6:CategoryDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -64,7 +78,7 @@
   <xs:element name="GetCountriesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" minOccurs="0" name="GetCountriesResult" nillable="true" type="q6:ArrayOfCountryDto" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" minOccurs="0" name="GetCountriesResult" nillable="true" type="q7:ArrayOfCountryDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

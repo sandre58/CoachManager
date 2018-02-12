@@ -18,7 +18,17 @@ namespace My.CoachManager.Services.Wcf
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public PlayerDetailDto GetPlayer(int id)
+        public PlayerDetailsDto GetPlayerDetails(int id)
+        {
+            return UnityFactory.Resolve<IPlayerAppService>().GetPlayerDetails(id);
+        }
+
+        /// <summary>
+        /// Get Player.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public PlayerDto GetPlayer(int id)
         {
             return UnityFactory.Resolve<IPlayerAppService>().GetPlayer(id);
         }

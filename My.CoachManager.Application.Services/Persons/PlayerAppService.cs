@@ -4,6 +4,7 @@ using My.CoachManager.Application.Core;
 using My.CoachManager.Application.Dtos.Categories;
 using My.CoachManager.Application.Dtos.Mapping;
 using My.CoachManager.Application.Dtos.Persons;
+using My.CoachManager.Application.Services.Addresses;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Logging;
@@ -24,6 +25,7 @@ namespace My.CoachManager.Application.Services.Persons
         private readonly IPlayerRepository _playerRepository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IPlayerDomainService _playerDomainService;
+        private readonly IAddressAppService _addressAppService;
 
         #endregion ---- Fields ----
 
@@ -32,12 +34,13 @@ namespace My.CoachManager.Application.Services.Persons
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerAppService"/> class.
         /// </summary>
-        public PlayerAppService(ILogger logger, IPlayerRepository playerRepository, ICategoryRepository categoryRepository, IPlayerDomainService playerDomainService)
+        public PlayerAppService(ILogger logger, IPlayerRepository playerRepository, ICategoryRepository categoryRepository, IPlayerDomainService playerDomainService, IAddressAppService addressAppService)
             : base(logger)
         {
             _playerRepository = playerRepository;
             _playerDomainService = playerDomainService;
             _categoryRepository = categoryRepository;
+            _addressAppService = addressAppService;
         }
 
         #endregion ---- Constructors ----
@@ -48,14 +51,27 @@ namespace My.CoachManager.Application.Services.Persons
         /// Get a player.
         /// </summary>
         /// <returns></returns>
-        public PlayerDetailDto GetPlayer(int playerId)
+        public PlayerDetailsDto GetPlayerDetails(int playerId)
         {
             var player = _playerRepository.GetEntity(playerId, x => x.Category,
                 x => x.Address,
                 x => x.Country,
                 x => x.Contacts);
 
-            return PlayerFactory.CreatePlayerDetailDto(player);
+            return PlayerFactory.CreatePlayerDetailsDto(player);
+        }
+
+        /// <summary>
+        /// Get a player.
+        /// </summary>
+        /// <returns></returns>
+        public PlayerDto GetPlayer(int playerId)
+        {
+            var player = _playerRepository.GetEntity(playerId,
+                x => x.Address,
+                x => x.Contacts);
+
+            return PlayerFactory.CreatePlayerDto(player);
         }
 
         /// <summary>
@@ -71,11 +87,39 @@ namespace My.CoachManager.Application.Services.Persons
                 throw new BusinessException(ValidationMessageResources.NotValidMessage);
             }
 
+            var address = new AddressDto()
+            {
+                Id = dto.AddressId ?? 0,
+                Row1 = dto.Address,
+                PostalCode = dto.PostalCode,
+                City = dto.City
+            };
+
+            // Create or update address
+            if (!string.IsNullOrEmpty(dto.Address) || !string.IsNullOrEmpty(dto.PostalCode) || !string.IsNullOrEmpty(dto.City))
+            {
+                entity.AddressId = _addressAppService.CreateOrUpdate(address).Id;
+            }
+
+            // Remove address
+            else if (dto.AddressId.HasValue && string.IsNullOrEmpty(dto.Address) && string.IsNullOrEmpty(dto.PostalCode) && string.IsNullOrEmpty(dto.City))
+            {
+                entity.AddressId = null;
+            }
+
+            // Add player
             _playerRepository.AddOrModify(entity);
 
+            // Commit changes
             _playerRepository.UnitOfWork.Commit();
 
-            return entity.ToDto<PlayerDto>();
+            // Remove address entity
+            if (!entity.AddressId.HasValue && address.Id != 0)
+            {
+                _addressAppService.Remove(address);
+            }
+
+            return PlayerFactory.CreatePlayerDto(entity);
         }
 
         /// <summary>

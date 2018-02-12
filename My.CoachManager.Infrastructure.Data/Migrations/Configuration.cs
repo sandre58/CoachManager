@@ -33,14 +33,6 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
             var player1 = new Player()
             {
                 CategoryId = 13,
-                Address = new Address()
-                {
-                    Id = 1,
-                    Row1 = "9 rue Marivaux",
-                    PostalCode = "63000",
-                    City = "Clermont-Ferrand"
-                },
-                AddressId = 1,
                 Birthdate = new DateTime(1989, 12, 5),
                 CountryId = 76,
                 FirstName = "Stéphane",

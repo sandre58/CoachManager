@@ -6,10 +6,17 @@
       <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" />
       <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Positions" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Categories" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IPersonService_GetPlayerDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerDetails" />
+  </wsdl:message>
+  <wsdl:message name="IPersonService_GetPlayerDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerDetailsResponse" />
+  </wsdl:message>
   <wsdl:message name="IPersonService_GetPlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayer" />
   </wsdl:message>
@@ -41,6 +48,10 @@
     <wsdl:part name="parameters" element="tns:GetCountriesResponse" />
   </wsdl:message>
   <wsdl:portType name="IPersonService">
+    <wsdl:operation name="GetPlayerDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/GetPlayerDetails" message="tns:IPersonService_GetPlayerDetails_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/GetPlayerDetailsResponse" message="tns:IPersonService_GetPlayerDetails_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/GetPlayer" message="tns:IPersonService_GetPlayer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/GetPlayerResponse" message="tns:IPersonService_GetPlayer_OutputMessage" />
@@ -64,6 +75,15 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IPersonService" type="tns:IPersonService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPlayerDetails">
+      <soap:operation soapAction="http://tempuri.org/IPersonService/GetPlayerDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetPlayer">
       <soap:operation soapAction="http://tempuri.org/IPersonService/GetPlayer" style="document" />
       <wsdl:input>

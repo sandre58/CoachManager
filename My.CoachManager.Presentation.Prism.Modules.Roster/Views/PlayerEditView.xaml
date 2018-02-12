@@ -78,7 +78,7 @@
 
                     <TextBox Grid.Column="0" x:Name="LastName"
                      Width="{StaticResource LargeWidth}"
-                     Text="{Binding Item.LastName, IsAsync=True, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding Item.LastName, IsAsync=True}"
                      parameters:FormParameters.Label="{x:Static entities:PersonResources.LastName}"
                      parameters:FormParameters.IsRequired="True" />
 
@@ -152,12 +152,12 @@
 
                     <TextBox Grid.Column="0"
                      Width="{StaticResource LargeWidth}"
-                     Text="{Binding Item.Address.Row1, IsAsync=True}"
+                     Text="{Binding Item.Address, IsAsync=True}"
                      parameters:FormParameters.Label="{x:Static entities:PersonResources.Address}" />
                     <ComboBox Grid.Column="1"
                       IsTextSearchEnabled="True"
                       ItemsSource="{Binding AllPostalCodes}"
-                      Text="{Binding Item.Address.PostalCode, IsAsync=True}"
+                      Text="{Binding Item.PostalCode, IsAsync=True}"
                       Width="{StaticResource MidSmallWidth}"
                       parameters:FormParameters.Label="{x:Static entities:AddressResources.PostalCode}"
                       parameters:ComboBoxParameters.DropDownButtonVisible="False"
@@ -167,7 +167,7 @@
                     <ComboBox Grid.Column="2"
                       IsTextSearchEnabled="True"
                       ItemsSource="{Binding AllCitiesNames}"
-                      Text="{Binding Item.Address.City, IsAsync=True}"
+                      Text="{Binding Item.City, IsAsync=True}"
                       Width="{StaticResource SmallLargeWidth}"
                       parameters:FormParameters.Label="{x:Static entities:AddressResources.City}"
                       parameters:ComboBoxParameters.DropDownButtonVisible="False"

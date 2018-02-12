@@ -8,7 +8,7 @@ namespace My.CoachManager.Application.Dtos.Rosters
     /// Data Transfer Object for Player item.
     /// </summary>
     [DataContract]
-    public class SquadPlayerDto : PlayerDto
+    public class SquadPlayerDto : PlayerDetailsDto
     {
         /// <summary>
         /// Gets or sets the player's squad id.

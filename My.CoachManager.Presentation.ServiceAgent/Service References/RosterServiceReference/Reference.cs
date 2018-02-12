@@ -26,12 +26,6 @@ namespace My.CoachManager.Presentation.ServiceAgent.RosterServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/GetSquad", ReplyAction="http://tempuri.org/IRosterService/GetSquadResponse")]
         System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Rosters.SquadDto> GetSquadAsync(int squadId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/GetPlayer", ReplyAction="http://tempuri.org/IRosterService/GetPlayerResponse")]
-        My.CoachManager.Application.Dtos.Persons.PlayerDetailDto GetPlayer(int playerId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/GetPlayer", ReplyAction="http://tempuri.org/IRosterService/GetPlayerResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Persons.PlayerDetailDto> GetPlayerAsync(int playerId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -75,14 +69,6 @@ namespace My.CoachManager.Presentation.ServiceAgent.RosterServiceReference {
         
         public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Rosters.SquadDto> GetSquadAsync(int squadId) {
             return base.Channel.GetSquadAsync(squadId);
-        }
-        
-        public My.CoachManager.Application.Dtos.Persons.PlayerDetailDto GetPlayer(int playerId) {
-            return base.Channel.GetPlayer(playerId);
-        }
-        
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Persons.PlayerDetailDto> GetPlayerAsync(int playerId) {
-            return base.Channel.GetPlayerAsync(playerId);
         }
     }
 }

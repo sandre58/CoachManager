@@ -11,21 +11,17 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
         /// Get a player.
         /// </summary>
         /// <returns></returns>
-        public static PlayerDetailDto CreatePlayerDetailDto(Player player)
+        public static PlayerDetailsDto CreatePlayerDetailsDto(Player player)
         {
-            return new PlayerDetailDto()
+            return new PlayerDetailsDto()
             {
                 Id = player.Id,
                 FirstName = player.FirstName,
                 LastName = player.LastName,
-                Address = player.Address != null ? new AddressDto()
-                {
-                    Id = player.Address.Id,
-                    Row1 = player.Address.Row1,
-                    Row2 = player.Address.Row2,
-                    PostalCode = player.Address.PostalCode,
-                    City = player.Address.City,
-                } : null,
+                AddressId = player.AddressId,
+                Address = player.Address != null ? player.Address.Row1 : string.Empty,
+                PostalCode = player.Address != null ? player.Address.PostalCode : string.Empty,
+                City = player.Address != null ? player.Address.City : string.Empty,
                 Birthdate = player.Birthdate,
                 Gender = player.Gender,
                 LicenseNumber = player.LicenseNumber,
@@ -47,6 +43,52 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                     Code = player.Country.Code,
                     Flag = player.Country.Flag
                 } : null,
+                Emails = player.Contacts.OfType<Email>().Select(e => new EmailDto()
+                {
+                    Id = e.Id,
+                    Label = e.Label,
+                    Default = e.Default,
+                    Value = e.Value,
+                    PersonId = e.PersonId
+                }).AsEnumerable(),
+                Phones = player.Contacts.OfType<Phone>().Select(p => new PhoneDto()
+                {
+                    Id = p.Id,
+                    Label = p.Label,
+                    Default = p.Default,
+                    Value = p.Value,
+                    PersonId = p.PersonId
+                }).AsEnumerable(),
+                Height = player.Height,
+                Weight = player.Weight,
+                ShoesSize = player.ShoesSize,
+                Size = player.Size,
+            };
+        }
+
+        /// <summary>
+        /// Get a player.
+        /// </summary>
+        /// <returns></returns>
+        public static PlayerDto CreatePlayerDto(Player player)
+        {
+            return new PlayerDto()
+            {
+                Id = player.Id,
+                FirstName = player.FirstName,
+                LastName = player.LastName,
+                AddressId = player.AddressId,
+                Address = player.Address != null ? player.Address.Row1 : string.Empty,
+                PostalCode = player.Address != null ? player.Address.PostalCode : string.Empty,
+                City = player.Address != null ? player.Address.City : string.Empty,
+                Birthdate = player.Birthdate,
+                Gender = player.Gender,
+                LicenseNumber = player.LicenseNumber,
+                Photo = player.Photo,
+                PlaceOfBirth = player.PlaceOfBirth,
+                Laterality = player.Laterality,
+                CategoryId = player.CategoryId,
+                CountryId = player.CountryId,
                 Emails = player.Contacts.OfType<Email>().Select(e => new EmailDto()
                 {
                     Id = e.Id,

@@ -3,7 +3,7 @@ using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.Modules.Roster.Views;
 using My.CoachManager.Presentation.Prism.ViewModels;
 using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
-using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 {
@@ -11,7 +11,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
     {
         #region Fields
 
-        private readonly IRosterService _rosterService;
+        private readonly IPersonService _personService;
 
         #endregion Fields
 
@@ -20,9 +20,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="PlayerItemViewModel"/>.
         /// </summary>
-        public PlayerItemViewModel(IRosterService rosterService) : this()
+        public PlayerItemViewModel(IPersonService personService) : this()
         {
-            _rosterService = rosterService;
+            _personService = personService;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// <param name="id"></param>
         protected override PlayerDetailViewModel LoadItemCore(int id)
         {
-            return _rosterService.GetPlayer(id).ToViewModel<PlayerDetailViewModel>();
+            return _personService.GetPlayerDetails(id).ToViewModel<PlayerDetailViewModel>();
         }
 
         /// <summary>

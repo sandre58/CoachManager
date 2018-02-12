@@ -71,6 +71,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SqlGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AddressRepository.cs" />
     <Compile Include="Repositories\SquadRepository.cs" />
     <Compile Include="Repositories\RosterRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />

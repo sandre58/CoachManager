@@ -121,15 +121,37 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
             set { SetProperty(ref _addressId, value); }
         }
 
-        private AddressViewModel _address;
+        private string _address;
 
         /// <summary>
         /// Gets or sets the address.
         /// </summary>
-        public AddressViewModel Address
+        public string Address
         {
             get { return _address; }
             set { SetProperty(ref _address, value); }
+        }
+
+        private string _postalCode;
+
+        /// <summary>
+        /// Gets or sets the address.
+        /// </summary>
+        public string PostalCode
+        {
+            get { return _postalCode; }
+            set { SetProperty(ref _postalCode, value); }
+        }
+
+        private string _city;
+
+        /// <summary>
+        /// Gets or sets the address.
+        /// </summary>
+        public string City
+        {
+            get { return _city; }
+            set { SetProperty(ref _city, value); }
         }
 
         private string _licenseNumber;

@@ -29,9 +29,6 @@ namespace My.CoachManager.Application.Dtos.Persons
         public int? CountryId { get; set; }
 
         [DataMember]
-        public CountryDto Country { get; set; }
-
-        [DataMember]
         public byte[] Photo { get; set; }
 
         [DataMember]
@@ -41,7 +38,13 @@ namespace My.CoachManager.Application.Dtos.Persons
         public int? AddressId { get; set; }
 
         [DataMember]
-        public AddressDto Address { get; set; }
+        public string Address { get; set; }
+
+        [DataMember]
+        public string PostalCode { get; set; }
+
+        [DataMember]
+        public string City { get; set; }
 
         [DataMember]
         public string LicenseNumber { get; set; }

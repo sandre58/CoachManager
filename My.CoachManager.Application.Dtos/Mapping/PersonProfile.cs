@@ -10,29 +10,29 @@ namespace My.CoachManager.Application.Dtos.Mapping
         public PersonProfile()
         {
             // Persons
-            CreateMap<Player, PlayerDto>().ReverseMap();
-            CreateMap<Coach, CoachDto>().ReverseMap();
-            CreateMap<Person, PersonDto>()
-                .ForMember(x => x.Emails, opt => opt.MapFrom(x => x.Contacts.OfType<Email>().ToList()))
-                .ForMember(x => x.Phones, opt => opt.MapFrom(x => x.Contacts.OfType<Phone>().ToList()))
-                .Include<Player, PlayerDto>()
-                .Include<Coach, CoachDto>()
-                .ReverseMap()
-                .ForMember(x => x.Contacts, opt => opt.MapFrom(x => x.Emails.ToList().Cast<ContactDto>().Union(x.Phones.ToList())));
+            CreateMap<PlayerDto, Player>().ReverseMap();
+            CreateMap<CoachDto, Coach>().ReverseMap();
+            CreateMap<PersonDto, Person>()
+                .Include<PlayerDto, Player>()
+                .Include<CoachDto, Coach>()
+                .ForMember(x => x.Contacts, opt => opt.MapFrom(x => x.Emails.ToList().Cast<ContactDto>().Union(x.Phones.ToList())))
+                .ForMember(x => x.Address, opt => opt.Ignore())
+;
 
             // Contacts
-            CreateMap<Email, EmailDto>().ReverseMap();
-            CreateMap<Phone, PhoneDto>().ReverseMap();
-            CreateMap<Contact, ContactDto>()
-                .Include<Email, EmailDto>()
-                .Include<Phone, PhoneDto>().ReverseMap();
+            CreateMap<EmailDto, Email>().ReverseMap();
+            CreateMap<PhoneDto, Phone>().ReverseMap();
+            CreateMap<ContactDto, Contact>()
+                .Include<EmailDto, Email>()
+                .Include<PhoneDto, Phone>()
+                .ReverseMap();
 
             // Foreign properties
-            CreateMap<PlayerPosition, PlayerPositionDto>().ReverseMap();
+            CreateMap<PlayerPositionDto, PlayerPosition>().ReverseMap();
 
             // Misc
-            CreateMap<Country, CountryDto>().ReverseMap();
-            CreateMap<Address, AddressDto>().ReverseMap();
+            CreateMap<CountryDto, Country>().ReverseMap();
+            CreateMap<AddressDto, Address>().ReverseMap();
         }
     }
 }

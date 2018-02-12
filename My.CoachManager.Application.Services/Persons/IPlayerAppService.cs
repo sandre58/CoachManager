@@ -14,7 +14,13 @@ namespace My.CoachManager.Application.Services.Persons
         /// Get a player.
         /// </summary>
         /// <returns></returns>
-        PlayerDetailDto GetPlayer(int playerId);
+        PlayerDetailsDto GetPlayerDetails(int playerId);
+
+        /// <summary>
+        /// Get a player.
+        /// </summary>
+        /// <returns></returns>
+        PlayerDto GetPlayer(int playerId);
 
         /// <summary>
         /// Create a dto.

@@ -32,14 +32,9 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
                 Id = x.Player.Id,
                 FirstName = x.Player.FirstName,
                 LastName = x.Player.LastName,
-                Address = x.Player.Address != null ? new AddressDto()
-                {
-                    Id = x.Player.Address.Id,
-                    Row1 = x.Player.Address.Row1,
-                    Row2 = x.Player.Address.Row2,
-                    PostalCode = x.Player.Address.PostalCode,
-                    City = x.Player.Address.City,
-                } : null,
+                Address = x.Player.Address != null ? x.Player.Address.Row1 : string.Empty,
+                PostalCode = x.Player.Address != null ? x.Player.Address.PostalCode : string.Empty,
+                City = x.Player.Address != null ? x.Player.Address.City : string.Empty,
                 Birthdate = x.Player.Birthdate,
                 Gender = x.Player.Gender,
                 LicenseNumber = x.Player.LicenseNumber,

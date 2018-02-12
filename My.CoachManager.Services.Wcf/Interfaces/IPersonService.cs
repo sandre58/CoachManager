@@ -17,7 +17,14 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// </summary>
         /// <returns></returns>>
         [OperationContract]
-        PlayerDetailDto GetPlayer(int playerId);
+        PlayerDetailsDto GetPlayerDetails(int playerId);
+
+        /// <summary>
+        /// Get a player.
+        /// </summary>
+        /// <returns></returns>>
+        [OperationContract]
+        PlayerDto GetPlayer(int playerId);
 
         /// <summary>
         /// Create a dto.

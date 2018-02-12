@@ -222,7 +222,7 @@
     <Compile Include="Mapping\UserProfile.cs" />
     <Compile Include="Persons\ContactDto.cs" />
     <Compile Include="Persons\CityDto.cs" />
-    <Compile Include="Persons\PlayerDetailDto.cs" />
+    <Compile Include="Persons\PlayerDetailsDto.cs" />
     <Compile Include="Persons\PlayerPositionDto.cs" />
     <Compile Include="Persons\EmailDto.cs" />
     <Compile Include="Persons\PersonDto.cs" />

@@ -10,7 +10,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels.Mapping
             // Persons
             CreateMap<PlayerDto, PlayerViewModel>().ReverseMap();
             CreateMap<CoachDto, CoachViewModel>().ReverseMap();
-            CreateMap<PlayerDetailDto, PlayerDetailViewModel>().ReverseMap();
+            CreateMap<PlayerDetailsDto, PlayerDetailViewModel>().ReverseMap();
 
             // Contacts
             CreateMap<EmailDto, EmailViewModel>().ReverseMap();

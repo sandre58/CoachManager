@@ -161,6 +161,8 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Addresses\AddressAppService.cs" />
+    <Compile Include="Addresses\IAddressAppService.cs" />
     <Compile Include="Persons\CountryAppService.cs" />
     <Compile Include="Persons\ICountryAppService.cs" />
     <Compile Include="Positions\IPositionAppService.cs" />

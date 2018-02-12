@@ -150,6 +150,7 @@
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Persons.CityDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Persons.CountryDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Persons.PlayerDetailDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Persons.PlayerDetailsDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Persons.PlayerDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.CityDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.PlayerDto.datasource" />
@@ -194,6 +195,9 @@
     <None Include="Service References\PersonServiceReference\PersonService5.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\PersonServiceReference\PersonService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\PositionServiceReference\PositionService.wsdl" />
     <None Include="Service References\PositionServiceReference\PositionService.xsd">
       <SubType>Designer</SubType>
@@ -230,6 +234,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\RosterServiceReference\RosterService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\RosterServiceReference\RosterService7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\RosterServiceReference\RosterService71.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SeasonServiceReference\SeasonService.wsdl" />

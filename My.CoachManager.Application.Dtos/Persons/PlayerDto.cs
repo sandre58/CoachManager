@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using My.CoachManager.Application.Dtos.Categories;
 using My.CoachManager.CrossCutting.Core.Enums;
 
 namespace My.CoachManager.Application.Dtos.Persons
@@ -13,9 +12,6 @@ namespace My.CoachManager.Application.Dtos.Persons
     {
         [DataMember]
         public int? CategoryId { get; set; }
-
-        [DataMember]
-        public CategoryDto Category { get; set; }
 
         [DataMember]
         public Laterality Laterality { get; set; }

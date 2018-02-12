@@ -23,6 +23,7 @@
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="PersonService.xsd" MetadataType="Schema" ID="8fc79334-214b-4665-a6bd-8560303f894a" SourceId="1" SourceUrl="http://localhost:62863/Services/PersonService.svc?xsd=xsd3" />
+    <MetadataFile FileName="PersonService6.xsd" MetadataType="Schema" ID="e160bc82-befd-460b-a7a7-3749de2148a7" SourceId="1" SourceUrl="http://localhost:62863/Services/PersonService.svc?xsd=xsd6" />
     <MetadataFile FileName="PersonService1.xsd" MetadataType="Schema" ID="590886a0-e71e-4bc7-a167-6f5648ea748c" SourceId="1" SourceUrl="http://localhost:62863/Services/PersonService.svc?xsd=xsd5" />
     <MetadataFile FileName="PersonService2.xsd" MetadataType="Schema" ID="40a01420-99f7-4442-b25d-f13ee7d79cff" SourceId="1" SourceUrl="http://localhost:62863/Services/PersonService.svc?xsd=xsd4" />
     <MetadataFile FileName="PersonService.wsdl" MetadataType="Wsdl" ID="101698b3-6a3d-457c-aa8b-f20164543906" SourceId="1" SourceUrl="http://localhost:62863/Services/PersonService.svc?wsdl" />
