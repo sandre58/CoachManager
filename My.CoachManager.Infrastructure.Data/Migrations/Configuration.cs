@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
-using My.CoachManager.Domain.Entities;
-using My.CoachManager.Infrastructure.Data.UnitOfWorks;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Extensions;
+using My.CoachManager.Infrastructure.Data.UnitOfWorks;
+using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Infrastructure.Data.Migrations
 {
+    /// <summary>
+    /// Database Configuration.
+    /// </summary>
     internal sealed class Configuration : DbMigrationsConfiguration<DataContext>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Configuration"/> class.
+        /// </summary>
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
@@ -18,211 +24,26 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
             SetSqlGenerator("System.Data.SqlClient", new DefaultValueSqlServerMigrationSqlGenerator());
         }
 
+        /// <summary>
+        /// Update Data when Database-Update Command is launched on Package Manager Console.
+        /// </summary>
+        /// <param name="context">The Absolu context.</param>
         protected override void Seed(DataContext context)
         {
-            AddCategories(context);
-            AddCountries(context);
-            AddPositions(context);
-            AddSeasons(context);
+            SeedCategories(context);
+            SeedCountries(context);
+            SeedPositions(context);
+            SeedSeasons(context);
 
-            AddTestData(context);
+            SeedPlayersAndRosters(context);
+            SeedUsersAndPermissions(context);
         }
 
-        private void AddTestData(DataContext context)
-        {
-            var player1 = new Player()
-            {
-                CategoryId = 13,
-                Birthdate = new DateTime(1989, 12, 5),
-                CountryId = 76,
-                FirstName = "Stéphane",
-                Gender = GenderType.Female,
-                LastName = "André",
-                Laterality = Laterality.LeftHander,
-                PlaceOfBirth = "Nevers",
-                ShoesSize = 44,
-                Size = "L",
-                Height = 175,
-                Weight = 75
-            };
-
-            var player2 = new Player()
-            {
-                CategoryId = 3,
-                Birthdate = new DateTime(1986, 12, 4),
-                Address = new Address()
-                {
-                    Id = 2,
-                    Row1 = "Impasse du Babory",
-                    PostalCode = "63270",
-                    City = "Vic le comte"
-                },
-                AddressId = 2,
-                CountryId = 76,
-                FirstName = "Vincent",
-                Gender = GenderType.Male,
-                LastName = "Sourdeix",
-                Laterality = Laterality.RightHander,
-                PlaceOfBirth = "Tulle",
-                ShoesSize = 42,
-                Size = "L",
-                LicenseNumber = "123456789"
-            };
-
-            // Contacts
-            var contacts = new List<Contact>
-            {
-                new Email
-                {
-                    Label = "Test",
-                    Default = true,
-                    Value = "andre.cs2i@gmail.com"
-                },
-                new Email
-                {
-                    Label = "Test2",
-                    Default = false,
-                    Value = "vincentsourdeix@gmail.com"
-                },
-                new Phone
-                {
-                    Label = "Test",
-                    Default = true,
-                    Value = "0664411391"
-                }
-            };
-
-            var contacts2 = new List<Contact>
-            {
-                new Email
-                {
-                    Label = "Principale",
-                    Default = true,
-                    Value = "visourdeix@gmail.com"
-                },
-                new Email
-                {
-                    Label = "Pub",
-                    Default = false,
-                    Value = "vincentsourdeix@gmail.com"
-                },
-                new Phone
-                {
-                    Label = "Portable",
-                    Default = true,
-                    Value = "0679189256"
-                }
-            };
-
-            player1.Contacts.AddRange(contacts);
-            player2.Contacts.AddRange(contacts2);
-
-            context.Players.AddOrUpdate(x => x.LastName, player1);
-            context.Players.AddOrUpdate(x => x.LastName, player2);
-
-            context.Commit();
-
-            // Rosters
-            var roster = new Roster()
-            {
-                Id = 1,
-                Name = "U15 2017/2018",
-                CategoryId = 7,
-                SeasonId = 1
-            };
-
-            var squad1 = new Squad()
-            {
-                Id = 1,
-                Name = "Equipe A"
-            };
-
-            var squad2 = new Squad()
-            {
-                Id = 2,
-                Name = "Equipe B"
-            };
-
-            roster.Players.Add(new RosterPlayer()
-            {
-                LicenseState = LicenseState.Back,
-                Number = 12,
-                IsMutation = true,
-                PlayerId = player1.Id,
-                RosterId = 1,
-                SquadId = 1,
-            });
-            roster.Players.Add(new RosterPlayer()
-            {
-                LicenseState = LicenseState.Given,
-                Number = 9,
-                PlayerId = player2.Id,
-                RosterId = 1,
-                SquadId = 2,
-            });
-
-            for (int i = 1; i <= 15; i++)
-            {
-                var player = new Player()
-                {
-                    Id = i + 10,
-                    CategoryId = i,
-                    Birthdate = new DateTime(1986, 12, i),
-                    CountryId = 76,
-                    FirstName = "FirstName" + i,
-                    Gender = GenderType.Male,
-                    LastName = "LastName" + i,
-                    Laterality = Laterality.RightHander,
-                    ShoesSize = 30 + i,
-                    Size = "L",
-                    LicenseNumber = "000000000"
-                };
-                context.Players.AddOrUpdate(x => x.LastName, player);
-
-                roster.Players.Add(new RosterPlayer()
-                {
-                    LicenseState = LicenseState.Given,
-                    Number = i,
-                    PlayerId = player.Id,
-                    RosterId = 1,
-                    SquadId = 1,
-                });
-            }
-
-            roster.Squads.Add(squad1);
-            roster.Squads.Add(squad2);
-            context.Rosters.AddOrUpdate(x => x.Id, roster);
-            context.Commit();
-
-            // User and permissions
-            var perm1 = new Permission() { Id = 1, Code = PermissionConstants.ChangeUser, Label = "Changer d'utilisateur", Description = "Permet de se connecter à l'aplication en tant qu'un autre utilisateur." };
-            var perm2 = new Permission() { Id = 2, Code = PermissionConstants.AccessAdmin, Label = "Accès à l'administration", Description = "Permet d'accèder à tout le module d'administration." };
-            var role1 = new Role() { Id = 1, Code = RoleConstants.Admin, Label = "Administrateur", Description = "Rôle permettant de gérer toutes les données utilisées dan l''application." };
-
-            var user1 = new User() { Id = 1, Name = "Stéphane ANDRE (Home)", Login = "andre", Password = "qRBfE9MoPFs=", Mail = "andre.cs2i@gmail.com", RosterId = 1 };
-            var user2 = new User() { Id = 2, Name = "Stéphane ANDRE (Merial)", Login = "E0214719", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@merial.com", RosterId = 1 };
-            var user3 = new User() { Id = 3, Name = "Vincent SOURDEIX (BI)", Login = "E0268620", Password = "qRBfE9MoPFs=", Mail = "vincentsourdeix@test.fr", RosterId = 1 };
-
-            role1.Permissions.Add(perm1);
-            role1.Permissions.Add(perm2);
-            user1.Roles.Add(role1);
-            user2.Roles.Add(role1);
-            user3.Roles.Add(role1);
-
-            context.Permissions.AddOrUpdate(r => r.Label, perm1);
-            context.Permissions.AddOrUpdate(r => r.Label, perm2);
-            context.Commit();
-
-            context.Roles.AddOrUpdate(r => r.Label, role1);
-            context.Commit();
-
-            context.Users.AddOrUpdate(u => u.Name, user1);
-            context.Users.AddOrUpdate(u => u.Name, user2);
-            context.Users.AddOrUpdate(u => u.Name, user3);
-            context.Commit();
-        }
-
-        private void AddCategories(DataContext context)
+        /// <summary>
+        /// Seeds categories.
+        /// </summary>
+        /// <param name="context">The data context.</param>
+        private void SeedCategories(DataContext context)
         {
             context.Categories.AddOrUpdate(c => c.Label, new Category() { Label = "Séniors", Code = "S", Year = 1998, Order = 1 });
             context.Categories.AddOrUpdate(c => c.Label, new Category() { Label = "Vétérans", Code = "V", Year = 1982, Order = 2 });
@@ -240,7 +61,11 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
             context.Commit();
         }
 
-        private void AddPositions(DataContext context)
+        /// <summary>
+        /// Seeds positions.
+        /// </summary>
+        /// <param name="context">The data context.</param>
+        private void SeedPositions(DataContext context)
         {
             context.Positions.AddOrUpdate(s => s.Code, new Position() { Label = "Gardien", Code = "GB", Order = 1, Row = 1, Column = 3 });
 
@@ -274,13 +99,21 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
             context.Commit();
         }
 
-        private void AddSeasons(DataContext context)
+        /// <summary>
+        /// Seeds seasons.
+        /// </summary>
+        /// <param name="context">The data context.</param>
+        private void SeedSeasons(DataContext context)
         {
             context.Seasons.AddOrUpdate(s => s.Label, new Season() { Label = "2017/2018", Code = "17/18", Order = 1, StartDate = new DateTime(2017, 08, 01), EndDate = new DateTime(2018, 07, 31) });
             context.Commit();
         }
 
-        private void AddCountries(DataContext context)
+        /// <summary>
+        /// Seeds countries.
+        /// </summary>
+        /// <param name="context">The data context.</param>
+        private void SeedCountries(DataContext context)
         {
             context.Countries.AddOrUpdate(c => c.Label, new Country() { Label = "Afghanistan", Code = "afg", Flag = "af.png" });
             context.Countries.AddOrUpdate(c => c.Label, new Country() { Label = "Aland Islands", Code = "ala", Flag = "ax.png" });
@@ -532,6 +365,215 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
             context.Countries.AddOrUpdate(c => c.Label, new Country() { Label = "Zambia", Code = "zmb", Flag = "zm.png" });
             context.Countries.AddOrUpdate(c => c.Label, new Country() { Label = "Zimbabwe", Code = "zwe", Flag = "zw.png" });
 
+            context.Commit();
+        }
+
+        /// <summary>
+        /// Seeds players.
+        /// </summary>
+        /// <param name="context">The data context.</param>
+        private void SeedPlayersAndRosters(DataContext context)
+        {
+            var player1 = new Player()
+            {
+                CategoryId = 13,
+                Birthdate = new DateTime(1989, 12, 5),
+                CountryId = 76,
+                FirstName = "Stéphane",
+                Gender = GenderType.Female,
+                LastName = "André",
+                Laterality = Laterality.LeftHander,
+                PlaceOfBirth = "Nevers",
+                ShoesSize = 44,
+                Size = "L",
+                Height = 175,
+                Weight = 75
+            };
+
+            var player2 = new Player()
+            {
+                CategoryId = 3,
+                Birthdate = new DateTime(1986, 12, 4),
+                Address = new Address()
+                {
+                    Id = 2,
+                    Row1 = "Impasse du Babory",
+                    PostalCode = "63270",
+                    City = "Vic le comte"
+                },
+                AddressId = 2,
+                CountryId = 76,
+                FirstName = "Vincent",
+                Gender = GenderType.Male,
+                LastName = "Sourdeix",
+                Laterality = Laterality.RightHander,
+                PlaceOfBirth = "Tulle",
+                ShoesSize = 42,
+                Size = "L",
+                LicenseNumber = "123456789"
+            };
+
+            // Contacts
+            var contacts = new List<Contact>
+            {
+                new Email
+                {
+                    Label = "Test",
+                    Default = true,
+                    Value = "andre.cs2i@gmail.com"
+                },
+                new Email
+                {
+                    Label = "Test2",
+                    Default = false,
+                    Value = "vincentsourdeix@gmail.com"
+                },
+                new Phone
+                {
+                    Label = "Test",
+                    Default = true,
+                    Value = "0664411391"
+                }
+            };
+
+            var contacts2 = new List<Contact>
+            {
+                new Email
+                {
+                    Label = "Principale",
+                    Default = true,
+                    Value = "visourdeix@gmail.com"
+                },
+                new Email
+                {
+                    Label = "Pub",
+                    Default = false,
+                    Value = "vincentsourdeix@gmail.com"
+                },
+                new Phone
+                {
+                    Label = "Portable",
+                    Default = true,
+                    Value = "0679189256"
+                }
+            };
+
+            player1.Contacts.AddRange(contacts);
+            player2.Contacts.AddRange(contacts2);
+
+            context.Players.AddOrUpdate(x => x.LastName, player1);
+            context.Players.AddOrUpdate(x => x.LastName, player2);
+
+            context.Commit();
+
+            // Rosters
+            var roster = new Roster()
+            {
+                Id = 1,
+                Name = "U15 2017/2018",
+                CategoryId = 7,
+                SeasonId = 1
+            };
+
+            var squad1 = new Squad()
+            {
+                Id = 1,
+                Name = "Equipe A"
+            };
+
+            var squad2 = new Squad()
+            {
+                Id = 2,
+                Name = "Equipe B"
+            };
+
+            roster.Players.Add(new RosterPlayer()
+            {
+                LicenseState = LicenseState.Back,
+                Number = 12,
+                IsMutation = true,
+                PlayerId = player1.Id,
+                RosterId = 1,
+                SquadId = 1,
+            });
+            roster.Players.Add(new RosterPlayer()
+            {
+                LicenseState = LicenseState.Given,
+                Number = 9,
+                PlayerId = player2.Id,
+                RosterId = 1,
+                SquadId = 2,
+            });
+
+            for (int i = 1; i <= 15; i++)
+            {
+                var player = new Player()
+                {
+                    Id = i + 10,
+                    CategoryId = i,
+                    Birthdate = new DateTime(1986, 12, i),
+                    CountryId = 76,
+                    FirstName = "FirstName" + i,
+                    Gender = GenderType.Male,
+                    LastName = "LastName" + i,
+                    Laterality = Laterality.RightHander,
+                    ShoesSize = 30 + i,
+                    Size = "L",
+                    LicenseNumber = "000000000"
+                };
+                context.Players.AddOrUpdate(x => x.LastName, player);
+
+                roster.Players.Add(new RosterPlayer()
+                {
+                    LicenseState = LicenseState.Given,
+                    Number = i,
+                    PlayerId = player.Id,
+                    RosterId = 1,
+                    SquadId = 1,
+                });
+            }
+
+            roster.Squads.Add(squad1);
+            roster.Squads.Add(squad2);
+            context.Rosters.AddOrUpdate(x => x.Id, roster);
+            context.Commit();
+        }
+
+        /// <summary>
+        /// Seeds users and permissions.
+        /// </summary>
+        /// <param name="context">The data context.</param>
+        private void SeedUsersAndPermissions(DataContext context)
+        {
+
+            // User and permissions
+            var perm1 = new Permission() { Id = 1, Code = PermissionConstants.ChangeUser, Label = "Changer d'utilisateur", Description = "Permet de se connecter à l'aplication en tant qu'un autre utilisateur." };
+            var perm2 = new Permission() { Id = 2, Code = PermissionConstants.AccessAdmin, Label = "Accès à l'administration", Description = "Permet d'accèder à tout le module d'administration." };
+            var role1 = new Role() { Id = 1, Code = RoleConstants.Admin, Label = "Administrateur", Description = "Rôle permettant de gérer toutes les données utilisées dan l''application." };
+
+            var user1 = new User() { Id = 1, Name = "Stéphane ANDRE (Home)", Login = "andre", Password = "qRBfE9MoPFs=", Mail = "andre.cs2i@gmail.com", RosterId = 1 };
+            var user2 = new User() { Id = 2, Name = "Stéphane ANDRE (Merial)", Login = "E0214719", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@merial.com", RosterId = 1 };
+            var user3 = new User() { Id = 3, Name = "Vincent SOURDEIX (BI)", Login = "E0268620", Password = "qRBfE9MoPFs=", Mail = "vincentsourdeix@test.fr", RosterId = 1 };
+            var user4 = new User() { Id = 3, Name = "Stéphane ANDRE (Modis)", Login = "stephane.andre", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@modis.com", RosterId = 1 };
+
+            role1.Permissions.Add(perm1);
+            role1.Permissions.Add(perm2);
+            user1.Roles.Add(role1);
+            user2.Roles.Add(role1);
+            user3.Roles.Add(role1);
+            user4.Roles.Add(role1);
+
+            context.Permissions.AddOrUpdate(r => r.Label, perm1);
+            context.Permissions.AddOrUpdate(r => r.Label, perm2);
+            context.Commit();
+
+            context.Roles.AddOrUpdate(r => r.Label, role1);
+            context.Commit();
+
+            context.Users.AddOrUpdate(u => u.Name, user1);
+            context.Users.AddOrUpdate(u => u.Name, user2);
+            context.Users.AddOrUpdate(u => u.Name, user3);
+            context.Users.AddOrUpdate(u => u.Name, user4);
             context.Commit();
         }
     }

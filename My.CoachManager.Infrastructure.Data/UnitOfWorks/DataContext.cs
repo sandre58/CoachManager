@@ -4,6 +4,7 @@ using System.Data.Entity.Core.Objects.DataClasses;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq.Expressions;
 using System.Reflection;
+using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Domain.Entities;
 
@@ -26,37 +27,37 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
     /// <summary>
     /// Database Context for Entity Framework 6.0
     /// </summary>
-    public class DataContext : DbContext, IDataContext
+    public class DataContext : DbContext, IQueryableUnitOfWork
     {
         #region Properties
 
-        public virtual DbSet<Address> Adresses { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Club> Clubs { get; set; }
-        public virtual DbSet<Coach> Coachs { get; set; }
-        public virtual DbSet<Contact> Contacts { get; set; }
-        public virtual DbSet<Country> Countries { get; set; }
-        public virtual DbSet<Function> Functions { get; set; }
-        public virtual DbSet<Permission> Permissions { get; set; }
-        public virtual DbSet<Person> Persons { get; set; }
-        public virtual DbSet<Player> Players { get; set; }
-        public virtual DbSet<PlayerPosition> PlayerPositions { get; set; }
-        public virtual DbSet<Position> Positions { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Roster> Rosters { get; set; }
-        public virtual DbSet<RosterPlayer> RosterPlayers { get; set; }
-        public virtual DbSet<RosterCoach> RosterCoachs { get; set; }
-        public virtual DbSet<Season> Seasons { get; set; }
-        public virtual DbSet<Squad> Squads { get; set; }
-        public virtual DbSet<Team> Teams { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        public virtual IDbSet<Address> Adresses { get; set; }
+        public virtual IDbSet<Category> Categories { get; set; }
+        public virtual IDbSet<Club> Clubs { get; set; }
+        public virtual IDbSet<Coach> Coachs { get; set; }
+        public virtual IDbSet<Contact> Contacts { get; set; }
+        public virtual IDbSet<Country> Countries { get; set; }
+        public virtual IDbSet<Function> Functions { get; set; }
+        public virtual IDbSet<Permission> Permissions { get; set; }
+        public virtual IDbSet<Person> Persons { get; set; }
+        public virtual IDbSet<Player> Players { get; set; }
+        public virtual IDbSet<PlayerPosition> PlayerPositions { get; set; }
+        public virtual IDbSet<Position> Positions { get; set; }
+        public virtual IDbSet<Role> Roles { get; set; }
+        public virtual IDbSet<Roster> Rosters { get; set; }
+        public virtual IDbSet<RosterPlayer> RosterPlayers { get; set; }
+        public virtual IDbSet<RosterCoach> RosterCoachs { get; set; }
+        public virtual IDbSet<Season> Seasons { get; set; }
+        public virtual IDbSet<Squad> Squads { get; set; }
+        public virtual IDbSet<Team> Teams { get; set; }
+        public virtual IDbSet<User> Users { get; set; }
 
         #endregion Properties
 
         public DataContext()
             : base("name=CoachManager")
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<DataContext, Migrations.Configuration>("CoachManager"));
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<DataContext, Migrations.Configuration>("CoachManager"));
 
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
@@ -136,22 +137,6 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 RollbackChanges();
                 throw;
             }
-        }
-
-        /// <summary>
-        /// Locks the specified entity.
-        /// </summary>
-        /// <typeparam name="TEntity">The type of the entity.</typeparam>
-        /// <param name="entity">The entity.</param>
-        public void Lock<TEntity>(TEntity entity)
-            where TEntity : class
-        {
-            var context = this as IQueryableUnitOfWork;
-
-            var tableName = context.GetTableName<TEntity>();
-            var primarykeyName = String.Concat(tableName.Split('_')[1].ToLower(), "_id");
-
-            context.ExecuteCommand(String.Format("SELECT * FROM {0} WITH (ROWLOCK) WHERE {1}={2};", tableName, primarykeyName, ((IEntity)entity).Id));
         }
 
         #endregion ----- Overrides Methods -----
@@ -245,27 +230,33 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         }
 
         /// <summary>
-        /// <see cref="IQueryableUnitOfWork.ApplyCurrentValues{TEntity}(TEntity, TEntity)"/>
+        /// Set Object as Modified.
         /// </summary>
-        /// <typeparam name="TEntity"><see cref="IQueryableUnitOfWork.ApplyCurrentValues{TEntity}(TEntity, TEntity)"/></typeparam>
-        /// <param name="original"><see cref="IQueryableUnitOfWork.ApplyCurrentValues{TEntity}(TEntity, TEntity)"/></param>
-        /// <param name="current"><see cref="IQueryableUnitOfWork.ApplyCurrentValues{TEntity}(TEntity, TEntity)"/></param>
-        public void ApplyCurrentValues<TEntity>(TEntity original, TEntity current)
+        /// <typeparam name="TEntity">Type of the entity.</typeparam>
+        /// <param name="item">Item to set modified in context.</param>
+        public void SetModified<TEntity>(TEntity item)
             where TEntity : class
         {
-            Entry(original).CurrentValues.SetValues(current);
+            if (Entry(item).State != EntityState.Modified)
+            {
+                Entry(item).State = EntityState.Modified;
+            }
         }
 
         /// <summary>
-        /// Gets the state of the entity object.
+        /// Locks the specified entity.
         /// </summary>
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
-        /// <param name="item">The item.</param>
-        /// <returns>The state of the entity object.</returns>
-        public EntityState GetObjectStateEntry<TEntity>(TEntity item)
+        /// <param name="entity">The entity.</param>
+        public void Lock<TEntity>(TEntity entity)
             where TEntity : class
         {
-            return Entry(item).State;
+            var context = this as IQueryableUnitOfWork;
+
+            var tableName = context.GetTableName<TEntity>();
+            var primarykeyName = String.Concat(tableName.Split('_')[1].ToLower(), "_id");
+
+            context.ExecuteCommand(String.Format("SELECT * FROM {0} WITH (ROWLOCK) WHERE {1}={2};", tableName, primarykeyName, ((IEntity)entity).Id));
         }
 
         #endregion ----- IQueryableUnitOfWork Methods -----
@@ -301,7 +292,15 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 auditable.Entity.ModifiedDate = now;
             }
 
-            SaveChanges();
+            try
+            {
+                SaveChanges();
+            }
+            catch (DbUpdateException exception)
+            {
+                ServiceLocator.Current.TryResolve<ILogger>().Error(exception);
+                throw;
+            }
         }
 
         /// <summary>

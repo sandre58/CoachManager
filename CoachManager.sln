@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Infrastructure", "5 - Infrastructure", "{457CAA75-84B5-4A2F-811D-86234A78617A}"
 EndProject
@@ -114,6 +114,7 @@ Global
 		Debug - BI|Any CPU = Debug - BI|Any CPU
 		Debug - Home|Any CPU = Debug - Home|Any CPU
 		Debug - Merial|Any CPU = Debug - Merial|Any CPU
+		Debug - Modis|Any CPU = Debug - Modis|Any CPU
 		Debug - Vincent|Any CPU = Debug - Vincent|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -125,30 +126,75 @@ Global
 		{181CD06D-74F2-4EC1-8F2D-1633E54DAD6F}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
 		{181CD06D-74F2-4EC1-8F2D-1633E54DAD6F}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
 		{181CD06D-74F2-4EC1-8F2D-1633E54DAD6F}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{181CD06D-74F2-4EC1-8F2D-1633E54DAD6F}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{181CD06D-74F2-4EC1-8F2D-1633E54DAD6F}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{181CD06D-74F2-4EC1-8F2D-1633E54DAD6F}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Vincent|Any CPU
 		{181CD06D-74F2-4EC1-8F2D-1633E54DAD6F}.Debug - Vincent|Any CPU.Build.0 = Debug - Vincent|Any CPU
 		{181CD06D-74F2-4EC1-8F2D-1633E54DAD6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{181CD06D-74F2-4EC1-8F2D-1633E54DAD6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{181CD06D-74F2-4EC1-8F2D-1633E54DAD6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{181CD06D-74F2-4EC1-8F2D-1633E54DAD6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD1BE4C7-0CFB-4FE2-85C9-AD8A63B2CCA4}.Debug - BI|Any CPU.ActiveCfg = Debug - Merial|Any CPU
+		{CD1BE4C7-0CFB-4FE2-85C9-AD8A63B2CCA4}.Debug - BI|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{CD1BE4C7-0CFB-4FE2-85C9-AD8A63B2CCA4}.Debug - Home|Any CPU.ActiveCfg = Debug - Home|Any CPU
+		{CD1BE4C7-0CFB-4FE2-85C9-AD8A63B2CCA4}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
+		{CD1BE4C7-0CFB-4FE2-85C9-AD8A63B2CCA4}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
+		{CD1BE4C7-0CFB-4FE2-85C9-AD8A63B2CCA4}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{CD1BE4C7-0CFB-4FE2-85C9-AD8A63B2CCA4}.Debug - Modis|Any CPU.ActiveCfg = Debug - Merial|Any CPU
+		{CD1BE4C7-0CFB-4FE2-85C9-AD8A63B2CCA4}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Merial|Any CPU
+		{CD1BE4C7-0CFB-4FE2-85C9-AD8A63B2CCA4}.Debug - Vincent|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{CD1BE4C7-0CFB-4FE2-85C9-AD8A63B2CCA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD1BE4C7-0CFB-4FE2-85C9-AD8A63B2CCA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD1BE4C7-0CFB-4FE2-85C9-AD8A63B2CCA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD1BE4C7-0CFB-4FE2-85C9-AD8A63B2CCA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{137BC5A7-D929-4DB8-B1EB-4EF04AB64BBC}.Debug - BI|Any CPU.ActiveCfg = Debug - Merial|Any CPU
+		{137BC5A7-D929-4DB8-B1EB-4EF04AB64BBC}.Debug - BI|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{137BC5A7-D929-4DB8-B1EB-4EF04AB64BBC}.Debug - Home|Any CPU.ActiveCfg = Debug - Home|Any CPU
+		{137BC5A7-D929-4DB8-B1EB-4EF04AB64BBC}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
+		{137BC5A7-D929-4DB8-B1EB-4EF04AB64BBC}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
+		{137BC5A7-D929-4DB8-B1EB-4EF04AB64BBC}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{137BC5A7-D929-4DB8-B1EB-4EF04AB64BBC}.Debug - Modis|Any CPU.ActiveCfg = Debug - Merial|Any CPU
+		{137BC5A7-D929-4DB8-B1EB-4EF04AB64BBC}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Merial|Any CPU
+		{137BC5A7-D929-4DB8-B1EB-4EF04AB64BBC}.Debug - Vincent|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{137BC5A7-D929-4DB8-B1EB-4EF04AB64BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{137BC5A7-D929-4DB8-B1EB-4EF04AB64BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{137BC5A7-D929-4DB8-B1EB-4EF04AB64BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{137BC5A7-D929-4DB8-B1EB-4EF04AB64BBC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}.Debug - BI|Any CPU.ActiveCfg = Debug - BI|Any CPU
 		{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}.Debug - BI|Any CPU.Build.0 = Debug - BI|Any CPU
 		{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}.Debug - Home|Any CPU.ActiveCfg = Debug - Home|Any CPU
 		{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
 		{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
 		{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Vincent|Any CPU
 		{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}.Debug - Vincent|Any CPU.Build.0 = Debug - Vincent|Any CPU
 		{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C19716D-DAE8-459C-A3DA-7C245E688404}.Debug - BI|Any CPU.ActiveCfg = Debug - Merial|Any CPU
+		{8C19716D-DAE8-459C-A3DA-7C245E688404}.Debug - BI|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{8C19716D-DAE8-459C-A3DA-7C245E688404}.Debug - Home|Any CPU.ActiveCfg = Debug - Home|Any CPU
+		{8C19716D-DAE8-459C-A3DA-7C245E688404}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
+		{8C19716D-DAE8-459C-A3DA-7C245E688404}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
+		{8C19716D-DAE8-459C-A3DA-7C245E688404}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{8C19716D-DAE8-459C-A3DA-7C245E688404}.Debug - Modis|Any CPU.ActiveCfg = Debug - Merial|Any CPU
+		{8C19716D-DAE8-459C-A3DA-7C245E688404}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Merial|Any CPU
+		{8C19716D-DAE8-459C-A3DA-7C245E688404}.Debug - Vincent|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{8C19716D-DAE8-459C-A3DA-7C245E688404}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C19716D-DAE8-459C-A3DA-7C245E688404}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C19716D-DAE8-459C-A3DA-7C245E688404}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C19716D-DAE8-459C-A3DA-7C245E688404}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E9776F93-3C59-4DAE-BB28-DCEFE01678D4}.Debug - BI|Any CPU.ActiveCfg = Debug - BI|Any CPU
 		{E9776F93-3C59-4DAE-BB28-DCEFE01678D4}.Debug - BI|Any CPU.Build.0 = Debug - BI|Any CPU
 		{E9776F93-3C59-4DAE-BB28-DCEFE01678D4}.Debug - Home|Any CPU.ActiveCfg = Debug - Home|Any CPU
 		{E9776F93-3C59-4DAE-BB28-DCEFE01678D4}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
 		{E9776F93-3C59-4DAE-BB28-DCEFE01678D4}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
 		{E9776F93-3C59-4DAE-BB28-DCEFE01678D4}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{E9776F93-3C59-4DAE-BB28-DCEFE01678D4}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{E9776F93-3C59-4DAE-BB28-DCEFE01678D4}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{E9776F93-3C59-4DAE-BB28-DCEFE01678D4}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Vincent|Any CPU
 		{E9776F93-3C59-4DAE-BB28-DCEFE01678D4}.Debug - Vincent|Any CPU.Build.0 = Debug - Vincent|Any CPU
 		{E9776F93-3C59-4DAE-BB28-DCEFE01678D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -161,6 +207,8 @@ Global
 		{7D8B4553-4A90-44D7-A1DD-14871E3C6127}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
 		{7D8B4553-4A90-44D7-A1DD-14871E3C6127}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
 		{7D8B4553-4A90-44D7-A1DD-14871E3C6127}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{7D8B4553-4A90-44D7-A1DD-14871E3C6127}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{7D8B4553-4A90-44D7-A1DD-14871E3C6127}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{7D8B4553-4A90-44D7-A1DD-14871E3C6127}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Vincent|Any CPU
 		{7D8B4553-4A90-44D7-A1DD-14871E3C6127}.Debug - Vincent|Any CPU.Build.0 = Debug - Vincent|Any CPU
 		{7D8B4553-4A90-44D7-A1DD-14871E3C6127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -173,6 +221,8 @@ Global
 		{FF6389F6-AA1C-41B3-922C-81A7A7031E72}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
 		{FF6389F6-AA1C-41B3-922C-81A7A7031E72}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
 		{FF6389F6-AA1C-41B3-922C-81A7A7031E72}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{FF6389F6-AA1C-41B3-922C-81A7A7031E72}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{FF6389F6-AA1C-41B3-922C-81A7A7031E72}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{FF6389F6-AA1C-41B3-922C-81A7A7031E72}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Merial|Any CPU
 		{FF6389F6-AA1C-41B3-922C-81A7A7031E72}.Debug - Vincent|Any CPU.Build.0 = Debug - Merial|Any CPU
 		{FF6389F6-AA1C-41B3-922C-81A7A7031E72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -185,6 +235,8 @@ Global
 		{FB5D742B-D81B-410A-86CB-4FE9D0BBE8AB}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
 		{FB5D742B-D81B-410A-86CB-4FE9D0BBE8AB}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
 		{FB5D742B-D81B-410A-86CB-4FE9D0BBE8AB}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{FB5D742B-D81B-410A-86CB-4FE9D0BBE8AB}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{FB5D742B-D81B-410A-86CB-4FE9D0BBE8AB}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{FB5D742B-D81B-410A-86CB-4FE9D0BBE8AB}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Vincent|Any CPU
 		{FB5D742B-D81B-410A-86CB-4FE9D0BBE8AB}.Debug - Vincent|Any CPU.Build.0 = Debug - Vincent|Any CPU
 		{FB5D742B-D81B-410A-86CB-4FE9D0BBE8AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -197,6 +249,8 @@ Global
 		{381D433D-9F76-4286-B0F5-7209E477B22B}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
 		{381D433D-9F76-4286-B0F5-7209E477B22B}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
 		{381D433D-9F76-4286-B0F5-7209E477B22B}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{381D433D-9F76-4286-B0F5-7209E477B22B}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{381D433D-9F76-4286-B0F5-7209E477B22B}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{381D433D-9F76-4286-B0F5-7209E477B22B}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Vincent|Any CPU
 		{381D433D-9F76-4286-B0F5-7209E477B22B}.Debug - Vincent|Any CPU.Build.0 = Debug - Vincent|Any CPU
 		{381D433D-9F76-4286-B0F5-7209E477B22B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -209,6 +263,8 @@ Global
 		{3F16A2CE-0BA1-4DEE-8918-57208969A749}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
 		{3F16A2CE-0BA1-4DEE-8918-57208969A749}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
 		{3F16A2CE-0BA1-4DEE-8918-57208969A749}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{3F16A2CE-0BA1-4DEE-8918-57208969A749}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{3F16A2CE-0BA1-4DEE-8918-57208969A749}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{3F16A2CE-0BA1-4DEE-8918-57208969A749}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Vincent|Any CPU
 		{3F16A2CE-0BA1-4DEE-8918-57208969A749}.Debug - Vincent|Any CPU.Build.0 = Debug - Vincent|Any CPU
 		{3F16A2CE-0BA1-4DEE-8918-57208969A749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -221,6 +277,8 @@ Global
 		{32754742-C3CD-408C-9D36-06BD75C0CB18}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
 		{32754742-C3CD-408C-9D36-06BD75C0CB18}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
 		{32754742-C3CD-408C-9D36-06BD75C0CB18}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{32754742-C3CD-408C-9D36-06BD75C0CB18}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{32754742-C3CD-408C-9D36-06BD75C0CB18}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{32754742-C3CD-408C-9D36-06BD75C0CB18}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Vincent|Any CPU
 		{32754742-C3CD-408C-9D36-06BD75C0CB18}.Debug - Vincent|Any CPU.Build.0 = Debug - Vincent|Any CPU
 		{32754742-C3CD-408C-9D36-06BD75C0CB18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -233,6 +291,8 @@ Global
 		{E8739C63-159B-4FE7-92BC-9B24D0ED6287}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
 		{E8739C63-159B-4FE7-92BC-9B24D0ED6287}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
 		{E8739C63-159B-4FE7-92BC-9B24D0ED6287}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{E8739C63-159B-4FE7-92BC-9B24D0ED6287}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{E8739C63-159B-4FE7-92BC-9B24D0ED6287}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{E8739C63-159B-4FE7-92BC-9B24D0ED6287}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Vincent|Any CPU
 		{E8739C63-159B-4FE7-92BC-9B24D0ED6287}.Debug - Vincent|Any CPU.Build.0 = Debug - Vincent|Any CPU
 		{E8739C63-159B-4FE7-92BC-9B24D0ED6287}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -245,6 +305,8 @@ Global
 		{FF822BFD-CB92-482D-BA26-A1398012777A}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
 		{FF822BFD-CB92-482D-BA26-A1398012777A}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
 		{FF822BFD-CB92-482D-BA26-A1398012777A}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{FF822BFD-CB92-482D-BA26-A1398012777A}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{FF822BFD-CB92-482D-BA26-A1398012777A}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{FF822BFD-CB92-482D-BA26-A1398012777A}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Vincent|Any CPU
 		{FF822BFD-CB92-482D-BA26-A1398012777A}.Debug - Vincent|Any CPU.Build.0 = Debug - Vincent|Any CPU
 		{FF822BFD-CB92-482D-BA26-A1398012777A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -257,6 +319,8 @@ Global
 		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
 		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
 		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Vincent|Any CPU
 		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug - Vincent|Any CPU.Build.0 = Debug - Vincent|Any CPU
 		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -269,6 +333,8 @@ Global
 		{2A887BE7-A2F5-4CD8-9FD6-AF1ADB53B874}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
 		{2A887BE7-A2F5-4CD8-9FD6-AF1ADB53B874}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
 		{2A887BE7-A2F5-4CD8-9FD6-AF1ADB53B874}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{2A887BE7-A2F5-4CD8-9FD6-AF1ADB53B874}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{2A887BE7-A2F5-4CD8-9FD6-AF1ADB53B874}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{2A887BE7-A2F5-4CD8-9FD6-AF1ADB53B874}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Vincent|Any CPU
 		{2A887BE7-A2F5-4CD8-9FD6-AF1ADB53B874}.Debug - Vincent|Any CPU.Build.0 = Debug - Vincent|Any CPU
 		{2A887BE7-A2F5-4CD8-9FD6-AF1ADB53B874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -281,6 +347,8 @@ Global
 		{7D1E178D-7FC1-454F-A0BD-4AF977A2DDC2}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
 		{7D1E178D-7FC1-454F-A0BD-4AF977A2DDC2}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
 		{7D1E178D-7FC1-454F-A0BD-4AF977A2DDC2}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{7D1E178D-7FC1-454F-A0BD-4AF977A2DDC2}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{7D1E178D-7FC1-454F-A0BD-4AF977A2DDC2}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{7D1E178D-7FC1-454F-A0BD-4AF977A2DDC2}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Vincent|Any CPU
 		{7D1E178D-7FC1-454F-A0BD-4AF977A2DDC2}.Debug - Vincent|Any CPU.Build.0 = Debug - Vincent|Any CPU
 		{7D1E178D-7FC1-454F-A0BD-4AF977A2DDC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -293,6 +361,8 @@ Global
 		{1A6AEEAB-7175-4CEA-90A6-68B064AB65DC}.Debug - Home|Any CPU.Build.0 = Debug - Home|Any CPU
 		{1A6AEEAB-7175-4CEA-90A6-68B064AB65DC}.Debug - Merial|Any CPU.ActiveCfg = Debug - Merial|Any CPU
 		{1A6AEEAB-7175-4CEA-90A6-68B064AB65DC}.Debug - Merial|Any CPU.Build.0 = Debug - Merial|Any CPU
+		{1A6AEEAB-7175-4CEA-90A6-68B064AB65DC}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{1A6AEEAB-7175-4CEA-90A6-68B064AB65DC}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{1A6AEEAB-7175-4CEA-90A6-68B064AB65DC}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Vincent|Any CPU
 		{1A6AEEAB-7175-4CEA-90A6-68B064AB65DC}.Debug - Vincent|Any CPU.Build.0 = Debug - Vincent|Any CPU
 		{1A6AEEAB-7175-4CEA-90A6-68B064AB65DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -305,6 +375,8 @@ Global
 		{196CA01E-80FC-4807-9AF4-EF97F1C90AAE}.Debug - Home|Any CPU.Build.0 = Debug - BI|Any CPU
 		{196CA01E-80FC-4807-9AF4-EF97F1C90AAE}.Debug - Merial|Any CPU.ActiveCfg = Debug - BI|Any CPU
 		{196CA01E-80FC-4807-9AF4-EF97F1C90AAE}.Debug - Merial|Any CPU.Build.0 = Debug - BI|Any CPU
+		{196CA01E-80FC-4807-9AF4-EF97F1C90AAE}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{196CA01E-80FC-4807-9AF4-EF97F1C90AAE}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{196CA01E-80FC-4807-9AF4-EF97F1C90AAE}.Debug - Vincent|Any CPU.ActiveCfg = Debug - Vincent|Any CPU
 		{196CA01E-80FC-4807-9AF4-EF97F1C90AAE}.Debug - Vincent|Any CPU.Build.0 = Debug - Vincent|Any CPU
 		{196CA01E-80FC-4807-9AF4-EF97F1C90AAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -317,6 +389,8 @@ Global
 		{E517CE44-0704-4BDF-8894-F90434C68931}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{E517CE44-0704-4BDF-8894-F90434C68931}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{E517CE44-0704-4BDF-8894-F90434C68931}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{E517CE44-0704-4BDF-8894-F90434C68931}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{E517CE44-0704-4BDF-8894-F90434C68931}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{E517CE44-0704-4BDF-8894-F90434C68931}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{E517CE44-0704-4BDF-8894-F90434C68931}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{E517CE44-0704-4BDF-8894-F90434C68931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -329,6 +403,8 @@ Global
 		{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -341,6 +417,8 @@ Global
 		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -353,6 +431,8 @@ Global
 		{4CA93004-D321-4897-A8AD-EF368D5BD57E}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{4CA93004-D321-4897-A8AD-EF368D5BD57E}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{4CA93004-D321-4897-A8AD-EF368D5BD57E}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{4CA93004-D321-4897-A8AD-EF368D5BD57E}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{4CA93004-D321-4897-A8AD-EF368D5BD57E}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{4CA93004-D321-4897-A8AD-EF368D5BD57E}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{4CA93004-D321-4897-A8AD-EF368D5BD57E}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{4CA93004-D321-4897-A8AD-EF368D5BD57E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -365,6 +445,8 @@ Global
 		{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -377,6 +459,8 @@ Global
 		{2D290FD9-5B64-4AF4-A295-2B4CDE6EB330}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{2D290FD9-5B64-4AF4-A295-2B4CDE6EB330}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{2D290FD9-5B64-4AF4-A295-2B4CDE6EB330}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{2D290FD9-5B64-4AF4-A295-2B4CDE6EB330}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{2D290FD9-5B64-4AF4-A295-2B4CDE6EB330}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{2D290FD9-5B64-4AF4-A295-2B4CDE6EB330}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{2D290FD9-5B64-4AF4-A295-2B4CDE6EB330}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{2D290FD9-5B64-4AF4-A295-2B4CDE6EB330}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -389,6 +473,8 @@ Global
 		{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -401,6 +487,8 @@ Global
 		{FA8B3D6E-F685-42BB-8225-20A4037A97BD}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{FA8B3D6E-F685-42BB-8225-20A4037A97BD}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{FA8B3D6E-F685-42BB-8225-20A4037A97BD}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{FA8B3D6E-F685-42BB-8225-20A4037A97BD}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{FA8B3D6E-F685-42BB-8225-20A4037A97BD}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{FA8B3D6E-F685-42BB-8225-20A4037A97BD}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{FA8B3D6E-F685-42BB-8225-20A4037A97BD}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{FA8B3D6E-F685-42BB-8225-20A4037A97BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -413,6 +501,8 @@ Global
 		{884D01D2-3FC9-4FD5-8A7A-FB20DE6CBB23}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{884D01D2-3FC9-4FD5-8A7A-FB20DE6CBB23}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{884D01D2-3FC9-4FD5-8A7A-FB20DE6CBB23}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{884D01D2-3FC9-4FD5-8A7A-FB20DE6CBB23}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{884D01D2-3FC9-4FD5-8A7A-FB20DE6CBB23}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{884D01D2-3FC9-4FD5-8A7A-FB20DE6CBB23}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{884D01D2-3FC9-4FD5-8A7A-FB20DE6CBB23}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{884D01D2-3FC9-4FD5-8A7A-FB20DE6CBB23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -425,6 +515,8 @@ Global
 		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -437,6 +529,8 @@ Global
 		{F33E2854-108F-4AE6-A81C-B8F9BB41337D}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{F33E2854-108F-4AE6-A81C-B8F9BB41337D}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{F33E2854-108F-4AE6-A81C-B8F9BB41337D}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{F33E2854-108F-4AE6-A81C-B8F9BB41337D}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{F33E2854-108F-4AE6-A81C-B8F9BB41337D}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{F33E2854-108F-4AE6-A81C-B8F9BB41337D}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{F33E2854-108F-4AE6-A81C-B8F9BB41337D}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{F33E2854-108F-4AE6-A81C-B8F9BB41337D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -449,6 +543,8 @@ Global
 		{79229C80-ABBD-43F5-A0F9-1CB5DFCCBA2B}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{79229C80-ABBD-43F5-A0F9-1CB5DFCCBA2B}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{79229C80-ABBD-43F5-A0F9-1CB5DFCCBA2B}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{79229C80-ABBD-43F5-A0F9-1CB5DFCCBA2B}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{79229C80-ABBD-43F5-A0F9-1CB5DFCCBA2B}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{79229C80-ABBD-43F5-A0F9-1CB5DFCCBA2B}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{79229C80-ABBD-43F5-A0F9-1CB5DFCCBA2B}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{79229C80-ABBD-43F5-A0F9-1CB5DFCCBA2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -461,6 +557,8 @@ Global
 		{123C2AED-3BA6-4CA2-8C3C-C68EC7CBE8D7}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{123C2AED-3BA6-4CA2-8C3C-C68EC7CBE8D7}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{123C2AED-3BA6-4CA2-8C3C-C68EC7CBE8D7}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{123C2AED-3BA6-4CA2-8C3C-C68EC7CBE8D7}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{123C2AED-3BA6-4CA2-8C3C-C68EC7CBE8D7}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{123C2AED-3BA6-4CA2-8C3C-C68EC7CBE8D7}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{123C2AED-3BA6-4CA2-8C3C-C68EC7CBE8D7}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{123C2AED-3BA6-4CA2-8C3C-C68EC7CBE8D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -473,6 +571,8 @@ Global
 		{7A531799-AB21-4D25-BAEA-B4342A100410}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{7A531799-AB21-4D25-BAEA-B4342A100410}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{7A531799-AB21-4D25-BAEA-B4342A100410}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{7A531799-AB21-4D25-BAEA-B4342A100410}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{7A531799-AB21-4D25-BAEA-B4342A100410}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{7A531799-AB21-4D25-BAEA-B4342A100410}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{7A531799-AB21-4D25-BAEA-B4342A100410}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{7A531799-AB21-4D25-BAEA-B4342A100410}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -485,6 +585,8 @@ Global
 		{A49A8323-1233-4728-ABBC-7DB09771383D}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{A49A8323-1233-4728-ABBC-7DB09771383D}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{A49A8323-1233-4728-ABBC-7DB09771383D}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{A49A8323-1233-4728-ABBC-7DB09771383D}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{A49A8323-1233-4728-ABBC-7DB09771383D}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{A49A8323-1233-4728-ABBC-7DB09771383D}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{A49A8323-1233-4728-ABBC-7DB09771383D}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{A49A8323-1233-4728-ABBC-7DB09771383D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -497,6 +599,8 @@ Global
 		{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -509,6 +613,8 @@ Global
 		{D1AEFA38-9E4D-4894-BDE2-C69DCDA711CF}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{D1AEFA38-9E4D-4894-BDE2-C69DCDA711CF}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{D1AEFA38-9E4D-4894-BDE2-C69DCDA711CF}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{D1AEFA38-9E4D-4894-BDE2-C69DCDA711CF}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{D1AEFA38-9E4D-4894-BDE2-C69DCDA711CF}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{D1AEFA38-9E4D-4894-BDE2-C69DCDA711CF}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{D1AEFA38-9E4D-4894-BDE2-C69DCDA711CF}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{D1AEFA38-9E4D-4894-BDE2-C69DCDA711CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -521,6 +627,8 @@ Global
 		{FF4DF0DF-34C2-4DE3-9DC6-ACFDFF36D63E}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{FF4DF0DF-34C2-4DE3-9DC6-ACFDFF36D63E}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF4DF0DF-34C2-4DE3-9DC6-ACFDFF36D63E}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{FF4DF0DF-34C2-4DE3-9DC6-ACFDFF36D63E}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{FF4DF0DF-34C2-4DE3-9DC6-ACFDFF36D63E}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{FF4DF0DF-34C2-4DE3-9DC6-ACFDFF36D63E}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF4DF0DF-34C2-4DE3-9DC6-ACFDFF36D63E}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{FF4DF0DF-34C2-4DE3-9DC6-ACFDFF36D63E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -533,6 +641,8 @@ Global
 		{029825F6-3AD5-456E-BCE5-22F655B5EF68}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{029825F6-3AD5-456E-BCE5-22F655B5EF68}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{029825F6-3AD5-456E-BCE5-22F655B5EF68}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{029825F6-3AD5-456E-BCE5-22F655B5EF68}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{029825F6-3AD5-456E-BCE5-22F655B5EF68}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{029825F6-3AD5-456E-BCE5-22F655B5EF68}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{029825F6-3AD5-456E-BCE5-22F655B5EF68}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{029825F6-3AD5-456E-BCE5-22F655B5EF68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -545,6 +655,8 @@ Global
 		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -557,6 +669,8 @@ Global
 		{50A483C0-90E2-4C4A-BFC4-C53458A6A727}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
 		{50A483C0-90E2-4C4A-BFC4-C53458A6A727}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
 		{50A483C0-90E2-4C4A-BFC4-C53458A6A727}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
+		{50A483C0-90E2-4C4A-BFC4-C53458A6A727}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
+		{50A483C0-90E2-4C4A-BFC4-C53458A6A727}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
 		{50A483C0-90E2-4C4A-BFC4-C53458A6A727}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
 		{50A483C0-90E2-4C4A-BFC4-C53458A6A727}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
 		{50A483C0-90E2-4C4A-BFC4-C53458A6A727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -611,5 +725,8 @@ Global
 		{029825F6-3AD5-456E-BCE5-22F655B5EF68} = {65E6F15A-E231-4A23-867E-6C6EFB5A3679}
 		{D55A1927-23BC-4C8B-B73E-D5143968B347} = {65E6F15A-E231-4A23-867E-6C6EFB5A3679}
 		{50A483C0-90E2-4C4A-BFC4-C53458A6A727} = {65E6F15A-E231-4A23-867E-6C6EFB5A3679}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5EA7F033-1A64-47D7-9042-DA806656CD6C}
 	EndGlobalSection
 EndGlobal

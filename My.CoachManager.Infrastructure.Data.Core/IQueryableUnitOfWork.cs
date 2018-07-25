@@ -13,24 +13,28 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// the ObjectStateManager, and the underlying store.
         /// </summary>
         /// <typeparam name="TEntity">an IObjectWithChangeTracker Entity</typeparam>
-        /// <returns></returns>
+        /// <returns>The database set of entities.</returns>
         IDbSet<TEntity> CreateSet<TEntity>() where TEntity : class;
 
         /// <summary>
         /// Attach this item in ObjectStateManager
         /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
-        /// <param name="item"></param>
+        /// <typeparam name="TEntity">Type of the entity.</typeparam>
+        /// <param name="item">Item to attach in context.</param>
         void Attach<TEntity>(TEntity item) where TEntity : class;
 
         /// <summary>
-        /// Apply Current Value in <paramref name="original"/>
+        /// Set Object as Modified
         /// </summary>
-        /// <typeparam name="TEntity">The type of Entity</typeparam>
-        /// <param name="original">original entity</param>
-        /// <param name="current">the current entity</param>
-        void ApplyCurrentValues<TEntity>(TEntity original, TEntity current) where TEntity : class;
+        /// <typeparam name="TEntity">Type of the entity.</typeparam>
+        /// <param name="item">Item to set modified in context.</param>
+        void SetModified<TEntity>(TEntity item) where TEntity : class;
 
+        /// <summary>
+        /// Lock a Row of a Table
+        /// </summary>
+        /// <typeparam name="TEntity">Type of the entity.</typeparam>
+        /// <param name="entity">Item to lock in context.</param>
         void Lock<TEntity>(TEntity entity) where TEntity : class;
 
         /// <summary>
