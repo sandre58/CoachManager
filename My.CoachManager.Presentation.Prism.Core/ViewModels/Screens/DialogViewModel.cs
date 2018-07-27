@@ -53,7 +53,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         public virtual void Close(DialogResult? dialogResult)
         {
-            if (dialogResult != null) DialogResult = dialogResult.Value;
+            if (dialogResult != null)
+            {
+                DialogResult = dialogResult.Value;
+            }
+
             OnCloseRequest(EventArgs.Empty);
         }
 
@@ -63,10 +67,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <param name="e"></param>
         protected virtual void OnCloseRequest(EventArgs e)
         {
-            if (CloseRequest != null)
-            {
-                CloseRequest(this, e);
-            }
+            CloseRequest?.Invoke(this, e);
         }
 
         #endregion Methods

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using My.CoachManager.Application.Core;
 using My.CoachManager.Application.Dtos.Rosters;
 using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Domain.Core;
+using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.RosterModule.Aggregate;
 
 namespace My.CoachManager.Application.Services.Rosters
@@ -10,12 +11,12 @@ namespace My.CoachManager.Application.Services.Rosters
     /// <summary>
     /// Implementation of the IRosterAppService class.
     /// </summary>
-    public class RosterAppService : AppService, IRosterAppService
+    public class RosterAppService : IRosterAppService
     {
         #region ---- Fields ----
 
-        private readonly ISquadRepository _squadRepository;
-        private readonly IRosterRepository _rosterRepository;
+        private readonly IRepository<Squad> _squadRepository;
+        private readonly IRepository<Roster> _rosterRepository;
 
         #endregion ---- Fields ----
 
@@ -24,8 +25,7 @@ namespace My.CoachManager.Application.Services.Rosters
         /// <summary>
         /// Initializes a new instance of the <see cref="RosterAppService"/> class.
         /// </summary>
-        public RosterAppService(ILogger logger, ISquadRepository squadRepository, IRosterRepository rosterRepository)
-            : base(logger)
+        public RosterAppService(ILogger logger, IRepository<Squad> squadRepository, IRepository<Roster> rosterRepository)
         {
             _squadRepository = squadRepository;
             _rosterRepository = rosterRepository;

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Metadatas;
+using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.Entities
 {
@@ -7,7 +8,7 @@ namespace My.CoachManager.Domain.Entities
     /// Provides properties for a Function Entity.
     /// </summary>
     [MetadataType(typeof(FunctionMetadata))]
-    public class Function : DataEntity
+    public class Function : Reference
     {
     }
 }

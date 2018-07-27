@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Metadatas;
+using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.Entities
 {
@@ -8,7 +9,7 @@ namespace My.CoachManager.Domain.Entities
     /// Provides properties for a Season Entity.
     /// </summary>
     [MetadataType(typeof(SeasonMetadata))]
-    public class Season : DataEntity
+    public class Season : Reference
     {
         /// <summary>
         /// Gets or sets the start date.

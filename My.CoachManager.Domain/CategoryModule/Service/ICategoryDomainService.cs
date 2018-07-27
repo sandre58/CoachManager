@@ -1,17 +1,10 @@
-﻿using My.CoachManager.Domain.Core;
-using My.CoachManager.Domain.Entities;
+﻿using My.CoachManager.Domain.Entities;
+using My.CoachManager.Domain.ReferenceModule.Service;
 
 namespace My.CoachManager.Domain.CategoryModule.Service
 {
-    public interface ICategoryDomainService : IDomainService
+    public interface ICategoryDomainService : IReferenceDomainService<Category>
     {
-        /// <summary>
-        /// Check if category is unique.
-        /// </summary>
-        /// <param name="category"></param>
-        /// <returns></returns>
-        bool IsUnique(Category category);
-
         /// <summary>
         /// Check if the category can be removed.
         /// </summary>
@@ -22,8 +15,8 @@ namespace My.CoachManager.Domain.CategoryModule.Service
         /// <summary>
         /// Check if the category is used by others properties.
         /// </summary>
-        /// <param name="category"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        bool IsUsed(Category category);
+        bool IsUsed(int id);
     }
 }

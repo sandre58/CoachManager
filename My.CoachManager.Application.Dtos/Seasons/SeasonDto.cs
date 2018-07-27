@@ -7,7 +7,7 @@ namespace My.CoachManager.Application.Dtos.Seasons
     /// Data Transfer Object for Season item.
     /// </summary>
     [DataContract]
-    public class SeasonDto : DataEntityDto
+    public class SeasonDto : ReferenceDto
     {
         [DataMember]
         public DateTime? StartDate { get; set; }

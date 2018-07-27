@@ -1,13 +1,12 @@
 ﻿using My.CoachManager.Application.Dtos.Seasons;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
+using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Resources.Strings;
-using My.CoachManager.Presentation.Prism.ViewModels;
-using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.SeasonServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
-    public class SeasonEditViewModel : EditViewModel<SeasonViewModel>, ISeasonEditViewModel
+    public class SeasonEditViewModel : EditViewModel<SeasonModel>, ISeasonEditViewModel
     {
         #region Fields
 
@@ -35,7 +34,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// </summary>
         protected override bool SaveItemCore()
         {
-            Item = _seasonService.CreateOrUpdate(Item.ToDto<SeasonDto>()).ToViewModel<SeasonViewModel>();
+            //Item = _seasonService.CreateOrUpdate(Item.ToDto<SeasonDto>()).ToViewModel<SeasonViewModel>();
             return true;
         }
 
@@ -43,9 +42,10 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// Load an item from data source.
         /// </summary>
         /// <param name="id"></param>
-        protected override SeasonViewModel LoadItemCore(int id)
+        protected override SeasonModel LoadItemCore(int id)
         {
-            return _seasonService.GetById(id).ToViewModel<SeasonViewModel>();
+            return null;
+            //return _seasonService.GetById(id).ToViewModel<SeasonViewModel>();
         }
 
         #endregion Methods

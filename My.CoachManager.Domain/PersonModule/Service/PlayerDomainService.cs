@@ -1,14 +1,15 @@
 ﻿using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.PersonModule.Aggregate;
 
 namespace My.CoachManager.Domain.PersonModule.Service
 {
-    public class PlayerDomainService : DomainService, IPlayerDomainService
+    public class PlayerDomainService : IPlayerDomainService
     {
         #region Fields
 
-        private readonly IPlayerRepository _playerRepository;
+        private readonly IRepository<Player> _playerRepository;
 
         #endregion Fields
 
@@ -19,8 +20,7 @@ namespace My.CoachManager.Domain.PersonModule.Service
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="playerRepository"></param>
-        public PlayerDomainService(ILogger logger, IPlayerRepository playerRepository)
-            : base(logger)
+        public PlayerDomainService(ILogger logger, IRepository<Player> playerRepository)
         {
             _playerRepository = playerRepository;
         }

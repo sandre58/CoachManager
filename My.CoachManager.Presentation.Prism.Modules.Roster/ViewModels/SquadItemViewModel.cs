@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.ViewModels;
-using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
@@ -75,21 +74,21 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
             var categories = new List<CategoryViewModel>();
             var countries = new List<CountryViewModel>();
 
-            if (_categoryService != null)
-            {
-                categories = _categoryService.GetLabels().ToViewModels<CategoryViewModel>().ToList();
-            }
+            //if (_categoryService != null)
+            //{
+            //    categories = _categoryService.GetLabels().ToViewModels<CategoryViewModel>().ToList();
+            //}
 
-            if (_categoryService != null)
-            {
-                countries = _personService.GetCountries().ToViewModels<CountryViewModel>().ToList();
-            }
+            //if (_categoryService != null)
+            //{
+            //    countries = _personService.GetCountries().ToViewModels<CountryViewModel>().ToList();
+            //}
 
-            if (_rosterService != null)
-            {
-                squad = _rosterService.GetSquad(id).ToViewModel<SquadViewModel>();
-                Players = new PlayersListViewModel(squad.Players, categories, countries);
-            }
+            //if (_rosterService != null)
+            //{
+            //    squad = _rosterService.GetSquad(id).ToViewModel<SquadViewModel>();
+            //    Players = new PlayersListViewModel(squad.Players, categories, countries);
+            //}
             return squad;
         }
 

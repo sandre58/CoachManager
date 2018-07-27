@@ -11,7 +11,7 @@ namespace My.CoachManager.Domain.Core
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     public class QueryOrder<TEntity>
-        where TEntity : class, IEntityBase
+        where TEntity : class, IEntity
     {
         /// <summary>
         /// The order by descending list.
@@ -48,49 +48,25 @@ namespace My.CoachManager.Domain.Core
         /// Gets the order by descending list.
         /// </summary>
         /// <returns>List of order.</returns>
-        public IList<LambdaExpression> GetOrderByDescendingList
-        {
-            get
-            {
-                return _orderByDescendingList;
-            }
-        }
+        public IList<LambdaExpression> GetOrderByDescendingList => _orderByDescendingList;
 
         /// <summary>
         /// Gets the order by list.
         /// </summary>
         /// <returns>List of order.</returns>
-        public IList<LambdaExpression> GetOrderByList
-        {
-            get
-            {
-                return _orderByList;
-            }
-        }
+        public IList<LambdaExpression> GetOrderByList => _orderByList;
 
         /// <summary>
         /// Gets the then by descending list.
         /// </summary>
         /// <returns>List of order.</returns>
-        public IList<LambdaExpression> GetThenByDescendingList
-        {
-            get
-            {
-                return _thenByDescendingList;
-            }
-        }
+        public IList<LambdaExpression> GetThenByDescendingList => _thenByDescendingList;
 
         /// <summary>
         /// Gets the then by list.
         /// </summary>
         /// <returns>List of order.</returns>
-        public IList<LambdaExpression> GetThenByList
-        {
-            get
-            {
-                return _thenByList;
-            }
-        }
+        public IList<LambdaExpression> GetThenByList => _thenByList;
 
         /// <summary>
         /// Set the order.

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>My.CoachManager.Domain.Entities</RootNamespace>
     <AssemblyName>My.CoachManager.Domain.Entities</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -175,18 +176,14 @@
     <Compile Include="Person.cs" />
     <Compile Include="Squad.cs" />
     <Compile Include="RosterPlayer.cs" />
-    <Compile Include="EntityBase.cs" />
-    <Compile Include="ForeignEntity.cs" />
     <Compile Include="Season.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="Phone.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Category.cs" />
-    <Compile Include="DataEntity.cs" />
     <Compile Include="Permission.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Role.cs" />
-    <Compile Include="Entity.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

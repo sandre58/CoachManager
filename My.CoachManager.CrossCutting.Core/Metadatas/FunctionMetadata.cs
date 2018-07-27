@@ -3,7 +3,7 @@
     /// <summary>
     /// Provides metadata for a Function Entity.
     /// </summary>
-    public class FunctionMetadata : DataEntityMetadata
+    public class FunctionMetadata : ReferenceMetadata
     {
     }
 }

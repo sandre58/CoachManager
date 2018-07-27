@@ -8,7 +8,7 @@ namespace My.CoachManager.Application.Dtos.Rosters
     /// Data Transfer Object for Roster player item.
     /// </summary>
     [DataContract]
-    public class RosterPlayerDto : EntityDtoBase
+    public class RosterPlayerDto : EntityDto
     {
         /// <summary>
         /// Gets or sets the player's roster id.

@@ -6,7 +6,7 @@ namespace My.CoachManager.Application.Dtos.Positions
     /// Data Transfer Object for Position item.
     /// </summary>
     [DataContract]
-    public class PositionDto : DataEntityDto
+    public class PositionDto : ReferenceDto
     {
         [DataMember]
         public int Row { get; set; }

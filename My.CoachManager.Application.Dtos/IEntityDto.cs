@@ -1,9 +1,9 @@
 ﻿namespace My.CoachManager.Application.Dtos
 {
     /// <summary>
-    /// List Dto interface.
+    /// Dto interface.
     /// </summary>
-    public interface IEntityDto : IEntityDtoBase
+    public interface IEntityDto
     {
         /// <summary>
         /// Gets or sets the id.

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using My.CoachManager.Application.Core;
 using My.CoachManager.Application.Dtos.Seasons;
 
 namespace My.CoachManager.Application.Services.Seasons
@@ -7,7 +6,7 @@ namespace My.CoachManager.Application.Services.Seasons
     /// <summary>
     /// Interface defining the Season application services.
     /// </summary>
-    public interface ISeasonAppService : IAppService
+    public interface ISeasonAppService
     {
         /// <summary>
         /// Get all dtos list.

@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
+using My.CoachManager.Presentation.Prism.Core.Models;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
     /// <summary>
     ///
     /// </summary>
-    public class SelectedLabelablesFilter : SelectedValuesFilter<ILabelableViewModel>
+    public class SelectedLabelablesFilter : SelectedValuesFilter<IReferenceModel>
     {
         public SelectedLabelablesFilter(string propertyName) : base(propertyName)
         {
@@ -18,7 +18,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// </summary>
         /// <param name="propertyName">The property info.</param>
         /// <param name="allowedValues"></param>
-        public SelectedLabelablesFilter(string propertyName, IEnumerable<ILabelableViewModel> allowedValues)
+        public SelectedLabelablesFilter(string propertyName, IEnumerable<IReferenceModel> allowedValues)
             : base(propertyName, allowedValues)
         {
         }

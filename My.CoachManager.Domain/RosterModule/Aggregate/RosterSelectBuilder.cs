@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using My.CoachManager.Application.Dtos.Categories;
+using My.CoachManager.Application.Dtos.Category;
 using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.Application.Dtos.Rosters;
 using My.CoachManager.Domain.Entities;

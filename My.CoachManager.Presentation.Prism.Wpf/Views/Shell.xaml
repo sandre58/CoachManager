@@ -12,6 +12,7 @@
         xmlns:interactivity="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.Interactivity"
         xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.Views"
         mc:Ignorable="d"
+        prism:ViewModelLocator.AutoWireViewModel="True"
         d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel}"
         Title="{x:Static strings:GlobalResources.ApplicationTitle}"
         Icon="{StaticResource IcoImageSource}"

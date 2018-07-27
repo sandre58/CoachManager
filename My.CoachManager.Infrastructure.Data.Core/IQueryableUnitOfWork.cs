@@ -37,12 +37,12 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="entity">Item to lock in context.</param>
         void Lock<TEntity>(TEntity entity) where TEntity : class;
 
-        /// <summary>
-        /// Add or update an entity.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="entity"></param>
-        /// <param name="ignoreProperties"></param>
-        void AddOrUpdate<T>(T entity, params string[] ignoreProperties) where T : class, IEntity;
+        ///// <summary>
+        ///// Add or update an entity.
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <param name="entity"></param>
+        ///// <param name="ignoreProperties"></param>
+        //void AddOrUpdate<T>(T entity, params string[] ignoreProperties) where T : class, IEntity;
     }
 }

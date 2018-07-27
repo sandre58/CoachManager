@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
+using My.CoachManager.Presentation.Prism.Core.Models;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
-    public abstract class EditViewModel<TEntityViewModel> : WorkspaceDialogViewModel, IEditViewModel
-        where TEntityViewModel : class, IEntityViewModel, IValidatable, IModifiable, new()
+    public abstract class EditViewModel<TModel> : WorkspaceDialogViewModel, IEditViewModel<TModel>
+        where TModel : class, IEntityModel, IValidatable, IModifiable, new()
     {
         #region Fields
-
-        private TEntityViewModel _item;
+        
         private int _activeId;
 
         #endregion Fields
@@ -24,17 +22,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Get or set Item.
         /// </summary>
-        public TEntityViewModel Item
-        {
-            get
-            {
-                return _item;
-            }
-            protected set
-            {
-                SetProperty(ref _item, value);
-            }
-        }
+        public TModel Item { get; set; }
 
         /// <summary>
         /// Get or Set Save Command.
@@ -49,7 +37,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Get or Set Refresh Command.
         /// </summary>
-        public ICommand RefreshCommand { get; set; }
+        public DelegateCommand RefreshCommand { get; set; }
 
         #endregion Members
 
@@ -57,6 +45,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         #region Initialization
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes data in constructor.
         /// </summary>
@@ -65,15 +54,15 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             base.InitializeData();
 
             Mode = ScreenMode.Creation;
-            Item = new TEntityViewModel();
+            Item = new TModel();
         }
 
         /// <summary>
         /// Initializes commands.
         /// </summary>
-        protected override void InitializeCommands()
+        protected override void InitializeCommand()
         {
-            base.InitializeCommands();
+            base.InitializeCommand();
 
             SaveCommand = new DelegateCommand(SaveAsync, CanSave);
             CancelCommand = new DelegateCommand(Cancel, CanCancel);
@@ -110,8 +99,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
                 {
                     // ignored
                 }
-
-                ResetModified();
+                
                 State = ScreenState.Ready;
                 Mode = ScreenMode.Edition;
 
@@ -125,9 +113,10 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
                 {
                     if (task.Exception != null)
                     {
-                        if (task.Exception.InnerException is BusinessException)
+                        var exception = task.Exception.InnerException as BusinessException;
+                        if (exception != null)
                         {
-                            OnBusinessExceptionOccured((BusinessException)task.Exception.InnerException);
+                            OnBusinessExceptionOccured(exception);
                         }
                         else
                         {
@@ -152,7 +141,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Add a new item.
         /// </summary>
-        public virtual async void SaveAsync()
+        protected virtual async void SaveAsync()
         {
             if (CanSave())
             {
@@ -164,7 +153,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// Can save item.
         /// </summary>
         /// <returns></returns>
-        public virtual bool CanSave()
+        protected virtual bool CanSave()
         {
             return true;
         }
@@ -186,7 +175,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         protected virtual void OnSaveCompleted()
         {
-            Locator.DialogService.ShowSuccessPopup(MessageResources.SavingSuccess);
+            DialogService.ShowSuccessPopup(MessageResources.SavingSuccess);
             Close(DialogResult.Ok);
         }
 
@@ -199,19 +188,17 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         public virtual void Cancel()
         {
-            if (CanCancel())
+            if (!CanCancel()) return;
+            if (Item.IsModified)
             {
-                if (Item.IsModified)
+                DialogService.ShowWarningDialog(MessageResources.CancelModifications, dialog =>
                 {
-                    Locator.DialogService.ShowWarningDialog(MessageResources.CancelModifications, dialog =>
-                    {
-                        OnCancelCompleted(dialog.Result);
-                    }, MessageDialogType.YesNo);
-                }
-                else
-                {
-                    OnCancelCompleted(DialogResult.Yes);
-                }
+                    OnCancelCompleted(dialog.Result);
+                }, MessageDialogType.YesNo);
+            }
+            else
+            {
+                OnCancelCompleted(DialogResult.Yes);
             }
         }
 
@@ -239,7 +226,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Refresh Items.
         /// </summary>
-        public virtual void Refresh()
+        protected virtual void Refresh()
         {
             RefreshDataAsync();
         }
@@ -247,7 +234,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Can refresh item.
         /// </summary>
-        public virtual bool CanRefresh()
+        protected virtual bool CanRefresh()
         {
             return true;
         }
@@ -256,6 +243,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         #region Data
 
+        /// <inheritdoc />
         /// <summary>
         /// Load an item by id.
         /// </summary>
@@ -266,26 +254,20 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             RefreshDataAsync();
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Save.
         /// </summary>
         protected override void LoadDataCore()
         {
-            if (_activeId > 0)
-            {
-                Item = LoadItemCore(_activeId);
-            }
-            else
-            {
-                Item = new TEntityViewModel();
-            }
+            Item = _activeId > 0 ? LoadItemCore(_activeId) : new TModel();
         }
 
         /// <summary>
         /// Load an item from data source.
         /// </summary>
         /// <param name="id"></param>
-        protected abstract TEntityViewModel LoadItemCore(int id);
+        protected abstract TModel LoadItemCore(int id);
 
         #endregion Data
 
@@ -300,8 +282,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
             RaisePropertyChanged(() => Title);
 
-            if (SaveCommand != null) SaveCommand.RaiseCanExecuteChanged();
-            if (CancelCommand != null) CancelCommand.RaiseCanExecuteChanged();
+            SaveCommand?.RaiseCanExecuteChanged();
+            CancelCommand?.RaiseCanExecuteChanged();
         }
 
         /// <summary>
@@ -310,15 +292,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         protected virtual void OnModeChanged()
         {
             Title = Mode == ScreenMode.Edition ? string.Format(MessageResources.EditItem, Title) : string.Format(MessageResources.CreateItem, Title);
-        }
-
-        /// <summary>
-        /// Reset modified property.
-        /// </summary>
-        public override void ResetModified()
-        {
-            Item.ResetModified();
-            base.ResetModified();
         }
 
         #endregion Properties Changed

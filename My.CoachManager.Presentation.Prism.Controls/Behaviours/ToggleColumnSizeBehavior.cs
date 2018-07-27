@@ -87,15 +87,9 @@ namespace My.CoachManager.Presentation.Prism.Controls.Behaviours
         /// </summary>
         public bool ToggleValue
         {
-            get
-            {
-                return (bool)GetValue(ToggleValueProperty);
-            }
+            get => (bool)GetValue(ToggleValueProperty);
 
-            set
-            {
-                SetValue(ToggleValueProperty, value);
-            }
+            set => SetValue(ToggleValueProperty, value);
         }
 
         #endregion Public Properties
@@ -120,8 +114,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Behaviours
         private static void ToggleValueChanged(
             DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            var toggleBehavior = dependencyObject as ToggleColumnSizeBehavior;
-            if (toggleBehavior == null)
+            if (!(dependencyObject is ToggleColumnSizeBehavior toggleBehavior))
             {
                 return;
             }

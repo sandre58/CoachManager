@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using My.CoachManager.Application.Dtos.Categories;
+using My.CoachManager.Application.Dtos.Category;
 using My.CoachManager.Application.Dtos.Seasons;
 
 namespace My.CoachManager.Application.Dtos.Rosters

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>My.CoachManager.Presentation.ServiceAgent</RootNamespace>
     <AssemblyName>My.CoachManager.Presentation.ServiceAgent</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -82,7 +83,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -145,6 +145,7 @@
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Administration.PositionDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Administration.SeasonDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Categories.CategoryDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Categories.CategoryDto1.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Competitions.ClubDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Countries.CountryDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Data.CategoriesListDto.datasource" />
@@ -158,16 +159,23 @@
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Person.PlayerDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Persons.CityDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Persons.CountryDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Persons.CountryDto1.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Persons.PlayerDetailDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Persons.PlayerDetailsDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Persons.PlayerDetailsDto1.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Persons.PlayerDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Persons.PlayerDto1.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.CityDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.PlayerDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.PlayersInformationsListDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.PlayersListDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Positions.PositionDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Rosters.PlayerDetailDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Rosters.SquadDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Rosters.SquadDto1.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Seasons.SeasonDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Users.UserDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Users.UserDto1.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Domain.Entities.Player.datasource" />
     <None Include="Service References\CategoryServiceReference\CategoryService.wsdl" />
     <None Include="Service References\CategoryServiceReference\CategoryService.xsd">
@@ -184,6 +192,9 @@
     </None>
     <None Include="Service References\CategoryServiceReference\CategoryService4.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CategoryServiceReference\My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\PersonServiceReference\PersonService.wsdl" />
     <None Include="Service References\PersonServiceReference\PersonService.xsd">
@@ -289,6 +300,10 @@
     <ProjectReference Include="..\My.CoachManager.CrossCutting.Core\My.CoachManager.CrossCutting.Core.csproj">
       <Project>{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}</Project>
       <Name>My.CoachManager.CrossCutting.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Domain.Core\My.CoachManager.Domain.Core.csproj">
+      <Project>{7d8b4553-4a90-44d7-a1dd-14871e3c6127}</Project>
+      <Name>My.CoachManager.Domain.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.Views
     /// </summary>
     public partial class CategoriesListView
     {
-        public CategoriesListView(ICategoriesListViewModel viewModel)
+        public CategoriesListView(CategoriesListViewModel viewModel)
         {
             DataContext = viewModel;
             InitializeComponent();

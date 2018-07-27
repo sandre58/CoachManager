@@ -4,18 +4,13 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
     public abstract class WorkspaceDialogViewModel : DialogViewModel, IWorkspaceDialogViewModel
     {
-        #region Fields
-
-        private string _title;
-
-        #endregion Fields
 
         #region Constructors
 
         /// <summary>
         /// Initialise a new instance of <see cref="ScreenViewModel"/>.
         /// </summary>
-        public WorkspaceDialogViewModel()
+        protected WorkspaceDialogViewModel()
         {
             DialogResult = DialogResult.None;
         }
@@ -27,11 +22,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Gets or sets the title screen.
         /// </summary>
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
+        public string Title { get; set; }
 
         #endregion Members
     }

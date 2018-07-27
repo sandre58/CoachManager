@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Metadatas;
+using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.Entities
 {

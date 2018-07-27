@@ -2,18 +2,17 @@
 using System.Linq;
 using System.Windows.Input;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
+using My.CoachManager.Presentation.Prism.Core.Models;
 using Prism.Commands;
 using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
     public abstract class ItemViewModel<TEntityViewModel> : NavigatableWorkspaceViewModel, IItemViewModel
-        where TEntityViewModel : class, IEntityViewModel, IValidatable, IModifiable, new()
+        where TEntityViewModel : class, IEntityModel, IValidatable, IModifiable, new()
     {
         #region Fields
-
-        private TEntityViewModel _item;
+        
         private int _activeId;
 
         #endregion Fields
@@ -23,17 +22,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Get or set Item.
         /// </summary>
-        public TEntityViewModel Item
-        {
-            get
-            {
-                return _item;
-            }
-            protected set
-            {
-                SetProperty(ref _item, value);
-            }
-        }
+        public TEntityViewModel Item { get; set; }
 
         /// <summary>
         /// Get or Set Refresh Command.
@@ -79,9 +68,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Initializes commands.
         /// </summary>
-        protected override void InitializeCommands()
+        protected override void InitializeCommand()
         {
-            base.InitializeCommands();
+            base.InitializeCommand();
 
             EditCommand = new DelegateCommand(Edit, CanEdit);
             RefreshCommand = new DelegateCommand(Refresh, CanRefresh);
@@ -118,9 +107,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         {
             if (CanEdit())
             {
-                Locator.DialogService.ShowWorkspaceDialog(GetEditViewType(), null, before =>
+                DialogService.ShowWorkspaceDialog(GetEditViewType(), null, before =>
                     {
-                        var vm = before.Context as IEditViewModel;
+                        var vm = before.Context as IEditViewModel<TEntityViewModel>;
                         OnEditRequested(Item, vm);
                     },
                     after =>
@@ -143,7 +132,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         /// <param name="item">The item.</param>
         /// <param name="viewModel">The view model.</param>
-        protected virtual void OnEditRequested(TEntityViewModel item, IEditViewModel viewModel)
+        protected virtual void OnEditRequested(TEntityViewModel item, IEditViewModel<TEntityViewModel> viewModel)
         {
             if (viewModel != null) viewModel.LoadItemById(item.Id);
         }

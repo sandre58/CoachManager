@@ -1,14 +1,15 @@
 ﻿using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
-using My.CoachManager.Domain.PositionModule.Aggregate;
+using My.CoachManager.Domain.ReferenceModule.Aggregates;
 
 namespace My.CoachManager.Domain.PositionModule.Service
 {
-    public class PositionDomainService : DomainService, IPositionDomainService
+    public class PositionDomainService : IPositionDomainService
     {
         #region Fields
 
-        private readonly IPositionRepository _positionRepository;
+        private readonly IRepository<Position> _positionRepository;
 
         #endregion Fields
 
@@ -19,8 +20,7 @@ namespace My.CoachManager.Domain.PositionModule.Service
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="positionRepository"></param>
-        public PositionDomainService(ILogger logger, IPositionRepository positionRepository)
-            : base(logger)
+        public PositionDomainService(ILogger logger, IRepository<Position> positionRepository)
         {
             _positionRepository = positionRepository;
         }
@@ -36,7 +36,7 @@ namespace My.CoachManager.Domain.PositionModule.Service
         /// <returns></returns>
         public bool IsUnique(Position position)
         {
-            return !_positionRepository.Any(DataSpecification.IsUnique(position));
+            return !_positionRepository.Any(ReferenceSpecification.IsUnique(position));
         }
 
         #endregion Methods

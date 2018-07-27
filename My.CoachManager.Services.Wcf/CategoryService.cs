@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using My.CoachManager.Application.Dtos.Categories;
-using My.CoachManager.Application.Services.Categories;
-using My.CoachManager.CrossCutting.Unity;
+using Microsoft.Practices.ServiceLocation;
+using My.CoachManager.Application.Dtos.Category;
+using My.CoachManager.Application.Services.CategoryModule;
 using My.CoachManager.Services.Wcf.Interfaces;
 
 namespace My.CoachManager.Services.Wcf
@@ -15,18 +15,9 @@ namespace My.CoachManager.Services.Wcf
         /// Get categories list.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<CategoryDto> GetList()
+        public IList<CategoryDto> GetCategories()
         {
-            return UnityFactory.Resolve<ICategoryAppService>().GetList();
-        }
-
-        /// <summary>
-        /// Get categories list.
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<CategoryDto> GetLabels()
-        {
-            return UnityFactory.Resolve<ICategoryAppService>().GetList();
+            return ServiceLocator.Current.TryResolve<ICategoryAppService>().GetCategories();
         }
 
         /// <summary>
@@ -34,9 +25,9 @@ namespace My.CoachManager.Services.Wcf
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public CategoryDto GetById(int id)
+        public CategoryDto GetCategoryById(int id)
         {
-            return UnityFactory.Resolve<ICategoryAppService>().GetById(id);
+            return ServiceLocator.Current.TryResolve<ICategoryAppService>().GetCategoryById(id);
         }
 
         /// <summary>
@@ -44,9 +35,9 @@ namespace My.CoachManager.Services.Wcf
         /// </summary>
         /// <param name="categoryDto"></param>
         /// <returns></returns>
-        public CategoryDto CreateOrUpdate(CategoryDto categoryDto)
+        public CategoryDto SaveCategory(CategoryDto categoryDto)
         {
-            return UnityFactory.Resolve<ICategoryAppService>().CreateOrUpdate(categoryDto);
+            return ServiceLocator.Current.TryResolve<ICategoryAppService>().SaveCategory(categoryDto);
         }
 
         /// <summary>
@@ -54,9 +45,9 @@ namespace My.CoachManager.Services.Wcf
         /// </summary>
         /// <param name="categoryDto"></param>
         /// <returns></returns>
-        public void Remove(CategoryDto categoryDto)
+        public void RemoveCategory(CategoryDto categoryDto)
         {
-            UnityFactory.Resolve<ICategoryAppService>().Remove(categoryDto);
+            ServiceLocator.Current.TryResolve<ICategoryAppService>().RemoveCategory(categoryDto);
         }
 
         /// <summary>
@@ -65,7 +56,7 @@ namespace My.CoachManager.Services.Wcf
         /// <param name="entities"></param>
         public void UpdateOrders(IDictionary<int, int> entities)
         {
-            UnityFactory.Resolve<ICategoryAppService>().UpdateOrders(entities);
+            ServiceLocator.Current.TryResolve<ICategoryAppService>().UpdateOrders(entities);
         }
     }
 }

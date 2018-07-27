@@ -25,14 +25,14 @@ namespace My.CoachManager.Presentation.Prism.Modules.Settings
         public void Initialize()
         {
             // Register ViewModels
-            Locator.RegisterType<ISettingsViewModel, SettingsViewModel>();
-            Locator.RegisterType<ISkinSettingsViewModel, SkinSettingsViewModel>();
+            //Locator.RegisterType<ISettingsViewModel, SettingsViewModel>();
+            //Locator.RegisterType<ISkinSettingsViewModel, SkinSettingsViewModel>();
 
-            // Register the navigation view
-            _regionManager.RegisterViewWithRegion(RegionNames.SettingsRegion, Locator.GetInstance<SkinSettingsView>);
+            //// Register the navigation view
+            //_regionManager.RegisterViewWithRegion(RegionNames.SettingsRegion, Locator.GetInstance<SkinSettingsView>);
 
-            _regionManager.RegisterViewWithRegion(RegionNames.ToolbarRegion, Locator.GetInstance<SettingsCommand>);
-            _regionManager.RegisterViewWithRegion(RegionNames.FlyoutsRegion, Locator.GetInstance<SettingsView>);
+            //_regionManager.RegisterViewWithRegion(RegionNames.ToolbarRegion, Locator.GetInstance<SettingsCommand>);
+            //_regionManager.RegisterViewWithRegion(RegionNames.FlyoutsRegion, Locator.GetInstance<SettingsView>);
         }
     }
 }

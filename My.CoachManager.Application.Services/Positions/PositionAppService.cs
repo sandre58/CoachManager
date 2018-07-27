@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using My.CoachManager.Application.Core;
-using My.CoachManager.Application.Dtos.Mapping;
 using My.CoachManager.Application.Dtos.Positions;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.PositionModule.Aggregate;
 using My.CoachManager.Domain.PositionModule.Service;
@@ -15,11 +14,11 @@ namespace My.CoachManager.Application.Services.Positions
     /// <summary>
     /// Implementation of the IPositionAppService class.
     /// </summary>
-    public class PositionAppService : AppService, IPositionAppService
+    public class PositionAppService : IPositionAppService
     {
         #region ---- Fields ----
 
-        private readonly IPositionRepository _positionRepository;
+        private readonly IRepository<Position> _positionRepository;
 
         private readonly IPositionDomainService _positionDomainService;
 
@@ -33,8 +32,7 @@ namespace My.CoachManager.Application.Services.Positions
         /// <param name="logger"></param>
         /// <param name="positionRepository"></param>
         /// <param name="positionDomainService"></param>
-        public PositionAppService(ILogger logger, IPositionRepository positionRepository, IPositionDomainService positionDomainService)
-            : base(logger)
+        public PositionAppService(ILogger logger, IRepository<Position> positionRepository, IPositionDomainService positionDomainService)
         {
             _positionRepository = positionRepository;
             _positionDomainService = positionDomainService;
@@ -50,17 +48,18 @@ namespace My.CoachManager.Application.Services.Positions
         /// <returns></returns>
         public PositionDto CreateOrUpdate(PositionDto dto)
         {
-            var entity = dto.ToEntity<Position>();
-            if (!_positionDomainService.IsUnique(entity))
-            {
-                throw new BusinessException(string.Format(ValidationMessageResources.AlreadyExistMessage, entity.Code));
-            }
+            return null;
+            //var entity = dto.ToEntity<Position>();
+            //if (!_positionDomainService.IsUnique(entity))
+            //{
+            //    throw new BusinessException(string.Format(ValidationMessageResources.AlreadyExistMessage, entity.Code));
+            //}
 
-            _positionRepository.AddOrModify(entity);
+            ////_positionRepository.AddOrModify(entity);
 
-            _positionRepository.UnitOfWork.Commit();
+            //_positionRepository.UnitOfWork.Commit();
 
-            return entity.ToDto<PositionDto>();
+            //return entity.ToDto<PositionDto>();
         }
 
         /// <summary>
@@ -69,9 +68,9 @@ namespace My.CoachManager.Application.Services.Positions
         /// <returns></returns>
         public void Remove(PositionDto dto)
         {
-            _positionRepository.Remove(dto.ToEntity<Position>());
+            //_positionRepository.Remove(dto.ToEntity<Position>());
 
-            _positionRepository.UnitOfWork.Commit();
+            //_positionRepository.UnitOfWork.Commit();
         }
 
         /// <summary>
@@ -80,7 +79,8 @@ namespace My.CoachManager.Application.Services.Positions
         /// <returns></returns>
         public PositionDto GetById(int id)
         {
-            return _positionRepository.GetEntity(id).ToDto<PositionDto>();
+            return null;
+            //return _positionRepository.GetEntity(id).ToDto<PositionDto>();
         }
 
         /// <summary>

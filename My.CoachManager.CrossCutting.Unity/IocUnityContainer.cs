@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
+using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.CrossCutting.Unity.Configurations;
 using My.CoachManager.CrossCutting.Unity.Exceptions;
 using My.CoachManager.CrossCutting.Unity.Resources;
@@ -14,125 +15,52 @@ namespace My.CoachManager.CrossCutting.Unity
     /// <summary>
     /// Implemented container in Microsoft Practices Unity.
     /// </summary>
-    public sealed class IocUnityContainer : IDisposable
+    public sealed class IocUnityContainer : UnityContainerExtension
     {
-        #region ----- Fields -----
-
         /// <summary>
-        /// Unity container.
+        /// The logger.
         /// </summary>
-        private readonly IUnityContainer _container;
-
-        #endregion ----- Fields -----
-
-        #region ----- Constructors -----
+        private readonly ILogger _logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IocUnityContainer"/> class.
         /// </summary>
-        public IocUnityContainer()
+        /// <param name="logger">The logger.</param>
+        public IocUnityContainer(ILogger logger)
         {
-            // Create root container.
-            _container = new UnityContainer();
+            _logger = logger;
+        }
+
+        /// <summary>
+        /// Initial the container with this extension's functionality.
+        /// </summary>
+        /// <remarks>
+        /// When overridden in a derived class, this method will modify the given <see cref="T:Microsoft.Practices.Unity.ExtensionContext"/> by adding
+        /// strategies, policies, etc. to install it's functions into the container.
+        /// </remarks>
+        protected override void Initialize()
+        {
+            // Application Layer
+            // Container.RegisterType<ISettingAppService, SettingAppService>();
+
+            // Domain Layer
+            // Container.RegisterType(typeof(IReferentialDomainService<>), typeof(ReferentialDomainService<>));
+
+            // Data Layer
+            // Container.RegisterType(typeof(IRepository<>), typeof(GenericRepository<>));
+
+            // CrossCutting Layer
+            // Container.RegisterType<ICacheManager, MemoryCacheManager>(new ContainerControlledLifetimeManager());
+            Container.RegisterInstance(_logger, new ContainerControlledLifetimeManager());
 
             // Get unity configurations sections
-            var configurations = UnityConfigurationManager.UnitySections;
+            //var configurations = UnityConfigurationManager.UnitySections;
 
             // Load All Container of all configurations.
-            LoadContainersConfiguration(configurations);
+            //LoadContainersConfiguration(configurations);
         }
-
-        #endregion ----- Constructors -----
 
         #region ----- Methods -----
-
-        /// <summary>
-        /// Resolve injection dependency.
-        /// </summary>
-        /// <typeparam name="TService">The service.</typeparam>
-        /// <param name="parameters">The parameters.</param>
-        /// <returns>The good instance.</returns>
-        public TService Resolve<TService>(params ConstructorParameter[] parameters)
-        {
-            var overrides = new ParameterOverrides();
-
-            foreach (var param in parameters)
-            {
-                overrides.Add(param.Name, param.Parameter);
-            }
-
-            return _container.Resolve<TService>(overrides);
-        }
-
-        /// <summary>
-        /// Resolves the specified name.
-        /// </summary>
-        /// <typeparam name="TService">The type of the service.</typeparam>
-        /// <param name="name">The name.</param>
-        /// <param name="parameters">The parameters.</param>
-        /// <returns>The good instance.</returns>
-        public TService Resolve<TService>(string name, params ConstructorParameter[] parameters)
-        {
-            var overrides = new ParameterOverrides();
-
-            foreach (var param in parameters)
-            {
-                overrides.Add(param.Name, param.Parameter);
-            }
-
-            return _container.Resolve<TService>(name, overrides);
-        }
-
-        /// <summary>
-        /// Resolve injection dependency.
-        /// </summary>
-        /// <param name="type">The type to resolve.</param>
-        /// <param name="parameters">The parameters.</param>
-        /// <returns>The good instance.</returns>
-        public object Resolve(Type type, params ConstructorParameter[] parameters)
-        {
-            var overrides = new ParameterOverrides();
-
-            foreach (var param in parameters)
-            {
-                overrides.Add(param.Name, param.Parameter);
-            }
-
-            return _container.Resolve(type, overrides);
-        }
-
-        #endregion ----- Methods -----
-
-        #region ----- IDisposable -----
-
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting
-        /// unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Disposes the specified disposing.
-        /// </summary>
-        /// <param name="disposing">If set to <c>true</c> [disposing].</param>
-        public void Dispose(Boolean disposing)
-        {
-            if (!disposing)
-            {
-                return;
-            }
-
-            // Dispose the unity container
-            _container.Dispose();
-        }
-
-        #endregion ----- IDisposable -----
-
-        #region ----- Private Methods -----
 
         /// <summary>
         /// Add all container section of all file in Current Container.
@@ -155,7 +83,7 @@ namespace My.CoachManager.CrossCutting.Unity
                     {
                         Trace.TraceInformation("Load Container {0} of file {1}", name, configuration.Key);
 
-                        _container.LoadConfiguration(configSection, name);
+                        Container.LoadConfiguration(configSection, name);
                     }
                     catch (InvalidOperationException exception)
                     {

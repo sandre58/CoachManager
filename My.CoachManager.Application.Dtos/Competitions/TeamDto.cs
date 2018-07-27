@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
-using My.CoachManager.Application.Dtos.Categories;
-using My.CoachManager.Domain.Entities;
+using My.CoachManager.Application.Dtos.Category;
+using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Application.Dtos.Competitions
 {

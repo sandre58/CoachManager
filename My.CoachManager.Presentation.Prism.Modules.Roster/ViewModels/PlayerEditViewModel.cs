@@ -8,7 +8,6 @@ using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.Modules.Roster.Core.Resources.Strings;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
 using My.CoachManager.Presentation.Prism.ViewModels;
-using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 using Prism.Commands;
@@ -211,8 +210,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 
         protected override void InitializeDataCore()
         {
-            AllCategories = _categoryService.GetLabels().ToViewModels<CategoryViewModel>();
-            AllCountries = _personService.GetCountries().ToViewModels<CountryViewModel>();
+            //AllCategories = _categoryService.GetLabels().ToViewModels<CategoryViewModel>();
+            //AllCountries = _personService.GetCountries().ToViewModels<CountryViewModel>();
 
             // TODO : Address
             AllCities = new List<CityViewModel>();
@@ -253,7 +252,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         protected override PlayerViewModel LoadItemCore(int id)
         {
             var item = _personService.GetPlayer(id);
-            return item.ToViewModel<PlayerViewModel>();
+            return null;
+            //return item.ToViewModel<PlayerViewModel>();
         }
 
         /// <summary>
@@ -283,7 +283,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// </summary>
         protected override bool SaveItemCore()
         {
-            Item = _personService.CreateOrUpdate(Item.ToDto<PlayerDto>()).ToViewModel<PlayerViewModel>();
+            //Item = _personService.CreateOrUpdate(Item.ToDto<PlayerDto>()).ToViewModel<PlayerViewModel>();
             return true;
         }
 

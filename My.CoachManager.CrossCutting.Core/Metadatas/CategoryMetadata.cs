@@ -6,7 +6,7 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
     /// <summary>
     /// Provides Metadata for a Category Entity.
     /// </summary>
-    public class CategoryMetadata : DataEntityMetadata
+    public class CategoryMetadata : ReferenceMetadata
     {
         [Display(Name = "Year", ResourceType = typeof(CategoryResources))]
         public int? Year { get; set; }

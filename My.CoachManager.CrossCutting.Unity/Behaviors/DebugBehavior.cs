@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using Microsoft.Practices.Unity.InterceptionExtension;
+using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.CrossCutting.Logging.Attributes;
+using Unity.Interception.InterceptionBehaviors;
+using Unity.Interception.PolicyInjection.Pipeline;
 
 namespace My.CoachManager.CrossCutting.Unity.Behaviors
 {
@@ -23,7 +24,7 @@ namespace My.CoachManager.CrossCutting.Unity.Behaviors
         public IMethodReturn Invoke(IMethodInvocation input, GetNextInterceptionBehaviorDelegate getNext)
         {
             // Get logger instance
-            var logger = UnityFactory.Resolve<ILogger>();
+            var logger = ServiceLocator.Current.TryResolve<ILogger>();
 
             var methodAttribute = input.MethodBase.GetCustomAttributes(typeof(LoggingContextAttribute), true).FirstOrDefault() as LoggingContextAttribute;
             if (input.MethodBase.DeclaringType != null)
@@ -32,21 +33,6 @@ namespace My.CoachManager.CrossCutting.Unity.Behaviors
 
                 input.InvocationContext.Add("MethodAttribute", methodAttribute);
                 input.InvocationContext.Add("ClassAttribute", classAttribute);
-
-                // Build String to Log
-                var parameters = new List<string>();
-
-                foreach (var item in input.Arguments)
-                {
-                    if (item != null)
-                    {
-                        parameters.Add(item.ToString());
-                    }
-                    else
-                    {
-                        parameters.Add("null");
-                    }
-                }
 
                 string startMethod = string.Format(Resources.TraceMessages.StartMethod, input.MethodBase.DeclaringType.Name, input.MethodBase.Name);
 

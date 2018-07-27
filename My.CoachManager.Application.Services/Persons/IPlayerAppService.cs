@@ -1,6 +1,5 @@
 ﻿using System;
-using My.CoachManager.Application.Core;
-using My.CoachManager.Application.Dtos.Categories;
+using My.CoachManager.Application.Dtos.Category;
 using My.CoachManager.Application.Dtos.Persons;
 
 namespace My.CoachManager.Application.Services.Persons
@@ -8,7 +7,7 @@ namespace My.CoachManager.Application.Services.Persons
     /// <summary>
     /// Interface defining the player application services.
     /// </summary>
-    public interface IPlayerAppService : IAppService
+    public interface IPlayerAppService
     {
         /// <summary>
         /// Get a player.

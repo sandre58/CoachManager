@@ -263,10 +263,8 @@
 
     <Style x:Key="ModernWindowStyle" TargetType="{x:Type controls:ExtendedWindow}">
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Template" Value="{StaticResource ExtendedWindowTemplate}" />
         <Setter Property="TitleForeground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="WindowTitleBrush" Value="{DynamicResource Transparent}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="NonActiveBorderBrush">
             <Setter.Value>
                 <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedWindow}, Path=BorderBrush, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
@@ -277,13 +275,7 @@
                 <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedWindow}, Path=WindowTitleBrush, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="IconTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <Image Margin="{StaticResource DefaultMargin}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding}" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality" />
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="OverlayBrush" Value="{DynamicResource Dark}" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
@@ -296,10 +288,18 @@
         <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="Template" Value="{StaticResource ExtendedWindowTemplate}" />
+        <Setter Property="IconTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Image Margin="{StaticResource DefaultMargin}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding}" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
 
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
-                <WindowChrome CornerRadius="0" GlassFrameThickness="1" UseAeroCaptionButtons="False" NonClientFrameEdges="None" CaptionHeight="0" />
+                <WindowChrome CornerRadius="0" GlassFrameThickness="1" UseAeroCaptionButtons="False" NonClientFrameEdges="None" CaptionHeight="0"  />
             </Setter.Value>
         </Setter>
     </Style>

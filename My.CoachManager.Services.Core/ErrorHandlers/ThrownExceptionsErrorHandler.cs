@@ -9,8 +9,8 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
+using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.CrossCutting.Unity;
 
 namespace My.CoachManager.Services.Core.ErrorHandlers
 {
@@ -49,7 +49,7 @@ namespace My.CoachManager.Services.Core.ErrorHandlers
 
             fault = Message.CreateMessage(version, msgFault, null);
 
-            UnityFactory.Resolve<ILogger>().Error(error);
+            ServiceLocator.Current.TryResolve<ILogger>().Error(error);
         }
     }
 }

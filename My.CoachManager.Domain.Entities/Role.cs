@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Metadatas;
+using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.Entities
 {
@@ -8,7 +9,7 @@ namespace My.CoachManager.Domain.Entities
     /// Provides properties for a Role Entity.
     /// </summary>
     [MetadataType(typeof(RoleMetadata))]
-    public class Role : DataEntity
+    public class Role : Reference
     {
         /// <summary>
         /// Initialize a new instance of <see cref="Role"/>.

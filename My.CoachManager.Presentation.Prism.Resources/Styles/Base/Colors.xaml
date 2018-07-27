@@ -19,7 +19,7 @@
     <Color x:Key="ShadowColor">#FF4D4D4D</Color>
 
     <!-- Colors -->
-    <Color x:Key="TransparentColor">Transparent</Color>
+    <Color x:Key="TransparentColor">#00ffffff</Color>
     <Color x:Key="WhiteColor">#ffffff</Color>
     <Color x:Key="BlackColor">#000000</Color>
 

@@ -8,8 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using My.CoachManager.Application.Dtos.Positions;
-
 namespace My.CoachManager.Presentation.ServiceAgent.PositionServiceReference {
     
     
@@ -18,28 +16,28 @@ namespace My.CoachManager.Presentation.ServiceAgent.PositionServiceReference {
     public interface IPositionService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPositionService/GetList", ReplyAction="http://tempuri.org/IPositionService/GetListResponse")]
-        PositionDto[] GetList();
+        My.CoachManager.Application.Dtos.Positions.PositionDto[] GetList();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPositionService/GetList", ReplyAction="http://tempuri.org/IPositionService/GetListResponse")]
-        System.Threading.Tasks.Task<PositionDto[]> GetListAsync();
+        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Positions.PositionDto[]> GetListAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPositionService/GetById", ReplyAction="http://tempuri.org/IPositionService/GetByIdResponse")]
-        PositionDto GetById(int id);
+        My.CoachManager.Application.Dtos.Positions.PositionDto GetById(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPositionService/GetById", ReplyAction="http://tempuri.org/IPositionService/GetByIdResponse")]
-        System.Threading.Tasks.Task<PositionDto> GetByIdAsync(int id);
+        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Positions.PositionDto> GetByIdAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPositionService/CreateOrUpdate", ReplyAction="http://tempuri.org/IPositionService/CreateOrUpdateResponse")]
-        PositionDto CreateOrUpdate(PositionDto dto);
+        My.CoachManager.Application.Dtos.Positions.PositionDto CreateOrUpdate(My.CoachManager.Application.Dtos.Positions.PositionDto dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPositionService/CreateOrUpdate", ReplyAction="http://tempuri.org/IPositionService/CreateOrUpdateResponse")]
-        System.Threading.Tasks.Task<PositionDto> CreateOrUpdateAsync(PositionDto dto);
+        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Positions.PositionDto> CreateOrUpdateAsync(My.CoachManager.Application.Dtos.Positions.PositionDto dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPositionService/Remove", ReplyAction="http://tempuri.org/IPositionService/RemoveResponse")]
-        void Remove(PositionDto dto);
+        void Remove(My.CoachManager.Application.Dtos.Positions.PositionDto dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPositionService/Remove", ReplyAction="http://tempuri.org/IPositionService/RemoveResponse")]
-        System.Threading.Tasks.Task RemoveAsync(PositionDto dto);
+        System.Threading.Tasks.Task RemoveAsync(My.CoachManager.Application.Dtos.Positions.PositionDto dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPositionService/UpdateOrders", ReplyAction="http://tempuri.org/IPositionService/UpdateOrdersResponse")]
         void UpdateOrders(System.Collections.Generic.Dictionary<int, int> entities);
@@ -75,35 +73,35 @@ namespace My.CoachManager.Presentation.ServiceAgent.PositionServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public PositionDto[] GetList() {
+        public My.CoachManager.Application.Dtos.Positions.PositionDto[] GetList() {
             return base.Channel.GetList();
         }
         
-        public System.Threading.Tasks.Task<PositionDto[]> GetListAsync() {
+        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Positions.PositionDto[]> GetListAsync() {
             return base.Channel.GetListAsync();
         }
         
-        public PositionDto GetById(int id) {
+        public My.CoachManager.Application.Dtos.Positions.PositionDto GetById(int id) {
             return base.Channel.GetById(id);
         }
         
-        public System.Threading.Tasks.Task<PositionDto> GetByIdAsync(int id) {
+        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Positions.PositionDto> GetByIdAsync(int id) {
             return base.Channel.GetByIdAsync(id);
         }
         
-        public PositionDto CreateOrUpdate(PositionDto dto) {
+        public My.CoachManager.Application.Dtos.Positions.PositionDto CreateOrUpdate(My.CoachManager.Application.Dtos.Positions.PositionDto dto) {
             return base.Channel.CreateOrUpdate(dto);
         }
         
-        public System.Threading.Tasks.Task<PositionDto> CreateOrUpdateAsync(PositionDto dto) {
+        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Positions.PositionDto> CreateOrUpdateAsync(My.CoachManager.Application.Dtos.Positions.PositionDto dto) {
             return base.Channel.CreateOrUpdateAsync(dto);
         }
         
-        public void Remove(PositionDto dto) {
+        public void Remove(My.CoachManager.Application.Dtos.Positions.PositionDto dto) {
             base.Channel.Remove(dto);
         }
         
-        public System.Threading.Tasks.Task RemoveAsync(PositionDto dto) {
+        public System.Threading.Tasks.Task RemoveAsync(My.CoachManager.Application.Dtos.Positions.PositionDto dto) {
             return base.Channel.RemoveAsync(dto);
         }
         

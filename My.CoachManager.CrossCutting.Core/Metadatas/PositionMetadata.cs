@@ -8,7 +8,7 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
     /// <summary>
     /// Provides metadata for a Position Entity.
     /// </summary>
-    public class PositionMetadata : DataEntityMetadata
+    public class PositionMetadata : ReferenceMetadata
     {
         [Display(Name = "Row", ResourceType = typeof(PositionResources))]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]

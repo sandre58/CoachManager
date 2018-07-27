@@ -103,9 +103,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Initializes commands.
         /// </summary>
-        protected override void InitializeCommands()
+        protected override void InitializeCommand()
         {
-            base.InitializeCommands();
+            base.InitializeCommand();
 
             AddFilterCommand = new DelegateCommand<string>(AddFilter, CanAddFilter);
             RemoveFilterCommand = new DelegateCommand<IFilter>(RemoveFilter, CanRemoveFilter);

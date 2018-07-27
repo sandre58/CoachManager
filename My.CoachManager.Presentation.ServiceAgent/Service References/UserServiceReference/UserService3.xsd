@@ -10,6 +10,7 @@
           <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Roles" nillable="true" type="tns:ArrayOfRoleDto" />
+          <xs:element minOccurs="0" name="RosterId" nillable="true" type="xs:int" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

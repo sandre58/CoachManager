@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using My.CoachManager.Application.Core;
-using My.CoachManager.Application.Dtos.Mapping;
 using My.CoachManager.Application.Dtos.Seasons;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.SeasonModule.Aggregate;
 using My.CoachManager.Domain.SeasonModule.Service;
@@ -15,11 +14,11 @@ namespace My.CoachManager.Application.Services.Seasons
     /// <summary>
     /// Implementation of the ISeasonAppService class.
     /// </summary>
-    public class SeasonAppService : AppService, ISeasonAppService
+    public class SeasonAppService : ISeasonAppService
     {
         #region ---- Fields ----
 
-        private readonly ISeasonRepository _seasonRepository;
+        private readonly IRepository<Season> _seasonRepository;
 
         private readonly ISeasonDomainService _seasonDomainService;
 
@@ -33,8 +32,7 @@ namespace My.CoachManager.Application.Services.Seasons
         /// <param name="logger"></param>
         /// <param name="seasonRepository"></param>
         /// <param name="seasonDomainService"></param>
-        public SeasonAppService(ILogger logger, ISeasonRepository seasonRepository, ISeasonDomainService seasonDomainService)
-            : base(logger)
+        public SeasonAppService(ILogger logger, IRepository<Season> seasonRepository, ISeasonDomainService seasonDomainService)
         {
             _seasonRepository = seasonRepository;
             _seasonDomainService = seasonDomainService;
@@ -50,17 +48,18 @@ namespace My.CoachManager.Application.Services.Seasons
         /// <returns></returns>
         public SeasonDto CreateOrUpdate(SeasonDto dto)
         {
-            var entity = dto.ToEntity<Season>();
-            if (!_seasonDomainService.IsUnique(entity))
-            {
-                throw new BusinessException(string.Format(ValidationMessageResources.AlreadyExistMessage, entity.Code));
-            }
+            return null;
+            //var entity = dto.ToEntity<Season>();
+            //if (!_seasonDomainService.IsUnique(entity))
+            //{
+            //    throw new BusinessException(string.Format(ValidationMessageResources.AlreadyExistMessage, entity.Code));
+            //}
 
-            _seasonRepository.AddOrModify(entity);
+            ////_seasonRepository.AddOrModify(entity);
 
-            _seasonRepository.UnitOfWork.Commit();
+            //_seasonRepository.UnitOfWork.Commit();
 
-            return entity.ToDto<SeasonDto>();
+            //return entity.ToDto<SeasonDto>();
         }
 
         /// <summary>
@@ -69,9 +68,9 @@ namespace My.CoachManager.Application.Services.Seasons
         /// <returns></returns>
         public void Remove(SeasonDto dto)
         {
-            _seasonRepository.Remove(dto.ToEntity<Season>());
+            //_seasonRepository.Remove(dto.ToEntity<Season>());
 
-            _seasonRepository.UnitOfWork.Commit();
+            //_seasonRepository.UnitOfWork.Commit();
         }
 
         /// <summary>
@@ -80,7 +79,8 @@ namespace My.CoachManager.Application.Services.Seasons
         /// <returns></returns>
         public SeasonDto GetById(int id)
         {
-            return _seasonRepository.GetEntity(id).ToDto<SeasonDto>();
+            return null;
+            //return _seasonRepository.GetEntity(id).ToDto<SeasonDto>();
         }
 
         /// <summary>

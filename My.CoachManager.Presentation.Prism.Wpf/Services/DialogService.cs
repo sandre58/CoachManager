@@ -5,7 +5,6 @@ using Microsoft.Win32;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
-using My.CoachManager.Presentation.Prism.Modules.Login.Core;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using Prism.Events;
@@ -318,16 +317,16 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// </returns>
         public void ShowLoginDialog(string login, string password, string title, Action<IDialog> callback = null)
         {
-            var content = _serviceLocator.GetInstance<ILoginViewModel>();
-            content.UserName = login;
-            content.Password = password;
-            var dialog = new Dialog()
-            {
-                Content = content,
-                Title = !string.IsNullOrEmpty(title) ? title : ControlResources.Login
-            };
+            //var content = _serviceLocator.GetInstance<ILoginViewModel>();
+            //content.UserName = login;
+            //content.Password = password;
+            //var dialog = new Dialog()
+            //{
+            //    Content = content,
+            //    Title = !string.IsNullOrEmpty(title) ? title : ControlResources.Login
+            //};
 
-            _eventAggregator.GetEvent<ShowLoginDialogRequestEvent>().Publish(new DialogEventArgs(dialog, callback));
+            //_eventAggregator.GetEvent<ShowLoginDialogRequestEvent>().Publish(new DialogEventArgs(dialog, callback));
         }
 
         #endregion IDialogService Members

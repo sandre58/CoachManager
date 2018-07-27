@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>My.CoachManager.Application.Dtos</RootNamespace>
     <AssemblyName>My.CoachManager.Application.Dtos</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -199,36 +200,25 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrudStatus.cs" />
     <Compile Include="Persons\AddressDto.cs" />
     <Compile Include="Persons\FunctionDto.cs" />
     <Compile Include="Competitions\ClubDto.cs" />
     <Compile Include="Competitions\TeamDto.cs" />
-    <Compile Include="EntityDtoBase.cs" />
-    <Compile Include="Categories\CategoryDto.cs" />
+    <Compile Include="Category\CategoryDto.cs" />
     <Compile Include="Seasons\SeasonDto.cs" />
     <Compile Include="Positions\PositionDto.cs" />
-    <Compile Include="IEntityDtoBase.cs" />
-    <Compile Include="Mapping\RosterProfile.cs" />
-    <Compile Include="Mapping\CompetitionProfile.cs" />
     <Compile Include="Persons\CoachDto.cs" />
     <Compile Include="Persons\PhoneDto.cs" />
     <Compile Include="Persons\CountryDto.cs" />
-    <Compile Include="DataEntityDto.cs" />
+    <Compile Include="ReferenceDto.cs" />
     <Compile Include="EntityDto.cs" />
     <Compile Include="IEntityDto.cs" />
-    <Compile Include="Mapping\AutoMapperExtension.cs" />
-    <Compile Include="Mapping\AdminProfile.cs" />
-    <Compile Include="Mapping\PersonProfile.cs" />
-    <Compile Include="Mapping\UserProfile.cs" />
     <Compile Include="Persons\ContactDto.cs" />
     <Compile Include="Persons\CityDto.cs" />
     <Compile Include="Persons\PlayerDetailsDto.cs" />
@@ -255,13 +245,6 @@
       <Project>{7D8B4553-4A90-44D7-A1DD-14871E3C6127}</Project>
       <Name>My.CoachManager.Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Domain.Entities\My.CoachManager.Domain.Entities.csproj">
-      <Project>{181cd06d-74f2-4ec1-8f2d-1633e54dad6f}</Project>
-      <Name>My.CoachManager.Domain.Entities</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

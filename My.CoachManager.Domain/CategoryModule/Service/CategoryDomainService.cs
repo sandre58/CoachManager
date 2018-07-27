@@ -1,16 +1,14 @@
-﻿using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Domain.CategoryModule.Aggregate;
+﻿using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
-using My.CoachManager.Domain.PersonModule.Aggregate;
+using My.CoachManager.Domain.ReferenceModule.Service;
 
 namespace My.CoachManager.Domain.CategoryModule.Service
 {
-    public class CategoryDomainService : DomainService, ICategoryDomainService
+    public class CategoryDomainService : ReferenceDomainService<Category>, ICategoryDomainService
     {
         #region Fields
-
-        private readonly ICategoryRepository _categoryRepository;
-        private readonly IPlayerRepository _playerRepository;
+        
+        private readonly IRepository<Player> _playerRepository;
 
         #endregion Fields
 
@@ -19,12 +17,8 @@ namespace My.CoachManager.Domain.CategoryModule.Service
         /// <summary>
         /// Initialise a new instance of <see cref="CategoryDomainService"/>.
         /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="categoryRepository"></param>
-        public CategoryDomainService(ILogger logger, ICategoryRepository categoryRepository, IPlayerRepository playerRepository)
-            : base(logger)
+        public CategoryDomainService(IRepository<Category> categoryRepository, IRepository<Player> playerRepository) : base(categoryRepository)
         {
-            _categoryRepository = categoryRepository;
             _playerRepository = playerRepository;
         }
 
@@ -33,33 +27,23 @@ namespace My.CoachManager.Domain.CategoryModule.Service
         #region Methods
 
         /// <summary>
-        /// Check if category is unique.
-        /// </summary>
-        /// <param name="category"></param>
-        /// <returns></returns>
-        public bool IsUnique(Category category)
-        {
-            return !_categoryRepository.Any(DataSpecification.IsUnique(category));
-        }
-
-        /// <summary>
         /// Check if the category can be removed.
         /// </summary>
         /// <param name="category"></param>
         /// <returns></returns>
         public bool CanBeRemoved(Category category)
         {
-            return !IsUsed(category);
+            return !IsUsed(category.Id);
         }
 
         /// <summary>
         /// Check if the category is used by others properties.
         /// </summary>
-        /// <param name="category"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public bool IsUsed(Category category)
+        public bool IsUsed(int id)
         {
-            return _playerRepository.Any(x => x.CategoryId == category.Id);
+            return _playerRepository.Any(x => x.CategoryId == id);
         }
 
         #endregion Methods

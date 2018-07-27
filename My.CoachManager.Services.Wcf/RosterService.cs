@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.Application.Dtos.Rosters;
 using My.CoachManager.Application.Services.Rosters;
-using My.CoachManager.CrossCutting.Unity;
 using My.CoachManager.Services.Wcf.Interfaces;
 
 namespace My.CoachManager.Services.Wcf
@@ -17,7 +17,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public IEnumerable<SquadDto> GetSquads(int rosterId)
         {
-            return UnityFactory.Resolve<IRosterAppService>().GetSquads(rosterId);
+            return ServiceLocator.Current.TryResolve<IRosterAppService>().GetSquads(rosterId);
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public SquadDto GetSquad(int squadId)
         {
-            return UnityFactory.Resolve<IRosterAppService>().GetSquad(squadId);
+            return ServiceLocator.Current.TryResolve<IRosterAppService>().GetSquad(squadId);
         }
     }
 }

@@ -13,12 +13,12 @@ namespace My.CoachManager.Presentation.Prism.Controls.Windows
     /// A window instance that is capable of per-monitor DPI awareness when supported.
     /// </summary>
     public abstract class DpiAwareWindow
-        : System.Windows.Window
+        : Window
     {
         /// <summary>
         /// Occurs when the system or monitor DPI for this window has changed.
         /// </summary>
-        public event EventHandler DpiChanged;
+        public new event EventHandler DpiChanged;
 
         private HwndSource _source;
         private DpiInformation _dpiInfo;

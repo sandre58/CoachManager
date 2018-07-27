@@ -3,7 +3,7 @@
     /// <summary>
     /// Provides metadata for a Permission Entity.
     /// </summary>
-    public class PermissionMetadata : DataEntityMetadata
+    public class PermissionMetadata : ReferenceMetadata
     {
     }
 }

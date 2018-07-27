@@ -4,11 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
-             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.ViewModels;assembly=My.CoachManager.Presentation.Prism.ViewModels"
              xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:models="clr-namespace:My.CoachManager.Presentation.Prism.Core.Models;assembly=My.CoachManager.Presentation.Prism.Core"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=viewModels:DataEntityViewModel}"
+             d:DataContext="{d:DesignInstance Type=models:ReferenceModel}"
              d:DesignHeight="100" d:DesignWidth="600"
              parameters:PanelParameters.NotAffectMargin="True">
     <Grid FocusManager.FocusedElement="{Binding ElementName=Code}">

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Metadatas;
+using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.Entities
 {
@@ -7,7 +8,7 @@ namespace My.CoachManager.Domain.Entities
     /// Provides properties for a Player Position Entity.
     /// </summary>
     [MetadataType(typeof(PlayerPositionMetadata))]
-    public class PlayerPosition : ForeignEntity
+    public class PlayerPosition : Entity
     {
         /// <summary>
         /// Gets or sets the player id.

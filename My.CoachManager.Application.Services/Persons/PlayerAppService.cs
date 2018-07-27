@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq;
-using My.CoachManager.Application.Core;
-using My.CoachManager.Application.Dtos.Categories;
-using My.CoachManager.Application.Dtos.Mapping;
+using My.CoachManager.Application.Dtos.Category;
 using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.Application.Services.Addresses;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Domain.CategoryModule.Aggregate;
+using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.PersonModule.Aggregate;
 using My.CoachManager.Domain.PersonModule.Service;
@@ -18,12 +17,12 @@ namespace My.CoachManager.Application.Services.Persons
     /// <summary>
     /// Implementation of the IPlayerAppService class.
     /// </summary>
-    public class PlayerAppService : AppService, IPlayerAppService
+    public class PlayerAppService : IPlayerAppService
     {
         #region ---- Fields ----
 
-        private readonly IPlayerRepository _playerRepository;
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly IRepository<Player> _playerRepository;
+        private readonly IRepository<Category> _categoryRepository;
         private readonly IPlayerDomainService _playerDomainService;
         private readonly IAddressAppService _addressAppService;
 
@@ -34,8 +33,7 @@ namespace My.CoachManager.Application.Services.Persons
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerAppService"/> class.
         /// </summary>
-        public PlayerAppService(ILogger logger, IPlayerRepository playerRepository, ICategoryRepository categoryRepository, IPlayerDomainService playerDomainService, IAddressAppService addressAppService)
-            : base(logger)
+        public PlayerAppService(ILogger logger, IRepository<Player> playerRepository, IRepository<Category> categoryRepository, IPlayerDomainService playerDomainService, IAddressAppService addressAppService)
         {
             _playerRepository = playerRepository;
             _playerDomainService = playerDomainService;
@@ -80,46 +78,47 @@ namespace My.CoachManager.Application.Services.Persons
         /// <returns></returns>
         public PlayerDto CreateOrUpdate(PlayerDto dto)
         {
-            var entity = dto.ToEntity<Player>();
+            // var entity = dto.ToEntity<Player>();
 
-            if (!_playerDomainService.IsValid(entity))
-            {
-                throw new BusinessException(ValidationMessageResources.NotValidMessage);
-            }
+            // if (!_playerDomainService.IsValid(entity))
+            // {
+            //     throw new BusinessException(ValidationMessageResources.NotValidMessage);
+            // }
 
-            var address = new AddressDto()
-            {
-                Id = dto.AddressId ?? 0,
-                Row1 = dto.Address,
-                PostalCode = dto.PostalCode,
-                City = dto.City
-            };
+            // var address = new AddressDto()
+            // {
+            //     Id = dto.AddressId ?? 0,
+            //     Row1 = dto.Address,
+            //     PostalCode = dto.PostalCode,
+            //     City = dto.City
+            // };
 
-            // Create or update address
-            if (!string.IsNullOrEmpty(dto.Address) || !string.IsNullOrEmpty(dto.PostalCode) || !string.IsNullOrEmpty(dto.City))
-            {
-                entity.AddressId = _addressAppService.CreateOrUpdate(address).Id;
-            }
+            // // Create or update address
+            // if (!string.IsNullOrEmpty(dto.Address) || !string.IsNullOrEmpty(dto.PostalCode) || !string.IsNullOrEmpty(dto.City))
+            // {
+            //     entity.AddressId = _addressAppService.CreateOrUpdate(address).Id;
+            // }
 
-            // Remove address
-            else if (dto.AddressId.HasValue && string.IsNullOrEmpty(dto.Address) && string.IsNullOrEmpty(dto.PostalCode) && string.IsNullOrEmpty(dto.City))
-            {
-                entity.AddressId = null;
-            }
+            // // Remove address
+            // else if (dto.AddressId.HasValue && string.IsNullOrEmpty(dto.Address) && string.IsNullOrEmpty(dto.PostalCode) && string.IsNullOrEmpty(dto.City))
+            // {
+            //     entity.AddressId = null;
+            // }
 
-            // Add player
-            _playerRepository.AddOrModify(entity);
+            // // Add player
+            //// _playerRepository.AddOrModify(entity);
 
-            // Commit changes
-            _playerRepository.UnitOfWork.Commit();
+            // // Commit changes
+            // _playerRepository.UnitOfWork.Commit();
 
-            // Remove address entity
-            if (!entity.AddressId.HasValue && address.Id != 0)
-            {
-                _addressAppService.Remove(address);
-            }
+            // // Remove address entity
+            // if (!entity.AddressId.HasValue && address.Id != 0)
+            // {
+            //     _addressAppService.Remove(address);
+            // }
 
-            return PlayerFactory.CreatePlayerDto(entity);
+            // return PlayerFactory.CreatePlayerDto(entity);
+            return null;
         }
 
         /// <summary>
@@ -128,9 +127,9 @@ namespace My.CoachManager.Application.Services.Persons
         /// <returns></returns>
         public void Remove(PlayerDto dto)
         {
-            _playerRepository.Remove(dto.ToEntity<Player>());
+            //_playerRepository.Remove(dto.ToEntity<Player>());
 
-            _playerRepository.UnitOfWork.Commit();
+            //_playerRepository.UnitOfWork.Commit();
         }
 
         /// <summary>
@@ -139,7 +138,8 @@ namespace My.CoachManager.Application.Services.Persons
         /// <returns></returns>
         public CategoryDto GetCategoryFromBirthdate(DateTime date)
         {
-            return _categoryRepository.GetByFilter(x => x.Year >= date.Year, x => x.Year, true).ToArray().ToDtos<CategoryDto>().FirstOrDefault();
+            return null;
+            // return _categoryRepository.GetByFilter(x => x.Year >= date.Year, x => x.Year, true).ToArray().ToDtos<CategoryDto>().FirstOrDefault();
         }
 
         #endregion Methods

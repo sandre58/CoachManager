@@ -6,7 +6,7 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
     /// <summary>
     /// Provides metadata for a Country Entity.
     /// </summary>
-    public class CountryMetadata : DataEntityMetadata
+    public class CountryMetadata : ReferenceMetadata
     {
         [Display(Name = "Flag", ResourceType = typeof(CountryResources))]
         public string Flag { get; set; }

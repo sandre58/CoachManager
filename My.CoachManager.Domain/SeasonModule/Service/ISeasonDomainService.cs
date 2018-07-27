@@ -3,7 +3,7 @@ using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Domain.SeasonModule.Service
 {
-    public interface ISeasonDomainService : IDomainService
+    public interface ISeasonDomainService
     {
         /// <summary>
         /// Check if Season is unique.

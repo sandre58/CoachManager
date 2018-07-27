@@ -2,22 +2,13 @@
 {
     public abstract class WorkspaceViewModel : ScreenViewModel, IWorkspaceViewModel
     {
-        #region Fields
-
-        private string _title;
-
-        #endregion Fields
 
         #region Members
 
         /// <summary>
         /// Gets or sets the title screen.
         /// </summary>
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
+        public string Title { get; set; }
 
         #endregion Members
     }

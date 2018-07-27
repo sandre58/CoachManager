@@ -1,12 +1,11 @@
-﻿using My.CoachManager.Application.Core;
-using My.CoachManager.Application.Dtos.Users;
+﻿using My.CoachManager.Application.Dtos.Users;
 
 namespace My.CoachManager.Application.Services.Users
 {
     /// <summary>
     /// Interface defining the category application services.
     /// </summary>
-    public interface IUserAppService : IAppService
+    public interface IUserAppService 
     {
         /// <summary>
         /// Gets a dto.

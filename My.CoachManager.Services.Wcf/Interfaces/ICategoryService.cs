@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using My.CoachManager.Application.Dtos.Categories;
+using My.CoachManager.Application.Dtos.Category;
 
 namespace My.CoachManager.Services.Wcf.Interfaces
 {
@@ -16,14 +15,7 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        IEnumerable<CategoryDto> GetList();
-
-        /// <summary>
-        /// Get categories list.
-        /// </summary>
-        /// <returns></returns>
-        [OperationContract]
-        IEnumerable<CategoryDto> GetLabels();
+        IList<CategoryDto> GetCategories();
 
         /// <summary>
         /// Get a category by Id.
@@ -31,7 +23,7 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// <param name="id"></param>
         /// <returns></returns>
         [OperationContract]
-        CategoryDto GetById(int id);
+        CategoryDto GetCategoryById(int id);
 
         /// <summary>
         /// Create a category.
@@ -39,7 +31,7 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// <param name="playerDto">the player model.</param>
         /// <returns></returns>
         [OperationContract]
-        CategoryDto CreateOrUpdate(CategoryDto playerDto);
+        CategoryDto SaveCategory(CategoryDto playerDto);
 
         /// <summary>
         /// Remove a category.
@@ -47,7 +39,7 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// <param name="playerDto">the player model.</param>
         /// <returns></returns>
         [OperationContract]
-        void Remove(CategoryDto playerDto);
+        void RemoveCategory(CategoryDto playerDto);
 
         /// <summary>
         /// Update Categories Orders.

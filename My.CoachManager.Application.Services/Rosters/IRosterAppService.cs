@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using My.CoachManager.Application.Core;
 using My.CoachManager.Application.Dtos.Rosters;
 
 namespace My.CoachManager.Application.Services.Rosters
@@ -7,7 +6,7 @@ namespace My.CoachManager.Application.Services.Rosters
     /// <summary>
     /// Interface defining the roster application services.
     /// </summary>
-    public interface IRosterAppService : IAppService
+    public interface IRosterAppService
     {
         /// <summary>
         /// Get all roster's squads.

@@ -2,8 +2,8 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Metadatas;
+using My.CoachManager.Presentation.Prism.Core.Models;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 
 namespace My.CoachManager.Presentation.Prism.ViewModels
 {
@@ -11,7 +11,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
     /// Provides properties for a Club Entity.
     /// </summary>
     [MetadataType(typeof(ClubMetadata))]
-    public class ClubViewModel : EntityViewModel
+    public class ClubViewModel : EntityModel
     {
         /// <summary>
         /// Initialise a new instance of <see cref="ClubViewModel"/>.

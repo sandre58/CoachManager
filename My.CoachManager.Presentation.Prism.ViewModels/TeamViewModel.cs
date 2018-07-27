@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Metadatas;
+using My.CoachManager.Presentation.Prism.Core.Models;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 
 namespace My.CoachManager.Presentation.Prism.ViewModels
 {
@@ -9,7 +9,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
     /// Provides properties for a Team Entity.
     /// </summary>
     [MetadataType(typeof(TeamMetadata))]
-    public class TeamViewModel : EntityViewModel
+    public class TeamViewModel : EntityModel
     {
         private int _clubId;
 

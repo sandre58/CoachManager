@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Linq;
-using My.CoachManager.Application.Dtos.Categories;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
+using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Resources.Strings;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Views;
-using My.CoachManager.Presentation.Prism.ViewModels;
-using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
-    public class CategoriesListViewModel : OrderedListViewModel<CategoryViewModel>, ICategoriesListViewModel
+    public class CategoriesListViewModel : OrderedListViewModel<CategoryModel>
     {
         #region Fields
 
@@ -66,9 +63,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// Remove the item from data source.
         /// </summary>
         /// <param name="item"></param>
-        protected override void RemoveItemCore(CategoryViewModel item)
+        protected override void RemoveItemCore(CategoryModel item)
         {
-            _categoryService.Remove(item.ToDto<CategoryDto>());
+            //_categoryService.Remove(item.ToDto<CategoryDto>());
         }
 
         /// <summary>
@@ -85,9 +82,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <returns></returns>
         protected override void LoadDataCore()
         {
-            var result = _categoryService.GetList();
+            var result = _categoryService.GetCategories();
 
-            Items = new ObservableCollection<CategoryViewModel>(result.OrderBy(x => x.Order).ToViewModels<CategoryViewModel>());
+            //Items = new ObservableCollection<CategoryViewModel>(result.OrderBy(x => x.Order).ToViewModels<CategoryViewModel>());
         }
 
         #endregion Data

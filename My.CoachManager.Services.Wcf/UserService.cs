@@ -1,6 +1,6 @@
-﻿using My.CoachManager.Application.Dtos.Users;
+﻿using Microsoft.Practices.ServiceLocation;
+using My.CoachManager.Application.Dtos.Users;
 using My.CoachManager.Application.Services.Users;
-using My.CoachManager.CrossCutting.Unity;
 using My.CoachManager.Services.Wcf.Interfaces;
 
 namespace My.CoachManager.Services.Wcf
@@ -16,7 +16,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public UserDto GetUserById(int id)
         {
-            return UnityFactory.Resolve<IUserAppService>().GetById(id);
+            return ServiceLocator.Current.TryResolve<IUserAppService>().GetById(id);
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public UserDto GetUserByLoginAndPassword(string login, string password)
         {
-            return UnityFactory.Resolve<IUserAppService>().GetByLoginAndPassword(login, password);
+            return ServiceLocator.Current.TryResolve<IUserAppService>().GetByLoginAndPassword(login, password);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public UserDto GetUserByLogin(string login)
         {
-            return UnityFactory.Resolve<IUserAppService>().GetByLogin(login);
+            return ServiceLocator.Current.TryResolve<IUserAppService>().GetByLogin(login);
         }
 
     }

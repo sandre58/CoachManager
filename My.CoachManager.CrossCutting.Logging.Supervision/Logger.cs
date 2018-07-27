@@ -9,6 +9,12 @@ namespace My.CoachManager.CrossCutting.Logging.Supervision
     /// </summary>
     public sealed class Logger : LoggerBase
     {
+
+        /// <summary>
+        /// The instance.
+        /// </summary>
+        private static Logger _instance;
+
         private static NLog.Logger _logger;
 
         #region ----- Constructors -----
@@ -20,6 +26,16 @@ namespace My.CoachManager.CrossCutting.Logging.Supervision
         {
             _logger = LogManager.GetCurrentClassLogger();
         }
+
+        /// <summary>
+        /// Create the logger.
+        /// </summary>
+        /// <returns>The <see cref="Logger"/>.</returns>
+        public static Logger CreateLogger()
+        {
+            return _instance ?? (_instance = new Logger());
+        }
+
 
         #endregion ----- Constructors -----
 

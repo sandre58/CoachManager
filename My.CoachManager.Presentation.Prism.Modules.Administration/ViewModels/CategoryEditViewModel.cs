@@ -1,13 +1,11 @@
-﻿using My.CoachManager.Application.Dtos.Categories;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
+﻿using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
+using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Resources.Strings;
-using My.CoachManager.Presentation.Prism.ViewModels;
-using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
-    public class CategoryEditViewModel : EditViewModel<CategoryViewModel>, ICategoryEditViewModel
+    public class CategoryEditViewModel : EditViewModel<CategoryModel>
     {
         #region Fields
 
@@ -35,7 +33,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// </summary>
         protected override bool SaveItemCore()
         {
-            Item = _categoryService.CreateOrUpdate(Item.ToDto<CategoryDto>()).ToViewModel<CategoryViewModel>();
+            //Item = _categoryService.CreateOrUpdate(Item.ToDto<CategoryDto>()).ToViewModel<CategoryViewModel>();
             return true;
         }
 
@@ -43,9 +41,10 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// Load an item from data source.
         /// </summary>
         /// <param name="id"></param>
-        protected override CategoryViewModel LoadItemCore(int id)
+        protected override CategoryModel LoadItemCore(int id)
         {
-            return _categoryService.GetById(id).ToViewModel<CategoryViewModel>();
+            return null;
+            //return _categoryService.GetById(id).ToViewModel<CategoryViewModel>();
         }
 
         #endregion Methods

@@ -6,7 +6,7 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
     /// <summary>
     /// Provides metadata for a Role Entity.
     /// </summary>
-    public class RoleMetadata : DataEntityMetadata
+    public class RoleMetadata : ReferenceMetadata
     {
         [Display(Name = "Permissions", ResourceType = typeof(RoleResources))]
         public object Permissions { get; set; }

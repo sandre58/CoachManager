@@ -1,12 +1,11 @@
-﻿using My.CoachManager.Application.Core;
-using My.CoachManager.Application.Dtos.Persons;
+﻿using My.CoachManager.Application.Dtos.Persons;
 
 namespace My.CoachManager.Application.Services.Addresses
 {
     /// <summary>
     /// Interface defining the address application services.
     /// </summary>
-    public interface IAddressAppService : IAppService
+    public interface IAddressAppService
     {
         /// <summary>
         /// Create a dto.

@@ -1,6 +1,5 @@
 ﻿using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Navigation;
-using Prism.Events;
 using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
@@ -25,7 +24,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <param name="navigationContext">The navigation context.</param>
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            Locator.GetInstance<IEventAggregator>().GetEvent<NotifyNavigationCompletedEvent>().Publish(new NavigationCompletedEventArgs(this, navigationContext));
+            EventAggregator.GetEvent<NotifyNavigationCompletedEvent>().Publish(new NavigationCompletedEventArgs(this, navigationContext));
 
             //if (State == ScreenState.NotLoaded)
             //{

@@ -396,12 +396,10 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                 Birthdate = new DateTime(1986, 12, 4),
                 Address = new Address()
                 {
-                    Id = 2,
                     Row1 = "Impasse du Babory",
                     PostalCode = "63270",
                     City = "Vic le comte"
                 },
-                AddressId = 2,
                 CountryId = 76,
                 FirstName = "Vincent",
                 Gender = GenderType.Male,
@@ -469,7 +467,6 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
             // Rosters
             var roster = new Roster()
             {
-                Id = 1,
                 Name = "U15 2017/2018",
                 CategoryId = 7,
                 SeasonId = 1
@@ -477,13 +474,11 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
 
             var squad1 = new Squad()
             {
-                Id = 1,
                 Name = "Equipe A"
             };
 
             var squad2 = new Squad()
             {
-                Id = 2,
                 Name = "Equipe B"
             };
 
@@ -509,7 +504,6 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
             {
                 var player = new Player()
                 {
-                    Id = i + 10,
                     CategoryId = i,
                     Birthdate = new DateTime(1986, 12, i),
                     CountryId = 76,
@@ -547,14 +541,14 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
         {
 
             // User and permissions
-            var perm1 = new Permission() { Id = 1, Code = PermissionConstants.ChangeUser, Label = "Changer d'utilisateur", Description = "Permet de se connecter à l'aplication en tant qu'un autre utilisateur." };
-            var perm2 = new Permission() { Id = 2, Code = PermissionConstants.AccessAdmin, Label = "Accès à l'administration", Description = "Permet d'accèder à tout le module d'administration." };
-            var role1 = new Role() { Id = 1, Code = RoleConstants.Admin, Label = "Administrateur", Description = "Rôle permettant de gérer toutes les données utilisées dan l''application." };
+            var perm1 = new Permission() { Code = PermissionConstants.ChangeUser, Label = "Changer d'utilisateur", Description = "Permet de se connecter à l'aplication en tant qu'un autre utilisateur." };
+            var perm2 = new Permission() { Code = PermissionConstants.AccessAdmin, Label = "Accès à l'administration", Description = "Permet d'accèder à tout le module d'administration." };
+            var role1 = new Role() { Code = RoleConstants.Admin, Label = "Administrateur", Description = "Rôle permettant de gérer toutes les données utilisées dan l''application." };
 
-            var user1 = new User() { Id = 1, Name = "Stéphane ANDRE (Home)", Login = "andre", Password = "qRBfE9MoPFs=", Mail = "andre.cs2i@gmail.com", RosterId = 1 };
-            var user2 = new User() { Id = 2, Name = "Stéphane ANDRE (Merial)", Login = "E0214719", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@merial.com", RosterId = 1 };
-            var user3 = new User() { Id = 3, Name = "Vincent SOURDEIX (BI)", Login = "E0268620", Password = "qRBfE9MoPFs=", Mail = "vincentsourdeix@test.fr", RosterId = 1 };
-            var user4 = new User() { Id = 3, Name = "Stéphane ANDRE (Modis)", Login = "stephane.andre", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@modis.com", RosterId = 1 };
+            var user1 = new User() { Name = "Stéphane ANDRE (Home)", Login = "andre", Password = "qRBfE9MoPFs=", Mail = "andre.cs2i@gmail.com", RosterId = 1 };
+            var user2 = new User() { Name = "Stéphane ANDRE (Merial)", Login = "E0214719", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@merial.com", RosterId = 1 };
+            var user3 = new User() { Name = "Vincent SOURDEIX (BI)", Login = "E0268620", Password = "qRBfE9MoPFs=", Mail = "vincentsourdeix@test.fr", RosterId = 1 };
+            var user4 = new User() { Name = "Stéphane ANDRE (Modis)", Login = "stephane.andre", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@modis.com", RosterId = 1 };
 
             role1.Permissions.Add(perm1);
             role1.Permissions.Add(perm2);

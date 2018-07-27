@@ -1,15 +1,12 @@
-﻿using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
-
-namespace My.CoachManager.Presentation.Prism.Wpf.Views
+﻿namespace My.CoachManager.Presentation.Prism.Wpf.Views
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
     public partial class Shell
     {
-        public Shell(IShellViewModel viewModel)
+        public Shell()
         {
-            DataContext = viewModel;
             InitializeComponent();
         }
     }

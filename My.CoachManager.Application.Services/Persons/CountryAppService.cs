@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using My.CoachManager.Application.Core;
 using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Domain.Core;
+using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.PersonModule.Aggregate;
 
 namespace My.CoachManager.Application.Services.Persons
@@ -10,11 +11,11 @@ namespace My.CoachManager.Application.Services.Persons
     /// <summary>
     /// Implementation of the ICountryAppService class.
     /// </summary>
-    public class CountryAppService : AppService, ICountryAppService
+    public class CountryAppService : ICountryAppService
     {
         #region ---- Fields ----
 
-        private readonly ICountryRepository _countryRepository;
+        private readonly IRepository<Country> _countryRepository;
 
         #endregion ---- Fields ----
 
@@ -25,8 +26,7 @@ namespace My.CoachManager.Application.Services.Persons
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="countryRepository"></param>
-        public CountryAppService(ILogger logger, ICountryRepository countryRepository)
-            : base(logger)
+        public CountryAppService(ILogger logger, IRepository<Country> countryRepository)
         {
             _countryRepository = countryRepository;
         }

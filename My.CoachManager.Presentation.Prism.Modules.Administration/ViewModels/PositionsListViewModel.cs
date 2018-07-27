@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Linq;
-using My.CoachManager.Application.Dtos.Positions;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
+using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Resources.Strings;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Views;
-using My.CoachManager.Presentation.Prism.ViewModels;
-using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
-    public class PositionsListViewModel : OrderedListViewModel<PositionViewModel>, IPositionsListViewModel
+    public class PositionsListViewModel : OrderedListViewModel<PositionModel>, IPositionsListViewModel
     {
         #region Fields
 
@@ -66,9 +63,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// Remove the item from data source.
         /// </summary>
         /// <param name="item"></param>
-        protected override void RemoveItemCore(PositionViewModel item)
+        protected override void RemoveItemCore(PositionModel item)
         {
-            _positionService.Remove(item.ToDto<PositionDto>());
+            //_positionService.Remove(item.ToDto<PositionDto>());
         }
 
         /// <summary>
@@ -87,7 +84,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         {
             var result = _positionService.GetList();
 
-            Items = new ObservableCollection<PositionViewModel>(result.OrderBy(x => x.Order).ToViewModels<PositionViewModel>());
+            //Items = new ObservableCollection<PositionViewModel>(result.OrderBy(x => x.Order).ToViewModels<PositionViewModel>());
         }
 
         #endregion Data

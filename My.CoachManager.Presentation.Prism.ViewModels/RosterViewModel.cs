@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Metadatas;
+using My.CoachManager.Presentation.Prism.Core.Models;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 
 namespace My.CoachManager.Presentation.Prism.ViewModels
 {
@@ -10,7 +10,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
     /// Data Transfer Object for Roster item.
     /// </summary>
     [MetadataType(typeof(RosterMetadata))]
-    public class RosterViewModel : EntityViewModel
+    public class RosterViewModel : EntityModel
     {
         /// <summary>
         /// Initialise a new instance of <see cref="RosterViewModel"/>.

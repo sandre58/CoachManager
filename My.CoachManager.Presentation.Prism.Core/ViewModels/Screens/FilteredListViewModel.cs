@@ -6,14 +6,14 @@ using System.Linq;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Filters;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
+using My.CoachManager.Presentation.Prism.Core.Models;
 using My.CoachManager.Presentation.Prism.Core.Views;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
     public abstract class FilteredListViewModel<TEntityViewModel> : ReadOnlyListViewModel<TEntityViewModel>, IFilteredListViewModel
-        where TEntityViewModel : class, IEntityViewModel, INotifyPropertyChanged
+        where TEntityViewModel : class, IEntityModel, INotifyPropertyChanged
     {
         #region Fields
 
@@ -73,9 +73,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Initializes commands.
         /// </summary>
-        protected override void InitializeCommands()
+        protected override void InitializeCommand()
         {
-            base.InitializeCommands();
+            base.InitializeCommand();
 
             ShowFiltersCommand = new DelegateCommand(ShowFilter);
             ResetFiltersCommand = new DelegateCommand(ResetFilters, CanResetFilters);
@@ -104,7 +104,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         private void ShowFilter()
         {
-            Locator.DialogService.ShowWorkspaceDialog(typeof(IFiltersView), _filtersViewModel, before =>
+            DialogService.ShowWorkspaceDialog(typeof(IFiltersView), _filtersViewModel, before =>
                 {
                     if (Filters != null)
                     {

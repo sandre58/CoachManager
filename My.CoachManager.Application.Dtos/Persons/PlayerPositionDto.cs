@@ -7,7 +7,7 @@ namespace My.CoachManager.Application.Dtos.Persons
     /// Data Transfer Object for Player Position item.
     /// </summary>
     [DataContract]
-    public class PlayerPositionDto : IEntityDtoBase
+    public class PlayerPositionDto : EntityDto
     {
         /// <summary>
         /// Gets or sets the player id.

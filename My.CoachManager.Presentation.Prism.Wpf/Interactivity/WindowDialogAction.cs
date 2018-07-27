@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Interactivity;
-using My.CoachManager.Presentation.Prism.Core;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
-using My.CoachManager.Presentation.Prism.Modules.Login.Core;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using My.CoachManager.Presentation.Prism.Wpf.Views;
 using Prism.Interactivity.InteractionRequest;
@@ -237,20 +235,20 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Interactivity
 
             if (dialog.Context != null)
             {
-                if (dialog.Context is IMessageViewModel)
-                {
-                    content = new MessageView((IMessageViewModel)dialog.Context);
-                }
-                else if (dialog.Context is ILoginViewModel)
-                {
-                    var view = Locator.GetInstance<ILoginView>();
-                    view.Model = (ILoginViewModel)dialog.Context;
-                    content = view;
-                }
-                else
-                {
-                    content = dialog.Content;
-                }
+                //if (dialog.Context is IMessageViewModel)
+                //{
+                //    content = new MessageView((IMessageViewModel)dialog.Context);
+                //}
+                //else if (dialog.Context is ILoginViewModel)
+                //{
+                //    //var view = Locator.GetInstance<ILoginView>();
+                //    //view.Model = (ILoginViewModel)dialog.Context;
+                //    //content = view;
+                //}
+                //else
+                //{
+                //    content = dialog.Content;
+                //}
             }
 
             return content;

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Metadatas;
+using My.CoachManager.Presentation.Prism.Core.Models;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 
 namespace My.CoachManager.Presentation.Prism.ViewModels
 {
@@ -9,7 +9,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
     /// Provides properties for a Address Entity.
     /// </summary>
     [MetadataType(typeof(AddressMetadata))]
-    public class AddressViewModel : EntityViewModel
+    public class AddressViewModel : EntityModel
     {
         private string _row1;
 

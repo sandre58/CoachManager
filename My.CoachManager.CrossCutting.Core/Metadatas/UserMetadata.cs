@@ -13,13 +13,13 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
         [Display(Name = "Name", ResourceType = typeof(UserResources))]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         [MaxLength(150, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        [Index(IsUnique = true)]
+        [Index]
         public string Name { get; set; }
 
         [Display(Name = "Login", ResourceType = typeof(UserResources))]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         [MaxLength(100, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        [Index(IsUnique = true)]
+        [Index]
         public string Login { get; set; }
 
         [Display(Name = "Password", ResourceType = typeof(UserResources))]
@@ -29,7 +29,7 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
         [Display(Name = "Mail", ResourceType = typeof(UserResources))]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         [MaxLength(200, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        [Index(IsUnique = true)]
+        [Index]
         [EmailAddress(ErrorMessageResourceName = "EmailFormatMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public string Mail { get; set; }
 

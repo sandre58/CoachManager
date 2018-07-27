@@ -8,7 +8,7 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
     /// <summary>
     /// Provides metadata for a Season Entity.
     /// </summary>
-    public class SeasonMetadata : DataEntityMetadata
+    public class SeasonMetadata : ReferenceMetadata
     {
         [Display(Name = "StartDate", ResourceType = typeof(SeasonResources))]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]

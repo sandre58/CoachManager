@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using My.CoachManager.Application.Dtos.Categories;
+using My.CoachManager.Application.Dtos.Category;
 
 namespace My.CoachManager.Application.Dtos.Persons
 {

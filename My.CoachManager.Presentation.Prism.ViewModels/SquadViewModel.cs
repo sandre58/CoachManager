@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Metadatas;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
+using My.CoachManager.Presentation.Prism.Core.Models;
 
 namespace My.CoachManager.Presentation.Prism.ViewModels
 {
@@ -9,7 +9,7 @@ namespace My.CoachManager.Presentation.Prism.ViewModels
     /// Data Transfer Object for Squad item.
     /// </summary>
     [MetadataType(typeof(SquadMetadata))]
-    public class SquadViewModel : EntityViewModel
+    public class SquadViewModel : EntityModel
     {
         /// <summary>
         /// Initialise a new instance of <see cref="SquadViewModel"/>.

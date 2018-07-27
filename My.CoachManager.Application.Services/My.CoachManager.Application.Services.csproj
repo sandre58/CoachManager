@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>My.CoachManager.Application.Services</RootNamespace>
     <AssemblyName>My.CoachManager.Application.Services</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -157,17 +158,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Addresses\AddressAppService.cs" />
@@ -178,8 +175,8 @@
     <Compile Include="Positions\PositionAppService.cs" />
     <Compile Include="Seasons\SeasonAppService.cs" />
     <Compile Include="Seasons\ISeasonAppService.cs" />
-    <Compile Include="Categories\ICategoryAppService.cs" />
-    <Compile Include="Categories\CategoryAppService.cs" />
+    <Compile Include="CategoryModule\ICategoryAppService.cs" />
+    <Compile Include="CategoryModule\CategoryAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Persons\IPlayerAppService.cs" />
     <Compile Include="Persons\PlayerAppService.cs" />
@@ -189,10 +186,6 @@
     <Compile Include="Users\IUserAppService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\My.CoachManager.Application.Core\My.CoachManager.Application.Core.csproj">
-      <Project>{E8739C63-159B-4FE7-92BC-9B24D0ED6287}</Project>
-      <Name>My.CoachManager.Application.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Application.Dtos\My.CoachManager.Application.Dtos.csproj">
       <Project>{2A887BE7-A2F5-4CD8-9FD6-AF1ADB53B874}</Project>
       <Name>My.CoachManager.Application.Dtos</Name>
@@ -216,14 +209,6 @@
     <ProjectReference Include="..\My.CoachManager.Domain\My.CoachManager.Domain.csproj">
       <Project>{3f16a2ce-0ba1-4dee-8918-57208969a749}</Project>
       <Name>My.CoachManager.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Infrastructure.Data.Core\My.CoachManager.Infrastructure.Data.Core.csproj">
-      <Project>{FB5D742B-D81B-410A-86CB-4FE9D0BBE8AB}</Project>
-      <Name>My.CoachManager.Infrastructure.Data.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Services.Core\My.CoachManager.Services.Core.csproj">
-      <Project>{196CA01E-80FC-4807-9AF4-EF97F1C90AAE}</Project>
-      <Name>My.CoachManager.Services.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

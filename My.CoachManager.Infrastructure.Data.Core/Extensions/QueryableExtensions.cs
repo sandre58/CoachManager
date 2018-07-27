@@ -24,7 +24,7 @@ namespace My.CoachManager.Infrastructure.Data.Core.Extensions
         /// <param name="includes">The includes.</param>
         /// <returns>Query where added include.</returns>
         public static IQueryable<T> Include<T>(this IQueryable<T> source, IEnumerable<Expression<Func<T, object>>> includes)
-            where T : class, IEntityBase
+            where T : class, IEntity
         {
             return source == null ? null : includes.Aggregate(source, (current, include) => current.Include(include));
         }
@@ -37,7 +37,7 @@ namespace My.CoachManager.Infrastructure.Data.Core.Extensions
         /// <param name="order">The order.</param>
         /// <returns>Query where order added.</returns>
         public static IQueryable<T> ApplyQueryOrder<T>(this IQueryable<T> source, QueryOrder<T> order)
-            where T : class, IEntityBase
+            where T : class, IEntity
         {
             source = order.GetOrderByList.Aggregate(source, (current, item) => Queryable.OrderBy(current, (dynamic)item));
 
@@ -72,10 +72,8 @@ namespace My.CoachManager.Infrastructure.Data.Core.Extensions
                 return SqlConstants.QueryNotShowable;
             }
 
-            var objectQuery = objectQueryField.GetValue(internalQuery) as ObjectQuery<T>;
-
             // If the Iqueryable object have no parameter, juste print the IQueryable.ToString() value.
-            if (objectQuery == null)
+            if (!(objectQueryField.GetValue(internalQuery) is ObjectQuery<T> objectQuery))
             {
                 return internalQuery.ToString().Replace("\r\n    ", string.Empty);
             }
@@ -111,7 +109,7 @@ namespace My.CoachManager.Infrastructure.Data.Core.Extensions
                     }
                     else
                     {
-                        value = p.Value == null ? "Null" : p.Value.ToString();
+                        value = p.Value?.ToString() ?? "Null";
                     }
 
                     sb.Replace("@" + p.Name + ' ', value + ' ');

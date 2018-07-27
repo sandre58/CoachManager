@@ -8,7 +8,7 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
     /// <summary>
     /// Provides metadata for a Roster Coach Entity.
     /// </summary>
-    public class RosterCoachMetadata : ForeignEntityMetadata
+    public class RosterCoachMetadata :EntityMetadata
     {
         [Key]
         [Column(Order = 1)]

@@ -5,13 +5,13 @@ using System.Linq;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.DragAndDrop;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
+using My.CoachManager.Presentation.Prism.Core.Models;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
     public abstract class OrderedListViewModel<TEntityViewModel> : ListViewModel<TEntityViewModel>
-        where TEntityViewModel : class, IOrderableViewModel, INotifyPropertyChanged
+        where TEntityViewModel : class, IOrderable, IEntityModel,IValidatable, IModifiable, INotifyPropertyChanged, new()
     {
         #region Fields
 
@@ -35,9 +35,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
                     EditCommand.RaiseCanExecuteChanged();
                     RemoveCommand.RaiseCanExecuteChanged();
                     RefreshCommand.RaiseCanExecuteChanged();
-                    KeyboardActionCommand.RaiseCanExecuteChanged();
-                    EnterCommand.RaiseCanExecuteChanged();
-                    EscapeCommand.RaiseCanExecuteChanged();
                     MoveAboveCommand.RaiseCanExecuteChanged();
                     MoveBelowCommand.RaiseCanExecuteChanged();
                     ActivateOrderCommand.RaiseCanExecuteChanged();
@@ -81,9 +78,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Initializes commands.
         /// </summary>
-        protected override void InitializeCommands()
+        protected override void InitializeCommand()
         {
-            base.InitializeCommands();
+            base.InitializeCommand();
 
             ActivateOrderCommand = new DelegateCommand(ActivateOrder, CanActivateOrder);
             CancelOrderCommand = new DelegateCommand(CancelOrder, CanCancelOrder);
@@ -174,7 +171,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         protected virtual void ValidateOrderCompleted()
         {
-            Locator.DialogService.ShowSuccessPopup(MessageResources.OrderSaved);
+            DialogService.ShowSuccessPopup(MessageResources.OrderSaved);
         }
 
         /// <summary>
@@ -271,7 +268,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         /// <param name="source">The item source.</param>
         /// <param name="newOrder">The new order.</param>
-        protected virtual void Move(IOrderableViewModel source, int newOrder)
+        protected virtual void Move(IOrderable source, int newOrder)
         {
             var items = Items.OrderBy(x => x.Order).ToList();
 

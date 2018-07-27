@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:62863/Services/PositionService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" />
+  <xs:import schemaLocation="http://localhost:62863/Services/PositionService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Positions" />
   <xs:import schemaLocation="http://localhost:62863/Services/PositionService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="GetList">
     <xs:complexType>
@@ -10,7 +10,7 @@
   <xs:element name="GetListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="GetListResult" nillable="true" type="q1:ArrayOfPositionDto" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Positions" minOccurs="0" name="GetListResult" nillable="true" type="q1:ArrayOfPositionDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -24,28 +24,28 @@
   <xs:element name="GetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="GetByIdResult" nillable="true" type="q2:PositionDto" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Positions" minOccurs="0" name="GetByIdResult" nillable="true" type="q2:PositionDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateOrUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="dto" nillable="true" type="q3:PositionDto" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Positions" minOccurs="0" name="dto" nillable="true" type="q3:PositionDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateOrUpdateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="CreateOrUpdateResult" nillable="true" type="q4:PositionDto" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Positions" minOccurs="0" name="CreateOrUpdateResult" nillable="true" type="q4:PositionDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="Remove">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" minOccurs="0" name="dto" nillable="true" type="q5:PositionDto" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Positions" minOccurs="0" name="dto" nillable="true" type="q5:PositionDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

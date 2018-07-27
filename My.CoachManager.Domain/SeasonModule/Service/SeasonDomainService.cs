@@ -1,14 +1,15 @@
 ﻿using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
-using My.CoachManager.Domain.SeasonModule.Aggregate;
+using My.CoachManager.Domain.ReferenceModule.Aggregates;
 
 namespace My.CoachManager.Domain.SeasonModule.Service
 {
-    public class SeasonDomainService : DomainService, ISeasonDomainService
+    public class SeasonDomainService : ISeasonDomainService
     {
         #region Fields
 
-        private readonly ISeasonRepository _seasonRepository;
+        private readonly IRepository<Season> _seasonRepository;
 
         #endregion Fields
 
@@ -19,8 +20,7 @@ namespace My.CoachManager.Domain.SeasonModule.Service
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="seasonRepository"></param>
-        public SeasonDomainService(ILogger logger, ISeasonRepository seasonRepository)
-            : base(logger)
+        public SeasonDomainService(ILogger logger, IRepository<Season> seasonRepository)
         {
             _seasonRepository = seasonRepository;
         }
@@ -36,7 +36,7 @@ namespace My.CoachManager.Domain.SeasonModule.Service
         /// <returns></returns>
         public bool IsUnique(Season item)
         {
-            return !_seasonRepository.Any(DataSpecification.IsUnique(item));
+            return !_seasonRepository.Any(ReferenceSpecification.IsUnique(item));
         }
 
         #endregion Methods

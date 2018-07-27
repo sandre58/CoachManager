@@ -20,7 +20,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Core
         public void Initialize()
         {
             // Register ViewModels
-            Locator.RegisterType<IFiltersView, FiltersView>();
+            //Locator.RegisterType<IFiltersView, FiltersView>();
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using My.CoachManager.Presentation.Prism.Core;
+using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Global;
 using My.CoachManager.Presentation.Prism.Core.Interactivity;
 using My.CoachManager.Presentation.Prism.Core.Navigation;
+using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
-using My.CoachManager.Presentation.Prism.Modules.StatusBar.Core;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -14,13 +14,11 @@ using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 {
-    public class ShellViewModel : ScreenViewModel, IShellViewModel
+    public class ShellViewModel : ScreenViewModel
     {
         #region Fields
 
         private IRegionNavigationJournal _journal;
-        private INavigatableWorkspaceViewModel _activeWorkspace;
-        private bool _isMenuExpended;
 
         #endregion Fields
 
@@ -35,12 +33,12 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
             DialogInteractionRequest = new InteractionRequest<IDialog>();
             NotificationPopupInteractionRequest = new InteractionRequest<INotificationPopup>();
 
-            Locator.GetInstance<IEventAggregator>().GetEvent<ShowWorkspaceDialogRequestEvent>().Subscribe(OnShowWorkspaceDialogRequested, ThreadOption.UIThread, true);
-            Locator.GetInstance<IEventAggregator>().GetEvent<ShowCustomDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
-            Locator.GetInstance<IEventAggregator>().GetEvent<ShowMessageDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
-            Locator.GetInstance<IEventAggregator>().GetEvent<ShowNotificationPopupRequestEvent>().Subscribe(OnShowNotificationRequested, ThreadOption.UIThread, true);
-            Locator.GetInstance<IEventAggregator>().GetEvent<ShowLoginDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
-            Locator.GetInstance<IEventAggregator>().GetEvent<NotifyNavigationCompletedEvent>().Subscribe(OnNavigateCompleted, ThreadOption.UIThread, true);
+            ServiceLocator.Current.TryResolve<IEventAggregator>().GetEvent<ShowWorkspaceDialogRequestEvent>().Subscribe(OnShowWorkspaceDialogRequested, ThreadOption.UIThread, true);
+            ServiceLocator.Current.TryResolve<IEventAggregator>().GetEvent<ShowCustomDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
+            ServiceLocator.Current.TryResolve<IEventAggregator>().GetEvent<ShowMessageDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
+            ServiceLocator.Current.TryResolve<IEventAggregator>().GetEvent<ShowNotificationPopupRequestEvent>().Subscribe(OnShowNotificationRequested, ThreadOption.UIThread, true);
+            ServiceLocator.Current.TryResolve<IEventAggregator>().GetEvent<ShowLoginDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
+            ServiceLocator.Current.TryResolve<IEventAggregator>().GetEvent<NotifyNavigationCompletedEvent>().Subscribe(OnNavigateCompleted, ThreadOption.UIThread, true);
 
             var navigateCommand = new DelegateCommand<string>(Navigate, s => true);
 
@@ -59,20 +57,12 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <summary>
         /// Gets or sets the menu is expended.
         /// </summary>
-        public bool IsMenuExpended
-        {
-            get { return _isMenuExpended; }
-            private set { SetProperty(ref _isMenuExpended, value); }
-        }
+        public bool IsMenuExpended { get; set; }
 
         /// <summary>
         /// Gets or sets the active workspace.
         /// </summary>
-        public INavigatableWorkspaceViewModel ActiveWorkspace
-        {
-            get { return _activeWorkspace; }
-            private set { SetProperty(ref _activeWorkspace, value); }
-        }
+        public INavigatableWorkspaceViewModel ActiveWorkspace { get; private set; }
 
         /// <summary>
         /// Gets or Set the dialog interraction.
@@ -115,11 +105,11 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
             if (splitPath.Length > 1)
             {
                 var parameters = new NavigationParameters(splitPath[1]);
-                Locator.NavigationService.NavigateTo(path, parameters.Select(x => new KeyValuePair<string, object>(x.Key, x.Value)));
+                ServiceLocator.Current.TryResolve<INavigationService>().NavigateTo(path, parameters.Select(x => new KeyValuePair<string, object>(x.Key, x.Value)));
             }
             else
             {
-                Locator.NavigationService.NavigateTo(path);
+                ServiceLocator.Current.TryResolve<INavigationService>().NavigateTo(path);
             }
         }
 
@@ -127,7 +117,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// Call when the navigation is completed.
         /// </summary>
         /// <param name="e"></param>
-        protected void OnNavigateCompleted(NavigationCompletedEventArgs e)
+        private void OnNavigateCompleted(NavigationCompletedEventArgs e)
         {
             _journal = e.Context.NavigationService.Journal;
             ActiveWorkspace = e.Workspace;
@@ -137,7 +127,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 
             if (ActiveWorkspace != null)
             {
-                Locator.GetInstance<IEventAggregator>().GetEvent<UpdateStatusBarMessageRequestEvent>().Publish(ActiveWorkspace.Title);
+                //ServiceLocator.Current.TryResolve<IEventAggregator>().GetEvent<UpdateStatusBarMessageRequestEvent>().Publish(ActiveWorkspace.Title);
             }
         }
 
@@ -145,7 +135,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// Call when the window dialog is requested.
         /// </summary>
         /// <param name="e"></param>
-        protected void OnShowWorkspaceDialogRequested(DialogEventArgs e)
+        private void OnShowWorkspaceDialogRequested(DialogEventArgs e)
         {
             WorkspaceDialogInteractionRequest.Raise(e.Dialog, e.Callback);
         }
@@ -154,7 +144,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// Call when the window dialog is requested.
         /// </summary>
         /// <param name="e"></param>
-        protected void OnShowDialogRequested(DialogEventArgs e)
+        private void OnShowDialogRequested(DialogEventArgs e)
         {
             DialogInteractionRequest.Raise(e.Dialog, e.Callback);
         }
@@ -163,7 +153,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// Call when the window dialog is requested.
         /// </summary>
         /// <param name="e"></param>
-        protected void OnShowNotificationRequested(NotificationEventArgs e)
+        private void OnShowNotificationRequested(NotificationEventArgs e)
         {
             NotificationPopupInteractionRequest.Raise(e.Notification, e.Callback);
         }
@@ -173,21 +163,18 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <summary>
         /// Go back.
         /// </summary>
-        public void GoBack()
+        private void GoBack()
         {
-            if (_journal != null)
-            {
-                _journal.GoBack();
-            }
+            _journal?.GoBack();
         }
 
         /// <summary>
         /// Can go back.
         /// </summary>
         /// <returns></returns>
-        public bool CanGoBack()
+        private bool CanGoBack()
         {
-            return _journal != null ? _journal.CanGoBack : false;
+            return _journal?.CanGoBack ?? false;
         }
 
         #endregion GoBack
@@ -197,21 +184,18 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <summary>
         /// Go back.
         /// </summary>
-        public void GoForward()
+        private void GoForward()
         {
-            if (_journal != null)
-            {
-                _journal.GoForward();
-            }
+            _journal?.GoForward();
         }
 
         /// <summary>
         /// Can go back.
         /// </summary>
         /// <returns></returns>
-        public bool CanGoForward()
+        private bool CanGoForward()
         {
-            return _journal != null ? _journal.CanGoForward : false;
+            return _journal?.CanGoForward ?? false;
         }
 
         #endregion GoForward

@@ -5,12 +5,12 @@ using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Metadatas;
 using My.CoachManager.CrossCutting.Core.Resources.Entities;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
+using My.CoachManager.Presentation.Prism.Core.Models;
 
 namespace My.CoachManager.Presentation.Prism.ViewModels
 {
     [MetadataType(typeof(PersonMetadata))]
-    public abstract class PersonViewModel : EntityViewModel
+    public abstract class PersonViewModel : EntityModel
     {
         /// <summary>
         /// Initialise a new instance of <see cref="PersonViewModel"/>.

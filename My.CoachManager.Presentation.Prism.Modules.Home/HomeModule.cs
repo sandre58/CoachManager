@@ -18,13 +18,13 @@ namespace My.CoachManager.Presentation.Prism.Modules.Home
         public void Initialize()
         {
             // Register ViewModels
-            Locator.RegisterType<IHomeViewModel, HomeViewModel>();
+            //Locator.RegisterType<IHomeViewModel, HomeViewModel>();
 
-            // Register Views (for navigation)
-            Locator.RegisterTypeForNavigation<HomeView>();
+            //// Register Views (for navigation)
+            //Locator.RegisterTypeForNavigation<HomeView>();
 
-            // Register the navigation view
-            _regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion, Locator.GetInstance<HomeNavigationView>);
+            //// Register the navigation view
+            //_regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion, Locator.GetInstance<HomeNavigationView>);
         }
     }
 }

@@ -8,44 +8,245 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using My.CoachManager.Application.Dtos.Categories;
-
 namespace My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CategoryDto", Namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Category" +
+        "")]
+    [System.SerializableAttribute()]
+    public partial class CategoryDto : My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.ReferenceDto {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> YearField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Year {
+            get {
+                return this.YearField;
+            }
+            set {
+                if ((this.YearField.Equals(value) != true)) {
+                    this.YearField = value;
+                    this.RaisePropertyChanged("Year");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityDto", Namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.ReferenceDto))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto))]
+    public partial class EntityDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CreatedByField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> CreatedDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ModifiedByField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> ModifiedDateField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy {
+            get {
+                return this.CreatedByField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CreatedByField, value) != true)) {
+                    this.CreatedByField = value;
+                    this.RaisePropertyChanged("CreatedBy");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.CreatedDateField;
+            }
+            set {
+                if ((this.CreatedDateField.Equals(value) != true)) {
+                    this.CreatedDateField = value;
+                    this.RaisePropertyChanged("CreatedDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy {
+            get {
+                return this.ModifiedByField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModifiedByField, value) != true)) {
+                    this.ModifiedByField = value;
+                    this.RaisePropertyChanged("ModifiedBy");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> ModifiedDate {
+            get {
+                return this.ModifiedDateField;
+            }
+            set {
+                if ((this.ModifiedDateField.Equals(value) != true)) {
+                    this.ModifiedDateField = value;
+                    this.RaisePropertyChanged("ModifiedDate");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ReferenceDto", Namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto))]
+    public partial class ReferenceDto : My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.EntityDto {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LabelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int OrderField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code {
+            get {
+                return this.CodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
+                    this.CodeField = value;
+                    this.RaisePropertyChanged("Code");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Label {
+            get {
+                return this.LabelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LabelField, value) != true)) {
+                    this.LabelField = value;
+                    this.RaisePropertyChanged("Label");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Order {
+            get {
+                return this.OrderField;
+            }
+            set {
+                if ((this.OrderField.Equals(value) != true)) {
+                    this.OrderField = value;
+                    this.RaisePropertyChanged("Order");
+                }
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CategoryServiceReference.ICategoryService")]
     public interface ICategoryService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetList", ReplyAction="http://tempuri.org/ICategoryService/GetListResponse")]
-        CategoryDto[] GetList();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetCategories", ReplyAction="http://tempuri.org/ICategoryService/GetCategoriesResponse")]
+        My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto[] GetCategories();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetList", ReplyAction="http://tempuri.org/ICategoryService/GetListResponse")]
-        System.Threading.Tasks.Task<CategoryDto[]> GetListAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetCategories", ReplyAction="http://tempuri.org/ICategoryService/GetCategoriesResponse")]
+        System.Threading.Tasks.Task<My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto[]> GetCategoriesAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetLabels", ReplyAction="http://tempuri.org/ICategoryService/GetLabelsResponse")]
-        CategoryDto[] GetLabels();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetCategoryById", ReplyAction="http://tempuri.org/ICategoryService/GetCategoryByIdResponse")]
+        My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto GetCategoryById(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetLabels", ReplyAction="http://tempuri.org/ICategoryService/GetLabelsResponse")]
-        System.Threading.Tasks.Task<CategoryDto[]> GetLabelsAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetCategoryById", ReplyAction="http://tempuri.org/ICategoryService/GetCategoryByIdResponse")]
+        System.Threading.Tasks.Task<My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto> GetCategoryByIdAsync(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetById", ReplyAction="http://tempuri.org/ICategoryService/GetByIdResponse")]
-        CategoryDto GetById(int id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/SaveCategory", ReplyAction="http://tempuri.org/ICategoryService/SaveCategoryResponse")]
+        My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto SaveCategory(My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto playerDto);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetById", ReplyAction="http://tempuri.org/ICategoryService/GetByIdResponse")]
-        System.Threading.Tasks.Task<CategoryDto> GetByIdAsync(int id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/SaveCategory", ReplyAction="http://tempuri.org/ICategoryService/SaveCategoryResponse")]
+        System.Threading.Tasks.Task<My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto> SaveCategoryAsync(My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto playerDto);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/CreateOrUpdate", ReplyAction="http://tempuri.org/ICategoryService/CreateOrUpdateResponse")]
-        CategoryDto CreateOrUpdate(CategoryDto playerDto);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/RemoveCategory", ReplyAction="http://tempuri.org/ICategoryService/RemoveCategoryResponse")]
+        void RemoveCategory(My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto playerDto);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/CreateOrUpdate", ReplyAction="http://tempuri.org/ICategoryService/CreateOrUpdateResponse")]
-        System.Threading.Tasks.Task<CategoryDto> CreateOrUpdateAsync(CategoryDto playerDto);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/Remove", ReplyAction="http://tempuri.org/ICategoryService/RemoveResponse")]
-        void Remove(CategoryDto playerDto);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/Remove", ReplyAction="http://tempuri.org/ICategoryService/RemoveResponse")]
-        System.Threading.Tasks.Task RemoveAsync(CategoryDto playerDto);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/RemoveCategory", ReplyAction="http://tempuri.org/ICategoryService/RemoveCategoryResponse")]
+        System.Threading.Tasks.Task RemoveCategoryAsync(My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto playerDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/UpdateOrders", ReplyAction="http://tempuri.org/ICategoryService/UpdateOrdersResponse")]
         void UpdateOrders(System.Collections.Generic.Dictionary<int, int> entities);
@@ -81,44 +282,36 @@ namespace My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public CategoryDto[] GetList() {
-            return base.Channel.GetList();
+        public My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto[] GetCategories() {
+            return base.Channel.GetCategories();
         }
         
-        public System.Threading.Tasks.Task<CategoryDto[]> GetListAsync() {
-            return base.Channel.GetListAsync();
+        public System.Threading.Tasks.Task<My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto[]> GetCategoriesAsync() {
+            return base.Channel.GetCategoriesAsync();
         }
         
-        public CategoryDto[] GetLabels() {
-            return base.Channel.GetLabels();
+        public My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto GetCategoryById(int id) {
+            return base.Channel.GetCategoryById(id);
         }
         
-        public System.Threading.Tasks.Task<CategoryDto[]> GetLabelsAsync() {
-            return base.Channel.GetLabelsAsync();
+        public System.Threading.Tasks.Task<My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto> GetCategoryByIdAsync(int id) {
+            return base.Channel.GetCategoryByIdAsync(id);
         }
         
-        public CategoryDto GetById(int id) {
-            return base.Channel.GetById(id);
+        public My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto SaveCategory(My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto playerDto) {
+            return base.Channel.SaveCategory(playerDto);
         }
         
-        public System.Threading.Tasks.Task<CategoryDto> GetByIdAsync(int id) {
-            return base.Channel.GetByIdAsync(id);
+        public System.Threading.Tasks.Task<My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto> SaveCategoryAsync(My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto playerDto) {
+            return base.Channel.SaveCategoryAsync(playerDto);
         }
         
-        public CategoryDto CreateOrUpdate(CategoryDto playerDto) {
-            return base.Channel.CreateOrUpdate(playerDto);
+        public void RemoveCategory(My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto playerDto) {
+            base.Channel.RemoveCategory(playerDto);
         }
         
-        public System.Threading.Tasks.Task<CategoryDto> CreateOrUpdateAsync(CategoryDto playerDto) {
-            return base.Channel.CreateOrUpdateAsync(playerDto);
-        }
-        
-        public void Remove(CategoryDto playerDto) {
-            base.Channel.Remove(playerDto);
-        }
-        
-        public System.Threading.Tasks.Task RemoveAsync(CategoryDto playerDto) {
-            return base.Channel.RemoveAsync(playerDto);
+        public System.Threading.Tasks.Task RemoveCategoryAsync(My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto playerDto) {
+            return base.Channel.RemoveCategoryAsync(playerDto);
         }
         
         public void UpdateOrders(System.Collections.Generic.Dictionary<int, int> entities) {

@@ -4,7 +4,6 @@ using My.CoachManager.Presentation.Prism.Core;
 using My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels;
 using My.CoachManager.Presentation.Prism.Modules.Roster.Views;
 using My.CoachManager.Presentation.Prism.ViewModels;
-using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using Prism.Modularity;
 using Prism.Regions;
@@ -43,21 +42,21 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster
 
             // Gets squads.
             var squads = await _rosterService.GetSquadsAsync(1);
-            var squadsViewModels = squads.ToViewModels<SquadViewModel>().ToList();
+            //var squadsViewModels = squads.ToViewModels<SquadViewModel>().ToList();
 
-            // Register the navigation view
-            if (squadsViewModels.Count > 1)
-            {
-                Locator.RegisterInstance(new SquadsNavigationViewModel(squadsViewModels));
+            //// Register the navigation view
+            //if (squadsViewModels.Count > 1)
+            //{
+            //    Locator.RegisterInstance(new SquadsNavigationViewModel(squadsViewModels));
 
-                _regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion,
-                    Locator.GetInstance<SquadsNavigationView>);
-            }
-            else
-            {
-                _regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion,
-                    Locator.GetInstance<RosterNavigationView>);
-            }
+            //    _regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion,
+            //        Locator.GetInstance<SquadsNavigationView>);
+            //}
+            //else
+            //{
+            //    _regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion,
+            //        Locator.GetInstance<RosterNavigationView>);
+            //}
         }
     }
 }

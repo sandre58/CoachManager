@@ -10,7 +10,7 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
     /// <summary>
     /// Provides metadata for a Player Position Entity.
     /// </summary>
-    public class PlayerPositionMetadata : ForeignEntityMetadata
+    public class PlayerPositionMetadata : EntityMetadata
     {
         [Key]
         [Column(Order = 1)]

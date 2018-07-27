@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.Application.Dtos.Seasons;
 using My.CoachManager.Application.Services.Seasons;
-using My.CoachManager.CrossCutting.Unity;
 using My.CoachManager.Services.Wcf.Interfaces;
 
 namespace My.CoachManager.Services.Wcf
@@ -17,7 +17,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public IEnumerable<SeasonDto> GetList()
         {
-            return UnityFactory.Resolve<ISeasonAppService>().GetList();
+            return ServiceLocator.Current.TryResolve<ISeasonAppService>().GetList();
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public SeasonDto GetById(int id)
         {
-            return UnityFactory.Resolve<ISeasonAppService>().GetById(id);
+            return ServiceLocator.Current.TryResolve<ISeasonAppService>().GetById(id);
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public SeasonDto CreateOrUpdate(SeasonDto categoryDto)
         {
-            return UnityFactory.Resolve<ISeasonAppService>().CreateOrUpdate(categoryDto);
+            return ServiceLocator.Current.TryResolve<ISeasonAppService>().CreateOrUpdate(categoryDto);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public void Remove(SeasonDto categoryDto)
         {
-            UnityFactory.Resolve<ISeasonAppService>().Remove(categoryDto);
+            ServiceLocator.Current.TryResolve<ISeasonAppService>().Remove(categoryDto);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace My.CoachManager.Services.Wcf
         /// <param name="entities"></param>
         public void UpdateOrders(IDictionary<int, int> entities)
         {
-            UnityFactory.Resolve<ISeasonAppService>().UpdateOrders(entities);
+            ServiceLocator.Current.TryResolve<ISeasonAppService>().UpdateOrders(entities);
         }
     }
 }

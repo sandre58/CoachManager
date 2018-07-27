@@ -4,40 +4,34 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:62863/Services/CategoryService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:62863/Services/CategoryService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/CategoryService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Administration" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/CategoryService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Category" />
       <xsd:import schemaLocation="http://localhost:62863/Services/CategoryService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" />
       <xsd:import schemaLocation="http://localhost:62863/Services/CategoryService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="ICategoryService_GetList_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetList" />
+  <wsdl:message name="ICategoryService_GetCategories_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCategories" />
   </wsdl:message>
-  <wsdl:message name="ICategoryService_GetList_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetListResponse" />
+  <wsdl:message name="ICategoryService_GetCategories_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCategoriesResponse" />
   </wsdl:message>
-  <wsdl:message name="ICategoryService_GetLabels_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetLabels" />
+  <wsdl:message name="ICategoryService_GetCategoryById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCategoryById" />
   </wsdl:message>
-  <wsdl:message name="ICategoryService_GetLabels_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetLabelsResponse" />
+  <wsdl:message name="ICategoryService_GetCategoryById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCategoryByIdResponse" />
   </wsdl:message>
-  <wsdl:message name="ICategoryService_GetById_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetById" />
+  <wsdl:message name="ICategoryService_SaveCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveCategory" />
   </wsdl:message>
-  <wsdl:message name="ICategoryService_GetById_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetByIdResponse" />
+  <wsdl:message name="ICategoryService_SaveCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveCategoryResponse" />
   </wsdl:message>
-  <wsdl:message name="ICategoryService_CreateOrUpdate_InputMessage">
-    <wsdl:part name="parameters" element="tns:CreateOrUpdate" />
+  <wsdl:message name="ICategoryService_RemoveCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveCategory" />
   </wsdl:message>
-  <wsdl:message name="ICategoryService_CreateOrUpdate_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CreateOrUpdateResponse" />
-  </wsdl:message>
-  <wsdl:message name="ICategoryService_Remove_InputMessage">
-    <wsdl:part name="parameters" element="tns:Remove" />
-  </wsdl:message>
-  <wsdl:message name="ICategoryService_Remove_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RemoveResponse" />
+  <wsdl:message name="ICategoryService_RemoveCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveCategoryResponse" />
   </wsdl:message>
   <wsdl:message name="ICategoryService_UpdateOrders_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateOrders" />
@@ -46,25 +40,21 @@
     <wsdl:part name="parameters" element="tns:UpdateOrdersResponse" />
   </wsdl:message>
   <wsdl:portType name="ICategoryService">
-    <wsdl:operation name="GetList">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryService/GetList" message="tns:ICategoryService_GetList_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryService/GetListResponse" message="tns:ICategoryService_GetList_OutputMessage" />
+    <wsdl:operation name="GetCategories">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryService/GetCategories" message="tns:ICategoryService_GetCategories_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryService/GetCategoriesResponse" message="tns:ICategoryService_GetCategories_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetLabels">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryService/GetLabels" message="tns:ICategoryService_GetLabels_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryService/GetLabelsResponse" message="tns:ICategoryService_GetLabels_OutputMessage" />
+    <wsdl:operation name="GetCategoryById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryService/GetCategoryById" message="tns:ICategoryService_GetCategoryById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryService/GetCategoryByIdResponse" message="tns:ICategoryService_GetCategoryById_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetById">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryService/GetById" message="tns:ICategoryService_GetById_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryService/GetByIdResponse" message="tns:ICategoryService_GetById_OutputMessage" />
+    <wsdl:operation name="SaveCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryService/SaveCategory" message="tns:ICategoryService_SaveCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryService/SaveCategoryResponse" message="tns:ICategoryService_SaveCategory_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="CreateOrUpdate">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryService/CreateOrUpdate" message="tns:ICategoryService_CreateOrUpdate_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryService/CreateOrUpdateResponse" message="tns:ICategoryService_CreateOrUpdate_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="Remove">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryService/Remove" message="tns:ICategoryService_Remove_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryService/RemoveResponse" message="tns:ICategoryService_Remove_OutputMessage" />
+    <wsdl:operation name="RemoveCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryService/RemoveCategory" message="tns:ICategoryService_RemoveCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryService/RemoveCategoryResponse" message="tns:ICategoryService_RemoveCategory_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateOrders">
       <wsdl:input wsaw:Action="http://tempuri.org/ICategoryService/UpdateOrders" message="tns:ICategoryService_UpdateOrders_InputMessage" />
@@ -73,8 +63,8 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ICategoryService" type="tns:ICategoryService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetList">
-      <soap:operation soapAction="http://tempuri.org/ICategoryService/GetList" style="document" />
+    <wsdl:operation name="GetCategories">
+      <soap:operation soapAction="http://tempuri.org/ICategoryService/GetCategories" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -82,8 +72,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetLabels">
-      <soap:operation soapAction="http://tempuri.org/ICategoryService/GetLabels" style="document" />
+    <wsdl:operation name="GetCategoryById">
+      <soap:operation soapAction="http://tempuri.org/ICategoryService/GetCategoryById" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -91,8 +81,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetById">
-      <soap:operation soapAction="http://tempuri.org/ICategoryService/GetById" style="document" />
+    <wsdl:operation name="SaveCategory">
+      <soap:operation soapAction="http://tempuri.org/ICategoryService/SaveCategory" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -100,17 +90,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="CreateOrUpdate">
-      <soap:operation soapAction="http://tempuri.org/ICategoryService/CreateOrUpdate" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="Remove">
-      <soap:operation soapAction="http://tempuri.org/ICategoryService/Remove" style="document" />
+    <wsdl:operation name="RemoveCategory">
+      <soap:operation soapAction="http://tempuri.org/ICategoryService/RemoveCategory" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

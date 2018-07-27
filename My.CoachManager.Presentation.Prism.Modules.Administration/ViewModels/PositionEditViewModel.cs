@@ -1,13 +1,12 @@
 ﻿using My.CoachManager.Application.Dtos.Positions;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
+using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Resources.Strings;
-using My.CoachManager.Presentation.Prism.ViewModels;
-using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
-    public class PositionEditViewModel : EditViewModel<PositionViewModel>, IPositionEditViewModel
+    public class PositionEditViewModel : EditViewModel<PositionModel>, IPositionEditViewModel
     {
         #region Fields
 
@@ -35,7 +34,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// </summary>
         protected override bool SaveItemCore()
         {
-            Item = _positionService.CreateOrUpdate(Item.ToDto<PositionDto>()).ToViewModel<PositionViewModel>();
+            //Item = _positionService.CreateOrUpdate(Item.ToDto<PositionDto>()).ToViewModel<PositionViewModel>();
             return true;
         }
 
@@ -43,9 +42,10 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// Load an item from data source.
         /// </summary>
         /// <param name="id"></param>
-        protected override PositionViewModel LoadItemCore(int id)
+        protected override PositionModel LoadItemCore(int id)
         {
-            return _positionService.GetById(id).ToViewModel<PositionViewModel>();
+            return null;
+            //return _positionService.GetById(id).ToViewModel<PositionViewModel>();
         }
 
         #endregion Methods

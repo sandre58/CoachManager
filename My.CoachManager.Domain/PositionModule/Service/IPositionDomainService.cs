@@ -3,7 +3,7 @@ using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Domain.PositionModule.Service
 {
-    public interface IPositionDomainService : IDomainService
+    public interface IPositionDomainService
     {
         /// <summary>
         /// Check if Position is unique.

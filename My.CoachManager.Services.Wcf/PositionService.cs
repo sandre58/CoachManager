@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.Application.Dtos.Positions;
 using My.CoachManager.Application.Services.Positions;
-using My.CoachManager.CrossCutting.Unity;
 using My.CoachManager.Services.Wcf.Interfaces;
 
 namespace My.CoachManager.Services.Wcf
@@ -17,7 +17,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public IEnumerable<PositionDto> GetList()
         {
-            return UnityFactory.Resolve<IPositionAppService>().GetList();
+            return ServiceLocator.Current.TryResolve<IPositionAppService>().GetList();
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public PositionDto GetById(int id)
         {
-            return UnityFactory.Resolve<IPositionAppService>().GetById(id);
+            return ServiceLocator.Current.TryResolve<IPositionAppService>().GetById(id);
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public PositionDto CreateOrUpdate(PositionDto categoryDto)
         {
-            return UnityFactory.Resolve<IPositionAppService>().CreateOrUpdate(categoryDto);
+            return ServiceLocator.Current.TryResolve<IPositionAppService>().CreateOrUpdate(categoryDto);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public void Remove(PositionDto categoryDto)
         {
-            UnityFactory.Resolve<IPositionAppService>().Remove(categoryDto);
+            ServiceLocator.Current.TryResolve<IPositionAppService>().Remove(categoryDto);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace My.CoachManager.Services.Wcf
         /// <param name="entities"></param>
         public void UpdateOrders(IDictionary<int, int> entities)
         {
-            UnityFactory.Resolve<IPositionAppService>().UpdateOrders(entities);
+            ServiceLocator.Current.TryResolve<IPositionAppService>().UpdateOrders(entities);
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using My.CoachManager.Application.Core;
-using My.CoachManager.Application.Dtos.Mapping;
 using My.CoachManager.Application.Dtos.Users;
 using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Domain.Core;
+using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.UserModule.Aggregate;
 
 namespace My.CoachManager.Application.Services.Users
@@ -10,11 +10,11 @@ namespace My.CoachManager.Application.Services.Users
     /// <summary>
     /// Implementation of the ICategoryAppService class.
     /// </summary>
-    public class UserAppService : AppService, IUserAppService
+    public class UserAppService : IUserAppService
     {
         #region ---- Fields ----
 
-        private readonly IUserRepository _userRepository;
+        private readonly IRepository<User> _userRepository;
 
         #endregion ---- Fields ----
 
@@ -25,8 +25,7 @@ namespace My.CoachManager.Application.Services.Users
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="userRepository"></param>
-        public UserAppService(ILogger logger, IUserRepository userRepository)
-            : base(logger)
+        public UserAppService(ILogger logger, IRepository<User> userRepository)
         {
             _userRepository = userRepository;
         }
@@ -41,7 +40,8 @@ namespace My.CoachManager.Application.Services.Users
         /// <returns></returns>
         public UserDto GetById(int id)
         {
-            return _userRepository.GetEntity(id).ToDto<UserDto>();
+            return null;
+            //return _userRepository.GetEntity(id).ToDto<UserDto>();
         }
 
         /// <summary>
@@ -50,7 +50,8 @@ namespace My.CoachManager.Application.Services.Users
         /// <returns></returns>
         public UserDto GetByLoginAndPassword(string login, string password)
         {
-            return _userRepository.GetBySpec(UserSpecification.GetUserByCredentials(login, password), x => x.Roles.Select(r => r.Permissions)).FirstOrDefault().ToDto<UserDto>();
+            return null;
+            //return _userRepository.GetBySpec(UserSpecification.GetUserByCredentials(login, password), x => x.Roles.Select(r => r.Permissions)).FirstOrDefault().ToDto<UserDto>();
         }
 
         /// <summary>
@@ -59,7 +60,8 @@ namespace My.CoachManager.Application.Services.Users
         /// <returns></returns>
         public UserDto GetByLogin(string login)
         {
-            return _userRepository.GetBySpec(UserSpecification.GetUserByLogin(login), x => x.Roles.Select(r => r.Permissions)).FirstOrDefault().ToDto<UserDto>();
+            return null;
+            //return _userRepository.GetBySpec(UserSpecification.GetUserByLogin(login), x => x.Roles.Select(r => r.Permissions)).FirstOrDefault().ToDto<UserDto>();
         }
 
         #endregion Methods

@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows.Input;
+using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.Presentation.Prism.Core.Filters;
+using My.CoachManager.Presentation.Prism.Core.Models;
 using My.CoachManager.Presentation.Prism.Core.Services;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Entities;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
     public abstract class ReadOnlyListViewModel<TEntityViewModel> : NavigatableWorkspaceViewModel, IReadOnlyListViewModel
-        where TEntityViewModel : class, IEntityViewModel, INotifyPropertyChanged
+        where TEntityViewModel : class, IEntityModel, INotifyPropertyChanged
     {
         #region Fields
 
@@ -109,9 +109,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Initializes commands.
         /// </summary>
-        protected override void InitializeCommands()
+        protected override void InitializeCommand()
         {
-            base.InitializeCommands();
+            base.InitializeCommand();
 
             RefreshCommand = new DelegateCommand(Refresh, CanRefresh);
             ChangeDisplayedColumnsCommand = new DelegateCommand<object>(ChangeDisplayedColumns);
@@ -156,7 +156,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         {
             if (CanOpen(item))
             {
-                Locator.GetInstance<INavigationService>().NavigateTo(GetItemViewType(), item.Id);
+                ServiceLocator.Current.TryResolve<INavigationService>().NavigateTo(GetItemViewType(), item.Id);
             }
         }
 
@@ -189,33 +189,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         }
 
         #endregion Refresh
-
-        #region Keyboard
-
-        /// <summary>
-        /// Action when "Enter" key is down.
-        /// </summary>
-        protected override void Enter()
-        {
-            Open(SelectedItem);
-        }
-
-        /// <summary>
-        /// Do action by keyboard trigger.
-        /// </summary>
-        protected override void KeyboardAction(KeyEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Key.F5:
-                    Refresh();
-                    break;
-            }
-
-            base.KeyboardAction(e);
-        }
-
-        #endregion Keyboard
 
         #region Columns Management
 

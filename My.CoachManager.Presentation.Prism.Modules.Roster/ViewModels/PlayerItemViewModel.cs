@@ -2,7 +2,6 @@
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.Modules.Roster.Views;
 using My.CoachManager.Presentation.Prism.ViewModels;
-using My.CoachManager.Presentation.Prism.ViewModels.Mapping;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
@@ -53,7 +52,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// <param name="id"></param>
         protected override PlayerDetailViewModel LoadItemCore(int id)
         {
-            return _personService.GetPlayerDetails(id).ToViewModel<PlayerDetailViewModel>();
+            return null;
+            //return _personService.GetPlayerDetails(id).ToViewModel<PlayerDetailViewModel>();
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Metadatas;
+using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.Entities
 {
@@ -7,7 +8,7 @@ namespace My.CoachManager.Domain.Entities
     /// Provides properties for a Country Entity.
     /// </summary>
     [MetadataType(typeof(CountryMetadata))]
-    public class Country : DataEntity
+    public class Country : Reference
     {
         /// <summary>
         /// Gets or sets the path of the flag image.

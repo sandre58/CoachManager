@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using My.CoachManager.Application.Core;
 using My.CoachManager.Application.Dtos.Positions;
 
 namespace My.CoachManager.Application.Services.Positions
@@ -7,7 +6,7 @@ namespace My.CoachManager.Application.Services.Positions
     /// <summary>
     /// Interface defining the Position application services.
     /// </summary>
-    public interface IPositionAppService : IAppService
+    public interface IPositionAppService
     {
         /// <summary>
         /// Get all dtos list.
