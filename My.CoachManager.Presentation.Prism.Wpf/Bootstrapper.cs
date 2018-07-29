@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
-using My.CoachManager.CrossCutting.Logging.Supervision;
-using My.CoachManager.CrossCutting.Unity;
+using Microsoft.Practices.Unity;
+using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Modules.Administration;
+using My.CoachManager.Presentation.Prism.Wpf.Services;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using My.CoachManager.Presentation.Prism.Wpf.Views;
+using My.CoachManager.Presentation.ServiceAgent;
+using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using Prism.Logging;
 using Prism.Modularity;
 using Prism.Mvvm;
@@ -17,7 +22,6 @@ namespace My.CoachManager.Presentation.Prism.Wpf
 {
     public class Bootstrapper : UnityBootstrapper
     {
-
         /// <summary>
         /// The splash screen model.
         /// </summary>
@@ -34,10 +38,11 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             _splashScreenModel = splashScreenModel;
         }
 
-        #endregion
+        #endregion Constructors
 
         #region Configuration
 
+        /// <inheritdoc />
         /// <summary>
         /// Create the Shell of the Application.
         /// </summary>
@@ -58,15 +63,25 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             return view;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Configure the unity container.
         /// </summary>
         protected override void ConfigureContainer()
         {
             base.ConfigureContainer();
-            Container.AddExtension(new IocUnityContainer(Logger as Logger));
+
+            // Container.AddExtension(new IocUnityContainer(Logger as Logger));
+            Container.RegisterInstance(typeof(ILogger), Logger);
+
+            // Register Wcf Services
+            Container.RegisterInstance(typeof(ICategoryService), ServiceClientFactory.Create<CategoryServiceClient, ICategoryService>());
+
+            // Register Presentation Services
+            Container.RegisterType(typeof(INavigationService), typeof(NavigationService), new ContainerControlledLifetimeManager());
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Configure the Module Catalog.
         /// </summary>
@@ -160,10 +175,11 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         //    thread.Start();
         //}
 
-        #endregion
+        #endregion Configuration
 
         #region Initialisation
 
+        /// <inheritdoc />
         /// <summary>
         /// The configure view model locator.
         /// </summary>
@@ -182,6 +198,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             return CrossCutting.Logging.Supervision.Logger.CreateLogger();
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// The initialize modules.
         /// </summary>
@@ -192,22 +209,16 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            //var actionToLoad = new List<Action>
-            //{
-            //    //CheckKeyCodeOption,
-            //    //LoadLastConfiguration,
-            //    //ShortcutHelper.TryCreateShortcut,
-            //    //this.ValidateXmlFile,
-            //    //this.CreateDefaultValues,
-            //    //this.InitializeUsb,
-            //    //this.CheckDirectories
-            //};
+            var actionToLoad = new List<Action>
+            {
+                LoadSkin
+            };
 
-            //foreach (var action in actionToLoad)
-            //{
-            //    action();
-            //    Logger.Log($"Load action : {action.Method.Name}", Category.Debug, Priority.None);
-            //}
+            foreach (var action in actionToLoad)
+            {
+                action();
+                Logger.Log($"Load action : {action.Method.Name}", Category.Debug, Priority.None);
+            }
 
             base.InitializeModules();
 
@@ -231,6 +242,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             mainWindow.Focus();         // important
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Initialize Shell of the Application.
         /// </summary>
@@ -273,7 +285,17 @@ namespace My.CoachManager.Presentation.Prism.Wpf
                     return viewModel;
                 });
         }
-        #endregion
+
+        /// <summary>
+        /// Load default Skin.
+        /// </summary>
+        private static void LoadSkin()
+        {
+            SkinManager.SkinManager.ApplyTheme("dark");
+            SkinManager.SkinManager.ApplyAccent("blue");
+        }
+
+        #endregion Initialisation
 
         ///// <summary>
         ///// Initialize the application.

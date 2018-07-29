@@ -5,13 +5,19 @@ using System.IO;
 using System.Linq;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
+using My.CoachManager.Application.Services.CategoryModule;
 using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.CrossCutting.Unity.Configurations;
 using My.CoachManager.CrossCutting.Unity.Exceptions;
 using My.CoachManager.CrossCutting.Unity.Resources;
+using My.CoachManager.Domain.AppModule.Services;
+using My.CoachManager.Domain.CategoryModule.Service;
+using My.CoachManager.Domain.Core;
+using My.CoachManager.Infrastructure.Data.Core;
+using My.CoachManager.Infrastructure.Data.UnitOfWorks;
 
 namespace My.CoachManager.CrossCutting.Unity
 {
+    /// <inheritdoc />
     /// <summary>
     /// Implemented container in Microsoft Practices Unity.
     /// </summary>
@@ -31,23 +37,26 @@ namespace My.CoachManager.CrossCutting.Unity
             _logger = logger;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Initial the container with this extension's functionality.
         /// </summary>
         /// <remarks>
-        /// When overridden in a derived class, this method will modify the given <see cref="T:Microsoft.Practices.Unity.ExtensionContext"/> by adding
+        /// When overridden in a derived class, this method will modify the given <see cref="T:Microsoft.Practices.Unity.ExtensionContext" /> by adding
         /// strategies, policies, etc. to install it's functions into the container.
         /// </remarks>
         protected override void Initialize()
         {
-            // Application Layer
-            // Container.RegisterType<ISettingAppService, SettingAppService>();
+            // Data Layer
+            Container.RegisterType<IQueryableUnitOfWork, DataContext>();
+            Container.RegisterType(typeof(IRepository<>), typeof(GenericRepository<>));
 
             // Domain Layer
-            // Container.RegisterType(typeof(IReferentialDomainService<>), typeof(ReferentialDomainService<>));
+            Container.RegisterType(typeof(ICrudDomainService<,>), typeof(CrudDomainService<,>));
+            Container.RegisterType(typeof(ICategoryDomainService), typeof(CategoryDomainService));
 
-            // Data Layer
-            // Container.RegisterType(typeof(IRepository<>), typeof(GenericRepository<>));
+            // Application Layer
+            Container.RegisterType<ICategoryAppService, CategoryAppService>();
 
             // CrossCutting Layer
             // Container.RegisterType<ICacheManager, MemoryCacheManager>(new ContainerControlledLifetimeManager());
@@ -99,6 +108,6 @@ namespace My.CoachManager.CrossCutting.Unity
             }
         }
 
-        #endregion ----- Private Methods -----
+        #endregion ----- Methods -----
     }
 }

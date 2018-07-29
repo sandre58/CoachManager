@@ -12,13 +12,14 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         where TModel : class, IEntityModel, IValidatable, IModifiable, new()
     {
         #region Fields
-        
+
         private int _activeId;
 
         #endregion Fields
 
         #region Members
 
+        /// <inheritdoc />
         /// <summary>
         /// Get or set Item.
         /// </summary>
@@ -33,11 +34,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// Get or Set Cancel Command.
         /// </summary>
         public DelegateCommand CancelCommand { get; set; }
-
-        /// <summary>
-        /// Get or Set Refresh Command.
-        /// </summary>
-        public DelegateCommand RefreshCommand { get; set; }
 
         #endregion Members
 
@@ -66,7 +62,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
             SaveCommand = new DelegateCommand(SaveAsync, CanSave);
             CancelCommand = new DelegateCommand(Cancel, CanCancel);
-            RefreshCommand = new DelegateCommand(Refresh, CanRefresh);
         }
 
         #endregion Initialization
@@ -99,7 +94,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
                 {
                     // ignored
                 }
-                
+
                 State = ScreenState.Ready;
                 Mode = ScreenMode.Edition;
 
@@ -220,26 +215,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         }
 
         #endregion Cancel
-
-        #region Refresh
-
-        /// <summary>
-        /// Refresh Items.
-        /// </summary>
-        protected virtual void Refresh()
-        {
-            RefreshDataAsync();
-        }
-
-        /// <summary>
-        /// Can refresh item.
-        /// </summary>
-        protected virtual bool CanRefresh()
-        {
-            return true;
-        }
-
-        #endregion Refresh
 
         #region Data
 

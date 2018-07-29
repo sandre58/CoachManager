@@ -1,18 +1,63 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.Filters;
 using My.CoachManager.Presentation.Prism.Core.Models;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
-    public abstract class
-        ListViewModel<TEntityViewModel> : ReadOnlyListViewModel<TEntityViewModel>
-        where TEntityViewModel : class, IEntityModel, IModifiable, IValidatable, INotifyPropertyChanged, new()
+    public abstract class ListViewModel<TEntityModel> : NavigatableWorkspaceViewModel
+        where TEntityModel : class, IEntityModel, IModifiable, IValidatable, new()
     {
+        #region Fields
+
+        private ObservableCollection<TEntityModel> _items;
+
+        #endregion Fields
+
         #region Members
+
+        /// <summary>
+        /// Gets or sets the items.
+        /// </summary>
+        public ObservableCollection<TEntityModel> Items
+        {
+            get { return _items; }
+            set
+            {
+                SetItems(value);
+                RaisePropertyChanged(() => Items);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the items.
+        /// </summary>
+        public FilteredCollectionView<TEntityModel> FilteredItems { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the selected item.
+        /// </summary>
+        public TEntityModel SelectedItem { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicates the list is in read only.
+        /// </summary>
+        public bool IsReadOnly { get; set; }
+
+        /// <summary>
+        /// Gets or sets the columns to displayed.
+        /// </summary>
+        public ObservableCollection<string> DisplayedColumns { get; set; }
+
+        /// <summary>
+        /// Gets or sets the preset columns to displayed.
+        /// </summary>
+        public Dictionary<object, string[]> PresetColumns { get; private set; }
 
         /// <summary>
         /// Gets or sets the add command.
@@ -22,38 +67,25 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Gets or sets the edit command.
         /// </summary>
-        public DelegateCommand<TEntityViewModel> EditCommand { get; set; }
+        public DelegateCommand<TEntityModel> EditCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the remove command.
         /// </summary>
-        public DelegateCommand<TEntityViewModel> RemoveCommand { get; set; }
+        public DelegateCommand<TEntityModel> RemoveCommand { get; set; }
+
+        /// <summary>
+        /// Command to change displayed columns.
+        /// </summary>
+        public DelegateCommand<object> ChangeDisplayedColumnsCommand { get; set; }
 
         #endregion Members
 
         #region Methods
 
-        #region Abstract Methods
-
-        /// <summary>
-        /// Get Item View Type.
-        /// </summary>
-        /// <returns></returns>
-        protected abstract Type GetEditViewType();
-
-        /// <summary>
-        /// Get Item View Type.
-        /// </summary>
-        /// <returns></returns>
-        protected override Type GetItemViewType()
-        {
-            return null;
-        }
-
-        #endregion Abstract Methods
-
         #region Initialization
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes commands.
         /// </summary>
@@ -62,33 +94,86 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             base.InitializeCommand();
 
             AddCommand = new DelegateCommand(Add, CanAdd);
-            RemoveCommand = new DelegateCommand<TEntityViewModel>(Remove, CanRemove);
-            EditCommand = new DelegateCommand<TEntityViewModel>(Edit, CanEdit);
-            RefreshCommand = new DelegateCommand(Refresh, CanRefresh);
+            RemoveCommand = new DelegateCommand<TEntityModel>(Remove, CanRemove);
+            EditCommand = new DelegateCommand<TEntityModel>(Edit, CanEdit);
+            ChangeDisplayedColumnsCommand = new DelegateCommand<object>(ChangeDisplayedColumns);
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes Data.
+        /// </summary>
+        protected override void InitializeData()
+        {
+            base.InitializeData();
+
+            _items = new ObservableCollection<TEntityModel>();
+            FilteredItems = new FilteredCollectionView<TEntityModel>(Items);
+
+            PresetColumns = new Dictionary<object, string[]>();
+            IsReadOnly = false;
+        }
+
+        /// <summary>
+        /// Set Items Collection.
+        /// </summary>
+        /// <param name="collection"></param>
+        protected void SetItems(IEnumerable<TEntityModel> collection)
+        {
+            if (_items == null)
+            {
+                _items = new ObservableCollection<TEntityModel>();
+            }
+
+            Items.Clear();
+            Items.AddRange(collection);
         }
 
         #endregion Initialization
+
+        #region Open
+
+        /// <summary>
+        /// Edit Item.
+        /// </summary>
+        protected virtual void Open(TEntityModel item)
+        {
+            if (CanOpen(item))
+            {
+                //ServiceLocator.Current.TryResolve<INavigationService>().NavigateTo(GetItemViewType(), item.Id);
+            }
+        }
+
+        /// <summary>
+        /// Can Edit item.
+        /// </summary>
+        protected virtual bool CanOpen(TEntityModel item)
+        {
+            return Mode == ScreenMode.Read && item != null;
+        }
+
+        #endregion Open
 
         #region Add
 
         /// <summary>
         /// Add a new item.
         /// </summary>
-        public virtual void Add()
+        protected virtual void Add()
         {
-            DialogService.ShowWorkspaceDialog(GetEditViewType(), null, null, dialog =>
-            {
-                OnAddCompleted(dialog.Result);
-            });
+            //DialogService.ShowWorkspaceDialog(GetEditViewType(), null, null, dialog =>
+            //{
+            //    OnAddCompleted(dialog.Result);
+            //});
         }
 
         /// <summary>
         /// Can add a new item.
         /// </summary>
         /// <returns></returns>
-        public virtual bool CanAdd()
+        protected virtual bool CanAdd()
         {
-            return Mode == ScreenMode.Read && GetEditViewType() != null;
+            return Mode == ScreenMode.Read && !IsReadOnly;
         }
 
         /// <summary>
@@ -107,28 +192,28 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Edit Item.
         /// </summary>
-        public virtual void Edit(TEntityViewModel item)
+        protected virtual void Edit(TEntityModel item)
         {
             if (CanEdit(item))
             {
-                DialogService.ShowWorkspaceDialog(GetEditViewType(), null, before =>
-                    {
-                        var vm = before.Context as IEditViewModel<TEntityViewModel>;
-                        OnEditRequested(item, vm);
-                    },
-                    after =>
-                    {
-                        OnEditCompleted(item, after.Result);
-                    });
+                //DialogService.ShowWorkspaceDialog(GetEditViewType(), null, before =>
+                //    {
+                //        var vm = before.Context as IEditViewModel<TEntityViewModel>;
+                //        OnEditRequested(item, vm);
+                //    },
+                //    after =>
+                //    {
+                //        OnEditCompleted(item, after.Result);
+                //    });
             }
         }
 
         /// <summary>
         /// Can Edit item.
         /// </summary>
-        public virtual bool CanEdit(TEntityViewModel item)
+        protected virtual bool CanEdit(TEntityModel item)
         {
-            return Mode == ScreenMode.Read && item != null && GetEditViewType() != null;
+            return Mode == ScreenMode.Read && item != null && !IsReadOnly;
         }
 
         /// <summary>
@@ -136,9 +221,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         /// <param name="item">The item.</param>
         /// <param name="viewModel">The view model.</param>
-        protected virtual void OnEditRequested(TEntityViewModel item, IEditViewModel<TEntityViewModel> viewModel)
+        protected virtual void OnEditRequested(TEntityModel item, IEditViewModel<TEntityModel> viewModel)
         {
-            if (viewModel != null) viewModel.LoadItemById(item.Id);
+            viewModel?.LoadItemById(item.Id);
         }
 
         /// <summary>
@@ -146,7 +231,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// </summary>
         /// <param name="item">The item.</param>
         /// <param name="result">The dialog result.</param>
-        protected virtual void OnEditCompleted(TEntityViewModel item, DialogResult result)
+        protected virtual void OnEditCompleted(TEntityModel item, DialogResult result)
         {
             if (result == DialogResult.Ok) RefreshDataAsync();
         }
@@ -158,32 +243,30 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Remove Item.
         /// </summary>
-        public virtual void Remove(TEntityViewModel item)
+        protected virtual void Remove(TEntityModel item)
         {
-            if (CanRemove(item))
+            if (!CanRemove(item)) return;
+
+            if (item != null)
             {
-                if (item != null)
+                DialogService.ShowQuestionDialog(MessageResources.ConfirmationRemovingItem, dialog =>
                 {
-                    DialogService.ShowQuestionDialog(MessageResources.ConfirmationRemovingItem, dialog =>
+                    if (dialog.Result != DialogResult.Yes) return;
+
+                    try
                     {
-                        if (dialog.Result == DialogResult.Yes)
-                        {
-                            try
-                            {
-                                RemoveItemCore(item);
-                                OnRemoveCompleted(item);
-                            }
-                            catch (BusinessException e)
-                            {
-                                OnBusinessExceptionOccured(e);
-                            }
-                            catch (Exception e)
-                            {
-                                OnExceptionOccured(e);
-                            }
-                        }
-                    });
-                }
+                        RemoveItemCore(item);
+                        OnRemoveCompleted(item);
+                    }
+                    catch (BusinessException e)
+                    {
+                        OnBusinessExceptionOccured(e);
+                    }
+                    catch (Exception e)
+                    {
+                        OnExceptionOccured(e);
+                    }
+                });
             }
         }
 
@@ -191,26 +274,49 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// Removes the item from the data source.
         /// </summary>
         /// <param name="item"></param>
-        protected abstract void RemoveItemCore(TEntityViewModel item);
+        protected abstract void RemoveItemCore(TEntityModel item);
 
         /// <summary>
         /// Can Edit item.
         /// </summary>
-        public virtual bool CanRemove(TEntityViewModel item)
+        protected virtual bool CanRemove(TEntityModel item)
         {
-            return Mode == ScreenMode.Read && item != null;
+            return Mode == ScreenMode.Read && item != null && !IsReadOnly;
         }
 
         /// <summary>
         /// Called after the edit action;
         /// </summary>
         /// <param name="item">The item.</param>
-        protected virtual void OnRemoveCompleted(TEntityViewModel item)
+        protected virtual void OnRemoveCompleted(TEntityModel item)
         {
             RefreshDataAsync();
         }
 
         #endregion Remove
+
+        #region Columns Management
+
+        /// <summary>
+        /// Changes displayed columns.
+        /// </summary>
+        protected void ChangeDisplayedColumns(object type)
+        {
+            if (type != null)
+                DisplayedColumns = new ObservableCollection<string>(PresetColumns[type]);
+        }
+
+        /// <summary>
+        /// Add a preset columns.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="columns"></param>
+        protected void AddPresetColumns(object key, string[] columns)
+        {
+            PresetColumns?.Add(key, columns);
+        }
+
+        #endregion Columns Management
 
         #region Properties Changed
 

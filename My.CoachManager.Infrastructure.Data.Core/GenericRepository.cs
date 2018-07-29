@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
-using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Core.Resources;
-using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Core.Specification;
 using My.CoachManager.Infrastructure.Data.Core.Extensions;
-using My.CoachManager.Infrastructure.Data.Core.Resources;
 
 namespace My.CoachManager.Infrastructure.Data.Core
 {
@@ -39,13 +35,9 @@ namespace My.CoachManager.Infrastructure.Data.Core
         public GenericRepository(IQueryableUnitOfWork unitOfWork)
         {
             // Check preconditions
-            if (unitOfWork == null)
-            {
-                throw new ArgumentNullException(nameof(unitOfWork));
-            }
 
             // Set internal values
-            _currentUnitOfWork = unitOfWork;
+            _currentUnitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
         #endregion ----- Constructor -----
@@ -54,22 +46,20 @@ namespace My.CoachManager.Infrastructure.Data.Core
 
         #region ----- Properties -----
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets a unit of work in this repository.
         /// </summary>
         /// <value>
         /// The unit of work.
         /// </value>
-        public IUnitOfWork UnitOfWork
-        {
-            get { return _currentUnitOfWork; }
-        }
+        public IUnitOfWork UnitOfWork => _currentUnitOfWork;
 
         #endregion ----- Properties -----
 
-
         #region ----- CUD Methods -----
 
+        /// <inheritdoc />
         /// <summary>
         /// Add an Entity Object in Context.
         /// </summary>
@@ -83,8 +73,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             }
 
             CreateSet().Add(item);
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_AddedItemRepository, typeof(TEntity).Name));
         }
 
         /// <summary>
@@ -105,8 +93,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 databaseSet.AddRange(items);
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_AddedItemRepository, typeof(TEntity).Name));
         }
 
         /// <summary>
@@ -128,8 +114,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
 
             // Delete object to IDbSet Object
             objectSet.Remove(item);
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_DeletedItemRepository, typeof(TEntity).Name));
         }
 
         /// <summary>
@@ -147,8 +131,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             // Apply changes for item object
             //_currentUnitOfWork.AddOrUpdate(item);
             _currentUnitOfWork.SetModified(item);
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_ModifiedItemRepository, typeof(TEntity).Name, item.Id));
         }
 
         /// <summary>
@@ -194,8 +176,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             // Create IObjectSet for this particular type and query this
             IQueryable<TEntity> objectSet = CreateSet();
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_CountByFilterRepository, typeof(TEntity).Name, string.Empty));
-
             // Add filter condition
             var result = objectSet.Where(filter).Count();
 
@@ -218,8 +198,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             // Create IObjectSet for this particular type and query this
             IQueryable<TEntity> objectSet = CreateSet();
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_CountBySpecRepository, typeof(TEntity).Name, string.Empty));
-
             // Add Specification condition
             var result = objectSet.Where(specification.SatisfiedBy()).Count();
 
@@ -230,20 +208,20 @@ namespace My.CoachManager.Infrastructure.Data.Core
 
         #region ----- Any Methods -----
 
+        /// <inheritdoc />
         /// <summary>
         /// Provide an interface to request and manage a data source.
         /// </summary>
         /// <typeparam name="TEntity">A class.</typeparam>
         public virtual bool Exists(int id)
         {
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_Exists, typeof(TEntity).Name, id));
-
             // Create IObjectSet for this particular type and query this
             IQueryable<TEntity> objectSet = CreateSet();
 
             return objectSet.Any(t => t.Id == id);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Check if any element check rules.
         /// </summary>
@@ -255,12 +233,8 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// </returns>
         public virtual bool Any(Expression<Func<TEntity, bool>> filter)
         {
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_Any, typeof(TEntity).Name, filter));
-
             // Create IObjectSet for this particular type and query this
             IQueryable<TEntity> objectSet = CreateSet();
-
-            //ServiceLocator.Current.TryResolve<ILogger>().Debug(objectSet.TraceSqlQuery());
 
             // Return true if any match with filter condition
             return objectSet.Any(filter);
@@ -273,12 +247,8 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <returns>A value indicating whether at least one element match with condition.</returns>
         public virtual bool Any(ISpecification<TEntity> specification)
         {
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_Any, typeof(TEntity).Name, specification));
-
             // Create IObjectSet for this particular type and query this
             IQueryable<TEntity> objectSet = CreateSet();
-
-            //ServiceLocator.Current.TryResolve<ILogger>().Debug(objectSet.TraceSqlQuery());
 
             // Return true if any match with filter condition
             return objectSet.Any(specification.SatisfiedBy());
@@ -295,8 +265,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <returns>All TEntity.</returns>
         public virtual IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includes)
         {
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetAllRepository, typeof(TEntity).Name));
-
             // Call Private Methods
             return GetFilteredElements<int, TEntity>(x => x, null, null, true, 0, 0, false, null, includes).Item1;
         }
@@ -315,8 +283,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentNullException(nameof(selectResult));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetAllRepository, typeof(TEntity).Name));
 
             // Call Private Methods
             return GetFilteredElements<int, TResult>(selectResult, null, null, true, 0, 0, false, null, includes).Item1;
@@ -338,8 +304,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentNullException(nameof(orderByExpression));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetAllRepository_ByOrder, typeof(TEntity).Name, orderByExpression));
-
             // Call Private Methods
             return GetFilteredElements(x => x, null, orderByExpression, ascending, 0, 0, false, null, includes).Item1;
         }
@@ -357,8 +321,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentNullException(nameof(order));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetAllRepository_ByOrder, typeof(TEntity).Name, order.WriteInfo()));
 
             // Call Private Methods
             return GetFilteredElements<int, TEntity>(x => x, null, null, true, 0, 0, false, order, includes).Item1;
@@ -387,8 +349,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentNullException(nameof(orderByExpression));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetAllRepository_ByOrder, typeof(TEntity).Name, orderByExpression));
-
             // Call Private Methods
             return GetFilteredElements(selectResult, null, orderByExpression, ascending, 0, 0, false, null, includes).Item1;
         }
@@ -413,8 +373,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentNullException(nameof(order));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetAllRepository_ByOrder, typeof(TEntity).Name, order.WriteInfo()));
 
             // Call Private Methods
             return GetFilteredElements<int, TResult>(selectResult, null, null, false, 0, 0, false, order, includes).Item1;
@@ -448,8 +406,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetAllRepository_ByOrder, typeof(TEntity).Name, pageIndex, pageCount, orderByExpression));
-
             // Call Private Methods
             return GetFilteredElements(x => x, null, orderByExpression, ascending, pageIndex, pageCount, false, null, includes).Item1;
         }
@@ -479,8 +435,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetAllRepository_ByOrder, typeof(TEntity).Name, pageIndex, pageCount, pageIndex, pageCount, order.WriteInfo()));
 
             // Call Private Methods
             return GetFilteredElements<int, TEntity>(x => x, null, null, false, pageIndex, pageCount, false, order, includes).Item1;
@@ -513,8 +467,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetAllRepository_ByOrder, typeof(TEntity).Name, pageIndex, pageCount, pageIndex, pageCount, orderByExpression));
-
             // Call Private Method
             return GetFilteredElements(x => x, null, orderByExpression, ascending, pageIndex, pageCount, true, null, includes);
         }
@@ -543,8 +495,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetAllRepository_ByOrder, typeof(TEntity).Name, pageIndex, pageCount, pageIndex, pageCount, order.WriteInfo()));
 
             // Call Private Method
             return GetFilteredElements<int, TEntity>(x => x, null, null, false, pageIndex, pageCount, true, order, includes);
@@ -585,8 +535,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetAllRepository_ByOrder, typeof(TEntity).Name, pageIndex, pageCount, pageIndex, pageCount, orderByExpression));
-
             // Call Private Methods
             return GetFilteredElements(selectResult, null, orderByExpression, ascending, pageIndex, pageCount, false, null, includes).Item1;
         }
@@ -624,8 +572,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetAllRepository_ByOrder, typeof(TEntity).Name, pageIndex, pageCount, pageIndex, pageCount, order.WriteInfo()));
-
             // Call Private Methods
             return GetFilteredElements<int, TResult>(selectResult, null, null, false, pageIndex, pageCount, false, order, includes).Item1;
         }
@@ -647,7 +593,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentNullException(nameof(filter));
             }
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetByFilterRepository, typeof(TEntity).Name, filter));
 
             // Call Private Methode
             return GetFilteredElements<int, TEntity>(x => x, filter, null, true, 0, 0, false, null, includes).Item1;
@@ -673,8 +618,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentNullException(nameof(filter));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetByFilterRepository, typeof(TEntity).Name, filter));
 
             // Call Private Methode
             return GetFilteredElements<int, TResult>(selectResult, filter, null, true, 0, 0, false, null, includes).Item1;
@@ -702,8 +645,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentNullException(nameof(orderByExpression));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetByFilterRepository_ByOrder, typeof(TEntity).Name, filter, orderByExpression));
-
             // Call Private Methode
             return GetFilteredElements(x => x, filter, orderByExpression, ascending, 0, 0, false, null, includes).Item1;
         }
@@ -727,8 +668,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentNullException(nameof(order));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetByFilterRepository_ByOrder, typeof(TEntity).Name, filter, order.WriteInfo()));
 
             // Call Private Methode
             return GetFilteredElements<int, TEntity>(x => x, filter, null, false, 0, 0, false, order, includes).Item1;
@@ -763,8 +702,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentNullException(nameof(orderByExpression));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetByFilterRepository_ByOrder, typeof(TEntity).Name, filter, orderByExpression));
-
             // Call Private Method
             return GetFilteredElements(selectResult, filter, orderByExpression, ascending, 0, 0, false, null, includes).Item1;
         }
@@ -795,8 +732,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentNullException(nameof(order));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetByFilterRepository_ByOrder, typeof(TEntity).Name, filter, order.WriteInfo()));
 
             // Call Private Method
             return GetFilteredElements<int, TResult>(selectResult, filter, null, false, 0, 0, false, order, includes).Item1;
@@ -836,8 +771,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentNullException(nameof(orderByExpression));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetByFilterRepository_ByOrder_WithPagination, typeof(TEntity).Name, filter, pageIndex, pageCount, orderByExpression));
-
             // Call Private Method
             return GetFilteredElements(x => x, filter, orderByExpression, ascending, pageIndex, pageCount, false, null, includes).Item1;
         }
@@ -873,8 +806,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentNullException(nameof(order));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetByFilterRepository_ByOrder_WithPagination, typeof(TEntity).Name, filter, pageIndex, pageCount, order.WriteInfo()));
 
             // Call Private Method
             return GetFilteredElements<int, TEntity>(x => x, filter, null, false, pageIndex, pageCount, false, order, includes).Item1;
@@ -914,8 +845,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentNullException(nameof(orderByExpression));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetByFilterRepository_ByOrder_WithPagination, typeof(TEntity).Name, filter, pageIndex, pageCount, orderByExpression));
-
             // Call Private Method
             return GetFilteredElements(x => x, filter, orderByExpression, ascending, pageIndex, pageCount, true, null, includes);
         }
@@ -951,8 +880,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentNullException(nameof(order));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetByFilterRepository_ByOrder_WithPagination, typeof(TEntity).Name, filter, pageIndex, pageCount, order.WriteInfo()));
 
             // Call Private Method
             return GetFilteredElements<int, TEntity>(x => x, filter, null, false, pageIndex, pageCount, true, order, includes);
@@ -999,8 +926,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetByFilterRepository_ByOrder_WithPagination, typeof(TEntity).Name, filter, pageIndex, pageCount, orderByExpression));
-
             // Call Private Method
             return GetFilteredElements(selectResult, filter, orderByExpression, ascending, pageIndex, pageCount, false, null, includes).Item1;
         }
@@ -1043,8 +968,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetByFilterRepository_ByOrder_WithPagination, typeof(TEntity).Name, filter, pageIndex, pageCount, order.WriteInfo()));
 
             // Call Private Method
             return GetFilteredElements<int, TResult>(selectResult, filter, null, false, pageIndex, pageCount, false, order, includes).Item1;
@@ -1091,8 +1014,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetByFilterRepository_ByOrder_WithPagination, typeof(TEntity).Name, filter, pageIndex, pageCount, orderByExpression));
-
             // Call Private Method
             return GetFilteredElements(selectResult, filter, orderByExpression, ascending, pageIndex, pageCount, true, null, includes);
         }
@@ -1136,8 +1057,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetByFilterRepository_ByOrder_WithPagination, typeof(TEntity).Name, filter, pageIndex, pageCount, order.WriteInfo()));
-
             // Call Private Method
             return GetFilteredElements<int, TResult>(selectResult, filter, null, false, pageIndex, pageCount, true, order, includes);
         }
@@ -1163,8 +1082,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentNullException(nameof(filter));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetByFilterRepository_ByOrder_WithPagination, typeof(TEntity).Name, filter));
-
             // Call Private Method
             return GetFilteredElements(selectResult, filter, f => f, true, 0, 0, true, null, includes);
         }
@@ -1185,8 +1102,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentNullException(nameof(specification));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetBySpecRepository, typeof(TEntity).Name, string.Empty));
 
             return GetBySpecElements<int, TEntity>(x => x, specification, null, true, 0, 0, false, null, includes).Item1;
         }
@@ -1211,8 +1126,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentNullException(nameof(specification));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetBySpecRepository, typeof(TEntity).Name, specification.GetType().Name));
 
             return GetBySpecElements<int, TResult>(selectResult, specification, null, true, 0, 0, false, null, includes).Item1;
         }
@@ -1239,8 +1152,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentNullException(nameof(orderByExpression));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetBySpecRepository_ByOrder, typeof(TEntity).Name, specification, orderByExpression));
-
             return GetBySpecElements(x => x, specification, orderByExpression, ascending, 0, 0, false, null, includes).Item1;
         }
 
@@ -1263,8 +1174,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentNullException(nameof(order));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetBySpecRepository_ByOrder, typeof(TEntity).Name, specification, order.WriteInfo()));
 
             return GetBySpecElements<int, TEntity>(x => x, specification, null, false, 0, 0, false, order, includes).Item1;
         }
@@ -1298,8 +1207,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentNullException(nameof(orderByExpression));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetBySpecRepository_ByOrder, typeof(TEntity).Name, specification, orderByExpression));
-
             return GetBySpecElements(selectResult, specification, orderByExpression, ascending, 0, 0, false, null, includes).Item1;
         }
 
@@ -1329,8 +1236,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentNullException(nameof(order));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetBySpecRepository_ByOrder, typeof(TEntity).Name, specification, order.WriteInfo()));
 
             return GetBySpecElements<int, TResult>(selectResult, specification, null, false, 0, 0, false, order, includes).Item1;
         }
@@ -1369,8 +1274,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetBySpecRepository_ByOrder_WithPagination1, typeof(TEntity).Name, specification, pageIndex, pageCount, orderByExpression));
-
             return GetBySpecElements(x => x, specification, orderByExpression, ascending, pageIndex, pageCount, false, null, includes).Item1;
         }
 
@@ -1405,8 +1308,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetBySpecRepository_ByOrder_WithPagination1, typeof(TEntity).Name, specification, pageIndex, pageCount, order.WriteInfo()));
 
             return GetBySpecElements<int, TEntity>(x => x, specification, null, false, pageIndex, pageCount, false, order, includes).Item1;
         }
@@ -1452,8 +1353,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetBySpecRepository_ByOrder_WithPagination1, typeof(TEntity).Name, specification, pageIndex, pageCount, orderByExpression));
-
             return GetBySpecElements(selectResult, specification, orderByExpression, ascending, pageIndex, pageCount, false, null, includes).Item1;
         }
 
@@ -1495,8 +1394,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetBySpecRepository_ByOrder_WithPagination1, typeof(TEntity).Name, specification, pageIndex, pageCount, order.WriteInfo()));
 
             return GetBySpecElements<int, TResult>(selectResult, specification, null, false, pageIndex, pageCount, false, order, includes).Item1;
         }
@@ -1542,7 +1439,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
             }
 
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetBySpecRepository_ByOrder_WithPagination1, typeof(TEntity).Name, specification, pageIndex, pageCount, orderByExpression));
             return GetBySpecElements(selectResult, specification, orderByExpression, ascending, pageIndex, pageCount, true, null, includes);
         }
 
@@ -1584,8 +1480,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
             }
-
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetBySpecRepository_ByOrder_WithPagination1, typeof(TEntity).Name, specification, pageIndex, pageCount, order.WriteInfo()));
 
             return GetBySpecElements<int, TResult>(selectResult, specification, null, false, pageIndex, pageCount, true, order, includes);
         }
@@ -1715,7 +1609,7 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="order">The order.</param>
         /// <param name="includes">Array of String for adding include in query.</param>
         /// <returns>List of Selected column of Entity Object, Count of records (0 if not used).</returns>
-        protected Tuple<IEnumerable<TResult>, int> GetElements<TKey, TResult>(IQueryable<TEntity> objectSet, int count, Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, QueryOrder<TEntity> order, params Expression<Func<TEntity, object>>[] includes)
+        private Tuple<IEnumerable<TResult>, int> GetElements<TKey, TResult>(IQueryable<TEntity> objectSet, int count, Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, QueryOrder<TEntity> order, params Expression<Func<TEntity, object>>[] includes)
         {
             // Add All Include Object in Query
             objectSet = objectSet.Include(includes);
@@ -1739,11 +1633,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
 
             var result = objectSet.Select(selectResult);
 
-            //if (result is DbQuery<TResult>)
-            //{
-            //    ServiceLocator.Current.TryResolve<ILogger>().Debug(objectSet.TraceSqlQuery());
-            //}
-
             // Return List of Entity Object and count
             return Tuple.Create(result.AsEnumerable(), count);
         }
@@ -1760,8 +1649,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <returns>Single or Default TEntity.</returns>
         public virtual TEntity GetEntity(int id, params Expression<Func<TEntity, object>>[] includes)
         {
-            ServiceLocator.Current.TryResolve<ILogger>().Debug(string.Format(CultureInfo.InvariantCulture, TraceResources.Trace_GetEntityByID, typeof(TEntity).Name, id));
-
             return GetFilteredElements<int, TEntity>(x => x, x => x.Id.Equals(id), null, true, 0, 0, false, null, includes).Item1.SingleOrDefault();
         }
 

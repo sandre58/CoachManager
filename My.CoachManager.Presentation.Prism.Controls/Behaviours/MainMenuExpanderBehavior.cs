@@ -46,12 +46,15 @@ namespace My.CoachManager.Presentation.Prism.Controls.Behaviours
         protected override void OnAttached()
         {
             base.OnAttached();
-            AssociatedObject.Expanded += AssociatedObjectOnExpanded;
+
+            if (AssociatedObject != null)
+                AssociatedObject.Expanded += AssociatedObjectOnExpanded;
         }
 
         protected override void OnDetaching()
         {
-            AssociatedObject.Expanded -= AssociatedObjectOnExpanded;
+            if (AssociatedObject != null)
+                AssociatedObject.Expanded -= AssociatedObjectOnExpanded;
             base.OnDetaching();
         }
 
@@ -60,8 +63,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Behaviours
         {
             if (!((bool)dependencyPropertyChangedEventArgs.NewValue))
             {
-                var behavior = dependencyObject as MainMenuExpanderBehavior;
-                if (behavior != null && behavior.AssociatedObject != null)
+                if (dependencyObject is MainMenuExpanderBehavior behavior && behavior.AssociatedObject != null)
                 {
                     behavior.AssociatedObject.IsExpanded = false;
                 }
@@ -70,9 +72,12 @@ namespace My.CoachManager.Presentation.Prism.Controls.Behaviours
 
         private void AssociatedObjectOnExpanded(object sender, RoutedEventArgs routedEventArgs)
         {
-            // Display the main menu when the expander is expanded
-            IsMenuDisplayed = true;
-            AssociatedObject.BringIntoView();
+            if (AssociatedObject != null)
+            {
+                // Display the main menu when the expander is expanded
+                IsMenuDisplayed = true;
+                AssociatedObject.BringIntoView();
+            }
         }
 
         #endregion Methods

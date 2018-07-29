@@ -1,6 +1,4 @@
-﻿using My.CoachManager.Presentation.Prism.Core.Interactivity;
-
-namespace My.CoachManager.Presentation.Prism.Controls.Parameters
+﻿namespace My.CoachManager.Presentation.Prism.Controls.Parameters
 {
     using Helpers;
     using System.Windows;
@@ -321,12 +319,9 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
         /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private static void OnDataGridMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DataGridRow dataGridRow = sender as DataGridRow;
-            if (dataGridRow != null && dataGridRow.IsSelected)
-            {
-                dataGridRow.IsSelected = false;
-                e.Handled = true;
-            }
+            if (!(sender is DataGridRow dataGridRow) || !dataGridRow.IsSelected) return;
+            dataGridRow.IsSelected = false;
+            e.Handled = true;
         }
 
         /// <summary>

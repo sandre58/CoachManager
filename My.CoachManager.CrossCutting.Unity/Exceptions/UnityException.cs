@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace My.CoachManager.CrossCutting.Unity.Exceptions
 {
+    /// <inheritdoc />
     /// <summary>
     /// Unity Exception.
     /// </summary>
@@ -11,15 +12,17 @@ namespace My.CoachManager.CrossCutting.Unity.Exceptions
     {
         #region ----- Constructors -----
 
+        /// <inheritdoc />
         /// <summary>
-        /// Initializes a new instance of the <see cref="UnityException"/> class.
+        /// Initializes a new instance of the <see cref="T:My.CoachManager.CrossCutting.Unity.Exceptions.UnityException" /> class.
         /// </summary>
         public UnityException()
         {
         }
 
+        /// <inheritdoc />
         /// <summary>
-        /// Initializes a new instance of the <see cref="UnityException"/> class.
+        /// Initializes a new instance of the <see cref="T:My.CoachManager.CrossCutting.Unity.Exceptions.UnityException" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         public UnityException(string message)
@@ -27,8 +30,9 @@ namespace My.CoachManager.CrossCutting.Unity.Exceptions
         {
         }
 
+        /// <inheritdoc />
         /// <summary>
-        /// Initializes a new instance of the <see cref="UnityException"/> class.
+        /// Initializes a new instance of the <see cref="T:My.CoachManager.CrossCutting.Unity.Exceptions.UnityException" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>
@@ -37,8 +41,9 @@ namespace My.CoachManager.CrossCutting.Unity.Exceptions
         {
         }
 
+        /// <inheritdoc />
         /// <summary>
-        /// Initializes a new instance of the <see cref="UnityException"/> class.
+        /// Initializes a new instance of the <see cref="T:My.CoachManager.CrossCutting.Unity.Exceptions.UnityException" /> class.
         /// </summary>
         /// <param name="info">The info.</param>
         /// <param name="context">The context.</param>

@@ -8,6 +8,7 @@ using Unity.Interception.PolicyInjection.Pipeline;
 
 namespace My.CoachManager.CrossCutting.Unity.Behaviors
 {
+    /// <inheritdoc cref="BehaviorBase" />
     /// <summary>
     /// Trace Behavior for Unity.
     /// </summary>

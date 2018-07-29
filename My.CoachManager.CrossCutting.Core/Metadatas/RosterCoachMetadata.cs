@@ -8,14 +8,12 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
     /// <summary>
     /// Provides metadata for a Roster Coach Entity.
     /// </summary>
-    public class RosterCoachMetadata :EntityMetadata
+    public class RosterCoachMetadata : EntityMetadata
     {
-        [Key]
         [Column(Order = 1)]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public int RosterId { get; set; }
 
-        [Key]
         [Column(Order = 2)]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public int CoachId { get; set; }

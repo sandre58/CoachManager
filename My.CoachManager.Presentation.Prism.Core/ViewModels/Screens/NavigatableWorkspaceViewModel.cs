@@ -1,6 +1,4 @@
-﻿using My.CoachManager.Presentation.Prism.Core.Interactivity;
-using My.CoachManager.Presentation.Prism.Core.Navigation;
-using Prism.Regions;
+﻿using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
@@ -8,10 +6,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
     {
         #region Members
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets a value indicating whether this instance should be kept-alive upon deactivation.
         /// </summary>
-        public virtual bool KeepAlive { get { return true; } }
+        public virtual bool KeepAlive => true;
 
         #endregion Members
 
@@ -24,8 +23,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <param name="navigationContext">The navigation context.</param>
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            EventAggregator.GetEvent<NotifyNavigationCompletedEvent>().Publish(new NavigationCompletedEventArgs(this, navigationContext));
-
             //if (State == ScreenState.NotLoaded)
             //{
             OnNavigatedToCore(navigationContext);

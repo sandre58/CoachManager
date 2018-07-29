@@ -40,8 +40,17 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.6\lib\net47\CommonServiceLocator.dll</HintPath>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -55,13 +64,11 @@
       <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\Prism.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
-    <Reference Include="Unity.ServiceLocation, Version=2.1.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.ServiceLocation.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -75,16 +82,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ViewModels\CategoriesListViewModel2.cs" />
     <Compile Include="ViewModels\CategoriesListViewModel.cs" />
     <Compile Include="ViewModels\CategoryEditViewModel.cs" />
     <Compile Include="ViewModels\IPositionsListViewModel.cs" />
-    <Compile Include="ViewModels\SeasonsListViewModel.cs" />
-    <Compile Include="ViewModels\PositionsListViewModel.cs" />
     <Compile Include="ViewModels\IPositionEditViewModel.cs" />
-    <Compile Include="ViewModels\PositionEditViewModel.cs" />
     <Compile Include="ViewModels\ISeasonsListViewModel.cs" />
     <Compile Include="ViewModels\ISeasonEditViewModel.cs" />
-    <Compile Include="ViewModels\SeasonEditViewModel.cs" />
     <Compile Include="Views\CategoriesListView.xaml.cs">
       <DependentUpon>CategoriesListView.xaml</DependentUpon>
     </Compile>
@@ -93,18 +97,6 @@
     </Compile>
     <Compile Include="Views\CategoryEditView.xaml.cs">
       <DependentUpon>CategoryEditView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SeasonsListView.xaml.cs">
-      <DependentUpon>SeasonsListView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SeasonEditView.xaml.cs">
-      <DependentUpon>SeasonEditView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PositionsListView.xaml.cs">
-      <DependentUpon>PositionsListView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PositionEditView.xaml.cs">
-      <DependentUpon>PositionEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DataEditView.xaml.cs">
       <DependentUpon>DataEditView.xaml</DependentUpon>
@@ -160,22 +152,6 @@
     <Page Include="Views\CategoryEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SeasonsListView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\SeasonEditView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\PositionsListView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\PositionEditView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\DataEditView.xaml">
       <SubType>Designer</SubType>

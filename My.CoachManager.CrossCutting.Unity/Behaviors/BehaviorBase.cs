@@ -13,10 +13,7 @@ namespace My.CoachManager.CrossCutting.Unity.Behaviors
         /// <summary>
         /// Gets a value indicating whether Execute the action.
         /// </summary>
-        public bool WillExecute
-        {
-            get { return true; }
-        }
+        public bool WillExecute => true;
 
         #endregion ----- Properties -----
 
@@ -26,7 +23,6 @@ namespace My.CoachManager.CrossCutting.Unity.Behaviors
         /// <returns>The interfaces list.</returns>
         public IEnumerable<Type> GetRequiredInterfaces()
         {
-            // TODO : Must be Study Correctly
             return Type.EmptyTypes;
         }
     }

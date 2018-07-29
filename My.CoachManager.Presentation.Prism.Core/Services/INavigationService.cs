@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Prism.Core.Services
 {
@@ -9,16 +9,37 @@ namespace My.CoachManager.Presentation.Prism.Core.Services
     /// </summary>
     public interface INavigationService
     {
-        void NavigateTo<TView>(IEnumerable<KeyValuePair<string, object>> parameters = null);
+        /// <summary>
+        /// Gets active view.
+        /// </summary>
+        object ActiveView { get; }
 
-        void NavigateTo(Type typeView, IEnumerable<KeyValuePair<string, object>> parameters = null);
+        /// <summary>
+        /// Navigates to specified view.
+        /// </summary>
+        /// <param name="pagePath">The Uri.</param>
+        /// <param name="parameters">The optionals parameters.</param>
+        /// <param name="callback">Action when navigation is completed.</param>
+        void NavigateTo(string pagePath, Action<NavigationResult> callback = null, NavigationParameters parameters = null);
 
-        void NavigateTo(string pagePath, IEnumerable<KeyValuePair<string, object>> parameters = null);
+        /// <summary>
+        /// Go previous page.
+        /// </summary>
+        void GoBack();
 
-        void NavigateTo(string pagePath, object paramValue, string paramKey = "Id");
+        /// <summary>
+        /// Can go previous page.
+        /// </summary>
+        bool CanGoBack();
 
-        void NavigateTo<TView>(object paramValue = null, string paramKey = "Id");
+        /// <summary>
+        /// Go next page.
+        /// </summary>
+        void GoForward();
 
-        void NavigateTo(Type typeView, object paramValue, string paramKey = "Id");
+        /// <summary>
+        /// Can go next page.
+        /// </summary>
+        bool CanGoForward();
     }
 }

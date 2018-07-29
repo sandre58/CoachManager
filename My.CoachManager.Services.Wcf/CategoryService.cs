@@ -11,6 +11,7 @@ namespace My.CoachManager.Services.Wcf
     /// </summary>
     public class CategoryService : ICategoryService
     {
+        /// <inheritdoc />
         /// <summary>
         /// Get categories list.
         /// </summary>
@@ -20,6 +21,7 @@ namespace My.CoachManager.Services.Wcf
             return ServiceLocator.Current.TryResolve<ICategoryAppService>().GetCategories();
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Get category.
         /// </summary>
@@ -30,6 +32,7 @@ namespace My.CoachManager.Services.Wcf
             return ServiceLocator.Current.TryResolve<ICategoryAppService>().GetCategoryById(id);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Create category.
         /// </summary>
@@ -40,6 +43,7 @@ namespace My.CoachManager.Services.Wcf
             return ServiceLocator.Current.TryResolve<ICategoryAppService>().SaveCategory(categoryDto);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Remove category.
         /// </summary>
@@ -50,6 +54,7 @@ namespace My.CoachManager.Services.Wcf
             ServiceLocator.Current.TryResolve<ICategoryAppService>().RemoveCategory(categoryDto);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Update Categories Orders.
         /// </summary>

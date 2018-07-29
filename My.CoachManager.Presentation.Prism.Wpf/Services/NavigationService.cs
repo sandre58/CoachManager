@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using My.CoachManager.Presentation.Prism.Core;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Prism.Wpf.Services
 {
+    /// <inheritdoc />
     /// <summary>
-    /// The implementation of the contract <see cref="INavigationService"/>.
+    /// The implementation of the contract <see cref="T:My.CoachManager.Presentation.Prism.Core.Services.INavigationService" />.
     /// this class has no need on its ownself, hence explicit implementation.
     /// </summary>
     public class NavigationService : INavigationService
@@ -15,6 +17,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         #region Fields
 
         private readonly IRegionManager _regionManager;
+        private IRegionNavigationJournal _journal;
 
         #endregion Fields
 
@@ -27,83 +30,103 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         public NavigationService(IRegionManager regionManager)
         {
             _regionManager = regionManager;
+            _regionManager.Regions.CollectionChanged += OnRegionChanged;
         }
 
         #endregion Constructors
 
+        #region Members
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets active view.
+        /// </summary>
+        public object ActiveView
+        {
+            get
+            {
+                if (_regionManager.Regions.ContainsRegionWithName(RegionNames.WorkspaceRegion))
+                {
+                    return _regionManager.Regions[RegionNames.WorkspaceRegion].ActiveViews.FirstOrDefault();
+                }
+                return null;
+            }
+        }
+
+        #endregion Members
+
         #region Methods
 
+        /// <inheritdoc />
         /// <summary>
         /// Navigates to specified view.
         /// </summary>
-        /// <typeparam name="TView">View type.</typeparam>
-        /// <param name="parameters">Optional parameters.</param>
-        public void NavigateTo<TView>(IEnumerable<KeyValuePair<string, object>> parameters = null)
-        {
-            NavigateTo(typeof(TView), parameters);
-        }
-
-        /// <summary>
-        /// Navigates to specified view.
-        /// </summary>
-        /// <param name="typeView"></param>
-        /// <param name="parameters">Optional parameters.</param>
-        public void NavigateTo(Type typeView, IEnumerable<KeyValuePair<string, object>> parameters = null)
-        {
-            var path = typeView.Name;
-            NavigateTo(path, parameters);
-        }
-
-        public void NavigateTo(string pagePath, IEnumerable<KeyValuePair<string, object>> parameters = null)
+        /// <param name="pagePath">The Uri.</param>
+        /// <param name="callback">Action when navigation is completed.</param>
+        /// <param name="parameters">The optionals parameters.</param>
+        public void NavigateTo(string pagePath, Action<NavigationResult> callback = null, NavigationParameters parameters = null)
         {
             if (!string.IsNullOrEmpty(pagePath))
             {
-                var parametersStr = parameters != null ? ToNavigationParameters(parameters).ToString() : "";
-                var newUri = new Uri(pagePath + parametersStr, UriKind.Relative);
-                var currentEntry = _regionManager.Regions[RegionNames.WorkspaceRegion].NavigationService.Journal
-                    .CurrentEntry;
-                var activeUri = currentEntry != null ? currentEntry.Uri : null;
+                var newUri = new Uri(pagePath + parameters, UriKind.Relative);
+                var activeUri = _journal?.CurrentEntry?.Uri;
                 if (!Equals(newUri, activeUri))
-                    _regionManager.RequestNavigate(RegionNames.WorkspaceRegion, newUri);
+                {
+                    _regionManager.RequestNavigate(RegionNames.WorkspaceRegion, newUri, callback);
+                }
             }
         }
 
-        public void NavigateTo(string pagePath, object paramValue, string paramKey = "Id")
+        /// <inheritdoc />
+        /// <summary>
+        /// Go previous page.
+        /// </summary>
+        public void GoBack()
         {
-            NavigateTo(pagePath, new List<KeyValuePair<string, object>>()
-            {
-                new KeyValuePair<string, object>(paramKey, paramValue)
-            });
+            _journal?.GoBack();
         }
 
-        public void NavigateTo<TView>(object paramValue = null, string paramKey = "Id")
+        /// <inheritdoc />
+        /// <summary>
+        /// Can go previous page.
+        /// </summary>
+        public bool CanGoBack()
         {
-            NavigateTo(typeof(TView), paramValue, paramKey);
+            return _journal?.CanGoBack ?? false;
         }
 
-        public void NavigateTo(Type typeView, object paramValue, string paramKey = "Id")
+        /// <inheritdoc />
+        /// <summary>
+        /// Go next page.
+        /// </summary>
+        public void GoForward()
         {
-            NavigateTo(typeView, new List<KeyValuePair<string, object>>()
-            {
-                new KeyValuePair<string, object>(paramKey, paramValue)
-            });
+            _journal?.GoForward();
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Can go next page.
+        /// </summary>
+        public bool CanGoForward()
+        {
+            return _journal?.CanGoBack ?? false;
         }
 
         /// <summary>
-        /// Gets Navigation Parameters.
+        /// Calls when regions changed.
         /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        protected NavigationParameters ToNavigationParameters(IEnumerable<KeyValuePair<string, object>> parameters)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnRegionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            var res = new NavigationParameters();
-
-            foreach (var parameter in parameters)
+            if (_journal == null)
             {
-                res.Add(parameter.Key, parameter.Value);
+                if (_regionManager.Regions.ContainsRegionWithName(RegionNames.WorkspaceRegion))
+                {
+                    _journal = _regionManager.Regions[RegionNames.WorkspaceRegion].NavigationService.Journal;
+                }
             }
-
-            return res;
         }
 
         #endregion Methods

@@ -12,12 +12,10 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
     /// </summary>
     public class RosterPlayerMetadata : EntityMetadata
     {
-        [Key]
         [Column(Order = 1)]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public int RosterId { get; set; }
 
-        [Key]
         [Column(Order = 2)]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public int PlayerId { get; set; }

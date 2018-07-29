@@ -3,7 +3,7 @@ using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
-    public interface IFilteredListViewModel : IReadOnlyListViewModel
+    public interface IFilteredListViewModel
     {
         /// <summary>
         /// Gets or sets the filter for speed Search.

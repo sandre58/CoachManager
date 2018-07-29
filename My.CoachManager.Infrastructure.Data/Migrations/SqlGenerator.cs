@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.Migrations.Model;
 using System.Data.Entity.SqlServer;
 
@@ -35,8 +34,7 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
 
         private void SetAnnotatedColumn(ColumnModel column, string tableName)
         {
-            AnnotationValues values;
-            if (column.Annotations.TryGetValue("SqlDefaultValue", out values))
+            if (column.Annotations.TryGetValue("SqlDefaultValue", out var values))
             {
                 if (values.NewValue == null)
                 {

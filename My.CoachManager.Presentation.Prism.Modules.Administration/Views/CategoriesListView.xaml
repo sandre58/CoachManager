@@ -8,7 +8,9 @@
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:columns="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Datagrids.Columns;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
+             xmlns:mvvm="http://prismlibrary.com/"
              mc:Ignorable="d"
+             mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:CategoriesListViewModel}"
              d:DesignHeight="500" d:DesignWidth="800">
 

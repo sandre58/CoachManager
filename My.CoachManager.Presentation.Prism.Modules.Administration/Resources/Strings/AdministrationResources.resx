@@ -129,40 +129,4 @@
   <data name="CategoryTitle" xml:space="preserve">
     <value>Catégorie</value>
   </data>
-  <data name="CoachesMenu" xml:space="preserve">
-    <value>Tous les éducateurs</value>
-  </data>
-  <data name="CoachesTitle" xml:space="preserve">
-    <value>Liste des éducateurs</value>
-  </data>
-  <data name="CoachTitle" xml:space="preserve">
-    <value>Educateurs</value>
-  </data>
-  <data name="PlayersMenu" xml:space="preserve">
-    <value>Tous les joueurs</value>
-  </data>
-  <data name="PlayersTitle" xml:space="preserve">
-    <value>Liste des joueurs</value>
-  </data>
-  <data name="PlayerTitle" xml:space="preserve">
-    <value>Joueur</value>
-  </data>
-  <data name="PositionsMenu" xml:space="preserve">
-    <value>Postes</value>
-  </data>
-  <data name="PositionsTitle" xml:space="preserve">
-    <value>Liste des postes</value>
-  </data>
-  <data name="PositionTitle" xml:space="preserve">
-    <value>Poste</value>
-  </data>
-  <data name="SeasonsMenu" xml:space="preserve">
-    <value>Saisons</value>
-  </data>
-  <data name="SeasonsTitle" xml:space="preserve">
-    <value>Liste des saisons</value>
-  </data>
-  <data name="SeasonTitle" xml:space="preserve">
-    <value>Saison</value>
-  </data>
 </root>

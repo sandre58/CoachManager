@@ -4,6 +4,7 @@ using My.CoachManager.CrossCutting.Core.Configurations;
 
 namespace My.CoachManager.CrossCutting.Unity.Configurations
 {
+    /// <inheritdoc />
     /// <summary>
     /// Unity Configuration Parameters.
     /// </summary>
@@ -12,12 +13,6 @@ namespace My.CoachManager.CrossCutting.Unity.Configurations
         /// <summary>
         /// Gets the loaded unity sections list.
         /// </summary>
-        public static IDictionary<string, UnityConfigurationSection> UnitySections
-        {
-            get
-            {
-                return GetAllConfigSections<UnityConfigurationSection>("unity");
-            }
-        }
+        public static IDictionary<string, UnityConfigurationSection> UnitySections => GetAllConfigSections<UnityConfigurationSection>("unity");
     }
 }

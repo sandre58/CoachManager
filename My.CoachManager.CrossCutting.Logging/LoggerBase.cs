@@ -7,7 +7,7 @@ namespace My.CoachManager.CrossCutting.Logging
     /// <summary>
     /// Logger Base.
     /// </summary>
-    public abstract class LoggerBase : ILogger
+    public abstract class LoggerBase : ILogger, ILoggerFacade
     {
         /// <summary>
         /// Log Trace.
@@ -126,6 +126,6 @@ namespace My.CoachManager.CrossCutting.Logging
             }
         }
 
-        #endregion
+        #endregion ILoggerFacade
     }
 }

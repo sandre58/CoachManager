@@ -12,8 +12,8 @@ using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
-    public abstract class FilteredListViewModel<TEntityViewModel> : ReadOnlyListViewModel<TEntityViewModel>, IFilteredListViewModel
-        where TEntityViewModel : class, IEntityModel, INotifyPropertyChanged
+    public abstract class FilteredListViewModel<TEntityViewModel> : ListViewModel<TEntityViewModel>, IFilteredListViewModel
+        where TEntityViewModel : class, IEntityModel, IModifiable, IValidatable, INotifyPropertyChanged, new()
     {
         #region Fields
 

@@ -74,6 +74,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         #region Events
 
+        /// <inheritdoc />
         /// <summary>
         /// Closes the dialog.
         /// </summary>

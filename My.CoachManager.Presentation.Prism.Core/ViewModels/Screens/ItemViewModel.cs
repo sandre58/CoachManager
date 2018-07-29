@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Windows.Input;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Models;
 using Prism.Commands;
@@ -12,7 +11,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         where TEntityViewModel : class, IEntityModel, IValidatable, IModifiable, new()
     {
         #region Fields
-        
+
         private int _activeId;
 
         #endregion Fields
@@ -23,11 +22,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// Get or set Item.
         /// </summary>
         public TEntityViewModel Item { get; set; }
-
-        /// <summary>
-        /// Get or Set Refresh Command.
-        /// </summary>
-        public ICommand RefreshCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the edit command.
@@ -73,30 +67,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             base.InitializeCommand();
 
             EditCommand = new DelegateCommand(Edit, CanEdit);
-            RefreshCommand = new DelegateCommand(Refresh, CanRefresh);
         }
 
         #endregion Initialization
-
-        #region Refresh
-
-        /// <summary>
-        /// Refresh Items.
-        /// </summary>
-        public virtual void Refresh()
-        {
-            RefreshDataAsync();
-        }
-
-        /// <summary>
-        /// Can refresh item.
-        /// </summary>
-        public virtual bool CanRefresh()
-        {
-            return true;
-        }
-
-        #endregion Refresh
 
         #region Edit
 

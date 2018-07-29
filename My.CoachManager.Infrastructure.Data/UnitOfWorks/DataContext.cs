@@ -17,7 +17,6 @@ using My.CoachManager.Infrastructure.Data.Extensions;
 
 namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
 {
-
     /// <inheritdoc cref="DbContext" />
     /// <summary>
     /// Database Context for Entity Framework 6.0
@@ -255,7 +254,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             var primarykeyName = String.Concat(tableName.Split('_')[1].ToLower(), "_id");
 
             context.ExecuteCommand(
-                $"SELECT * FROM {tableName} WITH (ROWLOCK) WHERE {primarykeyName}={((IEntity) entity).Id};");
+                $"SELECT * FROM {tableName} WITH (ROWLOCK) WHERE {primarykeyName}={((IEntity)entity).Id};");
         }
 
         #endregion ----- IQueryableUnitOfWork Methods -----
@@ -365,7 +364,14 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         /// <param name="sqlQuery">The executed sql query.</param>
         private void LogQuery(string sqlQuery)
         {
-            ServiceLocator.Current.TryResolve<ILogger>().Trace(sqlQuery);
+            try
+            {
+                ServiceLocator.Current.TryResolve<ILogger>().Trace(sqlQuery);
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
 
         ///// <summary>

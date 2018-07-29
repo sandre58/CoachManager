@@ -10,10 +10,11 @@ using PropertyChanged;
 
 namespace My.CoachManager.Presentation.Prism.Core.Models
 {
+    /// <inheritdoc cref="BindableBase" />
     /// <summary>
     /// The model base.
     /// </summary>
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged"/>
+    /// <seealso cref="T:System.ComponentModel.INotifyPropertyChanged" />
     [AddINotifyPropertyChangedInterface]
     public abstract class ModelBase : BindableBase, INotifyDataErrorInfo
     {
@@ -24,7 +25,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         /// </summary>
         protected IDictionary<string, IEnumerable<ValidationResult>> ValidationErrors { get; }
 
-        #endregion
+        #endregion Members
 
         #region Constructors
 
@@ -33,7 +34,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
             ValidationErrors = new Dictionary<string, IEnumerable<ValidationResult>>();
         }
 
-        #endregion
+        #endregion Constructors
 
         #region Methods
 
@@ -46,7 +47,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
             RaisePropertyChanged(propertyName);
         }
 
-        #endregion
+        #endregion Methods
 
         #region Validation
 
@@ -81,12 +82,12 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
             }
         }
 
-        #endregion
+        #endregion Validation
 
         #region INotifyDataErrorInfo
 
         /// <summary>
-        /// Occurs when the validation errors have changed for a property or for the entire object. 
+        /// Occurs when the validation errors have changed for a property or for the entire object.
         /// </summary>
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
@@ -95,6 +96,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         /// </summary>
         public virtual bool HasErrors => ValidationErrors.Any();
 
+        /// <inheritdoc />
         /// <summary>
         /// Get errors.
         /// </summary>
@@ -107,7 +109,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
                 ? validationResults.Select(validationResult => validationResult.ErrorMessage)
                 : Enumerable.Empty<object>();
         }
-        
+
         /// <summary>
         /// Notifies when errors changed.
         /// </summary>
@@ -117,7 +119,8 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
             // Notify
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
-        #endregion
+
+        #endregion INotifyDataErrorInfo
 
         #region IPropertyChanged
 
@@ -130,10 +133,16 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         protected virtual void OnPropertyChanged(string propertyName, object before, object after)
         {
             // We check if the property is valid, which notifies if the property is in error.
+            var prop = GetType().GetProperty(propertyName);
+            if (prop == null) return;
+            // The property exists
+            var setter = prop.GetSetMethod(true);
+            if (setter == null || !setter.IsPublic) return;
             ValidateProperty(propertyName, before);
+
             RaisePropertyChanged(propertyName);
         }
 
-        #endregion
+        #endregion IPropertyChanged
     }
 }

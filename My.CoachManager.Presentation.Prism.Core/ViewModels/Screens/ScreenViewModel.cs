@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using My.CoachManager.CrossCutting.Core.Exceptions;
-using PropertyChanged;
+using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
@@ -40,7 +40,27 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <remarks></remarks>
         public ScreenMode Mode { get; protected set; }
 
+        /// <summary>
+        /// Gets or sets the refresh command.
+        /// </summary>
+        public DelegateCommand RefreshCommand { get; set; }
+
         #endregion Members
+
+        #region Initialisation
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes commands.
+        /// </summary>
+        protected override void InitializeCommand()
+        {
+            base.InitializeCommand();
+
+            RefreshCommand = new DelegateCommand(Refresh, CanRefresh);
+        }
+
+        #endregion Initialisation
 
         #region Loading data
 
@@ -81,7 +101,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             {
                 // ignored
             }
-            
+
             State = ScreenState.Ready;
 
             // Is Cancelled
@@ -143,5 +163,24 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         #endregion Loading data
 
+        #region Refresh
+
+        /// <summary>
+        /// Refresh Items.
+        /// </summary>
+        protected virtual void Refresh()
+        {
+            RefreshDataAsync();
+        }
+
+        /// <summary>
+        /// Can refresh item.
+        /// </summary>
+        protected virtual bool CanRefresh()
+        {
+            return Mode == ScreenMode.Read;
+        }
+
+        #endregion Refresh
     }
 }

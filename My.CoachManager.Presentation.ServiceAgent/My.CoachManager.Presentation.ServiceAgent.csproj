@@ -83,6 +83,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -146,6 +147,7 @@
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Administration.SeasonDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Categories.CategoryDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Categories.CategoryDto1.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Category.CategoryDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Competitions.ClubDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Countries.CountryDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Data.CategoriesListDto.datasource" />
@@ -192,9 +194,6 @@
     </None>
     <None Include="Service References\CategoryServiceReference\CategoryService4.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\CategoryServiceReference\My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference.CategoryDto.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\PersonServiceReference\PersonService.wsdl" />
     <None Include="Service References\PersonServiceReference\PersonService.xsd">
@@ -304,6 +303,10 @@
     <ProjectReference Include="..\My.CoachManager.Domain.Core\My.CoachManager.Domain.Core.csproj">
       <Project>{7d8b4553-4a90-44d7-a1dd-14871e3c6127}</Project>
       <Name>My.CoachManager.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Services.Core\My.CoachManager.Services.Core.csproj">
+      <Project>{196ca01e-80fc-4807-9af4-ef97f1c90aae}</Project>
+      <Name>My.CoachManager.Services.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

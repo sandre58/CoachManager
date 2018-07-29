@@ -135,6 +135,10 @@
       <Project>{32754742-C3CD-408C-9D36-06BD75C0CB18}</Project>
       <Name>My.CoachManager.Application.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.CrossCutting.Logging\My.CoachManager.CrossCutting.Logging.csproj">
+      <Project>{381D433D-9F76-4286-B0F5-7209E477B22B}</Project>
+      <Name>My.CoachManager.CrossCutting.Logging</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

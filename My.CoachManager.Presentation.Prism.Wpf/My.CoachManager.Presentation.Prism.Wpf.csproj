@@ -73,6 +73,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -213,6 +214,18 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SkinResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="App.Debug - Modis.config">
+      <DependentUpon>App.config</DependentUpon>
+      <IsTransformFile>true</IsTransformFile>
+    </None>
+    <None Include="App.Debug.config">
+      <DependentUpon>App.config</DependentUpon>
+      <IsTransformFile>true</IsTransformFile>
+    </None>
+    <None Include="App.Release.config">
+      <DependentUpon>App.config</DependentUpon>
+      <IsTransformFile>true</IsTransformFile>
+    </None>
     <None Include="NLog.config">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -227,6 +240,7 @@
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
+      <TransformOnBuild>true</TransformOnBuild>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -266,9 +280,17 @@
       <Project>{2d290fd9-5b64-4af4-a295-2b4cde6eb330}</Project>
       <Name>My.CoachManager.Presentation.Prism.Resources</Name>
     </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.SkinManager\My.CoachManager.Presentation.Prism.SkinManager.csproj">
+      <Project>{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}</Project>
+      <Name>My.CoachManager.Presentation.Prism.SkinManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.ServiceAgent\My.CoachManager.Presentation.ServiceAgent.csproj">
       <Project>{1A6AEEAB-7175-4CEA-90A6-68B064AB65DC}</Project>
       <Name>My.CoachManager.Presentation.ServiceAgent</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Services.Core\My.CoachManager.Services.Core.csproj">
+      <Project>{196ca01e-80fc-4807-9af4-ef97f1c90aae}</Project>
+      <Name>My.CoachManager.Services.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -281,7 +303,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Fody.3.1.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.3.1.3\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.SlowCheetah.3.1.66\build\Microsoft.VisualStudio.SlowCheetah.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.SlowCheetah.3.1.66\build\Microsoft.VisualStudio.SlowCheetah.targets'))" />
   </Target>
+  <Import Project="..\packages\Microsoft.VisualStudio.SlowCheetah.3.1.66\build\Microsoft.VisualStudio.SlowCheetah.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.SlowCheetah.3.1.66\build\Microsoft.VisualStudio.SlowCheetah.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

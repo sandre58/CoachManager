@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Resources.Strings;
-using My.CoachManager.Presentation.Prism.Modules.Administration.Views;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
@@ -30,19 +28,6 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 
         #region Methods
 
-        #region Abstract Methods
-
-        /// <summary>
-        /// Get Item View Type.
-        /// </summary>
-        /// <returns></returns>
-        protected override Type GetEditViewType()
-        {
-            return typeof(CategoryEditView);
-        }
-
-        #endregion Abstract Methods
-
         #region Initialization
 
         /// <summary>
@@ -68,6 +53,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
             //_categoryService.Remove(item.ToDto<CategoryDto>());
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Validates order in the data source.
         /// </summary>
@@ -76,6 +62,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
             _categoryService.UpdateOrders(Items.ToDictionary(c => c.Id, c => c.Order));
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Load Data.
         /// </summary>
