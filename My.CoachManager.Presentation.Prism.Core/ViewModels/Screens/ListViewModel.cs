@@ -29,8 +29,15 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             get { return _items; }
             set
             {
-                SetItems(value);
-                RaisePropertyChanged(() => Items);
+                if (_items == null)
+                {
+                    _items = new ObservableCollection<TEntityModel>();
+                }
+
+                _items.Clear();
+                _items.AddRange(value);
+
+                RaisePropertyChanged();
             }
         }
 
@@ -107,26 +114,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         {
             base.InitializeData();
 
-            _items = new ObservableCollection<TEntityModel>();
+            Items = new ObservableCollection<TEntityModel>();
             FilteredItems = new FilteredCollectionView<TEntityModel>(Items);
 
             PresetColumns = new Dictionary<object, string[]>();
             IsReadOnly = false;
-        }
-
-        /// <summary>
-        /// Set Items Collection.
-        /// </summary>
-        /// <param name="collection"></param>
-        protected void SetItems(IEnumerable<TEntityModel> collection)
-        {
-            if (_items == null)
-            {
-                _items = new ObservableCollection<TEntityModel>();
-            }
-
-            Items.Clear();
-            Items.AddRange(collection);
         }
 
         #endregion Initialization

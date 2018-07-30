@@ -82,7 +82,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="ViewModels\CategoriesListViewModel2.cs" />
     <Compile Include="ViewModels\CategoriesListViewModel.cs" />
     <Compile Include="ViewModels\CategoryEditViewModel.cs" />
     <Compile Include="ViewModels\IPositionsListViewModel.cs" />

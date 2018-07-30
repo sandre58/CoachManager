@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Resources.Strings;
@@ -30,6 +31,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 
         #region Initialization
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes Data.
         /// </summary>
@@ -44,6 +46,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 
         #region Data
 
+        /// <inheritdoc />
         /// <summary>
         /// Remove the item from data source.
         /// </summary>
@@ -71,7 +74,15 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         {
             var result = _categoryService.GetCategories();
 
-            //Items = new ObservableCollection<CategoryViewModel>(result.OrderBy(x => x.Order).ToViewModels<CategoryViewModel>());
+            //Items = new ObservableCollection<CategoryModel>(result.Select(x => new CategoryModel
+            //{
+            //    Id = x.Id,
+            //    Code = x.Code,
+            //    Label = x.Label,
+            //    Description = x.Description,
+            //    Order = x.Order,
+            //    Year = x.Year,
+            //}));
         }
 
         #endregion Data

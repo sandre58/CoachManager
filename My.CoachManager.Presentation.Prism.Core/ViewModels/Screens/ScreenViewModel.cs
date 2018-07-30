@@ -32,13 +32,13 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// Get or set the state.
         /// </summary>
         /// <remarks></remarks>
-        public ScreenState State { get; protected set; }
+        public ScreenState State { get; set; }
 
         /// <summary>
         /// Get or set the mode.
         /// </summary>
         /// <remarks></remarks>
-        public ScreenMode Mode { get; protected set; }
+        public ScreenMode Mode { get; set; }
 
         /// <summary>
         /// Gets or sets the refresh command.

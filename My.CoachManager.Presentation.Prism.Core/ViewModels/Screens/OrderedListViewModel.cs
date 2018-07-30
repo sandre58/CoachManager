@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
@@ -11,38 +10,14 @@ using Prism.Commands;
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 {
     public abstract class OrderedListViewModel<TEntityViewModel> : ListViewModel<TEntityViewModel>
-        where TEntityViewModel : class, IOrderable, IEntityModel,IValidatable, IModifiable, INotifyPropertyChanged, new()
+        where TEntityViewModel : class, IOrderable, IEntityModel, IValidatable, IModifiable, new()
     {
-        #region Fields
-
-        private bool _canOrder;
-
-        #endregion Fields
-
         #region Members
 
         /// <summary>
         /// Gets a value which indicates if the view is orderable.
         /// </summary>
-        public bool CanOrder
-        {
-            get { return _canOrder; }
-            private set
-            {
-                SetProperty(ref _canOrder, value, () =>
-                {
-                    AddCommand.RaiseCanExecuteChanged();
-                    EditCommand.RaiseCanExecuteChanged();
-                    RemoveCommand.RaiseCanExecuteChanged();
-                    RefreshCommand.RaiseCanExecuteChanged();
-                    MoveAboveCommand.RaiseCanExecuteChanged();
-                    MoveBelowCommand.RaiseCanExecuteChanged();
-                    ActivateOrderCommand.RaiseCanExecuteChanged();
-                    CancelOrderCommand.RaiseCanExecuteChanged();
-                    ValidateOrderCommand.RaiseCanExecuteChanged();
-                });
-            }
-        }
+        public bool CanOrder { get; set; }
 
         /// <summary>
         /// Gets or sets the active order command.
@@ -75,6 +50,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
 
         #region Initialization
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes commands.
         /// </summary>
@@ -89,6 +65,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
             MoveBelowCommand = new DelegateCommand<DragAndDropEventArgs>(MoveBelow, CanMoveBelow);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes Data.
         /// </summary>
@@ -190,7 +167,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Validate orders.
         /// </summary>
-        private void CancelOrder()
+        protected virtual void CancelOrder()
         {
             RefreshDataAsync();
             State = ScreenState.Ready;
@@ -202,7 +179,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// Can Cancel Order.
         /// </summary>
         /// <returns></returns>
-        private bool CanCancelOrder()
+        protected virtual bool CanCancelOrder()
         {
             return CanOrder;
         }
@@ -214,7 +191,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Move Below.
         /// </summary>
-        public virtual void MoveBelow(DragAndDropEventArgs e)
+        protected virtual void MoveBelow(DragAndDropEventArgs e)
         {
             var source = e.Source as TEntityViewModel;
             var target = e.Target as TEntityViewModel;
@@ -226,7 +203,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Can move below.
         /// </summary>
-        public virtual bool CanMoveBelow(DragAndDropEventArgs e)
+        protected virtual bool CanMoveBelow(DragAndDropEventArgs e)
         {
             var source = e.Source as TEntityViewModel;
             var target = e.Target as TEntityViewModel;
@@ -240,7 +217,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Move above.
         /// </summary>
-        public virtual void MoveAbove(DragAndDropEventArgs e)
+        protected virtual void MoveAbove(DragAndDropEventArgs e)
         {
             var source = e.Source as TEntityViewModel;
             var target = e.Target as TEntityViewModel;
@@ -252,7 +229,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Can move above.
         /// </summary>
-        public virtual bool CanMoveAbove(DragAndDropEventArgs e)
+        protected virtual bool CanMoveAbove(DragAndDropEventArgs e)
         {
             var source = e.Source as TEntityViewModel;
             var target = e.Target as TEntityViewModel;
@@ -337,12 +314,32 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Screens
         /// <summary>
         /// Reorder the items.
         /// </summary>
-        private void Reorder()
+        protected virtual void Reorder()
         {
             Items = new ObservableCollection<TEntityViewModel>(Items.OrderBy(x => x.Order).ToList());
         }
 
         #endregion Privates methods
+
+        #region PropertyChanged
+
+        /// <summary>
+        /// Call when CanOrder changed.
+        /// </summary>
+        protected virtual void OnCanOrderChanged()
+        {
+            AddCommand.RaiseCanExecuteChanged();
+            EditCommand.RaiseCanExecuteChanged();
+            RemoveCommand.RaiseCanExecuteChanged();
+            RefreshCommand.RaiseCanExecuteChanged();
+            MoveAboveCommand.RaiseCanExecuteChanged();
+            MoveBelowCommand.RaiseCanExecuteChanged();
+            ActivateOrderCommand.RaiseCanExecuteChanged();
+            CancelOrderCommand.RaiseCanExecuteChanged();
+            ValidateOrderCommand.RaiseCanExecuteChanged();
+        }
+
+        #endregion PropertyChanged
 
         #endregion Methods
     }
