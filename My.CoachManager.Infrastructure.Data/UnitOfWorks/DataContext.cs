@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Domain.Entities;
 using System;
@@ -9,6 +8,7 @@ using System.Data.Entity.Infrastructure;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using CommonServiceLocator;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Infrastructure.Data.Core;
@@ -121,7 +121,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             catch (DbUpdateException ex)
             {
                 // Log exception information
-                ServiceLocator.Current.TryResolve<ILogger>().Error(ex);
+                ServiceLocator.Current.GetInstance<ILogger>().Error(ex);
 
                 // Changes are canceled after an error
                 RollbackChanges();
@@ -130,7 +130,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             catch (Exception ex)
             {
                 // Log exception information
-                ServiceLocator.Current.TryResolve<ILogger>().Error(ex);
+                ServiceLocator.Current.GetInstance<ILogger>().Error(ex);
 
                 // Changes are canceled after an error
                 RollbackChanges();
@@ -364,14 +364,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         /// <param name="sqlQuery">The executed sql query.</param>
         private void LogQuery(string sqlQuery)
         {
-            try
-            {
-                ServiceLocator.Current.TryResolve<ILogger>().Trace(sqlQuery);
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
+                ServiceLocator.Current.GetInstance<ILogger>().Trace(sqlQuery);
         }
 
         ///// <summary>

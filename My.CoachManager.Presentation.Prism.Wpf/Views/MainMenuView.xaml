@@ -15,7 +15,7 @@
              d:DesignHeight="700">
 
     <Grid>
-        <Border VerticalAlignment="Stretch" Background="{DynamicResource DarkAccent}" Effect="{StaticResource RightShadow}">
+        <Border VerticalAlignment="Stretch" Background="{DynamicResource DarkAccent}" Effect="{DynamicResource RightShadow}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />

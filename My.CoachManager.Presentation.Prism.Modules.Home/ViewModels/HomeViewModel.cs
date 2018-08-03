@@ -1,20 +1,23 @@
-﻿using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
+﻿using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Modules.Home.Resources.Strings;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Home.ViewModels
 {
-    public class HomeViewModel : NavigatableWorkspaceViewModel, IHomeViewModel
+    public class HomeViewModel : NavigatableWorkspaceViewModel
     {
-        #region Constructors
+        #region Initialization
 
+        /// <inheritdoc />
         /// <summary>
-        /// Initialise a new instance of <see cref="HomeViewModel"/>.
+        /// Initializes Data.
         /// </summary>
-        public HomeViewModel()
+        protected override void InitializeData()
         {
+            base.InitializeData();
+
             Title = HomeResources.HomeTitle;
         }
 
-        #endregion Constructors
+        #endregion Initialization
     }
 }

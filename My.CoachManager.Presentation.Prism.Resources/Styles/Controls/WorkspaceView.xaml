@@ -5,9 +5,9 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:converters="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Converters"
-                    xmlns:screens="clr-namespace:My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;assembly=My.CoachManager.Presentation.Prism.Core"
                     xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings"
+                    xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Core.ViewModels;assembly=My.CoachManager.Presentation.Prism.Core"
                     mc:Ignorable="d">
 
     <ResourceDictionary.MergedDictionaries>
@@ -24,7 +24,7 @@
         <ResourceDictionary Source="../Controls/Badged.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <DataTemplate x:Key="DefaultWorkspaceDialogViewHeaderTemplate" DataType="screens:WorkspaceDialogViewModel">
+    <DataTemplate x:Key="DefaultWorkspaceDialogViewHeaderTemplate" DataType="viewModels:WorkspaceDialogViewModel">
         <Grid>
 
             <Grid.Resources>
@@ -45,16 +45,16 @@
             <TextBlock Grid.Column="1" Text="{Binding Title}" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Center" />
         </Grid>
         <DataTemplate.Triggers>
-            <DataTrigger Binding="{Binding Mode}" Value="{x:Static screens:ScreenMode.Creation}">
+            <DataTrigger Binding="{Binding Mode}" Value="{x:Static viewModels:ScreenMode.Creation}">
                 <Setter TargetName="Icon" Property="Content" Value="{StaticResource AddGeometry}" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Mode}" Value="{x:Static screens:ScreenMode.Edition}">
+            <DataTrigger Binding="{Binding Mode}" Value="{x:Static viewModels:ScreenMode.Edition}">
                 <Setter TargetName="Icon" Property="Content" Value="{StaticResource EditGeometry}" />
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>
 
-    <DataTemplate x:Key="FilteredWorkspaceDialogViewHeaderTemplate" DataType="{x:Type screens:IFilteredListViewModel}">
+    <DataTemplate x:Key="FilteredWorkspaceDialogViewHeaderTemplate" DataType="{x:Type viewModels:IFilteredListViewModel}">
         <StackPanel>
             <DockPanel Background="{DynamicResource DarkVariation3}" parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}">
                 <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="{StaticResource LargeMargin}">
@@ -171,8 +171,8 @@
                                 <Binding Path="State" Converter="{StaticResource EnumToBooleanConverter}">
                                     <Binding.ConverterParameter>
                                         <converters:EnumCollection>
-                                            <x:Static Member="screens:ScreenState.Loading" />
-                                            <x:Static Member="screens:ScreenState.Saving" />
+                                            <x:Static Member="viewModels:ScreenState.Loading" />
+                                            <x:Static Member="viewModels:ScreenState.Saving" />
                                         </converters:EnumCollection>
                                     </Binding.ConverterParameter>
                                 </Binding>

@@ -10,6 +10,7 @@ using My.CoachManager.Infrastructure.Data.Core.Extensions;
 
 namespace My.CoachManager.Infrastructure.Data.Core
 {
+    /// <inheritdoc />
     /// <summary>
     /// Repository Generic.
     /// </summary>

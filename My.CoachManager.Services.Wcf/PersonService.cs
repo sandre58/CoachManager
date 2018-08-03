@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using My.CoachManager.Application.Dtos.Category;
 using My.CoachManager.Application.Dtos.Persons;
 using My.CoachManager.Application.Services.Persons;
@@ -20,7 +20,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public PlayerDetailsDto GetPlayerDetails(int id)
         {
-            return ServiceLocator.Current.TryResolve<IPlayerAppService>().GetPlayerDetails(id);
+            return ServiceLocator.Current.GetInstance<IPlayerAppService>().GetPlayerDetails(id);
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public PlayerDto GetPlayer(int id)
         {
-            return ServiceLocator.Current.TryResolve<IPlayerAppService>().GetPlayer(id);
+            return ServiceLocator.Current.GetInstance<IPlayerAppService>().GetPlayer(id);
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public PlayerDto CreateOrUpdate(PlayerDto dto)
         {
-            return ServiceLocator.Current.TryResolve<IPlayerAppService>().CreateOrUpdate(dto);
+            return ServiceLocator.Current.GetInstance<IPlayerAppService>().CreateOrUpdate(dto);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public void Remove(PlayerDto dto)
         {
-            ServiceLocator.Current.TryResolve<IPlayerAppService>().Remove(dto);
+            ServiceLocator.Current.GetInstance<IPlayerAppService>().Remove(dto);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public CategoryDto GetCategoryFromBirthdate(DateTime date)
         {
-            return ServiceLocator.Current.TryResolve<IPlayerAppService>().GetCategoryFromBirthdate(date);
+            return ServiceLocator.Current.GetInstance<IPlayerAppService>().GetCategoryFromBirthdate(date);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public IEnumerable<CountryDto> GetCountries()
         {
-            return ServiceLocator.Current.TryResolve<ICountryAppService>().GetList();
+            return ServiceLocator.Current.GetInstance<ICountryAppService>().GetList();
         }
     }
 }

@@ -61,11 +61,29 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configuration de l&apos;application....
+        ///   Looks up a localized string similar to Application chargée.
         /// </summary>
-        public static string ApplicationLoading {
+        public static string ApplicationEndLoading {
             get {
-                return ResourceManager.GetString("ApplicationLoading", resourceCulture);
+                return ResourceManager.GetString("ApplicationEndLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chargement de l&apos;application.
+        /// </summary>
+        public static string ApplicationStartLoading {
+            get {
+                return ResourceManager.GetString("ApplicationStartLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to La connexion a échouée. Vérifier le nom d&apos;utilisateur et le mot de passe..
+        /// </summary>
+        public static string ConnectionFailed {
+            get {
+                return ResourceManager.GetString("ConnectionFailed", resourceCulture);
             }
         }
         
@@ -79,7 +97,7 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chargement du module &quot;{0}&quot;....
+        ///   Looks up a localized string similar to Chargement du module &quot;{0}&quot;.
         /// </summary>
         public static string ModuleLoading {
             get {
@@ -88,7 +106,26 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Utilisateur connecté : {0}.
+        ///   Looks up a localized string similar to Chargement des modules.
+        /// </summary>
+        public static string ModulesLoading {
+            get {
+                return ResourceManager.GetString("ModulesLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chargement de l&apos;interface.
+        /// </summary>
+        public static string SkinLoading {
+            get {
+                return ResourceManager.GetString("SkinLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connexion réussi...
+        ///Utilisateur connecté : {0}.
         /// </summary>
         public static string UserConnected {
             get {
@@ -97,7 +134,7 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connexion de l&apos;utilisateur....
+        ///   Looks up a localized string similar to Connexion de l&apos;utilisateur.
         /// </summary>
         public static string UserConnection {
             get {
@@ -106,7 +143,7 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chargement du profil utilisateur....
+        ///   Looks up a localized string similar to Chargement du profil utilisateur.
         /// </summary>
         public static string UserLoading {
             get {

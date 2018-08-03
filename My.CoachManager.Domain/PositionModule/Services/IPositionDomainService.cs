@@ -1,0 +1,14 @@
+﻿using My.CoachManager.Domain.Entities;
+
+namespace My.CoachManager.Domain.PositionModule.Services
+{
+    public interface IPositionDomainService
+    {
+        /// <summary>
+        /// Check if Position is unique.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        bool IsUnique(Position item);
+    }
+}

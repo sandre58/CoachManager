@@ -1,13 +1,15 @@
 ﻿namespace My.CoachManager.Presentation.Prism.Core.Dialog
 {
     /// <summary>
-    /// An enum representing the different button states for a Message Dialog.
+    /// Type of dialogue.
     /// </summary>
     public enum MessageDialogType
     {
-        Ok,
-        Okcancel,
-        YesNo,
-        YesNoCancel
+        Custom,
+        Information,
+        Error,
+        Warning,
+        Success,
+        Question
     }
 }

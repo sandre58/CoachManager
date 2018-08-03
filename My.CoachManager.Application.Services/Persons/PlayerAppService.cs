@@ -10,7 +10,7 @@ using My.CoachManager.Domain.CategoryModule.Aggregate;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.PersonModule.Aggregate;
-using My.CoachManager.Domain.PersonModule.Service;
+using My.CoachManager.Domain.PersonModule.Services;
 
 namespace My.CoachManager.Application.Services.Persons
 {

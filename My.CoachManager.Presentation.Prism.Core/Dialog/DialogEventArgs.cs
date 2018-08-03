@@ -9,12 +9,12 @@ namespace My.CoachManager.Presentation.Prism.Core.Dialog
         /// <summary>
         /// Gets or set the dialog.
         /// </summary>
-        public IDialog Dialog { get; set; }
+        public IWorkspaceDialog Dialog { get; private set; }
 
         /// <summary>
         /// Gets or sets the callback action.
         /// </summary>
-        public Action<IDialog> Callback { get; set; }
+        public Action<IWorkspaceDialog> Callback { get; private set; }
 
         #endregion Members
 
@@ -25,7 +25,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Dialog
         /// </summary>
         /// <param name="dialog"></param>
         /// <param name="callback"></param>
-        public DialogEventArgs(IDialog dialog, Action<IDialog> callback = null)
+        public DialogEventArgs(IWorkspaceDialog dialog, Action<IWorkspaceDialog> callback = null)
         {
             Dialog = dialog;
             Callback = callback;

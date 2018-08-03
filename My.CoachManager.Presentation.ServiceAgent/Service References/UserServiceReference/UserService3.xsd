@@ -24,11 +24,8 @@
   <xs:element name="ArrayOfRoleDto" nillable="true" type="tns:ArrayOfRoleDto" />
   <xs:complexType name="RoleDto">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q2:EntityDto">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q2:ReferenceDto">
         <xs:sequence>
-          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Label" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Permissions" nillable="true" type="tns:ArrayOfPermissionDto" />
         </xs:sequence>
       </xs:extension>
@@ -43,12 +40,8 @@
   <xs:element name="ArrayOfPermissionDto" nillable="true" type="tns:ArrayOfPermissionDto" />
   <xs:complexType name="PermissionDto">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q3:EntityDto">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Label" nillable="true" type="xs:string" />
-        </xs:sequence>
+      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q3:ReferenceDto">
+        <xs:sequence />
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>

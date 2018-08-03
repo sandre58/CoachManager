@@ -7,7 +7,7 @@ using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.SeasonModule.Aggregate;
-using My.CoachManager.Domain.SeasonModule.Service;
+using My.CoachManager.Domain.SeasonModule.Services;
 
 namespace My.CoachManager.Application.Services.Seasons
 {

@@ -2,10 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:filters="clr-namespace:My.CoachManager.Presentation.Prism.Core.Filters;assembly=My.CoachManager.Presentation.Prism.Core"
                     xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
-                    xmlns:screens="clr-namespace:My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;assembly=My.CoachManager.Presentation.Prism.Core"
                     xmlns:extensions="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Extensions;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:resources="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
-                    xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings">
+                    xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings"
+                    xmlns:screens="clr-namespace:My.CoachManager.Presentation.Prism.Core.ViewModels;assembly=My.CoachManager.Presentation.Prism.Core">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Converters.xaml" />

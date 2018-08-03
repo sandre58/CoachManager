@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
-using Microsoft.Practices.Unity;
 using My.CoachManager.CrossCutting.Unity.Behaviors;
+using Unity;
 
 namespace My.CoachManager.CrossCutting.Unity
 {

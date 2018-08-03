@@ -3,15 +3,8 @@
 namespace My.CoachManager.Application.Dtos.Users
 {
     [DataContract]
-    public class PermissionDto : EntityDto
+    public class PermissionDto : ReferenceDto
     {
-        [DataMember]
-        public string Code { get; set; }
 
-        [DataMember]
-        public string Label { get; set; }
-
-        [DataMember]
-        public string Description { get; set; }
     }
 }

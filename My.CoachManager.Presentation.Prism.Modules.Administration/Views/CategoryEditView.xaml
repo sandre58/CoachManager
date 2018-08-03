@@ -10,6 +10,8 @@
              xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings;assembly=My.CoachManager.Presentation.Prism.Resources"
              xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.Views"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
+             xmlns:mvvm="http://prismlibrary.com/"
+             mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:CategoryEditViewModel}"
              d:DesignHeight="350" d:DesignWidth="600">
 
@@ -21,7 +23,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <views:DataEditView Grid.Column="0" Grid.Row="0" DataContext="{Binding Item}" />
+            <views:ReferenceEditView Grid.Column="0" Grid.Row="0" DataContext="{Binding Item}" />
 
             <Grid Grid.Row="1" Grid.Column="0">
                 <Grid.ColumnDefinitions>

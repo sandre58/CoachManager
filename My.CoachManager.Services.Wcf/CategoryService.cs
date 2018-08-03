@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using My.CoachManager.Application.Dtos.Category;
 using My.CoachManager.Application.Services.CategoryModule;
 using My.CoachManager.Services.Wcf.Interfaces;
@@ -18,7 +18,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public IList<CategoryDto> GetCategories()
         {
-            return ServiceLocator.Current.TryResolve<ICategoryAppService>().GetCategories();
+            return ServiceLocator.Current.GetInstance<ICategoryAppService>().GetCategories();
         }
 
         /// <inheritdoc />
@@ -29,7 +29,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public CategoryDto GetCategoryById(int id)
         {
-            return ServiceLocator.Current.TryResolve<ICategoryAppService>().GetCategoryById(id);
+            return ServiceLocator.Current.GetInstance<ICategoryAppService>().GetCategoryById(id);
         }
 
         /// <inheritdoc />
@@ -40,7 +40,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public CategoryDto SaveCategory(CategoryDto categoryDto)
         {
-            return ServiceLocator.Current.TryResolve<ICategoryAppService>().SaveCategory(categoryDto);
+            return ServiceLocator.Current.GetInstance<ICategoryAppService>().SaveCategory(categoryDto);
         }
 
         /// <inheritdoc />
@@ -51,7 +51,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public void RemoveCategory(CategoryDto categoryDto)
         {
-            ServiceLocator.Current.TryResolve<ICategoryAppService>().RemoveCategory(categoryDto);
+            ServiceLocator.Current.GetInstance<ICategoryAppService>().RemoveCategory(categoryDto);
         }
 
         /// <inheritdoc />
@@ -61,7 +61,7 @@ namespace My.CoachManager.Services.Wcf
         /// <param name="entities"></param>
         public void UpdateOrders(IDictionary<int, int> entities)
         {
-            ServiceLocator.Current.TryResolve<ICategoryAppService>().UpdateOrders(entities);
+            ServiceLocator.Current.GetInstance<ICategoryAppService>().UpdateOrders(entities);
         }
     }
 }

@@ -205,6 +205,11 @@
         </Setter>
     </Style>
 
+    <Style x:Key="IconButtonDarkStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource IconButtonStyle}">
+        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource Dark}" />
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource Dark}" />
+    </Style>
+
     <Style x:Key="CircleIconButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource CircleButtonBaseStyle}">
         <Setter Property="ContentTemplate">
             <Setter.Value>

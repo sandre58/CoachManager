@@ -18,11 +18,11 @@
             <controls:CommandButton x:Name="PART_BackButton"
                     Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:Flyout}}, Path=InternalCloseCommand, Mode=OneWay}"
                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:Flyout}}, Path=CloseCommandParameter, Mode=OneWay}"
-                                    ButtonDiameter="{StaticResource LargeDiameter}"
+                    ButtonDiameter="{StaticResource LargeDiameter}"
                     VerticalAlignment="Center"
                     Style="{StaticResource AccentCommandButtonStyle}"
                     IconData="{StaticResource ArrowRightGeometry}"
-                    Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:Flyout}}, Path=Foreground}"
+                    Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:Flyout}}, Mode=OneWay, Path=Foreground}"
                     DockPanel.Dock="Left"
                     IsCancel="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Flyout}}, Path=CloseButtonIsCancel}"
                     Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Flyout}}, Path=CloseButtonVisibility}" />

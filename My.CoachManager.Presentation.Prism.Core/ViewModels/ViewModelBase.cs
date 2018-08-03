@@ -3,10 +3,10 @@ using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Models;
-using My.CoachManager.Presentation.Prism.Core.Services;
 using Prism.Events;
-using PropertyChanged;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
@@ -16,7 +16,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         private IEventAggregator _eventAggregator;
         private ILogger _logger;
-        private IDialogService _dialogService;
 
         #endregion
 
@@ -25,17 +24,12 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Gets or sets the Prism event aggregator.
         /// </summary>
-        protected IEventAggregator EventAggregator => _eventAggregator ?? (_eventAggregator = ServiceLocator.Current.TryResolve<IEventAggregator>());
+        protected IEventAggregator EventAggregator => _eventAggregator ?? (_eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>());
 
         /// <summary>
         /// Gets or sets the logger.
         /// </summary>
-        protected ILogger Logger => _logger ?? (_logger = ServiceLocator.Current.TryResolve<ILogger>());
-
-        /// <summary>
-        /// Gets or sets the dialog service.
-        /// </summary>
-        protected IDialogService DialogService => _dialogService ?? (_dialogService = ServiceLocator.Current.TryResolve<IDialogService>());
+        protected ILogger Logger => _logger ?? (_logger = ServiceLocator.Current.GetInstance<ILogger>());
 
         #endregion Members
 
@@ -90,7 +84,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         protected virtual void OnExceptionOccured(Exception e)
         {
             Logger.Fatal(e);
-            DialogService.ShowErrorDialog(MessageResources.GetDataError);
+            DialogManager.ShowErrorDialog(MessageResources.GetDataError, MessageDialogButtons.Ok);
         }
 
         /// <summary>
@@ -99,7 +93,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <param name="e"></param>
         protected virtual void OnBusinessExceptionOccured(BusinessException e)
         {
-            DialogService.ShowErrorPopup(e.Message);
+            NotificationManager.ShowError(e.Message);
         }
 
         #endregion Exceptions Management

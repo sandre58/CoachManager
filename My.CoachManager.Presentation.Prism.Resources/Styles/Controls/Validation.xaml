@@ -83,16 +83,16 @@
                             </Style>
                         </Grid.Resources>
                         <Border Margin="4 4 -4 -4"
-                                Background="{DynamicResource Variation1}"
+                                Background="{DynamicResource DarkVariation1}"
                                 CornerRadius="5" />
                         <Border Margin="3 3 -3 -3"
-                                Background="{DynamicResource Variation2}"
+                                Background="{DynamicResource DarkVariation2}"
                                 CornerRadius="4" />
                         <Border Margin="2 2 -2 -2"
-                                Background="{DynamicResource Variation3}"
+                                Background="{DynamicResource DarkVariation3}"
                                 CornerRadius="3" />
                         <Border Margin="1 1 -1 -1"
-                                Background="{DynamicResource Variation4}"
+                                Background="{DynamicResource DarkVariation4}"
                                 CornerRadius="2" />
                         <Border Background="{DynamicResource Negative}" CornerRadius="2">
                             <Border.Resources>

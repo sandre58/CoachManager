@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using My.CoachManager.Application.Dtos.Positions;
 using My.CoachManager.Application.Services.Positions;
 using My.CoachManager.Services.Wcf.Interfaces;
@@ -17,7 +17,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public IEnumerable<PositionDto> GetList()
         {
-            return ServiceLocator.Current.TryResolve<IPositionAppService>().GetList();
+            return ServiceLocator.Current.GetInstance<IPositionAppService>().GetList();
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public PositionDto GetById(int id)
         {
-            return ServiceLocator.Current.TryResolve<IPositionAppService>().GetById(id);
+            return ServiceLocator.Current.GetInstance<IPositionAppService>().GetById(id);
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public PositionDto CreateOrUpdate(PositionDto categoryDto)
         {
-            return ServiceLocator.Current.TryResolve<IPositionAppService>().CreateOrUpdate(categoryDto);
+            return ServiceLocator.Current.GetInstance<IPositionAppService>().CreateOrUpdate(categoryDto);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public void Remove(PositionDto categoryDto)
         {
-            ServiceLocator.Current.TryResolve<IPositionAppService>().Remove(categoryDto);
+            ServiceLocator.Current.GetInstance<IPositionAppService>().Remove(categoryDto);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace My.CoachManager.Services.Wcf
         /// <param name="entities"></param>
         public void UpdateOrders(IDictionary<int, int> entities)
         {
-            ServiceLocator.Current.TryResolve<IPositionAppService>().UpdateOrders(entities);
+            ServiceLocator.Current.GetInstance<IPositionAppService>().UpdateOrders(entities);
         }
     }
 }

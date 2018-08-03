@@ -2,17 +2,27 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Security.Principal;
+using System.Threading;
 using System.Windows;
+using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
+using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Modules.Administration;
+using My.CoachManager.Presentation.Prism.Modules.Common;
+using My.CoachManager.Presentation.Prism.Modules.Home;
+using My.CoachManager.Presentation.Prism.Resources.Strings;
 using My.CoachManager.Presentation.Prism.Wpf.Services;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using My.CoachManager.Presentation.Prism.Wpf.Views;
 using My.CoachManager.Presentation.ServiceAgent;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.UserServiceReference;
 using Prism.Logging;
 using Prism.Modularity;
 using Prism.Mvvm;
@@ -22,23 +32,25 @@ namespace My.CoachManager.Presentation.Prism.Wpf
 {
     public class Bootstrapper : UnityBootstrapper
     {
-        /// <summary>
-        /// The splash screen model.
-        /// </summary>
-        private readonly SplashScreenViewModel _splashScreenModel;
 
-        #region Constructors
+        #region Fields
+
+        private readonly SplashScreenViewModel _splashScreenViewModel;
+
+#endregion
+
+        #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Bootstrapper"/> class.
+        /// Initialise a new instance.
         /// </summary>
-        /// <param name="splashScreenModel">The splash screen model.</param>
-        public Bootstrapper(SplashScreenViewModel splashScreenModel)
+        /// <param name="splashScreenViewModel"></param>
+        public Bootstrapper(SplashScreenViewModel splashScreenViewModel)
         {
-            _splashScreenModel = splashScreenModel;
+            _splashScreenViewModel = splashScreenViewModel;
         }
 
-        #endregion Constructors
+#endregion
 
         #region Configuration
 
@@ -49,17 +61,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// <returns>The main window.</returns>
         protected override DependencyObject CreateShell()
         {
-            _splashScreenModel.Message = "Shell Start Creation";
-
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-
             var view = Container.TryResolve<Shell>();
-
-            stopwatch.Stop();
-
-            _splashScreenModel.Message = "Shell End Creation : " + stopwatch.ElapsedMilliseconds;
-
             return view;
         }
 
@@ -70,17 +72,21 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         protected override void ConfigureContainer()
         {
             base.ConfigureContainer();
-
-            // Container.AddExtension(new IocUnityContainer(Logger as Logger));
+            
+            // Register Logger
             Container.RegisterInstance(typeof(ILogger), Logger);
 
             // Register Wcf Services
             Container.RegisterInstance(typeof(ICategoryService), ServiceClientFactory.Create<CategoryServiceClient, ICategoryService>());
+            Container.RegisterInstance(typeof(IUserService), ServiceClientFactory.Create<UserServiceClient, IUserService>());
 
             // Register Presentation Services
-            Container.RegisterType(typeof(INavigationService), typeof(NavigationService), new ContainerControlledLifetimeManager());
+            Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<INotificationService, NotificationService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IAuthenticationService, AuthenticationService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IDialogService, DialogService>(new ContainerControlledLifetimeManager());
         }
-
+        
         /// <inheritdoc />
         /// <summary>
         /// Configure the Module Catalog.
@@ -93,91 +99,24 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             ModuleCatalog.AddModule(new ModuleInfo
             {
                 InitializationMode = InitializationMode.WhenAvailable,
+                ModuleName = typeof(CommonModule).Name,
+                ModuleType = typeof(CommonModule).AssemblyQualifiedName
+            });
+
+            // Add Modules
+            ModuleCatalog.AddModule(new ModuleInfo
+            {
+                InitializationMode = InitializationMode.WhenAvailable,
+                ModuleName = typeof(HomeModule).Name,
+                ModuleType = typeof(HomeModule).AssemblyQualifiedName
+            });
+            ModuleCatalog.AddModule(new ModuleInfo
+            {
+                InitializationMode = InitializationMode.WhenAvailable,
                 ModuleName = typeof(AdministrationModule).Name,
                 ModuleType = typeof(AdministrationModule).AssemblyQualifiedName
             });
-
-            Logger.Log("Add the Administration Module", Category.Debug, Priority.None);
         }
-
-        //protected override void ConfigureContainer()
-        //{
-        //    Locator.SetContainer(Container);
-
-        //    // View Model Locator
-        //    ViewModelLocationProvider.SetDefaultViewModelFactory(t => Container.Resolve(t));
-
-        //    // Theme
-        //    SkinManager.SkinManager.ApplyTheme("dark");
-        //    SkinManager.SkinManager.ApplyAccent("blue");
-
-        //    // Services
-        //    Locator.RegisterInstance<ICategoryService>(ServiceClientFactory.Create<CategoryServiceClient, ICategoryService>());
-        //    Locator.RegisterInstance<IPositionService>(ServiceClientFactory.Create<PositionServiceClient, IPositionService>());
-        //    Locator.RegisterInstance<ISeasonService>(ServiceClientFactory.Create<SeasonServiceClient, ISeasonService>());
-        //    Locator.RegisterInstance<IPersonService>(ServiceClientFactory.Create<PersonServiceClient, IPersonService>());
-        //    Locator.RegisterInstance<IUserService>(ServiceClientFactory.Create<UserServiceClient, IUserService>());
-        //    Locator.RegisterInstance<IRosterService>(ServiceClientFactory.Create<RosterServiceClient, IRosterService>());
-
-        //    // Unity
-        //    Locator.RegisterType<ILogger, Logger>();
-        //    Locator.RegisterType<IAuthenticationService, AuthenticationService>();
-        //    Locator.RegisterType<IDialogService, DialogService>();
-        //    Locator.RegisterType<INavigationService, NavigationService>();
-
-        //    // ViewModels
-        //    Locator.RegisterType<IMessageViewModel, MessageViewModel>();
-        //    Locator.RegisterType<IShellViewModel, ShellViewModel>();
-
-        //    // base
-        //    base.ConfigureContainer();
-        //}
-
-        ///// <summary>
-        ///// Creates the modules catalog.
-        ///// </summary>
-        ///// <returns></returns>
-        //[STAThread]
-        //protected override void InitializeModules()
-        //{
-        //    IModule module = Container.Resolve<SplashScreenModule>();
-        //    module.Initialize();
-
-        //    module = Container.Resolve<LoginModule>();
-        //    module.Initialize();
-
-        //    ShowSplashScreen();
-
-        //    // Create a new thread for the splash screen to run on
-        //    var thread = new Thread(() =>
-        //    {
-        //        if (ConnectUser())
-        //        {
-        //            OnLoginSuccess();
-        //            Initialize();
-
-        //            System.Windows.Application.Current.Dispatcher.Invoke(
-        //                delegate
-        //                {
-        //                    HideSplashScreen();
-        //                    OpenShell();
-        //                }
-        //            );
-        //        }
-        //        else
-        //        {
-        //            OnLoginFailed();
-        //        }
-        //    });
-        //    thread.SetApartmentState(ApartmentState.STA);
-        //    thread.IsBackground = true;
-        //    thread.Name = "Splash Screen";
-        //    thread.Start();
-        //}
-
-        #endregion Configuration
-
-        #region Initialisation
 
         /// <inheritdoc />
         /// <summary>
@@ -189,10 +128,15 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             InitializeViewModelResolver();
         }
 
+        #endregion Configuration
+
+        #region Initialisation
+
+        /// <inheritdoc />
         /// <summary>
         /// Create the logger.
         /// </summary>
-        /// <returns>The <see cref="ILoggerFacade"/>.</returns>
+        /// <returns>The <see cref="T:Prism.Logging.ILoggerFacade" />.</returns>
         protected override ILoggerFacade CreateLogger()
         {
             return CrossCutting.Logging.Supervision.Logger.CreateLogger();
@@ -204,42 +148,32 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// </summary>
         protected override void InitializeModules()
         {
-            _splashScreenModel.Message = "ModulesStartInitialization";
+            var manager = Container.Resolve<IModuleManager>();
+            manager.LoadModuleCompleted += Manager_LoadModuleCompleted;
 
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
+            UpdateSplachMessage(StatusResources.UserConnection);
+                if (!ConnectUser()) return;
 
-            var actionToLoad = new List<Action>
-            {
-                LoadSkin
-            };
+                    base.InitializeModules();
 
-            foreach (var action in actionToLoad)
-            {
-                action();
-                Logger.Log($"Load action : {action.Method.Name}", Category.Debug, Priority.None);
-            }
+                var actionToLoad = new List<Tuple<Action, string>>
+                {
+                    new Tuple<Action, string>(LoadSkin, StatusResources.SkinLoading)
+                };
 
-            base.InitializeModules();
+                foreach (var action in actionToLoad)
+                {
+                    ExecuteAction(action.Item1, action.Item2);
+                }
 
-            Logger.Log("Initialize modules", Category.Debug, Priority.None);
+                OpenShell();
+        }
 
-            stopwatch.Stop();
-
-            _splashScreenModel.Message = "ModulesEndInitialization : " + stopwatch.ElapsedMilliseconds;
-
-            var mainWindow = System.Windows.Application.Current.MainWindow;
-
-            if (mainWindow == null)
-            {
-                return;
-            }
-
-            mainWindow.Show();
-            mainWindow.Activate();
-            mainWindow.Topmost = true;  // important
-            mainWindow.Topmost = false; // important
-            mainWindow.Focus();         // important
+        private void Manager_LoadModuleCompleted(object sender, LoadModuleCompletedEventArgs e)
+        {
+            Logger.Log($"Module Loaded : {e.ModuleInfo.ModuleName}" , Category.Debug, Priority.None);
+            UpdateSplachMessage(string.Format(StatusResources.ModuleLoading, e.ModuleInfo.ModuleName));
+            // Thread.Sleep(3000);
         }
 
         /// <inheritdoc />
@@ -248,19 +182,8 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// </summary>
         protected override void InitializeShell()
         {
-            _splashScreenModel.Message = "ShellStartInitialization";
-
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
             base.InitializeShell();
-
             System.Windows.Application.Current.MainWindow = (Shell)Shell;
-
-            stopwatch.Stop();
-
-            _splashScreenModel.Message = "ShellEndInitialization : " + stopwatch.ElapsedMilliseconds;
-
-            Logger.Log("Initialize shell", Category.Debug, Priority.None);
         }
 
         /// <summary>
@@ -286,6 +209,10 @@ namespace My.CoachManager.Presentation.Prism.Wpf
                 });
         }
 
+        #endregion Initialisation
+
+        #region Methods
+
         /// <summary>
         /// Load default Skin.
         /// </summary>
@@ -294,203 +221,127 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             SkinManager.SkinManager.ApplyTheme("dark");
             SkinManager.SkinManager.ApplyAccent("blue");
         }
+        
+        /// <summary>
+        /// Executes and log an action.
+        /// </summary>
+        /// <param name="action">The action</param>
+        /// <param name="message">The log message.</param>
+        private void ExecuteAction(Action action, string message)
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
 
-        #endregion Initialisation
+            action.Invoke();
 
-        ///// <summary>
-        ///// Initialize the application.
-        ///// </summary>
-        //private void Initialize()
-        //{
-        //    // Load the application configuration
-        //    EventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Publish(StatusResources.ApplicationLoading);
-        //    //
+            stopwatch.Stop();
 
-        //    // Load the application configuration
-        //    EventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Publish(StatusResources.UserLoading);
-        //    //
+            Logger.Log($"Action Loaded : {action.Method.Name} in {stopwatch.ElapsedMilliseconds} ms", Category.Debug, Priority.None);
+            UpdateSplachMessage(message);
 
-        //    // Initialize the modules
-        //    InitializeModule<CoreModule>();
-        //    InitializeModule<SettingsModule>();
-        //    InitializeModule<AboutModule>();
-        //    InitializeModule<StatusBarModule>();
-        //    InitializeModule<HomeModule>();
+        }
 
-        //    if (Thread.CurrentPrincipal.IsInRole(PermissionConstants.AccessAdmin))
-        //        InitializeModule<AdministrationModule>();
+        /// <summary>
+        /// Updates splah message.
+        /// </summary>
+        /// <param name="message"></param>
+        private void UpdateSplachMessage(string message)
+        {
+            _splashScreenViewModel.UpdateMessage(message);
+        }
 
-        //    InitializeModule<RosterModule>();
-        //}
+        /// <summary>
+        /// Open the shell.
+        /// </summary>
+        private static void OpenShell()
+        {
+            var mainWindow = System.Windows.Application.Current.MainWindow;
 
-        ///// <summary>
-        ///// Connection of the user.
-        ///// </summary>
-        ///// <returns></returns>
-        //private IPrincipal GetConnectedUser(string login = "", string password = "", bool byWindowsCredentials = true)
-        //{
-        //    EventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Publish(StatusResources.UserConnection);
-        //    IPrincipal principal;
+            if (mainWindow == null)
+            {
+                return;
+            }
 
-        //    var authentificationService = Container.TryResolve<IAuthenticationService>();
-        //    if (byWindowsCredentials)
-        //    {
-        //        principal = authentificationService.AuthenticateByWindowsCredentials();
-        //    }
-        //    else
-        //    {
-        //        principal = authentificationService.Authenticate(login, password);
-        //    }
+            mainWindow.Show();
+            mainWindow.Activate();
+            mainWindow.Topmost = true; // important
+            mainWindow.Topmost = false; // important
+            mainWindow.Focus(); // important
+        }
 
-        //    return principal;
-        //}
+        /// <summary>
+        /// Connection of the user.
+        /// </summary>
+        /// <returns></returns>
+        private bool ConnectUser()
+        {
+            IPrincipal principal = null;
 
-        ///// <summary>
-        ///// Connection of the user.
-        ///// </summary>
-        ///// <returns></returns>
-        //private bool ConnectUser()
-        //{
-        //    IPrincipal principal = null;
-        //    AutoResetEvent waitEvent = new AutoResetEvent(false);
+            if (ConfigurationManager.WindowsAuthentication)
+            {
+                principal = GetConnectedUser();
+            }
 
-        //    if (ConfigurationManager.WindowsAuthentication)
-        //    {
-        //        principal = GetConnectedUser();
-        //    }
+            if (principal == null)
+            {
 
-        //    if (principal == null)
-        //    {
-        //        var dialog = Container.TryResolve<IDialogService>();
+                // Get Default Credentials
+                string defaultUsername;
+                var defaultPassword = string.Empty;
+                if (Thread.CurrentPrincipal.Identity.IsAuthenticated)
+                {
+                    defaultUsername = Thread.CurrentPrincipal.Identity.GetLogin();
+                }
+                else
+                {
+                    var currentWindowsIdentity = WindowsIdentity.GetCurrent();
+                    defaultUsername = currentWindowsIdentity.GetLogin();
+                }
 
-        //        string defaultUsername;
-        //        var defaultPassword = "";
-        //        if (Thread.CurrentPrincipal.Identity.IsAuthenticated)
-        //        {
-        //            defaultUsername = Thread.CurrentPrincipal.Identity.GetLogin();
-        //        }
-        //        else
-        //        {
-        //            var currentWindowsIdentity = WindowsIdentity.GetCurrent();
-        //            defaultUsername = currentWindowsIdentity.GetLogin();
-        //        }
+                // Show Login Dialog
+                if (DialogManager.ShowLoginDialog((newLogin, newPassword) =>
+                        {
+                            principal = GetConnectedUser(newLogin, newPassword, false);
 
-        //        var failedConnection = true;
-        //        while (failedConnection)
-        //        {
-        //            dialog.ShowLoginDialog(defaultUsername.ToUpper(), defaultPassword, string.Empty, e =>
-        //                {
-        //                    failedConnection = false;
-        //                    var loginViewModel = (ILoginViewModel)e.Context;
-        //                    if (e.Result == DialogResult.Ok)
-        //                    {
-        //                        principal = GetConnectedUser(loginViewModel.UserName, loginViewModel.Password, false);
+                            var isConnected = principal != null;
 
-        //                        if (principal == null)
-        //                        {
-        //                            defaultUsername = loginViewModel.UserName;
-        //                            defaultPassword = loginViewModel.Password;
-        //                            failedConnection = principal == null;
-        //                            dialog.ShowErrorPopup(MessageResources.ConnectionFailed);
-        //                        }
-        //                    }
-        //                    waitEvent.Set();
-        //                }
-        //            );
+                            if (!isConnected)
+                            {
+                                NotificationManager.ShowError(StatusResources.ConnectionFailed);
+                            }
+                            
+                            return new Tuple<bool, string>(isConnected, StatusResources.ConnectionFailed);
+                        },
+                        defaultUsername.ToUpper(), defaultPassword) == DialogResult.Ok)
+                {
+                    NotificationManager.ShowSuccess(string.Format(StatusResources.UserConnected, principal.Identity.Name));
+                }
+                else
+                {
+                        System.Windows.Application.Current.Shutdown();
+                }
+                
+            }
 
-        //            waitEvent.WaitOne();
-        //        }
-        //    }
+            if (principal == null) return Thread.CurrentPrincipal.Identity.IsAuthenticated;
+            AppDomain.CurrentDomain.SetThreadPrincipal(principal);
+            Thread.CurrentPrincipal = principal;
 
-        //    if (principal != null)
-        //    {
-        //        AppDomain.CurrentDomain.SetThreadPrincipal(principal);
-        //        Thread.CurrentPrincipal = principal;
-        //    }
+            return Thread.CurrentPrincipal.Identity.IsAuthenticated;
+        }
 
-        //    return Thread.CurrentPrincipal.Identity.IsAuthenticated;
-        //}
+        /// <summary>
+            /// Connection of the user.
+            /// </summary>
+            /// <returns></returns>
+            private static IPrincipal GetConnectedUser(string login = "", string password = "", bool byWindowsCredentials = true)
+            {
+                var authentificationService = ServiceLocator.Current.GetInstance<IAuthenticationService>();
 
-        ///// <summary>
-        ///// Open the shell.
-        ///// </summary>
-        //private void OpenShell()
-        //{
-        //    System.Windows.Application.Current.MainWindow = (Window)Shell;
-        //    if (System.Windows.Application.Current.MainWindow != null) System.Windows.Application.Current.MainWindow.Show();
-        //}
+                return byWindowsCredentials ? authentificationService.AuthenticateByWindowsCredentials() : authentificationService.Authenticate(login, password);
 
-        ///// <summary>
-        ///// Show the splash screen.
-        ///// </summary>
-        //public void ShowSplashScreen()
-        //{
-        //    var splash = Container.Resolve<SplashScreenView>();
-        //    if (splash == null) return;
-        //    splash.Show();
-        //    //System.Windows.Application.Current.Dispatcher.Invoke(
-        //    //    delegate
-        //    //    {
-        //    //        var splash = Container.Resolve<SplashScreenView>();
-        //    //        if (splash == null) return;
-        //    //        splash.Show();
-        //    //    }
-        //    //);
-        //}
+            }
 
-        ///// <summary>
-        ///// Hide the splash screen.
-        ///// </summary>
-        //public void HideSplashScreen()
-        //{
-        //    var splash = Container.Resolve<SplashScreenView>();
-        //    if (splash == null) return;
-        //    splash.Visibility = Visibility.Hidden;
-        //    //System.Windows.Application.Current.Dispatcher.Invoke(
-        //    //    delegate
-        //    //    {
-        //    //        var splash = Container.Resolve<SplashScreenView>();
-        //    //        if (splash == null) return;
-        //    //        splash.Hide();
-        //    //    }
-        //    //);
-        //}
-
-        ///// <summary>
-        ///// Initialise a module.
-        ///// </summary>
-        ///// <typeparam name="T"></typeparam>
-        //protected void InitializeModule<T>() where T : IModule
-        //{
-        //    EventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Publish(string.Format(StatusResources.ModuleLoading, typeof(T).GetTypeInfo().Name));
-        //    IModule module = Container.Resolve<T>();
-        //    System.Windows.Application.Current.Dispatcher.Invoke(
-        //        delegate
-        //        {
-        //            module.Initialize();
-        //        }
-        //    );
-        //}
-
-        ///// <summary>
-        ///// On loggin failed.
-        ///// </summary>
-        //protected void OnLoginFailed()
-        //{
-        //    System.Windows.Application.Current.Dispatcher.Invoke(
-        //        delegate
-        //        {
-        //            System.Windows.Application.Current.Shutdown();
-        //        }
-        //    );
-        //}
-
-        ///// <summary>
-        ///// On loggin failed.
-        ///// </summary>
-        //protected void OnLoginSuccess()
-        //{
-        //    EventAggregator.GetEvent<UpdateSplashScreenMessageRequestEvent>().Publish(string.Format(StatusResources.UserConnected, Thread.CurrentPrincipal.Identity.Name));
-        //}
-    }
+            #endregion
+        }
 }

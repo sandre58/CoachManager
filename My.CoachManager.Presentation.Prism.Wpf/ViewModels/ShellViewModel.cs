@@ -1,11 +1,9 @@
 ﻿using System.Windows;
-using Microsoft.Practices.ServiceLocation;
-using My.CoachManager.Presentation.Prism.Core;
 using My.CoachManager.Presentation.Prism.Core.Commands;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.Events;
 using My.CoachManager.Presentation.Prism.Core.Manager;
-using My.CoachManager.Presentation.Prism.Core.Services;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
+using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -18,12 +16,6 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
     /// </summary>
     public class ShellViewModel : ScreenViewModel
     {
-        #region Fields
-
-        private INavigationService _navigationService;
-
-        #endregion Fields
-
         #region Members
 
         /// <summary>
@@ -34,27 +26,12 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <summary>
         /// Gets or sets the active workspace.
         /// </summary>
-        public INavigatableWorkspaceViewModel ActiveWorkspace => (NavigationService.ActiveView as FrameworkElement)?.DataContext as INavigatableWorkspaceViewModel;
-
-        /// <summary>
-        /// Gets the navigation service.
-        /// </summary>
-        private INavigationService NavigationService => _navigationService ?? (_navigationService = ServiceLocator.Current.TryResolve<INavigationService>());
+        public INavigatableWorkspaceViewModel ActiveWorkspace => (NavigationManager.ActiveView as FrameworkElement)?.DataContext as INavigatableWorkspaceViewModel;
 
         /// <summary>
         /// Gets or Set the dialog interraction.
         /// </summary>
-        public InteractionRequest<IDialog> DialogInteractionRequest { get; set; }
-
-        /// <summary>
-        /// Gets or Set the dialog interraction.
-        /// </summary>
-        public InteractionRequest<IDialog> WorkspaceDialogInteractionRequest { get; set; }
-
-        /// <summary>
-        /// Gets or Set the dialog interraction.
-        /// </summary>
-        public InteractionRequest<INotificationPopup> NotificationPopupInteractionRequest { get; set; }
+        public InteractionRequest<IWorkspaceDialog> WorkspaceDialogInteractionRequest { get; set; }
 
         /// <summary>
         /// Gets or sets the go back command.
@@ -78,7 +55,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         {
             base.InitializeCommand();
 
-            var navigateCommand = new DelegateCommand<string>(s => NavigationManager.Navigate(s, OnNavigateCompleted));
+            var navigateCommand = new DelegateCommand<string>(s => NavigationManager.Navigate(s));
 
             GlobalCommands.NavigateCommand.RegisterCommand(navigateCommand);
 
@@ -94,9 +71,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         {
             base.InitializeData();
 
-            WorkspaceDialogInteractionRequest = new InteractionRequest<IDialog>();
-            DialogInteractionRequest = new InteractionRequest<IDialog>();
-            NotificationPopupInteractionRequest = new InteractionRequest<INotificationPopup>();
+            WorkspaceDialogInteractionRequest = new InteractionRequest<IWorkspaceDialog>();
 
             IsMenuExpended = true;
         }
@@ -110,10 +85,8 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
             base.InitializeEvent();
 
             EventAggregator.GetEvent<ShowWorkspaceDialogRequestEvent>().Subscribe(OnShowWorkspaceDialogRequested, ThreadOption.UIThread, true);
-            EventAggregator.GetEvent<ShowCustomDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
-            EventAggregator.GetEvent<ShowMessageDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
-            EventAggregator.GetEvent<ShowNotificationPopupRequestEvent>().Subscribe(OnShowNotificationRequested, ThreadOption.UIThread, true);
-            EventAggregator.GetEvent<ShowLoginDialogRequestEvent>().Subscribe(OnShowDialogRequested, ThreadOption.UIThread, true);
+
+            NavigationManager.Navigated += OnNavigateCompleted;
         }
 
         #endregion Initialisation
@@ -123,8 +96,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <summary>
         /// Call when the navigation is completed.
         /// </summary>
-        /// <param name="e"></param>
-        private void OnNavigateCompleted(NavigationResult e)
+        private void OnNavigateCompleted(object sender, RegionNavigationEventArgs e)
         {
             RaisePropertyChanged(nameof(ActiveWorkspace));
             GoForwardCommand.RaiseCanExecuteChanged();
@@ -138,24 +110,6 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         private void OnShowWorkspaceDialogRequested(DialogEventArgs e)
         {
             WorkspaceDialogInteractionRequest.Raise(e.Dialog, e.Callback);
-        }
-
-        /// <summary>
-        /// Call when the window dialog is requested.
-        /// </summary>
-        /// <param name="e"></param>
-        private void OnShowDialogRequested(DialogEventArgs e)
-        {
-            DialogInteractionRequest.Raise(e.Dialog, e.Callback);
-        }
-
-        /// <summary>
-        /// Call when the window dialog is requested.
-        /// </summary>
-        /// <param name="e"></param>
-        private void OnShowNotificationRequested(NotificationEventArgs e)
-        {
-            NotificationPopupInteractionRequest.Raise(e.Notification, e.Callback);
         }
 
         #region GoBack

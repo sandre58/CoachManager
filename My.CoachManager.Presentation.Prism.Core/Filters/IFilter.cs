@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel;
-using My.CoachManager.Presentation.Prism.Core.ViewModels;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
     /// <summary>
     /// Defines the contract for a filter used by the FilteredCollection
     /// </summary>
-    public interface IFilter : IViewModel, INotifyPropertyChanged
+    public interface IFilter : INotifyPropertyChanged
     {
         /// <summary>
         /// Gets the property info.

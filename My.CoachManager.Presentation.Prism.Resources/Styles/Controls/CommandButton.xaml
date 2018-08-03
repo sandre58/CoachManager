@@ -133,24 +133,24 @@
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderBrush" Value="{DynamicResource AccentForeground}" />
         <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
-        <Setter Property="parameters:ControlParameters.Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush}" />
+        <Setter Property="parameters:ControlParameters.Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush, Mode=OneWay, Converter={StaticResource SolidColorBrushToBrushConverter}}" />
         <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource Transparent}" />
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush">
             <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=BorderBrush, Converter={StaticResource BrushToColorConverter}}" Opacity="0.6" />
+                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=BorderBrush, Mode=OneWay, Converter={StaticResource BrushToColorConverter}}" Opacity="0.6" />
             </Setter.Value>
         </Setter>
         <Setter Property="parameters:ControlParameters.MouseOverForeground">
             <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=BorderBrush, Converter={StaticResource BrushToColorConverter}}" Opacity="0.6" />
+                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=BorderBrush, Mode=OneWay, Converter={StaticResource BrushToColorConverter}}" Opacity="0.6" />
             </Setter.Value>
         </Setter>
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush}" />
-        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush}" />
+        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource SolidColorBrushToBrushConverter}, Path=BorderBrush}" />
+        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource SolidColorBrushToBrushConverter}, Path=BorderBrush}" />
         <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Transparent}" />
-        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush}" />
-        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Foreground)}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource SolidColorBrushToBrushConverter}, Path=BorderBrush}" />
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay, Path=(parameters:ControlParameters.Foreground)}" />
         <Style.Triggers>
             <DataTrigger Value="True">
                 <DataTrigger.Binding>

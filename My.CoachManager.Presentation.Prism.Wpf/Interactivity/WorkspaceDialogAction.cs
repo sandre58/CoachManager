@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Interactivity;
 using My.CoachManager.Presentation.Prism.Controls;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using Prism.Interactivity.InteractionRequest;
 
 namespace My.CoachManager.Presentation.Prism.Wpf.Interactivity
@@ -27,8 +28,8 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Interactivity
         /// </summary>
         public WorkspaceDialog WorkspaceDialog
         {
-            get { return (WorkspaceDialog)GetValue(WorkspaceDialogProperty); }
-            set { SetValue(WorkspaceDialogProperty, value); }
+            get => (WorkspaceDialog)GetValue(WorkspaceDialogProperty);
+            set => SetValue(WorkspaceDialogProperty, value);
         }
 
         /// <summary>
@@ -37,27 +38,25 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Interactivity
         /// <param name="parameter">The parameter to the action. If the action does not require a parameter, the parameter may be set to a null reference.</param>
         protected override void Invoke(object parameter)
         {
-            var args = parameter as InteractionRequestedEventArgs;
-            if (args == null)
+            if (!(parameter is InteractionRequestedEventArgs args))
             {
                 return;
             }
 
-            var wrapper = GetDialog((IDialog)args.Context);
+            var wrapper = GetDialog((IWorkspaceDialog)args.Context);
 
             // We invoke the callback when the interaction's window is closed.
             var callback = args.Callback;
 
-            DependencyPropertyChangedEventHandler handler = null;
-            handler =
-                (o, e) =>
-                {
-                    if ((bool)e.NewValue) return;
-                    wrapper.IsVisibleChanged -= handler;
-                    wrapper.Content = null;
-                    if (callback != null) callback();
-                };
-            wrapper.IsVisibleChanged += handler;
+            void Handler(object o, DependencyPropertyChangedEventArgs e)
+            {
+                if ((bool) e.NewValue) return;
+                wrapper.IsVisibleChanged -= Handler;
+                wrapper.Content = null;
+                callback?.Invoke();
+            }
+
+            wrapper.IsVisibleChanged += Handler;
 
             wrapper.ShowHandlerDialog();
         }
@@ -67,19 +66,24 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Interactivity
         /// </summary>
         /// <param name="dialog">The dialog to be set as a DataContext in the window.</param>
         /// <returns></returns>
-        protected virtual WorkspaceDialog GetDialog(IDialog dialog)
+        protected virtual WorkspaceDialog GetDialog(IWorkspaceDialog dialog)
         {
             var wrapper = WorkspaceDialog;
 
             if (wrapper == null)
                 throw new NullReferenceException("WorkspaceDialog cannot return null");
 
-            // If the WindowContent does not have its own DataContext, it will inherit this one.
-            wrapper.DataContext = dialog;
             wrapper.Content = dialog.Content;
 
-            EventHandler handler = (o, e) => { wrapper.HideHandlerDialog(); };
-            if (dialog.Context != null) dialog.Context.CloseRequest += handler;
+            void Handler(object o, EventArgs e)
+            {
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                {
+                    wrapper.HideHandlerDialog();
+                });
+            }
+
+            ((IDialogViewModel) dialog.Content.DataContext).CloseRequest += Handler;
 
             return wrapper;
         }

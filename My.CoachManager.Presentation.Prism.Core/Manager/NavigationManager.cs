@@ -23,7 +23,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// Gets Navigation Service.
         /// </summary>
         private static INavigationService NavigationService => _navigationService ??
-                                                              (_navigationService = ServiceLocator.Current.TryResolve<INavigationService>());
+                                                              (_navigationService = ServiceLocator.Current.GetInstance<INavigationService>());
 
         /// <summary>
         /// Gets active view.
@@ -31,6 +31,37 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         public static object ActiveView => NavigationService.ActiveView;
 
         #endregion Members
+
+        #region Events
+
+        /// <summary>
+        /// Raised when the region is about to be navigated to content.
+        /// </summary>
+        public static event EventHandler<RegionNavigationEventArgs> Navigated
+        {
+            add => NavigationService.Navigated += value;
+            remove => NavigationService.Navigated -= value;
+        }
+
+        /// <summary>
+        /// Raised when the region is navigated to content.
+        /// </summary>
+        public static event EventHandler<RegionNavigationEventArgs> Navigating
+        {
+            add => NavigationService.Navigating += value;
+            remove => NavigationService.Navigating -= value;
+        }
+
+        /// <summary>
+        /// Raised when a navigation request fails.
+        /// </summary>
+        public static event EventHandler<RegionNavigationFailedEventArgs> NavigationFailed
+        {
+            add => NavigationService.NavigationFailed += value;
+            remove => NavigationService.NavigationFailed -= value;
+        }
+
+        #endregion
 
         #region Methods
 
@@ -73,7 +104,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// </summary>
         /// <param name="navigatePath">Full Uri (with parameters).</param>
         /// <param name="callback">Action when navigation is completed.</param>
-        public static void Navigate(string navigatePath, Action<NavigationResult> callback)
+        public static void Navigate(string navigatePath, Action<NavigationResult> callback = null)
         {
             var splitPath = navigatePath.Split('?');
             var path = splitPath[0];

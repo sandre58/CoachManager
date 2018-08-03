@@ -106,6 +106,15 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authentification.
+        /// </summary>
+        public static string Authentification {
+            get {
+                return ResourceManager.GetString("Authentification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Annuler.
         /// </summary>
         public static string Cancel {
@@ -327,6 +336,15 @@ namespace My.CoachManager.Presentation.Prism.Resources.Strings {
         public static string Restore {
             get {
                 return ResourceManager.GetString("Restore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Réessayer.
+        /// </summary>
+        public static string Retry {
+            get {
+                return ResourceManager.GetString("Retry", resourceCulture);
             }
         }
         

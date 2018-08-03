@@ -16,8 +16,11 @@ namespace My.CoachManager.Domain.CategoryModule.Aggregate
         /// <returns>The entity.</returns>
         public static Category CreateEntity(CategoryDto item)
         {
+            if (item == null) return null;
+
             return new Category
             {
+                Id = item.Id,
                 Code = item.Code,
                 Label = item.Label,
                 Description = item.Description,
@@ -49,8 +52,11 @@ namespace My.CoachManager.Domain.CategoryModule.Aggregate
         /// <returns>Result of the convert to DTO.</returns>
         public static CategoryDto Get(Category item)
         {
+            if (item == null) return null;
+
             return new CategoryDto
             {
+                Id = item.Id,
                 Code = item.Code,
                 Label = item.Label,
                 Description = item.Description,

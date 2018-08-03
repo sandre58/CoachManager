@@ -1,72 +1,73 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:presentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
 
     <!-- BASE -->
-    <SolidColorBrush x:Key="Light" Color="{DynamicResource LightColor}" />
-    <SolidColorBrush x:Key="Dark" Color="{DynamicResource DarkColor}" />
-    <SolidColorBrush x:Key="VeryDark" Color="{DynamicResource VeryDarkColor}" />
-    <SolidColorBrush x:Key="Disabled" Color="{DynamicResource DisabledColor}" />
+    <SolidColorBrush x:Key="Light" Color="{DynamicResource LightColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Dark" Color="{DynamicResource DarkColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="VeryDark" Color="{DynamicResource VeryDarkColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Disabled" Color="{DynamicResource DisabledColor}" presentationOptions:Freeze="true" />
 
     <!-- VARIATIONS -->
-    <SolidColorBrush x:Key="LightVariation1" Color="{DynamicResource LightVariation1Color}" />
-    <SolidColorBrush x:Key="LightVariation2" Color="{DynamicResource LightVariation2Color}" />
-    <SolidColorBrush x:Key="LightVariation3" Color="{DynamicResource LightVariation3Color}" />
-    <SolidColorBrush x:Key="LightVariation4" Color="{DynamicResource LightVariation4Color}" />
-    <SolidColorBrush x:Key="LightVariation5" Color="{DynamicResource LightVariation5Color}" />
-    <SolidColorBrush x:Key="LightVariation6" Color="{DynamicResource LightVariation6Color}" />
-    <SolidColorBrush x:Key="LightVariation7" Color="{DynamicResource LightVariation7Color}" />
-    <SolidColorBrush x:Key="LightVariation8" Color="{DynamicResource LightVariation8Color}" />
-    <SolidColorBrush x:Key="LightVariation9" Color="{DynamicResource LightVariation9Color}" />
+    <SolidColorBrush x:Key="LightVariation1" Color="{DynamicResource LightVariation1Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightVariation2" Color="{DynamicResource LightVariation2Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightVariation3" Color="{DynamicResource LightVariation3Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightVariation4" Color="{DynamicResource LightVariation4Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightVariation5" Color="{DynamicResource LightVariation5Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightVariation6" Color="{DynamicResource LightVariation6Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightVariation7" Color="{DynamicResource LightVariation7Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightVariation8" Color="{DynamicResource LightVariation8Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightVariation9" Color="{DynamicResource LightVariation9Color}" presentationOptions:Freeze="true" />
 
-    <SolidColorBrush x:Key="Variation1" Color="{DynamicResource Variation1Color}" />
-    <SolidColorBrush x:Key="Variation2" Color="{DynamicResource Variation2Color}" />
-    <SolidColorBrush x:Key="Variation3" Color="{DynamicResource Variation3Color}" />
-    <SolidColorBrush x:Key="Variation4" Color="{DynamicResource Variation4Color}" />
-    <SolidColorBrush x:Key="Variation5" Color="{DynamicResource Variation5Color}" />
-    <SolidColorBrush x:Key="Variation6" Color="{DynamicResource Variation6Color}" />
-    <SolidColorBrush x:Key="Variation7" Color="{DynamicResource Variation7Color}" />
-    <SolidColorBrush x:Key="Variation8" Color="{DynamicResource Variation8Color}" />
-    <SolidColorBrush x:Key="Variation9" Color="{DynamicResource Variation9Color}" />
+    <SolidColorBrush x:Key="Variation1" Color="{DynamicResource Variation1Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Variation2" Color="{DynamicResource Variation2Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Variation3" Color="{DynamicResource Variation3Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Variation4" Color="{DynamicResource Variation4Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Variation5" Color="{DynamicResource Variation5Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Variation6" Color="{DynamicResource Variation6Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Variation7" Color="{DynamicResource Variation7Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Variation8" Color="{DynamicResource Variation8Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Variation9" Color="{DynamicResource Variation9Color}" presentationOptions:Freeze="true" />
 
-    <SolidColorBrush x:Key="DarkVariation1" Color="{DynamicResource DarkVariation1Color}" />
-    <SolidColorBrush x:Key="DarkVariation2" Color="{DynamicResource DarkVariation2Color}" />
-    <SolidColorBrush x:Key="DarkVariation3" Color="{DynamicResource DarkVariation3Color}" />
-    <SolidColorBrush x:Key="DarkVariation4" Color="{DynamicResource DarkVariation4Color}" />
-    <SolidColorBrush x:Key="DarkVariation5" Color="{DynamicResource DarkVariation5Color}" />
-    <SolidColorBrush x:Key="DarkVariation6" Color="{DynamicResource DarkVariation6Color}" />
-    <SolidColorBrush x:Key="DarkVariation7" Color="{DynamicResource DarkVariation7Color}" />
-    <SolidColorBrush x:Key="DarkVariation8" Color="{DynamicResource DarkVariation8Color}" />
-    <SolidColorBrush x:Key="DarkVariation9" Color="{DynamicResource DarkVariation9Color}" />
+    <SolidColorBrush x:Key="DarkVariation1" Color="{DynamicResource DarkVariation1Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="DarkVariation2" Color="{DynamicResource DarkVariation2Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="DarkVariation3" Color="{DynamicResource DarkVariation3Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="DarkVariation4" Color="{DynamicResource DarkVariation4Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="DarkVariation5" Color="{DynamicResource DarkVariation5Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="DarkVariation6" Color="{DynamicResource DarkVariation6Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="DarkVariation7" Color="{DynamicResource DarkVariation7Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="DarkVariation8" Color="{DynamicResource DarkVariation8Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="DarkVariation9" Color="{DynamicResource DarkVariation9Color}" presentationOptions:Freeze="true" />
 
     <!-- FONT -->
-    <SolidColorBrush x:Key="NormalForeground" Color="{DynamicResource DarkColor}" />
-    <SolidColorBrush x:Key="GrayForeground" Color="{DynamicResource Variation5Color}" />
-    <SolidColorBrush x:Key="LightForeground" Color="{DynamicResource LightColor}" />
+    <SolidColorBrush x:Key="NormalForeground" Color="{DynamicResource DarkColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="GrayForeground" Color="{DynamicResource Variation5Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightForeground" Color="{DynamicResource LightColor}" presentationOptions:Freeze="true" />
 
     <!-- ICONS -->
-    <SolidColorBrush x:Key="NormalIcon" Color="{DynamicResource Variation6Color}" />
+    <SolidColorBrush x:Key="NormalIcon" Color="{DynamicResource Variation6Color}" presentationOptions:Freeze="true" />
 
     <!-- HEADER -->
-    <SolidColorBrush x:Key="DarkHeaderBackground" Color="{DynamicResource DarkVariation3Color}" />
-    <SolidColorBrush x:Key="HeaderForeground" Color="{DynamicResource DarkColor}" />
-    <SolidColorBrush x:Key="HeaderBorder" Color="{DynamicResource Variation4Color}" />
-    <SolidColorBrush x:Key="LightHeaderForeground" Color="{DynamicResource Variation5Color}" />
-    <SolidColorBrush x:Key="LightHeaderBorder" Color="{DynamicResource Variation2Color}" />
+    <SolidColorBrush x:Key="DarkHeaderBackground" Color="{DynamicResource DarkVariation3Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="HeaderForeground" Color="{DynamicResource DarkColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="HeaderBorder" Color="{DynamicResource Variation4Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightHeaderForeground" Color="{DynamicResource Variation5Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightHeaderBorder" Color="{DynamicResource Variation2Color}" presentationOptions:Freeze="true" />
 
     <!-- SEPARATOR -->
-    <SolidColorBrush x:Key="Separator" Color="{DynamicResource Variation6Color}" />
+    <SolidColorBrush x:Key="Separator" Color="{DynamicResource Variation6Color}" presentationOptions:Freeze="true" />
 
     <!-- CONTROLS -->
-    <SolidColorBrush x:Key="AccentControl" Color="{DynamicResource LightVariation2Color}" />
-    <SolidColorBrush x:Key="AccentControlMouseOver" Color="{DynamicResource LightVariation3Color}" />
-    <SolidColorBrush x:Key="AccentControlPressed" Color="{DynamicResource LightVariation4Color}" />
-    <SolidColorBrush x:Key="LightControl" Color="{DynamicResource Variation1Color}" />
-    <SolidColorBrush x:Key="LightControlMouseOver" Color="{DynamicResource Variation2Color}" />
-    <SolidColorBrush x:Key="LightControlPressed" Color="{DynamicResource Variation3Color}" />
-    <SolidColorBrush x:Key="Control" Color="{DynamicResource Variation2Color}" />
-    <SolidColorBrush x:Key="ControlMouseOver" Color="{DynamicResource Variation3Color}" />
-    <SolidColorBrush x:Key="ControlPressed" Color="{DynamicResource Variation4Color}" />
-    <SolidColorBrush x:Key="DarkControl" Color="{DynamicResource Variation4Color}" />
-    <SolidColorBrush x:Key="DarkControlMouseOver" Color="{DynamicResource Variation6Color}" />
-    <SolidColorBrush x:Key="DarkControlPressed" Color="{DynamicResource Variation7Color}" />
+    <SolidColorBrush x:Key="AccentControl" Color="{DynamicResource LightVariation2Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="AccentControlMouseOver" Color="{DynamicResource LightVariation3Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="AccentControlPressed" Color="{DynamicResource LightVariation4Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightControl" Color="{DynamicResource Variation1Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightControlMouseOver" Color="{DynamicResource Variation2Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightControlPressed" Color="{DynamicResource Variation3Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Control" Color="{DynamicResource Variation2Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="ControlMouseOver" Color="{DynamicResource Variation3Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="ControlPressed" Color="{DynamicResource Variation4Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="DarkControl" Color="{DynamicResource Variation4Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="DarkControlMouseOver" Color="{DynamicResource Variation6Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="DarkControlPressed" Color="{DynamicResource Variation7Color}" presentationOptions:Freeze="true" />
 </ResourceDictionary>

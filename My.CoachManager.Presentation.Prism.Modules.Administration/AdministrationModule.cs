@@ -22,7 +22,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration
         public void Initialize()
         {
             // Register the navigation view
-            _regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion, () => ServiceLocator.Current.TryResolve<AdministrationNavigationView>());
+            _regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion, () => ServiceLocator.Current.GetInstance<AdministrationNavigationView>());
 
             // Register the workspace view
             _container.RegisterTypeForNavigation<CategoriesListView>();

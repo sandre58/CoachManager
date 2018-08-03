@@ -17,7 +17,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         public WorkspaceDialog()
         {
-            Visibility = Visibility.Hidden;
+            Visibility = Visibility.Collapsed;
         }
 
         /// <summary>
@@ -30,8 +30,8 @@ namespace My.CoachManager.Presentation.Prism.Controls
         /// </summary>
         public SolidColorBrush OverlayBackground
         {
-            get { return (SolidColorBrush)GetValue(OverlayBackgroundProperty); }
-            set { SetValue(OverlayBackgroundProperty, value); }
+            get => (SolidColorBrush)GetValue(OverlayBackgroundProperty);
+            set => SetValue(OverlayBackgroundProperty, value);
         }
 
         /// <summary>
@@ -44,19 +44,18 @@ namespace My.CoachManager.Presentation.Prism.Controls
         /// </summary>
         public UIElement Owner
         {
-            get { return (UIElement)GetValue(OwnerProperty); }
-            set { SetValue(OwnerProperty, value); }
+            get => (UIElement)GetValue(OwnerProperty);
+            set => SetValue(OwnerProperty, value);
         }
 
         public bool ShowHandlerDialog()
         {
+            if (Visibility == Visibility.Visible) return true;
             Visibility = Visibility.Visible;
 
-            if (Owner != null)
-            {
-                _saveEnabled = Owner.IsEnabled;
-                Owner.IsEnabled = false;
-            }
+            if (Owner == null) return _result;
+            _saveEnabled = Owner.IsEnabled;
+            Owner.IsEnabled = false;
 
             //_hideRequest = false;
             //while (!_hideRequest)
@@ -78,8 +77,9 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         public void HideHandlerDialog()
         {
+            if (Visibility != Visibility.Visible) return;
             // _hideRequest = true;
-            Visibility = Visibility.Hidden;
+            Visibility = Visibility.Collapsed;
             if (Owner != null)
             {
                 Owner.IsEnabled = _saveEnabled;

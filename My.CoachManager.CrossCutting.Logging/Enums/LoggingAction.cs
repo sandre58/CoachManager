@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace My.CoachManager.CrossCutting.Logging.Enums
+﻿namespace My.CoachManager.CrossCutting.Logging.Enums
 {
     /// <summary>
     /// Action for logger context.

@@ -1,10 +1,12 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Presentation.Prism.Resources.Strings;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
+using SplashScreen = My.CoachManager.Presentation.Prism.Wpf.Views.SplashScreen;
 
 namespace My.CoachManager.Presentation.Prism.Wpf
 {
@@ -13,72 +15,58 @@ namespace My.CoachManager.Presentation.Prism.Wpf
     /// </summary>
     public partial class App
     {
-        /// <summary>
-        /// The splash screen model.
-        /// </summary>
-        private SplashScreenViewModel _splashScreenModel;
+        private SplashScreenViewModel _splashScreenViewModel;
 
         /// <summary>
         /// Raises the <see cref="E:System.Windows.Application.Startup"/> event.
         /// </summary>
         /// <param name="e">A <see cref="T:System.Windows.StartupEventArgs"/> that contains the event data.</param>
-        [STAThread]
         protected override void OnStartup(StartupEventArgs e)
         {
-            Current.DispatcherUnhandledException += OnAppDispatcherUnhandledException;
+            DispatcherUnhandledException += OnAppDispatcherUnhandledException;
 
-            _splashScreenModel = new SplashScreenViewModel();
+            _splashScreenViewModel = new SplashScreenViewModel();
+            _splashScreenViewModel.Initialize();
 
-            //// Create a thread for the splash screen
-            //var splashScreenThread = new Thread(
-            //    () =>
-            //    {
-            //        // Create our context, and install it:
-            //        SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+            // Create a thread for the splash screen
+            var splashScreenThread = new Thread(
+                () =>
+                {
+                    // Create our context, and install it:
+                    SynchronizationContext.SetSynchronizationContext(
+                        new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
 
-            //            var splash = new SplashScreenView { DataContext = _splashScreenModel };
+                    var splash = new SplashScreen() { DataContext = _splashScreenViewModel };
 
-            //            splash.Closed += (s, closeEvent) =>
-            //        {
-            //            Dispatcher.CurrentDispatcher.BeginInvokeShutdown(DispatcherPriority.Background);
-            //        };
+                    splash.Closed += (s, closeEvent) =>
+                    {
+                        Dispatcher.CurrentDispatcher.BeginInvokeShutdown(DispatcherPriority.Background);
+                    };
 
-            //            splash.Show();
+                    splash.Show();
 
+                    Dispatcher.Run();
+                });
 
-            //        Dispatcher.Run();
-            //    });
-
-            //splashScreenThread.SetApartmentState(ApartmentState.STA);
+            splashScreenThread.SetApartmentState(ApartmentState.STA);
             //splashScreenThread.Start();
-            
+
+            _splashScreenViewModel.UpdateMessage(StatusResources.ApplicationStartLoading);
             base.OnStartup(e);
 
-            _splashScreenModel.Message = "InformationMessage.ApplicationStartLoading";
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-
-            InitializeDefaultThread();
-
-                var bootstrapper = new Bootstrapper(_splashScreenModel);
-                bootstrapper.Run();
+            
+            var bootstrapper = new Bootstrapper(_splashScreenViewModel);
+            bootstrapper.Run();
 
             stopwatch.Stop();
-            _splashScreenModel.Message = "InformationMessage.ApplicationStartLoading" + stopwatch.ElapsedMilliseconds;
+            _splashScreenViewModel.UpdateMessage(StatusResources.ApplicationEndLoading);
 
             ShutdownMode = ShutdownMode.OnMainWindowClose;
-        }
 
-        /// <summary>
-        /// The initialize default thread.
-        /// </summary>
-        private static void InitializeDefaultThread()
-        {
-            //var identity = new AbsoluIdentity("AbsoluIdentity");
-            //var principal = new AbsoluPrincipal(identity, new string[0]);
+            // Close splash
 
-            //Thread.CurrentPrincipal = principal;
-            //AppDomain.CurrentDomain.SetThreadPrincipal(principal);
         }
 
         /// <summary>
@@ -86,11 +74,10 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="DispatcherUnhandledExceptionEventArgs"/> instance containing the event data.</param>
-        private void OnAppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        private static void OnAppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
                 // Log the unhandled exception
-                ServiceLocator.Current.TryResolve<ILogger>().Error(e.Exception);
+                ServiceLocator.Current.GetInstance<ILogger>().Error(e.Exception);
         }
-
     }
 }

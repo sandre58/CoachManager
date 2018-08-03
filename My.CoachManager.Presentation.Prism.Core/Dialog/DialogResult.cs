@@ -10,5 +10,6 @@
         Yes,
         No,
         Cancel,
+        Retry
     }
 }

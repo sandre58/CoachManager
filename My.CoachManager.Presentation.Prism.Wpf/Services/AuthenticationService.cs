@@ -4,37 +4,36 @@ using My.CoachManager.Application.Dtos.Users;
 using My.CoachManager.CrossCutting.Core.Cryptography;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.CrossCutting.Core.Security;
-using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.ServiceAgent.UserServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Wpf.Services
 {
+    /// <inheritdoc />
     /// <summary>
-    /// The implementation of the contract <see cref="IAuthenticationService"/>.
+    /// The implementation of the contract <see cref="T:My.CoachManager.Presentation.Prism.Core.Services.IAuthenticationService" />.
     /// this class has no need on its ownself, hence explicit implementation.
     /// </summary>
     public class AuthenticationService : IAuthenticationService
     {
         #region Fields
-
-        private readonly ILogger _logger;
+        
         private readonly IUserService _userService;
 
         #endregion Fields
 
         #region Constructor
 
-        public AuthenticationService(IUserService userService, ILogger logger)
+        public AuthenticationService(IUserService userService)
         {
             _userService = userService;
-            _logger = logger;
         }
 
         #endregion Constructor
 
         #region Public Methods
 
+        /// <inheritdoc />
         /// <summary>
         /// Authenticate an user.
         /// </summary>
@@ -48,6 +47,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
             return GetPrincipalFromUser(user);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Authenticate an user.
         /// </summary>
@@ -71,7 +71,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// <param name="login">The user name.</param>
         /// <param name="password">The password.</param>
         /// <returns></returns>
-        protected UserDto GetAuthenticatedUser(string login, string password)
+        private UserDto GetAuthenticatedUser(string login, string password)
         {
             var hashPassword = TripleDesEncryptor.Encrypt(password, login);
             return _userService.GetUserByLoginAndPassword(login, hashPassword);
@@ -82,12 +82,17 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// </summary>
         /// <param name="login">The user name.</param>
         /// <returns></returns>
-        protected UserDto GetAuthenticatedUser(string login)
+        private UserDto GetAuthenticatedUser(string login)
         {
             return _userService.GetUserByLogin(login);
         }
 
-        protected IPrincipal GetPrincipalFromUser(UserDto user)
+        /// <summary>
+        /// Get principal.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        private static IPrincipal GetPrincipalFromUser(UserDto user)
         {
             if (user != null)
             {

@@ -7,7 +7,7 @@ using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.PositionModule.Aggregate;
-using My.CoachManager.Domain.PositionModule.Service;
+using My.CoachManager.Domain.PositionModule.Services;
 
 namespace My.CoachManager.Application.Services.Positions
 {

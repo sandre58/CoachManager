@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
-using My.CoachManager.Application.Services.CategoryModule;
 using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.CrossCutting.Unity.Configurations;
 using My.CoachManager.CrossCutting.Unity.Exceptions;
 using My.CoachManager.CrossCutting.Unity.Resources;
-using My.CoachManager.Domain.AppModule.Services;
-using My.CoachManager.Domain.CategoryModule.Service;
-using My.CoachManager.Domain.Core;
-using My.CoachManager.Infrastructure.Data.Core;
-using My.CoachManager.Infrastructure.Data.UnitOfWorks;
+using Unity;
+using Unity.Extension;
+using Unity.Lifetime;
 
 namespace My.CoachManager.CrossCutting.Unity
 {
@@ -47,26 +44,17 @@ namespace My.CoachManager.CrossCutting.Unity
         /// </remarks>
         protected override void Initialize()
         {
-            // Data Layer
-            Container.RegisterType<IQueryableUnitOfWork, DataContext>();
-            Container.RegisterType(typeof(IRepository<>), typeof(GenericRepository<>));
 
-            // Domain Layer
-            Container.RegisterType(typeof(ICrudDomainService<,>), typeof(CrudDomainService<,>));
-            Container.RegisterType(typeof(ICategoryDomainService), typeof(CategoryDomainService));
-
-            // Application Layer
-            Container.RegisterType<ICategoryAppService, CategoryAppService>();
-
-            // CrossCutting Layer
-            // Container.RegisterType<ICacheManager, MemoryCacheManager>(new ContainerControlledLifetimeManager());
+            //// CrossCutting Layer
+            //// Container.RegisterType<ICacheManager, MemoryCacheManager>(new ContainerControlledLifetimeManager());
             Container.RegisterInstance(_logger, new ContainerControlledLifetimeManager());
 
             // Get unity configurations sections
-            //var configurations = UnityConfigurationManager.UnitySections;
+            var configurations = UnityConfigurationManager.UnitySections;
 
             // Load All Container of all configurations.
-            //LoadContainersConfiguration(configurations);
+            LoadContainersConfiguration(configurations);
+
         }
 
         #region ----- Methods -----
@@ -94,15 +82,10 @@ namespace My.CoachManager.CrossCutting.Unity
 
                         Container.LoadConfiguration(configSection, name);
                     }
-                    catch (InvalidOperationException exception)
+                    catch (Exception exception)
                     {
                         Trace.TraceError("Container {0} of file {1} is on Error, please check container configuration file : Error = {2}", name, configuration.Key, exception.Message);
                         throw;
-                    }
-                    catch (FileLoadException exception)
-                    {
-                        Trace.TraceError("Container {0} of file {1} is on Error, please check container configuration file : Error = {2}", name, configuration.Key, exception.Message);
-                        throw new UnityException(string.Format(GlobalMessages.LoadConfigurationError, configuration.Key, name), exception);
                     }
                 }
             }

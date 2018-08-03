@@ -11,9 +11,6 @@
         /// <value>
         /// The Log Separator.
         /// </value>
-        public static string Separator
-        {
-            get { return "|"; }
-        }
+        public static string Separator => "|";
     }
 }

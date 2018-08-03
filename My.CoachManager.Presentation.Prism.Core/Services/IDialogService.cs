@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
 
 namespace My.CoachManager.Presentation.Prism.Core.Services
 {
@@ -12,152 +11,29 @@ namespace My.CoachManager.Presentation.Prism.Core.Services
     public interface IDialogService
     {
         /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
+        /// Displays a modal dialog.
         /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowCustomDialog(FrameworkElement view, IDialogViewModel model, string title,
-            Action<IDialog> callback = null);
+        /// <param name="view">The view to include in workspace dialog.</param>
+        /// <param name="callback">Action executed after result of dialog.</param>
+        void ShowWorkspaceDialog(FrameworkElement view, Action<IWorkspaceDialog> callback = null);
 
         /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
+        /// Displays a message dialog.
         /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowCustomDialog(Type type, string title, Action<IDialog> callback = null);
+        /// <param name="title">Title of window.</param>
+        /// <param name="message">Message.</param>
+        /// <param name="style">Style of window.</param>
+        /// <param name="buttons">Buttons of window.</param>
+        DialogResult ShowMessageDialog(string title, string message,
+            MessageDialogType style = MessageDialogType.Information,
+            MessageDialogButtons buttons = MessageDialogButtons.Okcancel);
 
         /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
+        /// Displays a message dialog.
         /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowCustomDialog<TView>(string title, Action<IDialog> callback = null);
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowWorkspaceDialog<TView>(IWorkspaceDialogViewModel model = null, Action<IDialog> callbackBefore = null, Action<IDialog> callbackAfter = null) where TView : FrameworkElement;
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowWorkspaceDialog(Type typeView, IWorkspaceDialogViewModel model = null, Action<IDialog> callbackBefore = null, Action<IDialog> callbackAfter = null);
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowInformationDialog(string message, Action<IDialog> callback = null, MessageDialogType type = MessageDialogType.Ok);
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowErrorDialog(string message, Action<IDialog> callback = null, MessageDialogType type = MessageDialogType.Ok);
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowWarningDialog(string message, Action<IDialog> callback = null, MessageDialogType type = MessageDialogType.Ok);
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowSuccessDialog(string message, Action<IDialog> callback = null, MessageDialogType type = MessageDialogType.Ok);
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowQuestionDialog(string message, Action<IDialog> callback = null, MessageDialogType type = MessageDialogType.YesNo);
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowMessageDialog(string title, string message, Action<IDialog> callback = null,
-            MessageDialogType type = MessageDialogType.Okcancel,
-            MessageDialogStyle style = MessageDialogStyle.Information);
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowInformationPopup(string message);
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowErrorPopup(string message);
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowWarningPopup(string message);
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowSuccessPopup(string message);
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowNotificationPopup(string title, string message,
-            MessageDialogStyle style = MessageDialogStyle.Information);
+        /// <param name="view">The view to include in workspace dialog.</param>
+        /// <param name="title">Title of window.</param>
+        DialogResult ShowCustomDialog(FrameworkElement view, string title);
 
         /// <summary>
         /// Show the dialog for open a file.
@@ -166,12 +42,12 @@ namespace My.CoachManager.Presentation.Prism.Core.Services
             bool restoreDirectory = false);
 
         /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
+        /// Show the dialog to provide Username and password.
         /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        void ShowLoginDialog(string login, string password, string title, Action<IDialog> callback = null);
+        /// <param name="loginAction">Action to log in.</param>
+        /// <param name="login">The login.</param>
+        /// <param name="password">The password.</param>
+        /// <returns>Item 1 : IsConnected ; Item2 : Error</returns>
+        DialogResult ShowLoginDialog(Func<string, string, Tuple<bool, string>> loginAction, string login = "", string password = "");
     }
 }

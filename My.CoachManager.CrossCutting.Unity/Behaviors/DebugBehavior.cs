@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Linq;
-using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.CrossCutting.Logging.Attributes;
 using Unity.Interception.InterceptionBehaviors;
@@ -14,6 +13,24 @@ namespace My.CoachManager.CrossCutting.Unity.Behaviors
     /// </summary>
     public class DebugBehavior : BehaviorBase, IInterceptionBehavior
     {
+        #region Fields
+
+        private readonly ILogger _logger;
+
+        #endregion
+        #region Constructors
+
+        /// <summary>
+        /// Initialize a new instance.
+        /// </summary>
+        /// <param name="logger"></param>
+        public DebugBehavior(ILogger logger)
+        {
+            _logger = logger;
+        }
+
+#endregion
+
         #region ----- IInterceptionBehavior Methods -----
 
         /// <summary>
@@ -24,45 +41,40 @@ namespace My.CoachManager.CrossCutting.Unity.Behaviors
         /// <returns>The output value of invocated methods.</returns>
         public IMethodReturn Invoke(IMethodInvocation input, GetNextInterceptionBehaviorDelegate getNext)
         {
-            // Get logger instance
-            var logger = ServiceLocator.Current.TryResolve<ILogger>();
-
             var methodAttribute = input.MethodBase.GetCustomAttributes(typeof(LoggingContextAttribute), true).FirstOrDefault() as LoggingContextAttribute;
-            if (input.MethodBase.DeclaringType != null)
-            {
-                var classAttribute = input.MethodBase.DeclaringType.GetCustomAttributes(typeof(LoggingContextAttribute), true).FirstOrDefault() as LoggingContextAttribute;
+            if (input.MethodBase.DeclaringType == null) return null;
 
-                input.InvocationContext.Add("MethodAttribute", methodAttribute);
-                input.InvocationContext.Add("ClassAttribute", classAttribute);
+            var classAttribute = input.MethodBase.DeclaringType.GetCustomAttributes(typeof(LoggingContextAttribute), true).FirstOrDefault() as LoggingContextAttribute;
 
-                string startMethod = string.Format(Resources.TraceMessages.StartMethod, input.MethodBase.DeclaringType.Name, input.MethodBase.Name);
+            input.InvocationContext.Add("MethodAttribute", methodAttribute);
+            input.InvocationContext.Add("ClassAttribute", classAttribute);
 
-                // Log in File
-                logger.Debug(startMethod, new LoggingContext { Action = methodAttribute != null ? methodAttribute.Action : "NoAction" });
+            var startMethod = string.Format(Resources.TraceMessages.StartMethod, input.MethodBase.DeclaringType.Name, input.MethodBase.Name);
 
-                var watch = new Stopwatch();
+            // Log in File
+            _logger.Debug(startMethod, new LoggingContext { Action = methodAttribute != null ? methodAttribute.Action : "NoAction" });
 
-                // Start Chronometer
-                watch.Start();
+            var watch = new Stopwatch();
 
-                var methodReturn = getNext().Invoke(input, getNext);
+            // Start Chronometer
+            watch.Start();
 
-                // Stop Chronometer
-                watch.Stop();
+            var methodReturn = getNext().Invoke(input, getNext);
 
-                // Build End String to log
-                var endMethod = string.Format(Resources.TraceMessages.EndMethod, input.MethodBase.DeclaringType.Name, input.MethodBase.Name, watch.ElapsedMilliseconds);
+            // Stop Chronometer
+            watch.Stop();
 
-                // Log in File
-                logger.Debug(endMethod, new LoggingContext { Action = methodAttribute != null ? methodAttribute.Action : "NoAction" });
+            // Build End String to log
+            var endMethod = string.Format(Resources.TraceMessages.EndMethod, input.MethodBase.DeclaringType.Name, input.MethodBase.Name, watch.ElapsedMilliseconds);
 
-                // Return Invocated Method Value
-                return methodReturn;
-            }
+            // Log in File
+            _logger.Debug(endMethod, new LoggingContext { Action = methodAttribute != null ? methodAttribute.Action : "NoAction" });
 
-            return null;
+            // Return Invocated Method Value
+            return methodReturn;
         }
 
         #endregion ----- IInterceptionBehavior Methods -----
+
     }
 }

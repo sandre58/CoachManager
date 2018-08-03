@@ -3,296 +3,114 @@ using System.Windows;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Win32;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.Events;
 using My.CoachManager.Presentation.Prism.Core.Services;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
+using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
+using My.CoachManager.Presentation.Prism.Wpf.Views;
 using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Wpf.Services
 {
+    /// <inheritdoc />
     /// <summary>
     /// Class abstracting the interaction between view models and views when it comes to
     /// opening dialogs using the MVVM pattern in WPF.
     /// </summary>
     public class DialogService : IDialogService
     {
-        #region Fields
-
-        private readonly IEventAggregator _eventAggregator;
-        private readonly IServiceLocator _serviceLocator;
-
-        #endregion Fields
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DialogService"/> class.
-        /// </summary>
-        public DialogService(IEventAggregator eventAggregator, IServiceLocator serviceLocator)
-        {
-            _eventAggregator = eventAggregator;
-            _serviceLocator = serviceLocator;
-        }
-
-        #endregion Constructors
 
         #region IDialogService Members
 
+        /// <inheritdoc />
         /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
+        /// Displays a modal dialog.
         /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowWorkspaceDialog<TView>(IWorkspaceDialogViewModel model = null, Action<IDialog> callbackBefore = null, Action<IDialog> callbackAfter = null) where TView : FrameworkElement
+        /// <param name="view">The view to include in workspace dialog.</param>
+        /// <param name="callback">Action executed after result of dialog.</param>
+        public void ShowWorkspaceDialog(FrameworkElement view, Action<IWorkspaceDialog> callback = null)
         {
-            ShowWorkspaceDialog(typeof(TView), model, callbackBefore, callbackAfter);
+
+            var dialog = new Dialog()
+            {
+                Content = view
+            };
+
+            ServiceLocator.Current.GetInstance<IEventAggregator>().GetEvent<ShowWorkspaceDialogRequestEvent>().Publish(new DialogEventArgs(dialog, callback));
+
         }
 
+        /// <inheritdoc />
         /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
+        /// Displays a message dialog.
         /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowWorkspaceDialog(Type typeView, IWorkspaceDialogViewModel model = null, Action<IDialog> callbackBefore = null, Action<IDialog> callbackAfter = null)
+        /// <param name="title">Title of window.</param>
+        /// <param name="message">Message.</param>
+        /// <param name="style">Style of window.</param>
+        /// <param name="buttons">Buttons of window.</param>
+        public DialogResult ShowMessageDialog(string title, string message, MessageDialogType style = MessageDialogType.Information, MessageDialogButtons buttons = MessageDialogButtons.Okcancel)
         {
-            var view = _serviceLocator.GetInstance(typeView) as FrameworkElement;
-
-            if (view != null)
+            var vm = new MessageViewModel
             {
-                if (model != null)
-                {
-                    view.DataContext = model;
-                }
+                Title = title,
+                Message = message,
+                Buttons = buttons,
+                Type = style
+            };
+            vm.Initialize();
+            
+            var result = DialogResult.None; 
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
 
-                var dialog = new Dialog()
+                var dialog = new MessageDialog
                 {
-                    Content = view
+                    DataContext = vm
                 };
 
-                if (callbackBefore != null)
+                dialog.ShowDialog();
+
+                result = ((IDialogViewModel) dialog.DataContext).DialogResult;
+            });
+            
+            return result;
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Displays a message dialog.
+        /// </summary>
+        /// <param name="view">The view to include in workspace dialog.</param>
+        /// <param name="title">Title of window.</param>
+        public DialogResult ShowCustomDialog(FrameworkElement view, string title)
+        {
+            var result = DialogResult.None;
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+
+                var dialog = new CustomDialog
                 {
-                    callbackBefore(dialog);
-                }
+                    Content = view,
+                    Title = title,
+                    DataContext = view.DataContext as IDialogViewModel
+                };
 
-                _eventAggregator.GetEvent<ShowWorkspaceDialogRequestEvent>().Publish(new DialogEventArgs(dialog, callbackAfter));
-            }
+                dialog.ShowDialog();
+
+                result = ((IDialogViewModel)dialog.DataContext).DialogResult;
+            });
+
+            return result;
         }
 
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowInformationDialog(string message, Action<IDialog> callback = null, MessageDialogType type = MessageDialogType.Ok)
-        {
-            ShowMessageDialog(DialogResources.Information, message, callback, type);
-        }
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowErrorDialog(string message, Action<IDialog> callback = null, MessageDialogType type = MessageDialogType.Ok)
-        {
-            ShowMessageDialog(DialogResources.Error, message, callback, type, MessageDialogStyle.Error);
-        }
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowWarningDialog(string message, Action<IDialog> callback = null, MessageDialogType type = MessageDialogType.Ok)
-        {
-            ShowMessageDialog(DialogResources.Warning, message, callback, type, MessageDialogStyle.Warning);
-        }
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowSuccessDialog(string message, Action<IDialog> callback = null, MessageDialogType type = MessageDialogType.Ok)
-        {
-            ShowMessageDialog(DialogResources.Success, message, callback, type, MessageDialogStyle.Success);
-        }
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowQuestionDialog(string message, Action<IDialog> callback = null, MessageDialogType type = MessageDialogType.YesNo)
-        {
-            ShowMessageDialog(DialogResources.Question, message, callback, type, MessageDialogStyle.Question);
-        }
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowMessageDialog(string title, string message, Action<IDialog> callback = null, MessageDialogType type = MessageDialogType.Okcancel, MessageDialogStyle style = MessageDialogStyle.Information)
-        {
-            var content = _serviceLocator.GetInstance<IMessageViewModel>();
-            content.Message = message;
-            content.Type = type;
-            content.Style = style;
-            var dialog = new Dialog()
-            {
-                Content = content,
-                Title = title
-            };
-
-            _eventAggregator.GetEvent<ShowMessageDialogRequestEvent>().Publish(new DialogEventArgs(dialog, callback));
-        }
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowCustomDialog(FrameworkElement view, string title, Action<IDialog> callback = null)
-        {
-            var dialog = new Dialog()
-            {
-                Content = view,
-                Title = title
-            };
-
-            _eventAggregator.GetEvent<ShowCustomDialogRequestEvent>().Publish(new DialogEventArgs(dialog, callback));
-        }
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowCustomDialog(FrameworkElement view, IDialogViewModel model, string title, Action<IDialog> callback = null)
-        {
-            view.DataContext = model;
-            ShowCustomDialog(view, title, callback);
-        }
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowCustomDialog(Type type, string title, Action<IDialog> callback = null)
-        {
-            ShowCustomDialog((FrameworkElement)_serviceLocator.GetInstance(type), title, callback);
-        }
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowCustomDialog<TView>(string title, Action<IDialog> callback = null)
-        {
-            ShowCustomDialog(typeof(TView), title, callback);
-        }
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowInformationPopup(string message)
-        {
-            ShowNotificationPopup(DialogResources.Information, message);
-        }
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowErrorPopup(string message)
-        {
-            ShowNotificationPopup(DialogResources.Error, message, MessageDialogStyle.Error);
-        }
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowWarningPopup(string message)
-        {
-            ShowNotificationPopup(DialogResources.Warning, message, MessageDialogStyle.Warning);
-        }
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowSuccessPopup(string message)
-        {
-            ShowNotificationPopup(DialogResources.Success, message, MessageDialogStyle.Success);
-        }
-
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowNotificationPopup(string title, string message, MessageDialogStyle style = MessageDialogStyle.Information)
-        {
-            var dialog = new NotificationPopup()
-            {
-                Content = message,
-                Title = title,
-                Style = style
-            };
-
-            _eventAggregator.GetEvent<ShowNotificationPopupRequestEvent>().Publish(new NotificationEventArgs(dialog));
-        }
-
+        /// <inheritdoc />
         /// <summary>
         /// Show the dialog for open a file.
         /// </summary>
         public string ShowOpenFileDialog(string filter = "", bool multiselect = false, string initialDirectory = "", bool restoreDirectory = false)
         {
-            var dialog = new OpenFileDialog()
+            var dialog = new OpenFileDialog
             {
                 Filter = filter,
                 Multiselect = multiselect,
@@ -308,25 +126,39 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
             return string.Empty;
         }
 
-        /// <summary>
-        /// Displays a modal dialog of a type that is determined by the dialog type locator.
-        /// </summary>
-        /// <returns>
-        /// A nullable value of type <see cref="bool"/> that signifies how a window was closed by
-        /// the user.
-        /// </returns>
-        public void ShowLoginDialog(string login, string password, string title, Action<IDialog> callback = null)
+/// <summary>
+/// Show the dialog to provide Username and password.
+/// </summary>
+/// <param name="loginAction">Action to log in.</param>
+/// <param name="login">The login.</param>
+/// <param name="password">The password.</param>
+/// <returns>Item 1 : IsConnected ; Item2 : Error</returns>
+        public DialogResult ShowLoginDialog(Func<string, string, Tuple<bool, string>> loginAction, string login = "", string password  ="")
         {
-            //var content = _serviceLocator.GetInstance<ILoginViewModel>();
-            //content.UserName = login;
-            //content.Password = password;
-            //var dialog = new Dialog()
-            //{
-            //    Content = content,
-            //    Title = !string.IsNullOrEmpty(title) ? title : ControlResources.Login
-            //};
+            var vm = new LoginViewModel();
+            vm.Initialize();
 
-            //_eventAggregator.GetEvent<ShowLoginDialogRequestEvent>().Publish(new DialogEventArgs(dialog, callback));
+            if(!string.IsNullOrEmpty(login)) vm.UserName = login;
+            if (!string.IsNullOrEmpty(password)) vm.Password = password;
+
+            vm.Title = ControlResources.Authentification;
+            vm.LoginAction = loginAction;
+
+            var result = DialogResult.None;
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+
+                var dialog = new LoginDialog
+                {
+                    DataContext = vm
+                };
+
+                dialog.ShowDialog();
+
+                result = ((IDialogViewModel)dialog.DataContext).DialogResult;
+            });
+
+            return result;
         }
 
         #endregion IDialogService Members

@@ -1,11 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:presentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
 
     <!-- ACCENTS -->
-    <SolidColorBrush x:Key="LightAccent" Color="{DynamicResource LightAccentColor}" />
-    <SolidColorBrush x:Key="Accent" Color="{DynamicResource AccentColor}" />
-    <SolidColorBrush x:Key="DarkAccent" Color="{DynamicResource DarkAccentColor}" />
+    <SolidColorBrush x:Key="LightAccent" Color="{DynamicResource LightAccentColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Accent" Color="{DynamicResource AccentColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="DarkAccent" Color="{DynamicResource DarkAccentColor}" presentationOptions:Freeze="true" />
 
     <!-- FONT -->
-    <SolidColorBrush x:Key="AccentForeground" Color="{DynamicResource AccentTextColor}" />
+    <SolidColorBrush x:Key="AccentForeground" Color="{DynamicResource AccentTextColor}" presentationOptions:Freeze="true" />
 </ResourceDictionary>

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using My.CoachManager.Application.Dtos.Seasons;
 using My.CoachManager.Application.Services.Seasons;
 using My.CoachManager.Services.Wcf.Interfaces;
@@ -17,7 +17,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public IEnumerable<SeasonDto> GetList()
         {
-            return ServiceLocator.Current.TryResolve<ISeasonAppService>().GetList();
+            return ServiceLocator.Current.GetInstance<ISeasonAppService>().GetList();
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public SeasonDto GetById(int id)
         {
-            return ServiceLocator.Current.TryResolve<ISeasonAppService>().GetById(id);
+            return ServiceLocator.Current.GetInstance<ISeasonAppService>().GetById(id);
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public SeasonDto CreateOrUpdate(SeasonDto categoryDto)
         {
-            return ServiceLocator.Current.TryResolve<ISeasonAppService>().CreateOrUpdate(categoryDto);
+            return ServiceLocator.Current.GetInstance<ISeasonAppService>().CreateOrUpdate(categoryDto);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public void Remove(SeasonDto categoryDto)
         {
-            ServiceLocator.Current.TryResolve<ISeasonAppService>().Remove(categoryDto);
+            ServiceLocator.Current.GetInstance<ISeasonAppService>().Remove(categoryDto);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace My.CoachManager.Services.Wcf
         /// <param name="entities"></param>
         public void UpdateOrders(IDictionary<int, int> entities)
         {
-            ServiceLocator.Current.TryResolve<ISeasonAppService>().UpdateOrders(entities);
+            ServiceLocator.Current.GetInstance<ISeasonAppService>().UpdateOrders(entities);
         }
     }
 }

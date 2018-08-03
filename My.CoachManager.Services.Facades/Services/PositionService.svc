@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="My.CoachManager.Services.Wcf.PositionService" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="My.CoachManager.Services.Wcf.PositionService" Factory="My.CoachManager.CrossCutting.Unity.UnityServiceFactory" %>

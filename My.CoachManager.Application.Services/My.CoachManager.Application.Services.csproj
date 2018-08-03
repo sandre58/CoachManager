@@ -182,8 +182,8 @@
     <Compile Include="Persons\PlayerAppService.cs" />
     <Compile Include="Rosters\RosterAppService.cs" />
     <Compile Include="Rosters\IRosterAppService.cs" />
-    <Compile Include="Users\UserAppService.cs" />
-    <Compile Include="Users\IUserAppService.cs" />
+    <Compile Include="UserModule\UserAppService.cs" />
+    <Compile Include="UserModule\IUserAppService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\My.CoachManager.Application.Dtos\My.CoachManager.Application.Dtos.csproj">

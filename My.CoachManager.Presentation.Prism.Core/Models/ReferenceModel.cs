@@ -36,8 +36,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
 
         public int CompareTo(object obj)
         {
-            var other = obj as ReferenceModel;
-            if (other != null)
+            if (obj is ReferenceModel other)
                 return string.Compare(Code, other.Code, StringComparison.Ordinal);
             return -1;
         }

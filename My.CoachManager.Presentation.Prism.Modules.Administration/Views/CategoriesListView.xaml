@@ -24,7 +24,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <controls:WorkspaceView.Commands>
+            <controls:WorkspaceView.Commands>
             <controls:CommandButton DockPanel.Dock="Right" IconData="{StaticResource AddGeometry}" Content="{x:Static strings1:ControlResources.Add}" Command="{Binding AddCommand}" />
             <controls:CommandButton DockPanel.Dock="Right" IconData="{StaticResource EditGeometry}" Content="{x:Static strings1:ControlResources.Edit}" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedItem}" />
             <controls:CommandButton DockPanel.Dock="Right" IconData="{StaticResource TrashGeometry}" Content="{x:Static strings1:ControlResources.Remove}" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedItem}" />

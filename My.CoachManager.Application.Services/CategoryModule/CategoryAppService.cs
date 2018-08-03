@@ -5,7 +5,7 @@ using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Domain.AppModule.Services;
 using My.CoachManager.Domain.CategoryModule.Aggregate;
-using My.CoachManager.Domain.CategoryModule.Service;
+using My.CoachManager.Domain.CategoryModule.Services;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.ReferenceModule.Aggregates;
@@ -94,17 +94,17 @@ namespace My.CoachManager.Application.Services.CategoryModule
             return items.Select(CategoryFactory.Get).ToList();
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Update items Orders.
         /// </summary>
         /// <param name="values"></param>
         public void UpdateOrders(IDictionary<int, int> values)
         {
-            var entities = _categoryRepository.GetByFilter(x => values.Keys.Contains(x.Id), new QueryOrder<Category>());
-            foreach (var entity in entities)
-            {
-                _categoryDomainService.UpdateOrder(entity, values[entity.Id]);
-            }
+            var entities = _categoryRepository.GetByFilter(x => values.Keys.Contains(x.Id), new QueryOrder<Category>()).ToList();
+
+            _categoryDomainService.UpdateOrders(entities.ToDictionary(x => x, x => values[x.Id]));
+
         }
 
         #endregion Methods

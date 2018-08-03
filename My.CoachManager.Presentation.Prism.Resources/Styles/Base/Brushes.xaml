@@ -1,17 +1,18 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:presentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
 
     <!-- COLORS -->
-    <SolidColorBrush x:Key="Transparent" Color="{DynamicResource TransparentColor}" />
-    <SolidColorBrush x:Key="White" Color="{DynamicResource WhiteColor}" />
-    <SolidColorBrush x:Key="Black" Color="{DynamicResource BlackColor}" />
-    <SolidColorBrush x:Key="None" Color="{DynamicResource NoneColor}" />
-    <SolidColorBrush x:Key="Positive" Color="{DynamicResource PositiveColor}" />
-    <SolidColorBrush x:Key="Negative" Color="{DynamicResource NegativeColor}" />
-    <SolidColorBrush x:Key="Action" Color="{DynamicResource ActionColor}" />
-    <SolidColorBrush x:Key="Warning" Color="{DynamicResource WarningColor}" />
-    <SolidColorBrush x:Key="Neutral" Color="{DynamicResource NeutralColor}" />
-    <SolidColorBrush x:Key="Information" Color="{DynamicResource InformationColor}" />
-    <SolidColorBrush x:Key="Male" Color="{DynamicResource MaleColor}" />
-    <SolidColorBrush x:Key="Female" Color="{DynamicResource FemaleColor}" />
+    <SolidColorBrush x:Key="Transparent" Color="{DynamicResource TransparentColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="White" Color="{DynamicResource WhiteColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Black" Color="{DynamicResource BlackColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="None" Color="{DynamicResource NoneColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Positive" Color="{DynamicResource PositiveColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Negative" Color="{DynamicResource NegativeColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Action" Color="{DynamicResource ActionColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Warning" Color="{DynamicResource WarningColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Neutral" Color="{DynamicResource NeutralColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Information" Color="{DynamicResource InformationColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Male" Color="{DynamicResource MaleColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Female" Color="{DynamicResource FemaleColor}" presentationOptions:Freeze="true" />
 </ResourceDictionary>

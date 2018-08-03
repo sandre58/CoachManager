@@ -44,10 +44,6 @@
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.3\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Prism, Version=7.0.0.396, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.7.0.0.396\lib\net45\Prism.dll</HintPath>
     </Reference>
@@ -58,7 +54,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
@@ -82,8 +77,7 @@
     </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
@@ -105,6 +99,7 @@
     <Compile Include="Behaviours\StylizedBehaviors.cs" />
     <Compile Include="CommandButton.cs" />
     <Compile Include="Commands\SystemCommands.cs" />
+    <Compile Include="DialogWindow.cs" />
     <Compile Include="DropDownButton.cs" />
     <Compile Include="DropDownMenuButton.cs" />
     <Compile Include="ExtendedDataGrid.cs" />
@@ -141,7 +136,13 @@
     <Compile Include="ExtendedThumb.cs" />
     <Compile Include="MultiComboBox.cs" />
     <Compile Include="Native\NativeConstants.cs" />
+    <Compile Include="Notifications\ToastPosition.cs" />
+    <Compile Include="Toast.cs" />
+    <Compile Include="ToastArea.cs" />
+    <Compile Include="Notifications\IToastManager.cs" />
+    <Compile Include="Notifications\ToastManager.cs" />
     <Compile Include="Parameters\ScrollViewerParameters.cs" />
+    <Compile Include="ReversibleStackPanel.cs" />
     <Compile Include="SelectorControl.cs" />
     <Compile Include="SelectorItem.cs" />
     <Compile Include="SplitView.cs" />

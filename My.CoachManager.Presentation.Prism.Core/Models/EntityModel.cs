@@ -2,11 +2,12 @@
 
 namespace My.CoachManager.Presentation.Prism.Core.Models
 {
-    public abstract class EntityModel : ModelBase, IEntityModel, IModifiable, IValidatable
+    public abstract class EntityModel : ModelBase, IEntityModel, IModifiable
     {
 
         #region Members
 
+        /// <inheritdoc />
         /// <summary>
         /// Get the Id.
         /// </summary>
@@ -36,6 +37,15 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
 
         #region Methods
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Reset IsModified value.
+        /// </summary>
+        public void ResetModified()
+        {
+            IsModified = false;
+        }
+
         /// <summary>
         /// Determines whether the specified object is equal to the current object.
         /// </summary>
@@ -44,8 +54,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         public override bool Equals(object obj)
         {
             var other = obj as EntityModel;
-            if (ReferenceEquals(null, other)) { return false; }
-            return ReferenceEquals(this, other) || Id.Equals(other.Id);
+            return !(other is null) && ReferenceEquals(this, other);
         }
 
         /// <summary>
@@ -61,28 +70,17 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
 
         #region IModifiable
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets a value indicates if the entity has been modified.
         /// </summary>
-        public bool IsModified { get; protected set; }
-
-        #endregion
-
-        #region IValidatable
-
-        /// <summary>
-        /// Return a value indicates if entity is valid.
-        /// </summary>
-        /// <returns></returns>
-        public virtual bool IsValid()
-        {
-            return HasErrors;
-        }
+        public bool IsModified { get; private set; }
 
         #endregion
 
         #region IPropertyChanged
 
+        /// <inheritdoc />
         /// <summary>
         /// Called when [property changed].
         /// </summary>
@@ -92,7 +90,8 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         protected override void OnPropertyChanged(string propertyName, object before, object after)
         {
             base.OnPropertyChanged(propertyName,before,after);
-            IsModified = true;
+
+            if(propertyName != nameof(IsModified)) IsModified = true;
         }
 
         #endregion

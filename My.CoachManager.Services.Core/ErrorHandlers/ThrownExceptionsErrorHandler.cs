@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using My.CoachManager.CrossCutting.Logging;
 
 namespace My.CoachManager.Services.Core.ErrorHandlers
@@ -49,7 +49,7 @@ namespace My.CoachManager.Services.Core.ErrorHandlers
 
             fault = Message.CreateMessage(version, msgFault, null);
 
-            ServiceLocator.Current.TryResolve<ILogger>().Error(error);
+            ServiceLocator.Current.GetInstance<ILogger>().Error(error);
         }
     }
 }

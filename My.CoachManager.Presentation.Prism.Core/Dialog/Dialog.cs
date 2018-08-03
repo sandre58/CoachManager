@@ -1,20 +1,34 @@
 ﻿using System.Windows;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Screens;
+using My.CoachManager.Presentation.Prism.Core.ViewModels;
+using Prism.Interactivity.InteractionRequest;
 
 namespace My.CoachManager.Presentation.Prism.Core.Dialog
 {
-    public class Dialog : IDialog
+    public class Dialog : IWorkspaceDialog
     {
+        /// <inheritdoc />
         /// <summary>
         /// Gets or sets the title. (Not used)
         /// </summary>
         public string Title { get; set; }
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets or sets the content.
         /// </summary>
-        public object Content { get; set; }
+        object INotification.Content
+        {
+            get => Content;
+            set => Content = (FrameworkElement)value;
+        }
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets the content.
+        /// </summary>
+        public FrameworkElement Content { get; set; }
+
+        /// <inheritdoc />
         /// <summary>
         /// Gets or sets the result.
         /// </summary>
@@ -22,46 +36,11 @@ namespace My.CoachManager.Presentation.Prism.Core.Dialog
         {
             get
             {
-                if (Content is IDialogViewModel)
-                {
-                    var dialog = (IDialogViewModel)Content;
-                    return dialog.DialogResult;
-                }
-                else
-                {
-                    var content = Content as FrameworkElement;
-                    if (content != null)
-                    {
-                        var dialog = content.DataContext as IDialogViewModel;
-                        if (dialog != null)
-                        {
-                            return dialog.DialogResult;
-                        }
-                    }
-                }
-                return DialogResult.None;
+                var dialog = Content?.DataContext as IDialogViewModel;
+
+                return dialog?.DialogResult ?? DialogResult.None;
             }
         }
 
-        /// <summary>
-        /// Gets or sets the context.
-        /// </summary>
-        public IDialogViewModel Context
-        {
-            get
-            {
-                if (Content is IDialogViewModel)
-                {
-                    return (IDialogViewModel)Content;
-                }
-
-                var content = Content as FrameworkElement;
-                if (content != null)
-                {
-                    return content.DataContext as IDialogViewModel;
-                }
-                return null;
-            }
-        }
     }
 }

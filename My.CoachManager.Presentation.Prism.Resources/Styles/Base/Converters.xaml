@@ -30,6 +30,7 @@
     <converters:StringToThemeConverter x:Key="StringToThemeConverter" />
     <converters:ResizeModeMinMaxButtonVisibilityConverter x:Key="ResizeModeMinMaxButtonVisibilityConverter" />
     <converters:BackgroundToForegroundConverter x:Key="BackgroundToForegroundConverter" />
+    <converters:SolidColorBrushToBrushConverter x:Key="SolidColorBrushToBrushConverter" />
 
     <MenuScrollingVisibilityConverter x:Key="MenuScrollingVisibilityConverter" />
 </ResourceDictionary>

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
-using Microsoft.Practices.ServiceLocation;
-using Microsoft.Practices.Unity;
+using CommonServiceLocator;
 using My.CoachManager.CrossCutting.Logging.Supervision;
+using Unity;
+using Unity.ServiceLocation;
 
 namespace My.CoachManager.CrossCutting.Unity
 {
@@ -20,7 +21,8 @@ namespace My.CoachManager.CrossCutting.Unity
             _container = container;
             _container.AddExtension(new IocUnityContainer(new Logger()));
 
-            ServiceLocator.SetLocatorProvider(() => new UnityServiceLocator(_container));
+            var locator = new UnityServiceLocator(_container);
+            ServiceLocator.SetLocatorProvider(() => locator);
         }
 
         protected override ServiceHost CreateServiceHost(Type serviceType, Uri[] baseAddresses)

@@ -31,6 +31,7 @@
         <ResourceDictionary Source="Controls/DropDownButton.xaml" />
         <ResourceDictionary Source="Controls/Flyout.xaml" />
         <ResourceDictionary Source="Controls/FlyoutsControl.xaml" />
+        <ResourceDictionary Source="Controls/Toast.xaml" />
         <ResourceDictionary Source="Controls/HamburgerMenu.xaml" />
         <ResourceDictionary Source="Controls/Hyperlink.xaml" />
         <ResourceDictionary Source="Controls/Icon.xaml" />

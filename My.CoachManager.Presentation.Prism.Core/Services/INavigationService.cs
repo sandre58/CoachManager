@@ -10,6 +10,21 @@ namespace My.CoachManager.Presentation.Prism.Core.Services
     public interface INavigationService
     {
         /// <summary>
+        /// Raised when the region is about to be navigated to content.
+        /// </summary>
+        event EventHandler<RegionNavigationEventArgs> Navigating;
+
+        /// <summary>
+        /// Raised when the region is navigated to content.
+        /// </summary>
+        event EventHandler<RegionNavigationEventArgs> Navigated;
+
+        /// <summary>
+        /// Raised when a navigation request fails.
+        /// </summary>
+        event EventHandler<RegionNavigationFailedEventArgs> NavigationFailed;
+
+        /// <summary>
         /// Gets active view.
         /// </summary>
         object ActiveView { get; }

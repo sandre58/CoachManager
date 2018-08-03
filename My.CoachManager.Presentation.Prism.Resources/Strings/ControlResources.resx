@@ -132,6 +132,9 @@
   <data name="AllImages" xml:space="preserve">
     <value>Toutes les images|*.BMP;*.JPG;*.JPEG;*.PNG</value>
   </data>
+  <data name="Authentification" xml:space="preserve">
+    <value>Authentification</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>
   </data>
@@ -206,6 +209,9 @@
   </data>
   <data name="Restore" xml:space="preserve">
     <value>Restaurer</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Réessayer</value>
   </data>
   <data name="ShowColumns" xml:space="preserve">
     <value>Afficher les colonnes</value>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using My.CoachManager.Presentation.Prism.Core;
 using My.CoachManager.Presentation.Prism.Core.Services;
@@ -17,9 +16,31 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         #region Fields
 
         private readonly IRegionManager _regionManager;
-        private IRegionNavigationJournal _journal;
+        private IRegionNavigationService _regionNavigationService;
 
         #endregion Fields
+
+        #region Events
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Raised when the region is about to be navigated to content.
+        /// </summary>
+        public event EventHandler<RegionNavigationEventArgs> Navigating;
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Raised when the region is navigated to content.
+        /// </summary>
+        public event EventHandler<RegionNavigationEventArgs> Navigated;
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Raised when a navigation request fails.
+        /// </summary>
+        public event EventHandler<RegionNavigationFailedEventArgs> NavigationFailed;
+
+        #endregion
 
         #region Constructors
 
@@ -69,10 +90,13 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
             if (!string.IsNullOrEmpty(pagePath))
             {
                 var newUri = new Uri(pagePath + parameters, UriKind.Relative);
-                var activeUri = _journal?.CurrentEntry?.Uri;
+                var activeUri = _regionNavigationService?.Journal?.CurrentEntry?.Uri;
                 if (!Equals(newUri, activeUri))
                 {
-                    _regionManager.RequestNavigate(RegionNames.WorkspaceRegion, newUri, callback);
+                    _regionManager.RequestNavigate(RegionNames.WorkspaceRegion, newUri, e =>
+                    {
+                        callback?.Invoke(e);
+                    });
                 }
             }
         }
@@ -83,7 +107,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// </summary>
         public void GoBack()
         {
-            _journal?.GoBack();
+            _regionNavigationService?.Journal?.GoBack();
         }
 
         /// <inheritdoc />
@@ -92,7 +116,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// </summary>
         public bool CanGoBack()
         {
-            return _journal?.CanGoBack ?? false;
+            return _regionNavigationService?.Journal?.CanGoBack ?? false;
         }
 
         /// <inheritdoc />
@@ -101,7 +125,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// </summary>
         public void GoForward()
         {
-            _journal?.GoForward();
+            _regionNavigationService?.Journal?.GoForward();
         }
 
         /// <inheritdoc />
@@ -110,7 +134,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// </summary>
         public bool CanGoForward()
         {
-            return _journal?.CanGoBack ?? false;
+            return _regionNavigationService?.Journal?.CanGoForward ?? false;
         }
 
         /// <summary>
@@ -120,11 +144,23 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// <param name="e"></param>
         private void OnRegionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (_journal == null)
+            if (_regionNavigationService == null)
             {
                 if (_regionManager.Regions.ContainsRegionWithName(RegionNames.WorkspaceRegion))
                 {
-                    _journal = _regionManager.Regions[RegionNames.WorkspaceRegion].NavigationService.Journal;
+                    _regionNavigationService = _regionManager.Regions[RegionNames.WorkspaceRegion].NavigationService;
+                    _regionNavigationService.Navigated += delegate(object o, RegionNavigationEventArgs args)
+                    {
+                        Navigated?.Invoke(o, args);
+                    };
+                    _regionNavigationService.Navigating += delegate (object o, RegionNavigationEventArgs args)
+                    {
+                        Navigating?.Invoke(o, args);
+                    };
+                    _regionNavigationService.NavigationFailed += delegate (object o, RegionNavigationFailedEventArgs args)
+                    {
+                        NavigationFailed?.Invoke(o, args);
+                    };
                 }
             }
         }

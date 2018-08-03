@@ -164,25 +164,25 @@
     <Compile Include="AppModule\Services\CrudDomainService.cs" />
     <Compile Include="AppModule\Services\ICrudDomainService.cs" />
     <Compile Include="CategoryModule\Aggregate\CategoryFactory.cs" />
-    <Compile Include="CategoryModule\Aggregate\CategorySelectBuilder.cs" />
     <Compile Include="ReferenceModule\Aggregates\ReferenceOrderBuilder.cs" />
     <Compile Include="PersonModule\Aggregate\CountrySelectBuilder.cs" />
     <Compile Include="PersonModule\Aggregate\PlayerFactory.cs" />
     <Compile Include="PositionModule\Aggregate\PositionSelectBuilder.cs" />
-    <Compile Include="CategoryModule\Service\CategoryDomainService.cs" />
-    <Compile Include="PersonModule\Service\PlayerDomainService.cs" />
-    <Compile Include="PersonModule\Service\IPlayerDomainService.cs" />
-    <Compile Include="PositionModule\Service\IPositionDomainService.cs" />
-    <Compile Include="PositionModule\Service\PositionDomainService.cs" />
-    <Compile Include="ReferenceModule\Service\IReferenceDomainService.cs" />
-    <Compile Include="ReferenceModule\Service\ReferenceDomainService.cs" />
+    <Compile Include="CategoryModule\Services\CategoryDomainService.cs" />
+    <Compile Include="PersonModule\Services\PlayerDomainService.cs" />
+    <Compile Include="PersonModule\Services\IPlayerDomainService.cs" />
+    <Compile Include="PositionModule\Services\IPositionDomainService.cs" />
+    <Compile Include="PositionModule\Services\PositionDomainService.cs" />
+    <Compile Include="ReferenceModule\Services\IReferenceDomainService.cs" />
+    <Compile Include="ReferenceModule\Services\ReferenceDomainService.cs" />
     <Compile Include="SeasonModule\Aggregate\SeasonSelectBuilder.cs" />
-    <Compile Include="SeasonModule\Service\SeasonDomainService.cs" />
-    <Compile Include="SeasonModule\Service\ISeasonDomainService.cs" />
-    <Compile Include="CategoryModule\Service\ICategoryDomainService.cs" />
+    <Compile Include="SeasonModule\Services\SeasonDomainService.cs" />
+    <Compile Include="SeasonModule\Services\ISeasonDomainService.cs" />
+    <Compile Include="CategoryModule\Services\ICategoryDomainService.cs" />
     <Compile Include="RosterModule\Aggregate\RosterSelectBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceModule\Aggregates\ReferenceSpecification.cs" />
+    <Compile Include="UserModule\Aggregate\UserFactory.cs" />
     <Compile Include="UserModule\Aggregate\UserSpecification.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -208,8 +208,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="RosterModule\Service\" />
-    <Folder Include="UserModule\Service\" />
+    <Folder Include="RosterModule\Services\" />
+    <Folder Include="UserModule\Services\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

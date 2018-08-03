@@ -117,22 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ApplicationLoading" xml:space="preserve">
-    <value>Configuration de l'application...</value>
+  <data name="ApplicationEndLoading" xml:space="preserve">
+    <value>Application chargée</value>
+  </data>
+  <data name="ApplicationStartLoading" xml:space="preserve">
+    <value>Chargement de l'application</value>
+  </data>
+  <data name="ConnectionFailed" xml:space="preserve">
+    <value>La connexion a échouée. Vérifier le nom d'utilisateur et le mot de passe.</value>
   </data>
   <data name="DefaultStatusMessage" xml:space="preserve">
     <value>Prêt</value>
   </data>
   <data name="ModuleLoading" xml:space="preserve">
-    <value>Chargement du module "{0}"...</value>
+    <value>Chargement du module "{0}"</value>
+  </data>
+  <data name="ModulesLoading" xml:space="preserve">
+    <value>Chargement des modules</value>
+  </data>
+  <data name="SkinLoading" xml:space="preserve">
+    <value>Chargement de l'interface</value>
   </data>
   <data name="UserConnected" xml:space="preserve">
-    <value>Utilisateur connecté : {0}</value>
+    <value>Connexion réussi...
+Utilisateur connecté : {0}</value>
   </data>
   <data name="UserConnection" xml:space="preserve">
-    <value>Connexion de l'utilisateur...</value>
+    <value>Connexion de l'utilisateur</value>
   </data>
   <data name="UserLoading" xml:space="preserve">
-    <value>Chargement du profil utilisateur...</value>
+    <value>Chargement du profil utilisateur</value>
   </data>
 </root>

@@ -6,8 +6,8 @@
     <Color x:Key="NoneColor">#555555</Color>
     <Color x:Key="PositiveColor">#388A34</Color>
     <Color x:Key="NegativeColor">#A1260D</Color>
-    <Color x:Key="ActionColor">#C27D1A</Color>
-    <Color x:Key="WarningColor">#FFCC00</Color>
+    <Color x:Key="ActionColor">#ff9966</Color>
+    <Color x:Key="WarningColor">#ff9933</Color>
     <Color x:Key="NeutralColor">#00539C</Color>
     <Color x:Key="InformationColor">#1BA1E2</Color>
 

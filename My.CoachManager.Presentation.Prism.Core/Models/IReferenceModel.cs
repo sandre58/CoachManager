@@ -2,6 +2,7 @@ using System;
 
 namespace My.CoachManager.Presentation.Prism.Core.Models
 {
+    /// <inheritdoc cref="IEntityModel" />
     /// <summary>
     /// Services to allow changes to an entity to be tracked.
     /// </summary>

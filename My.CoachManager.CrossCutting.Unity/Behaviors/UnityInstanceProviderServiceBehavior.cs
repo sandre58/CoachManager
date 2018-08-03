@@ -3,7 +3,7 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
-using Microsoft.Practices.Unity;
+using Unity;
 
 namespace My.CoachManager.CrossCutting.Unity.Behaviors
 {

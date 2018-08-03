@@ -18,6 +18,7 @@ namespace My.CoachManager.Application.Dtos
         /// <summary>
         /// Gets or sets the CRUD Status of DTO.
         /// </summary>
+        [DataMember]
         public CrudStatus CrudStatus { get; set; }
 
         [DataMember]

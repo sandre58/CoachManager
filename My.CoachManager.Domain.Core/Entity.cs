@@ -14,7 +14,7 @@ namespace My.CoachManager.Domain.Core
         /// <summary>
         /// Gets or sets the ID.
         /// </summary>
-        public virtual int Id { get; private set; }
+        public virtual int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the created date.
