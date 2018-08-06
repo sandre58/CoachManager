@@ -1,0 +1,5 @@
+ShortCuts -> NotInterceptControl
+Application Settings
+Domain Validation
+Application Logo
+Cache Manager

@@ -12,18 +12,18 @@ using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public abstract class ListViewModel<TEntityModel, TEditView> : NavigatableWorkspaceViewModel
+    public abstract class ListViewModel<TEntityModel, TEditView, TItemView> : NavigatableWorkspaceViewModel
         where TEntityModel : class, IEntityModel, IModifiable, IValidatable, new()
         where TEditView : FrameworkElement
+        where TItemView : FrameworkElement
     {
-
         #region Members
 
         /// <summary>
         /// Gets or sets the items.
         /// </summary>
         public ObservableCollection<TEntityModel> Items { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
@@ -38,6 +38,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// Gets or sets the add command.
         /// </summary>
         public DelegateCommand AddCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets the edit command.
+        /// </summary>
+        public DelegateCommand<TEntityModel> OpenCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the edit command.
@@ -66,6 +71,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             AddCommand = new DelegateCommand(Add, CanAdd);
             RemoveCommand = new DelegateCommand<TEntityModel>(Remove, CanRemove);
             EditCommand = new DelegateCommand<TEntityModel>(Edit, CanEdit);
+            OpenCommand = new DelegateCommand<TEntityModel>(Open, CanOpen);
         }
 
         /// <inheritdoc />
@@ -78,11 +84,21 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
             Items = new ObservableCollection<TEntityModel>();
 
-            AddShortcut(new KeyBinding(AddCommand, Key.N, ModifierKeys.Control));
-            AddShortcut(new KeyBinding(EditCommand, Key.Enter, ModifierKeys.None));
-            AddShortcut(new KeyBinding(EditCommand, Key.F2, ModifierKeys.None));
-            AddShortcut(new KeyBinding(RemoveCommand, Key.Delete, ModifierKeys.None));
             IsReadOnly = false;
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes Data.
+        /// </summary>
+        protected override void InitializeShortcuts()
+        {
+            base.InitializeShortcuts();
+
+            KeyboardShortcuts.Add(new KeyBinding(AddCommand, Key.N, ModifierKeys.Control));
+            KeyboardShortcuts.Add(new KeyBinding(OpenCommand, Key.Enter, ModifierKeys.None));
+            KeyboardShortcuts.Add(new KeyBinding(EditCommand, Key.F2, ModifierKeys.None));
+            KeyboardShortcuts.Add(new KeyBinding(RemoveCommand, Key.Delete, ModifierKeys.None));
         }
 
         #endregion Initialization
@@ -90,21 +106,32 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         #region Open
 
         /// <summary>
-        /// Edit Item.
+        /// Open Item.
         /// </summary>
         protected virtual void Open(TEntityModel item)
         {
-            if (CanOpen(item))
+            if (typeof(TEditView) == typeof(TItemView))
             {
-                //ServiceLocator.Current.GetInstance<INavigationService>().NavigateTo(GetItemViewType(), item.Id);
+                Edit(item);
+                return;
             }
+
+            var x = item ?? SelectedItem;
+            if (!CanOpen(x)) return;
+
+            NavigationManager.NavigateTo<TItemView>(x.Id);
         }
 
         /// <summary>
-        /// Can Edit item.
+        /// Can Open item.
         /// </summary>
         protected virtual bool CanOpen(TEntityModel item)
         {
+            if (typeof(TEditView) == typeof(TItemView))
+            {
+                return CanEdit(item);
+            }
+
             return Mode == ScreenMode.Read && item != null;
         }
 
@@ -191,7 +218,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             var x = item ?? SelectedItem;
             if (!CanRemove(x)) return;
-
 
             if (DialogManager.ShowWarningDialog(MessageResources.ConfirmationRemovingItem, MessageDialogButtons.YesNo) != DialogResult.Yes) return;
 

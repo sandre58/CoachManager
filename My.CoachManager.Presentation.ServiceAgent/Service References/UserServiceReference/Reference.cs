@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using My.CoachManager.Application.Dtos.User;
+
 namespace My.CoachManager.Presentation.ServiceAgent.UserServiceReference {
     
     
@@ -16,22 +18,22 @@ namespace My.CoachManager.Presentation.ServiceAgent.UserServiceReference {
     public interface IUserService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserById", ReplyAction="http://tempuri.org/IUserService/GetUserByIdResponse")]
-        My.CoachManager.Application.Dtos.Users.UserDto GetUserById(int id);
+        UserDto GetUserById(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserById", ReplyAction="http://tempuri.org/IUserService/GetUserByIdResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Users.UserDto> GetUserByIdAsync(int id);
+        System.Threading.Tasks.Task<UserDto> GetUserByIdAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserByLoginAndPassword", ReplyAction="http://tempuri.org/IUserService/GetUserByLoginAndPasswordResponse")]
-        My.CoachManager.Application.Dtos.Users.UserDto GetUserByLoginAndPassword(string login, string password);
+        UserDto GetUserByLoginAndPassword(string login, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserByLoginAndPassword", ReplyAction="http://tempuri.org/IUserService/GetUserByLoginAndPasswordResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Users.UserDto> GetUserByLoginAndPasswordAsync(string login, string password);
+        System.Threading.Tasks.Task<UserDto> GetUserByLoginAndPasswordAsync(string login, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserByLogin", ReplyAction="http://tempuri.org/IUserService/GetUserByLoginResponse")]
-        My.CoachManager.Application.Dtos.Users.UserDto GetUserByLogin(string login);
+        UserDto GetUserByLogin(string login);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserByLogin", ReplyAction="http://tempuri.org/IUserService/GetUserByLoginResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Users.UserDto> GetUserByLoginAsync(string login);
+        System.Threading.Tasks.Task<UserDto> GetUserByLoginAsync(string login);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -61,27 +63,27 @@ namespace My.CoachManager.Presentation.ServiceAgent.UserServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public My.CoachManager.Application.Dtos.Users.UserDto GetUserById(int id) {
+        public UserDto GetUserById(int id) {
             return base.Channel.GetUserById(id);
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Users.UserDto> GetUserByIdAsync(int id) {
+        public System.Threading.Tasks.Task<UserDto> GetUserByIdAsync(int id) {
             return base.Channel.GetUserByIdAsync(id);
         }
         
-        public My.CoachManager.Application.Dtos.Users.UserDto GetUserByLoginAndPassword(string login, string password) {
+        public UserDto GetUserByLoginAndPassword(string login, string password) {
             return base.Channel.GetUserByLoginAndPassword(login, password);
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Users.UserDto> GetUserByLoginAndPasswordAsync(string login, string password) {
+        public System.Threading.Tasks.Task<UserDto> GetUserByLoginAndPasswordAsync(string login, string password) {
             return base.Channel.GetUserByLoginAndPasswordAsync(login, password);
         }
         
-        public My.CoachManager.Application.Dtos.Users.UserDto GetUserByLogin(string login) {
+        public UserDto GetUserByLogin(string login) {
             return base.Channel.GetUserByLogin(login);
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Users.UserDto> GetUserByLoginAsync(string login) {
+        public System.Threading.Tasks.Task<UserDto> GetUserByLoginAsync(string login) {
             return base.Channel.GetUserByLoginAsync(login);
         }
     }

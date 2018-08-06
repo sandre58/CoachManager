@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using CommonServiceLocator;
-using My.CoachManager.Application.Dtos.Positions;
+using My.CoachManager.Application.Dtos.Position;
 using My.CoachManager.Application.Services.Positions;
 using My.CoachManager.Services.Wcf.Interfaces;
 

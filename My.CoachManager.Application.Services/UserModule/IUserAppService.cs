@@ -1,4 +1,4 @@
-﻿using My.CoachManager.Application.Dtos.Users;
+﻿using My.CoachManager.Application.Dtos.User;
 
 namespace My.CoachManager.Application.Services.UserModule
 {

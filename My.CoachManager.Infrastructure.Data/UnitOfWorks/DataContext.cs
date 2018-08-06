@@ -40,7 +40,6 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         public IDbSet<Role> Roles { get; set; }
         public IDbSet<Roster> Rosters { get; set; }
         public IDbSet<RosterPlayer> RosterPlayers { get; set; }
-        public IDbSet<RosterCoach> RosterCoachs { get; set; }
         public IDbSet<Season> Seasons { get; set; }
         public IDbSet<Squad> Squads { get; set; }
         public IDbSet<Team> Teams { get; set; }
@@ -120,8 +119,15 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             }
             catch (DbUpdateException ex)
             {
-                // Log exception information
-                ServiceLocator.Current.GetInstance<ILogger>().Error(ex);
+                try
+                {
+                    // Log exception information
+                    ServiceLocator.Current.GetInstance<ILogger>().Error(ex);
+                }
+                catch (Exception)
+                {
+                    // ignore
+                }
 
                 // Changes are canceled after an error
                 RollbackChanges();
@@ -129,8 +135,15 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             }
             catch (Exception ex)
             {
-                // Log exception information
-                ServiceLocator.Current.GetInstance<ILogger>().Error(ex);
+                try
+                {
+                    // Log exception information
+                    ServiceLocator.Current.GetInstance<ILogger>().Error(ex);
+                }
+                catch (Exception)
+                {
+                    // ignore
+                }
 
                 // Changes are canceled after an error
                 RollbackChanges();
@@ -364,7 +377,14 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         /// <param name="sqlQuery">The executed sql query.</param>
         private void LogQuery(string sqlQuery)
         {
+            try
+            {
                 ServiceLocator.Current.GetInstance<ILogger>().Trace(sqlQuery);
+            }
+            catch (Exception)
+            {
+                // ignore
+            }
         }
 
         ///// <summary>

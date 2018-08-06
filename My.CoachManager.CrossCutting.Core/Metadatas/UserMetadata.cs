@@ -33,9 +33,6 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
         [EmailAddress(ErrorMessageResourceName = "EmailFormatMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public string Mail { get; set; }
 
-        [Display(Name = "DefaultRoster", ResourceType = typeof(UserResources))]
-        public int? RosterId { get; set; }
-
         [Display(Name = "Roles", ResourceType = typeof(UserResources))]
         public object Roles { get; set; }
     }

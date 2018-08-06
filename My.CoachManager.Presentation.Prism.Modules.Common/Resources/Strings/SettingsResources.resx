@@ -123,6 +123,9 @@
   <data name="Settings" xml:space="preserve">
     <value>Paramètres</value>
   </data>
+  <data name="SettingsButton" xml:space="preserve">
+    <value>Paramètres (F4)</value>
+  </data>
   <data name="Skin" xml:space="preserve">
     <value>Apparence</value>
   </data>

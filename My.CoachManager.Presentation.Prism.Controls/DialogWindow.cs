@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 
 namespace My.CoachManager.Presentation.Prism.Controls
@@ -54,12 +53,12 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
             if (DataContext == null) return;
 
-            ((IDialogViewModel) DataContext).CloseRequest += OnCloseRequest;
+            ((IDialogViewModel)DataContext).CloseRequest += OnCloseRequest;
         }
 
         private void OnCloseRequest(object o, EventArgs ev)
         {
-            Application.Current.Dispatcher.Invoke(Close);
+            Close();
         }
 
         /// <summary>

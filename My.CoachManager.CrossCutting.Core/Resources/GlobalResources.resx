@@ -132,6 +132,12 @@
   <data name="And" xml:space="preserve">
     <value>Et</value>
   </data>
+  <data name="From" xml:space="preserve">
+    <value>De</value>
+  </data>
+  <data name="From1" xml:space="preserve">
+    <value>Du</value>
+  </data>
   <data name="Is" xml:space="preserve">
     <value>Est</value>
   </data>
@@ -146,6 +152,12 @@
   </data>
   <data name="NoneMale" xml:space="preserve">
     <value>Aucun</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>à</value>
+  </data>
+  <data name="To1" xml:space="preserve">
+    <value>Au</value>
   </data>
   <data name="Undefined" xml:space="preserve">
     <value>Non défini(e)</value>

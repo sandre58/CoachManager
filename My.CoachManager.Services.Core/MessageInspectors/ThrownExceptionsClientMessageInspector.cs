@@ -33,7 +33,7 @@ namespace My.CoachManager.Services.Core.MessageInspectors
             }
 
             var s = reply.ToString();
-            if (s != null && (!reply.IsFault && (!Equals(reply.Version, MessageVersion.None) || !s.StartsWith("<Fault ", StringComparison.OrdinalIgnoreCase))))
+            if (!reply.IsFault && (!Equals(reply.Version, MessageVersion.None) || !s.StartsWith("<Fault ", StringComparison.OrdinalIgnoreCase)))
             {
                 return;
             }
@@ -48,8 +48,7 @@ namespace My.CoachManager.Services.Core.MessageInspectors
             reply = buffer.CreateMessage();
 
             var faultDetail = ReadFaultDetail(copy);
-            var exception = faultDetail as Exception;
-            if (exception != null)
+            if (faultDetail is Exception exception)
             {
                 throw CreateNew(exception);
             }

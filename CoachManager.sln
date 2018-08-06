@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Infrastructure", "5 - Infrastructure", "{457CAA75-84B5-4A2F-811D-86234A78617A}"
 EndProject
@@ -80,6 +80,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Models", "My.CoachManager.Presentation.Prism.Models\My.CoachManager.Presentation.Prism.Models.csproj", "{C2647100-4BD2-49F0-8A22-A0CD1EA37C1E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Modules.Common", "My.CoachManager.Presentation.Prism.Modules.Common\My.CoachManager.Presentation.Prism.Modules.Common.csproj", "{E4990450-8387-40F8-B2DA-A9BADB0EDBCF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CE9840EB-3FE1-4C10-AE12-8159D69FFCAC}"
+	ProjectSection(SolutionItems) = preProject
+		memo.txt = memo.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

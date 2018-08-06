@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using Microsoft.Practices.Unity.Configuration;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.CrossCutting.Unity.Configurations;
-using My.CoachManager.CrossCutting.Unity.Exceptions;
-using My.CoachManager.CrossCutting.Unity.Resources;
 using Unity;
 using Unity.Extension;
 using Unity.Lifetime;
@@ -44,7 +41,6 @@ namespace My.CoachManager.CrossCutting.Unity
         /// </remarks>
         protected override void Initialize()
         {
-
             //// CrossCutting Layer
             //// Container.RegisterType<ICacheManager, MemoryCacheManager>(new ContainerControlledLifetimeManager());
             Container.RegisterInstance(_logger, new ContainerControlledLifetimeManager());
@@ -54,7 +50,6 @@ namespace My.CoachManager.CrossCutting.Unity
 
             // Load All Container of all configurations.
             LoadContainersConfiguration(configurations);
-
         }
 
         #region ----- Methods -----

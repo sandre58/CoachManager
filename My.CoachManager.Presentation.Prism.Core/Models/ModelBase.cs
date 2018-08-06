@@ -76,6 +76,15 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         }
 
         /// <summary>
+        /// Get errors.
+        /// </summary>
+        /// <returns></returns>
+        public virtual IEnumerable GetErrors()
+        {
+            return ValidationErrors.SelectMany(x => x.Value).Select(error => error.ErrorMessage);
+        }
+
+        /// <summary>
         /// Notifies when errors changed.
         /// </summary>
         /// <param name="propertyName"></param>
@@ -90,6 +99,17 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         #region IValidatable
 
         /// <summary>
+        /// Gets error for a property.
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        protected virtual IEnumerable<ValidationResult> ComputeErrors(string propertyName, object value)
+        {
+            return new List<ValidationResult>();
+        }
+
+        /// <summary>
         /// Test if property is valid.
         /// </summary>
         /// <param name="propertyName">The property name.</param>
@@ -101,7 +121,13 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
 
             TypeDescriptor.AddProviderTransparent(new AssociatedMetadataTypeTypeDescriptionProvider(GetType()), GetType());
 
-            if (Validator.TryValidateProperty(value, new ValidationContext(this) { MemberName = propertyName }, validationResults))
+            // Validation by Metadata
+            Validator.TryValidateProperty(value, new ValidationContext(this) { MemberName = propertyName }, validationResults);
+            // Custom Validation
+            validationResults.AddRange(ComputeErrors(propertyName, value));
+
+            // Is Valid
+            if (!validationResults.Any())
             {
                 if (!ValidationErrors.ContainsKey(propertyName)) return;
                 ValidationErrors.Remove(propertyName);
@@ -109,16 +135,17 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
                 return;
             }
 
+            // Is not valid
             if (ValidationErrors.ContainsKey(propertyName))
             {
                 ValidationErrors[propertyName] = validationResults;
-                NotifyErrorsChanged(propertyName);
             }
             else
             {
                 ValidationErrors.Add(propertyName, validationResults);
-                NotifyErrorsChanged(propertyName);
             }
+
+            NotifyErrorsChanged(propertyName);
         }
 
         /// <inheritdoc />
@@ -144,7 +171,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
             return !HasErrors && (result == null || (bool)result);
         }
 
-        #endregion
+        #endregion IValidatable
 
         #region IPropertyChanged
 

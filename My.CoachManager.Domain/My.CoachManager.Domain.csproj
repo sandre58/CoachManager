@@ -164,6 +164,7 @@
     <Compile Include="AppModule\Services\CrudDomainService.cs" />
     <Compile Include="AppModule\Services\ICrudDomainService.cs" />
     <Compile Include="CategoryModule\Aggregate\CategoryFactory.cs" />
+    <Compile Include="CategoryModule\Aggregate\CategorySelectBuilder.cs" />
     <Compile Include="ReferenceModule\Aggregates\ReferenceOrderBuilder.cs" />
     <Compile Include="PersonModule\Aggregate\CountrySelectBuilder.cs" />
     <Compile Include="PersonModule\Aggregate\PlayerFactory.cs" />
@@ -175,7 +176,10 @@
     <Compile Include="PositionModule\Services\PositionDomainService.cs" />
     <Compile Include="ReferenceModule\Services\IReferenceDomainService.cs" />
     <Compile Include="ReferenceModule\Services\ReferenceDomainService.cs" />
+    <Compile Include="RosterModule\Aggregate\RosterFactory.cs" />
+    <Compile Include="SeasonModule\Aggregate\SeasonIsValidSpecification.cs" />
     <Compile Include="SeasonModule\Aggregate\SeasonSelectBuilder.cs" />
+    <Compile Include="SeasonModule\Aggregate\SeasonFactory.cs" />
     <Compile Include="SeasonModule\Services\SeasonDomainService.cs" />
     <Compile Include="SeasonModule\Services\ISeasonDomainService.cs" />
     <Compile Include="CategoryModule\Services\ICategoryDomainService.cs" />

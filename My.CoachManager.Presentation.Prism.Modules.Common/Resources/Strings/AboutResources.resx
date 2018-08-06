@@ -120,6 +120,9 @@
   <data name="About" xml:space="preserve">
     <value>A propos de Coach Manager</value>
   </data>
+  <data name="AboutButton" xml:space="preserve">
+    <value>A propos de Coach Manager (F1)</value>
+  </data>
   <data name="Company" xml:space="preserve">
     <value>Entreprise</value>
   </data>

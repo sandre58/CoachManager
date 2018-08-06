@@ -172,8 +172,10 @@
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.PlayersListDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Positions.PositionDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Rosters.PlayerDetailDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Rosters.RosterDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Rosters.SquadDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Rosters.SquadDto1.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Season.SeasonDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Seasons.SeasonDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Users.UserDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Users.UserDto1.datasource" />

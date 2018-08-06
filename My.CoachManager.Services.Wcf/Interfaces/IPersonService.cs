@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using My.CoachManager.Application.Dtos.Category;
-using My.CoachManager.Application.Dtos.Persons;
+using My.CoachManager.Application.Dtos.Person;
 
 namespace My.CoachManager.Services.Wcf.Interfaces
 {

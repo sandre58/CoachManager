@@ -31,7 +31,17 @@ namespace My.CoachManager.Domain.Core.Specification
         /// <returns>Expression that satisfy this specification.</returns>
         public abstract Expression<Func<TEntity, bool>> SatisfiedBy();
 
-        #endregion
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public bool SatisfiedBy(TEntity entity)
+        {
+            return SatisfiedBy().Compile().Invoke(entity);
+        }
+
+        #endregion ----- ISpecification<TEntity> Members -----
 
         #region ----- Override Operators -----
 
@@ -108,7 +118,7 @@ namespace My.CoachManager.Domain.Core.Specification
         {
             if (specification == null)
             {
-                throw new ArgumentNullException("specification");
+                throw new ArgumentNullException(nameof(specification));
             }
 
             return false;
@@ -118,10 +128,7 @@ namespace My.CoachManager.Domain.Core.Specification
         /// Gets the Override operator false, only for support AND OR operators.
         /// </summary>
         /// <returns>See False operator in C#.</returns>
-        public bool IsFalse
-        {
-            get { return false; }
-        }
+        public bool IsFalse => false;
 
         /// <summary>
         /// Override operator True, only for support AND OR operators.
@@ -132,7 +139,7 @@ namespace My.CoachManager.Domain.Core.Specification
         {
             if (specification == null)
             {
-                throw new ArgumentNullException("specification");
+                throw new ArgumentNullException(nameof(specification));
             }
 
             return true;
@@ -142,11 +149,8 @@ namespace My.CoachManager.Domain.Core.Specification
         /// Gets the Override operator True, only for support AND OR operators.
         /// </summary>
         /// <returns>See True operator in C#.</returns>
-        public bool IsTrue
-        {
-            get { return true; }
-        }
+        public bool IsTrue => true;
 
-        #endregion
+        #endregion ----- Override Operators -----
     }
 }

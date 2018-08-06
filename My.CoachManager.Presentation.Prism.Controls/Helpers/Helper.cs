@@ -39,8 +39,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
         {
             if (OsVersionHelper.IsWindows8Point1OrGreater)
             {
-                ProcessDpiAwareness value;
-                var result = UnsafeNativeMethods.GetProcessDpiAwareness(IntPtr.Zero, out value);
+                var result = UnsafeNativeMethods.GetProcessDpiAwareness(IntPtr.Zero, out var value);
                 if (result != UnsafeNativeMethods.S_OK)
                 {
                     throw new Win32Exception(result);

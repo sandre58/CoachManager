@@ -11,6 +11,12 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
     /// </summary>
     public class ReferenceMetadata : EntityMetadata
     {
+        [Display(Name = "Code", ResourceType = typeof(DataEntityResources))]
+        [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
+        [MaxLength(15, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
+        [Index]
+        public string Code { get; set; }
+
         [Display(Name = "Label", ResourceType = typeof(DataEntityResources))]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         [MaxLength(100, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
@@ -19,12 +25,6 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
 
         [Display(Name = "Description", ResourceType = typeof(DataEntityResources))]
         public string Description { get; set; }
-
-        [Display(Name = "Code", ResourceType = typeof(DataEntityResources))]
-        [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        [MaxLength(15, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        [Index]
-        public string Code { get; set; }
 
         [Display(Name = "Order", ResourceType = typeof(DataEntityResources))]
         [DefaultValue(0)]

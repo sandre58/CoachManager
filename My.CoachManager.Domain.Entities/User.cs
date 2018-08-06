@@ -40,11 +40,6 @@ namespace My.CoachManager.Domain.Entities
         public string Mail { get; set; }
 
         /// <summary>
-        /// Gets or sets the default roster id.
-        /// </summary>
-        public int? RosterId { get; set; }
-
-        /// <summary>
         /// Gets or sets the roles.
         /// </summary>
         public ICollection<Role> Roles { get; set; }

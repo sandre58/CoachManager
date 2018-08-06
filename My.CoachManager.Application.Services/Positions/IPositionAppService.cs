@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using My.CoachManager.Application.Dtos.Positions;
+using My.CoachManager.Application.Dtos.Position;
 
 namespace My.CoachManager.Application.Services.Positions
 {

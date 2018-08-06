@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
@@ -67,6 +68,17 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             CancelCommand = new DelegateCommand(Cancel, CanCancel);
         }
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes Data.
+        /// </summary>
+        protected override void InitializeShortcuts()
+        {
+            base.InitializeShortcuts();
+
+            KeyboardShortcuts.Add(new KeyBinding(SaveCommand, Key.S, ModifierKeys.Control));
+        }
+
         #endregion Initialization
 
         #region Save
@@ -85,19 +97,25 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
             if (Item.Validate())
             {
-
                 var task = Task.Factory.StartNew(() =>
                 {
                     result = SaveItemCore();
                 }, CancellationToken.None
                         , TaskCreationOptions.None
                         , TaskScheduler.FromCurrentSynchronizationContext())
-                
+
                     // Error
                     .ContinueWith(t =>
                     {
                         if (t.Exception == null) return;
-                        if (t.Exception.InnerException is BusinessException businessException)
+                        if (t.Exception.InnerException is ValidationBusinessException validationBusinessException)
+                        {
+                            foreach (var error in validationBusinessException.Errors)
+                            {
+                                OnBusinessExceptionOccured(new BusinessException(error.ToString()));
+                            }
+                        }
+                        else if (t.Exception.InnerException is BusinessException businessException)
                         {
                             OnBusinessExceptionOccured(businessException);
                         }
@@ -110,7 +128,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
                     // Cancel
                     .ContinueWith(t =>
                     {
-
                     }, TaskContinuationOptions.OnlyOnCanceled)
 
                     // Success
@@ -119,21 +136,23 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
                         if (result)
                             OnSaveCompleted();
                     }, TaskContinuationOptions.OnlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously)
-                    
+
                     .ContinueWith(t =>
                     {
                         State = ScreenState.Ready;
                         Mode = ScreenMode.Edition;
                     });
 
-
                 await task;
-
             }
             else
             {
                 State = ScreenState.Ready;
-                OnBusinessExceptionOccured(new BusinessException(MessageResources.InvalidForm));
+
+                foreach (var error in Item.GetErrors())
+                {
+                    OnBusinessExceptionOccured(new BusinessException(error.ToString()));
+                }
             }
         }
 

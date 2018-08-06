@@ -87,8 +87,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ViewModels\SeasonsListViewModel.cs" />
+    <Compile Include="ViewModels\SeasonEditViewModel.cs" />
+    <Compile Include="ViewModels\RosterEditViewModel.cs" />
+    <Compile Include="ViewModels\RostersListViewModel.cs" />
     <Compile Include="ViewModels\CategoriesListViewModel.cs" />
     <Compile Include="ViewModels\CategoryEditViewModel.cs" />
+    <Compile Include="Views\SeasonsListView.xaml.cs">
+      <DependentUpon>SeasonsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SeasonEditView.xaml.cs">
+      <DependentUpon>SeasonEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RostersListView.xaml.cs">
+      <DependentUpon>RostersListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CategoriesListView.xaml.cs">
       <DependentUpon>CategoriesListView.xaml</DependentUpon>
     </Compile>
@@ -97,6 +110,9 @@
     </Compile>
     <Compile Include="Views\CategoryEditView.xaml.cs">
       <DependentUpon>CategoryEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RosterEditView.xaml.cs">
+      <DependentUpon>RosterEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ReferenceEditView.xaml.cs">
       <DependentUpon>ReferenceEditView.xaml</DependentUpon>
@@ -137,6 +153,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\SeasonsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SeasonEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RostersListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\CategoriesListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -146,6 +174,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CategoryEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RosterEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

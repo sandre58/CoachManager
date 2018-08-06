@@ -10,7 +10,7 @@ using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
-    public class CategoriesListViewModel : OrderedListViewModel<CategoryModel, CategoryEditView>
+    public class CategoriesListViewModel : OrderedListViewModel<CategoryModel, CategoryEditView, CategoryEditView>
     {
         #region Fields
 
@@ -77,6 +77,5 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         #endregion Data
 
         #endregion Methods
-
     }
 }

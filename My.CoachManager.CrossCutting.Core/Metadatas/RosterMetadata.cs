@@ -16,17 +16,14 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
 
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         [Display(Name = "Season", ResourceType = typeof(RosterResources))]
-        public int SeasonId { get; set; }
+        public int? SeasonId { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         [Display(Name = "Category", ResourceType = typeof(RosterResources))]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
         [Display(Name = "Players", ResourceType = typeof(RosterResources))]
         public ICollection<object> Players { get; set; }
-
-        [Display(Name = "Coachs", ResourceType = typeof(RosterResources))]
-        public ICollection<object> Coachs { get; set; }
 
         [Display(Name = "Squads", ResourceType = typeof(RosterResources))]
         public ICollection<object> Squads { get; set; }

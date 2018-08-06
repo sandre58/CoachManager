@@ -38,6 +38,11 @@ namespace My.CoachManager.Presentation.Prism.Controls
         /// <summary>
         /// Identifies the BackgroundContent dependency property.
         /// </summary>
+        public static readonly DependencyProperty ApplicationBarPositionProperty = DependencyProperty.Register("ApplicationBarPosition", typeof(Dock), typeof(WorkspaceView), new PropertyMetadata(Dock.Top));
+
+        /// <summary>
+        /// Identifies the BackgroundContent dependency property.
+        /// </summary>
         public static readonly DependencyProperty HeaderHeightProperty = DependencyProperty.Register("HeaderHeight", typeof(int), typeof(WorkspaceView));
 
         /// <summary>
@@ -65,6 +70,15 @@ namespace My.CoachManager.Presentation.Prism.Controls
         {
             get { return (Style)GetValue(ApplicationBarStyleProperty); }
             set { SetValue(ApplicationBarStyleProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the background content of this window instance.
+        /// </summary>
+        public Dock ApplicationBarPosition
+        {
+            get { return (Dock)GetValue(ApplicationBarPositionProperty); }
+            set { SetValue(ApplicationBarPositionProperty, value); }
         }
 
         /// <summary>

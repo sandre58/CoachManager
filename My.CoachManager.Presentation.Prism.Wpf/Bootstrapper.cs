@@ -17,11 +17,14 @@ using My.CoachManager.Presentation.Prism.Modules.Administration;
 using My.CoachManager.Presentation.Prism.Modules.Common;
 using My.CoachManager.Presentation.Prism.Modules.Home;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
+using My.CoachManager.Presentation.Prism.Wpf.Properties;
 using My.CoachManager.Presentation.Prism.Wpf.Services;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using My.CoachManager.Presentation.Prism.Wpf.Views;
 using My.CoachManager.Presentation.ServiceAgent;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.SeasonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.UserServiceReference;
 using Prism.Logging;
 using Prism.Modularity;
@@ -32,12 +35,11 @@ namespace My.CoachManager.Presentation.Prism.Wpf
 {
     public class Bootstrapper : UnityBootstrapper
     {
-
         #region Fields
 
         private readonly SplashScreenViewModel _splashScreenViewModel;
 
-#endregion
+        #endregion Fields
 
         #region Constructor
 
@@ -50,7 +52,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             _splashScreenViewModel = splashScreenViewModel;
         }
 
-#endregion
+        #endregion Constructor
 
         #region Configuration
 
@@ -72,13 +74,15 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         protected override void ConfigureContainer()
         {
             base.ConfigureContainer();
-            
+
             // Register Logger
             Container.RegisterInstance(typeof(ILogger), Logger);
 
             // Register Wcf Services
             Container.RegisterInstance(typeof(ICategoryService), ServiceClientFactory.Create<CategoryServiceClient, ICategoryService>());
+            Container.RegisterInstance(typeof(IRosterService), ServiceClientFactory.Create<RosterServiceClient, IRosterService>());
             Container.RegisterInstance(typeof(IUserService), ServiceClientFactory.Create<UserServiceClient, IUserService>());
+            Container.RegisterInstance(typeof(ISeasonService), ServiceClientFactory.Create<SeasonServiceClient, ISeasonService>());
 
             // Register Presentation Services
             Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
@@ -86,7 +90,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             Container.RegisterType<IAuthenticationService, AuthenticationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IDialogService, DialogService>(new ContainerControlledLifetimeManager());
         }
-        
+
         /// <inheritdoc />
         /// <summary>
         /// Configure the Module Catalog.
@@ -152,26 +156,26 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             manager.LoadModuleCompleted += Manager_LoadModuleCompleted;
 
             UpdateSplachMessage(StatusResources.UserConnection);
-                if (!ConnectUser()) return;
+            if (!ConnectUser()) return;
 
-                    base.InitializeModules();
+            base.InitializeModules();
 
-                var actionToLoad = new List<Tuple<Action, string>>
+            var actionToLoad = new List<Tuple<Action, string>>
                 {
                     new Tuple<Action, string>(LoadSkin, StatusResources.SkinLoading)
                 };
 
-                foreach (var action in actionToLoad)
-                {
-                    ExecuteAction(action.Item1, action.Item2);
-                }
+            foreach (var action in actionToLoad)
+            {
+                ExecuteAction(action.Item1, action.Item2);
+            }
 
-                OpenShell();
+            OpenShell();
         }
 
         private void Manager_LoadModuleCompleted(object sender, LoadModuleCompletedEventArgs e)
         {
-            Logger.Log($"Module Loaded : {e.ModuleInfo.ModuleName}" , Category.Debug, Priority.None);
+            Logger.Log($"Module Loaded : {e.ModuleInfo.ModuleName}", Category.Debug, Priority.None);
             UpdateSplachMessage(string.Format(StatusResources.ModuleLoading, e.ModuleInfo.ModuleName));
             // Thread.Sleep(3000);
         }
@@ -218,10 +222,10 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// </summary>
         private static void LoadSkin()
         {
-            SkinManager.SkinManager.ApplyTheme("dark");
-            SkinManager.SkinManager.ApplyAccent("blue");
+            SkinManager.SkinManager.ApplyTheme(Settings.Default.DefaultTheme);
+            SkinManager.SkinManager.ApplyAccent(Settings.Default.DefaultAccent);
         }
-        
+
         /// <summary>
         /// Executes and log an action.
         /// </summary>
@@ -238,7 +242,6 @@ namespace My.CoachManager.Presentation.Prism.Wpf
 
             Logger.Log($"Action Loaded : {action.Method.Name} in {stopwatch.ElapsedMilliseconds} ms", Category.Debug, Priority.None);
             UpdateSplachMessage(message);
-
         }
 
         /// <summary>
@@ -284,7 +287,6 @@ namespace My.CoachManager.Presentation.Prism.Wpf
 
             if (principal == null)
             {
-
                 // Get Default Credentials
                 string defaultUsername;
                 var defaultPassword = string.Empty;
@@ -309,7 +311,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
                             {
                                 NotificationManager.ShowError(StatusResources.ConnectionFailed);
                             }
-                            
+
                             return new Tuple<bool, string>(isConnected, StatusResources.ConnectionFailed);
                         },
                         defaultUsername.ToUpper(), defaultPassword) == DialogResult.Ok)
@@ -318,9 +320,8 @@ namespace My.CoachManager.Presentation.Prism.Wpf
                 }
                 else
                 {
-                        System.Windows.Application.Current.Shutdown();
+                    System.Windows.Application.Current.Shutdown();
                 }
-                
             }
 
             if (principal == null) return Thread.CurrentPrincipal.Identity.IsAuthenticated;
@@ -331,17 +332,16 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         }
 
         /// <summary>
-            /// Connection of the user.
-            /// </summary>
-            /// <returns></returns>
-            private static IPrincipal GetConnectedUser(string login = "", string password = "", bool byWindowsCredentials = true)
-            {
-                var authentificationService = ServiceLocator.Current.GetInstance<IAuthenticationService>();
+        /// Connection of the user.
+        /// </summary>
+        /// <returns></returns>
+        private static IPrincipal GetConnectedUser(string login = "", string password = "", bool byWindowsCredentials = true)
+        {
+            var authentificationService = ServiceLocator.Current.GetInstance<IAuthenticationService>();
 
-                return byWindowsCredentials ? authentificationService.AuthenticateByWindowsCredentials() : authentificationService.Authenticate(login, password);
-
-            }
-
-            #endregion
+            return byWindowsCredentials ? authentificationService.AuthenticateByWindowsCredentials() : authentificationService.Authenticate(login, password);
         }
+
+        #endregion Methods
+    }
 }

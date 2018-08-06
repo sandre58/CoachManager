@@ -10,7 +10,6 @@ namespace My.CoachManager.Presentation.Prism.Models
     [MetadataType(typeof(CategoryMetadata))]
     public class CategoryModel : ReferenceModel
     {
-
         /// <summary>
         /// Gets or sets the Year.
         /// </summary>

@@ -5,17 +5,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:prism="http://prismlibrary.com/"
         xmlns:core="clr-namespace:My.CoachManager.Presentation.Prism.Core;assembly=My.CoachManager.Presentation.Prism.Core"
-        xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
         xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.ViewModels"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:behaviours="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Behaviours;assembly=My.CoachManager.Presentation.Prism.Controls"
+        xmlns:properties="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.Properties"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel}"
              d:DesignWidth="300"
              d:DesignHeight="700">
 
     <Grid>
-        <Border VerticalAlignment="Stretch" Background="{DynamicResource DarkAccent}" Effect="{DynamicResource RightShadow}">
+        <Border VerticalAlignment="Stretch" Background="{DynamicResource DarkVariation5}" Effect="{DynamicResource RightShadow}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
@@ -32,7 +32,8 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Title -->
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=Title, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedWindow}, Converter={StaticResource ToUpperConverter}}"
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                           Text="{Binding Source={x:Static properties:Settings.Default}, Path=ClubName, Mode=OneWay}"
                            Style="{StaticResource ModernWindowTitle}"
                                Foreground="{DynamicResource AccentForeground}"
                            HorizontalAlignment="Center"

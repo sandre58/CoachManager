@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using My.CoachManager.Application.Dtos.Category;
-using My.CoachManager.Application.Dtos.Persons;
+using My.CoachManager.Application.Dtos.Person;
 using My.CoachManager.Application.Services.Addresses;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;

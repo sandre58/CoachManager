@@ -134,9 +134,9 @@
                 <ControlTemplate TargetType="{x:Type controls:WorkspaceView}">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" x:Name="Column0" />
+                            <RowDefinition Height="Auto" x:Name="Column1" />
+                            <RowDefinition Height="*" x:Name="Column2" />
                         </Grid.RowDefinitions>
 
                         <!-- Header -->
@@ -146,13 +146,16 @@
                             </Border>
                         </Grid>
 
+                        <!-- Commands -->
+                        <controls:ApplicationBar x:Name="Commands" Grid.Row="1" Grid.Column="0" ItemsSource="{TemplateBinding Commands}" Style="{TemplateBinding ApplicationBarStyle}" Visibility="{TemplateBinding Commands, Converter={StaticResource AnyToVisibilityConverter}}" />
+
                         <!-- Content -->
-                        <ScrollViewer Grid.Row="1"  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" Margin="{TemplateBinding Padding}">
+                        <ScrollViewer x:Name="Content" Grid.Row="2"  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" Margin="{TemplateBinding Padding}">
                             <ContentPresenter />
                         </ScrollViewer>
 
                         <!-- Loading -->
-                        <Border x:Name="Loader"  Grid.Row="1" Background="{DynamicResource LightVariation4}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
+                        <Border x:Name="Loader" Grid.Row="2" Background="{DynamicResource LightVariation4}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
                             <Grid>
                                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                                     <controls:ProgressRing Width="70" Height="70" />
@@ -160,9 +163,6 @@
                                 </StackPanel>
                             </Grid>
                         </Border>
-
-                        <!-- Commands -->
-                        <controls:ApplicationBar Grid.Row="2" Grid.Column="0" ItemsSource="{TemplateBinding Commands}" Style="{TemplateBinding ApplicationBarStyle}" Visibility="{TemplateBinding Commands, Converter={StaticResource AnyToVisibilityConverter}}" />
                     </Grid>
 
                     <ControlTemplate.Triggers>
@@ -179,6 +179,13 @@
                             </DataTrigger.Binding>
                             <Setter TargetName="Loader" Property="Visibility" Value="Visible" />
                         </DataTrigger>
+                        <Trigger Property="ApplicationBarPosition" Value="Bottom">
+                            <Setter TargetName="Commands" Property="Grid.Row" Value="2" />
+                            <Setter TargetName="Loader" Property="Grid.Row" Value="1" />
+                            <Setter TargetName="Content" Property="Grid.Row" Value="1" />
+                            <Setter TargetName="Column1" Property="Height" Value="*" />
+                            <Setter TargetName="Column2" Property="Height" Value="Auto" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -187,8 +194,9 @@
 
     <Style x:Key="WorkspaceDialogViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource {x:Type controls:WorkspaceView}}">
         <Setter Property="HeaderHeight" Value="70" />
-        <Setter Property="HeaderBackground" Value="{DynamicResource DarkVariation1}" />
+        <Setter Property="HeaderBackground" Value="{DynamicResource DarkVariation3}" />
         <Setter Property="HeaderTemplate" Value="{StaticResource DefaultWorkspaceDialogViewHeaderTemplate}" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ApplicationBarPosition" Value="Bottom" />
     </Style>
 </ResourceDictionary>

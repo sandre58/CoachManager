@@ -472,63 +472,63 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                 SeasonId = 1
             };
 
-            var squad1 = new Squad()
-            {
-                Name = "Equipe A"
-            };
+            //var squad1 = new Squad()
+            //{
+            //    Name = "Equipe A"
+            //};
 
-            var squad2 = new Squad()
-            {
-                Name = "Equipe B"
-            };
+            //var squad2 = new Squad()
+            //{
+            //    Name = "Equipe B"
+            //};
 
-            roster.Players.Add(new RosterPlayer()
-            {
-                LicenseState = LicenseState.Back,
-                Number = 12,
-                IsMutation = true,
-                PlayerId = player1.Id,
-                RosterId = 1,
-                SquadId = 1,
-            });
-            roster.Players.Add(new RosterPlayer()
-            {
-                LicenseState = LicenseState.Given,
-                Number = 9,
-                PlayerId = player2.Id,
-                RosterId = 1,
-                SquadId = 2,
-            });
+            //roster.Players.Add(new RosterPlayer()
+            //{
+            //    LicenseState = LicenseState.Back,
+            //    Number = 12,
+            //    IsMutation = true,
+            //    PlayerId = player1.Id,
+            //    RosterId = 1,
+            //    SquadId = 1,
+            //});
+            //roster.Players.Add(new RosterPlayer()
+            //{
+            //    LicenseState = LicenseState.Given,
+            //    Number = 9,
+            //    PlayerId = player2.Id,
+            //    RosterId = 1,
+            //    SquadId = 2,
+            //});
 
-            for (int i = 1; i <= 15; i++)
-            {
-                var player = new Player()
-                {
-                    CategoryId = i,
-                    Birthdate = new DateTime(1986, 12, i),
-                    CountryId = 76,
-                    FirstName = "FirstName" + i,
-                    Gender = GenderType.Male,
-                    LastName = "LastName" + i,
-                    Laterality = Laterality.RightHander,
-                    ShoesSize = 30 + i,
-                    Size = "L",
-                    LicenseNumber = "000000000"
-                };
-                context.Players.AddOrUpdate(x => x.LastName, player);
+            //for (int i = 1; i <= 15; i++)
+            //{
+            //    var player = new Player()
+            //    {
+            //        CategoryId = i,
+            //        Birthdate = new DateTime(1986, 12, i),
+            //        CountryId = 76,
+            //        FirstName = "FirstName" + i,
+            //        Gender = GenderType.Male,
+            //        LastName = "LastName" + i,
+            //        Laterality = Laterality.RightHander,
+            //        ShoesSize = 30 + i,
+            //        Size = "L",
+            //        LicenseNumber = "000000000"
+            //    };
+            //    context.Players.AddOrUpdate(x => x.LastName, player);
 
-                roster.Players.Add(new RosterPlayer()
-                {
-                    LicenseState = LicenseState.Given,
-                    Number = i,
-                    PlayerId = player.Id,
-                    RosterId = 1,
-                    SquadId = 1,
-                });
-            }
+            //    roster.Players.Add(new RosterPlayer()
+            //    {
+            //        LicenseState = LicenseState.Given,
+            //        Number = i,
+            //        PlayerId = player.Id,
+            //        RosterId = 1,
+            //        SquadId = 1,
+            //    });
+            //}
 
-            roster.Squads.Add(squad1);
-            roster.Squads.Add(squad2);
+            //roster.Squads.Add(squad1);
+            //roster.Squads.Add(squad2);
             context.Rosters.AddOrUpdate(x => x.Id, roster);
             context.Commit();
         }
@@ -539,16 +539,15 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
         /// <param name="context">The data context.</param>
         private void SeedUsersAndPermissions(DataContext context)
         {
-
             // User and permissions
             var perm1 = new Permission() { Code = PermissionConstants.ChangeUser, Label = "Changer d'utilisateur", Description = "Permet de se connecter à l'aplication en tant qu'un autre utilisateur." };
             var perm2 = new Permission() { Code = PermissionConstants.AccessAdmin, Label = "Accès à l'administration", Description = "Permet d'accèder à tout le module d'administration." };
             var role1 = new Role() { Code = RoleConstants.Admin, Label = "Administrateur", Description = "Rôle permettant de gérer toutes les données utilisées dan l''application." };
 
-            var user1 = new User() { Name = "Stéphane ANDRE (Home)", Login = "andre", Password = "qRBfE9MoPFs=", Mail = "andre.cs2i@gmail.com", RosterId = 1 };
-            var user2 = new User() { Name = "Stéphane ANDRE (Merial)", Login = "E0214719", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@merial.com", RosterId = 1 };
-            var user3 = new User() { Name = "Vincent SOURDEIX (BI)", Login = "E0268620", Password = "qRBfE9MoPFs=", Mail = "vincentsourdeix@test.fr", RosterId = 1 };
-            var user4 = new User() { Name = "Stéphane ANDRE (Modis)", Login = "stephane.andre", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@modis.com", RosterId = 1 };
+            var user1 = new User() { Name = "Stéphane ANDRE (Home)", Login = "andre", Password = "qRBfE9MoPFs=", Mail = "andre.cs2i@gmail.com" };
+            var user2 = new User() { Name = "Stéphane ANDRE (Merial)", Login = "E0214719", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@merial.com" };
+            var user3 = new User() { Name = "Vincent SOURDEIX (BI)", Login = "E0268620", Password = "qRBfE9MoPFs=", Mail = "vincentsourdeix@test.fr" };
+            var user4 = new User() { Name = "Stéphane ANDRE (Modis)", Login = "stephane.andre", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@modis.com" };
 
             role1.Permissions.Add(perm1);
             role1.Permissions.Add(perm2);

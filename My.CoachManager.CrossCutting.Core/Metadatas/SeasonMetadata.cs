@@ -12,10 +12,12 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
     {
         [Display(Name = "StartDate", ResourceType = typeof(SeasonResources))]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
+        [DataType(DataType.Date)]
         public DateTime? StartDate { get; set; }
 
         [Display(Name = "EndDate", ResourceType = typeof(SeasonResources))]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
+        [DataType(DataType.Date)]
         public DateTime? EndDate { get; set; }
     }
 }

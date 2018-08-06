@@ -9,7 +9,7 @@
       <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" />
       <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" />
       <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Positions" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Categories" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Category" />
       <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Seasons" />
     </xsd:schema>
   </wsdl:types>
@@ -25,6 +25,30 @@
   <wsdl:message name="IRosterService_GetSquad_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetSquadResponse" />
   </wsdl:message>
+  <wsdl:message name="IRosterService_GetRosters_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRosters" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_GetRosters_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRostersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_SaveRoster_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveRoster" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_SaveRoster_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveRosterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_RemoveRoster_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveRoster" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_RemoveRoster_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveRosterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_GetRosterById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRosterById" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_GetRosterById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRosterByIdResponse" />
+  </wsdl:message>
   <wsdl:portType name="IRosterService">
     <wsdl:operation name="GetSquads">
       <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetSquads" message="tns:IRosterService_GetSquads_InputMessage" />
@@ -33,6 +57,22 @@
     <wsdl:operation name="GetSquad">
       <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetSquad" message="tns:IRosterService_GetSquad_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/GetSquadResponse" message="tns:IRosterService_GetSquad_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRosters">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetRosters" message="tns:IRosterService_GetRosters_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/GetRostersResponse" message="tns:IRosterService_GetRosters_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveRoster">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/SaveRoster" message="tns:IRosterService_SaveRoster_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/SaveRosterResponse" message="tns:IRosterService_SaveRoster_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveRoster">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/RemoveRoster" message="tns:IRosterService_RemoveRoster_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/RemoveRosterResponse" message="tns:IRosterService_RemoveRoster_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRosterById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetRosterById" message="tns:IRosterService_GetRosterById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/GetRosterByIdResponse" message="tns:IRosterService_GetRosterById_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IRosterService" type="tns:IRosterService">
@@ -48,6 +88,42 @@
     </wsdl:operation>
     <wsdl:operation name="GetSquad">
       <soap:operation soapAction="http://tempuri.org/IRosterService/GetSquad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRosters">
+      <soap:operation soapAction="http://tempuri.org/IRosterService/GetRosters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveRoster">
+      <soap:operation soapAction="http://tempuri.org/IRosterService/SaveRoster" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveRoster">
+      <soap:operation soapAction="http://tempuri.org/IRosterService/RemoveRoster" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRosterById">
+      <soap:operation soapAction="http://tempuri.org/IRosterService/GetRosterById" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

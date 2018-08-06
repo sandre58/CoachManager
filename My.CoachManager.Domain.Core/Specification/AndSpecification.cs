@@ -39,48 +39,35 @@ namespace My.CoachManager.Domain.Core.Specification
         /// <param name="rightSide">Right side specification.</param>
         public AndSpecification(ISpecification<TEntity> leftSide, ISpecification<TEntity> rightSide)
         {
-            if (leftSide == null)
-            {
-                throw new ArgumentNullException("leftSide");
-            }
-
-            if (rightSide == null)
-            {
-                throw new ArgumentNullException("rightSide");
-            }
-
-            _leftSideSpecification = leftSide;
-            _rightSideSpecification = rightSide;
+            _leftSideSpecification = leftSide ?? throw new ArgumentNullException(nameof(leftSide));
+            _rightSideSpecification = rightSide ?? throw new ArgumentNullException(nameof(rightSide));
         }
 
         #endregion ----- Constructor -----
 
         #region ----- Override Methods -----
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets the Left side specification.
         /// </summary>
-        public override ISpecification<TEntity> LeftSideSpecification
-        {
-            get { return _leftSideSpecification; }
-        }
+        public override ISpecification<TEntity> LeftSideSpecification => _leftSideSpecification;
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets the Right side specification.
         /// </summary>
-        public override ISpecification<TEntity> RightSideSpecification
-        {
-            get { return _rightSideSpecification; }
-        }
+        public override ISpecification<TEntity> RightSideSpecification => _rightSideSpecification;
 
+        /// <inheritdoc />
         /// <summary>
         /// Satisfied the by.
         /// </summary>
         /// <returns>The expression.</returns>
         public override Expression<Func<TEntity, bool>> SatisfiedBy()
         {
-            Expression<Func<TEntity, bool>> left = _leftSideSpecification.SatisfiedBy();
-            Expression<Func<TEntity, bool>> right = _rightSideSpecification.SatisfiedBy();
+            var left = _leftSideSpecification.SatisfiedBy();
+            var right = _rightSideSpecification.SatisfiedBy();
 
             return left.And(right);
         }

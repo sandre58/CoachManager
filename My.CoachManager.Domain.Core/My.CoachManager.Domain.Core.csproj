@@ -162,6 +162,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\AlreadyExistException.cs" />
+    <Compile Include="Exceptions\IsUsedException.cs" />
     <Compile Include="Reference.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="IReference.cs" />
@@ -173,6 +175,7 @@
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryOrder.cs" />
+    <Compile Include="Specification\IsValidSpecification.cs" />
     <Compile Include="Specification\AndSpecification.cs" />
     <Compile Include="Specification\CompositeSpecification.cs" />
     <Compile Include="Specification\DirectSpecification.cs" />

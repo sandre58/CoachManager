@@ -25,6 +25,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration
             _regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion, () => ServiceLocator.Current.GetInstance<AdministrationNavigationView>());
 
             // Register the workspace view
+            _container.RegisterTypeForNavigation<RostersListView>();
+            _container.RegisterTypeForNavigation<SeasonsListView>();
             _container.RegisterTypeForNavigation<CategoriesListView>();
         }
     }

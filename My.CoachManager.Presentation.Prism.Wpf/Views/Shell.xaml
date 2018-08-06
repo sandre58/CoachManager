@@ -29,7 +29,7 @@
 
     <!-- Commands -->
     <controls:ExtendedWindow.RightWindowCommands>
-        <controls:WindowCommands prism:RegionManager.RegionName="{x:Static core:RegionNames.ToolbarRegion}" />
+        <controls:WindowCommands prism:RegionManager.RegionName="{x:Static core:RegionNames.ToolbarRegion}" Foreground="{DynamicResource AccentForeground}" />
     </controls:ExtendedWindow.RightWindowCommands>
 
     <!-- Flyouts -->
@@ -40,6 +40,7 @@
     <Grid>
         <Grid x:Name="Main">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -47,42 +48,52 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
+            <!--Header -->
+            <Border Focusable="False" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Height="90"
+                    Background="{DynamicResource DarkAccent}">
+                <Grid VerticalAlignment="Center" Margin="{StaticResource LargeHorizontalMargin}"
+                          Visibility="{Binding ActiveWorkspace, Converter={StaticResource NullToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal" Margin="{StaticResource VeryLargeHorizontalMargin}" VerticalAlignment="Center">
+                        <controls:CommandButton Style="{StaticResource BackCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoBackCommand}" />
+                        <controls:CommandButton Style="{StaticResource NextCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoForwardCommand}" />
+                    </StackPanel>
+                    <TextBlock Grid.Column="1" Text="{Binding ActiveWorkspace.Title, Converter={StaticResource ToUpperConverter}}" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Top" Style="{StaticResource HeaderStyle}" Foreground="{DynamicResource AccentForeground}" />
+                </Grid>
+            </Border>
+
             <!-- Main Region -->
-            <Grid Grid.Row="0" Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <!--Header -->
-                <Grid Grid.Row="0" Height="90" Visibility="{Binding ActiveWorkspace, Converter={StaticResource NullToVisibilityConverter}}">
-                    <Border Focusable="False">
-                        <Grid VerticalAlignment="Center" Margin="{StaticResource LargeHorizontalMargin}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <StackPanel Orientation="Horizontal" Margin="{StaticResource VeryLargeHorizontalMargin}" VerticalAlignment="Center">
-                                <controls:CommandButton Style="{StaticResource BackCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoBackCommand}" />
-                                <controls:CommandButton Style="{StaticResource NextCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoForwardCommand}" />
-                            </StackPanel>
-                            <TextBlock Grid.Column="1" Text="{Binding ActiveWorkspace.Title, Converter={StaticResource ToUpperConverter}}" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Top" Style="{StaticResource HeaderStyle}" />
-                        </Grid>
-                    </Border>
-                </Grid>
-
-                <!-- Workspace -->
-                <Grid Grid.Row="1" Grid.Column="0">
-                    <controls:TransitioningContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.WorkspaceRegion}" />
-                </Grid>
-            </Grid>
+            <controls:TransitioningContentControl Grid.Row="1" Grid.Column="1" prism:RegionManager.RegionName="{x:Static core:RegionNames.WorkspaceRegion}" />
 
             <!-- Left Region -->
-            <views:MainMenuView Grid.Row="0" Grid.Column="0" />
+            <views:MainMenuView Grid.Row="1" Grid.Column="0" />
+        </Grid>
+
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="{Binding Path=Title, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedWindow}, Converter={StaticResource ToUpperConverter}}"
+                       Style="{StaticResource MediumHeaderStyle}"
+                       Margin="0"
+                       Foreground="{DynamicResource AccentForeground}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Typography.Capitals="AllSmallCaps" />
+
+            <!-- Logo -->
+            <Ellipse Width="120" Height="120" Grid.Row="1" Fill="{DynamicResource DarkAccent}" />
+            <Image Grid.Row="1" Grid.Column="0"
+                   Source="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/CoachManager.png"
+                   SnapsToDevicePixels="False"
+                   Height="100"
+                   RenderOptions.BitmapScalingMode="Fant" />
         </Grid>
 
         <!-- Dialog Region -->

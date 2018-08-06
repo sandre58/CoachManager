@@ -19,18 +19,5 @@ namespace My.CoachManager.Domain.ReferenceModule.Aggregates
 
             return specification;
         }
-
-        /// <summary>
-        /// Specification by id.
-        /// </summary>
-        public static ISpecification<TEntity> ById<TEntity>(int id)
-            where TEntity : class, IEntity
-        {
-            Specification<TEntity> specification = new TrueSpecification<TEntity>();
-
-            specification &= new DirectSpecification<TEntity>(x => x.Id == id);
-
-            return specification;
-        }
     }
 }

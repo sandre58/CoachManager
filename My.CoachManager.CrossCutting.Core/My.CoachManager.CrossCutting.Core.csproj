@@ -233,6 +233,7 @@
     <Compile Include="Enums\GenderType.cs" />
     <Compile Include="Exceptions\BusinessException.cs" />
     <Compile Include="Exceptions\MyException.cs" />
+    <Compile Include="Exceptions\ValidationBusinessException.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\AttributeExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
@@ -247,7 +248,6 @@
     <Compile Include="Metadatas\PlayerDetailMetadata.cs" />
     <Compile Include="Metadatas\SquadPlayerMetadata.cs" />
     <Compile Include="Metadatas\RosterPlayerMetadata.cs" />
-    <Compile Include="Metadatas\RosterCoachMetadata.cs" />
     <Compile Include="Metadatas\RosterMetadata.cs" />
     <Compile Include="Metadatas\AddressMetadata.cs" />
     <Compile Include="Metadatas\ClubMetadata.cs" />

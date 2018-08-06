@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using Prism.Commands;
@@ -22,6 +23,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             State = ScreenState.NotLoaded;
             Mode = ScreenMode.Read;
+
+            KeyboardShortcuts = new List<KeyBinding>();
         }
 
         #endregion Constructors
@@ -45,7 +48,10 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         public DelegateCommand RefreshCommand { get; set; }
 
-        public InputBindingCollection InputBindings { get; private set; }
+        /// <summary>
+        /// Gets or sets keyboard shortcuts.
+        /// </summary>
+        public List<KeyBinding> KeyboardShortcuts { get; set; }
 
         #endregion Members
 
@@ -80,7 +86,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <returns></returns>
         private async Task LoadDataAsync()
         {
-
             State = ScreenState.Loading;
 
             OnLoadDataRequested();
@@ -113,7 +118,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
                 // Cancel
                 .ContinueWith(t =>
                 {
-
                 }, TaskContinuationOptions.OnlyOnCanceled)
 
                 // Success
@@ -126,7 +130,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
                 {
                     State = ScreenState.Ready;
                 });
-
 
             await task.ConfigureAwait(false);
         }

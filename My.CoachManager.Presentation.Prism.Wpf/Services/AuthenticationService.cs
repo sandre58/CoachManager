@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Security.Principal;
-using My.CoachManager.Application.Dtos.Users;
+using My.CoachManager.Application.Dtos.User;
 using My.CoachManager.CrossCutting.Core.Cryptography;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.CrossCutting.Core.Security;

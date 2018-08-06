@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
-using My.CoachManager.Application.Dtos.Positions;
+using My.CoachManager.Application.Dtos.Position;
 
 namespace My.CoachManager.Services.Wcf.Interfaces
 {

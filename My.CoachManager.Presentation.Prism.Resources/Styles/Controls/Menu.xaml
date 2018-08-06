@@ -231,7 +231,7 @@
         <Setter Property="Margin" Value="0,3,0,0" />
         <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
         <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
-        <Setter Property="Background" Value="{DynamicResource AccentControl}" />
+        <Setter Property="Background" Value="{DynamicResource Control}" />
         <Setter Property="BorderBrush" Value="{DynamicResource AccentForeground}" />
         <Setter Property="Color" Value="{DynamicResource AccentForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}" />
@@ -275,7 +275,7 @@
         <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
         <Setter Property="IsExpanded" Value="False" />
         <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
-        <Setter Property="Background" Value="{DynamicResource AccentControl}" />
+        <Setter Property="Background" Value="{DynamicResource Control}" />
         <Setter Property="BorderBrush" Value="{DynamicResource AccentForeground}" />
         <Setter Property="Color" Value="{DynamicResource AccentForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}" />

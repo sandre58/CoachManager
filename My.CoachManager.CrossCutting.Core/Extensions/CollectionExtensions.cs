@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace My.CoachManager.CrossCutting.Core.Extensions
@@ -10,8 +11,7 @@ namespace My.CoachManager.CrossCutting.Core.Extensions
 
         public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T> items)
         {
-            var list = collection as List<T>;
-            if (list != null)
+            if (collection is List<T> list)
             {
                 list.AddRange(items);
             }
@@ -40,6 +40,12 @@ namespace My.CoachManager.CrossCutting.Core.Extensions
         {
             var items = collection.OrderByDescending(keySelector).ToArray();
             collection.ReplaceAll(items);
+        }
+
+        public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> source)
+
+        {
+            return new ObservableCollection<T>(source);
         }
 
         #endregion Public Methods and Operators

@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.ServiceLocation;
+﻿using System.Windows.Input;
+using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.Presentation.Prism.Core;
 using My.CoachManager.Presentation.Prism.Core.Commands;
 using My.CoachManager.Presentation.Prism.Core.Manager;
@@ -28,7 +29,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Common
         /// Initializes the module.
         /// </summary>
         public void Initialize()
-        {         
+        {
             // Register toolbar
             _regionManager.RegisterViewWithRegion(RegionNames.ToolbarRegion, () => ServiceLocator.Current.GetInstance<AboutCommand>());
             _regionManager.RegisterViewWithRegion(RegionNames.ToolbarRegion, ServiceLocator.Current.GetInstance<SettingsCommand>);
@@ -46,6 +47,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Common
             });
 
             GlobalCommands.ShowAboutViewCommand.RegisterCommand(showAboutCommand);
+            KeyboardManager.RegisterGlobalShortcut(new KeyBinding(showAboutCommand, Key.F1, ModifierKeys.None));
         }
     }
 }

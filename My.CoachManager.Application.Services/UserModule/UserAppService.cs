@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using My.CoachManager.Application.Dtos.Users;
+using My.CoachManager.Application.Dtos.User;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;

@@ -1,4 +1,4 @@
-﻿using My.CoachManager.Application.Dtos.Persons;
+﻿using My.CoachManager.Application.Dtos.Person;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;

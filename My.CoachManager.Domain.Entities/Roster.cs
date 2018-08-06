@@ -18,7 +18,6 @@ namespace My.CoachManager.Domain.Entities
         {
             Squads = new List<Squad>();
             Players = new List<RosterPlayer>();
-            Coachs = new List<RosterCoach>();
         }
 
         /// <summary>
@@ -29,7 +28,7 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the season id.
         /// </summary>
-        public int SeasonId { get; set; }
+        public int? SeasonId { get; set; }
 
         /// <summary>
         /// Gets or sets the season.
@@ -39,7 +38,7 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the squad's category id.
         /// </summary>
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
         /// <summary>
         /// Gets or sets the squad's category.
@@ -50,11 +49,6 @@ namespace My.CoachManager.Domain.Entities
         /// Gets or set the players.
         /// </summary>
         public ICollection<RosterPlayer> Players { get; set; }
-
-        /// <summary>
-        /// Gets or set the coachs.
-        /// </summary>
-        public ICollection<RosterCoach> Coachs { get; set; }
 
         /// <summary>
         /// Gets or set the squads.

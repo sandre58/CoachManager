@@ -13,9 +13,10 @@ using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public abstract class FilteredListViewModel<TEntityViewModel, TEditView> : ListViewModel<TEntityViewModel, TEditView>, IFilteredListViewModel
+    public abstract class FilteredListViewModel<TEntityViewModel, TEditView, TItemView> : ListViewModel<TEntityViewModel, TEditView, TItemView>, IFilteredListViewModel
         where TEntityViewModel : class, IEntityModel, IModifiable, IValidatable, INotifyPropertyChanged, new()
         where TEditView : FrameworkElement
+        where TItemView : FrameworkElement
     {
         #region Fields
 

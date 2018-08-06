@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using My.CoachManager.Presentation.Prism.Core.Commands;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Events;
@@ -27,6 +28,11 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// Gets or sets the active workspace.
         /// </summary>
         public INavigatableWorkspaceViewModel ActiveWorkspace => (NavigationManager.ActiveView as FrameworkElement)?.DataContext as INavigatableWorkspaceViewModel;
+
+        /// <summary>
+        /// Gets or sets the active workspace dialog.
+        /// </summary>
+        public IWorkspaceDialogViewModel ActiveWorkspaceDialog { get; private set; }
 
         /// <summary>
         /// Gets or Set the dialog interraction.
@@ -71,8 +77,6 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         {
             base.InitializeData();
 
-            WorkspaceDialogInteractionRequest = new InteractionRequest<IWorkspaceDialog>();
-
             IsMenuExpended = true;
         }
 
@@ -86,12 +90,27 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 
             EventAggregator.GetEvent<ShowWorkspaceDialogRequestEvent>().Subscribe(OnShowWorkspaceDialogRequested, ThreadOption.UIThread, true);
 
+            WorkspaceDialogInteractionRequest = new InteractionRequest<IWorkspaceDialog>();
+            WorkspaceDialogInteractionRequest.Raised += OnWorkspaceDialogInteractionRequestRaised;
+
             NavigationManager.Navigated += OnNavigateCompleted;
         }
 
         #endregion Initialisation
 
         #region Methods
+
+        private void OnWorkspaceDialogInteractionRequestRaised(object sender, InteractionRequestedEventArgs e)
+        {
+            KeyboardManager.WorkspaceBindingsIsSuspended = true;
+            ActiveWorkspaceDialog = (e.Context.Content as FrameworkElement)?.DataContext as IWorkspaceDialogViewModel;
+            if (ActiveWorkspaceDialog != null)
+                ActiveWorkspaceDialog.CloseRequest += (o, args) =>
+                {
+                    KeyboardManager.WorkspaceBindingsIsSuspended = false;
+                    ActiveWorkspaceDialog = null;
+                };
+        }
 
         /// <summary>
         /// Call when the navigation is completed.

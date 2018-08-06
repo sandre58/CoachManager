@@ -3,7 +3,7 @@
   <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" />
   <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" />
   <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" />
-  <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Categories" />
+  <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Category" />
   <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Seasons" />
   <xs:complexType name="ArrayOfSquadDto">
     <xs:sequence>
@@ -48,7 +48,7 @@
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q4:EntityDto">
         <xs:sequence>
-          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Categories" minOccurs="0" name="Category" nillable="true" type="q5:CategoryDto" />
+          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Category" minOccurs="0" name="Category" nillable="true" type="q5:CategoryDto" />
           <xs:element minOccurs="0" name="CategoryId" type="xs:int" />
           <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Players" nillable="true" type="tns:ArrayOfRosterPlayerDto" />
@@ -68,7 +68,7 @@
   <xs:element name="ArrayOfRosterPlayerDto" nillable="true" type="tns:ArrayOfRosterPlayerDto" />
   <xs:complexType name="RosterPlayerDto">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q7:EntityDtoBase">
+      <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q7:EntityDto">
         <xs:sequence>
           <xs:element minOccurs="0" name="IsMutation" type="xs:boolean" />
           <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" minOccurs="0" name="LicenseState" type="q8:LicenseState" />
@@ -84,4 +84,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="RosterPlayerDto" nillable="true" type="tns:RosterPlayerDto" />
+  <xs:complexType name="ArrayOfRosterDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RosterDto" nillable="true" type="tns:RosterDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRosterDto" nillable="true" type="tns:ArrayOfRosterDto" />
 </xs:schema>

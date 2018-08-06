@@ -4,34 +4,34 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:62863/Services/SeasonService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:62863/Services/SeasonService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/SeasonService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Seasons" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/SeasonService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Season" />
       <xsd:import schemaLocation="http://localhost:62863/Services/SeasonService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" />
       <xsd:import schemaLocation="http://localhost:62863/Services/SeasonService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="ISeasonService_GetList_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetList" />
+  <wsdl:message name="ISeasonService_GetSeasons_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSeasons" />
   </wsdl:message>
-  <wsdl:message name="ISeasonService_GetList_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetListResponse" />
+  <wsdl:message name="ISeasonService_GetSeasons_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSeasonsResponse" />
   </wsdl:message>
-  <wsdl:message name="ISeasonService_GetById_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetById" />
+  <wsdl:message name="ISeasonService_GetSeasonById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSeasonById" />
   </wsdl:message>
-  <wsdl:message name="ISeasonService_GetById_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetByIdResponse" />
+  <wsdl:message name="ISeasonService_GetSeasonById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSeasonByIdResponse" />
   </wsdl:message>
-  <wsdl:message name="ISeasonService_CreateOrUpdate_InputMessage">
-    <wsdl:part name="parameters" element="tns:CreateOrUpdate" />
+  <wsdl:message name="ISeasonService_SaveSeason_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSeason" />
   </wsdl:message>
-  <wsdl:message name="ISeasonService_CreateOrUpdate_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CreateOrUpdateResponse" />
+  <wsdl:message name="ISeasonService_SaveSeason_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSeasonResponse" />
   </wsdl:message>
-  <wsdl:message name="ISeasonService_Remove_InputMessage">
-    <wsdl:part name="parameters" element="tns:Remove" />
+  <wsdl:message name="ISeasonService_RemoveSeason_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveSeason" />
   </wsdl:message>
-  <wsdl:message name="ISeasonService_Remove_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RemoveResponse" />
+  <wsdl:message name="ISeasonService_RemoveSeason_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveSeasonResponse" />
   </wsdl:message>
   <wsdl:message name="ISeasonService_UpdateOrders_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateOrders" />
@@ -40,21 +40,21 @@
     <wsdl:part name="parameters" element="tns:UpdateOrdersResponse" />
   </wsdl:message>
   <wsdl:portType name="ISeasonService">
-    <wsdl:operation name="GetList">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISeasonService/GetList" message="tns:ISeasonService_GetList_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISeasonService/GetListResponse" message="tns:ISeasonService_GetList_OutputMessage" />
+    <wsdl:operation name="GetSeasons">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISeasonService/GetSeasons" message="tns:ISeasonService_GetSeasons_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISeasonService/GetSeasonsResponse" message="tns:ISeasonService_GetSeasons_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetById">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISeasonService/GetById" message="tns:ISeasonService_GetById_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISeasonService/GetByIdResponse" message="tns:ISeasonService_GetById_OutputMessage" />
+    <wsdl:operation name="GetSeasonById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISeasonService/GetSeasonById" message="tns:ISeasonService_GetSeasonById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISeasonService/GetSeasonByIdResponse" message="tns:ISeasonService_GetSeasonById_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="CreateOrUpdate">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISeasonService/CreateOrUpdate" message="tns:ISeasonService_CreateOrUpdate_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISeasonService/CreateOrUpdateResponse" message="tns:ISeasonService_CreateOrUpdate_OutputMessage" />
+    <wsdl:operation name="SaveSeason">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISeasonService/SaveSeason" message="tns:ISeasonService_SaveSeason_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISeasonService/SaveSeasonResponse" message="tns:ISeasonService_SaveSeason_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Remove">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISeasonService/Remove" message="tns:ISeasonService_Remove_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISeasonService/RemoveResponse" message="tns:ISeasonService_Remove_OutputMessage" />
+    <wsdl:operation name="RemoveSeason">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISeasonService/RemoveSeason" message="tns:ISeasonService_RemoveSeason_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISeasonService/RemoveSeasonResponse" message="tns:ISeasonService_RemoveSeason_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateOrders">
       <wsdl:input wsaw:Action="http://tempuri.org/ISeasonService/UpdateOrders" message="tns:ISeasonService_UpdateOrders_InputMessage" />
@@ -63,8 +63,8 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ISeasonService" type="tns:ISeasonService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetList">
-      <soap:operation soapAction="http://tempuri.org/ISeasonService/GetList" style="document" />
+    <wsdl:operation name="GetSeasons">
+      <soap:operation soapAction="http://tempuri.org/ISeasonService/GetSeasons" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -72,8 +72,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetById">
-      <soap:operation soapAction="http://tempuri.org/ISeasonService/GetById" style="document" />
+    <wsdl:operation name="GetSeasonById">
+      <soap:operation soapAction="http://tempuri.org/ISeasonService/GetSeasonById" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -81,8 +81,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="CreateOrUpdate">
-      <soap:operation soapAction="http://tempuri.org/ISeasonService/CreateOrUpdate" style="document" />
+    <wsdl:operation name="SaveSeason">
+      <soap:operation soapAction="http://tempuri.org/ISeasonService/SaveSeason" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -90,8 +90,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Remove">
-      <soap:operation soapAction="http://tempuri.org/ISeasonService/Remove" style="document" />
+    <wsdl:operation name="RemoveSeason">
+      <soap:operation soapAction="http://tempuri.org/ISeasonService/RemoveSeason" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

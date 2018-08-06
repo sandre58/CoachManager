@@ -31,7 +31,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
             if (parentObject == null) return null;
 
             //check if the parent matches the type we're looking for
-            T parent = parentObject as T;
+            var parent = parentObject as T;
             return parent ?? TryFindParent<T>(parentObject);
         }
 
@@ -57,8 +57,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
             {
                 var child = VisualTreeHelper.GetChild(parent, i);
                 // If the child is not of the request child type child
-                T childType = child as T;
-                if (childType == null)
+                if (!(child is T))
                 {
                     // recursively drill down the tree
                     foundChild = FindChild<T>(child, childName);
@@ -67,9 +66,8 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
                 }
                 else if (!string.IsNullOrEmpty(childName))
                 {
-                    var frameworkInputElement = child as IFrameworkInputElement;
                     // If the child's name is set for search
-                    if (frameworkInputElement != null && frameworkInputElement.Name == childName)
+                    if (child is IFrameworkInputElement frameworkInputElement && frameworkInputElement.Name == childName)
                     {
                         // if the child's name is of the request name
                         foundChild = (T)child;
@@ -165,8 +163,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
                 var child = VisualTreeHelper.GetChild(parent, i);
 
                 // If the child is not of the request child type child
-                var childType = child as T;
-                if (childType == null)
+                if (!(child is T))
                 {
                     // recursively drill down the tree
                     foundChild = FindChild<T>(child);
@@ -214,7 +211,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
         public static T FindVisualParent<T>(this DependencyObject dependencyObject, string name)
             where T : DependencyObject
         {
-            DependencyObject parent = VisualTreeHelper.GetParent(dependencyObject);
+            var parent = VisualTreeHelper.GetParent(dependencyObject);
 
             if ((parent == null) && (dependencyObject is FrameworkElement))
             {
@@ -223,10 +220,10 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
 
             if (parent != null)
             {
-                if ((parent is T) &&
-                    (string.IsNullOrEmpty(name) || ((parent is FrameworkElement) && ((FrameworkElement)parent).Name == name)))
+                if ((parent is T variable) &&
+                    (string.IsNullOrEmpty(name) || ((variable is FrameworkElement) && ((FrameworkElement)parent).Name == name)))
                 {
-                    return (T)parent;
+                    return variable;
                 }
 
                 T grandParent = parent.FindVisualParent<T>(name);
@@ -263,14 +260,12 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
             if (child == null) return null;
 
             // handle content elements separately
-            var contentElement = child as ContentElement;
-            if (contentElement != null)
+            if (child is ContentElement contentElement)
             {
                 DependencyObject parent = ContentOperations.GetParent(contentElement);
                 if (parent != null) return parent;
 
-                var fce = contentElement as FrameworkContentElement;
-                return fce != null ? fce.Parent : null;
+                return contentElement is FrameworkContentElement fce ? fce.Parent : null;
             }
 
             var childParent = VisualTreeHelper.GetParent(child);
@@ -280,8 +275,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
             }
 
             // also try searching for parent in framework elements (such as DockPanel, etc)
-            var frameworkElement = child as FrameworkElement;
-            if (frameworkElement != null)
+            if (!(child is FrameworkElement frameworkElement)) return null;
             {
                 DependencyObject parent = frameworkElement.Parent;
                 if (parent != null) return parent;
@@ -301,22 +295,20 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
         /// <returns>All descendants of <paramref name="source"/> that match the requested type.</returns>
         public static IEnumerable<T> FindChildren<T>(this DependencyObject source, bool forceUsingTheVisualTreeHelper = false) where T : DependencyObject
         {
-            if (source != null)
+            if (source == null) yield break;
+            var childs = GetChildObjects(source, forceUsingTheVisualTreeHelper);
+            foreach (DependencyObject child in childs)
             {
-                var childs = GetChildObjects(source, forceUsingTheVisualTreeHelper);
-                foreach (DependencyObject child in childs)
+                //analyze if children match the requested type
+                if (child is T variable)
                 {
-                    //analyze if children match the requested type
-                    if (child != null && child is T)
-                    {
-                        yield return (T)child;
-                    }
+                    yield return variable;
+                }
 
-                    //recurse tree
-                    foreach (T descendant in FindChildren<T>(child, forceUsingTheVisualTreeHelper))
-                    {
-                        yield return descendant;
-                    }
+                //recurse tree
+                foreach (var descendant in FindChildren<T>(child, forceUsingTheVisualTreeHelper))
+                {
+                    yield return descendant;
                 }
             }
         }
@@ -337,17 +329,16 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
             if (!forceUsingTheVisualTreeHelper && (parent is ContentElement || parent is FrameworkElement))
             {
                 //use the logical tree for content / framework elements
-                foreach (object obj in LogicalTreeHelper.GetChildren(parent))
+                foreach (var obj in LogicalTreeHelper.GetChildren(parent))
                 {
-                    var depObj = obj as DependencyObject;
-                    if (depObj != null) yield return (DependencyObject)obj;
+                    if (obj is DependencyObject o) yield return o;
                 }
             }
             else if (parent is Visual || parent is Visual3D)
             {
                 //use the visual tree per default
-                int count = VisualTreeHelper.GetChildrenCount(parent);
-                for (int i = 0; i < count; i++)
+                var count = VisualTreeHelper.GetChildrenCount(parent);
+                for (var i = 0; i < count; i++)
                 {
                     yield return VisualTreeHelper.GetChild(parent, i);
                 }
@@ -366,12 +357,10 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
         public static T TryFindFromPoint<T>(UIElement reference, Point point)
             where T : DependencyObject
         {
-            var element = reference.InputHitTest(point) as DependencyObject;
-
-            if (element == null)
+            if (!(reference.InputHitTest(point) is DependencyObject element))
                 return null;
-            if (element is T)
-                return (T)element;
+            if (element is T variable)
+                return variable;
             return TryFindParent<T>(element);
         }
     }

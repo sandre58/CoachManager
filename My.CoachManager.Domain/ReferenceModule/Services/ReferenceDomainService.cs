@@ -9,7 +9,7 @@ namespace My.CoachManager.Domain.ReferenceModule.Services
     {
         #region Fields
 
-        private readonly IRepository<TEntity> _repository;
+        protected readonly IRepository<TEntity> Repository;
 
         #endregion Fields
 
@@ -21,7 +21,7 @@ namespace My.CoachManager.Domain.ReferenceModule.Services
         /// <param name="repository"></param>
         public ReferenceDomainService(IRepository<TEntity> repository)
         {
-            _repository = repository;
+            Repository = repository;
         }
 
         #endregion Constructors
@@ -32,13 +32,12 @@ namespace My.CoachManager.Domain.ReferenceModule.Services
         /// <summary>
         /// Check if TEntity is unique.
         /// </summary>
-        /// <param name="entity"></param>
         /// <returns></returns>
         public bool IsUnique(TEntity entity)
         {
-            return !_repository.Any(ReferenceSpecification.IsUnique(entity));
+            return !Repository.Any(ReferenceSpecification.IsUnique(entity));
         }
-        
+
         /// <summary>
         /// Update items Orders.
         /// </summary>
@@ -48,9 +47,9 @@ namespace My.CoachManager.Domain.ReferenceModule.Services
             foreach (var value in values)
             {
                 value.Key.Order = value.Value;
-                _repository.Modify(value.Key);
+                Repository.Modify(value.Key);
             }
-            _repository.UnitOfWork.Commit();
+            Repository.UnitOfWork.Commit();
         }
 
         #endregion Methods

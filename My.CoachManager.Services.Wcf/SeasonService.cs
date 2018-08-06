@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using CommonServiceLocator;
-using My.CoachManager.Application.Dtos.Seasons;
-using My.CoachManager.Application.Services.Seasons;
+using My.CoachManager.Application.Dtos.Season;
+using My.CoachManager.Application.Services.SeasonModule;
 using My.CoachManager.Services.Wcf.Interfaces;
 
 namespace My.CoachManager.Services.Wcf
@@ -11,47 +11,52 @@ namespace My.CoachManager.Services.Wcf
     /// </summary>
     public class SeasonService : ISeasonService
     {
+        /// <inheritdoc />
         /// <summary>
-        /// Get Seasons list.
+        /// Get categories list.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<SeasonDto> GetList()
+        public IList<SeasonDto> GetSeasons()
         {
-            return ServiceLocator.Current.GetInstance<ISeasonAppService>().GetList();
+            return ServiceLocator.Current.GetInstance<ISeasonAppService>().GetSeasons();
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Get Season.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public SeasonDto GetById(int id)
+        public SeasonDto GetSeasonById(int id)
         {
-            return ServiceLocator.Current.GetInstance<ISeasonAppService>().GetById(id);
+            return ServiceLocator.Current.GetInstance<ISeasonAppService>().GetSeasonById(id);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Create Season.
         /// </summary>
-        /// <param name="categoryDto"></param>
+        /// <param name="seasonDto"></param>
         /// <returns></returns>
-        public SeasonDto CreateOrUpdate(SeasonDto categoryDto)
+        public SeasonDto SaveSeason(SeasonDto seasonDto)
         {
-            return ServiceLocator.Current.GetInstance<ISeasonAppService>().CreateOrUpdate(categoryDto);
+            return ServiceLocator.Current.GetInstance<ISeasonAppService>().SaveSeason(seasonDto);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Remove Season.
         /// </summary>
-        /// <param name="categoryDto"></param>
+        /// <param name="seasonDto"></param>
         /// <returns></returns>
-        public void Remove(SeasonDto categoryDto)
+        public void RemoveSeason(SeasonDto seasonDto)
         {
-            ServiceLocator.Current.GetInstance<ISeasonAppService>().Remove(categoryDto);
+            ServiceLocator.Current.GetInstance<ISeasonAppService>().RemoveSeason(seasonDto);
         }
 
+        /// <inheritdoc />
         /// <summary>
-        /// Update Seasons Orders.
+        /// Update Categories Orders.
         /// </summary>
         /// <param name="entities"></param>
         public void UpdateOrders(IDictionary<int, int> entities)

@@ -35,6 +35,8 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
         /// <returns>The model.</returns>
         public static CategoryModel Get(CategoryDto dto)
         {
+            if (dto == null) return null;
+
             return new CategoryModel
             {
                 Id = dto.Id,

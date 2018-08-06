@@ -17,7 +17,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         private IEventAggregator _eventAggregator;
         private ILogger _logger;
 
-        #endregion
+        #endregion Fields
 
         #region Members
 
@@ -38,11 +38,12 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Initialize all events, data, and commands.
         /// </summary>
-        public void Initialize()
+        public virtual void Initialize()
         {
             InitializeEvent();
             InitializeCommand();
             InitializeData();
+            InitializeShortcuts();
         }
 
         /// <summary>
@@ -67,13 +68,20 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         }
 
         /// <summary>
+        /// Launch on constructor for initialize all shortcuts.
+        /// </summary>
+        protected virtual void InitializeShortcuts()
+        {
+        }
+
+        /// <summary>
         /// Override method to include the cleaning logic (remove event handlers for ex.).
         /// </summary>
         protected virtual void Clean()
         {
         }
 
-        #endregion
+        #endregion Initialisation
 
         #region Exceptions Management
 
@@ -113,7 +121,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             }
         }
 
-
         /// <summary>
         /// Dispose Object and launch Clean Methods.
         /// </summary>
@@ -123,6 +130,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             GC.SuppressFinalize(this);
         }
 
-        #endregion
+        #endregion IDisposable implementation
     }
 }

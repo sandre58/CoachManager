@@ -120,14 +120,14 @@
   <data name="AlreadyExistMessage" xml:space="preserve">
     <value>L'élément "{0}" existe déjà.</value>
   </data>
-  <data name="CodeIsRequiredMessage" xml:space="preserve">
-    <value>Le champ "Code" est requis.</value>
-  </data>
   <data name="EmailFormatMessage" xml:space="preserve">
     <value>Le format ne correspond pas à une adresse mail.</value>
   </data>
   <data name="EntityErrorHeader" xml:space="preserve">
     <value>Erreurs lors de la sauvegarde de l'entité de type "{0}" : </value>
+  </data>
+  <data name="InvalidFields" xml:space="preserve">
+    <value>Les champs renseignés ne sont pas corrects.</value>
   </data>
   <data name="IsRequiredFieldMessage" xml:space="preserve">
     <value>Ce champ est obligatoire.</value>
@@ -135,14 +135,8 @@
   <data name="IsUsedMessage" xml:space="preserve">
     <value>L'élément "{0}" est utilisée par d'autres entités.</value>
   </data>
-  <data name="LabelIsRequiredMessage" xml:space="preserve">
-    <value>Le champ "Label" est requis.</value>
-  </data>
   <data name="MaxLenghtFieldMessage" xml:space="preserve">
     <value>Le champ "{0}" ne doit pas dépasser {1} caractères.</value>
-  </data>
-  <data name="NotValidMessage" xml:space="preserve">
-    <value>Les données ne sont pas valides.</value>
   </data>
   <data name="PhoneFormatMessage" xml:space="preserve">
     <value>Le format ne correspond pas à un numéro de téléphone.</value>
@@ -158,5 +152,8 @@
   </data>
   <data name="RequiredFieldMessage" xml:space="preserve">
     <value>Le champ "{0}" est requis.</value>
+  </data>
+  <data name="StartDateLessThanEndDateMessage" xml:space="preserve">
+    <value>La date de début doit être inférieure à la date de fin.</value>
   </data>
 </root>

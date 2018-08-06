@@ -3,7 +3,7 @@
   <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" />
   <xs:complexType name="PositionDto">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q1:DataEntityDto">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q1:ReferenceDto">
         <xs:sequence>
           <xs:element minOccurs="0" name="Column" type="xs:int" />
           <xs:element minOccurs="0" name="Row" type="xs:int" />

@@ -2,13 +2,12 @@
 using System.Linq;
 using My.CoachManager.Application.Dtos.Category;
 using My.CoachManager.CrossCutting.Core.Exceptions;
-using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Domain.AppModule.Services;
 using My.CoachManager.Domain.CategoryModule.Aggregate;
 using My.CoachManager.Domain.CategoryModule.Services;
 using My.CoachManager.Domain.Core;
+using My.CoachManager.Domain.Core.Exceptions;
 using My.CoachManager.Domain.Entities;
-using My.CoachManager.Domain.ReferenceModule.Aggregates;
 
 namespace My.CoachManager.Application.Services.CategoryModule
 {
@@ -46,20 +45,30 @@ namespace My.CoachManager.Application.Services.CategoryModule
 
         #region Methods
 
+        /// <inheritdoc />
         /// <summary>
         /// Save a dto.
         /// </summary>
         /// <returns></returns>
         public CategoryDto SaveCategory(CategoryDto dto)
         {
-            if (!_categoryDomainService.IsUnique(CategoryFactory.CreateEntity(dto)))
-            {
-                throw new BusinessException(string.Format(ValidationMessageResources.AlreadyExistMessage, dto.Label));
-            }
+            ValidateEntity(dto);
 
             return _crudDomainService.Save(dto, CategoryFactory.CreateEntity, CategoryFactory.UpdateEntity);
         }
 
+        /// <summary>
+        /// Validates entity.
+        /// </summary>
+        private void ValidateEntity(CategoryDto dto)
+        {
+            //if (!_categoryDomainService.IsUnique(dto.Id, dto.Code))
+            //{
+            //    throw new AlreadyExistException(dto.Code);
+            //}
+        }
+
+        /// <inheritdoc />
         /// <summary>
         /// Create a dto.
         /// </summary>
@@ -68,30 +77,31 @@ namespace My.CoachManager.Application.Services.CategoryModule
         {
             if (_categoryDomainService.IsUsed(dto.Id))
             {
-                throw new BusinessException(MessageResources.RemovingFailed + " " + string.Format(ValidationMessageResources.IsUsedMessage, dto.Label));
+                throw new IsUsedException(dto.Label);
             }
 
             _crudDomainService.Remove(dto);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets a dto.
         /// </summary>
         /// <returns></returns>
         public CategoryDto GetCategoryById(int id)
         {
-           var entity = _categoryRepository.GetEntity(id);
+            var entity = _categoryRepository.GetEntity(id);
             return entity != null ? CategoryFactory.Get(entity) : null;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Load all items.
         /// </summary>
         /// <returns></returns>
         public IList<CategoryDto> GetCategories()
         {
-            var items = _categoryRepository.GetAll(ReferenceOrderBuilder.OrderByOrder<Category>());
-            return items.Select(CategoryFactory.Get).ToList();
+            return _categoryRepository.GetAll(CategorySelectBuilder.SelectCategories(), x => x.Order).ToList();
         }
 
         /// <inheritdoc />
@@ -104,7 +114,6 @@ namespace My.CoachManager.Application.Services.CategoryModule
             var entities = _categoryRepository.GetByFilter(x => values.Keys.Contains(x.Id), new QueryOrder<Category>()).ToList();
 
             _categoryDomainService.UpdateOrders(entities.ToDictionary(x => x, x => values[x.Id]));
-
         }
 
         #endregion Methods

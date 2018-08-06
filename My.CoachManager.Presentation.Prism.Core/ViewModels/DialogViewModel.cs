@@ -1,5 +1,6 @@
 ﻿using System;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.Manager;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
@@ -24,6 +25,18 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         #endregion Members
 
         #region Initialisation
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Launch on constructor for initialize all Data.
+        /// </summary>
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            KeyboardManager.RegisterWorkspaceDialogShortcuts(KeyboardShortcuts);
+            Refresh();
+        }
 
         /// <inheritdoc />
         /// <summary>
@@ -70,6 +83,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
                 DialogResult = dialogResult.Value;
             }
 
+            KeyboardManager.RemoveWorkspaceDialogShortcuts(KeyboardShortcuts);
             OnCloseRequest(EventArgs.Empty);
         }
 

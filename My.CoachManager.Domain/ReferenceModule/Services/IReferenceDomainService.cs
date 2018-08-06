@@ -9,9 +9,8 @@ namespace My.CoachManager.Domain.ReferenceModule.Services
         /// <summary>
         /// Check if TEntity is unique.
         /// </summary>
-        /// <param name="item"></param>
         /// <returns></returns>
-        bool IsUnique(TEntity item);
+        bool IsUnique(TEntity entity);
 
         /// <summary>
         /// Update items Orders.

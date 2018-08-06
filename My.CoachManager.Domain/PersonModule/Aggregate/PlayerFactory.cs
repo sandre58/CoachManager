@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using My.CoachManager.Application.Dtos.Category;
-using My.CoachManager.Application.Dtos.Persons;
+using My.CoachManager.Application.Dtos.Person;
 using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Domain.PersonModule.Aggregate

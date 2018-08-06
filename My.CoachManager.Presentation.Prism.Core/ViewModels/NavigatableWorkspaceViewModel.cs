@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using Prism.Regions;
 
@@ -15,8 +14,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         public virtual bool KeepAlive => true;
 
-        private List<KeyBinding> _keyboardShortcuts;
-
         #endregion Members
 
         #region Initialization
@@ -25,34 +22,16 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Launch on constructor for initialize all Data.
         /// </summary>
-        protected override void InitializeData()
+        protected override void InitializeShortcuts()
         {
-            base.InitializeData();
+            base.InitializeShortcuts();
 
-            _keyboardShortcuts = new List<KeyBinding>();
-            AddShortcut(new KeyBinding(RefreshCommand, Key.F5, ModifierKeys.None));
+            KeyboardShortcuts.Add(new KeyBinding(RefreshCommand, Key.F5, ModifierKeys.None));
         }
 
-        #endregion
+        #endregion Initialization
 
         #region Methods
-
-        /// <summary>
-        /// Add a shortcut.
-        /// </summary>
-        /// <param name="keyBinding"></param>
-        protected void AddShortcut(KeyBinding keyBinding)
-        {
-            _keyboardShortcuts.Add(keyBinding);
-        }
-
-        /// <summary>
-        /// Clears shortcuts.
-        /// </summary>
-        protected void ClearShortcuts()
-        {
-            _keyboardShortcuts.Clear();
-        }
 
         /// <inheritdoc />
         /// <summary>
@@ -61,7 +40,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <param name="navigationContext">The navigation context.</param>
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            KeyboardManager.RegisterCurrentShortcuts(_keyboardShortcuts);
+            KeyboardManager.RegisterWorkspaceShortcuts(KeyboardShortcuts);
             //if (State == ScreenState.NotLoaded)
             //{
             OnNavigatedToCore(navigationContext);
@@ -95,7 +74,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <param name="navigationContext">The navigation context.</param>
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            KeyboardManager.RemoveCurrentShortcuts(_keyboardShortcuts);
+            KeyboardManager.RemoveWorkspaceShortcuts(KeyboardShortcuts);
             if (Mode == ScreenMode.Creation || Mode == ScreenMode.Edition)
             {
                 OnNavigatedFromCore(navigationContext);

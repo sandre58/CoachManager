@@ -262,7 +262,7 @@
 
     <Style x:Key="ModernWindowStyle" TargetType="{x:Type controls:ExtendedWindow}">
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="TitleForeground" Value="{DynamicResource NormalForeground}" />
+        <Setter Property="TitleForeground" Value="{DynamicResource AccentForeground}" />
         <Setter Property="WindowTitleBrush" Value="{DynamicResource Transparent}" />
         <Setter Property="NonActiveBorderBrush">
             <Setter.Value>
@@ -274,7 +274,7 @@
                 <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedWindow}, Path=WindowTitleBrush, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DarkAccent}" />
         <Setter Property="OverlayBrush" Value="{DynamicResource Dark}" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
@@ -298,13 +298,13 @@
 
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
-                <WindowChrome CornerRadius="0" GlassFrameThickness="1" UseAeroCaptionButtons="False" NonClientFrameEdges="None" CaptionHeight="0"  />
+                <WindowChrome CornerRadius="0" GlassFrameThickness="1" UseAeroCaptionButtons="False" NonClientFrameEdges="None" CaptionHeight="0" />
             </Setter.Value>
         </Setter>
     </Style>
 
     <Style x:Key="DialogWindowStyle" TargetType="{x:Type controls:ExtendedWindow}" BasedOn="{StaticResource ModernWindowStyle}">
-        <Setter Property="WindowTitleBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="WindowTitleBrush" Value="{DynamicResource DarkAccent}" />
         <Setter Property="ShowMaxRestoreButton" Value="False" />
         <Setter Property="IsTitleOverlay" Value="False" />
         <Setter Property="ShowIconOnTitleBar" Value="False" />
@@ -317,5 +317,4 @@
         <Setter Property="MinHeight" Value="100" />
         <Setter Property="SizeToContent" Value="WidthAndHeight" />
     </Style>
-
 </ResourceDictionary>

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using My.CoachManager.Application.Dtos.Positions;
+using My.CoachManager.Application.Dtos.Position;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Logging;

@@ -157,7 +157,10 @@
     <Style x:Key="SystemButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource ButtonBaseStyle}">
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Transparent}" />
-        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource ControlPressed}" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource AccentControlMouseOver}" />
+        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource AccentControlPressed}" />
         <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Transparent}" />
         <Setter Property="parameters:ControlParameters.ContentCharacterCasing" Value="Normal" />
         <Setter Property="BorderThickness" Value="0" />

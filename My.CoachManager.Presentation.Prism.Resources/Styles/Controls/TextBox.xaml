@@ -118,7 +118,7 @@
 
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="">
                             <Setter TargetName="PART_Message" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="PART_ClearText" Property="Visibility" Value="Hidden" />
+                            <Setter TargetName="PART_ClearText" Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
 
                         <MultiDataTrigger>

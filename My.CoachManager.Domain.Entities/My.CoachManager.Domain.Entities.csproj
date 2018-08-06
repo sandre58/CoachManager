@@ -166,7 +166,6 @@
     <Compile Include="Function.cs" />
     <Compile Include="Roster.cs" />
     <Compile Include="Address.cs" />
-    <Compile Include="RosterCoach.cs" />
     <Compile Include="PlayerPosition.cs" />
     <Compile Include="Stadium.cs" />
     <Compile Include="Team.cs" />

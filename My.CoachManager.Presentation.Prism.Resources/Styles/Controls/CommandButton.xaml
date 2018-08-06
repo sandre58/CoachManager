@@ -172,11 +172,11 @@
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource Light}" />
     </Style>
 
-    <Style x:Key="BackCommandButtonBaseStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonBaseStyle}">
+    <Style x:Key="BackCommandButtonBaseStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource AccentCommandButtonStyle}">
         <Setter Property="IconData" Value="{StaticResource ArrowLeftGeometry}" />
     </Style>
 
-    <Style x:Key="NextCommandButtonBaseStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonBaseStyle}">
+    <Style x:Key="NextCommandButtonBaseStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource AccentCommandButtonStyle}">
         <Setter Property="IconData" Value="{StaticResource ArrowRightGeometry}" />
     </Style>
 

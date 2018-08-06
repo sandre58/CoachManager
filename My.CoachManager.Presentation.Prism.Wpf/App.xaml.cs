@@ -5,6 +5,7 @@ using System.Windows.Threading;
 using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Resources.Strings;
+using My.CoachManager.Presentation.Prism.Wpf.Properties;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using SplashScreen = My.CoachManager.Presentation.Prism.Wpf.Views.SplashScreen;
 
@@ -56,7 +57,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            
+
             var bootstrapper = new Bootstrapper(_splashScreenViewModel);
             bootstrapper.Run();
 
@@ -66,7 +67,16 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             ShutdownMode = ShutdownMode.OnMainWindowClose;
 
             // Close splash
+        }
 
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+
+            Settings.Default.DefaultTheme = SkinManager.SkinManager.CurrentTheme.Name;
+            Settings.Default.DefaultAccent = SkinManager.SkinManager.CurrentAccent.Name;
+
+            Settings.Default.Save();
         }
 
         /// <summary>
@@ -76,8 +86,8 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// <param name="e">The <see cref="DispatcherUnhandledExceptionEventArgs"/> instance containing the event data.</param>
         private static void OnAppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-                // Log the unhandled exception
-                ServiceLocator.Current.GetInstance<ILogger>().Error(e.Exception);
+            // Log the unhandled exception
+            ServiceLocator.Current.GetInstance<ILogger>().Error(e.Exception);
         }
     }
 }

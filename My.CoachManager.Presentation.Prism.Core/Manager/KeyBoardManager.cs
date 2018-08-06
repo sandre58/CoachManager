@@ -16,14 +16,32 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// <summary>
         /// The current bindings.
         /// </summary>
-        private static readonly IList<KeyBinding> CurrentBindings;
-        
+        private static readonly IList<KeyBinding> GlobalBindings;
+
+        /// <summary>
+        /// The current bindings.
+        /// </summary>
+        private static readonly IList<KeyBinding> WorkspaceBindings;
+
+        /// <summary>
+        /// The current bindings.
+        /// </summary>
+        private static readonly IList<KeyBinding> WorkspaceDialogBindings;
+
+        public static bool GlobalBindingsIsSuspended;
+
+        public static bool WorkspaceBindingsIsSuspended;
+
+        public static bool WorkspaceDialogBindingsIsSuspended;
+
         /// <summary>
         /// Set default binding collection.
         /// </summary>
         static KeyboardManager()
         {
-            CurrentBindings = new List<KeyBinding>();
+            GlobalBindings = new List<KeyBinding>();
+            WorkspaceBindings = new List<KeyBinding>();
+            WorkspaceDialogBindings = new List<KeyBinding>();
 
             EventManager.RegisterClassHandler(typeof(Window), Keyboard.PreviewKeyDownEvent, new KeyEventHandler(OnPreviewKeyDown), true);
         }
@@ -32,12 +50,12 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// Registers the current shortcuts.
         /// </summary>
         /// <param name="shortcuts">The shortcuts.</param>
-        public static void RegisterCurrentShortcuts(IEnumerable<KeyBinding> shortcuts)
+        public static void RegisterGlobalShortcuts(IEnumerable<KeyBinding> shortcuts)
         {
             // Register them in the binding collection
             foreach (var shortcut in shortcuts)
             {
-                RegisterCurrentShortcuts(shortcut);
+                RegisterGlobalShortcut(shortcut);
             }
         }
 
@@ -45,27 +63,109 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// Registers the current shortcuts.
         /// </summary>
         /// <param name="shortcut">The shortcut.</param>
-        public static void RegisterCurrentShortcuts(KeyBinding shortcut)
+        public static void RegisterGlobalShortcut(KeyBinding shortcut)
         {
             // Register them in the binding collection
-            CurrentBindings.Add(shortcut);
+            GlobalBindings.Add(shortcut);
         }
 
         /// <summary>
         /// Removes the current shortcuts.
         /// </summary>
         /// <param name="shortcuts">The shortcuts.</param>
-        public static void RemoveCurrentShortcuts(IEnumerable<KeyBinding> shortcuts)
+        public static void RemoveGlobalShortcuts(IEnumerable<KeyBinding> shortcuts)
         {
             foreach (var shortcut in shortcuts)
             {
-                if (!CurrentBindings.Contains(shortcut))
+                if (!GlobalBindings.Contains(shortcut))
                 {
                     continue;
                 }
 
-                var index = CurrentBindings.IndexOf(shortcut);
-                CurrentBindings.RemoveAt(index);
+                var index = GlobalBindings.IndexOf(shortcut);
+                GlobalBindings.RemoveAt(index);
+            }
+        }
+
+        /// <summary>
+        /// Registers the current shortcuts.
+        /// </summary>
+        /// <param name="shortcuts">The shortcuts.</param>
+        public static void RegisterWorkspaceShortcuts(IEnumerable<KeyBinding> shortcuts)
+        {
+            // Register them in the binding collection
+            foreach (var shortcut in shortcuts)
+            {
+                RegisterWorkspaceShortcut(shortcut);
+            }
+        }
+
+        /// <summary>
+        /// Registers the current shortcuts.
+        /// </summary>
+        /// <param name="shortcut">The shortcut.</param>
+        public static void RegisterWorkspaceShortcut(KeyBinding shortcut)
+        {
+            // Register them in the binding collection
+            WorkspaceBindings.Add(shortcut);
+        }
+
+        /// <summary>
+        /// Removes the current shortcuts.
+        /// </summary>
+        /// <param name="shortcuts">The shortcuts.</param>
+        public static void RemoveWorkspaceShortcuts(IEnumerable<KeyBinding> shortcuts)
+        {
+            foreach (var shortcut in shortcuts)
+            {
+                if (!WorkspaceBindings.Contains(shortcut))
+                {
+                    continue;
+                }
+
+                var index = WorkspaceBindings.IndexOf(shortcut);
+                WorkspaceBindings.RemoveAt(index);
+            }
+        }
+
+        /// <summary>
+        /// Registers the current shortcuts.
+        /// </summary>
+        /// <param name="shortcuts">The shortcuts.</param>
+        public static void RegisterWorkspaceDialogShortcuts(IEnumerable<KeyBinding> shortcuts)
+        {
+            // Register them in the binding collection
+            foreach (var shortcut in shortcuts)
+            {
+                RegisterWorkspaceDialogShortcut(shortcut);
+            }
+        }
+
+        /// <summary>
+        /// Registers the current shortcuts.
+        /// </summary>
+        /// <param name="shortcut">The shortcut.</param>
+        public static void RegisterWorkspaceDialogShortcut(KeyBinding shortcut)
+        {
+            // Register them in the binding collection
+            WorkspaceDialogBindings.Add(shortcut);
+        }
+
+        /// <summary>
+        /// Removes the current shortcuts.
+        /// </summary>
+        /// <param name="shortcuts">The shortcuts.</param>
+        public static void RemoveWorkspaceDialogShortcuts(IEnumerable<KeyBinding> shortcuts)
+        {
+            foreach (var shortcut in shortcuts)
+            {
+                if (!WorkspaceDialogBindings.Contains(shortcut))
+                {
+                    continue;
+                }
+
+                var index = WorkspaceDialogBindings.IndexOf(shortcut);
+                WorkspaceDialogBindings.RemoveAt(index);
             }
         }
 
@@ -105,18 +205,40 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// <param name="e">The <see cref="KeyEventArgs" /> instance containing the event data.</param>
         private static void OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
-
             try
             {
-                // Get the key binding
-                var keyBinding = CurrentBindings.FirstOrDefault(w => w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
-                keyBinding?.Command.Execute(keyBinding.CommandParameter);
+                // WorkspaceDialog Bindings
+                if (!WorkspaceDialogBindingsIsSuspended)
+                {
+                    var keyBinding = WorkspaceDialogBindings.FirstOrDefault(w => w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
+                    if (keyBinding != null)
+                    {
+                        keyBinding.Command.Execute(keyBinding.CommandParameter);
+                        return;
+                    }
+                }
+
+                // Workspace Bindings
+                if (!WorkspaceBindingsIsSuspended)
+                {
+                    var keyBinding = WorkspaceBindings.FirstOrDefault(w => w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
+                    if (keyBinding != null)
+                    {
+                        keyBinding.Command.Execute(keyBinding.CommandParameter);
+                        return;
+                    }
+                }
+
+                // Global Bindings
+                if (GlobalBindingsIsSuspended) return;
+
+                var keyBinding1 = GlobalBindings.FirstOrDefault(w => w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
+                keyBinding1?.Command.Execute(keyBinding1.CommandParameter);
             }
             catch (Exception exception)
             {
                 ServiceLocator.Current.TryResolve<ILogger>().Error(exception);
             }
         }
-
     }
 }

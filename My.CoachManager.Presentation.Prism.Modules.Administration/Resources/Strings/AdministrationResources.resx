@@ -129,4 +129,22 @@
   <data name="CategoryTitle" xml:space="preserve">
     <value>Catégorie</value>
   </data>
+  <data name="RostersMenu" xml:space="preserve">
+    <value>Effectif</value>
+  </data>
+  <data name="RostersTitle" xml:space="preserve">
+    <value>Liste des effectifs</value>
+  </data>
+  <data name="RosterTitle" xml:space="preserve">
+    <value>Effectif</value>
+  </data>
+  <data name="SeasonsMenu" xml:space="preserve">
+    <value>Saisons</value>
+  </data>
+  <data name="SeasonsTitle" xml:space="preserve">
+    <value>Liste des saisons</value>
+  </data>
+  <data name="SeasonTitle" xml:space="preserve">
+    <value>Saison</value>
+  </data>
 </root>

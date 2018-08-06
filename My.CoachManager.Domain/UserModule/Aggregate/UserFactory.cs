@@ -1,10 +1,9 @@
 ﻿using System.Linq;
-using My.CoachManager.Application.Dtos.Users;
+using My.CoachManager.Application.Dtos.User;
 using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Domain.UserModule.Aggregate
 {
-
     /// <summary>
     /// The user factory.
     /// </summary>
@@ -26,7 +25,6 @@ namespace My.CoachManager.Domain.UserModule.Aggregate
                 Login = item.Login,
                 Mail = item.Mail,
                 Name = item.Name,
-                RosterId = item.RosterId,
                 Roles = item.Roles.Select(CreateRole).ToList()
             };
         }
@@ -125,7 +123,6 @@ namespace My.CoachManager.Domain.UserModule.Aggregate
                 Login = item.Login,
                 Mail = item.Mail,
                 Name = item.Name,
-                RosterId = item.RosterId,
                 Roles = item.Roles.Select(GetRole).ToList()
             };
         }

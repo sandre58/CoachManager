@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Categories" />
+  <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Category" />
   <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" />
   <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" />
   <xs:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Positions" />
@@ -8,7 +8,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:PlayerDto">
         <xs:sequence>
-          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Categories" minOccurs="0" name="Category" nillable="true" type="q1:CategoryDto" />
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Category" minOccurs="0" name="Category" nillable="true" type="q1:CategoryDto" />
           <xs:element minOccurs="0" name="Country" nillable="true" type="tns:CountryDto" />
         </xs:sequence>
       </xs:extension>
@@ -111,18 +111,22 @@
   </xs:complexType>
   <xs:element name="ArrayOfPlayerPositionDto" nillable="true" type="tns:ArrayOfPlayerPositionDto" />
   <xs:complexType name="PlayerPositionDto">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Player" nillable="true" type="tns:PlayerDto" />
-      <xs:element minOccurs="0" name="PlayerId" type="xs:int" />
-      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Positions" minOccurs="0" name="Position" nillable="true" type="q6:PositionDto" />
-      <xs:element minOccurs="0" name="PositionId" type="xs:int" />
-      <xs:element minOccurs="0" name="Rating" type="xs:decimal" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q6="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q6:EntityDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Player" nillable="true" type="tns:PlayerDto" />
+          <xs:element minOccurs="0" name="PlayerId" type="xs:int" />
+          <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Positions" minOccurs="0" name="Position" nillable="true" type="q7:PositionDto" />
+          <xs:element minOccurs="0" name="PositionId" type="xs:int" />
+          <xs:element minOccurs="0" name="Rating" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="PlayerPositionDto" nillable="true" type="tns:PlayerPositionDto" />
   <xs:complexType name="CountryDto">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q7:DataEntityDto">
+      <xs:extension xmlns:q8="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" base="q8:ReferenceDto">
         <xs:sequence>
           <xs:element minOccurs="0" name="Flag" nillable="true" type="xs:string" />
         </xs:sequence>

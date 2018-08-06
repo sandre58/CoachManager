@@ -96,5 +96,59 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.Resources.St
                 return ResourceManager.GetString("CategoryTitle", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Effectif.
+        /// </summary>
+        public static string RostersMenu {
+            get {
+                return ResourceManager.GetString("RostersMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Liste des effectifs.
+        /// </summary>
+        public static string RostersTitle {
+            get {
+                return ResourceManager.GetString("RostersTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Effectif.
+        /// </summary>
+        public static string RosterTitle {
+            get {
+                return ResourceManager.GetString("RosterTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Saisons.
+        /// </summary>
+        public static string SeasonsMenu {
+            get {
+                return ResourceManager.GetString("SeasonsMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Liste des saisons.
+        /// </summary>
+        public static string SeasonsTitle {
+            get {
+                return ResourceManager.GetString("SeasonsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Saison.
+        /// </summary>
+        public static string SeasonTitle {
+            get {
+                return ResourceManager.GetString("SeasonTitle", resourceCulture);
+            }
+        }
     }
 }

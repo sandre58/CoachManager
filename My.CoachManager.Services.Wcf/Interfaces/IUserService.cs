@@ -1,5 +1,5 @@
 ﻿using System.ServiceModel;
-using My.CoachManager.Application.Dtos.Users;
+using My.CoachManager.Application.Dtos.User;
 
 namespace My.CoachManager.Services.Wcf.Interfaces
 {

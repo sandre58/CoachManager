@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:62863/Services/SeasonService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Seasons" />
+  <xs:import schemaLocation="http://localhost:62863/Services/SeasonService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Season" />
   <xs:import schemaLocation="http://localhost:62863/Services/SeasonService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:element name="GetList">
+  <xs:element name="GetSeasons">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetListResponse">
+  <xs:element name="GetSeasonsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Seasons" minOccurs="0" name="GetListResult" nillable="true" type="q1:ArrayOfSeasonDto" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Season" minOccurs="0" name="GetSeasonsResult" nillable="true" type="q1:ArrayOfSeasonDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetById">
+  <xs:element name="GetSeasonById">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="id" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetByIdResponse">
+  <xs:element name="GetSeasonByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Seasons" minOccurs="0" name="GetByIdResult" nillable="true" type="q2:SeasonDto" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Season" minOccurs="0" name="GetSeasonByIdResult" nillable="true" type="q2:SeasonDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="CreateOrUpdate">
+  <xs:element name="SaveSeason">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Seasons" minOccurs="0" name="dto" nillable="true" type="q3:SeasonDto" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Season" minOccurs="0" name="playerDto" nillable="true" type="q3:SeasonDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="CreateOrUpdateResponse">
+  <xs:element name="SaveSeasonResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Seasons" minOccurs="0" name="CreateOrUpdateResult" nillable="true" type="q4:SeasonDto" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Season" minOccurs="0" name="SaveSeasonResult" nillable="true" type="q4:SeasonDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="Remove">
+  <xs:element name="RemoveSeason">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Seasons" minOccurs="0" name="dto" nillable="true" type="q5:SeasonDto" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Season" minOccurs="0" name="playerDto" nillable="true" type="q5:SeasonDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="RemoveResponse">
+  <xs:element name="RemoveSeasonResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

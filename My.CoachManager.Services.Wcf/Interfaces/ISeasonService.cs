@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
-using My.CoachManager.Application.Dtos.Seasons;
+using My.CoachManager.Application.Dtos.Season;
 
 namespace My.CoachManager.Services.Wcf.Interfaces
 {
@@ -11,11 +11,11 @@ namespace My.CoachManager.Services.Wcf.Interfaces
     public interface ISeasonService
     {
         /// <summary>
-        /// Get Seasons list.
+        /// Get categories list.
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        IEnumerable<SeasonDto> GetList();
+        IList<SeasonDto> GetSeasons();
 
         /// <summary>
         /// Get a Season by Id.
@@ -23,26 +23,26 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// <param name="id"></param>
         /// <returns></returns>
         [OperationContract]
-        SeasonDto GetById(int id);
+        SeasonDto GetSeasonById(int id);
 
         /// <summary>
         /// Create a Season.
         /// </summary>
-        /// <param name="dto">the player model.</param>
+        /// <param name="playerDto">the player model.</param>
         /// <returns></returns>
         [OperationContract]
-        SeasonDto CreateOrUpdate(SeasonDto dto);
+        SeasonDto SaveSeason(SeasonDto playerDto);
 
         /// <summary>
         /// Remove a Season.
         /// </summary>
-        /// <param name="dto">the player model.</param>
+        /// <param name="playerDto">the player model.</param>
         /// <returns></returns>
         [OperationContract]
-        void Remove(SeasonDto dto);
+        void RemoveSeason(SeasonDto playerDto);
 
         /// <summary>
-        /// Update Seasons Orders.
+        /// Update Categories Orders.
         /// </summary>
         /// <param name="entities"></param>
         [OperationContract]
