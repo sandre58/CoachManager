@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Metadatas;
@@ -20,13 +19,12 @@ namespace My.CoachManager.Domain.Entities
         public Player()
         {
             Laterality = PlayerConstants.DefaultLaterality;
-            Positions = new List<PlayerPosition>();
         }
 
         /// <summary>
         /// Gets or sets the category id.
         /// </summary>
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
         /// <summary>
         /// Gets or sets the category.
@@ -52,10 +50,5 @@ namespace My.CoachManager.Domain.Entities
         /// Gets or sets the shoes size.
         /// </summary>
         public int? ShoesSize { get; set; }
-
-        /// <summary>
-        /// Gets or set the positions.
-        /// </summary>
-        public ICollection<PlayerPosition> Positions { get; set; }
     }
 }

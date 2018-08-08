@@ -7,7 +7,7 @@ using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public abstract class ItemViewModel<TEntityViewModel> : NavigatableWorkspaceViewModel, IItemViewModel
+    public abstract class ItemViewModel<TEntityViewModel> : NavigatableWorkspaceViewModel, IItemViewModel<TEntityViewModel>
         where TEntityViewModel : class, IEntityModel, IValidatable, IModifiable, new()
     {
         #region Fields
@@ -17,6 +17,13 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         #endregion Fields
 
         #region Members
+
+        IEntityModel IItemViewModel.Item
+        {
+            get => Item;
+            set => Item = (TEntityViewModel)value;
+        }
+
 
         /// <summary>
         /// Get or set Item.
@@ -107,7 +114,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <param name="viewModel">The view model.</param>
         protected virtual void OnEditRequested(TEntityViewModel item, IEditViewModel<TEntityViewModel> viewModel)
         {
-            if (viewModel != null) viewModel.LoadItemById(item.Id);
+            viewModel?.LoadItemById(item.Id);
         }
 
         /// <summary>

@@ -120,9 +120,6 @@
   <data name="Category" xml:space="preserve">
     <value>Catégorie</value>
   </data>
-  <data name="Coachs" xml:space="preserve">
-    <value>Staff</value>
-  </data>
   <data name="Name" xml:space="preserve">
     <value>Nom</value>
   </data>
@@ -131,8 +128,5 @@
   </data>
   <data name="Season" xml:space="preserve">
     <value>Saison</value>
-  </data>
-  <data name="Squads" xml:space="preserve">
-    <value>Equipes</value>
   </data>
 </root>

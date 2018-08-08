@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="LicenseState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Given" />
+      <xs:enumeration value="Back" />
+      <xs:enumeration value="Paid" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="LicenseState" nillable="true" type="tns:LicenseState" />
   <xs:simpleType name="GenderType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Male" />
@@ -15,13 +24,4 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="Laterality" nillable="true" type="tns:Laterality" />
-  <xs:simpleType name="LicenseState">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Unknown" />
-      <xs:enumeration value="Given" />
-      <xs:enumeration value="Back" />
-      <xs:enumeration value="Paid" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="LicenseState" nillable="true" type="tns:LicenseState" />
 </xs:schema>

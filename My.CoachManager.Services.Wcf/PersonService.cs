@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CommonServiceLocator;
 using My.CoachManager.Application.Dtos.Category;
 using My.CoachManager.Application.Dtos.Person;
-using My.CoachManager.Application.Services.Persons;
+using My.CoachManager.Application.Services.PersonModule;
 using My.CoachManager.Services.Wcf.Interfaces;
 
 namespace My.CoachManager.Services.Wcf
@@ -13,14 +13,23 @@ namespace My.CoachManager.Services.Wcf
     /// </summary>
     public class PersonService : IPersonService
     {
+
         /// <summary>
-        /// Get Player.
+        /// Load all items.
         /// </summary>
-        /// <param name="id"></param>
         /// <returns></returns>
-        public PlayerDetailsDto GetPlayerDetails(int id)
+        public IList<CountryDto> GetCountries()
         {
-            return ServiceLocator.Current.GetInstance<IPlayerAppService>().GetPlayerDetails(id);
+            return ServiceLocator.Current.GetInstance<ICountryAppService>().GetCountries();
+        }
+
+        /// <summary>
+        /// Load all items.
+        /// </summary>
+        /// <returns></returns>
+        public IList<PlayerDto> GetPlayers()
+        {
+            return ServiceLocator.Current.GetInstance<IPlayerAppService>().GetPlayers();
         }
 
         /// <summary>
@@ -28,9 +37,9 @@ namespace My.CoachManager.Services.Wcf
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public PlayerDto GetPlayer(int id)
+        public PlayerDto GetPlayerById(int id)
         {
-            return ServiceLocator.Current.GetInstance<IPlayerAppService>().GetPlayer(id);
+            return ServiceLocator.Current.GetInstance<IPlayerAppService>().GetPlayerById(id);
         }
 
         /// <summary>
@@ -38,9 +47,9 @@ namespace My.CoachManager.Services.Wcf
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public PlayerDto CreateOrUpdate(PlayerDto dto)
+        public PlayerDto SavePlayer(PlayerDto dto)
         {
-            return ServiceLocator.Current.GetInstance<IPlayerAppService>().CreateOrUpdate(dto);
+            return ServiceLocator.Current.GetInstance<IPlayerAppService>().SavePlayer(dto);
         }
 
         /// <summary>
@@ -48,9 +57,9 @@ namespace My.CoachManager.Services.Wcf
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public void Remove(PlayerDto dto)
+        public void RemovePlayer(PlayerDto dto)
         {
-            ServiceLocator.Current.GetInstance<IPlayerAppService>().Remove(dto);
+            ServiceLocator.Current.GetInstance<IPlayerAppService>().RemovePlayer(dto);
         }
 
         /// <summary>
@@ -60,15 +69,6 @@ namespace My.CoachManager.Services.Wcf
         public CategoryDto GetCategoryFromBirthdate(DateTime date)
         {
             return ServiceLocator.Current.GetInstance<IPlayerAppService>().GetCategoryFromBirthdate(date);
-        }
-
-        /// <summary>
-        /// Get categories list.
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<CountryDto> GetCountries()
-        {
-            return ServiceLocator.Current.GetInstance<ICountryAppService>().GetList();
         }
     }
 }

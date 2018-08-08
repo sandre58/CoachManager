@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
-using My.CoachManager.Presentation.Prism.Modules.Common.Resources.Strings;
+using My.CoachManager.Presentation.Prism.Modules.Common.Resources;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Common.ViewModels
 {

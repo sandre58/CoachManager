@@ -39,7 +39,7 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
         public GenderType Gender { get; set; }
 
         [Display(Name = "Address", ResourceType = typeof(PersonResources))]
-        public int? Address { get; set; }
+        public int? AddressId { get; set; }
 
         [Display(Name = "LicenseNumber", ResourceType = typeof(PersonResources))]
         [MaxLength(10, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]

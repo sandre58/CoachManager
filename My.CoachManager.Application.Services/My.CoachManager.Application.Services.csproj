@@ -163,23 +163,32 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.7.6.104\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.1\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Addresses\AddressAppService.cs" />
-    <Compile Include="Addresses\IAddressAppService.cs" />
-    <Compile Include="Persons\CountryAppService.cs" />
-    <Compile Include="Persons\ICountryAppService.cs" />
-    <Compile Include="Positions\IPositionAppService.cs" />
-    <Compile Include="Positions\PositionAppService.cs" />
+    <Compile Include="AddressModule\AddressAppService.cs" />
+    <Compile Include="AddressModule\IAddressAppService.cs" />
+    <Compile Include="PersonModule\CountryAppService.cs" />
+    <Compile Include="PersonModule\ICountryAppService.cs" />
     <Compile Include="SeasonModule\SeasonAppService.cs" />
     <Compile Include="SeasonModule\ISeasonAppService.cs" />
     <Compile Include="CategoryModule\ICategoryAppService.cs" />
     <Compile Include="CategoryModule\CategoryAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Persons\IPlayerAppService.cs" />
-    <Compile Include="Persons\PlayerAppService.cs" />
+    <Compile Include="PersonModule\IPlayerAppService.cs" />
+    <Compile Include="PersonModule\PlayerAppService.cs" />
     <Compile Include="RosterModule\RosterAppService.cs" />
     <Compile Include="RosterModule\IRosterAppService.cs" />
     <Compile Include="UserModule\UserAppService.cs" />

@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
-        xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings;assembly=My.CoachManager.Presentation.Prism.Resources"
-        xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.ViewModels"
-        mc:Ignorable="d"
+                         xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.ViewModels"
+                         xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.Resources"
+                         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewModels:SplashScreenViewModel}"
-        Title="{x:Static strings:GlobalResources.ApplicationTitle}" Height="300" Width="500" ResizeMode="NoResize" ShowInTaskbar="False"
+        Title="{x:Static strings:CoachManagerResources.ApplicationTitle}" Height="300" Width="500" ResizeMode="NoResize" ShowInTaskbar="False"
                          ShowTitleOnTitleBar="False"
         Background="{DynamicResource DarkAccent}" Foreground="{DynamicResource AccentForeground}" Style="{DynamicResource ModernWindowStyle}"
                       WindowStartupLocation="CenterScreen">
@@ -25,9 +25,9 @@
             <Image Source="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/CoachManager.png"
                    VerticalAlignment="Top" HorizontalAlignment="Left" Margin="{StaticResource LargeHorizontalMargin}" Width="150" />
             <StackPanel Orientation="Vertical" Margin="{StaticResource VeryLargeHorizontalMargin}">
-                <TextBlock Text="{Binding Source={x:Static strings:GlobalResources.ApplicationTitlePart1}, Converter={StaticResource ToUpperConverter}}"
+                <TextBlock Text="{Binding Source={x:Static strings:CoachManagerResources.ApplicationTitlePart1}, Converter={StaticResource ToUpperConverter}}"
                            FontFamily="{StaticResource HeaderFontFamily}" FontStyle="Italic" VerticalAlignment="Top" FontSize="85" />
-                <TextBlock  Text="{Binding Source={x:Static strings:GlobalResources.ApplicationTitlePart2}, Converter={StaticResource ToUpperConverter}}"
+                <TextBlock  Text="{Binding Source={x:Static strings:CoachManagerResources.ApplicationTitlePart2}, Converter={StaticResource ToUpperConverter}}"
                             FontFamily="{StaticResource HeaderFontFamily}" Margin="0,-20,0,0" FontStyle="Italic" VerticalAlignment="Top" FontSize="58" />
                 <TextBlock TextAlignment="Right" Text="{Binding Version}" />
             </StackPanel>

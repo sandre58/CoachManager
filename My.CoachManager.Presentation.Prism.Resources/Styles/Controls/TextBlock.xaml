@@ -19,31 +19,19 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-    <Style x:Key="AutoCollapsingTextBlock" BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
-        <Setter Property="FontSize" Value="{DynamicResource SmallFontSize}" />
-        <Setter Property="Opacity" Value="0.6" />
-        <Setter Property="RenderTransform">
-            <Setter.Value>
-                <TranslateTransform />
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="Text" Value="">
-                <Setter Property="Visibility" Value="Collapsed" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="FloatingMessageContainerStyle" TargetType="{x:Type ContentControl}">
+    
+    <!-- Texts -->
+    <Style x:Key="ReferenceStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+        <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="Foreground" Value="{DynamicResource LightVariation6}" />
+        <Setter Property="FontSize" Value="{DynamicResource MidSmallFontSize}" />
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="IsHitTestVisible" Value="False" />
-        <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="Margin" Value="2 0" />
-        <Setter Property="MaxHeight" Value="0" />
-        <Setter Property="Visibility" Value="Visible" />
     </Style>
-
+    
+    <!-- Header -->
+    
     <Style x:Key="HeaderStyle" TargetType="TextBlock">
         <Setter Property="TextWrapping" Value="NoWrap" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
@@ -61,6 +49,8 @@
     <Style x:Key="SmallHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource MediumHeaderStyle}">
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
     </Style>
+
+    <!-- Header with icon -->
 
     <Style TargetType="{x:Type Label}" x:Key="HeaderIconStyle">
         <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
@@ -113,4 +103,31 @@
     <Style TargetType="{x:Type Label}" x:Key="AccentSmallHeaderIconStyle" BasedOn="{StaticResource SmallHeaderIconStyle}">
         <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
     </Style>
+
+    <!-- Controls -->
+    
+    <Style x:Key="AutoCollapsingTextBlock" BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="{DynamicResource SmallFontSize}" />
+        <Setter Property="Opacity" Value="0.6" />
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform />
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Text" Value="">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="FloatingMessageContainerStyle" TargetType="{x:Type ContentControl}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Margin" Value="2 0" />
+        <Setter Property="MaxHeight" Value="0" />
+        <Setter Property="Visibility" Value="Visible" />
+    </Style>
+
 </ResourceDictionary>

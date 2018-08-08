@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Resources;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace My.CoachManager.CrossCutting.Core.Exceptions
 {
@@ -77,16 +76,11 @@ namespace My.CoachManager.CrossCutting.Core.Exceptions
 
         public override string ToString()
         {
-            var result = new StringBuilder();
-
-            result.AppendLine(Message);
-
+            var errorMessage = Message + "\r\n";
             foreach (var error in Errors)
-            {
-                result.AppendLine(error.ToString());
-            }
+                errorMessage += $" - {error.ToString()}" + "\r\n";
 
-            return result.ToString();
+            return errorMessage;
         }
     }
 }

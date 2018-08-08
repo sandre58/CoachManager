@@ -2,7 +2,6 @@
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
-using My.CoachManager.Presentation.Prism.Modules.Administration.Resources.Strings;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
@@ -26,20 +25,6 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         }
 
         #endregion Constructors
-
-        #region Initialisation
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Launch on constructor for initialize all Data.
-        /// </summary>
-        protected override void InitializeData()
-        {
-            base.InitializeData();
-            Title = AdministrationResources.CategoryTitle;
-        }
-
-        #endregion Initialisation
 
         #region Methods
 

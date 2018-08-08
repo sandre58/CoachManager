@@ -1,4 +1,6 @@
-﻿using My.CoachManager.Domain.Core;
+﻿using FluentValidation.Results;
+using My.CoachManager.Domain.CategoryModule.Aggregate;
+using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.ReferenceModule.Services;
 
@@ -48,6 +50,17 @@ namespace My.CoachManager.Domain.CategoryModule.Services
         public bool IsUsed(int id)
         {
             return _playerRepository.Any(x => x.CategoryId == id) || _rosterRepository.Any(x => x.CategoryId == id);
+        }
+
+        /// <summary>
+        /// Validates entity.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public override ValidationResult Validate(Category entity)
+        {
+            var validator = new CategoryValidator(Repository);
+            return validator.Validate(entity);
         }
 
         #endregion Methods

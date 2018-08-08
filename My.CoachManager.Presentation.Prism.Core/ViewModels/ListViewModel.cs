@@ -4,10 +4,10 @@ using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Core.Exceptions;
-using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Models;
+using My.CoachManager.Presentation.Prism.Core.Resources;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels

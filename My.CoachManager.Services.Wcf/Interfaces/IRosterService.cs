@@ -11,20 +11,6 @@ namespace My.CoachManager.Services.Wcf.Interfaces
     public interface IRosterService
     {
         /// <summary>
-        /// Get squads list.
-        /// </summary>
-        /// <returns></returns>
-        [OperationContract]
-        IEnumerable<SquadDto> GetSquads(int rosterId);
-
-        /// <summary>
-        /// Get a squad.
-        /// </summary>
-        /// <returns></returns>
-        [OperationContract]
-        SquadDto GetSquad(int squadId);
-
-        /// <summary>
         /// Get all dtos list.
         /// </summary>
         /// <returns></returns>

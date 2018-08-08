@@ -103,38 +103,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Strings\ControlResources.Designer.cs">
-      <DependentUpon>ControlResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Strings\StatusResources.Designer.cs">
-      <DependentUpon>StatusResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Strings\GlobalResources.Designer.cs">
-      <DependentUpon>GlobalResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Strings\ControlResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Strings\StatusResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>StatusResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Strings\GlobalResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>GlobalResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
     <Resource Include="Fonts\Jersey M54.ttf" />
@@ -860,6 +831,10 @@
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Core\My.CoachManager.Presentation.Prism.Core.csproj">
       <Project>{3f11e745-d328-4654-a3c9-4bfc9bf6b9ab}</Project>
       <Name>My.CoachManager.Presentation.Prism.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Models\My.CoachManager.Presentation.Prism.Models.csproj">
+      <Project>{C2647100-4BD2-49F0-8A22-A0CD1EA37C1E}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.SkinManager\My.CoachManager.Presentation.Prism.SkinManager.csproj">
       <Project>{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}</Project>

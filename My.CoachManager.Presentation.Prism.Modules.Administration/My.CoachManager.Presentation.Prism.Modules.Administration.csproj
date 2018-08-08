@@ -72,6 +72,10 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
@@ -82,17 +86,52 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Strings\AdministrationResources.Designer.cs">
+    <Compile Include="Resources\SeasonResources.Designer.cs">
+      <DependentUpon>SeasonResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\PlayerResources.Designer.cs">
+      <DependentUpon>PlayerResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\CategoryResources.Designer.cs">
+      <DependentUpon>CategoryResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\RosterResources.Designer.cs">
+      <DependentUpon>RosterResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\AdministrationResources.Designer.cs">
       <DependentUpon>AdministrationResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ViewModels\PlayerEditViewModel.Contacts.cs" />
+    <Compile Include="ViewModels\PlayerEditViewModel.cs" />
+    <Compile Include="ViewModels\PlayersListViewModel.cs" />
     <Compile Include="ViewModels\SeasonsListViewModel.cs" />
     <Compile Include="ViewModels\SeasonEditViewModel.cs" />
     <Compile Include="ViewModels\RosterEditViewModel.cs" />
     <Compile Include="ViewModels\RostersListViewModel.cs" />
     <Compile Include="ViewModels\CategoriesListViewModel.cs" />
     <Compile Include="ViewModels\CategoryEditViewModel.cs" />
+    <Compile Include="Views\EmailsEditView.xaml.cs">
+      <DependentUpon>EmailsEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PhonesEditView.xaml.cs">
+      <DependentUpon>PhonesEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayerEditView.xaml.cs">
+      <DependentUpon>PlayerEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayersListView.xaml.cs">
+      <DependentUpon>PlayersListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SeasonsListView.xaml.cs">
       <DependentUpon>SeasonsListView.xaml</DependentUpon>
     </Compile>
@@ -153,6 +192,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\EmailsEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PhonesEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PlayerEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PlayersListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\SeasonsListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -191,7 +246,27 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Strings\AdministrationResources.resx">
+    <EmbeddedResource Include="Resources\SeasonResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SeasonResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\PlayerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PlayerResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\CategoryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CategoryResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\RosterResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RosterResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AdministrationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdministrationResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>

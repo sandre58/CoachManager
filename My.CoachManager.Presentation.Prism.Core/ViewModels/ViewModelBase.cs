@@ -1,11 +1,11 @@
 ﻿using System;
 using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Core.Exceptions;
-using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Models;
+using My.CoachManager.Presentation.Prism.Core.Resources;
 using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels

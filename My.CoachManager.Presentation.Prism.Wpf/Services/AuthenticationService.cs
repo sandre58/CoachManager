@@ -98,8 +98,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
             {
                 return new Principal()
                 {
-                    Identity = new Identity(user.Login, user.Name, user.Mail,
-                        user.Roles.SelectMany(r => r.Permissions).Select(p => p.Code))
+                    Identity = new Identity(user.Login, user.Name, user.Mail)
                 };
             }
 

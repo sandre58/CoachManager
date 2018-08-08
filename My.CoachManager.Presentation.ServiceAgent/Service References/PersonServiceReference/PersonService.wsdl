@@ -4,36 +4,42 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Persons" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Person" />
       <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" />
       <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Positions" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Categories" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Category" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/PersonService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Position" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IPersonService_GetPlayerDetails_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetPlayerDetails" />
+  <wsdl:message name="IPersonService_GetCountries_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountries" />
   </wsdl:message>
-  <wsdl:message name="IPersonService_GetPlayerDetails_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetPlayerDetailsResponse" />
+  <wsdl:message name="IPersonService_GetCountries_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountriesResponse" />
   </wsdl:message>
-  <wsdl:message name="IPersonService_GetPlayer_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetPlayer" />
+  <wsdl:message name="IPersonService_GetPlayers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayers" />
   </wsdl:message>
-  <wsdl:message name="IPersonService_GetPlayer_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetPlayerResponse" />
+  <wsdl:message name="IPersonService_GetPlayers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayersResponse" />
   </wsdl:message>
-  <wsdl:message name="IPersonService_CreateOrUpdate_InputMessage">
-    <wsdl:part name="parameters" element="tns:CreateOrUpdate" />
+  <wsdl:message name="IPersonService_GetPlayerById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerById" />
   </wsdl:message>
-  <wsdl:message name="IPersonService_CreateOrUpdate_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CreateOrUpdateResponse" />
+  <wsdl:message name="IPersonService_GetPlayerById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerByIdResponse" />
   </wsdl:message>
-  <wsdl:message name="IPersonService_Remove_InputMessage">
-    <wsdl:part name="parameters" element="tns:Remove" />
+  <wsdl:message name="IPersonService_SavePlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:SavePlayer" />
   </wsdl:message>
-  <wsdl:message name="IPersonService_Remove_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RemoveResponse" />
+  <wsdl:message name="IPersonService_SavePlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SavePlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPersonService_RemovePlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemovePlayer" />
+  </wsdl:message>
+  <wsdl:message name="IPersonService_RemovePlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemovePlayerResponse" />
   </wsdl:message>
   <wsdl:message name="IPersonService_GetCategoryFromBirthdate_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCategoryFromBirthdate" />
@@ -41,42 +47,36 @@
   <wsdl:message name="IPersonService_GetCategoryFromBirthdate_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCategoryFromBirthdateResponse" />
   </wsdl:message>
-  <wsdl:message name="IPersonService_GetCountries_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetCountries" />
-  </wsdl:message>
-  <wsdl:message name="IPersonService_GetCountries_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetCountriesResponse" />
-  </wsdl:message>
   <wsdl:portType name="IPersonService">
-    <wsdl:operation name="GetPlayerDetails">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/GetPlayerDetails" message="tns:IPersonService_GetPlayerDetails_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/GetPlayerDetailsResponse" message="tns:IPersonService_GetPlayerDetails_OutputMessage" />
+    <wsdl:operation name="GetCountries">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/GetCountries" message="tns:IPersonService_GetCountries_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/GetCountriesResponse" message="tns:IPersonService_GetCountries_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetPlayer">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/GetPlayer" message="tns:IPersonService_GetPlayer_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/GetPlayerResponse" message="tns:IPersonService_GetPlayer_OutputMessage" />
+    <wsdl:operation name="GetPlayers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/GetPlayers" message="tns:IPersonService_GetPlayers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/GetPlayersResponse" message="tns:IPersonService_GetPlayers_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="CreateOrUpdate">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/CreateOrUpdate" message="tns:IPersonService_CreateOrUpdate_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/CreateOrUpdateResponse" message="tns:IPersonService_CreateOrUpdate_OutputMessage" />
+    <wsdl:operation name="GetPlayerById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/GetPlayerById" message="tns:IPersonService_GetPlayerById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/GetPlayerByIdResponse" message="tns:IPersonService_GetPlayerById_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Remove">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/Remove" message="tns:IPersonService_Remove_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/RemoveResponse" message="tns:IPersonService_Remove_OutputMessage" />
+    <wsdl:operation name="SavePlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/SavePlayer" message="tns:IPersonService_SavePlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/SavePlayerResponse" message="tns:IPersonService_SavePlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemovePlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/RemovePlayer" message="tns:IPersonService_RemovePlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/RemovePlayerResponse" message="tns:IPersonService_RemovePlayer_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetCategoryFromBirthdate">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/GetCategoryFromBirthdate" message="tns:IPersonService_GetCategoryFromBirthdate_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/GetCategoryFromBirthdateResponse" message="tns:IPersonService_GetCategoryFromBirthdate_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetCountries">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/GetCountries" message="tns:IPersonService_GetCountries_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/GetCountriesResponse" message="tns:IPersonService_GetCountries_OutputMessage" />
-    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IPersonService" type="tns:IPersonService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetPlayerDetails">
-      <soap:operation soapAction="http://tempuri.org/IPersonService/GetPlayerDetails" style="document" />
+    <wsdl:operation name="GetCountries">
+      <soap:operation soapAction="http://tempuri.org/IPersonService/GetCountries" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -84,8 +84,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetPlayer">
-      <soap:operation soapAction="http://tempuri.org/IPersonService/GetPlayer" style="document" />
+    <wsdl:operation name="GetPlayers">
+      <soap:operation soapAction="http://tempuri.org/IPersonService/GetPlayers" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -93,8 +93,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="CreateOrUpdate">
-      <soap:operation soapAction="http://tempuri.org/IPersonService/CreateOrUpdate" style="document" />
+    <wsdl:operation name="GetPlayerById">
+      <soap:operation soapAction="http://tempuri.org/IPersonService/GetPlayerById" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -102,8 +102,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Remove">
-      <soap:operation soapAction="http://tempuri.org/IPersonService/Remove" style="document" />
+    <wsdl:operation name="SavePlayer">
+      <soap:operation soapAction="http://tempuri.org/IPersonService/SavePlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemovePlayer">
+      <soap:operation soapAction="http://tempuri.org/IPersonService/RemovePlayer" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -113,15 +122,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetCategoryFromBirthdate">
       <soap:operation soapAction="http://tempuri.org/IPersonService/GetCategoryFromBirthdate" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetCountries">
-      <soap:operation soapAction="http://tempuri.org/IPersonService/GetCountries" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

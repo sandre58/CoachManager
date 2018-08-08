@@ -14,13 +14,11 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
     {
         [Display(Name = "Id", ResourceType = typeof(EntityResources))]
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual int Id { get; set; }
 
         [Display(Name = "CreatedDate", ResourceType = typeof(EntityResources))]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [DefaultValue(SqlConstants.GetUtcDate)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? CreatedDate { get; set; }
 
         [Display(Name = "CreatedBy", ResourceType = typeof(EntityResources))]
@@ -29,7 +27,6 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
         [Display(Name = "ModifiedDate", ResourceType = typeof(EntityResources))]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [DefaultValue(SqlConstants.GetUtcDate)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? ModifiedDate { get; set; }
 
         [Display(Name = "ModifiedBy", ResourceType = typeof(EntityResources))]

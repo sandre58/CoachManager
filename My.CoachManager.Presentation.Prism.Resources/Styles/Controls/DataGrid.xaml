@@ -3,7 +3,7 @@
                     xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:drag="clr-namespace:My.CoachManager.Presentation.Prism.Controls.DragAndDrop;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
-                    xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings">
+                    xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Margins.xaml" />

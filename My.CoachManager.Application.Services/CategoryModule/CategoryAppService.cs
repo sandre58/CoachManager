@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using My.CoachManager.Application.Dtos.Category;
-using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.Domain.AppModule.Services;
 using My.CoachManager.Domain.CategoryModule.Aggregate;
 using My.CoachManager.Domain.CategoryModule.Services;
@@ -52,20 +51,7 @@ namespace My.CoachManager.Application.Services.CategoryModule
         /// <returns></returns>
         public CategoryDto SaveCategory(CategoryDto dto)
         {
-            ValidateEntity(dto);
-
-            return _crudDomainService.Save(dto, CategoryFactory.CreateEntity, CategoryFactory.UpdateEntity);
-        }
-
-        /// <summary>
-        /// Validates entity.
-        /// </summary>
-        private void ValidateEntity(CategoryDto dto)
-        {
-            //if (!_categoryDomainService.IsUnique(dto.Id, dto.Code))
-            //{
-            //    throw new AlreadyExistException(dto.Code);
-            //}
+            return _crudDomainService.Save(dto, CategoryFactory.CreateEntity, CategoryFactory.UpdateEntity, x => _categoryDomainService.Validate(x));
         }
 
         /// <inheritdoc />

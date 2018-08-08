@@ -19,7 +19,7 @@ namespace My.CoachManager.Domain.Core
         /// <returns>
         /// Enumerable results .
         /// </returns>
-        IEnumerable<TEntity> ExecuteQuery<TEntity>(string sqlQuery, params object[] parameters);
+        IEnumerable<TEntity> ExecuteQuery<TEntity>(string sqlQuery, params object[] parameters) where TEntity : class;
 
         /// <summary>
         /// Execute arbitrary command into underliying persistence store.

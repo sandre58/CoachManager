@@ -62,6 +62,10 @@ namespace My.CoachManager.Domain.CategoryModule.Aggregate
                 Description = item.Description,
                 Order = item.Order,
                 Year = item.Year,
+                CreatedDate = item.CreatedDate,
+                CreatedBy = item.CreatedBy,
+                ModifiedDate = item.ModifiedDate,
+                ModifiedBy = item.ModifiedBy
             };
         }
     }

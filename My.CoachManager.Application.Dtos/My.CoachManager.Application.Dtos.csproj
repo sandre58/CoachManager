@@ -207,13 +207,9 @@
   <ItemGroup>
     <Compile Include="CrudStatus.cs" />
     <Compile Include="Person\AddressDto.cs" />
-    <Compile Include="Person\FunctionDto.cs" />
-    <Compile Include="Competition\ClubDto.cs" />
-    <Compile Include="Competition\TeamDto.cs" />
     <Compile Include="Category\CategoryDto.cs" />
     <Compile Include="Season\SeasonDto.cs" />
     <Compile Include="Position\PositionDto.cs" />
-    <Compile Include="Person\CoachDto.cs" />
     <Compile Include="Person\PhoneDto.cs" />
     <Compile Include="Person\CountryDto.cs" />
     <Compile Include="ReferenceDto.cs" />
@@ -221,19 +217,13 @@
     <Compile Include="IEntityDto.cs" />
     <Compile Include="Person\ContactDto.cs" />
     <Compile Include="Person\CityDto.cs" />
-    <Compile Include="Person\PlayerDetailsDto.cs" />
     <Compile Include="Person\PlayerPositionDto.cs" />
     <Compile Include="Person\EmailDto.cs" />
     <Compile Include="Person\PersonDto.cs" />
     <Compile Include="Person\PlayerDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Roster\SquadPlayerDto.cs" />
-    <Compile Include="Roster\RosterCoachDto.cs" />
     <Compile Include="Roster\RosterDto.cs" />
     <Compile Include="Roster\RosterPlayerDto.cs" />
-    <Compile Include="Roster\SquadDto.cs" />
-    <Compile Include="User\PermissionDto.cs" />
-    <Compile Include="User\RoleDto.cs" />
     <Compile Include="User\UserDto.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +235,9 @@
       <Project>{7D8B4553-4A90-44D7-A1DD-14871E3C6127}</Project>
       <Name>My.CoachManager.Domain.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

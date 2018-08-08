@@ -59,7 +59,11 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
                 SeasonId = item.SeasonId,
                 CategoryId = item.CategoryId,
                 Category = CategoryFactory.Get(item.Category),
-                Season = SeasonFactory.Get(item.Season)
+                Season = SeasonFactory.Get(item.Season),
+                CreatedDate = item.CreatedDate,
+                CreatedBy = item.CreatedBy,
+                ModifiedDate = item.ModifiedDate,
+                ModifiedBy = item.ModifiedBy
             };
         }
     }

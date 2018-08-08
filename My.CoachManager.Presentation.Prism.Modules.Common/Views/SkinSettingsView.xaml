@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:skinManager="clr-namespace:My.CoachManager.Presentation.Prism.SkinManager;assembly=My.CoachManager.Presentation.Prism.SkinManager"
              xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
-             xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Common.Resources.Strings"
+             xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Common.Resources"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Common.ViewModels"
              mc:Ignorable="d"
              xmlns:prism="http://prismlibrary.com/"

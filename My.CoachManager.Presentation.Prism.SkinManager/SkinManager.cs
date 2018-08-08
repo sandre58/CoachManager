@@ -80,7 +80,7 @@ namespace My.CoachManager.Presentation.Prism.SkinManager
         {
             // Get the assembly that we are currently in.
             Assembly assembly = Assembly.GetEntryAssembly();
-            ResourceManager = new ResourceManager(assembly.GetName().Name + ".Resources.Strings.SkinResources", assembly);
+            ResourceManager = new ResourceManager(assembly.GetName().Name + ".Resources.SkinResources", assembly);
 
             CurrentThemes = new Dictionary<DispatcherObject, Theme>();
             CurrentAccents = new Dictionary<DispatcherObject, Accent>();

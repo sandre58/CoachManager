@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Core.Resources.Entities;
 
@@ -11,22 +10,20 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
     /// </summary>
     public class ReferenceMetadata : EntityMetadata
     {
-        [Display(Name = "Code", ResourceType = typeof(DataEntityResources))]
+        [Display(Name = "Code", ResourceType = typeof(ReferenceResources))]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         [MaxLength(15, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        [Index]
         public string Code { get; set; }
 
-        [Display(Name = "Label", ResourceType = typeof(DataEntityResources))]
+        [Display(Name = "Label", ResourceType = typeof(ReferenceResources))]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         [MaxLength(100, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        [Index]
         public string Label { get; set; }
 
-        [Display(Name = "Description", ResourceType = typeof(DataEntityResources))]
+        [Display(Name = "Description", ResourceType = typeof(ReferenceResources))]
         public string Description { get; set; }
 
-        [Display(Name = "Order", ResourceType = typeof(DataEntityResources))]
+        [Display(Name = "Order", ResourceType = typeof(ReferenceResources))]
         [DefaultValue(0)]
         public int Order { get; set; }
     }

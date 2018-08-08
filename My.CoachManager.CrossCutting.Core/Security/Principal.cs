@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Security.Principal;
+﻿using System.Security.Principal;
 
 namespace My.CoachManager.CrossCutting.Core.Security
 {
@@ -38,7 +37,7 @@ namespace My.CoachManager.CrossCutting.Core.Security
         /// <returns></returns>
         public bool IsInRole(string permission)
         {
-            return Identity.IsAuthenticated && Identity.Permissions.Contains(permission);
+            return Identity.IsAuthenticated;
         }
 
         #endregion IPrincipal Members

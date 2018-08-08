@@ -1,7 +1,8 @@
 ﻿using System.Reflection;
 using My.CoachManager.Presentation.Prism.Core.Events;
+using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
-using My.CoachManager.Presentation.Prism.Resources.Strings;
+using My.CoachManager.Presentation.Prism.Modules.Common.Resources;
 using Prism.Events;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Common.ViewModels
@@ -42,10 +43,10 @@ namespace My.CoachManager.Presentation.Prism.Modules.Common.ViewModels
 
             var copyrightAttr = assembly.GetCustomAttribute<AssemblyCopyrightAttribute>();
 
-            Version = string.Format(GlobalResources.Version, assembly.GetName().Version);
+            Version = string.Format(StatusBarResources.Version, assembly.GetName().Version);
             Copyright = (copyrightAttr != null) ? copyrightAttr.Copyright : "";
 
-            Message = StatusResources.DefaultStatusMessage;
+            Message = MessageResources.Ready;
 
             EventAggregator.GetEvent<UpdateStatusBarMessageRequestEvent>().Subscribe(OnMessageChanged, ThreadOption.UIThread, true);
         }

@@ -37,11 +37,6 @@ namespace My.CoachManager.Presentation.Prism.Models
         public int SquadId { get; set; }
 
         /// <summary>
-        /// Gets or sets the player's squad.
-        /// </summary>
-        public SquadModel Squad { get; set; }
-
-        /// <summary>
         /// Gets or sets the default player's number in the roster.
         /// </summary>
         public int? Number { get; set; }

@@ -31,16 +31,6 @@ namespace My.CoachManager.Domain.Core.Specification
         /// <returns>Expression that satisfy this specification.</returns>
         public abstract Expression<Func<TEntity, bool>> SatisfiedBy();
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        public bool SatisfiedBy(TEntity entity)
-        {
-            return SatisfiedBy().Compile().Invoke(entity);
-        }
-
         #endregion ----- ISpecification<TEntity> Members -----
 
         #region ----- Override Operators -----

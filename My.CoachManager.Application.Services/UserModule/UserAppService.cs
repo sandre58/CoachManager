@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using My.CoachManager.Application.Dtos.User;
-using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.UserModule.Aggregate;
@@ -50,7 +49,7 @@ namespace My.CoachManager.Application.Services.UserModule
         /// <returns></returns>
         public UserDto GetByLoginAndPassword(string login, string password)
         {
-            return UserFactory.Get(_userRepository.GetBySpec(UserSpecification.GetUserByCredentials(login, password), x => x.Roles.Select(r => r.Permissions)).FirstOrDefault());
+            return UserFactory.Get(_userRepository.GetBySpec(UserSpecification.GetUserByCredentials(login, password)).FirstOrDefault());
         }
 
         /// <inheritdoc />
@@ -60,7 +59,7 @@ namespace My.CoachManager.Application.Services.UserModule
         /// <returns></returns>
         public UserDto GetByLogin(string login)
         {
-            return UserFactory.Get(_userRepository.GetBySpec(UserSpecification.GetUserByLogin(login), x => x.Roles.Select(r => r.Permissions)).FirstOrDefault());
+            return UserFactory.Get(_userRepository.GetBySpec(UserSpecification.GetUserByLogin(login)).FirstOrDefault());
         }
 
         #endregion Methods

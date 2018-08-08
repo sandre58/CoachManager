@@ -141,14 +141,8 @@
   <data name="NumberAbbr" xml:space="preserve">
     <value>N°</value>
   </data>
-  <data name="Positions" xml:space="preserve">
-    <value>Postes</value>
-  </data>
   <data name="ShoesSize" xml:space="preserve">
     <value>Pointure</value>
-  </data>
-  <data name="Squad" xml:space="preserve">
-    <value>Equipe</value>
   </data>
   <data name="Weight" xml:space="preserve">
     <value>Poids</value>

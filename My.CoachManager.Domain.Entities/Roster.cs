@@ -16,7 +16,6 @@ namespace My.CoachManager.Domain.Entities
         /// </summary>
         public Roster()
         {
-            Squads = new List<Squad>();
             Players = new List<RosterPlayer>();
         }
 
@@ -49,10 +48,5 @@ namespace My.CoachManager.Domain.Entities
         /// Gets or set the players.
         /// </summary>
         public ICollection<RosterPlayer> Players { get; set; }
-
-        /// <summary>
-        /// Gets or set the squads.
-        /// </summary>
-        public ICollection<Squad> Squads { get; set; }
     }
 }

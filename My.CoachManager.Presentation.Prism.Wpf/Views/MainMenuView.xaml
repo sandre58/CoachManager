@@ -15,7 +15,7 @@
              d:DesignHeight="700">
 
     <Grid>
-        <Border VerticalAlignment="Stretch" Background="{DynamicResource DarkVariation5}" Effect="{DynamicResource RightShadow}">
+        <Border VerticalAlignment="Stretch" Background="{DynamicResource DarkAccent}" Effect="{DynamicResource RightShadow}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
@@ -43,7 +43,7 @@
 
                 <!-- Logo -->
                 <Image Grid.Row="1" Grid.Column="0"
-                       Source="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/CoachManager.png"
+                       Source="{Binding Source={x:Static properties:Settings.Default}, Path=ClubLogo, Mode=OneWay}"
                        Margin="5 20 5 20"
                        SnapsToDevicePixels="False"
                        RenderOptions.BitmapScalingMode="Fant" />

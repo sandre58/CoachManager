@@ -9,6 +9,7 @@
 
     <!-- FONT SIZES-->
     <sys:Double x:Key="SmallFontSize">10</sys:Double>
+    <sys:Double x:Key="MidSmallFontSize">12</sys:Double>
     <sys:Double x:Key="NormalFontSize">14</sys:Double>
     <sys:Double x:Key="MediumFontSize">16</sys:Double>
     <sys:Double x:Key="LargeFontSize">20</sys:Double>

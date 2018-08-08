@@ -102,7 +102,6 @@
     <Compile Include="Interfaces\IPositionService.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
     <Compile Include="SeasonService.cs" />
-    <Compile Include="PositionService.cs" />
     <Compile Include="Interfaces\IRosterService.cs" />
     <Compile Include="RosterService.cs" />
     <Compile Include="UserService.cs" />

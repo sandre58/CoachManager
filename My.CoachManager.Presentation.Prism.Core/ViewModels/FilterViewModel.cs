@@ -9,7 +9,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
     /// Provides members and properties to manage a filter.
     /// </summary>
     [Serializable]
-    public class FilterViewModel : ViewModelBase, IFilterViewModel, IWorkspaceViewModel, ISerializable
+    public class FilterViewModel : ScreenViewModel, IFilterViewModel, IWorkspaceViewModel, ISerializable
     {
         #region Fields
 

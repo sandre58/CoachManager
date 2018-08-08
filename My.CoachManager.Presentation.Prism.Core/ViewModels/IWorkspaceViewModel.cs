@@ -1,6 +1,6 @@
 ﻿namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public interface IWorkspaceViewModel
+    public interface IWorkspaceViewModel : IScreenViewModel
     {
         /// <summary>
         /// Gets or sets the title.

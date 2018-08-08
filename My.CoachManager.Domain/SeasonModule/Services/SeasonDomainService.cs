@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using My.CoachManager.CrossCutting.Core.Resources;
+﻿using FluentValidation.Results;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
-using My.CoachManager.Domain.ReferenceModule.Aggregates;
 using My.CoachManager.Domain.ReferenceModule.Services;
+using My.CoachManager.Domain.SeasonModule.Aggregate;
 
 namespace My.CoachManager.Domain.SeasonModule.Services
 {
@@ -53,22 +52,11 @@ namespace My.CoachManager.Domain.SeasonModule.Services
         /// Validates entity.
         /// </summary>
         /// <param name="entity"></param>
-        /// <returns>Errors.</returns>
-        public IEnumerable<string> IsValid(Season entity)
+        /// <returns></returns>
+        public override ValidationResult Validate(Season entity)
         {
-            var errors = new List<string>();
-
-            if (Repository.Any(ReferenceSpecification.IsUnique(entity)))
-            {
-                errors.Add(string.Format(ValidationMessageResources.AlreadyExistMessage, entity.Code));
-            }
-
-            if (entity.StartDate >= entity.EndDate)
-            {
-                errors.Add(ValidationMessageResources.StartDateLessThanEndDateMessage);
-            }
-
-            return errors;
+            var validator = new SeasonValidator(Repository);
+            return validator.Validate(entity);
         }
 
         #endregion Methods

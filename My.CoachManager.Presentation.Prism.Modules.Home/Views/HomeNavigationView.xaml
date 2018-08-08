@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
-             xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Home.Resources.Strings"
+             xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Home.Resources"
              mc:Ignorable="d"
              Content="{x:Static strings:HomeResources.HomeMenu}"
                          Target="HomeView"

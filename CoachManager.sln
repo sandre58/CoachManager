@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Infrastructure", "5 - Infrastructure", "{457CAA75-84B5-4A2F-811D-86234A78617A}"
 EndProject
@@ -69,11 +69,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Controls", "My.CoachManager.Presentation.Prism.Controls\My.CoachManager.Presentation.Prism.Controls.csproj", "{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Modules.Roster", "My.CoachManager.Presentation.Prism.Modules.Roster\My.CoachManager.Presentation.Prism.Modules.Roster.csproj", "{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.SkinManager", "My.CoachManager.Presentation.Prism.SkinManager\My.CoachManager.Presentation.Prism.SkinManager.csproj", "{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Modules.Roster.Core", "My.CoachManager.Presentation.Prism.Modules.Roster.Core\My.CoachManager.Presentation.Prism.Modules.Roster.Core.csproj", "{D55A1927-23BC-4C8B-B73E-D5143968B347}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Modules.Core", "My.CoachManager.Presentation.Prism.Modules.Core\My.CoachManager.Presentation.Prism.Modules.Core.csproj", "{50A483C0-90E2-4C4A-BFC4-C53458A6A727}"
 EndProject
@@ -405,20 +401,6 @@ Global
 		{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - BI|Any CPU.ActiveCfg = Debug|Any CPU
-		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - BI|Any CPU.Build.0 = Debug|Any CPU
-		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Home|Any CPU.ActiveCfg = Debug|Any CPU
-		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
-		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
-		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
-		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
-		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
-		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
-		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
-		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}.Debug - BI|Any CPU.ActiveCfg = Debug|Any CPU
 		{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}.Debug - BI|Any CPU.Build.0 = Debug|Any CPU
 		{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}.Debug - Home|Any CPU.ActiveCfg = Debug|Any CPU
@@ -433,20 +415,6 @@ Global
 		{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - BI|Any CPU.ActiveCfg = Debug|Any CPU
-		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - BI|Any CPU.Build.0 = Debug|Any CPU
-		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - Home|Any CPU.ActiveCfg = Debug|Any CPU
-		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
-		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
-		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
-		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
-		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
-		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
-		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
-		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D55A1927-23BC-4C8B-B73E-D5143968B347}.Release|Any CPU.Build.0 = Release|Any CPU
 		{50A483C0-90E2-4C4A-BFC4-C53458A6A727}.Debug - BI|Any CPU.ActiveCfg = Debug|Any CPU
 		{50A483C0-90E2-4C4A-BFC4-C53458A6A727}.Debug - BI|Any CPU.Build.0 = Debug|Any CPU
 		{50A483C0-90E2-4C4A-BFC4-C53458A6A727}.Debug - Home|Any CPU.ActiveCfg = Debug|Any CPU
@@ -517,9 +485,7 @@ Global
 		{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28} = {65E6F15A-E231-4A23-867E-6C6EFB5A3679}
 		{2D290FD9-5B64-4AF4-A295-2B4CDE6EB330} = {2D9139DF-BAD5-4B37-9E8D-444FE5778D68}
 		{A554F212-3F08-4AEF-B9AA-FA01A7491A7F} = {2D9139DF-BAD5-4B37-9E8D-444FE5778D68}
-		{F52D4433-DE0A-4E5E-89D1-05BA575C5BBA} = {65E6F15A-E231-4A23-867E-6C6EFB5A3679}
 		{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0} = {2D9139DF-BAD5-4B37-9E8D-444FE5778D68}
-		{D55A1927-23BC-4C8B-B73E-D5143968B347} = {65E6F15A-E231-4A23-867E-6C6EFB5A3679}
 		{50A483C0-90E2-4C4A-BFC4-C53458A6A727} = {65E6F15A-E231-4A23-867E-6C6EFB5A3679}
 		{C2647100-4BD2-49F0-8A22-A0CD1EA37C1E} = {2D9139DF-BAD5-4B37-9E8D-444FE5778D68}
 		{E4990450-8387-40F8-B2DA-A9BADB0EDBCF} = {65E6F15A-E231-4A23-867E-6C6EFB5A3679}

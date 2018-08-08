@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
 using Microsoft.Practices.ServiceLocation;
-using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Presentation.Prism.Core.Services;
 
 namespace My.CoachManager.Presentation.Prism.Core.Manager
 {
@@ -13,38 +10,39 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
     /// </summary>
     public static class KeyboardManager
     {
-        /// <summary>
-        /// The current bindings.
-        /// </summary>
-        private static readonly IList<KeyBinding> GlobalBindings;
+        #region Fields
+
+        private static IKeyBoardService _keyBoardService;
+
+        #endregion Fields
+
+        #region Members
 
         /// <summary>
-        /// The current bindings.
+        /// Gets Navigation Service.
         /// </summary>
-        private static readonly IList<KeyBinding> WorkspaceBindings;
+        private static IKeyBoardService KeyBoardService => _keyBoardService ??
+                                                               (_keyBoardService = ServiceLocator.Current.GetInstance<IKeyBoardService>());
 
-        /// <summary>
-        /// The current bindings.
-        /// </summary>
-        private static readonly IList<KeyBinding> WorkspaceDialogBindings;
-
-        public static bool GlobalBindingsIsSuspended;
-
-        public static bool WorkspaceBindingsIsSuspended;
-
-        public static bool WorkspaceDialogBindingsIsSuspended;
-
-        /// <summary>
-        /// Set default binding collection.
-        /// </summary>
-        static KeyboardManager()
+        public static bool GlobalBindingsIsSuspended
         {
-            GlobalBindings = new List<KeyBinding>();
-            WorkspaceBindings = new List<KeyBinding>();
-            WorkspaceDialogBindings = new List<KeyBinding>();
-
-            EventManager.RegisterClassHandler(typeof(Window), Keyboard.PreviewKeyDownEvent, new KeyEventHandler(OnPreviewKeyDown), true);
+            get => KeyBoardService.GlobalBindingsIsSuspended;
+            set => KeyBoardService.GlobalBindingsIsSuspended = value;
         }
+
+        public static bool WorkspaceBindingsIsSuspended
+        {
+            get => KeyBoardService.WorkspaceBindingsIsSuspended;
+            set => KeyBoardService.WorkspaceBindingsIsSuspended = value;
+        }
+
+        public static bool WorkspaceDialogBindingsIsSuspended
+        {
+            get => KeyBoardService.WorkspaceDialogBindingsIsSuspended;
+            set => KeyBoardService.WorkspaceDialogBindingsIsSuspended = value;
+        }
+
+        #endregion Members
 
         /// <summary>
         /// Registers the current shortcuts.
@@ -65,8 +63,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// <param name="shortcut">The shortcut.</param>
         public static void RegisterGlobalShortcut(KeyBinding shortcut)
         {
-            // Register them in the binding collection
-            GlobalBindings.Add(shortcut);
+            KeyBoardService.RegisterGlobalShortcut(shortcut);
         }
 
         /// <summary>
@@ -75,16 +72,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// <param name="shortcuts">The shortcuts.</param>
         public static void RemoveGlobalShortcuts(IEnumerable<KeyBinding> shortcuts)
         {
-            foreach (var shortcut in shortcuts)
-            {
-                if (!GlobalBindings.Contains(shortcut))
-                {
-                    continue;
-                }
-
-                var index = GlobalBindings.IndexOf(shortcut);
-                GlobalBindings.RemoveAt(index);
-            }
+            KeyBoardService.RemoveGlobalShortcuts(shortcuts);
         }
 
         /// <summary>
@@ -106,8 +94,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// <param name="shortcut">The shortcut.</param>
         public static void RegisterWorkspaceShortcut(KeyBinding shortcut)
         {
-            // Register them in the binding collection
-            WorkspaceBindings.Add(shortcut);
+            KeyBoardService.RegisterWorkspaceShortcut(shortcut);
         }
 
         /// <summary>
@@ -116,16 +103,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// <param name="shortcuts">The shortcuts.</param>
         public static void RemoveWorkspaceShortcuts(IEnumerable<KeyBinding> shortcuts)
         {
-            foreach (var shortcut in shortcuts)
-            {
-                if (!WorkspaceBindings.Contains(shortcut))
-                {
-                    continue;
-                }
-
-                var index = WorkspaceBindings.IndexOf(shortcut);
-                WorkspaceBindings.RemoveAt(index);
-            }
+            KeyBoardService.RemoveWorkspaceShortcuts(shortcuts);
         }
 
         /// <summary>
@@ -147,8 +125,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// <param name="shortcut">The shortcut.</param>
         public static void RegisterWorkspaceDialogShortcut(KeyBinding shortcut)
         {
-            // Register them in the binding collection
-            WorkspaceDialogBindings.Add(shortcut);
+            KeyBoardService.RegisterWorkspaceDialogShortcut(shortcut);
         }
 
         /// <summary>
@@ -157,16 +134,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// <param name="shortcuts">The shortcuts.</param>
         public static void RemoveWorkspaceDialogShortcuts(IEnumerable<KeyBinding> shortcuts)
         {
-            foreach (var shortcut in shortcuts)
-            {
-                if (!WorkspaceDialogBindings.Contains(shortcut))
-                {
-                    continue;
-                }
-
-                var index = WorkspaceDialogBindings.IndexOf(shortcut);
-                WorkspaceDialogBindings.RemoveAt(index);
-            }
+            KeyBoardService.RemoveWorkspaceDialogShortcuts(shortcuts);
         }
 
         /// <summary>
@@ -175,70 +143,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// <param name="key">The key.</param>
         public static void Send(Key key)
         {
-            if (Keyboard.PrimaryDevice == null)
-            {
-                return;
-            }
-
-            if (Keyboard.PrimaryDevice.ActiveSource == null)
-            {
-                return;
-            }
-
-            // Send the Preview Key Down Event
-            InputManager.Current.ProcessInput(new KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource, 0, key)
-            {
-                RoutedEvent = Keyboard.PreviewKeyDownEvent
-            });
-
-            // Send the Key Down Event
-            InputManager.Current.ProcessInput(new KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource, 0, key)
-            {
-                RoutedEvent = Keyboard.KeyDownEvent
-            });
-        }
-
-        /// <summary>
-        /// Called when [preview key down].
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="KeyEventArgs" /> instance containing the event data.</param>
-        private static void OnPreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                // WorkspaceDialog Bindings
-                if (!WorkspaceDialogBindingsIsSuspended)
-                {
-                    var keyBinding = WorkspaceDialogBindings.FirstOrDefault(w => w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
-                    if (keyBinding != null)
-                    {
-                        keyBinding.Command.Execute(keyBinding.CommandParameter);
-                        return;
-                    }
-                }
-
-                // Workspace Bindings
-                if (!WorkspaceBindingsIsSuspended)
-                {
-                    var keyBinding = WorkspaceBindings.FirstOrDefault(w => w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
-                    if (keyBinding != null)
-                    {
-                        keyBinding.Command.Execute(keyBinding.CommandParameter);
-                        return;
-                    }
-                }
-
-                // Global Bindings
-                if (GlobalBindingsIsSuspended) return;
-
-                var keyBinding1 = GlobalBindings.FirstOrDefault(w => w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
-                keyBinding1?.Command.Execute(keyBinding1.CommandParameter);
-            }
-            catch (Exception exception)
-            {
-                ServiceLocator.Current.TryResolve<ILogger>().Error(exception);
-            }
+            KeyBoardService.Send(key);
         }
     }
 }

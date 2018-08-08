@@ -46,16 +46,6 @@ namespace My.CoachManager.Application.Dtos.Roster
         /// </summary>
         [DataMember]
         public IEnumerable<RosterPlayerDto> Players { get; set; }
-
-        /// <summary>
-        /// Gets or set the coachs.
-        /// </summary>
-        public IEnumerable<RosterCoachDto> Coachs { get; set; }
-
-        /// <summary>
-        /// Gets or set the squads.
-        /// </summary>
-        [DataMember]
-        public IEnumerable<SquadDto> Squads { get; set; }
+        
     }
 }

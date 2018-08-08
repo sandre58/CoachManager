@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Core.Specification;
@@ -108,12 +108,12 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentNullException(nameof(item));
             }
 
-            IDbSet<TEntity> objectSet = CreateSet();
+            DbSet<TEntity> objectSet = CreateSet();
 
             // Attach object to unit of works and delete this
             objectSet.Attach(item);
 
-            // Delete object to IDbSet Object
+            // Delete object to DbSet Object
             objectSet.Remove(item);
         }
 
@@ -1487,24 +1487,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
 
         #endregion ----- Get Methods With Specification -----
 
-        #region ----- Lock Methods -----
-
-        /// <summary>
-        /// Lock the entity.
-        /// </summary>
-        /// <param name="entity">The entity object.</param>
-        public void Lock(TEntity entity)
-        {
-            if (_currentUnitOfWork == null)
-            {
-                throw new InvalidOperationException("Context cannot be null");
-            }
-
-            _currentUnitOfWork.Lock(entity);
-        }
-
-        #endregion ----- Lock Methods -----
-
         #endregion ----- IRepository<TEntity> Members -----
 
         #region ----- Private Methods -----
@@ -1513,7 +1495,7 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// Method for verify if Context Exist and transform the Entity Creation query to IObjectSet.
         /// </summary>
         /// <returns>Entity Creation query.</returns>
-        protected virtual IDbSet<TEntity> CreateSet()
+        protected virtual DbSet<TEntity> CreateSet()
         {
             if (_currentUnitOfWork == null)
             {

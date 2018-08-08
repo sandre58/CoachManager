@@ -104,9 +104,9 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         /// <param name="propertyName"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        protected virtual IEnumerable<ValidationResult> ComputeErrors(string propertyName, object value)
+        protected virtual IEnumerable<string> ComputeErrors(string propertyName, object value)
         {
-            return new List<ValidationResult>();
+            return new List<string>();
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
             // Validation by Metadata
             Validator.TryValidateProperty(value, new ValidationContext(this) { MemberName = propertyName }, validationResults);
             // Custom Validation
-            validationResults.AddRange(ComputeErrors(propertyName, value));
+            validationResults.AddRange(ComputeErrors(propertyName, value).Select(x => new ValidationResult(x)));
 
             // Is Valid
             if (!validationResults.Any())
@@ -183,7 +183,16 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         /// <param name="after">The after value.</param>
         protected virtual void OnPropertyChanged(string propertyName, object before, object after)
         {
-            ValidateProperty(propertyName, after);
+            var prop = GetType().GetProperty(propertyName);
+            if (prop != null)
+            {
+                // The property exists
+                var isPublic = (prop.GetGetMethod(true) ?? prop.GetSetMethod(true)).IsPublic;
+                if (isPublic)
+                {
+                    ValidateProperty(propertyName, after);
+                }
+            }
 
             RaisePropertyChanged(propertyName);
         }

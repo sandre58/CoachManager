@@ -124,7 +124,7 @@
     <value>Le format ne correspond pas à une adresse mail.</value>
   </data>
   <data name="EntityErrorHeader" xml:space="preserve">
-    <value>Erreurs lors de la sauvegarde de l'entité de type "{0}" : </value>
+    <value>Erreurs lors de la sauvegarde d'une ou plusieurs entités : </value>
   </data>
   <data name="InvalidFields" xml:space="preserve">
     <value>Les champs renseignés ne sont pas corrects.</value>

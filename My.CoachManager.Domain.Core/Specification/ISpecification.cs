@@ -25,12 +25,5 @@ namespace My.CoachManager.Domain.Core.Specification
         /// </summary>
         /// <returns>Lambda expression.</returns>
         Expression<Func<TEntity, bool>> SatisfiedBy();
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        bool SatisfiedBy(TEntity entity);
     }
 }

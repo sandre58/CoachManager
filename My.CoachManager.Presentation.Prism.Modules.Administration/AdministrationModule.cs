@@ -28,6 +28,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration
             _container.RegisterTypeForNavigation<RostersListView>();
             _container.RegisterTypeForNavigation<SeasonsListView>();
             _container.RegisterTypeForNavigation<CategoriesListView>();
+            _container.RegisterTypeForNavigation<PlayersListView>();
         }
     }
 }

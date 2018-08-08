@@ -80,7 +80,12 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Resources\Strings\SettingsResources.Designer.cs">
+    <Compile Include="Resources\StatusBarResources.Designer.cs">
+      <DependentUpon>StatusBarResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\SettingsResources.Designer.cs">
       <DependentUpon>SettingsResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -104,7 +109,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="CommonModule.cs" />
-    <Compile Include="Resources\Strings\AboutResources.Designer.cs">
+    <Compile Include="Resources\AboutResources.Designer.cs">
       <DependentUpon>AboutResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -164,12 +169,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings\AboutResources.resx">
+    <EmbeddedResource Include="Resources\StatusBarResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StatusBarResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AboutResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AboutResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings\SettingsResources.resx">
+    <EmbeddedResource Include="Resources\SettingsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SettingsResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>

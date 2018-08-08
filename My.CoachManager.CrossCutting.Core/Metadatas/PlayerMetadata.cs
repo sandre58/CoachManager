@@ -14,7 +14,7 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
     {
         [Display(Name = "Category", ResourceType = typeof(PlayerResources))]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
         [Display(Name = "Laterality", ResourceType = typeof(PlayerResources))]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
@@ -29,8 +29,5 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
 
         [Display(Name = "ShoesSize", ResourceType = typeof(PlayerResources))]
         public int? ShoesSize { get; set; }
-
-        [Display(Name = "Positions", ResourceType = typeof(PlayerResources))]
-        public object Positions { get; set; }
     }
 }

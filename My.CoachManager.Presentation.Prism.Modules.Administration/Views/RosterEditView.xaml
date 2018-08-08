@@ -7,9 +7,9 @@
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
-             xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings;assembly=My.CoachManager.Presentation.Prism.Resources"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
              xmlns:mvvm="http://prismlibrary.com/"
+             xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:RosterEditViewModel}"
              d:DesignHeight="350" d:DesignWidth="600">
@@ -41,7 +41,7 @@
                           ItemsSource="{Binding Seasons, IsAsync=True}"
                           DisplayMemberPath="Label"
                           SelectedValuePath="Id"
-                          SelectedValue="{Binding Item.SeasonId, IsAsync=True}"
+                          SelectedValue="{Binding Item.SeasonId, UpdateSourceTrigger=PropertyChanged}"
                           Width="{StaticResource MediumWidth}"
                           parameters:FormParameters.Label="{x:Static strings:RosterResources.Season}" />
             </Grid>
@@ -54,7 +54,7 @@
                           ItemsSource="{Binding Categories, IsAsync=True}"
                           DisplayMemberPath="Label"
                           SelectedValuePath="Id"
-                          SelectedValue="{Binding Item.CategoryId, IsAsync=True}"
+                          SelectedValue="{Binding Item.CategoryId, UpdateSourceTrigger=PropertyChanged}"
                           Width="{StaticResource MidSmallWidth}"
                           parameters:FormParameters.Label="{x:Static strings:RosterResources.Category}" />
             </Grid>

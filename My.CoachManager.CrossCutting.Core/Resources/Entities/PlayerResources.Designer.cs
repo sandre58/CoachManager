@@ -133,29 +133,11 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Postes.
-        /// </summary>
-        public static string Positions {
-            get {
-                return ResourceManager.GetString("Positions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Pointure.
         /// </summary>
         public static string ShoesSize {
             get {
                 return ResourceManager.GetString("ShoesSize", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Equipe.
-        /// </summary>
-        public static string Squad {
-            get {
-                return ResourceManager.GetString("Squad", resourceCulture);
             }
         }
         

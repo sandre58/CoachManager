@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using FluentValidation.Results;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.Core;
 
@@ -20,7 +22,8 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// <param name="entitiesBase">The entities base.</param>
         /// <param name="createFactory">The create factory.</param>
         /// <param name="modifyFactory">The modify factory.</param>
-        void Save(IEnumerable<TBaseDto> entitiesBase, Func<TBaseDto, TEntity> createFactory, Func<TBaseDto, TEntity, bool> modifyFactory);
+        /// <param name="validateEntity"></param>
+        void Save(IEnumerable<TBaseDto> entitiesBase, Func<TBaseDto, TEntity> createFactory, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null);
 
         /// <summary>
         /// Save in database the entity base.
@@ -28,29 +31,37 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// <param name="entityBase">The entity base.</param>
         /// <param name="createFactory">The create factory.</param>
         /// <param name="modifyFactory">The modify factory.</param>
+        /// <param name="validateEntity"></param>
         TBaseDto Save(
             TBaseDto entityBase,
             Func<TBaseDto, TEntity> createFactory,
-            Func<TBaseDto, TEntity, bool> modifyFactory);
+            Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null);
 
         /// <summary>
         /// Add in database the entity base.
         /// </summary>
         /// <param name="entityBase">The entity base.</param>
         /// <param name="createFactory">The create factory.</param>
-        TBaseDto Add(TBaseDto entityBase, Func<TBaseDto, TEntity> createFactory);
+        /// <param name="validateEntity"></param>
+        TBaseDto Add(TBaseDto entityBase, Func<TBaseDto, TEntity> createFactory, Func<TEntity, ValidationResult> validateEntity = null);
 
         /// <summary>
         /// Modify in database the entity base.
         /// </summary>
         /// <param name="entityBase">The entity base.</param>
         /// <param name="modifyFactory">The modify factory.</param>
-        TBaseDto Modify(TBaseDto entityBase, Func<TBaseDto, TEntity, bool> modifyFactory);
+        /// <param name="validateEntity"></param>
+        TBaseDto Modify(TBaseDto entityBase, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null);
 
         /// <summary>
         /// Remove in database the entity base.
         /// </summary>
         /// <param name="entityBase">The entity base.</param>
         void Remove(TBaseDto entityBase);
+
+        /// <summary>
+        /// Remove in database the entity base.
+        /// </summary>
+        void Remove(int id);
     }
 }

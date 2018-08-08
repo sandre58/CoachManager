@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using My.CoachManager.Application.Dtos.Season;
-using My.CoachManager.CrossCutting.Core.Exceptions;
-using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Domain.AppModule.Services;
 using My.CoachManager.Domain.SeasonModule.Aggregate;
 using My.CoachManager.Domain.SeasonModule.Services;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Core.Exceptions;
-using My.CoachManager.Domain.Core.Specification;
 using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Application.Services.SeasonModule
@@ -54,14 +51,7 @@ namespace My.CoachManager.Application.Services.SeasonModule
         /// <returns></returns>
         public SeasonDto SaveSeason(SeasonDto dto)
         {
-            var entity = SeasonFactory.CreateEntity(dto);
-            var spec = new SeasonIsValidSpecification(_seasonRepository);
-            if (!spec.SatisfiedBy(entity))
-            {
-                throw new ValidationBusinessException(ValidationMessageResources.InvalidFields, spec.Errors);
-            }
-
-            return _crudDomainService.Save(dto, SeasonFactory.CreateEntity, SeasonFactory.UpdateEntity);
+            return _crudDomainService.Save(dto, SeasonFactory.CreateEntity, SeasonFactory.UpdateEntity, x => _seasonDomainService.Validate(x));
         }
 
         /// <inheritdoc />

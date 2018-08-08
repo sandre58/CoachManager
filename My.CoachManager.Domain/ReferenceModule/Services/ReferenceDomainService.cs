@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using FluentValidation.Results;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.ReferenceModule.Aggregates;
 
 namespace My.CoachManager.Domain.ReferenceModule.Services
 {
-    public class ReferenceDomainService<TEntity> : IReferenceDomainService<TEntity>
+    public abstract class ReferenceDomainService<TEntity> : IReferenceDomainService<TEntity>
         where TEntity : class, IReference, new()
     {
         #region Fields
@@ -51,6 +52,13 @@ namespace My.CoachManager.Domain.ReferenceModule.Services
             }
             Repository.UnitOfWork.Commit();
         }
+
+        /// <summary>
+        /// Validates entity.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public abstract ValidationResult Validate(TEntity entity);
 
         #endregion Methods
     }

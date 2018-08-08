@@ -61,15 +61,6 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Effectif par défaut.
-        /// </summary>
-        public static string DefaultRoster {
-            get {
-                return ResourceManager.GetString("DefaultRoster", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Nom d&apos;utilisateur.
         /// </summary>
         public static string Login {
@@ -102,15 +93,6 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Rôles.
-        /// </summary>
-        public static string Roles {
-            get {
-                return ResourceManager.GetString("Roles", resourceCulture);
             }
         }
     }

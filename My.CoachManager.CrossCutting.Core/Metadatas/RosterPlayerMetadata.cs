@@ -20,10 +20,6 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public int PlayerId { get; set; }
 
-        [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        [Display(Name = "Squad", ResourceType = typeof(PlayerResources))]
-        public int SquadId { get; set; }
-
         [Display(Name = "Number", ResourceType = typeof(PlayerResources))]
         [Range(1, 99, ErrorMessageResourceName = "RangeFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public int? Number { get; set; }

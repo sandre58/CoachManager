@@ -2,7 +2,7 @@
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public interface IDialogViewModel : ICloseable
+    public interface IDialogViewModel : ICloseable, IScreenViewModel
     {
         /// <summary>
         /// Gets or sets title.

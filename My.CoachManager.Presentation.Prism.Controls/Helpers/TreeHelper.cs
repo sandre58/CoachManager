@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
@@ -12,6 +13,30 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
     /// </summary>
     public static class TreeHelper
     {
+        /// <summary>
+        /// Finds the ancestor or self.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="obj">The object.</param>
+        /// <returns>
+        /// The ancestor or self.
+        /// </returns>
+        public static UIElement FindAncestorOrSelf(Type type, DependencyObject obj)
+        {
+            while (obj != null)
+            {
+                if (obj.GetType() == type)
+                {
+                    return obj as UIElement;
+                }
+
+                obj = GetParentObject(obj);
+            }
+
+            return null;
+        }
+
+
         /// <summary>
         /// Finds a parent of a given item on the visual tree.
         /// </summary>

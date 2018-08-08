@@ -70,15 +70,6 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Staff.
-        /// </summary>
-        public static string Coachs {
-            get {
-                return ResourceManager.GetString("Coachs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Nom.
         /// </summary>
         public static string Name {
@@ -102,15 +93,6 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         public static string Season {
             get {
                 return ResourceManager.GetString("Season", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Equipes.
-        /// </summary>
-        public static string Squads {
-            get {
-                return ResourceManager.GetString("Squads", resourceCulture);
             }
         }
     }

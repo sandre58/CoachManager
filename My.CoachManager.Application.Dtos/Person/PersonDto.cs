@@ -10,7 +10,6 @@ namespace My.CoachManager.Application.Dtos.Person
     /// </summary>
     [DataContract]
     [KnownType(typeof(PlayerDto))]
-    [KnownType(typeof(CoachDto))]
     public class PersonDto : EntityDto
     {
         [DataMember]
@@ -27,6 +26,9 @@ namespace My.CoachManager.Application.Dtos.Person
 
         [DataMember]
         public int? CountryId { get; set; }
+
+        [DataMember]
+        public CountryDto Country { get; set; }
 
         [DataMember]
         public byte[] Photo { get; set; }

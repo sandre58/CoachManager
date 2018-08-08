@@ -19,7 +19,7 @@ namespace My.CoachManager.Domain.CategoryModule.Aggregate
                 Label = x.Label,
                 Description = x.Description,
                 Order = x.Order,
-                Year = x.Year,
+                Year = x.Year
             };
         }
     }

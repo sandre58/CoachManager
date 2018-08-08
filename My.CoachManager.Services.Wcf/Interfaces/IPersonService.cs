@@ -12,33 +12,41 @@ namespace My.CoachManager.Services.Wcf.Interfaces
     [ServiceContract]
     public interface IPersonService
     {
+
         /// <summary>
-        /// Get a player.
+        /// Load all items.
         /// </summary>
-        /// <returns></returns>>
+        /// <returns></returns>
         [OperationContract]
-        PlayerDetailsDto GetPlayerDetails(int playerId);
+        IList<CountryDto> GetCountries();
+
+        /// <summary>
+        /// Load all items.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        IList<PlayerDto> GetPlayers();
 
         /// <summary>
         /// Get a player.
         /// </summary>
         /// <returns></returns>>
         [OperationContract]
-        PlayerDto GetPlayer(int playerId);
+        PlayerDto GetPlayerById(int playerId);
 
         /// <summary>
         /// Create a dto.
         /// </summary>
         /// <returns></returns>>
         [OperationContract]
-        PlayerDto CreateOrUpdate(PlayerDto dto);
+        PlayerDto SavePlayer(PlayerDto dto);
 
         /// <summary>
         /// Remove a dto.
         /// </summary>
         /// <returns></returns>>
         [OperationContract]
-        void Remove(PlayerDto dto);
+        void RemovePlayer(PlayerDto dto);
 
         /// <summary>
         /// Get category from birthdate.
@@ -46,12 +54,5 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// <returns></returns>>
         [OperationContract]
         CategoryDto GetCategoryFromBirthdate(DateTime date);
-
-        /// <summary>
-        /// Get all dtos list.
-        /// </summary>
-        /// <returns></returns>
-        [OperationContract]
-        IEnumerable<CountryDto> GetCountries();
     }
 }

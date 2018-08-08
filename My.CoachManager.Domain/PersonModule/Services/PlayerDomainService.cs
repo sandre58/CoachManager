@@ -1,6 +1,7 @@
-﻿using My.CoachManager.CrossCutting.Logging;
+﻿using FluentValidation.Results;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
+using My.CoachManager.Domain.PersonModule.Aggregate;
 
 namespace My.CoachManager.Domain.PersonModule.Services
 {
@@ -19,7 +20,7 @@ namespace My.CoachManager.Domain.PersonModule.Services
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="playerRepository"></param>
-        public PlayerDomainService(ILogger logger, IRepository<Player> playerRepository)
+        public PlayerDomainService(IRepository<Player> playerRepository)
         {
             _playerRepository = playerRepository;
         }
@@ -29,23 +30,24 @@ namespace My.CoachManager.Domain.PersonModule.Services
         #region methods
 
         /// <summary>
-        /// Check if player is valide.
+        /// Check if the category is used by others properties.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public bool IsValid(Player item)
+        public bool IsUsed(int id)
         {
-            if (string.IsNullOrEmpty(item.LastName) || string.IsNullOrEmpty(item.FirstName))
-            {
-                return false;
-            }
+            return false;
+        }
 
-            if (item.CategoryId <= 0)
-            {
-                return false;
-            }
-
-            return true;
+        /// <summary>
+        /// Validates entity.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public ValidationResult Validate(Player entity)
+        {
+            var validator = new PlayerValidator();
+            return validator.Validate(entity);
         }
 
         #endregion methods

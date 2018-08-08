@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
+using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
-using My.CoachManager.Presentation.Prism.Resources.Strings;
+using My.CoachManager.Presentation.Prism.Wpf.Resources;
 
 namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 {
@@ -41,10 +42,10 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 
             var copyrightAttr = assembly.GetCustomAttribute<AssemblyCopyrightAttribute>();
 
-            Version = string.Format(GlobalResources.Version, assembly.GetName().Version);
+            Version = string.Format(CoachManagerResources.Version, assembly.GetName().Version);
             Copyright = (copyrightAttr != null) ? copyrightAttr.Copyright : "";
 
-            Message = StatusResources.DefaultStatusMessage;
+            Message = MessageResources.Ready;
         }
         #endregion Constructor
 

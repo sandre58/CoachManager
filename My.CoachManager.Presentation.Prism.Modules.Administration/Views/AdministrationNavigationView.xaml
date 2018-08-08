@@ -4,14 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
-             xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.Resources.Strings"
+             xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.Resources"
              mc:Ignorable="d"
              Header="{x:Static strings:AdministrationResources.AdministrationMenu}"
              Style="{StaticResource NavigationExpanderStyle}"
              Icon="{StaticResource ToolsGeometry}"
              Color="Black">
     <StackPanel>
-        <!--<controls:NavigationItem Content="{x:Static strings:AdministrationResources.PlayersMenu}" Target="PlayersListView" />-->
+        <controls:NavigationItem Content="{x:Static strings:AdministrationResources.PlayersMenu}" Target="PlayersListView" />
         <controls:NavigationItem Content="{x:Static strings:AdministrationResources.RostersMenu}" Target="RostersListView" />
         <controls:NavigationItem Content="{x:Static strings:AdministrationResources.SeasonsMenu}" Target="SeasonsListView" />
         <controls:NavigationItem Content="{x:Static strings:AdministrationResources.CategoriesMenu}" Target="CategoriesListView" />

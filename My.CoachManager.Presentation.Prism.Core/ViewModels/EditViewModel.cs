@@ -3,10 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Exceptions;
-using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Models;
+using My.CoachManager.Presentation.Prism.Core.Resources;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
@@ -22,6 +22,16 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         #region Members
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets item.
+        /// </summary>
+        IEntityModel IItemViewModel.Item
+        {
+            get => Item;
+            set => Item = (TModel) value;
+        }
+        
         /// <inheritdoc />
         /// <summary>
         /// Get or set Item.
@@ -134,13 +144,15 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
                     .ContinueWith(t =>
                     {
                         if (result)
+                        {
                             OnSaveCompleted();
+                            Mode = ScreenMode.Edition;
+                        }
                     }, TaskContinuationOptions.OnlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously)
 
                     .ContinueWith(t =>
                     {
                         State = ScreenState.Ready;
-                        Mode = ScreenMode.Edition;
                     });
 
                 await task;
@@ -173,7 +185,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <returns></returns>
         protected virtual bool CanSave()
         {
-            return Item.IsModified;
+            return true;
         }
 
         /// <summary>
@@ -278,9 +290,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Called when mode changes.
         /// </summary>
-        protected virtual void OnModeChanged()
+        protected override void OnModeChanged()
         {
-            Title = Mode == ScreenMode.Edition ? string.Format(MessageResources.EditItem, Title) : string.Format(MessageResources.CreateItem, Title);
+            Title = Mode == ScreenMode.Edition ? ControlResources.Edition : ControlResources.Creation;
         }
 
         #endregion Properties Changed

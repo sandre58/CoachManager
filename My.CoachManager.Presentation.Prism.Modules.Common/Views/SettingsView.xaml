@@ -6,7 +6,7 @@
              xmlns:regions="http://prismlibrary.com/"
              xmlns:core="clr-namespace:My.CoachManager.Presentation.Prism.Core;assembly=My.CoachManager.Presentation.Prism.Core"
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
-             xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Common.Resources.Strings"
+             xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Common.Resources"
              mc:Ignorable="d"
                  xmlns:prism="http://prismlibrary.com/"
                  xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Common.ViewModels"

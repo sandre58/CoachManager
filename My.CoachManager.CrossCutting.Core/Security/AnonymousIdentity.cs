@@ -8,7 +8,7 @@
         /// Initialise a new instance of <see cref="Identity"/>.
         /// </summary>
         public AnonymousIdentity()
-            : base(string.Empty, string.Empty, string.Empty, new string[] { })
+            : base(string.Empty, string.Empty, string.Empty)
         {
         }
 

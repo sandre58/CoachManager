@@ -183,5 +183,23 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         }
 
         #endregion Refresh
+
+        #region PropertyChanged
+
+        /// <summary>
+        /// Called when mode changes.
+        /// </summary>
+        protected virtual void OnModeChanged()
+        {
+        }
+
+        /// <summary>
+        /// Called when mode changes.
+        /// </summary>
+        protected virtual void OnStateChanged()
+        {
+        }
+
+        #endregion
     }
 }

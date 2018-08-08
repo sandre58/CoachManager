@@ -63,7 +63,11 @@ namespace My.CoachManager.Domain.SeasonModule.Aggregate
                 Description = item.Description,
                 Order = item.Order,
                 StartDate = item.StartDate,
-                EndDate = item.EndDate
+                EndDate = item.EndDate,
+                CreatedDate = item.CreatedDate,
+                CreatedBy = item.CreatedBy,
+                ModifiedDate = item.ModifiedDate,
+                ModifiedBy = item.ModifiedBy
             };
         }
     }

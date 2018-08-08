@@ -1,4 +1,4 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.EntityFrameworkCore;
 using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Infrastructure.Data.Core
@@ -14,7 +14,7 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// </summary>
         /// <typeparam name="TEntity">an IObjectWithChangeTracker Entity</typeparam>
         /// <returns>The database set of entities.</returns>
-        IDbSet<TEntity> CreateSet<TEntity>() where TEntity : class;
+        DbSet<TEntity> CreateSet<TEntity>() where TEntity : class;
 
         /// <summary>
         /// Attach this item in ObjectStateManager
@@ -30,19 +30,5 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="item">Item to set modified in context.</param>
         void SetModified<TEntity>(TEntity item) where TEntity : class;
 
-        /// <summary>
-        /// Lock a Row of a Table
-        /// </summary>
-        /// <typeparam name="TEntity">Type of the entity.</typeparam>
-        /// <param name="entity">Item to lock in context.</param>
-        void Lock<TEntity>(TEntity entity) where TEntity : class;
-
-        ///// <summary>
-        ///// Add or update an entity.
-        ///// </summary>
-        ///// <typeparam name="T"></typeparam>
-        ///// <param name="entity"></param>
-        ///// <param name="ignoreProperties"></param>
-        //void AddOrUpdate<T>(T entity, params string[] ignoreProperties) where T : class, IEntity;
     }
 }

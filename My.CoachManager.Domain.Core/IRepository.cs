@@ -571,14 +571,5 @@ namespace My.CoachManager.Domain.Core
 
         #endregion ----- Get Methods With Specification -----
 
-        #region ----- Lock Method -----
-
-        /// <summary>
-        /// Lock the table of the Entity with a Select For Update.
-        /// </summary>
-        /// <param name="entity">Entity to lock.</param>
-        void Lock(TEntity entity);
-
-        #endregion ----- Lock Method -----
     }
 }

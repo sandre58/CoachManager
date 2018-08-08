@@ -24,8 +24,5 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
 
         [Display(Name = "Players", ResourceType = typeof(RosterResources))]
         public ICollection<object> Players { get; set; }
-
-        [Display(Name = "Squads", ResourceType = typeof(RosterResources))]
-        public ICollection<object> Squads { get; set; }
     }
 }

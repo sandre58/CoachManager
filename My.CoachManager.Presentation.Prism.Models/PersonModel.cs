@@ -134,7 +134,7 @@ namespace My.CoachManager.Presentation.Prism.Models
         {
             get
             {
-                if (Phones.Count <= 0) return string.Empty;
+                if (Phones == null || Phones.Count <= 0) return string.Empty;
                 var defaultPhone = Phones.FirstOrDefault(p => p.Default);
                 return defaultPhone != null ? defaultPhone.Value : Phones.First().Value;
             }
@@ -147,7 +147,7 @@ namespace My.CoachManager.Presentation.Prism.Models
         {
             get
             {
-                if (Emails.Count <= 0) return string.Empty;
+                if (Emails == null || Emails.Count <= 0) return string.Empty;
                 var defaultEmail = Emails.FirstOrDefault(p => p.Default);
                 return defaultEmail != null ? defaultEmail.Value : Emails.First().Value;
             }

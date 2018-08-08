@@ -11,18 +11,19 @@ using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Manager;
+using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Modules.Administration;
 using My.CoachManager.Presentation.Prism.Modules.Common;
 using My.CoachManager.Presentation.Prism.Modules.Home;
-using My.CoachManager.Presentation.Prism.Resources.Strings;
 using My.CoachManager.Presentation.Prism.Wpf.Properties;
 using My.CoachManager.Presentation.Prism.Wpf.Services;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using My.CoachManager.Presentation.Prism.Wpf.Views;
 using My.CoachManager.Presentation.ServiceAgent;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.SeasonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.UserServiceReference;
@@ -83,12 +84,14 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             Container.RegisterInstance(typeof(IRosterService), ServiceClientFactory.Create<RosterServiceClient, IRosterService>());
             Container.RegisterInstance(typeof(IUserService), ServiceClientFactory.Create<UserServiceClient, IUserService>());
             Container.RegisterInstance(typeof(ISeasonService), ServiceClientFactory.Create<SeasonServiceClient, ISeasonService>());
+            Container.RegisterInstance(typeof(IPersonService), ServiceClientFactory.Create<PersonServiceClient, IPersonService>());
 
             // Register Presentation Services
             Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<INotificationService, NotificationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IAuthenticationService, AuthenticationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IDialogService, DialogService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IKeyBoardService, KeyboardService>(new ContainerControlledLifetimeManager());
         }
 
         /// <inheritdoc />
@@ -155,14 +158,14 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             var manager = Container.Resolve<IModuleManager>();
             manager.LoadModuleCompleted += Manager_LoadModuleCompleted;
 
-            UpdateSplachMessage(StatusResources.UserConnection);
+            UpdateSplachMessage(MessageResources.UserConnection);
             if (!ConnectUser()) return;
 
             base.InitializeModules();
 
             var actionToLoad = new List<Tuple<Action, string>>
                 {
-                    new Tuple<Action, string>(LoadSkin, StatusResources.SkinLoading)
+                    new Tuple<Action, string>(LoadSkin, MessageResources.SkinLoading)
                 };
 
             foreach (var action in actionToLoad)
@@ -176,7 +179,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         private void Manager_LoadModuleCompleted(object sender, LoadModuleCompletedEventArgs e)
         {
             Logger.Log($"Module Loaded : {e.ModuleInfo.ModuleName}", Category.Debug, Priority.None);
-            UpdateSplachMessage(string.Format(StatusResources.ModuleLoading, e.ModuleInfo.ModuleName));
+            UpdateSplachMessage(string.Format(MessageResources.ModuleLoading, e.ModuleInfo.ModuleName));
             // Thread.Sleep(3000);
         }
 
@@ -309,14 +312,14 @@ namespace My.CoachManager.Presentation.Prism.Wpf
 
                             if (!isConnected)
                             {
-                                NotificationManager.ShowError(StatusResources.ConnectionFailed);
+                                NotificationManager.ShowError(MessageResources.ConnectionFailed);
                             }
 
-                            return new Tuple<bool, string>(isConnected, StatusResources.ConnectionFailed);
+                            return new Tuple<bool, string>(isConnected, MessageResources.ConnectionFailed);
                         },
                         defaultUsername.ToUpper(), defaultPassword) == DialogResult.Ok)
                 {
-                    NotificationManager.ShowSuccess(string.Format(StatusResources.UserConnected, principal.Identity.Name));
+                    NotificationManager.ShowSuccess(string.Format(MessageResources.UserConnected, principal.Identity.Name));
                 }
                 else
                 {

@@ -17,7 +17,6 @@ namespace My.CoachManager.Presentation.Prism.Models
         public RosterModel()
         {
             Players = new ObservableCollection<RosterPlayerModel>();
-            Squads = new ObservableCollection<SquadModel>();
         }
 
         /// <summary>
@@ -49,10 +48,5 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// Gets or set the players.
         /// </summary>
         public ObservableCollection<RosterPlayerModel> Players { get; set; }
-
-        /// <summary>
-        /// Gets or set the squads.
-        /// </summary>
-        public ObservableCollection<SquadModel> Squads { get; set; }
     }
 }

@@ -7,11 +7,11 @@
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
-             xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Strings;assembly=My.CoachManager.Presentation.Prism.Resources"
              xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.Views"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:resources="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:SeasonEditViewModel}"
              d:DesignHeight="350" d:DesignWidth="600">

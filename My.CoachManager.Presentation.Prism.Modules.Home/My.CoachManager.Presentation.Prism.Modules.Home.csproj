@@ -80,7 +80,7 @@
     </Compile>
     <Compile Include="HomeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Strings\HomeResources.Designer.cs">
+    <Compile Include="Resources\HomeResources.Designer.cs">
       <DependentUpon>HomeResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -116,7 +116,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Strings\HomeResources.resx">
+    <EmbeddedResource Include="Resources\HomeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HomeResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>

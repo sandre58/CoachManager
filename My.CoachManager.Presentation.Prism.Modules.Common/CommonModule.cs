@@ -3,7 +3,7 @@ using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.Presentation.Prism.Core;
 using My.CoachManager.Presentation.Prism.Core.Commands;
 using My.CoachManager.Presentation.Prism.Core.Manager;
-using My.CoachManager.Presentation.Prism.Modules.Common.Resources.Strings;
+using My.CoachManager.Presentation.Prism.Modules.Common.Resources;
 using My.CoachManager.Presentation.Prism.Modules.Common.Views;
 using Prism.Commands;
 using Prism.Modularity;

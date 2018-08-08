@@ -157,29 +157,47 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.7.6.104\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressModule\Aggregate\AddressFactory.cs" />
     <Compile Include="AppModule\Services\CrudDomainService.cs" />
     <Compile Include="AppModule\Services\ICrudDomainService.cs" />
     <Compile Include="CategoryModule\Aggregate\CategoryFactory.cs" />
     <Compile Include="CategoryModule\Aggregate\CategorySelectBuilder.cs" />
+    <Compile Include="CategoryModule\Aggregate\CategoryValidator.cs" />
+    <Compile Include="PersonModule\Aggregate\ContactFactory.cs" />
+    <Compile Include="PersonModule\Aggregate\PlayerValidator.cs" />
+    <Compile Include="PersonModule\Aggregate\CountryFactory.cs" />
+    <Compile Include="PersonModule\Aggregate\PlayerSelectBuilder.cs" />
     <Compile Include="ReferenceModule\Aggregates\ReferenceOrderBuilder.cs" />
     <Compile Include="PersonModule\Aggregate\CountrySelectBuilder.cs" />
     <Compile Include="PersonModule\Aggregate\PlayerFactory.cs" />
-    <Compile Include="PositionModule\Aggregate\PositionSelectBuilder.cs" />
     <Compile Include="CategoryModule\Services\CategoryDomainService.cs" />
     <Compile Include="PersonModule\Services\PlayerDomainService.cs" />
     <Compile Include="PersonModule\Services\IPlayerDomainService.cs" />
-    <Compile Include="PositionModule\Services\IPositionDomainService.cs" />
-    <Compile Include="PositionModule\Services\PositionDomainService.cs" />
+    <Compile Include="ReferenceModule\Aggregates\ReferenceValidator.cs" />
     <Compile Include="ReferenceModule\Services\IReferenceDomainService.cs" />
     <Compile Include="ReferenceModule\Services\ReferenceDomainService.cs" />
+    <Compile Include="RosterModule\Aggregate\RosterValidator.cs" />
     <Compile Include="RosterModule\Aggregate\RosterFactory.cs" />
-    <Compile Include="SeasonModule\Aggregate\SeasonIsValidSpecification.cs" />
+    <Compile Include="RosterModule\Services\IRosterDomainService.cs" />
+    <Compile Include="RosterModule\Services\RosterDomainService.cs" />
     <Compile Include="SeasonModule\Aggregate\SeasonSelectBuilder.cs" />
     <Compile Include="SeasonModule\Aggregate\SeasonFactory.cs" />
+    <Compile Include="SeasonModule\Aggregate\SeasonValidator.cs" />
     <Compile Include="SeasonModule\Services\SeasonDomainService.cs" />
     <Compile Include="SeasonModule\Services\ISeasonDomainService.cs" />
     <Compile Include="CategoryModule\Services\ICategoryDomainService.cs" />
@@ -212,11 +230,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="RosterModule\Services\" />
     <Folder Include="UserModule\Services\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

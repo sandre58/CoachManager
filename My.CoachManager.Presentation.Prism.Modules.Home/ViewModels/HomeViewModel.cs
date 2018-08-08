@@ -1,5 +1,5 @@
 ﻿using My.CoachManager.Presentation.Prism.Core.ViewModels;
-using My.CoachManager.Presentation.Prism.Modules.Home.Resources.Strings;
+using My.CoachManager.Presentation.Prism.Modules.Home.Resources;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Home.ViewModels
 {

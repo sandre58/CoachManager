@@ -30,9 +30,9 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// <param name="propertyName"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        protected override IEnumerable<ValidationResult> ComputeErrors(string propertyName, object value)
+        protected override IEnumerable<string> ComputeErrors(string propertyName, object value)
         {
-            var errors = new List<ValidationResult>();
+            var errors = new List<string>();
 
             switch (propertyName)
             {
@@ -40,7 +40,7 @@ namespace My.CoachManager.Presentation.Prism.Models
                 case nameof(EndDate):
                     if (StartDate >= EndDate)
                     {
-                        errors.Add(new ValidationResult(ValidationMessageResources.StartDateLessThanEndDateMessage));
+                        errors.Add(ValidationMessageResources.StartDateLessThanEndDateMessage);
                     }
 
                     break;

@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using FluentValidation.Results;
 using My.CoachManager.Application.Dtos;
+using My.CoachManager.CrossCutting.Core.Exceptions;
+using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.AppModule.Services
@@ -11,7 +15,7 @@ namespace My.CoachManager.Domain.AppModule.Services
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <typeparam name="TBaseDto">The type of the base dto.</typeparam>
-    /// <seealso cref="QM.Absolu.Domain.AppModule.Services.ICrudDomainService{TEntity, TBaseDTO}" />
+    /// <seealso cref="ICrudDomainService{TEntity,TBaseDto}" />
     public class CrudDomainService<TEntity, TBaseDto> : ICrudDomainService<TEntity, TBaseDto>
         where TEntity : class, IEntity, new()
         where TBaseDto : EntityDto, new()
@@ -36,7 +40,8 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// <param name="entitiesBase">The entities base.</param>
         /// <param name="createFactory">The create factory.</param>
         /// <param name="modifyFactory">The modify factory.</param>
-        public void Save(IEnumerable<TBaseDto> entitiesBase, Func<TBaseDto, TEntity> createFactory, Func<TBaseDto, TEntity, bool> modifyFactory)
+        /// <param name="validateEntity"></param>
+        public void Save(IEnumerable<TBaseDto> entitiesBase, Func<TBaseDto, TEntity> createFactory, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null)
         {
             var entitiesBaseList = entitiesBase.ToList();
 
@@ -68,7 +73,8 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// <param name="entityBase">The entity base.</param>
         /// <param name="createFactory">The create factory.</param>
         /// <param name="modifyFactory">The modify factory.</param>
-        public TBaseDto Save(TBaseDto entityBase, Func<TBaseDto, TEntity> createFactory, Func<TBaseDto, TEntity, bool> modifyFactory)
+        /// <param name="validateEntity"></param>
+        public TBaseDto Save(TBaseDto entityBase, Func<TBaseDto, TEntity> createFactory, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null)
         {
             // Delete
             if (entityBase.CrudStatus == CrudStatus.Deleted)
@@ -95,7 +101,15 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// <param name="entityBase">The entity base.</param>
         public void Remove(TBaseDto entityBase)
         {
-            var entity = _entityRepository.GetEntity(entityBase.Id);
+            Remove(entityBase.Id);
+        }
+
+        /// <summary>
+        /// Remove in database the entity base.
+        /// </summary>
+        public void Remove(int id)
+        {
+            var entity = _entityRepository.GetEntity(id);
 
             if (entity == null)
             {
@@ -106,15 +120,26 @@ namespace My.CoachManager.Domain.AppModule.Services
             _entityRepository.UnitOfWork.Commit();
         }
 
-        /// <inheritdoc />
         /// <summary>
         /// Add in database the entity base.
         /// </summary>
         /// <param name="entityBase">The entity base.</param>
         /// <param name="createFactory">The create factory.</param>
-        public TBaseDto Add(TBaseDto entityBase, Func<TBaseDto, TEntity> createFactory)
+        /// <param name="validateEntity"></param>
+        public TBaseDto Add(TBaseDto entityBase, Func<TBaseDto, TEntity> createFactory, Func<TEntity, ValidationResult> validateEntity = null)
         {
             var entity = createFactory.Invoke(entityBase);
+
+            if (validateEntity != null)
+            {
+                var result = validateEntity.Invoke(entity);
+
+                if (!result.IsValid)
+                {
+                    throw new ValidationBusinessException(ValidationMessageResources.InvalidFields, result.Errors.Select(x => x.ErrorMessage).ToList());
+                }
+            }
+            
             _entityRepository.Add(entity);
             _entityRepository.UnitOfWork.Commit();
 
@@ -129,16 +154,27 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// </summary>
         /// <param name="entityBase">The entity base.</param>
         /// <param name="modifyFactory">The modify factory.</param>
-        public TBaseDto Modify(TBaseDto entityBase, Func<TBaseDto, TEntity, bool> modifyFactory)
+        /// <param name="validateEntity"></param>
+        public TBaseDto Modify(TBaseDto entityBase, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null)
         {
             var entity = _entityRepository.GetEntity(entityBase.Id);
+            modifyFactory.Invoke(entityBase, entity);
 
             if (entity == null)
             {
                 throw new NullReferenceException();
             }
 
-            modifyFactory.Invoke(entityBase, entity);
+            if (validateEntity != null)
+            {
+                var result = validateEntity.Invoke(entity);
+
+                if (!result.IsValid)
+                {
+                    throw new ValidationBusinessException(ValidationMessageResources.InvalidFields, result.Errors.Select(x => x.ErrorMessage).ToList());
+                }
+            }
+
             _entityRepository.Modify(entity);
             _entityRepository.UnitOfWork.Commit();
 

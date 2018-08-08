@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Security.Principal;
+﻿using System.Security.Principal;
 
 namespace My.CoachManager.CrossCutting.Core.Security
 {
@@ -19,13 +18,11 @@ namespace My.CoachManager.CrossCutting.Core.Security
         /// <param name="login"></param>
         /// <param name="name"></param>
         /// <param name="email"></param>
-        /// <param name="permissions"></param>
-        public Identity(string login, string name, string email, IEnumerable<string> permissions)
+        public Identity(string login, string name, string email)
         {
             Login = login;
             Name = name;
             Email = email;
-            Permissions = permissions;
         }
 
         #endregion Constructors and Destructors
@@ -44,11 +41,6 @@ namespace My.CoachManager.CrossCutting.Core.Security
         /// Gets the email.
         /// </summary>
         public string Email { get; private set; }
-
-        /// <summary>
-        /// Gets the permissions.
-        /// </summary>
-        public IEnumerable<string> Permissions { get; private set; }
 
         #region IIdentity Members
 

@@ -9,18 +9,6 @@ namespace My.CoachManager.Application.Services.RosterModule
     public interface IRosterAppService
     {
         /// <summary>
-        /// Get all roster's squads.
-        /// </summary>
-        /// <returns></returns>
-        IEnumerable<SquadDto> GetSquads(int rosterId);
-
-        /// <summary>
-        /// Get a squad.
-        /// </summary>
-        /// <returns></returns>
-        SquadDto GetSquad(int squadId);
-
-        /// <summary>
         /// Get all dtos list.
         /// </summary>
         /// <returns></returns>
