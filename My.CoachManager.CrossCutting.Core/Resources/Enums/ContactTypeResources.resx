@@ -117,70 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Address" xml:space="preserve">
-    <value>Adresse</value>
-  </data>
-  <data name="Age" xml:space="preserve">
-    <value>Âge</value>
-  </data>
-  <data name="AgeFormat" xml:space="preserve">
-    <value>{0} ans</value>
-  </data>
-  <data name="Birthdate" xml:space="preserve">
-    <value>Né(e) le</value>
-  </data>
-  <data name="Contacts" xml:space="preserve">
-    <value>Contacts</value>
-  </data>
-  <data name="Country" xml:space="preserve">
-    <value>Nationalité</value>
-  </data>
-  <data name="CountryAbbr" xml:space="preserve">
-    <value>Nat.</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>Description</value>
-  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
-  <data name="Emails" xml:space="preserve">
-    <value>Emails</value>
-  </data>
-  <data name="FirstName" xml:space="preserve">
-    <value>Prénom</value>
-  </data>
-  <data name="FullName" xml:space="preserve">
-    <value>Nom</value>
-  </data>
-  <data name="Gender" xml:space="preserve">
-    <value>Genre</value>
-  </data>
-  <data name="LastName" xml:space="preserve">
-    <value>Nom</value>
-  </data>
-  <data name="LicenseNumber" xml:space="preserve">
-    <value>N° de licence</value>
-  </data>
   <data name="Phone" xml:space="preserve">
     <value>Téléphone</value>
-  </data>
-  <data name="Phones" xml:space="preserve">
-    <value>Téléphones</value>
-  </data>
-  <data name="Photo" xml:space="preserve">
-    <value>Photo</value>
-  </data>
-  <data name="PlaceOfBirth" xml:space="preserve">
-    <value>Lieu de naissance</value>
-  </data>
-  <data name="Size" xml:space="preserve">
-    <value>Taille</value>
-  </data>
-  <data name="UnknownAge" xml:space="preserve">
-    <value>Age inconnu</value>
-  </data>
-  <data name="UnknownCountry" xml:space="preserve">
-    <value>Nationnalité inconnue</value>
   </data>
 </root>

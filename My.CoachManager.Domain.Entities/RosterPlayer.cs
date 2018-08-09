@@ -32,11 +32,6 @@ namespace My.CoachManager.Domain.Entities
         public Player Player { get; set; }
 
         /// <summary>
-        /// Gets or sets the player's squad id.
-        /// </summary>
-        public int SquadId { get; set; }
-
-        /// <summary>
         /// Gets or sets the default player's number in the roster.
         /// </summary>
         public int? Number { get; set; }

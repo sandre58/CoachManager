@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Constants;
@@ -35,7 +36,6 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
 
         [Display(Name = "Gender", ResourceType = typeof(PersonResources))]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        [DefaultValue(PlayerConstants.DefaultGender)]
         public GenderType Gender { get; set; }
 
         [Display(Name = "Address", ResourceType = typeof(PersonResources))]
@@ -51,5 +51,8 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
         [Display(Name = "Size", ResourceType = typeof(PersonResources))]
         [MaxLength(4, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public string Size { get; set; }
+
+        [Display(Name = "Contacts", ResourceType = typeof(PersonResources))]
+        public ICollection<object> Contacts { get; set; }
     }
 }

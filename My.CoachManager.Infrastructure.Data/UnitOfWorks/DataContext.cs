@@ -7,9 +7,12 @@ using CommonServiceLocator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Logging;
+using My.CoachManager.CrossCutting.Core.Constants;
+using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Infrastructure.Data.Core;
+using My.CoachManager.Infrastructure.Data.Migrations;
 using ILogger = My.CoachManager.CrossCutting.Logging.ILogger;
 
 namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
@@ -24,7 +27,8 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
 
         public DbSet<Address> Adresses { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Email> Emails { get; set; }
+        public DbSet<Phone> Phones { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<Player> Players { get; set; }
@@ -58,24 +62,111 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Contacts
+            modelBuilder.Entity<Contact>()
+                .ToTable("Contacts")
+                .HasDiscriminator<ContactType>("Type")
+                .HasValue<Phone>(ContactType.Phone)
+                .HasValue<Email>(ContactType.Email);
 
-            //// Default Value
-            //modelBuilder.Conventions.Add(new AttributeToColumnAnnotationConvention<DefaultValueAttribute, string>("SqlDefaultValue",
-            //    (p, attributes) =>
-            //    {
-            //        var value = attributes.Single().Value;
-            //        if (value is Enum || value is bool)
-            //        {
-            //            return Convert.ToInt32(value).ToString();
-            //        }
-            //        return value.ToString();
-            //    }));
+            // Category
+            modelBuilder.Entity<Category>()
+                .HasAlternateKey(x => x.Code);
+
+            // Country
+            modelBuilder.Entity<Country>()
+                .HasAlternateKey(x => x.Code);
+
+            // Season
+            modelBuilder.Entity<Season>()
+                .HasAlternateKey(x => x.Code);
 
             // Address
             modelBuilder.Entity<Address>()
                 .HasOne(s => s.Country)
                 .WithMany()
-                .HasForeignKey(x => x.CountryId);
+                .HasForeignKey(x => x.CountryId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            // Person
+            modelBuilder.Entity<Person>()
+                .HasOne(x => x.Address)
+                .WithMany()
+                .HasForeignKey(x => x.AddressId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Person>()
+                .HasOne(x => x.Country)
+                .WithMany()
+                .HasForeignKey(x => x.CountryId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Person>()
+                .HasMany(x => x.Contacts)
+                .WithOne(x => x.Person)
+                .HasForeignKey(x => x.PersonId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Person>()
+                .Property(x => x.Gender)
+                .HasDefaultValue(PlayerConstants.DefaultGender);
+
+            //Player
+            modelBuilder.Entity<Player>()
+                .HasOne(x => x.Category)
+                .WithMany()
+                .HasForeignKey(x => x.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Player>()
+                .Property(x => x.Laterality)
+                .HasDefaultValue(PlayerConstants.DefaultLaterality);
+
+            // Roster
+            modelBuilder.Entity<Roster>()
+                .HasOne(x => x.Category)
+                .WithMany()
+                .HasForeignKey(x => x.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Roster>()
+                .HasOne(x => x.Season)
+                .WithMany()
+                .HasForeignKey(x => x.SeasonId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Roster>()
+                .HasOne(x => x.Season)
+                .WithMany()
+                .HasForeignKey(x => x.SeasonId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Roster>()
+                .HasAlternateKey(x => new { x.SeasonId, x.CategoryId });
+
+            modelBuilder.Entity<RosterPlayer>()
+                .HasKey(x => new { x.RosterId, x.PlayerId });
+
+            modelBuilder.Entity<RosterPlayer>()
+                .HasOne(x => x.Roster)
+                .WithMany(x => x.Players)
+                .HasForeignKey(x => x.RosterId);
+
+            modelBuilder.Entity<RosterPlayer>()
+                .HasOne(x => x.Player)
+                .WithMany()
+                .HasForeignKey(x => x.PlayerId);
+
+            modelBuilder.Entity<RosterPlayer>()
+                .Property(x => x.IsMutation)
+                .HasDefaultValue(PlayerConstants.DefaultMutation);
+
+            modelBuilder.Entity<RosterPlayer>()
+                .Property(x => x.LicenseState)
+                .HasDefaultValue(PlayerConstants.DefaultLicenseState);
+
+            // Seed
+            modelBuilder.Seed();
 
             base.OnModelCreating(modelBuilder);
         }

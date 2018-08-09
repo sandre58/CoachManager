@@ -24,7 +24,6 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
         public string Description { get; set; }
 
         [Display(Name = "Order", ResourceType = typeof(ReferenceResources))]
-        [DefaultValue(0)]
         public int Order { get; set; }
     }
 }

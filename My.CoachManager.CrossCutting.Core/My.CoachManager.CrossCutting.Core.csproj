@@ -297,6 +297,7 @@
     <Compile Include="Constants\RoleConstants.cs" />
     <Compile Include="Constants\SqlConstants.cs" />
     <Compile Include="Cryptography\TripleDesEncryptor.cs" />
+    <Compile Include="Enums\ContactType.cs" />
     <Compile Include="Enums\LicenseState.cs" />
     <Compile Include="Enums\Laterality.cs" />
     <Compile Include="Enums\GenderType.cs" />
@@ -366,6 +367,11 @@
     </Compile>
     <Compile Include="Resources\Enums\FilterOperatorResources.Designer.cs">
       <DependentUpon>FilterOperatorResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Enums\ContactTypeResources.Designer.cs">
+      <DependentUpon>ContactTypeResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -458,6 +464,10 @@
     <EmbeddedResource Include="Resources\Enums\FilterOperatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FilterOperatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Enums\ContactTypeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ContactTypeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Enums\LicenseStateResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

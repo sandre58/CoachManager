@@ -25,7 +25,6 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
         public int? Number { get; set; }
 
         [Display(Name = "LicenseState", ResourceType = typeof(PlayerResources))]
-        [DefaultValue(LicenseState.Unknown)]
         public LicenseState LicenseState { get; set; }
 
         [Display(Name = "IsMutation", ResourceType = typeof(PlayerResources))]

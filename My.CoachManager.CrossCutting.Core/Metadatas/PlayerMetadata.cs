@@ -18,7 +18,6 @@ namespace My.CoachManager.CrossCutting.Core.Metadatas
 
         [Display(Name = "Laterality", ResourceType = typeof(PlayerResources))]
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        [DefaultValue(PlayerConstants.DefaultLaterality)]
         public Laterality Laterality { get; set; }
 
         [Display(Name = "Height", ResourceType = typeof(PlayerResources))]

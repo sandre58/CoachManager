@@ -38,9 +38,6 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the Business identifier.
         /// </summary>
-        public override string BusinessKey
-        {
-            get { return Value; }
-        }
+        public override string BusinessKey => Value;
     }
 }
