@@ -302,7 +302,11 @@
     <Compile Include="Enums\Laterality.cs" />
     <Compile Include="Enums\GenderType.cs" />
     <Compile Include="Exceptions\BusinessException.cs" />
+    <Compile Include="Exceptions\ConcurrencyException.cs" />
+    <Compile Include="Exceptions\ConstraintCheckException.cs" />
+    <Compile Include="Exceptions\IsUsedException.cs" />
     <Compile Include="Exceptions\MyException.cs" />
+    <Compile Include="Exceptions\UniqueException.cs" />
     <Compile Include="Exceptions\ValidationBusinessException.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\AttributeExtensions.cs" />
@@ -315,20 +319,6 @@
     <Compile Include="Helpers\ParameterHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\Util.cs" />
-    <Compile Include="Metadatas\RosterPlayerMetadata.cs" />
-    <Compile Include="Metadatas\RosterMetadata.cs" />
-    <Compile Include="Metadatas\AddressMetadata.cs" />
-    <Compile Include="Metadatas\CategoryMetadata.cs" />
-    <Compile Include="Metadatas\PersonMetadata.cs" />
-    <Compile Include="Metadatas\PhoneMetadata.cs" />
-    <Compile Include="Metadatas\EmailMetadata.cs" />
-    <Compile Include="Metadatas\ContactMetadata.cs" />
-    <Compile Include="Metadatas\SeasonMetadata.cs" />
-    <Compile Include="Metadatas\ReferenceMetadata.cs" />
-    <Compile Include="Metadatas\CountryMetadata.cs" />
-    <Compile Include="Metadatas\UserMetadata.cs" />
-    <Compile Include="Metadatas\PlayerMetadata.cs" />
-    <Compile Include="Metadatas\EntityMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Entities\RosterResources.Designer.cs">
       <DependentUpon>RosterResources.resx</DependentUpon>

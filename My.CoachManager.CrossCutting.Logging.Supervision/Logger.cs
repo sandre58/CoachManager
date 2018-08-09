@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Logging;
 using NLog;
+using Prism.Logging;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace My.CoachManager.CrossCutting.Logging.Supervision
 {
     /// <summary>
     /// Class representing a Logger.
     /// </summary>
-    public sealed class Logger : LoggerBase
+    public sealed class Logger : LoggerBase, ILoggerFacade,Microsoft.Extensions.Logging.ILogger
     {
 
         /// <summary>
@@ -112,5 +115,93 @@ namespace My.CoachManager.CrossCutting.Logging.Supervision
             var message = "";
             _logger.Fatal(ex, message, GetLoggingContext(loggingContext));
         }
+
+        #region ILoggerFacade
+
+        /// <summary>
+        /// The logging method.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="category">The category.</param>
+        /// <param name="priority">The priority.</param>
+        [Obsolete]
+        public void Log(string message, Category category, Priority priority)
+        {
+            if (string.IsNullOrWhiteSpace(message))
+            {
+                return;
+            }
+
+            switch (category)
+            {
+                case Category.Debug:
+                    Debug(message);
+                    break;
+
+                case Category.Info:
+                    Info(message);
+                    break;
+
+                case Category.Warn:
+                    Warning(message);
+                    break;
+
+                case Category.Exception:
+                    Error(new Exception(message));
+                    break;
+            }
+        }
+
+        #endregion ILoggerFacade
+
+        #region ILogger
+
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        {
+            var message = formatter(state, exception);
+
+            switch (logLevel)
+            {
+                case LogLevel.Critical:
+                    Fatal(exception);
+                    break;
+
+                case LogLevel.Trace:
+                    Trace(message);
+                    break;
+
+                case LogLevel.Debug:
+                    Debug(message);
+                    break;
+
+                case LogLevel.Information:
+                    Info(message);
+                    break;
+
+                case LogLevel.Warning:
+                    Warning(message);
+                    break;
+
+                case LogLevel.Error:
+                    Error(exception);
+                    break;
+
+                case LogLevel.None:
+                    Info(message);
+                    break;
+            }
+        }
+
+        public bool IsEnabled(LogLevel logLevel)
+        {
+            return true;
+        }
+
+        public IDisposable BeginScope<TState>(TState state)
+        {
+            return null;
+        }
+
+        #endregion
     }
 }

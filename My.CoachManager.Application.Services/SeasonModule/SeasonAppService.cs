@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using My.CoachManager.Application.Dtos.Season;
+using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.Domain.AppModule.Services;
 using My.CoachManager.Domain.SeasonModule.Aggregate;
 using My.CoachManager.Domain.SeasonModule.Services;
 using My.CoachManager.Domain.Core;
-using My.CoachManager.Domain.Core.Exceptions;
 using My.CoachManager.Domain.Entities;
+using My.CoachManager.Domain.ReferenceModule.Aggregates;
 
 namespace My.CoachManager.Application.Services.SeasonModule
 {
@@ -87,7 +88,7 @@ namespace My.CoachManager.Application.Services.SeasonModule
         /// <returns></returns>
         public IList<SeasonDto> GetSeasons()
         {
-            return _seasonRepository.GetAll(SeasonSelectBuilder.SelectSeasons(), x => x.Order).ToList();
+            return _seasonRepository.GetAll(SeasonSelectBuilder.SelectSeasons(), ReferenceOrderBuilder.OrderByOrder<Season>()).ToList();
         }
 
         /// <inheritdoc />
@@ -97,7 +98,7 @@ namespace My.CoachManager.Application.Services.SeasonModule
         /// <param name="values"></param>
         public void UpdateOrders(IDictionary<int, int> values)
         {
-            var entities = _seasonRepository.GetByFilter(x => values.Keys.Contains(x.Id), new QueryOrder<Season>()).ToList();
+            var entities = _seasonRepository.GetByFilter(x => values.Keys.Contains(x.Id), ReferenceOrderBuilder.OrderByOrder<Season>()).ToList();
 
             _seasonDomainService.UpdateOrders(entities.ToDictionary(x => x, x => values[x.Id]));
         }

@@ -1,6 +1,7 @@
 ﻿using My.CoachManager.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
 using CommonServiceLocator;
@@ -12,7 +13,6 @@ using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Infrastructure.Data.Core;
-using My.CoachManager.Infrastructure.Data.Migrations;
 using ILogger = My.CoachManager.CrossCutting.Logging.ILogger;
 
 namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
@@ -47,11 +47,15 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            var loggerFactory = new LoggerFactory();
+            loggerFactory.AddProvider(new LoggerProvider());
+            optionsBuilder.UseLoggerFactory(loggerFactory);
+
             optionsBuilder.UseSqlServer(DbConfigurationManager.ConnectionString,
             x => x.EnableRetryOnFailure())
                 .ConfigureWarnings(x => x.Throw(RelationalEventId.QueryClientEvaluationWarning))
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
-                .UseLoggerFactory(new LoggerFactory());
+                .UseLoggerFactory(loggerFactory);
 
             base.OnConfiguring(optionsBuilder);
         }
@@ -62,24 +66,6 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Contacts
-            modelBuilder.Entity<Contact>()
-                .ToTable("Contacts")
-                .HasDiscriminator<ContactType>("Type")
-                .HasValue<Phone>(ContactType.Phone)
-                .HasValue<Email>(ContactType.Email);
-
-            // Category
-            modelBuilder.Entity<Category>()
-                .HasAlternateKey(x => x.Code);
-
-            // Country
-            modelBuilder.Entity<Country>()
-                .HasAlternateKey(x => x.Code);
-
-            // Season
-            modelBuilder.Entity<Season>()
-                .HasAlternateKey(x => x.Code);
 
             // Address
             modelBuilder.Entity<Address>()
@@ -88,31 +74,67 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 .HasForeignKey(x => x.CountryId)
                 .OnDelete(DeleteBehavior.SetNull);
 
+            modelBuilder.Entity<Address>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
+            // Category
+            modelBuilder.Entity<Category>()
+                .HasAlternateKey(x => x.Code);
+
+            modelBuilder.Entity<Category>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
+            // Contacts
+            modelBuilder.Entity<Contact>()
+                .ToTable("Contacts")
+                .HasDiscriminator<ContactType>("Type")
+                .HasValue<Phone>(ContactType.Phone)
+                .HasValue<Email>(ContactType.Email);
+
+            modelBuilder.Entity<Contact>()
+                .HasOne(x => x.Person)
+                .WithMany()
+                .HasForeignKey(x => x.PersonId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Contact>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
+            // Country
+            modelBuilder.Entity<Country>()
+                .HasAlternateKey(x => x.Code);
+
+            modelBuilder.Entity<Country>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
             // Person
-            modelBuilder.Entity<Person>()
+            modelBuilder.Entity<Player>()
                 .HasOne(x => x.Address)
                 .WithMany()
                 .HasForeignKey(x => x.AddressId)
                 .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<Person>()
+            modelBuilder.Entity<Player>()
                 .HasOne(x => x.Country)
                 .WithMany()
                 .HasForeignKey(x => x.CountryId)
                 .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<Person>()
-                .HasMany(x => x.Contacts)
-                .WithOne(x => x.Person)
-                .HasForeignKey(x => x.PersonId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Person>()
+            modelBuilder.Entity<Player>()
                 .Property(x => x.Gender)
                 .HasDefaultValue(PlayerConstants.DefaultGender);
 
+            modelBuilder.Entity<Player>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
             //Player
             modelBuilder.Entity<Player>()
+                .ToTable("Players")
                 .HasOne(x => x.Category)
                 .WithMany()
                 .HasForeignKey(x => x.CategoryId)
@@ -144,6 +166,10 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             modelBuilder.Entity<Roster>()
                 .HasAlternateKey(x => new { x.SeasonId, x.CategoryId });
 
+            modelBuilder.Entity<Roster>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
             modelBuilder.Entity<RosterPlayer>()
                 .HasKey(x => new { x.RosterId, x.PlayerId });
 
@@ -165,6 +191,23 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 .Property(x => x.LicenseState)
                 .HasDefaultValue(PlayerConstants.DefaultLicenseState);
 
+            modelBuilder.Entity<RosterPlayer>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
+            // Season
+            modelBuilder.Entity<Season>()
+                .HasAlternateKey(x => x.Code);
+
+            modelBuilder.Entity<Season>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
+            // User
+            modelBuilder.Entity<User>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+            
             // Seed
             modelBuilder.Seed();
 
@@ -177,34 +220,68 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         /// <returns>Number of Modified Element</returns>
         public override int SaveChanges()
         {
-            try
-            {
-                return base.SaveChanges();
-            }
-            catch (DbUpdateException ex)
-            {
-                // Changes are canceled after an error
-                RollbackChanges();
+            int result = 0;
 
-                ServiceLocator.Current.GetInstance<ILogger>().Error(ex);
-                throw new BusinessException(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                try
-                {
-                    // Log exception information
-                    ServiceLocator.Current.GetInstance<ILogger>().Error(ex);
-                }
-                catch (Exception)
-                {
-                    // ignore
-                }
+            var strategy = Database.CreateExecutionStrategy();
 
-                // Changes are canceled after an error
-                RollbackChanges();
-                throw;
+            strategy.Execute(() =>
+            {
+                using (var transaction = Database.BeginTransaction())
+                {
+                    try
+                    {
+                        result = base.SaveChanges();
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        HandleException(ex);
+                    }
+                }
+                
+            });
+
+            return result;
+        }
+
+        /// <summary>
+        /// Handle exception.
+        /// </summary>
+        /// <param name="exception"></param>
+        private void HandleException(Exception exception)
+        {
+            if (exception is DbUpdateConcurrencyException concurrencyEx)
+            {
+                ServiceLocator.Current.GetInstance<ILogger>().Error(concurrencyEx);
+                // A custom exception of yours for concurrency issues
+                throw new ConcurrencyException();
             }
+
+            if (exception is DbUpdateException dbUpdateEx)
+            {
+                if ((dbUpdateEx.InnerException is SqlException sqlException))
+                {
+
+                    ServiceLocator.Current.GetInstance<ILogger>().Error(sqlException);
+                    switch (sqlException.Number)
+                    {
+                        case 2627: // Unique constraint error
+                            throw new UniqueException();
+
+                        case 547: // Constraint check violation
+                            throw new ConstraintCheckException();
+
+                        case 2601: // Duplicated key row error
+                            throw new ConcurrencyException();
+                        default:
+                            // A custom exception of yours for other DB issues
+                            throw new BusinessException(dbUpdateEx.Message);
+                    }
+                }
+            }
+
+            ServiceLocator.Current.GetInstance<ILogger>().Error(exception);
         }
 
         #endregion ----- Overrides Methods -----
@@ -345,25 +422,6 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         }
 
         #endregion ----- ISql Methods -----
-
-        #region ----- Methods -----
-
-        /// <summary>
-        /// Log a sql query.
-        /// </summary>
-        /// <param name="sqlQuery">The executed sql query.</param>
-        private void LogQuery(string sqlQuery)
-        {
-            try
-            {
-                ServiceLocator.Current.GetInstance<ILogger>().Trace(sqlQuery);
-            }
-            catch (Exception)
-            {
-                // ignore
-            }
-        }
-
-        #endregion ----- Methods -----
+        
     }
 }

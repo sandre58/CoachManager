@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Enums;
-using My.CoachManager.CrossCutting.Core.Metadatas;
 using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.Entities
@@ -8,12 +7,12 @@ namespace My.CoachManager.Domain.Entities
     /// <summary>
     /// Provides properties for a Roster Player Entity.
     /// </summary>
-    [MetadataType(typeof(RosterPlayerMetadata))]
     public class RosterPlayer : Entity
     {
         /// <summary>
         /// Gets or sets the player's roster id.
         /// </summary>
+        [Required]
         public int RosterId { get; set; }
 
         /// <summary>
@@ -24,6 +23,7 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the player id.
         /// </summary>
+        [Required]
         public int PlayerId { get; set; }
 
         /// <summary>

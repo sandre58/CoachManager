@@ -118,7 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AlreadyExistMessage" xml:space="preserve">
-    <value>L'élément "{0}" existe déjà.</value>
+    <value>L'élément '{0}' existe déjà.</value>
+  </data>
+  <data name="ConstraintCheckMessage" xml:space="preserve">
+    <value>La valeur spécifiée ne respècte pas les règle de validité.</value>
   </data>
   <data name="EmailFormatMessage" xml:space="preserve">
     <value>Le format ne correspond pas à une adresse mail.</value>
@@ -131,6 +134,9 @@
   </data>
   <data name="IsRequiredFieldMessage" xml:space="preserve">
     <value>Ce champ est obligatoire.</value>
+  </data>
+  <data name="IsUniqueMessage" xml:space="preserve">
+    <value>L'élément spécifié existe déjà.</value>
   </data>
   <data name="IsUsedMessage" xml:space="preserve">
     <value>L'élément "{0}" est utilisée par d'autres entités.</value>

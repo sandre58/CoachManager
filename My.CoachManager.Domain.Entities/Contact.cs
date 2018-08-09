@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using My.CoachManager.CrossCutting.Core.Metadatas;
 using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.Entities
@@ -7,7 +6,6 @@ namespace My.CoachManager.Domain.Entities
     /// <summary>
     /// Provides properties for a Contact Entity.
     /// </summary>
-    [MetadataType(typeof(ContactMetadata))]
     public abstract class Contact : Entity
     {
         /// <summary>
@@ -23,11 +21,13 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the value.
         /// </summary>
+        [Required]
         public string Value { get; set; }
 
         /// <summary>
         /// Gets or sets the person id.
         /// </summary>
+        [Required]
         public int PersonId { get; set; }
 
         /// <summary>

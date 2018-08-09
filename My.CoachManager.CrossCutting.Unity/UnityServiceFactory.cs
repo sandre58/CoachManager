@@ -19,7 +19,7 @@ namespace My.CoachManager.CrossCutting.Unity
         public UnityServiceFactory(IUnityContainer container)
         {
             _container = container;
-            _container.AddExtension(new IocUnityContainer(new Logger()));
+            _container.AddExtension(new IocUnityContainer(LoggerFactory.GetLogger()));
 
             var locator = new UnityServiceLocator(_container);
             ServiceLocator.SetLocatorProvider(() => locator);

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using My.CoachManager.CrossCutting.Core.Metadatas;
 using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.Entities
@@ -8,7 +7,6 @@ namespace My.CoachManager.Domain.Entities
     /// <summary>
     /// Provides properties for a Roster Entity.
     /// </summary>
-    [MetadataType(typeof(RosterMetadata))]
     public class Roster : Entity
     {
         /// <summary>
@@ -22,11 +20,13 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
+        [Required]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the season id.
         /// </summary>
+        [Required]
         public int? SeasonId { get; set; }
 
         /// <summary>
@@ -37,6 +37,7 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the squad's category id.
         /// </summary>
+        [Required]
         public int? CategoryId { get; set; }
 
         /// <summary>

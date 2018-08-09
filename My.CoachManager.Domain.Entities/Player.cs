@@ -1,16 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
-using My.CoachManager.CrossCutting.Core.Metadatas;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace My.CoachManager.Domain.Entities
 {
     /// <summary>
     /// Provides properties for a Player Entity.
     /// </summary>
-    [Table("Players")]
-    [MetadataType(typeof(PlayerMetadata))]
     public class Player : Person
     {
         /// <summary>
@@ -24,6 +20,7 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the category id.
         /// </summary>
+        [Required]
         public int? CategoryId { get; set; }
 
         /// <summary>
@@ -34,6 +31,7 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the latérality.
         /// </summary>
+        [Required]
         public Laterality Laterality { get; set; }
 
         /// <summary>

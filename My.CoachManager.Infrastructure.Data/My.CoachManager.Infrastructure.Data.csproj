@@ -155,9 +155,22 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoggerProvider.cs" />
+    <Compile Include="Migrations\20180809115457_CreateDatabase.cs" />
+    <Compile Include="Migrations\20180809115457_CreateDatabase.designer.cs">
+      <DependentUpon>20180809115457_CreateDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180809121038_AddPlayers.cs" />
+    <Compile Include="Migrations\20180809121038_AddPlayers.designer.cs">
+      <DependentUpon>20180809121038_AddPlayers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180809124847_AddUsers.cs" />
+    <Compile Include="Migrations\20180809124847_AddUsers.designer.cs">
+      <DependentUpon>20180809124847_AddUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Migrations\ModelBuilderExtensions.cs" />
-    <Compile Include="Migrations\SqlGenerator.cs" />
+    <Compile Include="Migrations\DataContextModelSnapshot.cs" />
+    <Compile Include="ModelBuilderExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DbConfigurationManager.cs" />
     <Compile Include="UnitOfWorks\DataContext.cs" />
@@ -196,6 +209,10 @@
       <Project>{69f4e1a5-acae-4431-9723-3db4de847bc9}</Project>
       <Name>My.CoachManager.CrossCutting.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.CrossCutting.Logging.Supervision\My.CoachManager.CrossCutting.Logging.Supervision.csproj">
+      <Project>{ff822bfd-cb92-482d-ba26-a1398012777a}</Project>
+      <Name>My.CoachManager.CrossCutting.Logging.Supervision</Name>
+    </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.CrossCutting.Logging\My.CoachManager.CrossCutting.Logging.csproj">
       <Project>{381D433D-9F76-4286-B0F5-7209E477B22B}</Project>
       <Name>My.CoachManager.CrossCutting.Logging</Name>
@@ -212,6 +229,9 @@
       <Project>{FB5D742B-D81B-410A-86CB-4FE9D0BBE8AB}</Project>
       <Name>My.CoachManager.Infrastructure.Data.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Configuration\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

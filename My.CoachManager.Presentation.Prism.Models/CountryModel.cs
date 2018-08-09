@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using My.CoachManager.CrossCutting.Core.Metadatas;
+using My.CoachManager.CrossCutting.Core.Resources.Entities;
 using My.CoachManager.Presentation.Prism.Core.Models;
 
 namespace My.CoachManager.Presentation.Prism.Models
@@ -7,7 +7,6 @@ namespace My.CoachManager.Presentation.Prism.Models
     /// <summary>
     /// Provides properties for a Country item.
     /// </summary>
-    [MetadataType(typeof(CountryMetadata))]
     public class CountryModel : ReferenceModel
     {
         #region Constants
@@ -19,6 +18,7 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// <summary>
         /// Gets or sets the path of the flag image.
         /// </summary>
+        [Display(Name = "Flag", ResourceType = typeof(CountryResources))]
         public virtual string Flag { get; set; }
 
         /// <summary>

@@ -61,11 +61,20 @@ namespace My.CoachManager.CrossCutting.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to L&apos;élément &quot;{0}&quot; existe déjà..
+        ///   Looks up a localized string similar to L&apos;élément &apos;{0}&apos; existe déjà..
         /// </summary>
         public static string AlreadyExistMessage {
             get {
                 return ResourceManager.GetString("AlreadyExistMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to La valeur spécifiée ne respècte pas les règle de validité..
+        /// </summary>
+        public static string ConstraintCheckMessage {
+            get {
+                return ResourceManager.GetString("ConstraintCheckMessage", resourceCulture);
             }
         }
         
@@ -102,6 +111,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources {
         public static string IsRequiredFieldMessage {
             get {
                 return ResourceManager.GetString("IsRequiredFieldMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to L&apos;élément spécifié existe déjà..
+        /// </summary>
+        public static string IsUniqueMessage {
+            get {
+                return ResourceManager.GetString("IsUniqueMessage", resourceCulture);
             }
         }
         

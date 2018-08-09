@@ -4,6 +4,7 @@ using My.CoachManager.Application.Dtos.Person;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.PersonModule.Aggregate;
+using My.CoachManager.Domain.ReferenceModule.Aggregates;
 
 namespace My.CoachManager.Application.Services.PersonModule
 {
@@ -39,7 +40,7 @@ namespace My.CoachManager.Application.Services.PersonModule
         /// <returns></returns>
         public IList<CountryDto> GetCountries()
         {
-            return _countryRepository.GetAll(CountrySelectBuilder.SelectCountry()).ToList();
+            return _countryRepository.GetAll(CountrySelectBuilder.SelectCountry(), ReferenceOrderBuilder.OrderByLabel<Country>()).ToList();
         }
 
         #endregion Methods

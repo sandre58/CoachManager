@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using FluentValidation.Results;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Exceptions;
@@ -57,12 +56,12 @@ namespace My.CoachManager.Domain.AppModule.Services
 
             foreach (var item in entitiesBaseList.Where(w => w.CrudStatus == CrudStatus.Created))
             {
-                Add(item, createFactory);
+                Add(item, createFactory, validateEntity);
             }
 
             foreach (var item in entitiesBaseList.Where(w => w.CrudStatus == CrudStatus.Updated))
             {
-                Modify(item, modifyFactory);
+                Modify(item, modifyFactory, validateEntity);
             }
         }
 
@@ -84,12 +83,12 @@ namespace My.CoachManager.Domain.AppModule.Services
 
             if (entityBase.CrudStatus == CrudStatus.Created)
             {
-                return Add(entityBase, createFactory);
+                return Add(entityBase, createFactory, validateEntity);
             }
 
             if (entityBase.CrudStatus == CrudStatus.Updated)
             {
-                return Modify(entityBase, modifyFactory);
+                return Modify(entityBase, modifyFactory, validateEntity);
             }
 
             return entityBase;

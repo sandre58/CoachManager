@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using My.CoachManager.CrossCutting.Core.Metadatas;
 using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.Entities
@@ -7,12 +6,12 @@ namespace My.CoachManager.Domain.Entities
     /// <summary>
     /// Provides properties for a Address Entity.
     /// </summary>
-    [MetadataType(typeof(AddressMetadata))]
     public class Address : Entity
     {
         /// <summary>
         /// Gets or sets the first row.
         /// </summary>
+        [Required]
         public string Row1 { get; set; }
 
         /// <summary>
@@ -23,11 +22,14 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the postal code.
         /// </summary>
+        [Required]
+        [MaxLength(5)]
         public string PostalCode { get; set; }
 
         /// <summary>
         /// Gets or sets the city.
         /// </summary>
+        [Required]
         public string City { get; set; }
 
         /// <summary>
@@ -53,9 +55,6 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the Business identifier.
         /// </summary>
-        public override string BusinessKey
-        {
-            get { return string.Join(" ", Row1, Row2, PostalCode, City != null ? City.ToUpper() : ""); }
-        }
+        public override string BusinessKey => string.Join(" ", Row1, Row2, PostalCode, City?.ToUpper() ?? "");
     }
 }

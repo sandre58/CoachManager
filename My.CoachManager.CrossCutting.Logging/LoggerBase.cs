@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-using Prism.Logging;
 
 namespace My.CoachManager.CrossCutting.Logging
 {
     /// <summary>
     /// Logger Base.
     /// </summary>
-    public abstract class LoggerBase : ILogger, ILoggerFacade
+    public abstract class LoggerBase : ILogger
     {
         /// <summary>
         /// Log Trace.
@@ -89,43 +88,5 @@ namespace My.CoachManager.CrossCutting.Logging
 
             return new LoggingContext { Action = "Action", MessageIdentity = "Identity" };
         }
-
-        #region ILoggerFacade
-
-        /// <summary>
-        /// The logging method.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        /// <param name="category">The category.</param>
-        /// <param name="priority">The priority.</param>
-        [Obsolete]
-        public void Log(string message, Category category, Priority priority)
-        {
-            if (string.IsNullOrWhiteSpace(message))
-            {
-                return;
-            }
-
-            switch (category)
-            {
-                case Category.Debug:
-                    Debug(message);
-                    break;
-
-                case Category.Info:
-                    Info(message);
-                    break;
-
-                case Category.Warn:
-                    Warning(message);
-                    break;
-
-                case Category.Exception:
-                    Error(new Exception(message));
-                    break;
-            }
-        }
-
-        #endregion ILoggerFacade
     }
 }

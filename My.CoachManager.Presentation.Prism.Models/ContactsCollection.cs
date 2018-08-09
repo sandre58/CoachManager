@@ -49,7 +49,7 @@ namespace My.CoachManager.Presentation.Prism.Models
         {
             foreach (var item in this)
             {
-                item.CanAdd = IndexOf(item) == Count - 1 && !string.IsNullOrEmpty(item.Value);
+                //item.CanAdd = IndexOf(item) == Count - 1 && !string.IsNullOrEmpty(item.Value);
             }
         }
 
@@ -57,7 +57,7 @@ namespace My.CoachManager.Presentation.Prism.Models
         {
             foreach (var item in this)
             {
-                item.CanRemove = Count > 1 || !string.IsNullOrEmpty(item.Value);
+               // item.CanRemove = Count > 1 || !string.IsNullOrEmpty(item.Value);
             }
         }
 

@@ -3,13 +3,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
-using My.CoachManager.CrossCutting.Core.Metadatas;
+using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Core.Resources.Entities;
 using My.CoachManager.Presentation.Prism.Core.Models;
 
 namespace My.CoachManager.Presentation.Prism.Models
 {
-    [MetadataType(typeof(PersonMetadata))]
     public abstract class PersonModel : EntityModel
     {
         /// <summary>
@@ -25,86 +24,109 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// <summary>
         /// Gets or sets the last name.
         /// </summary>
+        [Display(Name = "LastName", ResourceType = typeof(PersonResources))]
+        [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public string LastName { get; set; }
 
         /// <summary>
         /// Gets or sets the first name.
         /// </summary>
+        [Display(Name = "FirstName", ResourceType = typeof(PersonResources))]
+        [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Gets or sets the birthdate.
         /// </summary>
+        [Display(Name = "Birthdate", ResourceType = typeof(PersonResources))]
         public DateTime? Birthdate { get; set; }
 
         /// <summary>
         /// Gets or sets the place of birth.
         /// </summary>
+        [Display(Name = "PlaceOfBirth", ResourceType = typeof(PersonResources))]
         public string PlaceOfBirth { get; set; }
 
         /// <summary>
         /// Gets or sets the nationality id.
         /// </summary>
+        [Display(Name = "Country", ResourceType = typeof(PersonResources))]
         public int? CountryId { get; set; }
 
         /// <summary>
         /// Gets or sets the nationality.
         /// </summary>
+        [Display(Name = "Country", ResourceType = typeof(PersonResources))]
         public CountryModel Country { get; set; }
 
         /// <summary>
         /// Gets or sets the photo.
         /// </summary>
+        [Display(Name = "Photo", ResourceType = typeof(PersonResources))]
         public byte[] Photo { get; set; }
 
         /// <summary>
         /// Gets or sets the gender.
         /// </summary>
+        [Display(Name = "Gender", ResourceType = typeof(PersonResources))]
+        [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public GenderType Gender { get; set; }
 
         /// <summary>
         /// Gets or sets the address id.
         /// </summary>
+        [Display(Name = "Address", ResourceType = typeof(PersonResources))]
         public int? AddressId { get; set; }
 
         /// <summary>
         /// Gets or sets the address.
         /// </summary>
+        [Display(Name = "Address", ResourceType = typeof(PersonResources))]
         public string Address { get; set; }
 
         /// <summary>
         /// Gets or sets the address.
         /// </summary>
+        [Display(Name = "PostalCode", ResourceType = typeof(AddressResources))]
+        [MaxLength(5, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public string PostalCode { get; set; }
 
         /// <summary>
         /// Gets or sets the address.
         /// </summary>
+        [Display(Name = "City", ResourceType = typeof(AddressResources))]
         public string City { get; set; }
 
         /// <summary>
         /// Gets or sets the license number.
         /// </summary>
+        [Display(Name = "LicenseNumber", ResourceType = typeof(PersonResources))]
+        [MaxLength(10, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public string LicenseNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the description.
         /// </summary>
+        [Display(Name = "Description", ResourceType = typeof(PersonResources))]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the size for clothes.
         /// </summary>
+        [Display(Name = "Size", ResourceType = typeof(PersonResources))]
+        [MaxLength(4, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public string Size { get; set; }
 
         /// <summary>
         /// Gets or sets the phones.
         /// </summary>
+        [Display(Name = "Phones", ResourceType = typeof(PersonResources))]
         public ContactsCollection<PhoneModel> Phones { get; set; }
 
         /// <summary>
         /// Gets or sets the emails.
         /// </summary>
+        [Display(Name = "Emails", ResourceType = typeof(PersonResources))]
         public ContactsCollection<EmailModel> Emails { get; set; }
 
         /// <summary>
@@ -119,6 +141,7 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// <summary>
         /// Get the inverse name (LastName FirstName).
         /// </summary>
+        [Display(Name = "FullName", ResourceType = typeof(PersonResources))]
         public string InverseName => string.Join(" ", LastName, FirstName);
 
         /// <summary>
@@ -130,6 +153,7 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// <summary>
         /// Get the default phone.
         /// </summary>
+        [Display(Name = "Phone", ResourceType = typeof(PersonResources))]
         public string Phone
         {
             get
@@ -143,6 +167,7 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// <summary>
         /// Get the default email.
         /// </summary>
+        [Display(Name = "Email", ResourceType = typeof(PersonResources))]
         public string Email
         {
             get

@@ -172,7 +172,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\IsUsedException.cs" />
     <Compile Include="Reference.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="IReference.cs" />

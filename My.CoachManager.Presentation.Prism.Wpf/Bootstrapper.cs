@@ -146,7 +146,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// <returns>The <see cref="T:Prism.Logging.ILoggerFacade" />.</returns>
         protected override ILoggerFacade CreateLogger()
         {
-            return CrossCutting.Logging.Supervision.Logger.CreateLogger();
+            return CrossCutting.Logging.Supervision.LoggerFactory.GetLogger() as ILoggerFacade;
         }
 
         /// <inheritdoc />

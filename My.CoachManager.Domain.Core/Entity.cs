@@ -1,39 +1,45 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using My.CoachManager.CrossCutting.Core.Metadatas;
+using My.CoachManager.CrossCutting.Core.Resources.Entities;
 
 namespace My.CoachManager.Domain.Core
 {
     /// <summary>
     /// Provides properties for an entity.
     /// </summary>
-    [MetadataType(typeof(EntityMetadata))]
     public abstract class Entity : IEntity, IAuditable
     {
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets the ID.
         /// </summary>
+        [Display(Name = "Id", ResourceType = typeof(EntityResources))]
         public virtual int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the created date.
         /// </summary>
+        [Display(Name = "CreatedDate", ResourceType = typeof(EntityResources))]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? CreatedDate { get; set; }
 
         /// <summary>
         /// Gets or sets the created user.
         /// </summary>
+        [Display(Name = "CreatedBy", ResourceType = typeof(EntityResources))]
         public string CreatedBy { get; set; }
 
         /// <summary>
         /// Gets or sets the updated date.
         /// </summary>
+        [Display(Name = "ModifiedDate", ResourceType = typeof(EntityResources))]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? ModifiedDate { get; set; }
 
         /// <summary>
         /// Gets or sets the updated user.
         /// </summary>
+        [Display(Name = "ModifiedBy", ResourceType = typeof(EntityResources))]
         public string ModifiedBy { get; set; }
 
         /// <summary>

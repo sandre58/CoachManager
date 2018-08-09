@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
-using My.CoachManager.CrossCutting.Core.Metadatas;
 using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.Entities
@@ -12,8 +10,6 @@ namespace My.CoachManager.Domain.Entities
     /// <summary>
     /// Provides properties for a Person Entity.
     /// </summary>
-    [Table("Persons")]
-    [MetadataType(typeof(PersonMetadata))]
     public abstract class Person : Entity
     {
         /// <summary>
@@ -28,11 +24,13 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the last name.
         /// </summary>
+        [Required]
         public string LastName { get; set; }
 
         /// <summary>
         /// Gets or sets the first name.
         /// </summary>
+        [Required]
         public string FirstName { get; set; }
 
         /// <summary>
@@ -63,6 +61,7 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the gender.
         /// </summary>
+        [Required]
         public GenderType Gender { get; set; }
 
         /// <summary>
@@ -78,6 +77,7 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the license number.
         /// </summary>
+        [MaxLength(10)]
         public string LicenseNumber { get; set; }
 
         /// <summary>
@@ -88,6 +88,7 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the size for clothes.
         /// </summary>
+        [MaxLength(4)]
         public string Size { get; set; }
 
         /// <summary>
