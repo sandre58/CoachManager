@@ -99,7 +99,7 @@
                                                           ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                                           RecognizesAccessKey="True"
                                                           HorizontalAlignment="Stretch"
-                                                          VerticalAlignment="Stretch" Margin="{StaticResource LargeMargin}" />
+                                                          VerticalAlignment="Stretch" Margin="{StaticResource MediumMargin}" />
                         <Ellipse x:Name="PART_Image" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                  Stroke="Transparent"
                                  StrokeThickness="{TemplateBinding BorderThickness}"
@@ -109,14 +109,14 @@
                             </Ellipse.Fill>
                         </Ellipse>
                         <Ellipse x:Name="PART_Mask" Fill="{DynamicResource ControlMouseOver}" Stroke="{DynamicResource Transparent}" Visibility="Collapsed" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" StrokeThickness="{TemplateBinding BorderThickness}" />
-                        <controls:Icon x:Name="PART_MaskIcon" Content="{StaticResource EditBoxGeometry}" Margin="{StaticResource LargeMargin}" Foreground="{DynamicResource White}"
+                        <controls:Icon x:Name="PART_MaskIcon" Content="{StaticResource EditBoxGeometry}" Margin="{StaticResource MediumMargin}" Foreground="{DynamicResource White}"
                                                       HorizontalAlignment="Stretch"
                                                           VerticalAlignment="Stretch" Visibility="Collapsed" />
                     </Grid>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter  TargetName="PART_Background" Property="Stroke" Value="{DynamicResource DarkControlMouseOver}" />
+                            <Setter  TargetName="PART_Background" Property="Stroke" Value="{DynamicResource Accent}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter  TargetName="PART_Background" Property="Fill" Value="{DynamicResource ControlMouseOver}" />

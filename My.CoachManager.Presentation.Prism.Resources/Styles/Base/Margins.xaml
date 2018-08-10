@@ -12,10 +12,15 @@
     <sys:Double x:Key="DefaultMarginTopValue">5</sys:Double>
     <sys:Double x:Key="DefaultMarginBottomValue">5</sys:Double>
 
-    <sys:Double x:Key="LargeMarginLeftValue">10</sys:Double>
-    <sys:Double x:Key="LargeMarginRightValue">10</sys:Double>
-    <sys:Double x:Key="LargeMarginTopValue">10</sys:Double>
-    <sys:Double x:Key="LargeMarginBottomValue">10</sys:Double>
+    <sys:Double x:Key="MediumMarginLeftValue">10</sys:Double>
+    <sys:Double x:Key="MediumMarginRightValue">10</sys:Double>
+    <sys:Double x:Key="MediumMarginTopValue">10</sys:Double>
+    <sys:Double x:Key="MediumMarginBottomValue">10</sys:Double>
+
+    <sys:Double x:Key="LargeMarginLeftValue">15</sys:Double>
+    <sys:Double x:Key="LargeMarginRightValue">15</sys:Double>
+    <sys:Double x:Key="LargeMarginTopValue">15</sys:Double>
+    <sys:Double x:Key="LargeMarginBottomValue">15</sys:Double>
 
     <sys:Double x:Key="VeryLargeMarginLeftValue">20</sys:Double>
     <sys:Double x:Key="VeryLargeMarginRightValue">20</sys:Double>
@@ -38,6 +43,14 @@
     <Thickness x:Key="DefaultRightMargin" Left="0" Top="0" Right="{StaticResource DefaultMarginLeftValue}" Bottom="0" />
     <Thickness x:Key="DefaultTopMargin" Left="0" Top="{StaticResource DefaultMarginTopValue}" Right="0" Bottom="0" />
     <Thickness x:Key="DefaultBottomMargin" Left="0" Top="0" Right="0" Bottom="{StaticResource DefaultMarginBottomValue}" />
+
+    <Thickness x:Key="MediumMargin" Left="{StaticResource MediumMarginLeftValue}" Top="{StaticResource MediumMarginTopValue}" Right="{StaticResource MediumMarginRightValue}" Bottom="{StaticResource MediumMarginBottomValue}" />
+    <Thickness x:Key="MediumHorizontalMargin" Left="{StaticResource MediumMarginLeftValue}" Top="0" Right="{StaticResource MediumMarginRightValue}" Bottom="0" />
+    <Thickness x:Key="MediumVerticalMargin" Left="0" Top="{StaticResource MediumMarginTopValue}" Right="0" Bottom="{StaticResource MediumMarginBottomValue}" />
+    <Thickness x:Key="MediumLeftMargin" Left="{StaticResource MediumMarginLeftValue}" Top="0" Right="0" Bottom="0" />
+    <Thickness x:Key="MediumRightMargin" Left="0" Top="0" Right="{StaticResource MediumMarginLeftValue}" Bottom="0" />
+    <Thickness x:Key="MediumTopMargin" Left="0" Top="{StaticResource MediumMarginLeftValue}" Right="0" Bottom="0" />
+    <Thickness x:Key="MediumBottomMargin" Left="0" Top="0" Right="0" Bottom="{StaticResource MediumMarginLeftValue}" />
 
     <Thickness x:Key="LargeMargin" Left="{StaticResource LargeMarginLeftValue}" Top="{StaticResource LargeMarginTopValue}" Right="{StaticResource LargeMarginRightValue}" Bottom="{StaticResource LargeMarginBottomValue}" />
     <Thickness x:Key="LargeHorizontalMargin" Left="{StaticResource LargeMarginLeftValue}" Top="0" Right="{StaticResource LargeMarginRightValue}" Bottom="0" />
@@ -70,7 +83,7 @@
 
     <Thickness x:Key="FieldMargin"
                Left="{StaticResource DefaultMarginLeftValue}"
-               Top="{StaticResource LargeMarginTopValue}"
+               Top="{StaticResource MediumMarginTopValue}"
                Right="{StaticResource DefaultMarginRightValue}"
-               Bottom="{StaticResource LargeMarginBottomValue}" />
+               Bottom="{StaticResource MediumMarginBottomValue}" />
 </ResourceDictionary>

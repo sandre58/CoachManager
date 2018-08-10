@@ -21,9 +21,9 @@
         </Grid.RowDefinitions>
 
         <TextBlock Text="{Binding Copyright}" Margin="{StaticResource DefaultMargin}" />
-        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="{StaticResource LargeHorizontalMargin}">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="{StaticResource MediumHorizontalMargin}">
             <Image Source="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/CoachManager.png"
-                   VerticalAlignment="Top" HorizontalAlignment="Left" Margin="{StaticResource LargeHorizontalMargin}" Width="150" />
+                   VerticalAlignment="Top" HorizontalAlignment="Left" Margin="{StaticResource MediumHorizontalMargin}" Width="150" />
             <StackPanel Orientation="Vertical" Margin="{StaticResource VeryLargeHorizontalMargin}">
                 <TextBlock Text="{Binding Source={x:Static strings:CoachManagerResources.ApplicationTitlePart1}, Converter={StaticResource ToUpperConverter}}"
                            FontFamily="{StaticResource HeaderFontFamily}" FontStyle="Italic" VerticalAlignment="Top" FontSize="85" />

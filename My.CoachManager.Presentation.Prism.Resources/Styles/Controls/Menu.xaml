@@ -98,7 +98,7 @@
             <TextBlock Grid.Column="1" x:Name="Header"
                                    Text="{Binding Path=Header, RelativeSource={RelativeSource AncestorType={x:Type controls:NavigationExpander}}, Converter={StaticResource ToUpperConverter}}"
                                    FontSize="{Binding Path=FontSize, RelativeSource={RelativeSource AncestorType={x:Type controls:NavigationExpander}}}"
-                                   VerticalAlignment="Center" Margin="{StaticResource LargeHorizontalMargin}" />
+                                   VerticalAlignment="Center" Margin="{StaticResource MediumHorizontalMargin}" />
         </Grid>
         <DataTemplate.Triggers>
             <MultiDataTrigger>
@@ -178,7 +178,7 @@
                 <TextBlock Grid.Column="1" x:Name="Header"
                                    Text="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToUpperConverter}}"
                                    FontSize="{Binding Path=FontSize, RelativeSource={RelativeSource TemplatedParent}}"
-                                   VerticalAlignment="Center" Margin="{StaticResource LargeHorizontalMargin}" />
+                                   VerticalAlignment="Center" Margin="{StaticResource MediumHorizontalMargin}" />
             </Grid>
         </Border>
         <ControlTemplate.Triggers>

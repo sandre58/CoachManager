@@ -61,7 +61,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
             return obj.GetValue(IconProperty);
         }
 
-        public static void SetIcon(FrameworkElement obj, Style value)
+        public static void SetIcon(FrameworkElement obj, object value)
         {
             obj.SetValue(IconProperty, value);
         }

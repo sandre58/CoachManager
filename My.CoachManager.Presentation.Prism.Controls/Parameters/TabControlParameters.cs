@@ -27,6 +27,11 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
             typeof(Style),
             typeof(TabControlParameters));
 
+        public static readonly DependencyProperty HeaderSizeProperty = DependencyProperty.RegisterAttached(
+            "HeaderSize",
+            typeof(GridLength),
+            typeof(TabControlParameters));
+
         #endregion Dependency Properties
 
         #region Public Static Methods
@@ -59,6 +64,16 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
         public static void SetHeaderStyle(TabItem tc, Style value)
         {
             tc.SetValue(HeaderStyleProperty, value);
+        }
+
+        public static GridLength GetHeaderSize(TabControl tc)
+        {
+            return (GridLength)tc.GetValue(HeaderSizeProperty);
+        }
+
+        public static void SetHeaderSize(TabControl tc, GridLength value)
+        {
+            tc.SetValue(HeaderSizeProperty, value);
         }
 
         #endregion Public Static Methods

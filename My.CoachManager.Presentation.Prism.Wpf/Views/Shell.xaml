@@ -74,7 +74,7 @@
                            Source="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/CoachManager.png"
                            SnapsToDevicePixels="False"
                            Height="70"
-                           Margin="{StaticResource LargeLeftMargin}"
+                           Margin="{StaticResource MediumLeftMargin}"
                            RenderOptions.BitmapScalingMode="Fant" />
 
                     <!-- Text -->
@@ -123,7 +123,7 @@
                                 <controls:CommandButton Style="{StaticResource BackCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoBackCommand}" />
                                 <controls:CommandButton Style="{StaticResource NextCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoForwardCommand}" />
                             </StackPanel>
-                            <TextBlock Grid.Column="1" Text="{Binding ActiveWorkspace.Title, Converter={StaticResource ToUpperConverter}}" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Top" Style="{StaticResource HeaderStyle}" Foreground="{DynamicResource AccentForeground}" />
+                            <TextBlock Grid.Column="1" Text="{Binding ActiveWorkspace.Title, Converter={StaticResource ToUpperConverter}}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Top" Style="{StaticResource HeaderStyle}" Foreground="{DynamicResource AccentForeground}" />
                         </Grid>
                         </Grid>
                     </Border>

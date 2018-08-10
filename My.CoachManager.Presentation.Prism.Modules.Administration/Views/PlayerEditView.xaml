@@ -19,16 +19,15 @@
              d:DataContext="{d:DesignInstance Type=viewModels:PlayerEditViewModel}"
              d:DesignHeight="1000" d:DesignWidth="750" MaxHeight="750">
 
-    <controls:WorkspaceView>
+    <controls:WorkspaceView Padding="0" Width="750" Height="600">
         <i:Interaction.Behaviors>
             <behaviours:FocusBehavior FocusElement="{Binding ElementName=LastName}" />
         </i:Interaction.Behaviors>
 
-        <TabControl TabStripPlacement="Left">
-            <TabItem>
-                <TabItem.Header>
-                    <Label Grid.Row="0" Content="{x:Static strings:PlayerResources.IdCard}" parameters:FormParameters.Icon="{StaticResource UserInformationGeometry}" Style="{StaticResource HeaderIconStyle}" />
-                </TabItem.Header>
+        <TabControl TabStripPlacement="Left" Style="{StaticResource TabControlStyle2}"
+                    Padding="{StaticResource DefaultMargin}"
+                    parameters:TabControlParameters.HeaderSize="170">
+            <TabItem Header="{x:Static strings:PlayerResources.IdCard}" parameters:ControlParameters.Icon="{StaticResource IdCardGeometry}">
 
                 <Grid  parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
                     <Grid.RowDefinitions>
@@ -67,13 +66,13 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBox Grid.Column="0" x:Name="LastName"
-                     Width="{StaticResource LargeWidth}"
+                     Width="{StaticResource SmallLargeWidth}"
                      Text="{Binding Item.LastName, UpdateSourceTrigger=PropertyChanged}"
                      parameters:FormParameters.Label="{x:Static entities:PersonResources.LastName}"
                      parameters:FormParameters.IsRequired="True" />
 
                         <TextBox Grid.Column="1"
-                     Width="{StaticResource LargeWidth}"
+                     Width="{StaticResource SmallLargeWidth}"
                      Text="{Binding Item.FirstName, UpdateSourceTrigger=PropertyChanged}"
                      parameters:FormParameters.Label="{x:Static entities:PersonResources.FirstName}"
                      parameters:FormParameters.IsRequired="True" />
@@ -134,42 +133,41 @@
                     <controls:Icon Grid.Column="0" Grid.Row="3" Size="Medium" Content="{StaticResource AddressGeometry}" HorizontalAlignment="Center" />
 
                     <Grid Grid.Column="1" Grid.Row="3">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
-                        <TextBox Grid.Column="0"
+                        <TextBox Grid.Row="0"
                      Width="{StaticResource LargeWidth}"
                      Text="{Binding Item.Address, UpdateSourceTrigger=PropertyChanged}"
                      parameters:FormParameters.Label="{x:Static entities:PersonResources.Address}" />
-                        <ComboBox Grid.Column="1"
-                      IsTextSearchEnabled="True"
-                      ItemsSource="{Binding AllPostalCodes}"
-                      Text="{Binding Item.PostalCode, UpdateSourceTrigger=PropertyChanged}"
-                      Width="{StaticResource MidSmallWidth}"
-                      parameters:FormParameters.Label="{x:Static entities:AddressResources.PostalCode}"
-                      parameters:ComboBoxParameters.DropDownButtonVisible="False"
-                      parameters:TextBoxParameters.Mask="PositiveInteger"
-                      IsEditable="True"
-                      parameters:ComboBoxParameters.MaxLength="5" />
-                        <ComboBox Grid.Column="2"
-                      IsTextSearchEnabled="True"
-                      ItemsSource="{Binding AllCitiesNames}"
-                      Text="{Binding Item.City, UpdateSourceTrigger=PropertyChanged}"
-                      Width="{StaticResource SmallLargeWidth}"
-                      parameters:FormParameters.Label="{x:Static entities:AddressResources.City}"
-                      parameters:ComboBoxParameters.DropDownButtonVisible="False"
-                      IsEditable="True" />
+
+                        <StackPanel Orientation="Horizontal" Grid.Row="1">
+                            <ComboBox
+                                IsTextSearchEnabled="True"
+                                ItemsSource="{Binding AllPostalCodes}"
+                                Text="{Binding Item.PostalCode, UpdateSourceTrigger=PropertyChanged}"
+                                Width="{StaticResource MidSmallWidth}"
+                                parameters:FormParameters.Label="{x:Static entities:AddressResources.PostalCode}"
+                                parameters:ComboBoxParameters.DropDownButtonVisible="False"
+                                parameters:TextBoxParameters.Mask="PositiveInteger"
+                                IsEditable="True"
+                                parameters:ComboBoxParameters.MaxLength="5" />
+                            <ComboBox
+                                      IsTextSearchEnabled="True"
+                                      ItemsSource="{Binding AllCitiesNames}"
+                                      Text="{Binding Item.City, UpdateSourceTrigger=PropertyChanged}"
+                                      Width="{StaticResource SmallLargeWidth}"
+                                      parameters:FormParameters.Label="{x:Static entities:AddressResources.City}"
+                                      parameters:ComboBoxParameters.DropDownButtonVisible="False"
+                                      IsEditable="True" />
+                        </StackPanel>
                     </Grid>
                 </Grid>
             </TabItem>
 
-            <TabItem>
-                <TabItem.Header>
-                    <Label Grid.Row="2" Content="{x:Static strings:PlayerResources.Club}" parameters:FormParameters.Icon="{DynamicResource IdCardGeometry}" Style="{StaticResource HeaderIconStyle}" />
-                </TabItem.Header>
+            <TabItem Header="{x:Static strings:PlayerResources.Club}"  parameters:ControlParameters.Icon="{StaticResource HomeGeometry}">
 
                 <Grid  parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
                     <Grid.RowDefinitions>
@@ -214,15 +212,12 @@
                 </Grid>
             </TabItem>
 
-            <TabItem>
-                <TabItem.Header>
-                    <Label Grid.Row="4" Content="{x:Static strings:PlayerResources.Contacts}" parameters:FormParameters.Icon="{DynamicResource ContactsGeometry}" Style="{StaticResource HeaderIconStyle}" />
-                </TabItem.Header>
+            <TabItem Header="{x:Static strings:PlayerResources.Contacts}" parameters:ControlParameters.Icon="{StaticResource ContactsGeometry}">
 
                 <Grid parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <views1:PhonesEditView DataContext="{Binding}" ItemsSource="{Binding Item.Phones}" IsTabStop="False" />
                     <views1:EmailsEditView Grid.Row="1" DataContext="{Binding}" ItemsSource="{Binding Item.Emails}" IsTabStop="False" />
@@ -231,7 +226,7 @@
         </TabControl>
 
         <!-- Body -->
-            <!--<Label Grid.Row="6" Content="{x:Static screens:PlayersResources.Body}" parameters:FormParameters.Icon="{DynamicResource Football1IconStyle}" Style="{StaticResource TitleTextBlockStyle}" />
+        <!--<Label Grid.Row="6" Content="{x:Static screens:PlayersResources.Body}" parameters:FormParameters.Icon="{DynamicResource Football1IconStyle}" Style="{StaticResource TitleTextBlockStyle}" />
 
             <Grid Grid.Row="7">
                 <Grid.RowDefinitions>
@@ -289,8 +284,8 @@
                 </Grid>
             </Grid>-->
 
-            <!-- Clothes -->
-            <!--<Label Grid.Row="8" Content="{x:Static screens:PlayersResources.Clothes}" parameters:FormParameters.Icon="{DynamicResource ClothesShirtIconStyle}" Style="{StaticResource TitleTextBlockStyle}" />
+        <!-- Clothes -->
+        <!--<Label Grid.Row="8" Content="{x:Static screens:PlayersResources.Clothes}" parameters:FormParameters.Icon="{DynamicResource ClothesShirtIconStyle}" Style="{StaticResource TitleTextBlockStyle}" />
 
             <Grid Grid.Row="9">
                 <Grid.RowDefinitions>
@@ -330,7 +325,7 @@
                     parameters:FormParameters.Label="{x:Static entities:PlayerResources.ShoesSize}" />
                 </Grid>
             </Grid>-->
-        
+
         <controls:WorkspaceView.Commands>
             <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CancelCommand}" Style="{StaticResource CancelCommandButtonApplicationBarStyle}" IsCancel="True" />
             <controls:CommandButton DockPanel.Dock="Right" Command="{Binding SaveCommand}" Style="{StaticResource ValidateCommandButtonApplicationBarStyle}" IsDefault="True" />

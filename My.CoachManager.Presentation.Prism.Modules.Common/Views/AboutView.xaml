@@ -13,7 +13,7 @@
              d:DataContext="{d:DesignInstance Type=viewModels:AboutViewModel}"
              Height="320"
              Width="450">
-    <Grid Margin="{StaticResource LargeMargin}" FocusManager.FocusedElement="{Binding ElementName=CloseButton}">
+    <Grid Margin="{StaticResource MediumMargin}" FocusManager.FocusedElement="{Binding ElementName=CloseButton}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="100" />
@@ -55,7 +55,7 @@
 
         <TextBlock  Grid.Row="5" Grid.Column="0"  Grid.ColumnSpan="2" Text="{x:Static strings:AboutResources.Warning}" TextWrapping="Wrap" FontSize="{StaticResource SmallFontSize}" />
 
-        <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="{StaticResource LargeTopMargin}">
+        <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="{StaticResource MediumTopMargin}">
             <Button x:Name="CloseButton" HorizontalAlignment="Right" Content="{x:Static strings1:ControlResources.Close}" Command="{Binding CloseCommand}" CommandParameter="{x:Static dialog:DialogResult.Ok}" IsCancel="True" IsDefault="True" />
         </StackPanel>
     </Grid>

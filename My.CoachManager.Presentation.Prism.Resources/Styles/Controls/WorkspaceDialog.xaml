@@ -21,7 +21,7 @@
                     <Border Background="{TemplateBinding OverlayBackground}">
                         <Border VerticalAlignment="Center" HorizontalAlignment="Center"
                                 Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                                Margin="{StaticResource LargeMargin}" Effect="{StaticResource CenterShadow}">
+                                Margin="{StaticResource MediumMargin}" Effect="{StaticResource CenterShadow}">
                             <Grid>
                                 <ContentPresenter />
                             </Grid>

@@ -46,7 +46,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <controls:Icon Grid.Column="0" Size="VeryLarge" Margin="{StaticResource LargeMargin}">
+                <controls:Icon Grid.Column="0" Size="VeryLarge" Margin="{StaticResource MediumMargin}">
                     <controls:Icon.Style>
                         <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
                             <Style.Triggers>
@@ -75,8 +75,8 @@
                     </controls:Icon.Style>
                 </controls:Icon>
                 <StackPanel Grid.Column="1" Orientation="Vertical">
-                    <TextBlock Text="{Binding Title}" Style="{StaticResource HeaderStyle}" VerticalAlignment="Bottom" Margin="{StaticResource LargeMargin}" />
-                    <TextBlock Text="{Binding Message}" VerticalAlignment="Top" Focusable="False" Margin="{StaticResource LargeHorizontalMargin}" TextWrapping="Wrap" />
+                    <TextBlock Text="{Binding Title}" Style="{StaticResource HeaderStyle}" VerticalAlignment="Bottom" Margin="{StaticResource MediumMargin}" />
+                    <TextBlock Text="{Binding Message}" VerticalAlignment="Top" Focusable="False" Margin="{StaticResource MediumHorizontalMargin}" TextWrapping="Wrap" />
                 </StackPanel>
             </Grid>
         </ScrollViewer>

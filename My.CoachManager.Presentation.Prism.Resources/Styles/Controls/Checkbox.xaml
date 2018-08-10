@@ -9,7 +9,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="CheckBoxBaseStyle" TargetType="{x:Type CheckBox}">
-        <Setter Property="Margin" Value="{StaticResource LargeMargin}" />
+        <Setter Property="Margin" Value="{StaticResource MediumMargin}" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="Background" Value="{DynamicResource Light}" />
         <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />

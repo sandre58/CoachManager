@@ -30,7 +30,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 <controls:Icon Size="VeryLarge" Margin="{StaticResource VeryVeryLargeHorizontalMargin}" Content="{StaticResource LockGeometry}"
                                VerticalAlignment="Center" Foreground="{DynamicResource Dark}" />
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding Error}" Foreground="{DynamicResource Negative}" Margin="{StaticResource LargeVerticalMargin}" TextWrapping="Wrap" />
+                    <TextBlock Text="{Binding Error}" Foreground="{DynamicResource Negative}" Margin="{StaticResource MediumVerticalMargin}" TextWrapping="Wrap" />
                     <StackPanel Orientation="Horizontal">
                         <controls:Icon Size="Medium" Margin="{StaticResource DefaultHorizontalMargin}" Content="{StaticResource LoginGeometry}" />
                         <TextBox x:Name="TxtUsername" Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="{StaticResource LargeWidth}" parameters:TextBoxParameters.Watermark="{x:Static strings:ControlResources.Username}" parameters:TextBoxParameters.ClearTextButton="True" />

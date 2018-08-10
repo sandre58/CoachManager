@@ -38,10 +38,10 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <controls:Icon x:Name="Icon" Width="40" Height="40" Size="Custom" Content="{StaticResource ChevronRightGeometry}" Grid.Column="0" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Center"
+            <controls:Icon x:Name="Icon" Width="40" Height="40" Size="Custom" Content="{StaticResource ChevronRightGeometry}" Grid.Column="0" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center"
                             Style="{StaticResource EllipseIconBaseStyle}"
                            OverlayBackground="{DynamicResource HeaderForeground}" />
-            <TextBlock Grid.Column="1" Text="{Binding Title}" Margin="{StaticResource LargeHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />
+            <TextBlock Grid.Column="1" Text="{Binding Title}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />
 
             <Grid Grid.Column="2" Visibility="{Binding Mode, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static viewModels:ScreenMode.Edition}}">
                 <Grid.RowDefinitions>
@@ -81,7 +81,7 @@
     <DataTemplate x:Key="FilteredWorkspaceDialogViewHeaderTemplate" DataType="{x:Type viewModels:IFilteredListViewModel}">
         <StackPanel>
             <DockPanel Background="{DynamicResource DarkVariation3}" parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}">
-                <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="{StaticResource LargeMargin}">
+                <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="{StaticResource MediumMargin}">
                     <TextBlock Text="{x:Static strings:ControlResources.SpeedSearch}" VerticalAlignment="Center" />
                     <TextBox Text="{Binding SpeedFilter.Filter.Value, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource TextBoxBaseStyle}"
@@ -167,7 +167,7 @@
                         <!-- Header -->
                         <Grid Grid.Row="0" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HeaderHeight}" Visibility="{TemplateBinding HeaderTemplate, Converter={StaticResource NullToVisibilityConverter}}">
                             <Border Padding="0,0,0,15" Background="{TemplateBinding HeaderBackground}" Focusable="False">
-                                <ContentControl Margin="{StaticResource LargeHorizontalMargin}" Content="{Binding}" ContentTemplate="{TemplateBinding HeaderTemplate}" VerticalAlignment="Bottom" />
+                                <ContentControl Margin="{StaticResource MediumHorizontalMargin}" Content="{Binding}" ContentTemplate="{TemplateBinding HeaderTemplate}" VerticalAlignment="Bottom" />
                             </Border>
                         </Grid>
 
@@ -184,7 +184,7 @@
                             <Grid>
                                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                                     <controls:ProgressRing Width="70" Height="70" />
-                                    <TextBlock Style="{StaticResource HeaderStyle}" Foreground="{DynamicResource DarkAccent}" Text="{x:Static strings:MessageResources.Loading}" Margin="{StaticResource LargeVerticalMargin}" FontStyle="Italic" Visibility="Collapsed" />
+                                    <TextBlock Style="{StaticResource HeaderStyle}" Foreground="{DynamicResource DarkAccent}" Text="{x:Static strings:MessageResources.Loading}" Margin="{StaticResource MediumVerticalMargin}" FontStyle="Italic" Visibility="Collapsed" />
                                 </StackPanel>
                             </Grid>
                         </Border>
