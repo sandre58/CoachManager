@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Resources;
@@ -17,8 +18,8 @@ namespace My.CoachManager.Presentation.Prism.Models
         public PersonModel()
         {
             Gender = PlayerConstants.DefaultGender;
-            Emails = new ContactsCollection<EmailModel>();
-            Phones = new ContactsCollection<PhoneModel>();
+            Emails = new ItemsObservableCollection<EmailModel>();
+            Phones = new ItemsObservableCollection<PhoneModel>();
         }
 
         /// <summary>
@@ -121,13 +122,13 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// Gets or sets the phones.
         /// </summary>
         [Display(Name = "Phones", ResourceType = typeof(PersonResources))]
-        public ContactsCollection<PhoneModel> Phones { get; set; }
+        public ItemsObservableCollection<PhoneModel> Phones { get; set; }
 
         /// <summary>
         /// Gets or sets the emails.
         /// </summary>
         [Display(Name = "Emails", ResourceType = typeof(PersonResources))]
-        public ContactsCollection<EmailModel> Emails { get; set; }
+        public ItemsObservableCollection<EmailModel> Emails { get; set; }
 
         /// <summary>
         /// Get the full name (FirstName LastName).

@@ -32,8 +32,7 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// Gets or sets the person id.
         /// </summary>
         [Display(Name = "Person", ResourceType = typeof(ContactResources))]
-        [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        public virtual int PersonId { get; set; }
+        public virtual int? PersonId { get; set; }
 
     }
 }

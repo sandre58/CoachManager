@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.Presentation.Prism.Models;
 using Prism.Commands;
 
@@ -19,9 +20,19 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         public IEnumerable<string> AllEmailLabels { get; set; }
 
         /// <summary>
+        /// Gets phones.
+        /// </summary>
+        public ItemsObservableCollection<PhoneModel> Phones { get; private set; }
+
+        /// <summary>
+        /// Gets phones.
+        /// </summary>
+        public ItemsObservableCollection<EmailModel> Emails { get; private set; }
+
+        /// <summary>
         /// Get or Set Add Phone Command.
         /// </summary>
-        public DelegateCommand AddPhoneCommand { get; set; }
+        public DelegateCommand<PhoneModel> AddPhoneCommand { get; set; }
 
         /// <summary>
         /// Get or Set Remove Phone Command.
@@ -31,7 +42,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Get or Set Add Email Command.
         /// </summary>
-        public DelegateCommand AddEmailCommand { get; set; }
+        public DelegateCommand<EmailModel> AddEmailCommand { get; set; }
 
         /// <summary>
         /// Get or Set Remove Email Command.
@@ -45,22 +56,27 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Add a contact.
         /// </summary>
-        public void AddPhone()
+        private void AddPhone(PhoneModel phone)
         {
-            Item.Phones.Add(new PhoneModel
-            {
-                PersonId = Item.Id
-            });
+            Phones.Add(new PhoneModel());
+        }
+
+        /// <summary>
+        /// Can Add a contact.
+        /// </summary>
+        private bool CanAddPhone(PhoneModel phone)
+        {
+            return Phones.IndexOf(phone) == Phones.Count - 1 && !string.IsNullOrEmpty(phone.Value);
         }
 
         /// <summary>
         /// Remove a contact.
         /// </summary>
-        public void RemovePhone(PhoneModel phone)
+        private void RemovePhone(PhoneModel phone)
         {
-            if (Item.Phones.Count > 1)
-                Item.Phones.Remove(phone);
-            else if (Item.Phones.Count == 1)
+            if (Phones.Count > 1)
+               Phones.Remove(phone);
+            else if (Phones.Count == 1)
             {
                 phone.Label = "";
                 phone.Value = "";
@@ -68,31 +84,52 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         }
 
         /// <summary>
+        /// Can remove a contact.
+        /// </summary>
+        private bool CanRemovePhone(PhoneModel phone)
+        {
+            return  Phones.Count > 1 || !string.IsNullOrEmpty(phone.Value);
+        }
+
+        /// <summary>
         /// Add a contact.
         /// </summary>
-        public void AddEmail()
+        private void AddEmail(EmailModel mail)
         {
-            Item.Emails.Add(new EmailModel
-            {
-                PersonId = Item.Id
-            });
+            Emails.Add(new EmailModel());
+        }
+
+        /// <summary>
+        /// Can Add a contact.
+        /// </summary>
+        private bool CanAddEmail(EmailModel mail)
+        {
+            return Emails.IndexOf(mail) == Emails.Count - 1 && !string.IsNullOrEmpty(mail.Value);
         }
 
         /// <summary>
         /// Remove a contact.
         /// </summary>
-        public void RemoveEmail(EmailModel email)
+        private void RemoveEmail(EmailModel email)
         {
             if (email != null)
             {
-                if (Item.Emails.Count > 1)
-                    Item.Emails.Remove(email);
-                else if (Item.Phones.Count == 1)
+                if (Emails.Count > 1)
+                    Emails.Remove(email);
+                else if (Phones.Count == 1)
                 {
                     email.Label = "";
                     email.Value = "";
                 }
             }
+        }
+
+        /// <summary>
+        /// Can remove a contact.
+        /// </summary>
+        private bool CanRemoveEmail(EmailModel mail)
+        {
+            return Emails.Count > 1 || !string.IsNullOrEmpty(mail.Value);
         }
 
         #endregion Methods

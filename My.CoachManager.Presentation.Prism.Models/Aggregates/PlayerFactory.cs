@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Application.Dtos.Person;
+using My.CoachManager.CrossCutting.Core.Collections;
+using My.CoachManager.CrossCutting.Core.Extensions;
 
 namespace My.CoachManager.Presentation.Prism.Models.Aggregates
 {
@@ -41,7 +43,9 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 Description = item.Description,
                 Address = item.Address,
                 PostalCode = item.PostalCode,
-                City = item.City
+                City = item.City,
+                Emails = item.Emails.Select(ContactFactory.GetContact<EmailDto>),
+                Phones = item.Phones.Select(ContactFactory.GetContact<PhoneDto>),
             };
         }
 
@@ -77,8 +81,8 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 Weight = dto.Weight,
                 ShoesSize = dto.ShoesSize,
                 Size = dto.Size,
-                Emails = dto.Emails != null ? new ContactsCollection<EmailModel>(dto.Emails.Select(ContactFactory.GetContact<EmailModel>)) : new ContactsCollection<EmailModel>(),
-                Phones = dto.Phones != null ? new ContactsCollection<PhoneModel>(dto.Phones.Select(ContactFactory.GetContact<PhoneModel>)) : new ContactsCollection<PhoneModel>(),
+                Emails = dto.Emails != null ? dto.Emails.Select(ContactFactory.GetContact<EmailModel>).ToList().ToItemsObservableCollection() : new ItemsObservableCollection<EmailModel>(),
+                Phones = dto.Phones != null ?dto.Phones.Select(ContactFactory.GetContact<PhoneModel>).ToList().ToItemsObservableCollection() : new ItemsObservableCollection<PhoneModel>(),
                 CreatedBy = dto.CreatedBy,
                 CreatedDate = dto.CreatedDate,
                 ModifiedBy = dto.ModifiedBy,

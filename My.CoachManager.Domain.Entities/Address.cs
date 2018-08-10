@@ -11,7 +11,6 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the first row.
         /// </summary>
-        [Required]
         public string Row1 { get; set; }
 
         /// <summary>
@@ -22,14 +21,12 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the postal code.
         /// </summary>
-        [Required]
         [MaxLength(5)]
         public string PostalCode { get; set; }
 
         /// <summary>
         /// Gets or sets the city.
         /// </summary>
-        [Required]
         public string City { get; set; }
 
         /// <summary>

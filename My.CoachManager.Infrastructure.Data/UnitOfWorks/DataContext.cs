@@ -95,10 +95,10 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
 
             modelBuilder.Entity<Contact>()
                 .HasOne(x => x.Person)
-                .WithMany()
+                .WithMany(x => x.Contacts)
                 .HasForeignKey(x => x.PersonId)
                 .OnDelete(DeleteBehavior.Cascade);
-
+            
             modelBuilder.Entity<Contact>()
                 .Property(x => x.CreatedDate)
                 .HasDefaultValueSql("getdate()");
@@ -171,7 +171,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 .HasDefaultValueSql("getdate()");
 
             modelBuilder.Entity<RosterPlayer>()
-                .HasKey(x => new { x.RosterId, x.PlayerId });
+                .HasAlternateKey(x => new { x.RosterId, x.PlayerId });
 
             modelBuilder.Entity<RosterPlayer>()
                 .HasOne(x => x.Roster)

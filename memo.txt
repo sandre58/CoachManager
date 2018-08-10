@@ -1,2 +1,4 @@
 Application Settings
 Cache Manager
+Remove contacts
+Focus contact on adding

@@ -144,7 +144,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual void Add()
         {
-            DialogManager.ShowWorkspaceDialog<TEditView>(dialog =>
+            var view = ServiceLocator.Current.GetInstance<TEditView>();
+            var model = view.DataContext as IEditViewModel<TEntityModel>;
+            model?.LoadItemById(0);
+
+            DialogManager.ShowWorkspaceDialog(view, dialog =>
             {
                 OnAddCompleted(dialog.Result);
             });

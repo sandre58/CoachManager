@@ -219,7 +219,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         protected virtual void Cancel()
         {
             if (!CanCancel()) return;
-            if (!Item.IsModified || DialogManager.ShowWarningDialog(MessageResources.CancelModifications, MessageDialogButtons.YesNo) == DialogResult.Yes)
+            if (!Item.IsModified() || DialogManager.ShowWarningDialog(MessageResources.CancelModifications, MessageDialogButtons.YesNo) == DialogResult.Yes)
             {
                 Close(DialogResult.Cancel);
             }
@@ -244,7 +244,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         public void LoadItemById(int id)
         {
             _activeId = id;
-            Mode = ScreenMode.Edition;
+            Mode = id == 0 ? ScreenMode.Creation : ScreenMode.Edition;
             RefreshDataAsync();
         }
 
@@ -254,6 +254,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected override void LoadDataCore()
         {
+            if(Item == null || Item.Id != _activeId)
             Item = _activeId > 0 ? LoadItemCore(_activeId) : new TModel();
         }
 

@@ -22,23 +22,23 @@
     <Color x:Key="LightVariation8Color">#D1ffffff</Color>
     <Color x:Key="LightVariation9Color">#E1ffffff</Color>
 
-    <Color x:Key="Variation1Color">#11333333</Color>
-    <Color x:Key="Variation2Color">#22333333</Color>
-    <Color x:Key="Variation3Color">#44333333</Color>
-    <Color x:Key="Variation4Color">#66333333</Color>
-    <Color x:Key="Variation5Color">#88333333</Color>
-    <Color x:Key="Variation6Color">#A1333333</Color>
-    <Color x:Key="Variation7Color">#C1333333</Color>
-    <Color x:Key="Variation8Color">#D1333333</Color>
-    <Color x:Key="Variation9Color">#E1333333</Color>
+    <Color x:Key="Variation1Color">#11555555</Color>
+    <Color x:Key="Variation2Color">#22555555</Color>
+    <Color x:Key="Variation3Color">#44555555</Color>
+    <Color x:Key="Variation4Color">#66555555</Color>
+    <Color x:Key="Variation5Color">#88555555</Color>
+    <Color x:Key="Variation6Color">#A1555555</Color>
+    <Color x:Key="Variation7Color">#C1555555</Color>
+    <Color x:Key="Variation8Color">#D1555555</Color>
+    <Color x:Key="Variation9Color">#E1555555</Color>
 
-    <Color x:Key="DarkVariation1Color">#11000000</Color>
-    <Color x:Key="DarkVariation2Color">#22000000</Color>
-    <Color x:Key="DarkVariation3Color">#44000000</Color>
-    <Color x:Key="DarkVariation4Color">#66000000</Color>
-    <Color x:Key="DarkVariation5Color">#88000000</Color>
-    <Color x:Key="DarkVariation6Color">#A1000000</Color>
-    <Color x:Key="DarkVariation7Color">#C1000000</Color>
-    <Color x:Key="DarkVariation8Color">#D1000000</Color>
-    <Color x:Key="DarkVariation9Color">#E1000000</Color>
+    <Color x:Key="DarkVariation1Color">#11333333</Color>
+    <Color x:Key="DarkVariation2Color">#22333333</Color>
+    <Color x:Key="DarkVariation3Color">#44333333</Color>
+    <Color x:Key="DarkVariation4Color">#66333333</Color>
+    <Color x:Key="DarkVariation5Color">#88333333</Color>
+    <Color x:Key="DarkVariation6Color">#A1333333</Color>
+    <Color x:Key="DarkVariation7Color">#C1333333</Color>
+    <Color x:Key="DarkVariation8Color">#D1333333</Color>
+    <Color x:Key="DarkVariation9Color">#E1333333</Color>
 </ResourceDictionary>

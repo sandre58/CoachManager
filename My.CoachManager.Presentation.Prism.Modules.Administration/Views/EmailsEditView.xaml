@@ -40,27 +40,30 @@
                 <ComboBox Grid.Column="2"
                               IsTextSearchEnabled="True"
                               ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views1:EmailsEditView}}, Path=DataContext.AllEmailLabels}"
-                              Text="{Binding Label}"
-                              Width="{StaticResource MediumWidth}"
+                              Text="{Binding Label, UpdateSourceTrigger=PropertyChanged}"
+                              Width="120"
                               parameters:FormParameters.Label="{x:Static entities:ContactResources.Label}"
                               IsEditable="True" />
 
-                <CheckBox Grid.Column="3" Content="{x:Static entities:ContactResources.Default}" IsChecked="{Binding Default}" />
+                <CheckBox Grid.Column="3" ToolTip="{x:Static entities:ContactResources.Default}" IsChecked="{Binding Default, UpdateSourceTrigger=PropertyChanged}" />
 
                 <Button x:Name="RemoveButton" Grid.Column="4"
                                     Style="{StaticResource RemoveButtonStyle}"
                                     Width="18" Height="18"
                                     ToolTip="{x:Static strings:ControlResources.RemoveContact}"
                                     Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views1:EmailsEditView}}, Path=DataContext.RemoveEmailCommand}"
-                                    CommandParameter="{Binding}" />
+                                    CommandParameter="{Binding}" 
+                        Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
                 <Button x:Name="AddButton" Grid.Column="5"
                                     Style="{StaticResource AddButtonStyle}"
                                     Width="18" Height="18"
                                     ToolTip="{x:Static strings:ControlResources.AddContact}"
-                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views1:EmailsEditView}}, Path=DataContext.AddEmailCommand}" />
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views1:EmailsEditView}}, Path=DataContext.AddEmailCommand}"
+                        CommandParameter="{Binding}"
+                        Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             </Grid>
-            <DataTemplate.Triggers>
+            <!--<DataTemplate.Triggers>
 
                 <DataTrigger Binding="{Binding CanAdd}" Value="False">
                     <Setter TargetName="AddButton" Property="Visibility" Value="Hidden" />
@@ -68,7 +71,7 @@
                 <DataTrigger Binding="{Binding CanRemove}" Value="False">
                     <Setter TargetName="RemoveButton" Property="Visibility" Value="Hidden" />
                 </DataTrigger>
-            </DataTemplate.Triggers>
+            </DataTemplate.Triggers>-->
         </DataTemplate>
     </ItemsControl.ItemTemplate>
 </ItemsControl>

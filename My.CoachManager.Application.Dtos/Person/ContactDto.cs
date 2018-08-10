@@ -20,6 +20,6 @@ namespace My.CoachManager.Application.Dtos.Person
         public bool Default { get; set; }
 
         [DataMember]
-        public int PersonId { get; set; }
+        public int? PersonId { get; set; }
     }
 }

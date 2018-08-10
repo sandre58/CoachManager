@@ -37,6 +37,11 @@ namespace My.CoachManager.Domain.AddressModule.Aggregate
         /// <returns>Result of the convert to DTO.</returns>
         public static Address CreateEntity(string address, string postalCode, string city)
         {
+            if (string.IsNullOrEmpty(address) && string.IsNullOrEmpty(postalCode) && string.IsNullOrEmpty(city))
+            {
+                return null;
+            }
+
             return new Address
             {
                 Row1 = address,

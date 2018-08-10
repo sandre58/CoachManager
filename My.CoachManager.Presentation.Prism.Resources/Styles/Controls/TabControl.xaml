@@ -186,7 +186,6 @@
                                         RenderOptions.ClearTypeHint="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(RenderOptions.ClearTypeHint)}">
                                 <ContentPresenter x:Name="PART_SelectedContentHost"
                                                               ContentSource="SelectedContent"
-TextBlock.Foreground="Red"
                                                               Margin="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Padding}"
                                                               HorizontalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.HorizontalContentAlignment),Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
                                                               VerticalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.VerticalContentAlignment),Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -254,7 +253,7 @@ TextBlock.Foreground="Red"
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Foreground" Value="{DynamicResource DarkControl}" />
+        <Setter Property="Foreground" Value="{DynamicResource GrayForeground}" />
         <Setter Property="FontSize" Value="{StaticResource NormalFontSize}" />
         <Setter Property="FontStretch" Value="Medium" />
         <Setter Property="FontStyle" Value="Normal" />
@@ -318,8 +317,8 @@ TextBlock.Foreground="Red"
                 <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
             </DataTrigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource DarkVariation2}" />
-                <Setter Property="Foreground" Value="{DynamicResource Dark}" />
+                <Setter Property="Background" Value="{DynamicResource LightControlMouseOver}" />
+                <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{DynamicResource Light}" />
@@ -382,7 +381,7 @@ TextBlock.Foreground="Red"
                                 <RowDefinition x:Name="FirstRowDefinition" Height="{TemplateBinding params:TabControlParameters.HeaderSize}" />
                                 <RowDefinition x:Name="SecondRowDefinition" Height="*" />
                             </Grid.RowDefinitions>
-                            <TabPanel x:Name="HeaderPanel" Grid.Column="0" Grid.Row="0" IsItemsHost="True" KeyboardNavigation.TabIndex="1" Background="{DynamicResource DarkVariation5}" />
+                            <TabPanel x:Name="HeaderPanel" Grid.Column="0" Grid.Row="0" IsItemsHost="True" KeyboardNavigation.TabIndex="1" Background="{DynamicResource DarkMenuBackground}" />
                             <Border x:Name="ContentPanel"
                                         Grid.Column="0"
                                         Grid.Row="1"

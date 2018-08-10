@@ -143,8 +143,6 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
 
                     b.Property<int>("PersonId");
 
-                    b.Property<int?>("PersonId1");
-
                     b.Property<int>("Type");
 
                     b.Property<string>("Value")
@@ -153,8 +151,6 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PersonId");
-
-                    b.HasIndex("PersonId1");
 
                     b.ToTable("Contacts");
 
@@ -544,17 +540,15 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("My.CoachManager.Domain.Entities.RosterPlayer", b =>
                 {
-                    b.Property<int>("RosterId");
-
-                    b.Property<int>("PlayerId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CreatedBy");
 
                     b.Property<DateTime?>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("getdate()");
-
-                    b.Property<int>("Id");
 
                     b.Property<bool>("IsMutation")
                         .ValueGeneratedOnAdd()
@@ -570,7 +564,13 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
 
                     b.Property<int?>("Number");
 
-                    b.HasKey("RosterId", "PlayerId");
+                    b.Property<int>("PlayerId");
+
+                    b.Property<int>("RosterId");
+
+                    b.HasKey("Id");
+
+                    b.HasAlternateKey("RosterId", "PlayerId");
 
                     b.HasIndex("PlayerId");
 
@@ -738,13 +738,9 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
             modelBuilder.Entity("My.CoachManager.Domain.Entities.Contact", b =>
                 {
                     b.HasOne("My.CoachManager.Domain.Entities.Person", "Person")
-                        .WithMany()
+                        .WithMany("Contacts")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("My.CoachManager.Domain.Entities.Person")
-                        .WithMany("Contacts")
-                        .HasForeignKey("PersonId1");
                 });
 
             modelBuilder.Entity("My.CoachManager.Domain.Entities.Person", b =>

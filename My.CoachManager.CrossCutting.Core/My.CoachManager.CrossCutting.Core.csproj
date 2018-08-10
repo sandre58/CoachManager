@@ -290,6 +290,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\ItemsObservableCollection.cs" />
     <Compile Include="Configurations\ConfigurationManagerBase.cs" />
     <Compile Include="Constants\ContactConstants.cs" />
     <Compile Include="Constants\PlayerConstants.cs" />

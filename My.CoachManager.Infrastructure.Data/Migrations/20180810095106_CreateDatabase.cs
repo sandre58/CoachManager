@@ -221,7 +221,6 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     Default = table.Column<bool>(nullable: false),
                     Value = table.Column<string>(nullable: false),
                     PersonId = table.Column<int>(nullable: false),
-                    PersonId1 = table.Column<int>(nullable: true),
                     Type = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -233,19 +232,14 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                         principalTable: "Persons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Contacts_Persons_PersonId1",
-                        column: x => x.PersonId1,
-                        principalTable: "Persons",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "RosterPlayers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CreatedDate = table.Column<DateTime>(nullable: true, defaultValueSql: "getdate()"),
                     CreatedBy = table.Column<string>(nullable: true),
                     ModifiedDate = table.Column<DateTime>(nullable: true),
@@ -258,7 +252,8 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RosterPlayers", x => new { x.RosterId, x.PlayerId });
+                    table.PrimaryKey("PK_RosterPlayers", x => x.Id);
+                    table.UniqueConstraint("AK_RosterPlayers_RosterId_PlayerId", x => new { x.RosterId, x.PlayerId });
                     table.ForeignKey(
                         name: "FK_RosterPlayers_Persons_PlayerId",
                         column: x => x.PlayerId,
@@ -274,25 +269,30 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Adresses",
+                columns: new[] { "Id", "City", "CountryId", "CreatedBy", "CreatedDate", "Latitude", "Longitude", "ModifiedBy", "ModifiedDate", "PostalCode", "Row1", "Row2" },
+                values: new object[] { 1, "Vic le comte", null, null, null, 0.0, 0.0, null, null, "63270", "Impasse du Babory", null });
+
+            migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Label", "ModifiedBy", "ModifiedDate", "Order", "Year" },
                 values: new object[,]
                 {
-                    { 1, "S", null, null, null, "Séniors", null, null, 1, 1998 },
                     { 16, "U6", null, null, null, "U6", null, null, 16, 2012 },
-                    { 14, "U8", null, null, null, "U8", null, null, 14, 2010 },
+                    { 15, "U7", null, null, null, "U7", null, null, 15, 2011 },
                     { 13, "U9", null, null, null, "U9", null, null, 13, 2009 },
                     { 12, "U10", null, null, null, "U10", null, null, 12, 2008 },
                     { 11, "U11", null, null, null, "U11", null, null, 11, 2007 },
                     { 10, "U12", null, null, null, "U12", null, null, 10, 2006 },
                     { 9, "U13", null, null, null, "U13", null, null, 9, 2005 },
-                    { 15, "U7", null, null, null, "U7", null, null, 15, 2011 },
+                    { 14, "U8", null, null, null, "U8", null, null, 14, 2010 },
                     { 7, "U15", null, null, null, "U15", null, null, 7, 2003 },
                     { 6, "U16", null, null, null, "U16", null, null, 6, 2002 },
                     { 5, "U17", null, null, null, "U17", null, null, 5, 2001 },
                     { 4, "U18", null, null, null, "U18", null, null, 4, 2000 },
                     { 3, "U19", null, null, null, "U19", null, null, 3, 1999 },
                     { 2, "V", null, null, null, "Vétérans", null, null, 2, 1982 },
+                    { 1, "S", null, null, null, "Séniors", null, null, 1, 1998 },
                     { 8, "U14", null, null, null, "U14", null, null, 8, 2004 }
                 });
 
@@ -314,15 +314,15 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     { 171, "pan", null, null, null, "pa.png", "Panama", null, null, 0 },
                     { 165, "mnp", null, null, null, "mp.png", "Northern Mariana Islands", null, null, 0 },
                     { 172, "png", null, null, null, "pg.png", "Papua New Guinea", null, null, 0 },
-                    { 180, "qat", null, null, null, "qa.png", "Qatar", null, null, 0 },
+                    { 181, "reu", null, null, null, "re.png", "Reunion", null, null, 0 },
                     { 174, "per", null, null, null, "pe.png", "Peru", null, null, 0 },
                     { 175, "phl", null, null, null, "ph.png", "Philippines", null, null, 0 },
                     { 176, "pcn", null, null, null, "pn.png", "Pitcairn", null, null, 0 },
                     { 177, "pol", null, null, null, "pl.png", "Poland", null, null, 0 },
                     { 178, "prt", null, null, null, "pt.png", "Portugal", null, null, 0 },
                     { 179, "pri", null, null, null, "pr.png", "Puerto Rico", null, null, 0 },
+                    { 180, "qat", null, null, null, "qa.png", "Qatar", null, null, 0 },
                     { 159, "nzl", null, null, null, "nz.png", "New Zealand", null, null, 0 },
-                    { 181, "reu", null, null, null, "re.png", "Reunion", null, null, 0 },
                     { 182, "rou", null, null, null, "ro.png", "Romania", null, null, 0 },
                     { 183, "rus", null, null, null, "ru.png", "Russian Federation", null, null, 0 },
                     { 184, "rwa", null, null, null, "rw.png", "Rwanda", null, null, 0 },
@@ -330,7 +330,7 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     { 186, "shn", null, null, null, "sh.png", "Saint Helena, Ascension and Tristan Da Cunha", null, null, 0 },
                     { 173, "pry", null, null, null, "py.png", "Paraguay", null, null, 0 },
                     { 158, "ncl", null, null, null, "nc.png", "New Caledonia", null, null, 0 },
-                    { 150, "msr", null, null, null, "ms.png", "Montserrat", null, null, 0 },
+                    { 149, "mne", null, null, null, "me.png", "Montenegro", null, null, 0 },
                     { 156, "npl", null, null, null, "np.png", "Nepal", null, null, 0 },
                     { 128, "lie", null, null, null, "li.png", "Liechtenstein", null, null, 0 },
                     { 129, "ltu", null, null, null, "lt.png", "Lithuania", null, null, 0 },
@@ -353,8 +353,8 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     { 146, "mda", null, null, null, "md.png", "Moldova, Republic of", null, null, 0 },
                     { 147, "mco", null, null, null, "mc.png", "Monaco", null, null, 0 },
                     { 148, "mng", null, null, null, "mn.png", "Mongolia", null, null, 0 },
-                    { 149, "mne", null, null, null, "me.png", "Montenegro", null, null, 0 },
                     { 187, "kna", null, null, null, "kn.png", "Saint Kitts and Nevis", null, null, 0 },
+                    { 150, "msr", null, null, null, "ms.png", "Montserrat", null, null, 0 },
                     { 151, "mar", null, null, null, "ma.png", "Morocco", null, null, 0 },
                     { 152, "moz", null, null, null, "mz.png", "Mozambique", null, null, 0 },
                     { 153, "mmr", null, null, null, "mm.png", "Myanmar", null, null, 0 },
@@ -425,7 +425,7 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     { 218, "tpc", null, null, null, "tw.png", "Taiwan, Province of China", null, null, 0 },
                     { 205, "som", null, null, null, "so.png", "Somalia", null, null, 0 },
                     { 126, "lbr", null, null, null, "lr.png", "Liberia", null, null, 0 },
-                    { 118, "prk", null, null, null, "kp.png", "Korea, Democratic People's Republic of", null, null, 0 },
+                    { 119, "kor", null, null, null, "kr.png", "Korea, Republic of", null, null, 0 },
                     { 124, "lbn", null, null, null, "lb.png", "Lebanon", null, null, 0 },
                     { 33, "bio", null, null, null, "io.png", "British Indian Ocean Territory", null, null, 0 },
                     { 34, "brn", null, null, null, "bn.png", "Brunei Darussalam", null, null, 0 },
@@ -471,7 +471,7 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     { 11, "arg", null, null, null, "ar.png", "Argentina", null, null, 0 },
                     { 12, "arm", null, null, null, "am.png", "Armenia", null, null, 0 },
                     { 13, "abw", null, null, null, "aw.png", "Aruba", null, null, 0 },
-                    { 60, "cze", null, null, null, "cz.png", "Czech Republic", null, null, 0 },
+                    { 125, "lso", null, null, null, "ls.png", "Lesotho", null, null, 0 },
                     { 14, "aus", null, null, null, "au.png", "Australia", null, null, 0 },
                     { 16, "aze", null, null, null, "az.png", "Azerbaijan", null, null, 0 },
                     { 17, "bhs", null, null, null, "bs.png", "Bahamas", null, null, 0 },
@@ -488,9 +488,9 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     { 28, "bes", null, null, null, "bq.png", "Bonaire, Sint Eustatius and Saba", null, null, 0 },
                     { 15, "aut", null, null, null, "at.png", "Austria", null, null, 0 },
                     { 61, "dnk", null, null, null, "dk.png", "Denmark", null, null, 0 },
-                    { 62, "dji", null, null, null, "dj.png", "Djibouti", null, null, 0 },
+                    { 60, "cze", null, null, null, "cz.png", "Czech Republic", null, null, 0 },
                     { 63, "dma", null, null, null, "dm.png", "Dominica", null, null, 0 },
-                    { 96, "hti", null, null, null, "ht.png", "Haiti", null, null, 0 },
+                    { 62, "dji", null, null, null, "dj.png", "Djibouti", null, null, 0 },
                     { 97, "him", null, null, null, "hm.png", "Heard Island and McDonald Islands", null, null, 0 },
                     { 98, "vat", null, null, null, "va.png", "Holy See (Vatican City State)", null, null, 0 },
                     { 99, "hnd", null, null, null, "hn.png", "Honduras", null, null, 0 },
@@ -512,12 +512,10 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     { 115, "kaz", null, null, null, "kz.png", "Kazakhstan", null, null, 0 },
                     { 116, "ken", null, null, null, "ke.png", "Kenya", null, null, 0 },
                     { 117, "kir", null, null, null, "ki.png", "Kiribati", null, null, 0 },
-                    { 119, "kor", null, null, null, "kr.png", "Korea, Republic of", null, null, 0 },
+                    { 118, "prk", null, null, null, "kp.png", "Korea, Democratic People's Republic of", null, null, 0 },
                     { 120, "kwt", null, null, null, "kw.png", "Kuwait", null, null, 0 },
                     { 121, "kgz", null, null, null, "kg.png", "Kyrgyzstan", null, null, 0 },
-                    { 122, "lao", null, null, null, "la.png", "Lao People's Democratic Republic", null, null, 0 },
-                    { 123, "lva", null, null, null, "lv.png", "Latvia", null, null, 0 },
-                    { 95, "guy", null, null, null, "gy.png", "Guyana", null, null, 0 }
+                    { 122, "lao", null, null, null, "la.png", "Lao People's Democratic Republic", null, null, 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -525,8 +523,10 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Flag", "Label", "ModifiedBy", "ModifiedDate", "Order" },
                 values: new object[,]
                 {
-                    { 125, "lso", null, null, null, "ls.png", "Lesotho", null, null, 0 },
+                    { 123, "lva", null, null, null, "lv.png", "Latvia", null, null, 0 },
+                    { 95, "guy", null, null, null, "gy.png", "Guyana", null, null, 0 },
                     { 94, "gnb", null, null, null, "gw.png", "Guinea-Bissau", null, null, 0 },
+                    { 96, "hti", null, null, null, "ht.png", "Haiti", null, null, 0 },
                     { 92, "ggy", null, null, null, "gg.png", "Guernsey", null, null, 0 },
                     { 64, "dom", null, null, null, "do.png", "Dominican Republic", null, null, 0 },
                     { 65, "ecu", null, null, null, "ec.png", "Ecuador", null, null, 0 },
@@ -539,24 +539,24 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     { 72, "flk", null, null, null, "fk.png", "Falkland Islands (Malvinas)", null, null, 0 },
                     { 73, "fro", null, null, null, "fo.png", "Faroe Islands", null, null, 0 },
                     { 74, "fji", null, null, null, "fj.png", "Fiji", null, null, 0 },
-                    { 75, "fin", null, null, null, "fi.png", "Finland", null, null, 0 },
-                    { 76, "fra", null, null, null, "fr.png", "France", null, null, 0 },
                     { 93, "gin", null, null, null, "gn.png", "Guinea", null, null, 0 },
+                    { 76, "fra", null, null, null, "fr.png", "France", null, null, 0 },
                     { 77, "guf", null, null, null, "gf.png", "French Guiana", null, null, 0 },
+                    { 75, "fin", null, null, null, "fi.png", "Finland", null, null, 0 },
                     { 79, "fst", null, null, null, "tf.png", "French Southern Territories", null, null, 0 },
-                    { 80, "gab", null, null, null, "ga.png", "Gabon", null, null, 0 },
-                    { 81, "gmb", null, null, null, "gm.png", "Gambia", null, null, 0 },
-                    { 82, "geo", null, null, null, "ge.png", "Georgia", null, null, 0 },
-                    { 83, "deu", null, null, null, "de.png", "Germany", null, null, 0 },
-                    { 84, "gha", null, null, null, "gh.png", "Ghana", null, null, 0 },
-                    { 85, "gib", null, null, null, "gi.png", "Gibraltar", null, null, 0 },
+                    { 91, "gtm", null, null, null, "gt.png", "Guatemala", null, null, 0 },
+                    { 90, "gum", null, null, null, "gu.png", "Guam", null, null, 0 },
+                    { 89, "glp", null, null, null, "gp.png", "Guadeloupe", null, null, 0 },
+                    { 88, "grd", null, null, null, "gd.png", "Grenada", null, null, 0 },
+                    { 78, "pyf", null, null, null, "pf.png", "French Polynesia", null, null, 0 },
                     { 86, "grc", null, null, null, "gr.png", "Greece", null, null, 0 },
                     { 87, "grl", null, null, null, "gl.png", "Greenland", null, null, 0 },
-                    { 88, "grd", null, null, null, "gd.png", "Grenada", null, null, 0 },
-                    { 89, "glp", null, null, null, "gp.png", "Guadeloupe", null, null, 0 },
-                    { 90, "gum", null, null, null, "gu.png", "Guam", null, null, 0 },
-                    { 91, "gtm", null, null, null, "gt.png", "Guatemala", null, null, 0 },
-                    { 78, "pyf", null, null, null, "pf.png", "French Polynesia", null, null, 0 }
+                    { 84, "gha", null, null, null, "gh.png", "Ghana", null, null, 0 },
+                    { 83, "deu", null, null, null, "de.png", "Germany", null, null, 0 },
+                    { 82, "geo", null, null, null, "ge.png", "Georgia", null, null, 0 },
+                    { 81, "gmb", null, null, null, "gm.png", "Gambia", null, null, 0 },
+                    { 80, "gab", null, null, null, "ga.png", "Gabon", null, null, 0 },
+                    { 85, "gib", null, null, null, "gi.png", "Gibraltar", null, null, 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -564,8 +564,42 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "EndDate", "Label", "ModifiedBy", "ModifiedDate", "Order", "StartDate" },
                 values: new object[,]
                 {
-                    { 1, "17/18", null, null, null, new DateTime(2018, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "2017/2018", null, null, 1, new DateTime(2017, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, "18/19", null, null, null, new DateTime(2019, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "2018/2019", null, null, 1, new DateTime(2018, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 2, "18/19", null, null, null, new DateTime(2019, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "2018/2019", null, null, 1, new DateTime(2018, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 1, "17/18", null, null, null, new DateTime(2018, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "2017/2018", null, null, 1, new DateTime(2017, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Login", "Mail", "ModifiedBy", "ModifiedDate", "Name", "Password" },
+                values: new object[,]
+                {
+                    { 2, null, null, "E0214719", "stephane.andre@merial.com", null, null, "Stéphane ANDRE (Merial)", "qRBfE9MoPFs=" },
+                    { 3, null, null, "E0268620", "vincentsourdeix@test.fr", null, null, "Vincent SOURDEIX (BI)", "qRBfE9MoPFs=" },
+                    { 1, null, null, "andre", "andre.cs2i@gmail.com", null, null, "Stéphane ANDRE (Home)", "qRBfE9MoPFs=" },
+                    { 4, null, null, "stephane.andre", "stephane.andre@modis.com", null, null, "Stéphane ANDRE (Modis)", "qRBfE9MoPFs=" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Persons",
+                columns: new[] { "Id", "AddressId", "Birthdate", "CountryId", "CreatedBy", "CreatedDate", "Description", "Discriminator", "FirstName", "Gender", "LastName", "LicenseNumber", "ModifiedBy", "ModifiedDate", "Photo", "PlaceOfBirth", "Size", "CategoryId", "Height", "Laterality", "ShoesSize", "Weight" },
+                values: new object[] { 1, null, new DateTime(1989, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 76, null, null, null, "Player", "Stéphane", 1, "André", null, null, null, null, "Nevers", "L", 13, 175, 2, 44, 75 });
+
+            migrationBuilder.InsertData(
+                table: "Persons",
+                columns: new[] { "Id", "AddressId", "Birthdate", "CountryId", "CreatedBy", "CreatedDate", "Description", "Discriminator", "FirstName", "Gender", "LastName", "LicenseNumber", "ModifiedBy", "ModifiedDate", "Photo", "PlaceOfBirth", "Size", "CategoryId", "Height", "Laterality", "ShoesSize", "Weight" },
+                values: new object[] { 2, 1, new DateTime(1986, 12, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 76, null, null, null, "Player", "Vincent", 0, "Sourdeix", "123456789", null, null, null, "Tulle", "L", 3, null, 1, 42, null });
+
+            migrationBuilder.InsertData(
+                table: "Contacts",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Default", "Label", "ModifiedBy", "ModifiedDate", "PersonId", "Type", "Value" },
+                values: new object[,]
+                {
+                    { 1, null, null, true, "Test", null, null, 1, 2, "andre.cs2i@gmail.com" },
+                    { 2, null, null, false, "Test2", null, null, 1, 2, "vincentsourdeix@gmail.com" },
+                    { 3, null, null, true, "Test", null, null, 1, 1, "0664411391" },
+                    { 4, null, null, true, "Principale", null, null, 2, 2, "visourdeix@gmail.com" },
+                    { 5, null, null, false, "Pub", null, null, 2, 2, "vincentsourdeix@gmail.com" },
+                    { 6, null, null, true, "Portable", null, null, 2, 1, "0679189256" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -577,11 +611,6 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                 name: "IX_Contacts_PersonId",
                 table: "Contacts",
                 column: "PersonId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Contacts_PersonId1",
-                table: "Contacts",
-                column: "PersonId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Persons_AddressId",

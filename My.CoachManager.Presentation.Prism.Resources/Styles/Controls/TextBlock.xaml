@@ -25,7 +25,7 @@
         <Setter Property="TextWrapping" Value="NoWrap" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
-        <Setter Property="Foreground" Value="{DynamicResource LightVariation6}" />
+        <Setter Property="Foreground" Value="{DynamicResource GrayForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource MidSmallFontSize}" />
         <Setter Property="Focusable" Value="False" />
     </Style>

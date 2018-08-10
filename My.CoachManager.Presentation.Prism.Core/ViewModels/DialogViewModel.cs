@@ -35,7 +35,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             base.Initialize();
 
             KeyboardManager.RegisterWorkspaceDialogShortcuts(KeyboardShortcuts);
-            Refresh();
         }
 
         /// <inheritdoc />

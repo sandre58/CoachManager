@@ -51,19 +51,19 @@
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                     <TextBlock Text="Créé par" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.CreatedBy}" Style="{StaticResource ReferenceStyle}" Foreground="{DynamicResource LightVariation8}" />
+                    <TextBlock Text="{Binding Item.CreatedBy}" Style="{StaticResource ReferenceStyle}" />
                     <TextBlock Text="le" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.CreatedDate, StringFormat={}{0:dd/MM/yyyy}}" Style="{StaticResource ReferenceStyle}" Foreground="{DynamicResource LightVariation8}" />
+                    <TextBlock Text="{Binding Item.CreatedDate, StringFormat={}{0:dd/MM/yyyy}}" Style="{StaticResource ReferenceStyle}" />
                     <TextBlock Text="à" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.CreatedDate, StringFormat={}{0:HH:mm}}" Style="{StaticResource ReferenceStyle}" Foreground="{DynamicResource LightVariation8}" />
+                    <TextBlock Text="{Binding Item.CreatedDate, StringFormat={}{0:HH:mm}}" Style="{StaticResource ReferenceStyle}" />
                 </StackPanel>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                     <TextBlock Text="Modifié par" Style="{StaticResource ReferenceStyle}" />
                     <TextBlock Text="{Binding Item.ModifiedBy}" Style="{StaticResource ReferenceStyle}" FontWeight="Bold" />
                     <TextBlock Text="le" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.ModifiedDate, StringFormat={}{0:dd/MM/yyyy}}" Style="{StaticResource ReferenceStyle}" Foreground="{DynamicResource LightVariation8}" />
+                    <TextBlock Text="{Binding Item.ModifiedDate, StringFormat={}{0:dd/MM/yyyy}}" Style="{StaticResource ReferenceStyle}" />
                     <TextBlock Text="à" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.ModifiedDate, StringFormat={}{0:HH:mm}}" Style="{StaticResource ReferenceStyle}" Foreground="{DynamicResource LightVariation8}" />
+                    <TextBlock Text="{Binding Item.ModifiedDate, StringFormat={}{0:HH:mm}}" Style="{StaticResource ReferenceStyle}"/>
                 </StackPanel>
             </Grid>
 
@@ -78,7 +78,7 @@
         </DataTemplate.Triggers>
     </DataTemplate>
 
-    <DataTemplate x:Key="FilteredWorkspaceDialogViewHeaderTemplate" DataType="{x:Type viewModels:IFilteredListViewModel}">
+    <!--<DataTemplate x:Key="FilteredWorkspaceDialogViewHeaderTemplate" DataType="{x:Type viewModels:IFilteredListViewModel}">
         <StackPanel>
             <DockPanel Background="{DynamicResource DarkVariation3}" parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}">
                 <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="{StaticResource MediumMargin}">
@@ -139,7 +139,7 @@
                 </WrapPanel>
             </DockPanel>
         </StackPanel>
-    </DataTemplate>
+    </DataTemplate>-->
 
     <Style TargetType="{x:Type controls:WorkspaceView}">
         <Setter Property="MinWidth" Value="320" />
@@ -180,7 +180,7 @@
                         </ScrollViewer>
 
                         <!-- Loading -->
-                        <Border x:Name="Loader" Grid.Row="2" Background="{DynamicResource LightVariation4}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
+                        <Border x:Name="Loader" Grid.Row="2" Background="{DynamicResource DarkControl}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
                             <Grid>
                                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                                     <controls:ProgressRing Width="70" Height="70" />
@@ -219,7 +219,7 @@
 
     <Style x:Key="WorkspaceDialogViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource {x:Type controls:WorkspaceView}}">
         <Setter Property="HeaderHeight" Value="70" />
-        <Setter Property="HeaderBackground" Value="{DynamicResource DarkVariation3}" />
+        <Setter Property="HeaderBackground" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="HeaderTemplate" Value="{StaticResource EditDialogViewHeaderTemplate}" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
     </Style>

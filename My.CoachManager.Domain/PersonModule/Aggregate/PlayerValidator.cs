@@ -15,7 +15,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
         /// </summary>
         public PlayerValidator()
         {
-        }
 
+        }
     }
 }

@@ -206,8 +206,8 @@
         </Border>
     </ControlTemplate>
     <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
-        <Setter Property="Background" Value="{DynamicResource DarkVariation4}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource DarkVariation4}" />
+        <Setter Property="Background" Value="{DynamicResource HeaderBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="parameters:ScrollBarParameters.BarWidth" Value="18" />
         <Setter Property="parameters:ScrollBarParameters.ButtonsVisibility" Value="Visible" />

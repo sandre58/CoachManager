@@ -27,5 +27,22 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 ModifiedDate = dto.ModifiedDate
             };
         }
+
+        /// <summary>
+        /// Convert the DTO to model.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>The model.</returns>
+        public static TContactDto GetContact<TContactDto>(ContactModel model) where TContactDto : ContactDto, new()
+        {
+            return new TContactDto()
+            {
+                Id = model.Id,
+                Label = model.Label,
+                Value = model.Value,
+                Default = model.Default,
+                PersonId = model.PersonId
+            };
+        }
     }
 }

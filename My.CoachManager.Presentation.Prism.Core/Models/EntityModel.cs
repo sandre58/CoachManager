@@ -1,9 +1,18 @@
 ﻿using System;
+using System.Collections;
+using System.Linq;
+using Microsoft.Practices.ObjectBuilder2;
 
 namespace My.CoachManager.Presentation.Prism.Core.Models
 {
     public abstract class EntityModel : ModelBase, IEntityModel, IModifiable
     {
+
+        #region Fields
+
+        private bool _isModified;
+
+        #endregion
 
         #region Members
 
@@ -37,15 +46,6 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
 
         #region Methods
 
-        /// <inheritdoc />
-        /// <summary>
-        /// Reset IsModified value.
-        /// </summary>
-        public void ResetModified()
-        {
-            IsModified = false;
-        }
-
         /// <summary>
         /// Determines whether the specified object is equal to the current object.
         /// </summary>
@@ -69,12 +69,33 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         #endregion Methods
 
         #region IModifiable
-
-        /// <inheritdoc />
+        
         /// <summary>
         /// Gets a value indicates if the entity has been modified.
         /// </summary>
-        public bool IsModified { get; private set; }
+        public bool IsModified() {
+                var type = GetType();
+                var isModified = _isModified;
+                var complexIsModified =
+                    type.GetProperties().Select(x => x.GetValue(this)).OfType<IModifiable>().ToList()
+                        .Any(x => x.IsModified());
+                var collectionIsModied =
+                    type.GetProperties().Select(x => x.GetValue(this)).OfType<ICollection>().ToList().SelectMany(x => x.OfType<IModifiable>()).Any(x => x.IsModified());
+                return isModified || complexIsModified || collectionIsModied;
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Reset IsModified value.
+        /// </summary>
+        public void ResetModified()
+        {
+            var type = GetType();
+            _isModified = false;
+            type.GetProperties().Select(x => x.GetValue(this)).OfType<IModifiable>().ToList()
+                    .ForEach(x => x.ResetModified());
+            type.GetProperties().Select(x => x.GetValue(this)).OfType<ICollection>().ToList().SelectMany(x => x.OfType<IModifiable>()).ForEach(x => x.ResetModified());
+        }
 
         #endregion
 
@@ -91,7 +112,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         {
             base.OnPropertyChanged(propertyName,before,after);
 
-            if(propertyName != nameof(IsModified)) IsModified = true;
+            _isModified = true;
         }
 
         #endregion

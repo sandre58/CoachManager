@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 
 namespace My.CoachManager.Presentation.Prism.Core.Models
 {
@@ -21,6 +21,6 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         //
         // Retourne :
         //     The validation errors for the property or entity.
-        IEnumerable GetErrors();
+        IEnumerable<string> GetErrors();
     }
 }

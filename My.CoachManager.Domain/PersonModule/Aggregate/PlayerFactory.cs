@@ -34,7 +34,8 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                     ShoesSize = item.ShoesSize,
                     Size = item.Size,
                     AddressId = item.AddressId,
-                    Address = AddressFactory.CreateEntity(item.Address, item.PostalCode, item.City)
+                    Address = AddressFactory.CreateEntity(item.Address, item.PostalCode, item.City),
+                    Contacts = item.Phones.Select(ContactFactory.CreateEntity<Phone>).Concat(item.Emails.Select(ContactFactory.CreateEntity<Email>).Cast<Contact>()).ToList()
                 };
             }
 
@@ -62,6 +63,8 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
             entity.ShoesSize = item.ShoesSize;
             entity.Size = item.Size;
             entity.Description = item.Description;
+            entity.Contacts = item.Phones.Select(ContactFactory.CreateEntity<Phone>)
+                .Concat(item.Emails.Select(ContactFactory.CreateEntity<Email>).Cast<Contact>()).ToList();
 
             return true;
         }

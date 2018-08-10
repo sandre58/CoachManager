@@ -32,13 +32,13 @@
     <Color x:Key="Variation8Color">#D1EEEEEE</Color>
     <Color x:Key="Variation9Color">#E1EEEEEE</Color>
 
-    <Color x:Key="DarkVariation1Color">#11000000</Color>
-    <Color x:Key="DarkVariation2Color">#22000000</Color>
-    <Color x:Key="DarkVariation3Color">#44000000</Color>
-    <Color x:Key="DarkVariation4Color">#66000000</Color>
-    <Color x:Key="DarkVariation5Color">#88000000</Color>
-    <Color x:Key="DarkVariation6Color">#A1000000</Color>
-    <Color x:Key="DarkVariation7Color">#C1000000</Color>
-    <Color x:Key="DarkVariation8Color">#D1000000</Color>
-    <Color x:Key="DarkVariation9Color">#E1000000</Color>
+    <Color x:Key="DarkVariation1Color">#11222222</Color>
+    <Color x:Key="DarkVariation2Color">#22222222</Color>
+    <Color x:Key="DarkVariation3Color">#44222222</Color>
+    <Color x:Key="DarkVariation4Color">#66222222</Color>
+    <Color x:Key="DarkVariation5Color">#88222222</Color>
+    <Color x:Key="DarkVariation6Color">#A1222222</Color>
+    <Color x:Key="DarkVariation7Color">#C1222222</Color>
+    <Color x:Key="DarkVariation8Color">#D1222222</Color>
+    <Color x:Key="DarkVariation9Color">#E1222222</Color>
 </ResourceDictionary>

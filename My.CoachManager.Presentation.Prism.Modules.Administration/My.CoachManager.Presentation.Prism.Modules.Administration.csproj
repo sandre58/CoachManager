@@ -111,7 +111,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="ViewModels\PlayerEditViewModel.Contacts.cs" />
+    <Compile Include="ViewModels\PlayerEditViewModel.Contacts.cs">
+      <DependentUpon>PlayerEditViewModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\PlayerEditViewModel.cs" />
     <Compile Include="ViewModels\PlayersListViewModel.cs" />
     <Compile Include="ViewModels\SeasonsListViewModel.cs" />

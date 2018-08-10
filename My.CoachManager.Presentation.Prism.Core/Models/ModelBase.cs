@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
-using Microsoft.Practices.ObjectBuilder2;
 using Prism.Mvvm;
 using PropertyChanged;
 
@@ -79,9 +78,15 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         /// Get errors.
         /// </summary>
         /// <returns></returns>
-        public virtual IEnumerable GetErrors()
+        public virtual IEnumerable<string> GetErrors()
         {
-            return ValidationErrors.SelectMany(x => x.Value).Select(error => error.ErrorMessage);
+            var type = GetType();
+            var validationErrors = ValidationErrors.SelectMany(x => x.Value).Select(error => error.ErrorMessage).ToList();
+            var complexValidationErrors =
+                type.GetProperties().Select(x => x.GetValue(this)).OfType<IValidatable>().ToList().SelectMany(x => x.GetErrors()).ToList();
+            var collectionValidationErrors =
+                type.GetProperties().Select(x => x.GetValue(this)).OfType<ICollection>().ToList().SelectMany(x => x.OfType<IValidatable>()).SelectMany(x => x.GetErrors()).ToList();
+            return validationErrors.Concat(complexValidationErrors).Concat(collectionValidationErrors);
         }
 
         /// <summary>
@@ -156,19 +161,25 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         public bool Validate()
         {
             var type = GetType();
-            bool? result = true;
+            var result = true;
             foreach (var property in type.GetProperties())
             {
+                // All Property
                 ValidateProperty(property.Name, property.GetValue(this));
+                result = result && !HasErrors;
 
-                var collection = property.GetValue(this) as ICollection;
+                // Complex property
+                if(property.GetValue(this) is IValidatable entity)
+                result = result && entity.Validate();
 
-                collection?.OfType<IValidatable>().ForEach(validatable => validatable.Validate());
-
-                result = collection?.OfType<IValidatable>().All(validatable => validatable.Validate());
+                // Collection property
+                if (property.GetValue(this) is ICollection collection)
+                {
+                    result = result && collection.OfType<IValidatable>().All(validatable => validatable.Validate());
+                }
             }
 
-            return !HasErrors && (result == null || (bool)result);
+            return result;
         }
 
         #endregion IValidatable

@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using My.CoachManager.Application.Dtos;
+using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Constants;
+using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
@@ -89,7 +92,14 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
             AllPhoneLabels = ContactConstants.DefaultPhoneLabels;
             AllEmailLabels = ContactConstants.DefaultEmailLabels;
 
-           // Title = PlayerResources.PlayerTitle;
+            Emails = new ItemsObservableCollection<EmailModel>();
+            Phones = new ItemsObservableCollection<PhoneModel>();
+
+            Phones.CollectionChanged += Contacts_CollectionChanged;
+            Emails.CollectionChanged += Contacts_CollectionChanged;
+
+            AddEmail(null);
+            AddPhone(null);
         }
 
         /// <summary>
@@ -99,10 +109,10 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         {
             base.InitializeCommand();
 
-            AddEmailCommand = new DelegateCommand(AddEmail);
-            RemoveEmailCommand = new DelegateCommand<EmailModel>(RemoveEmail);
-            AddPhoneCommand = new DelegateCommand(AddPhone);
-            RemovePhoneCommand = new DelegateCommand<PhoneModel>(RemovePhone);
+            AddEmailCommand = new DelegateCommand<EmailModel>(AddEmail, CanAddEmail);
+            RemoveEmailCommand = new DelegateCommand<EmailModel>(RemoveEmail, CanRemoveEmail);
+            AddPhoneCommand = new DelegateCommand<PhoneModel>(AddPhone, CanAddPhone);
+            RemovePhoneCommand = new DelegateCommand<PhoneModel>(RemovePhone, CanRemovePhone);
             SelectPhotoCommand = new DelegateCommand(SelectPhoto, CanSelectPhoto);
             RemovePhotoCommand = new DelegateCommand(RemovePhoto, CanRemovePhoto);
         }
@@ -176,20 +186,26 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         {
             if (Mode == ScreenMode.Creation)
             {
-                if (AllCountries != null)
-                {
-                    var country = AllCountries.FirstOrDefault(c => c.Label == DefaultCountry);
+                var country = AllCountries?.FirstOrDefault(c => c.Label == DefaultCountry);
 
-                    if (country != null) Item.CountryId = country.Id;
-                }
+                if (country != null) Item.CountryId = country.Id;
             }
 
             if (Item != null)
             {
                 Item.PropertyChanged += OnItemPropertyChanged;
 
-                if (Item.Emails.Count == 0) AddEmail();
-                if (Item.Phones.Count == 0) AddPhone();
+                if (Item.Emails.Count != 0)
+                {
+                    Emails = Item.Emails;
+                    Emails.CollectionChanged += Contacts_CollectionChanged;
+                }
+                if (Item.Phones.Count != 0)
+                {
+                    Phones = Item.Phones;
+                    Phones.CollectionChanged += Contacts_CollectionChanged;
+                }
+
             }
 
             base.OnLoadDataCompleted();
@@ -210,19 +226,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// </summary>
         protected override void OnSaveRequested()
         {
-            var emptyEmailIndexes = Item.Emails.Where(x => string.IsNullOrEmpty(x.Value)).Select(x => Item.Emails.IndexOf(x)).OrderByDescending(x => x);
-
-            foreach (var index in emptyEmailIndexes)
-            {
-                Item.Emails.RemoveAt(index);
-            }
-
-            var emptyPhoneIndexes = Item.Phones.Where(x => string.IsNullOrEmpty(x.Value)).Select(x => Item.Phones.IndexOf(x)).OrderByDescending(x => x);
-
-            foreach (var index in emptyPhoneIndexes)
-            {
-                Item.Phones.RemoveAt(index);
-            }
+            Item.Emails = Emails.Where(x => !string.IsNullOrEmpty(x.Value)).ToItemsObservableCollection();
+            Item.Phones = Phones.Where(x => !string.IsNullOrEmpty(x.Value)).ToItemsObservableCollection();
 
             base.OnSaveRequested();
         }
@@ -251,6 +256,20 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 
             RemovePhotoCommand?.RaiseCanExecuteChanged();
             SelectPhotoCommand?.RaiseCanExecuteChanged();
+            UpdateContactsCommand();
+        }
+
+        private void Contacts_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            UpdateContactsCommand();
+        }
+
+        private void UpdateContactsCommand()
+        {
+            RemoveEmailCommand?.RaiseCanExecuteChanged();
+            RemovePhoneCommand?.RaiseCanExecuteChanged();
+            AddEmailCommand?.RaiseCanExecuteChanged();
+            AddPhoneCommand?.RaiseCanExecuteChanged();
         }
 
         #endregion Properties Changed
@@ -260,7 +279,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -282,7 +301,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
                     if (Item.Birthdate.HasValue)
                     {
                         var category = _personService.GetCategoryFromBirthdate(Item.Birthdate.Value);
-                        Item.CategoryId = category != null ? category.Id : 0;
+                        Item.CategoryId = category?.Id ?? 0;
                     }
                     break;
 

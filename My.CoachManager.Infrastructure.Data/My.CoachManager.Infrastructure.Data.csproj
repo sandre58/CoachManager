@@ -156,17 +156,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LoggerProvider.cs" />
-    <Compile Include="Migrations\20180809115457_CreateDatabase.cs" />
-    <Compile Include="Migrations\20180809115457_CreateDatabase.designer.cs">
-      <DependentUpon>20180809115457_CreateDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180809121038_AddPlayers.cs" />
-    <Compile Include="Migrations\20180809121038_AddPlayers.designer.cs">
-      <DependentUpon>20180809121038_AddPlayers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180809124847_AddUsers.cs" />
-    <Compile Include="Migrations\20180809124847_AddUsers.designer.cs">
-      <DependentUpon>20180809124847_AddUsers.cs</DependentUpon>
+    <Compile Include="Migrations\20180810095106_CreateDatabase.cs" />
+    <Compile Include="Migrations\20180810095106_CreateDatabase.designer.cs">
+      <DependentUpon>20180810095106_CreateDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\DataContextModelSnapshot.cs" />

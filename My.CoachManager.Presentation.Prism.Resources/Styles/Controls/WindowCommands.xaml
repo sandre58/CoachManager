@@ -69,6 +69,7 @@
         <Setter Property="Foreground" Value="{Binding Foreground, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type controls:WindowCommands}}}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="Padding" Value="8 0 8 0" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
@@ -85,6 +86,7 @@
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:WindowCommands">
@@ -228,5 +230,6 @@
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template" Value="{StaticResource WindowButtonCommandsTemplate}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Focusable" Value="False" />
     </Style>
 </ResourceDictionary>

@@ -3,13 +3,13 @@
     public interface IModifiable
     {
         /// <summary>
-        /// Gets if the object is modified.
-        /// </summary>
-        bool IsModified { get; }
-
-        /// <summary>
         /// Reset IsModified value.
         /// </summary>
         void ResetModified();
+
+        /// <summary>
+        /// Gets if the object is modified.
+        /// </summary>
+        bool IsModified();
     }
 }

@@ -28,8 +28,8 @@
                     Padding="{StaticResource DefaultMargin}"
                     parameters:TabControlParameters.HeaderSize="170">
             <TabItem Header="{x:Static strings:PlayerResources.IdCard}" parameters:ControlParameters.Icon="{StaticResource IdCardGeometry}">
-
-                <Grid  parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
+                <AdornerDecorator>
+                    <Grid  parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -165,11 +165,12 @@
                         </StackPanel>
                     </Grid>
                 </Grid>
+                    </AdornerDecorator>
             </TabItem>
 
             <TabItem Header="{x:Static strings:PlayerResources.Club}"  parameters:ControlParameters.Icon="{StaticResource HomeGeometry}">
-
-                <Grid  parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
+                <AdornerDecorator>
+                    <Grid  parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -210,18 +211,20 @@
                      Height="100"
                      Style="{StaticResource TextBoxBaseStyle}" />
                 </Grid>
+                    </AdornerDecorator>
             </TabItem>
 
             <TabItem Header="{x:Static strings:PlayerResources.Contacts}" parameters:ControlParameters.Icon="{StaticResource ContactsGeometry}">
-
-                <Grid parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
+                <AdornerDecorator>
+                    <Grid parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <views1:PhonesEditView DataContext="{Binding}" ItemsSource="{Binding Item.Phones}" IsTabStop="False" />
-                    <views1:EmailsEditView Grid.Row="1" DataContext="{Binding}" ItemsSource="{Binding Item.Emails}" IsTabStop="False" />
+                    <views1:PhonesEditView DataContext="{Binding}" ItemsSource="{Binding Phones}" IsTabStop="False" />
+                    <views1:EmailsEditView Grid.Row="1" DataContext="{Binding}" ItemsSource="{Binding Emails}" IsTabStop="False" />
                 </Grid>
+                    </AdornerDecorator>
             </TabItem>
         </TabControl>
 

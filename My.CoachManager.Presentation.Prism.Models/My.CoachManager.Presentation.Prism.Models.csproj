@@ -54,7 +54,6 @@
     <Compile Include="Aggregates\SeasonFactory.cs" />
     <Compile Include="Aggregates\RosterFactory.cs" />
     <Compile Include="Aggregates\CategoryFactory.cs" />
-    <Compile Include="ContactsCollection.cs" />
     <Compile Include="ContactModel.cs" />
     <Compile Include="CountryModel.cs" />
     <Compile Include="EmailModel.cs" />
