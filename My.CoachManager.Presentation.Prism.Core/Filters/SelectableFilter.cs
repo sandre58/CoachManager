@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+using My.CoachManager.CrossCutting.Core.Enums;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {

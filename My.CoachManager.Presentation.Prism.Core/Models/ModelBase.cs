@@ -5,6 +5,9 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
+using Microsoft.Practices.ObjectBuilder2;
+using My.CoachManager.Presentation.Prism.Core.Attributes.Validation;
 using Prism.Mvvm;
 using PropertyChanged;
 
@@ -120,7 +123,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         /// <param name="propertyName">The property name.</param>
         /// <param name="value">The value.</param>
         /// <returns></returns>
-        private void ValidateProperty(string propertyName, object value)
+        protected void ValidateProperty(string propertyName, object value)
         {
             var validationResults = new List<ValidationResult>();
 
@@ -169,8 +172,8 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
                 result = result && !HasErrors;
 
                 // Complex property
-                if(property.GetValue(this) is IValidatable entity)
-                result = result && entity.Validate();
+                if (property.GetValue(this) is IValidatable entity)
+                    result = result && entity.Validate();
 
                 // Collection property
                 if (property.GetValue(this) is ICollection collection)
@@ -202,6 +205,14 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
                 if (isPublic)
                 {
                     ValidateProperty(propertyName, after);
+
+                    // Validate other property defined by [ValidateProperty(<PropertyName>)] attributes.
+                    prop.GetCustomAttributes().OfType<ValidatePropertyAttribute>().ForEach(x =>
+                    {
+                        var property = GetType().GetProperty(x.PropertyName);
+                        var value = property?.GetValue(this);
+                        ValidateProperty(x.PropertyName, value);
+                    });
                 }
             }
 

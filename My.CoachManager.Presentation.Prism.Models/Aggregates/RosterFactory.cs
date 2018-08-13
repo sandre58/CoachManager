@@ -1,5 +1,4 @@
 ﻿using My.CoachManager.Application.Dtos;
-using My.CoachManager.Application.Dtos.Roster;
 
 namespace My.CoachManager.Presentation.Prism.Models.Aggregates
 {

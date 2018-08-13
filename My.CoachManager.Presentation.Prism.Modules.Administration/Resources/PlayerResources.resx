@@ -129,4 +129,10 @@
   <data name="IdCard" xml:space="preserve">
     <value>Identité</value>
   </data>
+  <data name="Morphology" xml:space="preserve">
+    <value>Morphologie</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>Général</value>
+  </data>
 </root>

@@ -5,7 +5,8 @@
                     xmlns:extensions="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Extensions;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:resources="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
                     xmlns:screens="clr-namespace:My.CoachManager.Presentation.Prism.Core.ViewModels;assembly=My.CoachManager.Presentation.Prism.Core"
-                    xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core">
+                    xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
+                    xmlns:enums="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Converters.xaml" />
@@ -60,7 +61,7 @@
             <ComboBox Grid.Column="0" Grid.Row="0"
                       HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
                       Width="125"
-                      ItemsSource="{Binding Source={extensions:Enum {x:Type filters:StringOperator}}}"
+                      ItemsSource="{Binding Source={extensions:Enum {x:Type enums:StringOperator}}}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
             <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Width="{StaticResource MediumWidth}" Style="{StaticResource TextBoxBaseStyle}" />
             <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding CaseSensitive}" Content="{x:Static strings:ControlResources.CaseSensitive}" />
@@ -80,7 +81,7 @@
             <ComboBox Grid.Column="0"
                       HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
                       Width="125"
-                      ItemsSource="{Binding Source={extensions:Enum {x:Type filters:ComparableOperator}}}"
+                      ItemsSource="{Binding Source={extensions:Enum {x:Type enums:ComparableOperator}}}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
             <controls:ExtendedNumericUpDown x:Name="From" Grid.Column="1"
                                             Value="{Binding From}"
@@ -97,27 +98,27 @@
                                             Style="{StaticResource ExtendedNumericUpDownBaseStyle}" />
         </Grid>
         <DataTemplate.Triggers>
-            <DataTrigger Binding="{Binding Operator}" Value="{x:Static filters:ComparableOperator.EqualsTo}">
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComparableOperator.EqualsTo}">
                 <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="To" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Operator}" Value="{x:Static filters:ComparableOperator.GreaterEqualThan}">
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComparableOperator.GreaterEqualThan}">
                 <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="To" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Operator}" Value="{x:Static filters:ComparableOperator.GreaterThan}">
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComparableOperator.GreaterThan}">
                 <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="To" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Operator}" Value="{x:Static filters:ComparableOperator.LessEqualThan}">
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComparableOperator.LessEqualThan}">
                 <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="From" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Operator}" Value="{x:Static filters:ComparableOperator.LessThan}">
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComparableOperator.LessThan}">
                 <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="From" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Operator}" Value="{x:Static filters:ComparableOperator.NotEqualsTo}">
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComparableOperator.NotEqualsTo}">
                 <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="To" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
@@ -136,7 +137,7 @@
             <ComboBox Grid.Column="0"
                       HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
                       Width="125"
-                      ItemsSource="{Binding Source={extensions:Enum {x:Type filters:BinaryOperator}}}"
+                      ItemsSource="{Binding Source={extensions:Enum {x:Type enums:BinaryOperator}}}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
             <ComboBox Grid.Column="1" Width="{StaticResource MidSmallWidth}"
                       HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
@@ -157,7 +158,7 @@
             <ComboBox Grid.Column="0"
                       HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
                       Width="125"
-                      ItemsSource="{Binding Source={extensions:Enum {x:Type filters:BinaryOperator}}}"
+                      ItemsSource="{Binding Source={extensions:Enum {x:Type enums:BinaryOperator}}}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
             <controls:MultiComboBox Grid.Column="1" Width="{StaticResource SmallLargeWidth}"
                       HorizontalAlignment="Center" Style="{StaticResource MultiComboBoxStyle}"
@@ -178,7 +179,7 @@
             <ComboBox Grid.Column="0"
                       HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
                       Width="125"
-                      ItemsSource="{Binding Source={extensions:Enum {x:Type filters:BinaryOperator}}}"
+                      ItemsSource="{Binding Source={extensions:Enum {x:Type enums:BinaryOperator}}}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
             <ComboBox Grid.Column="1" Width="{StaticResource MidSmallWidth}"
                       HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
@@ -199,7 +200,7 @@
             <ComboBox Grid.Column="0"
                       HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
                       Width="125"
-                      ItemsSource="{Binding Source={extensions:Enum {x:Type filters:BinaryOperator}}}"
+                      ItemsSource="{Binding Source={extensions:Enum {x:Type enums:BinaryOperator}}}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
             <controls:MultiComboBox Grid.Column="1" Width="{StaticResource SmallLargeWidth}"
                                     HorizontalAlignment="Center" Style="{StaticResource MultiComboBoxStyle}"

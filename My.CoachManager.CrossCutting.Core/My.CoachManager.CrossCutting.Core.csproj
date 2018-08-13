@@ -298,10 +298,14 @@
     <Compile Include="Constants\RoleConstants.cs" />
     <Compile Include="Constants\SqlConstants.cs" />
     <Compile Include="Cryptography\TripleDesEncryptor.cs" />
+    <Compile Include="Enums\BinaryOperator.cs" />
+    <Compile Include="Enums\ComplexComparableOperator.cs" />
+    <Compile Include="Enums\ComparableOperator.cs" />
     <Compile Include="Enums\ContactType.cs" />
     <Compile Include="Enums\LicenseState.cs" />
     <Compile Include="Enums\Laterality.cs" />
     <Compile Include="Enums\GenderType.cs" />
+    <Compile Include="Enums\StringOperator.cs" />
     <Compile Include="Exceptions\BusinessException.cs" />
     <Compile Include="Exceptions\ConcurrencyException.cs" />
     <Compile Include="Exceptions\ConstraintCheckException.cs" />
@@ -316,6 +320,7 @@
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Helpers\ClipboardHelper.cs" />
     <Compile Include="Helpers\ConvertHelper.cs" />
+    <Compile Include="Helpers\ComparableHelper.cs" />
     <Compile Include="Helpers\DoubleHelper.cs" />
     <Compile Include="Helpers\ParameterHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
@@ -356,8 +361,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\Enums\FilterOperatorResources.Designer.cs">
-      <DependentUpon>FilterOperatorResources.resx</DependentUpon>
+    <Compile Include="Resources\Enums\OperatorResources.Designer.cs">
+      <DependentUpon>OperatorResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -452,9 +457,9 @@
       <LastGenOutput>ReferenceResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Enums\FilterOperatorResources.resx">
+    <EmbeddedResource Include="Resources\Enums\OperatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>FilterOperatorResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>OperatorResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Enums\ContactTypeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

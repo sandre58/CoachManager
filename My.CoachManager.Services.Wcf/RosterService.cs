@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using CommonServiceLocator;
-using My.CoachManager.Application.Dtos.Roster;
+using My.CoachManager.Application.Dtos;
 using My.CoachManager.Application.Services.RosterModule;
 using My.CoachManager.Services.Wcf.Interfaces;
 

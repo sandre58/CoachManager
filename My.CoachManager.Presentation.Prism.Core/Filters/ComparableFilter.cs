@@ -1,4 +1,5 @@
 ﻿using System;
+using My.CoachManager.CrossCutting.Core.Enums;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
@@ -18,7 +19,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
 
         private T _maximum;
 
-        private ComparableOperator _operator;
+        private ComplexComparableOperator _operator;
 
         #endregion Fields
 
@@ -39,7 +40,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// <param name="comparableOperator"></param>
         /// <param name="from">From.</param>
         /// <param name="to">To.</param>
-        public ComparableFilter(string propertyName, ComparableOperator comparableOperator, T from, T to)
+        public ComparableFilter(string propertyName, ComplexComparableOperator comparableOperator, T from, T to)
             : this(propertyName)
         {
             if (to == null)
@@ -75,7 +76,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         /// Gets or sets the operator.
         /// </summary>
         /// <value>The property info.</value>
-        public ComparableOperator Operator
+        public ComplexComparableOperator Operator
         {
             get { return _operator; }
             set { SetProperty(ref _operator, value); }
@@ -183,28 +184,28 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
 
             switch (Operator)
             {
-                case ComparableOperator.IsBetween:
+                case ComplexComparableOperator.IsBetween:
                     return result;
 
-                case ComparableOperator.IsNotBetween:
+                case ComplexComparableOperator.IsNotBetween:
                     return !result;
 
-                case ComparableOperator.EqualsTo:
+                case ComplexComparableOperator.EqualsTo:
                     return compareFrom == 0;
 
-                case ComparableOperator.NotEqualsTo:
+                case ComplexComparableOperator.NotEqualsTo:
                     return compareFrom != 0;
 
-                case ComparableOperator.LessThan:
+                case ComplexComparableOperator.LessThan:
                     return compareTo < 0;
 
-                case ComparableOperator.GreaterThan:
+                case ComplexComparableOperator.GreaterThan:
                     return compareFrom > 0;
 
-                case ComparableOperator.LessEqualThan:
+                case ComplexComparableOperator.LessEqualThan:
                     return compareTo <= 0;
 
-                case ComparableOperator.GreaterEqualThan:
+                case ComplexComparableOperator.GreaterEqualThan:
                     return compareFrom >= 0;
 
                 default:

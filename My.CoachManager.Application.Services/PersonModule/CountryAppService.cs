@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using My.CoachManager.Application.Dtos.Person;
+using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.PersonModule.Aggregate;
-using My.CoachManager.Domain.ReferenceModule.Aggregates;
+using My.CoachManager.Domain.ReferenceModule.Aggregate;
 
 namespace My.CoachManager.Application.Services.PersonModule
 {

@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using My.CoachManager.Application.Dtos;
+
 namespace My.CoachManager.Presentation.ServiceAgent.PersonServiceReference {
     
     
@@ -16,40 +18,40 @@ namespace My.CoachManager.Presentation.ServiceAgent.PersonServiceReference {
     public interface IPersonService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/GetCountries", ReplyAction="http://tempuri.org/IPersonService/GetCountriesResponse")]
-        My.CoachManager.Application.Dtos.Person.CountryDto[] GetCountries();
+        CountryDto[] GetCountries();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/GetCountries", ReplyAction="http://tempuri.org/IPersonService/GetCountriesResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Person.CountryDto[]> GetCountriesAsync();
+        System.Threading.Tasks.Task<CountryDto[]> GetCountriesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/GetPlayers", ReplyAction="http://tempuri.org/IPersonService/GetPlayersResponse")]
-        My.CoachManager.Application.Dtos.Person.PlayerDto[] GetPlayers();
+        PlayerDto[] GetPlayers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/GetPlayers", ReplyAction="http://tempuri.org/IPersonService/GetPlayersResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Person.PlayerDto[]> GetPlayersAsync();
+        System.Threading.Tasks.Task<PlayerDto[]> GetPlayersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/GetPlayerById", ReplyAction="http://tempuri.org/IPersonService/GetPlayerByIdResponse")]
-        My.CoachManager.Application.Dtos.Person.PlayerDto GetPlayerById(int playerId);
+        PlayerDto GetPlayerById(int playerId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/GetPlayerById", ReplyAction="http://tempuri.org/IPersonService/GetPlayerByIdResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Person.PlayerDto> GetPlayerByIdAsync(int playerId);
+        System.Threading.Tasks.Task<PlayerDto> GetPlayerByIdAsync(int playerId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/SavePlayer", ReplyAction="http://tempuri.org/IPersonService/SavePlayerResponse")]
-        My.CoachManager.Application.Dtos.Person.PlayerDto SavePlayer(My.CoachManager.Application.Dtos.Person.PlayerDto dto);
+        PlayerDto SavePlayer(PlayerDto dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/SavePlayer", ReplyAction="http://tempuri.org/IPersonService/SavePlayerResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Person.PlayerDto> SavePlayerAsync(My.CoachManager.Application.Dtos.Person.PlayerDto dto);
+        System.Threading.Tasks.Task<PlayerDto> SavePlayerAsync(PlayerDto dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/RemovePlayer", ReplyAction="http://tempuri.org/IPersonService/RemovePlayerResponse")]
-        void RemovePlayer(My.CoachManager.Application.Dtos.Person.PlayerDto dto);
+        void RemovePlayer(PlayerDto dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/RemovePlayer", ReplyAction="http://tempuri.org/IPersonService/RemovePlayerResponse")]
-        System.Threading.Tasks.Task RemovePlayerAsync(My.CoachManager.Application.Dtos.Person.PlayerDto dto);
+        System.Threading.Tasks.Task RemovePlayerAsync(PlayerDto dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/GetCategoryFromBirthdate", ReplyAction="http://tempuri.org/IPersonService/GetCategoryFromBirthdateResponse")]
-        My.CoachManager.Application.Dtos.Category.CategoryDto GetCategoryFromBirthdate(System.DateTime date);
+        CategoryDto GetCategoryFromBirthdate(System.DateTime date);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/GetCategoryFromBirthdate", ReplyAction="http://tempuri.org/IPersonService/GetCategoryFromBirthdateResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Category.CategoryDto> GetCategoryFromBirthdateAsync(System.DateTime date);
+        System.Threading.Tasks.Task<CategoryDto> GetCategoryFromBirthdateAsync(System.DateTime date);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -79,51 +81,51 @@ namespace My.CoachManager.Presentation.ServiceAgent.PersonServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public My.CoachManager.Application.Dtos.Person.CountryDto[] GetCountries() {
+        public CountryDto[] GetCountries() {
             return base.Channel.GetCountries();
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Person.CountryDto[]> GetCountriesAsync() {
+        public System.Threading.Tasks.Task<CountryDto[]> GetCountriesAsync() {
             return base.Channel.GetCountriesAsync();
         }
         
-        public My.CoachManager.Application.Dtos.Person.PlayerDto[] GetPlayers() {
+        public PlayerDto[] GetPlayers() {
             return base.Channel.GetPlayers();
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Person.PlayerDto[]> GetPlayersAsync() {
+        public System.Threading.Tasks.Task<PlayerDto[]> GetPlayersAsync() {
             return base.Channel.GetPlayersAsync();
         }
         
-        public My.CoachManager.Application.Dtos.Person.PlayerDto GetPlayerById(int playerId) {
+        public PlayerDto GetPlayerById(int playerId) {
             return base.Channel.GetPlayerById(playerId);
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Person.PlayerDto> GetPlayerByIdAsync(int playerId) {
+        public System.Threading.Tasks.Task<PlayerDto> GetPlayerByIdAsync(int playerId) {
             return base.Channel.GetPlayerByIdAsync(playerId);
         }
         
-        public My.CoachManager.Application.Dtos.Person.PlayerDto SavePlayer(My.CoachManager.Application.Dtos.Person.PlayerDto dto) {
+        public PlayerDto SavePlayer(PlayerDto dto) {
             return base.Channel.SavePlayer(dto);
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Person.PlayerDto> SavePlayerAsync(My.CoachManager.Application.Dtos.Person.PlayerDto dto) {
+        public System.Threading.Tasks.Task<PlayerDto> SavePlayerAsync(PlayerDto dto) {
             return base.Channel.SavePlayerAsync(dto);
         }
         
-        public void RemovePlayer(My.CoachManager.Application.Dtos.Person.PlayerDto dto) {
+        public void RemovePlayer(PlayerDto dto) {
             base.Channel.RemovePlayer(dto);
         }
         
-        public System.Threading.Tasks.Task RemovePlayerAsync(My.CoachManager.Application.Dtos.Person.PlayerDto dto) {
+        public System.Threading.Tasks.Task RemovePlayerAsync(PlayerDto dto) {
             return base.Channel.RemovePlayerAsync(dto);
         }
         
-        public My.CoachManager.Application.Dtos.Category.CategoryDto GetCategoryFromBirthdate(System.DateTime date) {
+        public CategoryDto GetCategoryFromBirthdate(System.DateTime date) {
             return base.Channel.GetCategoryFromBirthdate(date);
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Category.CategoryDto> GetCategoryFromBirthdateAsync(System.DateTime date) {
+        public System.Threading.Tasks.Task<CategoryDto> GetCategoryFromBirthdateAsync(System.DateTime date) {
             return base.Channel.GetCategoryFromBirthdateAsync(date);
         }
     }

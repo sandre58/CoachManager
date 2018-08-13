@@ -1,4 +1,4 @@
-﻿using My.CoachManager.Application.Dtos.Season;
+﻿using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Domain.SeasonModule.Aggregate

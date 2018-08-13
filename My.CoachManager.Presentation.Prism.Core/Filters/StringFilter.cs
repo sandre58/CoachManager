@@ -1,4 +1,5 @@
 ﻿using System;
+using My.CoachManager.CrossCutting.Core.Enums;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {

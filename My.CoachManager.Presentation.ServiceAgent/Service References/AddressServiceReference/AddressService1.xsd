@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfAddressDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AddressDto" nillable="true" type="tns:AddressDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAddressDto" nillable="true" type="tns:ArrayOfAddressDto" />
+  <xs:complexType name="AddressDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EntityDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Country" nillable="true" type="tns:CountryDto" />
+          <xs:element minOccurs="0" name="CountryId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="Latitude" type="xs:double" />
+          <xs:element minOccurs="0" name="Longitude" type="xs:double" />
+          <xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Row1" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Row2" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AddressDto" nillable="true" type="tns:AddressDto" />
+  <xs:complexType name="EntityDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CrudStatus" type="tns:CrudStatus" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModifiedDate" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EntityDto" nillable="true" type="tns:EntityDto" />
+  <xs:simpleType name="CrudStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unchanged" />
+      <xs:enumeration value="Created" />
+      <xs:enumeration value="Updated" />
+      <xs:enumeration value="Deleted" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CrudStatus" nillable="true" type="tns:CrudStatus" />
+  <xs:complexType name="CountryDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ReferenceDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Flag" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CountryDto" nillable="true" type="tns:CountryDto" />
+  <xs:complexType name="ReferenceDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EntityDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Label" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Order" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ReferenceDto" nillable="true" type="tns:ReferenceDto" />
+</xs:schema>

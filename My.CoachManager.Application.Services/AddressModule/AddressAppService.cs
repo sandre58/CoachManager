@@ -1,4 +1,6 @@
-﻿using My.CoachManager.Application.Dtos.Person;
+﻿using System.Collections.Generic;
+using System.Linq;
+using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.AddressModule.Aggregate;
 using My.CoachManager.Domain.AppModule.Services;
 using My.CoachManager.Domain.Core;
@@ -35,6 +37,16 @@ namespace My.CoachManager.Application.Services.AddressModule
         #endregion ---- Constructors ----
 
         #region Methods
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Load all items.
+        /// </summary>
+        /// <returns></returns>
+        public IList<AddressDto> GetCities()
+        {
+            return _addressRepository.GetAll(AddressSelectBuilder.SelectCityAndPostalCode(), AddressOrderBuilder.OrderByCity()).ToList();
+        }
 
         /// <summary>
         /// Create a dto.

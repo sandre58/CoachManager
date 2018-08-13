@@ -24,10 +24,11 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <DataGrid Grid.Row="1"
+            <DataGrid Grid.Row="1" x:Name="ListGrid"
                       ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"
                       Style="{StaticResource ItemsDataGridStyle}"
-                      FrozenColumnCount="2">
+                      FrozenColumnCount="2"
+                      parameters:DataGridParameters.VisibleColumns="{Binding Parameters.DisplayedColumns}">
                 <DataGrid.Columns>
 
                     <!-- Photo -->
@@ -62,14 +63,13 @@
 
                     <!-- Age -->
                     <columns:DataGridTextColumn AutomationProperties.Name="Age"
-                                                Binding="{Binding Age, StringFormat={x:Static entities:PersonResources.AgeFormat}, TargetNullValue=''}" 
-                                                Header="{x:Static entities:PersonResources.Age}" SortMemberPath="Age" MinWidth="50"
-                                                />
+                                                Binding="{Binding Age, StringFormat={x:Static entities:PersonResources.AgeFormat}, TargetNullValue=''}"
+                                                Header="{x:Static entities:PersonResources.Age}" SortMemberPath="Age" MinWidth="50" />
 
                     <!-- Birthdate -->
-                    <DataGridTextColumn AutomationProperties.Name="Birthdate" 
-                                        Binding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}" 
-                                        Header="{x:Static entities:PersonResources.Birthdate}" SortMemberPath="Birthdate" MinWidth="100"/>
+                    <DataGridTextColumn AutomationProperties.Name="Birthdate"
+                                        Binding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}"
+                                        Header="{x:Static entities:PersonResources.Birthdate}" SortMemberPath="Birthdate" MinWidth="100" />
 
                     <!-- Category -->
                     <DataGridTextColumn AutomationProperties.Name="Category" Binding="{Binding Category.Label}" Header="{x:Static entities:PlayerResources.CategoryAbbr}" SortMemberPath="Category.Order" MinWidth="70" />

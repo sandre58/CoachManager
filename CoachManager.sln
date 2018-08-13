@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Infrastructure", "5 - Infrastructure", "{457CAA75-84B5-4A2F-811D-86234A78617A}"
 EndProject
@@ -58,8 +58,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Documents", "0 - Docume
 	ProjectSection(SolutionItems) = preProject
 		Documents\Prism5forWPF.pdf = Documents\Prism5forWPF.pdf
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.ViewModels", "My.CoachManager.Presentation.Prism.ViewModels\My.CoachManager.Presentation.Prism.ViewModels.csproj", "{EEC17382-357C-4CD4-B493-23659FEE0E94}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Modules.Administration", "My.CoachManager.Presentation.Prism.Modules.Administration\My.CoachManager.Presentation.Prism.Modules.Administration.csproj", "{4CA93004-D321-4897-A8AD-EF368D5BD57E}"
 EndProject
@@ -331,20 +329,6 @@ Global
 		{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - BI|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - BI|Any CPU.Build.0 = Debug|Any CPU
-		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - Home|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - Home|Any CPU.Build.0 = Debug|Any CPU
-		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - Merial|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - Merial|Any CPU.Build.0 = Debug|Any CPU
-		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - Modis|Any CPU.ActiveCfg = Debug - Modis|Any CPU
-		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - Modis|Any CPU.Build.0 = Debug - Modis|Any CPU
-		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - Vincent|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug - Vincent|Any CPU.Build.0 = Debug|Any CPU
-		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEC17382-357C-4CD4-B493-23659FEE0E94}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4CA93004-D321-4897-A8AD-EF368D5BD57E}.Debug - BI|Any CPU.ActiveCfg = Debug|Any CPU
 		{4CA93004-D321-4897-A8AD-EF368D5BD57E}.Debug - BI|Any CPU.Build.0 = Debug|Any CPU
 		{4CA93004-D321-4897-A8AD-EF368D5BD57E}.Debug - Home|Any CPU.ActiveCfg = Debug|Any CPU
@@ -480,7 +464,6 @@ Global
 		{65E6F15A-E231-4A23-867E-6C6EFB5A3679} = {2D9139DF-BAD5-4B37-9E8D-444FE5778D68}
 		{E517CE44-0704-4BDF-8894-F90434C68931} = {2D9139DF-BAD5-4B37-9E8D-444FE5778D68}
 		{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB} = {2D9139DF-BAD5-4B37-9E8D-444FE5778D68}
-		{EEC17382-357C-4CD4-B493-23659FEE0E94} = {2D9139DF-BAD5-4B37-9E8D-444FE5778D68}
 		{4CA93004-D321-4897-A8AD-EF368D5BD57E} = {65E6F15A-E231-4A23-867E-6C6EFB5A3679}
 		{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28} = {65E6F15A-E231-4A23-867E-6C6EFB5A3679}
 		{2D290FD9-5B64-4AF4-A295-2B4CDE6EB330} = {2D9139DF-BAD5-4B37-9E8D-444FE5778D68}

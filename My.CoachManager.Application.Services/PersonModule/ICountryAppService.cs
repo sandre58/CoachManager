@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using My.CoachManager.Application.Dtos.Person;
+using My.CoachManager.Application.Dtos;
 
 namespace My.CoachManager.Application.Services.PersonModule
 {

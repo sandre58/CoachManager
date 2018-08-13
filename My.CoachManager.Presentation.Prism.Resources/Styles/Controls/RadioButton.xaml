@@ -14,7 +14,7 @@
         <Setter Property="Foreground" Value="{DynamicResource DarkControl}" />
         <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource DarkControlMouseOver}" />
         <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource DarkAccent}" />
+        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Accent}" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />

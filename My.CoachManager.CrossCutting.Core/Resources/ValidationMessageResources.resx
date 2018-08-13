@@ -129,6 +129,9 @@
   <data name="EntityErrorHeader" xml:space="preserve">
     <value>Erreurs lors de la sauvegarde d'une ou plusieurs entités : </value>
   </data>
+  <data name="IncompleteAddressMesage" xml:space="preserve">
+    <value>L'adresse indiquée n'est pas complète (Adresse + Code Postal + Ville).</value>
+  </data>
   <data name="InvalidFields" xml:space="preserve">
     <value>Les champs renseignés ne sont pas corrects.</value>
   </data>

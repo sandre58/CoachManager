@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.Serialization;
+using My.CoachManager.CrossCutting.Core.Enums;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
@@ -12,7 +13,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
         {
         }
 
-        public IntegerFilter(string propertyName, ComparableOperator comparaison, int from, int to) : base(
+        public IntegerFilter(string propertyName, ComplexComparableOperator comparaison, int from, int to) : base(
             propertyName, comparaison, from, to)
         {
         }

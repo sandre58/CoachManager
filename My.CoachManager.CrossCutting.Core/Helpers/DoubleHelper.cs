@@ -149,116 +149,6 @@ namespace My.CoachManager.CrossCutting.Core.Helpers
                    AreClose(point1.Y, point2.Y);
         }
 
-#if UNUSED
-    /// <summary>
-    /// IsZero - Returns whether or not the double is "close" to 0.  Same as AreClose(double, 0),
-    /// but this is faster.
-    /// </summary>
-    /// <returns>
-    /// bool - the result of the AreClose comparision.
-    /// </returns>
-    /// <param name="value"> The double to compare to 0. </param>
-        public static bool IsZero(double value)
-        {
-            return Math.Abs(value) < 10.0 * DBL_EPSILON;
-        }
-
-        // The Point, Size, Rect and Matrix class have moved to WinCorLib.  However, we provide
-        // internal AreClose methods for our own use here.
-
-        /// <summary>
-        /// Compares two Size instances for fuzzy equality.  This function
-        /// helps compensate for the fact that double values can
-        /// acquire error when operated upon
-        /// </summary>
-        /// <param name='size1'>The first size to compare</param>
-        /// <param name='size2'>The second size to compare</param>
-        /// <returns>Whether or not the two Size instances are equal</returns>
-        public static bool AreClose(Size size1, Size size2)
-        {
-            return DoubleUtil.AreClose(size1.Width, size2.Width) &&
-                   DoubleUtil.AreClose(size1.Height, size2.Height);
-        }
-
-        /// <summary>
-        /// Compares two Vector instances for fuzzy equality.  This function
-        /// helps compensate for the fact that double values can
-        /// acquire error when operated upon
-        /// </summary>
-        /// <param name='vector1'>The first Vector to compare</param>
-        /// <param name='vector2'>The second Vector to compare</param>
-        /// <returns>Whether or not the two Vector instances are equal</returns>
-        public static bool AreClose(System.Windows.Vector vector1, System.Windows.Vector vector2)
-        {
-            return DoubleUtil.AreClose(vector1.X, vector2.X) &&
-                   DoubleUtil.AreClose(vector1.Y, vector2.Y);
-        }
-
-        /// <summary>
-        /// Compares two rectangles for fuzzy equality.  This function
-        /// helps compensate for the fact that double values can
-        /// acquire error when operated upon
-        /// </summary>
-        /// <param name='rect1'>The first rectangle to compare</param>
-        /// <param name='rect2'>The second rectangle to compare</param>
-        /// <returns>Whether or not the two rectangles are equal</returns>
-        public static bool AreClose(Rect rect1, Rect rect2)
-        {
-            // If they're both empty, don't bother with the double logic.
-            if (rect1.IsEmpty)
-            {
-                return rect2.IsEmpty;
-            }
-
-            // At this point, rect1 isn't empty, so the first thing we can test is
-            // rect2.IsEmpty, followed by property-wise compares.
-
-            return (!rect2.IsEmpty) &&
-                DoubleUtil.AreClose(rect1.X, rect2.X) &&
-                DoubleUtil.AreClose(rect1.Y, rect2.Y) &&
-                DoubleUtil.AreClose(rect1.Height, rect2.Height) &&
-                DoubleUtil.AreClose(rect1.Width, rect2.Width);
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="val"></param>
-        /// <returns></returns>
-        public static bool IsBetweenZeroAndOne(double val)
-        {
-            return (GreaterThanOrClose(val, 0) && LessThanOrClose(val, 1));
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="val"></param>
-        /// <returns></returns>
-        public static int DoubleToInt(double val)
-        {
-            return (0 < val) ? (int)(val + 0.5) : (int)(val - 0.5);
-        }
-
-        /// <summary>
-        /// rectHasNaN - this returns true if this rect has X, Y , Height or Width as NaN.
-        /// </summary>
-        /// <param name='r'>The rectangle to test</param>
-        /// <returns>returns whether the Rect has NaN</returns>
-        public static bool RectHasNaN(Rect r)
-        {
-            if (    DoubleUtil.IsNaN(r.X)
-                 || DoubleUtil.IsNaN(r.Y)
-                 || DoubleUtil.IsNaN(r.Height)
-                 || DoubleUtil.IsNaN(r.Width) )
-            {
-                return true;
-            }
-            return false;
-        }
-
-#endif
-
         [StructLayout(LayoutKind.Explicit)]
         private struct NanUnion
         {
@@ -276,8 +166,7 @@ namespace My.CoachManager.CrossCutting.Core.Helpers
         // or in the range 0xfff0000000000001L through 0xffffffffffffffffL, the result will be NaN.
         public static bool IsNaN(double value)
         {
-            var t = new NanUnion();
-            t.DoubleValue = value;
+            var t = new NanUnion { DoubleValue = value };
 
             UInt64 exp = t.UintValue & 0xfff0000000000000;
             UInt64 man = t.UintValue & 0x000fffffffffffff;

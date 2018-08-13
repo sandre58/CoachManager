@@ -206,25 +206,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CrudStatus.cs" />
-    <Compile Include="Person\AddressDto.cs" />
-    <Compile Include="Category\CategoryDto.cs" />
-    <Compile Include="Season\SeasonDto.cs" />
-    <Compile Include="Position\PositionDto.cs" />
-    <Compile Include="Person\PhoneDto.cs" />
-    <Compile Include="Person\CountryDto.cs" />
+    <Compile Include="AddressDto.cs" />
+    <Compile Include="CategoryDto.cs" />
+    <Compile Include="SeasonDto.cs" />
+    <Compile Include="PositionDto.cs" />
+    <Compile Include="PhoneDto.cs" />
+    <Compile Include="CountryDto.cs" />
     <Compile Include="ReferenceDto.cs" />
     <Compile Include="EntityDto.cs" />
     <Compile Include="IEntityDto.cs" />
-    <Compile Include="Person\ContactDto.cs" />
-    <Compile Include="Person\CityDto.cs" />
-    <Compile Include="Person\PlayerPositionDto.cs" />
-    <Compile Include="Person\EmailDto.cs" />
-    <Compile Include="Person\PersonDto.cs" />
-    <Compile Include="Person\PlayerDto.cs" />
+    <Compile Include="ContactDto.cs" />
+    <Compile Include="EmailDto.cs" />
+    <Compile Include="PersonDto.cs" />
+    <Compile Include="PlayerDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Roster\RosterDto.cs" />
-    <Compile Include="Roster\RosterPlayerDto.cs" />
-    <Compile Include="User\UserDto.cs" />
+    <Compile Include="RosterDto.cs" />
+    <Compile Include="RosterPlayerDto.cs" />
+    <Compile Include="UserDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\My.CoachManager.CrossCutting.Core\My.CoachManager.CrossCutting.Core.csproj">

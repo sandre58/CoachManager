@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using FluentValidation.Results;
 using My.CoachManager.Domain.Core;
-using My.CoachManager.Domain.ReferenceModule.Aggregates;
+using My.CoachManager.Domain.ReferenceModule.Aggregate;
 
 namespace My.CoachManager.Domain.ReferenceModule.Services
 {

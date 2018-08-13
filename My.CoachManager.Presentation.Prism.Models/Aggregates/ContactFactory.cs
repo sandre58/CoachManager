@@ -1,4 +1,4 @@
-﻿using My.CoachManager.Application.Dtos.Person;
+﻿using My.CoachManager.Application.Dtos;
 
 namespace My.CoachManager.Presentation.Prism.Models.Aggregates
 {

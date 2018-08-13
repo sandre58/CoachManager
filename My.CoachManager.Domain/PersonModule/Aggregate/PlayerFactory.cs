@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using My.CoachManager.Application.Dtos.Person;
+using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.AddressModule.Aggregate;
 using My.CoachManager.Domain.Entities;
 

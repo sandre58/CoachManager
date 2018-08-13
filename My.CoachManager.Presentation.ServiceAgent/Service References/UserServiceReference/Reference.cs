@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using My.CoachManager.Application.Dtos.User;
+using My.CoachManager.Application.Dtos;
 
 namespace My.CoachManager.Presentation.ServiceAgent.UserServiceReference {
     

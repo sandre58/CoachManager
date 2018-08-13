@@ -48,12 +48,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aggregates\AddressFactory.cs" />
     <Compile Include="Aggregates\CountryFactory.cs" />
     <Compile Include="Aggregates\ContactFactory.cs" />
     <Compile Include="Aggregates\PlayerFactory.cs" />
     <Compile Include="Aggregates\SeasonFactory.cs" />
     <Compile Include="Aggregates\RosterFactory.cs" />
     <Compile Include="Aggregates\CategoryFactory.cs" />
+    <Compile Include="CityModel.cs" />
     <Compile Include="ContactModel.cs" />
     <Compile Include="CountryModel.cs" />
     <Compile Include="EmailModel.cs" />

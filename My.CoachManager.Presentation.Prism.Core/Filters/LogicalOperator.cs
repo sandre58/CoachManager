@@ -5,10 +5,10 @@ namespace My.CoachManager.Presentation.Prism.Core.Filters
 {
     public enum LogicalOperator
     {
-        [Display(Name = "And", ResourceType = typeof(FilterOperatorResources))]
+        [Display(Name = "And", ResourceType = typeof(OperatorResources))]
         And,
 
-        [Display(Name = "Or", ResourceType = typeof(FilterOperatorResources))]
+        [Display(Name = "Or", ResourceType = typeof(OperatorResources))]
         Or,
     }
 }

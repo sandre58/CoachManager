@@ -4,9 +4,10 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:converters="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Converters"
-                    xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Core.ViewModels;assembly=My.CoachManager.Presentation.Prism.Core"
                     xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
+                    xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
                     mc:Ignorable="d">
 
     <ResourceDictionary.MergedDictionaries>
@@ -23,64 +24,8 @@
         <ResourceDictionary Source="../Controls/Badged.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <DataTemplate x:Key="EditDialogViewHeaderTemplate" DataType="{x:Type viewModels:IEditViewModel}">
-        <Grid>
-
-            <Grid.Resources>
-                <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
-                    <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
-                </Style>
-            </Grid.Resources>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-
-            <controls:Icon x:Name="Icon" Width="40" Height="40" Size="Custom" Content="{StaticResource ChevronRightGeometry}" Grid.Column="0" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center"
-                            Style="{StaticResource EllipseIconBaseStyle}"
-                           OverlayBackground="{DynamicResource HeaderForeground}" />
-            <TextBlock Grid.Column="1" Text="{Binding Title}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />
-
-            <Grid Grid.Column="2" Visibility="{Binding Mode, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static viewModels:ScreenMode.Edition}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
-                <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                    <TextBlock Text="Créé par" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.CreatedBy}" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="le" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.CreatedDate, StringFormat={}{0:dd/MM/yyyy}}" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="à" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.CreatedDate, StringFormat={}{0:HH:mm}}" Style="{StaticResource ReferenceStyle}" />
-                </StackPanel>
-                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                    <TextBlock Text="Modifié par" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.ModifiedBy}" Style="{StaticResource ReferenceStyle}" FontWeight="Bold" />
-                    <TextBlock Text="le" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.ModifiedDate, StringFormat={}{0:dd/MM/yyyy}}" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="à" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.ModifiedDate, StringFormat={}{0:HH:mm}}" Style="{StaticResource ReferenceStyle}"/>
-                </StackPanel>
-            </Grid>
-
-        </Grid>
-        <DataTemplate.Triggers>
-            <DataTrigger Binding="{Binding Mode}" Value="{x:Static viewModels:ScreenMode.Creation}">
-                <Setter TargetName="Icon" Property="Content" Value="{StaticResource AddGeometry}" />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Mode}" Value="{x:Static viewModels:ScreenMode.Edition}">
-                <Setter TargetName="Icon" Property="Content" Value="{StaticResource EditGeometry}" />
-            </DataTrigger>
-        </DataTemplate.Triggers>
-    </DataTemplate>
-
-    <!--<DataTemplate x:Key="FilteredWorkspaceDialogViewHeaderTemplate" DataType="{x:Type viewModels:IFilteredListViewModel}">
-        <StackPanel>
-            <DockPanel Background="{DynamicResource DarkVariation3}" parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}">
+    <DataTemplate x:Key="ListViewHeaderTemplate" DataType="{x:Type viewModels:IListViewModel}">
+        <!--<DockPanel Background="{DynamicResource DarkVariation3}" parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}">
                 <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="{StaticResource MediumMargin}">
                     <TextBlock Text="{x:Static strings:ControlResources.SpeedSearch}" VerticalAlignment="Center" />
                     <TextBox Text="{Binding SpeedFilter.Filter.Value, UpdateSourceTrigger=PropertyChanged}"
@@ -94,13 +39,54 @@
                         <Button Content="{x:Static strings:ControlResources.ShowFilters}" Command="{Binding ShowFiltersCommand}" Style="{StaticResource AccentButtonBaseStyle}" />
                     </controls:Badged>
                 </WrapPanel>
-            </DockPanel>
-            <DockPanel parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}">
+            </DockPanel>-->
+        <StackPanel Orientation="Vertical">
+            <DockPanel parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}" VerticalAlignment="Center"
+                       Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}">
+
+                <!-- Filters Parameters -->
+                <WrapPanel DockPanel.Dock="Left" VerticalAlignment="Center">
+                    <TextBlock Text="{x:Static strings:ControlResources.SpeedSearch}" VerticalAlignment="Center" />
+                    <TextBox Text="{Binding Filters.SpeedFilter.Value, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource TextBoxBaseStyle}"
+                         Width="{StaticResource MediumWidth}"
+                         CharacterCasing="Upper"
+                         parameters:TextBoxParameters.UseFloatingWatermark="False"
+                         parameters:TextBoxParameters.Watermark="{Binding Filters.SpeedFilter.Title}" />
+                    <Button Content="{x:Static strings:ControlResources.Clear}" Style="{StaticResource SmallButtonBaseStyle}" Command="{Binding Filters.ResetFiltersCommand}" VerticalAlignment="Center" />
+                    <controls:Badged Badge="{Binding Filters.CountActiveFilters}" VerticalAlignment="Center">
+                        <Button Content="{x:Static strings:ControlResources.ShowFilters}" Command="{Binding Filters.ShowFiltersCommand}">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource SmallAccentButtonBaseStyle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Filters.IsVisible}" Value="False">
+                                            <Setter Property="Content" Value="{x:Static strings:ControlResources.HideFilters}" />
+                                            <Setter Property="Command" Value="{Binding Filters.HideFiltersCommand}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </controls:Badged>
+                </WrapPanel>
+
+                <Rectangle Width="1"
+                       VerticalAlignment="Stretch"
+                       parameters:PanelParameters.NotAffectMargin="True"
+                       Fill="{DynamicResource Control}"
+                       IsHitTestVisible="False"
+                       SnapsToDevicePixels="True"
+                       UseLayoutRounding="True"
+                           Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}" />
+
+                <!-- Count Items -->
                 <TextBlock VerticalAlignment="Center"
-                               parameters:PanelParameters.NotAffectMargin="True"
-                               Margin="{StaticResource DefaultMargin}"
-                               DataContext="{Binding FilteredItems}"
-                               Text="{Binding Count, StringFormat={x:Static strings:ControlResources.CountItemsToUpper}}">
+                       DockPanel.Dock="Left"
+                       parameters:PanelParameters.NotAffectMargin="True"
+                       Margin="{StaticResource DefaultMargin}"
+                       FontSize="{StaticResource MediumFontSize}"
+                       DataContext="{Binding Items}"
+                       Text="{Binding Count, StringFormat={x:Static strings:ControlResources.CountItemsToUpper}}">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock" BasedOn="{StaticResource SmallHeaderStyle}">
                             <Setter Property="Foreground" Value="{DynamicResource Positive}" />
@@ -112,22 +98,18 @@
                         </Style>
                     </TextBlock.Style>
                 </TextBlock>
-                <Rectangle Width="1"
-                               VerticalAlignment="Stretch"
-                               parameters:PanelParameters.NotAffectMargin="True"
-                               Margin="{StaticResource DefaultVerticalMargin}"
-                               Fill="{DynamicResource Control}"
-                               IsHitTestVisible="False"
-                               SnapsToDevicePixels="True"
-                               UseLayoutRounding="True" />
-                <WrapPanel Margin="{StaticResource DefaultVerticalMargin}">
+
+                <!-- Columns Parameters -->
+                <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right"
+                       Visibility="{Binding Parameters, Converter={StaticResource NullToVisibilityConverter}}" VerticalAlignment="Center">
                     <controls:DropDownMenuButton Style="{StaticResource HyperLinkDropDownMenuButtonStyle}"
                                                      Content="{x:Static strings:ControlResources.ShowData}"
-                                                     ItemsSource="{Binding PresetColumns.Keys}">
+                                                     ItemsSource="{Binding Parameters.PresetColumns.Keys}"
+                                             VerticalAlignment="Center">
                         <controls:DropDownMenuButton.ItemContainerStyle>
                             <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
                                 <Setter Property="Header" Value="{Binding Converter={StaticResource EnumToStringConverter}}" />
-                                <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, Path=DataContext, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=ChangeDisplayedColumnsCommand}" />
+                                <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, Path=DataContext.Parameters, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=ChangeDisplayedColumnsCommand}" />
                                 <Setter Property="CommandParameter" Value="{Binding }" />
                             </Style>
                         </controls:DropDownMenuButton.ItemContainerStyle>
@@ -135,25 +117,63 @@
                     <controls:DropDownMenuButton Style="{StaticResource HyperLinkDropDownMenuButtonStyle}"
                                                      Content="{x:Static strings:ControlResources.ShowColumns}"
                                                      ItemsSource="{Binding ElementName=ListGrid, Path=Columns}"
-                                                     ItemContainerStyle="{StaticResource ColumnContextMenuStyle}" />
+                                                     ItemContainerStyle="{StaticResource ColumnContextMenuStyle}"
+                                             VerticalAlignment="Center" />
                 </WrapPanel>
             </DockPanel>
+
+            <!-- Filters Panel -->
+            <Grid x:Name="FiltersPanel" Background="{DynamicResource AccentControl}" parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}"
+                  Visibility="{Binding Filters.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!--<DockPanel>
+                    -->
+                <!--<CheckBox Content="{x:Static strings:ControlResources.ShowOverview}" IsChecked="{Binding UpdateOnLive}" />-->
+                <!--
+                    <controls:DropDownMenuButton Style="{StaticResource HyperLinkDropDownMenuButtonStyle}"
+                                                 Content="{x:Static strings:ControlResources.AddCondition}"
+                                                 ItemsSource="{Binding AllowedFilters}"
+                                                 DockPanel.Dock="Right" HorizontalAlignment="Right">
+                        <controls:DropDownMenuButton.ItemContainerStyle>
+                            <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
+                                <Setter Property="Header" Value="{Binding Value}" />
+                                <Setter Property="Command" Value="{Binding DataContext.AddFilterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:DropDownMenuButton}}" />
+                                <Setter Property="CommandParameter" Value="{Binding Key}" />
+                            </Style>
+                        </controls:DropDownMenuButton.ItemContainerStyle>
+                    </controls:DropDownMenuButton>
+                </DockPanel>-->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding Filters.Filters}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
         </StackPanel>
-    </DataTemplate>-->
+    </DataTemplate>
 
     <Style TargetType="{x:Type controls:WorkspaceView}">
         <Setter Property="MinWidth" Value="320" />
         <Setter Property="ApplicationBarPosition" Value="Bottom" />
-        <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
+        <Setter Property="Padding" Value="5,20,5,5" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="FontSize" Value="{StaticResource NormalFontSize}" />
         <Setter Property="FontFamily" Value="{StaticResource NormalFontFamily}" />
         <Setter Property="MinHeight" Value="320" />
-        <Setter Property="HeaderHeight" Value="100" />
+        <Setter Property="HeaderHeight" Value="{x:Static system:Double.NaN}" />
         <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="HeaderBackground" Value="{DynamicResource LightHeaderBackground}" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="ApplicationBarStyle" Value="{StaticResource {x:Type controls:ApplicationBar}}" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="HeaderTemplate" Value="{StaticResource ListViewHeaderTemplate}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:WorkspaceView}">
@@ -166,8 +186,8 @@
 
                         <!-- Header -->
                         <Grid Grid.Row="0" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HeaderHeight}" Visibility="{TemplateBinding HeaderTemplate, Converter={StaticResource NullToVisibilityConverter}}">
-                            <Border Padding="0,0,0,15" Background="{TemplateBinding HeaderBackground}" Focusable="False">
-                                <ContentControl Margin="{StaticResource MediumHorizontalMargin}" Content="{Binding}" ContentTemplate="{TemplateBinding HeaderTemplate}" VerticalAlignment="Bottom" />
+                            <Border Background="{TemplateBinding HeaderBackground}" Focusable="False">
+                                <ContentControl Margin="{StaticResource MediumMargin}" Content="{Binding}" ContentTemplate="{TemplateBinding HeaderTemplate}" VerticalAlignment="Center" />
                             </Border>
                         </Grid>
 
@@ -216,6 +236,61 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!-- For dialog window -->
+    <DataTemplate x:Key="EditDialogViewHeaderTemplate" DataType="{x:Type viewModels:IEditViewModel}">
+        <Grid>
+
+            <Grid.Resources>
+                <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
+                    <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
+                </Style>
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <controls:Icon x:Name="Icon" Width="40" Height="40" Size="Custom" Content="{StaticResource ChevronRightGeometry}" Grid.Column="0" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center"
+                            Style="{StaticResource EllipseIconBaseStyle}"
+                           OverlayBackground="{DynamicResource HeaderForeground}" />
+            <TextBlock Grid.Column="1" Text="{Binding Title}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />
+
+            <Grid Grid.Column="2" Visibility="{Binding Mode, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static viewModels:ScreenMode.Edition}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <TextBlock Text="Créé par" Style="{StaticResource ReferenceStyle}" />
+                    <TextBlock Text="{Binding Item.CreatedBy}" Style="{StaticResource ReferenceStyle}" />
+                    <TextBlock Text="le" Style="{StaticResource ReferenceStyle}" />
+                    <TextBlock Text="{Binding Item.CreatedDate, StringFormat={}{0:dd/MM/yyyy}}" Style="{StaticResource ReferenceStyle}" />
+                    <TextBlock Text="à" Style="{StaticResource ReferenceStyle}" />
+                    <TextBlock Text="{Binding Item.CreatedDate, StringFormat={}{0:HH:mm}}" Style="{StaticResource ReferenceStyle}" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <TextBlock Text="Modifié par" Style="{StaticResource ReferenceStyle}" />
+                    <TextBlock Text="{Binding Item.ModifiedBy}" Style="{StaticResource ReferenceStyle}" FontWeight="Bold" />
+                    <TextBlock Text="le" Style="{StaticResource ReferenceStyle}" />
+                    <TextBlock Text="{Binding Item.ModifiedDate, StringFormat={}{0:dd/MM/yyyy}}" Style="{StaticResource ReferenceStyle}" />
+                    <TextBlock Text="à" Style="{StaticResource ReferenceStyle}" />
+                    <TextBlock Text="{Binding Item.ModifiedDate, StringFormat={}{0:HH:mm}}" Style="{StaticResource ReferenceStyle}" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Mode}" Value="{x:Static viewModels:ScreenMode.Creation}">
+                <Setter TargetName="Icon" Property="Content" Value="{StaticResource AddGeometry}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Mode}" Value="{x:Static viewModels:ScreenMode.Edition}">
+                <Setter TargetName="Icon" Property="Content" Value="{StaticResource EditGeometry}" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
 
     <Style x:Key="WorkspaceDialogViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource {x:Type controls:WorkspaceView}}">
         <Setter Property="HeaderHeight" Value="70" />

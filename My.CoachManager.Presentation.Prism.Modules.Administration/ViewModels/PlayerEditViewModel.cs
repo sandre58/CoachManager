@@ -10,6 +10,7 @@ using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
+using My.CoachManager.Presentation.ServiceAgent.AddressServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 using Prism.Commands;
@@ -28,6 +29,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 
         private readonly IPersonService _personService;
         private readonly ICategoryService _categoryService;
+        private readonly IAddressService _addressService;
 
         #endregion Fields
 
@@ -36,10 +38,11 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="PlayerEditViewModel"/>.
         /// </summary>
-        public PlayerEditViewModel(IPersonService personService, ICategoryService categoryService)
+        public PlayerEditViewModel(IPersonService personService, ICategoryService categoryService, IAddressService addressService)
         {
             _personService = personService;
             _categoryService = categoryService;
+            _addressService = addressService;
         }
 
         #endregion Constructors
@@ -47,34 +50,44 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         #region Members
 
         /// <summary>
+        /// Gets or sets addresses.
+        /// </summary>
+        public IEnumerable<CityModel> AllAdresses { get; private set; }
+
+        /// <summary>
+        /// Gets or sets cities.
+        /// </summary>
+        public IEnumerable<string> AllCities { get; private set; }
+
+        /// <summary>
+        /// Gets or sets postal code.
+        /// </summary>
+        public IEnumerable<string> AllPostalCodes { get; private set; }
+
+        /// <summary>
         /// Gets or sets categories.
         /// </summary>
-        public IEnumerable<CategoryModel> AllCategories { get; set; }
+        public IEnumerable<CategoryModel> AllCategories { get; private set; }
+
+        /// <summary>
+        /// Gets or sets categories.
+        /// </summary>
+        public IEnumerable<string> AllSizes { get; private set; }
 
         /// <summary>
         /// Gets or sets countries.
         /// </summary>
-        public IEnumerable<CountryModel> AllCountries { get; set; }
-
-        /// <summary>
-        /// Gets or sets cities names.
-        /// </summary>
-        public IEnumerable<string> AllCitiesNames { get; set; }
-
-        /// <summary>
-        /// Gets or sets postal codes.
-        /// </summary>
-        public IEnumerable<string> AllPostalCodes { get; set; }
+        public IEnumerable<CountryModel> AllCountries { get; private set; }
 
         /// <summary>
         /// Get or Set Select Photo Command.
         /// </summary>
-        public DelegateCommand SelectPhotoCommand { get; set; }
+        public DelegateCommand SelectPhotoCommand { get; private set; }
 
         /// <summary>
         /// Get or Set Remove Photo Command.
         /// </summary>
-        public DelegateCommand RemovePhotoCommand { get; set; }
+        public DelegateCommand RemovePhotoCommand { get; private set; }
 
         #endregion Members
 
@@ -172,11 +185,11 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         {
             AllCategories = _categoryService.GetCategories().Select(CategoryFactory.Get);
             AllCountries = _personService.GetCountries().Select(CountryFactory.Get);
+            AllAdresses = _addressService.GetCities().Select(AddressFactory.Get).ToList();
+            AllSizes = PlayerConstants.DefaultSizes;
 
-            // TODO : Address
-            //AllCities = new List<CityViewModel>();
-            //AllCitiesNames = AllCities.Select(c => c.City).OrderBy(c => c);
-            //AllPostalCodes = AllCities.Select(c => c.PostalCode).OrderBy(c => c);
+            AllCities = AllAdresses.Select(c => c.City).Distinct().OrderBy(x => x);
+            AllPostalCodes = AllAdresses.Select(c => c.PostalCode).Distinct().OrderBy(x => x);
         }
 
         /// <summary>
@@ -205,7 +218,6 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
                     Phones = Item.Phones;
                     Phones.CollectionChanged += Contacts_CollectionChanged;
                 }
-
             }
 
             base.OnLoadDataCompleted();
@@ -283,19 +295,19 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         {
             switch (e.PropertyName)
             {
-                //case "City":
-                //    if (!string.IsNullOrEmpty(Item.Address.City) && string.IsNullOrEmpty(Item.Address.PostalCode))
-                //    {
-                //        Item.PostalCode = AllCities.Where(c => c.City == Item.City).Select(c => c.PostalCode).FirstOrDefault();
-                //    }
-                //    break;
+                case "City":
+                    if (!string.IsNullOrEmpty(Item.City))
+                    {
+                        Item.PostalCode = AllAdresses.Where(c => c.City == Item.City).Select(c => c.PostalCode).FirstOrDefault();
+                    }
+                    break;
 
-                //case "PostalCode":
-                //    if (!string.IsNullOrEmpty(Item.PostalCode) && string.IsNullOrEmpty(Item.City))
-                //    {
-                //        Item.City = AllCities.Where(c => c.PostalCode == Item.PostalCode).Select(c => c.City).FirstOrDefault();
-                //    }
-                //    break;
+                case "PostalCode":
+                    if (!string.IsNullOrEmpty(Item.PostalCode))
+                    {
+                        Item.City = AllAdresses.Where(c => c.PostalCode == Item.PostalCode).Select(c => c.City).FirstOrDefault();
+                    }
+                    break;
 
                 case "Birthdate":
                     if (Item.Birthdate.HasValue)

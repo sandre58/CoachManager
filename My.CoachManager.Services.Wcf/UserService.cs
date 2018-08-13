@@ -1,5 +1,5 @@
 ﻿using CommonServiceLocator;
-using My.CoachManager.Application.Dtos.User;
+using My.CoachManager.Application.Dtos;
 using My.CoachManager.Application.Services.UserModule;
 using My.CoachManager.Services.Wcf.Interfaces;
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using My.CoachManager.CrossCutting.Core.Collections;
@@ -6,6 +7,7 @@ using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Core.Resources.Entities;
+using My.CoachManager.Presentation.Prism.Core.Attributes.Validation;
 using My.CoachManager.Presentation.Prism.Core.Models;
 
 namespace My.CoachManager.Presentation.Prism.Models
@@ -83,6 +85,8 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// Gets or sets the address.
         /// </summary>
         [Display(Name = "Address", ResourceType = typeof(PersonResources))]
+        [ValidateProperty(nameof(City))]
+        [ValidateProperty(nameof(PostalCode))]
         public string Address { get; set; }
 
         /// <summary>
@@ -90,12 +94,16 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// </summary>
         [Display(Name = "PostalCode", ResourceType = typeof(AddressResources))]
         [MaxLength(5, ErrorMessageResourceName = "MaxLenghtFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
+        [ValidateProperty(nameof(Address))]
+        [ValidateProperty(nameof(City))]
         public string PostalCode { get; set; }
 
         /// <summary>
         /// Gets or sets the address.
         /// </summary>
         [Display(Name = "City", ResourceType = typeof(AddressResources))]
+        [ValidateProperty(nameof(Address))]
+        [ValidateProperty(nameof(PostalCode))]
         public string City { get; set; }
 
         /// <summary>
@@ -134,10 +142,7 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// Get the full name (FirstName LastName).
         /// </summary>
         [Display(Name = "FullName", ResourceType = typeof(PersonResources))]
-        public string FullName
-        {
-            get { return string.Join(" ", FirstName, LastName); }
-        }
+        public string FullName => string.Join(" ", FirstName, LastName);
 
         /// <summary>
         /// Get the inverse name (LastName FirstName).
@@ -196,11 +201,46 @@ namespace My.CoachManager.Presentation.Prism.Models
                 var age = today.Year - birthdate.Year;
 
                 // Do stuff with it.
-                if (today.Month < birthdate.Month || (today.Month == birthdate.Month && today.Day < birthdate.Day))
+                if (today.Month < birthdate.Month || today.Month == birthdate.Month && today.Day < birthdate.Day)
                     age--;
 
                 return age;
             }
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets error for a property.
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        protected override IEnumerable<string> ComputeErrors(string propertyName, object value)
+        {
+            var errors = new List<string>();
+
+            switch (propertyName)
+            {
+                case nameof(Address):
+                case nameof(City):
+                case nameof(PostalCode):
+                    if (propertyName == nameof(Address) && string.IsNullOrEmpty(Address)
+                        || propertyName == nameof(City) && string.IsNullOrEmpty(City)
+                        || propertyName == nameof(PostalCode) && string.IsNullOrEmpty(PostalCode))
+                    {
+                        if (!(string.IsNullOrEmpty(Address) && string.IsNullOrEmpty(PostalCode) &&
+                              string.IsNullOrEmpty(City)) &&
+                            (string.IsNullOrEmpty(Address) || string.IsNullOrEmpty(PostalCode) ||
+                             string.IsNullOrEmpty(City)))
+                        {
+                            errors.Add(ValidationMessageResources.IncompleteAddressMesage);
+                        }
+                    }
+
+                    break;
+            }
+
+            return errors;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using My.CoachManager.Application.Dtos.Roster;
+﻿using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.CategoryModule.Aggregate;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.SeasonModule.Aggregate;

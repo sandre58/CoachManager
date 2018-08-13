@@ -87,6 +87,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\AddressServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\CategoryServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -131,6 +136,7 @@
       <DependentUpon>app.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.AddressDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Admin.CategoryDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Admin.CategoryForListDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Admin.CountryDto.datasource" />
@@ -177,6 +183,16 @@
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Users.UserDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Users.UserDto1.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Domain.Entities.Player.datasource" />
+    <None Include="Service References\AddressServiceReference\AddressService.wsdl" />
+    <None Include="Service References\AddressServiceReference\AddressService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AddressServiceReference\AddressService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AddressServiceReference\AddressService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\CategoryServiceReference\CategoryService.wsdl" />
     <None Include="Service References\CategoryServiceReference\CategoryService.xsd">
       <SubType>Designer</SubType>
@@ -288,6 +304,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\AddressServiceReference\" />
     <WCFMetadataStorage Include="Service References\CategoryServiceReference\" />
     <WCFMetadataStorage Include="Service References\PersonServiceReference\" />
     <WCFMetadataStorage Include="Service References\RosterServiceReference\" />
@@ -365,6 +382,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\SeasonServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AddressServiceReference\AddressService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AddressServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AddressServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AddressServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

@@ -173,6 +173,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressModule\Aggregate\AddressFactory.cs" />
+    <Compile Include="AddressModule\Aggregate\AddressSelectBuilder.cs" />
+    <Compile Include="AddressModule\Aggregate\AddressOrderBuilder.cs" />
     <Compile Include="AppModule\Services\CrudDomainService.cs" />
     <Compile Include="AppModule\Services\ICrudDomainService.cs" />
     <Compile Include="CategoryModule\Aggregate\CategoryFactory.cs" />
@@ -182,13 +184,13 @@
     <Compile Include="PersonModule\Aggregate\PlayerValidator.cs" />
     <Compile Include="PersonModule\Aggregate\CountryFactory.cs" />
     <Compile Include="PersonModule\Aggregate\PlayerSelectBuilder.cs" />
-    <Compile Include="ReferenceModule\Aggregates\ReferenceOrderBuilder.cs" />
+    <Compile Include="ReferenceModule\Aggregate\ReferenceOrderBuilder.cs" />
     <Compile Include="PersonModule\Aggregate\CountrySelectBuilder.cs" />
     <Compile Include="PersonModule\Aggregate\PlayerFactory.cs" />
     <Compile Include="CategoryModule\Services\CategoryDomainService.cs" />
     <Compile Include="PersonModule\Services\PlayerDomainService.cs" />
     <Compile Include="PersonModule\Services\IPlayerDomainService.cs" />
-    <Compile Include="ReferenceModule\Aggregates\ReferenceValidator.cs" />
+    <Compile Include="ReferenceModule\Aggregate\ReferenceValidator.cs" />
     <Compile Include="ReferenceModule\Services\IReferenceDomainService.cs" />
     <Compile Include="ReferenceModule\Services\ReferenceDomainService.cs" />
     <Compile Include="RosterModule\Aggregate\RosterValidator.cs" />
@@ -203,7 +205,7 @@
     <Compile Include="CategoryModule\Services\ICategoryDomainService.cs" />
     <Compile Include="RosterModule\Aggregate\RosterSelectBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReferenceModule\Aggregates\ReferenceSpecification.cs" />
+    <Compile Include="ReferenceModule\Aggregate\ReferenceSpecification.cs" />
     <Compile Include="UserModule\Aggregate\UserFactory.cs" />
     <Compile Include="UserModule\Aggregate\UserSpecification.cs" />
   </ItemGroup>

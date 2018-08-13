@@ -52,9 +52,10 @@
     <SolidColorBrush x:Key="HeaderBackground" Color="{DynamicResource DarkVariation3Color}" presentationOptions:Freeze="true" />
     <SolidColorBrush x:Key="HeaderForeground" Color="{DynamicResource DarkColor}" presentationOptions:Freeze="true" />
     <SolidColorBrush x:Key="HeaderBorder" Color="{DynamicResource Variation4Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightHeaderBackground" Color="{DynamicResource LightVariation1Color}" presentationOptions:Freeze="true" />
     <SolidColorBrush x:Key="LightHeaderForeground" Color="{DynamicResource Variation5Color}" presentationOptions:Freeze="true" />
     <SolidColorBrush x:Key="LightHeaderBorder" Color="{DynamicResource Variation2Color}" presentationOptions:Freeze="true" />
-    
+
     <!-- Menus -->
     <SolidColorBrush x:Key="MenuBackground" Color="{DynamicResource DarkVariation3Color}" presentationOptions:Freeze="true" />
     <SolidColorBrush x:Key="DarkMenuBackground" Color="{DynamicResource DarkVariation5Color}" presentationOptions:Freeze="true" />

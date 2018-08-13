@@ -43,7 +43,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
         /// <summary>
         /// Identifies the BackgroundContent dependency property.
         /// </summary>
-        public static readonly DependencyProperty HeaderHeightProperty = DependencyProperty.Register("HeaderHeight", typeof(int), typeof(WorkspaceView));
+        public static readonly DependencyProperty HeaderHeightProperty = DependencyProperty.Register("HeaderHeight", typeof(double), typeof(WorkspaceView));
 
         /// <summary>
         /// Gets or sets the background content of this window instance.
@@ -84,12 +84,12 @@ namespace My.CoachManager.Presentation.Prism.Controls
         /// <summary>
         /// Gets or sets the background content of this window instance.
         /// </summary>
-        public int HeaderHeight
+        public double HeaderHeight
         {
             get
             {
                 var value = GetValue(HeaderHeightProperty);
-                if (value != null) return (int)value;
+                if (value != null) return (double)value;
                 return 0;
             }
             set { SetValue(HeaderHeightProperty, value); }

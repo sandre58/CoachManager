@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CommonServiceLocator;
-using My.CoachManager.Application.Dtos.Category;
-using My.CoachManager.Application.Dtos.Person;
+using My.CoachManager.Application.Dtos;
 using My.CoachManager.Application.Services.PersonModule;
 using My.CoachManager.Services.Wcf.Interfaces;
 

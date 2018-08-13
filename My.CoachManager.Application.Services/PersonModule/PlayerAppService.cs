@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using My.CoachManager.Application.Dtos;
-using My.CoachManager.Application.Dtos.Category;
-using My.CoachManager.Application.Dtos.Person;
 using My.CoachManager.Application.Services.AddressModule;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.Domain.AddressModule.Aggregate;

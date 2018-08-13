@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using My.CoachManager.Application.Dtos;
+
 namespace My.CoachManager.Presentation.ServiceAgent.SeasonServiceReference {
     
     
@@ -16,28 +18,28 @@ namespace My.CoachManager.Presentation.ServiceAgent.SeasonServiceReference {
     public interface ISeasonService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISeasonService/GetSeasons", ReplyAction="http://tempuri.org/ISeasonService/GetSeasonsResponse")]
-        My.CoachManager.Application.Dtos.Season.SeasonDto[] GetSeasons();
+        SeasonDto[] GetSeasons();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISeasonService/GetSeasons", ReplyAction="http://tempuri.org/ISeasonService/GetSeasonsResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Season.SeasonDto[]> GetSeasonsAsync();
+        System.Threading.Tasks.Task<SeasonDto[]> GetSeasonsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISeasonService/GetSeasonById", ReplyAction="http://tempuri.org/ISeasonService/GetSeasonByIdResponse")]
-        My.CoachManager.Application.Dtos.Season.SeasonDto GetSeasonById(int id);
+        SeasonDto GetSeasonById(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISeasonService/GetSeasonById", ReplyAction="http://tempuri.org/ISeasonService/GetSeasonByIdResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Season.SeasonDto> GetSeasonByIdAsync(int id);
+        System.Threading.Tasks.Task<SeasonDto> GetSeasonByIdAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISeasonService/SaveSeason", ReplyAction="http://tempuri.org/ISeasonService/SaveSeasonResponse")]
-        My.CoachManager.Application.Dtos.Season.SeasonDto SaveSeason(My.CoachManager.Application.Dtos.Season.SeasonDto playerDto);
+        SeasonDto SaveSeason(SeasonDto playerDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISeasonService/SaveSeason", ReplyAction="http://tempuri.org/ISeasonService/SaveSeasonResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Season.SeasonDto> SaveSeasonAsync(My.CoachManager.Application.Dtos.Season.SeasonDto playerDto);
+        System.Threading.Tasks.Task<SeasonDto> SaveSeasonAsync(SeasonDto playerDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISeasonService/RemoveSeason", ReplyAction="http://tempuri.org/ISeasonService/RemoveSeasonResponse")]
-        void RemoveSeason(My.CoachManager.Application.Dtos.Season.SeasonDto playerDto);
+        void RemoveSeason(SeasonDto playerDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISeasonService/RemoveSeason", ReplyAction="http://tempuri.org/ISeasonService/RemoveSeasonResponse")]
-        System.Threading.Tasks.Task RemoveSeasonAsync(My.CoachManager.Application.Dtos.Season.SeasonDto playerDto);
+        System.Threading.Tasks.Task RemoveSeasonAsync(SeasonDto playerDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISeasonService/UpdateOrders", ReplyAction="http://tempuri.org/ISeasonService/UpdateOrdersResponse")]
         void UpdateOrders(System.Collections.Generic.Dictionary<int, int> entities);
@@ -73,35 +75,35 @@ namespace My.CoachManager.Presentation.ServiceAgent.SeasonServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public My.CoachManager.Application.Dtos.Season.SeasonDto[] GetSeasons() {
+        public SeasonDto[] GetSeasons() {
             return base.Channel.GetSeasons();
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Season.SeasonDto[]> GetSeasonsAsync() {
+        public System.Threading.Tasks.Task<SeasonDto[]> GetSeasonsAsync() {
             return base.Channel.GetSeasonsAsync();
         }
         
-        public My.CoachManager.Application.Dtos.Season.SeasonDto GetSeasonById(int id) {
+        public SeasonDto GetSeasonById(int id) {
             return base.Channel.GetSeasonById(id);
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Season.SeasonDto> GetSeasonByIdAsync(int id) {
+        public System.Threading.Tasks.Task<SeasonDto> GetSeasonByIdAsync(int id) {
             return base.Channel.GetSeasonByIdAsync(id);
         }
         
-        public My.CoachManager.Application.Dtos.Season.SeasonDto SaveSeason(My.CoachManager.Application.Dtos.Season.SeasonDto playerDto) {
+        public SeasonDto SaveSeason(SeasonDto playerDto) {
             return base.Channel.SaveSeason(playerDto);
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Season.SeasonDto> SaveSeasonAsync(My.CoachManager.Application.Dtos.Season.SeasonDto playerDto) {
+        public System.Threading.Tasks.Task<SeasonDto> SaveSeasonAsync(SeasonDto playerDto) {
             return base.Channel.SaveSeasonAsync(playerDto);
         }
         
-        public void RemoveSeason(My.CoachManager.Application.Dtos.Season.SeasonDto playerDto) {
+        public void RemoveSeason(SeasonDto playerDto) {
             base.Channel.RemoveSeason(playerDto);
         }
         
-        public System.Threading.Tasks.Task RemoveSeasonAsync(My.CoachManager.Application.Dtos.Season.SeasonDto playerDto) {
+        public System.Threading.Tasks.Task RemoveSeasonAsync(SeasonDto playerDto) {
             return base.Channel.RemoveSeasonAsync(playerDto);
         }
         

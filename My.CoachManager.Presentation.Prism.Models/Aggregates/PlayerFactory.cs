@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using My.CoachManager.Application.Dtos;
-using My.CoachManager.Application.Dtos.Person;
 using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Extensions;
 

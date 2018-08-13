@@ -12,7 +12,6 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
     public class PlayersListViewModel : ListViewModel<PlayerModel, PlayerEditView, PlayerEditView>
     {
-
         #region Fields
 
         private readonly IPersonService _personService;
@@ -44,6 +43,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
             base.InitializeData();
 
             Title = PlayerResources.PlayersTitle;
+            Parameters = new PlayersListParametersViewModel();
         }
 
         #endregion Initialization

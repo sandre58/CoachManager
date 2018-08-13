@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using My.CoachManager.CrossCutting.Core.Enums;
 
 namespace My.CoachManager.Presentation.Prism.Core.Filters
 {

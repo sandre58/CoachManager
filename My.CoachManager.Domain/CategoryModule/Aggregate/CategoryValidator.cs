@@ -1,6 +1,6 @@
 ﻿using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
-using My.CoachManager.Domain.ReferenceModule.Aggregates;
+using My.CoachManager.Domain.ReferenceModule.Aggregate;
 
 namespace My.CoachManager.Domain.CategoryModule.Aggregate
 {

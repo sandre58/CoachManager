@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using My.CoachManager.Application.Dtos;
+
 namespace My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference {
     
     
@@ -16,28 +18,28 @@ namespace My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference {
     public interface ICategoryService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetCategories", ReplyAction="http://tempuri.org/ICategoryService/GetCategoriesResponse")]
-        My.CoachManager.Application.Dtos.Category.CategoryDto[] GetCategories();
+        CategoryDto[] GetCategories();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetCategories", ReplyAction="http://tempuri.org/ICategoryService/GetCategoriesResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Category.CategoryDto[]> GetCategoriesAsync();
+        System.Threading.Tasks.Task<CategoryDto[]> GetCategoriesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetCategoryById", ReplyAction="http://tempuri.org/ICategoryService/GetCategoryByIdResponse")]
-        My.CoachManager.Application.Dtos.Category.CategoryDto GetCategoryById(int id);
+        CategoryDto GetCategoryById(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetCategoryById", ReplyAction="http://tempuri.org/ICategoryService/GetCategoryByIdResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Category.CategoryDto> GetCategoryByIdAsync(int id);
+        System.Threading.Tasks.Task<CategoryDto> GetCategoryByIdAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/SaveCategory", ReplyAction="http://tempuri.org/ICategoryService/SaveCategoryResponse")]
-        My.CoachManager.Application.Dtos.Category.CategoryDto SaveCategory(My.CoachManager.Application.Dtos.Category.CategoryDto playerDto);
+        CategoryDto SaveCategory(CategoryDto playerDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/SaveCategory", ReplyAction="http://tempuri.org/ICategoryService/SaveCategoryResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Category.CategoryDto> SaveCategoryAsync(My.CoachManager.Application.Dtos.Category.CategoryDto playerDto);
+        System.Threading.Tasks.Task<CategoryDto> SaveCategoryAsync(CategoryDto playerDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/RemoveCategory", ReplyAction="http://tempuri.org/ICategoryService/RemoveCategoryResponse")]
-        void RemoveCategory(My.CoachManager.Application.Dtos.Category.CategoryDto playerDto);
+        void RemoveCategory(CategoryDto playerDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/RemoveCategory", ReplyAction="http://tempuri.org/ICategoryService/RemoveCategoryResponse")]
-        System.Threading.Tasks.Task RemoveCategoryAsync(My.CoachManager.Application.Dtos.Category.CategoryDto playerDto);
+        System.Threading.Tasks.Task RemoveCategoryAsync(CategoryDto playerDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/UpdateOrders", ReplyAction="http://tempuri.org/ICategoryService/UpdateOrdersResponse")]
         void UpdateOrders(System.Collections.Generic.Dictionary<int, int> entities);
@@ -73,35 +75,35 @@ namespace My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public My.CoachManager.Application.Dtos.Category.CategoryDto[] GetCategories() {
+        public CategoryDto[] GetCategories() {
             return base.Channel.GetCategories();
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Category.CategoryDto[]> GetCategoriesAsync() {
+        public System.Threading.Tasks.Task<CategoryDto[]> GetCategoriesAsync() {
             return base.Channel.GetCategoriesAsync();
         }
         
-        public My.CoachManager.Application.Dtos.Category.CategoryDto GetCategoryById(int id) {
+        public CategoryDto GetCategoryById(int id) {
             return base.Channel.GetCategoryById(id);
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Category.CategoryDto> GetCategoryByIdAsync(int id) {
+        public System.Threading.Tasks.Task<CategoryDto> GetCategoryByIdAsync(int id) {
             return base.Channel.GetCategoryByIdAsync(id);
         }
         
-        public My.CoachManager.Application.Dtos.Category.CategoryDto SaveCategory(My.CoachManager.Application.Dtos.Category.CategoryDto playerDto) {
+        public CategoryDto SaveCategory(CategoryDto playerDto) {
             return base.Channel.SaveCategory(playerDto);
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.Category.CategoryDto> SaveCategoryAsync(My.CoachManager.Application.Dtos.Category.CategoryDto playerDto) {
+        public System.Threading.Tasks.Task<CategoryDto> SaveCategoryAsync(CategoryDto playerDto) {
             return base.Channel.SaveCategoryAsync(playerDto);
         }
         
-        public void RemoveCategory(My.CoachManager.Application.Dtos.Category.CategoryDto playerDto) {
+        public void RemoveCategory(CategoryDto playerDto) {
             base.Channel.RemoveCategory(playerDto);
         }
         
-        public System.Threading.Tasks.Task RemoveCategoryAsync(My.CoachManager.Application.Dtos.Category.CategoryDto playerDto) {
+        public System.Threading.Tasks.Task RemoveCategoryAsync(CategoryDto playerDto) {
             return base.Channel.RemoveCategoryAsync(playerDto);
         }
         

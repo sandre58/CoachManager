@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using My.CoachManager.Application.Dtos.Roster;
+using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.AppModule.Services;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;

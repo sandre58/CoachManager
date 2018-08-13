@@ -1,4 +1,5 @@
-﻿using My.CoachManager.Application.Dtos.Person;
+﻿using System.Collections.Generic;
+using My.CoachManager.Application.Dtos;
 
 namespace My.CoachManager.Application.Services.AddressModule
 {
@@ -7,6 +8,12 @@ namespace My.CoachManager.Application.Services.AddressModule
     /// </summary>
     public interface IAddressAppService
     {
+        /// <summary>
+        /// Get all dtos list.
+        /// </summary>
+        /// <returns></returns>
+        IList<AddressDto> GetCities();
+
         /// <summary>
         /// Create a dto.
         /// </summary>

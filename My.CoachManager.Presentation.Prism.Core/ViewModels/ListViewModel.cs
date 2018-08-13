@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -12,27 +14,52 @@ using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public abstract class ListViewModel<TEntityModel, TEditView, TItemView> : NavigatableWorkspaceViewModel
+    public abstract class ListViewModel<TEntityModel, TEditView, TItemView> : NavigatableWorkspaceViewModel, IListViewModel<TEntityModel>
         where TEntityModel : class, IEntityModel, IModifiable, IValidatable, new()
         where TEditView : FrameworkElement
         where TItemView : FrameworkElement
     {
         #region Members
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets items.
+        /// </summary>
+        ICollection IListViewModel.Items
+        {
+            get => Items;
+            set => Items = new ObservableCollection<TEntityModel>((IEnumerable<TEntityModel>)value);
+        }
+
+        /// <inheritdoc />
         /// <summary>
         /// Gets or sets the items.
         /// </summary>
         public ObservableCollection<TEntityModel> Items { get; set; }
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
         public TEntityModel SelectedItem { get; set; }
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets or sets a value indicates the list is in read only.
         /// </summary>
         public bool IsReadOnly { get; set; }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets list parameters.
+        /// </summary>
+        public ListParametersViewModel Parameters { get; set; }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets list parameters.
+        /// </summary>
+        public ListFiltersViewModel Filters { get; set; }
 
         /// <summary>
         /// Gets or sets the add command.
