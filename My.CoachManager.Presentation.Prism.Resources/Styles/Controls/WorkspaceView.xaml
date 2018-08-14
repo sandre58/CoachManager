@@ -8,6 +8,7 @@
                     xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
                     xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:interfaces="clr-namespace:My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;assembly=My.CoachManager.Presentation.Prism.Core"
                     mc:Ignorable="d">
 
     <ResourceDictionary.MergedDictionaries>
@@ -22,57 +23,32 @@
         <ResourceDictionary Source="../Controls/DropDownButton.xaml" />
         <ResourceDictionary Source="../Controls/DataGrid.xaml" />
         <ResourceDictionary Source="../Controls/Badged.xaml" />
+        <ResourceDictionary Source="../Specific/Filter.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <DataTemplate x:Key="ListViewHeaderTemplate" DataType="{x:Type viewModels:IListViewModel}">
-        <!--<DockPanel Background="{DynamicResource DarkVariation3}" parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}">
-                <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="{StaticResource MediumMargin}">
-                    <TextBlock Text="{x:Static strings:ControlResources.SpeedSearch}" VerticalAlignment="Center" />
-                    <TextBox Text="{Binding SpeedFilter.Filter.Value, UpdateSourceTrigger=PropertyChanged}"
-                                 Style="{StaticResource TextBoxBaseStyle}"
-                                 Width="{StaticResource MediumWidth}"
-                                 CharacterCasing="Upper"
-                                 parameters:TextBoxParameters.UseFloatingWatermark="False"
-                                 parameters:TextBoxParameters.Watermark="{Binding SpeedFilter.Title}" />
-                    <Button Content="{x:Static strings:ControlResources.Clear}" Command="{Binding ResetFiltersCommand}" />
-                    <controls:Badged Badge="{Binding CountActiveFilters}">
-                        <Button Content="{x:Static strings:ControlResources.ShowFilters}" Command="{Binding ShowFiltersCommand}" Style="{StaticResource AccentButtonBaseStyle}" />
-                    </controls:Badged>
-                </WrapPanel>
-            </DockPanel>-->
-        <StackPanel Orientation="Vertical">
-            <DockPanel parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}" VerticalAlignment="Center"
-                       Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}">
+    <DataTemplate x:Key="ListViewHeaderTemplate" DataType="{x:Type interfaces:IListViewModel}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Margin="{StaticResource MediumMargin}">
+            <DockPanel parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}" VerticalAlignment="Center" >
 
                 <!-- Filters Parameters -->
-                <WrapPanel DockPanel.Dock="Left" VerticalAlignment="Center">
-                    <TextBlock Text="{x:Static strings:ControlResources.SpeedSearch}" VerticalAlignment="Center" />
-                    <TextBox Text="{Binding Filters.SpeedFilter.Value, UpdateSourceTrigger=PropertyChanged}"
-                         Style="{StaticResource TextBoxBaseStyle}"
-                         Width="{StaticResource MediumWidth}"
-                         CharacterCasing="Upper"
-                         parameters:TextBoxParameters.UseFloatingWatermark="False"
-                         parameters:TextBoxParameters.Watermark="{Binding Filters.SpeedFilter.Title}" />
+                <WrapPanel DockPanel.Dock="Left" VerticalAlignment="Center"
+                           Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}">
+                    <ContentControl Content="{Binding Filters.SpeedFilter}" Style="{StaticResource SpeedFilterStyle}" Focusable="False" />
                     <Button Content="{x:Static strings:ControlResources.Clear}" Style="{StaticResource SmallButtonBaseStyle}" Command="{Binding Filters.ResetFiltersCommand}" VerticalAlignment="Center" />
-                    <controls:Badged Badge="{Binding Filters.CountActiveFilters}" VerticalAlignment="Center">
-                        <Button Content="{x:Static strings:ControlResources.ShowFilters}" Command="{Binding Filters.ShowFiltersCommand}">
-                            <Button.Style>
-                                <Style TargetType="Button" BasedOn="{StaticResource SmallAccentButtonBaseStyle}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Filters.IsVisible}" Value="False">
-                                            <Setter Property="Content" Value="{x:Static strings:ControlResources.HideFilters}" />
-                                            <Setter Property="Command" Value="{Binding Filters.HideFiltersCommand}" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
+                    <controls:Badged x:Name="FiltersBadge" Badge="{Binding Filters.CountActiveFilters}" VerticalAlignment="Center">
+                            <Button x:Name="ShowHideFilterButton" Content="{x:Static strings:ControlResources.ShowFilters}" Command="{Binding Filters.ShowFiltersCommand}" Style="{StaticResource SmallButtonBaseStyle}" />
                     </controls:Badged>
                 </WrapPanel>
 
                 <Rectangle Width="1"
                        VerticalAlignment="Stretch"
                        parameters:PanelParameters.NotAffectMargin="True"
+                           Margin="{StaticResource LargeHorizontalMargin}"
                        Fill="{DynamicResource Control}"
                        IsHitTestVisible="False"
                        SnapsToDevicePixels="True"
@@ -80,74 +56,59 @@
                            Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}" />
 
                 <!-- Count Items -->
-                <TextBlock VerticalAlignment="Center"
+                    <TextBlock x:Name="CountTextBlock" VerticalAlignment="Center"
                        DockPanel.Dock="Left"
                        parameters:PanelParameters.NotAffectMargin="True"
                        Margin="{StaticResource DefaultMargin}"
                        FontSize="{StaticResource MediumFontSize}"
-                       DataContext="{Binding Items}"
-                       Text="{Binding Count, StringFormat={x:Static strings:ControlResources.CountItemsToUpper}}">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock" BasedOn="{StaticResource SmallHeaderStyle}">
-                            <Setter Property="Foreground" Value="{DynamicResource Positive}" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Count}" Value="0">
-                                    <Setter Property="Foreground" Value="{DynamicResource Negative}" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
+                       Text="{Binding Filters.Items.Count, StringFormat={x:Static strings:ControlResources.CountItemsToUpper}}"
+                           Foreground="{DynamicResource Positive}"
+                           Style="{StaticResource SmallHeaderStyle}"/>
 
                 <!-- Columns Parameters -->
                 <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right"
                        Visibility="{Binding Parameters, Converter={StaticResource NullToVisibilityConverter}}" VerticalAlignment="Center">
-                    <controls:DropDownMenuButton Style="{StaticResource HyperLinkDropDownMenuButtonStyle}"
+                        <controls:DropDownMenuButton Style="{StaticResource TextDropDownMenuButtonStyle}"
                                                      Content="{x:Static strings:ControlResources.ShowData}"
-                                                     ItemsSource="{Binding Parameters.PresetColumns.Keys}"
-                                             VerticalAlignment="Center">
+                                                     ItemsSource="{Binding Parameters.PresetColumns.Keys}">
                         <controls:DropDownMenuButton.ItemContainerStyle>
                             <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
                                 <Setter Property="Header" Value="{Binding Converter={StaticResource EnumToStringConverter}}" />
-                                <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, Path=DataContext.Parameters, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=ChangeDisplayedColumnsCommand}" />
+                                <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:DropDownMenuButton}, Path=DataContext.Parameters.ChangeDisplayedColumnsCommand}" />
                                 <Setter Property="CommandParameter" Value="{Binding }" />
                             </Style>
                         </controls:DropDownMenuButton.ItemContainerStyle>
                     </controls:DropDownMenuButton>
-                    <controls:DropDownMenuButton Style="{StaticResource HyperLinkDropDownMenuButtonStyle}"
+                        <controls:DropDownMenuButton Style="{StaticResource TextDropDownMenuButtonStyle}"
                                                      Content="{x:Static strings:ControlResources.ShowColumns}"
                                                      ItemsSource="{Binding ElementName=ListGrid, Path=Columns}"
                                                      ItemContainerStyle="{StaticResource ColumnContextMenuStyle}"
                                              VerticalAlignment="Center" />
                 </WrapPanel>
             </DockPanel>
+            </Grid>
 
             <!-- Filters Panel -->
-            <Grid x:Name="FiltersPanel" Background="{DynamicResource AccentControl}" parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}"
-                  Visibility="{Binding Filters.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel Grid.Row="1" Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}">
+            <Grid x:Name="FiltersPanel" Background="{DynamicResource LightHeaderBackground}" parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}"
+                  Visibility="{Binding Filters.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" MaxHeight="300">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <!--<DockPanel>
-                    -->
-                <!--<CheckBox Content="{x:Static strings:ControlResources.ShowOverview}" IsChecked="{Binding UpdateOnLive}" />-->
-                <!--
-                    <controls:DropDownMenuButton Style="{StaticResource HyperLinkDropDownMenuButtonStyle}"
+                    <controls:DropDownMenuButton Style="{StaticResource TextDropDownMenuButtonStyle}"
                                                  Content="{x:Static strings:ControlResources.AddCondition}"
-                                                 ItemsSource="{Binding AllowedFilters}"
-                                                 DockPanel.Dock="Right" HorizontalAlignment="Right">
-                        <controls:DropDownMenuButton.ItemContainerStyle>
-                            <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
-                                <Setter Property="Header" Value="{Binding Value}" />
-                                <Setter Property="Command" Value="{Binding DataContext.AddFilterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:DropDownMenuButton}}" />
-                                <Setter Property="CommandParameter" Value="{Binding Key}" />
-                            </Style>
-                        </controls:DropDownMenuButton.ItemContainerStyle>
-                    </controls:DropDownMenuButton>
-                </DockPanel>-->
+                                                 ItemsSource="{Binding Filters.AllowedFilters}">
+                    <controls:DropDownMenuButton.ItemContainerStyle>
+                        <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
+                            <Setter Property="Header" Value="{Binding Item2}" />
+                            <Setter Property="Command" Value="{Binding DataContext.Filters.AddFilterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:DropDownMenuButton}}" />
+                            <Setter Property="CommandParameter" Value="{Binding }" />
+                        </Style>
+                    </controls:DropDownMenuButton.ItemContainerStyle>
+                </controls:DropDownMenuButton>
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                    <ItemsControl ItemsSource="{Binding Filters.Filters}">
+                    <ItemsControl ItemsSource="{Binding Filters.Filters}" Focusable="False">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Vertical" />
@@ -156,7 +117,23 @@
                     </ItemsControl>
                 </ScrollViewer>
             </Grid>
-        </StackPanel>
+            </StackPanel>
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Filters.IsVisible, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                <Setter TargetName="ShowHideFilterButton" Property="Content" Value="{x:Static strings:ControlResources.HideFilters}" />
+                <Setter TargetName="ShowHideFilterButton" Property="Command" Value="{Binding Filters.HideFiltersCommand}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Filters.Items.Count}" Value="0">
+                <Setter TargetName="CountTextBlock" Property="Foreground" Value="{DynamicResource Negative}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Filters.CountActiveFilters}" Value="0">
+                <Setter TargetName="FiltersBadge" Property="BadgeBackground" Value="{DynamicResource Disabled}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Filters}" Value="{x:Null}">
+                <Setter TargetName="CountTextBlock" Property="Text" Value="{Binding Items.Count, StringFormat={x:Static strings:ControlResources.CountItemsToUpper}}" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
     </DataTemplate>
 
     <Style TargetType="{x:Type controls:WorkspaceView}">
@@ -169,7 +146,7 @@
         <Setter Property="MinHeight" Value="320" />
         <Setter Property="HeaderHeight" Value="{x:Static system:Double.NaN}" />
         <Setter Property="UseLayoutRounding" Value="True" />
-        <Setter Property="HeaderBackground" Value="{DynamicResource LightHeaderBackground}" />
+        <Setter Property="HeaderBackground" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="ApplicationBarStyle" Value="{StaticResource {x:Type controls:ApplicationBar}}" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
@@ -187,7 +164,7 @@
                         <!-- Header -->
                         <Grid Grid.Row="0" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HeaderHeight}" Visibility="{TemplateBinding HeaderTemplate, Converter={StaticResource NullToVisibilityConverter}}">
                             <Border Background="{TemplateBinding HeaderBackground}" Focusable="False">
-                                <ContentControl Margin="{StaticResource MediumMargin}" Content="{Binding}" ContentTemplate="{TemplateBinding HeaderTemplate}" VerticalAlignment="Center" />
+                                <ContentControl Content="{Binding}" ContentTemplate="{TemplateBinding HeaderTemplate}" VerticalAlignment="Center" />
                             </Border>
                         </Grid>
 
@@ -238,7 +215,7 @@
     </Style>
 
     <!-- For dialog window -->
-    <DataTemplate x:Key="EditDialogViewHeaderTemplate" DataType="{x:Type viewModels:IEditViewModel}">
+    <DataTemplate x:Key="EditDialogViewHeaderTemplate" DataType="{x:Type interfaces:IEditViewModel}">
         <Grid>
 
             <Grid.Resources>
@@ -294,7 +271,6 @@
 
     <Style x:Key="WorkspaceDialogViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource {x:Type controls:WorkspaceView}}">
         <Setter Property="HeaderHeight" Value="70" />
-        <Setter Property="HeaderBackground" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="HeaderTemplate" Value="{StaticResource EditDialogViewHeaderTemplate}" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
     </Style>

@@ -19,7 +19,7 @@
         WindowState="Maximized"
                          ShowIconOnTitleBar="False"
                          ShowTitleOnTitleBar="False"
-        Style="{StaticResource ModernWindowStyle}" IsTitleOverlay="True">
+        Style="{StaticResource ModernWindowStyle}" IsTitleOverlay="True" Focusable="False">
 
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding WorkspaceDialogInteractionRequest}">
@@ -57,7 +57,7 @@
 
             <!--Header -->
             <Border Focusable="False" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Height="100"
-                    Background="{DynamicResource DarkAccent}">
+                    Background="{DynamicResource Accent}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -108,7 +108,7 @@
                         <Grid>
                             <Polygon  
                                      Points="0,0 0,1 1,0"  
-                                     Fill="{DynamicResource DarkAccent}"  
+                                     Fill="{DynamicResource Accent}"  
                                      Width="80"  
                                      Height="80"  
                                 HorizontalAlignment="Left"

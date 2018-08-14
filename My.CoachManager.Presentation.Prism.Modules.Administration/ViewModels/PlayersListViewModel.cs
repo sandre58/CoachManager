@@ -6,6 +6,7 @@ using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Resources;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Views;
+using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
@@ -15,6 +16,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         #region Fields
 
         private readonly IPersonService _personService;
+        private readonly ICategoryService _categoryService;
 
         #endregion Fields
 
@@ -23,9 +25,10 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="CategoriesListViewModel"/>.
         /// </summary>
-        public PlayersListViewModel(IPersonService personService)
+        public PlayersListViewModel(IPersonService personService, ICategoryService categoryService)
         {
             _personService = personService;
+            _categoryService = categoryService;
         }
 
         #endregion Constructors
@@ -43,7 +46,6 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
             base.InitializeData();
 
             Title = PlayerResources.PlayersTitle;
-            Parameters = new PlayersListParametersViewModel();
         }
 
         #endregion Initialization
@@ -67,6 +69,16 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
             var result = _personService.GetPlayers();
 
             Items = result.Select(PlayerFactory.Get).ToObservableCollection();
+        }
+
+        protected override void InitializeDataCore()
+        {
+            base.InitializeDataCore();
+
+            var categories = _categoryService.GetCategories().Select(CategoryFactory.Get);
+            var countries = _personService.GetCountries().Select(CountryFactory.Get);
+            Filters = new PlayersListFiltersViewModel(categories, countries);
+            Parameters = new PlayersListParametersViewModel();
         }
 
         #endregion Data

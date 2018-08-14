@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
-using My.CoachManager.Presentation.Prism.Core.Filters;
+using My.CoachManager.Presentation.Prism.Core.Models;
+using My.CoachManager.Presentation.Prism.Core.Models.Filters;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
@@ -9,16 +11,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
     /// Provides members and properties to manage a filter.
     /// </summary>
     [Serializable]
-    public class FilterViewModel : ScreenViewModel, IFilterViewModel, IWorkspaceViewModel, ISerializable
+    public class FilterViewModel : ModelBase, IFilterViewModel, ISerializable
     {
-        #region Fields
-
-        private string _title;
-        private bool _isEnabled;
-        private LogicalOperator _operator;
-        private IFilter _filter;
-
-        #endregion Fields
 
         #region Constructors
 
@@ -29,6 +23,10 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             Operator = logicalOperator;
             Filter = filter;
+            Filter.PropertyChanged += delegate
+            {
+                RaisePropertyChanged(() => Filter);
+            };
 
             IsEnabled = true;
             Title = title;
@@ -45,51 +43,30 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         #region Members
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets or sets the operator.
         /// </summary>
         /// <value>The property info.</value>
-        public LogicalOperator Operator
-        {
-            get { return _operator; }
-            set { SetProperty(ref _operator, value); }
-        }
+        public LogicalOperator Operator { get; set; }
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets or sets the filter.
         /// </summary>
-        public IFilter Filter
-        {
-            get { return _filter; }
-            private set
-            {
-                SetProperty(ref _filter, value, () =>
-                {
-                    if (_filter != null)
-                    {
-                        _filter.PropertyChanged += (sender, args) => OnPropertyChanged(args);
-                    }
-                });
-            }
-        }
+        public IFilter Filter { get; set; }
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets or sets a value indicates if filter is enabled.
         /// </summary>
-        public bool IsEnabled
-        {
-            get { return _isEnabled; }
-            set { SetProperty(ref _isEnabled, value); }
-        }
+        public bool IsEnabled { get; set; }
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
+        public string Title { get; set; }
 
         #endregion Members
 
@@ -131,9 +108,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         public override bool Equals(object obj)
         {
-            var o = obj as FilterViewModel;
-
-            if (Filter == null || o == null || GetType() != obj.GetType())
+            if (Filter == null || !(obj is FilterViewModel o) || GetType() != obj.GetType())
             {
                 return false;
             }

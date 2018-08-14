@@ -5,6 +5,7 @@ using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Events;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;

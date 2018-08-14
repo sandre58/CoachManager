@@ -379,8 +379,7 @@ typeof(DataGridParameters));
         /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private static void OnDataGridMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DataGrid dataGrid = sender as DataGrid;
-            if ((dataGrid != null) && (dataGrid.SelectedItems.Count > 0))
+            if ((sender is DataGrid dataGrid) && (dataGrid.SelectedItems.Count > 0))
             {
                 foreach (object selectedItem in dataGrid.SelectedItems.Cast<object>().ToList())
                 {

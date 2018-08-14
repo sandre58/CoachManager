@@ -185,22 +185,13 @@
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                 Padding="{TemplateBinding Padding}"
                                 Content="{Binding Content, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                Focusable="{TemplateBinding Focusable}"
+                                Focusable="False"
                                 Foreground="{TemplateBinding Foreground}"
                                 BorderBrush="{TemplateBinding Foreground}"
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 FontSize="{TemplateBinding FontSize}"
                                 FontWeight="{TemplateBinding FontWeight}"
-                                parameters:ControlParameters.MouseOverForeground="Yellow"
-                                parameters:ControlParameters.MouseOverBorderBrush="{TemplateBinding parameters:ControlParameters.MouseOverBorderBrush}"
-                                parameters:ControlParameters.MouseOverBackground="{TemplateBinding parameters:ControlParameters.MouseOverBackground}"
-                                parameters:ControlParameters.PressedForeground="{TemplateBinding parameters:ControlParameters.PressedForeground}"
-                                parameters:ControlParameters.PressedBorderBrush="{TemplateBinding parameters:ControlParameters.PressedBorderBrush}"
-                                parameters:ControlParameters.PressedBackground="{TemplateBinding parameters:ControlParameters.PressedBackground}"
-                                parameters:ControlParameters.FocusForeground="{TemplateBinding parameters:ControlParameters.FocusForeground}"
-                                parameters:ControlParameters.FocusBorderBrush="{TemplateBinding parameters:ControlParameters.FocusBorderBrush}"
-                                parameters:ControlParameters.FocusBackground="{TemplateBinding parameters:ControlParameters.FocusBackground}"
                                 parameters:ControlParameters.ContentCharacterCasing="{TemplateBinding parameters:ControlParameters.ContentCharacterCasing}">
                         <Button.ContentTemplate>
                             <DataTemplate>
@@ -242,6 +233,16 @@
                         </Button.ContextMenu>
                     </Button>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="PART_Button" Property="Background" Value="{Binding (parameters:ControlParameters.FocusBackground), RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="PART_Button" Property="BorderBrush" Value="{Binding (parameters:ControlParameters.FocusBorderBrush), RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="PART_Button" Property="Foreground" Value="{Binding (parameters:ControlParameters.FocusForeground), RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_Button" Property="Background" Value="{Binding (parameters:ControlParameters.MouseOverBackground), RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="PART_Button" Property="BorderBrush" Value="{Binding (parameters:ControlParameters.MouseOverBorderBrush), RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="PART_Button" Property="Foreground" Value="{Binding (parameters:ControlParameters.MouseOverForeground), RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Trigger>
                         <Trigger Property="IsExpanded" Value="True">
                             <Setter TargetName="PART_Button" Property="Background" Value="{Binding (parameters:ControlParameters.FocusBackground), RelativeSource={RelativeSource TemplatedParent}}" />
                             <Setter TargetName="PART_Button" Property="BorderBrush" Value="{Binding (parameters:ControlParameters.FocusBorderBrush), RelativeSource={RelativeSource TemplatedParent}}" />
@@ -256,7 +257,7 @@
     <Style x:Key="TextDropDownMenuButtonStyle" TargetType="{x:Type controls:DropDownMenuButton}" BasedOn="{StaticResource {x:Type controls:DropDownMenuButton}}">
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Foreground" Value="{DynamicResource DarkControl}" />
+        <Setter Property="Foreground" Value="{DynamicResource Dark}" />
         <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource Transparent}" />
         <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource DarkControlMouseOver}" />
         <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource Transparent}" />

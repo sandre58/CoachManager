@@ -305,6 +305,7 @@
     <Compile Include="Enums\LicenseState.cs" />
     <Compile Include="Enums\Laterality.cs" />
     <Compile Include="Enums\GenderType.cs" />
+    <Compile Include="Enums\LogicalOperator.cs" />
     <Compile Include="Enums\StringOperator.cs" />
     <Compile Include="Exceptions\BusinessException.cs" />
     <Compile Include="Exceptions\ConcurrencyException.cs" />

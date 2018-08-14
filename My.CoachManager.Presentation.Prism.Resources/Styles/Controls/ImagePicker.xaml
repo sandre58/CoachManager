@@ -15,6 +15,7 @@
         <Setter Property="Background" Value="{DynamicResource Control}" />
         <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
         <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Bottom" />

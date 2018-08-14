@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using My.CoachManager.Presentation.Prism.Core.Manager;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels

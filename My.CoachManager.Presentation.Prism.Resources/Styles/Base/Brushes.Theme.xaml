@@ -67,6 +67,9 @@
     <SolidColorBrush x:Key="AccentControl" Color="{DynamicResource LightVariation2Color}" presentationOptions:Freeze="true" />
     <SolidColorBrush x:Key="AccentControlMouseOver" Color="{DynamicResource LightVariation3Color}" presentationOptions:Freeze="true" />
     <SolidColorBrush x:Key="AccentControlPressed" Color="{DynamicResource LightVariation4Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="DarkAccentControl" Color="{DynamicResource LightVariation5Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="DarkAccentControlMouseOver" Color="{DynamicResource LightVariation7Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="DarkAccentControlPressed" Color="{DynamicResource LightVariation9Color}" presentationOptions:Freeze="true" />
     <SolidColorBrush x:Key="LightControl" Color="{DynamicResource Variation1Color}" presentationOptions:Freeze="true" />
     <SolidColorBrush x:Key="LightControlMouseOver" Color="{DynamicResource Variation2Color}" presentationOptions:Freeze="true" />
     <SolidColorBrush x:Key="LightControlPressed" Color="{DynamicResource Variation3Color}" presentationOptions:Freeze="true" />

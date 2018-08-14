@@ -3,13 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Core.Exceptions;
+using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Models;
+using My.CoachManager.Presentation.Prism.Core.Models.Filters;
 using My.CoachManager.Presentation.Prism.Core.Resources;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
@@ -57,9 +61,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         /// <inheritdoc />
         /// <summary>
-        /// Gets or sets list parameters.
+        /// Gets or sets list filters parameters.
         /// </summary>
-        public ListFiltersViewModel Filters { get; set; }
+        public IListFiltersViewModel Filters { get; set; }
 
         /// <summary>
         /// Gets or sets the add command.
@@ -123,11 +127,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             base.InitializeShortcuts();
 
             KeyboardShortcuts.Add(new KeyBinding(AddCommand, Key.N, ModifierKeys.Control));
-            KeyboardShortcuts.Add(new KeyBinding(OpenCommand, Key.Enter, ModifierKeys.None));
-            KeyboardShortcuts.Add(new KeyBinding(EditCommand, Key.F2, ModifierKeys.None));
-            KeyboardShortcuts.Add(new KeyBinding(RemoveCommand, Key.Delete, ModifierKeys.None));
         }
-
+        
         #endregion Initialization
 
         #region Open
@@ -302,6 +303,18 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             EditCommand.RaiseCanExecuteChanged();
             RemoveCommand.RaiseCanExecuteChanged();
         }
+
+        /// <summary>
+        /// Calls when selected item change.
+        /// </summary>
+        protected virtual void OnItemsChanged()
+        {
+            if (Filters != null)
+            {
+                Filters.Items = new FilteredCollectionView<TEntityModel>(Items.ToObservableCollection());
+            }
+        }
+
 
         #endregion Properties Changed
 

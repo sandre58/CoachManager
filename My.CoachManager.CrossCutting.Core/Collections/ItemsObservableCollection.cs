@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -65,6 +64,7 @@ namespace My.CoachManager.CrossCutting.Core.Collections
         private void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             var index = IndexOf((T)sender);
+            if (index == -1) return;
             var args = new NotifyCollectionChangedEventArgs(
                 NotifyCollectionChangedAction.Replace,
                 sender,

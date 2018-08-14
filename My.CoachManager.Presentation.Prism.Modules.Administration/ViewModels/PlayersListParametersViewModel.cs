@@ -27,6 +27,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
             AddPresetColumns(PresetColumnsType.GeneralInformations, GeneralInformationsColumns);
             AddPresetColumns(PresetColumnsType.ClubInformations, ClubInformationsColumns);
             AddPresetColumns(PresetColumnsType.BodyInformations, BodyInformationsColumns);
+
+            ChangeDisplayedColumns(PresetColumnsType.GeneralInformations);
         }
 
         #endregion Initialisation

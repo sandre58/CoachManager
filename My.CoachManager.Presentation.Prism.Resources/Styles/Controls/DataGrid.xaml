@@ -345,17 +345,6 @@
                         </SelectiveScrollingGrid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsFocused" Value="True">
-                        </Trigger>
-                        <Trigger Property="IsFocused" Value="False">
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource LightControlMouseOver}" />
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource Accent}" />
-                            <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
-                        </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="{DynamicResource DisabledOpacity}" />
                         </Trigger>
@@ -492,14 +481,21 @@
     <Style TargetType="{x:Type DataGridCellsPresenter}">
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
     </Style>
 
     <Style x:Key="DataGridCellStyle" TargetType="{x:Type DataGridCell}">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+        <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
+        <!--<Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
         <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -513,21 +509,43 @@
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
-        </Setter>
+        </Setter>-->
         <Style.Triggers>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True" />
-                    <Condition Binding="{Binding Path=SelectionUnit, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="Cell" />
+                    <Condition Binding="{Binding Path=SelectionUnit, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="FullRow" />
                 </MultiDataTrigger.Conditions>
                 <MultiDataTrigger.Setters>
-                    <Setter Property="Background" Value="{DynamicResource LightControlMouseOver}" />
+                    <Setter Property="Focusable" Value="False" />
                 </MultiDataTrigger.Setters>
             </MultiDataTrigger>
-            <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{DynamicResource Accent}" />
-                <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
-            </Trigger>
+            <!--
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridRow}, Path=IsSelected}" Value="True" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridRow}, Path=IsFocused}" Value="True" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=IsKeyboardFocusWithin}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Background" Value="{DynamicResource Accent}" />
+                    <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridRow}, Path=IsSelected}" Value="True" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridRow}, Path=IsFocused}" Value="False" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=IsKeyboardFocusWithin}" Value="False" />
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{DynamicResource AccentColor}" Opacity="0.5"/>
+                        </Setter.Value>
+                        </Setter>
+                    <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>-->
         </Style.Triggers>
     </Style>
 
@@ -578,6 +596,7 @@
     <Style x:Key="DataGridHyperlinkColumnElementStyle" BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
         <Style.Resources>
             <Style BasedOn="{StaticResource {x:Type Hyperlink}}" TargetType="{x:Type Hyperlink}">
+                <Setter Property="Focusable" Value="False" />
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True">
                         <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
@@ -798,7 +817,16 @@
     </Style>
 
     <Style x:Key="ItemsDataGridStyle" TargetType="{x:Type DataGrid}" BasedOn="{StaticResource {x:Type DataGrid}}">
-        <Setter Property="parameters:DataGridParameters.DoubleClickRowCommand" Value="{Binding OpenCommand}" />
+        <!--<Setter Property="parameters:DataGridParameters.DoubleClickRowCommand" Value="{Binding OpenCommand}" />-->
+        <Setter Property="parameters:UiElementParameters.InputBindings">
+            <Setter.Value>
+                <InputBindingCollection>
+                <KeyBinding Key="Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                <KeyBinding Key="Enter" Command="{Binding OpenCommand}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                    <KeyBinding Key="F2" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                </InputBindingCollection>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="OrderItemsDataGridStyle" TargetType="{x:Type DataGrid}" BasedOn="{StaticResource ItemsDataGridStyle}">

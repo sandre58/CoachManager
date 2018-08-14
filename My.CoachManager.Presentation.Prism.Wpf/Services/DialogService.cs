@@ -7,6 +7,7 @@ using My.CoachManager.Presentation.Prism.Core.Events;
 using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using My.CoachManager.Presentation.Prism.Wpf.Views;
 using Prism.Events;

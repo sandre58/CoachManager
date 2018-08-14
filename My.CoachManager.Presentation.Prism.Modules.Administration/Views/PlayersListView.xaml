@@ -25,7 +25,7 @@
             </Grid.RowDefinitions>
 
             <DataGrid Grid.Row="1" x:Name="ListGrid"
-                      ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"
+                      ItemsSource="{Binding Filters.Items}" SelectedItem="{Binding SelectedItem}"
                       Style="{StaticResource ItemsDataGridStyle}"
                       FrozenColumnCount="2"
                       parameters:DataGridParameters.VisibleColumns="{Binding Parameters.DisplayedColumns}">

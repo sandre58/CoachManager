@@ -7,6 +7,7 @@ using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Models;
 using My.CoachManager.Presentation.Prism.Core.Resources;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
@@ -163,7 +164,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
                 foreach (var error in Item.GetErrors())
                 {
-                    OnBusinessExceptionOccured(new BusinessException(error.ToString()));
+                    OnBusinessExceptionOccured(new BusinessException(error));
                 }
             }
         }

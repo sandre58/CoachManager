@@ -9,6 +9,8 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
     /// </summary>
     public static class UiElementParameters
     {
+        #region IsBubblingMouseWheelEvents
+
         public static readonly DependencyProperty IsBubblingMouseWheelEventsProperty = DependencyProperty.RegisterAttached(
             "IsBubblingMouseWheelEvents",
             typeof(bool),
@@ -81,5 +83,64 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
         }
 
         #endregion Private Static Methods
+
+        #endregion
+
+        #region InpuBindings
+
+            public static readonly DependencyProperty InputBindingsProperty = DependencyProperty.RegisterAttached(
+                "InputBindings",
+                typeof(InputBindingCollection),
+                typeof(UiElementParameters),
+                new PropertyMetadata(new InputBindingCollection(), OnInputBindingsChanged));
+
+            #region Public Static Methods
+
+            /// <summary>
+            /// Gets whether the <see cref="UIElement"/> is bubbling mouse wheel events to parent controls.
+            /// Useful when you want to put a <see cref="ScrollViewer"/> around a control whose template also contains a <see cref="ScrollViewer"/>,
+            /// this usually stops the scroll wheel from working.
+            /// </summary>
+            /// <param name="uiElement">The UI element.</param>
+            /// <returns><c>true</c> if the events are being bubbled, otherwise <c>false</c>.</returns>
+            public static bool GetInputBindings(UIElement uiElement)
+            {
+                return (bool)uiElement.GetValue(InputBindingsProperty);
+            }
+
+            /// <summary>
+            /// Sets whether the <see cref="UIElement" /> is bubbling mouse wheel events to parent controls.
+            /// Useful when you want to put a <see cref="ScrollViewer" /> around a control whose template also contains a <see cref="ScrollViewer" />,
+            /// this usually stops the scroll wheel from working.
+            /// </summary>
+            /// <param name="uiElement">The UI element.</param>
+            /// <param name="value">if set to <c>true</c> <c>true</c> events are being bubbled.</param>
+            public static void SetInputBindings(UIElement uiElement, InputBindingCollection value)
+            {
+                uiElement.SetValue(InputBindingsProperty, value);
+            }
+
+            #endregion Public Static Methods
+
+            #region Private Static Methods
+
+            /// <summary>
+            /// Called when the bubbling mouse wheel events property is changed.
+            /// </summary>
+            /// <param name="dependencyObject">The dependency object.</param>
+            /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+            private static void OnInputBindingsChanged(
+                DependencyObject dependencyObject,
+                DependencyPropertyChangedEventArgs e)
+            {
+                if (!(dependencyObject is UIElement element)) return;
+                //element.InputBindings.Clear();
+                element.InputBindings.AddRange((InputBindingCollection)e.NewValue);
+        }
+
+            #endregion Private Static Methods
+
+            #endregion
+
+        }
     }
-}

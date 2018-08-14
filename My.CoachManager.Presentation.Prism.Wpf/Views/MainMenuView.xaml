@@ -49,13 +49,12 @@
                        RenderOptions.BitmapScalingMode="Fant" />
 
                 <!-- Navigation Region -->
-                <ItemsControl Grid.Row="2" Grid.Column="0" prism:RegionManager.RegionName="{x:Static core:RegionNames.NavigationRegion}" />
+                <ItemsControl Grid.Row="2" Grid.Column="0" prism:RegionManager.RegionName="{x:Static core:RegionNames.NavigationRegion}" Focusable="False" />
             </Grid>
         </Border>
         <ToggleButton
                       IsThreeState="False"
                       IsChecked="{Binding IsMenuExpended}"
-                      Focusable="False"
                       Style="{StaticResource MainMenuToggleButtonStyle}"
                       Width="30" Height="30"
                       VerticalAlignment="Bottom"

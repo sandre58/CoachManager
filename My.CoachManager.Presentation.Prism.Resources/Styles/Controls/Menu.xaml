@@ -25,19 +25,6 @@
     </Storyboard>
 
     <!--Toggle Button -->
-    <Style x:Key="NavigationExpanderToggleButtonFocusVisualStyle" TargetType="{x:Type ToggleButton}">
-        <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Border>
-                        <Rectangle Margin="0" SnapsToDevicePixels="True" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 2" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <Style x:Key="NavigationExpanderToggleButtonStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
@@ -129,12 +116,12 @@
                                           ContentTemplate="{TemplateBinding HeaderTemplate}"
                                           Content="{TemplateBinding Header}"
                                           DockPanel.Dock="Top"
+                              Focusable="False"
                                           Foreground="{TemplateBinding Foreground}"
                                           FontWeight="{TemplateBinding FontWeight}" FontStyle="{TemplateBinding FontStyle}" FontStretch="{TemplateBinding FontStretch}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}"
                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                           IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                          MinWidth="0" MinHeight="0" Height="{DynamicResource LargeHeight}"
-                              FocusVisualStyle="{StaticResource NavigationExpanderToggleButtonFocusVisualStyle}" Style="{StaticResource NavigationExpanderToggleButtonStyle}">
+                                          MinWidth="0" MinHeight="0" Height="{DynamicResource LargeHeight}" Style="{StaticResource NavigationExpanderToggleButtonStyle}">
                 </ToggleButton>
                 <ContentPresenter x:Name="ExpandSite" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" DockPanel.Dock="Bottom" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                     <ContentPresenter.LayoutTransform>

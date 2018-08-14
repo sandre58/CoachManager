@@ -4,6 +4,7 @@ using System.Windows.Interactivity;
 using My.CoachManager.Presentation.Prism.Controls;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Interactivity.InteractionRequest;
 
 namespace My.CoachManager.Presentation.Prism.Wpf.Interactivity

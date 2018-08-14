@@ -14,18 +14,20 @@
     <Style x:Key="CommandButtonBaseStyle" TargetType="{x:Type controls:CommandButton}">
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
-        <Setter Property="Background" Value="{DynamicResource Light}" />
-        <Setter Property="parameters:ControlParameters.Foreground" Value="{DynamicResource DarkControlMouseOver}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource DarkControlMouseOver}" />
-        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource DarkControlMouseOver}" />
+        <Setter Property="Background" Value="{DynamicResource Transparent}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Dark}" />
+        <Setter Property="parameters:ControlParameters.Foreground" Value="{DynamicResource DarkControlPressed}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource LightControlMouseOver}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource Dark}" />
         <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Transparent}" />
         <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource DarkControlMouseOver}" />
-        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Light}" />
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource DarkControlPressed}" />
         <Setter Property="ButtonDiameter" Value="{DynamicResource LargeDiameter}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
@@ -130,46 +132,21 @@
     </Style>
 
     <Style x:Key="AccentCommandButtonStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonBaseStyle}">
-        <Setter Property="Background" Value="{DynamicResource Transparent}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DarkAccentControl}" />
         <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
-        <Setter Property="parameters:ControlParameters.Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush, Mode=OneWay, Converter={StaticResource SolidColorBrushToBrushConverter}}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource Transparent}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=BorderBrush, Mode=OneWay, Converter={StaticResource BrushToColorConverter}}" Opacity="0.6" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="parameters:ControlParameters.MouseOverForeground">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=BorderBrush, Mode=OneWay, Converter={StaticResource BrushToColorConverter}}" Opacity="0.6" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="parameters:ControlParameters.Foreground" Value="{DynamicResource DarkAccentControlMouseOver}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource AccentControlMouseOver}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource AccentForeground}" />
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource SolidColorBrushToBrushConverter}, Path=BorderBrush}" />
-        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource SolidColorBrushToBrushConverter}, Path=BorderBrush}" />
-        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Transparent}" />
-        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource SolidColorBrushToBrushConverter}, Path=BorderBrush}" />
-        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay, Path=(parameters:ControlParameters.Foreground)}" />
-        <Style.Triggers>
-            <DataTrigger Value="True">
-                <DataTrigger.Binding>
-                    <Binding RelativeSource="{RelativeSource Self}" Path="BorderBrush" Converter="{StaticResource NotEqualsConverter}">
-                        <Binding.ConverterParameter>
-                            <SolidColorBrush Color="White" />
-                        </Binding.ConverterParameter>
-                    </Binding>
-                </DataTrigger.Binding>
-                <Setter Property="parameters:ControlParameters.PressedForeground" Value="White" />
-            </DataTrigger>
-        </Style.Triggers>
+        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource DarkAccentControlMouseOver}" />
     </Style>
 
-    <Style x:Key="CommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource AccentCommandButtonStyle}">
+    <Style x:Key="CommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonBaseStyle}">
         <Setter Property="ButtonDiameter" Value="{DynamicResource VeryLargeDiameter}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource NormalForeground}" />
-        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ApplicationBar}, Path=Foreground}" />
-        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource Light}" />
     </Style>
 
     <Style x:Key="BackCommandButtonBaseStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource AccentCommandButtonStyle}">

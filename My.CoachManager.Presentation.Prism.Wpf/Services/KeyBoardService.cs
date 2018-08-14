@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Presentation.Prism.Controls.Helpers;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.Prism.Wpf.Views;
 using SplashScreen = My.CoachManager.Presentation.Prism.Wpf.Views.SplashScreen;
@@ -199,46 +198,49 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// <param name="e">The <see cref="KeyEventArgs" /> instance containing the event data.</param>
         private void OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
-            // Not intercept the Esc key for toogle  Menu
-            if (NotInterceptControl.Any(x => sender.GetType() == x))
-            {
-                return;
-            }
+                // Not intercept the Esc key for toogle  Menu
+                //if (NotInterceptControl.Any(x => sender.GetType() == x))
+                //{
+                //    return;
+                //}
 
-            try
-            {
-                // WorkspaceDialog Bindings
-                if (!WorkspaceDialogBindingsIsSuspended)
-                {
-                    var keyBinding = _workspaceDialogBindings.FirstOrDefault(w => w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
-                    if (keyBinding != null)
-                    {
-                        keyBinding.Command.Execute(keyBinding.CommandParameter);
-                        return;
-                    }
-                }
+                //try
+                //{
+                //    // WorkspaceDialog Bindings
+                //    if (!WorkspaceDialogBindingsIsSuspended)
+                //    {
+                //        var keyBinding = _workspaceDialogBindings.FirstOrDefault(w =>
+                //            w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
+                //        if (keyBinding != null)
+                //        {
+                //            keyBinding.Command.Execute(keyBinding.CommandParameter);
+                //            return;
+                //        }
+                //    }
 
-                // Workspace Bindings
-                if (!WorkspaceBindingsIsSuspended)
-                {
-                    var keyBinding = _workspaceBindings.FirstOrDefault(w => w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
-                    if (keyBinding != null)
-                    {
-                        keyBinding.Command.Execute(keyBinding.CommandParameter);
-                        return;
-                    }
-                }
+                //    // Workspace Bindings
+                //    if (!WorkspaceBindingsIsSuspended)
+                //    {
+                //        var keyBinding =
+                //            _workspaceBindings.FirstOrDefault(w => w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
+                //        if (keyBinding != null)
+                //        {
+                //            keyBinding.Command.Execute(keyBinding.CommandParameter);
+                //            return;
+                //        }
+                //    }
 
-                // Global Bindings
-                if (GlobalBindingsIsSuspended) return;
+                //    // Global Bindings
+                //    if (GlobalBindingsIsSuspended) return;
 
-                var keyBinding1 = _globalBindings.FirstOrDefault(w => w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
-                keyBinding1?.Command.Execute(keyBinding1.CommandParameter);
-            }
-            catch (Exception exception)
-            {
-                ServiceLocator.Current.TryResolve<ILogger>().Error(exception);
-            }
+                //    var keyBinding1 =
+                //        _globalBindings.FirstOrDefault(w => w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
+                //    keyBinding1?.Command.Execute(keyBinding1.CommandParameter);
+                //}
+                //catch (Exception exception)
+                //{
+                //    ServiceLocator.Current.TryResolve<ILogger>().Error(exception);
+                //}
         }
     }
 }

@@ -1,32 +1,51 @@
-﻿using My.CoachManager.CrossCutting.Core.Resources.Entities;
-using My.CoachManager.Presentation.Prism.Core.Filters;
+﻿using System.Collections.Generic;
+using My.CoachManager.CrossCutting.Core.Enums;
+using My.CoachManager.CrossCutting.Core.Resources.Entities;
+using My.CoachManager.Presentation.Prism.Core.Models.Filters;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
+using My.CoachManager.Presentation.Prism.Models;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
     public class PlayersListFiltersViewModel : ListFiltersViewModel
     {
+
         #region Initialisation
 
         /// <summary>
         /// Initialise a new instance of <see cref="PlayersListFiltersViewModel"/>.
         /// </summary>
-        public PlayersListFiltersViewModel()
+        public PlayersListFiltersViewModel(IEnumerable<CategoryModel> categories, IEnumerable<CountryModel> countries)
         {
             SpeedFilter = new FilterViewModel(new StringFilter("FullName"), PersonResources.FullName, LogicalOperator.Or);
 
-            AddAllowedFilter("FullName", PersonResources.FullName);
-            AddAllowedFilter("CategoryId", PlayerResources.Category);
-            AddAllowedFilter("Number", PlayerResources.Number);
-            AddAllowedFilter("Age", PersonResources.Age);
-            AddAllowedFilter("Gender", PersonResources.Gender);
-            AddAllowedFilter("CountryId", PersonResources.Country);
-            AddAllowedFilter("FullAddress", PersonResources.Address);
-            AddAllowedFilter("Laterality", PlayerResources.Laterality);
-            AddAllowedFilter("Height", PlayerResources.Height);
-            AddAllowedFilter("Weight", PlayerResources.Weight);
-            AddAllowedFilter("Size", PersonResources.Size);
-            AddAllowedFilter("ShoesSize", PlayerResources.ShoesSize);
+            AddAllowedFilter(PersonResources.FullName, () => new StringFilter("FullName"));
+            AddAllowedFilter(PlayerResources.Category, () => new SelectedLabelablesFilter("CategoryId", categories));
+            AddAllowedFilter(PersonResources.Age, () => new IntegerFilter("Age", ComplexComparableOperator.IsBetween, 16, 35)
+            {
+                Minimum = 0,
+                Maximum = 120
+            });
+            AddAllowedFilter(PersonResources.Gender, () => new EnumValuesFilter("Gender", typeof(GenderType)));
+            AddAllowedFilter(PersonResources.Country, () => new SelectedLabelablesFilter("CountryId", countries));
+            AddAllowedFilter(PersonResources.Address, () => new StringFilter("FullAddress"));
+            AddAllowedFilter(PlayerResources.Laterality, () => new EnumValuesFilter("Laterality", typeof(Laterality)));
+            AddAllowedFilter(PlayerResources.Height, () => new IntegerFilter("Height", ComplexComparableOperator.IsBetween, 120, 195)
+            {
+                Minimum = 100,
+                Maximum = 230
+            });
+            AddAllowedFilter(PlayerResources.Weight, () => new IntegerFilter("Weight", ComplexComparableOperator.IsBetween, 50, 100)
+            {
+                Minimum = 40,
+                Maximum = 120
+            });
+            AddAllowedFilter(PersonResources.Size, () => new StringFilter("Size"));
+            AddAllowedFilter(PlayerResources.ShoesSize, () => new IntegerFilter("ShoesSize", ComplexComparableOperator.IsBetween, 33, 45)
+            {
+                Minimum = 30,
+                Maximum = 48
+            });
         }
 
         #endregion Initialisation

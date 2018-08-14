@@ -22,7 +22,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Command to change displayed columns.
         /// </summary>
-        public DelegateCommand<object> ChangeDisplayedColumnsCommand { get; private set; }
+        public DelegateCommand<object> ChangeDisplayedColumnsCommand { get; }
 
         #endregion Members
 

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Interactivity.InteractionRequest;
 
 namespace My.CoachManager.Presentation.Prism.Core.Dialog

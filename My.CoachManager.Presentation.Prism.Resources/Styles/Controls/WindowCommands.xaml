@@ -13,69 +13,12 @@
         <ResourceDictionary Source="Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <ControlTemplate x:Key="WindowCommandsToggleButtonTemplate" TargetType="{x:Type ToggleButton}">
-        <Grid Background="{TemplateBinding Background}">
-            <ContentControl x:Name="PART_ContentControlEx"
-                                       Padding="{TemplateBinding Padding}"
-                                       HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                       VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                       Opacity="0.5"
-                                       Content="{TemplateBinding Content}"
-                                        parameters:ControlParameters.ContentCharacterCasing="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:WindowCommands}}, Path=(parameters:ControlParameters.ContentCharacterCasing)}"
-                                       ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                       ContentTemplate="{TemplateBinding ContentTemplate}"
-                                       ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
-                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-        </Grid>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource Accent}" />
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="PART_ContentControlEx" Property="Opacity" Value="1" />
-            </Trigger>
-            <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource Accent}" />
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-
-    <ControlTemplate x:Key="WindowCommandsButtonTemplate" TargetType="{x:Type Button}">
-        <Grid Background="{TemplateBinding Background}">
-            <ContentControl x:Name="PART_ContentControlEx"
-                                       Padding="{TemplateBinding Padding}"
-                                       HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                       VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                       Opacity="0.5"
-                                       Content="{TemplateBinding Content}"
-                            parameters:ControlParameters.ContentCharacterCasing="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:WindowCommands}}, Path=(parameters:ControlParameters.ContentCharacterCasing)}"
-                                       ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                       ContentTemplate="{TemplateBinding ContentTemplate}"
-                                       ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
-                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-        </Grid>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="PART_ContentControlEx" Property="Opacity" Value="1" />
-            </Trigger>
-            <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource Accent}" />
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-
-    <Style x:Key="WindowCommandsControlStyle" TargetType="{x:Type Control}">
-        <Setter Property="Background" Value="{DynamicResource Transparent}" />
-        <Setter Property="Foreground" Value="{Binding Foreground, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type controls:WindowCommands}}}" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Style x:Key="WindowCommandsControlStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextButtonStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource DarkAccentControl}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource DarkAccentControlMouseOver}" />
+        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource AccentForeground}" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Padding" Value="8 0 8 0" />
-        <Style.Triggers>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource Disabled}" />
-            </Trigger>
-        </Style.Triggers>
     </Style>
 
     <Style TargetType="{x:Type controls:WindowCommands}">
@@ -93,12 +36,8 @@
                     <ItemsPresenter />
                     <ControlTemplate.Resources>
                         <ResourceDictionary>
-                            <Style BasedOn="{StaticResource WindowCommandsControlStyle}" TargetType="{x:Type Button}">
-                                <Setter Property="Template" Value="{StaticResource WindowCommandsButtonTemplate}" />
-                            </Style>
-                            <Style BasedOn="{StaticResource WindowCommandsControlStyle}" TargetType="{x:Type ToggleButton}">
-                                <Setter Property="Template" Value="{StaticResource WindowCommandsToggleButtonTemplate}" />
-                            </Style>
+                            <Style BasedOn="{StaticResource WindowCommandsControlStyle}" TargetType="{x:Type Button}" />
+                            <Style BasedOn="{StaticResource WindowCommandsControlStyle}" TargetType="{x:Type ToggleButton}" />
                         </ResourceDictionary>
                     </ControlTemplate.Resources>
                 </ControlTemplate>

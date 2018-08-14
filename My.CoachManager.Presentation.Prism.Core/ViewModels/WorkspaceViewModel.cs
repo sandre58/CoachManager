@@ -1,4 +1,6 @@
-﻿namespace My.CoachManager.Presentation.Prism.Core.ViewModels
+﻿using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
+
+namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
     public abstract class WorkspaceViewModel : ScreenViewModel, IWorkspaceViewModel
     {
