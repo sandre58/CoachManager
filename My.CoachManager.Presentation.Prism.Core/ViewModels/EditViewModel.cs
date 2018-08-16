@@ -30,9 +30,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         IEntityModel IItemViewModel.Item
         {
             get => Item;
-            set => Item = (TModel) value;
+            set => Item = (TModel)value;
         }
-        
+
         /// <inheritdoc />
         /// <summary>
         /// Get or set Item.
@@ -255,8 +255,16 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected override void LoadDataCore()
         {
-            if(Item == null || Item.Id != _activeId)
-            Item = _activeId > 0 ? LoadItemCore(_activeId) : new TModel();
+            if (Item == null || Item.Id != _activeId)
+                Item = _activeId > 0 ? LoadItemCore(_activeId) : new TModel();
+        }
+
+        /// <summary>
+        /// Call after load data.
+        /// </summary>
+        protected override void OnLoadDataCompleted()
+        {
+            Item.ResetModified();
         }
 
         /// <summary>

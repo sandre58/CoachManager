@@ -51,7 +51,7 @@
 
             <!-- Main Region -->
             <controls:TransitioningContentControl Grid.Row="2" Grid.Column="1" prism:RegionManager.RegionName="{x:Static core:RegionNames.WorkspaceRegion}" />
-            
+
             <!-- Left Region -->
             <views:MainMenuView Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" />
 
@@ -106,30 +106,29 @@
                     <Border Grid.Row="1" Grid.Column="2" Background="{DynamicResource HeaderBackground}"
                             Visibility="{Binding ActiveWorkspace, Converter={StaticResource NullToVisibilityConverter}}">
                         <Grid>
-                            <Polygon  
-                                     Points="0,0 0,1 1,0"  
-                                     Fill="{DynamicResource Accent}"  
-                                     Width="80"  
-                                     Height="80"  
+                            <Polygon
+                                     Points="0,0 0,1 1,0"
+                                     Fill="{DynamicResource Accent}"
+                                     Width="80"
+                                     Height="80"
                                 HorizontalAlignment="Left"
                                      Stretch="Fill" />
                             <Grid  VerticalAlignment="Center" Margin="60 0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                            <StackPanel Orientation="Horizontal" Margin="{StaticResource VeryLargeHorizontalMargin}" VerticalAlignment="Center">
-                                <controls:CommandButton Style="{StaticResource BackCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoBackCommand}" />
-                                <controls:CommandButton Style="{StaticResource NextCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoForwardCommand}" />
-                            </StackPanel>
-                            <TextBlock Grid.Column="1" Text="{Binding ActiveWorkspace.Title, Converter={StaticResource ToUpperConverter}}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Top" Style="{StaticResource HeaderStyle}" Foreground="{DynamicResource AccentForeground}" />
-                        </Grid>
+                                <StackPanel Orientation="Horizontal" Margin="{StaticResource VeryLargeHorizontalMargin}" VerticalAlignment="Center">
+                                    <controls:CommandButton Style="{StaticResource BackCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoBackCommand}" />
+                                    <controls:CommandButton Style="{StaticResource NextCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoForwardCommand}" />
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" Text="{Binding ActiveWorkspace.Title, Converter={StaticResource ToUpperConverter}}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Top" Style="{StaticResource HeaderStyle}" Foreground="{DynamicResource AccentForeground}" />
+                            </Grid>
                         </Grid>
                     </Border>
                 </Grid>
             </Border>
-
         </Grid>
 
         <!-- Dialog Region -->

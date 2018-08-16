@@ -43,7 +43,7 @@
                     <controls:Icon Content="{StaticResource PeopleGeometry}" Size="Custom" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                 </Grid>
             </controls:ImagePicker>
-            <Button Grid.Row="1" parameters:PanelParameters.NotAffectMargin="True" Style="{StaticResource HyperLinkButtonStyle}" Content="{x:Static strings1:ControlResources.Delete}" Command="{Binding RemovePhotoCommand}"
+            <Button Grid.Row="1" parameters:PanelParameters.NotAffectMargin="True" Style="{StaticResource TextButtonStyle}" Content="{x:Static strings1:ControlResources.Delete}" Command="{Binding RemovePhotoCommand}"
                             HorizontalAlignment="Center" FontSize="{StaticResource SmallFontSize}"
                             Visibility="{Binding Item.Photo, Converter={StaticResource NullToVisibilityConverter}}" />
         </Grid>

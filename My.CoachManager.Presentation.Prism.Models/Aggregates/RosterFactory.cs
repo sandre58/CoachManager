@@ -36,7 +36,7 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
         {
             if (dto == null) return null;
 
-            return new RosterModel
+            var result = new RosterModel
             {
                 Id = dto.Id,
                 Name = dto.Name,
@@ -49,6 +49,9 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 ModifiedBy = dto.ModifiedBy,
                 ModifiedDate = dto.ModifiedDate
             };
+            result.ResetModified();
+
+            return result;
         }
     }
 }

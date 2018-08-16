@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using My.CoachManager.Presentation.Prism.Controls.ContentControls;
 using My.CoachManager.Presentation.Prism.Controls.Helpers;
@@ -406,34 +404,5 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
         }
 
         #endregion HeaderTemplate
-
-        #region DisabledVisualElementVisibility
-
-        public static readonly DependencyProperty DisabledVisualElementVisibilityProperty = DependencyProperty.RegisterAttached("DisabledVisualElementVisibility", typeof(Visibility), typeof(ControlParameters), new FrameworkPropertyMetadata(Visibility.Visible, FrameworkPropertyMetadataOptions.Inherits | FrameworkPropertyMetadataOptions.AffectsMeasure));
-
-        /// <summary>
-        /// Gets the value to handle the visibility of the DisabledVisualElement in the template.
-        /// </summary>
-        [Category(Constants.ParameterCategory)]
-        [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
-        [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
-        [AttachedPropertyBrowsableForType(typeof(ExtendedNumericUpDown))]
-        public static Visibility GetDisabledVisualElementVisibility(UIElement element)
-        {
-            var value = element.GetValue(DisabledVisualElementVisibilityProperty);
-            if (value != null)
-                return (Visibility)value;
-            return default(Visibility);
-        }
-
-        /// <summary>
-        /// Sets the value to handle the visibility of the DisabledVisualElement in the template.
-        /// </summary>
-        public static void SetDisabledVisualElementVisibility(UIElement element, Visibility value)
-        {
-            element.SetValue(DisabledVisualElementVisibilityProperty, value);
-        }
-
-        #endregion DisabledVisualElementVisibility
     }
 }

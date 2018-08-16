@@ -101,34 +101,22 @@
     </Style>
 
     <Style x:Key="ColorCommandButtonStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonBaseStyle}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush">
-            <Setter.Value>
-                <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="parameters:ControlParameters.Foreground" Value="{DynamicResource White}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBackground">
+        <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Accent}" />
+        <Setter Property="parameters:ControlParameters.Foreground">
             <Setter.Value>
                 <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
             </Setter.Value>
         </Setter>
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
-        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource White}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
         <Setter Property="parameters:ControlParameters.PressedBackground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
         <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
-        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource White}" />
         <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
-        <Setter Property="parameters:ControlParameters.FocusBackground">
+        <Setter Property="parameters:ControlParameters.FocusForeground">
             <Setter.Value>
-                <SolidColorBrush Opacity="0.7" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
+                <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource White}" />
     </Style>
 
     <Style x:Key="AccentCommandButtonStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonBaseStyle}">
@@ -145,10 +133,6 @@
         <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource DarkAccentControlMouseOver}" />
     </Style>
 
-    <Style x:Key="CommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonBaseStyle}">
-        <Setter Property="ButtonDiameter" Value="{DynamicResource VeryLargeDiameter}" />
-    </Style>
-
     <Style x:Key="BackCommandButtonBaseStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource AccentCommandButtonStyle}">
         <Setter Property="IconData" Value="{StaticResource ArrowLeftGeometry}" />
     </Style>
@@ -157,14 +141,22 @@
         <Setter Property="IconData" Value="{StaticResource ArrowRightGeometry}" />
     </Style>
 
-    <Style x:Key="ValidateCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonApplicationBarStyle}">
-        <Setter Property="BorderBrush" Value="{DynamicResource Positive}" />
+    <Style x:Key="CommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonBaseStyle}">
+        <Setter Property="ButtonDiameter" Value="{DynamicResource VeryLargeDiameter}" />
+    </Style>
+
+    <Style x:Key="ColorCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource ColorCommandButtonStyle}">
+        <Setter Property="ButtonDiameter" Value="{DynamicResource VeryLargeDiameter}" />
+    </Style>
+
+    <Style x:Key="ValidateCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource ColorCommandButtonApplicationBarStyle}">
+        <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Positive}" />
         <Setter Property="IconData" Value="{StaticResource OkGeometry}" />
         <Setter Property="Content" Value="{x:Static strings:ControlResources.Validate}" />
     </Style>
 
-    <Style x:Key="CancelCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonApplicationBarStyle}">
-        <Setter Property="BorderBrush" Value="{DynamicResource Negative}" />
+    <Style x:Key="CancelCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource ColorCommandButtonApplicationBarStyle}">
+        <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Negative}" />
         <Setter Property="IconData" Value="{StaticResource CancelGeometry}" />
         <Setter Property="Content" Value="{x:Static strings:ControlResources.Cancel}" />
     </Style>

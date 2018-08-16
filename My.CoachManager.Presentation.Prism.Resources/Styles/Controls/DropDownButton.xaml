@@ -125,27 +125,6 @@
         </Setter>
     </Style>
 
-    <Style x:Key="TextDropDownButtonStyle" TargetType="{x:Type controls:DropDownButton}" BasedOn="{StaticResource {x:Type controls:DropDownButton}}">
-        <Setter Property="Background" Value="{DynamicResource Transparent}" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Foreground" Value="{DynamicResource DarkControl}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource Transparent}" />
-        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource DarkControlMouseOver}" />
-        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource Transparent}" />
-        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Transparent}" />
-        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.ContentCharacterCasing" Value="Normal" />
-        <Setter Property="FontWeight" Value="Normal" />
-    </Style>
-
-    <Style x:Key="HyperLinkDropDownButtonStyle" TargetType="{x:Type controls:DropDownButton}" BasedOn="{StaticResource TextDropDownButtonStyle}">
-        <Setter Property="Foreground" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource LightAccent}" />
-        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource LightAccent}" />
-        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource LightAccent}" />
-    </Style>
-
     <Style TargetType="{x:Type controls:DropDownMenuButton}">
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
@@ -257,20 +236,14 @@
     <Style x:Key="TextDropDownMenuButtonStyle" TargetType="{x:Type controls:DropDownMenuButton}" BasedOn="{StaticResource {x:Type controls:DropDownMenuButton}}">
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Foreground" Value="{DynamicResource Dark}" />
+        <Setter Property="Foreground" Value="{DynamicResource DarkControlPressed}" />
         <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource Transparent}" />
-        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource DarkControlMouseOver}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource Dark}" />
         <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource Transparent}" />
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Transparent}" />
         <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.ContentCharacterCasing" Value="Normal" />
         <Setter Property="FontWeight" Value="Normal" />
-    </Style>
-
-    <Style x:Key="HyperLinkDropDownMenuButtonStyle" TargetType="{x:Type controls:DropDownMenuButton}" BasedOn="{StaticResource TextDropDownMenuButtonStyle}">
-        <Setter Property="Foreground" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource LightAccent}" />
-        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource LightAccent}" />
     </Style>
 </ResourceDictionary>

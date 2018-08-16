@@ -3,8 +3,11 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
+using System;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
+using My.CoachManager.Presentation.Prism.Controls.Helpers;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
@@ -12,6 +15,8 @@ namespace My.CoachManager.Presentation.Prism.Controls
     {
         //private bool _hideRequest;
         private bool _result = false;
+
+        private IInputElement _restoreFocus;
 
         private bool _saveEnabled;
 
@@ -55,6 +60,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
             if (Owner == null) return _result;
             _saveEnabled = Owner.IsEnabled;
+            StoreFocus();
             Owner.IsEnabled = false;
 
             //_hideRequest = false;
@@ -83,6 +89,35 @@ namespace My.CoachManager.Presentation.Prism.Controls
             if (Owner != null)
             {
                 Owner.IsEnabled = _saveEnabled;
+            }
+            RestoreFocus();
+        }
+
+        /// <summary>
+        /// Stores the given element, or the last focused element via FocusManager, for restoring the focus after closing a dialog.
+        /// </summary>
+        /// <param name="thisElement">The element which will be focused again.</param>
+        public void StoreFocus(IInputElement thisElement = null)
+        {
+            if (Owner != null)
+            {
+                var window = Owner.FindVisualParent<Window>();
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    _restoreFocus = thisElement ?? (_restoreFocus ?? FocusManager.GetFocusedElement(window));
+                }));
+            }
+        }
+
+        internal void RestoreFocus()
+        {
+            if (_restoreFocus != null)
+            {
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    Keyboard.Focus(_restoreFocus);
+                    _restoreFocus = null;
+                }));
             }
         }
     }

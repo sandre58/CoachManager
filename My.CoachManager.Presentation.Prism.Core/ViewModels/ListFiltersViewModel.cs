@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Collections;
+using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Models;
 using My.CoachManager.Presentation.Prism.Core.Models.Filters;
@@ -30,7 +31,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Gets or sets the filter for speed Search.
         /// </summary>
-        public ItemsObservableCollection<IFilterViewModel> Filters { get; set; }
+        public ObservableItemsCollection<IFilterViewModel> Filters { get; set; }
 
         /// <inheritdoc />
         /// <summary>
@@ -93,7 +94,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         public ListFiltersViewModel()
         {
-            Filters = new ItemsObservableCollection<IFilterViewModel>();
+            Filters = new ObservableItemsCollection<IFilterViewModel>();
             Filters.CollectionChanged += FiltersCollectionChanged;
             AllowedFilters = new List<Tuple<Func<IFilter>, string>>();
 
@@ -116,8 +117,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         private void ResetFilters()
         {
-                Filters.Clear();
-                FilterItems();
+            Filters.Clear();
+            FilterItems();
         }
 
         /// <summary>
@@ -175,10 +176,10 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <param name="filter"></param>
         private void AddFilter(Tuple<Func<IFilter>, string> filter)
         {
-           Filters.Add(new FilterViewModel(filter.Item1.Invoke(), filter.Item2));
+            Filters.Add(new FilterViewModel(filter.Item1.Invoke(), filter.Item2));
         }
 
-        #endregion
+        #endregion AddFilter
 
         #region RemoveFilter
 
@@ -191,7 +192,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             Filters.Remove(Filters.FirstOrDefault(x => ReferenceEquals(x.Filter, filter)));
         }
 
-        #endregion
+        #endregion RemoveFilter
 
         #region Filter
 
@@ -230,7 +231,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <param name="title"></param>
         protected void AddAllowedFilter(string title, Func<IFilter> createFilter)
         {
-                AllowedFilters.Add(new Tuple<Func<IFilter>, string>(createFilter, title));
+            AllowedFilters.Add(new Tuple<Func<IFilter>, string>(createFilter, title));
         }
 
         /// <summary>
@@ -244,8 +245,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
             if (!SpeedFilter.Filter.IsEmpty())
             {
-                if(!Filters.Any(x => x.Filter.Equals(SpeedFilter.Filter)))
-                Filters.Add(SpeedFilter);
+                if (!Filters.Any(x => x.Filter.Equals(SpeedFilter.Filter)))
+                    Filters.Add(SpeedFilter);
             }
             else
             {
@@ -264,14 +265,13 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected void OnSpeedFilterChanged()
         {
+            if (SpeedFilter != null)
+            {
+                SpeedFilter.PropertyChanged -= SpeedFilter_FilterChanged;
+                SpeedFilter.PropertyChanged += SpeedFilter_FilterChanged;
+            }
+        }
 
-                if (SpeedFilter != null)
-                {
-                    SpeedFilter.PropertyChanged -= SpeedFilter_FilterChanged;
-                    SpeedFilter.PropertyChanged += SpeedFilter_FilterChanged;
-                }
-    }
-
-        #endregion
+        #endregion PropertyChanged
     }
 }

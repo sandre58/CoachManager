@@ -50,10 +50,10 @@ namespace My.CoachManager.CrossCutting.Core.Extensions
             return new ObservableCollection<T>(source);
         }
 
-        public static ItemsObservableCollection<T> ToItemsObservableCollection<T>(this IEnumerable<T> source) where T : INotifyPropertyChanged
+        public static ObservableItemsCollection<T> ToItemsObservableCollection<T>(this IEnumerable<T> source) where T : INotifyPropertyChanged
 
         {
-            var collection = new ItemsObservableCollection<T>();
+            var collection = new ObservableItemsCollection<T>();
             collection.AddRange(source);
             return collection;
         }

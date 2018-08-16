@@ -11,6 +11,7 @@
         <ResourceDictionary Source="../Base/Fonts.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <!-- Normal buttons -->
     <Style x:Key="ButtonBaseStyle" TargetType="{x:Type ButtonBase}">
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
@@ -106,6 +107,9 @@
         <Setter Property="Padding" Value="3" />
     </Style>
 
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}" />
+
+    <!-- Circle buttons -->
     <Style x:Key="CircleButtonBaseStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource ButtonBaseStyle}">
         <Setter Property="Foreground" Value="{DynamicResource White}" />
         <Setter Property="Background" Value="{DynamicResource DarkControl}" />
@@ -164,6 +168,101 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="CircleIconButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource CircleButtonBaseStyle}">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <controls:Icon Size="Custom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                   Content="{Binding Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}"
+                                   Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TextBoxCircleButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource CircleIconButtonStyle}">
+        <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonWidth)}" />
+        <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonWidth)}" />
+        <Setter Property="Margin" Value="{StaticResource DefaultHorizontalMargin}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonFontFamily)}" />
+        <Setter Property="FontSize" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonFontSize)}" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Focusable" Value="False" />
+    </Style>
+
+    <Style x:Key="ClearTextBoxButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxCircleButtonStyle}">
+        <Setter Property="Content" Value="{StaticResource CancelGeometry}" />
+        <Setter Property="ToolTip" Value="{x:Static strings:ControlResources.ClearText}" />
+        <Setter Property="parameters:TextBoxParameters.IsClearTextButtonBehaviorEnabled" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ClearTextButton), Mode=OneWay}" />
+    </Style>
+
+    <Style x:Key="AddButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxCircleButtonStyle}">
+        <Setter Property="Content" Value="{StaticResource PlusGeometry}" />
+    </Style>
+
+    <Style x:Key="RemoveButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxCircleButtonStyle}">
+        <Setter Property="Content" Value="{StaticResource CancelGeometry}" />
+    </Style>
+
+    <!-- Text button -->
+    <Style x:Key="TextButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource ButtonBaseStyle}">
+        <Setter Property="Background" Value="{DynamicResource Transparent}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource DarkControlPressed}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource Transparent}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource Dark}" />
+        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource Transparent}" />
+        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource Accent}" />
+        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Transparent}" />
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource Accent}" />
+        <Setter Property="parameters:ControlParameters.ContentCharacterCasing" Value="Normal" />
+        <Setter Property="FontWeight" Value="Normal" />
+    </Style>
+
+    <Style x:Key="IconButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextButtonStyle}">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <controls:Icon Size="Custom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                   Content="{Binding Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}"
+                                   Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AccentIconButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource IconButtonStyle}">
+        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource AccentForeground}" />
+    </Style>
+
+    <Style x:Key="TextBoxButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource IconButtonStyle}">
+        <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonWidth)}" />
+        <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonWidth)}" />
+        <Setter Property="Margin" Value="{StaticResource DefaultHorizontalMargin}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonFontFamily)}" />
+        <Setter Property="FontSize" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonFontSize)}" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Focusable" Value="False" />
+    </Style>
+
+    <Style x:Key="DatePickerButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxButtonStyle}">
+        <Setter Property="Content" Value="{StaticResource CalendarGeometry}" />
+    </Style>
+
+    <Style x:Key="PlusNumericUpDownButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxButtonStyle}">
+        <Setter Property="Content" Value="{StaticResource PlusGeometry}" />
+    </Style>
+
+    <Style x:Key="MinusNumericUpDownButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxButtonStyle}">
+        <Setter Property="Content" Value="{StaticResource MinusGeometry}" />
+    </Style>
+
+    <Style TargetType="{x:Type RepeatButton}" BasedOn="{StaticResource TextButtonStyle}" />
+
+    <!-- System buttons -->
     <Style x:Key="SystemButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource ButtonBaseStyle}">
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Transparent}" />
@@ -185,104 +284,4 @@
     <Style x:Key="SystemCloseButtonStyle" TargetType="ButtonBase" BasedOn="{StaticResource SystemButtonStyle}">
         <Setter Property="parameters:ControlParameters.PressedBackground" Value="Red" />
     </Style>
-
-    <Style x:Key="TextButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource ButtonBaseStyle}">
-        <Setter Property="Background" Value="{DynamicResource Transparent}" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Foreground" Value="{DynamicResource DarkControl}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource Transparent}" />
-        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource DarkControlMouseOver}" />
-        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource Transparent}" />
-        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Transparent}" />
-        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.ContentCharacterCasing" Value="Normal" />
-        <Setter Property="FontWeight" Value="Normal" />
-    </Style>
-
-    <Style x:Key="HyperLinkButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextButtonStyle}">
-        <Setter Property="Foreground" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource LightAccent}" />
-        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource LightAccent}" />
-    </Style>
-
-    <Style x:Key="IconButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextButtonStyle}">
-        <Setter Property="ContentTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <controls:Icon Size="Custom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                		Content="{Binding Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}"
-                		Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}" />
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="IconButtonDarkStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource IconButtonStyle}">
-        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource Dark}" />
-        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource Dark}" />
-    </Style>
-
-    <Style x:Key="CircleIconButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource CircleButtonBaseStyle}">
-        <Setter Property="ContentTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <controls:Icon Size="Custom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                		Content="{Binding Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}"
-                		Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}" />
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="TextBoxButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource IconButtonStyle}">
-        <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonWidth)}" />
-        <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonWidth)}" />
-        <Setter Property="Margin" Value="{StaticResource DefaultHorizontalMargin}" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontFamily" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonFontFamily)}" />
-        <Setter Property="FontSize" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonFontSize)}" />
-        <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="Focusable" Value="False" />
-    </Style>
-
-    <Style x:Key="TextBoxCircleButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource CircleIconButtonStyle}">
-        <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonWidth)}" />
-        <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonWidth)}" />
-        <Setter Property="Margin" Value="{StaticResource DefaultHorizontalMargin}" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontFamily" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonFontFamily)}" />
-        <Setter Property="FontSize" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonFontSize)}" />
-        <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="Focusable" Value="False" />
-    </Style>
-
-    <Style x:Key="ClearTextBoxButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxCircleButtonStyle}">
-        <Setter Property="Content" Value="{StaticResource CancelGeometry}" />
-        <Setter Property="ToolTip" Value="{x:Static strings:ControlResources.ClearText}" />
-        <Setter Property="parameters:TextBoxParameters.IsClearTextButtonBehaviorEnabled" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ClearTextButton), Mode=OneWay}" />
-    </Style>
-
-    <Style x:Key="DatePickerButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxButtonStyle}">
-        <Setter Property="Content" Value="{StaticResource CalendarGeometry}" />
-    </Style>
-
-    <Style x:Key="PlusNumericUpDownButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxButtonStyle}">
-        <Setter Property="Content" Value="{StaticResource PlusGeometry}" />
-    </Style>
-
-    <Style x:Key="MinusNumericUpDownButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxButtonStyle}">
-        <Setter Property="Content" Value="{StaticResource MinusGeometry}" />
-    </Style>
-
-    <Style x:Key="AddButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxCircleButtonStyle}">
-        <Setter Property="Content" Value="{StaticResource PlusGeometry}" />
-    </Style>
-
-    <Style x:Key="RemoveButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxCircleButtonStyle}">
-        <Setter Property="Content" Value="{StaticResource CancelGeometry}" />
-    </Style>
-
-    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}" />
-    <Style TargetType="{x:Type RepeatButton}" BasedOn="{StaticResource TextButtonStyle}" />
 </ResourceDictionary>

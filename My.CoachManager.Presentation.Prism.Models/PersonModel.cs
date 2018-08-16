@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using My.CoachManager.CrossCutting.Core.Collections;
@@ -20,8 +19,29 @@ namespace My.CoachManager.Presentation.Prism.Models
         public PersonModel()
         {
             Gender = PlayerConstants.DefaultGender;
-            Emails = new ItemsObservableCollection<EmailModel>();
-            Phones = new ItemsObservableCollection<PhoneModel>();
+            Emails = new ObservableItemsCollection<EmailModel>();
+            Phones = new ObservableItemsCollection<PhoneModel>();
+
+            Rules.Add(nameof(Address), ValidationMessageResources.IncompleteAddressMesage, o =>
+            {
+                var item = (PersonModel)o;
+                return !(string.IsNullOrEmpty(item.Address) &&
+                (!string.IsNullOrEmpty(item.PostalCode) || !string.IsNullOrEmpty(item.City)));
+            });
+
+            Rules.Add(nameof(PostalCode), ValidationMessageResources.IncompleteAddressMesage, o =>
+            {
+                var item = (PersonModel)o;
+                return !(string.IsNullOrEmpty(item.PostalCode) &&
+                       (!string.IsNullOrEmpty(item.Address) || !string.IsNullOrEmpty(item.City)));
+            });
+
+            Rules.Add(nameof(City), ValidationMessageResources.IncompleteAddressMesage, o =>
+            {
+                var item = (PersonModel)o;
+                return !(string.IsNullOrEmpty(item.City) &&
+                       (!string.IsNullOrEmpty(item.Address) || !string.IsNullOrEmpty(item.PostalCode)));
+            });
         }
 
         /// <summary>
@@ -130,13 +150,13 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// Gets or sets the phones.
         /// </summary>
         [Display(Name = "Phones", ResourceType = typeof(PersonResources))]
-        public ItemsObservableCollection<PhoneModel> Phones { get; set; }
+        public ObservableItemsCollection<PhoneModel> Phones { get; set; }
 
         /// <summary>
         /// Gets or sets the emails.
         /// </summary>
         [Display(Name = "Emails", ResourceType = typeof(PersonResources))]
-        public ItemsObservableCollection<EmailModel> Emails { get; set; }
+        public ObservableItemsCollection<EmailModel> Emails { get; set; }
 
         /// <summary>
         /// Get the full name (FirstName LastName).
@@ -206,41 +226,6 @@ namespace My.CoachManager.Presentation.Prism.Models
 
                 return age;
             }
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets error for a property.
-        /// </summary>
-        /// <param name="propertyName"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        protected override IEnumerable<string> ComputeErrors(string propertyName, object value)
-        {
-            var errors = new List<string>();
-
-            switch (propertyName)
-            {
-                case nameof(Address):
-                case nameof(City):
-                case nameof(PostalCode):
-                    if (propertyName == nameof(Address) && string.IsNullOrEmpty(Address)
-                        || propertyName == nameof(City) && string.IsNullOrEmpty(City)
-                        || propertyName == nameof(PostalCode) && string.IsNullOrEmpty(PostalCode))
-                    {
-                        if (!(string.IsNullOrEmpty(Address) && string.IsNullOrEmpty(PostalCode) &&
-                              string.IsNullOrEmpty(City)) &&
-                            (string.IsNullOrEmpty(Address) || string.IsNullOrEmpty(PostalCode) ||
-                             string.IsNullOrEmpty(City)))
-                        {
-                            errors.Add(ValidationMessageResources.IncompleteAddressMesage);
-                        }
-                    }
-
-                    break;
-            }
-
-            return errors;
         }
     }
 }

@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Interactivity;
 using My.CoachManager.Presentation.Prism.Controls;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
-using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Interactivity.InteractionRequest;
 
@@ -51,7 +50,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Interactivity
 
             void Handler(object o, DependencyPropertyChangedEventArgs e)
             {
-                if ((bool) e.NewValue) return;
+                if ((bool)e.NewValue) return;
                 wrapper.IsVisibleChanged -= Handler;
                 wrapper.Content = null;
                 callback?.Invoke();
@@ -84,7 +83,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Interactivity
                 });
             }
 
-            ((IDialogViewModel) dialog.Content.DataContext).CloseRequest += Handler;
+            ((IDialogViewModel)dialog.Content.DataContext).CloseRequest += Handler;
 
             return wrapper;
         }

@@ -7,7 +7,6 @@
                     xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
                     xmlns:enums="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
                     xmlns:filters="clr-namespace:My.CoachManager.Presentation.Prism.Core.Models.Filters;assembly=My.CoachManager.Presentation.Prism.Core"
-                    xmlns:filters1="clr-namespace:My.CoachManager.Presentation.Prism.Core.Models.Filters;assembly=My.CoachManager.CrossCutting.Core"
                     xmlns:selectors="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Selectors">
 
     <ResourceDictionary.MergedDictionaries>
@@ -41,7 +40,7 @@
                       HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
                       Width="60"
                       IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}"
-                      ItemsSource="{Binding Source={extensions:Enum {x:Type filters1:LogicalOperator}}}"
+                      ItemsSource="{Binding Source={extensions:Enum {x:Type enums:LogicalOperator}}}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Grid.Column="3" Text="{Binding Title}" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
             <ContentControl Grid.Column="4" Content="{Binding Filter}" IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}" />
@@ -233,14 +232,13 @@
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate DataType="screens:FilterViewModel">
-                    <ContentControl Content="{Binding Filter}" >
+                    <ContentControl Content="{Binding Filter}">
                         <ContentControl.ContentTemplateSelector>
                             <selectors:SpeedFilterDataTemplateSelector StringFilterTemplate="{StaticResource StringSpeedFilterTemplate}" />
                         </ContentControl.ContentTemplateSelector>
-                        </ContentControl>
+                    </ContentControl>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
 </ResourceDictionary>

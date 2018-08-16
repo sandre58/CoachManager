@@ -29,23 +29,23 @@
     <DataTemplate x:Key="ListViewHeaderTemplate" DataType="{x:Type interfaces:IListViewModel}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid Margin="{StaticResource MediumMargin}">
-            <DockPanel parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}" VerticalAlignment="Center" >
+                <DockPanel parameters:PanelParameters.ItemsMargin="{StaticResource DefaultHorizontalMargin}" VerticalAlignment="Center">
 
-                <!-- Filters Parameters -->
-                <WrapPanel DockPanel.Dock="Left" VerticalAlignment="Center"
+                    <!-- Filters Parameters -->
+                    <WrapPanel DockPanel.Dock="Left" VerticalAlignment="Center"
                            Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}">
-                    <ContentControl Content="{Binding Filters.SpeedFilter}" Style="{StaticResource SpeedFilterStyle}" Focusable="False" />
-                    <Button Content="{x:Static strings:ControlResources.Clear}" Style="{StaticResource SmallButtonBaseStyle}" Command="{Binding Filters.ResetFiltersCommand}" VerticalAlignment="Center" />
-                    <controls:Badged x:Name="FiltersBadge" Badge="{Binding Filters.CountActiveFilters}" VerticalAlignment="Center">
+                        <ContentControl Content="{Binding Filters.SpeedFilter}" Style="{StaticResource SpeedFilterStyle}" Focusable="False" />
+                        <Button Content="{x:Static strings:ControlResources.Clear}" Style="{StaticResource SmallButtonBaseStyle}" Command="{Binding Filters.ResetFiltersCommand}" VerticalAlignment="Center" />
+                        <controls:Badged x:Name="FiltersBadge" Badge="{Binding Filters.CountActiveFilters}" VerticalAlignment="Center">
                             <Button x:Name="ShowHideFilterButton" Content="{x:Static strings:ControlResources.ShowFilters}" Command="{Binding Filters.ShowFiltersCommand}" Style="{StaticResource SmallButtonBaseStyle}" />
-                    </controls:Badged>
-                </WrapPanel>
+                        </controls:Badged>
+                    </WrapPanel>
 
-                <Rectangle Width="1"
+                    <Rectangle Width="1"
                        VerticalAlignment="Stretch"
                        parameters:PanelParameters.NotAffectMargin="True"
                            Margin="{StaticResource LargeHorizontalMargin}"
@@ -55,7 +55,7 @@
                        UseLayoutRounding="True"
                            Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}" />
 
-                <!-- Count Items -->
+                    <!-- Count Items -->
                     <TextBlock x:Name="CountTextBlock" VerticalAlignment="Center"
                        DockPanel.Dock="Left"
                        parameters:PanelParameters.NotAffectMargin="True"
@@ -63,60 +63,60 @@
                        FontSize="{StaticResource MediumFontSize}"
                        Text="{Binding Filters.Items.Count, StringFormat={x:Static strings:ControlResources.CountItemsToUpper}}"
                            Foreground="{DynamicResource Positive}"
-                           Style="{StaticResource SmallHeaderStyle}"/>
+                           Style="{StaticResource SmallHeaderStyle}" />
 
-                <!-- Columns Parameters -->
-                <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right"
+                    <!-- Columns Parameters -->
+                    <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right"
                        Visibility="{Binding Parameters, Converter={StaticResource NullToVisibilityConverter}}" VerticalAlignment="Center">
                         <controls:DropDownMenuButton Style="{StaticResource TextDropDownMenuButtonStyle}"
                                                      Content="{x:Static strings:ControlResources.ShowData}"
                                                      ItemsSource="{Binding Parameters.PresetColumns.Keys}">
-                        <controls:DropDownMenuButton.ItemContainerStyle>
-                            <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
-                                <Setter Property="Header" Value="{Binding Converter={StaticResource EnumToStringConverter}}" />
-                                <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:DropDownMenuButton}, Path=DataContext.Parameters.ChangeDisplayedColumnsCommand}" />
-                                <Setter Property="CommandParameter" Value="{Binding }" />
-                            </Style>
-                        </controls:DropDownMenuButton.ItemContainerStyle>
-                    </controls:DropDownMenuButton>
+                            <controls:DropDownMenuButton.ItemContainerStyle>
+                                <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
+                                    <Setter Property="Header" Value="{Binding Converter={StaticResource EnumToStringConverter}}" />
+                                    <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:DropDownMenuButton}, Path=DataContext.Parameters.ChangeDisplayedColumnsCommand}" />
+                                    <Setter Property="CommandParameter" Value="{Binding }" />
+                                </Style>
+                            </controls:DropDownMenuButton.ItemContainerStyle>
+                        </controls:DropDownMenuButton>
                         <controls:DropDownMenuButton Style="{StaticResource TextDropDownMenuButtonStyle}"
                                                      Content="{x:Static strings:ControlResources.ShowColumns}"
                                                      ItemsSource="{Binding ElementName=ListGrid, Path=Columns}"
                                                      ItemContainerStyle="{StaticResource ColumnContextMenuStyle}"
                                              VerticalAlignment="Center" />
-                </WrapPanel>
-            </DockPanel>
+                    </WrapPanel>
+                </DockPanel>
             </Grid>
 
             <!-- Filters Panel -->
             <StackPanel Grid.Row="1" Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}">
-            <Grid x:Name="FiltersPanel" Background="{DynamicResource LightHeaderBackground}" parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}"
+                <Grid x:Name="FiltersPanel" Background="{DynamicResource LightHeaderBackground}" parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}"
                   Visibility="{Binding Filters.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" MaxHeight="300">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
                     <controls:DropDownMenuButton Style="{StaticResource TextDropDownMenuButtonStyle}"
                                                  Content="{x:Static strings:ControlResources.AddCondition}"
                                                  ItemsSource="{Binding Filters.AllowedFilters}">
-                    <controls:DropDownMenuButton.ItemContainerStyle>
-                        <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
-                            <Setter Property="Header" Value="{Binding Item2}" />
-                            <Setter Property="Command" Value="{Binding DataContext.Filters.AddFilterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:DropDownMenuButton}}" />
-                            <Setter Property="CommandParameter" Value="{Binding }" />
-                        </Style>
-                    </controls:DropDownMenuButton.ItemContainerStyle>
-                </controls:DropDownMenuButton>
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                    <ItemsControl ItemsSource="{Binding Filters.Filters}" Focusable="False">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Vertical" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </ScrollViewer>
-            </Grid>
+                        <controls:DropDownMenuButton.ItemContainerStyle>
+                            <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
+                                <Setter Property="Header" Value="{Binding Item2}" />
+                                <Setter Property="Command" Value="{Binding DataContext.Filters.AddFilterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:DropDownMenuButton}}" />
+                                <Setter Property="CommandParameter" Value="{Binding }" />
+                            </Style>
+                        </controls:DropDownMenuButton.ItemContainerStyle>
+                    </controls:DropDownMenuButton>
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding Filters.Filters}" Focusable="False">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
             </StackPanel>
         </Grid>
         <DataTemplate.Triggers>
@@ -172,7 +172,7 @@
                         <controls:ApplicationBar x:Name="Commands" Grid.Row="1" Grid.Column="0" ItemsSource="{TemplateBinding Commands}" Style="{TemplateBinding ApplicationBarStyle}" Visibility="{TemplateBinding Commands, Converter={StaticResource AnyToVisibilityConverter}}" />
 
                         <!-- Content -->
-                        <ScrollViewer x:Name="Content" Grid.Row="2"  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" Margin="{TemplateBinding Padding}">
+                        <ScrollViewer x:Name="Content" Grid.Row="2" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" Margin="{TemplateBinding Padding}">
                             <ContentPresenter />
                         </ScrollViewer>
 

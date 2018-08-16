@@ -22,12 +22,12 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Gets phones.
         /// </summary>
-        public ItemsObservableCollection<PhoneModel> Phones { get; private set; }
+        public ObservableItemsCollection<PhoneModel> Phones { get; private set; }
 
         /// <summary>
         /// Gets phones.
         /// </summary>
-        public ItemsObservableCollection<EmailModel> Emails { get; private set; }
+        public ObservableItemsCollection<EmailModel> Emails { get; private set; }
 
         /// <summary>
         /// Get or Set Add Phone Command.
@@ -75,7 +75,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         private void RemovePhone(PhoneModel phone)
         {
             if (Phones.Count > 1)
-               Phones.Remove(phone);
+                Phones.Remove(phone);
             else if (Phones.Count == 1)
             {
                 phone.Label = "";
@@ -88,7 +88,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// </summary>
         private bool CanRemovePhone(PhoneModel phone)
         {
-            return  Phones.Count > 1 || !string.IsNullOrEmpty(phone.Value);
+            return Phones.Count > 1 || !string.IsNullOrEmpty(phone.Value);
         }
 
         /// <summary>

@@ -105,8 +105,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
             AllPhoneLabels = ContactConstants.DefaultPhoneLabels;
             AllEmailLabels = ContactConstants.DefaultEmailLabels;
 
-            Emails = new ItemsObservableCollection<EmailModel>();
-            Phones = new ItemsObservableCollection<PhoneModel>();
+            Emails = new ObservableItemsCollection<EmailModel>();
+            Phones = new ObservableItemsCollection<PhoneModel>();
 
             Phones.CollectionChanged += Contacts_CollectionChanged;
             Emails.CollectionChanged += Contacts_CollectionChanged;

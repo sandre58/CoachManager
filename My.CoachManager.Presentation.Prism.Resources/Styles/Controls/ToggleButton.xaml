@@ -21,16 +21,6 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="CircleToggleButtonStyle" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource CircleButtonBaseStyle}">
-        <Style.Triggers>
-            <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedBackground)}" />
-                <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedBorderBrush)}" />
-                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedForeground)}" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
     <Style x:Key="TextToggleButtonStyle" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource TextButtonStyle}">
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">

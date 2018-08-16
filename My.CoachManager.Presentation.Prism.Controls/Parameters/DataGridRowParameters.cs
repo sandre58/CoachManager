@@ -16,7 +16,13 @@
             "IsDeselectionEnabled",
             typeof(bool),
             typeof(DataGridRowParameters),
-            new PropertyMetadata(false, OnIsDeselectionEnabledChanged));
+            new PropertyMetadata(true, OnIsDeselectionEnabledChanged));
+
+        public static readonly DependencyProperty GotFocusOnSelectionProperty = DependencyProperty.RegisterAttached(
+            "GotFocusOnSelection",
+            typeof(bool),
+            typeof(DataGridRowParameters),
+            new PropertyMetadata(false, OnGotFocusOnSelectionChanged));
 
         public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.RegisterAttached(
             "IsReadOnly",
@@ -129,6 +135,26 @@
         }
 
         /// <summary>
+        /// Gets the deselection enabled property. If enabled, and the row is clicked while selected, the row is deselected.
+        /// </summary>
+        /// <param name="dataGridRow">The data grid row.</param>
+        /// <returns><c>true</c> if deselecting row when selected and clicked, otherwise <c>false</c>.</returns>
+        public static bool GetGotFocusOnSelection(DataGridRow dataGridRow)
+        {
+            return (bool)dataGridRow.GetValue(GotFocusOnSelectionProperty);
+        }
+
+        /// <summary>
+        /// Sets the deselection enabled property. If enabled, and the row is clicked while selected, the row is deselected.
+        /// </summary>
+        /// <param name="dataGridRow">The data grid row.</param>
+        /// <param name="value">if set to <c>true</c> deselects the row when selected and clicked.</param>
+        public static void SetGotFocusOnSelection(DataGridRow dataGridRow, bool value)
+        {
+            dataGridRow.SetValue(GotFocusOnSelectionProperty, value);
+        }
+
+        /// <summary>
         /// Gets the is read only flag for the row.
         /// </summary>
         /// <param name="dataGridRow">The data grid row.</param>
@@ -231,6 +257,53 @@
         #endregion Public Static Methods
 
         #region Private Static Methods
+
+        /// <summary>
+        /// Called when the deselection enabled property is changed.
+        /// </summary>
+        /// <param name="dependencyObject">The dependency object.</param>
+        /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+        private static void OnGotFocusOnSelectionChanged(
+            DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs e)
+        {
+            DataGridRow dataGridRow = (DataGridRow)dependencyObject;
+            if (dataGridRow != null)
+            {
+                if (GetGotFocusOnSelection(dataGridRow))
+                {
+                    dataGridRow.Selected += OnDataGridRowSelected;
+                    dataGridRow.GotFocus += OnDataGridRowGotFocus;
+                    dataGridRow.MouseDown += OnDataGridRowMouseDown;
+                    dataGridRow.MouseLeftButtonDown += OnDataGridRowMouseDown;
+                }
+                else
+                {
+                    dataGridRow.Selected -= OnDataGridRowSelected;
+                    dataGridRow.GotFocus -= OnDataGridRowGotFocus;
+                    dataGridRow.MouseDown -= OnDataGridRowMouseDown;
+                    dataGridRow.MouseLeftButtonDown -= OnDataGridRowMouseDown;
+                }
+            }
+        }
+
+        private static void OnDataGridRowMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is DataGridRow dataGridRow && !dataGridRow.IsFocused)
+                dataGridRow.Focus();
+        }
+
+        private static void OnDataGridRowSelected(object sender, RoutedEventArgs e)
+        {
+            if (sender is DataGridRow dataGridRow && !dataGridRow.IsFocused)
+                dataGridRow.Focus();
+        }
+
+        private static void OnDataGridRowGotFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is DataGridRow dataGridRow && !dataGridRow.IsSelected)
+                dataGridRow.IsSelected = true;
+        }
 
         /// <summary>
         /// Called when the deselection enabled property is changed.

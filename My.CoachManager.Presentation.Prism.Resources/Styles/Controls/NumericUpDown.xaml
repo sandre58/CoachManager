@@ -63,7 +63,6 @@
                                      BorderThickness="0"
                                      FontFamily="{TemplateBinding FontFamily}"
                                      FontSize="{TemplateBinding FontSize}"
-                                     parameters:ControlParameters.DisabledVisualElementVisibility="Collapsed"
                                      parameters:TextBoxParameters.ButtonWidth="{TemplateBinding parameters:TextBoxParameters.ButtonWidth}"
                                      parameters:TextBoxParameters.ButtonContent="{TemplateBinding parameters:TextBoxParameters.ButtonContent}"
                                      parameters:TextBoxParameters.ButtonContentTemplate="{TemplateBinding parameters:TextBoxParameters.ButtonContentTemplate}"

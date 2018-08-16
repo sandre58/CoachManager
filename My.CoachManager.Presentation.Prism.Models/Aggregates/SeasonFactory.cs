@@ -36,7 +36,7 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
         {
             if (dto == null) return null;
 
-            return new SeasonModel
+            var result = new SeasonModel
             {
                 Id = dto.Id,
                 Code = dto.Code,
@@ -50,6 +50,9 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 ModifiedBy = dto.ModifiedBy,
                 ModifiedDate = dto.ModifiedDate
             };
+            result.ResetModified();
+
+            return result;
         }
     }
 }

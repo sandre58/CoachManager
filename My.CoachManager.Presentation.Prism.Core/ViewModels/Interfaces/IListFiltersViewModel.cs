@@ -6,7 +6,6 @@ using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
 {
-
     public interface IListFiltersViewModel
     {
         /// <summary>
@@ -17,7 +16,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
         /// <summary>
         /// Gets or sets the filter for speed Search.
         /// </summary>
-        ItemsObservableCollection<IFilterViewModel> Filters { get; set; }
+        ObservableItemsCollection<IFilterViewModel> Filters { get; set; }
 
         /// <summary>
         /// Gets the allowed filters.

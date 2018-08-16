@@ -57,7 +57,7 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
         {
             if (dto == null) return null;
 
-            return new PlayerModel
+            var result = new PlayerModel
             {
                 Id = dto.Id,
                 FirstName = dto.FirstName,
@@ -80,13 +80,16 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 Weight = dto.Weight,
                 ShoesSize = dto.ShoesSize,
                 Size = dto.Size,
-                Emails = dto.Emails != null ? dto.Emails.Select(ContactFactory.GetContact<EmailModel>).ToList().ToItemsObservableCollection() : new ItemsObservableCollection<EmailModel>(),
-                Phones = dto.Phones != null ?dto.Phones.Select(ContactFactory.GetContact<PhoneModel>).ToList().ToItemsObservableCollection() : new ItemsObservableCollection<PhoneModel>(),
+                Emails = dto.Emails != null ? dto.Emails.Select(ContactFactory.GetContact<EmailModel>).ToList().ToItemsObservableCollection() : new ObservableItemsCollection<EmailModel>(),
+                Phones = dto.Phones != null ? dto.Phones.Select(ContactFactory.GetContact<PhoneModel>).ToList().ToItemsObservableCollection() : new ObservableItemsCollection<PhoneModel>(),
                 CreatedBy = dto.CreatedBy,
                 CreatedDate = dto.CreatedDate,
                 ModifiedBy = dto.ModifiedBy,
                 ModifiedDate = dto.ModifiedDate
             };
+            result.ResetModified();
+
+            return result;
         }
     }
 }

@@ -5,9 +5,11 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reactive.Linq;
 using System.Reflection;
 using Microsoft.Practices.ObjectBuilder2;
 using My.CoachManager.Presentation.Prism.Core.Attributes.Validation;
+using My.CoachManager.Presentation.Prism.Core.Rules;
 using Prism.Mvvm;
 using PropertyChanged;
 
@@ -26,7 +28,31 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         /// <summary>
         /// Gets the validation errors.
         /// </summary>
-        protected IDictionary<string, IEnumerable<ValidationResult>> ValidationErrors { get; }
+        private IDictionary<string, List<ValidationResult>> ValidationErrors { get; }
+
+        /// <summary>
+        /// Gets the rules which provide the errors.
+        /// </summary>
+        /// <value>The rules this instance must satisfy.</value>
+        protected RuleCollection Rules { get; } = new RuleCollection();
+
+        /// <summary>
+        /// Gets the when errors changed observable event. Occurs when the validation errors have changed for a property or for the entire object.
+        /// </summary>
+        /// <value>
+        /// The when errors changed observable event.
+        /// </value>
+        public IObservable<string> WhenErrorsChanged
+        {
+            get
+            {
+                return Observable
+                    .FromEventPattern<DataErrorsChangedEventArgs>(
+                        h => ErrorsChanged += h,
+                        h => ErrorsChanged -= h)
+                    .Select(x => x.EventArgs.PropertyName);
+            }
+        }
 
         #endregion Members
 
@@ -34,7 +60,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
 
         protected ModelBase()
         {
-            ValidationErrors = new Dictionary<string, IEnumerable<ValidationResult>>();
+            ValidationErrors = new Dictionary<string, List<ValidationResult>>();
         }
 
         #endregion Constructors
@@ -57,46 +83,78 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         /// <summary>
         /// Occurs when the validation errors have changed for a property or for the entire object.
         /// </summary>
-        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-
-        /// <summary>
-        /// Has errors ?
-        /// </summary>
-        public virtual bool HasErrors => ValidationErrors.Any();
+        private event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
         /// <inheritdoc />
         /// <summary>
-        /// Get errors.
+        /// Occurs when the validation errors have changed for a property or for the entire object.
         /// </summary>
-        /// <param name="propertyName">Property Name.</param>
-        /// <returns></returns>
-        public virtual IEnumerable GetErrors(string propertyName)
+        event EventHandler<DataErrorsChangedEventArgs> INotifyDataErrorInfo.ErrorsChanged
         {
-            return (propertyName != null) && ValidationErrors.TryGetValue(propertyName, out var validationResults)
-                ? validationResults.Select(validationResult => validationResult.ErrorMessage)
-                : Enumerable.Empty<object>();
+            add => ErrorsChanged += value;
+            remove => ErrorsChanged -= value;
         }
 
         /// <summary>
-        /// Get errors.
+        /// Gets a value indicating whether the object has validation errors.
         /// </summary>
-        /// <returns></returns>
+        /// <value><c>true</c> if this instance has errors, otherwise <c>false</c>.</value>
+        public virtual bool HasErrors => ValidationErrors.Any();
+
+        /// <summary>
+        /// Gets the validation errors for a specified property or for the entire object.
+        /// </summary>
+        /// <param name="propertyName">Name of the property to retrieve errors for. <c>null</c> to
+        /// retrieve all errors for this instance.</param>
+        /// <returns>A collection of errors.</returns>
+        public IEnumerable GetErrors(string propertyName)
+        {
+            IEnumerable result;
+            if (string.IsNullOrEmpty(propertyName))
+            {
+                var allErrors = new List<string>();
+
+                foreach (var keyValuePair in ValidationErrors)
+                {
+                    allErrors.AddRange(keyValuePair.Value.Select(x => x.ErrorMessage));
+                }
+
+                result = allErrors;
+            }
+            else
+            {
+                result = ValidationErrors.ContainsKey(propertyName) ? ValidationErrors[propertyName].Select(x => x.ErrorMessage) : new List<string>();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the validation errors for the entire object.
+        /// </summary>
+        /// <returns>A collection of errors.</returns>
         public virtual IEnumerable<string> GetErrors()
         {
+            var result = new List<string>();
+            result.AddRange((List<string>)GetErrors(null));
+
             var type = GetType();
-            var validationErrors = ValidationErrors.SelectMany(x => x.Value).Select(error => error.ErrorMessage).ToList();
             var complexValidationErrors =
                 type.GetProperties().Select(x => x.GetValue(this)).OfType<IValidatable>().ToList().SelectMany(x => x.GetErrors()).ToList();
+            result.AddRange(complexValidationErrors);
+
             var collectionValidationErrors =
                 type.GetProperties().Select(x => x.GetValue(this)).OfType<ICollection>().ToList().SelectMany(x => x.OfType<IValidatable>()).SelectMany(x => x.GetErrors()).ToList();
-            return validationErrors.Concat(complexValidationErrors).Concat(collectionValidationErrors);
+            result.AddRange(collectionValidationErrors);
+
+            return result;
         }
 
         /// <summary>
         /// Notifies when errors changed.
         /// </summary>
         /// <param name="propertyName"></param>
-        protected void NotifyErrorsChanged(string propertyName)
+        protected void OnErrorsChanged(string propertyName)
         {
             // Notify
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
@@ -105,17 +163,6 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         #endregion INotifyDataErrorInfo
 
         #region IValidatable
-
-        /// <summary>
-        /// Gets error for a property.
-        /// </summary>
-        /// <param name="propertyName"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        protected virtual IEnumerable<string> ComputeErrors(string propertyName, object value)
-        {
-            return new List<string>();
-        }
 
         /// <summary>
         /// Test if property is valid.
@@ -132,14 +179,14 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
             // Validation by Metadata
             Validator.TryValidateProperty(value, new ValidationContext(this) { MemberName = propertyName }, validationResults);
             // Custom Validation
-            validationResults.AddRange(ComputeErrors(propertyName, value).Select(x => new ValidationResult(x)));
+            validationResults.AddRange(Rules.Apply(this, propertyName).Select(x => new ValidationResult(x.ToString())).ToList());
 
             // Is Valid
             if (!validationResults.Any())
             {
                 if (!ValidationErrors.ContainsKey(propertyName)) return;
                 ValidationErrors.Remove(propertyName);
-                NotifyErrorsChanged(propertyName);
+                OnErrorsChanged(propertyName);
                 return;
             }
 
@@ -153,7 +200,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
                 ValidationErrors.Add(propertyName, validationResults);
             }
 
-            NotifyErrorsChanged(propertyName);
+            OnErrorsChanged(propertyName);
         }
 
         /// <inheritdoc />

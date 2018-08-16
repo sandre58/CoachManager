@@ -15,8 +15,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
 
         private static void EnableVirtualizationWithGroupingPropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            var comboBox = dependencyObject as ComboBox;
-            if (comboBox != null && e.NewValue != e.OldValue)
+            if (dependencyObject is ComboBox comboBox && e.NewValue != e.OldValue)
             {
                 comboBox.SetValue(VirtualizingStackPanel.IsVirtualizingProperty, e.NewValue);
                 comboBox.SetValue(VirtualizingPanel.IsVirtualizingWhenGroupingProperty, e.NewValue);

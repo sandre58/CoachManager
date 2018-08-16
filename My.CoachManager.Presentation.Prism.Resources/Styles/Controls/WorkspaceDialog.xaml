@@ -24,7 +24,7 @@
                                 Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                                 Margin="{StaticResource MediumMargin}" Effect="{StaticResource CenterShadow}">
                             <Grid>
-                                <ContentPresenter />
+                                <ContentPresenter Focusable="False" />
                             </Grid>
                         </Border>
                     </Border>

@@ -200,6 +200,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
         }
 
-        #endregion
+        #endregion PropertyChanged
     }
 }

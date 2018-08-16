@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.Presentation.Prism.Core.Models.Filters;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces

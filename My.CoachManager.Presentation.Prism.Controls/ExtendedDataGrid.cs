@@ -73,6 +73,5 @@ namespace My.CoachManager.Presentation.Prism.Controls
         }
 
         #endregion Clipboard Paste
-
     }
 }

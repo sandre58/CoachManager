@@ -7,7 +7,6 @@
         <ResourceDictionary Source="../Base/Margins.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <SineEase x:Key="BadgeEase" EasingMode="EaseOut" />
     <Storyboard x:Key="BadgeChangedStoryboard">
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)">

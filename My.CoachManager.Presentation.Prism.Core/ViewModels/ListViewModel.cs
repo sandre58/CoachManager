@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Core.Exceptions;
@@ -128,7 +127,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
             KeyboardShortcuts.Add(new KeyBinding(AddCommand, Key.N, ModifierKeys.Control));
         }
-        
+
         #endregion Initialization
 
         #region Open
@@ -314,7 +313,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
                 Filters.Items = new FilteredCollectionView<TEntityModel>(Items.ToObservableCollection());
             }
         }
-
 
         #endregion Properties Changed
 

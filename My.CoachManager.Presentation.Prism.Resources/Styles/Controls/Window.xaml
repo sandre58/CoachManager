@@ -162,19 +162,6 @@
                                     Focusable="False"
                                     KeyboardNavigation.TabNavigation="None" />
 
-                    <!--  overlay effect container  -->
-                    <Grid x:Name="PART_OverlayBox"
-                          Grid.Row="0"
-                          Grid.RowSpan="3"
-                          Grid.Column="0"
-                          Grid.ColumnSpan="5"
-                          Panel.ZIndex="4"
-                          Background="{TemplateBinding OverlayBrush}"
-                          Opacity="0"
-                          FocusVisualStyle="{x:Null}"
-                          Focusable="False"
-                          Visibility="Hidden" />
-
                     <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" x:Name="PART_StatusBar" Background="{DynamicResource Accent}" MinHeight="25" Focusable="False" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
                         <ContentControl Content="{TemplateBinding StatusBar}" Foreground="{DynamicResource AccentForeground}" VerticalAlignment="Center" IsTabStop="False" />
                     </Border>

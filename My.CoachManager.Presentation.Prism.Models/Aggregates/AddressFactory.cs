@@ -16,11 +16,13 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
         {
             if (dto == null) return null;
 
-            return new CityModel
+            var result = new CityModel
             {
                 City = dto.City,
                 PostalCode = dto.PostalCode
             };
+
+            return result;
         }
     }
 }

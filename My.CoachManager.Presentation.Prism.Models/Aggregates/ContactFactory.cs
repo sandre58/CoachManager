@@ -14,7 +14,7 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
         /// <returns>The model.</returns>
         public static TContactModel GetContact<TContactModel>(ContactDto dto) where TContactModel : ContactModel, new()
         {
-            return new TContactModel()
+            var result = new TContactModel()
             {
                 Id = dto.Id,
                 Label = dto.Label,
@@ -26,6 +26,9 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 ModifiedBy = dto.ModifiedBy,
                 ModifiedDate = dto.ModifiedDate
             };
+            result.ResetModified();
+
+            return result;
         }
 
         /// <summary>

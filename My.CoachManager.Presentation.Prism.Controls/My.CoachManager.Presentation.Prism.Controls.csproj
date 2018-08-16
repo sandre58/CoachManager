@@ -41,8 +41,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommonServiceLocator.2.0.3\lib\net47\CommonServiceLocator.dll</HintPath>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Prism, Version=7.0.0.396, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.7.0.0.396\lib\net45\Prism.dll</HintPath>
@@ -137,6 +137,16 @@
     <Compile Include="MultiComboBox.cs" />
     <Compile Include="Native\NativeConstants.cs" />
     <Compile Include="Notifications\ToastPosition.cs" />
+    <Compile Include="Parameters\Commands\CommandBinding.cs" />
+    <Compile Include="Parameters\Commands\CommandBindingCollection.cs" />
+    <Compile Include="Parameters\Commands\EventCommand.CommandBindings.cs" />
+    <Compile Include="Parameters\Commands\EventCommand.cs" />
+    <Compile Include="Parameters\Commands\Internal\ActionExecutionStrategy.cs" />
+    <Compile Include="Parameters\Commands\Internal\CommandBehaviorBinding.cs" />
+    <Compile Include="Parameters\Commands\Internal\CommandExecutionStrategy.cs" />
+    <Compile Include="Parameters\Commands\Internal\EventHandlerGenerator.cs" />
+    <Compile Include="Parameters\Commands\Internal\IExecutionStrategy.cs" />
+    <Compile Include="Parameters\Commands\KeyCommand.cs" />
     <Compile Include="Toast.cs" />
     <Compile Include="ToastArea.cs" />
     <Compile Include="Notifications\IToastManager.cs" />
@@ -262,6 +272,10 @@
     <ProjectReference Include="..\My.CoachManager.CrossCutting.Core\My.CoachManager.CrossCutting.Core.csproj">
       <Project>{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}</Project>
       <Name>My.CoachManager.CrossCutting.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.CrossCutting.Logging\My.CoachManager.CrossCutting.Logging.csproj">
+      <Project>{381D433D-9F76-4286-B0F5-7209E477B22B}</Project>
+      <Name>My.CoachManager.CrossCutting.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Core\My.CoachManager.Presentation.Prism.Core.csproj">
       <Project>{3f11e745-d328-4654-a3c9-4bfc9bf6b9ab}</Project>
