@@ -97,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\Validation\CompareToPropertyAttribute.cs" />
+    <Compile Include="ComponentModel\AbortableBackgroundWorker.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Events\UpdateStatusBarMessageRequestEvent.cs" />
     <Compile Include="Manager\KeyBoardManager.cs" />
     <Compile Include="Manager\ConfigurationManager.cs" />

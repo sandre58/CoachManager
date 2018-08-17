@@ -4,7 +4,9 @@ using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Resources;
+using My.CoachManager.Presentation.Prism.Modules.Home.Views;
 using My.CoachManager.Presentation.Prism.Wpf.Properties;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using SplashScreen = My.CoachManager.Presentation.Prism.Wpf.Views.SplashScreen;
@@ -63,6 +65,9 @@ namespace My.CoachManager.Presentation.Prism.Wpf
 
             stopwatch.Stop();
             _splashScreenViewModel.UpdateMessage(MessageResources.ApplicationEndLoading);
+
+
+            NavigationManager.NavigateTo(typeof(HomeView));
 
             ShutdownMode = ShutdownMode.OnMainWindowClose;
 

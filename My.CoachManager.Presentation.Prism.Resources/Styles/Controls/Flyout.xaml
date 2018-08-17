@@ -78,7 +78,7 @@
                                                         Margin="5 50 5 30"
                                                        Content="{TemplateBinding Header}"
                                                        ContentTemplate="{TemplateBinding HeaderTemplate}"
-                                                  parameters:ControlParameters.ContentCharacterCasing="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.ContentCharacterCasing)}"
+                                                  parameters:ControlParameters.CharacterCasing="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.CharacterCasing)}"
                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     <ContentPresenter x:Name="PART_Content" DockPanel.Dock="Bottom" />
                 </DockPanel>

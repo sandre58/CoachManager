@@ -37,15 +37,15 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="Code" Grid.Column="0" Width="{StaticResource SmallWidth}" Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" parameters:FormParameters.Label="{x:Static strings:ReferenceResources.Code}" />
+            <TextBox x:Name="Code" Grid.Column="0" Width="{StaticResource SmallWidth}" Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" parameters:TextBoxParameters.Watermark="{x:Static strings:ReferenceResources.Code}" />
 
-            <TextBox Grid.Column="2" Width="{StaticResource SmallLargeWidth}" Text="{Binding Label, UpdateSourceTrigger=PropertyChanged}" parameters:FormParameters.Label="{x:Static strings:ReferenceResources.Label}" />
+            <TextBox Grid.Column="2" Width="{StaticResource SmallLargeWidth}" Text="{Binding Label, UpdateSourceTrigger=PropertyChanged}" parameters:TextBoxParameters.Watermark="{x:Static strings:ReferenceResources.Label}" />
         </Grid>
 
         <controls:Icon Grid.Row="1" Grid.Column="0" Size="Medium" Content="{DynamicResource BookOpenGeometry}" HorizontalAlignment="Center" />
 
         <Grid Grid.Row="1" Grid.Column="1">
-            <TextBox Width="{StaticResource VeryLargeWidth}" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" parameters:FormParameters.Label="{x:Static strings:ReferenceResources.Description}" parameters:TextBoxParameters.ClearTextButton="True" />
+            <TextBox Width="{StaticResource VeryLargeWidth}" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" parameters:TextBoxParameters.Watermark="{x:Static strings:ReferenceResources.Description}" parameters:TextBoxParameters.ClearTextButton="True" />
         </Grid>
     </Grid>
 </UserControl>

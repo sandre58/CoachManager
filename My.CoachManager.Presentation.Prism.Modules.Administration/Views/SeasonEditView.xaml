@@ -40,12 +40,12 @@
                 <TextBlock Grid.Column="1" Text="{x:Static resources:GlobalResources.From1}" VerticalAlignment="Center" />
 
                 <DatePicker Grid.Column="2" SelectedDate="{Binding Item.StartDate, IsAsync=True}" Width="{StaticResource SmallLargeWidth}"
-                            parameters:FormParameters.Label="{x:Static strings:SeasonResources.StartDate}" />
+                            parameters:TextBoxParameters.Watermark="{x:Static strings:SeasonResources.StartDate}" />
 
                 <TextBlock Grid.Column="3" Text="{x:Static resources:GlobalResources.To1}"  VerticalAlignment="Center" />
 
                 <DatePicker Grid.Column="4" SelectedDate="{Binding Item.EndDate, IsAsync=True}" Width="{StaticResource SmallLargeWidth}"
-                            parameters:FormParameters.Label="{x:Static strings:SeasonResources.EndDate}" />
+                            parameters:TextBoxParameters.Watermark="{x:Static strings:SeasonResources.EndDate}" />
             </Grid>
         </Grid>
 

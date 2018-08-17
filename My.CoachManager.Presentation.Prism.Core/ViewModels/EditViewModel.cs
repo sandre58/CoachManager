@@ -1,8 +1,8 @@
-﻿using System.ComponentModel;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Exceptions;
+using My.CoachManager.Presentation.Prism.Core.ComponentModel;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Models;
@@ -18,6 +18,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         #region Fields
 
         private int _activeId;
+
+        /// <summary>
+        /// The laod data background worker.
+        /// </summary>
+        private AbortableBackgroundWorker _saveDataBackgroundWorker;
 
         #endregion Fields
 
@@ -75,7 +80,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             base.InitializeCommand();
 
-            SaveCommand = new DelegateCommand(SaveAsync, CanSave);
+            SaveCommand = new DelegateCommand(Save, CanSave);
             CancelCommand = new DelegateCommand(Cancel, CanCancel);
         }
 
@@ -98,65 +103,22 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// Load data.
         /// </summary>
         /// <returns></returns>
-        private async Task SaveDataAsync()
+        private void SaveCore()
         {
-            var result = false;
-
             State = ScreenState.Saving;
 
             OnSaveRequested();
 
             if (Item.Validate())
             {
-                var task = Task.Factory.StartNew(() =>
-                {
-                    result = SaveItemCore();
-                }, CancellationToken.None
-                        , TaskCreationOptions.None
-                        , TaskScheduler.FromCurrentSynchronizationContext())
 
-                    // Error
-                    .ContinueWith(t =>
-                    {
-                        if (t.Exception == null) return;
-                        if (t.Exception.InnerException is ValidationBusinessException validationBusinessException)
-                        {
-                            foreach (var error in validationBusinessException.Errors)
-                            {
-                                OnBusinessExceptionOccured(new BusinessException(error.ToString()));
-                            }
-                        }
-                        else if (t.Exception.InnerException is BusinessException businessException)
-                        {
-                            OnBusinessExceptionOccured(businessException);
-                        }
-                        else
-                        {
-                            OnExceptionOccured(t.Exception.InnerException);
-                        }
-                    }, TaskContinuationOptions.OnlyOnFaulted)
+                _saveDataBackgroundWorker =
+                    new AbortableBackgroundWorker {WorkerReportsProgress = true, WorkerSupportsCancellation = true};
+                _saveDataBackgroundWorker.RunWorkerCompleted += OnBackgroundWorkerRunWorkerCompleted;
+                _saveDataBackgroundWorker.DoWork += OnBackgroundWorkerOnDoWork;
 
-                    // Cancel
-                    .ContinueWith(t =>
-                    {
-                    }, TaskContinuationOptions.OnlyOnCanceled)
-
-                    // Success
-                    .ContinueWith(t =>
-                    {
-                        if (result)
-                        {
-                            OnSaveCompleted();
-                            Mode = ScreenMode.Edition;
-                        }
-                    }, TaskContinuationOptions.OnlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously)
-
-                    .ContinueWith(t =>
-                    {
-                        State = ScreenState.Ready;
-                    });
-
-                await task;
+                // Start the background worker
+                _saveDataBackgroundWorker.RunWorkerAsync();
             }
             else
             {
@@ -170,14 +132,58 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         }
 
         /// <summary>
+        /// Called when [background worker run worker completed].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RunWorkerCompletedEventArgs"/> instance containing the event data.</param>
+        private void OnBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error == null)
+            {
+                OnSaveCompleted();
+                Mode = ScreenMode.Edition;
+            }
+            State = ScreenState.Ready;
+        }
+
+        /// <summary>
+        /// Called when [background worker on do work].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="doWorkEventArgs">The <see cref="DoWorkEventArgs"/> instance containing the event data.</param>
+        private void OnBackgroundWorkerOnDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
+        {
+            try
+            {
+                var result = SaveItemCore();
+                if(!result) _saveDataBackgroundWorker.Abort();
+            }
+            catch (Exception exception)
+            {
+                if (exception.InnerException is ValidationBusinessException validationBusinessException)
+                {
+                    foreach (var error in validationBusinessException.Errors)
+                    {
+                        OnBusinessExceptionOccured(new BusinessException(error.ToString()));
+                    }
+                }
+                else if (exception.InnerException is BusinessException businessException)
+                {
+                    OnBusinessExceptionOccured(businessException);
+                }
+                else
+                {
+                    OnExceptionOccured(exception.InnerException);
+                }
+            }
+        }
+
+        /// <summary>
         /// Add a new item.
         /// </summary>
-        protected virtual async void SaveAsync()
+        protected virtual void Save()
         {
-            if (CanSave())
-            {
-                await SaveDataAsync();
-            }
+           SaveCore();
         }
 
         /// <summary>
@@ -246,7 +252,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             _activeId = id;
             Mode = id == 0 ? ScreenMode.Creation : ScreenMode.Edition;
-            RefreshDataAsync();
+            Refresh();
         }
 
         /// <inheritdoc />
@@ -255,7 +261,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected override void LoadDataCore()
         {
-            if (Item == null || Item.Id != _activeId)
                 Item = _activeId > 0 ? LoadItemCore(_activeId) : new TModel();
         }
 

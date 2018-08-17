@@ -35,14 +35,14 @@
                 <TextBox x:Name="PhoneValue" Grid.Column="1"
                                  Width="{StaticResource SmallLargeWidth}"
                                  Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
-                                 parameters:FormParameters.Label="{x:Static entities:ContactResources.Phone}" />
+                                 parameters:TextBoxParameters.Watermark="{x:Static entities:ContactResources.Phone}" />
 
                 <ComboBox Grid.Column="2"
                               IsTextSearchEnabled="True"
                               ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views:PlayerPhonesEditView}}, Path=DataContext.AllPhoneLabels}"
                               Text="{Binding Label, UpdateSourceTrigger=PropertyChanged}"
                               Width="120"
-                              parameters:FormParameters.Label="{x:Static entities:ContactResources.Label}"
+                              parameters:TextBoxParameters.Watermark="{x:Static entities:ContactResources.Label}"
                               IsEditable="True" />
 
                 <CheckBox Grid.Column="3" ToolTip="{x:Static entities:ContactResources.Default}" IsChecked="{Binding Default, UpdateSourceTrigger=PropertyChanged}" />

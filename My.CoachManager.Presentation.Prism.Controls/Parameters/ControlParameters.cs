@@ -11,15 +11,15 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
     /// </summary>
     public static class ControlParameters
     {
-        #region ContentCharacterCasing
+        #region CharacterCasing
 
         /// <summary>
         /// The DependencyProperty for the CharacterCasing property.
         /// Controls whether or not content is converted to upper or lower case
         /// </summary>
-        public static readonly DependencyProperty ContentCharacterCasingProperty =
+        public static readonly DependencyProperty CharacterCasingProperty =
             DependencyProperty.RegisterAttached(
-                "ContentCharacterCasing",
+                "CharacterCasing",
                 typeof(CharacterCase),
                 typeof(ControlParameters),
                 new FrameworkPropertyMetadata(CharacterCase.Normal, FrameworkPropertyMetadataOptions.AffectsMeasure),
@@ -30,9 +30,9 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
         /// </summary>
         [Category(Constants.ParameterCategory)]
         [AttachedPropertyBrowsableForType(typeof(UIElement))]
-        public static CharacterCase GetContentCharacterCasing(UIElement element)
+        public static CharacterCase GetCharacterCasing(UIElement element)
         {
-            var value = element.GetValue(ContentCharacterCasingProperty);
+            var value = element.GetValue(CharacterCasingProperty);
             if (value != null)
                 return (CharacterCase)value;
             return CharacterCase.Normal;
@@ -41,12 +41,12 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
         /// <summary>
         /// Sets the character casing of the control
         /// </summary>
-        public static void SetContentCharacterCasing(UIElement element, CharacterCase value)
+        public static void SetCharacterCasing(UIElement element, CharacterCase value)
         {
-            element.SetValue(ContentCharacterCasingProperty, value);
+            element.SetValue(CharacterCasingProperty, value);
         }
 
-        #endregion ContentCharacterCasing
+        #endregion CharacterCasing
 
         #region Icon
 

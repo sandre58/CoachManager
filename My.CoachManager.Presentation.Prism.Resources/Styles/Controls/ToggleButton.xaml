@@ -42,13 +42,15 @@
     </Style>
 
     <Style x:Key="MainMenuToggleButtonStyle" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource ButtonBaseStyle}">
-        <Setter Property="Foreground" Value="{DynamicResource Light}" />
-        <Setter Property="Background" Value="{DynamicResource Dark}" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="Background" Value="{DynamicResource LightAccent}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource LightAccent}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource Accent}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">

@@ -18,9 +18,7 @@
         <Border VerticalAlignment="Stretch" Background="{DynamicResource DarkAccent}" Effect="{DynamicResource RightShadow}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="200" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -31,27 +29,66 @@
                     </ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <!-- Title -->
-                <TextBlock Grid.Row="0" Grid.Column="0"
-                           Text="{Binding Source={x:Static properties:Settings.Default}, Path=ClubName, Mode=OneWay}"
-                           Style="{StaticResource ModernWindowTitle}"
-                               Foreground="{DynamicResource AccentForeground}"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Typography.Capitals="AllSmallCaps"
-                           Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <!-- Header -->
+                <Border Grid.Row="0" Height="150" Background="{DynamicResource LightAccent}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MaxWidth="90" Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
 
-                <!-- Logo -->
-                <Image Grid.Row="1" Grid.Column="0"
-                       Source="{Binding Source={x:Static properties:Settings.Default}, Path=ClubLogo, Mode=OneWay}"
-                       Margin="5 20 5 20"
-                       SnapsToDevicePixels="False"
-                       RenderOptions.BitmapScalingMode="Fant" />
+                        <!-- Title -->
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Text="{Binding Source={x:Static properties:Settings.Default}, Path=ClubName, Mode=OneWay}"
+                                   Style="{StaticResource HeaderStyle}"
+                                   Foreground="{DynamicResource AccentForeground}"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Typography.Capitals="AllSmallCaps"
+                                   Margin="{StaticResource LargeHorizontalMargin}"
+                                   Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        
+                        <!-- Logo -->
+                        <Grid Grid.Row="1" Grid.Column="0" Margin="{StaticResource LargeMargin}" HorizontalAlignment="Left"
+                              Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Ellipse Fill="{DynamicResource AccentForeground}" Stroke="{DynamicResource HeaderBackground}" StrokeThickness="1" />
+                            <Image
+                                Source="{Binding Source={x:Static properties:Settings.Default}, Path=ClubLogo, Mode=OneWay}"
+                                SnapsToDevicePixels="False"
+                                RenderOptions.BitmapScalingMode="Fant"  Margin="{StaticResource MediumMargin}" />
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="0" Margin="{StaticResource DefaultMargin}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                              Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
+                            <Ellipse Fill="{DynamicResource AccentForeground}" Stroke="{DynamicResource HeaderBackground}" StrokeThickness="1" />
+                            <Image
+                                Source="{Binding Source={x:Static properties:Settings.Default}, Path=ClubLogo, Mode=OneWay}"
+                                SnapsToDevicePixels="False"
+                                RenderOptions.BitmapScalingMode="Fant"  Margin="{StaticResource DefaultMargin}" />
+                        </Grid>
+                        
+                        <!-- Informations -->
+                        <Grid Grid.Row="1" Grid.Column="1" Margin="{StaticResource LargeVerticalMargin}"
+                              Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                                <TextBlock Text="Informations diverses 1" />
+                                <TextBlock Text="Informations diverses 2" />
+                                <TextBlock Text="Informations diverses 3" />
+                            </StackPanel>
+                        </Grid>
+                        
+                    </Grid>
+                </Border>
 
                 <!-- Navigation Region -->
-                <ItemsControl Grid.Row="2" Grid.Column="0" prism:RegionManager.RegionName="{x:Static core:RegionNames.NavigationRegion}" Focusable="False" />
+                <ItemsControl Grid.Row="1" Grid.Column="0" prism:RegionManager.RegionName="{x:Static core:RegionNames.NavigationRegion}" Focusable="False" Margin="{StaticResource VeryVeryLargeVerticalMargin}" />
             </Grid>
         </Border>
+        
+        <!-- Expand button -->
         <ToggleButton
                       IsThreeState="False"
                       IsChecked="{Binding IsMenuExpended}"

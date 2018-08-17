@@ -23,7 +23,7 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// <param name="createFactory">The create factory.</param>
         /// <param name="modifyFactory">The modify factory.</param>
         /// <param name="validateEntity"></param>
-        void Save(IEnumerable<TBaseDto> entitiesBase, Func<TBaseDto, TEntity> createFactory, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null);
+        void Save(IEnumerable<TBaseDto> entitiesBase, Func<TBaseDto, TEntity> createFactory, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null, params Expression<Func<TEntity, object>>[] includes);
 
         /// <summary>
         /// Save in database the entity base.
@@ -35,7 +35,7 @@ namespace My.CoachManager.Domain.AppModule.Services
         TBaseDto Save(
             TBaseDto entityBase,
             Func<TBaseDto, TEntity> createFactory,
-            Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null);
+            Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null, params Expression<Func<TEntity, object>>[] includes);
 
         /// <summary>
         /// Add in database the entity base.
@@ -51,7 +51,7 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// <param name="entityBase">The entity base.</param>
         /// <param name="modifyFactory">The modify factory.</param>
         /// <param name="validateEntity"></param>
-        TBaseDto Modify(TBaseDto entityBase, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null);
+        TBaseDto Modify(TBaseDto entityBase, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null, params Expression<Func<TEntity, object>>[] includes);
 
         /// <summary>
         /// Remove in database the entity base.

@@ -269,7 +269,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             {
                 return;
             }
-
+            
             mainWindow.Show();
             mainWindow.Activate();
             mainWindow.Topmost = true; // important

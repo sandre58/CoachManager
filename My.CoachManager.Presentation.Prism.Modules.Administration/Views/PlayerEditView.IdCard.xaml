@@ -57,14 +57,12 @@
             <TextBox Grid.Column="0" x:Name="LastName"
                      Width="{StaticResource SmallLargeWidth}"
                      Text="{Binding Item.LastName, UpdateSourceTrigger=PropertyChanged}"
-                     parameters:FormParameters.Label="{x:Static entities:PersonResources.LastName}"
-                     parameters:FormParameters.IsRequired="True" />
+                     parameters:TextBoxParameters.Watermark="{x:Static entities:PersonResources.LastName}" />
 
             <TextBox Grid.Column="1"
                      Width="{StaticResource SmallLargeWidth}"
                      Text="{Binding Item.FirstName, UpdateSourceTrigger=PropertyChanged}"
-                     parameters:FormParameters.Label="{x:Static entities:PersonResources.FirstName}"
-                     parameters:FormParameters.IsRequired="True" />
+                     parameters:TextBoxParameters.Watermark="{x:Static entities:PersonResources.FirstName}" />
         </Grid>
 
         <controls:Icon Grid.Column="0" Grid.Row="1" Size="Medium" Content="{StaticResource GenderBothGeometry}" HorizontalAlignment="Center" />
@@ -79,11 +77,11 @@
 
             <StackPanel Orientation="Horizontal">
                 <RadioButton Style="{StaticResource IconRadioButtonStyle}" Content="{Binding Source={x:Static enums:GenderType.Male}, Converter={StaticResource EnumToStringConverter}}"
-                                     parameters:FormParameters.Icon="{DynamicResource GenderMaleGeometry}" parameters:ControlParameters.FocusBackground="{StaticResource Male}"
+                                     parameters:ControlParameters.Icon="{DynamicResource GenderMaleGeometry}" parameters:ControlParameters.FocusBackground="{StaticResource Male}"
                                      parameters:ControlParameters.PressedBackground="{StaticResource Male}"
                                           IsChecked="{Binding Item.Gender, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:GenderType.Male}, UpdateSourceTrigger=PropertyChanged}" />
                 <RadioButton Style="{StaticResource IconRadioButtonStyle}" Content="{Binding Source={x:Static enums:GenderType.Female}, Converter={StaticResource EnumToStringConverter}}"
-                                     parameters:FormParameters.Icon="{DynamicResource GenderFemaleGeometry}" parameters:ControlParameters.FocusBackground="{StaticResource Female}"
+                                     parameters:ControlParameters.Icon="{DynamicResource GenderFemaleGeometry}" parameters:ControlParameters.FocusBackground="{StaticResource Female}"
                                      parameters:ControlParameters.PressedBackground="{StaticResource Female}"
                                           IsChecked="{Binding Item.Gender, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:GenderType.Female}, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
@@ -97,7 +95,7 @@
                       SelectedValuePath="Id"
                       SelectedValue="{Binding Item.CountryId, UpdateSourceTrigger=PropertyChanged}"
                       Width="{StaticResource SmallLargeWidth}"
-                      parameters:FormParameters.Label="{x:Static entities:PersonResources.Country}"
+                      parameters:TextBoxParameters.Watermark="{x:Static entities:PersonResources.Country}"
                       parameters:TextBoxParameters.ClearTextButton="True"
                       Style="{StaticResource CountryBottomBorderComboboxStyle}" />
         </Grid>
@@ -111,12 +109,12 @@
             </Grid.ColumnDefinitions>
 
             <DatePicker Grid.Column="0" SelectedDate="{Binding Item.Birthdate, UpdateSourceTrigger=PropertyChanged}" Width="{StaticResource SmallLargeWidth}"
-                            parameters:FormParameters.Label="{x:Static entities:PersonResources.Birthdate}" />
+                            parameters:TextBoxParameters.Watermark="{x:Static entities:PersonResources.Birthdate}" />
 
             <TextBox Grid.Column="1"
                      Width="{StaticResource SmallLargeWidth}"
                      Text="{Binding Item.PlaceOfBirth, UpdateSourceTrigger=PropertyChanged}"
-                     parameters:FormParameters.Label="{x:Static entities:PersonResources.PlaceOfBirth}" />
+                     parameters:TextBoxParameters.Watermark="{x:Static entities:PersonResources.PlaceOfBirth}" />
         </Grid>
 
         <controls:Icon Grid.Column="0" Grid.Row="3" Size="Medium" Content="{StaticResource AddressGeometry}" HorizontalAlignment="Center" />
@@ -130,7 +128,7 @@
             <TextBox Grid.Row="0"
                      Width="{StaticResource LargeWidth}"
                      Text="{Binding Item.Address, UpdateSourceTrigger=PropertyChanged}"
-                     parameters:FormParameters.Label="{x:Static entities:PersonResources.Address}" />
+                     parameters:TextBoxParameters.Watermark="{x:Static entities:PersonResources.Address}" />
 
             <StackPanel Orientation="Horizontal" Grid.Row="1">
                 <ComboBox
@@ -138,7 +136,7 @@
                                 ItemsSource="{Binding AllPostalCodes}"
                                 Text="{Binding Item.PostalCode, UpdateSourceTrigger=PropertyChanged}"
                                 Width="{StaticResource MidSmallWidth}"
-                                parameters:FormParameters.Label="{x:Static entities:AddressResources.PostalCode}"
+                                parameters:TextBoxParameters.Watermark="{x:Static entities:AddressResources.PostalCode}"
                                 parameters:ComboBoxParameters.DropDownButtonVisible="False"
                                 parameters:TextBoxParameters.Mask="PositiveInteger"
                                 IsEditable="True"
@@ -148,7 +146,7 @@
                                       ItemsSource="{Binding AllCities}"
                                       Text="{Binding Item.City, UpdateSourceTrigger=PropertyChanged}"
                                       Width="{StaticResource SmallLargeWidth}"
-                                      parameters:FormParameters.Label="{x:Static entities:AddressResources.City}"
+                                      parameters:TextBoxParameters.Watermark="{x:Static entities:AddressResources.City}"
                                       parameters:ComboBoxParameters.DropDownButtonVisible="False"
                                       IsEditable="True" />
             </StackPanel>

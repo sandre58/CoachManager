@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Exceptions;
+using My.CoachManager.Presentation.Prism.Core.ComponentModel;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
@@ -11,6 +13,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         #region Fields
 
         private bool _dataInitialized;
+
+        /// <summary>
+        /// The laod data background worker.
+        /// </summary>
+        private AbortableBackgroundWorker _loadDataBackgroundWorker;
 
         #endregion Fields
 
@@ -75,22 +82,39 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Refreshes Data.
         /// </summary>
-        protected virtual async void RefreshDataAsync()
-        {
-            await LoadDataAsync();
-        }
-
-        /// <summary>
-        /// Load data.
-        /// </summary>
-        /// <returns></returns>
-        private async Task LoadDataAsync()
+        private void RefreshDataCore()
         {
             State = ScreenState.Loading;
 
             OnLoadDataRequested();
 
-            var task = Task.Factory.StartNew(() =>
+            _loadDataBackgroundWorker = new AbortableBackgroundWorker { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
+            _loadDataBackgroundWorker.RunWorkerCompleted += OnBackgroundWorkerRunWorkerCompleted;
+            _loadDataBackgroundWorker.DoWork += OnBackgroundWorkerOnDoWork;
+
+            // Start the background worker
+            _loadDataBackgroundWorker.RunWorkerAsync();
+        }
+
+        /// <summary>
+        /// Called when [background worker run worker completed].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RunWorkerCompletedEventArgs"/> instance containing the event data.</param>
+        private void OnBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            OnLoadDataCompleted();
+            State = ScreenState.Ready;
+        }
+
+        /// <summary>
+        /// Called when [background worker on do work].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="doWorkEventArgs">The <see cref="DoWorkEventArgs"/> instance containing the event data.</param>
+        private void OnBackgroundWorkerOnDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
+        {
+            try
             {
                 if (!_dataInitialized)
                 {
@@ -99,39 +123,18 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
                 }
 
                 LoadDataCore();
-            })
-
-                // Error
-                .ContinueWith(t =>
+            }
+            catch (Exception exception)
+            {
+                if (exception.InnerException is BusinessException businessException)
                 {
-                    if (t.Exception == null) return;
-                    if (t.Exception.InnerException is BusinessException businessException)
-                    {
-                        OnBusinessExceptionOccured(businessException);
-                    }
-                    else
-                    {
-                        OnExceptionOccured(t.Exception.InnerException);
-                    }
-                }, TaskContinuationOptions.OnlyOnFaulted)
-
-                // Cancel
-                .ContinueWith(t =>
+                    OnBusinessExceptionOccured(businessException);
+                }
+                else
                 {
-                }, TaskContinuationOptions.OnlyOnCanceled)
-
-                // Success
-                .ContinueWith(t =>
-                {
-                    OnLoadDataCompleted();
-                }, TaskContinuationOptions.OnlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously)
-
-                .ContinueWith(t =>
-                {
-                    State = ScreenState.Ready;
-                });
-
-            await task.ConfigureAwait(false);
+                    OnExceptionOccured(exception.InnerException);
+                }
+            }
         }
 
         /// <summary>
@@ -171,7 +174,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual void Refresh()
         {
-            RefreshDataAsync();
+            RefreshDataCore();
         }
 
         /// <summary>

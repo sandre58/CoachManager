@@ -138,7 +138,6 @@
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource DarkControlMouseOver}" />
         <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource ControlPressed}" />
         <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource ControlMouseOver}" />
-        <Setter Property="parameters:TextBoxParameters.Watermark" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:FormParameters.Label), Mode=OneWay}" />
         <Setter Property="parameters:TextBoxParameters.UseFloatingWatermark" Value="True" />
         <Setter Property="parameters:TextBoxParameters.ButtonWidth" Value="18" />
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource PopupValidationErrorTemplate}" />
@@ -229,7 +228,7 @@
                                      parameters:TextBoxParameters.ButtonFontSize="{TemplateBinding parameters:TextBoxParameters.ButtonFontSize}"
                                      parameters:TextBoxParameters.UseFloatingWatermark="{TemplateBinding parameters:TextBoxParameters.UseFloatingWatermark}"
                                      parameters:TextBoxParameters.Watermark="{TemplateBinding parameters:TextBoxParameters.Watermark}"
-                                     CharacterCasing="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ComboBoxParameters.CharacterCasing), Mode=OneWay}"
+                                     CharacterCasing="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.CharacterCasing), Mode=OneWay}"
                                      Focusable="True"
                                      IsReadOnly="{TemplateBinding IsReadOnly}"
                                      MaxLength="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ComboBoxParameters.MaxLength), Mode=OneWay}"
@@ -587,7 +586,6 @@
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource DarkControlMouseOver}" />
         <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource ControlPressed}" />
         <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource ControlMouseOver}" />
-        <Setter Property="parameters:TextBoxParameters.Watermark" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:FormParameters.Label), Mode=OneWay}" />
         <Setter Property="parameters:TextBoxParameters.UseFloatingWatermark" Value="True" />
         <Setter Property="parameters:TextBoxParameters.ButtonWidth" Value="18" />
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource PopupValidationErrorTemplate}" />
@@ -678,7 +676,7 @@
                                      parameters:TextBoxParameters.ButtonFontSize="{TemplateBinding parameters:TextBoxParameters.ButtonFontSize}"
                                      parameters:TextBoxParameters.UseFloatingWatermark="{TemplateBinding parameters:TextBoxParameters.UseFloatingWatermark}"
                                      parameters:TextBoxParameters.Watermark="{TemplateBinding parameters:TextBoxParameters.Watermark}"
-                                     CharacterCasing="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ComboBoxParameters.CharacterCasing), Mode=OneWay}"
+                                     CharacterCasing="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.CharacterCasing), Mode=OneWay}"
                                      Focusable="True"
                                      MaxLength="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ComboBoxParameters.MaxLength), Mode=OneWay}"
                                      parameters:TextBoxParameters.Mask="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.Mask), Mode=OneWay}"

@@ -17,6 +17,6 @@
              IsOpen="{Binding IsOpen}"
                  Style="{StaticResource {x:Type controls:Flyout}}">
     <Grid>
-        <ItemsControl  regions:RegionManager.RegionName="{x:Static core:RegionNames.SettingsRegion}" />
+        <ItemsControl  regions:RegionManager.RegionName="{x:Static core:RegionNames.SettingsRegion}" Focusable="False" />
     </Grid>
 </controls:Flyout>

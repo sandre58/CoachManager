@@ -38,7 +38,7 @@
                     Minimum="1900" Interval="1"
                     Width="{StaticResource MediumWidth}"
                     Value="{Binding Item.Year, UpdateSourceTrigger=PropertyChanged}"
-                    parameters:FormParameters.Label="{x:Static strings:CategoryResources.Year}" />
+                    parameters:TextBoxParameters.Watermark="{x:Static strings:CategoryResources.Year}" />
             </Grid>
         </Grid>
 

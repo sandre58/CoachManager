@@ -6,7 +6,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <!-- ACCENT -->
-    <Color x:Key="LightAccentColor">#FB0000</Color>
+    <Color x:Key="LightAccentColor">#b30000</Color>
     <Color x:Key="AccentColor">#8F0000</Color>
     <Color x:Key="DarkAccentColor">#520303</Color>
     <Color x:Key="AccentTextColor">#ffffff</Color>

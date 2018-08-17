@@ -30,14 +30,14 @@
                       SelectedValuePath="Id"
                       SelectedValue="{Binding Item.CategoryId, UpdateSourceTrigger=PropertyChanged}"
                       Width="{StaticResource MidSmallWidth}"
-                      parameters:FormParameters.Label="{x:Static entities:PlayerResources.Category}" />
+                      parameters:TextBoxParameters.Watermark="{x:Static entities:PlayerResources.Category}" />
 
         <controls:Icon Grid.Column="0" Grid.Row="1" Size="Medium" Content="{StaticResource LicenseGeometry}" HorizontalAlignment="Center" />
 
         <TextBox Grid.Column="1" Grid.Row="1"
                      Width="{StaticResource MediumWidth}"
                      Text="{Binding Item.LicenseNumber, UpdateSourceTrigger=PropertyChanged}"
-                     parameters:FormParameters.Label="{x:Static entities:PersonResources.LicenseNumber}"
+                     parameters:TextBoxParameters.Watermark="{x:Static entities:PersonResources.LicenseNumber}"
                      parameters:TextBoxParameters.Mask="PositiveInteger" MaxLength="10" />
 
         <controls:Icon Grid.Column="0" Grid.Row="2" Size="Medium" Content="{StaticResource DescriptionGeometry}" HorizontalAlignment="Center" />
@@ -45,7 +45,7 @@
         <TextBox Grid.Column="1" Grid.Row="2"
                      HorizontalAlignment="Stretch"
                      Text="{Binding Item.Description, UpdateSourceTrigger=PropertyChanged}"
-                     parameters:FormParameters.Label="{x:Static entities:PersonResources.Description}"
+                     parameters:TextBoxParameters.Watermark="{x:Static entities:PersonResources.Description}"
                      TextWrapping="Wrap"
                      AcceptsReturn="True"
                      Height="100"

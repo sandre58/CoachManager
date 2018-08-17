@@ -196,7 +196,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <param name="result"></param>
         protected virtual void OnAddCompleted(DialogResult result)
         {
-            if (result == DialogResult.Ok) RefreshDataAsync();
+            if (result == DialogResult.Ok) Refresh();
         }
 
         #endregion Add
@@ -235,7 +235,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <param name="result">The dialog result.</param>
         protected virtual void OnEditCompleted(DialogResult result)
         {
-            if (result == DialogResult.Ok) RefreshDataAsync();
+            if (result == DialogResult.Ok) Refresh();
         }
 
         #endregion Edit
@@ -287,7 +287,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <param name="item">The item.</param>
         protected virtual void OnRemoveCompleted(TEntityModel item)
         {
-            RefreshDataAsync();
+            Refresh();
         }
 
         #endregion Remove

@@ -67,7 +67,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
             _workspaceBindings = new List<KeyBinding>();
             _workspaceDialogBindings = new List<KeyBinding>();
 
-            EventManager.RegisterClassHandler(typeof(Window), Keyboard.PreviewKeyDownEvent, new KeyEventHandler(OnPreviewKeyDown), true);
+            //EventManager.RegisterClassHandler(typeof(Window), Keyboard.PreviewKeyDownEvent, new KeyEventHandler(OnPreviewKeyDown), true);
         }
 
         #endregion Constructors
@@ -108,6 +108,15 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         {
             // Register them in the binding collection
             _workspaceBindings.Add(shortcut);
+
+            //System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            //{
+            //    if (System.Windows.Application.Current.MainWindow != null)
+            //    {
+            //        if (!System.Windows.Application.Current.MainWindow.InputBindings.Contains(shortcut))
+            //            System.Windows.Application.Current.MainWindow.InputBindings.Add(shortcut);
+            //    }
+            //});
         }
 
         /// <summary>
@@ -192,49 +201,49 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
         /// <param name="e">The <see cref="KeyEventArgs" /> instance containing the event data.</param>
         private void OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
-            // Not intercept the Esc key for toogle  Menu
-            if (NotInterceptControl.Any(x => sender.GetType() == x))
-            {
-                return;
-            }
+        //    // Not intercept the Esc key for toogle  Menu
+        //    if (NotInterceptControl.Any(x => sender.GetType() == x))
+        //    {
+        //        return;
+        //    }
 
-            try
-            {
-                // WorkspaceDialog Bindings
-                if (!WorkspaceDialogBindingsIsSuspended)
-                {
-                    var keyBinding = _workspaceDialogBindings.FirstOrDefault(w =>
-                        w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
-                    if (keyBinding != null)
-                    {
-                        keyBinding.Command.Execute(keyBinding.CommandParameter);
-                        return;
-                    }
-                }
+        //    try
+        //    {
+        //        // WorkspaceDialog Bindings
+        //        if (!WorkspaceDialogBindingsIsSuspended)
+        //        {
+        //            var keyBinding = _workspaceDialogBindings.FirstOrDefault(w =>
+        //                w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
+        //            if (keyBinding != null)
+        //            {
+        //                keyBinding.Command.Execute(keyBinding.CommandParameter);
+        //                return;
+        //            }
+        //        }
 
-                // Workspace Bindings
-                if (!WorkspaceBindingsIsSuspended)
-                {
-                    var keyBinding =
-                        _workspaceBindings.FirstOrDefault(w => w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
-                    if (keyBinding != null)
-                    {
-                        keyBinding.Command.Execute(keyBinding.CommandParameter);
-                        return;
-                    }
-                }
+        //        // Workspace Bindings
+        //        if (!WorkspaceBindingsIsSuspended)
+        //        {
+        //            var keyBinding =
+        //                _workspaceBindings.FirstOrDefault(w => w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
+        //            if (keyBinding != null)
+        //            {
+        //                keyBinding.Command.Execute(keyBinding.CommandParameter);
+        //                return;
+        //            }
+        //        }
 
-                // Global Bindings
-                if (GlobalBindingsIsSuspended) return;
+        //        // Global Bindings
+        //        if (GlobalBindingsIsSuspended) return;
 
-                var keyBinding1 =
-                    _globalBindings.FirstOrDefault(w => w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
-                keyBinding1?.Command.Execute(keyBinding1.CommandParameter);
-            }
-            catch (Exception exception)
-            {
-                ServiceLocator.Current.TryResolve<ILogger>().Error(exception);
-            }
+        //        var keyBinding1 =
+        //            _globalBindings.FirstOrDefault(w => w.Key == e.Key && w.Modifiers == Keyboard.Modifiers);
+        //        keyBinding1?.Command.Execute(keyBinding1.CommandParameter);
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        ServiceLocator.Current.TryResolve<ILogger>().Error(exception);
+        //    }
         }
     }
 }

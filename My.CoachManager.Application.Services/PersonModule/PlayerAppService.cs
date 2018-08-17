@@ -97,34 +97,7 @@ namespace My.CoachManager.Application.Services.PersonModule
                 }
             }
 
-            return _crudDomainService.Save(dto, PlayerFactory.CreateEntity, PlayerFactory.UpdateEntity, x => _playerDomainService.Validate(x));
-
-            // var address = new AddressDto()
-            // {
-            //     Id = dto.AddressId ?? 0,
-            //     Row1 = dto.Address,
-            //     PostalCode = dto.PostalCode,
-            //     City = dto.City
-            // };
-
-
-
-
-
-            // // Add player
-            //// _playerRepository.AddOrModify(entity);
-
-            // // Commit changes
-            // _playerRepository.UnitOfWork.Commit();
-
-            // // Remove address entity
-            // if (!entity.AddressId.HasValue && address.Id != 0)
-            // {
-            //     _addressAppService.Remove(address);
-            // }
-
-            // return PlayerFactory.CreatePlayerDto(entity);
-
+            return _crudDomainService.Save(dto, PlayerFactory.CreateEntity, PlayerFactory.UpdateEntity, x => _playerDomainService.Validate(x), x => x.Contacts);
         }
 
         /// <summary>

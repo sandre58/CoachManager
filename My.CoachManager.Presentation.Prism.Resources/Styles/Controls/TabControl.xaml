@@ -56,7 +56,7 @@
                             <ContentControl  x:Name="ContentSite" Content="{TemplateBinding Header}" Margin="{TemplateBinding Padding}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                               params:ControlParameters.ContentCharacterCasing="Upper"
+                                               params:ControlParameters.CharacterCasing="Upper"
                                                TextOptions.TextFormattingMode="{TemplateBinding TextOptions.TextFormattingMode}"
                                                TextOptions.TextRenderingMode="{TemplateBinding TextOptions.TextRenderingMode}"
                                                RenderOptions.ClearTypeHint="{TemplateBinding RenderOptions.ClearTypeHint}"

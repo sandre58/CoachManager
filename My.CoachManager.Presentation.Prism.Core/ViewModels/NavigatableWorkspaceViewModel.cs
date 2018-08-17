@@ -54,7 +54,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <param name="navigationContext">The navigation context.</param>
         protected virtual void OnNavigatedToCore(NavigationContext navigationContext)
         {
-            RefreshDataAsync();
+            Refresh();
         }
 
         /// <inheritdoc />

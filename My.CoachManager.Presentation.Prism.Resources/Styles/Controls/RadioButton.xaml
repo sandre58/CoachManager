@@ -27,7 +27,7 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <controls:Icon Grid.Row="0" x:Name="Icon" Size="Medium" Foreground="{TemplateBinding Background}"  Content="{TemplateBinding parameters:FormParameters.Icon}" />
+                        <controls:Icon Grid.Row="0" x:Name="Icon" Size="Medium" Foreground="{TemplateBinding Background}"  Content="{TemplateBinding parameters:ControlParameters.Icon}" />
                         <TextBlock Grid.Row="1" x:Name="Title" Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" />
                     </Grid>
                     <ControlTemplate.Triggers>

@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Input;
-using My.CoachManager.Presentation.Prism.Core.Commands;
+﻿using System.Windows;using My.CoachManager.Presentation.Prism.Core.Commands;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Events;
 using My.CoachManager.Presentation.Prism.Core.Manager;

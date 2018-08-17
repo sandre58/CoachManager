@@ -27,10 +27,10 @@
 
         <StackPanel Grid.Row="0" Grid.Column="1"  Orientation="Horizontal">
             <RadioButton Style="{StaticResource IconRadioButtonStyle}" Content="{Binding Source={x:Static enums:Laterality.LeftHander}, Converter={StaticResource EnumToStringConverter}}"
-                                     parameters:FormParameters.Icon="{DynamicResource LeftFootGeometry}"
+                                     parameters:ControlParameters.Icon="{DynamicResource LeftFootGeometry}"
                                           IsChecked="{Binding Item.Laterality, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:Laterality.LeftHander}, UpdateSourceTrigger=PropertyChanged}" />
             <RadioButton Style="{StaticResource IconRadioButtonStyle}" Content="{Binding Source={x:Static enums:Laterality.RightHander}, Converter={StaticResource EnumToStringConverter}}"
-                             parameters:FormParameters.Icon="{DynamicResource RightFootGeometry}"
+                             parameters:ControlParameters.Icon="{DynamicResource RightFootGeometry}"
                              IsChecked="{Binding Item.Laterality, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:Laterality.RightHander}, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
 
@@ -50,7 +50,7 @@
                 Width="{StaticResource MediumWidth}"
                 Value="{Binding Item.Height, UpdateSourceTrigger=PropertyChanged}"
                 StringFormat="{}{0} cm"
-                parameters:FormParameters.Label="{x:Static entities:PlayerResources.Height}" />
+                parameters:TextBoxParameters.Watermark="{x:Static entities:PlayerResources.Height}" />
 
             <controls:Icon Grid.Column="2" Grid.Row="0" Size="Medium" Content="{StaticResource WeighGeometry}" HorizontalAlignment="Center" />
 
@@ -60,7 +60,7 @@
                 Width="{StaticResource MidSmallWidth}"
                 Value="{Binding Item.Weight, UpdateSourceTrigger=PropertyChanged}"
                 StringFormat="{}{0} kg"
-                parameters:FormParameters.Label="{x:Static entities:PlayerResources.Weight}" />
+                parameters:TextBoxParameters.Watermark="{x:Static entities:PlayerResources.Weight}" />
         </Grid>
 
         <controls:Icon Grid.Column="0" Grid.Row="2" Size="Medium" Content="{StaticResource ClothesGeometry}" HorizontalAlignment="Center" />
@@ -78,8 +78,8 @@
                       ItemsSource="{Binding AllSizes}"
                       Text="{Binding Item.Size, UpdateSourceTrigger=PropertyChanged}"
                       Width="{StaticResource MidSmallWidth}"
-                      parameters:FormParameters.Label="{x:Static entities:PersonResources.Size}"
-                      parameters:ComboBoxParameters.CharacterCasing="Upper"
+                      parameters:TextBoxParameters.Watermark="{x:Static entities:PersonResources.Size}"
+                      parameters:ControlParameters.CharacterCasing="Upper"
                       IsEditable="True" />
 
             <controls:Icon Grid.Column="2" Grid.Row="0" Size="Medium" Content="{StaticResource MeasureFootGeometry}" HorizontalAlignment="Center" />
@@ -89,7 +89,7 @@
                 Minimum="25" Maximum="50" Interval="1"
                 Width="{StaticResource MidSmallWidth}"
                 Value="{Binding Item.ShoesSize, UpdateSourceTrigger=PropertyChanged}"
-                parameters:FormParameters.Label="{x:Static entities:PlayerResources.ShoesSize}" />
+                parameters:TextBoxParameters.Watermark="{x:Static entities:PlayerResources.ShoesSize}" />
         </Grid>
     </Grid>
 </UserControl>

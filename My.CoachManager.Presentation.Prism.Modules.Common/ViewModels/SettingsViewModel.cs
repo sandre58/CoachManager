@@ -30,7 +30,6 @@ namespace My.CoachManager.Presentation.Prism.Modules.Common.ViewModels
             var toggleSettingsCommand = new DelegateCommand(() => IsOpen = !IsOpen);
 
             GlobalCommands.ToggleSettingsCommand.RegisterCommand(toggleSettingsCommand);
-            KeyboardManager.RegisterGlobalShortcut(new KeyBinding(toggleSettingsCommand, Key.F4, ModifierKeys.None));
         }
 
         #endregion Initialisation

@@ -12,13 +12,6 @@
         <ResourceDictionary Source="Thumb.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="ModernWindowTitle" TargetType="TextBlock">
-        <Setter Property="TextWrapping" Value="NoWrap" />
-        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
-        <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
-    </Style>
-
     <ControlTemplate x:Key="ExtendedWindowTemplate" TargetType="{x:Type controls:ExtendedWindow}">
         <Grid
             Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}">
@@ -99,7 +92,7 @@
                     <controls:ThumbContentControl x:Name="PART_TitleBar"
                                                        Grid.Row="0"
                                                        Grid.Column="2"
-                                                       parameters:ControlParameters.ContentCharacterCasing="{TemplateBinding TitleCharacterCasing}"
+                                                       parameters:ControlParameters.CharacterCasing="{TemplateBinding TitleCharacterCasing}"
                                                        Height="{Binding TitlebarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                                        HorizontalAlignment="{TemplateBinding TitleAlignment}"
                                                        HorizontalContentAlignment="Stretch"
@@ -273,6 +266,7 @@
         <Setter Property="MinHeight" Value="320" />
         <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
         <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="Template" Value="{StaticResource ExtendedWindowTemplate}" />
         <Setter Property="IconTemplate">

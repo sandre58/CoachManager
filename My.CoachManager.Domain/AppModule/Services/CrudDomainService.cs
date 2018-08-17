@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using FluentValidation.Results;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Exceptions;
@@ -40,7 +41,7 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// <param name="createFactory">The create factory.</param>
         /// <param name="modifyFactory">The modify factory.</param>
         /// <param name="validateEntity"></param>
-        public void Save(IEnumerable<TBaseDto> entitiesBase, Func<TBaseDto, TEntity> createFactory, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null)
+        public void Save(IEnumerable<TBaseDto> entitiesBase, Func<TBaseDto, TEntity> createFactory, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null, params Expression<Func<TEntity, object>>[] includes)
         {
             var entitiesBaseList = entitiesBase.ToList();
 
@@ -61,7 +62,7 @@ namespace My.CoachManager.Domain.AppModule.Services
 
             foreach (var item in entitiesBaseList.Where(w => w.CrudStatus == CrudStatus.Updated))
             {
-                Modify(item, modifyFactory, validateEntity);
+                Modify(item, modifyFactory, validateEntity, includes);
             }
         }
 
@@ -73,7 +74,7 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// <param name="createFactory">The create factory.</param>
         /// <param name="modifyFactory">The modify factory.</param>
         /// <param name="validateEntity"></param>
-        public TBaseDto Save(TBaseDto entityBase, Func<TBaseDto, TEntity> createFactory, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null)
+        public TBaseDto Save(TBaseDto entityBase, Func<TBaseDto, TEntity> createFactory, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null, params Expression<Func<TEntity, object>>[] includes)
         {
             // Delete
             if (entityBase.CrudStatus == CrudStatus.Deleted)
@@ -88,7 +89,7 @@ namespace My.CoachManager.Domain.AppModule.Services
 
             if (entityBase.CrudStatus == CrudStatus.Updated)
             {
-                return Modify(entityBase, modifyFactory, validateEntity);
+                return Modify(entityBase, modifyFactory, validateEntity, includes);
             }
 
             return entityBase;
@@ -154,9 +155,9 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// <param name="entityBase">The entity base.</param>
         /// <param name="modifyFactory">The modify factory.</param>
         /// <param name="validateEntity"></param>
-        public TBaseDto Modify(TBaseDto entityBase, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null)
+        public TBaseDto Modify(TBaseDto entityBase, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null, params Expression<Func<TEntity, object>>[] includes)
         {
-            var entity = _entityRepository.GetEntity(entityBase.Id);
+            var entity = _entityRepository.GetEntity(entityBase.Id, includes);
             modifyFactory.Invoke(entityBase, entity);
 
             if (entity == null)

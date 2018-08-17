@@ -34,7 +34,7 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="FontSize" Value="{StaticResource NormalFontSize}" />
-        <Setter Property="parameters:ControlParameters.ContentCharacterCasing" Value="Upper" />
+        <Setter Property="parameters:ControlParameters.CharacterCasing" Value="Upper" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
@@ -53,7 +53,7 @@
                                         Content="{TemplateBinding Content}"
                                         ContentStringFormat="{TemplateBinding ContentStringFormat}"
                                         ContentTemplate="{TemplateBinding ContentTemplate}"
-                                        parameters:ControlParameters.ContentCharacterCasing="{TemplateBinding parameters:ControlParameters.ContentCharacterCasing}"
+                                        parameters:ControlParameters.CharacterCasing="{TemplateBinding parameters:ControlParameters.CharacterCasing}"
                                         ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                         TextBlock.FontWeight="{TemplateBinding FontWeight}"
@@ -136,7 +136,7 @@
                                                    Content="{TemplateBinding Content}"
                                                    ContentStringFormat="{TemplateBinding ContentStringFormat}"
                                                    ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                   parameters:ControlParameters.ContentCharacterCasing="{TemplateBinding parameters:ControlParameters.ContentCharacterCasing}"
+                                                   parameters:ControlParameters.CharacterCasing="{TemplateBinding parameters:ControlParameters.CharacterCasing}"
                                                    ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                    TextBlock.FontWeight="Bold" />
@@ -216,7 +216,7 @@
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Transparent}" />
         <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.ContentCharacterCasing" Value="Normal" />
+        <Setter Property="parameters:ControlParameters.CharacterCasing" Value="Normal" />
         <Setter Property="FontWeight" Value="Normal" />
     </Style>
 
@@ -271,7 +271,7 @@
         <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource AccentControlMouseOver}" />
         <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource AccentControlPressed}" />
         <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Transparent}" />
-        <Setter Property="parameters:ControlParameters.ContentCharacterCasing" Value="Normal" />
+        <Setter Property="parameters:ControlParameters.CharacterCasing" Value="Normal" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="MaxWidth" Value="34" />

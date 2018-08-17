@@ -173,7 +173,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual void CancelOrder()
         {
-            RefreshDataAsync();
+            Refresh();
             State = ScreenState.Ready;
             Mode = ScreenMode.Read;
             CanOrder = false;

@@ -47,7 +47,6 @@ namespace My.CoachManager.Presentation.Prism.Modules.Common
             });
 
             GlobalCommands.ShowAboutViewCommand.RegisterCommand(showAboutCommand);
-            KeyboardManager.RegisterGlobalShortcut(new KeyBinding(showAboutCommand, Key.F1, ModifierKeys.None));
         }
     }
 }

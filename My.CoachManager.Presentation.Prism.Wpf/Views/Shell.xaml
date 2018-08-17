@@ -11,6 +11,7 @@
         xmlns:interactivity="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.Interactivity"
         xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.Views"
         xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.Resources"
+        xmlns:commands="clr-namespace:My.CoachManager.Presentation.Prism.Core.Commands;assembly=My.CoachManager.Presentation.Prism.Core"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
         d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel}"
@@ -19,13 +20,19 @@
         WindowState="Maximized"
                          ShowIconOnTitleBar="False"
                          ShowTitleOnTitleBar="False"
-        Style="{StaticResource ModernWindowStyle}" IsTitleOverlay="True" Focusable="False">
+        Style="{StaticResource ModernWindowStyle}" IsTitleOverlay="True">
 
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding WorkspaceDialogInteractionRequest}">
             <interactivity:WorkspaceDialogAction WorkspaceDialog="{Binding ElementName=WorkspaceDialog}" />
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
+    
+    <!-- HotKeys -->
+    <controls:ExtendedWindow.InputBindings>
+        <KeyBinding Key="F1" Command="{x:Static commands:GlobalCommands.ShowAboutViewCommand}" />
+        <KeyBinding Key="F2" Command="{x:Static commands:GlobalCommands.ToggleSettingsCommand}" />
+    </controls:ExtendedWindow.InputBindings>
 
     <!-- Commands -->
     <controls:ExtendedWindow.RightWindowCommands>

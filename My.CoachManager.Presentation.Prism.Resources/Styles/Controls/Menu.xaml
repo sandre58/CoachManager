@@ -26,7 +26,6 @@
 
     <!--Toggle Button -->
     <Style x:Key="NavigationExpanderToggleButtonStyle" TargetType="{x:Type ToggleButton}">
-        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
@@ -116,13 +115,12 @@
                                           ContentTemplate="{TemplateBinding HeaderTemplate}"
                                           Content="{TemplateBinding Header}"
                                           DockPanel.Dock="Top"
-                              Focusable="False"
+                                          Focusable="{TemplateBinding IsExpanded, Converter={StaticResource NotConverter}}"
                                           Foreground="{TemplateBinding Foreground}"
                                           FontWeight="{TemplateBinding FontWeight}" FontStyle="{TemplateBinding FontStyle}" FontStretch="{TemplateBinding FontStretch}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}"
                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                           IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                          MinWidth="0" MinHeight="0" Height="{DynamicResource LargeHeight}" Style="{StaticResource NavigationExpanderToggleButtonStyle}">
-                </ToggleButton>
+                                          MinWidth="0" MinHeight="0" Height="{DynamicResource LargeHeight}" Style="{StaticResource NavigationExpanderToggleButtonStyle}"/>
                 <ContentPresenter x:Name="ExpandSite" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" DockPanel.Dock="Bottom" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                     <ContentPresenter.LayoutTransform>
                         <ScaleTransform x:Name="scaleTransform" ScaleX="1" ScaleY="1" />
@@ -140,7 +138,6 @@
                     <BeginStoryboard Storyboard="{StaticResource ScaleYDown}" />
                 </Trigger.ExitActions>
             </Trigger>
-
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="{DynamicResource DisabledOpacity}" />
             </Trigger>
@@ -204,7 +201,10 @@
                 <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{Binding Path=Color, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:NavigationExpander}}" />
+                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource AccentForeground}" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource AccentForeground}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True" />
             <Trigger Property="IsEnabled" Value="False">
@@ -225,7 +225,6 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="BorderThickness" Value="4,0,0,0" />
-        <Setter Property="Focusable" Value="False" />
         <Setter Property="Cursor" Value="{x:Static Cursors.Hand}" />
         <Setter Property="Template" Value="{StaticResource NavigationItemTemplate}" />
         <Setter Property="Command" Value="{x:Static global:GlobalCommands.NavigateCommand}" />
@@ -237,6 +236,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource DarkAccentControlMouseOver}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -269,10 +269,10 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="BorderThickness" Value="4,0,0,0" />
-        <Setter Property="Focusable" Value="False" />
         <Setter Property="Cursor" Value="{x:Static Cursors.Hand}" />
         <Setter Property="Template" Value="{StaticResource NavigationExpanderTemplate}" />
         <Setter Property="HeaderTemplate" Value="{StaticResource NavigationExpanderHeaderTemplate}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>
     <Style x:Key="NavigationExpanderStyle" TargetType="{x:Type controls:NavigationExpander}" BasedOn="{StaticResource {x:Type controls:NavigationExpander}}" />
 </ResourceDictionary>

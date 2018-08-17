@@ -124,7 +124,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
         /// <param name="result">The dialog result.</param>
         protected virtual void OnEditCompleted(TEntityViewModel item, DialogResult result)
         {
-            if (result == DialogResult.Ok) RefreshDataAsync();
+            if (result == DialogResult.Ok) Refresh();
         }
 
         #endregion Edit
@@ -137,7 +137,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
         public void LoadItemById(int id)
         {
             _activeId = id;
-            RefreshDataAsync();
+            Refresh();
         }
 
         /// <summary>

@@ -23,7 +23,7 @@
 
     <Style TargetType="{x:Type controls:WindowCommands}">
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
-        <Setter Property="parameters:ControlParameters.ContentCharacterCasing" Value="Normal" />
+        <Setter Property="parameters:ControlParameters.CharacterCasing" Value="Normal" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
         <Setter Property="IsTabStop" Value="False" />

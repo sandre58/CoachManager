@@ -65,7 +65,7 @@
                                 parameters:ControlParameters.FocusForeground="{TemplateBinding parameters:ControlParameters.FocusForeground}"
                                 parameters:ControlParameters.FocusBorderBrush="{TemplateBinding parameters:ControlParameters.FocusBorderBrush}"
                                 parameters:ControlParameters.FocusBackground="{TemplateBinding parameters:ControlParameters.FocusBackground}"
-                                parameters:ControlParameters.ContentCharacterCasing="{TemplateBinding parameters:ControlParameters.ContentCharacterCasing}"
+                                parameters:ControlParameters.CharacterCasing="{TemplateBinding parameters:ControlParameters.CharacterCasing}"
                                 IsHitTestVisible="{Binding IsOpen, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NotConverter}}"
                                 IsChecked="{Binding IsOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
                             <Grid>
@@ -171,7 +171,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 FontSize="{TemplateBinding FontSize}"
                                 FontWeight="{TemplateBinding FontWeight}"
-                                parameters:ControlParameters.ContentCharacterCasing="{TemplateBinding parameters:ControlParameters.ContentCharacterCasing}">
+                                parameters:ControlParameters.CharacterCasing="{TemplateBinding parameters:ControlParameters.CharacterCasing}">
                         <Button.ContentTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -243,7 +243,7 @@
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Transparent}" />
         <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.ContentCharacterCasing" Value="Normal" />
+        <Setter Property="parameters:ControlParameters.CharacterCasing" Value="Normal" />
         <Setter Property="FontWeight" Value="Normal" />
     </Style>
 </ResourceDictionary>

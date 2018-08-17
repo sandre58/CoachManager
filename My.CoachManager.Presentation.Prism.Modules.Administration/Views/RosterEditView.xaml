@@ -31,7 +31,7 @@
             <controls:Icon Grid.Column="0" Grid.Row="0" Size="Medium" Content="{DynamicResource InformationGeometry}" HorizontalAlignment="Center" />
 
             <Grid Grid.Row="0" Grid.Column="1">
-                <TextBox Width="{StaticResource LargeWidth}" Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged}" parameters:FormParameters.Label="{x:Static strings:RosterResources.Name}" />
+                <TextBox Width="{StaticResource LargeWidth}" Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged}" parameters:TextBoxParameters.Watermark="{x:Static strings:RosterResources.Name}" />
             </Grid>
 
             <controls:Icon Grid.Row="1" Grid.Column="0" Size="Medium" Content="{DynamicResource CalendarGeometry}" HorizontalAlignment="Center" />
@@ -43,7 +43,7 @@
                           SelectedValuePath="Id"
                           SelectedValue="{Binding Item.SeasonId, UpdateSourceTrigger=PropertyChanged}"
                           Width="{StaticResource MediumWidth}"
-                          parameters:FormParameters.Label="{x:Static strings:RosterResources.Season}" />
+                          parameters:TextBoxParameters.Watermark="{x:Static strings:RosterResources.Season}" />
             </Grid>
 
             <controls:Icon Grid.Row="2" Grid.Column="0" Size="Medium" Content="{DynamicResource BookOpenGeometry}" HorizontalAlignment="Center" />
@@ -56,7 +56,7 @@
                           SelectedValuePath="Id"
                           SelectedValue="{Binding Item.CategoryId, UpdateSourceTrigger=PropertyChanged}"
                           Width="{StaticResource MidSmallWidth}"
-                          parameters:FormParameters.Label="{x:Static strings:RosterResources.Category}" />
+                          parameters:TextBoxParameters.Watermark="{x:Static strings:RosterResources.Category}" />
             </Grid>
         </Grid>
 

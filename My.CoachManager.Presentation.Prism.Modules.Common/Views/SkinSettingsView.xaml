@@ -55,7 +55,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="{x:Static strings:SettingsResources.Skin}" parameters:FormParameters.Icon="{StaticResource EyeSettingsGeometry}"  Style="{StaticResource AccentSmallHeaderIconStyle}" />
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="{x:Static strings:SettingsResources.Skin}" parameters:ControlParameters.Icon="{StaticResource EyeSettingsGeometry}"  Style="{StaticResource AccentSmallHeaderIconStyle}" />
         <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static strings:SettingsResources.Theme}" />
         <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding SelectedTheme}" Width="{StaticResource MediumWidth}"
                   Style="{StaticResource ThemeComboboxStyle}"

@@ -199,7 +199,6 @@
     <Compile Include="Windows\NotificationPosition.cs" />
     <Compile Include="ExtendedNumericUpDown.cs" />
     <Compile Include="NumericUpDowns\NumericUpDownChangedRoutedEventArgs.cs" />
-    <Compile Include="Parameters\FormParameters.cs" />
     <Compile Include="Parameters\TextBoxParameters.cs" />
     <Compile Include="Parameters\UiElementParameters.cs" />
     <Compile Include="ProgressRing.cs" />

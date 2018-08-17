@@ -59,31 +59,6 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
             obj.SetValue(MaxLengthProperty, value);
         }
 
-        public static readonly DependencyProperty CharacterCasingProperty = DependencyProperty.RegisterAttached("CharacterCasing", typeof(CharacterCasing), typeof(ComboBoxParameters), new FrameworkPropertyMetadata(CharacterCasing.Normal), CharacterCasingValidateValue);
-
-        private static bool CharacterCasingValidateValue(object value)
-        {
-            return (CharacterCasing.Normal <= (CharacterCasing)value && (CharacterCasing)value <= CharacterCasing.Upper);
-        }
-
-        /// <summary>
-        /// Gets the Character casing of the TextBox.
-        /// </summary>
-        [Category(Constants.ParameterCategory)]
-        [AttachedPropertyBrowsableForType(typeof(ComboBox))]
-        public static CharacterCasing GetCharacterCasing(UIElement obj)
-        {
-            return (CharacterCasing)obj.GetValue(CharacterCasingProperty);
-        }
-
-        /// <summary>
-        /// Sets the Character casing of the TextBox.
-        /// </summary>
-        public static void SetCharacterCasing(UIElement obj, CharacterCasing value)
-        {
-            obj.SetValue(CharacterCasingProperty, value);
-        }
-
         #region DropDownButtonVisible Property
 
         [AttachedPropertyBrowsableForType(typeof(ComboBox))]

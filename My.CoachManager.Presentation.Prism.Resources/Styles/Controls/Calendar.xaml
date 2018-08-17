@@ -182,7 +182,7 @@
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           TextElement.Foreground="{DynamicResource NormalForeground}"
-                                          parameters:ControlParameters.ContentCharacterCasing="FirstLetterUpper"
+                                          parameters:ControlParameters.CharacterCasing="FirstLetterUpper"
                                          Content="{TemplateBinding Content}" />
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
@@ -285,7 +285,7 @@
                                        Foreground="{DynamicResource Dark}"
                                        TextElement.FontFamily="{DynamicResource NormalFontFamily}"
                                        TextElement.FontSize="{DynamicResource NormalFontSize}"
-                                       parameters:ControlParameters.ContentCharacterCasing="FirstLetterUpper"
+                                       parameters:ControlParameters.CharacterCasing="FirstLetterUpper"
                                        TextElement.FontWeight="Bold"
                                        Content="{Binding}" />
                         </DataTemplate>
@@ -405,7 +405,7 @@
                                                                   Content="{TemplateBinding Content}"
                                                                   ContentTemplate="{TemplateBinding ContentTemplate}"
                                                                   TextElement.FontFamily="{DynamicResource NormalFontFamily}"
-                                                                  parameters:ControlParameters.ContentCharacterCasing="FirstLetterUpper"
+                                                                  parameters:ControlParameters.CharacterCasing="FirstLetterUpper"
                                                                   TextElement.Foreground="{DynamicResource AccentForeground}" />
                                             </Grid>
                                         </ControlTemplate>
