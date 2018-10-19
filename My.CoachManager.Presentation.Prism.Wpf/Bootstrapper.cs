@@ -17,6 +17,7 @@ using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Modules.Administration;
 using My.CoachManager.Presentation.Prism.Modules.Common;
 using My.CoachManager.Presentation.Prism.Modules.Home;
+using My.CoachManager.Presentation.Prism.Modules.Roster;
 using My.CoachManager.Presentation.Prism.Wpf.Properties;
 using My.CoachManager.Presentation.Prism.Wpf.Services;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
@@ -122,6 +123,12 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             ModuleCatalog.AddModule(new ModuleInfo
             {
                 InitializationMode = InitializationMode.WhenAvailable,
+                ModuleName = typeof(RosterModule).Name,
+                ModuleType = typeof(RosterModule).AssemblyQualifiedName
+            });
+            ModuleCatalog.AddModule(new ModuleInfo
+            {
+                InitializationMode = InitializationMode.WhenAvailable,
                 ModuleName = typeof(AdministrationModule).Name,
                 ModuleType = typeof(AdministrationModule).AssemblyQualifiedName
             });
@@ -214,6 +221,12 @@ namespace My.CoachManager.Presentation.Prism.Wpf
                     }
 
                     viewModel.Initialize();
+
+                    if (viewModel is ScreenViewModel screenViewModel)
+                    {
+                        if(screenViewModel.RefreshOnInit)
+                        screenViewModel.Refresh();
+                    }
                     return viewModel;
                 });
         }

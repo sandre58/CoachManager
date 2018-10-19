@@ -130,7 +130,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
             }
 
             // Apply changes for item object
-            //_currentUnitOfWork.AddOrUpdate(item);
             _currentUnitOfWork.SetModified(item);
         }
 
@@ -151,8 +150,47 @@ namespace My.CoachManager.Infrastructure.Data.Core
             {
                 if (item != null)
                 {
-                    //_currentUnitOfWork.AddOrUpdate(item);
                     _currentUnitOfWork.SetModified(item);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Modify an Entity Object in Context.
+        /// </summary>
+        /// <param name="item">Entity Object.</param>
+        public virtual void Attach(TEntity item)
+        {
+            // Check arguments
+            if (item == null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
+
+            // Apply changes for item object
+            //_currentUnitOfWork.AddOrUpdate(item);
+            _currentUnitOfWork.Attach(item);
+        }
+
+        /// <summary>
+        /// Modify a collection of Entity Objects in Context.
+        /// </summary>
+        /// <param name="items">Entity Object.</param>
+        public virtual void Attach(ICollection<TEntity> items)
+        {
+            // Check arguments
+            if (items == null)
+            {
+                throw new ArgumentNullException(nameof(items));
+            }
+
+            // For each element in collection apply changes
+            foreach (TEntity item in items)
+            {
+                if (item != null)
+                {
+                    //_currentUnitOfWork.AddOrUpdate(item);
+                    _currentUnitOfWork.Attach(item);
                 }
             }
         }

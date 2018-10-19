@@ -506,6 +506,22 @@
         <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource AccentForeground}" />
     </Style>
 
+    <Style x:Key="AccentComboBoxStyle2" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ComboBoxStyle}">
+
+        <Setter Property="Background" Value="{DynamicResource AccentControl}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentControl}" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource AccentControlMouseOver}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource AccentControlMouseOver}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource AccentForeground}" />
+
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource AccentControlPressed}" />
+        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource AccentControlPressed}" />
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource AccentForeground}" />
+
+    </Style>
+
     <Style x:Key="CountryBottomBorderComboboxStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource BottomBorderComboBoxStyle}">
         <Setter Property="ItemTemplate">
             <Setter.Value>

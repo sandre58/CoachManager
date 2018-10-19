@@ -17,52 +17,12 @@ using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public abstract class ListViewModel<TEntityModel, TEditView, TItemView> : NavigatableWorkspaceViewModel, IListViewModel<TEntityModel>
+    public abstract class ListViewModel<TEntityModel, TEditView, TItemView> : ListViewModel<TEntityModel>
         where TEntityModel : class, IEntityModel, IModifiable, IValidatable, new()
         where TEditView : FrameworkElement
         where TItemView : FrameworkElement
     {
         #region Members
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets or sets items.
-        /// </summary>
-        ICollection IListViewModel.Items
-        {
-            get => Items;
-            set => Items = new ObservableCollection<TEntityModel>((IEnumerable<TEntityModel>)value);
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets or sets the items.
-        /// </summary>
-        public ObservableCollection<TEntityModel> Items { get; set; }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets or sets the selected item.
-        /// </summary>
-        public TEntityModel SelectedItem { get; set; }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets or sets a value indicates the list is in read only.
-        /// </summary>
-        public bool IsReadOnly { get; set; }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets or sets list parameters.
-        /// </summary>
-        public ListParametersViewModel Parameters { get; set; }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets or sets list filters parameters.
-        /// </summary>
-        public IListFiltersViewModel Filters { get; set; }
 
         /// <summary>
         /// Gets or sets the add command.
@@ -102,19 +62,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             RemoveCommand = new DelegateCommand<TEntityModel>(Remove, CanRemove);
             EditCommand = new DelegateCommand<TEntityModel>(Edit, CanEdit);
             OpenCommand = new DelegateCommand<TEntityModel>(Open, CanOpen);
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Initializes Data.
-        /// </summary>
-        protected override void InitializeData()
-        {
-            base.InitializeData();
-
-            Items = new ObservableCollection<TEntityModel>();
-
-            IsReadOnly = false;
         }
 
         /// <inheritdoc />
@@ -302,6 +249,79 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             EditCommand.RaiseCanExecuteChanged();
             RemoveCommand.RaiseCanExecuteChanged();
         }
+
+        #endregion Properties Changed
+
+        #endregion Methods
+    }
+
+    public abstract class ListViewModel<TEntityModel> : NavigatableWorkspaceViewModel, IListViewModel<TEntityModel>
+    where TEntityModel : class, IEntityModel, IModifiable, IValidatable, new()
+    {
+        #region Members
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets items.
+        /// </summary>
+        ICollection IListViewModel.Items
+        {
+            get => Items;
+            set => Items = new ObservableCollection<TEntityModel>((IEnumerable<TEntityModel>)value);
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets the items.
+        /// </summary>
+        public ObservableCollection<TEntityModel> Items { get; set; }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets the selected item.
+        /// </summary>
+        public TEntityModel SelectedItem { get; set; }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets a value indicates the list is in read only.
+        /// </summary>
+        public bool IsReadOnly { get; set; }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets list parameters.
+        /// </summary>
+        public ListParametersViewModel Parameters { get; set; }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets list filters parameters.
+        /// </summary>
+        public IListFiltersViewModel Filters { get; set; }
+
+        #endregion Members
+
+        #region Methods
+
+        #region Initialization
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes Data.
+        /// </summary>
+        protected override void InitializeData()
+        {
+            base.InitializeData();
+
+            Items = new ObservableCollection<TEntityModel>();
+
+            IsReadOnly = false;
+        }
+
+        #endregion Initialization
+
+        #region Properties Changed
 
         /// <summary>
         /// Calls when selected item change.

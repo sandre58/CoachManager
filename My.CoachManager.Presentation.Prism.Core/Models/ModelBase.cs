@@ -61,6 +61,12 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         protected ModelBase()
         {
             ValidationErrors = new Dictionary<string, List<ValidationResult>>();
+
+            this.PropertyChanged += ModelBase_PropertyChanged;
+        }
+
+        private void ModelBase_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
         }
 
         #endregion Constructors

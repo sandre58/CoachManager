@@ -146,7 +146,9 @@
     <Compile Include="Attributes\Validation\ValidatePropertyAttribute.cs" />
     <Compile Include="ViewModels\DialogViewModel.cs" />
     <Compile Include="Dialog\IWorkspaceDialog.cs" />
+    <Compile Include="ViewModels\Interfaces\IRefreshable.cs" />
     <Compile Include="ViewModels\Interfaces\IListFiltersViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\ISelectItemsViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IListViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IScreenViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IEditViewModel.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="Events\ShowWorkspaceDialogRequestEvent.cs" />
     <Compile Include="ViewModels\ListFiltersViewModel.cs" />
     <Compile Include="ViewModels\ListParametersViewModel.cs" />
+    <Compile Include="ViewModels\SelectItemsViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceDialogViewModel.cs" />
     <Compile Include="DragAndDrop\DragAndDropEventArgs.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />

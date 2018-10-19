@@ -6,7 +6,9 @@ using System.Linq;
 using System.Threading;
 using CommonServiceLocator;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Logging;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
@@ -319,7 +321,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             where TEntity : class
         {
             Update(item);
-        }
+       }
 
         #endregion ----- IQueryableUnitOfWork Methods -----
 
@@ -422,6 +424,78 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         }
 
         #endregion ----- ISql Methods -----
-        
+
+        #region Methods
+
+        /// <summary>
+        /// Gets the changed property of an entry.
+        /// </summary>
+        /// <param name="dbEntry"></param>
+        /// <returns></returns>
+        public static IEnumerable<IProperty> GetChangedProperties(EntityEntry dbEntry)
+        {
+            var properties = dbEntry.State == EntityState.Added ? dbEntry.CurrentValues.Properties : dbEntry.OriginalValues.Properties;
+            foreach (var property in properties)
+            {
+                if (IsValueChanged(dbEntry, property))
+                {
+                    yield return property;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Tests if the value changed.
+        /// </summary>
+        /// <param name="dbEntry"></param>
+        /// <param name="property"></param>
+        /// <returns></returns>
+        private static bool IsValueChanged(EntityEntry dbEntry, IProperty property)
+        {
+            return !Equals(OriginalValue(dbEntry, property), CurrentValue(dbEntry, property));
+        }
+
+        /// <summary>
+        /// Gets the original value of an entry by property name.
+        /// </summary>
+        /// <param name="dbEntry"></param>
+        /// <param name="property"></param>
+        /// <returns></returns>
+        private static object OriginalValue(EntityEntry dbEntry, IProperty property)
+        {
+            object originalValue = null;
+
+            if (dbEntry.State == EntityState.Modified)
+            {
+                originalValue = dbEntry.OriginalValues.GetValue<object>(property);
+            }
+
+            return originalValue;
+        }
+
+        /// <summary>
+        /// Gets the current value of an entry by property name.
+        /// </summary>
+        /// <param name="dbEntry"></param>
+        /// <param name="property"></param>
+        /// <returns></returns>
+        private static object CurrentValue(EntityEntry dbEntry, IProperty property)
+        {
+            object newValue;
+
+            try
+            {
+                newValue = dbEntry.CurrentValues.GetValue<object>(property);
+            }
+            catch (InvalidOperationException) // It will be invalid operation when its in deleted state. in that case, new value should be null
+            {
+                newValue = null;
+            }
+
+            return newValue;
+        }
+
+        #endregion
+
     }
 }

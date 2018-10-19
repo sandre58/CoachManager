@@ -53,5 +53,31 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
 
             return result;
         }
+
+        /// <summary>
+        /// Convert the DTO to model.
+        /// </summary>
+        /// <param name="dto">The dto.</param>
+        /// <returns>The model.</returns>
+        public static RosterPlayerModel Get(RosterPlayerDto dto)
+        {
+            if (dto == null) return null;
+
+            var result = new RosterPlayerModel
+            {
+                Id = dto.Id,
+                IsMutation = dto.IsMutation,
+                LicenseState = dto.LicenseState,
+                Number = dto.Number,
+                Player = PlayerFactory.Get(dto.Player),
+                CreatedBy = dto.CreatedBy,
+                CreatedDate = dto.CreatedDate,
+                ModifiedBy = dto.ModifiedBy,
+                ModifiedDate = dto.ModifiedDate
+            };
+            result.ResetModified();
+
+            return result;
+        }
     }
 }

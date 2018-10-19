@@ -27,12 +27,7 @@
     <MetadataFile FileName="RosterService2.xsd" MetadataType="Schema" ID="54d40689-f31f-4c8e-a120-d57e32b93bb9" SourceId="1" SourceUrl="http://localhost:62863/Services/RosterService.svc?xsd=xsd2" />
     <MetadataFile FileName="RosterService3.xsd" MetadataType="Schema" ID="6d8a1af7-ee9b-4d3d-9a86-f7132752746b" SourceId="1" SourceUrl="http://localhost:62863/Services/RosterService.svc?xsd=xsd3" />
     <MetadataFile FileName="RosterService.wsdl" MetadataType="Wsdl" ID="dbea4a09-2704-4dad-9e55-8ae13631a1a5" SourceId="1" SourceUrl="http://localhost:62863/Services/RosterService.svc?wsdl" />
-    <MetadataFile FileName="RosterService4.xsd" MetadataType="Schema" ID="fdd56211-def5-4340-96b4-7bb238b4f6df" SourceId="1" SourceUrl="http://localhost:62863/Services/RosterService.svc?xsd=xsd5" />
-    <MetadataFile FileName="RosterService5.xsd" MetadataType="Schema" ID="43d83ea5-24cf-4b7c-bc15-9d55da2460a1" SourceId="1" SourceUrl="http://localhost:62863/Services/RosterService.svc?xsd=xsd6" />
-    <MetadataFile FileName="RosterService7.xsd" MetadataType="Schema" ID="4f232879-e9e2-48cd-8d95-1d4500b07eb8" SourceId="1" SourceUrl="http://localhost:62863/Services/RosterService.svc?xsd=xsd7" />
-    <MetadataFile FileName="RosterService71.xsd" MetadataType="Schema" ID="18032170-7bd4-4937-a6d6-77e2fcc1d147" SourceId="1" SourceUrl="http://localhost:62863/Services/RosterService.svc?xsd=xsd8" />
     <MetadataFile FileName="RosterService.disco" MetadataType="Disco" ID="515d3082-5329-4e0b-96a2-146cd8dad014" SourceId="1" SourceUrl="http://localhost:62863/Services/RosterService.svc?disco" />
-    <MetadataFile FileName="RosterService6.xsd" MetadataType="Schema" ID="8c0f6f9b-1792-440e-95d0-d5c5990f2036" SourceId="1" SourceUrl="http://localhost:62863/Services/RosterService.svc?xsd=xsd4" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

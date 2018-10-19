@@ -63,11 +63,8 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
             entity.ShoesSize = item.ShoesSize;
             entity.Size = item.Size;
             entity.Description = item.Description;
-            //entity.Contacts = item.Phones.Select(ContactFactory.CreateEntity<Phone>)
-            //    .Concat(item.Emails.Select(ContactFactory.CreateEntity<Email>).Cast<Contact>()).ToList();
-
-            var contact = entity.Contacts.First();
-            entity.Contacts.Remove(contact);
+            entity.Contacts = item.Phones.Select(ContactFactory.CreateEntity<Phone>)
+                .Concat(item.Emails.Select(ContactFactory.CreateEntity<Email>).Cast<Contact>()).ToList();
 
             return true;
         }

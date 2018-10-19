@@ -97,7 +97,7 @@ namespace My.CoachManager.Application.Services.PersonModule
                 }
             }
 
-            return _crudDomainService.Save(dto, PlayerFactory.CreateEntity, PlayerFactory.UpdateEntity, x => _playerDomainService.Validate(x), x => x.Contacts);
+            return _crudDomainService.Save(dto, PlayerFactory.CreateEntity, PlayerFactory.UpdateEntity, x => _playerDomainService.Validate(x));
         }
 
         /// <summary>

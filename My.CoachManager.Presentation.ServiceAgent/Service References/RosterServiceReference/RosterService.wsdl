@@ -4,13 +4,8 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Roster" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Category" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Person" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Position" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Season" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/RosterService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IRosterService_GetRosters_InputMessage">
@@ -37,6 +32,12 @@
   <wsdl:message name="IRosterService_GetRosterById_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRosterByIdResponse" />
   </wsdl:message>
+  <wsdl:message name="IRosterService_GetPlayers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayers" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_GetPlayers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayersResponse" />
+  </wsdl:message>
   <wsdl:portType name="IRosterService">
     <wsdl:operation name="GetRosters">
       <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetRosters" message="tns:IRosterService_GetRosters_InputMessage" />
@@ -53,6 +54,10 @@
     <wsdl:operation name="GetRosterById">
       <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetRosterById" message="tns:IRosterService_GetRosterById_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/GetRosterByIdResponse" message="tns:IRosterService_GetRosterById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetPlayers" message="tns:IRosterService_GetPlayers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/GetPlayersResponse" message="tns:IRosterService_GetPlayers_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IRosterService" type="tns:IRosterService">
@@ -86,6 +91,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetRosterById">
       <soap:operation soapAction="http://tempuri.org/IRosterService/GetRosterById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayers">
+      <soap:operation soapAction="http://tempuri.org/IRosterService/GetPlayers" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

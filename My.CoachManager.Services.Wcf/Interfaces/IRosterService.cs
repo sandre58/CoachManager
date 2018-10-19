@@ -37,5 +37,12 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// <returns></returns>
         [OperationContract]
         RosterDto GetRosterById(int id);
+
+        /// <summary>
+        /// Gets players.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        IList<RosterPlayerDto> GetPlayers(int rosterId);
     }
 }

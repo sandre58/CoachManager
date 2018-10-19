@@ -31,5 +31,11 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// </summary>
         /// <returns></returns>
         RosterDto GetRosterById(int id);
+
+        /// <summary>
+        /// Gets players.
+        /// </summary>
+        /// <returns></returns>
+        IList<RosterPlayerDto> GetPlayers(int rosterId);
     }
 }

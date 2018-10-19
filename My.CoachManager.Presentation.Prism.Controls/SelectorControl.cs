@@ -592,8 +592,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             // Keep it simple for now. Just update all
             UpdateFromSelectedItems();
         }
-
-        private bool _updatingAll;
+        
         private bool _ignoreSelectedValuesChanged;
 
         private void OnItemSelectionChangedCore(RoutedEventArgs args, bool unselected)
@@ -608,25 +607,10 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
             if (item.Equals(_allItem))
             {
-                if (!_updatingAll)
+                foreach (var i in ItemContainerGenerator.Items)
                 {
-                    foreach (var i in ItemsCollection)
-                    {
-                        if (unselected)
-                        {
-                            if (SelectedItems.Contains(i))
-                            {
-                                SelectedItems.Remove(i);
-                            }
-                        }
-                        else
-                        {
-                            if (!SelectedItems.Contains(i))
-                            {
-                                SelectedItems.Add(i);
-                            }
-                        }
-                    }
+                    if (ItemContainerGenerator.ContainerFromItem(i) is SelectorItem container)
+                        container.IsSelected = !unselected;
                 }
             }
             else
@@ -645,10 +629,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
                         SelectedItems.Add(item);
                     }
                 }
-
-                _updatingAll = true;
-                _allItem.IsSelected = SelectedItems.Count == Items.Count;
-                _updatingAll = false;
             }
 
             OnItemSelectionChanged(new ItemSelectionChangedEventArgs(ItemSelectionChangedEvent, this, item, !unselected));

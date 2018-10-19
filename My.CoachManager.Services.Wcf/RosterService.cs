@@ -50,5 +50,14 @@ namespace My.CoachManager.Services.Wcf
         {
             return ServiceLocator.Current.GetInstance<IRosterAppService>().GetRosters();
         }
+
+        /// <summary>
+        /// Gets players.
+        /// </summary>
+        /// <returns></returns>
+        public IList<RosterPlayerDto> GetPlayers(int rosterId)
+        {
+            return ServiceLocator.Current.GetInstance<IRosterAppService>().GetPlayers(rosterId);
+        }
     }
 }
