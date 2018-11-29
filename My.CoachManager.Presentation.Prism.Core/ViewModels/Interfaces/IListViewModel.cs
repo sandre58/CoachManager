@@ -1,5 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.Presentation.Prism.Core.Models;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
@@ -10,7 +11,12 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
         /// <summary>
         /// Gets or sets the items.
         /// </summary>
-        new ObservableCollection<TEntityModel> Items { get; set; }
+        new ObservableItemsCollection<TEntityModel> Items { get; set; }
+
+        /// <summary>
+        /// Gets or sets the selected items.
+        /// </summary>
+        IEnumerable<TEntityModel> SelectedItems { get; set; }
 
         /// <summary>
         /// Gets or sets the selected item.

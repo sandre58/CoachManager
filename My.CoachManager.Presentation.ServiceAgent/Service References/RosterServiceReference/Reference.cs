@@ -44,6 +44,18 @@ namespace My.CoachManager.Presentation.ServiceAgent.RosterServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/GetPlayers", ReplyAction="http://tempuri.org/IRosterService/GetPlayersResponse")]
         System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.RosterPlayerDto[]> GetPlayersAsync(int rosterId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/AddPlayers", ReplyAction="http://tempuri.org/IRosterService/AddPlayersResponse")]
+        void AddPlayers(int rosterId, int[] playerIds);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/AddPlayers", ReplyAction="http://tempuri.org/IRosterService/AddPlayersResponse")]
+        System.Threading.Tasks.Task AddPlayersAsync(int rosterId, int[] playerIds);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/RemovePlayers", ReplyAction="http://tempuri.org/IRosterService/RemovePlayersResponse")]
+        void RemovePlayers(int rosterId, int[] playerIds);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/RemovePlayers", ReplyAction="http://tempuri.org/IRosterService/RemovePlayersResponse")]
+        System.Threading.Tasks.Task RemovePlayersAsync(int rosterId, int[] playerIds);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +123,22 @@ namespace My.CoachManager.Presentation.ServiceAgent.RosterServiceReference {
         
         public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.RosterPlayerDto[]> GetPlayersAsync(int rosterId) {
             return base.Channel.GetPlayersAsync(rosterId);
+        }
+        
+        public void AddPlayers(int rosterId, int[] playerIds) {
+            base.Channel.AddPlayers(rosterId, playerIds);
+        }
+        
+        public System.Threading.Tasks.Task AddPlayersAsync(int rosterId, int[] playerIds) {
+            return base.Channel.AddPlayersAsync(rosterId, playerIds);
+        }
+        
+        public void RemovePlayers(int rosterId, int[] playerIds) {
+            base.Channel.RemovePlayers(rosterId, playerIds);
+        }
+        
+        public System.Threading.Tasks.Task RemovePlayersAsync(int rosterId, int[] playerIds) {
+            return base.Channel.RemovePlayersAsync(rosterId, playerIds);
         }
     }
 }

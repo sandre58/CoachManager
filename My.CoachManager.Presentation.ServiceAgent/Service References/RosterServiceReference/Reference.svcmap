@@ -28,6 +28,7 @@
     <MetadataFile FileName="RosterService3.xsd" MetadataType="Schema" ID="6d8a1af7-ee9b-4d3d-9a86-f7132752746b" SourceId="1" SourceUrl="http://localhost:62863/Services/RosterService.svc?xsd=xsd3" />
     <MetadataFile FileName="RosterService.wsdl" MetadataType="Wsdl" ID="dbea4a09-2704-4dad-9e55-8ae13631a1a5" SourceId="1" SourceUrl="http://localhost:62863/Services/RosterService.svc?wsdl" />
     <MetadataFile FileName="RosterService.disco" MetadataType="Disco" ID="515d3082-5329-4e0b-96a2-146cd8dad014" SourceId="1" SourceUrl="http://localhost:62863/Services/RosterService.svc?disco" />
+    <MetadataFile FileName="RosterService4.xsd" MetadataType="Schema" ID="1eff1481-e3f1-43b1-a0ec-805f5d9e27c9" SourceId="1" SourceUrl="http://localhost:62863/Services/RosterService.svc?xsd=xsd4" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

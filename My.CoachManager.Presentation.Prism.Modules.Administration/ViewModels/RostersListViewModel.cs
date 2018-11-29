@@ -66,7 +66,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         {
             var result = _rosterService.GetRosters();
 
-            Items = result.Select(RosterFactory.Get).ToObservableCollection();
+            Items = result.Select(RosterFactory.Get).ToItemsObservableCollection();
         }
 
         #endregion Data

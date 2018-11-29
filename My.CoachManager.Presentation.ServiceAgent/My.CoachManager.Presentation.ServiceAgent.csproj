@@ -246,6 +246,9 @@
     <None Include="Service References\RosterServiceReference\RosterService3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\RosterServiceReference\RosterService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\SeasonServiceReference\SeasonService.wsdl" />
     <None Include="Service References\SeasonServiceReference\SeasonService.xsd">
       <SubType>Designer</SubType>

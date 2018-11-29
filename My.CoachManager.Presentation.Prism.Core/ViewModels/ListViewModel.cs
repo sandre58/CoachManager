@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.ServiceLocation;
+using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
@@ -18,7 +21,7 @@ using Prism.Commands;
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
     public abstract class ListViewModel<TEntityModel, TEditView, TItemView> : ListViewModel<TEntityModel>
-        where TEntityModel : class, IEntityModel, IModifiable, IValidatable, new()
+        where TEntityModel : class, ISelectable, IEntityModel, IModifiable, IValidatable, new()
         where TEditView : FrameworkElement
         where TItemView : FrameworkElement
     {
@@ -239,24 +242,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         #endregion Remove
 
-        #region Properties Changed
-
-        /// <summary>
-        /// Calls when selected item change.
-        /// </summary>
-        protected virtual void OnSelectedItemChanged()
-        {
-            EditCommand.RaiseCanExecuteChanged();
-            RemoveCommand.RaiseCanExecuteChanged();
-        }
-
-        #endregion Properties Changed
-
         #endregion Methods
     }
 
     public abstract class ListViewModel<TEntityModel> : NavigatableWorkspaceViewModel, IListViewModel<TEntityModel>
-    where TEntityModel : class, IEntityModel, IModifiable, IValidatable, new()
+    where TEntityModel : class, ISelectable, IEntityModel, IModifiable, IValidatable, new()
     {
         #region Members
 
@@ -267,20 +257,59 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         ICollection IListViewModel.Items
         {
             get => Items;
-            set => Items = new ObservableCollection<TEntityModel>((IEnumerable<TEntityModel>)value);
+            set => Items = new ObservableItemsCollection<TEntityModel>((IEnumerable<TEntityModel>)value);
         }
 
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets the items.
         /// </summary>
-        public ObservableCollection<TEntityModel> Items { get; set; }
+        public ObservableItemsCollection<TEntityModel> Items { get; set; }
+
+        /// <summary>
+        /// Gets or sets the selected item.
+        /// </summary>
+        public IEnumerable<TEntityModel> SelectedItems
+        {
+            get { return Items?.Where(x => x.IsSelected); }
+            set
+            {
+                Items.ForEach(x => x.IsSelected = false);
+
+                var items = Items.Where(x => x.IsSelectable).ToArray();
+                foreach (var item in value)
+                {
+                    var toModify = items.Single(x => x.Equals(item));
+                    toModify.IsSelected = true;
+                }
+            }
+        }
 
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
-        public TEntityModel SelectedItem { get; set; }
+        public TEntityModel SelectedItem
+        {
+            get => SelectedItems?.FirstOrDefault();
+            set => SelectedItems = new List<TEntityModel> { value };
+        }
+
+        /// <summary>
+        /// Gets or sets not selectionnable items.
+        /// </summary>
+        public IEnumerable<TEntityModel> NotSelectableItems { get; set; }
+
+        /// <summary>
+        /// Gets or sets the selected item.
+        /// </summary>
+        public bool AreAllSelected
+        {
+            get
+            {
+                return Items != null && Items.Any(x => x.IsSelectable) && Items.Where(x => x.IsSelectable).All(x => x.IsSelected);
+            }
+        }
 
         /// <inheritdoc />
         /// <summary>
@@ -300,6 +329,21 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         public IListFiltersViewModel Filters { get; set; }
 
+        /// <summary>
+        /// Gets or sets select all command.
+        /// </summary>
+        public DelegateCommand<bool?> SelectAllCommand { get; private set; }
+
+        /// <summary>
+        /// Gets or sets select command.
+        /// </summary>
+        public DelegateCommand<TEntityModel> SelectItemCommand { get; private set; }
+
+        /// <summary>
+        /// Gets or sets select command.
+        /// </summary>
+        public DelegateCommand<IEnumerable<TEntityModel>> SelectItemsCommand { get; private set; }
+
         #endregion Members
 
         #region Methods
@@ -314,12 +358,93 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             base.InitializeData();
 
-            Items = new ObservableCollection<TEntityModel>();
+            Items = new ObservableItemsCollection<TEntityModel>();
 
             IsReadOnly = false;
         }
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Launch on constructor for initialize all command property.
+        /// </summary>
+        protected override void InitializeCommand()
+        {
+            base.InitializeCommand();
+
+            SelectItemCommand = new DelegateCommand<TEntityModel>(SelectItem, CanSelectItem);
+            SelectItemsCommand = new DelegateCommand<IEnumerable<TEntityModel>>(SelectItems, CanSelectItems);
+            SelectAllCommand = new DelegateCommand<bool?>(SelectAll, CanSelectAll);
+        }
+
         #endregion Initialization
+
+        #region SelectAll
+
+        /// <summary>
+        /// Can Select All ?
+        /// </summary>
+        /// <returns></returns>
+        protected bool CanSelectAll(bool? value)
+        {
+            return Items.Any(x => x.IsSelectable);
+        }
+
+        /// <summary>
+        /// Select or unselect all.
+        /// </summary>
+        protected virtual void SelectAll(bool? value)
+        {
+            Items.Where(x => x.IsSelectable).ForEach(x =>
+            {
+                if (value != null) x.IsSelected = value.Value;
+            });
+        }
+
+        #endregion
+
+        #region SelectItem
+
+        /// <summary>
+        /// Can select an item. 
+        /// </summary>
+        /// <returns></returns>
+        protected bool CanSelectItem(TEntityModel item)
+        {
+            return item != null && item.IsSelectable;
+        }
+
+        /// <summary>
+        /// Select an item.
+        /// </summary>
+        public virtual void SelectItem(TEntityModel item)
+        {
+            if(item == null || !item.IsSelectable) return;
+
+            item.IsSelected = true;
+        }
+
+        #endregion
+
+        #region SelectItem
+
+        /// <summary>
+        /// Can select items. 
+        /// </summary>
+        /// <returns></returns>
+        protected bool CanSelectItems(IEnumerable<TEntityModel> items)
+        {
+            return items.Any(x => x.IsSelectable);
+        }
+
+        /// <summary>
+        /// Select items.
+        /// </summary>
+        public virtual void SelectItems(IEnumerable<TEntityModel> items)
+        {
+            items?.ForEach(SelectItem);
+        }
+
+        #endregion
 
         #region Properties Changed
 
@@ -332,7 +457,15 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             {
                 Filters.Items = new FilteredCollectionView<TEntityModel>(Items.ToObservableCollection());
             }
+            Items.CollectionChanged += ItemsCollectionChanged;
+            SelectAllCommand.RaiseCanExecuteChanged();
         }
+
+        private void ItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            RaisePropertyChanged(() => AreAllSelected);
+        }
+
 
         #endregion Properties Changed
 

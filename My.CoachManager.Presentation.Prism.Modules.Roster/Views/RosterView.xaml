@@ -25,12 +25,14 @@
             </Grid.RowDefinitions>
 
             <DataGrid Grid.Row="1" x:Name="ListGrid"
-                      ItemsSource="{Binding Filters.Items}" SelectedItem="{Binding SelectedItem}"
+                      ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"
                       Style="{StaticResource ItemsDataGridStyle}"
-                      FrozenColumnCount="2"
+                      FrozenColumnCount="3"
                       parameters:DataGridParameters.VisibleColumns="{Binding Parameters.DisplayedColumns}">
                 <DataGrid.Columns>
 
+                    <columns:DataGridSelectColumn />
+                    
                     <!-- Photo -->
                     <DataGridTemplateColumn AutomationProperties.Name="Photo" MinWidth="90" CanUserResize="False" CanUserSort="False" parameters:DataGridColumnParameters.CanUserHideColumn="False">
                         <DataGridTemplateColumn.CellTemplate>

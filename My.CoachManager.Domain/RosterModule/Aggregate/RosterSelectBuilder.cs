@@ -47,7 +47,7 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
                 LicenseState = x.LicenseState,
                 Player = x.Player != null ? new PlayerDto()
                 {
-                    Id = x.Id,
+                    Id = x.Player.Id,
                     FirstName = x.Player.FirstName,
                     LastName = x.Player.LastName,
                     AddressId = x.Player.AddressId,

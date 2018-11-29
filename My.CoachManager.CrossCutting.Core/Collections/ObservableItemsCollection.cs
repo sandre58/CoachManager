@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -16,6 +17,11 @@ namespace My.CoachManager.CrossCutting.Core.Collections
         #region Constructors
 
         public ObservableItemsCollection()
+        {
+            Initialize();
+        }
+
+        public ObservableItemsCollection(IEnumerable<T> value) : base(value)
         {
             Initialize();
         }

@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.Presentation.Prism.Core.DragAndDrop;
 using My.CoachManager.Presentation.Prism.Core.Manager;
@@ -12,7 +12,7 @@ using Prism.Commands;
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
     public abstract class OrderedListViewModel<TEntityViewModel, TEditView, TItemView> : ListViewModel<TEntityViewModel, TEditView, TItemView>
-        where TEntityViewModel : class, IOrderable, IEntityModel, IValidatable, IModifiable, new()
+        where TEntityViewModel : class, ISelectable, IOrderable, IEntityModel, IValidatable, IModifiable, new()
         where TEditView : FrameworkElement
         where TItemView : FrameworkElement
     {
@@ -320,7 +320,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual void Reorder()
         {
-            Items = new ObservableCollection<TEntityViewModel>(Items.OrderBy(x => x.Order).ToList());
+            Items = new ObservableItemsCollection<TEntityViewModel>(Items.OrderBy(x => x.Order).ToList());
         }
 
         #endregion Privates methods

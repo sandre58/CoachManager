@@ -1,27 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.Presentation.Prism.Core.Models;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
 {
-    public interface ISelectItemsViewModel<TEntityModel> : ISelectItemsViewModel
-        where TEntityModel : class, IEntityModel, IModifiable, IValidatable, new()
+    public interface ISelectItemsViewModel<TModel> : ISelectItemsViewModel
+        where TModel : ISelectable
     {
         /// <summary>
         /// Gets or sets the items.
         /// </summary>
-        new ObservableCollection<TEntityModel> Items { get; set; }
+        new ObservableItemsCollection<TModel> Items { get; set; }
 
         /// <summary>
         /// Gets or sets the selected items.
         /// </summary>
-       IEnumerable<TEntityModel> SelectedItems { get; set; }
+       IEnumerable<TModel> SelectedItems { get; set; }
 
         /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
-        TEntityModel SelectedItem { get; set; }
+        TModel SelectedItem { get; set; }
     }
 
     public interface ISelectItemsViewModel : IWorkspaceDialogViewModel

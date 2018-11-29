@@ -44,5 +44,19 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// <returns></returns>
         [OperationContract]
         IList<RosterPlayerDto> GetPlayers(int rosterId);
+
+        /// <summary>
+        /// Add players in rosters.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        void AddPlayers(int rosterId, IEnumerable<int> playerIds);
+
+        /// <summary>
+        /// Remove players in rosters.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        void RemovePlayers(int rosterId, IEnumerable<int> playerIds);
     }
 }

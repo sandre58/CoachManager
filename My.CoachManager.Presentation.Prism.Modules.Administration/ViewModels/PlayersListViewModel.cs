@@ -68,7 +68,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         {
             var result = _personService.GetPlayers();
 
-            Items = result.Select(PlayerFactory.Get).ToObservableCollection();
+            Items = result.Select(PlayerFactory.Get).ToItemsObservableCollection();
         }
 
         protected override void InitializeDataCore()

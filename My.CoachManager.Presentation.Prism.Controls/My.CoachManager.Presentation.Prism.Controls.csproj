@@ -99,6 +99,7 @@
     <Compile Include="Behaviours\StylizedBehaviors.cs" />
     <Compile Include="CommandButton.cs" />
     <Compile Include="Commands\SystemCommands.cs" />
+    <Compile Include="Datagrids\Columns\DataGridSelectColumn.cs" />
     <Compile Include="DialogWindow.cs" />
     <Compile Include="DropDownButton.cs" />
     <Compile Include="DropDownMenuButton.cs" />

@@ -222,6 +222,12 @@
   <data name="Retry" xml:space="preserve">
     <value>Réessayer</value>
   </data>
+  <data name="Select" xml:space="preserve">
+    <value>Sélectionner</value>
+  </data>
+  <data name="SelectItems" xml:space="preserve">
+    <value>Sélectionner le(s) élément(s)</value>
+  </data>
   <data name="ShowColumns" xml:space="preserve">
     <value>Afficher les colonnes</value>
   </data>

@@ -5,7 +5,7 @@ using Microsoft.Practices.ObjectBuilder2;
 
 namespace My.CoachManager.Presentation.Prism.Core.Models
 {
-    public abstract class EntityModel : ModelBase, IEntityModel, IModifiable
+    public abstract class EntityModel : SelectModel, IEntityModel, IModifiable
     {
 
         #region Fields
@@ -54,7 +54,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         public override bool Equals(object obj)
         {
             var other = obj as EntityModel;
-            return !(other is null) && ReferenceEquals(this, other);
+            return !(other is null) && Id == other.Id;// && ReferenceEquals(this, other);
         }
 
         /// <summary>

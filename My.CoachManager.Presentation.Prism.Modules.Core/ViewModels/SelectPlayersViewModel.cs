@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
@@ -32,35 +33,22 @@ namespace My.CoachManager.Presentation.Prism.Modules.Core.ViewModels
 
         #region Methods
 
-        #region Initialization
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Initializes Data.
-        /// </summary>
-        protected override void InitializeData()
-        {
-            base.InitializeData();
-
-            //Title = PlayerResources.PlayersTitle;
-        }
-
-        #endregion Initialization
-
         #region Data
 
-        /// <inheritdoc />
         /// <summary>
         /// Load Data.
         /// </summary>
         /// <returns></returns>
-        protected override void LoadDataCore()
+        protected override ObservableItemsCollection<PlayerModel> LoadItems()
         {
             var result = _personService.GetPlayers();
 
-            Items = result.Select(PlayerFactory.Get).ToObservableCollection();
+            return result.Select(PlayerFactory.Get).ToItemsObservableCollection();
         }
 
+        /// <summary>
+        /// Initialise data.
+        /// </summary>
         protected override void InitializeDataCore()
         {
             base.InitializeDataCore();

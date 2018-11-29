@@ -96,6 +96,38 @@ namespace My.CoachManager.Application.Services.RosterModule
             return _playerRosterRepository.GetAll(RosterSelectBuilder.SelectRosterPlayers(), x => x.Player.Contacts, x => x.Player.Category, x => x.Player.Address, x => x.Player.Country).ToList();
         }
 
+        /// <summary>
+        /// Add players in rosters.
+        /// </summary>
+        /// <returns></returns>
+        public void AddPlayers(int rosterId, IEnumerable<int> playerIds)
+        {
+            foreach (var id in playerIds)
+            {
+                _playerRosterRepository.Add(RosterFactory.CreatePlayer(rosterId, id));
+            }
+            
+            _playerRosterRepository.UnitOfWork.Commit();
+
+        }
+
+        /// <summary>
+        /// Remove players in rosters.
+        /// </summary>
+        /// <returns></returns>
+        public void RemovePlayers(int rosterId, IEnumerable<int> playerIds)
+        {
+            var players = _playerRosterRepository.GetByFilter(x => playerIds.Contains(x.PlayerId) && x.RosterId == rosterId).ToList();
+            foreach (var player in players)
+            {
+                
+                _playerRosterRepository.Remove(player);
+            }
+
+            _playerRosterRepository.UnitOfWork.Commit();
+
+        }
+
         #endregion Methods
     }
 }

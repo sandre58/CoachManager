@@ -59,5 +59,23 @@ namespace My.CoachManager.Services.Wcf
         {
             return ServiceLocator.Current.GetInstance<IRosterAppService>().GetPlayers(rosterId);
         }
+
+        /// <summary>
+        /// Add players in rosters.
+        /// </summary>
+        /// <returns></returns>
+        public void AddPlayers(int rosterId, IEnumerable<int> playerIds)
+        {
+            ServiceLocator.Current.GetInstance<IRosterAppService>().AddPlayers(rosterId, playerIds);
+        }
+
+        /// <summary>
+        /// Remove players in rosters.
+        /// </summary>
+        /// <returns></returns>
+        public void RemovePlayers(int rosterId, IEnumerable<int> playerIds)
+        {
+            ServiceLocator.Current.GetInstance<IRosterAppService>().RemovePlayers(rosterId, playerIds);
+        }
     }
 }

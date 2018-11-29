@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace My.CoachManager.Presentation.Prism.Core.Resources {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -108,6 +111,15 @@ namespace My.CoachManager.Presentation.Prism.Core.Resources {
         public static string GetDataError {
             get {
                 return ResourceManager.GetString("GetDataError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} élément(s) ont été ajouté(s).
+        /// </summary>
+        public static string ItemsAdded {
+            get {
+                return ResourceManager.GetString("ItemsAdded", resourceCulture);
             }
         }
         

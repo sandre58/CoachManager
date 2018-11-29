@@ -61,7 +61,7 @@
         <Setter Property="SeparatorBrush" Value="{DynamicResource Transparent}" />
         <Setter Property="SeparatorVisibility" Value="Visible" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Height" Value="35" />
+        <Setter Property="Height" Value="50" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
@@ -272,6 +272,39 @@
         </Setter>
     </Style>
 
+    <Style x:Key="SelectButtonDataGridColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ButtonDataGridColumnHeaderStyle}">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox Margin="1" IsChecked="{Binding DataContext.AreAllSelected, RelativeSource={RelativeSource AncestorType=DataGrid}, Mode=OneWay}" Command="{Binding DataContext.SelectAllCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked}" />
+
+                        <Thumb Grid.Column="0" x:Name="PART_LeftHeaderGripper"
+                               HorizontalAlignment="Left"
+                               Style="{StaticResource ColumnHeaderGripperStyle}" />
+                        <Thumb Grid.Column="0" x:Name="PART_RightHeaderGripper"
+                               HorizontalAlignment="Right"
+                               Style="{StaticResource ColumnHeaderGripperStyle}" />
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="DisplayIndex" Value="0">
+                            <Setter TargetName="PART_LeftHeaderGripper" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
     <!-- Row Header -->
     <Style x:Key="DataGridRowHeaderStyle" TargetType="{x:Type DataGridRowHeader}">
         <Setter Property="Background" Value="{DynamicResource Control}" />
@@ -311,6 +344,7 @@
         <Setter Property="FontStyle" Value="Normal" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="IsEnabled" Value="{Binding IsSelectable}" />
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -357,6 +391,10 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="DGR_Border" Property="Background" Value="{DynamicResource ControlMouseOver}" />
                         </Trigger>
+                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                            <Setter TargetName="DGR_Border" Property="Background" Value="{DynamicResource LightAccent}" />
+                            <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+                        </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True" />
@@ -609,6 +647,18 @@
         </Setter>
     </Style>
 
+    <Style x:Key="SelectDataGridCellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource DataGridCellStyle}">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <CheckBox IsEnabled="{Binding Path=IsSelectable}" IsChecked="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- DataGridColumn -->
     <Style x:Key="DataGridTemplateColumnCellStyle" BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="{x:Type DataGridCell}">
         <Style.Resources>
@@ -710,6 +760,9 @@
             <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True">
+                        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Path=DataContext.IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True">
                         <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
                     </DataTrigger>
                 </Style.Triggers>

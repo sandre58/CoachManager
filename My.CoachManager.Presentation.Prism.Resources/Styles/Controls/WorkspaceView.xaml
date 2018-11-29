@@ -269,9 +269,46 @@
         </DataTemplate.Triggers>
     </DataTemplate>
 
-    <Style x:Key="WorkspaceDialogViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource {x:Type controls:WorkspaceView}}">
+    <DataTemplate x:Key="SelectDialogViewHeaderTemplate" DataType="{x:Type interfaces:ISelectItemsViewModel}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+        <Grid Margin="{StaticResource LargeVerticalMargin}">
+
+            <Grid.Resources>
+                <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
+                    <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
+                </Style>
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <controls:Icon x:Name="Icon" Width="40" Height="40" Size="Custom" Content="{StaticResource AddGeometry}" Grid.Column="0" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center"
+                            Style="{StaticResource EllipseIconBaseStyle}"
+                           OverlayBackground="{DynamicResource HeaderForeground}" />
+            <TextBlock Grid.Column="1" Text="{Binding Title}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />
+
+        </Grid>
+            <Border Grid.Row="1" Background="{DynamicResource LightHeaderBackground}">
+            <ContentControl Content="{Binding}" ContentTemplate="{StaticResource ListViewHeaderTemplate}" />
+            </Border>
+        </Grid>
+    </DataTemplate>
+
+    <Style x:Key="EditWorkspaceDialogViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource {x:Type controls:WorkspaceView}}">
         <Setter Property="HeaderHeight" Value="70" />
         <Setter Property="HeaderTemplate" Value="{StaticResource EditDialogViewHeaderTemplate}" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+    </Style>
+
+    <Style x:Key="SelectWorkspaceDialogViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource EditWorkspaceDialogViewStyle}">
+        <Setter Property="HeaderHeight" Value="{x:Static system:Double.NaN}" />
+        <Setter Property="HeaderTemplate" Value="{StaticResource SelectDialogViewHeaderTemplate}" />
     </Style>
 </ResourceDictionary>

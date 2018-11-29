@@ -115,9 +115,11 @@
     <Compile Include="Models\Filters\SelectedLabelableFilter.cs" />
     <Compile Include="Manager\DialogManager.cs" />
     <Compile Include="Manager\NotificationManager.cs" />
+    <Compile Include="Models\ISelectable.cs" />
     <Compile Include="Models\ReferenceModel.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Manager\NavigationManager.cs" />
+    <Compile Include="Models\SelectModel.cs" />
     <Compile Include="Notification\NotificationContent.cs" />
     <Compile Include="Notification\NotificationType.cs" />
     <Compile Include="Resources\ControlResources.Designer.cs">

@@ -91,5 +91,6 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
 
             return result;
         }
+
     }
 }

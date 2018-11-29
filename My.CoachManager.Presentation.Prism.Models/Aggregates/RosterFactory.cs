@@ -70,6 +70,7 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 LicenseState = dto.LicenseState,
                 Number = dto.Number,
                 Player = PlayerFactory.Get(dto.Player),
+                PlayerId = dto.PlayerId,
                 CreatedBy = dto.CreatedBy,
                 CreatedDate = dto.CreatedDate,
                 ModifiedBy = dto.ModifiedBy,

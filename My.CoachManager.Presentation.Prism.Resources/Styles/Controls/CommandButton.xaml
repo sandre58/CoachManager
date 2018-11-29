@@ -155,9 +155,18 @@
         <Setter Property="Content" Value="{x:Static strings:ControlResources.Validate}" />
     </Style>
 
+    <Style x:Key="SelectCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource ValidateCommandButtonApplicationBarStyle}">
+        <Setter Property="Content" Value="{x:Static strings:ControlResources.Select}" />
+    </Style>
+
     <Style x:Key="CancelCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource ColorCommandButtonApplicationBarStyle}">
         <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Negative}" />
         <Setter Property="IconData" Value="{StaticResource CancelGeometry}" />
         <Setter Property="Content" Value="{x:Static strings:ControlResources.Cancel}" />
+    </Style>
+
+    <Style x:Key="RefreshCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonApplicationBarStyle}">
+        <Setter Property="IconData" Value="{StaticResource RefreshGeometry}" />
+        <Setter Property="Content" Value="{x:Static strings:ControlResources.Refresh}" />
     </Style>
 </ResourceDictionary>

@@ -1,11 +1,13 @@
 ﻿using System.Linq;
 using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Core.Extensions;
+using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Manager;
+using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
+using My.CoachManager.Presentation.Prism.Modules.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Modules.Core.Views;
 using My.CoachManager.Presentation.Prism.Modules.Roster.Resources;
 using My.CoachManager.Presentation.Prism.Modules.Roster.Views;
@@ -18,6 +20,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         #region Fields
 
         private readonly IRosterService _rosterService;
+        private const int Roster = 1;
 
         #endregion Fields
 
@@ -59,7 +62,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// <param name="item"></param>
         protected override void RemoveItemCore(RosterPlayerModel item)
         {
-            // _personService.RemovePlayer(PlayerFactory.Get(item, CrudStatus.Deleted));
+            _rosterService.RemovePlayers(Roster, new []{item.Player.Id});
         }
 
         /// <inheritdoc />
@@ -69,9 +72,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// <returns></returns>
         protected override void LoadDataCore()
         {
-            var result = _rosterService.GetPlayers(1);
+            var result = _rosterService.GetPlayers(Roster);
 
-            Items = result.Select(RosterFactory.Get).ToObservableCollection();
+            Items = result.Select(RosterFactory.Get).ToItemsObservableCollection();
         }
 
         protected override void InitializeDataCore()
@@ -92,8 +95,21 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         {
             var view = ServiceLocator.Current.GetInstance<SelectPlayersView>();
 
+            if (!(view.DataContext is SelectPlayersViewModel model)) return;
+
+            model.NotSelectableItems = Items.Select(x => x.Player);
+
             DialogManager.ShowWorkspaceDialog(view, dialog =>
             {
+
+                if (dialog.Result == DialogResult.Ok)
+                {
+                    _rosterService.AddPlayers(Roster, model.SelectedItems.Select(x => x.Id).ToArray());
+
+                    NotificationManager.ShowSuccess(string.Format(MessageResources.ItemsAdded,
+                        model.SelectedItems.Count()));
+                }
+
                 OnAddCompleted(dialog.Result);
             });
         }

@@ -135,6 +135,9 @@
   <data name="GetDataError" xml:space="preserve">
     <value>Une erreur est survenue lors de la récupération des données. Veuillez contacter l'administrateur.</value>
   </data>
+  <data name="ItemsAdded" xml:space="preserve">
+    <value>{0} élément(s) ont été ajouté(s)</value>
+  </data>
   <data name="Loading" xml:space="preserve">
     <value>Chargement des données...</value>
   </data>

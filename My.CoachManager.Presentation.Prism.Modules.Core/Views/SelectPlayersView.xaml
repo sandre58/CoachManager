@@ -11,13 +11,12 @@
              xmlns:models="clr-namespace:My.CoachManager.Presentation.Prism.Models;assembly=My.CoachManager.Presentation.Prism.Models"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Core.ViewModels"
-             xmlns:dialog="clr-namespace:My.CoachManager.Presentation.Prism.Core.Dialog;assembly=My.CoachManager.Presentation.Prism.Core"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:SelectPlayersViewModel}"
-             Height="500" Width="800">
+             Height="700" Width="800">
 
-    <controls:WorkspaceView>
+    <controls:WorkspaceView Style="{StaticResource SelectWorkspaceDialogViewStyle}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -25,12 +24,14 @@
             </Grid.RowDefinitions>
 
             <DataGrid Grid.Row="1" x:Name="ListGrid"
-                      ItemsSource="{Binding Filters.Items}" SelectedItem="{Binding SelectedItem}"
+                      ItemsSource="{Binding Filters.Items}"
                       Style="{StaticResource ItemsDataGridStyle}"
-                      FrozenColumnCount="2"
+                      FrozenColumnCount="3"
                       parameters:DataGridParameters.VisibleColumns="{Binding Parameters.DisplayedColumns}">
                 <DataGrid.Columns>
 
+                    <columns:DataGridSelectColumn />
+                    
                     <!-- Photo -->
                     <DataGridTemplateColumn AutomationProperties.Name="Photo" MinWidth="90" CanUserResize="False" CanUserSort="False" parameters:DataGridColumnParameters.CanUserHideColumn="False">
                         <DataGridTemplateColumn.CellTemplate>
@@ -92,8 +93,9 @@
             </DataGrid>
         </Grid>
         <controls:WorkspaceView.Commands>
-            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CloseCommand}" CommandParameter="{x:Static dialog:DialogResult.Cancel}" Style="{StaticResource CancelCommandButtonApplicationBarStyle}" IsCancel="True" />
-            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CloseCommand}" CommandParameter="{x:Static dialog:DialogResult.Ok}" Style="{StaticResource ValidateCommandButtonApplicationBarStyle}" IsDefault="True" />
+            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CancelCommand}" Style="{StaticResource CancelCommandButtonApplicationBarStyle}" IsCancel="True" />
+            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding SelectCommand}" Style="{StaticResource SelectCommandButtonApplicationBarStyle}" IsDefault="True" />
+            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding RefreshCommand}" Style="{StaticResource RefreshCommandButtonApplicationBarStyle}" />
         </controls:WorkspaceView.Commands>
     </controls:WorkspaceView>
 </UserControl>
