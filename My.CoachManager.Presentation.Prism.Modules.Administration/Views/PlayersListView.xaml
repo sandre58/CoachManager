@@ -6,12 +6,11 @@
              xmlns:entities="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:enum="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
-             xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
-             xmlns:columns="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Datagrids.Columns;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:viewModels1="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
              xmlns:models="clr-namespace:My.CoachManager.Presentation.Prism.Models;assembly=My.CoachManager.Presentation.Prism.Models"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
+             xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels1:PlayersListViewModel}"
@@ -26,8 +25,194 @@
 
             <ListView Grid.Row="1" ItemsSource="{Binding Filters.Items}">
                 <ListView.View>
-				<GridView AllowsColumnReorder="True" >
-                        <GridViewColumn Header="{x:Static entities:PersonResources.LastName}" Width="120" DisplayMemberBinding="{Binding LastName, Converter={StaticResource ToUpperConverter}}" />
+                    <GridView parameters:GridViewParameters.VisibleColumns="{Binding Parameters.DisplayedColumns}" >
+
+                        <!-- Photo -->
+                        <controls:ExtendedGridViewColumn 
+                            AutomationProperties.Name="Photo"  parameters:GridViewColumnParameters.CanUserHideColumn="False">
+                            <controls:ExtendedGridViewColumn.CellTemplate>
+                                <DataTemplate DataType="models:PlayerModel">
+                                    <controls:ImageContent Style="{StaticResource RoundedImageStyle}" Width="45" Height="45" Image="{Binding Photo, Converter={StaticResource BytesToImageConverter}}" HorizontalAlignment="Center">
+                                        <Grid>
+                                            <controls:Icon x:Name="Icon" Content="{StaticResource MalePeopleGeometry}" Size="Custom" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                        </Grid>
+                                    </controls:ImageContent>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding Gender}" Value="{x:Static enum:GenderType.Female}">
+                                            <Setter TargetName="Icon" Property="Content" Value="{StaticResource FemalePeopleGeometry}" />
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </controls:ExtendedGridViewColumn.CellTemplate>
+                        </controls:ExtendedGridViewColumn>
+
+                        <!-- Name -->
+                        <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.LastName}" 
+                                        AutomationProperties.Name="Name"  parameters:GridViewColumnParameters.CanUserHideColumn="False" >
+                            <controls:ExtendedGridViewColumn.CellTemplate>
+                                <DataTemplate DataType="models:PlayerModel">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding LastName, Converter={StaticResource ToUpperConverter}}" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </controls:ExtendedGridViewColumn.CellTemplate>
+                        </controls:ExtendedGridViewColumn>
+                    
+                    <!-- Age -->
+                        <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Age}"
+                                        AutomationProperties.Name="Age">
+                            <controls:ExtendedGridViewColumn.CellTemplate>
+				            <DataTemplate DataType="models:PlayerModel">
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Age, StringFormat={x:Static entities:PersonResources.AgeFormat}, TargetNullValue=''}" />
+				            </DataTemplate>
+				        </controls:ExtendedGridViewColumn.CellTemplate>
+				    </controls:ExtendedGridViewColumn>
+
+                        <!-- Birthdate -->
+                        <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Birthdate}"
+                                        AutomationProperties.Name="Birthdate">
+                            <controls:ExtendedGridViewColumn.CellTemplate>
+				            <DataTemplate DataType="models:PlayerModel">
+                                    <TextBlock Text="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}" />
+				            </DataTemplate>
+				        </controls:ExtendedGridViewColumn.CellTemplate>
+				    </controls:ExtendedGridViewColumn>
+
+                        <!-- Category -->
+                        <controls:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.CategoryAbbr}"
+                                        AutomationProperties.Name="Category">
+                            <controls:ExtendedGridViewColumn.CellTemplate>
+                                <DataTemplate DataType="models:PlayerModel">
+                                    <TextBlock Text="{Binding Category.Label}" />
+                                </DataTemplate>
+                            </controls:ExtendedGridViewColumn.CellTemplate>
+                        </controls:ExtendedGridViewColumn>
+
+				    <!-- License Number -->
+                        <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.LicenseNumber}"
+                                        AutomationProperties.Name="LicenseNumber">
+                            <controls:ExtendedGridViewColumn.CellTemplate>
+				            <DataTemplate DataType="models:PlayerModel">
+                                    <TextBlock Text="{Binding LicenseNumber, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0:# ### ### ###\}}" />
+				            </DataTemplate>
+				        </controls:ExtendedGridViewColumn.CellTemplate>
+				    </controls:ExtendedGridViewColumn>
+
+                        <!-- Gender -->
+                        <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Gender}"
+                                        AutomationProperties.Name="Gender">
+                            <controls:ExtendedGridViewColumn.CellTemplate>
+                                <DataTemplate DataType="models:PlayerModel">
+                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <controls:Icon Size="Custom" Height="25" Foreground="{DynamicResource Male}"  Content="{DynamicResource GenderMaleGeometry}"
+                                               Visibility="{Binding Gender, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static enum:GenderType.Male}}" />
+                                        <controls:Icon Size="Custom" Height="25" Foreground="{DynamicResource Female}"  Content="{DynamicResource GenderFemaleGeometry}"
+                                               Visibility="{Binding Gender, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static enum:GenderType.Female}}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </controls:ExtendedGridViewColumn.CellTemplate>
+                        </controls:ExtendedGridViewColumn>
+
+                        <!-- Country -->
+                        <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.CountryAbbr}"
+                                        AutomationProperties.Name="Country">
+                            <controls:ExtendedGridViewColumn.CellTemplate>
+                                <DataTemplate DataType="models:PlayerModel">
+                                    <Grid>
+                                        <Image Source="{Binding Country.FullPath}" Width="20" ToolTip="{Binding Country.Label}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </controls:ExtendedGridViewColumn.CellTemplate>
+                        </controls:ExtendedGridViewColumn>
+
+                        <!-- Address -->
+                        <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Address}"
+                                        AutomationProperties.Name="Address">
+                            <controls:ExtendedGridViewColumn.CellTemplate>
+                                <DataTemplate DataType="models:PlayerModel">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Address}" />
+                                        <StackPanel Orientation="Horizontal" Margin="{StaticResource DefaultHorizontalMargin}">
+                                            <TextBlock Text="{Binding  PostalCode, StringFormat='{}{0} '}" Margin="0" />
+                                            <TextBlock Text="{Binding  City, Converter={StaticResource ToUpperConverter}}" Margin="0" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </controls:ExtendedGridViewColumn.CellTemplate>
+                        </controls:ExtendedGridViewColumn>
+
+                        <!-- Phone -->
+                        <!--<columns:DataGridHyperlinkColumn AutomationProperties.Name="Phone" Header="{x:Static entities:PersonResources.Phone}"
+                                                 Binding="{Binding Phone, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0:00 00 00 00 00\}}"
+                                                 MinWidth="130" />-->
+
+                        <!-- Email -->
+                        <!--<columns:DataGridHyperlinkColumn AutomationProperties.Name="Email" Header="{x:Static entities:PersonResources.Email}"
+                                                 Binding="{Binding Email}"
+                                                 MinWidth="175" Width="*" />-->
+
+                        <!-- Laterality -->
+                        <controls:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.Laterality}"
+                                        AutomationProperties.Name="Laterality">
+                            <controls:ExtendedGridViewColumn.CellTemplate>
+                                <DataTemplate DataType="models:PlayerModel">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="{Binding Laterality, Converter={StaticResource EnumToStringConverter}}">
+                                        <controls:Icon x:Name="LeftFootIcon" Size="Custom" Height="35"  Content="{DynamicResource LeftFootGeometry}" Margin="{StaticResource DefaultHorizontalMargin}" Opacity="0.3" />
+                                        <controls:Icon x:Name="RightFootIcon" Size="Custom" Height="35" Content="{DynamicResource RightFootGeometry}" Margin="{StaticResource DefaultHorizontalMargin}" Opacity="0.3" />
+                                    </StackPanel>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding Laterality}" Value="{x:Static enum:Laterality.LeftHander}">
+                                            <Setter TargetName="LeftFootIcon" Property="Opacity" Value="1" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Laterality}" Value="{x:Static enum:Laterality.RightHander}">
+                                            <Setter TargetName="RightFootIcon" Property="Opacity" Value="1" />
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </controls:ExtendedGridViewColumn.CellTemplate>
+                        </controls:ExtendedGridViewColumn>
+
+                        <!-- Height -->
+                        <controls:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.Height}"
+                                        AutomationProperties.Name="Height">
+                            <controls:ExtendedGridViewColumn.CellTemplate>
+                                <DataTemplate DataType="models:PlayerModel">
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Height, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0\} cm}" />
+                                </DataTemplate>
+                            </controls:ExtendedGridViewColumn.CellTemplate>
+                        </controls:ExtendedGridViewColumn>
+
+                        <!-- Weight -->
+                        <controls:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.Weight}"
+                                        AutomationProperties.Name="Weight">
+                            <controls:ExtendedGridViewColumn.CellTemplate>
+                                <DataTemplate DataType="models:PlayerModel">
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Weight, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0\} kg}" />
+                                </DataTemplate>
+                            </controls:ExtendedGridViewColumn.CellTemplate>
+                        </controls:ExtendedGridViewColumn>
+
+                        <!-- Size -->
+                        <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Size}"
+                                        AutomationProperties.Name="Size">
+                            <controls:ExtendedGridViewColumn.CellTemplate>
+                                <DataTemplate DataType="models:PlayerModel">
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Size}" />
+                                </DataTemplate>
+                            </controls:ExtendedGridViewColumn.CellTemplate>
+                        </controls:ExtendedGridViewColumn>
+
+                        <!-- Shoes Size -->
+                        <controls:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.ShoesSize}"
+                                        AutomationProperties.Name="ShoesSize">
+                            <controls:ExtendedGridViewColumn.CellTemplate>
+                                <DataTemplate DataType="models:PlayerModel">
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding ShoesSize}" />
+                                </DataTemplate>
+                            </controls:ExtendedGridViewColumn.CellTemplate>
+                        </controls:ExtendedGridViewColumn>
+
                     </GridView>
 			</ListView.View>
             </ListView>
