@@ -31,17 +31,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Launch on constructor for initialize all Data.
         /// </summary>
-        public override void Initialize()
-        {
-            base.Initialize();
-
-            KeyboardManager.RegisterWorkspaceDialogShortcuts(KeyboardShortcuts);
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Launch on constructor for initialize all Data.
-        /// </summary>
         protected override void InitializeData()
         {
             base.InitializeData();
@@ -82,8 +71,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             {
                 DialogResult = dialogResult.Value;
             }
-
-            KeyboardManager.RemoveWorkspaceDialogShortcuts(KeyboardShortcuts);
+            
             OnCloseRequest(EventArgs.Empty);
         }
 

@@ -5,7 +5,7 @@ using Microsoft.Practices.ObjectBuilder2;
 
 namespace My.CoachManager.Presentation.Prism.Core.Models
 {
-    public abstract class EntityModel : SelectModel, IEntityModel, IModifiable
+    public abstract class EntityModel : SelectModel, IEntityModel, IModifiable, IComparable
     {
 
         #region Fields
@@ -66,10 +66,24 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
             return Id.GetHashCode();
         }
 
+        /// <summary>
+        /// Compares this instance to a specified object and returns an indication of their relative values.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public virtual int CompareTo(object obj)
+        {
+            if (obj is EntityModel other)
+            {
+                return Id.CompareTo(other.Id);
+            }
+            return -1;
+        }
+
         #endregion Methods
 
         #region IModifiable
-        
+
         /// <summary>
         /// Gets a value indicates if the entity has been modified.
         /// </summary>

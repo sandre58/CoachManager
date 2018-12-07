@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using My.CoachManager.Presentation.Prism.Modules.Administration.Resources;
+using My.CoachManager.Presentation.Prism.Modules.Core.Resources;
 
-namespace My.CoachManager.Presentation.Prism.Modules.Administration.Enums
+namespace My.CoachManager.Presentation.Prism.Modules.Core.Enums
 {
-    public enum PresetColumnsType
+    public enum PresetPlayerColumnsType
     {
         [Display(Name = "General", ResourceType = typeof(PlayerResources))]
         GeneralInformations,

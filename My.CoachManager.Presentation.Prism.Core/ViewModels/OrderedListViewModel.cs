@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using My.CoachManager.CrossCutting.Core.Collections;
@@ -98,6 +99,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         private void ActivateOrder()
         {
+            SelectAll(false);
             Reorder();
             CanOrder = true;
             Mode = ScreenMode.Edition;
@@ -223,10 +225,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual void MoveAbove(DragAndDropEventArgs e)
         {
-            var source = e.Source as TEntityViewModel;
-            var target = e.Target as TEntityViewModel;
-
-            if (source != null && target != null)
+            if (e.Source is TEntityViewModel source && e.Target is TEntityViewModel target)
                 Move(source, target.Order);
         }
 
@@ -235,12 +234,41 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual bool CanMoveAbove(DragAndDropEventArgs e)
         {
-            var source = e.Source as TEntityViewModel;
-            var target = e.Target as TEntityViewModel;
-            return CanOrder && source != null && target != null && CanMove(source, target.Order);
+            return CanOrder && e.Source is TEntityViewModel source && e.Target is TEntityViewModel target && CanMove(source, target.Order);
         }
 
         #endregion Move Above
+
+        #region  Selection
+
+        /// <summary>
+        /// Can Select All ?
+        /// </summary>
+        /// <returns></returns>
+        protected override bool CanSelectAll(bool? value)
+        {
+            return base.CanSelectAll(value) && !CanOrder;
+        }
+
+        /// <summary>
+        /// Can select an item. 
+        /// </summary>
+        /// <returns></returns>
+        protected override bool CanSelectItem(TEntityViewModel item)
+        {
+            return base.CanSelectItem(item) && !CanOrder;
+        }
+
+        /// <summary>
+        /// Can select items. 
+        /// </summary>
+        /// <returns></returns>
+        protected override bool CanSelectItems(IEnumerable<TEntityViewModel> items)
+        {
+            return base.CanSelectItems(items) && !CanOrder;
+        }
+
+        #endregion
 
         #region Privates methods
 

@@ -1,16 +1,16 @@
 ﻿using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Modules.Core.Enums;
 
-namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
+namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 {
-    public class PlayersListParametersViewModel : ListParametersViewModel
+    public class RosterParametersViewModel : ListParametersViewModel
     {
         #region Constants
 
         private static readonly string[] GeneralInformationsColumns =
             {"Age", "Birthdate", "Category", "Gender", "Country", "Address", "Phone", "Email"};
 
-        private static readonly string[] ClubInformationsColumns = { "Category", "LicenseNumber" };
+        private static readonly string[] ClubInformationsColumns = { "Number", "Category", "LicenseNumber", "LicenseState" };
 
         private static readonly string[] BodyInformationsColumns =
             {"Laterality", "Height", "Weight", "Size", "ShoesSize"};
@@ -20,9 +20,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         #region Initialisation
 
         /// <summary>
-        /// Initialise a new instance of <see cref="ListParametersViewModel"/>.
+        /// Initialise a new instance of <see cref="RosterParametersViewModel"/>.
         /// </summary>
-        public PlayersListParametersViewModel()
+        public RosterParametersViewModel()
         {
             AddPresetColumns(PresetPlayerColumnsType.GeneralInformations, GeneralInformationsColumns);
             AddPresetColumns(PresetPlayerColumnsType.ClubInformations, ClubInformationsColumns);

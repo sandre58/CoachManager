@@ -65,7 +65,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         protected override void LoadDataCore()
         {
             var result = _rosterService.GetRosters();
-
+            
             Items = result.Select(RosterFactory.Get).ToItemsObservableCollection();
         }
 

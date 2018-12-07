@@ -10,4 +10,9 @@
     <Color x:Key="AccentColor">#AAA739</Color>
     <Color x:Key="DarkAccentColor">#78750A</Color>
     <Color x:Key="AccentTextColor">#111111</Color>
+
+    <!-- MENU -->
+    <Color x:Key="MenuTextColor">#ffffff</Color>
+    <Color x:Key="MainMenuColor">#7b5c37</Color>
+    <Color x:Key="SecondMenuColor">#9d7446</Color>
 </ResourceDictionary>

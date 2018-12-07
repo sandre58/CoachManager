@@ -93,6 +93,7 @@
     </Compile>
     <Compile Include="ViewModels\RosterPlayerEditViewModel.cs" />
     <Compile Include="ViewModels\RosterViewModel.cs" />
+    <Compile Include="ViewModels\RosterParametersViewModel.cs" />
     <Compile Include="Views\RosterPlayerEditView.xaml.cs">
       <DependentUpon>RosterPlayerEditView.xaml</DependentUpon>
     </Compile>

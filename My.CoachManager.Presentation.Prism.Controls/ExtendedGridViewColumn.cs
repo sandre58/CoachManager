@@ -1,53 +1,88 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
     public class ExtendedGridViewColumn : GridViewColumn
     {
-        #region Fields
 
-        private double _visibleWidth;
+        #region Hidden Columns
+
+        #region CanUserHideColumns
+
+        public static readonly DependencyProperty CanUserHideColumnProperty = DependencyProperty.Register(
+            "CanUserHideColumn",
+            typeof(bool),
+            typeof(ExtendedGridViewColumn),
+            new PropertyMetadata(true));
+
+        public bool CanUserHideColumn
+        {
+            get => (bool)GetValue(CanUserHideColumnProperty);
+            set => SetValue(CanUserHideColumnProperty, value);
+        }
 
         #endregion
 
         #region Visibility
 
+        /// <summary>
+        ///     Dependency property for Visibility
+        /// </summary>
         public static readonly DependencyProperty VisibilityProperty =
-            DependencyProperty.Register("Visibility", typeof(Visibility),
+            DependencyProperty.Register(
+                "Visibility",
+                typeof(Visibility),
                 typeof(ExtendedGridViewColumn),
-                new FrameworkPropertyMetadata(Visibility.Visible,
-                    FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
-                    OnVisibilityPropertyChanged));
+                new FrameworkPropertyMetadata(Visibility.Visible, OnVisibilityPropertyChanged));
 
+        /// <summary>
+        ///     The property which determines if the column is visible or not.
+        /// </summary>
         public Visibility Visibility
         {
             get => (Visibility)GetValue(VisibilityProperty);
             set => SetValue(VisibilityProperty, value);
         }
 
-        private static void OnVisibilityPropertyChanged(DependencyObject d,
-            DependencyPropertyChangedEventArgs e)
+        /// <summary>
+        ///     Property changed callback for Visibility property
+        /// </summary>
+        private static void OnVisibilityPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs eventArgs)
         {
-            if (d is ExtendedGridViewColumn column)
-            {
-                column.OnVisibilityChanged((Visibility)e.NewValue);
-            }
-        }
+            var column = d as ExtendedGridViewColumn;
+            Visibility oldVisibility = (Visibility)eventArgs.OldValue;
+            Visibility newVisibility = (Visibility)eventArgs.NewValue;
 
-        private void OnVisibilityChanged(Visibility visibility)
-        {
-            if (visibility == Visibility.Visible)
+            if (oldVisibility != Visibility.Visible && newVisibility != Visibility.Visible)
             {
-                Width = _visibleWidth;
+                return;
+            }
+
+            if (newVisibility == Visibility.Visible)
+            {
+                if (column != null) column.Width = column._internalWidth;
             }
             else
             {
-                _visibleWidth = Width;
-                Width = 0.0;
+                if (column != null)
+                {
+                    column._internalWidth = column.Width;
+                    column.Width = 0;
+                }
             }
         }
 
-        #endregion        
+        /// <summary>
+        ///     Helper IsVisible property
+        /// </summary>
+        internal bool IsVisible => Visibility == Visibility.Visible;
+
+        private double _internalWidth;
+
+        #endregion
+
+        #endregion
     }
 }

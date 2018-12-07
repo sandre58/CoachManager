@@ -159,6 +159,9 @@
   <data name="CountItemsToUpper" xml:space="preserve">
     <value>{0} ELEMENT(S)</value>
   </data>
+  <data name="CountSelectedItemsToUpper" xml:space="preserve">
+    <value>{0} ELEMENT(S) SELECTIONNE(S)</value>
+  </data>
   <data name="Creation" xml:space="preserve">
     <value>Création</value>
   </data>

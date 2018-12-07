@@ -84,7 +84,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
             //var categories = _categoryService.GetCategories().Select(CategoryFactory.Get);
             //var countries = _personService.GetCountries().Select(CountryFactory.Get);
             //Filters = new PlayersListFiltersViewModel(categories, countries);
-            //Parameters = new PlayersListParametersViewModel();
+            Parameters = new RosterParametersViewModel();
         }
 
         #endregion Data

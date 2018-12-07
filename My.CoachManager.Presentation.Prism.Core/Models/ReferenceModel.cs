@@ -42,10 +42,19 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         [Display(Name = "Order", ResourceType = typeof(ReferenceResources))]
         public int Order { get; set; }
 
-        public int CompareTo(object obj)
+        /// <summary>
+        /// Compares this instance to a specified object and returns an indication of their relative values.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override int CompareTo(object obj)
         {
             if (obj is ReferenceModel other)
-                return string.Compare(Code, other.Code, StringComparison.Ordinal);
+            {
+                var value = Order.CompareTo(other.Order);
+
+                return value != 0 ? value : string.Compare(Label, other.Label, StringComparison.Ordinal);
+            }
             return -1;
         }
     }

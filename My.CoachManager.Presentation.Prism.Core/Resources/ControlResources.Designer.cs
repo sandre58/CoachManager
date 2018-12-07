@@ -187,6 +187,15 @@ namespace My.CoachManager.Presentation.Prism.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} ELEMENT(S) SELECTIONNE(S).
+        /// </summary>
+        public static string CountSelectedItemsToUpper {
+            get {
+                return ResourceManager.GetString("CountSelectedItemsToUpper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Création.
         /// </summary>
         public static string Creation {

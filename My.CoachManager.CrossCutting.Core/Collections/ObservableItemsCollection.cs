@@ -49,11 +49,13 @@ namespace My.CoachManager.CrossCutting.Core.Collections
 
         private void ItemPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var args = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, sender, sender,
-                IndexOf((T)sender));
-            OnCollectionChanged(args);
+            if (Contains((T)sender))
+            {
+                var args = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, sender, sender,
+                    IndexOf((T) sender));
+                OnCollectionChanged(args);
+            }
         }
-
 
         #endregion
 

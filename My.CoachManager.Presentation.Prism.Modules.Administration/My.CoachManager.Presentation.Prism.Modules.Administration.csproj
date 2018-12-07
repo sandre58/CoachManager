@@ -86,7 +86,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Enums\PresetColumnsType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\SeasonResources.Designer.cs">
       <DependentUpon>SeasonResources.resx</DependentUpon>
@@ -195,6 +194,10 @@
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Models\My.CoachManager.Presentation.Prism.Models.csproj">
       <Project>{C2647100-4BD2-49F0-8A22-A0CD1EA37C1E}</Project>
       <Name>My.CoachManager.Presentation.Prism.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Core\My.CoachManager.Presentation.Prism.Modules.Core.csproj">
+      <Project>{9904BC67-A287-4FCE-9607-730B15E3F105}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Modules.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Resources\My.CoachManager.Presentation.Prism.Resources.csproj">
       <Project>{2d290fd9-5b64-4af4-a295-2b4cde6eb330}</Project>

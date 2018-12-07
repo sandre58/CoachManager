@@ -15,7 +15,6 @@
         <ResourceDictionary Source="Button.xaml" />
         <ResourceDictionary Source="CommandButton.xaml" />
         <ResourceDictionary Source="ProgressBar.xaml" />
-        <ResourceDictionary Source="Hyperlink.xaml" />
         <ResourceDictionary Source="Icon.xaml" />
         <ResourceDictionary Source="ToggleButton.xaml" />
         <ResourceDictionary Source="TextBox.xaml" />

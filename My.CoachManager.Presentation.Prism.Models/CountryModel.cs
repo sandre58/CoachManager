@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Resources.Entities;
 using My.CoachManager.Presentation.Prism.Core.Models;
 
@@ -25,5 +26,6 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// Get the path of the flag image.
         /// </summary>
         public virtual string FullPath => FolderPath + Flag;
+
     }
 }

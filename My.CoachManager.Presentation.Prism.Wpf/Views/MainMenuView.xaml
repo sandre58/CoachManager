@@ -15,7 +15,7 @@
              d:DesignHeight="700">
 
     <Grid>
-        <Border VerticalAlignment="Stretch" Background="{DynamicResource DarkAccent}" Effect="{DynamicResource RightShadow}">
+        <Border VerticalAlignment="Stretch" Background="{DynamicResource MainMenu}" Effect="{DynamicResource RightShadow}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -30,8 +30,8 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Header -->
-                <Border Grid.Row="0" Height="150" Background="{DynamicResource LightAccent}">
-                    <Grid>
+                <Border Grid.Row="0" Height="150" Background="{DynamicResource White}">
+                    <Grid Background="{DynamicResource LightMainMenu}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
@@ -45,17 +45,17 @@
                         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                                    Text="{Binding Source={x:Static properties:Settings.Default}, Path=ClubName, Mode=OneWay}"
                                    Style="{StaticResource HeaderStyle}"
-                                   Foreground="{DynamicResource AccentForeground}"
+                                   Foreground="{DynamicResource MenuForeground}"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
                                    Typography.Capitals="AllSmallCaps"
                                    Margin="{StaticResource LargeHorizontalMargin}"
                                    Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                        
+
                         <!-- Logo -->
                         <Grid Grid.Row="1" Grid.Column="0" Margin="{StaticResource LargeMargin}" HorizontalAlignment="Left"
                               Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <Ellipse Fill="{DynamicResource AccentForeground}" Stroke="{DynamicResource HeaderBackground}" StrokeThickness="1" />
+                            <Ellipse Fill="{DynamicResource MenuForeground}" Stroke="{DynamicResource MenuForeground}" StrokeThickness="1" />
                             <Image
                                 Source="{Binding Source={x:Static properties:Settings.Default}, Path=ClubLogo, Mode=OneWay}"
                                 SnapsToDevicePixels="False"
@@ -63,13 +63,13 @@
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="0" Margin="{StaticResource DefaultMargin}" HorizontalAlignment="Center" VerticalAlignment="Center"
                               Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
-                            <Ellipse Fill="{DynamicResource AccentForeground}" Stroke="{DynamicResource HeaderBackground}" StrokeThickness="1" />
+                            <Ellipse Fill="{DynamicResource MenuForeground}" Stroke="{DynamicResource MenuForeground}" StrokeThickness="1" />
                             <Image
                                 Source="{Binding Source={x:Static properties:Settings.Default}, Path=ClubLogo, Mode=OneWay}"
                                 SnapsToDevicePixels="False"
                                 RenderOptions.BitmapScalingMode="Fant"  Margin="{StaticResource DefaultMargin}" />
                         </Grid>
-                        
+
                         <!-- Informations -->
                         <Grid Grid.Row="1" Grid.Column="1" Margin="{StaticResource LargeVerticalMargin}"
                               Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -80,7 +80,7 @@
                                           Style="{StaticResource AccentComboBoxStyle2}" HorizontalAlignment="Stretch" FontSize="{StaticResource LargeFontSize}"/>
                             </StackPanel>
                         </Grid>
-                        
+
                     </Grid>
                 </Border>
 

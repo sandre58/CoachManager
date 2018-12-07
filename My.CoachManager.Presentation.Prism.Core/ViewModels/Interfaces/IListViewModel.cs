@@ -32,6 +32,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
         ICollection Items { get; set; }
 
         /// <summary>
+        /// Gets or sets the selected item.
+        /// </summary>
+        IEnumerable SelectedItems { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicates the list is in read only.
         /// </summary>
         bool IsReadOnly { get; set; }

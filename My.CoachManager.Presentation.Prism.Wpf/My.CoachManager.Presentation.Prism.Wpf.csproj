@@ -107,7 +107,6 @@
       <DependentUpon>SkinResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\DialogService.cs" />
-    <Compile Include="Services\KeyBoardService.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
@@ -134,6 +133,10 @@
     <Compile Include="Views\CustomDialog.xaml.cs">
       <DependentUpon>CustomDialog.xaml</DependentUpon>
     </Compile>
+    <Page Include="Skins\Accent\Gold.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Skins\Accent\Green.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

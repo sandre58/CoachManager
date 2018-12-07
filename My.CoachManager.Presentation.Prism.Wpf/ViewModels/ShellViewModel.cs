@@ -158,12 +158,10 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 
         private void OnWorkspaceDialogInteractionRequestRaised(object sender, InteractionRequestedEventArgs e)
         {
-            KeyboardManager.WorkspaceBindingsIsSuspended = true;
             ActiveWorkspaceDialog = (e.Context.Content as FrameworkElement)?.DataContext as IWorkspaceDialogViewModel;
             if (ActiveWorkspaceDialog != null)
                 ActiveWorkspaceDialog.CloseRequest += (o, args) =>
                 {
-                    KeyboardManager.WorkspaceBindingsIsSuspended = false;
                     ActiveWorkspaceDialog = null;
                 };
         }

@@ -9,4 +9,10 @@
 
     <!-- FONT -->
     <SolidColorBrush x:Key="AccentForeground" Color="{DynamicResource AccentTextColor}" presentationOptions:Freeze="true" />
+    
+    <!-- MENU -->
+    <SolidColorBrush x:Key="MenuForeground" Color="{DynamicResource MenuTextColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="MainMenu" Color="{DynamicResource MainMenuColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightMainMenu" Color="{DynamicResource MainMenuColor}" Opacity="0.75" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="SecondMenu" Color="{DynamicResource SecondMenuColor}" presentationOptions:Freeze="true" />
 </ResourceDictionary>

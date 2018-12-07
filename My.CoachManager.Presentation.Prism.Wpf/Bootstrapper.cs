@@ -94,7 +94,6 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             Container.RegisterType<INotificationService, NotificationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IAuthenticationService, AuthenticationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IDialogService, DialogService>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<IKeyBoardService, KeyboardService>(new ContainerControlledLifetimeManager());
         }
 
         /// <inheritdoc />

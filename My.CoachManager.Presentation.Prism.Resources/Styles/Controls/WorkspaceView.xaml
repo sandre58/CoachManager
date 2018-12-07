@@ -56,14 +56,33 @@
                            Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}" />
 
                     <!-- Count Items -->
-                    <TextBlock x:Name="CountTextBlock" VerticalAlignment="Center"
-                       DockPanel.Dock="Left"
-                       parameters:PanelParameters.NotAffectMargin="True"
-                       Margin="{StaticResource DefaultMargin}"
-                       FontSize="{StaticResource MediumFontSize}"
-                       Text="{Binding Filters.Items.Count, StringFormat={x:Static strings:ControlResources.CountItemsToUpper}}"
-                           Foreground="{DynamicResource Positive}"
-                           Style="{StaticResource SmallHeaderStyle}" />
+                    <DockPanel  Margin="{StaticResource DefaultMargin}" DockPanel.Dock="Left" VerticalAlignment="Center" parameters:PanelParameters.NotAffectMargin="True" MinHeight="40">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                        <TextBlock x:Name="SelectedCountTextBlock" 
+                                   FontSize="{StaticResource NormalFontSize}"
+                                   Text="{Binding SelectedItems.Count, StringFormat={x:Static strings:ControlResources.CountSelectedItemsToUpper}}"
+                                   Foreground="{DynamicResource Accent}"
+                                   Style="{StaticResource SmallHeaderStyle}"
+                                   Visibility="{Binding SelectedItems, Converter={StaticResource AnyToVisibilityConverter}}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="{StaticResource MediumFontSize}" Margin="0"
+                                       Text="{Binding Filters.Items.Count}"
+                                       Foreground="{DynamicResource Positive}"
+                                       Style="{StaticResource SmallHeaderStyle}"
+                                       Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}"/>
+                            <TextBlock FontSize="{StaticResource MediumFontSize}" Margin="0"
+                                       Text="/"
+                                       Foreground="{DynamicResource Positive}"
+                                       Style="{StaticResource SmallHeaderStyle}"
+                                       Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}"/>
+                            <TextBlock x:Name="CountTextBlock" Margin="0"
+                                       FontSize="{StaticResource MediumFontSize}"
+                                       Text="{Binding Items.Count, StringFormat={x:Static strings:ControlResources.CountItemsToUpper}}"
+                                       Foreground="{DynamicResource Positive}"
+                                       Style="{StaticResource SmallHeaderStyle}" />
+                        </StackPanel>
+                    </StackPanel>
+                    </DockPanel>
 
                     <!-- Columns Parameters -->
                     <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right"
@@ -79,11 +98,6 @@
                                 </Style>
                             </controls:DropDownMenuButton.ItemContainerStyle>
                         </controls:DropDownMenuButton>
-                        <controls:DropDownMenuButton Style="{StaticResource TextDropDownMenuButtonStyle}"
-                                                     Content="{x:Static strings:ControlResources.ShowColumns}"
-                                                     ItemsSource="{Binding ElementName=ListGrid, Path=Columns}"
-                                                     ItemContainerStyle="{StaticResource ColumnContextMenuStyle}"
-                                             VerticalAlignment="Center" />
                     </WrapPanel>
                 </DockPanel>
             </Grid>
@@ -151,6 +165,17 @@
         <Setter Property="ApplicationBarStyle" Value="{StaticResource {x:Type controls:ApplicationBar}}" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
         <Setter Property="HeaderTemplate" Value="{StaticResource ListViewHeaderTemplate}" />
+
+        <Setter Property="parameters:ControlParameters.InputBindings">
+            <Setter.Value>
+                <InputBindingCollection>
+                    <KeyBinding Key="F5" Command="{Binding RefreshCommand}" />
+                    <KeyBinding Key="N" Modifiers="Control" Command="{Binding AddCommand}" />
+                    <KeyBinding Key="F" Modifiers="Control" Command="{Binding Filters.ShowFiltersCommand}" />
+                </InputBindingCollection>
+            </Setter.Value>
+        </Setter>
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:WorkspaceView}">

@@ -261,6 +261,18 @@
     </Style>
 
     <Style TargetType="{x:Type RepeatButton}" BasedOn="{StaticResource TextButtonStyle}" />
+    
+    <!-- HyperLink -->
+    <Style TargetType="{x:Type controls:HyperlinkButton}" BasedOn="{StaticResource TextButtonStyle}">
+        <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock TextDecorations="Underline" Text="{Binding}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <!-- System buttons -->
     <Style x:Key="SystemButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource ButtonBaseStyle}">

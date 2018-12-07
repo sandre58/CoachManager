@@ -47,6 +47,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         public DelegateCommand<TEntityModel> RemoveCommand { get; set; }
 
+        /// <summary>
+        /// Gets or sets the remove command.
+        /// </summary>
+        public DelegateCommand RemoveSelectedItemsCommand { get; set; }
+
         #endregion Members
 
         #region Methods
@@ -63,6 +68,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
             AddCommand = new DelegateCommand(Add, CanAdd);
             RemoveCommand = new DelegateCommand<TEntityModel>(Remove, CanRemove);
+            RemoveSelectedItemsCommand = new DelegateCommand(RemoveSelectedItems, CanRemoveSelectedItems);
             EditCommand = new DelegateCommand<TEntityModel>(Edit, CanEdit);
             OpenCommand = new DelegateCommand<TEntityModel>(Open, CanOpen);
         }
@@ -242,7 +248,63 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         #endregion Remove
 
-        #endregion Methods
+        #region RemoveSelectedItems
+
+        /// <summary>
+        /// Remove Item.
+        /// </summary>
+        protected virtual void RemoveSelectedItems()
+        {
+            if (!CanRemoveSelectedItems()) return;
+
+            if (DialogManager.ShowWarningDialog(MessageResources.ConfirmationRemovingItems, MessageDialogButtons.YesNo) != DialogResult.Yes) return;
+
+            try
+            {
+                SelectedItems.ForEach(RemoveItemCore);
+                OnRemoveSelectedItemsCompleted();
+            }
+            catch (BusinessException e)
+            {
+                OnBusinessExceptionOccured(e);
+            }
+            catch (Exception e)
+            {
+                OnExceptionOccured(e);
+            }
+        }
+
+        /// <summary>
+        /// Can Edit item.
+        /// </summary>
+        protected virtual bool CanRemoveSelectedItems()
+        {
+            return Mode == ScreenMode.Read && SelectedItems != null && SelectedItems.Any();
+        }
+
+        /// <summary>
+        /// Called after the edit action;
+        /// </summary>
+        protected virtual void OnRemoveSelectedItemsCompleted()
+        {
+            Refresh();
+        }
+
+        #endregion Remove
+
+        #region Properties Changed
+
+        protected override void OnItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            base.OnItemsCollectionChanged(sender, e);
+
+            RemoveSelectedItemsCommand.RaiseCanExecuteChanged();
+        }
+
+
+        #endregion Properties Changed
+
+#endregion Methods
     }
 
     public abstract class ListViewModel<TEntityModel> : NavigatableWorkspaceViewModel, IListViewModel<TEntityModel>
@@ -265,6 +327,16 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// Gets or sets the items.
         /// </summary>
         public ObservableItemsCollection<TEntityModel> Items { get; set; }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets items.
+        /// </summary>
+        IEnumerable IListViewModel.SelectedItems
+        {
+            get => SelectedItems;
+            set => SelectedItems = (IEnumerable<TEntityModel>) value;
+        }
 
         /// <summary>
         /// Gets or sets the selected item.
@@ -384,7 +456,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// Can Select All ?
         /// </summary>
         /// <returns></returns>
-        protected bool CanSelectAll(bool? value)
+        protected virtual bool CanSelectAll(bool? value)
         {
             return Items.Any(x => x.IsSelectable);
         }
@@ -408,7 +480,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// Can select an item. 
         /// </summary>
         /// <returns></returns>
-        protected bool CanSelectItem(TEntityModel item)
+        protected virtual bool CanSelectItem(TEntityModel item)
         {
             return item != null && item.IsSelectable;
         }
@@ -425,13 +497,13 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         #endregion
 
-        #region SelectItem
+        #region SelectItems
 
         /// <summary>
         /// Can select items. 
         /// </summary>
         /// <returns></returns>
-        protected bool CanSelectItems(IEnumerable<TEntityModel> items)
+        protected virtual bool CanSelectItems(IEnumerable<TEntityModel> items)
         {
             return items.Any(x => x.IsSelectable);
         }
@@ -457,13 +529,15 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             {
                 Filters.Items = new FilteredCollectionView<TEntityModel>(Items.ToObservableCollection());
             }
-            Items.CollectionChanged += ItemsCollectionChanged;
+            Items.CollectionChanged += OnItemsCollectionChanged;
             SelectAllCommand.RaiseCanExecuteChanged();
         }
 
-        private void ItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        protected virtual void OnItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             RaisePropertyChanged(() => AreAllSelected);
+            RaisePropertyChanged(() => SelectedItems);
+            RaisePropertyChanged(() => SelectedItem);
         }
 
 

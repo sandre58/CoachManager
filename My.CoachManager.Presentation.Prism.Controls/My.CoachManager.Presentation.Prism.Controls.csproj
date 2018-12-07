@@ -89,6 +89,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdornedControl.cs" />
+    <Compile Include="HyperlinkButton.cs" />
+    <Compile Include="ExtendedGridView.cs" />
     <Compile Include="Badged.cs" />
     <Compile Include="BadgedBase.cs" />
     <Compile Include="Behaviours\FocusBehavior.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="DropDownMenuButton.cs" />
     <Compile Include="ExtendedDataGrid.cs" />
     <Compile Include="ExtendedGridViewColumn.cs" />
+    <Compile Include="Extensions\CommandBindingExtension.cs" />
     <Compile Include="Extensions\EnumExtension.cs" />
     <Compile Include="Flyout.cs" />
     <Compile Include="FlyoutsControl.cs" />
@@ -149,8 +152,8 @@
     <Compile Include="Parameters\Commands\Internal\EventHandlerGenerator.cs" />
     <Compile Include="Parameters\Commands\Internal\IExecutionStrategy.cs" />
     <Compile Include="Parameters\Commands\KeyCommand.cs" />
-    <Compile Include="Parameters\GridViewParameters.cs" />
-    <Compile Include="Parameters\GridViewColumnParameters.cs" />
+    <Compile Include="Parameters\DragAndDropParameters.cs" />
+    <Compile Include="Parameters\ListViewParameters.cs" />
     <Compile Include="Toast.cs" />
     <Compile Include="ToastArea.cs" />
     <Compile Include="Notifications\IToastManager.cs" />

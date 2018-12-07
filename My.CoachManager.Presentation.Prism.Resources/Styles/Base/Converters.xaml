@@ -15,6 +15,7 @@
     <converters:ThicknessToDoubleConverter x:Key="ThicknessToDoubleConverter" />
     <converters:CoefficientConverter x:Key="CoefficientConverter" />
     <converters:AnyToVisibilityConverter x:Key="AnyToVisibilityConverter" />
+    <converters:AnyToBooleanConverter x:Key="AnyToBooleanConverter" />
     <converters:BrushToColorConverter x:Key="BrushToColorConverter" />
     <converters:NotEqualsConverter x:Key="NotEqualsConverter" />
     <converters:NotEqualToVisibilityConverter x:Key="NotEqualToVisibilityConverter" />

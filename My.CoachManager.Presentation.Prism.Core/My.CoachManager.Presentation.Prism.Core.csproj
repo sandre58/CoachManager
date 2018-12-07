@@ -101,7 +101,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Events\UpdateStatusBarMessageRequestEvent.cs" />
-    <Compile Include="Manager\KeyBoardManager.cs" />
     <Compile Include="Manager\ConfigurationManager.cs" />
     <Compile Include="Dialog\Dialog.cs" />
     <Compile Include="Dialog\DialogEventArgs.cs" />
@@ -143,7 +142,6 @@
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\INotificationService.cs" />
     <Compile Include="Services\INavigationService.cs" />
-    <Compile Include="Services\IKeyBoardService.cs" />
     <Compile Include="Utilities\KeyboardUtilities.cs" />
     <Compile Include="Attributes\Validation\ValidatePropertyAttribute.cs" />
     <Compile Include="ViewModels\DialogViewModel.cs" />

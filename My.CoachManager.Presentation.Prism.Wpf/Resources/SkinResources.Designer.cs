@@ -106,6 +106,15 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Or.
+        /// </summary>
+        internal static string gold {
+            get {
+                return ResourceManager.GetString("gold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vert.
         /// </summary>
         internal static string green {

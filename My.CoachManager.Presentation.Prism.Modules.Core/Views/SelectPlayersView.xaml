@@ -17,24 +17,15 @@
              Height="700" Width="800">
 
     <controls:WorkspaceView Style="{StaticResource SelectWorkspaceDialogViewStyle}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
 
-            <DataGrid Grid.Row="1" x:Name="ListGrid"
-                      ItemsSource="{Binding Filters.Items}"
-                      Style="{StaticResource ItemsDataGridStyle}"
-                      FrozenColumnCount="3"
-                      parameters:DataGridParameters.VisibleColumns="{Binding Parameters.DisplayedColumns}">
-                <DataGrid.Columns>
+        <ListView ItemsSource="{Binding Filters.Items}">
+            <ListView.View>
+                <controls:ExtendedGridView VisibleColumns="{Binding Parameters.DisplayedColumns}">
 
-                    <columns:DataGridSelectColumn />
-                    
                     <!-- Photo -->
-                    <DataGridTemplateColumn AutomationProperties.Name="Photo" MinWidth="90" CanUserResize="False" CanUserSort="False" parameters:DataGridColumnParameters.CanUserHideColumn="False">
-                        <DataGridTemplateColumn.CellTemplate>
+                    <controls:ExtendedGridViewColumn 
+                            parameters:ListViewParameters.PropertyName="Photo"  CanUserHideColumn="False" Width="100">
+                        <controls:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
                                 <controls:ImageContent Style="{StaticResource RoundedImageStyle}" Width="45" Height="45" Image="{Binding Photo, Converter={StaticResource BytesToImageConverter}}" HorizontalAlignment="Center">
                                     <Grid>
@@ -47,37 +38,46 @@
                                     </DataTrigger>
                                 </DataTemplate.Triggers>
                             </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                        </controls:ExtendedGridViewColumn.CellTemplate>
+                    </controls:ExtendedGridViewColumn>
 
                     <!-- Name -->
-                    <DataGridTemplateColumn AutomationProperties.Name="Name" Header="{x:Static entities:PersonResources.LastName}" SortMemberPath="LastName" MinWidth="140" parameters:DataGridColumnParameters.CanUserHideColumn="False">
-                        <DataGridTemplateColumn.CellTemplate>
+                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.LastName}" 
+                                                         parameters:ListViewParameters.PropertyName="LastName" CanUserHideColumn="False" Width="150" >
+                        <controls:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
                                 <StackPanel>
                                     <TextBlock Text="{Binding LastName, Converter={StaticResource ToUpperConverter}}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
                                 </StackPanel>
                             </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                        </controls:ExtendedGridViewColumn.CellTemplate>
+                    </controls:ExtendedGridViewColumn>
 
                     <!-- Age -->
-                    <columns:DataGridTextColumn AutomationProperties.Name="Age"
-                                                Binding="{Binding Age, StringFormat={x:Static entities:PersonResources.AgeFormat}, TargetNullValue=''}"
-                                                Header="{x:Static entities:PersonResources.Age}" SortMemberPath="Age" MinWidth="50" />
+                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Age}"
+                                                         parameters:ListViewParameters.PropertyName="Age" Width="60">
+                        <controls:ExtendedGridViewColumn.CellTemplate>
+                            <DataTemplate DataType="models:PlayerModel">
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Age, StringFormat={x:Static entities:PersonResources.AgeFormat}, TargetNullValue=''}" />
+                            </DataTemplate>
+                        </controls:ExtendedGridViewColumn.CellTemplate>
+                    </controls:ExtendedGridViewColumn>
 
                     <!-- Birthdate -->
-                    <DataGridTextColumn AutomationProperties.Name="Birthdate"
-                                        Binding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}"
-                                        Header="{x:Static entities:PersonResources.Birthdate}" SortMemberPath="Birthdate" MinWidth="100" />
+                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Birthdate}"
+                                                         parameters:ListViewParameters.PropertyName="Birthdate" Width="110" 
+                                                         DisplayMemberBinding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}"/>
 
                     <!-- Category -->
-                    <DataGridTextColumn AutomationProperties.Name="Category" Binding="{Binding Category.Label}" Header="{x:Static entities:PlayerResources.CategoryAbbr}" SortMemberPath="Category.Order" MinWidth="70" />
+                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.CategoryAbbr}"
+                                                         parameters:ListViewParameters.PropertyName="Category" Width="80"
+                                                         DisplayMemberBinding="{Binding Category.Label}"/>
 
                     <!-- Gender -->
-                    <DataGridTemplateColumn AutomationProperties.Name="Gender" Header="{x:Static entities:PersonResources.Gender}" SortMemberPath="Gender" MinWidth="70">
-                        <DataGridTemplateColumn.CellTemplate>
+                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Gender}"
+                                                         parameters:ListViewParameters.PropertyName="Gender" Width="80">
+                        <controls:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
                                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <controls:Icon Size="Custom" Height="25" Foreground="{DynamicResource Male}"  Content="{DynamicResource GenderMaleGeometry}"
@@ -86,12 +86,25 @@
                                                Visibility="{Binding Gender, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static enum:GenderType.Female}}" />
                                 </Grid>
                             </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                        </controls:ExtendedGridViewColumn.CellTemplate>
+                    </controls:ExtendedGridViewColumn>
 
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
+                    <!-- Country -->
+                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.CountryAbbr}"
+                                                         parameters:ListViewParameters.PropertyName="Country" Width="70">
+                        <controls:ExtendedGridViewColumn.CellTemplate>
+                            <DataTemplate DataType="models:PlayerModel">
+                                <Grid>
+                                    <Image Source="{Binding Country.FullPath}" Width="20" ToolTip="{Binding Country.Label}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+                            </DataTemplate>
+                        </controls:ExtendedGridViewColumn.CellTemplate>
+                    </controls:ExtendedGridViewColumn>
+
+                </controls:ExtendedGridView>
+            </ListView.View>
+        </ListView>
+        
         <controls:WorkspaceView.Commands>
             <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CancelCommand}" Style="{StaticResource CancelCommandButtonApplicationBarStyle}" IsCancel="True" />
             <controls:CommandButton DockPanel.Dock="Right" Command="{Binding SelectCommand}" Style="{StaticResource SelectCommandButtonApplicationBarStyle}" IsDefault="True" />
