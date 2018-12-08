@@ -129,8 +129,6 @@ namespace My.CoachManager.Infrastructure.Data.Core
                 throw new ArgumentNullException(nameof(item));
             }
 
-            // Apply changes for item object
-            //_currentUnitOfWork.AddOrUpdate(item);
             _currentUnitOfWork.SetModified(item);
         }
 
