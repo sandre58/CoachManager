@@ -15,7 +15,7 @@
              d:DataContext="{d:DesignInstance Type=viewModels:SettingsViewModel, IsDesignTimeCreatable=True}"
              Header="{x:Static strings:SettingsResources.Settings}"
              IsOpen="{Binding IsOpen}"
-                 Style="{StaticResource {x:Type controls:Flyout}}">
+                 Style="{StaticResource MenuFlyoutStyle}">
     <Grid>
         <ItemsControl  regions:RegionManager.RegionName="{x:Static core:RegionNames.SettingsRegion}" Focusable="False" />
     </Grid>

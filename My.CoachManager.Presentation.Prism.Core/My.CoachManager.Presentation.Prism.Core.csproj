@@ -101,7 +101,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Events\UpdateStatusBarMessageRequestEvent.cs" />
-    <Compile Include="Manager\KeyBoardManager.cs" />
     <Compile Include="Manager\ConfigurationManager.cs" />
     <Compile Include="Dialog\Dialog.cs" />
     <Compile Include="Dialog\DialogEventArgs.cs" />
@@ -115,9 +114,11 @@
     <Compile Include="Models\Filters\SelectedLabelableFilter.cs" />
     <Compile Include="Manager\DialogManager.cs" />
     <Compile Include="Manager\NotificationManager.cs" />
+    <Compile Include="Models\ISelectable.cs" />
     <Compile Include="Models\ReferenceModel.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Manager\NavigationManager.cs" />
+    <Compile Include="Models\SelectModel.cs" />
     <Compile Include="Notification\NotificationContent.cs" />
     <Compile Include="Notification\NotificationType.cs" />
     <Compile Include="Resources\ControlResources.Designer.cs">
@@ -141,12 +142,13 @@
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\INotificationService.cs" />
     <Compile Include="Services\INavigationService.cs" />
-    <Compile Include="Services\IKeyBoardService.cs" />
     <Compile Include="Utilities\KeyboardUtilities.cs" />
     <Compile Include="Attributes\Validation\ValidatePropertyAttribute.cs" />
     <Compile Include="ViewModels\DialogViewModel.cs" />
     <Compile Include="Dialog\IWorkspaceDialog.cs" />
+    <Compile Include="ViewModels\Interfaces\IRefreshable.cs" />
     <Compile Include="ViewModels\Interfaces\IListFiltersViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\ISelectItemsViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IListViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IScreenViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IEditViewModel.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="Events\ShowWorkspaceDialogRequestEvent.cs" />
     <Compile Include="ViewModels\ListFiltersViewModel.cs" />
     <Compile Include="ViewModels\ListParametersViewModel.cs" />
+    <Compile Include="ViewModels\SelectItemsViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceDialogViewModel.cs" />
     <Compile Include="DragAndDrop\DragAndDropEventArgs.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />

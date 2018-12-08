@@ -17,6 +17,7 @@ using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Modules.Administration;
 using My.CoachManager.Presentation.Prism.Modules.Common;
 using My.CoachManager.Presentation.Prism.Modules.Home;
+using My.CoachManager.Presentation.Prism.Modules.Roster;
 using My.CoachManager.Presentation.Prism.Wpf.Properties;
 using My.CoachManager.Presentation.Prism.Wpf.Services;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
@@ -93,7 +94,6 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             Container.RegisterType<INotificationService, NotificationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IAuthenticationService, AuthenticationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IDialogService, DialogService>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<IKeyBoardService, KeyboardService>(new ContainerControlledLifetimeManager());
         }
 
         /// <inheritdoc />
@@ -118,6 +118,12 @@ namespace My.CoachManager.Presentation.Prism.Wpf
                 InitializationMode = InitializationMode.WhenAvailable,
                 ModuleName = typeof(HomeModule).Name,
                 ModuleType = typeof(HomeModule).AssemblyQualifiedName
+            });
+            ModuleCatalog.AddModule(new ModuleInfo
+            {
+                InitializationMode = InitializationMode.WhenAvailable,
+                ModuleName = typeof(RosterModule).Name,
+                ModuleType = typeof(RosterModule).AssemblyQualifiedName
             });
             ModuleCatalog.AddModule(new ModuleInfo
             {
@@ -214,6 +220,12 @@ namespace My.CoachManager.Presentation.Prism.Wpf
                     }
 
                     viewModel.Initialize();
+
+                    if (viewModel is ScreenViewModel screenViewModel)
+                    {
+                        if(screenViewModel.RefreshOnInit)
+                        screenViewModel.Refresh();
+                    }
                     return viewModel;
                 });
         }

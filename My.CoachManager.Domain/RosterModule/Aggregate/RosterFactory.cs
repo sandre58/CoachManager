@@ -66,5 +66,21 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
                 ModifiedBy = item.ModifiedBy
             };
         }
+
+        /// <summary>
+        /// Create the entity from the DTO.
+        /// </summary>
+        /// <returns>The entity.</returns>
+        public static RosterPlayer CreatePlayer(int rosterId, int playerId)
+        {
+            if (rosterId == 0) return null;
+            if (playerId == 0) return null;
+
+            return new RosterPlayer
+            {
+                PlayerId = playerId,
+                RosterId = rosterId
+            };
+        }
     }
 }

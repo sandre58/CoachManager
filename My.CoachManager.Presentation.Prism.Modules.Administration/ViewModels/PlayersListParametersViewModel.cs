@@ -1,5 +1,5 @@
 ﻿using My.CoachManager.Presentation.Prism.Core.ViewModels;
-using My.CoachManager.Presentation.Prism.Modules.Administration.Enums;
+using My.CoachManager.Presentation.Prism.Modules.Core.Enums;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
@@ -10,7 +10,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         private static readonly string[] GeneralInformationsColumns =
             {"Age", "Birthdate", "Category", "Gender", "Country", "Address", "Phone", "Email"};
 
-        private static readonly string[] ClubInformationsColumns = { "Number", "Category", "License", "LicenseState" };
+        private static readonly string[] ClubInformationsColumns = { "Category", "LicenseNumber" };
 
         private static readonly string[] BodyInformationsColumns =
             {"Laterality", "Height", "Weight", "Size", "ShoesSize"};
@@ -24,11 +24,11 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// </summary>
         public PlayersListParametersViewModel()
         {
-            AddPresetColumns(PresetColumnsType.GeneralInformations, GeneralInformationsColumns);
-            AddPresetColumns(PresetColumnsType.ClubInformations, ClubInformationsColumns);
-            AddPresetColumns(PresetColumnsType.BodyInformations, BodyInformationsColumns);
+            AddPresetColumns(PresetPlayerColumnsType.GeneralInformations, GeneralInformationsColumns);
+            AddPresetColumns(PresetPlayerColumnsType.ClubInformations, ClubInformationsColumns);
+            AddPresetColumns(PresetPlayerColumnsType.BodyInformations, BodyInformationsColumns);
 
-            ChangeDisplayedColumns(PresetColumnsType.GeneralInformations);
+            ChangeDisplayedColumns(PresetPlayerColumnsType.GeneralInformations);
         }
 
         #endregion Initialisation

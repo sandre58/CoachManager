@@ -317,5 +317,23 @@ namespace My.CoachManager.Presentation.Prism.Controls
         {
             e.Handled = true;
         }
+
+        #region ShowArrow
+
+        public static readonly DependencyProperty ShowArrowroperty = DependencyProperty.Register("ShowArrow", typeof(bool), typeof(DropDownMenuButton), new UIPropertyMetadata(true));
+
+        public bool ShowArrow
+        {
+            get
+            {
+                return (bool)GetValue(ShowArrowroperty);
+            }
+            set
+            {
+                SetValue(ShowArrowroperty, value);
+            }
+        }
+
+        #endregion ShowArrow
     }
 }

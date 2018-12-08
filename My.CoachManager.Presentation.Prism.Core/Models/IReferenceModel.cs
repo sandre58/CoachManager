@@ -6,7 +6,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
     /// <summary>
     /// Services to allow changes to an entity to be tracked.
     /// </summary>
-    public interface IReferenceModel : IEntityModel, IOrderable, IComparable
+    public interface IReferenceModel : IEntityModel, IOrderable
     {
         /// <summary>
         /// Gets or sets the label.

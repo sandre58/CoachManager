@@ -17,6 +17,7 @@ namespace My.CoachManager.Application.Services.RosterModule
         #region ---- Fields ----
         
         private readonly IRepository<Roster> _rosterRepository;
+        private readonly IRepository<RosterPlayer> _playerRosterRepository;
 
         private readonly ICrudDomainService<Roster, RosterDto> _crudDomainService;
         private readonly IRosterDomainService _rosterDomainService;
@@ -29,11 +30,13 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// Initializes a new instance of the <see cref="RosterAppService"/> class.
         /// </summary>
         /// <param name="rosterRepository"></param>
+        /// <param name="playerRosterRepository"></param>
         /// <param name="crudDomainService"></param>
         /// <param name="rosterDomainService"></param>
-        public RosterAppService(IRepository<Roster> rosterRepository, ICrudDomainService<Roster, RosterDto> crudDomainService, IRosterDomainService rosterDomainService)
+        public RosterAppService(IRepository<Roster> rosterRepository, IRepository<RosterPlayer> playerRosterRepository, ICrudDomainService<Roster, RosterDto> crudDomainService, IRosterDomainService rosterDomainService)
         {
             _rosterRepository = rosterRepository;
+            _playerRosterRepository = playerRosterRepository;
             _crudDomainService = crudDomainService;
             _rosterDomainService = rosterDomainService;
         }
@@ -81,6 +84,48 @@ namespace My.CoachManager.Application.Services.RosterModule
         public IList<RosterDto> GetRosters()
         {
             return _rosterRepository.GetAll(RosterSelectBuilder.SelectRosters(), x => x.Category, x => x.Season).ToList();
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Load all items.
+        /// </summary>
+        /// <returns></returns>
+        public IList<RosterPlayerDto> GetPlayers(int rosterId)
+        {
+            return _playerRosterRepository.GetAll(RosterSelectBuilder.SelectRosterPlayers(), x => x.Player.Contacts, x => x.Player.Category, x => x.Player.Address, x => x.Player.Country).ToList();
+        }
+
+        /// <summary>
+        /// Add players in rosters.
+        /// </summary>
+        /// <returns></returns>
+        public void AddPlayers(int rosterId, IEnumerable<int> playerIds)
+        {
+            foreach (var id in playerIds)
+            {
+                _playerRosterRepository.Add(RosterFactory.CreatePlayer(rosterId, id));
+            }
+            
+            _playerRosterRepository.UnitOfWork.Commit();
+
+        }
+
+        /// <summary>
+        /// Remove players in rosters.
+        /// </summary>
+        /// <returns></returns>
+        public void RemovePlayers(int rosterId, IEnumerable<int> playerIds)
+        {
+            var players = _playerRosterRepository.GetByFilter(x => playerIds.Contains(x.PlayerId) && x.RosterId == rosterId).ToList();
+            foreach (var player in players)
+            {
+                
+                _playerRosterRepository.Remove(player);
+            }
+
+            _playerRosterRepository.UnitOfWork.Commit();
+
         }
 
         #endregion Methods

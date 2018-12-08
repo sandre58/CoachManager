@@ -171,8 +171,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models.Filters
         /// </returns>
         protected override bool IsMatchProperty(object toCompare)
         {
-            var toComparable = toCompare as IComparable;
-            if (toComparable == null)
+            if (!(toCompare is IComparable toComparable))
             {
                 return false;
             }

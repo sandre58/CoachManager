@@ -21,13 +21,13 @@ namespace My.CoachManager.Presentation.Prism.Resources.Converters
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value != null)
+            if (value is string)
             {
                 var strValue = value.ToString();
 
                 return strValue.ToUpperInvariant();
             }
-            return null;
+            return value;
         }
 
         /// <summary>

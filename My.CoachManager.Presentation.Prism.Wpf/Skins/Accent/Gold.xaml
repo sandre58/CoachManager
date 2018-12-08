@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source= "pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Styles/Base/Brushes.Accent.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- ACCENT -->
+    <Color x:Key="LightAccentColor">#ffe44d</Color>
+    <Color x:Key="AccentColor">#FFD700</Color>
+    <Color x:Key="DarkAccentColor">#e6c300</Color>
+    <Color x:Key="AccentTextColor">#000000</Color>
+
+    <!-- MENU -->
+    <Color x:Key="MenuTextColor">#000000</Color>
+    <Color x:Key="MainMenuColor">#e37a02</Color>
+    <Color x:Key="SecondMenuColor">#fda035</Color>
+</ResourceDictionary>

@@ -8,6 +8,8 @@
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
+             xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:models="clr-namespace:My.CoachManager.Presentation.Prism.Models;assembly=My.CoachManager.Presentation.Prism.Models"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:RostersListViewModel}"
@@ -15,19 +17,37 @@
 
     <controls:WorkspaceView>
 
-        <DataGrid ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" Style="{StaticResource ItemsDataGridStyle}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="{x:Static strings:RosterResources.Name}" Width="300" FontWeight="DemiBold" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="{x:Static strings:RosterResources.Season}" Width="200" Binding="{Binding Season.Label}" />
-                <DataGridTextColumn Header="{x:Static strings:RosterResources.Category}" Width="*" Binding="{Binding Category.Label}" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <ListView ItemsSource="{Binding Items}">
+            <ListView.View>
+                <controls:ExtendedGridView VisibleColumns="{Binding Parameters.DisplayedColumns}">
+                    <!-- Name -->
+                    <controls:ExtendedGridViewColumn Header="{x:Static strings:RosterResources.Name}" Width="300"
+                                                     parameters:ListViewParameters.PropertyName="Name">
+                        <controls:ExtendedGridViewColumn.CellTemplate>
+                            <DataTemplate DataType="models:RosterModel">
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" FontWeight="DemiBold" />
+                            </DataTemplate>
+                        </controls:ExtendedGridViewColumn.CellTemplate>
+                    </controls:ExtendedGridViewColumn>
+
+                    <!-- Category -->
+                    <controls:ExtendedGridViewColumn Header="{x:Static strings:RosterResources.Category}"
+                                                     DisplayMemberBinding="{Binding Category.Label}"
+                                                     parameters:ListViewParameters.PropertyName="Category" />
+
+                    <!-- Season -->
+                    <controls:ExtendedGridViewColumn Header="{x:Static strings:RosterResources.Season}"
+                                                     DisplayMemberBinding="{Binding Season.Label}"
+                                                     parameters:ListViewParameters.PropertyName="Season" />
+
+                </controls:ExtendedGridView>
+            </ListView.View>
+        </ListView>
 
         <controls:WorkspaceView.Commands>
-            <controls:CommandButton DockPanel.Dock="Right" IconData="{StaticResource AddGeometry}" Content="{x:Static strings1:ControlResources.Add}" Command="{Binding AddCommand}" />
-            <controls:CommandButton DockPanel.Dock="Right" IconData="{StaticResource EditGeometry}" Content="{x:Static strings1:ControlResources.Edit}" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedItem}" />
-            <controls:CommandButton DockPanel.Dock="Right" IconData="{StaticResource TrashGeometry}" Content="{x:Static strings1:ControlResources.Remove}" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedItem}" />
-            <controls:CommandButton DockPanel.Dock="Right" IconData="{StaticResource RefreshGeometry}" Content="{x:Static strings1:ControlResources.Refresh}" Command="{Binding RefreshCommand}" />
+            <controls:CommandButton DockPanel.Dock="Right"  Style="{StaticResource AddCommandButtonApplicationBarStyle}" Command="{Binding AddCommand}" />
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource DeleteCommandButtonApplicationBarStyle}" Command="{Binding RemoveSelectedItemsCommand}" />
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource RefreshCommandButtonApplicationBarStyle}" Command="{Binding RefreshCommand}" />
         </controls:WorkspaceView.Commands>
     </controls:WorkspaceView>
 </UserControl>

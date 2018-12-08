@@ -107,7 +107,6 @@
       <DependentUpon>SkinResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\DialogService.cs" />
-    <Compile Include="Services\KeyBoardService.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
@@ -134,6 +133,10 @@
     <Compile Include="Views\CustomDialog.xaml.cs">
       <DependentUpon>CustomDialog.xaml</DependentUpon>
     </Compile>
+    <Page Include="Skins\Accent\Gold.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Skins\Accent\Green.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -280,6 +283,10 @@
       <Project>{381d433d-9f76-4286-b0f5-7209e477b22b}</Project>
       <Name>My.CoachManager.CrossCutting.Logging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Models\My.CoachManager.Presentation.Prism.Models.csproj">
+      <Project>{C2647100-4BD2-49F0-8A22-A0CD1EA37C1E}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Administration\My.CoachManager.Presentation.Prism.Modules.Administration.csproj">
       <Project>{4ca93004-d321-4897-a8ad-ef368d5bd57e}</Project>
       <Name>My.CoachManager.Presentation.Prism.Modules.Administration</Name>
@@ -299,6 +306,10 @@
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Home\My.CoachManager.Presentation.Prism.Modules.Home.csproj">
       <Project>{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28}</Project>
       <Name>My.CoachManager.Presentation.Prism.Modules.Home</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Roster\My.CoachManager.Presentation.Prism.Modules.Roster.csproj">
+      <Project>{fe218964-5ef0-42eb-a7d1-2afeb44d5b01}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Modules.Roster</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Resources\My.CoachManager.Presentation.Prism.Resources.csproj">
       <Project>{2d290fd9-5b64-4af4-a295-2b4cde6eb330}</Project>

@@ -41,7 +41,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <param name="navigationContext">The navigation context.</param>
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            KeyboardManager.RegisterWorkspaceShortcuts(KeyboardShortcuts);
             //if (State == ScreenState.NotLoaded)
             //{
             OnNavigatedToCore(navigationContext);
@@ -75,7 +74,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <param name="navigationContext">The navigation context.</param>
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            KeyboardManager.RemoveWorkspaceShortcuts(KeyboardShortcuts);
             if (Mode == ScreenMode.Creation || Mode == ScreenMode.Edition)
             {
                 OnNavigatedFromCore(navigationContext);

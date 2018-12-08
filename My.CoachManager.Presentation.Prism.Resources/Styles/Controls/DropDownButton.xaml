@@ -138,11 +138,13 @@
         <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource Light}" />
+        <Setter Property="parameters:ControlParameters.CharacterCasing" Value= "Upper" />
         <Setter Property="parameters:ControlParameters.CornerRadius" Value="0" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
+        <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -154,83 +156,112 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:DropDownMenuButton}">
-                    <Button x:Name="PART_Button"
-                                HorizontalContentAlignment="Stretch"
-                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                            Command="{TemplateBinding Command}"
-                            CommandParameter="{TemplateBinding CommandParameter}"
-                            CommandTarget="{TemplateBinding CommandTarget}"
-                                FocusVisualStyle="{TemplateBinding FocusVisualStyle}"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                Padding="{TemplateBinding Padding}"
-                                Content="{Binding Content, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                Focusable="False"
-                                Foreground="{TemplateBinding Foreground}"
-                                BorderBrush="{TemplateBinding Foreground}"
-                                Background="{TemplateBinding Background}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                FontSize="{TemplateBinding FontSize}"
-                                FontWeight="{TemplateBinding FontWeight}"
-                                parameters:ControlParameters.CharacterCasing="{TemplateBinding parameters:ControlParameters.CharacterCasing}">
-                        <Button.ContentTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <ContentPresenter Content="{Binding}" />
-                                    <Path Grid.Column="1" x:Name="BtnArrow"
-                                          Margin="{StaticResource DefaultHorizontalMargin}"
-                                          Width="12"
-                                          Height="6"
-                                          HorizontalAlignment="Center"
-                                          Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=Foreground}"
-                                          Data="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
-                                          IsHitTestVisible="false"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                          Stretch="Uniform" />
-                                </Grid>
-                            </DataTemplate>
-                        </Button.ContentTemplate>
-                        <Button.ContextMenu>
-                            <ContextMenu x:Name="PART_Menu"
-                                             Placement="Bottom"
-                                             MinWidth="{TemplateBinding ActualWidth}"
-                                             Style="{TemplateBinding MenuStyle}"
-                                             DisplayMemberPath="{TemplateBinding DisplayMemberPath}"
-                                             IsOpen="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                             ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
-                                             ItemContainerStyleSelector="{TemplateBinding ItemContainerStyleSelector}"
-                                             ItemStringFormat="{TemplateBinding ItemStringFormat}"
-                                             ItemTemplate="{TemplateBinding ItemTemplate}"
-                                             ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                             ItemsSource="{TemplateBinding ItemsSource}"
-                                             ItemsPanel="{TemplateBinding ItemsPanel}"
-                                             StaysOpen="False" />
-                        </Button.ContextMenu>
-                    </Button>
+                    <Border x:Name="PART_Border"
+                            Background="Transparent"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            UseLayoutRounding="True">
+                        <Button x:Name="PART_Button"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    HorizontalContentAlignment="Stretch"
+                                    VerticalContentAlignment="Stretch"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    parameters:ControlParameters.CharacterCasing="{TemplateBinding parameters:ControlParameters.CharacterCasing}"
+                                    Command="{TemplateBinding Command}"
+                                    CommandParameter="{TemplateBinding CommandParameter}"
+                                    CommandTarget="{TemplateBinding CommandTarget}"
+                                    FocusVisualStyle="{TemplateBinding FocusVisualStyle}"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    RenderOptions.ClearTypeHint="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(RenderOptions.ClearTypeHint), Mode=OneWay}"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <DockPanel x:Name="PART_Content" Focusable="False" LastChildFill="True">
+                                <StackPanel x:Name="PART_ContentOrientation"
+                                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                Focusable="False"
+                                                Orientation="Horizontal">
+                                    <ContentControl x:Name="PART_ButtonContent"
+                                                                   Margin="3"
+                                                    FontWeight="{TemplateBinding FontWeight}"
+                                                                   Padding="{TemplateBinding Padding}"
+                                                                   HorizontalAlignment="Center"
+                                                                   VerticalAlignment="Center"
+                                                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                                   Content="{Binding Content, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                   ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                                   ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                   ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                    parameters:ControlParameters.CharacterCasing="{TemplateBinding parameters:ControlParameters.CharacterCasing}"               
+                                                    UseLayoutRounding="False" />
+                                </StackPanel>
+                                <Path x:Name="PART_Arrow"
+                                      Margin="{StaticResource DefaultHorizontalMargin}"
+                                      Width="12"
+                                      Height="6"
+                                      HorizontalAlignment="Center"
+                                      Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=Foreground}"
+                                      Data="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
+                                      IsHitTestVisible="false"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                      Stretch="Uniform"
+                                      Visibility="{Binding ShowArrow, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </DockPanel>
+                            <Button.ContextMenu>
+                                <ContextMenu x:Name="PART_Menu"
+                                                 MinWidth="{TemplateBinding ActualWidth}"
+                                                 DisplayMemberPath="{TemplateBinding DisplayMemberPath}"
+                                                 IsOpen="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                 ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
+                                                 ItemContainerStyleSelector="{TemplateBinding ItemContainerStyleSelector}"
+                                                 ItemStringFormat="{TemplateBinding ItemStringFormat}"
+                                                 ItemTemplate="{TemplateBinding ItemTemplate}"
+                                                 ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                 ItemsPanel="{TemplateBinding ItemsPanel}"
+                                                 ItemsSource="{TemplateBinding ItemsSource}"
+                                                 Placement="Bottom"
+                                                 StaysOpen="False"
+                                                 Style="{TemplateBinding MenuStyle}"
+                                                 UseLayoutRounding="False" />
+                            </Button.ContextMenu>
+                        </Button>
+                    </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="PART_Button" Property="Background" Value="{Binding (parameters:ControlParameters.FocusBackground), RelativeSource={RelativeSource TemplatedParent}}" />
-                            <Setter TargetName="PART_Button" Property="BorderBrush" Value="{Binding (parameters:ControlParameters.FocusBorderBrush), RelativeSource={RelativeSource TemplatedParent}}" />
-                            <Setter TargetName="PART_Button" Property="Foreground" Value="{Binding (parameters:ControlParameters.FocusForeground), RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Trigger Property="Content" Value="{x:Null}">
+                            <Setter TargetName="PART_ButtonContent" Property="Margin" Value="0" />
                         </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="PART_Button" Property="Background" Value="{Binding (parameters:ControlParameters.MouseOverBackground), RelativeSource={RelativeSource TemplatedParent}}" />
-                            <Setter TargetName="PART_Button" Property="BorderBrush" Value="{Binding (parameters:ControlParameters.MouseOverBorderBrush), RelativeSource={RelativeSource TemplatedParent}}" />
-                            <Setter TargetName="PART_Button" Property="Foreground" Value="{Binding (parameters:ControlParameters.MouseOverForeground), RelativeSource={RelativeSource TemplatedParent}}" />
-                        </Trigger>
-                        <Trigger Property="IsExpanded" Value="True">
-                            <Setter TargetName="PART_Button" Property="Background" Value="{Binding (parameters:ControlParameters.FocusBackground), RelativeSource={RelativeSource TemplatedParent}}" />
-                            <Setter TargetName="PART_Button" Property="BorderBrush" Value="{Binding (parameters:ControlParameters.FocusBorderBrush), RelativeSource={RelativeSource TemplatedParent}}" />
-                            <Setter TargetName="PART_Button" Property="Foreground" Value="{Binding (parameters:ControlParameters.FocusForeground), RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter TargetName="PART_Arrow" Property="DockPanel.Dock" Value="Bottom" />
+                            <Setter TargetName="PART_Arrow" Property="Margin" Value="0 0 0 3" />
+                            <Setter TargetName="PART_ContentOrientation" Property="Orientation" Value="Vertical" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.FocusBackground)}" />
+                <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.FocusBorderBrush)}" />
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.FocusForeground)}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.MouseOverBackground)}" />
+                <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.MouseOverBorderBrush)}" />
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.MouseOverForeground)}" />
+            </Trigger>
+            <Trigger Property="IsExpanded" Value="True">
+                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedBackground)}" />
+                <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedBorderBrush)}" />
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedForeground)}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="{DynamicResource DisabledOpacity}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="TextDropDownMenuButtonStyle" TargetType="{x:Type controls:DropDownMenuButton}" BasedOn="{StaticResource {x:Type controls:DropDownMenuButton}}">
@@ -245,5 +276,17 @@
         <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.CharacterCasing" Value="Normal" />
         <Setter Property="FontWeight" Value="Normal" />
+    </Style>
+
+    <Style x:Key="IconDropDownMenuButtonStyle" TargetType="{x:Type controls:DropDownMenuButton}" BasedOn="{StaticResource TextDropDownMenuButtonStyle}">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <controls:Icon Size="Custom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                   Content="{Binding Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:DropDownMenuButton}}}"
+                                   Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:DropDownMenuButton}}}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

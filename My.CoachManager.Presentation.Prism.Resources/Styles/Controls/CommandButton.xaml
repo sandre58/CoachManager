@@ -119,6 +119,12 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ColorCommandButtonStyle2" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource ColorCommandButtonStyle}">
+        <Setter Property="parameters:ControlParameters.Foreground" Value="{DynamicResource DarkControlPressed}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource DarkControlPressed}" />
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource DarkControlPressed}" />
+    </Style>
+
     <Style x:Key="AccentCommandButtonStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonBaseStyle}">
         <Setter Property="BorderBrush" Value="{DynamicResource DarkAccentControl}" />
         <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
@@ -149,15 +155,39 @@
         <Setter Property="ButtonDiameter" Value="{DynamicResource VeryLargeDiameter}" />
     </Style>
 
+    <Style x:Key="ColorCommandButtonApplicationBarStyle2" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource ColorCommandButtonStyle2}">
+        <Setter Property="ButtonDiameter" Value="{DynamicResource VeryLargeDiameter}" />
+    </Style>
+
     <Style x:Key="ValidateCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource ColorCommandButtonApplicationBarStyle}">
         <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Positive}" />
         <Setter Property="IconData" Value="{StaticResource OkGeometry}" />
         <Setter Property="Content" Value="{x:Static strings:ControlResources.Validate}" />
     </Style>
 
+    <Style x:Key="SelectCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource ValidateCommandButtonApplicationBarStyle}">
+        <Setter Property="Content" Value="{x:Static strings:ControlResources.Select}" />
+    </Style>
+
     <Style x:Key="CancelCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource ColorCommandButtonApplicationBarStyle}">
         <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Negative}" />
         <Setter Property="IconData" Value="{StaticResource CancelGeometry}" />
         <Setter Property="Content" Value="{x:Static strings:ControlResources.Cancel}" />
+    </Style>
+
+    <Style x:Key="DeleteCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource ColorCommandButtonApplicationBarStyle2}">
+        <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Negative}" />
+        <Setter Property="IconData" Value="{StaticResource TrashGeometry}" />
+        <Setter Property="Content" Value="{x:Static strings:ControlResources.Delete}" />
+    </Style>
+
+    <Style x:Key="RefreshCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonApplicationBarStyle}">
+        <Setter Property="IconData" Value="{StaticResource RefreshGeometry}" />
+        <Setter Property="Content" Value="{x:Static strings:ControlResources.Refresh}" />
+    </Style>
+
+    <Style x:Key="AddCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonApplicationBarStyle}">
+        <Setter Property="IconData" Value="{StaticResource AddGeometry}" />
+        <Setter Property="Content" Value="{x:Static strings:ControlResources.Add}" />
     </Style>
 </ResourceDictionary>

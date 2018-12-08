@@ -43,7 +43,7 @@
     <SolidColorBrush x:Key="NormalForeground" Color="{DynamicResource DarkColor}" presentationOptions:Freeze="true" />
     <SolidColorBrush x:Key="GrayForeground" Color="{DynamicResource Variation5Color}" presentationOptions:Freeze="true" />
     <SolidColorBrush x:Key="LightForeground" Color="{DynamicResource LightColor}" presentationOptions:Freeze="true" />
-    <SolidColorBrush x:Key="LightAccentForeground" Color="{DynamicResource Variation7Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="LightAccentForeground" Color="{DynamicResource LightVariation5Color}" presentationOptions:Freeze="true" />
 
     <!-- ICONS -->
     <SolidColorBrush x:Key="NormalIcon" Color="{DynamicResource Variation6Color}" presentationOptions:Freeze="true" />

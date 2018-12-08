@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace My.CoachManager.Presentation.Prism.Core.Resources {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -94,6 +97,15 @@ namespace My.CoachManager.Presentation.Prism.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vous êtes sur le point de supprimer définitivement le(s) élément(s) sélectionné(s) de l&apos;application. Voulez-vous continuez ?.
+        /// </summary>
+        public static string ConfirmationRemovingItems {
+            get {
+                return ResourceManager.GetString("ConfirmationRemovingItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to La connexion a échouée. Vérifier le nom d&apos;utilisateur et le mot de passe..
         /// </summary>
         public static string ConnectionFailed {
@@ -108,6 +120,15 @@ namespace My.CoachManager.Presentation.Prism.Core.Resources {
         public static string GetDataError {
             get {
                 return ResourceManager.GetString("GetDataError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} élément(s) ont été ajouté(s).
+        /// </summary>
+        public static string ItemsAdded {
+            get {
+                return ResourceManager.GetString("ItemsAdded", resourceCulture);
             }
         }
         

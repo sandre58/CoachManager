@@ -60,6 +60,22 @@ namespace My.CoachManager.Domain.Core
 
         #endregion
 
+        #region ----- Attach Methods -----
+
+        /// <summary>
+        /// Attach an Entity Object in Context.
+        /// </summary>
+        /// <param name="item">Entity Object.</param>
+        void Attach(TEntity item);
+
+        /// <summary>
+        /// Attach a collection of Entity Objects in Context.
+        /// </summary>
+        /// <param name="items">Entity Object.</param>
+        void Attach(ICollection<TEntity> items);
+
+        #endregion
+
         #region ----- Get Methods -----
 
         /// <summary>

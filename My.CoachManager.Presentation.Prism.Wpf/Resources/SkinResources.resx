@@ -153,4 +153,7 @@
   <data name="yellow" xml:space="preserve">
     <value>Jaune</value>
   </data>
+  <data name="gold" xml:space="preserve">
+    <value>Or</value>
+  </data>
 </root>

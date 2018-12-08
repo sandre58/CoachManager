@@ -1,6 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Linq;
 using My.CoachManager.Application.Dtos;
+using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
@@ -71,7 +71,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         {
             var result = _seasonService.GetSeasons();
 
-            Items = new ObservableCollection<SeasonModel>(result.Select(SeasonFactory.Get));
+            Items = result.Select(SeasonFactory.Get).ToItemsObservableCollection();
         }
 
         #endregion Data

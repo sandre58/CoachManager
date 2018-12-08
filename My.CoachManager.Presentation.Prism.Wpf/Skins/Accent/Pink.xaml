@@ -6,8 +6,13 @@
     </ResourceDictionary.MergedDictionaries>
 
     <!-- ACCENT -->
-    <Color x:Key="LightAccentColor">#AA0E64</Color>
-    <Color x:Key="AccentColor">#8A2E60</Color>
-    <Color x:Key="DarkAccentColor">#610839</Color>
+    <Color x:Key="LightAccentColor">#f755f4</Color>
+    <Color x:Key="AccentColor">#db0ad8</Color>
+    <Color x:Key="DarkAccentColor">#7a0678</Color>
     <Color x:Key="AccentTextColor">#ffffff</Color>
+
+    <!-- MENU -->
+    <Color x:Key="MenuTextColor">#ffffff</Color>
+    <Color x:Key="MainMenuColor">#732650</Color>
+    <Color x:Key="SecondMenuColor">#8a2e60</Color>
 </ResourceDictionary>

@@ -10,7 +10,7 @@
 
     <Style TargetType="{x:Type controls:WorkspaceDialog}">
         <Style.Resources>
-            <Style TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource WorkspaceDialogViewStyle}" />
+            <Style TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource EditWorkspaceDialogViewStyle}" />
         </Style.Resources>
         <Setter Property="Background" Value="{DynamicResource Light}" />
         <Setter Property="OverlayBackground" Value="{DynamicResource DarkControl}" />

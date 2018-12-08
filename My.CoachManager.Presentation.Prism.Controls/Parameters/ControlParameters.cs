@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using My.CoachManager.Presentation.Prism.Controls.ContentControls;
 using My.CoachManager.Presentation.Prism.Controls.Helpers;
@@ -404,5 +405,59 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
         }
 
         #endregion HeaderTemplate
+
+        #region InputBindings
+
+        public static readonly DependencyProperty InputBindingsProperty =
+            DependencyProperty.RegisterAttached("InputBindings", typeof(InputBindingCollection), typeof(ControlParameters),
+                new FrameworkPropertyMetadata(new InputBindingCollection(),
+                    (sender, e) =>
+                    {
+                        var element = sender as UIElement;
+                        if (element == null) return;
+                        element.InputBindings.Clear();
+                        element.InputBindings.AddRange((InputBindingCollection)e.NewValue);
+                    }));
+
+        public static InputBindingCollection GetInputBindings(UIElement element)
+        {
+            return (InputBindingCollection)element.GetValue(InputBindingsProperty);
+        }
+
+        public static void SetInputBindings(UIElement element, InputBindingCollection inputBindings)
+        {
+            element.SetValue(InputBindingsProperty, inputBindings);
+        }
+
+        #endregion
+
+        #region DisableInputBindings
+
+        public static readonly DependencyProperty DisableInputBindingsProperty =
+            DependencyProperty.RegisterAttached("DisableInputBindings", typeof(bool), typeof(ControlParameters),
+                new FrameworkPropertyMetadata(false,
+                    (sender, e) =>
+                    {
+                        var element = sender as UIElement;
+                        if (element == null) return;
+
+                        element.InputBindings.Clear();
+                        if (!(bool)e.NewValue)
+                        {
+                            element.InputBindings.AddRange(GetInputBindings(element));
+                        }
+                    }));
+
+        public static bool GetDisableInputBindings(UIElement element)
+        {
+            return (bool)element.GetValue(DisableInputBindingsProperty);
+        }
+
+        public static void SetDisableInputBindings(UIElement element, bool inputBindings)
+        {
+            element.SetValue(DisableInputBindingsProperty, inputBindings);
+        }
+
+        #endregion
     }
 }

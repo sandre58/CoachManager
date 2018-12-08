@@ -131,6 +131,9 @@
             <Trigger Property="Role" Value="SubmenuItem">
                 <Setter Property="Padding" Value="2 6 2 6" />
             </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource Accent}" />
+            </Trigger>
         </Style.Triggers>
     </Style>
 
@@ -271,7 +274,7 @@
                       Margin="8 0 0 0"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
-                      Fill="{DynamicResource Dark}"
+                      Fill="{TemplateBinding Foreground}"
                       Data="{StaticResource CheckmarkGeometry}"
                       FlowDirection="LeftToRight"
                       Visibility="Collapsed" />
@@ -358,7 +361,7 @@
                       Margin="8 0 0 0"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
-                      Fill="{DynamicResource Dark}"
+                      Fill="{TemplateBinding Foreground}"
                       Data="{StaticResource CheckmarkGeometry}"
                       FlowDirection="LeftToRight"
                       Visibility="Collapsed" />
@@ -416,7 +419,7 @@
                       Margin="5 0 0 0"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
-                      Fill="{DynamicResource Dark}"
+                      Fill="{TemplateBinding Foreground}"
                       Data="{StaticResource CheckmarkGeometry}"
                       FlowDirection="LeftToRight"
                       Visibility="Collapsed" />
@@ -432,7 +435,7 @@
                 <Path Grid.Column="5"
                       Margin="4 0 0 0"
                       VerticalAlignment="Center"
-                      Fill="{DynamicResource Dark}"
+                      Fill="{TemplateBinding Foreground}"
                       Data="{StaticResource RightArrowGeometry}" />
             </Grid>
             <Popup x:Name="PART_Popup"
@@ -515,7 +518,7 @@
                       Margin="5 0 0 0"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
-                      Fill="{DynamicResource Dark}"
+                      Fill="{TemplateBinding Foreground}"
                       Data="{StaticResource CheckmarkGeometry}"
                       FlowDirection="LeftToRight"
                       Visibility="Collapsed" />

@@ -37,28 +37,28 @@
             <DataTrigger Binding="{Binding Type}" Value="Information">
                 <Setter TargetName="Icon" Property="Content" Value="{StaticResource InformationGeometry}" />
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource Information}" />
-                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource AccentForeground}" />
+                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource LightAccentForeground}" />
                 <Setter TargetName="Title" Property="Foreground" Value="{DynamicResource AccentForeground}" />
                 <Setter TargetName="Message" Property="Foreground" Value="{DynamicResource LightAccentForeground}" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Type}" Value="Success">
                 <Setter TargetName="Icon" Property="Content" Value="{StaticResource SuccessGeometry}" />
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource Positive}" />
-                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource AccentForeground}" />
+                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource LightAccentForeground}" />
                 <Setter TargetName="Title" Property="Foreground" Value="{DynamicResource AccentForeground}" />
                 <Setter TargetName="Message" Property="Foreground" Value="{DynamicResource LightAccentForeground}" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Type}" Value="Warning">
                 <Setter TargetName="Icon" Property="Content" Value="{StaticResource WarningGeometry}" />
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource Warning}" />
-                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource AccentForeground}" />
+                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource LightAccentForeground}" />
                 <Setter TargetName="Title" Property="Foreground" Value="{DynamicResource AccentForeground}" />
                 <Setter TargetName="Message" Property="Foreground" Value="{DynamicResource LightAccentForeground}" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Type}" Value="Error">
                 <Setter TargetName="Icon" Property="Content" Value="{StaticResource ErrorGeometry}" />
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource Negative}" />
-                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource AccentForeground}" />
+                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource LightAccentForeground}" />
                 <Setter TargetName="Title" Property="Foreground" Value="{DynamicResource AccentForeground}" />
                 <Setter TargetName="Message" Property="Foreground" Value="{DynamicResource LightAccentForeground}" />
             </DataTrigger>

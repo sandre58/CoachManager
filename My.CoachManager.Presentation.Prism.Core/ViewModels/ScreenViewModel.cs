@@ -4,11 +4,12 @@ using System.ComponentModel;
 using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.Presentation.Prism.Core.ComponentModel;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public abstract class ScreenViewModel : ViewModelBase
+    public abstract class ScreenViewModel : ViewModelBase, IRefreshable
     {
         #region Fields
 
@@ -59,6 +60,12 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// Gets or sets keyboard shortcuts.
         /// </summary>
         public List<KeyBinding> KeyboardShortcuts { get; set; }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets if we can refresh after initialisation.
+        /// </summary>
+        public virtual bool RefreshOnInit => false;
 
         #endregion Members
 
@@ -172,7 +179,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Refresh Items.
         /// </summary>
-        protected virtual void Refresh()
+        public virtual void Refresh()
         {
             RefreshDataCore();
         }
@@ -180,7 +187,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Can refresh item.
         /// </summary>
-        protected virtual bool CanRefresh()
+        public virtual bool CanRefresh()
         {
             return true;
         }

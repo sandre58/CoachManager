@@ -155,8 +155,8 @@
                                     Focusable="False"
                                     KeyboardNavigation.TabNavigation="None" />
 
-                    <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" x:Name="PART_StatusBar" Background="{DynamicResource Accent}" MinHeight="25" Focusable="False" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
-                        <ContentControl Content="{TemplateBinding StatusBar}" Foreground="{DynamicResource AccentForeground}" VerticalAlignment="Center" IsTabStop="False" />
+                    <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" x:Name="PART_StatusBar" Background="{DynamicResource SecondMenu}" MinHeight="25" Focusable="False" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                        <ContentControl Content="{TemplateBinding StatusBar}" Foreground="{DynamicResource MenuForeground}" VerticalAlignment="Center" IsTabStop="False" />
                     </Border>
                 </Grid>
             </AdornerDecorator>
@@ -242,7 +242,7 @@
 
     <Style x:Key="ModernWindowStyle" TargetType="{x:Type controls:ExtendedWindow}">
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="TitleForeground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="TitleForeground" Value="{DynamicResource MenuForeground}" />
         <Setter Property="WindowTitleBrush" Value="{DynamicResource Transparent}" />
         <Setter Property="NonActiveBorderBrush">
             <Setter.Value>
@@ -254,7 +254,7 @@
                 <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedWindow}, Path=WindowTitleBrush, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource DarkAccent}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SecondMenu}" />
         <Setter Property="OverlayBrush" Value="{DynamicResource Dark}" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
@@ -285,7 +285,7 @@
     </Style>
 
     <Style x:Key="DialogWindowStyle" TargetType="{x:Type controls:ExtendedWindow}" BasedOn="{StaticResource ModernWindowStyle}">
-        <Setter Property="WindowTitleBrush" Value="{DynamicResource DarkAccent}" />
+        <Setter Property="WindowTitleBrush" Value="{DynamicResource SecondMenu}" />
         <Setter Property="ShowMaxRestoreButton" Value="False" />
         <Setter Property="IsTitleOverlay" Value="False" />
         <Setter Property="ShowIconOnTitleBar" Value="False" />

@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
-             xmlns:columns="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Datagrids.Columns;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
              xmlns:mvvm="http://prismlibrary.com/"
-             xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
+             xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:models="clr-namespace:My.CoachManager.Presentation.Prism.Models;assembly=My.CoachManager.Presentation.Prism.Models"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:SeasonsListViewModel}"
@@ -16,20 +16,43 @@
 
     <controls:WorkspaceView>
 
-        <DataGrid ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" Style="{StaticResource OrderItemsDataGridStyle}">
-            <DataGrid.Columns>
-                <columns:DataGridOrderColumn />
-                <DataGridTextColumn Header="{x:Static strings:ReferenceResources.Label}" Width="300" FontWeight="DemiBold" Binding="{Binding Label}" />
-                <DataGridTextColumn Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}}" Header="{x:Static strings:SeasonResources.StartDate}" SortMemberPath="StartDate" MinWidth="100" Width="300" />
-                <DataGridTextColumn Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}}" Header="{x:Static strings:SeasonResources.EndDate}" SortMemberPath="EndDate" MinWidth="100" Width="*" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <ListView ItemsSource="{Binding Items}"  Style="{StaticResource DraggableListViewStyle}">
+            <ListView.View>
+                <controls:ExtendedGridView VisibleColumns="{Binding Parameters.DisplayedColumns}">
 
+                    <!-- Order -->
+                    <controls:ExtendedGridViewColumn Header="Order" Width="75" CanUserHideColumn="False"
+                                                     parameters:ListViewParameters.PropertyName="Order" CellTemplate="{StaticResource OrderListViewColumnTemplate}" HeaderTemplate="{StaticResource OrderListViewColumnHeaderTemplate}" />
+
+                    
+                    <!-- Label -->
+                    <controls:ExtendedGridViewColumn Header="{x:Static strings:ReferenceResources.Label}" Width="300"
+                                                     parameters:ListViewParameters.PropertyName="Label">
+                        <controls:ExtendedGridViewColumn.CellTemplate>
+                            <DataTemplate DataType="models:SeasonModel">
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Label}" FontWeight="DemiBold" />
+                            </DataTemplate>
+                        </controls:ExtendedGridViewColumn.CellTemplate>
+                    </controls:ExtendedGridViewColumn>
+
+                    <!-- Start Date -->
+                    <controls:ExtendedGridViewColumn Header="{x:Static strings:SeasonResources.StartDate}" Width="300"
+                                                     parameters:ListViewParameters.PropertyName="StartDate"
+                                                     DisplayMemberBinding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}}"/>
+
+                    <!-- End Date -->
+                    <controls:ExtendedGridViewColumn Header="{x:Static strings:SeasonResources.EndDate}" Width="300"
+                                                     parameters:ListViewParameters.PropertyName="EndDate"
+                                                     DisplayMemberBinding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}}"/>
+
+                </controls:ExtendedGridView>
+            </ListView.View>
+        </ListView>
+        
         <controls:WorkspaceView.Commands>
-            <controls:CommandButton DockPanel.Dock="Right" IconData="{StaticResource AddGeometry}" Content="{x:Static strings1:ControlResources.Add}" Command="{Binding AddCommand}" />
-            <controls:CommandButton DockPanel.Dock="Right" IconData="{StaticResource EditGeometry}" Content="{x:Static strings1:ControlResources.Edit}" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedItem}" />
-            <controls:CommandButton DockPanel.Dock="Right" IconData="{StaticResource TrashGeometry}" Content="{x:Static strings1:ControlResources.Remove}" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedItem}" />
-            <controls:CommandButton DockPanel.Dock="Right" IconData="{StaticResource RefreshGeometry}" Content="{x:Static strings1:ControlResources.Refresh}" Command="{Binding RefreshCommand}" />
+            <controls:CommandButton DockPanel.Dock="Right"  Style="{StaticResource AddCommandButtonApplicationBarStyle}" Command="{Binding AddCommand}" />
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource DeleteCommandButtonApplicationBarStyle}" Command="{Binding RemoveSelectedItemsCommand}" />
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource RefreshCommandButtonApplicationBarStyle}" Command="{Binding RefreshCommand}" />
         </controls:WorkspaceView.Commands>
     </controls:WorkspaceView>
 </UserControl>

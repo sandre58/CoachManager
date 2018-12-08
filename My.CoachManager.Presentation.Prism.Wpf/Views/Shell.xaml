@@ -36,7 +36,7 @@
 
     <!-- Commands -->
     <controls:ExtendedWindow.RightWindowCommands>
-        <controls:WindowCommands prism:RegionManager.RegionName="{x:Static core:RegionNames.ToolbarRegion}" Foreground="{DynamicResource AccentForeground}" />
+        <controls:WindowCommands prism:RegionManager.RegionName="{x:Static core:RegionNames.ToolbarRegion}" Foreground="{DynamicResource MenuForeground}" />
     </controls:ExtendedWindow.RightWindowCommands>
 
     <!-- Flyouts -->
@@ -64,7 +64,7 @@
 
             <!--Header -->
             <Border Focusable="False" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Height="100"
-                    Background="{DynamicResource Accent}">
+                    Background="{DynamicResource SecondMenu}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -95,7 +95,7 @@
                         <TextBlock Grid.Row="0"  Text="{x:Static strings:CoachManagerResources.ApplicationTitlePart1}"
                                    Style="{StaticResource HeaderStyle}"
                                    FontFamily="{StaticResource HeaderFontFamily}"
-                                   Foreground="{DynamicResource AccentForeground}"
+                                   Foreground="{DynamicResource MenuForeground}"
                                    FontStyle="Italic"
                                    VerticalAlignment="Bottom"
                                    Typography.Capitals="AllSmallCaps" />
@@ -103,7 +103,7 @@
                         <TextBlock  Grid.Row="1"  Text="{x:Static strings:CoachManagerResources.ApplicationTitlePart2}"
                                      Style="{StaticResource HeaderStyle}"
                                      FontFamily="{StaticResource HeaderFontFamily}"
-                                     Foreground="{DynamicResource AccentForeground}"
+                                     Foreground="{DynamicResource MenuForeground}"
                                      FontStyle="Italic"
                                      VerticalAlignment="top"
                                      Typography.Capitals="AllSmallCaps" />
@@ -115,7 +115,7 @@
                         <Grid>
                             <Polygon
                                      Points="0,0 0,1 1,0"
-                                     Fill="{DynamicResource Accent}"
+                                     Fill="{DynamicResource SecondMenu}"
                                      Width="80"
                                      Height="80"
                                 HorizontalAlignment="Left"
@@ -130,7 +130,7 @@
                                     <controls:CommandButton Style="{StaticResource BackCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoBackCommand}" />
                                     <controls:CommandButton Style="{StaticResource NextCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoForwardCommand}" />
                                 </StackPanel>
-                                <TextBlock Grid.Column="1" Text="{Binding ActiveWorkspace.Title, Converter={StaticResource ToUpperConverter}}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Top" Style="{StaticResource HeaderStyle}" Foreground="{DynamicResource AccentForeground}" />
+                                <TextBlock Grid.Column="1" Text="{Binding ActiveWorkspace.Title, Converter={StaticResource ToUpperConverter}}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Top" Style="{StaticResource HeaderStyle}" Foreground="{DynamicResource MenuForeground}" />
                             </Grid>
                         </Grid>
                     </Border>

@@ -322,6 +322,11 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
             return value != null && (bool)value;
         }
 
+        public static bool GetIsMonitoring(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsMonitoringProperty);
+        }
+
         public static void SetIsMonitoring(DependencyObject obj, bool value)
         {
             obj.SetValue(IsMonitoringProperty, value);

@@ -1,9 +1,16 @@
-﻿using System.Windows;using My.CoachManager.Presentation.Prism.Core.Commands;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
+using My.CoachManager.CrossCutting.Core.Extensions;
+using My.CoachManager.Presentation.Prism.Core.Commands;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Events;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
+using My.CoachManager.Presentation.Prism.Models;
+using My.CoachManager.Presentation.Prism.Models.Aggregates;
+using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -16,6 +23,24 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
     /// </summary>
     public class ShellViewModel : ScreenViewModel
     {
+        #region Fields
+
+        private readonly IRosterService _rosterService;
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Initialise a new instance of <see cref="ShellViewModel"/>.
+        /// </summary>
+        public ShellViewModel(IRosterService rosterService)
+        {
+            _rosterService = rosterService;
+        }
+
+        #endregion Constructors
+
         #region Members
 
         /// <summary>
@@ -47,6 +72,22 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// Gets or sets the go forward command.
         /// </summary>
         public DelegateCommand GoForwardCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets selectable rosters.
+        /// </summary>
+        public ObservableCollection<RosterModel> Rosters { get; set; }
+
+        /// <summary>
+        /// Gets or sets selected Roster.
+        /// </summary>
+        public RosterModel SelectedRoster { get; set; }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets if we can refresh after initialisation.
+        /// </summary>
+        public override bool RefreshOnInit => true;
 
         #endregion Members
 
@@ -99,14 +140,28 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 
         #region Methods
 
+        #region Data
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Load Data.
+        /// </summary>
+        /// <returns></returns>
+        protected override void LoadDataCore()
+        {
+            var result = _rosterService.GetRosters();
+
+            Rosters = result.Select(RosterFactory.Get).ToObservableCollection();
+        }
+
+        #endregion Data
+
         private void OnWorkspaceDialogInteractionRequestRaised(object sender, InteractionRequestedEventArgs e)
         {
-            KeyboardManager.WorkspaceBindingsIsSuspended = true;
             ActiveWorkspaceDialog = (e.Context.Content as FrameworkElement)?.DataContext as IWorkspaceDialogViewModel;
             if (ActiveWorkspaceDialog != null)
                 ActiveWorkspaceDialog.CloseRequest += (o, args) =>
                 {
-                    KeyboardManager.WorkspaceBindingsIsSuspended = false;
                     ActiveWorkspaceDialog = null;
                 };
         }

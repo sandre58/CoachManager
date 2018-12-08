@@ -269,7 +269,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected override void OnLoadDataCompleted()
         {
-            Item.ResetModified();
+            Item?.ResetModified();
         }
 
         /// <summary>

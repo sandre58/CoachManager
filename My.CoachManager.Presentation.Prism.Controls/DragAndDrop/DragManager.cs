@@ -403,8 +403,8 @@ namespace My.CoachManager.Presentation.Prism.Controls.DragAndDrop
             Rectangle rectangle = new Rectangle()
             {
                 Height = frameworkElement.ActualHeight,
-                Fill = new VisualBrush(frameworkElement),
-                Opacity = 0.7,
+                Fill = (Brush)Application.Current.FindResource("Accent"),
+                Opacity = 0.5,
                 Width = frameworkElement.ActualWidth
             };
 

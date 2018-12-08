@@ -104,8 +104,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             ResetFiltersCommand = new DelegateCommand(ResetFilters, CanResetFilters);
             AddFilterCommand = new DelegateCommand<Tuple<Func<IFilter>, string>>(AddFilter);
             RemoveFilterCommand = new DelegateCommand<IFilter>(RemoveFilter);
-
-            KeyboardManager.RegisterWorkspaceShortcut(new KeyBinding(ShowFiltersCommand, Key.F, ModifierKeys.Control));
         }
 
         #endregion Constructors
@@ -117,6 +115,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         private void ResetFilters()
         {
+            SpeedFilter.Filter.Reset();
             Filters.Clear();
             FilterItems();
         }

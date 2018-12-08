@@ -232,5 +232,10 @@
         <Setter Property="Background" Value="{DynamicResource DarkAccent}" />
     </Style>
 
+    <Style x:Key="MenuFlyoutStyle" TargetType="{x:Type controls:Flyout}" BasedOn="{StaticResource FlyoutStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource MenuForeground}" />
+        <Setter Property="Background" Value="{DynamicResource MainMenu}" />
+    </Style>
+
     <Style TargetType="{x:Type controls:Flyout}" BasedOn="{StaticResource AccentFlyoutStyle}" />
 </ResourceDictionary>
