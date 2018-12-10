@@ -39,9 +39,9 @@
                     <WrapPanel DockPanel.Dock="Left" VerticalAlignment="Center"
                            Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}">
                         <ContentControl Content="{Binding Filters.SpeedFilter}" Style="{StaticResource SpeedFilterStyle}" Focusable="False" />
-                        <Button Content="{x:Static strings:ControlResources.Clear}" Style="{StaticResource SmallButtonBaseStyle}" Command="{Binding Filters.ResetFiltersCommand}" VerticalAlignment="Center" />
+                        <Button Content="{x:Static strings:ControlResources.Clear}" Style="{StaticResource SmallButtonStyle}" Command="{Binding Filters.ResetFiltersCommand}" VerticalAlignment="Center" />
                         <controls:Badged x:Name="FiltersBadge" Badge="{Binding Filters.CountActiveFilters}" VerticalAlignment="Center">
-                            <Button x:Name="ShowHideFilterButton" Content="{x:Static strings:ControlResources.ShowFilters}" Command="{Binding Filters.ShowFiltersCommand}" Style="{StaticResource SmallButtonBaseStyle}" />
+                            <Button x:Name="ShowHideFilterButton" Content="{x:Static strings:ControlResources.ShowFilters}" Command="{Binding Filters.ShowFiltersCommand}" Style="{StaticResource SmallButtonStyle}" />
                         </controls:Badged>
                     </WrapPanel>
 
@@ -259,7 +259,7 @@
         <Setter Property="HeaderTemplate" Value="{StaticResource ItemHeaderTemplate}" />
     </Style>
 
-    <Style TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource WorkspaceViewBaseStyle}" />
+    <Style TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource ListWorkspaceViewStyle}" />
 
     <!-- For dialog window -->
     <DataTemplate x:Key="EditDialogHeaderTemplate" DataType="{x:Type interfaces:IEditViewModel}">
@@ -267,7 +267,7 @@
 
             <Grid.Resources>
                 <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
-                    <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
+                    <Setter Property="Foreground" Value="{DynamicResource Dark}" />
                 </Style>
             </Grid.Resources>
 
@@ -279,7 +279,7 @@
 
             <controls:Icon x:Name="Icon" Width="40" Height="40" Size="Custom" Content="{StaticResource ChevronRightGeometry}" Grid.Column="0" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center"
                             Style="{StaticResource EllipseIconBaseStyle}"
-                           OverlayBackground="{DynamicResource HeaderForeground}" />
+                           OverlayBackground="{DynamicResource Dark}" />
             <TextBlock Grid.Column="1" Text="{Binding Title}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />
 
             <Grid Grid.Column="2" Visibility="{Binding Mode, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static viewModels:ScreenMode.Edition}}">
@@ -311,7 +311,7 @@
                 <Setter TargetName="Icon" Property="Content" Value="{StaticResource AddGeometry}" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Mode}" Value="{x:Static viewModels:ScreenMode.Edition}">
-                <Setter TargetName="Icon" Property="Content" Value="{StaticResource EditGeometry}" />
+                <Setter TargetName="Icon" Property="Content" Value="{StaticResource EditPageGeometry}" />
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>
@@ -326,7 +326,7 @@
 
                 <Grid.Resources>
                     <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
-                        <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
+                        <Setter Property="Foreground" Value="{DynamicResource Dark}" />
                     </Style>
                 </Grid.Resources>
 
@@ -338,7 +338,7 @@
 
                 <controls:Icon x:Name="Icon" Width="40" Height="40" Size="Custom" Content="{StaticResource AddGeometry}" Grid.Column="0" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center"
                             Style="{StaticResource EllipseIconBaseStyle}"
-                           OverlayBackground="{DynamicResource HeaderForeground}" />
+                           OverlayBackground="{DynamicResource Dark}" />
                 <TextBlock Grid.Column="1" Text="{Binding Title}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />
             </Grid>
             <Border Grid.Row="1" Background="{DynamicResource LightHeaderBackground}">

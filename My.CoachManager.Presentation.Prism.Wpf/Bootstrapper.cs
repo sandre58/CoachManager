@@ -241,6 +241,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         {
             SkinManager.SkinManager.ApplyTheme(Settings.Default.DefaultTheme);
             SkinManager.SkinManager.ApplyAccent(Settings.Default.DefaultAccent);
+            SkinManager.SkinManager.ApplyMenu(Settings.Default.DefaultMenu);
         }
 
         /// <summary>

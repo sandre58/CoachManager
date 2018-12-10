@@ -34,7 +34,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("blue")]
+        [global::System.Configuration.DefaultSettingValueAttribute("gold")]
         public string DefaultAccent {
             get {
                 return ((string)(this["DefaultAccent"]));
@@ -74,6 +74,18 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Properties {
             }
             set {
                 this["RosterId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("red")]
+        public string DefaultMenu {
+            get {
+                return ((string)(this["DefaultMenu"]));
+            }
+            set {
+                this["DefaultMenu"] = value;
             }
         }
     }

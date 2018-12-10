@@ -6,7 +6,7 @@
       <Value Profile="(Default)">US Beaumont</Value>
     </Setting>
     <Setting Name="DefaultAccent" Type="System.String" Scope="User">
-      <Value Profile="(Default)">blue</Value>
+      <Value Profile="(Default)">gold</Value>
     </Setting>
     <Setting Name="DefaultTheme" Type="System.String" Scope="User">
       <Value Profile="(Default)">dark</Value>
@@ -16,6 +16,9 @@
     </Setting>
     <Setting Name="RosterId" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DefaultMenu" Type="System.String" Scope="User">
+      <Value Profile="(Default)">red</Value>
     </Setting>
   </Settings>
 </SettingsFile>

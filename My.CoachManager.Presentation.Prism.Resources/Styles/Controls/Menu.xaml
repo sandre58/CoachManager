@@ -201,10 +201,10 @@
                 <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource AccentForeground}" />
+                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource MenuForeground}" />
             </Trigger>
             <Trigger Property="IsFocused" Value="True">
-                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource AccentForeground}" />
+                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource MenuForeground}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True" />
             <Trigger Property="IsEnabled" Value="False">
@@ -217,10 +217,10 @@
     <Style TargetType="{x:Type controls:NavigationItem}">
         <Setter Property="Margin" Value="0,3,0,0" />
         <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
-        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MenuForeground}" />
         <Setter Property="Background" Value="{DynamicResource AccentControl}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource AccentForeground}" />
-        <Setter Property="Color" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MenuForeground}" />
+        <Setter Property="Color" Value="{DynamicResource Accent}" />
         <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -236,7 +236,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
-        <Setter Property="Foreground" Value="{DynamicResource DarkAccentControlMouseOver}" />
+        <Setter Property="Foreground" Value="{DynamicResource LightMenuForeground}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -261,10 +261,10 @@
         <Setter Property="Margin" Value="0,3,0,0" />
         <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
         <Setter Property="IsExpanded" Value="False" />
-        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MenuForeground}" />
         <Setter Property="Background" Value="{DynamicResource AccentControl}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource AccentForeground}" />
-        <Setter Property="Color" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MenuForeground}" />
+        <Setter Property="Color" Value="{DynamicResource Accent}" />
         <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />

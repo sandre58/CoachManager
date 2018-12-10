@@ -9,13 +9,11 @@
              Header="{x:Static strings:AdministrationResources.AdministrationMenu}"
              Style="{StaticResource NavigationExpanderStyle}"
              Icon="{StaticResource ToolsGeometry}"
-             Color="Black">
+             Color="Yellow">
     <StackPanel>
         <controls:NavigationItem Content="{x:Static strings:AdministrationResources.PlayersMenu}" Target="PlayersListView" />
         <controls:NavigationItem Content="{x:Static strings:AdministrationResources.RostersMenu}" Target="RostersListView" />
         <controls:NavigationItem Content="{x:Static strings:AdministrationResources.SeasonsMenu}" Target="SeasonsListView" />
         <controls:NavigationItem Content="{x:Static strings:AdministrationResources.CategoriesMenu}" Target="CategoriesListView" />
-        <!--
-        <controls:NavigationItem Content="{x:Static strings:AdministrationResources.PositionsMenu}" Target="PositionsListView" />-->
     </StackPanel>
 </controls:NavigationExpander>

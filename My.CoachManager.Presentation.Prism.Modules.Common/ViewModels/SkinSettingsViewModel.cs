@@ -20,6 +20,11 @@ namespace My.CoachManager.Presentation.Prism.Modules.Common.ViewModels
         public IList<Theme> Themes { get; private set; }
 
         /// <summary>
+        /// Gets the name of the base menus.
+        /// </summary>
+        public IList<Menu> Menus { get; private set; }
+
+        /// <summary>
         /// Gets or sets the selected accent color.
         /// </summary>
         public Accent SelectedAccent { get; set; }
@@ -28,6 +33,11 @@ namespace My.CoachManager.Presentation.Prism.Modules.Common.ViewModels
         /// Gets or sets the selected theme.
         /// </summary>
         public Theme SelectedTheme { get; set; }
+
+        /// <summary>
+        /// Gets or sets the selected menu.
+        /// </summary>
+        public Menu SelectedMenu { get; set; }
 
         #endregion Members
 
@@ -43,9 +53,11 @@ namespace My.CoachManager.Presentation.Prism.Modules.Common.ViewModels
 
             Accents = SkinManager.SkinManager.Accents;
             Themes = SkinManager.SkinManager.Themes;
+            Menus = SkinManager.SkinManager.Menus;
 
             SelectedAccent = SkinManager.SkinManager.CurrentAccent;
             SelectedTheme = SkinManager.SkinManager.CurrentTheme;
+            SelectedMenu = SkinManager.SkinManager.CurrentMenu;
         }
 
         #endregion Initialisation
@@ -66,6 +78,14 @@ namespace My.CoachManager.Presentation.Prism.Modules.Common.ViewModels
         protected void OnSelectedAccentChanged()
         {
             SkinManager.SkinManager.ApplyAccent(SelectedAccent);
+        }
+
+        /// <summary>
+        /// Occurs when SelectedMenu changed.
+        /// </summary>
+        protected void OnSelectedMenuChanged()
+        {
+            SkinManager.SkinManager.ApplyMenu(SelectedMenu);
         }
 
         #endregion

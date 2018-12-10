@@ -120,6 +120,9 @@
   <data name="Accent" xml:space="preserve">
     <value>Couleur</value>
   </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Paramètres</value>
   </data>

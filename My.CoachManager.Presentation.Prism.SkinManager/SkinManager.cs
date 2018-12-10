@@ -20,6 +20,7 @@ namespace My.CoachManager.Presentation.Prism.SkinManager
 
         private static readonly IDictionary<DispatcherObject, Theme> CurrentThemes;
         private static readonly IDictionary<DispatcherObject, Accent> CurrentAccents;
+        private static readonly IDictionary<DispatcherObject, Menu> CurrentMenus;
 
         #endregion Fields
 
@@ -34,6 +35,11 @@ namespace My.CoachManager.Presentation.Prism.SkinManager
         /// The available accents to be applied to a content control or the whole application.
         /// </summary>
         public static IList<Accent> Accents { get; set; }
+
+        /// <summary>
+        /// The available menu to be applied to a content control or the whole application.
+        /// </summary>
+        public static IList<Menu> Menus { get; set; }
 
         /// <summary>
         /// Gets the current theme.
@@ -68,6 +74,21 @@ namespace My.CoachManager.Presentation.Prism.SkinManager
         }
 
         /// <summary>
+        /// Gets the current theme.
+        /// </summary>
+        public static Menu CurrentMenu
+        {
+            get
+            {
+                if (CurrentMenus.TryGetValue(Application.Current, out Menu current))
+                {
+                    return current;
+                }
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets resource manager.
         /// </summary>
         public static ResourceManager ResourceManager { get; set; }
@@ -84,10 +105,12 @@ namespace My.CoachManager.Presentation.Prism.SkinManager
 
             CurrentThemes = new Dictionary<DispatcherObject, Theme>();
             CurrentAccents = new Dictionary<DispatcherObject, Accent>();
+            CurrentMenus = new Dictionary<DispatcherObject, Menu>();
 
             // Get the list of theme names from the method above.
             Themes = RetrieveList<Theme>();
             Accents = RetrieveList<Accent>();
+            Menus = RetrieveList<Menu>();
         }
 
         #endregion Constructors
@@ -162,6 +185,18 @@ namespace My.CoachManager.Presentation.Prism.SkinManager
             if (Accents != null && Accents.All(x => x != accent))
             {
                 Accents.Add(accent);
+            }
+        }
+
+        /// <summary>
+        /// Add a accent.
+        /// </summary>
+        /// <param name="menu"></param>
+        public static void AddMenu(Menu menu)
+        {
+            if (Menus != null && Menus.All(x => x != menu))
+            {
+                Menus.Add(menu);
             }
         }
 
@@ -257,10 +292,55 @@ namespace My.CoachManager.Presentation.Prism.SkinManager
             ApplySkin(control, control.Resources, CurrentAccents, accent);
         }
 
+        /// <summary>
+        /// Applies a menu to the application.
+        /// </summary>
+        /// <param name="menu">The theme to be applied.</param>
+        public static void ApplyMenu(Menu menu)
+        {
+            var localThemes = Menus ?? Enumerable.Empty<Menu>();
+            if (localThemes.All(x => x != menu))
+            {
+                throw new ArgumentException("Unknown theme!");
+            }
+
+            ApplySkin(Application.Current, Application.Current.Resources, CurrentMenus, menu);
+        }
+
+        /// <summary>
+        /// Applies a menu to the application.
+        /// </summary>
+        /// <param name="menuName">The theme to be applied.</param>
+        public static void ApplyMenu(string menuName)
+        {
+            if (Menus != null)
+            {
+                var enumerable = Menus ?? Menus.ToList();
+                var menu = enumerable.FirstOrDefault(x => string.Equals(x.Name, menuName, StringComparison.CurrentCultureIgnoreCase));
+
+                if (menu != null) ApplyMenu(menu);
+            }
+        }
+
+        /// <summary>
+        /// Applies a menu to a content control
+        /// </summary>
+        /// <param name="control">The control the theme will be applied to.</param>
+        /// <param name="menu">The theme to be applied</param>
+        public static void ApplyMenu(ContentControl control, Menu menu)
+        {
+            var localThemes = Menus ?? Enumerable.Empty<Menu>();
+            if (localThemes.All(x => x != menu))
+            {
+                throw new ArgumentException("Unknown theme!");
+            }
+
+            ApplySkin(control, control.Resources, CurrentMenus, menu);
+        }
+
         private static void ApplySkin<T>(DispatcherObject @object, ResourceDictionary resources, IDictionary<DispatcherObject, T> currents, T skin) where T : Skin
         {
-            T current;
-            if (currents.TryGetValue(@object, out current))
+            if (currents.TryGetValue(@object, out var current))
             {
                 resources.MergedDictionaries.Remove(current.Resources);
             }

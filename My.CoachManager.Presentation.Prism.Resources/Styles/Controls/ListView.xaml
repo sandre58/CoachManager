@@ -101,16 +101,18 @@
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                               Visibility="Collapsed" />
                             <StackPanel x:Name="PART_Actions" Grid.Column="2" Orientation="Horizontal" Visibility="Hidden">
-                                <Button Margin="{StaticResource DefaultHorizontalMargin}" Style="{StaticResource CircleIconButtonStyle}"
-                                        Width="25" Height="25"
-                                        Content="{StaticResource EditGeometry}" ToolTip="{x:Static strings:ControlResources.Edit}"
-                                        parameters:ControlParameters.PressedBackground="{DynamicResource Dark}" parameters:ControlParameters.PressedForeground="{DynamicResource Accent}"
+                                <Button Margin="{StaticResource DefaultHorizontalMargin}" Style="{StaticResource IconButtonStyle}"
+                                        Width="20" Height="20"
+                                        Content="{StaticResource EditPageGeometry}" ToolTip="{x:Static strings:ControlResources.Edit}"
+                                        parameters:ControlParameters.PressedForeground="{DynamicResource AccentForeground}"
+                                        parameters:ControlParameters.FocusBackground="{DynamicResource AccentForeground}"
                                         Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
                                         CommandParameter="{Binding}" />
-                                <Button Margin="{StaticResource DefaultHorizontalMargin}" Style="{StaticResource CircleIconButtonStyle}"
-                                        Width="25" Height="25"
+                                <Button Margin="{StaticResource DefaultHorizontalMargin}" Style="{StaticResource IconButtonStyle}"
+                                        Width="20" Height="20"
                                         Content="{StaticResource CancelGeometry}" ToolTip="{x:Static strings:ControlResources.Remove}"
-                                        parameters:ControlParameters.PressedBackground="{DynamicResource Negative}"
+                                        parameters:ControlParameters.PressedForeground="{DynamicResource AccentForeground}"
+                                        parameters:ControlParameters.FocusBackground="{DynamicResource AccentForeground}"
                                         Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
                                         CommandParameter="{Binding}" />
                             </StackPanel>
@@ -221,16 +223,18 @@
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                               Visibility="Collapsed" />
                                         <StackPanel x:Name="PART_Actions" Grid.Column="2" Orientation="Horizontal" Visibility="Hidden">
-                                            <Button Margin="{StaticResource DefaultHorizontalMargin}" Style="{StaticResource CircleIconButtonStyle}"
+                                            <Button Margin="{StaticResource DefaultHorizontalMargin}" Style="{StaticResource IconButtonStyle}"
                                         Width="25" Height="25"
-                                        Content="{StaticResource EditGeometry}" ToolTip="{x:Static strings:ControlResources.Edit}"
-                                        parameters:ControlParameters.PressedBackground="{DynamicResource Dark}" parameters:ControlParameters.PressedForeground="{DynamicResource Accent}"
+                                        Content="{StaticResource EditPageGeometry}" ToolTip="{x:Static strings:ControlResources.Edit}"
+                                                    parameters:ControlParameters.PressedForeground="{DynamicResource AccentForeground}"
+                                                    parameters:ControlParameters.FocusBackground="{DynamicResource AccentForeground}"
                                         Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
                                         CommandParameter="{Binding}" />
-                                            <Button Margin="{StaticResource DefaultHorizontalMargin}" Style="{StaticResource CircleIconButtonStyle}"
+                                            <Button Margin="{StaticResource DefaultHorizontalMargin}" Style="{StaticResource IconButtonStyle}"
                                         Width="25" Height="25"
                                         Content="{StaticResource CancelGeometry}" ToolTip="{x:Static strings:ControlResources.Remove}"
-                                        parameters:ControlParameters.PressedBackground="{DynamicResource Negative}"
+                                                    parameters:ControlParameters.PressedForeground="{DynamicResource AccentForeground}"
+                                                    parameters:ControlParameters.FocusBackground="{DynamicResource AccentForeground}"
                                         Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
                                         CommandParameter="{Binding}" />
                                         </StackPanel>

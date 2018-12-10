@@ -74,8 +74,6 @@
                         <Grid Grid.Row="1" Grid.Column="1" Margin="{StaticResource LargeVerticalMargin}"
                               Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
-                                <TextBlock Text="Informations diverses 1" />
-                                <TextBlock Text="Informations diverses 2" />
                                 <ComboBox ItemsSource="{Binding Rosters}" SelectedItem="{Binding SelectedRoster}" DisplayMemberPath="Name" 
                                           Style="{StaticResource AccentComboBoxStyle2}" HorizontalAlignment="Stretch" FontSize="{StaticResource LargeFontSize}"/>
                             </StackPanel>
@@ -93,7 +91,7 @@
         <ToggleButton
                       IsThreeState="False"
                       IsChecked="{Binding IsMenuExpended}"
-                      Style="{StaticResource MainMenuToggleButtonStyle}"
+                      Style="{StaticResource AccentToggleButtonStyle}"
                       Width="30" Height="30"
                       VerticalAlignment="Bottom"
                       HorizontalAlignment="Right"

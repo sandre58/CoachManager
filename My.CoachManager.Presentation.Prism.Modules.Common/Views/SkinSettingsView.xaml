@@ -19,7 +19,7 @@
             <Style x:Key="AccentComboboxStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource AccentComboBoxStyle}">
                 <Setter Property="ItemTemplate">
                     <Setter.Value>
-                        <DataTemplate DataType="skinManager:Accent">
+                        <DataTemplate DataType="skinManager:Skin">
                             <StackPanel Orientation="Horizontal">
                                 <Ellipse Height="14" Width="14" Stroke="{DynamicResource Dark}" Fill="{Binding Converter={StaticResource StringToAccentConverter}}" Margin="2" />
                                 <TextBlock Text="{Binding Label}" FontSize="14" Margin="2" />
@@ -32,15 +32,29 @@
             <Style x:Key="ThemeComboboxStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource AccentComboBoxStyle}">
                 <Setter Property="ItemTemplate">
                     <Setter.Value>
-                        <DataTemplate DataType="skinManager:Theme">
+                        <DataTemplate DataType="skinManager:Skin">
                             <StackPanel Orientation="Horizontal">
-                                <Ellipse Height="14" Width="14" Stroke="{DynamicResource Dark}" Fill="{Binding  Converter={StaticResource StringToThemeConverter}}" Margin="2" />
+                                <Ellipse Height="14" Width="14" Stroke="{DynamicResource Dark}" Fill="{Binding Converter={StaticResource StringToThemeConverter}}" Margin="2" />
                                 <TextBlock Text="{Binding Label}" FontSize="14" Margin="2" />
                             </StackPanel>
                         </DataTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <Style x:Key="MenuComboboxStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource AccentComboBoxStyle}">
+                <Setter Property="ItemTemplate">
+                    <Setter.Value>
+                        <DataTemplate DataType="skinManager:Skin">
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse Height="14" Width="14" Stroke="{DynamicResource Dark}" Fill="{Binding Converter={StaticResource StringToMenuConverter}}" Margin="2" />
+                                <TextBlock Text="{Binding Label}" FontSize="14" Margin="2" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -53,9 +67,12 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="{x:Static strings:SettingsResources.Skin}" parameters:ControlParameters.Icon="{StaticResource EyeSettingsGeometry}"  Style="{StaticResource AccentSmallHeaderIconStyle}" />
+        <ContentControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="{x:Static strings:SettingsResources.Skin}" 
+                        parameters:ControlParameters.Icon="{StaticResource EyeSettingsGeometry}" 
+                        Style="{StaticResource HeaderIconStyle}"/>
         <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static strings:SettingsResources.Theme}" />
         <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding SelectedTheme}" Width="{StaticResource MediumWidth}"
                   Style="{StaticResource ThemeComboboxStyle}"
@@ -65,5 +82,9 @@
         <ComboBox Grid.Row="2" Grid.Column="1" SelectedItem="{Binding SelectedAccent}" Width="{StaticResource MediumWidth}"
                   Style="{StaticResource AccentComboboxStyle}"
                   ItemsSource="{Binding Accents}" DisplayMemberPath="Name" />
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static strings:SettingsResources.Menu}" />
+        <ComboBox Grid.Row="3" Grid.Column="1" SelectedItem="{Binding SelectedMenu}" Width="{StaticResource MediumWidth}"
+                  Style="{StaticResource MenuComboboxStyle}"
+                  ItemsSource="{Binding Menus}" DisplayMemberPath="Name" />
     </Grid>
 </UserControl>

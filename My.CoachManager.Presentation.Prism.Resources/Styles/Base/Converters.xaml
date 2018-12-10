@@ -29,6 +29,7 @@
     <converters:ToFormatConverter x:Key="ToFormatConverter" />
     <converters:StringToAccentConverter x:Key="StringToAccentConverter" />
     <converters:StringToThemeConverter x:Key="StringToThemeConverter" />
+    <converters:StringToMenuConverter x:Key="StringToMenuConverter" />
     <converters:ResizeModeMinMaxButtonVisibilityConverter x:Key="ResizeModeMinMaxButtonVisibilityConverter" />
     <converters:BackgroundToForegroundConverter x:Key="BackgroundToForegroundConverter" />
     <converters:SolidColorBrushToBrushConverter x:Key="SolidColorBrushToBrushConverter" />

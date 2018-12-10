@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
-                    xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:wpf="clr-namespace:My.CoachManager.Presentation.Prism.Core.Notification;assembly=My.CoachManager.Presentation.Prism.Core">
 
     <ResourceDictionary.MergedDictionaries>
@@ -13,12 +12,6 @@
         <ResourceDictionary Source="TextBlock.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <DataTemplate DataType="{x:Type system:String}" x:Key="DefaultStringTemplate">
-        <Border Background="{Binding RelativeSource={RelativeSource AncestorType=controls:Toast}, Path=Background}" MinHeight="80">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding}" />
-        </Border>
-    </DataTemplate>
-
     <DataTemplate DataType="{x:Type wpf:NotificationContent}" x:Key="DefaultNotificationTemplate">
         <Border x:Name="Border" Padding="12" MinHeight="80">
             <Grid>
@@ -26,10 +19,10 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <controls:Icon  x:Name="Icon" Margin="0,0,12,0" Size="Custom" Width="25" Height="25" VerticalAlignment="Top" Opacity="0.8" />
+                <controls:Icon  x:Name="Icon" Margin="0,0,12,0" Size="Custom" Width="25" Height="25" VerticalAlignment="Top" Opacity="0.85" />
                 <DockPanel Grid.Column="1">
                     <TextBlock x:Name="Title" DockPanel.Dock="Top" Text="{Binding Title}" Style="{StaticResource MediumHeaderStyle}" />
-                    <TextBlock x:Name="Message" Text="{Binding Message}" TextWrapping="Wrap" Margin="0,0,12,0" />
+                    <TextBlock x:Name="Message" Text="{Binding Message}" TextWrapping="Wrap" Margin="0,0,12,0" Opacity="0.75" />
                 </DockPanel>
             </Grid>
         </Border>
@@ -37,30 +30,30 @@
             <DataTrigger Binding="{Binding Type}" Value="Information">
                 <Setter TargetName="Icon" Property="Content" Value="{StaticResource InformationGeometry}" />
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource Information}" />
-                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource LightAccentForeground}" />
-                <Setter TargetName="Title" Property="Foreground" Value="{DynamicResource AccentForeground}" />
-                <Setter TargetName="Message" Property="Foreground" Value="{DynamicResource LightAccentForeground}" />
+                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource White}" />
+                <Setter TargetName="Title" Property="Foreground" Value="{DynamicResource White}" />
+                <Setter TargetName="Message" Property="Foreground" Value="{DynamicResource White}" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Type}" Value="Success">
                 <Setter TargetName="Icon" Property="Content" Value="{StaticResource SuccessGeometry}" />
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource Positive}" />
-                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource LightAccentForeground}" />
-                <Setter TargetName="Title" Property="Foreground" Value="{DynamicResource AccentForeground}" />
-                <Setter TargetName="Message" Property="Foreground" Value="{DynamicResource LightAccentForeground}" />
+                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource White}" />
+                <Setter TargetName="Title" Property="Foreground" Value="{DynamicResource White}" />
+                <Setter TargetName="Message" Property="Foreground" Value="{DynamicResource White}" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Type}" Value="Warning">
                 <Setter TargetName="Icon" Property="Content" Value="{StaticResource WarningGeometry}" />
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource Warning}" />
-                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource LightAccentForeground}" />
-                <Setter TargetName="Title" Property="Foreground" Value="{DynamicResource AccentForeground}" />
-                <Setter TargetName="Message" Property="Foreground" Value="{DynamicResource LightAccentForeground}" />
+                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource White}" />
+                <Setter TargetName="Title" Property="Foreground" Value="{DynamicResource White}" />
+                <Setter TargetName="Message" Property="Foreground" Value="{DynamicResource White}" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Type}" Value="Error">
                 <Setter TargetName="Icon" Property="Content" Value="{StaticResource ErrorGeometry}" />
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource Negative}" />
-                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource LightAccentForeground}" />
-                <Setter TargetName="Title" Property="Foreground" Value="{DynamicResource AccentForeground}" />
-                <Setter TargetName="Message" Property="Foreground" Value="{DynamicResource LightAccentForeground}" />
+                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource White}" />
+                <Setter TargetName="Title" Property="Foreground" Value="{DynamicResource White}" />
+                <Setter TargetName="Message" Property="Foreground" Value="{DynamicResource White}" />
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>
@@ -72,7 +65,7 @@
                 Margin="8,8,0,0">
             <Grid>
                 <ContentPresenter />
-                <Button x:Name="PART_CloseButton" Style="{StaticResource AccentIconButtonStyle}"
+                <Button x:Name="PART_CloseButton" Style="{StaticResource IconButtonStyle}"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
                         Width="{StaticResource SmallDiameter}"

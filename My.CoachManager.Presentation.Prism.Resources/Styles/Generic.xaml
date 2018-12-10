@@ -4,6 +4,7 @@
 
         <ResourceDictionary Source="Skin/Theme.xaml" />
         <ResourceDictionary Source="Skin/Accent.xaml" />
+        <ResourceDictionary Source="Skin/Menu.xaml" />
 
         <!-- Base -->
         <ResourceDictionary Source="Base/Colors.xaml" />

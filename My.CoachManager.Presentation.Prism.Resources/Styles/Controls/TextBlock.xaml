@@ -36,7 +36,6 @@
         <Setter Property="TextWrapping" Value="NoWrap" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
-        <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource HeaderFontSize}" />
         <Setter Property="Focusable" Value="False" />
     </Style>
@@ -52,18 +51,15 @@
 
     <!-- Header with icon -->
 
-    <Style TargetType="{x:Type Label}" x:Key="HeaderIconStyle">
-        <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource HeaderBorder}" />
+    <Style TargetType="{x:Type ContentControl}" x:Key="HeaderIconStyle">
+        <Setter Property="BorderBrush" Value="{DynamicResource Control}" />
         <Setter Property="FontSize" Value="{DynamicResource HeaderFontSize}" />
-        <Setter Property="FontFamily" Value="{StaticResource HeaderFontFamily}" />
-        <Setter Property="FontStyle" Value="Italic" />
         <Setter Property="Margin" Value="3, 15, 3, 10" />
-        <Setter Property="BorderThickness" Value="0,0,0,5" />
-        <Setter Property="Padding" Value="0, 0, 0, 10" />
+        <Setter Property="BorderThickness" Value="0,0,0,3" />
+        <Setter Property="Padding" Value="0, 0, 0, 7" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Label}">
+                <ControlTemplate TargetType="{x:Type ContentControl}">
                     <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding Padding}" Margin="{TemplateBinding Margin}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}" VerticalAlignment="Center" />
@@ -75,33 +71,11 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type Label}" x:Key="AccentHeaderIconStyle" BasedOn="{StaticResource HeaderIconStyle}">
-        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource AccentForeground}" />
-    </Style>
-
-    <Style TargetType="{x:Type Label}" x:Key="MediumHeaderIconStyle" BasedOn="{StaticResource HeaderIconStyle}">
-        <Setter Property="Foreground" Value="{DynamicResource LightHeaderForeground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource LightHeaderBorder}" />
-        <Setter Property="FontSize" Value="{DynamicResource MediumHeaderFontSize}" />
+    <Style TargetType="{x:Type ContentControl}" x:Key="MediumHeaderIconStyle" BasedOn="{StaticResource HeaderIconStyle}">
+        <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}" />
         <Setter Property="Margin" Value="3, 12, 3, 8" />
-        <Setter Property="BorderThickness" Value="0,0,0,3" />
-        <Setter Property="Padding" Value="0, 0, 0, 7" />
-    </Style>
-
-    <Style TargetType="{x:Type Label}" x:Key="AccentMediumHeaderIconStyle" BasedOn="{StaticResource MediumHeaderIconStyle}">
-        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
-    </Style>
-
-    <Style TargetType="{x:Type Label}" x:Key="SmallHeaderIconStyle" BasedOn="{StaticResource MediumHeaderIconStyle}">
-        <Setter Property="FontSize" Value="{DynamicResource SmallHeaderFontSize}" />
-        <Setter Property="Margin" Value="1, 9, 1, 5" />
-        <Setter Property="BorderThickness" Value="0,0,0,2" />
-        <Setter Property="Padding" Value="0, 0, 0, 5" />
-    </Style>
-
-    <Style TargetType="{x:Type Label}" x:Key="AccentSmallHeaderIconStyle" BasedOn="{StaticResource SmallHeaderIconStyle}">
-        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="Padding" Value="0, 0, 0, 4" />
     </Style>
 
     <!-- Controls -->

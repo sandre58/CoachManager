@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
+using System.Linq;
 using My.CoachManager.Presentation.Prism.Core.Models;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
+using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public abstract class ItemViewModel<TModel> : WorkspaceDialogViewModel, IItemViewModel<TModel>
+    public abstract class ItemViewModel<TModel> : NavigatableWorkspaceViewModel, IItemViewModel<TModel>
         where TModel : class, IEntityModel, IValidatable, IModifiable, INotifyPropertyChanged, new()
     {
         #region Fields
@@ -86,6 +88,23 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         protected abstract TModel LoadItemCore(int id);
 
         #endregion Data
+
+        #region Navigation
+
+        /// <summary>
+        /// Called when the implementer has been navigated to.
+        /// </summary>
+        /// <param name="navigationContext">The navigation context.</param>
+        protected override void OnNavigatedToCore(NavigationContext navigationContext)
+        {
+            if (navigationContext.Parameters.Any(x => x.Key.ToUpper() == "ID"))
+            {
+                LoadItemById(int.Parse(navigationContext.Parameters.Single(x => x.Key.ToUpper() == "ID").Value.ToString()));
+            }
+            
+        }
+
+        #endregion
 
         #region PropertyChanged
 

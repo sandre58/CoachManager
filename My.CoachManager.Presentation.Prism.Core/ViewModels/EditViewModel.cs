@@ -11,10 +11,12 @@ using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public abstract class EditViewModel<TModel> : ItemViewModel<TModel>, IEditViewModel<TModel>
+    public abstract class EditViewModel<TModel> : WorkspaceDialogViewModel, IEditViewModel<TModel>
         where TModel : class, IEntityModel, IValidatable, IModifiable, INotifyPropertyChanged, new()
     {
         #region Fields
+
+        private int _activeId;
 
         /// <summary>
         /// The laod data background worker.
@@ -24,6 +26,22 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         #endregion Fields
 
         #region Members
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets item.
+        /// </summary>
+        IEntityModel IItemViewModel.Item
+        {
+            get => Item;
+            set => Item = (TModel)value;
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Get or set Item.
+        /// </summary>
+        public TModel Item { get; set; }
 
         /// <summary>
         /// Get or Set Save Command.
@@ -49,6 +67,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             base.InitializeData();
 
+            Item = new TModel();
             Mode = ScreenMode.Creation;
         }
 
@@ -212,14 +231,39 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         #region Data
 
+        /// <inheritdoc />
         /// <summary>
         /// Load an item by id.
         /// </summary>
-        public override void LoadItemById(int id)
+        public virtual void LoadItemById(int id)
         {
+            _activeId = id;
             Mode = id == 0 ? ScreenMode.Creation : ScreenMode.Edition;
-            base.LoadItemById(id);
+            Refresh();
         }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Save.
+        /// </summary>
+        protected override void LoadDataCore()
+        {
+            Item = _activeId > 0 ? LoadItemCore(_activeId) : new TModel();
+        }
+
+        /// <summary>
+        /// Call after load data.
+        /// </summary>
+        protected override void OnLoadDataCompleted()
+        {
+            Item?.ResetModified();
+        }
+
+        /// <summary>
+        /// Load an item from data source.
+        /// </summary>
+        /// <param name="id"></param>
+        protected abstract TModel LoadItemCore(int id);
 
         #endregion Data
 
@@ -228,11 +272,12 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Calls when Item changes.
         /// </summary>
-        protected override void OnItemChanged()
+        protected virtual void OnItemChanged()
         {
-            base.OnItemChanged();
+            if (Item != null) _activeId = Item.Id;
             if (Item != null) Item.PropertyChanged += OnItemPropertyChanged;
             SaveCommand.RaiseCanExecuteChanged();
+            Item?.ResetModified();
         }
 
         /// <summary>

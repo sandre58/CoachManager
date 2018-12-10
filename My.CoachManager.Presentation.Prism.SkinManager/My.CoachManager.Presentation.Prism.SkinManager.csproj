@@ -49,6 +49,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Menu.cs" />
     <Compile Include="Skin.cs" />
     <Compile Include="Accent.cs" />
     <Compile Include="SkinManager.cs" />

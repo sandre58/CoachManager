@@ -385,7 +385,7 @@
                                 <RowDefinition x:Name="FirstRowDefinition" Height="{TemplateBinding params:TabControlParameters.HeaderSize}" />
                                 <RowDefinition x:Name="SecondRowDefinition" Height="*" />
                             </Grid.RowDefinitions>
-                            <TabPanel x:Name="HeaderPanel" Grid.Column="0" Grid.Row="0" IsItemsHost="True" KeyboardNavigation.TabIndex="1" Background="{DynamicResource DarkMenuBackground}" />
+                            <TabPanel x:Name="HeaderPanel" Grid.Column="0" Grid.Row="0" IsItemsHost="True" KeyboardNavigation.TabIndex="1" Background="{DynamicResource HeaderBackground}" />
                             <Border x:Name="ContentPanel"
                                         Grid.Column="0"
                                         Grid.Row="1"
