@@ -73,17 +73,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             OpenCommand = new DelegateCommand<TEntityModel>(Open, CanOpen);
         }
 
-        /// <inheritdoc />
-        /// <summary>
-        /// Initializes Data.
-        /// </summary>
-        protected override void InitializeShortcuts()
-        {
-            base.InitializeShortcuts();
-
-            KeyboardShortcuts.Add(new KeyBinding(AddCommand, Key.N, ModifierKeys.Control));
-        }
-
         #endregion Initialization
 
         #region Open
@@ -290,7 +279,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             Refresh();
         }
 
-        #endregion Remove
+        #endregion RemoveSelectedItems
 
         #region Properties Changed
 
@@ -301,10 +290,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             RemoveSelectedItemsCommand.RaiseCanExecuteChanged();
         }
 
-
         #endregion Properties Changed
 
-#endregion Methods
+        #endregion Methods
     }
 
     public abstract class ListViewModel<TEntityModel> : NavigatableWorkspaceViewModel, IListViewModel<TEntityModel>
@@ -335,7 +323,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         IEnumerable IListViewModel.SelectedItems
         {
             get => SelectedItems;
-            set => SelectedItems = (IEnumerable<TEntityModel>) value;
+            set => SelectedItems = (IEnumerable<TEntityModel>)value;
         }
 
         /// <summary>
@@ -472,12 +460,12 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             });
         }
 
-        #endregion
+        #endregion SelectAll
 
         #region SelectItem
 
         /// <summary>
-        /// Can select an item. 
+        /// Can select an item.
         /// </summary>
         /// <returns></returns>
         protected virtual bool CanSelectItem(TEntityModel item)
@@ -490,17 +478,17 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         public virtual void SelectItem(TEntityModel item)
         {
-            if(item == null || !item.IsSelectable) return;
+            if (item == null || !item.IsSelectable) return;
 
             item.IsSelected = true;
         }
 
-        #endregion
+        #endregion SelectItem
 
         #region SelectItems
 
         /// <summary>
-        /// Can select items. 
+        /// Can select items.
         /// </summary>
         /// <returns></returns>
         protected virtual bool CanSelectItems(IEnumerable<TEntityModel> items)
@@ -516,7 +504,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             items?.ForEach(SelectItem);
         }
 
-        #endregion
+        #endregion SelectItems
 
         #region Properties Changed
 
@@ -539,7 +527,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             RaisePropertyChanged(() => SelectedItems);
             RaisePropertyChanged(() => SelectedItem);
         }
-
 
         #endregion Properties Changed
 

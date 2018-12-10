@@ -1,6 +1,4 @@
-﻿using System.Windows.Input;
-using My.CoachManager.Presentation.Prism.Core.Manager;
-using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
+﻿using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
@@ -16,21 +14,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         public virtual bool KeepAlive => true;
 
         #endregion Members
-
-        #region Initialization
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Launch on constructor for initialize all Data.
-        /// </summary>
-        protected override void InitializeShortcuts()
-        {
-            base.InitializeShortcuts();
-
-            KeyboardShortcuts.Add(new KeyBinding(RefreshCommand, Key.F5, ModifierKeys.None));
-        }
-
-        #endregion Initialization
 
         #region Methods
 

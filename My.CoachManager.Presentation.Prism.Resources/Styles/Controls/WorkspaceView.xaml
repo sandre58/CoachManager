@@ -26,7 +26,7 @@
         <ResourceDictionary Source="../Specific/Filter.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <DataTemplate x:Key="ListViewHeaderTemplate" DataType="{x:Type interfaces:IListViewModel}">
+    <DataTemplate x:Key="ListHeaderTemplate" DataType="{x:Type interfaces:IListViewModel}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -57,31 +57,31 @@
 
                     <!-- Count Items -->
                     <DockPanel  Margin="{StaticResource DefaultMargin}" DockPanel.Dock="Left" VerticalAlignment="Center" parameters:PanelParameters.NotAffectMargin="True" MinHeight="40">
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <TextBlock x:Name="SelectedCountTextBlock" 
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock x:Name="SelectedCountTextBlock"
                                    FontSize="{StaticResource NormalFontSize}"
                                    Text="{Binding SelectedItems.Count, StringFormat={x:Static strings:ControlResources.CountSelectedItemsToUpper}}"
                                    Foreground="{DynamicResource Accent}"
                                    Style="{StaticResource SmallHeaderStyle}"
-                                   Visibility="{Binding SelectedItems, Converter={StaticResource AnyToVisibilityConverter}}"/>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="{StaticResource MediumFontSize}" Margin="0"
+                                   Visibility="{Binding SelectedItems, Converter={StaticResource AnyToVisibilityConverter}}" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="{StaticResource MediumFontSize}" Margin="0"
                                        Text="{Binding Filters.Items.Count}"
                                        Foreground="{DynamicResource Positive}"
                                        Style="{StaticResource SmallHeaderStyle}"
-                                       Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}"/>
-                            <TextBlock FontSize="{StaticResource MediumFontSize}" Margin="0"
+                                       Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}" />
+                                <TextBlock FontSize="{StaticResource MediumFontSize}" Margin="0"
                                        Text="/"
                                        Foreground="{DynamicResource Positive}"
                                        Style="{StaticResource SmallHeaderStyle}"
-                                       Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}"/>
-                            <TextBlock x:Name="CountTextBlock" Margin="0"
+                                       Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}" />
+                                <TextBlock x:Name="CountTextBlock" Margin="0"
                                        FontSize="{StaticResource MediumFontSize}"
                                        Text="{Binding Items.Count, StringFormat={x:Static strings:ControlResources.CountItemsToUpper}}"
                                        Foreground="{DynamicResource Positive}"
                                        Style="{StaticResource SmallHeaderStyle}" />
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
                     </DockPanel>
 
                     <!-- Columns Parameters -->
@@ -150,7 +150,12 @@
         </DataTemplate.Triggers>
     </DataTemplate>
 
-    <Style TargetType="{x:Type controls:WorkspaceView}">
+    <DataTemplate x:Key="ItemHeaderTemplate" DataType="{x:Type interfaces:IListViewModel}">
+        <Grid>
+        </Grid>
+    </DataTemplate>
+
+    <Style x:Key="WorkspaceViewBaseStyle" TargetType="{x:Type controls:WorkspaceView}">
         <Setter Property="MinWidth" Value="320" />
         <Setter Property="ApplicationBarPosition" Value="Bottom" />
         <Setter Property="Padding" Value="5,20,5,5" />
@@ -164,18 +169,15 @@
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="ApplicationBarStyle" Value="{StaticResource {x:Type controls:ApplicationBar}}" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
-        <Setter Property="HeaderTemplate" Value="{StaticResource ListViewHeaderTemplate}" />
 
         <Setter Property="parameters:ControlParameters.InputBindings">
             <Setter.Value>
                 <InputBindingCollection>
                     <KeyBinding Key="F5" Command="{Binding RefreshCommand}" />
-                    <KeyBinding Key="N" Modifiers="Control" Command="{Binding AddCommand}" />
-                    <KeyBinding Key="F" Modifiers="Control" Command="{Binding Filters.ShowFiltersCommand}" />
                 </InputBindingCollection>
             </Setter.Value>
         </Setter>
-        
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:WorkspaceView}">
@@ -239,8 +241,28 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ListWorkspaceViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource WorkspaceViewBaseStyle}">
+        <Setter Property="HeaderTemplate" Value="{StaticResource ListHeaderTemplate}" />
+
+        <Setter Property="parameters:ControlParameters.InputBindings">
+            <Setter.Value>
+                <InputBindingCollection>
+                    <KeyBinding Key="F5" Command="{Binding RefreshCommand}" />
+                    <KeyBinding Key="N" Modifiers="Control" Command="{Binding AddCommand}" />
+                    <KeyBinding Key="F" Modifiers="Control" Command="{Binding Filters.ShowFiltersCommand}" />
+                </InputBindingCollection>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ItemWorkspaceViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource WorkspaceViewBaseStyle}">
+        <Setter Property="HeaderTemplate" Value="{StaticResource ItemHeaderTemplate}" />
+    </Style>
+
+    <Style TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource WorkspaceViewBaseStyle}" />
+
     <!-- For dialog window -->
-    <DataTemplate x:Key="EditDialogViewHeaderTemplate" DataType="{x:Type interfaces:IEditViewModel}">
+    <DataTemplate x:Key="EditDialogHeaderTemplate" DataType="{x:Type interfaces:IEditViewModel}">
         <Grid>
 
             <Grid.Resources>
@@ -294,46 +316,54 @@
         </DataTemplate.Triggers>
     </DataTemplate>
 
-    <DataTemplate x:Key="SelectDialogViewHeaderTemplate" DataType="{x:Type interfaces:ISelectItemsViewModel}">
+    <DataTemplate x:Key="SelectDialogHeaderTemplate" DataType="{x:Type interfaces:ISelectItemsViewModel}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-        <Grid Margin="{StaticResource LargeVerticalMargin}">
+            <Grid Margin="{StaticResource LargeVerticalMargin}">
 
-            <Grid.Resources>
-                <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
-                    <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
-                </Style>
-            </Grid.Resources>
+                <Grid.Resources>
+                    <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
+                        <Setter Property="Foreground" Value="{DynamicResource HeaderForeground}" />
+                    </Style>
+                </Grid.Resources>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-            <controls:Icon x:Name="Icon" Width="40" Height="40" Size="Custom" Content="{StaticResource AddGeometry}" Grid.Column="0" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center"
+                <controls:Icon x:Name="Icon" Width="40" Height="40" Size="Custom" Content="{StaticResource AddGeometry}" Grid.Column="0" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center"
                             Style="{StaticResource EllipseIconBaseStyle}"
                            OverlayBackground="{DynamicResource HeaderForeground}" />
-            <TextBlock Grid.Column="1" Text="{Binding Title}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />
-
-        </Grid>
+                <TextBlock Grid.Column="1" Text="{Binding Title}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />
+            </Grid>
             <Border Grid.Row="1" Background="{DynamicResource LightHeaderBackground}">
-            <ContentControl Content="{Binding}" ContentTemplate="{StaticResource ListViewHeaderTemplate}" />
+                <ContentControl Content="{Binding}" ContentTemplate="{StaticResource ListHeaderTemplate}" />
             </Border>
         </Grid>
     </DataTemplate>
 
-    <Style x:Key="EditWorkspaceDialogViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource {x:Type controls:WorkspaceView}}">
+    <Style x:Key="EditWorkspaceDialogViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource WorkspaceViewBaseStyle}">
         <Setter Property="HeaderHeight" Value="70" />
-        <Setter Property="HeaderTemplate" Value="{StaticResource EditDialogViewHeaderTemplate}" />
+        <Setter Property="HeaderTemplate" Value="{StaticResource EditDialogHeaderTemplate}" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+
+        <Setter Property="parameters:ControlParameters.InputBindings">
+            <Setter.Value>
+                <InputBindingCollection>
+                    <KeyBinding Key="F5" Command="{Binding RefreshCommand}" />
+                    <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveCommand}" />
+                </InputBindingCollection>
+            </Setter.Value>
+        </Setter>
     </Style>
 
-    <Style x:Key="SelectWorkspaceDialogViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource EditWorkspaceDialogViewStyle}">
-        <Setter Property="HeaderHeight" Value="{x:Static system:Double.NaN}" />
-        <Setter Property="HeaderTemplate" Value="{StaticResource SelectDialogViewHeaderTemplate}" />
+    <Style x:Key="SelectWorkspaceDialogViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource WorkspaceViewBaseStyle}">
+        <Setter Property="HeaderTemplate" Value="{StaticResource SelectDialogHeaderTemplate}" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
     </Style>
 </ResourceDictionary>

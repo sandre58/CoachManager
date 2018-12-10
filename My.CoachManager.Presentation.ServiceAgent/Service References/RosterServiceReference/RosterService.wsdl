@@ -51,6 +51,12 @@
   <wsdl:message name="IRosterService_RemovePlayers_OutputMessage">
     <wsdl:part name="parameters" element="tns:RemovePlayersResponse" />
   </wsdl:message>
+  <wsdl:message name="IRosterService_GetRosterPlayerById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRosterPlayerById" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_GetRosterPlayerById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRosterPlayerByIdResponse" />
+  </wsdl:message>
   <wsdl:portType name="IRosterService">
     <wsdl:operation name="GetRosters">
       <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetRosters" message="tns:IRosterService_GetRosters_InputMessage" />
@@ -79,6 +85,10 @@
     <wsdl:operation name="RemovePlayers">
       <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/RemovePlayers" message="tns:IRosterService_RemovePlayers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/RemovePlayersResponse" message="tns:IRosterService_RemovePlayers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRosterPlayerById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetRosterPlayerById" message="tns:IRosterService_GetRosterPlayerById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/GetRosterPlayerByIdResponse" message="tns:IRosterService_GetRosterPlayerById_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IRosterService" type="tns:IRosterService">
@@ -139,6 +149,15 @@
     </wsdl:operation>
     <wsdl:operation name="RemovePlayers">
       <soap:operation soapAction="http://tempuri.org/IRosterService/RemovePlayers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRosterPlayerById">
+      <soap:operation soapAction="http://tempuri.org/IRosterService/GetRosterPlayerById" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

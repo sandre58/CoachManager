@@ -14,7 +14,6 @@ using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-
     public abstract class SelectItemsViewModel<TModel> : DialogViewModel, ISelectItemsViewModel<TModel>
     where TModel : ISelectable
     {
@@ -39,7 +38,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
-        public IEnumerable<TModel> SelectedItems {
+        public IEnumerable<TModel> SelectedItems
+        {
             get { return Items?.Where(x => x.IsSelected); }
             set
             {
@@ -58,9 +58,10 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
-        public TModel SelectedItem {
+        public TModel SelectedItem
+        {
             get => SelectedItems != null ? SelectedItems.FirstOrDefault() : default(TModel);
-            set => SelectedItems = new List<TModel> {value};
+            set => SelectedItems = new List<TModel> { value };
         }
 
         /// <summary>
@@ -171,7 +172,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <returns></returns>
         protected abstract ObservableItemsCollection<TModel> LoadItems();
 
-        #endregion
+        #endregion Data
 
         #region SelectAll
 
@@ -195,7 +196,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             });
         }
 
-        #endregion
+        #endregion SelectAll
 
         #region Select
 
@@ -213,10 +214,10 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         public virtual void Select()
         {
-           Close(DialogResult.Ok);
+            Close(DialogResult.Ok);
         }
 
-        #endregion
+        #endregion Select
 
         #region Cancel
 
@@ -237,7 +238,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             Close(DialogResult.Cancel);
         }
 
-        #endregion
+        #endregion Cancel
 
         #region Properties Changed
 
@@ -256,10 +257,12 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         private void ItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            RaisePropertyChanged(() => AreAllSelected);
             SelectCommand.RaiseCanExecuteChanged();
-        }
 
+            RaisePropertyChanged(() => AreAllSelected);
+            RaisePropertyChanged(() => SelectedItems);
+            RaisePropertyChanged(() => SelectedItem);
+        }
 
         #endregion Properties Changed
 

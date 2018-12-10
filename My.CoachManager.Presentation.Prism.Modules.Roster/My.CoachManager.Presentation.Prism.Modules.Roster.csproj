@@ -91,11 +91,15 @@
     <Compile Include="ViewModels\PlayerEditViewModel.Contacts.cs">
       <DependentUpon>RosterPlayerEditViewModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\RosterPlayerViewModel.cs" />
     <Compile Include="ViewModels\RosterPlayerEditViewModel.cs" />
     <Compile Include="ViewModels\RosterViewModel.cs" />
     <Compile Include="ViewModels\RosterParametersViewModel.cs" />
     <Compile Include="Views\RosterPlayerEditView.xaml.cs">
       <DependentUpon>RosterPlayerEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RosterPlayerView.xaml.cs">
+      <DependentUpon>RosterPlayerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RosterView.xaml.cs">
       <DependentUpon>RosterView.xaml</DependentUpon>
@@ -113,6 +117,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\RosterPlayerEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RosterPlayerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

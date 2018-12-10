@@ -240,3 +240,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/My.CoachManager.Domain.Core/My.CoachManager.Domain.Core.csproj.DotSettings

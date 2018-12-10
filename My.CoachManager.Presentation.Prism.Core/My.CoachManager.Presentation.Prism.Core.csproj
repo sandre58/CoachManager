@@ -146,6 +146,7 @@
     <Compile Include="Attributes\Validation\ValidatePropertyAttribute.cs" />
     <Compile Include="ViewModels\DialogViewModel.cs" />
     <Compile Include="Dialog\IWorkspaceDialog.cs" />
+    <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IRefreshable.cs" />
     <Compile Include="ViewModels\Interfaces\IListFiltersViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ISelectItemsViewModel.cs" />

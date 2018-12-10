@@ -5,7 +5,7 @@ using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 {
-    public partial class RosterPlayerEditViewModel : EditViewModel<RosterPlayerModel>
+    public partial class RosterPlayerViewModel : ItemViewModel<RosterPlayerModel>
     {
         #region Fields
 
@@ -18,21 +18,14 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="RosterViewModel"/>.
         /// </summary>
-        public RosterPlayerEditViewModel(IRosterService rosterService)
+        public RosterPlayerViewModel(IRosterService rosterService)
         {
             _rosterService = rosterService;
         }
 
         #endregion Constructors
 
-        #region Methods
-
         #region Data
-
-        protected override bool SaveItemCore()
-        {
-            return true;
-        }
 
         protected override RosterPlayerModel LoadItemCore(int id)
         {
@@ -41,6 +34,19 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 
         #endregion Data
 
-        #endregion Methods
+        #region PropertyChanged
+
+        /// <summary>
+        /// Calls when Item changes.
+        /// </summary>
+        protected override void OnItemChanged()
+        {
+            base.OnItemChanged();
+
+            if (Item.Player != null)
+                Title = Item.Player.FullName;
+        }
+
+        #endregion PropertyChanged
     }
 }

@@ -26,6 +26,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster
 
             // Register the workspace view
             _container.RegisterTypeForNavigation<RosterView>();
+            _container.RegisterTypeForNavigation<RosterPlayerView>();
             //_container.RegisterTypeForNavigation<SeasonsListView>();
             //_container.RegisterTypeForNavigation<CategoriesListView>();
             //_container.RegisterTypeForNavigation<PlayersListView>();

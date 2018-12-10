@@ -43,7 +43,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             InitializeEvent();
             InitializeCommand();
             InitializeData();
-            InitializeShortcuts();
         }
 
         /// <summary>
@@ -64,13 +63,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// Launch on constructor for initialize all Event.
         /// </summary>
         protected virtual void InitializeEvent()
-        {
-        }
-
-        /// <summary>
-        /// Launch on constructor for initialize all shortcuts.
-        /// </summary>
-        protected virtual void InitializeShortcuts()
         {
         }
 

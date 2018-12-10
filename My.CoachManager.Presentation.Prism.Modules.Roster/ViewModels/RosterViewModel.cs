@@ -15,7 +15,7 @@ using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 {
-    public class RosterViewModel : ListViewModel<RosterPlayerModel, RosterPlayerEditView, RosterPlayerEditView>
+    public class RosterViewModel : ListViewModel<RosterPlayerModel, RosterPlayerEditView, RosterPlayerView>
     {
         #region Fields
 
@@ -62,7 +62,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// <param name="item"></param>
         protected override void RemoveItemCore(RosterPlayerModel item)
         {
-            _rosterService.RemovePlayers(Roster, new []{item.Player.Id});
+            _rosterService.RemovePlayers(Roster, new[] { item.Player.Id });
         }
 
         /// <inheritdoc />
@@ -101,7 +101,6 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 
             DialogManager.ShowWorkspaceDialog(view, dialog =>
             {
-
                 if (dialog.Result == DialogResult.Ok)
                 {
                     _rosterService.AddPlayers(Roster, model.SelectedItems.Select(x => x.Id).ToArray());
@@ -114,9 +113,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
             });
         }
 
-        #endregion
+        #endregion Add
 
         #endregion Methods
-
     }
 }

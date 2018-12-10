@@ -77,5 +77,15 @@ namespace My.CoachManager.Services.Wcf
         {
             ServiceLocator.Current.GetInstance<IRosterAppService>().RemovePlayers(rosterId, playerIds);
         }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Get player.
+        /// </summary>
+        /// <returns></returns>
+        public RosterPlayerDto GetRosterPlayerById(int id)
+        {
+            return ServiceLocator.Current.GetInstance<IRosterAppService>().GetRosterPlayerById(id);
+        }
     }
 }

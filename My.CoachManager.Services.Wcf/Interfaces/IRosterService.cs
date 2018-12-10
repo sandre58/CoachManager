@@ -58,5 +58,12 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// <returns></returns>
         [OperationContract]
         void RemovePlayers(int rosterId, IEnumerable<int> playerIds);
+
+        /// <summary>
+        /// Get a player.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        RosterPlayerDto GetRosterPlayerById(int id);
     }
 }

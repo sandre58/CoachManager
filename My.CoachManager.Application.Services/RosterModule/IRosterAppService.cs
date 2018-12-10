@@ -49,5 +49,11 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// </summary>
         /// <returns></returns>
         void RemovePlayers(int rosterId, IEnumerable<int> playerIds);
+
+        /// <summary>
+        /// Get a player.
+        /// </summary>
+        /// <returns></returns>
+        RosterPlayerDto GetRosterPlayerById(int id);
     }
 }

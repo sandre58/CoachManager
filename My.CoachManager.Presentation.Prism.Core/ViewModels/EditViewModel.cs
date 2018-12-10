@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.Presentation.Prism.Core.ComponentModel;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
@@ -12,12 +11,10 @@ using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public abstract class EditViewModel<TModel> : WorkspaceDialogViewModel, IEditViewModel<TModel>
+    public abstract class EditViewModel<TModel> : ItemViewModel<TModel>, IEditViewModel<TModel>
         where TModel : class, IEntityModel, IValidatable, IModifiable, INotifyPropertyChanged, new()
     {
         #region Fields
-
-        private int _activeId;
 
         /// <summary>
         /// The laod data background worker.
@@ -27,22 +24,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         #endregion Fields
 
         #region Members
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets or sets item.
-        /// </summary>
-        IEntityModel IItemViewModel.Item
-        {
-            get => Item;
-            set => Item = (TModel)value;
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Get or set Item.
-        /// </summary>
-        public TModel Item { get; set; }
 
         /// <summary>
         /// Get or Set Save Command.
@@ -69,7 +50,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             base.InitializeData();
 
             Mode = ScreenMode.Creation;
-            Item = new TModel();
         }
 
         /// <inheritdoc />
@@ -82,17 +62,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
             SaveCommand = new DelegateCommand(Save, CanSave);
             CancelCommand = new DelegateCommand(Cancel, CanCancel);
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Initializes Data.
-        /// </summary>
-        protected override void InitializeShortcuts()
-        {
-            base.InitializeShortcuts();
-
-            KeyboardShortcuts.Add(new KeyBinding(SaveCommand, Key.S, ModifierKeys.Control));
         }
 
         #endregion Initialization
@@ -111,9 +80,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
             if (Item.Validate())
             {
-
                 _saveDataBackgroundWorker =
-                    new AbortableBackgroundWorker {WorkerReportsProgress = true, WorkerSupportsCancellation = true};
+                    new AbortableBackgroundWorker { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
                 _saveDataBackgroundWorker.RunWorkerCompleted += OnBackgroundWorkerRunWorkerCompleted;
                 _saveDataBackgroundWorker.DoWork += OnBackgroundWorkerOnDoWork;
 
@@ -156,7 +124,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             try
             {
                 var result = SaveItemCore();
-                if(!result) _saveDataBackgroundWorker.Abort();
+                if (!result) _saveDataBackgroundWorker.Abort();
             }
             catch (Exception exception)
             {
@@ -183,7 +151,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual void Save()
         {
-           SaveCore();
+            SaveCore();
         }
 
         /// <summary>
@@ -244,39 +212,14 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         #region Data
 
-        /// <inheritdoc />
         /// <summary>
         /// Load an item by id.
         /// </summary>
-        public void LoadItemById(int id)
+        public override void LoadItemById(int id)
         {
-            _activeId = id;
             Mode = id == 0 ? ScreenMode.Creation : ScreenMode.Edition;
-            Refresh();
+            base.LoadItemById(id);
         }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Save.
-        /// </summary>
-        protected override void LoadDataCore()
-        {
-                Item = _activeId > 0 ? LoadItemCore(_activeId) : new TModel();
-        }
-
-        /// <summary>
-        /// Call after load data.
-        /// </summary>
-        protected override void OnLoadDataCompleted()
-        {
-            Item?.ResetModified();
-        }
-
-        /// <summary>
-        /// Load an item from data source.
-        /// </summary>
-        /// <param name="id"></param>
-        protected abstract TModel LoadItemCore(int id);
 
         #endregion Data
 
@@ -285,11 +228,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Calls when Item changes.
         /// </summary>
-        protected virtual void OnItemChanged()
+        protected override void OnItemChanged()
         {
-            if (Item != null) _activeId = Item.Id;
-
-            Item?.ResetModified();
+            base.OnItemChanged();
             if (Item != null) Item.PropertyChanged += OnItemPropertyChanged;
             SaveCommand.RaiseCanExecuteChanged();
         }

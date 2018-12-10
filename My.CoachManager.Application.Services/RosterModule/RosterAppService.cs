@@ -15,7 +15,7 @@ namespace My.CoachManager.Application.Services.RosterModule
     public class RosterAppService : IRosterAppService
     {
         #region ---- Fields ----
-        
+
         private readonly IRepository<Roster> _rosterRepository;
         private readonly IRepository<RosterPlayer> _playerRosterRepository;
 
@@ -106,9 +106,8 @@ namespace My.CoachManager.Application.Services.RosterModule
             {
                 _playerRosterRepository.Add(RosterFactory.CreatePlayer(rosterId, id));
             }
-            
-            _playerRosterRepository.UnitOfWork.Commit();
 
+            _playerRosterRepository.UnitOfWork.Commit();
         }
 
         /// <summary>
@@ -120,12 +119,26 @@ namespace My.CoachManager.Application.Services.RosterModule
             var players = _playerRosterRepository.GetByFilter(x => playerIds.Contains(x.PlayerId) && x.RosterId == rosterId).ToList();
             foreach (var player in players)
             {
-                
                 _playerRosterRepository.Remove(player);
             }
 
             _playerRosterRepository.UnitOfWork.Commit();
+        }
 
+        /// <summary>
+        /// Get a player.
+        /// </summary>
+        /// <returns></returns>
+        public RosterPlayerDto GetRosterPlayerById(int id)
+        {
+            var player = _playerRosterRepository.GetEntity(id,
+                x => x.Player,
+                x => x.Player.Category,
+                x => x.Player.Address,
+                x => x.Player.Contacts,
+                x => x.Player.Country);
+
+            return RosterFactory.GetPlayer(player);
         }
 
         #endregion Methods

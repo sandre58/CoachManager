@@ -14,6 +14,7 @@
         <Setter Property="Background" Value="{DynamicResource Light}" />
         <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
         <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource Light}" />
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource DarkControlMouseOver}" />
         <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource Accent}" />
@@ -129,13 +130,13 @@
                 <ControlTemplate TargetType="CheckBox">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition x:Name="LeftCol" Width="18" />
+                            <ColumnDefinition x:Name="LeftCol" Width="20" />
                             <ColumnDefinition x:Name="RightCol" Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid x:Name="PART_CHECKBOX">
                             <Rectangle Margin="-6, 0" Fill="{DynamicResource Transparent}" />
-                            <Ellipse x:Name="normal" Width="18"
-                                     Height="18" Fill="{TemplateBinding Background}"
+                            <Ellipse x:Name="normal" Width="20"
+                                     Height="20" Fill="{TemplateBinding Background}"
                                      Stroke="{TemplateBinding BorderBrush}"
                                      StrokeThickness="{TemplateBinding BorderThickness}" />
                             <Path x:Name="checkBox"
@@ -205,6 +206,24 @@
                             <Setter TargetName="normal" Property="Stroke" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.PressedBorderBrush)}" />
                             <Setter TargetName="checkBox" Property="Fill" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.PressedForeground)}" />
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsFocused" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="normal" Property="Stroke" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.PressedForeground)}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="normal" Property="Opacity" Value="0.7" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="{DynamicResource DisabledOpacity}" />
                         </Trigger>

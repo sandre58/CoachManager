@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.Presentation.Prism.Core.ComponentModel;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
@@ -31,8 +29,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             State = ScreenState.NotLoaded;
             Mode = ScreenMode.Read;
-
-            KeyboardShortcuts = new List<KeyBinding>();
         }
 
         #endregion Constructors
@@ -55,11 +51,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// Gets or sets the refresh command.
         /// </summary>
         public DelegateCommand RefreshCommand { get; set; }
-
-        /// <summary>
-        /// Gets or sets keyboard shortcuts.
-        /// </summary>
-        public List<KeyBinding> KeyboardShortcuts { get; set; }
 
         /// <inheritdoc />
         /// <summary>
