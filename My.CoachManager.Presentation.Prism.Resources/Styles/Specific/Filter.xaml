@@ -16,6 +16,7 @@
         <ResourceDictionary Source="../Controls/TextBox.xaml" />
         <ResourceDictionary Source="../Controls/NumericUpDown.xaml" />
         <ResourceDictionary Source="../Controls/Combobox.xaml" />
+        <ResourceDictionary Source="../Controls/Checkbox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate DataType="{x:Type screens:FilterViewModel}">
@@ -35,7 +36,7 @@
                     ToolTip="{x:Static strings:ControlResources.RemoveCondition}"
                     Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.Filters.RemoveFilterCommand}"
                     CommandParameter="{Binding Filter}" Margin="{StaticResource LargeMargin}" />
-            <CheckBox Grid.Column="1" x:Name="IsEnabled" IsChecked="{Binding IsEnabled}" HorizontalAlignment="Center" />
+            <CheckBox Grid.Column="1" x:Name="IsEnabled" IsChecked="{Binding IsEnabled}" HorizontalAlignment="Center" Style="{StaticResource CircleCheckBoxStyle}" />
             <ComboBox Grid.Column="2"
                       HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
                       Width="60"

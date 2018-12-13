@@ -34,6 +34,8 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         public DbSet<Country> Countries { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<Player> Players { get; set; }
+        public DbSet<Position> Positions { get; set; }
+        public DbSet<PlayerPosition> PlayerPositions { get; set; }
         public DbSet<Roster> Rosters { get; set; }
         public DbSet<RosterPlayer> RosterPlayers { get; set; }
         public DbSet<Season> Seasons { get; set; }
@@ -85,6 +87,14 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 .HasAlternateKey(x => x.Code);
 
             modelBuilder.Entity<Category>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
+            // Position
+            modelBuilder.Entity<Position>()
+                .HasAlternateKey(x => x.Code);
+
+            modelBuilder.Entity<Position>()
                 .Property(x => x.CreatedDate)
                 .HasDefaultValueSql("getdate()");
 
@@ -145,6 +155,23 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             modelBuilder.Entity<Player>()
                 .Property(x => x.Laterality)
                 .HasDefaultValue(PlayerConstants.DefaultLaterality);
+
+            modelBuilder.Entity<PlayerPosition>()
+                .HasAlternateKey(x => new { x.PlayerId, x.PositionId });
+
+            modelBuilder.Entity<PlayerPosition>()
+                .HasOne(x => x.Player)
+                .WithMany(x => x.Positions)
+                .HasForeignKey(x => x.PositionId);
+
+            modelBuilder.Entity<PlayerPosition>()
+                .HasOne(x => x.Position)
+                .WithMany()
+                .HasForeignKey(x => x.PlayerId);
+            
+            modelBuilder.Entity<PlayerPosition>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
 
             // Roster
             modelBuilder.Entity<Roster>()

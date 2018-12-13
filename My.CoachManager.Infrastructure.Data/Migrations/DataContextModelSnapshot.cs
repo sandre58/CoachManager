@@ -26,8 +26,7 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("City")
-                        .IsRequired();
+                    b.Property<string>("City");
 
                     b.Property<int?>("CountryId");
 
@@ -46,11 +45,9 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     b.Property<DateTime?>("ModifiedDate");
 
                     b.Property<string>("PostalCode")
-                        .IsRequired()
                         .HasMaxLength(5);
 
-                    b.Property<string>("Row1")
-                        .IsRequired();
+                    b.Property<string>("Row1");
 
                     b.Property<string>("Row2");
 
@@ -472,6 +469,8 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired();
 
+                    b.Property<DateTime?>("FromDate");
+
                     b.Property<int>("Gender")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(0);
@@ -502,6 +501,102 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     b.ToTable("Persons");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Person");
+                });
+
+            modelBuilder.Entity("My.CoachManager.Domain.Entities.PlayerPosition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<bool>("IsNatural");
+
+                    b.Property<string>("ModifiedBy");
+
+                    b.Property<DateTime?>("ModifiedDate");
+
+                    b.Property<int>("Note");
+
+                    b.Property<int>("PlayerId");
+
+                    b.Property<int>("PositionId");
+
+                    b.HasKey("Id");
+
+                    b.HasAlternateKey("PlayerId", "PositionId");
+
+                    b.HasIndex("PositionId");
+
+                    b.ToTable("PlayerPositions");
+                });
+
+            modelBuilder.Entity("My.CoachManager.Domain.Entities.Position", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(15);
+
+                    b.Property<int>("Column");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Label")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("ModifiedBy");
+
+                    b.Property<DateTime?>("ModifiedDate");
+
+                    b.Property<int>("Order");
+
+                    b.Property<int>("Row");
+
+                    b.Property<int>("Side");
+
+                    b.Property<int>("Type");
+
+                    b.HasKey("Id");
+
+                    b.HasAlternateKey("Code");
+
+                    b.ToTable("Positions");
+
+                    b.HasData(
+                        new { Id = 1, Code = "GB", Column = 1, Label = "Gardien", Order = 1, Row = 0, Side = 1, Type = 0 },
+                        new { Id = 2, Code = "L", Column = 1, Label = "Libéro", Order = 2, Row = 1, Side = 1, Type = 1 },
+                        new { Id = 3, Code = "DG", Column = 0, Label = "Défenseur gauche", Order = 3, Row = 2, Side = 0, Type = 2 },
+                        new { Id = 4, Code = "DC", Column = 1, Label = "Défenseur central", Order = 4, Row = 2, Side = 1, Type = 3 },
+                        new { Id = 5, Code = "DD", Column = 2, Label = "Défenseur Droit", Order = 5, Row = 2, Side = 2, Type = 2 },
+                        new { Id = 6, Code = "LG", Column = 0, Label = "Latéral Gauche", Order = 6, Row = 3, Side = 0, Type = 4 },
+                        new { Id = 7, Code = "LD", Column = 2, Label = "Latéral Droit", Order = 7, Row = 3, Side = 0, Type = 4 },
+                        new { Id = 8, Code = "MDC", Column = 1, Label = "Milieu défensif", Order = 8, Row = 3, Side = 1, Type = 5 },
+                        new { Id = 9, Code = "MG", Column = 0, Label = "Milieu gauche", Order = 9, Row = 4, Side = 0, Type = 6 },
+                        new { Id = 10, Code = "MC", Column = 1, Label = "Milieu central", Order = 10, Row = 4, Side = 1, Type = 6 },
+                        new { Id = 11, Code = "MD", Column = 2, Label = "Milieu Droit", Order = 11, Row = 4, Side = 2, Type = 6 },
+                        new { Id = 12, Code = "MOG", Column = 0, Label = "Milieu offensif gauche", Order = 12, Row = 5, Side = 0, Type = 7 },
+                        new { Id = 13, Code = "MOC", Column = 1, Label = "Milieu offensif central", Order = 13, Row = 5, Side = 1, Type = 7 },
+                        new { Id = 14, Code = "MOD", Column = 2, Label = "Milieu offensif Droit", Order = 14, Row = 5, Side = 2, Type = 7 },
+                        new { Id = 15, Code = "AG", Column = 0, Label = "Ailier gauche", Order = 15, Row = 6, Side = 0, Type = 8 },
+                        new { Id = 16, Code = "ATT", Column = 1, Label = "Attaquant", Order = 16, Row = 6, Side = 1, Type = 9 },
+                        new { Id = 17, Code = "AD", Column = 2, Label = "Ailier Droit", Order = 17, Row = 6, Side = 2, Type = 8 }
+                    );
                 });
 
             modelBuilder.Entity("My.CoachManager.Domain.Entities.Roster", b =>
@@ -618,7 +713,7 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     b.ToTable("Seasons");
 
                     b.HasData(
-                        new { Id = 1, Code = "17/18", EndDate = new DateTime(2018, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), Label = "2017/2018", Order = 1, StartDate = new DateTime(2017, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                        new { Id = 1, Code = "17/18", EndDate = new DateTime(2018, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), Label = "2017/2018", Order = 2, StartDate = new DateTime(2017, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                         new { Id = 2, Code = "18/19", EndDate = new DateTime(2019, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), Label = "2018/2019", Order = 1, StartDate = new DateTime(2018, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                     );
                 });
@@ -722,7 +817,7 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     b.HasDiscriminator().HasValue("Player");
 
                     b.HasData(
-                        new { Id = 1, Birthdate = new DateTime(1989, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), CountryId = 76, FirstName = "Stéphane", Gender = 1, LastName = "André", PlaceOfBirth = "Nevers", Size = "L", CategoryId = 13, Height = 175, Laterality = 2, ShoesSize = 44, Weight = 75 },
+                        new { Id = 1, Birthdate = new DateTime(1989, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), CountryId = 76, FirstName = "Stéphane", FromDate = new DateTime(2007, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), Gender = 1, LastName = "André", PlaceOfBirth = "Nevers", Size = "L", CategoryId = 13, Height = 175, Laterality = 2, ShoesSize = 44, Weight = 75 },
                         new { Id = 2, AddressId = 1, Birthdate = new DateTime(1986, 12, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), CountryId = 76, FirstName = "Vincent", Gender = 0, LastName = "Sourdeix", LicenseNumber = "123456789", PlaceOfBirth = "Tulle", Size = "L", CategoryId = 3, Laterality = 1, ShoesSize = 42 }
                     );
                 });
@@ -754,6 +849,19 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                         .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.SetNull);
+                });
+
+            modelBuilder.Entity("My.CoachManager.Domain.Entities.PlayerPosition", b =>
+                {
+                    b.HasOne("My.CoachManager.Domain.Entities.Position", "Position")
+                        .WithMany()
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("My.CoachManager.Domain.Entities.Player", "Player")
+                        .WithMany("Positions")
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("My.CoachManager.Domain.Entities.Roster", b =>

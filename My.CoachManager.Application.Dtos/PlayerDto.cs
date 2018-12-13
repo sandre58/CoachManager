@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using My.CoachManager.CrossCutting.Core.Enums;
 
 namespace My.CoachManager.Application.Dtos
@@ -26,5 +27,11 @@ namespace My.CoachManager.Application.Dtos
 
         [DataMember]
         public int? ShoesSize { get; set; }
+
+        /// <summary>
+        /// Gets or set the players.
+        /// </summary>
+        [DataMember]
+        public IEnumerable<PlayerPositionDto> Positions { get; set; }
     }
 }

@@ -37,9 +37,16 @@
                     <views1:PlayerContactsEditView />
                 </AdornerDecorator>
             </TabItem>
+            
             <TabItem Header="{x:Static strings:PlayerResources.Morphology}" parameters:ControlParameters.Icon="{StaticResource MorphologyGeometry}">
                 <AdornerDecorator>
                     <views1:PlayerMorphologyEditView />
+                </AdornerDecorator>
+            </TabItem>
+
+            <TabItem Header="{x:Static strings:PlayerResources.Positions}" parameters:ControlParameters.Icon="{StaticResource TargetGeometry}">
+                <AdornerDecorator>
+                    <views1:PlayerPositionsEditView />
                 </AdornerDecorator>
             </TabItem>
         </TabControl>

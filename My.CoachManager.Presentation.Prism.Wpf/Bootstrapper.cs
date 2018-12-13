@@ -26,6 +26,7 @@ using My.CoachManager.Presentation.ServiceAgent;
 using My.CoachManager.Presentation.ServiceAgent.AddressServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.SeasonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.UserServiceReference;
@@ -88,6 +89,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             Container.RegisterInstance(typeof(ISeasonService), ServiceClientFactory.Create<SeasonServiceClient, ISeasonService>());
             Container.RegisterInstance(typeof(IPersonService), ServiceClientFactory.Create<PersonServiceClient, IPersonService>());
             Container.RegisterInstance(typeof(IAddressService), ServiceClientFactory.Create<AddressServiceClient, IAddressService>());
+            Container.RegisterInstance(typeof(IPositionService), ServiceClientFactory.Create<PositionServiceClient, IPositionService>());
 
             // Register Presentation Services
             Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());

@@ -177,6 +177,7 @@
     <Compile Include="AddressModule\Aggregate\AddressOrderBuilder.cs" />
     <Compile Include="AppModule\Services\CrudDomainService.cs" />
     <Compile Include="AppModule\Services\ICrudDomainService.cs" />
+    <Compile Include="PositionModule\Aggregate\PositionSelectBuilder.cs" />
     <Compile Include="CategoryModule\Aggregate\CategoryFactory.cs" />
     <Compile Include="CategoryModule\Aggregate\CategorySelectBuilder.cs" />
     <Compile Include="CategoryModule\Aggregate\CategoryValidator.cs" />

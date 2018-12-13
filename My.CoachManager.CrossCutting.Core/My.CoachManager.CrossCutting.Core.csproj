@@ -303,6 +303,7 @@
     <Compile Include="Collections\ObservableItemsCollection.cs" />
     <Compile Include="Configurations\ConfigurationManagerBase.cs" />
     <Compile Include="Constants\ContactConstants.cs" />
+    <Compile Include="Constants\PositionConstants.cs" />
     <Compile Include="Constants\PlayerConstants.cs" />
     <Compile Include="Constants\PermissionConstants.cs" />
     <Compile Include="Constants\RoleConstants.cs" />
@@ -312,6 +313,8 @@
     <Compile Include="Enums\ComplexComparableOperator.cs" />
     <Compile Include="Enums\ComparableOperator.cs" />
     <Compile Include="Enums\ContactType.cs" />
+    <Compile Include="Enums\PositionType.cs" />
+    <Compile Include="Enums\PositionSide.cs" />
     <Compile Include="Enums\LicenseState.cs" />
     <Compile Include="Enums\Laterality.cs" />
     <Compile Include="Enums\GenderType.cs" />
@@ -339,6 +342,11 @@
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Entities\PositionResources.Designer.cs">
+      <DependentUpon>PositionResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\Entities\RosterResources.Designer.cs">
       <DependentUpon>RosterResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -371,6 +379,16 @@
     </Compile>
     <Compile Include="Resources\Entities\ReferenceResources.Designer.cs">
       <DependentUpon>ReferenceResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Enums\PositionTypeResources.Designer.cs">
+      <DependentUpon>PositionTypeResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Enums\PositionSideResources.Designer.cs">
+      <DependentUpon>PositionSideResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -435,6 +453,11 @@
     <Compile Include="Security\Principal.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Entities\PositionResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PositionResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Entities\RosterResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RosterResources.Designer.cs</LastGenOutput>
@@ -469,6 +492,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReferenceResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Enums\PositionTypeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PositionTypeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Enums\PositionSideResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PositionSideResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Enums\OperatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

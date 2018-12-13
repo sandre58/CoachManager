@@ -78,6 +78,11 @@
                                                          parameters:ListViewParameters.PropertyName="LicenseNumber" Width="120" 
                                                          DisplayMemberBinding="{Binding LicenseNumber, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0:# ### ### ###\}}"/>
 
+                    <!-- FromDate -->
+                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.FromDate}"
+                                                     parameters:ListViewParameters.PropertyName="FromDate" Width="110" 
+                                                     DisplayMemberBinding="{Binding FromDate, StringFormat={}{0:dd/MM/yyyy}}"/>
+
                     <!-- Gender -->
                     <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Gender}"
                                                          parameters:ListViewParameters.PropertyName="Gender" Width="80">

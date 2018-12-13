@@ -162,9 +162,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Position.cs" />
     <Compile Include="Roster.cs" />
     <Compile Include="Address.cs" />
     <Compile Include="Person.cs" />
+    <Compile Include="PlayerPosition.cs" />
     <Compile Include="RosterPlayer.cs" />
     <Compile Include="Season.cs" />
     <Compile Include="Email.cs" />

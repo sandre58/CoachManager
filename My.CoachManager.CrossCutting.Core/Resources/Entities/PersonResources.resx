@@ -150,6 +150,9 @@
   <data name="FirstName" xml:space="preserve">
     <value>Prénom</value>
   </data>
+  <data name="FromDate" xml:space="preserve">
+    <value>Date d'arrivée</value>
+  </data>
   <data name="FullName" xml:space="preserve">
     <value>Nom</value>
   </data>

@@ -132,6 +132,19 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
             return Emails.Count > 1 || !string.IsNullOrEmpty(mail.Value);
         }
 
+        private void Contacts_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            UpdateContactsCommand();
+        }
+
+        private void UpdateContactsCommand()
+        {
+            RemoveEmailCommand?.RaiseCanExecuteChanged();
+            RemovePhoneCommand?.RaiseCanExecuteChanged();
+            AddEmailCommand?.RaiseCanExecuteChanged();
+            AddPhoneCommand?.RaiseCanExecuteChanged();
+        }
+
         #endregion Methods
     }
 }

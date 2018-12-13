@@ -102,6 +102,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\PositionServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\RosterServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -172,6 +177,7 @@
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.PlayerDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.PlayersInformationsListDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.PlayersListDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.PositionDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Positions.PositionDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Roster.RosterDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.RosterDto.datasource" />
@@ -231,6 +237,19 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\PersonServiceReference\PersonService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PositionServiceReference\PositionService.wsdl" />
+    <None Include="Service References\PositionServiceReference\PositionService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PositionServiceReference\PositionService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PositionServiceReference\PositionService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PositionServiceReference\PositionService3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\RosterServiceReference\RosterService.wsdl" />
@@ -297,6 +316,7 @@
     <WCFMetadataStorage Include="Service References\AddressServiceReference\" />
     <WCFMetadataStorage Include="Service References\CategoryServiceReference\" />
     <WCFMetadataStorage Include="Service References\PersonServiceReference\" />
+    <WCFMetadataStorage Include="Service References\PositionServiceReference\" />
     <WCFMetadataStorage Include="Service References\RosterServiceReference\" />
     <WCFMetadataStorage Include="Service References\SeasonServiceReference\" />
     <WCFMetadataStorage Include="Service References\UserServiceReference\" />
@@ -387,6 +407,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\AddressServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PositionServiceReference\PositionService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PositionServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PositionServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PositionServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

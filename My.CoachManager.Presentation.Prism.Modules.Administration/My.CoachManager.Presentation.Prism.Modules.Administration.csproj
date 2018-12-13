@@ -112,6 +112,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ViewModels\PlayerEditViewModel.Positions.cs" />
     <Compile Include="ViewModels\PlayerEditViewModel.Contacts.cs">
       <DependentUpon>PlayerEditViewModel.cs</DependentUpon>
     </Compile>
@@ -125,6 +126,9 @@
     <Compile Include="ViewModels\RostersListViewModel.cs" />
     <Compile Include="ViewModels\CategoriesListViewModel.cs" />
     <Compile Include="ViewModels\CategoryEditViewModel.cs" />
+    <Compile Include="Views\PlayerEditView.Positions.xaml.cs">
+      <DependentUpon>PlayerEditView.Positions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlayerEditView.Morphology.xaml.cs">
       <DependentUpon>PlayerEditView.Morphology.xaml</DependentUpon>
     </Compile>
@@ -210,6 +214,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PlayerEditView.Positions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

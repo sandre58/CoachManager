@@ -249,6 +249,8 @@
   <ItemGroup>
     <Compile Include="AddressModule\AddressAppService.cs" />
     <Compile Include="AddressModule\IAddressAppService.cs" />
+    <Compile Include="PositionModule\PositionAppService.cs" />
+    <Compile Include="PositionModule\IPositionAppService.cs" />
     <Compile Include="PersonModule\CountryAppService.cs" />
     <Compile Include="PersonModule\ICountryAppService.cs" />
     <Compile Include="SeasonModule\SeasonAppService.cs" />

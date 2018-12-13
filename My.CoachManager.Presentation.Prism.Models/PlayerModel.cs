@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Resources;
@@ -14,6 +15,7 @@ namespace My.CoachManager.Presentation.Prism.Models
         public PlayerModel()
         {
             Laterality = PlayerConstants.DefaultLaterality;
+            Positions = new ObservableCollection<PlayerPositionModel>();
         }
 
         /// <summary>
@@ -53,5 +55,11 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// </summary>
         [Display(Name = "ShoesSize", ResourceType = typeof(PlayerResources))]
         public int? ShoesSize { get; set; }
+
+        /// <summary>
+        /// Gets or set the positions.
+        /// </summary>
+        [Display(Name = "Positions", ResourceType = typeof(PlayerResources))]
+        public ObservableCollection<PlayerPositionModel> Positions { get; set; }
     }
 }

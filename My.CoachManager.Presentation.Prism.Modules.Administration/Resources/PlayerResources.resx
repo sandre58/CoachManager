@@ -135,4 +135,7 @@
   <data name="General" xml:space="preserve">
     <value>Général</value>
   </data>
+  <data name="Positions" xml:space="preserve">
+    <value>Postes</value>
+  </data>
 </root>

@@ -33,6 +33,7 @@
         <ResourceDictionary Source="Controls/Flyout.xaml" />
         <ResourceDictionary Source="Controls/FlyoutsControl.xaml" />
         <ResourceDictionary Source="Controls/Toast.xaml" />
+        <ResourceDictionary Source="Controls/Rating.xaml" />
         <ResourceDictionary Source="Controls/HamburgerMenu.xaml" />
         <ResourceDictionary Source="Controls/Icon.xaml" />
         <ResourceDictionary Source="Controls/ImagePicker.xaml" />
@@ -62,5 +63,6 @@
 
         <!-- Specific -->
         <ResourceDictionary Source="Specific/Filter.xaml" />
+        <ResourceDictionary Source="Specific/PositionSelector.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

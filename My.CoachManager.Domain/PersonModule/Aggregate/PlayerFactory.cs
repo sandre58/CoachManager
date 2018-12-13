@@ -22,6 +22,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                     FirstName = item.FirstName,
                     LastName = item.LastName,
                     Birthdate = item.Birthdate,
+                    FromDate = item.FromDate,
                     Gender = item.Gender,
                     LicenseNumber = item.LicenseNumber,
                     Photo = item.Photo,
@@ -51,6 +52,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
             entity.LastName = item.LastName;
             entity.AddressId = item.AddressId;
             entity.Birthdate = item.Birthdate;
+            entity.FromDate = item.FromDate;
             entity.Gender = item.Gender;
             entity.LicenseNumber = item.LicenseNumber;
             entity.Photo = item.Photo;
@@ -85,6 +87,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                 PostalCode = player.Address != null ? player.Address.PostalCode : string.Empty,
                 City = player.Address != null ? player.Address.City : string.Empty,
                 Birthdate = player.Birthdate,
+                FromDate = player.FromDate,
                 Gender = player.Gender,
                 LicenseNumber = player.LicenseNumber,
                 Photo = player.Photo,

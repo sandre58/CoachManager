@@ -81,6 +81,11 @@ namespace My.CoachManager.Domain.Entities
         public string LicenseNumber { get; set; }
 
         /// <summary>
+        /// Gets or sets the date of arrival to club.
+        /// </summary>
+        public DateTime? FromDate { get; set; }
+
+        /// <summary>
         /// Gets or sets the description.
         /// </summary>
         public string Description { get; set; }

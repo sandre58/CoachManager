@@ -160,7 +160,10 @@
     <Compile Include="Migrations\20180810095106_CreateDatabase.designer.cs">
       <DependentUpon>20180810095106_CreateDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\20181212082210_Positions.cs" />
+    <Compile Include="Migrations\20181212082210_Positions.designer.cs">
+      <DependentUpon>20181212082210_Positions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DataContextModelSnapshot.cs" />
     <Compile Include="ModelBuilderExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -222,9 +225,7 @@
       <Name>My.CoachManager.Infrastructure.Data.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Configuration\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

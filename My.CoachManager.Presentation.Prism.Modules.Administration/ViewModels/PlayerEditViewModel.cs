@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using Microsoft.Practices.ObjectBuilder2;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Constants;
@@ -13,6 +14,7 @@ using My.CoachManager.Presentation.Prism.Models.Aggregates;
 using My.CoachManager.Presentation.ServiceAgent.AddressServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
@@ -30,6 +32,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         private readonly IPersonService _personService;
         private readonly ICategoryService _categoryService;
         private readonly IAddressService _addressService;
+        private readonly IPositionService _positionService;
 
         #endregion Fields
 
@@ -38,11 +41,12 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="PlayerEditViewModel"/>.
         /// </summary>
-        public PlayerEditViewModel(IPersonService personService, ICategoryService categoryService, IAddressService addressService)
+        public PlayerEditViewModel(IPersonService personService, ICategoryService categoryService, IAddressService addressService, IPositionService positionService)
         {
             _personService = personService;
             _categoryService = categoryService;
             _addressService = addressService;
+            _positionService = positionService;
         }
 
         #endregion Constructors
@@ -186,10 +190,13 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
             AllCategories = _categoryService.GetCategories().Select(CategoryFactory.Get);
             AllCountries = _personService.GetCountries().Select(CountryFactory.Get);
             AllAdresses = _addressService.GetCities().Select(AddressFactory.Get).ToList();
+            AllPositions = _positionService.GetPositions().Select(PositionFactory.Get).ToList();
             AllSizes = PlayerConstants.DefaultSizes;
 
             AllCities = AllAdresses.Select(c => c.City).Distinct().OrderBy(x => x);
             AllPostalCodes = AllAdresses.Select(c => c.PostalCode).Distinct().OrderBy(x => x);
+
+                AllPositions.ForEach(x => x.PropertyChanged += X_PropertyChanged);
         }
 
         /// <summary>
@@ -218,6 +225,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
                     Phones = Item.Phones;
                     Phones.CollectionChanged += Contacts_CollectionChanged;
                 }
+
+                    AllPositions.ForEach(x => x.IsSelected = Item.Positions.Any(y => y.PositionId == x.Id));
             }
 
             base.OnLoadDataCompleted();
@@ -269,19 +278,6 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
             RemovePhotoCommand?.RaiseCanExecuteChanged();
             SelectPhotoCommand?.RaiseCanExecuteChanged();
             UpdateContactsCommand();
-        }
-
-        private void Contacts_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            UpdateContactsCommand();
-        }
-
-        private void UpdateContactsCommand()
-        {
-            RemoveEmailCommand?.RaiseCanExecuteChanged();
-            RemovePhoneCommand?.RaiseCanExecuteChanged();
-            AddEmailCommand?.RaiseCanExecuteChanged();
-            AddPhoneCommand?.RaiseCanExecuteChanged();
         }
 
         #endregion Properties Changed

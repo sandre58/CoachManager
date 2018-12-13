@@ -55,6 +55,7 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
                     PostalCode = x.Player.Address.PostalCode,
                     City = x.Player.Address.City,
                     Birthdate = x.Player.Birthdate,
+                    FromDate = x.Player.FromDate,
                     Gender = x.Player.Gender,
                     LicenseNumber = x.Player.LicenseNumber,
                     Photo = x.Player.Photo,

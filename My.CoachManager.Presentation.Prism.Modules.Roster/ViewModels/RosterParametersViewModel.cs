@@ -10,7 +10,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         private static readonly string[] GeneralInformationsColumns =
             {"Age", "Birthdate", "Category", "Gender", "Country", "Address", "Phone", "Email"};
 
-        private static readonly string[] ClubInformationsColumns = { "Number", "Category", "LicenseNumber", "LicenseState" };
+        private static readonly string[] ClubInformationsColumns = { "Number", "Category", "LicenseNumber", "LicenseState", "FromDate" };
 
         private static readonly string[] BodyInformationsColumns =
             {"Laterality", "Height", "Weight", "Size", "ShoesSize"};
@@ -28,7 +28,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
             AddPresetColumns(PresetPlayerColumnsType.ClubInformations, ClubInformationsColumns);
             AddPresetColumns(PresetPlayerColumnsType.BodyInformations, BodyInformationsColumns);
 
-            ChangeDisplayedColumns(PresetPlayerColumnsType.GeneralInformations);
+            ChangeDisplayedColumns(PresetPlayerColumnsType.ClubInformations);
         }
 
         #endregion Initialisation

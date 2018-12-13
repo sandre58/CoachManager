@@ -16,6 +16,7 @@
         <ResourceDictionary Source="ContextMenu.xaml" />
         <ResourceDictionary Source="DropDownButton.xaml" />
         <ResourceDictionary Source="Button.xaml" />
+        <ResourceDictionary Source="Checkbox.xaml" />
         <ResourceDictionary Source="CommandButton.xaml" />
         <ResourceDictionary Source="Separator.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -87,6 +88,7 @@
 
                             <CheckBox x:Name="PART_Selection"
                                       IsChecked="{Binding IsSelected}" IsEnabled="{Binding IsSelectable}"
+                                      Style="{StaticResource CircleCheckBoxStyle}"
                                       HorizontalAlignment="Center" VerticalAlignment="Center"
                                       Visibility="{Binding DataContext.SelectedItems,
                                 Converter={StaticResource AnyToVisibilityConverter},
@@ -208,6 +210,7 @@
                                         <Grid Width="50" Visibility="{Binding Path=DataContext.CanOrder, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
                                             <CheckBox x:Name="PART_Selection"
                                                       IsChecked="{Binding IsSelected}" IsEnabled="{Binding IsSelectable}"
+                                                      Style="{StaticResource CircleCheckBoxStyle}"
                                                       HorizontalAlignment="Center" VerticalAlignment="Center"
                                                       Visibility="{Binding DataContext.SelectedItems,
                                 Converter={StaticResource AnyToVisibilityConverter},

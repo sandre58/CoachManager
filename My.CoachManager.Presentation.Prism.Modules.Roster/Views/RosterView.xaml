@@ -21,6 +21,16 @@
             <ListView.View>
                 <controls:ExtendedGridView VisibleColumns="{Binding Parameters.DisplayedColumns}">
 
+                    <!-- Number -->
+                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.NumberAbbr}" 
+                                                     parameters:ListViewParameters.PropertyName="Number" Width="80" >
+                        <controls:ExtendedGridViewColumn.CellTemplate>
+                            <DataTemplate DataType="models:RosterPlayerModel">
+                                <TextBlock Text="{Binding Number}" FontSize="{StaticResource HeaderFontSize}" FontFamily="{StaticResource NumberFontFamily}" HorizontalAlignment="Center" />
+                            </DataTemplate>
+                        </controls:ExtendedGridViewColumn.CellTemplate>
+                    </controls:ExtendedGridViewColumn>
+                    
                     <!-- Photo -->
                     <controls:ExtendedGridViewColumn 
                             parameters:ListViewParameters.PropertyName="Photo"  CanUserHideColumn="False" Width="100">
@@ -55,7 +65,7 @@
 
                     <!-- Age -->
                     <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Age}"
-                                                         parameters:ListViewParameters.PropertyName="Age" Width="60">
+                                                         parameters:ListViewParameters.PropertyName="Age" Width="80">
                         <controls:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:RosterPlayerModel">
                                 <TextBlock HorizontalAlignment="Center" Text="{Binding Player.Age, StringFormat={x:Static entities:PersonResources.AgeFormat}, TargetNullValue=''}" />
@@ -65,18 +75,57 @@
 
                     <!-- Birthdate -->
                     <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Birthdate}"
-                                                         parameters:ListViewParameters.PropertyName="Birthdate" Width="110" 
+                                                         parameters:ListViewParameters.PropertyName="Birthdate" Width="120" 
                                                          DisplayMemberBinding="{Binding Player.Birthdate, StringFormat={}{0:dd/MM/yyyy}}"/>
 
                     <!-- Category -->
                     <controls:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.CategoryAbbr}"
-                                                         parameters:ListViewParameters.PropertyName="Category" Width="80"
+                                                         parameters:ListViewParameters.PropertyName="Category" Width="90"
                                                          DisplayMemberBinding="{Binding Player.Category.Label}"/>
 
                     <!-- License Number -->
                     <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.LicenseNumber}"
-                                                         parameters:ListViewParameters.PropertyName="LicenseNumber" Width="120" 
+                                                         parameters:ListViewParameters.PropertyName="LicenseNumber" Width="130" 
                                                          DisplayMemberBinding="{Binding Player.LicenseNumber, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0:# ### ### ###\}}"/>
+
+                    <!-- License state -->
+                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.LicenseState}"
+                                                     parameters:ListViewParameters.PropertyName="LicenseState" Width="180">
+                        <controls:ExtendedGridViewColumn.CellTemplate>
+                            <DataTemplate DataType="models:RosterPlayerModel">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <controls:ExtendedProgressBar x:Name="value" Height="15" Width="100" HorizontalAlignment="Center"
+                                                                  Margin="{StaticResource DefaultHorizontalMargin}"
+                                                                  Minimum="0" Maximum="{Binding Source={x:Static enum:LicenseState.Paid}, Converter={StaticResource EnumToIntegerConverter}}"
+                                                                  Value="{Binding LicenseState, Converter={StaticResource EnumToIntegerConverter}}"
+                                                                  ToolTip="{Binding LicenseState, Converter={StaticResource EnumToStringConverter}}" />
+                                    <controls:Icon HorizontalAlignment="Center"
+                                                   Size="Custom" Height="25" Width="25" Foreground="{DynamicResource Warning}" Margin="{StaticResource DefaultHorizontalMargin}" Content="{DynamicResource WarningGeometry}"
+                                                   Visibility="{Binding IsMutation, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                   ToolTip="{x:Static entities:PlayerResources.IsMutation}" />
+                                </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding LicenseState}" Value="{x:Static enum:LicenseState.Paid}">
+                                        <Setter TargetName="value" Property="Foreground" Value="{DynamicResource Positive}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding LicenseState}" Value="{x:Static enum:LicenseState.Back}">
+                                        <Setter TargetName="value" Property="Foreground" Value="{DynamicResource Warning}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding LicenseState}" Value="{x:Static enum:LicenseState.Given}">
+                                        <Setter TargetName="value" Property="Foreground" Value="{DynamicResource Negative}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding LicenseState}" Value="{x:Static enum:LicenseState.Unknown}">
+                                        <Setter TargetName="value" Property="Foreground" Value="{DynamicResource None}" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </controls:ExtendedGridViewColumn.CellTemplate>
+                    </controls:ExtendedGridViewColumn>
+
+                    <!-- FromDate -->
+                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.FromDate}"
+                                                     parameters:ListViewParameters.PropertyName="FromDate" Width="110" 
+                                                     DisplayMemberBinding="{Binding Player.FromDate, StringFormat={}{0:dd/MM/yyyy}}"/>
 
                     <!-- Gender -->
                     <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Gender}"

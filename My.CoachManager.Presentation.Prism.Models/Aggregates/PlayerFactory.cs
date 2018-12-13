@@ -28,6 +28,7 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 LastName = item.LastName,
                 AddressId = item.AddressId,
                 Birthdate = item.Birthdate,
+                FromDate = item.FromDate,
                 Gender = item.Gender,
                 LicenseNumber = item.LicenseNumber,
                 Photo = item.Photo,
@@ -44,7 +45,7 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 PostalCode = item.PostalCode,
                 City = item.City,
                 Emails = item.Emails.Select(ContactFactory.GetContact<EmailDto>),
-                Phones = item.Phones.Select(ContactFactory.GetContact<PhoneDto>),
+                Phones = item.Phones.Select(ContactFactory.GetContact<PhoneDto>)
             };
         }
 
@@ -67,6 +68,7 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 PostalCode = dto.PostalCode,
                 City = dto.City,
                 Birthdate = dto.Birthdate,
+                FromDate = dto.FromDate,
                 Gender = dto.Gender,
                 LicenseNumber = dto.LicenseNumber,
                 Photo = dto.Photo,
@@ -88,6 +90,25 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 ModifiedDate = dto.ModifiedDate
             };
             result.ResetModified();
+
+            return result;
+        }
+
+        /// <summary>
+        /// Convert the DTO to model.
+        /// </summary>
+        /// <returns>The model.</returns>
+        public static PlayerPositionModel CreatePosition(PlayerModel player, PositionModel position)
+        {
+            if (player == null || position == null) return null;
+
+            var result = new PlayerPositionModel
+            {
+             Player   = player,
+             PlayerId = player.Id,
+             Position = position,
+             PositionId = position.Id
+            };
 
             return result;
         }

@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Services\AddressService.svc" />
+    <Content Include="Services\PositionService.svc" />
     <Content Include="Services\SeasonService.svc" />
     <Content Include="Services\CategoryService.svc" />
     <Content Include="Services\RosterService.svc" />

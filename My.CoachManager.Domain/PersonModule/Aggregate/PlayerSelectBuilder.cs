@@ -23,6 +23,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                 PostalCode = x.Address.PostalCode,
                 City = x.Address.City,
                 Birthdate = x.Birthdate,
+                FromDate = x.FromDate,
                 Gender = x.Gender,
                 LicenseNumber = x.LicenseNumber,
                 Photo = x.Photo,
