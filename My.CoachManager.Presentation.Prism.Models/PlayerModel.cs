@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Resources;
@@ -61,5 +62,24 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// </summary>
         [Display(Name = "Positions", ResourceType = typeof(PlayerResources))]
         public ObservableCollection<PlayerPositionModel> Positions { get; set; }
+
+        /// <summary>
+        /// Get the current age.
+        /// </summary>
+        [Display(Name = "Position", ResourceType = typeof(PlayerResources))]
+        public PositionModel Position
+        {
+            get
+            {
+                if (Positions == null || Positions.Count <= 0) return null;
+                return Positions.OrderByDescending(x => x.IsNatural).FirstOrDefault()?.Position;
+            }
+        }
+
+        /// <summary>
+        /// Get the current age.
+        /// </summary>
+        [Display(Name = "Position", ResourceType = typeof(PlayerResources))]
+        public int? PositionId => Position?.Id;
     }
 }

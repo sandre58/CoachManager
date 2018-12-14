@@ -11,6 +11,7 @@ using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.PersonModule.Aggregate;
 using My.CoachManager.Domain.PersonModule.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace My.CoachManager.Application.Services.PersonModule
 {
@@ -67,9 +68,12 @@ namespace My.CoachManager.Application.Services.PersonModule
         /// <returns></returns>
         public PlayerDto GetPlayerById(int playerId)
         {
-            var player = _playerRepository.GetEntity(playerId,
-                x => x.Address,
-                x => x.Contacts);
+            var player = _playerRepository.Query
+                .Include(x => x.Address)
+                .Include(x => x.Contacts)
+                .Include(x => x.Positions)
+                    .ThenInclude(x => x.Position)
+                .SingleOrDefault(x => x.Id == playerId);
 
             return PlayerFactory.Get(player);
         }

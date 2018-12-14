@@ -15,12 +15,13 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="PlayersListFiltersViewModel"/>.
         /// </summary>
-        public PlayersListFiltersViewModel(IEnumerable<CategoryModel> categories, IEnumerable<CountryModel> countries)
+        public PlayersListFiltersViewModel(IEnumerable<CategoryModel> categories, IEnumerable<PositionModel> positions, IEnumerable<CountryModel> countries)
         {
             SpeedFilter = new FilterViewModel(new StringFilter("FullName"), PersonResources.FullName, LogicalOperator.Or);
 
             AddAllowedFilter(PersonResources.FullName, () => new StringFilter("FullName"));
             AddAllowedFilter(PlayerResources.Category, () => new SelectedLabelablesFilter("CategoryId", categories));
+            AddAllowedFilter(PlayerResources.Position, () => new SelectedLabelablesFilter("PositionId", positions));
             AddAllowedFilter(PersonResources.Age, () => new IntegerFilter("Age", ComplexComparableOperator.IsBetween, 16, 35)
             {
                 Minimum = 0,

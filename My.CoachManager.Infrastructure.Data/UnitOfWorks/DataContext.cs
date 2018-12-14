@@ -162,12 +162,12 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             modelBuilder.Entity<PlayerPosition>()
                 .HasOne(x => x.Player)
                 .WithMany(x => x.Positions)
-                .HasForeignKey(x => x.PositionId);
+                .HasForeignKey(x => x.PlayerId);
 
             modelBuilder.Entity<PlayerPosition>()
                 .HasOne(x => x.Position)
                 .WithMany()
-                .HasForeignKey(x => x.PlayerId);
+                .HasForeignKey(x => x.PositionId);
             
             modelBuilder.Entity<PlayerPosition>()
                 .Property(x => x.CreatedDate)

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
+namespace My.CoachManager.CrossCutting.Core.Resources.Enums {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class PositionResources {
+    public class PositionRatingResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal PositionResources() {
+        internal PositionRatingResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("My.CoachManager.CrossCutting.Core.Resources.Entities.PositionResources", typeof(PositionResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("My.CoachManager.CrossCutting.Core.Resources.Enums.PositionRatingResources", typeof(PositionRatingResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,47 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Colonne.
+        ///   Looks up a localized string similar to Moyen.
         /// </summary>
-        public static string Column {
+        public static string Average {
             get {
-                return ResourceManager.GetString("Column", resourceCulture);
+                return ResourceManager.GetString("Average", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Est sa position naturelle.
+        ///   Looks up a localized string similar to Bon.
         /// </summary>
-        public static string IsNatural {
+        public static string Good {
             get {
-                return ResourceManager.GetString("IsNatural", resourceCulture);
+                return ResourceManager.GetString("Good", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Note.
+        ///   Looks up a localized string similar to Naturel.
         /// </summary>
-        public static string Note {
+        public static string Natural {
             get {
-                return ResourceManager.GetString("Note", resourceCulture);
+                return ResourceManager.GetString("Natural", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ligne.
+        ///   Looks up a localized string similar to Faible.
         /// </summary>
-        public static string Row {
+        public static string Poor {
             get {
-                return ResourceManager.GetString("Row", resourceCulture);
+                return ResourceManager.GetString("Poor", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Côté.
+        ///   Looks up a localized string similar to Très bon.
         /// </summary>
-        public static string Side {
+        public static string VeryGood {
             get {
-                return ResourceManager.GetString("Side", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Position.
-        /// </summary>
-        public static string Type {
-            get {
-                return ResourceManager.GetString("Type", resourceCulture);
+                return ResourceManager.GetString("VeryGood", resourceCulture);
             }
         }
     }

@@ -44,6 +44,25 @@ namespace My.CoachManager.Presentation.Prism.Controls {
         /// <summary>
         /// Identifies the DisplayValue dependency property.
         /// </summary>
+        protected static readonly DependencyProperty ItemWidthProperty =
+            DependencyProperty.Register(
+                "ItemWidth",
+                typeof(double),
+                typeof(Rating),
+                new PropertyMetadata(20.0));
+
+        /// <summary>
+        /// Gets or sets the actual value of the Rating control.
+        /// </summary>
+        public double ItemWidth
+        {
+            get { return (double)GetValue(ItemWidthProperty); }
+            set { SetValue(ItemWidthProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the DisplayValue dependency property.
+        /// </summary>
         protected static readonly DependencyProperty DisplayValueProperty =
             DependencyProperty.Register(
                 "DisplayValue",

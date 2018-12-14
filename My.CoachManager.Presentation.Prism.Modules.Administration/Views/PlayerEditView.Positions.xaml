@@ -7,8 +7,16 @@
              xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:entities="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.Views"
+             xmlns:extensions="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Extensions;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:enums="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
              d:DataContext="{d:DesignInstance Type=viewModels:PlayerEditViewModel}">
 
+    <UserControl.Resources>
+        <system:Double x:Key="MyDouble">0.2</system:Double>
+    </UserControl.Resources>
     <Grid  parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
         <Grid HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
@@ -17,7 +25,7 @@
             </Grid.ColumnDefinitions>
             <controls:PositionsSelector ItemsSource="{Binding AllPositions}" 
                                         Margin="{StaticResource LargeLeftMargin}"  />
-            <ItemsControl Grid.Column="1" ItemsSource="{Binding Item.Positions}" >
+            <ItemsControl Grid.Column="1" ItemsSource="{Binding Item.Positions}" Focusable="False" IsTabStop="False" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" />
@@ -34,29 +42,40 @@
 
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="20" />
-                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Position.Label}" />
-                                <controls:Rating Grid.Column="0" Grid.Row="1" Value="{Binding Note}" ItemCount="5"
-                                        HorizontalAlignment="Center" 
-                                        VerticalAlignment="Center"/>
-                                <CheckBox Grid.Column="1" Grid.Row="1" x:Name="IsEnabled" IsChecked="{Binding IsNatural}" 
+                                <CheckBox Grid.Column="0" Grid.Row="0" IsChecked="{Binding IsNatural}" ToolTip="{x:Static entities:PositionResources.IsNatural}"
                                           Margin="{StaticResource DefaultMargin}"
-                                          HorizontalAlignment="Center" 
+                                          HorizontalAlignment="Left" 
                                           VerticalAlignment="Center"
                                           Style="{StaticResource CircleCheckBoxStyle}" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Position.Label}" VerticalAlignment="Center" Margin="{StaticResource DefaultMargin}" Foreground="{DynamicResource NormalForeground}" />
+                                <controls:Rating Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="{StaticResource DefaultMargin}"
+                                                 Value="{Binding Note, Converter={StaticResource CoefficientConverter}, ConverterParameter={StaticResource MyDouble}, Mode=TwoWay}" 
+                                                 ItemsSource="{Binding Source={extensions:Enum {x:Type enums:PositionRating}}}"
+                                        HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center">
+                                    <controls:Rating.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Display}" />
+                                        </DataTemplate>
+                                    </controls:Rating.ItemTemplate>
+                                    </controls:Rating>
+                                
                             </Grid>
 
                             <Button Grid.Column="1"
                                     Style="{StaticResource RemoveButtonStyle}"
                                     Width="18" Height="18"
                                     Margin="{StaticResource LargeMargin}" 
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views:PlayerPositionsEditView}}, Path=DataContext.RemovePositionCommand}"
+                                    CommandParameter="{Binding Position}"
                                     HorizontalAlignment="Center" />
                         </Grid>
 

@@ -121,7 +121,7 @@
     <value>Colonne</value>
   </data>
   <data name="IsNatural" xml:space="preserve">
-    <value>Naturel</value>
+    <value>Est sa position naturelle</value>
   </data>
   <data name="Note" xml:space="preserve">
     <value>Note</value>

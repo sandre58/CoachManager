@@ -78,6 +78,15 @@ namespace My.CoachManager.Presentation.Prism.Controls
         }
 
         /// <summary>
+        /// Gets the actual value.
+        /// </summary>
+        public bool IsGreaterThanValue
+        {
+            get => (bool) GetValue(IsGreaterThanValueProperty);
+            private set => SetValue(IsGreaterThanValueProperty, value);
+        }
+
+        /// <summary>
         /// Identifies the DisplayValue dependency property.
         /// </summary>
         public static readonly DependencyProperty DisplayValueProperty =
@@ -86,6 +95,15 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 typeof(double),
                 typeof(RatingItem),
                 new PropertyMetadata(0.0, OnDisplayValueChanged));
+
+        /// <summary>
+        /// Identifies the DisplayValue dependency property.
+        /// </summary>
+        public static readonly DependencyProperty IsGreaterThanValueProperty =
+            DependencyProperty.Register(
+                "IsGreaterThanValue",
+                typeof(bool),
+                typeof(RatingItem));
 
         /// <summary>
         /// DisplayValueProperty property changed handler.
@@ -127,6 +145,8 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 {
                     VisualStates.GoToState(this, true, StatePartial);
                 }
+
+                IsGreaterThanValue = DisplayValue > Value;
             }
         }
         #endregion public double DisplayValue
@@ -210,7 +230,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
         /// Gets or sets the value property.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "Value is the logical name for this property.")]
-        internal double Value
+        public double Value
         {
             get { return (double)GetValue(ValueProperty); }
             set { SetValue(ValueProperty, value); }
@@ -219,7 +239,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
         /// <summary>
         /// Identifies the Value dependency property.
         /// </summary>
-        internal static readonly DependencyProperty ValueProperty =
+        public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register(
                 "Value",
                 typeof(double),

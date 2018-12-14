@@ -164,6 +164,10 @@
     <Compile Include="Migrations\20181212082210_Positions.designer.cs">
       <DependentUpon>20181212082210_Positions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20181214133429_Positions2.cs" />
+    <Compile Include="Migrations\20181214133429_Positions2.designer.cs">
+      <DependentUpon>20181214133429_Positions2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DataContextModelSnapshot.cs" />
     <Compile Include="ModelBuilderExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

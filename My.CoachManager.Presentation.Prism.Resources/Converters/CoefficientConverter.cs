@@ -27,10 +27,7 @@ namespace My.CoachManager.Presentation.Prism.Resources.Converters
             if (parameter == null)
                 parameter = 1;
 
-            double number;
-            double coefficient;
-
-            if (double.TryParse(value.ToString(), out number) && double.TryParse(parameter.ToString(), out coefficient))
+            if (double.TryParse(value.ToString(), out var number) && double.TryParse(parameter.ToString(), out var coefficient))
             {
                 return number * coefficient;
             }
@@ -50,7 +47,18 @@ namespace My.CoachManager.Presentation.Prism.Resources.Converters
         /// </returns>
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            throw new NotSupportedException();
+            if (value == null)
+                return 0;
+
+            if (parameter == null)
+                parameter = 1;
+
+            if (double.TryParse(value.ToString(), out var number) && double.TryParse(parameter.ToString(), out var coefficient))
+            {
+                return number / coefficient;
+            }
+
+            return 0;
         }
     }
 }

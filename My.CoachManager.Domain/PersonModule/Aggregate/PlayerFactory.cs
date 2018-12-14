@@ -2,6 +2,7 @@
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.AddressModule.Aggregate;
 using My.CoachManager.Domain.Entities;
+using My.CoachManager.Domain.PositionModule.Aggregate;
 
 namespace My.CoachManager.Domain.PersonModule.Aggregate
 {
@@ -36,7 +37,8 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                     Size = item.Size,
                     AddressId = item.AddressId,
                     Address = AddressFactory.CreateEntity(item.Address, item.PostalCode, item.City),
-                    Contacts = item.Phones.Select(ContactFactory.CreateEntity<Phone>).Concat(item.Emails.Select(ContactFactory.CreateEntity<Email>).Cast<Contact>()).ToList()
+                    Contacts = item.Phones.Select(ContactFactory.CreateEntity<Phone>).Concat(item.Emails.Select(ContactFactory.CreateEntity<Email>).Cast<Contact>()).ToList(),
+                    Positions = item.Positions.Select(CreatePosition).ToList()
                 };
             }
 
@@ -67,6 +69,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
             entity.Description = item.Description;
             entity.Contacts = item.Phones.Select(ContactFactory.CreateEntity<Phone>)
                 .Concat(item.Emails.Select(ContactFactory.CreateEntity<Email>).Cast<Contact>()).ToList();
+            entity.Positions = item.Positions.Select(CreatePosition).ToList();
 
             return true;
         }
@@ -98,6 +101,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                 Country = CountryFactory.Get(player.Country),
                 Emails = player.Contacts.OfType<Email>().Select(ContactFactory.GetContact<EmailDto>),
                 Phones = player.Contacts.OfType<Phone>().Select(ContactFactory.GetContact<PhoneDto>),
+                Positions = player.Positions.Select(GetPosition).OrderBy(x => x.Position.Order),
                 Height = player.Height,
                 Weight = player.Weight,
                 ShoesSize = player.ShoesSize,
@@ -107,6 +111,47 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                 ModifiedDate = player.ModifiedDate,
                 ModifiedBy = player.ModifiedBy
             };
+        }
+
+        /// <summary>
+        /// Convert the DTO to model.
+        /// </summary>
+        /// <returns>The model.</returns>
+        public static PlayerPosition CreatePosition(PlayerPositionDto position)
+        {
+            if (position == null) return null;
+
+            var result = new PlayerPosition
+            {
+                Id = position.Id,
+                PositionId = position.PositionId,
+                PlayerId = position.PlayerId,
+                IsNatural = position.IsNatural,
+                Note = position.Note
+            };
+
+            return result;
+        }
+
+        /// <summary>
+        /// Convert the DTO to model.
+        /// </summary>
+        /// <returns>The model.</returns>
+        public static PlayerPositionDto GetPosition(PlayerPosition position)
+        {
+            if (position == null) return null;
+
+            var result = new PlayerPositionDto
+            {
+                Id = position.Id,
+                Position = PositionFactory.Get(position.Position),
+                PositionId = position.PositionId,
+                PlayerId = position.PlayerId,
+                IsNatural = position.IsNatural,
+                Note = position.Note
+            };
+
+            return result;
         }
     }
 }

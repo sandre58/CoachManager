@@ -15,5 +15,9 @@ namespace My.CoachManager.CrossCutting.Core.Constants
 
         public const int MaxNote = 5;
 
+        public const int ColumnsCount = 3;
+
+        public const int RowsCount = 7;
+
     }
 }

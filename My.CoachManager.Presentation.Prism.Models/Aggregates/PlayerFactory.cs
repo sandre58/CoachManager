@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Extensions;
@@ -45,7 +46,8 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 PostalCode = item.PostalCode,
                 City = item.City,
                 Emails = item.Emails.Select(ContactFactory.GetContact<EmailDto>),
-                Phones = item.Phones.Select(ContactFactory.GetContact<PhoneDto>)
+                Phones = item.Phones.Select(ContactFactory.GetContact<PhoneDto>),
+                Positions = item.Positions.Select(GetPosition)
             };
         }
 
@@ -84,6 +86,7 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 Size = dto.Size,
                 Emails = dto.Emails != null ? dto.Emails.Select(ContactFactory.GetContact<EmailModel>).ToList().ToItemsObservableCollection() : new ObservableItemsCollection<EmailModel>(),
                 Phones = dto.Phones != null ? dto.Phones.Select(ContactFactory.GetContact<PhoneModel>).ToList().ToItemsObservableCollection() : new ObservableItemsCollection<PhoneModel>(),
+                Positions = dto.Positions != null ? dto.Positions.Select(GetPosition).ToList().ToObservableCollection() : new ObservableCollection<PlayerPositionModel>(),
                 CreatedBy = dto.CreatedBy,
                 CreatedDate = dto.CreatedDate,
                 ModifiedBy = dto.ModifiedBy,
@@ -98,14 +101,53 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
         /// Convert the DTO to model.
         /// </summary>
         /// <returns>The model.</returns>
-        public static PlayerPositionModel CreatePosition(PlayerModel player, PositionModel position)
+        public static PlayerPositionDto GetPosition(PlayerPositionModel position)
         {
-            if (player == null || position == null) return null;
+            if (position == null) return null;
+
+            var result = new PlayerPositionDto
+            {
+                Id = position.Id,
+                PositionId = position.PositionId,
+                IsNatural = position.IsNatural,
+                Note = position.Note,
+                PlayerId = position.PlayerId
+            };
+
+            return result;
+        }
+
+        /// <summary>
+        /// Convert the DTO to model.
+        /// </summary>
+        /// <returns>The model.</returns>
+        public static PlayerPositionModel GetPosition(PlayerPositionDto position)
+        {
+            if (position == null) return null;
 
             var result = new PlayerPositionModel
             {
-             Player   = player,
-             PlayerId = player.Id,
+                Id = position.Id,
+                Position = PositionFactory.Get(position.Position),
+                PositionId = position.PositionId,
+                IsNatural = position.IsNatural,
+                Note = position.Note,
+                PlayerId = position.PlayerId
+            };
+
+            return result;
+        }
+
+        /// <summary>
+        /// Convert the DTO to model.
+        /// </summary>
+        /// <returns>The model.</returns>
+        public static PlayerPositionModel CreatePosition(PositionModel position)
+        {
+            if (position == null) return null;
+
+            var result = new PlayerPositionModel
+            {
              Position = position,
              PositionId = position.Id
             };

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using My.CoachManager.Domain.Core.Specification;
 
@@ -21,6 +22,11 @@ namespace My.CoachManager.Domain.Core
         /// Pattern Unit of Work.
         /// </value>
         IUnitOfWork UnitOfWork { get; }
+
+        /// <summary>
+        /// Gets Query.
+        /// </summary>
+        IQueryable<TEntity> Query { get; }
 
         #endregion ----- Property -----
 

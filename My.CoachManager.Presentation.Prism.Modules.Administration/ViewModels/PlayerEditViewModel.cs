@@ -132,6 +132,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
             RemovePhoneCommand = new DelegateCommand<PhoneModel>(RemovePhone, CanRemovePhone);
             SelectPhotoCommand = new DelegateCommand(SelectPhoto, CanSelectPhoto);
             RemovePhotoCommand = new DelegateCommand(RemovePhoto, CanRemovePhoto);
+            RemovePositionCommand = new DelegateCommand<PositionModel>(RemovePosition, CanRemovePosition);
         }
 
         #endregion Initialization
@@ -196,7 +197,6 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
             AllCities = AllAdresses.Select(c => c.City).Distinct().OrderBy(x => x);
             AllPostalCodes = AllAdresses.Select(c => c.PostalCode).Distinct().OrderBy(x => x);
 
-                AllPositions.ForEach(x => x.PropertyChanged += X_PropertyChanged);
         }
 
         /// <summary>
@@ -226,7 +226,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
                     Phones.CollectionChanged += Contacts_CollectionChanged;
                 }
 
-                    AllPositions.ForEach(x => x.IsSelected = Item.Positions.Any(y => y.PositionId == x.Id));
+                AllPositions.ForEach(x => x.PropertyChanged -= Position_PropertyChanged);
+                AllPositions.ForEach(x => x.IsSelected = Item.Positions.Any(y => y.PositionId == x.Id));
+                AllPositions.ForEach(x => x.PropertyChanged += Position_PropertyChanged);
             }
 
             base.OnLoadDataCompleted();

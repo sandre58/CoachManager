@@ -10,6 +10,7 @@
              xmlns:models="clr-namespace:My.CoachManager.Presentation.Prism.Models;assembly=My.CoachManager.Presentation.Prism.Models"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.Views"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels1:PlayersListViewModel}"
@@ -73,6 +74,21 @@
                                                          parameters:ListViewParameters.PropertyName="Category" Width="80"
                                                          DisplayMemberBinding="{Binding Category.Label}"/>
 
+                    <!-- Position -->
+                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.Position}"
+                                                     parameters:ListViewParameters.PropertyName="Position" Width="180">
+                        <controls:ExtendedGridViewColumn.CellTemplate>
+                            <DataTemplate DataType="models:PlayerModel">
+                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <controls:PositionsSelector ItemsSource="{Binding Positions}" 
+                                                                Margin="{StaticResource DefaultMargin}" 
+                                                                ItemHeight="18" Height="90" Width="130" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                                ItemContainerStyle="{StaticResource PlayerPositionStyle}" FontSize="{StaticResource SmallFontSize}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:ExtendedGridViewColumn.CellTemplate>
+                        </controls:ExtendedGridViewColumn>
+                    
                     <!-- License Number -->
                     <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.LicenseNumber}"
                                                          parameters:ListViewParameters.PropertyName="LicenseNumber" Width="120" 

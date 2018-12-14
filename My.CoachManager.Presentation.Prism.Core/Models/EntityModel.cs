@@ -109,8 +109,10 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         /// </summary>
         public void ResetModified()
         {
-            var type = GetType();
+            if(!_isModified) return;
+
             _isModified = false;
+            var type = GetType();
             type.GetProperties().Select(x => x.GetValue(this)).OfType<IModifiable>().ToList()
                     .ForEach(x => x.ResetModified());
             type.GetProperties().Select(x => x.GetValue(this)).OfType<ICollection>().ToList().SelectMany(x => x.OfType<IModifiable>()).ForEach(x => x.ResetModified());

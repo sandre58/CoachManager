@@ -3,6 +3,7 @@
                     xmlns:converters="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Converters">
 
     <converters:IdNavigationParameterConverter x:Key="IdNavigationParameterConverter" />
+    <converters:VerticalRowToHorizontalColumnPositionConverter x:Key="VerticalRowToHorizontalColumnPositionConverter" />
     <converters:BooleanToFontWeightConverter x:Key="BooleanToFontWeightConverter" />
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <converters:VisibilityToBooleanConverter x:Key="VisibilityToBooleanConverter" />

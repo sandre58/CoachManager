@@ -71,30 +71,30 @@ namespace My.CoachManager.Infrastructure.Data
         {
             var result = new List<Position>
             {
-                new Position() {Id = 1, Label = "Gardien", Code = "GB", Order = 1, Type =PositionType.GoalKeeper, Side = PositionSide.Center, Row = 0, Column = 1},
+                new Position() {Id = 1, Label = "Gardien", Code = "GB", Order = 1, Type =PositionType.GoalKeeper, Side = PositionSide.Center, Row = 6, Column = 1},
 
-                new Position() {Id = 2, Label = "Libéro", Code = "L", Order = 2, Type =PositionType.Sweeper, Side = PositionSide.Center, Row = 1, Column = 1},
+                new Position() {Id = 2, Label = "Libéro", Code = "L", Order = 2, Type =PositionType.Sweeper, Side = PositionSide.Center, Row = 5, Column = 1},
 
-                new Position() {Id = 3, Label = "Défenseur gauche", Code = "DG", Order = 3, Type =PositionType.FullBack, Side = PositionSide.Left, Row = 2, Column = 0},
-                new Position() {Id = 4, Label = "Défenseur central", Code = "DC", Order = 4, Type =PositionType.CenterBack, Side = PositionSide.Center, Row = 2, Column = 1},
-                new Position() {Id = 5, Label = "Défenseur Droit", Code = "DD", Order = 5, Type =PositionType.FullBack, Side = PositionSide.Right, Row = 2, Column = 2},
+                new Position() {Id = 3, Label = "Défenseur gauche", Code = "DG", Order = 3, Type =PositionType.FullBack, Side = PositionSide.Left, Row = 4, Column = 0},
+                new Position() {Id = 4, Label = "Défenseur central", Code = "DC", Order = 4, Type =PositionType.CenterBack, Side = PositionSide.Center, Row = 4, Column = 1},
+                new Position() {Id = 5, Label = "Défenseur Droit", Code = "DD", Order = 5, Type =PositionType.FullBack, Side = PositionSide.Right, Row = 4, Column = 2},
 
                 new Position() {Id = 6, Label = "Latéral Gauche", Code = "LG", Order = 6, Type =PositionType.WingBack, Side = PositionSide.Left, Row = 3, Column = 0},
                 new Position() {Id = 7, Label = "Latéral Droit", Code = "LD", Order = 7, Type =PositionType.WingBack, Side = PositionSide.Left, Row = 3, Column = 2},
 
                 new Position() {Id = 8, Label = "Milieu défensif", Code = "MDC", Order = 8, Type =PositionType.DefensiveMidfielder, Side = PositionSide.Center, Row = 3, Column = 1},
 
-                new Position() {Id = 9, Label = "Milieu gauche", Code = "MG", Order = 9, Type =PositionType.Midfielder, Side = PositionSide.Left, Row = 4, Column = 0},
-                new Position() {Id = 10, Label = "Milieu central", Code = "MC", Order = 10, Type =PositionType.Midfielder, Side = PositionSide.Center, Row = 4, Column = 1},
-                new Position() {Id = 11, Label = "Milieu Droit", Code = "MD", Order = 11, Type =PositionType.Midfielder, Side = PositionSide.Right, Row = 4, Column = 2},
+                new Position() {Id = 9, Label = "Milieu gauche", Code = "MG", Order = 9, Type =PositionType.Midfielder, Side = PositionSide.Left, Row = 2, Column = 0},
+                new Position() {Id = 10, Label = "Milieu central", Code = "MC", Order = 10, Type =PositionType.Midfielder, Side = PositionSide.Center, Row = 2, Column = 1},
+                new Position() {Id = 11, Label = "Milieu Droit", Code = "MD", Order = 11, Type =PositionType.Midfielder, Side = PositionSide.Right, Row = 2, Column = 2},
 
-                new Position() {Id = 12, Label = "Milieu offensif gauche", Code = "MOG", Order = 12, Type =PositionType.AttackingMidfielder, Side = PositionSide.Left, Row = 5, Column = 0},
-                new Position() {Id = 13, Label = "Milieu offensif central", Code = "MOC", Order = 13, Type =PositionType.AttackingMidfielder, Side = PositionSide.Center, Row = 5, Column = 1},
-                new Position() {Id = 14, Label = "Milieu offensif Droit", Code = "MOD", Order = 14, Type =PositionType.AttackingMidfielder, Side = PositionSide.Right, Row = 5, Column = 2},
+                new Position() {Id = 12, Label = "Milieu offensif gauche", Code = "MOG", Order = 12, Type =PositionType.AttackingMidfielder, Side = PositionSide.Left, Row = 1, Column = 0},
+                new Position() {Id = 13, Label = "Milieu offensif central", Code = "MOC", Order = 13, Type =PositionType.AttackingMidfielder, Side = PositionSide.Center, Row = 1, Column = 1},
+                new Position() {Id = 14, Label = "Milieu offensif Droit", Code = "MOD", Order = 14, Type =PositionType.AttackingMidfielder, Side = PositionSide.Right, Row = 1, Column = 2},
 
-                new Position() {Id = 15, Label = "Ailier gauche", Code = "AG", Order = 15, Type =PositionType.Winger, Side = PositionSide.Left, Row = 6, Column = 0},
-                new Position() {Id = 16, Label = "Attaquant", Code = "ATT", Order = 16, Type =PositionType.Forward, Side = PositionSide.Center, Row = 6, Column = 1},
-                new Position() {Id = 17, Label = "Ailier Droit", Code = "AD", Order = 17, Type =PositionType.Winger, Side = PositionSide.Right, Row = 6, Column = 2}
+                new Position() {Id = 15, Label = "Ailier gauche", Code = "AG", Order = 15, Type =PositionType.Winger, Side = PositionSide.Left, Row = 0, Column = 0},
+                new Position() {Id = 16, Label = "Attaquant", Code = "ATT", Order = 16, Type =PositionType.Forward, Side = PositionSide.Center, Row = 0, Column = 1},
+                new Position() {Id = 17, Label = "Ailier Droit", Code = "AD", Order = 17, Type =PositionType.Winger, Side = PositionSide.Right, Row = 0, Column = 2}
             };
 
             return result;
