@@ -169,6 +169,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Au club depuis le {0:dd/MM/yyyy}.
+        /// </summary>
+        public static string FromDateLiteral {
+            get {
+                return ResourceManager.GetString("FromDateLiteral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nom.
         /// </summary>
         public static string FullName {
@@ -241,7 +250,7 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Taille.
+        ///   Looks up a localized string similar to Taille (vêtement).
         /// </summary>
         public static string Size {
             get {
@@ -264,6 +273,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         public static string UnknownCountry {
             get {
                 return ResourceManager.GetString("UnknownCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pas de date d&apos;arrivée connue.
+        /// </summary>
+        public static string UnknownFromDate {
+            get {
+                return ResourceManager.GetString("UnknownFromDate", resourceCulture);
             }
         }
     }

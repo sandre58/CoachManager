@@ -482,6 +482,7 @@
                                         <CheckBox IsChecked="{Binding AreAllSelected, Mode=OneWay}"
                                                   Command="{Binding SelectAllCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked}"
                                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                  Style="{StaticResource CircleCheckBoxStyle}"
                                                   Visibility="{Binding SelectedItems,
                                 Converter={StaticResource AnyToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" />
                                     </Grid>

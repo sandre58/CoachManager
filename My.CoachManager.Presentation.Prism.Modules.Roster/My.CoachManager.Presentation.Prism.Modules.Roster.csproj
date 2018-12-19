@@ -83,18 +83,24 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Resources\RosterPlayerResources.Designer.cs">
+      <DependentUpon>RosterPlayerResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\RosterResources.Designer.cs">
       <DependentUpon>RosterResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="ViewModels\PlayerEditViewModel.Contacts.cs">
-      <DependentUpon>RosterPlayerEditViewModel.cs</DependentUpon>
-    </Compile>
+    <Compile Include="ViewModels\RosterFiltersViewModel.cs" />
     <Compile Include="ViewModels\RosterPlayerViewModel.cs" />
     <Compile Include="ViewModels\RosterPlayerEditViewModel.cs" />
     <Compile Include="ViewModels\RosterViewModel.cs" />
     <Compile Include="ViewModels\RosterParametersViewModel.cs" />
+    <Compile Include="Views\RosterPlayerEditView.xaml.Club.xaml.cs">
+      <DependentUpon>RosterPlayerEditView.xaml.Club.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RosterPlayerEditView.xaml.cs">
       <DependentUpon>RosterPlayerEditView.xaml</DependentUpon>
     </Compile>
@@ -116,6 +122,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\RosterPlayerEditView.xaml.Club.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\RosterPlayerEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -150,6 +160,11 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\RosterPlayerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RosterPlayerResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\RosterResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

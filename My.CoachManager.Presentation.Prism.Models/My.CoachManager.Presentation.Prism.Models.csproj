@@ -60,6 +60,7 @@
     <Compile Include="ContactModel.cs" />
     <Compile Include="CountryModel.cs" />
     <Compile Include="EmailModel.cs" />
+    <Compile Include="Filters\PlayerPositionFilter.cs" />
     <Compile Include="PersonModel.cs" />
     <Compile Include="PhoneModel.cs" />
     <Compile Include="PlayerModel.cs" />

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace My.CoachManager.Presentation.Prism.Core.Models.Filters
 {
@@ -49,14 +52,45 @@ namespace My.CoachManager.Presentation.Prism.Core.Models.Filters
         /// </returns>
         public virtual bool IsMatch(object target)
         {
+            return IsMatchInternal(target, PropertyName.Split('.'));
+        }
+
+        /// <summary>
+        /// Determines whether the specified target is a match.
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <param name="propertyNames"></param>
+        /// <returns>
+        /// 	<c>true</c> if the specified target is a match; otherwise, <c>false</c>.
+        /// </returns>
+        private bool IsMatchInternal(object target, IList<string> propertyNames)
+        {
             if (target == null)
             {
                 return false;
             }
+            
+            var toCompare = target;
+            var newPropertyNames = propertyNames.ToList();
 
-            var propertyInfo = target.GetType().GetProperty(PropertyName);
-            if (propertyInfo == null) return false;
-            var toCompare = propertyInfo.GetValue(target, null);
+            foreach (var propertyName in propertyNames)
+            {
+                var propertyInfo = toCompare.GetType().GetProperty(propertyName);
+                if (propertyInfo == null) return false;
+                toCompare = propertyInfo.GetValue(toCompare, null);
+
+                newPropertyNames.Remove(propertyName);
+
+                if (newPropertyNames.Count > 0 && toCompare is IList toCompareEnumerableRecursive)
+                {
+                    return toCompareEnumerableRecursive.Cast<object>().Any(x => IsMatchInternal(x, newPropertyNames));
+                }
+            }
+
+            if (toCompare is IList toCompareEnumerable)
+            {
+                return toCompareEnumerable.Cast<object>().Any(IsMatchProperty);
+            }
 
             return IsMatchProperty(toCompare);
         }

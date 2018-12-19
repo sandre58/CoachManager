@@ -105,8 +105,10 @@
     <Compile Include="Dialog\Dialog.cs" />
     <Compile Include="Dialog\DialogEventArgs.cs" />
     <Compile Include="Dialog\DialogResult.cs" />
+    <Compile Include="Manager\SettingsManager.cs" />
     <Compile Include="Models\Filters\EnumValuesFilter.cs" />
     <Compile Include="Models\Filters\FilteredCollectionView.cs" />
+    <Compile Include="Models\Filters\DateFilter.cs" />
     <Compile Include="Models\Filters\SelectableFilter.cs" />
     <Compile Include="Models\Filters\EnumValueFilter.cs" />
     <Compile Include="Models\Filters\SelectedValueFilter.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="Models\Filters\SelectedLabelableFilter.cs" />
     <Compile Include="Manager\DialogManager.cs" />
     <Compile Include="Manager\NotificationManager.cs" />
+    <Compile Include="Models\Filters\BooleanFilter.cs" />
     <Compile Include="Models\ISelectable.cs" />
     <Compile Include="Models\ReferenceModel.cs" />
     <Compile Include="Models\ModelBase.cs" />
@@ -140,6 +143,7 @@
     <Compile Include="Rules\Rule.cs" />
     <Compile Include="Rules\RuleCollection.cs" />
     <Compile Include="Services\IDialogService.cs" />
+    <Compile Include="Services\ISettingsService.cs" />
     <Compile Include="Services\INotificationService.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Utilities\KeyboardUtilities.cs" />

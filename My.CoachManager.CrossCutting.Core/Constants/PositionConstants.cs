@@ -7,13 +7,13 @@ namespace My.CoachManager.CrossCutting.Core.Constants
     /// </summary>
     public static class PositionConstants
     {
-        public const int DefaultNote = 5;
+        public const int DefaultRating = 5;
 
         public const PositionSide DefaultSide = PositionSide.Center;
 
         public const PositionType DefaultType = PositionType.Midfielder;
 
-        public const int MaxNote = 5;
+        public const int MaxRating = 5;
 
         public const int ColumnsCount = 3;
 

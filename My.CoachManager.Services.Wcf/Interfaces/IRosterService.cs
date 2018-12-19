@@ -22,7 +22,7 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        RosterDto SaveRoster(RosterDto dto);
+        int SaveRoster(RosterDto dto);
 
         /// <summary>
         /// Remove a dto.
@@ -65,5 +65,12 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// <returns></returns>
         [OperationContract]
         RosterPlayerDto GetRosterPlayerById(int id);
+
+        /// <summary>
+        /// Create a dto.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        int UpdatePlayer(RosterPlayerDto dto);
     }
 }

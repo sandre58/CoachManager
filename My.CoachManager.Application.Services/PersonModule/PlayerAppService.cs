@@ -82,7 +82,7 @@ namespace My.CoachManager.Application.Services.PersonModule
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        public PlayerDto SavePlayer(PlayerDto dto)
+        public int SavePlayer(PlayerDto dto)
         {
             if (dto.CrudStatus == CrudStatus.Updated)
             {
@@ -90,7 +90,7 @@ namespace My.CoachManager.Application.Services.PersonModule
                 if (!string.IsNullOrEmpty(dto.Address) || !string.IsNullOrEmpty(dto.PostalCode) || !string.IsNullOrEmpty(dto.City))
                 {
                     var adressDto = AddressFactory.GetDto(dto.AddressId ?? 0, dto.Address, dto.PostalCode, dto.City, dto.AddressId.HasValue ? CrudStatus.Updated : CrudStatus.Created);
-                    dto.AddressId = _addressAppService.SaveAddress(adressDto).Id;
+                    dto.AddressId = _addressAppService.SaveAddress(adressDto);
                 }
 
                 // Remove address

@@ -62,65 +62,11 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Club.
-        /// </summary>
-        public static string Club {
-            get {
-                return ResourceManager.GetString("Club", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Contacts.
-        /// </summary>
-        public static string Contacts {
-            get {
-                return ResourceManager.GetString("Contacts", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Général.
-        /// </summary>
-        public static string General {
-            get {
-                return ResourceManager.GetString("General", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Identité.
-        /// </summary>
-        public static string IdCard {
-            get {
-                return ResourceManager.GetString("IdCard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Morphologie.
-        /// </summary>
-        public static string Morphology {
-            get {
-                return ResourceManager.GetString("Morphology", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Liste des joueurs.
         /// </summary>
         public static string PlayersTitle {
             get {
                 return ResourceManager.GetString("PlayersTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Postes.
-        /// </summary>
-        public static string Positions {
-            get {
-                return ResourceManager.GetString("Positions", resourceCulture);
             }
         }
     }

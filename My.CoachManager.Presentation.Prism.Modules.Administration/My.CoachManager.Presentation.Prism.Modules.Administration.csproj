@@ -87,13 +87,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\SeasonResources.Designer.cs">
-      <DependentUpon>SeasonResources.resx</DependentUpon>
+    <Compile Include="Resources\PlayerResources.Designer.cs">
+      <DependentUpon>PlayerResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\PlayerResources.Designer.cs">
-      <DependentUpon>PlayerResources.resx</DependentUpon>
+    <Compile Include="Resources\SeasonResources.Designer.cs">
+      <DependentUpon>SeasonResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -112,10 +112,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="ViewModels\PlayerEditViewModel.Positions.cs" />
-    <Compile Include="ViewModels\PlayerEditViewModel.Contacts.cs">
-      <DependentUpon>PlayerEditViewModel.cs</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\PlayerEditViewModel.cs" />
     <Compile Include="ViewModels\PlayersListFiltersViewModel.cs" />
     <Compile Include="ViewModels\PlayersListParametersViewModel.cs" />
@@ -126,27 +122,6 @@
     <Compile Include="ViewModels\RostersListViewModel.cs" />
     <Compile Include="ViewModels\CategoriesListViewModel.cs" />
     <Compile Include="ViewModels\CategoryEditViewModel.cs" />
-    <Compile Include="Views\PlayerEditView.Positions.xaml.cs">
-      <DependentUpon>PlayerEditView.Positions.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PlayerEditView.Morphology.xaml.cs">
-      <DependentUpon>PlayerEditView.Morphology.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PlayerEditView.Emails.xaml.cs">
-      <DependentUpon>PlayerEditView.Emails.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PlayerEditView.Phones.xaml.cs">
-      <DependentUpon>PlayerEditView.Phones.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PlayerEditView.IdCard.xaml.cs">
-      <DependentUpon>PlayerEditView.IdCard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PlayerEditView.Club.xaml.cs">
-      <DependentUpon>PlayerEditView.Club.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PlayerEditView.Contacts.xaml.cs">
-      <DependentUpon>PlayerEditView.Contacts.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\PlayerEditView.xaml.cs">
       <DependentUpon>PlayerEditView.xaml</DependentUpon>
     </Compile>
@@ -217,34 +192,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PlayerEditView.Positions.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\PlayerEditView.Morphology.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\PlayerEditView.Emails.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\PlayerEditView.Phones.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\PlayerEditView.IdCard.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\PlayerEditView.Club.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\PlayerEditView.Contacts.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\PlayerEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -291,14 +238,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\SeasonResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>SeasonResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\PlayerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PlayerResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SeasonResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SeasonResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\CategoryResources.resx">

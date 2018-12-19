@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
-                    xmlns:constants="clr-namespace:My.CoachManager.CrossCutting.Core.Constants;assembly=My.CoachManager.CrossCutting.Core">
+                    xmlns:constants="clr-namespace:My.CoachManager.CrossCutting.Core.Constants;assembly=My.CoachManager.CrossCutting.Core"
+                    xmlns:enum="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Converters.xaml" />
@@ -101,20 +102,25 @@
 
     <Style x:Key="PlayerPositionStyle" TargetType="{x:Type controls:SelectorItem}" BasedOn="{StaticResource PositionStyle}">
         <Setter Property="Grid.Row" Value="{Binding Position.Row}" />
-        <Setter Property="Grid.Column" Value="{Binding Posiiton.Column}" />
+        <Setter Property="Grid.Column" Value="{Binding Position.Column}" />
         <Setter Property="Background" Value="{DynamicResource Accent}" />
-        <Setter Property="Foreground" Value="{DynamicResource AccentControl}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="Cursor" Value="{x:Null}" />
+        <Setter Property="ToolTip" Value="{Binding Position.Label}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:SelectorItem}">
-                    <Grid RenderOptions.ClearTypeHint="{TemplateBinding RenderOptions.ClearTypeHint}" >
-                        <Ellipse Fill="{TemplateBinding Background}" Height="{Binding ItemHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:PositionsSelector}}}"
+                    <Grid RenderOptions.ClearTypeHint="{TemplateBinding RenderOptions.ClearTypeHint}" ToolTip="{TemplateBinding ToolTip}" >
+                        <Ellipse Fill="{TemplateBinding Background}"
+                                 StrokeThickness="{Binding BorderThickness.Left, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:SelectorItem}}"
+                                 Stroke="{TemplateBinding BorderBrush}"
+                                 Height="{Binding ItemHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:PositionsSelector}}}"
                                  Width="{Binding ItemHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:PositionsSelector}}}"
                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        <!--<ContentPresenter Margin="{TemplateBinding Padding}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />-->
+                        <!--<TextBlock Text="{Binding Position.Code}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>-->
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -124,6 +130,32 @@
             <DataTrigger Binding="{Binding Orientation, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:PositionsSelector}}}" Value="{x:Static Orientation.Horizontal}">
                 <Setter Property="Grid.Row" Value="{Binding Position.Column}" />
                 <Setter Property="Grid.Column" Value="{Binding Position.Row, Converter={StaticResource VerticalRowToHorizontalColumnPositionConverter}}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding PositionRating}" Value="{x:Static enum:PositionRating.Natural}">
+                <Setter Property="Background" Value="{DynamicResource Excellent}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding PositionRating}" Value="{x:Static enum:PositionRating.VeryGood}">
+                <Setter Property="Background" Value="{DynamicResource Good}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding PositionRating}" Value="{x:Static enum:PositionRating.Good}">
+                <Setter Property="Background" Value="{DynamicResource Average}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding PositionRating}" Value="{x:Static enum:PositionRating.Average}">
+                <Setter Property="Background" Value="{DynamicResource Poor}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding PositionRating}" Value="{x:Static enum:PositionRating.Poor}">
+                <Setter Property="Background" Value="{DynamicResource Bad}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsNatural}" Value="True">
+                <Setter Property="BorderThickness" Value="3" />
+                <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsSelectable}" Value="False">
+                <Setter Property="Background" Value="{DynamicResource Control}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Opacity" Value="{DynamicResource DisabledOpacity}" />
+                <Setter Property="ToolTip" Value="{x:Null}" />
             </DataTrigger>
         </Style.Triggers>
     </Style>

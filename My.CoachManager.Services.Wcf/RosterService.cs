@@ -16,7 +16,7 @@ namespace My.CoachManager.Services.Wcf
         /// Save a dto.
         /// </summary>
         /// <returns></returns>
-        public RosterDto SaveRoster(RosterDto dto)
+        public int SaveRoster(RosterDto dto)
         {
             return ServiceLocator.Current.GetInstance<IRosterAppService>().SaveRoster(dto);
         }
@@ -86,6 +86,15 @@ namespace My.CoachManager.Services.Wcf
         public RosterPlayerDto GetRosterPlayerById(int id)
         {
             return ServiceLocator.Current.GetInstance<IRosterAppService>().GetRosterPlayerById(id);
+        }
+
+        /// <summary>
+        /// Create a dto.
+        /// </summary>
+        /// <returns></returns>
+        public int UpdatePlayer(RosterPlayerDto dto)
+        {
+            return ServiceLocator.Current.GetInstance<IRosterAppService>().UpdatePlayer(dto);
         }
     }
 }

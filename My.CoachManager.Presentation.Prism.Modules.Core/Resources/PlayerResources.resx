@@ -126,4 +126,13 @@
   <data name="General" xml:space="preserve">
     <value>Général</value>
   </data>
+  <data name="Contacts" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="IdCard" xml:space="preserve">
+    <value>Identité</value>
+  </data>
+  <data name="Positions" xml:space="preserve">
+    <value>Postes</value>
+  </data>
 </root>

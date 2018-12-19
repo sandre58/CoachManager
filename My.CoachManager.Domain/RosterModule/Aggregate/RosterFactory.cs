@@ -108,5 +108,20 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
                 ModifiedBy = item.ModifiedBy
             };
         }
+
+        /// <summary>
+        /// Updates the entity.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <param name="entity">The entity.</param>
+        public static bool UpdatePlayer(RosterPlayerDto item, RosterPlayer entity)
+        {
+            entity.IsMutation = item.IsMutation;
+            entity.LicenseState = item.LicenseState;
+            entity.Number = item.Number;
+
+            return true;
+        }
+
     }
 }

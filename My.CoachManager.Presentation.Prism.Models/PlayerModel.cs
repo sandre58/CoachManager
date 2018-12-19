@@ -64,22 +64,27 @@ namespace My.CoachManager.Presentation.Prism.Models
         public ObservableCollection<PlayerPositionModel> Positions { get; set; }
 
         /// <summary>
-        /// Get the current age.
+        /// Get natural position
         /// </summary>
-        [Display(Name = "Position", ResourceType = typeof(PlayerResources))]
-        public PositionModel Position
+        public string NaturalPositions
         {
             get
             {
-                if (Positions == null || Positions.Count <= 0) return null;
-                return Positions.OrderByDescending(x => x.IsNatural).FirstOrDefault()?.Position;
+                if (Positions == null || Positions.Count <= 0) return string.Empty;
+                return string.Join(" / ", Positions.Where(x => x.IsNatural).OrderBy(x => x.Position.Order).Select(x => x.Position.Label));
             }
         }
 
         /// <summary>
-        /// Get the current age.
+        /// Get a string shows main positions.
         /// </summary>
-        [Display(Name = "Position", ResourceType = typeof(PlayerResources))]
-        public int? PositionId => Position?.Id;
+        public string PositionsLiteral
+        {
+            get
+            {
+                if (Positions == null || Positions.Count <= 0) return string.Empty;
+                return string.Join(", ", Positions.Where(x => x.Rating > 3).OrderBy(x => x.Position.Order).Select(x => x.Position.Code));
+            }
+        }
     }
 }

@@ -110,7 +110,7 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 Id = position.Id,
                 PositionId = position.PositionId,
                 IsNatural = position.IsNatural,
-                Note = position.Note,
+                Rating = position.Rating,
                 PlayerId = position.PlayerId
             };
 
@@ -131,7 +131,7 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 Position = PositionFactory.Get(position.Position),
                 PositionId = position.PositionId,
                 IsNatural = position.IsNatural,
-                Note = position.Note,
+                Rating = position.Rating,
                 PlayerId = position.PlayerId
             };
 

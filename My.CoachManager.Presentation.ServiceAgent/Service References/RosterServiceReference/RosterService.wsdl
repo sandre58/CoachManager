@@ -57,6 +57,12 @@
   <wsdl:message name="IRosterService_GetRosterPlayerById_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRosterPlayerByIdResponse" />
   </wsdl:message>
+  <wsdl:message name="IRosterService_UpdatePlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePlayer" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_UpdatePlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePlayerResponse" />
+  </wsdl:message>
   <wsdl:portType name="IRosterService">
     <wsdl:operation name="GetRosters">
       <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetRosters" message="tns:IRosterService_GetRosters_InputMessage" />
@@ -89,6 +95,10 @@
     <wsdl:operation name="GetRosterPlayerById">
       <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetRosterPlayerById" message="tns:IRosterService_GetRosterPlayerById_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/GetRosterPlayerByIdResponse" message="tns:IRosterService_GetRosterPlayerById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/UpdatePlayer" message="tns:IRosterService_UpdatePlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/UpdatePlayerResponse" message="tns:IRosterService_UpdatePlayer_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IRosterService" type="tns:IRosterService">
@@ -158,6 +168,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetRosterPlayerById">
       <soap:operation soapAction="http://tempuri.org/IRosterService/GetRosterPlayerById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePlayer">
+      <soap:operation soapAction="http://tempuri.org/IRosterService/UpdatePlayer" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

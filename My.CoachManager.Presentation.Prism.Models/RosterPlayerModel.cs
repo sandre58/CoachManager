@@ -2,14 +2,13 @@
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Core.Resources.Entities;
-using My.CoachManager.Presentation.Prism.Core.Models;
 
 namespace My.CoachManager.Presentation.Prism.Models
 {
     /// <summary>
     /// Provides properties for a Category item.
     /// </summary>
-    public class RosterPlayerModel : EntityModel
+    public class RosterPlayerModel : PlayerModel
     {
         /// <summary>
         /// Gets or sets the player's roster id.
@@ -26,11 +25,6 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// Gets or sets the player id.
         /// </summary>
         public int PlayerId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the player.
-        /// </summary>
-        public PlayerModel Player { get; set; }
 
         /// <summary>
         /// Gets or sets the default player's number in the roster.

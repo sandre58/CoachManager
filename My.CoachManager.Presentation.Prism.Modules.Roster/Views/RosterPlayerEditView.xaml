@@ -5,14 +5,86 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
-             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels"
+             xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Roster.Resources"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
+             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels"
+             xmlns:views1="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Core.Views;assembly=My.CoachManager.Presentation.Prism.Modules.Core"
+             xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Roster.Views"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:RosterPlayerEditViewModel}"
              d:DesignHeight="1000" d:DesignWidth="750" MaxHeight="750">
 
-    <controls:WorkspaceView Padding="0" Width="750" Height="600">
+    <controls:WorkspaceView Padding="0" Width="750" Height="600" HeaderHeight="90">
+        <controls:WorkspaceView.HeaderTemplate>
+            <DataTemplate DataType="viewModels:RosterPlayerEditViewModel">
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="15" />
+                        </Grid.RowDefinitions>
+                        <controls:ImagePicker Grid.Row="0" parameters:PanelParameters.NotAffectMargin="True"
+                                              Height="55" Width="55"
+                                              Image="{Binding Item.Photo, Converter={StaticResource BytesToImageConverter}}"
+                                              HorizontalAlignment="Center" Command="{Binding SelectPhotoCommand}">
+                            <Grid>
+                                <controls:Icon Content="{StaticResource PeopleGeometry}" Size="Custom" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                            </Grid>
+                        </controls:ImagePicker>
+                        <Button Grid.Row="1" parameters:PanelParameters.NotAffectMargin="True" Style="{StaticResource TextButtonStyle}" Content="{x:Static strings1:ControlResources.Delete}" Command="{Binding RemovePhotoCommand}"
+                                HorizontalAlignment="Center" FontSize="{StaticResource SmallFontSize}"
+                                Visibility="{Binding Item.Photo, Converter={StaticResource NullToVisibilityConverter}}" />
+                    </Grid>
+                    <TextBlock Grid.Column="1" Text="{Binding Item.FirstName}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />
+                    <TextBlock Grid.Column="2" Text="{Binding Item.LastName, Converter={StaticResource ToUpperConverter}}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />
+                </Grid>
+
+            </DataTemplate>
+        </controls:WorkspaceView.HeaderTemplate>
+
+        <TabControl TabStripPlacement="Left" Style="{StaticResource TabControlStyle2}"
+                    Padding="{StaticResource DefaultMargin}"
+                    parameters:TabControlParameters.HeaderSize="170">
+
+            <TabItem Header="{x:Static strings:RosterPlayerResources.Club}"  parameters:ControlParameters.Icon="{StaticResource HomeGeometry}">
+                <AdornerDecorator>
+                    <views:RosterPlayerClubEditView />
+                </AdornerDecorator>
+            </TabItem>
+
+            <TabItem Header="{x:Static strings:RosterPlayerResources.Positions}" parameters:ControlParameters.Icon="{StaticResource TargetGeometry}">
+                <AdornerDecorator>
+                    <views1:PlayerPositionsEditView />
+                </AdornerDecorator>
+            </TabItem>
+
+            <TabItem Header="{x:Static strings:RosterPlayerResources.IdCard}" parameters:ControlParameters.Icon="{StaticResource IdCardGeometry}">
+                <AdornerDecorator>
+                    <views1:PlayerIdCardEditView />
+                </AdornerDecorator>
+            </TabItem>
+
+            <TabItem Header="{x:Static strings:RosterPlayerResources.Morphology}" parameters:ControlParameters.Icon="{StaticResource MorphologyGeometry}">
+                <AdornerDecorator>
+                    <views1:PlayerMorphologyEditView />
+                </AdornerDecorator>
+            </TabItem>
+
+            <TabItem Header="{x:Static strings:RosterPlayerResources.Contacts}" parameters:ControlParameters.Icon="{StaticResource ContactsGeometry}">
+                <AdornerDecorator>
+                    <views1:PlayerContactsEditView />
+                </AdornerDecorator>
+            </TabItem>
+        </TabControl>
 
         <controls:WorkspaceView.Commands>
             <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CancelCommand}" Style="{StaticResource CancelCommandButtonApplicationBarStyle}" IsCancel="True" />

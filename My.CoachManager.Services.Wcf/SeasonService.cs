@@ -38,7 +38,7 @@ namespace My.CoachManager.Services.Wcf
         /// </summary>
         /// <param name="seasonDto"></param>
         /// <returns></returns>
-        public SeasonDto SaveSeason(SeasonDto seasonDto)
+        public int SaveSeason(SeasonDto seasonDto)
         {
             return ServiceLocator.Current.GetInstance<ISeasonAppService>().SaveSeason(seasonDto);
         }

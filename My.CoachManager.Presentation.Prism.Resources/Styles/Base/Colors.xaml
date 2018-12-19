@@ -2,6 +2,15 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
+    <!-- Levels -->
+    <Color x:Key="ExcellentColor">#00ff00</Color>
+    <Color x:Key="GreatColor">#00b300</Color>
+    <Color x:Key="GoodColor">#006600</Color>
+    <Color x:Key="AverageColor">#e6e600</Color>
+    <Color x:Key="PoorColor">#ff9900</Color>
+    <Color x:Key="BadColor">#b32d00</Color>
+    <Color x:Key="VeryBadColor">#ff0000</Color>
+
     <!-- Actions -->
     <Color x:Key="NoneColor">#555555</Color>
     <Color x:Key="PositiveColor">#388A34</Color>

@@ -18,7 +18,6 @@ using My.CoachManager.Presentation.Prism.Modules.Administration;
 using My.CoachManager.Presentation.Prism.Modules.Common;
 using My.CoachManager.Presentation.Prism.Modules.Home;
 using My.CoachManager.Presentation.Prism.Modules.Roster;
-using My.CoachManager.Presentation.Prism.Wpf.Properties;
 using My.CoachManager.Presentation.Prism.Wpf.Services;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using My.CoachManager.Presentation.Prism.Wpf.Views;
@@ -96,6 +95,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             Container.RegisterType<INotificationService, NotificationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IAuthenticationService, AuthenticationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IDialogService, DialogService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ISettingsService, SettingsService>(new ContainerControlledLifetimeManager());
         }
 
         /// <inheritdoc />
@@ -241,9 +241,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// </summary>
         private static void LoadSkin()
         {
-            SkinManager.SkinManager.ApplyTheme(Settings.Default.DefaultTheme);
-            SkinManager.SkinManager.ApplyAccent(Settings.Default.DefaultAccent);
-            SkinManager.SkinManager.ApplyMenu(Settings.Default.DefaultMenu);
+            SettingsManager.LoadSkin();
         }
 
         /// <summary>

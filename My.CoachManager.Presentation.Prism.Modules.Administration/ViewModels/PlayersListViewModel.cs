@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Resources;
-using My.CoachManager.Presentation.Prism.Modules.Administration.Views;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
+using PlayerEditView = My.CoachManager.Presentation.Prism.Modules.Administration.Views.PlayerEditView;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
@@ -22,16 +21,6 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         private readonly IPositionService _positionService;
 
         #endregion Fields
-
-        #region Members
-
-
-        /// <summary>
-        /// Gets or sets categories.
-        /// </summary>
-        public IEnumerable<PositionModel> AllPositions { get; private set; }
-
-        #endregion
 
         #region Constructors
 
@@ -91,8 +80,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 
             var categories = _categoryService.GetCategories().Select(CategoryFactory.Get);
             var countries = _personService.GetCountries().Select(CountryFactory.Get);
-            AllPositions = _positionService.GetPositions().Select(PositionFactory.Get);
-            Filters = new PlayersListFiltersViewModel(categories, AllPositions, countries);
+            var positions = _positionService.GetPositions().Select(PositionFactory.Get);
+            Filters = new PlayersListFiltersViewModel(categories, positions, countries);
             Parameters = new PlayersListParametersViewModel();
         }
 

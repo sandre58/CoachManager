@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
-using System.Windows.Input;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Core.Collections;
@@ -250,7 +249,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
             try
             {
-                SelectedItems.ForEach(RemoveItemCore);
+                var itemToDelete = SelectedItems.ToList();
+                itemToDelete.ForEach(RemoveItemCore);
                 OnRemoveSelectedItemsCompleted();
             }
             catch (BusinessException e)

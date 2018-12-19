@@ -44,13 +44,12 @@ namespace My.CoachManager.Application.Services.CategoryModule
         #endregion ---- Constructors ----
 
         #region Methods
-
-        /// <inheritdoc />
+        
         /// <summary>
         /// Save a dto.
         /// </summary>
         /// <returns></returns>
-        public CategoryDto SaveCategory(CategoryDto dto)
+        public int SaveCategory(CategoryDto dto)
         {
             return _crudDomainService.Save(dto, CategoryFactory.CreateEntity, CategoryFactory.UpdateEntity, x => _categoryDomainService.Validate(x));
         }

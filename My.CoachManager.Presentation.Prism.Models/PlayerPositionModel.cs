@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Constants;
+using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Models;
 
@@ -15,7 +16,7 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// </summary>
         public PlayerPositionModel()
         {
-            Note = PositionConstants.DefaultNote;
+            Rating = PositionConstants.DefaultRating;
         }
 
         /// <summary>
@@ -44,8 +45,19 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// Gets or sets the note.
         /// </summary>
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        [Range(0, PositionConstants.MaxNote, ErrorMessageResourceName = "RangeFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        public int Note { get; set; }
+        [Range(0, PositionConstants.MaxRating, ErrorMessageResourceName = "RangeFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
+        public int Rating { get; set; }
+
+
+        /// <summary>
+        /// Gets or sets the note.
+        /// </summary>
+        [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
+        [Range(0, PositionConstants.MaxRating, ErrorMessageResourceName = "RangeFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
+        public PositionRating PositionRating {
+            get => (PositionRating)Rating;
+            set => Rating = (int)value;
+        }
 
         /// <summary>
         /// Gets or sets a value indicates if the position is natural.

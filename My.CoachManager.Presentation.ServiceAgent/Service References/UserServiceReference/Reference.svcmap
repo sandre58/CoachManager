@@ -22,12 +22,11 @@
     <MetadataSource Address="http://localhost:62863/Services/UserService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="UserService.wsdl" MetadataType="Wsdl" ID="69ae9937-6931-421b-bc99-ce1756290f69" SourceId="1" SourceUrl="http://localhost:62863/Services/UserService.svc?wsdl" />
-    <MetadataFile FileName="UserService.disco" MetadataType="Disco" ID="0f23ca4d-9d21-416f-8fc4-889b7b796be7" SourceId="1" SourceUrl="http://localhost:62863/Services/UserService.svc?disco" />
-    <MetadataFile FileName="UserService.xsd" MetadataType="Schema" ID="e0960532-8bd5-4bd4-8ec4-50461ca4bca5" SourceId="1" SourceUrl="http://localhost:62863/Services/UserService.svc?xsd=xsd3" />
-    <MetadataFile FileName="UserService1.xsd" MetadataType="Schema" ID="101ea9d9-14ff-4743-a392-2dcd020886c4" SourceId="1" SourceUrl="http://localhost:62863/Services/UserService.svc?xsd=xsd1" />
-    <MetadataFile FileName="UserService2.xsd" MetadataType="Schema" ID="6aec58e3-7ad5-471c-9a14-39c990c32029" SourceId="1" SourceUrl="http://localhost:62863/Services/UserService.svc?xsd=xsd0" />
     <MetadataFile FileName="UserService3.xsd" MetadataType="Schema" ID="796c02dd-9996-4d8d-8768-fbca6981c550" SourceId="1" SourceUrl="http://localhost:62863/Services/UserService.svc?xsd=xsd2" />
+    <MetadataFile FileName="UserService.disco" MetadataType="Disco" ID="0f23ca4d-9d21-416f-8fc4-889b7b796be7" SourceId="1" SourceUrl="http://localhost:62863/Services/UserService.svc?disco" />
+    <MetadataFile FileName="UserService2.xsd" MetadataType="Schema" ID="6aec58e3-7ad5-471c-9a14-39c990c32029" SourceId="1" SourceUrl="http://localhost:62863/Services/UserService.svc?xsd=xsd0" />
+    <MetadataFile FileName="UserService.wsdl" MetadataType="Wsdl" ID="69ae9937-6931-421b-bc99-ce1756290f69" SourceId="1" SourceUrl="http://localhost:62863/Services/UserService.svc?wsdl" />
+    <MetadataFile FileName="UserService1.xsd" MetadataType="Schema" ID="101ea9d9-14ff-4743-a392-2dcd020886c4" SourceId="1" SourceUrl="http://localhost:62863/Services/UserService.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

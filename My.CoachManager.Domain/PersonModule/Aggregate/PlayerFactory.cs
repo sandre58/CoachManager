@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.AddressModule.Aggregate;
+using My.CoachManager.Domain.CategoryModule.Aggregate;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.PositionModule.Aggregate;
 
@@ -98,6 +99,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                 Laterality = player.Laterality,
                 CategoryId = player.CategoryId,
                 CountryId = player.CountryId,
+                Category = CategoryFactory.Get(player.Category),
                 Country = CountryFactory.Get(player.Country),
                 Emails = player.Contacts.OfType<Email>().Select(ContactFactory.GetContact<EmailDto>),
                 Phones = player.Contacts.OfType<Phone>().Select(ContactFactory.GetContact<PhoneDto>),
@@ -127,7 +129,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                 PositionId = position.PositionId,
                 PlayerId = position.PlayerId,
                 IsNatural = position.IsNatural,
-                Note = position.Note
+                Rating = position.Rating
             };
 
             return result;
@@ -148,7 +150,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                 PositionId = position.PositionId,
                 PlayerId = position.PlayerId,
                 IsNatural = position.IsNatural,
-                Note = position.Note
+                Rating = position.Rating
             };
 
             return result;

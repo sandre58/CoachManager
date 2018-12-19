@@ -153,6 +153,9 @@
   <data name="FromDate" xml:space="preserve">
     <value>Date d'arrivée</value>
   </data>
+  <data name="FromDateLiteral" xml:space="preserve">
+    <value>Au club depuis le {0:dd/MM/yyyy}</value>
+  </data>
   <data name="FullName" xml:space="preserve">
     <value>Nom</value>
   </data>
@@ -178,12 +181,15 @@
     <value>Lieu de naissance</value>
   </data>
   <data name="Size" xml:space="preserve">
-    <value>Taille</value>
+    <value>Taille (vêtement)</value>
   </data>
   <data name="UnknownAge" xml:space="preserve">
     <value>Age inconnu</value>
   </data>
   <data name="UnknownCountry" xml:space="preserve">
     <value>Nationnalité inconnue</value>
+  </data>
+  <data name="UnknownFromDate" xml:space="preserve">
+    <value>Pas de date d'arrivée connue</value>
   </data>
 </root>

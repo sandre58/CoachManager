@@ -78,11 +78,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         {
             base.OnExit(e);
 
-            Settings.Default.DefaultTheme = SkinManager.SkinManager.CurrentTheme.Name;
-            Settings.Default.DefaultAccent = SkinManager.SkinManager.CurrentAccent.Name;
-            Settings.Default.DefaultMenu = SkinManager.SkinManager.CurrentMenu.Name;
-
-            Settings.Default.Save();
+            SettingsManager.SaveSkin();
         }
 
         /// <summary>

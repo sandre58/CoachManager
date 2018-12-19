@@ -6,45 +6,95 @@
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
-             xmlns:views1="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.Views"
-             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
-             xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.Resources"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
+             xmlns:entities="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:behaviours="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Behaviours;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:resources="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Modules.Core"
+             xmlns:views1="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Core.Views;assembly=My.CoachManager.Presentation.Prism.Modules.Core"
+             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
-             d:DataContext="{d:DesignInstance Type=viewModels:PlayerEditViewModel}"
+             d:DataContext="{d:DesignInstance viewModels:PlayerEditViewModel}"
              d:DesignHeight="1000" d:DesignWidth="750" MaxHeight="750">
 
-    <controls:WorkspaceView Padding="0" Width="750" Height="600">
+    <controls:WorkspaceView Padding="0" Width="750" Height="600" HeaderHeight="90">
+
+        <controls:WorkspaceView.HeaderTemplate>
+            <DataTemplate DataType="viewModels:PlayerEditViewModel">
+
+                <Grid>
+
+                    <i:Interaction.Behaviors>
+                        <behaviours:FocusBehavior FocusElement="{Binding ElementName=LastName}" />
+                    </i:Interaction.Behaviors>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="15" />
+                        </Grid.RowDefinitions>
+                        <controls:ImagePicker Grid.Row="0" parameters:PanelParameters.NotAffectMargin="True"
+                                              Height="55" Width="55"
+                                              Image="{Binding Item.Photo, Converter={StaticResource BytesToImageConverter}}"
+                                              HorizontalAlignment="Center" Command="{Binding SelectPhotoCommand}">
+                            <Grid>
+                                <controls:Icon Content="{StaticResource PeopleGeometry}" Size="Custom" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                            </Grid>
+                        </controls:ImagePicker>
+                        <Button Grid.Row="1" parameters:PanelParameters.NotAffectMargin="True" Style="{StaticResource TextButtonStyle}" Content="{x:Static strings1:ControlResources.Delete}" Command="{Binding RemovePhotoCommand}"
+                                HorizontalAlignment="Center" FontSize="{StaticResource SmallFontSize}"
+                                Visibility="{Binding Item.Photo, Converter={StaticResource NullToVisibilityConverter}}" />
+                    </Grid>
+                    <TextBox Grid.Column="1" x:Name="LastName"
+                             Width="{StaticResource SmallLargeWidth}"
+                             Text="{Binding Item.LastName, UpdateSourceTrigger=PropertyChanged}"
+                             parameters:TextBoxParameters.Watermark="{x:Static entities:PersonResources.LastName}" />
+
+                    <TextBox Grid.Column="2"
+                             Width="{StaticResource SmallLargeWidth}"
+                             Text="{Binding Item.FirstName, UpdateSourceTrigger=PropertyChanged}"
+                             parameters:TextBoxParameters.Watermark="{x:Static entities:PersonResources.FirstName}" />
+                </Grid>
+
+            </DataTemplate>
+        </controls:WorkspaceView.HeaderTemplate>
 
         <TabControl TabStripPlacement="Left" Style="{StaticResource TabControlStyle2}"
                     Padding="{StaticResource DefaultMargin}"
                     parameters:TabControlParameters.HeaderSize="170">
-            <TabItem Header="{x:Static strings:PlayerResources.IdCard}" parameters:ControlParameters.Icon="{StaticResource IdCardGeometry}">
+
+            <TabItem Header="{x:Static resources:PlayerResources.Club}"  parameters:ControlParameters.Icon="{StaticResource HomeGeometry}">
+                <AdornerDecorator>
+                    <views1:PlayerClubEditView />
+                </AdornerDecorator>
+            </TabItem>
+            
+            <TabItem Header="{x:Static resources:PlayerResources.IdCard}" parameters:ControlParameters.Icon="{StaticResource IdCardGeometry}">
                 <AdornerDecorator>
                     <views1:PlayerIdCardEditView />
                 </AdornerDecorator>
             </TabItem>
 
-            <TabItem Header="{x:Static strings:PlayerResources.Club}"  parameters:ControlParameters.Icon="{StaticResource HomeGeometry}">
-                <AdornerDecorator>
-                    <views1:PlayerClubEditView />
-                </AdornerDecorator>
-            </TabItem>
-
-            <TabItem Header="{x:Static strings:PlayerResources.Contacts}" parameters:ControlParameters.Icon="{StaticResource ContactsGeometry}">
+            <TabItem Header="{x:Static resources:PlayerResources.Contacts}" parameters:ControlParameters.Icon="{StaticResource ContactsGeometry}">
                 <AdornerDecorator>
                     <views1:PlayerContactsEditView />
                 </AdornerDecorator>
             </TabItem>
-            
-            <TabItem Header="{x:Static strings:PlayerResources.Morphology}" parameters:ControlParameters.Icon="{StaticResource MorphologyGeometry}">
+
+            <TabItem Header="{x:Static resources:PlayerResources.Morphology}" parameters:ControlParameters.Icon="{StaticResource MorphologyGeometry}">
                 <AdornerDecorator>
                     <views1:PlayerMorphologyEditView />
                 </AdornerDecorator>
             </TabItem>
 
-            <TabItem Header="{x:Static strings:PlayerResources.Positions}" parameters:ControlParameters.Icon="{StaticResource TargetGeometry}">
+            <TabItem Header="{x:Static resources:PlayerResources.Positions}" parameters:ControlParameters.Icon="{StaticResource TargetGeometry}">
                 <AdornerDecorator>
                     <views1:PlayerPositionsEditView />
                 </AdornerDecorator>

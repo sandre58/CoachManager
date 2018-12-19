@@ -36,7 +36,7 @@ namespace My.CoachManager.Application.Dtos
         /// Gets or sets the default player's note.
         /// </summary>
         [DataMember]
-        public int Note { get; set; }
+        public int Rating { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicates if the position is natural.

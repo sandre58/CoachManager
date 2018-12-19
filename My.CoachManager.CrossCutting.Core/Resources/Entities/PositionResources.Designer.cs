@@ -81,9 +81,9 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         /// <summary>
         ///   Looks up a localized string similar to Note.
         /// </summary>
-        public static string Note {
+        public static string Rating {
             get {
-                return ResourceManager.GetString("Note", resourceCulture);
+                return ResourceManager.GetString("Rating", resourceCulture);
             }
         }
         

@@ -10,7 +10,6 @@
              xmlns:models="clr-namespace:My.CoachManager.Presentation.Prism.Models;assembly=My.CoachManager.Presentation.Prism.Models"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
-             xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.Views"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels1:PlayersListViewModel}"
@@ -75,15 +74,15 @@
                                                          DisplayMemberBinding="{Binding Category.Label}"/>
 
                     <!-- Position -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.Position}"
+                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.Positions}"
                                                      parameters:ListViewParameters.PropertyName="Position" Width="180">
                         <controls:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
                                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <controls:PositionsSelector ItemsSource="{Binding Positions}" 
                                                                 Margin="{StaticResource DefaultMargin}" 
-                                                                ItemHeight="18" Height="90" Width="130" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                                                ItemContainerStyle="{StaticResource PlayerPositionStyle}" FontSize="{StaticResource SmallFontSize}"/>
+                                                                ItemHeight="16" Height="90" Width="130" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                                ItemContainerStyle="{StaticResource PlayerPositionStyle}"/>
                                 </Grid>
                             </DataTemplate>
                         </controls:ExtendedGridViewColumn.CellTemplate>
@@ -188,7 +187,7 @@
                                                          parameters:ListViewParameters.PropertyName="Height" Width="90">
                         <controls:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding Height, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0\} cm}" />
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Height, Converter={StaticResource ToFormatConverter}, ConverterParameter={x:Static entities:PlayerResources.HeightFormat}}" />
                             </DataTemplate>
                         </controls:ExtendedGridViewColumn.CellTemplate>
                     </controls:ExtendedGridViewColumn>
@@ -198,7 +197,7 @@
                                                          parameters:ListViewParameters.PropertyName="Weight" Width="90">
                         <controls:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding Weight, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0\} kg}" />
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Weight, Converter={StaticResource ToFormatConverter}, ConverterParameter={x:Static entities:PlayerResources.WeightFormat}}" />
                             </DataTemplate>
                         </controls:ExtendedGridViewColumn.CellTemplate>
                     </controls:ExtendedGridViewColumn>

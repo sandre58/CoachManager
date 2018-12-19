@@ -123,7 +123,7 @@
   <data name="IsNatural" xml:space="preserve">
     <value>Est sa position naturelle</value>
   </data>
-  <data name="Note" xml:space="preserve">
+  <data name="Rating" xml:space="preserve">
     <value>Note</value>
   </data>
   <data name="Row" xml:space="preserve">

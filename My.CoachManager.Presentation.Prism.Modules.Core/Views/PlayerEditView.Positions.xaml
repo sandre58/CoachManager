@@ -1,22 +1,17 @@
-﻿<UserControl x:Class="My.CoachManager.Presentation.Prism.Modules.Administration.Views.PlayerPositionsEditView"
+﻿<UserControl x:Class="My.CoachManager.Presentation.Prism.Modules.Core.Views.PlayerPositionsEditView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
-             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:entities="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
-             xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.Views"
              xmlns:extensions="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Extensions;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:enums="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
-             d:DataContext="{d:DesignInstance Type=viewModels:PlayerEditViewModel}">
+             xmlns:views1="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Core.Views">
 
-    <UserControl.Resources>
-        <system:Double x:Key="MyDouble">0.2</system:Double>
-    </UserControl.Resources>
     <Grid  parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
         <Grid HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
@@ -57,7 +52,7 @@
                                           Style="{StaticResource CircleCheckBoxStyle}" />
                                 <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Position.Label}" VerticalAlignment="Center" Margin="{StaticResource DefaultMargin}" Foreground="{DynamicResource NormalForeground}" />
                                 <controls:Rating Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="{StaticResource DefaultMargin}"
-                                                 Value="{Binding Note, Converter={StaticResource CoefficientConverter}, ConverterParameter={StaticResource MyDouble}, Mode=TwoWay}" 
+                                                 Value="{Binding Rating, Converter={StaticResource CoefficientConverter}, ConverterParameter={StaticResource CoefficientRatingBy5}, Mode=TwoWay}" 
                                                  ItemsSource="{Binding Source={extensions:Enum {x:Type enums:PositionRating}}}"
                                         HorizontalAlignment="Center" 
                                         VerticalAlignment="Center">
@@ -74,7 +69,7 @@
                                     Style="{StaticResource RemoveButtonStyle}"
                                     Width="18" Height="18"
                                     Margin="{StaticResource LargeMargin}" 
-                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views:PlayerPositionsEditView}}, Path=DataContext.RemovePositionCommand}"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views1:PlayerPositionsEditView}}, Path=DataContext.RemovePositionCommand}"
                                     CommandParameter="{Binding Position}"
                                     HorizontalAlignment="Center" />
                         </Grid>

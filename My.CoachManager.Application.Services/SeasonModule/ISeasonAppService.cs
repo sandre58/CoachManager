@@ -18,7 +18,7 @@ namespace My.CoachManager.Application.Services.SeasonModule
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        SeasonDto SaveSeason(SeasonDto dto);
+        int SaveSeason(SeasonDto dto);
 
         /// <summary>
         /// Remove a dto.

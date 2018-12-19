@@ -10,6 +10,7 @@ using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
+using My.CoachManager.Presentation.Prism.Modules.Core;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using Prism.Commands;
 using Prism.Events;
@@ -154,6 +155,16 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
             Rosters = result.Select(RosterFactory.Get).ToObservableCollection();
         }
 
+        /// <summary>
+        /// Data is loaded.
+        /// </summary>
+        protected override void OnLoadDataCompleted()
+        {
+            base.OnLoadDataCompleted();
+
+            SelectedRoster = Rosters.FirstOrDefault(x => x.Id == SettingsManager.GetRosterId());
+        }
+
         #endregion Data
 
         private void OnWorkspaceDialogInteractionRequestRaised(object sender, InteractionRequestedEventArgs e)
@@ -228,5 +239,14 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         #endregion GoForward
 
         #endregion Methods
+
+        #region  PropertChanged
+
+        protected void OnSelectedRosterChanged()
+        {
+            SettingsManager.SaveRoster(SelectedRoster.Id);
+        }
+
+        #endregion
     }
 }

@@ -18,7 +18,7 @@ namespace My.CoachManager.Application.Services.AddressModule
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        AddressDto SaveAddress(AddressDto dto);
+        int SaveAddress(AddressDto dto);
 
         /// <summary>
         /// Remove a dto.

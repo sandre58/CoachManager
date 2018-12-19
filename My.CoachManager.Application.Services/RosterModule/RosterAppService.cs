@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using My.CoachManager.Application.Dtos;
+using My.CoachManager.Application.Services.PersonModule;
 using My.CoachManager.Domain.AppModule.Services;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
@@ -15,12 +17,14 @@ namespace My.CoachManager.Application.Services.RosterModule
     public class RosterAppService : IRosterAppService
     {
         #region ---- Fields ----
-
+        
         private readonly IRepository<Roster> _rosterRepository;
         private readonly IRepository<RosterPlayer> _playerRosterRepository;
 
         private readonly ICrudDomainService<Roster, RosterDto> _crudDomainService;
         private readonly IRosterDomainService _rosterDomainService;
+
+        private readonly IPlayerAppService _playerAppService;
 
         #endregion ---- Fields ----
 
@@ -33,12 +37,14 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// <param name="playerRosterRepository"></param>
         /// <param name="crudDomainService"></param>
         /// <param name="rosterDomainService"></param>
-        public RosterAppService(IRepository<Roster> rosterRepository, IRepository<RosterPlayer> playerRosterRepository, ICrudDomainService<Roster, RosterDto> crudDomainService, IRosterDomainService rosterDomainService)
+        /// <param name="playerAppService"></param>
+        public RosterAppService(IRepository<Roster> rosterRepository, IRepository<RosterPlayer> playerRosterRepository, ICrudDomainService<Roster, RosterDto> crudDomainService, IRosterDomainService rosterDomainService, IPlayerAppService playerAppService)
         {
             _rosterRepository = rosterRepository;
             _playerRosterRepository = playerRosterRepository;
             _crudDomainService = crudDomainService;
             _rosterDomainService = rosterDomainService;
+            _playerAppService = playerAppService;
         }
 
         #endregion ---- Constructors ----
@@ -50,7 +56,7 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// Save a dto.
         /// </summary>
         /// <returns></returns>
-        public RosterDto SaveRoster(RosterDto dto)
+        public int SaveRoster(RosterDto dto)
         {
             return _crudDomainService.Save(dto, RosterFactory.CreateEntity, RosterFactory.UpdateEntity, x => _rosterDomainService.Validate(x));
         }
@@ -93,7 +99,20 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// <returns></returns>
         public IList<RosterPlayerDto> GetPlayers(int rosterId)
         {
-            return _playerRosterRepository.GetAll(RosterSelectBuilder.SelectRosterPlayers(), x => x.Player.Contacts, x => x.Player.Category, x => x.Player.Address, x => x.Player.Country).ToList();
+            return _playerRosterRepository.Query
+                .Include(x => x.Player)
+                    .ThenInclude(x => x.Address)
+                .Include(x => x.Player)
+                    .ThenInclude(x => x.Contacts)
+                .Include(x => x.Player)
+                    .ThenInclude(x => x.Category)
+                .Include(x => x.Player)
+                    .ThenInclude(x => x.Country)
+                .Include(x => x.Player)
+                    .ThenInclude(x => x.Positions)
+                    .ThenInclude(x => x.Position)
+                .Where(x => x.RosterId == rosterId)
+                .Select(RosterSelectBuilder.SelectRosterPlayers()).ToList();
         }
 
         /// <summary>
@@ -131,14 +150,43 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// <returns></returns>
         public RosterPlayerDto GetRosterPlayerById(int id)
         {
-            var player = _playerRosterRepository.GetEntity(id,
-                x => x.Player,
-                x => x.Player.Category,
-                x => x.Player.Address,
-                x => x.Player.Contacts,
-                x => x.Player.Country);
+            var player = _playerRosterRepository.Query
+                .Include(x => x.Player)
+                .ThenInclude(x => x.Address)
+                .Include(x => x.Player)
+                .ThenInclude(x => x.Contacts)
+                .Include(x => x.Player)
+                .ThenInclude(x => x.Category)
+                .Include(x => x.Player)
+                .ThenInclude(x => x.Country)
+                .Include(x => x.Player)
+                .ThenInclude(x => x.Positions)
+                .ThenInclude(x => x.Position)
+                .FirstOrDefault(x => x.Id == id);
 
             return RosterFactory.GetPlayer(player);
+        }
+
+        /// <summary>
+        /// Create a dto.
+        /// </summary>
+        /// <returns></returns>
+        public int UpdatePlayer(RosterPlayerDto dto)
+        {
+
+            var entity = _playerRosterRepository.GetEntity(dto.Id);
+
+            dto.PlayerId = _playerAppService.SavePlayer(dto.Player);
+
+            RosterFactory.UpdatePlayer(dto, entity);
+
+            _playerRosterRepository.Modify(entity);
+            _playerRosterRepository.UnitOfWork.Commit();
+
+            dto.CrudStatus = CrudStatus.Unchanged;
+
+            return entity.Id;
+
         }
 
         #endregion Methods

@@ -62,7 +62,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                 {
                     Id = y.Id,
                     IsNatural = y.IsNatural,
-                    Note = y.Note,
+                    Rating = y.Rating,
                     PositionId = y.PositionId,
                     Position = y.Position != null ? new PositionDto()
                     {
@@ -70,7 +70,8 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                         Label = y.Position.Label,
                         Code = y.Position.Code,
                         Row = y.Position.Row,
-                        Column = y.Position.Column
+                        Column = y.Position.Column,
+                        Order = y.Position.Order
                     } : null
                 }),
                 Height = x.Height,

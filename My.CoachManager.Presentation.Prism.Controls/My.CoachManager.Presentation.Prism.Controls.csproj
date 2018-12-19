@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdornedControl.cs" />
+    <Compile Include="HeaderPanel.cs" />
     <Compile Include="Clipper.cs" />
     <Compile Include="HyperlinkButton.cs" />
     <Compile Include="ExtendedGridView.cs" />

@@ -521,11 +521,11 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
 
                     b.Property<DateTime?>("ModifiedDate");
 
-                    b.Property<int>("Note");
-
                     b.Property<int>("PlayerId");
 
                     b.Property<int>("PositionId");
+
+                    b.Property<int>("Rating");
 
                     b.HasKey("Id");
 
@@ -579,23 +579,23 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     b.ToTable("Positions");
 
                     b.HasData(
-                        new { Id = 1, Code = "GB", Column = 1, Label = "Gardien", Order = 1, Row = 0, Side = 1, Type = 0 },
-                        new { Id = 2, Code = "L", Column = 1, Label = "Libéro", Order = 2, Row = 1, Side = 1, Type = 1 },
-                        new { Id = 3, Code = "DG", Column = 0, Label = "Défenseur gauche", Order = 3, Row = 2, Side = 0, Type = 2 },
-                        new { Id = 4, Code = "DC", Column = 1, Label = "Défenseur central", Order = 4, Row = 2, Side = 1, Type = 3 },
-                        new { Id = 5, Code = "DD", Column = 2, Label = "Défenseur Droit", Order = 5, Row = 2, Side = 2, Type = 2 },
+                        new { Id = 1, Code = "GB", Column = 1, Label = "Gardien", Order = 1, Row = 6, Side = 1, Type = 0 },
+                        new { Id = 2, Code = "L", Column = 1, Label = "Libéro", Order = 2, Row = 5, Side = 1, Type = 1 },
+                        new { Id = 3, Code = "DG", Column = 0, Label = "Défenseur gauche", Order = 3, Row = 4, Side = 0, Type = 2 },
+                        new { Id = 4, Code = "DC", Column = 1, Label = "Défenseur central", Order = 4, Row = 4, Side = 1, Type = 3 },
+                        new { Id = 5, Code = "DD", Column = 2, Label = "Défenseur Droit", Order = 5, Row = 4, Side = 2, Type = 2 },
                         new { Id = 6, Code = "LG", Column = 0, Label = "Latéral Gauche", Order = 6, Row = 3, Side = 0, Type = 4 },
                         new { Id = 7, Code = "LD", Column = 2, Label = "Latéral Droit", Order = 7, Row = 3, Side = 0, Type = 4 },
                         new { Id = 8, Code = "MDC", Column = 1, Label = "Milieu défensif", Order = 8, Row = 3, Side = 1, Type = 5 },
-                        new { Id = 9, Code = "MG", Column = 0, Label = "Milieu gauche", Order = 9, Row = 4, Side = 0, Type = 6 },
-                        new { Id = 10, Code = "MC", Column = 1, Label = "Milieu central", Order = 10, Row = 4, Side = 1, Type = 6 },
-                        new { Id = 11, Code = "MD", Column = 2, Label = "Milieu Droit", Order = 11, Row = 4, Side = 2, Type = 6 },
-                        new { Id = 12, Code = "MOG", Column = 0, Label = "Milieu offensif gauche", Order = 12, Row = 5, Side = 0, Type = 7 },
-                        new { Id = 13, Code = "MOC", Column = 1, Label = "Milieu offensif central", Order = 13, Row = 5, Side = 1, Type = 7 },
-                        new { Id = 14, Code = "MOD", Column = 2, Label = "Milieu offensif Droit", Order = 14, Row = 5, Side = 2, Type = 7 },
-                        new { Id = 15, Code = "AG", Column = 0, Label = "Ailier gauche", Order = 15, Row = 6, Side = 0, Type = 8 },
-                        new { Id = 16, Code = "ATT", Column = 1, Label = "Attaquant", Order = 16, Row = 6, Side = 1, Type = 9 },
-                        new { Id = 17, Code = "AD", Column = 2, Label = "Ailier Droit", Order = 17, Row = 6, Side = 2, Type = 8 }
+                        new { Id = 9, Code = "MG", Column = 0, Label = "Milieu gauche", Order = 9, Row = 2, Side = 0, Type = 6 },
+                        new { Id = 10, Code = "MC", Column = 1, Label = "Milieu central", Order = 10, Row = 2, Side = 1, Type = 6 },
+                        new { Id = 11, Code = "MD", Column = 2, Label = "Milieu Droit", Order = 11, Row = 2, Side = 2, Type = 6 },
+                        new { Id = 12, Code = "MOG", Column = 0, Label = "Milieu offensif gauche", Order = 12, Row = 1, Side = 0, Type = 7 },
+                        new { Id = 13, Code = "MOC", Column = 1, Label = "Milieu offensif central", Order = 13, Row = 1, Side = 1, Type = 7 },
+                        new { Id = 14, Code = "MOD", Column = 2, Label = "Milieu offensif Droit", Order = 14, Row = 1, Side = 2, Type = 7 },
+                        new { Id = 15, Code = "AG", Column = 0, Label = "Ailier gauche", Order = 15, Row = 0, Side = 0, Type = 8 },
+                        new { Id = 16, Code = "ATT", Column = 1, Label = "Attaquant", Order = 16, Row = 0, Side = 1, Type = 9 },
+                        new { Id = 17, Code = "AD", Column = 2, Label = "Ailier Droit", Order = 17, Row = 0, Side = 2, Type = 8 }
                     );
                 });
 

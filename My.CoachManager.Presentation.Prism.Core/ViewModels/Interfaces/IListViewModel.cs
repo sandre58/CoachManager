@@ -16,7 +16,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
         /// <summary>
         /// Gets or sets the selected items.
         /// </summary>
-        IEnumerable<TEntityModel> SelectedItems { get; set; }
+        new IEnumerable<TEntityModel> SelectedItems { get; set; }
 
         /// <summary>
         /// Gets or sets the selected item.

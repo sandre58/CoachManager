@@ -38,7 +38,7 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// </summary>
         /// <returns></returns>>
         [OperationContract]
-        PlayerDto SavePlayer(PlayerDto dto);
+        int SavePlayer(PlayerDto dto);
 
         /// <summary>
         /// Remove a dto.

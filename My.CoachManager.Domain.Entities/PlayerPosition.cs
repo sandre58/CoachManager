@@ -15,7 +15,7 @@ namespace My.CoachManager.Domain.Entities
         /// </summary>
         public PlayerPosition()
         {
-            Note = PositionConstants.DefaultNote;
+            Rating = PositionConstants.DefaultRating;
         }
 
         /// <summary>
@@ -43,8 +43,8 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the note.
         /// </summary>
-        [Range(0, PositionConstants.MaxNote, ErrorMessageResourceName = "RangeFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        public int Note { get; set; }
+        [Range(0, PositionConstants.MaxRating, ErrorMessageResourceName = "RangeFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
+        public int Rating { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicates if the position is natural.

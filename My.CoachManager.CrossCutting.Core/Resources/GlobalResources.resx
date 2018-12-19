@@ -177,4 +177,13 @@
   <data name="UndefiniedPluralMale" xml:space="preserve">
     <value>Non définis</value>
   </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Inconnu(e)</value>
+  </data>
+  <data name="UnknownFemale" xml:space="preserve">
+    <value>Inconnue</value>
+  </data>
+  <data name="UnknownMale" xml:space="preserve">
+    <value>Inconnu</value>
+  </data>
 </root>
