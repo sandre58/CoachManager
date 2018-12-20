@@ -51,8 +51,8 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 {
                     if (dataGridColumn is ExtendedGridViewColumn column)
                     {
-                        if (string.IsNullOrEmpty(ListViewParameters.GetPropertyName(column)) ||
-                            columns.Any(x => string.Equals(x, ListViewParameters.GetPropertyName(column),
+                        if (string.IsNullOrEmpty(column.PropertyName) ||
+                            columns.Any(x => string.Equals(x, column.PropertyName,
                                 StringComparison.CurrentCultureIgnoreCase)) ||
                             !column.CanUserHideColumn)
                         {

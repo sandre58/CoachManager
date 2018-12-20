@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Security.Principal;
+﻿using System.Security.Principal;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Cryptography;
 using My.CoachManager.CrossCutting.Core.Extensions;

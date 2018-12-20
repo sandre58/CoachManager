@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Windows;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.Enums;
 
 namespace My.CoachManager.Presentation.Prism.Core.Services
 {
@@ -16,6 +18,16 @@ namespace My.CoachManager.Presentation.Prism.Core.Services
         /// <param name="view">The view to include in workspace dialog.</param>
         /// <param name="callback">Action executed after result of dialog.</param>
         void ShowWorkspaceDialog(FrameworkElement view, Action<IWorkspaceDialog> callback = null);
+
+        /// <summary>
+        /// Displays a modal dialog.
+        /// </summary>
+        /// <param name="selectionMode"></param>
+        /// <param name="view"></param>
+        /// <param name="callback">Action executed after result of dialog.</param>
+        /// <param name="notSelectableItems"></param>
+        void ShowSelectItemsDialog(FrameworkElement view, Action<IWorkspaceDialog> callback = null,
+            SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null);
 
         /// <summary>
         /// Displays a message dialog.

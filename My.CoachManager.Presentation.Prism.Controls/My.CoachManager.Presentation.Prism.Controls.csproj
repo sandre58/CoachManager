@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdornedControl.cs" />
+    <Compile Include="ExtendedListView.cs" />
     <Compile Include="HeaderPanel.cs" />
     <Compile Include="Clipper.cs" />
     <Compile Include="HyperlinkButton.cs" />
@@ -158,7 +159,6 @@
     <Compile Include="Parameters\Commands\Internal\IExecutionStrategy.cs" />
     <Compile Include="Parameters\Commands\KeyCommand.cs" />
     <Compile Include="Parameters\DragAndDropParameters.cs" />
-    <Compile Include="Parameters\ListViewParameters.cs" />
     <Compile Include="PositionsSelector.cs" />
     <Compile Include="Rating.cs" />
     <Compile Include="RatingItem.cs" />

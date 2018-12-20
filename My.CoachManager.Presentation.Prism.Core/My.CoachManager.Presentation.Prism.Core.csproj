@@ -100,6 +100,7 @@
     <Compile Include="ComponentModel\AbortableBackgroundWorker.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Enums\SelectionMode.cs" />
     <Compile Include="Events\UpdateStatusBarMessageRequestEvent.cs" />
     <Compile Include="Manager\ConfigurationManager.cs" />
     <Compile Include="Dialog\Dialog.cs" />

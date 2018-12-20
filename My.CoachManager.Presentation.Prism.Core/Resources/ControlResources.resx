@@ -228,6 +228,9 @@
   <data name="Select" xml:space="preserve">
     <value>Sélectionner</value>
   </data>
+  <data name="SelectItem" xml:space="preserve">
+    <value>Sélectionner un élément</value>
+  </data>
   <data name="SelectItems" xml:space="preserve">
     <value>Sélectionner le(s) élément(s)</value>
   </data>

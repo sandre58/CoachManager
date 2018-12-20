@@ -7,7 +7,6 @@
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
              xmlns:mvvm="http://prismlibrary.com/"
-             xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:models="clr-namespace:My.CoachManager.Presentation.Prism.Models;assembly=My.CoachManager.Presentation.Prism.Models"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
@@ -16,17 +15,17 @@
 
     <controls:WorkspaceView>
 
-        <ListView ItemsSource="{Binding Items}" Style="{StaticResource DraggableListViewStyle}">
-            <ListView.View>
+        <controls:ExtendedListView ItemsSource="{Binding Items}">
+            <controls:ExtendedListView.View>
                 <controls:ExtendedGridView VisibleColumns="{Binding Parameters.DisplayedColumns}">
                     
                     <!-- Order -->
                     <controls:ExtendedGridViewColumn Header="Order" Width="75" CanUserHideColumn="False"
-                                                     parameters:ListViewParameters.PropertyName="Order" CellTemplate="{StaticResource OrderListViewColumnTemplate}" HeaderTemplate="{StaticResource OrderListViewColumnHeaderTemplate}" />
+                                                     PropertyName="Order" CellTemplate="{StaticResource OrderListViewColumnTemplate}" HeaderTemplate="{StaticResource OrderListViewColumnHeaderTemplate}" />
                     
                     <!-- Label -->
                     <controls:ExtendedGridViewColumn Header="{x:Static strings:ReferenceResources.Label}" Width="300"
-                                                     parameters:ListViewParameters.PropertyName="Label">
+                                                     PropertyName="Label">
                         <controls:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:CategoryModel">
                                 <TextBlock HorizontalAlignment="Center" Text="{Binding Label}" FontWeight="DemiBold" />
@@ -37,11 +36,11 @@
                     <!-- Year -->
                     <controls:ExtendedGridViewColumn Header="{x:Static strings:CategoryResources.Year}"
                                                      DisplayMemberBinding="{Binding Year}"
-                                                     parameters:ListViewParameters.PropertyName="Year" />
+                                                     PropertyName="Year" />
 
                 </controls:ExtendedGridView>
-            </ListView.View>
-        </ListView>
+            </controls:ExtendedListView.View>
+        </controls:ExtendedListView>
 
         <controls:WorkspaceView.Commands>
             <controls:CommandButton DockPanel.Dock="Right"  Style="{StaticResource AddCommandButtonApplicationBarStyle}" Command="{Binding AddCommand}" />

@@ -1,13 +1,13 @@
 ﻿using System.Linq;
-using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.Enums;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
-using My.CoachManager.Presentation.Prism.Modules.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Modules.Core.Views;
 using My.CoachManager.Presentation.Prism.Modules.Roster.Resources;
 using My.CoachManager.Presentation.Prism.Modules.Roster.Views;
@@ -113,27 +113,28 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 
         protected override void Add()
         {
-            var view = ServiceLocator.Current.GetInstance<SelectPlayersView>();
 
-            if (!(view.DataContext is SelectPlayersViewModel model)) return;
-
-            model.NotSelectableItems = Items.Select(x => new PlayerModel()
+            DialogManager.ShowSelectItemsDialog<SelectPlayersView>(dialog =>
             {
-                Id = x.PlayerId
-            });
-
-            DialogManager.ShowWorkspaceDialog(view, dialog =>
-            {
+                var model = dialog.Content.DataContext as ISelectItemsViewModel<RosterPlayerModel>;
                 if (dialog.Result == DialogResult.Ok)
                 {
-                    _rosterService.AddPlayers(Roster.Id, model.SelectedItems.Select(x => x.Id).ToArray());
+                    if (model != null)
+                    {
+                        _rosterService.AddPlayers(Roster.Id, model.SelectedItems.Select(x => x.Id).ToArray());
 
-                    NotificationManager.ShowSuccess(string.Format(MessageResources.ItemsAdded,
-                        model.SelectedItems.Count()));
+                        NotificationManager.ShowSuccess(string.Format(MessageResources.ItemsAdded,
+                            model.SelectedItems.Count()));
+                    }
                 }
 
                 OnAddCompleted(dialog.Result);
-            });
+            },
+            SelectionMode.Multiple,
+            Items.Select(x => new PlayerModel()
+            {
+                Id = x.PlayerId
+            }).ToList());
         }
 
         #endregion Add

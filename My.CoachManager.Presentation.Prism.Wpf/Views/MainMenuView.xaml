@@ -74,8 +74,7 @@
                         <Grid Grid.Row="1" Grid.Column="1" Margin="{StaticResource LargeVerticalMargin}"
                               Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
-                                <ComboBox ItemsSource="{Binding Rosters}" SelectedItem="{Binding SelectedRoster}" DisplayMemberPath="Name" 
-                                          Style="{StaticResource AccentComboBoxStyle2}" HorizontalAlignment="Stretch" FontSize="{StaticResource LargeFontSize}"/>
+                                <Button Content="Changer d'effectif" Command="{Binding SetRosterCommand}" />
                             </StackPanel>
                         </Grid>
 

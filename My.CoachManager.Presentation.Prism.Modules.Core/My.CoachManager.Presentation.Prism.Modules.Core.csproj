@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="ViewModels\PlayerEditViewModel.cs" />
     <Compile Include="ViewModels\SelectPlayersFiltersViewModel.cs" />
+    <Compile Include="ViewModels\SelectRostersViewModel.cs" />
     <Compile Include="ViewModels\SelectPlayersViewModel.cs" />
     <Compile Include="Views\PlayerEditView.Club.xaml.cs">
       <DependentUpon>PlayerEditView.Club.xaml</DependentUpon>
@@ -130,6 +131,9 @@
     </Compile>
     <Compile Include="Views\PlayerEditView.Positions.xaml.cs">
       <DependentUpon>PlayerEditView.Positions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectRostersView.xaml.cs">
+      <DependentUpon>SelectRostersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SelectPlayersView.xaml.cs">
       <DependentUpon>SelectPlayersView.xaml</DependentUpon>
@@ -184,6 +188,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\PlayerEditView.Positions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SelectRostersView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

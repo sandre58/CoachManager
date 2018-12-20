@@ -6,6 +6,7 @@ using Microsoft.Practices.ObjectBuilder2;
 using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.Enums;
 using My.CoachManager.Presentation.Prism.Core.Models;
 using My.CoachManager.Presentation.Prism.Core.Models.Filters;
 using My.CoachManager.Presentation.Prism.Core.Resources;
@@ -15,7 +16,7 @@ using Prism.Commands;
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
     public abstract class SelectItemsViewModel<TModel> : DialogViewModel, ISelectItemsViewModel<TModel>
-    where TModel : ISelectable
+    where TModel : class, ISelectable 
     {
         #region Members
 
@@ -35,12 +36,22 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         public ObservableItemsCollection<TModel> Items { get; set; }
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
-        public IEnumerable<TModel> SelectedItems
+        IList ISelectItemsViewModel.SelectedItems
         {
-            get { return Items?.Where(x => x.IsSelected); }
+            get => SelectedItems as IList;
+            set => SelectedItems =  value as IList<TModel>;
+        }
+
+        /// <summary>
+        /// Gets or sets the selected item.
+        /// </summary>
+        public IList<TModel> SelectedItems
+        {
+            get { return Items?.Where(x => x.IsSelected).ToList(); }
             set
             {
                 Items.ForEach(x => x.IsSelected = false);
@@ -58,6 +69,16 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
+        object ISelectItemsViewModel.SelectedItem
+        {
+            get => SelectedItem;
+            set => SelectedItem = value as TModel;
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets the selected item.
+        /// </summary>
         public TModel SelectedItem
         {
             get => SelectedItems != null ? SelectedItems.FirstOrDefault() : default(TModel);
@@ -65,9 +86,23 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         }
 
         /// <summary>
+        /// Gets or sets selection mode.
+        /// </summary>
+        public SelectionMode SelectionMode { get; set; }
+
+        /// <summary>
         /// Gets or sets not selectionnable items.
         /// </summary>
-        public IEnumerable<TModel> NotSelectableItems { get; set; }
+        IList ISelectItemsViewModel.NotSelectableItems
+        {
+            get => NotSelectableItems as IList;
+            set => NotSelectableItems = new ObservableItemsCollection<TModel>((IEnumerable<TModel>)value);
+        }
+
+        /// <summary>
+        /// Gets or sets not selectionnable items.
+        /// </summary>
+        public IList<TModel> NotSelectableItems { get; set; }
 
         /// <summary>
         /// Gets or sets the selected item.
@@ -129,6 +164,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
             Title = ControlResources.SelectItems;
             Items = new ObservableItemsCollection<TModel>();
+            SelectionMode = SelectionMode.Single;
         }
 
         /// <inheritdoc />
@@ -182,7 +218,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <returns></returns>
         protected bool CanSelectAll(bool? value)
         {
-            return Items.Any(x => x.IsSelectable);
+            return Items.Any(x => x.IsSelectable) && SelectionMode == SelectionMode.Multiple;
         }
 
         /// <summary>
@@ -190,6 +226,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual void SelectAll(bool? value)
         {
+            if(SelectionMode == SelectionMode.Multiple)
             Items.Where(x => x.IsSelectable).ForEach(x =>
             {
                 if (value != null) x.IsSelected = value.Value;
@@ -259,6 +296,22 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             SelectCommand.RaiseCanExecuteChanged();
 
+            RaisePropertyChanged(() => AreAllSelected);
+            RaisePropertyChanged(() => SelectedItems);
+            RaisePropertyChanged(() => SelectedItem);
+        }
+
+
+        /// <summary>
+        /// Calls when selected item change.
+        /// </summary>
+        protected virtual void OnSelectionModeChanged()
+        {
+            Title = SelectionMode == SelectionMode.Multiple
+                ? ControlResources.SelectItems
+                : ControlResources.SelectItem;
+
+            SelectAllCommand.RaiseCanExecuteChanged();
             RaisePropertyChanged(() => AreAllSelected);
             RaisePropertyChanged(() => SelectedItems);
             RaisePropertyChanged(() => SelectedItem);

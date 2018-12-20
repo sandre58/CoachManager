@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using My.CoachManager.CrossCutting.Core.Collections;
+using My.CoachManager.Presentation.Prism.Core.Enums;
 using My.CoachManager.Presentation.Prism.Core.Models;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
@@ -16,12 +17,17 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
         /// <summary>
         /// Gets or sets the selected items.
         /// </summary>
-       IEnumerable<TModel> SelectedItems { get; set; }
+       new IList<TModel> SelectedItems { get; set; }
+
+        /// <summary>
+        /// Gets or sets not selectionnable items.
+        /// </summary>
+         new IList<TModel> NotSelectableItems { get; set; }
 
         /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
-        TModel SelectedItem { get; set; }
+        new TModel SelectedItem { get; set; }
     }
 
     public interface ISelectItemsViewModel : IWorkspaceDialogViewModel
@@ -32,6 +38,21 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
         ICollection Items { get; set; }
 
         /// <summary>
+        /// Gets or sets the selected items.
+        /// </summary>
+        IList SelectedItems { get; set; }
+
+        /// <summary>
+        /// Gets or sets not selectionnable items.
+        /// </summary>
+        IList NotSelectableItems { get; set; }
+
+        /// <summary>
+        /// Gets or sets the selected item.
+        /// </summary>
+        object SelectedItem { get; set; }
+
+        /// <summary>
         /// Gets or sets list parameters.
         /// </summary>
         ListParametersViewModel Parameters { get; set; }
@@ -40,5 +61,10 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
         /// Gets or sets list filters.
         /// </summary>
         IListFiltersViewModel Filters { get; set; }
+
+        /// <summary>
+        /// Gets or sets selection mode.
+        /// </summary>
+        SelectionMode SelectionMode { get; set; }
     }
 }

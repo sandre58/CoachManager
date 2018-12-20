@@ -71,6 +71,7 @@
     <Compile Include="CategoryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeasonModel.cs" />
+    <Compile Include="SquadModel.cs" />
     <Compile Include="UserModel.cs" />
   </ItemGroup>
   <ItemGroup>
