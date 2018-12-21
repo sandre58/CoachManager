@@ -18,7 +18,7 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        RosterDto SaveRoster(RosterDto dto);
+        int SaveRoster(RosterDto dto);
 
         /// <summary>
         /// Remove a dto.
@@ -55,5 +55,11 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// </summary>
         /// <returns></returns>
         RosterPlayerDto GetRosterPlayerById(int id);
+
+        /// <summary>
+        /// Create a dto.
+        /// </summary>
+        /// <returns></returns>
+        int UpdatePlayer(RosterPlayerDto dto);
     }
 }

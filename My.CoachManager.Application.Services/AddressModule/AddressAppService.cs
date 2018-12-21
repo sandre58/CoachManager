@@ -52,7 +52,7 @@ namespace My.CoachManager.Application.Services.AddressModule
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        public AddressDto SaveAddress(AddressDto dto)
+        public int SaveAddress(AddressDto dto)
         {
             return _crudDomainService.Save(dto, AddressFactory.CreateEntity, AddressFactory.UpdateEntity);
         }

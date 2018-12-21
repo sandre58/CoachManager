@@ -45,6 +45,8 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
                 IsMutation = x.IsMutation,
                 Number = x.Number,
                 LicenseState = x.LicenseState,
+                PlayerId = x.PlayerId,
+                RosterId = x.RosterId,
                 Player = x.Player != null ? new PlayerDto()
                 {
                     Id = x.Player.Id,
@@ -55,6 +57,7 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
                     PostalCode = x.Player.Address.PostalCode,
                     City = x.Player.Address.City,
                     Birthdate = x.Player.Birthdate,
+                    FromDate = x.Player.FromDate,
                     Gender = x.Player.Gender,
                     LicenseNumber = x.Player.LicenseNumber,
                     Photo = x.Player.Photo,
@@ -88,6 +91,22 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
                         Default = p.Default,
                         Value = p.Value,
                         PersonId = p.PersonId
+                    }),
+                    Positions = x.Player.Positions.Select(y => new PlayerPositionDto()
+                    {
+                        Id = y.Id,
+                        IsNatural = y.IsNatural,
+                        Rating = y.Rating,
+                        PositionId = y.PositionId,
+                        Position = y.Position != null ? new PositionDto()
+                        {
+                            Id = y.Position.Id,
+                            Label = y.Position.Label,
+                            Code = y.Position.Code,
+                            Row = y.Position.Row,
+                            Column = y.Position.Column,
+                            Order = y.Position.Order
+                        } : null
                     }),
                     Height = x.Player.Height,
                     Weight = x.Player.Weight,

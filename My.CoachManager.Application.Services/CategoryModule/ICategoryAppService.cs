@@ -18,7 +18,7 @@ namespace My.CoachManager.Application.Services.CategoryModule
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        CategoryDto SaveCategory(CategoryDto dto);
+        int SaveCategory(CategoryDto dto);
 
         /// <summary>
         /// Remove a dto.

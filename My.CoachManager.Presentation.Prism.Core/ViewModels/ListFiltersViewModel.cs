@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Input;
 using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Enums;
-using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Models;
 using My.CoachManager.Presentation.Prism.Core.Models.Filters;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
@@ -244,12 +242,12 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
             if (!SpeedFilter.Filter.IsEmpty())
             {
-                if (!Filters.Any(x => x.Filter.Equals(SpeedFilter.Filter)))
+                if (!Filters.Any(x => ReferenceEquals(x.Filter, SpeedFilter.Filter)))
                     Filters.Add(SpeedFilter);
             }
             else
             {
-                Filters.Remove(Filters.FirstOrDefault(x => x.Filter.Equals(SpeedFilter.Filter)));
+                Filters.Remove(Filters.FirstOrDefault(x => ReferenceEquals(x.Filter, SpeedFilter.Filter)));
             }
 
             FilterItems();

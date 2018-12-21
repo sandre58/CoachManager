@@ -46,7 +46,7 @@ namespace My.CoachManager.Services.Wcf
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public PlayerDto SavePlayer(PlayerDto dto)
+        public int SavePlayer(PlayerDto dto)
         {
             return ServiceLocator.Current.GetInstance<IPlayerAppService>().SavePlayer(dto);
         }

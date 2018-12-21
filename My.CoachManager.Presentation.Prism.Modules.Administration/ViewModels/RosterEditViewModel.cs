@@ -56,9 +56,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// </summary>
         protected override bool SaveItemCore()
         {
-            var dto = _rosterService.SaveRoster(RosterFactory.Get(Item, Mode == ScreenMode.Creation ? CrudStatus.Created : CrudStatus.Updated));
-            Item = RosterFactory.Get(dto);
-            return true;
+            return _rosterService.SaveRoster(RosterFactory.Get(Item, Mode == ScreenMode.Creation ? CrudStatus.Created : CrudStatus.Updated)) > 0;
         }
 
         /// <inheritdoc />

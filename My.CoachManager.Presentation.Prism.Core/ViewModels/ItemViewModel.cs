@@ -99,7 +99,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             if (navigationContext.Parameters.Any(x => x.Key.ToUpper() == "ID"))
             {
-                LoadItemById(int.Parse(navigationContext.Parameters.Single(x => x.Key.ToUpper() == "ID").Value.ToString()));
+                LoadItemById(int.Parse(navigationContext.Parameters.First(x => x.Key.ToUpper() == "ID").Value.ToString()));
             }
             
         }

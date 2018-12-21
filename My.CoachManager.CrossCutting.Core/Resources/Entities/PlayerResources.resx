@@ -126,6 +126,9 @@
   <data name="Height" xml:space="preserve">
     <value>Taille</value>
   </data>
+  <data name="HeightFormat" xml:space="preserve">
+    <value>{0} cm</value>
+  </data>
   <data name="IsMutation" xml:space="preserve">
     <value>Fait Mutation</value>
   </data>
@@ -141,10 +144,19 @@
   <data name="NumberAbbr" xml:space="preserve">
     <value>N°</value>
   </data>
+  <data name="Position" xml:space="preserve">
+    <value>Poste</value>
+  </data>
+  <data name="Positions" xml:space="preserve">
+    <value>Postes</value>
+  </data>
   <data name="ShoesSize" xml:space="preserve">
     <value>Pointure</value>
   </data>
   <data name="Weight" xml:space="preserve">
     <value>Poids</value>
+  </data>
+  <data name="WeightFormat" xml:space="preserve">
+    <value>{0} kg</value>
   </data>
 </root>

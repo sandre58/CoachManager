@@ -394,6 +394,15 @@ namespace My.CoachManager.Presentation.Prism.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sélectionner un élément.
+        /// </summary>
+        public static string SelectItem {
+            get {
+                return ResourceManager.GetString("SelectItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sélectionner le(s) élément(s).
         /// </summary>
         public static string SelectItems {

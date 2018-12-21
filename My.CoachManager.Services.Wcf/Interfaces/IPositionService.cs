@@ -15,37 +15,7 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        IEnumerable<PositionDto> GetList();
+        IList<PositionDto> GetPositions();
 
-        /// <summary>
-        /// Get a Position by Id.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [OperationContract]
-        PositionDto GetById(int id);
-
-        /// <summary>
-        /// Create a Position.
-        /// </summary>
-        /// <param name="dto">the player model.</param>
-        /// <returns></returns>
-        [OperationContract]
-        PositionDto CreateOrUpdate(PositionDto dto);
-
-        /// <summary>
-        /// Remove a Position.
-        /// </summary>
-        /// <param name="dto">the player model.</param>
-        /// <returns></returns>
-        [OperationContract]
-        void Remove(PositionDto dto);
-
-        /// <summary>
-        /// Update Positions Orders.
-        /// </summary>
-        /// <param name="entities"></param>
-        [OperationContract]
-        void UpdateOrders(IDictionary<int, int> entities);
     }
 }

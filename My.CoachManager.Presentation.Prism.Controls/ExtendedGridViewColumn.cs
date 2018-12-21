@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace My.CoachManager.Presentation.Prism.Controls
@@ -80,6 +79,22 @@ namespace My.CoachManager.Presentation.Prism.Controls
         internal bool IsVisible => Visibility == Visibility.Visible;
 
         private double _internalWidth;
+
+        #endregion
+
+        #region PropertyName
+
+        public static readonly DependencyProperty PropertyNameProperty = DependencyProperty.Register(
+            "PropertyName",
+            typeof(string),
+            typeof(ExtendedGridViewColumn),
+            new PropertyMetadata(string.Empty));
+
+        public string PropertyName
+        {
+            get => (string)GetValue(PropertyNameProperty);
+            set => SetValue(PropertyNameProperty, value);
+        }
 
         #endregion
 

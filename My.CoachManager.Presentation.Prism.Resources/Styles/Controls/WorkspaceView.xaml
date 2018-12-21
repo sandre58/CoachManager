@@ -65,12 +65,14 @@
                                    Style="{StaticResource SmallHeaderStyle}"
                                    Visibility="{Binding SelectedItems, Converter={StaticResource AnyToVisibilityConverter}}" />
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="{StaticResource MediumFontSize}" Margin="0"
+                                <TextBlock x:Name="FilteredCountTextBlock"
+                                    FontSize="{StaticResource MediumFontSize}" Margin="0"
                                        Text="{Binding Filters.Items.Count}"
                                        Foreground="{DynamicResource Positive}"
                                        Style="{StaticResource SmallHeaderStyle}"
                                        Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}" />
-                                <TextBlock FontSize="{StaticResource MediumFontSize}" Margin="0"
+                                <TextBlock x:Name="SeparatorCountTextBlock"
+                                    FontSize="{StaticResource MediumFontSize}" Margin="0"
                                        Text="/"
                                        Foreground="{DynamicResource Positive}"
                                        Style="{StaticResource SmallHeaderStyle}"
@@ -139,6 +141,8 @@
                 <Setter TargetName="ShowHideFilterButton" Property="Command" Value="{Binding Filters.HideFiltersCommand}" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Filters.Items.Count}" Value="0">
+                <Setter TargetName="SeparatorCountTextBlock" Property="Foreground" Value="{DynamicResource Negative}" />
+                <Setter TargetName="FilteredCountTextBlock" Property="Foreground" Value="{DynamicResource Negative}" />
                 <Setter TargetName="CountTextBlock" Property="Foreground" Value="{DynamicResource Negative}" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Filters.CountActiveFilters}" Value="0">

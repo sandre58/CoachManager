@@ -11,6 +11,7 @@ using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.PersonModule.Aggregate;
 using My.CoachManager.Domain.PersonModule.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace My.CoachManager.Application.Services.PersonModule
 {
@@ -67,9 +68,12 @@ namespace My.CoachManager.Application.Services.PersonModule
         /// <returns></returns>
         public PlayerDto GetPlayerById(int playerId)
         {
-            var player = _playerRepository.GetEntity(playerId,
-                x => x.Address,
-                x => x.Contacts);
+            var player = _playerRepository.Query
+                .Include(x => x.Address)
+                .Include(x => x.Contacts)
+                .Include(x => x.Positions)
+                    .ThenInclude(x => x.Position)
+                .SingleOrDefault(x => x.Id == playerId);
 
             return PlayerFactory.Get(player);
         }
@@ -78,7 +82,7 @@ namespace My.CoachManager.Application.Services.PersonModule
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        public PlayerDto SavePlayer(PlayerDto dto)
+        public int SavePlayer(PlayerDto dto)
         {
             if (dto.CrudStatus == CrudStatus.Updated)
             {
@@ -86,7 +90,7 @@ namespace My.CoachManager.Application.Services.PersonModule
                 if (!string.IsNullOrEmpty(dto.Address) || !string.IsNullOrEmpty(dto.PostalCode) || !string.IsNullOrEmpty(dto.City))
                 {
                     var adressDto = AddressFactory.GetDto(dto.AddressId ?? 0, dto.Address, dto.PostalCode, dto.City, dto.AddressId.HasValue ? CrudStatus.Updated : CrudStatus.Created);
-                    dto.AddressId = _addressAppService.SaveAddress(adressDto).Id;
+                    dto.AddressId = _addressAppService.SaveAddress(adressDto);
                 }
 
                 // Remove address

@@ -1,4 +1,8 @@
-﻿using My.CoachManager.Application.Dtos;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using My.CoachManager.Application.Dtos;
+using My.CoachManager.CrossCutting.Core.Collections;
+using My.CoachManager.CrossCutting.Core.Extensions;
 
 namespace My.CoachManager.Presentation.Prism.Models.Aggregates
 {
@@ -69,7 +73,30 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 IsMutation = dto.IsMutation,
                 LicenseState = dto.LicenseState,
                 Number = dto.Number,
-                Player = PlayerFactory.Get(dto.Player),
+                FirstName = dto.Player.FirstName,
+                LastName = dto.Player.LastName,
+                AddressId = dto.Player.AddressId,
+                Address = dto.Player.Address,
+                PostalCode = dto.Player.PostalCode,
+                City = dto.Player.City,
+                Birthdate = dto.Player.Birthdate,
+                FromDate = dto.Player.FromDate,
+                Gender = dto.Player.Gender,
+                LicenseNumber = dto.Player.LicenseNumber,
+                Photo = dto.Player.Photo,
+                PlaceOfBirth = dto.Player.PlaceOfBirth,
+                Laterality = dto.Player.Laterality,
+                CategoryId = dto.Player.CategoryId,
+                Category = CategoryFactory.Get(dto.Player.Category),
+                CountryId = dto.Player.CountryId,
+                Country = CountryFactory.Get(dto.Player.Country),
+                Height = dto.Player.Height,
+                Weight = dto.Player.Weight,
+                ShoesSize = dto.Player.ShoesSize,
+                Size = dto.Player.Size,
+                Emails = dto.Player.Emails != null ? dto.Player.Emails.Select(ContactFactory.GetContact<EmailModel>).ToList().ToItemsObservableCollection() : new ObservableItemsCollection<EmailModel>(),
+                Phones = dto.Player.Phones != null ? dto.Player.Phones.Select(ContactFactory.GetContact<PhoneModel>).ToList().ToItemsObservableCollection() : new ObservableItemsCollection<PhoneModel>(),
+                Positions = dto.Player.Positions != null ? dto.Player.Positions.Select(PlayerFactory.GetPosition).ToList().ToObservableCollection() : new ObservableCollection<PlayerPositionModel>(),
                 PlayerId = dto.PlayerId,
                 CreatedBy = dto.CreatedBy,
                 CreatedDate = dto.CreatedDate,
@@ -79,6 +106,32 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
             result.ResetModified();
 
             return result;
+        }
+
+        /// <summary>
+        /// Convert the model to DTO.
+        /// </summary>
+        /// <param name="item">The model.</param>
+        /// <param name="crudStatus">The crud status.</param>
+        /// <returns>The DTO from the model.</returns>
+        public static RosterPlayerDto Get(RosterPlayerModel item, CrudStatus crudStatus)
+        {
+            if (item == null) return null;
+
+            var player = new RosterPlayerDto
+            {
+                CrudStatus = crudStatus,
+                Id = item.Id,
+                PlayerId = item.PlayerId,
+                IsMutation = item.IsMutation,
+                LicenseState = item.LicenseState,
+                Number = item.Number,
+                RosterId = item.RosterId,
+                Player = PlayerFactory.Get(item, crudStatus)
+            };
+            player.Player.Id = item.PlayerId;
+
+            return player;
         }
     }
 }

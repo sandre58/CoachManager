@@ -89,13 +89,18 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         /// </summary>
         public bool IsModified() {
                 var type = GetType();
-                var isModified = _isModified;
+            if (_isModified) return true;
+
                 var complexIsModified =
                     type.GetProperties().Select(x => x.GetValue(this)).OfType<IModifiable>().ToList()
                         .Any(x => x.IsModified());
-                var collectionIsModied =
+            if (complexIsModified) return true;
+
+            var collectionIsModied =
                     type.GetProperties().Select(x => x.GetValue(this)).OfType<ICollection>().ToList().SelectMany(x => x.OfType<IModifiable>()).Any(x => x.IsModified());
-                return isModified || complexIsModified || collectionIsModied;
+            if (collectionIsModied) return true;
+
+            return false;
         }
 
         /// <inheritdoc />
@@ -104,8 +109,10 @@ namespace My.CoachManager.Presentation.Prism.Core.Models
         /// </summary>
         public void ResetModified()
         {
-            var type = GetType();
+            if(!_isModified) return;
+
             _isModified = false;
+            var type = GetType();
             type.GetProperties().Select(x => x.GetValue(this)).OfType<IModifiable>().ToList()
                     .ForEach(x => x.ResetModified());
             type.GetProperties().Select(x => x.GetValue(this)).OfType<ICollection>().ToList().SelectMany(x => x.OfType<IModifiable>()).ForEach(x => x.ResetModified());

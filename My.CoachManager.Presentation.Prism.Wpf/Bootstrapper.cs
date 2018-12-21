@@ -18,7 +18,6 @@ using My.CoachManager.Presentation.Prism.Modules.Administration;
 using My.CoachManager.Presentation.Prism.Modules.Common;
 using My.CoachManager.Presentation.Prism.Modules.Home;
 using My.CoachManager.Presentation.Prism.Modules.Roster;
-using My.CoachManager.Presentation.Prism.Wpf.Properties;
 using My.CoachManager.Presentation.Prism.Wpf.Services;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using My.CoachManager.Presentation.Prism.Wpf.Views;
@@ -26,6 +25,7 @@ using My.CoachManager.Presentation.ServiceAgent;
 using My.CoachManager.Presentation.ServiceAgent.AddressServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.SeasonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.UserServiceReference;
@@ -88,12 +88,14 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             Container.RegisterInstance(typeof(ISeasonService), ServiceClientFactory.Create<SeasonServiceClient, ISeasonService>());
             Container.RegisterInstance(typeof(IPersonService), ServiceClientFactory.Create<PersonServiceClient, IPersonService>());
             Container.RegisterInstance(typeof(IAddressService), ServiceClientFactory.Create<AddressServiceClient, IAddressService>());
+            Container.RegisterInstance(typeof(IPositionService), ServiceClientFactory.Create<PositionServiceClient, IPositionService>());
 
             // Register Presentation Services
             Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<INotificationService, NotificationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IAuthenticationService, AuthenticationService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IDialogService, DialogService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ISettingsService, SettingsService>(new ContainerControlledLifetimeManager());
         }
 
         /// <inheritdoc />
@@ -239,9 +241,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
         /// </summary>
         private static void LoadSkin()
         {
-            SkinManager.SkinManager.ApplyTheme(Settings.Default.DefaultTheme);
-            SkinManager.SkinManager.ApplyAccent(Settings.Default.DefaultAccent);
-            SkinManager.SkinManager.ApplyMenu(Settings.Default.DefaultMenu);
+            SettingsManager.LoadSkin();
         }
 
         /// <summary>

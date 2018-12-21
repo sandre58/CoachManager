@@ -88,6 +88,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} cm.
+        /// </summary>
+        public static string HeightFormat {
+            get {
+                return ResourceManager.GetString("HeightFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fait Mutation.
         /// </summary>
         public static string IsMutation {
@@ -133,6 +142,24 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Poste.
+        /// </summary>
+        public static string Position {
+            get {
+                return ResourceManager.GetString("Position", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Postes.
+        /// </summary>
+        public static string Positions {
+            get {
+                return ResourceManager.GetString("Positions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pointure.
         /// </summary>
         public static string ShoesSize {
@@ -147,6 +174,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         public static string Weight {
             get {
                 return ResourceManager.GetString("Weight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} kg.
+        /// </summary>
+        public static string WeightFormat {
+            get {
+                return ResourceManager.GetString("WeightFormat", resourceCulture);
             }
         }
     }

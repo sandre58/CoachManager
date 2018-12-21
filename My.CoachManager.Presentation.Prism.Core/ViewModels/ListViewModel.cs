@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
-using System.Windows.Input;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.Enums;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Models;
 using My.CoachManager.Presentation.Prism.Core.Models.Filters;
@@ -250,7 +250,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
             try
             {
-                SelectedItems.ForEach(RemoveItemCore);
+                var itemToDelete = SelectedItems.ToList();
+                itemToDelete.ForEach(RemoveItemCore);
                 OnRemoveSelectedItemsCompleted();
             }
             catch (BusinessException e)
@@ -371,6 +372,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets or sets selection mode.
+        /// </summary>
+        public SelectionMode SelectionMode { get; set; }
+
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets a value indicates the list is in read only.
@@ -420,6 +426,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
             Items = new ObservableItemsCollection<TEntityModel>();
 
+            SelectionMode = SelectionMode.Multiple;
             IsReadOnly = false;
         }
 

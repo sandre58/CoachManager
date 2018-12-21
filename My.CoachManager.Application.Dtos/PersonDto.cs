@@ -22,6 +22,9 @@ namespace My.CoachManager.Application.Dtos
         public DateTime? Birthdate { get; set; }
 
         [DataMember]
+        public DateTime? FromDate { get; set; }
+
+        [DataMember]
         public string PlaceOfBirth { get; set; }
 
         [DataMember]

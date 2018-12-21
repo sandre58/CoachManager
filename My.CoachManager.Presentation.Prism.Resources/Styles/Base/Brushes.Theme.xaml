@@ -53,7 +53,7 @@
     <SolidColorBrush x:Key="LightHeaderBackground" Color="{DynamicResource LightVariation1Color}" presentationOptions:Freeze="true" />
 
     <!-- SEPARATOR -->
-    <SolidColorBrush x:Key="Separator" Color="{DynamicResource Variation6Color}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Separator" Color="{DynamicResource Variation2Color}" presentationOptions:Freeze="true" />
 
     <!-- CONTROLS -->
     <SolidColorBrush x:Key="AccentControl" Color="{DynamicResource LightVariation2Color}" presentationOptions:Freeze="true" />

@@ -23,6 +23,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                 PostalCode = x.Address.PostalCode,
                 City = x.Address.City,
                 Birthdate = x.Birthdate,
+                FromDate = x.FromDate,
                 Gender = x.Gender,
                 LicenseNumber = x.LicenseNumber,
                 Photo = x.Photo,
@@ -56,6 +57,22 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                     Default = p.Default,
                     Value = p.Value,
                     PersonId = p.PersonId
+                }),
+                Positions = x.Positions.Select(y => new PlayerPositionDto()
+                {
+                    Id = y.Id,
+                    IsNatural = y.IsNatural,
+                    Rating = y.Rating,
+                    PositionId = y.PositionId,
+                    Position = y.Position != null ? new PositionDto()
+                    {
+                        Id = y.Position.Id,
+                        Label = y.Position.Label,
+                        Code = y.Position.Code,
+                        Row = y.Position.Row,
+                        Column = y.Position.Column,
+                        Order = y.Position.Order
+                    } : null
                 }),
                 Height = x.Height,
                 Weight = x.Weight,

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using My.CoachManager.CrossCutting.Core.Collections;
+using My.CoachManager.Presentation.Prism.Core.Enums;
 using My.CoachManager.Presentation.Prism.Core.Models;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
@@ -16,7 +17,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
         /// <summary>
         /// Gets or sets the selected items.
         /// </summary>
-        IEnumerable<TEntityModel> SelectedItems { get; set; }
+        new IEnumerable<TEntityModel> SelectedItems { get; set; }
 
         /// <summary>
         /// Gets or sets the selected item.
@@ -35,6 +36,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
         /// Gets or sets the selected item.
         /// </summary>
         IEnumerable SelectedItems { get; set; }
+
+        /// <summary>
+        /// Gets or sets selection mode.
+        /// </summary>
+        SelectionMode SelectionMode { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicates the list is in read only.

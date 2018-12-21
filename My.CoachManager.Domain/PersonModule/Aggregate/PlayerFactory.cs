@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.AddressModule.Aggregate;
+using My.CoachManager.Domain.CategoryModule.Aggregate;
 using My.CoachManager.Domain.Entities;
+using My.CoachManager.Domain.PositionModule.Aggregate;
 
 namespace My.CoachManager.Domain.PersonModule.Aggregate
 {
@@ -22,6 +24,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                     FirstName = item.FirstName,
                     LastName = item.LastName,
                     Birthdate = item.Birthdate,
+                    FromDate = item.FromDate,
                     Gender = item.Gender,
                     LicenseNumber = item.LicenseNumber,
                     Photo = item.Photo,
@@ -35,7 +38,8 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                     Size = item.Size,
                     AddressId = item.AddressId,
                     Address = AddressFactory.CreateEntity(item.Address, item.PostalCode, item.City),
-                    Contacts = item.Phones.Select(ContactFactory.CreateEntity<Phone>).Concat(item.Emails.Select(ContactFactory.CreateEntity<Email>).Cast<Contact>()).ToList()
+                    Contacts = item.Phones.Select(ContactFactory.CreateEntity<Phone>).Concat(item.Emails.Select(ContactFactory.CreateEntity<Email>).Cast<Contact>()).ToList(),
+                    Positions = item.Positions.Select(CreatePosition).ToList()
                 };
             }
 
@@ -51,6 +55,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
             entity.LastName = item.LastName;
             entity.AddressId = item.AddressId;
             entity.Birthdate = item.Birthdate;
+            entity.FromDate = item.FromDate;
             entity.Gender = item.Gender;
             entity.LicenseNumber = item.LicenseNumber;
             entity.Photo = item.Photo;
@@ -65,6 +70,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
             entity.Description = item.Description;
             entity.Contacts = item.Phones.Select(ContactFactory.CreateEntity<Phone>)
                 .Concat(item.Emails.Select(ContactFactory.CreateEntity<Email>).Cast<Contact>()).ToList();
+            entity.Positions = item.Positions.Select(CreatePosition).ToList();
 
             return true;
         }
@@ -85,6 +91,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                 PostalCode = player.Address != null ? player.Address.PostalCode : string.Empty,
                 City = player.Address != null ? player.Address.City : string.Empty,
                 Birthdate = player.Birthdate,
+                FromDate = player.FromDate,
                 Gender = player.Gender,
                 LicenseNumber = player.LicenseNumber,
                 Photo = player.Photo,
@@ -92,9 +99,11 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                 Laterality = player.Laterality,
                 CategoryId = player.CategoryId,
                 CountryId = player.CountryId,
+                Category = CategoryFactory.Get(player.Category),
                 Country = CountryFactory.Get(player.Country),
                 Emails = player.Contacts.OfType<Email>().Select(ContactFactory.GetContact<EmailDto>),
                 Phones = player.Contacts.OfType<Phone>().Select(ContactFactory.GetContact<PhoneDto>),
+                Positions = player.Positions.Select(GetPosition).OrderBy(x => x.Position.Order),
                 Height = player.Height,
                 Weight = player.Weight,
                 ShoesSize = player.ShoesSize,
@@ -104,6 +113,47 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                 ModifiedDate = player.ModifiedDate,
                 ModifiedBy = player.ModifiedBy
             };
+        }
+
+        /// <summary>
+        /// Convert the DTO to model.
+        /// </summary>
+        /// <returns>The model.</returns>
+        public static PlayerPosition CreatePosition(PlayerPositionDto position)
+        {
+            if (position == null) return null;
+
+            var result = new PlayerPosition
+            {
+                Id = position.Id,
+                PositionId = position.PositionId,
+                PlayerId = position.PlayerId,
+                IsNatural = position.IsNatural,
+                Rating = position.Rating
+            };
+
+            return result;
+        }
+
+        /// <summary>
+        /// Convert the DTO to model.
+        /// </summary>
+        /// <returns>The model.</returns>
+        public static PlayerPositionDto GetPosition(PlayerPosition position)
+        {
+            if (position == null) return null;
+
+            var result = new PlayerPositionDto
+            {
+                Id = position.Id,
+                Position = PositionFactory.Get(position.Position),
+                PositionId = position.PositionId,
+                PlayerId = position.PlayerId,
+                IsNatural = position.IsNatural,
+                Rating = position.Rating
+            };
+
+            return result;
         }
     }
 }

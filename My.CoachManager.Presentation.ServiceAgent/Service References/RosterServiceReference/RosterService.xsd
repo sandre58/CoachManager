@@ -24,14 +24,14 @@
   <xs:element name="SaveRosterResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" minOccurs="0" name="SaveRosterResult" nillable="true" type="q3:RosterDto" />
+        <xs:element minOccurs="0" name="SaveRosterResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RemoveRoster">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" minOccurs="0" name="dto" nillable="true" type="q4:RosterDto" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" minOccurs="0" name="dto" nillable="true" type="q3:RosterDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -50,7 +50,7 @@
   <xs:element name="GetRosterByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" minOccurs="0" name="GetRosterByIdResult" nillable="true" type="q5:RosterDto" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" minOccurs="0" name="GetRosterByIdResult" nillable="true" type="q4:RosterDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -64,7 +64,7 @@
   <xs:element name="GetPlayersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" minOccurs="0" name="GetPlayersResult" nillable="true" type="q6:ArrayOfRosterPlayerDto" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" minOccurs="0" name="GetPlayersResult" nillable="true" type="q5:ArrayOfRosterPlayerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -72,7 +72,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="rosterId" type="xs:int" />
-        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playerIds" nillable="true" type="q7:ArrayOfint" />
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playerIds" nillable="true" type="q6:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -85,7 +85,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="rosterId" type="xs:int" />
-        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playerIds" nillable="true" type="q8:ArrayOfint" />
+        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playerIds" nillable="true" type="q7:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -104,7 +104,21 @@
   <xs:element name="GetRosterPlayerByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" minOccurs="0" name="GetRosterPlayerByIdResult" nillable="true" type="q9:RosterPlayerDto" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" minOccurs="0" name="GetRosterPlayerByIdResult" nillable="true" type="q8:RosterPlayerDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdatePlayer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" minOccurs="0" name="dto" nillable="true" type="q9:RosterPlayerDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdatePlayerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdatePlayerResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

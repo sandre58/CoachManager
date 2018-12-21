@@ -1,11 +1,18 @@
-﻿using My.CoachManager.Presentation.Prism.Core.ViewModels;
+﻿using System.Collections.Generic;
+using My.CoachManager.Application.Dtos;
+using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
+using My.CoachManager.Presentation.Prism.Modules.Core.ViewModels;
+using My.CoachManager.Presentation.ServiceAgent.AddressServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 {
-    public partial class RosterPlayerEditViewModel : EditViewModel<RosterPlayerModel>
+    public class RosterPlayerEditViewModel : PlayerEditViewModel<RosterPlayerModel>
     {
         #region Fields
 
@@ -18,7 +25,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="RosterViewModel"/>.
         /// </summary>
-        public RosterPlayerEditViewModel(IRosterService rosterService)
+        public RosterPlayerEditViewModel(IRosterService rosterService, ICategoryService categoryService, IAddressService addressService, IPositionService positionService, IPersonService personService)
+            : base(personService, categoryService, addressService, positionService)
         {
             _rosterService = rosterService;
         }
@@ -31,7 +39,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 
         protected override bool SaveItemCore()
         {
-            return true;
+            return _rosterService.UpdatePlayer(RosterFactory.Get(Item, Mode == ScreenMode.Creation ? CrudStatus.Created : CrudStatus.Updated)) > 0;
         }
 
         protected override RosterPlayerModel LoadItemCore(int id)

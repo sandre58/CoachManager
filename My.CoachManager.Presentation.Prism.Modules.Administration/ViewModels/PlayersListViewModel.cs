@@ -1,13 +1,15 @@
 ﻿using System.Linq;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Extensions;
+using My.CoachManager.Presentation.Prism.Core.Enums;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Resources;
-using My.CoachManager.Presentation.Prism.Modules.Administration.Views;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
+using PlayerEditView = My.CoachManager.Presentation.Prism.Modules.Administration.Views.PlayerEditView;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
@@ -17,6 +19,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 
         private readonly IPersonService _personService;
         private readonly ICategoryService _categoryService;
+        private readonly IPositionService _positionService;
 
         #endregion Fields
 
@@ -25,10 +28,11 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="CategoriesListViewModel"/>.
         /// </summary>
-        public PlayersListViewModel(IPersonService personService, ICategoryService categoryService)
+        public PlayersListViewModel(IPersonService personService, ICategoryService categoryService, IPositionService positionService)
         {
             _personService = personService;
             _categoryService = categoryService;
+            _positionService = positionService;
         }
 
         #endregion Constructors
@@ -77,7 +81,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 
             var categories = _categoryService.GetCategories().Select(CategoryFactory.Get);
             var countries = _personService.GetCountries().Select(CountryFactory.Get);
-            Filters = new PlayersListFiltersViewModel(categories, countries);
+            var positions = _positionService.GetPositions().Select(PositionFactory.Get);
+            Filters = new PlayersListFiltersViewModel(categories, positions, countries);
             Parameters = new PlayersListParametersViewModel();
         }
 

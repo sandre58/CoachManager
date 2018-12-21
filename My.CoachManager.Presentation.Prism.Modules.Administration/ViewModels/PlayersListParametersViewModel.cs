@@ -10,7 +10,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         private static readonly string[] GeneralInformationsColumns =
             {"Age", "Birthdate", "Category", "Gender", "Country", "Address", "Phone", "Email"};
 
-        private static readonly string[] ClubInformationsColumns = { "Category", "LicenseNumber" };
+        private static readonly string[] ClubInformationsColumns = { "Category", "Position", "LicenseNumber", "FromDate" };
 
         private static readonly string[] BodyInformationsColumns =
             {"Laterality", "Height", "Weight", "Size", "ShoesSize"};

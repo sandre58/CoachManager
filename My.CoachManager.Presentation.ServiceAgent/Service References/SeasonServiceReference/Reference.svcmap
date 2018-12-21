@@ -26,7 +26,6 @@
     <MetadataFile FileName="SeasonService1.xsd" MetadataType="Schema" ID="c288d199-b137-446b-89c8-7f048d688efc" SourceId="1" SourceUrl="http://localhost:62863/Services/SeasonService.svc?xsd=xsd2" />
     <MetadataFile FileName="SeasonService2.xsd" MetadataType="Schema" ID="fae94d6c-c81f-4f7e-aa63-c5a039e165e9" SourceId="1" SourceUrl="http://localhost:62863/Services/SeasonService.svc?xsd=xsd1" />
     <MetadataFile FileName="SeasonService3.xsd" MetadataType="Schema" ID="5b99c615-a305-4fb7-88e5-de17e11eb91a" SourceId="1" SourceUrl="http://localhost:62863/Services/SeasonService.svc?xsd=xsd0" />
-    <MetadataFile FileName="SeasonService4.xsd" MetadataType="Schema" ID="2aa83a6d-d4c9-4ce6-b49a-7e6cfadc79c1" SourceId="1" SourceUrl="http://localhost:62863/Services/SeasonService.svc?xsd=xsd4" />
     <MetadataFile FileName="SeasonService.wsdl" MetadataType="Wsdl" ID="513bb066-a1bf-46a0-a2ea-9ad90eab3afa" SourceId="1" SourceUrl="http://localhost:62863/Services/SeasonService.svc?wsdl" />
     <MetadataFile FileName="SeasonService.disco" MetadataType="Disco" ID="7eea7516-3e4d-4bf2-8226-bf87310ac4b7" SourceId="1" SourceUrl="http://localhost:62863/Services/SeasonService.svc?disco" />
   </Metadata>

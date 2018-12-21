@@ -102,6 +102,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\PositionServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\RosterServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -148,8 +153,10 @@
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Categories.CategoryDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Categories.CategoryDto1.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Category.CategoryDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.CategoryDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Competitions.ClubDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Countries.CountryDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.CountryDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Data.CategoriesListDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Data.CategoryDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Data.CountryDto.datasource" />
@@ -168,10 +175,12 @@
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Persons.PlayerDetailsDto1.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Persons.PlayerDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Persons.PlayerDto1.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.PlayerDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.CityDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.PlayerDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.PlayersInformationsListDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Players.PlayersListDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.PositionDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Positions.PositionDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Roster.RosterDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.RosterDto.datasource" />
@@ -181,7 +190,9 @@
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Rosters.SquadDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Rosters.SquadDto1.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Season.SeasonDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.SeasonDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Seasons.SeasonDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.UserDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Users.UserDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Users.UserDto1.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Domain.Entities.Player.datasource" />
@@ -199,9 +210,6 @@
     <None Include="Service References\CategoryServiceReference\CategoryService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\CategoryServiceReference\CategoryService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\CategoryServiceReference\CategoryService2.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -215,12 +223,6 @@
     <None Include="Service References\PersonServiceReference\PersonService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\PersonServiceReference\PersonService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\PersonServiceReference\PersonService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\PersonServiceReference\PersonService3.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -230,7 +232,17 @@
     <None Include="Service References\PersonServiceReference\PersonService5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\PersonServiceReference\PersonService6.xsd">
+    <None Include="Service References\PositionServiceReference\PositionService.wsdl" />
+    <None Include="Service References\PositionServiceReference\PositionService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PositionServiceReference\PositionService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PositionServiceReference\PositionService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PositionServiceReference\PositionService3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\RosterServiceReference\RosterService.wsdl" />
@@ -262,13 +274,7 @@
     <None Include="Service References\SeasonServiceReference\SeasonService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SeasonServiceReference\SeasonService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\UserServiceReference\UserService.wsdl" />
-    <None Include="Service References\UserServiceReference\UserService.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\UserServiceReference\UserService1.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -297,6 +303,7 @@
     <WCFMetadataStorage Include="Service References\AddressServiceReference\" />
     <WCFMetadataStorage Include="Service References\CategoryServiceReference\" />
     <WCFMetadataStorage Include="Service References\PersonServiceReference\" />
+    <WCFMetadataStorage Include="Service References\PositionServiceReference\" />
     <WCFMetadataStorage Include="Service References\RosterServiceReference\" />
     <WCFMetadataStorage Include="Service References\SeasonServiceReference\" />
     <WCFMetadataStorage Include="Service References\UserServiceReference\" />
@@ -387,6 +394,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\AddressServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PositionServiceReference\PositionService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PositionServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PositionServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PositionServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

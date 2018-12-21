@@ -7,7 +7,10 @@
                     xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
                     xmlns:enums="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
                     xmlns:filters="clr-namespace:My.CoachManager.Presentation.Prism.Core.Models.Filters;assembly=My.CoachManager.Presentation.Prism.Core"
-                    xmlns:selectors="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Selectors">
+                    xmlns:selectors="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Selectors"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:filters1="clr-namespace:My.CoachManager.Presentation.Prism.Models.Filters;assembly=My.CoachManager.Presentation.Prism.Models"
+                    xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Converters.xaml" />
@@ -16,7 +19,11 @@
         <ResourceDictionary Source="../Controls/TextBox.xaml" />
         <ResourceDictionary Source="../Controls/NumericUpDown.xaml" />
         <ResourceDictionary Source="../Controls/Combobox.xaml" />
+        <ResourceDictionary Source="../Controls/Checkbox.xaml" />
+        <ResourceDictionary Source="../Controls/RadioButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
+    <system:Double x:Key="CoefficientRatingBy5">0.2</system:Double>
 
     <DataTemplate DataType="{x:Type screens:FilterViewModel}">
         <Grid Background="{DynamicResource HeaderBackground}" Margin="{StaticResource DefaultMargin}">
@@ -35,7 +42,7 @@
                     ToolTip="{x:Static strings:ControlResources.RemoveCondition}"
                     Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.Filters.RemoveFilterCommand}"
                     CommandParameter="{Binding Filter}" Margin="{StaticResource LargeMargin}" />
-            <CheckBox Grid.Column="1" x:Name="IsEnabled" IsChecked="{Binding IsEnabled}" HorizontalAlignment="Center" />
+            <CheckBox Grid.Column="1" x:Name="IsEnabled" IsChecked="{Binding IsEnabled}" HorizontalAlignment="Center" Style="{StaticResource CircleCheckBoxStyle}" />
             <ComboBox Grid.Column="2"
                       HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
                       Width="60"
@@ -63,6 +70,26 @@
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
             <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Width="{StaticResource MediumWidth}" Style="{StaticResource TextBoxBaseStyle}" />
             <CheckBox Grid.Column="2" IsChecked="{Binding CaseSensitive}" Content="{x:Static strings:ControlResources.CaseSensitive}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type filters:BooleanFilter}">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Margin="{StaticResource DefaultVerticalMargin}">
+                <RadioButton Style="{StaticResource IconRadioButtonStyle}" Content="{x:Static strings:ControlResources.Yes}"
+                             parameters:ControlParameters.Icon="{DynamicResource OkGeometry}" parameters:ControlParameters.FocusBackground="{DynamicResource Positive}"
+                             parameters:ControlParameters.PressedBackground="{DynamicResource Positive}"
+                             IsChecked="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
+                <RadioButton Style="{StaticResource IconRadioButtonStyle}" Content="{x:Static strings:ControlResources.No}"
+                             parameters:ControlParameters.Icon="{DynamicResource CancelGeometry}" parameters:ControlParameters.FocusBackground="{DynamicResource Negative}"
+                             parameters:ControlParameters.PressedBackground="{DynamicResource Negative}"
+                             IsChecked="{Binding Value, Converter={StaticResource NotConverter}, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
         </Grid>
     </DataTemplate>
 
@@ -105,6 +132,57 @@
                                             Maximum="{Binding Maximum}"
                                             Width="{StaticResource MidSmallWidth}"
                                             Style="{StaticResource ExtendedNumericUpDownBaseStyle}" />
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.EqualsTo}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="To" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.GreaterEqualThan}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="To" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.GreaterThan}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="To" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.LessEqualThan}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="From" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.LessThan}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="From" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.NotEqualsTo}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="To" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type filters:DateFilter}">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <ComboBox Grid.Column="0"
+                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      Width="{StaticResource MediumWidth}"
+                      ItemsSource="{Binding Source={extensions:Enum {x:Type enums:ComplexComparableOperator}}}"
+                      DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
+            <DatePicker x:Name="From" Grid.Column="1"
+                                            SelectedDate="{Binding From}"
+                                            Width="{StaticResource MediumWidth}" />
+            <TextBlock x:Name="And" Grid.Column="2" Text="{x:Static resources:GlobalResources.And}" />
+            <DatePicker x:Name="To" Grid.Column="3"
+                                             SelectedDate="{Binding To}"
+                                            Width="{StaticResource MediumWidth}" />
         </Grid>
         <DataTemplate.Triggers>
             <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.EqualsTo}">
@@ -241,4 +319,80 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <DataTemplate DataType="{x:Type filters1:PlayerPositionFilter}">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <ComboBox Grid.Column="0"
+                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      Width="{StaticResource SmallLargeWidth}"
+                      ItemsSource="{Binding AllowedValues}"
+                      DisplayMemberPath="Label" SelectedValuePath="Id" SelectedValue="{Binding PositionId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <ComboBox Grid.Column="1"
+                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      Width="{StaticResource MediumWidth}"
+                      ItemsSource="{Binding Source={extensions:Enum {x:Type enums:ComplexComparableOperator}}}"
+                      DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
+            <controls:Rating x:Name="From" Grid.Column="2"
+                             Value="{Binding From, Converter={StaticResource CoefficientConverter}, ConverterParameter={StaticResource CoefficientRatingBy5}, Mode=TwoWay}" 
+                             ItemCount="{Binding Maximum}"
+                             ItemsSource="{Binding Source={extensions:Enum {x:Type enums:PositionRating}}}"
+                             HorizontalAlignment="Center" 
+                             VerticalAlignment="Center">
+                <controls:Rating.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Display}" />
+                    </DataTemplate>
+                </controls:Rating.ItemTemplate>
+            </controls:Rating>
+            <TextBlock x:Name="And" Grid.Column="3" Text="{x:Static resources:GlobalResources.And}" />
+            <controls:Rating x:Name="To" Grid.Column="4"
+                             Value="{Binding To, Converter={StaticResource CoefficientConverter}, ConverterParameter={StaticResource CoefficientRatingBy5}, Mode=TwoWay}" 
+                             ItemCount="{Binding Maximum}"
+                             ItemsSource="{Binding Source={extensions:Enum {x:Type enums:PositionRating}}}"
+                             HorizontalAlignment="Center" 
+                             VerticalAlignment="Center">
+                <controls:Rating.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Display}" />
+                    </DataTemplate>
+                </controls:Rating.ItemTemplate>
+            </controls:Rating>
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.EqualsTo}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="To" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.GreaterEqualThan}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="To" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.GreaterThan}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="To" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.LessEqualThan}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="From" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.LessThan}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="From" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.NotEqualsTo}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="To" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
 </ResourceDictionary>

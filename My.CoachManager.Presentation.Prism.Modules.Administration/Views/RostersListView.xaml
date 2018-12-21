@@ -7,7 +7,6 @@
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
              xmlns:mvvm="http://prismlibrary.com/"
-             xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
              xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:models="clr-namespace:My.CoachManager.Presentation.Prism.Models;assembly=My.CoachManager.Presentation.Prism.Models"
              mc:Ignorable="d"
@@ -17,12 +16,12 @@
 
     <controls:WorkspaceView>
 
-        <ListView ItemsSource="{Binding Items}">
-            <ListView.View>
+        <controls:ExtendedListView ItemsSource="{Binding Items}">
+            <controls:ExtendedListView.View>
                 <controls:ExtendedGridView VisibleColumns="{Binding Parameters.DisplayedColumns}">
                     <!-- Name -->
                     <controls:ExtendedGridViewColumn Header="{x:Static strings:RosterResources.Name}" Width="300"
-                                                     parameters:ListViewParameters.PropertyName="Name">
+                                                     PropertyName="Name">
                         <controls:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:RosterModel">
                                 <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" FontWeight="DemiBold" />
@@ -33,16 +32,16 @@
                     <!-- Category -->
                     <controls:ExtendedGridViewColumn Header="{x:Static strings:RosterResources.Category}"
                                                      DisplayMemberBinding="{Binding Category.Label}"
-                                                     parameters:ListViewParameters.PropertyName="Category" />
+                                                     PropertyName="Category" />
 
                     <!-- Season -->
                     <controls:ExtendedGridViewColumn Header="{x:Static strings:RosterResources.Season}"
                                                      DisplayMemberBinding="{Binding Season.Label}"
-                                                     parameters:ListViewParameters.PropertyName="Season" />
+                                                     PropertyName="Season" />
 
                 </controls:ExtendedGridView>
-            </ListView.View>
-        </ListView>
+            </controls:ExtendedListView.View>
+        </controls:ExtendedListView>
 
         <controls:WorkspaceView.Commands>
             <controls:CommandButton DockPanel.Dock="Right"  Style="{StaticResource AddCommandButtonApplicationBarStyle}" Command="{Binding AddCommand}" />

@@ -1,15 +1,14 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows;
-using My.CoachManager.CrossCutting.Core.Extensions;
+﻿using System.Windows;
 using My.CoachManager.Presentation.Prism.Core.Commands;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Events;
 using My.CoachManager.Presentation.Prism.Core.Manager;
+using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
+using My.CoachManager.Presentation.Prism.Modules.Core.Views;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using Prism.Commands;
 using Prism.Events;
@@ -74,14 +73,14 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         public DelegateCommand GoForwardCommand { get; set; }
 
         /// <summary>
-        /// Gets or sets selectable rosters.
+        /// Gets or sets the set roster command.
         /// </summary>
-        public ObservableCollection<RosterModel> Rosters { get; set; }
+        public DelegateCommand SetRosterCommand { get; set; }
 
         /// <summary>
-        /// Gets or sets selected Roster.
+        /// Gets or sets selectable rosters.
         /// </summary>
-        public RosterModel SelectedRoster { get; set; }
+        public RosterModel Roster { get; set; }
 
         /// <inheritdoc />
         /// <summary>
@@ -107,6 +106,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 
             GoBackCommand = new DelegateCommand(GoBack, CanGoBack);
             GoForwardCommand = new DelegateCommand(GoForward, CanGoForward);
+            SetRosterCommand = new DelegateCommand(SetRoster, CanSetRoster);
         }
 
         /// <inheritdoc />
@@ -149,9 +149,9 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <returns></returns>
         protected override void LoadDataCore()
         {
-            var result = _rosterService.GetRosters();
+            var result = _rosterService.GetRosterById(SettingsManager.GetRosterId());
 
-            Rosters = result.Select(RosterFactory.Get).ToObservableCollection();
+            Roster = RosterFactory.Get(result);
         }
 
         #endregion Data
@@ -227,6 +227,37 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 
         #endregion GoForward
 
+        #region GoForward
+
+        /// <summary>
+        /// Go back.
+        /// </summary>
+        private void SetRoster()
+        {
+            DialogManager.ShowSelectItemsDialog<SelectRostersView>(dialog =>
+            {
+                var model = dialog.Content.DataContext as ISelectItemsViewModel;
+                if (dialog.Result == DialogResult.Ok)
+                {
+                    if (model != null)
+                        NotificationManager.ShowSuccess(string.Format(MessageResources.ItemsAdded,
+                            model.SelectedItems.Count));
+                }
+            });
+        }
+
+        /// <summary>
+        /// Can go back.
+        /// </summary>
+        /// <returns></returns>
+        private bool CanSetRoster()
+        {
+            return true;
+        }
+
+        #endregion GoForward
+
         #endregion Methods
+
     }
 }

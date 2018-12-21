@@ -38,7 +38,7 @@ namespace My.CoachManager.Services.Wcf
         /// </summary>
         /// <param name="categoryDto"></param>
         /// <returns></returns>
-        public CategoryDto SaveCategory(CategoryDto categoryDto)
+        public int SaveCategory(CategoryDto categoryDto)
         {
             return ServiceLocator.Current.GetInstance<ICategoryAppService>().SaveCategory(categoryDto);
         }

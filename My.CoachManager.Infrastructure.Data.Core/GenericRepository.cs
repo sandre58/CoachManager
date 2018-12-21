@@ -47,6 +47,11 @@ namespace My.CoachManager.Infrastructure.Data.Core
 
         #region ----- Properties -----
 
+        /// <summary>
+        /// Gets Query.
+        /// </summary>
+        public IQueryable<TEntity> Query => CreateSet();
+
         /// <inheritdoc />
         /// <summary>
         /// Gets a unit of work in this repository.

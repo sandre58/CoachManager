@@ -24,6 +24,7 @@
         <Setter Property="parameters:TextBoxParameters.UseFloatingWatermark" Value="True" />
         <Setter Property="parameters:TextBoxParameters.ButtonWidth" Value="13" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource PopupValidationErrorTemplate}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:ExtendedNumericUpDown}">

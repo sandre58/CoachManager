@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Windows;
 using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.Enums;
 using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Services;
 
@@ -59,6 +61,47 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         {
             var view = ServiceLocator.Current.GetInstance(typeView) as FrameworkElement;
             ShowWorkspaceDialog(view, callback);
+        }
+
+        #endregion
+
+        #region Select Items Dialog
+
+        /// <summary>
+        /// Displays a modal dialog.
+        /// </summary>
+        /// <param name="view">The view to include in workspace dialog.</param>
+        /// <param name="callback">Action executed after result of dialog.</param>
+        /// <param name="selectionMode"></param>
+        /// <param name="notSelectableItems"></param>
+        public static void ShowSelectItemsDialog(FrameworkElement view, Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null)
+        {
+            DialogService.ShowSelectItemsDialog(view, callback, selectionMode, notSelectableItems);
+        }
+
+        /// <summary>
+        /// Displays a modal dialog.
+        /// </summary>
+        /// <param name="callback">Action executed after result of dialog.</param>
+        /// <param name="selectionMode"></param>
+        /// <param name="notSelectableItems"></param>
+        public static void ShowSelectItemsDialog<TView>(Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null) where TView : FrameworkElement
+        {
+            var view = ServiceLocator.Current.GetInstance<TView>();
+            ShowSelectItemsDialog(view, callback, selectionMode, notSelectableItems);
+        }
+
+        /// <summary>
+        /// Displays a modal dialog.
+        /// </summary>
+        /// <param name="typeView">The view to include in workspace dialog.</param>
+        /// <param name="callback">Action executed after result of dialog.</param>
+        /// <param name="selectionMode"></param>
+        /// <param name="notSelectableItems"></param>
+        public static void ShowSelectItemsDialog(Type typeView, Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null)
+        {
+            var view = ServiceLocator.Current.GetInstance(typeView) as FrameworkElement;
+            ShowSelectItemsDialog(view, callback, selectionMode, notSelectableItems);
         }
 
         #endregion

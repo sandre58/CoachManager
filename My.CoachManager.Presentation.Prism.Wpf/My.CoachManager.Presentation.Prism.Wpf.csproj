@@ -107,6 +107,7 @@
       <DependentUpon>SkinResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
@@ -338,6 +339,10 @@
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Common\My.CoachManager.Presentation.Prism.Modules.Common.csproj">
       <Project>{E4990450-8387-40F8-B2DA-A9BADB0EDBCF}</Project>
       <Name>My.CoachManager.Presentation.Prism.Modules.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Core\My.CoachManager.Presentation.Prism.Modules.Core.csproj">
+      <Project>{9904BC67-A287-4FCE-9607-730B15E3F105}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Modules.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Home\My.CoachManager.Presentation.Prism.Modules.Home.csproj">
       <Project>{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28}</Project>

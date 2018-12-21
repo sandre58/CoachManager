@@ -5,6 +5,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Margins.xaml" />
+        <ResourceDictionary Source="../Base/Sizes.xaml" />
         <ResourceDictionary Source="../Base/Converters.xaml" />
         <ResourceDictionary Source="../Base/Geometry.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -19,15 +20,16 @@
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Height" Value="{StaticResource LargeHeight}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <controls:Icon Grid.Row="0" x:Name="Icon" Size="Medium" Foreground="{TemplateBinding Background}"  Content="{TemplateBinding parameters:ControlParameters.Icon}" />
+                        <controls:Icon Grid.Row="0" x:Name="Icon" Size="Custom" Margin="{StaticResource DefaultMargin}" Foreground="{TemplateBinding Background}"  Content="{TemplateBinding parameters:ControlParameters.Icon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                         <TextBlock Grid.Row="1" x:Name="Title" Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" />
                     </Grid>
                     <ControlTemplate.Triggers>

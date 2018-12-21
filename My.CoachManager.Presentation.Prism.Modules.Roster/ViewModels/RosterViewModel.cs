@@ -1,16 +1,19 @@
 ﻿using System.Linq;
-using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.Enums;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
-using My.CoachManager.Presentation.Prism.Modules.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Modules.Core.Views;
 using My.CoachManager.Presentation.Prism.Modules.Roster.Resources;
 using My.CoachManager.Presentation.Prism.Modules.Roster.Views;
+using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
@@ -20,18 +23,32 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         #region Fields
 
         private readonly IRosterService _rosterService;
-        private const int Roster = 1;
+        private readonly IPersonService _personService;
+        private readonly ICategoryService _categoryService;
+        private readonly IPositionService _positionService;
 
         #endregion Fields
+
+        #region Members
+
+        /// <summary>
+        /// Gets or sets model.
+        /// </summary>
+        public RosterModel Roster { get; set; }
+
+#endregion
 
         #region Constructors
 
         /// <summary>
         /// Initialise a new instance of <see cref="RosterViewModel"/>.
         /// </summary>
-        public RosterViewModel(IRosterService rosterService)
+        public RosterViewModel(IRosterService rosterService, IPersonService personService, ICategoryService categoryService, IPositionService positionService)
         {
             _rosterService = rosterService;
+            _personService = personService;
+            _categoryService = categoryService;
+            _positionService = positionService;
         }
 
         #endregion Constructors
@@ -62,7 +79,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// <param name="item"></param>
         protected override void RemoveItemCore(RosterPlayerModel item)
         {
-            _rosterService.RemovePlayers(Roster, new[] { item.Player.Id });
+            _rosterService.RemovePlayers(Roster.Id, new[] { item.PlayerId });
         }
 
         /// <inheritdoc />
@@ -72,18 +89,21 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// <returns></returns>
         protected override void LoadDataCore()
         {
-            var result = _rosterService.GetPlayers(Roster);
+            Roster = RosterFactory.Get(_rosterService.GetRosterById(SettingsManager.GetRosterId()));
+            var result = _rosterService.GetPlayers(Roster.Id);
 
             Items = result.Select(RosterFactory.Get).ToItemsObservableCollection();
+            Title = Roster.Name;
         }
 
         protected override void InitializeDataCore()
         {
             base.InitializeDataCore();
 
-            //var categories = _categoryService.GetCategories().Select(CategoryFactory.Get);
-            //var countries = _personService.GetCountries().Select(CountryFactory.Get);
-            //Filters = new PlayersListFiltersViewModel(categories, countries);
+            var categories = _categoryService.GetCategories().Select(CategoryFactory.Get);
+            var countries = _personService.GetCountries().Select(CountryFactory.Get);
+            var positions  = _positionService.GetPositions().Select(PositionFactory.Get);
+            Filters = new RosterFiltersViewModel(categories, positions, countries);
             Parameters = new RosterParametersViewModel();
         }
 
@@ -93,24 +113,28 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 
         protected override void Add()
         {
-            var view = ServiceLocator.Current.GetInstance<SelectPlayersView>();
 
-            if (!(view.DataContext is SelectPlayersViewModel model)) return;
-
-            model.NotSelectableItems = Items.Select(x => x.Player);
-
-            DialogManager.ShowWorkspaceDialog(view, dialog =>
+            DialogManager.ShowSelectItemsDialog<SelectPlayersView>(dialog =>
             {
+                var model = dialog.Content.DataContext as ISelectItemsViewModel<RosterPlayerModel>;
                 if (dialog.Result == DialogResult.Ok)
                 {
-                    _rosterService.AddPlayers(Roster, model.SelectedItems.Select(x => x.Id).ToArray());
+                    if (model != null)
+                    {
+                        _rosterService.AddPlayers(Roster.Id, model.SelectedItems.Select(x => x.Id).ToArray());
 
-                    NotificationManager.ShowSuccess(string.Format(MessageResources.ItemsAdded,
-                        model.SelectedItems.Count()));
+                        NotificationManager.ShowSuccess(string.Format(MessageResources.ItemsAdded,
+                            model.SelectedItems.Count()));
+                    }
                 }
 
                 OnAddCompleted(dialog.Result);
-            });
+            },
+            SelectionMode.Multiple,
+            Items.Select(x => new PlayerModel()
+            {
+                Id = x.PlayerId
+            }).ToList());
         }
 
         #endregion Add

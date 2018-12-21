@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="ReferenceDto">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:EntityDto">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Label" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Order" type="xs:int" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="ReferenceDto" nillable="true" type="tns:ReferenceDto" />
-  <xs:complexType name="EntityDto">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CreatedDate" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="CrudStatus" type="tns:CrudStatus" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ModifiedDate" nillable="true" type="xs:dateTime" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="EntityDto" nillable="true" type="tns:EntityDto" />
-  <xs:simpleType name="CrudStatus">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="GenderType">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Unchanged" />
-      <xs:enumeration value="Created" />
-      <xs:enumeration value="Updated" />
-      <xs:enumeration value="Deleted" />
+      <xs:enumeration value="Male" />
+      <xs:enumeration value="Female" />
     </xs:restriction>
   </xs:simpleType>
-  <xs:element name="CrudStatus" nillable="true" type="tns:CrudStatus" />
+  <xs:element name="GenderType" nillable="true" type="tns:GenderType" />
+  <xs:simpleType name="Laterality">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="RightHander" />
+      <xs:enumeration value="LeftHander" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Laterality" nillable="true" type="tns:Laterality" />
+  <xs:simpleType name="PositionSide">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Left" />
+      <xs:enumeration value="Center" />
+      <xs:enumeration value="Right" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PositionSide" nillable="true" type="tns:PositionSide" />
+  <xs:simpleType name="PositionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="GoalKeeper" />
+      <xs:enumeration value="Sweeper" />
+      <xs:enumeration value="FullBack" />
+      <xs:enumeration value="CenterBack" />
+      <xs:enumeration value="WingBack" />
+      <xs:enumeration value="DefensiveMidfielder" />
+      <xs:enumeration value="Midfielder" />
+      <xs:enumeration value="AttackingMidfielder" />
+      <xs:enumeration value="Winger" />
+      <xs:enumeration value="Forward" />
+      <xs:enumeration value="Striker" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PositionType" nillable="true" type="tns:PositionType" />
 </xs:schema>

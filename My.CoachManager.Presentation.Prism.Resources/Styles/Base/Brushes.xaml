@@ -15,4 +15,11 @@
     <SolidColorBrush x:Key="Information" Color="{DynamicResource InformationColor}" presentationOptions:Freeze="true" />
     <SolidColorBrush x:Key="Male" Color="{DynamicResource MaleColor}" presentationOptions:Freeze="true" />
     <SolidColorBrush x:Key="Female" Color="{DynamicResource FemaleColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Excellent" Color="{DynamicResource ExcellentColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Great" Color="{DynamicResource GreatColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Good" Color="{DynamicResource GoodColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Average" Color="{DynamicResource AverageColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Poor" Color="{DynamicResource PoorColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Bad" Color="{DynamicResource BadColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="VeryBad" Color="{DynamicResource VeryBadColor}" presentationOptions:Freeze="true" />
 </ResourceDictionary>

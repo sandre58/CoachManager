@@ -25,7 +25,7 @@ namespace My.CoachManager.Application.Services.PersonModule
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        PlayerDto SavePlayer(PlayerDto dto);
+        int SavePlayer(PlayerDto dto);
 
         /// <summary>
         /// Remove a dto.

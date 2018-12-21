@@ -31,7 +31,7 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// <param name="playerDto">the player model.</param>
         /// <returns></returns>
         [OperationContract]
-        CategoryDto SaveCategory(CategoryDto playerDto);
+        int SaveCategory(CategoryDto playerDto);
 
         /// <summary>
         /// Remove a category.

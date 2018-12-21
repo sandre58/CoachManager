@@ -50,7 +50,7 @@ namespace My.CoachManager.Application.Services.SeasonModule
         /// Save a dto.
         /// </summary>
         /// <returns></returns>
-        public SeasonDto SaveSeason(SeasonDto dto)
+        public int SaveSeason(SeasonDto dto)
         {
             return _crudDomainService.Save(dto, SeasonFactory.CreateEntity, SeasonFactory.UpdateEntity, x => _seasonDomainService.Validate(x));
         }

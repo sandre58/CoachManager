@@ -208,6 +208,7 @@
     <Compile Include="CrudStatus.cs" />
     <Compile Include="AddressDto.cs" />
     <Compile Include="CategoryDto.cs" />
+    <Compile Include="PlayerPositionDto.cs" />
     <Compile Include="SeasonDto.cs" />
     <Compile Include="PositionDto.cs" />
     <Compile Include="PhoneDto.cs" />
@@ -222,16 +223,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RosterDto.cs" />
     <Compile Include="RosterPlayerDto.cs" />
+    <Compile Include="SquadDto.cs" />
     <Compile Include="UserDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\My.CoachManager.CrossCutting.Core\My.CoachManager.CrossCutting.Core.csproj">
       <Project>{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}</Project>
       <Name>My.CoachManager.CrossCutting.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Domain.Core\My.CoachManager.Domain.Core.csproj">
-      <Project>{7D8B4553-4A90-44D7-A1DD-14871E3C6127}</Project>
-      <Name>My.CoachManager.Domain.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

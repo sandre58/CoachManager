@@ -160,7 +160,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
                 }
                 else
                 {
-                    OnExceptionOccured(exception.InnerException);
+                    OnExceptionOccured(exception.InnerException ?? exception);
                 }
             }
         }
@@ -248,7 +248,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected override void LoadDataCore()
         {
-            Item = _activeId > 0 ? LoadItemCore(_activeId) : new TModel();
+            Item = new TModel();
+            if (_activeId > 0) Item = LoadItemCore(_activeId);
         }
 
         /// <summary>
@@ -274,7 +275,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual void OnItemChanged()
         {
-            if (Item != null) _activeId = Item.Id;
+            if (Item != null && Item.Id > 0) _activeId = Item.Id;
             if (Item != null) Item.PropertyChanged += OnItemPropertyChanged;
             SaveCommand.RaiseCanExecuteChanged();
             Item?.ResetModified();

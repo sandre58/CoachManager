@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:62863/Services/UserService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Users" />
+  <xs:import schemaLocation="http://localhost:62863/Services/UserService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" />
   <xs:element name="GetUserById">
     <xs:complexType>
       <xs:sequence>
@@ -11,7 +11,7 @@
   <xs:element name="GetUserByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Users" minOccurs="0" name="GetUserByIdResult" nillable="true" type="q1:UserDto" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" minOccurs="0" name="GetUserByIdResult" nillable="true" type="q1:UserDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -26,7 +26,7 @@
   <xs:element name="GetUserByLoginAndPasswordResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Users" minOccurs="0" name="GetUserByLoginAndPasswordResult" nillable="true" type="q2:UserDto" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" minOccurs="0" name="GetUserByLoginAndPasswordResult" nillable="true" type="q2:UserDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -40,7 +40,7 @@
   <xs:element name="GetUserByLoginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos.Users" minOccurs="0" name="GetUserByLoginResult" nillable="true" type="q3:UserDto" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" minOccurs="0" name="GetUserByLoginResult" nillable="true" type="q3:UserDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Resources;
@@ -14,6 +16,7 @@ namespace My.CoachManager.Presentation.Prism.Models
         public PlayerModel()
         {
             Laterality = PlayerConstants.DefaultLaterality;
+            Positions = new ObservableCollection<PlayerPositionModel>();
         }
 
         /// <summary>
@@ -53,5 +56,35 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// </summary>
         [Display(Name = "ShoesSize", ResourceType = typeof(PlayerResources))]
         public int? ShoesSize { get; set; }
+
+        /// <summary>
+        /// Gets or set the positions.
+        /// </summary>
+        [Display(Name = "Positions", ResourceType = typeof(PlayerResources))]
+        public ObservableCollection<PlayerPositionModel> Positions { get; set; }
+
+        /// <summary>
+        /// Get natural position
+        /// </summary>
+        public string NaturalPositions
+        {
+            get
+            {
+                if (Positions == null || Positions.Count <= 0) return string.Empty;
+                return string.Join(" / ", Positions.Where(x => x.IsNatural).OrderBy(x => x.Position.Order).Select(x => x.Position.Label));
+            }
+        }
+
+        /// <summary>
+        /// Get a string shows main positions.
+        /// </summary>
+        public string PositionsLiteral
+        {
+            get
+            {
+                if (Positions == null || Positions.Count <= 0) return string.Empty;
+                return string.Join(", ", Positions.Where(x => x.Rating > 3).OrderBy(x => x.Position.Order).Select(x => x.Position.Code));
+            }
+        }
     }
 }

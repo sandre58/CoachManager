@@ -12,31 +12,14 @@ namespace My.CoachManager.Presentation.Prism.Core.Models.Filters
     /// <typeparam name="TAllowedValues"></typeparam>
     public abstract class SelectableFilter<TAllowedValues> : Filter, ISerializable
     {
-        #region Fields
-
-        private IEnumerable<TAllowedValues> _allowedValues;
-
-        private BinaryOperator _operator;
-
-        #endregion Fields
-
         #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectedValueFilter{T,T}"/> class.
         /// </summary>
         /// <param name="propertyName">The property info.</param>
-        public SelectableFilter(string propertyName)
-            : this(propertyName, null)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SelectedValueFilter{T,T}"/> class.
-        /// </summary>
-        /// <param name="propertyName">The property info.</param>
         /// <param name="allowedValues"></param>
-        public SelectableFilter(string propertyName, IEnumerable<TAllowedValues> allowedValues)
+        public SelectableFilter(string propertyName, IEnumerable<TAllowedValues> allowedValues = null)
             : base(propertyName)
         {
             Operator = BinaryOperator.Is;
@@ -58,27 +41,17 @@ namespace My.CoachManager.Presentation.Prism.Core.Models.Filters
         /// Gets or sets the operator.
         /// </summary>
         /// <value>The property info.</value>
-        public BinaryOperator Operator
-        {
-            get { return _operator; }
-            set { SetProperty(ref _operator, value); }
-        }
+        public BinaryOperator Operator { get; set; }
 
         /// <summary>
         /// Gets the values to check for equality
         /// </summary>
         /// <value>The values.</value>
-        public IEnumerable<TAllowedValues> AllowedValues
-        {
-            get { return _allowedValues; }
-            set { SetProperty(ref _allowedValues, value); }
-        }
+        public IEnumerable<TAllowedValues> AllowedValues { get; set; }
 
         public override bool Equals(object obj)
         {
-            var o = obj as SelectableFilter<TAllowedValues>;
-
-            if (o == null || GetType() != obj.GetType())
+            if (!(obj is SelectableFilter<TAllowedValues> o) || GetType() != obj.GetType())
             {
                 return false;
             }

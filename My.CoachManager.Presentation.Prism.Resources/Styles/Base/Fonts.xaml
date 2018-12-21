@@ -8,7 +8,9 @@
     <FontFamily x:Key="HeaderFontFamily">pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Fonts/#DAGGERSQUARE</FontFamily>
 
     <!-- FONT SIZES-->
+    <sys:Double x:Key="VerySmallFontSize">8</sys:Double>
     <sys:Double x:Key="SmallFontSize">10</sys:Double>
+    <sys:Double x:Key="LabelFontSize">11</sys:Double>
     <sys:Double x:Key="MidSmallFontSize">12</sys:Double>
     <sys:Double x:Key="NormalFontSize">14</sys:Double>
     <sys:Double x:Key="MediumFontSize">16</sys:Double>
@@ -16,4 +18,5 @@
     <sys:Double x:Key="SmallHeaderFontSize">22</sys:Double>
     <sys:Double x:Key="MediumHeaderFontSize">26</sys:Double>
     <sys:Double x:Key="HeaderFontSize">30</sys:Double>
+    <sys:Double x:Key="LargeHeaderFontSize">45</sys:Double>
 </ResourceDictionary>

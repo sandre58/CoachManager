@@ -83,12 +83,16 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdornedControl.cs" />
+    <Compile Include="ExtendedListView.cs" />
+    <Compile Include="HeaderPanel.cs" />
+    <Compile Include="Clipper.cs" />
     <Compile Include="HyperlinkButton.cs" />
     <Compile Include="ExtendedGridView.cs" />
     <Compile Include="Badged.cs" />
@@ -139,9 +143,11 @@
     <Compile Include="Helpers\ValueChangeHelper.cs" />
     <Compile Include="IThumb.cs" />
     <Compile Include="ExtendedThumb.cs" />
+    <Compile Include="LinearClipper.cs" />
     <Compile Include="MultiComboBox.cs" />
     <Compile Include="Native\NativeConstants.cs" />
     <Compile Include="Notifications\ToastPosition.cs" />
+    <Compile Include="Parameters\GridParameters.cs" />
     <Compile Include="Parameters\Commands\CommandBinding.cs" />
     <Compile Include="Parameters\Commands\CommandBindingCollection.cs" />
     <Compile Include="Parameters\Commands\EventCommand.CommandBindings.cs" />
@@ -153,7 +159,15 @@
     <Compile Include="Parameters\Commands\Internal\IExecutionStrategy.cs" />
     <Compile Include="Parameters\Commands\KeyCommand.cs" />
     <Compile Include="Parameters\DragAndDropParameters.cs" />
-    <Compile Include="Parameters\ListViewParameters.cs" />
+    <Compile Include="PositionsSelector.cs" />
+    <Compile Include="Rating.cs" />
+    <Compile Include="RatingItem.cs" />
+    <Compile Include="Helpers\InteractionHelper.cs" />
+    <Compile Include="Ratings\ItemsControlHelper.cs" />
+    <Compile Include="Ratings\IUpdateVisualState.cs" />
+    <Compile Include="Ratings\RatingAutomationPeer.cs" />
+    <Compile Include="Ratings\RatingItemAutomationPeer.cs" />
+    <Compile Include="Ratings\RatingSelectionMode.cs" />
     <Compile Include="Toast.cs" />
     <Compile Include="ToastArea.cs" />
     <Compile Include="Notifications\IToastManager.cs" />

@@ -113,7 +113,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             {
                 return false;
             }
-            return Filter.Equals(o.Filter);
+            return ReferenceEquals(Filter, o.Filter);
         }
 
         // override object.GetHashCode

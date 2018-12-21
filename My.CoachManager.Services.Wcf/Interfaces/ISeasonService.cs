@@ -31,7 +31,7 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// <param name="playerDto">the player model.</param>
         /// <returns></returns>
         [OperationContract]
-        SeasonDto SaveSeason(SeasonDto playerDto);
+        int SaveSeason(SeasonDto playerDto);
 
         /// <summary>
         /// Remove a Season.

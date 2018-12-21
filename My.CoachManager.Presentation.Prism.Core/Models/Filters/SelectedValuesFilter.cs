@@ -14,15 +14,6 @@ namespace My.CoachManager.Presentation.Prism.Core.Models.Filters
     /// <typeparam name="TAllowedValues"></typeparam>
     public class SelectedValuesFilter<TAllowedValues> : SelectableFilter<TAllowedValues>, IValuesFilter
     {
-        #region Fields
-
-        /// <summary>
-        /// instance of the value used in the comparison
-        /// </summary>
-        private IEnumerable _values;
-
-        #endregion Fields
-
         #region Constructors
 
         /// <summary>
@@ -59,11 +50,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Models.Filters
         /// Gets or sets the value used in the comparison.
         /// </summary>
         /// <value>The compare to.</value>
-        public IEnumerable Values
-        {
-            get { return _values; }
-            set { SetProperty(ref _values, value); }
-        }
+        public IEnumerable Values { get; set; }
 
         #endregion Members
 

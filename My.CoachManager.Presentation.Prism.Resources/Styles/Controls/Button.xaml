@@ -114,7 +114,7 @@
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
                     <Grid>
                         <Ellipse x:Name="Base" Fill="{TemplateBinding Background}"
-                                StrokeThickness="{TemplateBinding BorderThickness}"
+                                StrokeThickness="{Binding BorderThickness.Left, RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}}"
                                 Stroke="{TemplateBinding BorderBrush}"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         <Border Padding="{TemplateBinding Padding}">
@@ -231,6 +231,27 @@
         <Setter Property="Focusable" Value="False" />
     </Style>
 
+    <Style x:Key="TextBoxColorCircleButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxCircleButtonStyle}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{Binding Path=(parameters:ControlParameters.Color), RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}}" Opacity="{DynamicResource ColorOpacity}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="parameters:ControlParameters.MouseOverBackground">
+            <Setter.Value>
+                <SolidColorBrush Color="{Binding Path=(parameters:ControlParameters.Color), RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}}" Opacity="1" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="parameters:ControlParameters.PressedBackground">
+            <Setter.Value>
+                <SolidColorBrush Color="{Binding Path=(parameters:ControlParameters.Color), RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}}" Opacity="1" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource White}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource White}" />
+        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource White}" />
+    </Style>
+
     <Style x:Key="ClearTextBoxButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxCircleButtonStyle}">
         <Setter Property="Content" Value="{StaticResource CancelGeometry}" />
         <Setter Property="ToolTip" Value="{x:Static strings:ControlResources.ClearText}" />
@@ -253,8 +274,9 @@
         <Setter Property="Content" Value="{StaticResource MinusGeometry}" />
     </Style>
 
-    <Style x:Key="RemoveButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxCircleButtonStyle}">
-        <Setter Property="Content" Value="{StaticResource CancelGeometry}" />
+    <Style x:Key="RemoveButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxColorCircleButtonStyle}">
+        <Setter Property="Content" Value="{StaticResource MinusGeometry}" />
+        <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource NegativeColor}" />
     </Style>
 
     <Style TargetType="{x:Type RepeatButton}" BasedOn="{StaticResource TextButtonStyle}" />

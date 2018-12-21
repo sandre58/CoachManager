@@ -34,6 +34,18 @@ namespace My.CoachManager.Application.Dtos
         public PlayerDto Player { get; set; }
 
         /// <summary>
+        /// Gets or sets the player's squad id.
+        /// </summary>
+        [DataMember]
+        public int SquadId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the player's squad.
+        /// </summary>
+        [DataMember]
+        public SquadDto Squad { get; set; }
+
+        /// <summary>
         /// Gets or sets the default player's number in the roster.
         /// </summary>
         [DataMember]

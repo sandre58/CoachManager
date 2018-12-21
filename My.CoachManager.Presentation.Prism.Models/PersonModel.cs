@@ -65,6 +65,12 @@ namespace My.CoachManager.Presentation.Prism.Models
         public DateTime? Birthdate { get; set; }
 
         /// <summary>
+        /// Gets or sets the FromDate.
+        /// </summary>
+        [Display(Name = "FromDate", ResourceType = typeof(PersonResources))]
+        public DateTime? FromDate { get; set; }
+
+        /// <summary>
         /// Gets or sets the place of birth.
         /// </summary>
         [Display(Name = "PlaceOfBirth", ResourceType = typeof(PersonResources))]

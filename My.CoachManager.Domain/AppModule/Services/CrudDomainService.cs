@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using FluentValidation.Results;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Exceptions;
@@ -74,7 +73,7 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// <param name="createFactory">The create factory.</param>
         /// <param name="modifyFactory">The modify factory.</param>
         /// <param name="validateEntity"></param>
-        public TBaseDto Save(TBaseDto entityBase, Func<TBaseDto, TEntity> createFactory, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null)
+        public int Save(TBaseDto entityBase, Func<TBaseDto, TEntity> createFactory, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null)
         {
             // Delete
             if (entityBase.CrudStatus == CrudStatus.Deleted)
@@ -92,7 +91,7 @@ namespace My.CoachManager.Domain.AppModule.Services
                 return Modify(entityBase, modifyFactory, validateEntity);
             }
 
-            return entityBase;
+            return entityBase.Id;
         }
 
         /// <summary>
@@ -126,7 +125,7 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// <param name="entityBase">The entity base.</param>
         /// <param name="createFactory">The create factory.</param>
         /// <param name="validateEntity"></param>
-        public TBaseDto Add(TBaseDto entityBase, Func<TBaseDto, TEntity> createFactory, Func<TEntity, ValidationResult> validateEntity = null)
+        public int Add(TBaseDto entityBase, Func<TBaseDto, TEntity> createFactory, Func<TEntity, ValidationResult> validateEntity = null)
         {
             var entity = createFactory.Invoke(entityBase);
 
@@ -146,7 +145,7 @@ namespace My.CoachManager.Domain.AppModule.Services
             entityBase.CrudStatus = CrudStatus.Unchanged;
             entityBase.Id = entity.Id;
 
-            return entityBase;
+            return entity.Id;
         }
 
         /// <summary>
@@ -155,7 +154,7 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// <param name="entityBase">The entity base.</param>
         /// <param name="modifyFactory">The modify factory.</param>
         /// <param name="validateEntity"></param>
-        public TBaseDto Modify(TBaseDto entityBase, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null)
+        public int Modify(TBaseDto entityBase, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null)
         {
             var entity = _entityRepository.GetEntity(entityBase.Id);
 
@@ -181,7 +180,7 @@ namespace My.CoachManager.Domain.AppModule.Services
 
             entityBase.CrudStatus = CrudStatus.Unchanged;
 
-            return entityBase;
+            return entity.Id;
         }
     }
 }
