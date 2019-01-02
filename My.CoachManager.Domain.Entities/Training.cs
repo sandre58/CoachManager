@@ -1,30 +1,46 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.Entities
 {
     /// <summary>
-    /// Provides properties for a Training Entity.
+    /// Provides properties for a training Entity.
     /// </summary>
     public class Training : Entity
     {
-        /// <summary>
-        /// Gets or sets the date and time.
-        /// </summary>
-        public DateTime Date { get; set; }
 
         /// <summary>
-        /// Gets or sets the duration (in minutes).
+        /// Gets or sets the roster id.
         /// </summary>
-        public int Duration { get; set; }
+        [Required]
+        public int? RosterId { get; set; }
 
         /// <summary>
-        /// Gets or sets the stadium id.
+        /// Gets or sets the roster.
         /// </summary>
-        public int StadiumId { get; set; }
+        public virtual Roster Roster { get; set; }
 
         /// <summary>
-        /// Gets or sets the stadium.
+        /// Gets or sets the place.
         /// </summary>
-        public Stadium Stadium { get; set; }
+        public virtual string Place { get; set; }
+
+        /// <summary>
+        /// Gets or sets the start date.
+        /// </summary>
+        [Required]
+        public virtual DateTime StartDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the end date.
+        /// </summary>
+        [Required]
+        public virtual DateTime EndDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the is cancelled value.
+        /// </summary>
+        public virtual bool IsCancelled { get; set; }
     }
 }

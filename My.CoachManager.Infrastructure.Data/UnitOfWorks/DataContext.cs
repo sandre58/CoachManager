@@ -35,11 +35,13 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         public DbSet<Person> Persons { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Position> Positions { get; set; }
+        public DbSet<Injury> Injuries { get; set; }
         public DbSet<PlayerPosition> PlayerPositions { get; set; }
         public DbSet<Roster> Rosters { get; set; }
         public DbSet<RosterPlayer> RosterPlayers { get; set; }
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Squad> Squads { get; set; }
+        public DbSet<Training> Trainings { get; set; }
         public DbSet<User> Users { get; set; }
 
         #endregion Properties
@@ -169,8 +171,18 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 .HasOne(x => x.Position)
                 .WithMany()
                 .HasForeignKey(x => x.PositionId);
-            
+
             modelBuilder.Entity<PlayerPosition>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
+            // Injury
+            modelBuilder.Entity<Injury>()
+                .HasOne(x => x.Player)
+                .WithMany()
+                .HasForeignKey(x => x.PlayerId);
+
+            modelBuilder.Entity<Injury>()
                 .Property(x => x.CreatedDate)
                 .HasDefaultValueSql("getdate()");
 
@@ -238,6 +250,17 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Squad>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
+            // Training
+            modelBuilder.Entity<Training>()
+                .HasOne(x => x.Roster)
+                .WithMany()
+                .HasForeignKey(x => x.RosterId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Training>()
                 .Property(x => x.CreatedDate)
                 .HasDefaultValueSql("getdate()");
 

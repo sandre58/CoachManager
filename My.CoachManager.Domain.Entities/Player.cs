@@ -17,6 +17,7 @@ namespace My.CoachManager.Domain.Entities
         {
             Laterality = PlayerConstants.DefaultLaterality;
             Positions = new List<PlayerPosition>();
+            Injuries = new List<Injury>();
         }
 
         /// <summary>
@@ -55,5 +56,10 @@ namespace My.CoachManager.Domain.Entities
         /// Gets or sets the contacts.
         /// </summary>
         public ICollection<PlayerPosition> Positions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the injuries.
+        /// </summary>
+        public ICollection<Injury> Injuries { get; set; }
     }
 }
