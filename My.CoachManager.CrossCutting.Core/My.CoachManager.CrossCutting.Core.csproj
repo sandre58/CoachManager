@@ -309,6 +309,8 @@
     <Compile Include="Constants\RoleConstants.cs" />
     <Compile Include="Constants\SqlConstants.cs" />
     <Compile Include="Cryptography\TripleDesEncryptor.cs" />
+    <Compile Include="Enums\Availability.cs" />
+    <Compile Include="Enums\InjuryType.cs" />
     <Compile Include="Enums\BinaryOperator.cs" />
     <Compile Include="Enums\ComplexComparableOperator.cs" />
     <Compile Include="Enums\ComparableOperator.cs" />
@@ -343,6 +345,11 @@
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Entities\InjuryResources.Designer.cs">
+      <DependentUpon>InjuryResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\Entities\PositionResources.Designer.cs">
       <DependentUpon>PositionResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -380,6 +387,16 @@
     </Compile>
     <Compile Include="Resources\Entities\ReferenceResources.Designer.cs">
       <DependentUpon>ReferenceResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Enums\AvailabilityResources.Designer.cs">
+      <DependentUpon>AvailabilityResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Enums\InjuryTypeResources.Designer.cs">
+      <DependentUpon>InjuryTypeResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -459,6 +476,11 @@
     <Compile Include="Security\Principal.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Entities\InjuryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InjuryResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Entities\PositionResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PositionResources.Designer.cs</LastGenOutput>
@@ -498,6 +520,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReferenceResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Enums\AvailabilityResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AvailabilityResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Enums\InjuryTypeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InjuryTypeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Enums\PositionRatingResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
