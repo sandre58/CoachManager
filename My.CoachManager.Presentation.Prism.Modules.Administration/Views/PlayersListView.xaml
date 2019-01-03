@@ -9,7 +9,6 @@
              xmlns:viewModels1="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
              xmlns:models="clr-namespace:My.CoachManager.Presentation.Prism.Models;assembly=My.CoachManager.Presentation.Prism.Models"
              xmlns:mvvm="http://prismlibrary.com/"
-             xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels1:PlayersListViewModel}"
@@ -22,7 +21,7 @@
                 <controls:ExtendedGridView VisibleColumns="{Binding Parameters.DisplayedColumns}">
 
                     <!-- Photo -->
-                    <controls:ExtendedGridViewColumn 
+                    <controls:ExtendedGridViewColumn
                             PropertyName="Photo"  CanUserHideColumn="False" Width="100">
                         <controls:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
@@ -41,8 +40,8 @@
                     </controls:ExtendedGridViewColumn>
 
                     <!-- Name -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.LastName}" 
-                                                         PropertyName="LastName" CanUserHideColumn="False" Width="150" >
+                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.LastName}"
+                                                         PropertyName="LastName" CanUserHideColumn="False" Width="150">
                         <controls:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
                                 <StackPanel>
@@ -65,13 +64,13 @@
 
                     <!-- Birthdate -->
                     <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Birthdate}"
-                                                         PropertyName="Birthdate" Width="110" 
-                                                         DisplayMemberBinding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                                         PropertyName="Birthdate" Width="110"
+                                                         DisplayMemberBinding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}" />
 
                     <!-- Category -->
                     <controls:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.CategoryAbbr}"
                                                          PropertyName="Category" Width="80"
-                                                         DisplayMemberBinding="{Binding Category.Label}"/>
+                                                         DisplayMemberBinding="{Binding Category.Label}" />
 
                     <!-- Position -->
                     <controls:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.Positions}"
@@ -79,24 +78,24 @@
                         <controls:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
                                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <controls:PositionsSelector ItemsSource="{Binding Positions}" 
-                                                                Margin="{StaticResource DefaultMargin}" 
+                                    <controls:PositionsSelector ItemsSource="{Binding Positions}"
+                                                                Margin="{StaticResource DefaultMargin}"
                                                                 ItemHeight="16" Height="90" Width="130" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                                                ItemContainerStyle="{StaticResource PlayerPositionStyle}"/>
+                                                                ItemContainerStyle="{StaticResource PlayerPositionStyle}" />
                                 </Grid>
                             </DataTemplate>
                         </controls:ExtendedGridViewColumn.CellTemplate>
-                        </controls:ExtendedGridViewColumn>
-                    
+                    </controls:ExtendedGridViewColumn>
+
                     <!-- License Number -->
                     <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.LicenseNumber}"
-                                                         PropertyName="LicenseNumber" Width="120" 
-                                                         DisplayMemberBinding="{Binding LicenseNumber, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0:# ### ### ###\}}"/>
+                                                         PropertyName="LicenseNumber" Width="120"
+                                                         DisplayMemberBinding="{Binding LicenseNumber, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0:# ### ### ###\}}" />
 
                     <!-- FromDate -->
                     <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.FromDate}"
-                                                     PropertyName="FromDate" Width="110" 
-                                                     DisplayMemberBinding="{Binding FromDate, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                                     PropertyName="FromDate" Width="110"
+                                                     DisplayMemberBinding="{Binding FromDate, StringFormat={}{0:dd/MM/yyyy}}" />
 
                     <!-- Gender -->
                     <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Gender}"
@@ -143,20 +142,20 @@
 
                     <!-- Phone -->
                     <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Phone}"
-                                                         PropertyName="Phone" Width="130" >
+                                                         PropertyName="Phone" Width="130">
                         <controls:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
-                                <controls:HyperlinkButton Content="{Binding Phone, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0:00 00 00 00 00\}}"/>
+                                <controls:HyperlinkButton Content="{Binding Phone, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0:00 00 00 00 00\}}" />
                             </DataTemplate>
                         </controls:ExtendedGridViewColumn.CellTemplate>
                     </controls:ExtendedGridViewColumn>
 
                     <!-- Email -->
                     <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Email}"
-                                                         PropertyName="Email" Width="175" >
+                                                         PropertyName="Email" Width="175">
                         <controls:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
-                                <controls:HyperlinkButton Content="{Binding Email}"/>
+                                <controls:HyperlinkButton Content="{Binding Email}" />
                             </DataTemplate>
                         </controls:ExtendedGridViewColumn.CellTemplate>
                     </controls:ExtendedGridViewColumn>
@@ -226,8 +225,10 @@
         </controls:ExtendedListView>
         <controls:WorkspaceView.Commands>
             <controls:CommandButton DockPanel.Dock="Right"  Style="{StaticResource AddCommandButtonApplicationBarStyle}" Command="{Binding AddCommand}" />
-            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource DeleteCommandButtonApplicationBarStyle}" Command="{Binding RemoveSelectedItemsCommand}" />
             <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource RefreshCommandButtonApplicationBarStyle}" Command="{Binding RefreshCommand}" />
+            <Separator DockPanel.Dock="Right" Style="{StaticResource VerticalSeparatorStyle}" />
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource EditCommandButtonApplicationBarStyle}" Command="{Binding EditSelectedItemCommand}" />
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource DeleteCommandButtonApplicationBarStyle}" Command="{Binding RemoveSelectedItemsCommand}" />
         </controls:WorkspaceView.Commands>
     </controls:WorkspaceView>
 </UserControl>

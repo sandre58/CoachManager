@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using My.CoachManager.Presentation.Prism.Controls.Collections;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -8,12 +9,11 @@ namespace My.CoachManager.Presentation.Prism.Controls
 {
     public class ExtendedListView : ListView
     {
-
         #region Fields
 
         private GridViewColumnHeader _columnHeader;
 
-        #endregion
+        #endregion Fields
 
         #region DoubleClickCommandProperty
 
@@ -28,7 +28,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             set => SetValue(DoubleClickCommandProperty, value);
         }
 
-        #endregion
+        #endregion DoubleClickCommandProperty
 
         #region CustomSelectionModeProperty
 
@@ -44,7 +44,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             set => SetValue(CustomSelectionModeProperty, value);
         }
 
-        #endregion
+        #endregion CustomSelectionModeProperty
 
         #region CanOrderProperty
 
@@ -60,7 +60,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             set => SetValue(CanOrderProperty, value);
         }
 
-        #endregion
+        #endregion CanOrderProperty
 
         #region CanSortProperty
 
@@ -86,12 +86,12 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         private void OnCanSortPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
-                bool oldValue = (bool)e.OldValue;
-                bool newValue = (bool)e.NewValue;
-                if (oldValue && !newValue)
-                    RemoveHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ColumnHeader_Click));
-                if (!oldValue && newValue)
-                    AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ColumnHeader_Click));
+            bool oldValue = (bool)e.OldValue;
+            bool newValue = (bool)e.NewValue;
+            if (oldValue && !newValue)
+                RemoveHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ColumnHeader_Click));
+            if (!oldValue && newValue)
+                AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ColumnHeader_Click));
         }
 
         private void ColumnHeader_Click(object sender, RoutedEventArgs e)
@@ -100,10 +100,10 @@ namespace My.CoachManager.Presentation.Prism.Controls
             {
                 if (!string.IsNullOrEmpty(column.PropertyName))
                 {
-                        if (CanSort)
-                        {
-                            ApplySort(headerClicked, column.PropertyName);
-                        }
+                    if (CanSort)
+                    {
+                        ApplySort(headerClicked, column.PropertyName);
+                    }
                 }
             }
         }
@@ -145,7 +145,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             return ListSortDirection.Ascending;
         }
 
-        #endregion
+        #endregion CanSortProperty
 
         #region SortDirection
 
@@ -162,7 +162,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             element.SetValue(SortDirectionProperty, value);
         }
 
-        #endregion
+        #endregion SortDirection
 
         #region IsSorting
 
@@ -179,7 +179,31 @@ namespace My.CoachManager.Presentation.Prism.Controls
             element.SetValue(IsSortingProperty, value);
         }
 
-        #endregion
+        #endregion IsSorting
 
+        #region ItemCommands
+
+        /// <summary>
+        /// Identifies the BackgroundContent dependency property.
+        /// </summary>
+        public static readonly DependencyProperty ItemCommandsProperty = DependencyProperty.Register("ItemCommands", typeof(UiCollection), typeof(ExtendedListView), new PropertyMetadata(new UiCollection()));
+
+        /// <summary>
+        /// Get or set commands in Application Bar.
+        /// </summary>
+        public UiCollection ItemCommands
+        {
+            get
+            {
+                return (UiCollection)GetValue(ItemCommandsProperty);
+            }
+
+            set
+            {
+                SetValue(ItemCommandsProperty, value);
+            }
+        }
+
+        #endregion ItemCommands
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using My.CoachManager.Presentation.Prism.Core.Commands;
+﻿using My.CoachManager.Presentation.Prism.Core.Commands;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Events;
 using My.CoachManager.Presentation.Prism.Core.Manager;
@@ -14,6 +13,7 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Regions;
+using System.Windows;
 
 namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 {
@@ -26,7 +26,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 
         private readonly IRosterService _rosterService;
 
-        #endregion
+        #endregion Fields
 
         #region Constructors
 
@@ -258,6 +258,5 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         #endregion GoForward
 
         #endregion Methods
-
     }
 }

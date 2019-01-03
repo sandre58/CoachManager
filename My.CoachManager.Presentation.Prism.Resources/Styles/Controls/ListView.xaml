@@ -5,7 +5,9 @@
                     xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System"
                     xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
                     xmlns:dragAndDrop="clr-namespace:My.CoachManager.Presentation.Prism.Controls.DragAndDrop;assembly=My.CoachManager.Presentation.Prism.Controls"
-                    xmlns:enum="clr-namespace:My.CoachManager.Presentation.Prism.Core.Enums;assembly=My.CoachManager.Presentation.Prism.Core">
+                    xmlns:enum="clr-namespace:My.CoachManager.Presentation.Prism.Core.Enums;assembly=My.CoachManager.Presentation.Prism.Core"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:collections="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Collections;assembly=My.CoachManager.Presentation.Prism.Controls">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Converters.xaml" />
@@ -22,6 +24,10 @@
         <ResourceDictionary Source="Separator.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <!-- Columns Sizes -->
+    <system:Double x:Key="SelectionColumnWidth">35</system:Double>
+    <system:Double x:Key="ActionColumnWidth">80</system:Double>
+
     <!-- ContextMenu -->
     <Style x:Key="GridViewContextMenuStyle" TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
         <Setter Property="Header" Value="{Binding Header}" />
@@ -32,38 +38,6 @@
     </Style>
 
     <!-- Item Style -->
-    <StackPanel x:Key="ActionsPanel" Orientation="Horizontal">
-        <Button Margin="{StaticResource DefaultHorizontalMargin}" Style="{StaticResource IconButtonStyle}"
-                                        Width="20" Height="20"
-                                        Content="{StaticResource EditPageGeometry}" ToolTip="{x:Static strings:ControlResources.Edit}"
-                                        parameters:ControlParameters.PressedForeground="{DynamicResource AccentForeground}"
-                                        parameters:ControlParameters.FocusBackground="{DynamicResource AccentForeground}"
-                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
-                                        CommandParameter="{Binding}" 
-                                        Visibility="{Binding DataContext.EditCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Converter={StaticResource NullToVisibilityConverter}}"/>
-        <Button Margin="{StaticResource DefaultHorizontalMargin}" Style="{StaticResource IconButtonStyle}"
-                                        Width="20" Height="20"
-                                        Content="{StaticResource CancelGeometry}" ToolTip="{x:Static strings:ControlResources.Remove}"
-                                        parameters:ControlParameters.PressedForeground="{DynamicResource AccentForeground}"
-                                        parameters:ControlParameters.FocusBackground="{DynamicResource AccentForeground}"
-                                        Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
-                                        CommandParameter="{Binding}"
-                                        Visibility="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Converter={StaticResource NullToVisibilityConverter}}" />
-    </StackPanel>
-
-    <StackPanel x:Key="SelectionPanel">
-        <Grid 
-            Width="50"
-            Visibility="{Binding CanOrder, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
-            <CheckBox IsChecked="{Binding IsSelected}" IsEnabled="{Binding IsSelectable}"
-                      Style="{StaticResource CircleCheckBoxStyle}"
-                      HorizontalAlignment="Center" VerticalAlignment="Center"
-                      Visibility="{Binding DataContext.SelectedItems,
-                                Converter={StaticResource AnyToVisibilityConverter},
-                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, UpdateSourceTrigger=PropertyChanged}" />
-        </Grid>
-    </StackPanel>
-    
     <ControlTemplate x:Key="ListViewItemTemplate" TargetType="{x:Type ListViewItem}">
         <Border x:Name="Border"
                             Background="{TemplateBinding Background}"
@@ -75,31 +49,62 @@
                                           Command="{Binding DoubleClickCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}"
                                           CommandParameter="{Binding}" />
             </Border.InputBindings>
-            <Grid>
-                <Grid.ColumnDefinitions>
+
+            <SelectiveScrollingGrid>
+                <SelectiveScrollingGrid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+                </SelectiveScrollingGrid.ColumnDefinitions>
 
-                <Grid x:Name="SelectionColumn" Width="50" Visibility="Collapsed">
-                    <CheckBox x:Name="SelectionCheckBox" IsChecked="{Binding IsSelected}" IsEnabled="{Binding IsSelectable}"
-                              Style="{StaticResource CircleCheckBoxStyle}"
+                <StackPanel x:Name="ActionsColumn" Width="{StaticResource ActionColumnWidth}" Orientation="Horizontal" Visibility="Hidden">
+
+                    <!-- Selection -->
+                    <Grid Width="{StaticResource SelectionColumnWidth}">
+                        <CheckBox x:Name="SelectionCheckBox" IsChecked="{Binding IsSelected}" IsEnabled="{Binding IsSelectable}"
+                              Style="{StaticResource SmallCircleCheckBoxStyle}"
+                                  Height="17" Margin="0"
                               HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding DataContext.SelectedItems,
                                 Converter={StaticResource AnyToVisibilityConverter},
                                 RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, UpdateSourceTrigger=PropertyChanged}" />
-                </Grid>
+                    </Grid>
+
+                    <!-- Actions -->
+                    <Grid  Visibility="{Binding ItemCommands, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, Converter={StaticResource AnyToVisibilityConverter}}">
+                        <ItemsControl x:Name="ActionsPanel" Visibility="Hidden" ItemsSource="{Binding ItemCommands, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.Resources>
+                                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonStyle}">
+                                    <Setter Property="Width" Value="17" />
+                                    <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource AccentForeground}" />
+                                    <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource AccentForeground}" />
+                                    <Setter Property="CommandParameter" Value="{Binding}" />
+                                    <Setter Property="Focusable" Value="False" />
+                                    <Setter Property="Margin" Value="{StaticResource SmallHorizontalMargin}" />
+                                    <!--<Setter Property="Visibility" Value="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource NullToVisibilityConverter}}" />-->
+                                </Style>
+                            </ItemsControl.Resources>
+                        </ItemsControl>
+                    </Grid>
+                </StackPanel>
+
+                <!-- Content -->
                 <GridViewRowPresenter Grid.Column="1" x:Name="PART_RowPresenter"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                      SelectiveScrollingGrid.SelectiveScrollingOrientation="Horizontal" />
                 <ContentPresenter Grid.Column="1" x:Name="PART_ContentPresenter"
-                                              Margin="{TemplateBinding Padding}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                              Visibility="Collapsed" />
-                <ContentControl  x:Name="PART_Actions" Grid.Column="2" Content="{StaticResource ActionsPanel}" Visibility="Hidden" />
-            </Grid>
+                                  Margin="{TemplateBinding Padding}"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                  Visibility="Collapsed" />
+            </SelectiveScrollingGrid>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="GridView.ColumnCollection" Value="{x:Null}">
@@ -108,16 +113,33 @@
             </Trigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CustomSelectionMode, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}" Value="{x:Static enum:SelectionMode.Multiple}" />
+                    <Condition Binding="{Binding CanOrder, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter TargetName="ActionsColumn" Property="Visibility" Value="Collapsed" />
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding CanOrder, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}" Value="False" />
                 </MultiDataTrigger.Conditions>
                 <MultiDataTrigger.Setters>
-                    <Setter TargetName="SelectionColumn" Property="Visibility" Value="Visible" />
+                    <Setter TargetName="ActionsColumn" Property="Visibility" Value="Visible" />
                 </MultiDataTrigger.Setters>
             </MultiDataTrigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter TargetName="SelectionCheckBox" Property="Visibility" Value="Visible" />
+                <Setter TargetName="ActionsPanel" Property="Visibility" Value="Visible" />
             </Trigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, Converter={StaticResource AnyToBooleanConverter}}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter TargetName="SelectionCheckBox" Property="Visibility" Value="Visible" />
+                    <Setter TargetName="ActionsPanel" Property="Visibility" Value="Hidden" />
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -150,31 +172,60 @@
                                       dragAndDrop:DragManager.IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedListView}, Path=CanOrder}"
                                       Background="{DynamicResource Transparent}">
 
-                        <Grid>
-                            <Grid.ColumnDefinitions>
+                        <SelectiveScrollingGrid>
+                            <SelectiveScrollingGrid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                            </SelectiveScrollingGrid.ColumnDefinitions>
 
-                            <Grid x:Name="SelectionColumn" Width="50" Visibility="Collapsed">
+                            <!-- Selection -->
+                            <Grid x:Name="SelectionColumn" Width="{StaticResource SelectionColumnWidth}" Visibility="Collapsed">
                                 <CheckBox x:Name="SelectionCheckBox" IsChecked="{Binding IsSelected}" IsEnabled="{Binding IsSelectable}"
-                                          Style="{StaticResource CircleCheckBoxStyle}"
-                                          HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding DataContext.SelectedItems,
+                              Style="{StaticResource CircleCheckBoxStyle}"
+                              HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding DataContext.SelectedItems,
                                 Converter={StaticResource AnyToVisibilityConverter},
                                 RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, UpdateSourceTrigger=PropertyChanged}" />
                             </Grid>
+
+                            <!-- Content -->
                             <GridViewRowPresenter Grid.Column="1" x:Name="PART_RowPresenter"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                      SelectiveScrollingGrid.SelectiveScrollingOrientation="Horizontal" />
                             <ContentPresenter Grid.Column="1" x:Name="PART_ContentPresenter"
-                                              Margin="{TemplateBinding Padding}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                              Visibility="Collapsed" />
-                            <ContentControl  x:Name="PART_Actions" Grid.Column="2" Content="{StaticResource ActionsPanel}" Visibility="Hidden" />
-                        </Grid>
+                                  Margin="{TemplateBinding Padding}"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                  Visibility="Collapsed" />
+
+                            <!-- Actions -->
+                            <DockPanel x:Name="ActionsColumns" Grid.ColumnSpan="2" Grid.Column="0" Visibility="Hidden">
+                                <Grid DockPanel.Dock="Right" HorizontalAlignment="Right" Width="{StaticResource ActionColumnWidth}">
+                                    <StackPanel x:Name="ActionsPanel" HorizontalAlignment="Center" Orientation="Horizontal" Visibility="Collapsed">
+                                        <Button Margin="{StaticResource DefaultHorizontalMargin}" Style="{StaticResource IconButtonStyle}"
+                                        Width="20" Height="20"
+                                        Content="{StaticResource EditPageGeometry}" ToolTip="{x:Static strings:ControlResources.Edit}"
+                                        parameters:ControlParameters.PressedForeground="{DynamicResource AccentForeground}"
+                                        parameters:ControlParameters.FocusBackground="{DynamicResource AccentForeground}"
+                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
+                                        CommandParameter="{Binding}"
+                                    Focusable="False"
+                                        Visibility="{Binding DataContext.EditCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Converter={StaticResource NullToVisibilityConverter}}" />
+                                        <Button Margin="{StaticResource DefaultHorizontalMargin}" Style="{StaticResource IconButtonStyle}"
+                                        Width="20" Height="20"
+                                        Content="{StaticResource CancelGeometry}" ToolTip="{x:Static strings:ControlResources.Remove}"
+                                        parameters:ControlParameters.PressedForeground="{DynamicResource AccentForeground}"
+                                        parameters:ControlParameters.FocusBackground="{DynamicResource AccentForeground}"
+                                        Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
+                                        CommandParameter="{Binding}"
+                                        Focusable="False"
+                                        Visibility="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Converter={StaticResource NullToVisibilityConverter}}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DockPanel>
+                        </SelectiveScrollingGrid>
 
                         <Grid dragAndDrop:DragViewer.Format="{TemplateBinding parameters:DragAndDropParameters.MoveDragFormat}"
                                           IsHitTestVisible="{Binding Path=(dragAndDrop:DragViewer.IsDragging), RelativeSource={RelativeSource Self}}">
@@ -216,7 +267,17 @@
             </MultiDataTrigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter TargetName="SelectionCheckBox" Property="Visibility" Value="Visible" />
+                <Setter TargetName="ActionsPanel" Property="Visibility" Value="Visible" />
             </Trigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, Converter={StaticResource AnyToBooleanConverter}}" Value="False" />
+                    <Condition Binding="{Binding CanOrder, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}" Value="False" />
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter TargetName="ActionsColumns" Property="Visibility" Value="Visible" />
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -240,6 +301,7 @@
         </Style.Resources>
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0,0,70,0" />
         <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource Dark}" />
         <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource ControlMouseOver}" />
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource ControlMouseOver}" />
@@ -252,8 +314,10 @@
         <Setter Property="Margin" Value="0" />
         <Setter Property="MinHeight" Value="40" />
         <Setter Property="IsEnabled" Value="{Binding IsSelectable}" />
+        <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Template" Value="{StaticResource ListViewItemTemplate}"/>
+        <Setter Property="Template" Value="{StaticResource ListViewItemTemplate}" />
 
         <Style.Triggers>
 
@@ -281,8 +345,8 @@
 
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding SelectionMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static SelectionMode.Multiple}"/>
-                    <Condition Binding="{Binding CustomSelectionMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static enum:SelectionMode.Multiple}"/>
+                    <Condition Binding="{Binding SelectionMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static SelectionMode.Multiple}" />
+                    <Condition Binding="{Binding CustomSelectionMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static enum:SelectionMode.Multiple}" />
                 </MultiDataTrigger.Conditions>
                 <MultiDataTrigger.Setters>
                     <Setter Property="IsSelected" Value="{Binding IsSelected}" />
@@ -291,8 +355,8 @@
 
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding SelectionMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static SelectionMode.Single}"/>
-                    <Condition Binding="{Binding CustomSelectionMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static enum:SelectionMode.Multiple}"/>
+                    <Condition Binding="{Binding SelectionMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static SelectionMode.Single}" />
+                    <Condition Binding="{Binding CustomSelectionMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static enum:SelectionMode.Multiple}" />
                 </MultiDataTrigger.Conditions>
                 <MultiDataTrigger.Setters>
                     <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=OneWay}" />
@@ -387,7 +451,7 @@
                                Margin="0 0 -9 0"
                                HorizontalAlignment="Right"
                                Style="{StaticResource GridViewColumnHeaderGripper}"
-                               Visibility="Collapsed" />
+                               Visibility="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type GridViewColumnHeader}}, Converter={StaticResource NotEqualToVisibilityConverter}, ConverterParameter=0}" />
                     </Grid>
 
                     <ControlTemplate.Triggers>
@@ -447,7 +511,7 @@
         <Setter Property="CanOrder" Value="{Binding CanOrder, FallbackValue=False}" />
         <Setter Property="CanSort" Value="{Binding CanSort, FallbackValue=True}" />
         <Setter Property="CustomSelectionMode" Value="{Binding SelectionMode}" />
-        <Setter Property="SelectionMode" Value="Single" />
+        <Setter Property="SelectionMode" Value="Multiple" />
         <Setter Property="Background" Value="{DynamicResource Light}" />
         <Setter Property="BorderBrush" Value="{DynamicResource DarkAccent}" />
         <Setter Property="BorderThickness" Value="1" />
@@ -456,15 +520,16 @@
         <Setter Property="FontStretch" Value="Medium" />
         <Setter Property="FontStyle" Value="Normal" />
         <Setter Property="FontWeight" Value="Normal" />
-        <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
-        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="AlternationCount" Value="2" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource ListViewItemStyle}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
 
         <Setter Property="Template">
             <Setter.Value>
@@ -481,30 +546,45 @@
                                       CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                      VerticalScrollBarVisibility="Disabled">
-                            <DockPanel Margin="{TemplateBinding Padding}">
-                                <Grid Background="{DynamicResource Control}" DockPanel.Dock="Top">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
+                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                            <ScrollViewer.Template>
+                                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
 
-                                    <!-- Select All Header -->
-                                    <Grid Grid.Column="0" Visibility="{Binding CustomSelectionMode, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static enum:SelectionMode.Multiple}}">
-                                        <Grid 
-                                              Width="50"
-                                              Visibility="{Binding CanOrder, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
-                                            <CheckBox IsChecked="{Binding AreAllSelected, Mode=OneWay}"
-                                                      Command="{Binding SelectAllCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked}"
-                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                      Style="{StaticResource CircleCheckBoxStyle}"
-                                                      Visibility="{Binding SelectedItems, Converter={StaticResource AnyToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" />
-                                        </Grid>
-                                    </Grid>
+                                        <!-- Header -->
+                                        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="{DynamicResource Control}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
 
-                                    <!-- Column Header -->
-                                    <GridViewHeaderRowPresenter Grid.Column="1" x:Name="PART_HeaderRowPresenter"
+                                                <!-- Select All Header -->
+                                                <Grid Grid.Column="0" Width="{StaticResource ActionColumnWidth}"
+                                                      Visibility="{Binding CanOrder, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
+                                                    <Grid HorizontalAlignment="Left"
+                                                          Visibility="{Binding CustomSelectionMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static enum:SelectionMode.Multiple}}"
+                                                Width="{StaticResource SelectionColumnWidth}">
+                                                        <CheckBox IsChecked="{Binding AreAllSelected, Mode=OneWay}"
+                                                          Command="{Binding SelectAllCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked}"
+                                                          HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                          Style="{StaticResource SmallCircleCheckBoxStyle}" Margin="0"
+                                                          Visibility="{Binding SelectedItems, Converter={StaticResource AnyToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" />
+                                                    </Grid>
+                                                </Grid>
+
+                                                <!-- Column Header -->
+                                                <GridViewHeaderRowPresenter Grid.Row="0" Grid.Column="1" x:Name="PART_HeaderRowPresenter"
                                                                 Margin="2 0 2 0"
                                                                 AllowsColumnReorder="{Binding View.AllowsColumnReorder, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}"
                                                                 ColumnHeaderContainerStyle="{Binding View.ColumnHeaderContainerStyle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}"
@@ -515,29 +595,51 @@
                                                                 ColumnHeaderToolTip="{Binding View.ColumnHeaderToolTip, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}"
                                                                 Columns="{Binding View.Columns, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}"
                                                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                    
-                                    <!-- Hide columns combobox -->
-                                    <Grid Grid.Column="2"
-                                          Width="50"
-                                          Visibility="{Binding View.CanUserHideColumns, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                        <controls:DropDownMenuButton Style="{StaticResource IconDropDownMenuButtonStyle}"
-                                                                     Content="{StaticResource ColumnChooserGeometry}"
-                                                                     ItemsSource="{Binding View.Columns, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}"
-                                                                     ItemContainerStyle="{StaticResource GridViewContextMenuStyle}"
-                                                                     ShowArrow="False"
-                                                                     HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                                     Height="30"
-                                                                     Visibility="{Binding CanOrder, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}" />
-                                    </Grid>
-                                </Grid>
 
-                                <!-- Rows -->
-                                <Grid>
-                                    <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-                                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                    </ScrollViewer>
-                                </Grid>
-                            </DockPanel>
+                                                <!-- Hide columns combobox -->
+                                                <Grid Grid.Row="0" Grid.Column="2"
+                                              Width="{StaticResource ActionColumnWidth}"
+                                              Visibility="{Binding View.CanUserHideColumns, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                    <controls:DropDownMenuButton Style="{StaticResource IconDropDownMenuButtonStyle}"
+                                                                         Content="{StaticResource ColumnChooserGeometry}"
+                                                                         ItemsSource="{Binding View.Columns, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}"
+                                                                         ItemContainerStyle="{StaticResource GridViewContextMenuStyle}"
+                                                                         ShowArrow="False"
+                                                                         HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                                         Height="30"
+                                                                         Visibility="{Binding CanOrder, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}" />
+                                                </Grid>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Content -->
+                                        <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                                                Grid.Column="0"
+                                                                Grid.Row="1"
+                                                                CanContentScroll="{TemplateBinding CanContentScroll}" />
+
+                                        <!-- Vertical Scrollbar -->
+                                        <ScrollBar x:Name="PART_VerticalScrollBar"
+                                                   Grid.Column="1"
+                                                   Grid.Row="1"
+                                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                                   Orientation="Vertical"
+                                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                                   Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                   ViewportSize="{TemplateBinding ViewportHeight}" />
+
+                                        <!-- Horizontal Scrollbar -->
+                                        <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                                   Grid.Row="2" Grid.Column="1"
+                                                       Maximum="{TemplateBinding ScrollableWidth}"
+                                                       Orientation="Horizontal"
+                                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                                       Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                       ViewportSize="{TemplateBinding ViewportWidth}" />
+                                    </Grid>
+                                </ControlTemplate>
+                            </ScrollViewer.Template>
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </ScrollViewer>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -554,14 +656,14 @@
         <Style.Triggers>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding SelectedItems, Converter={StaticResource AnyToBooleanConverter}, UpdateSourceTrigger=PropertyChanged}" Value="True"/>
-                    <Condition Binding="{Binding CustomSelectionMode, RelativeSource={RelativeSource Self}}" Value="{x:Static enum:SelectionMode.Multiple}"/>
+                    <Condition Binding="{Binding SelectedItems, Converter={StaticResource AnyToBooleanConverter}, UpdateSourceTrigger=PropertyChanged}" Value="False" />
+                    <Condition Binding="{Binding CustomSelectionMode, RelativeSource={RelativeSource Self}}" Value="{x:Static enum:SelectionMode.Multiple}" />
                 </MultiDataTrigger.Conditions>
                 <MultiDataTrigger.Setters>
-                    <Setter Property="SelectionMode" Value="Multiple" />
-                    <Setter Property="parameters:ControlParameters.DisableInputBindings" Value="True" />
+                    <Setter Property="SelectionMode" Value="Single" />
                 </MultiDataTrigger.Setters>
             </MultiDataTrigger>
+
             <Trigger Property="CanOrder" Value="true">
                 <Setter Property="CanSort" Value="False" />
                 <Setter Property="SelectionMode" Value="Single" />
@@ -579,6 +681,17 @@
     </Style>
 
     <Style x:Key="ItemsListViewStyle" TargetType="{x:Type controls:ExtendedListView}" BasedOn="{StaticResource ListViewBaseStyle}">
+        <Setter Property="ItemCommands">
+            <Setter.Value>
+                <collections:UiCollection>
+                    <Button Content="{StaticResource EditPageGeometry}" ToolTip="{x:Static strings:ControlResources.Edit}"
+                                        parameters:ControlParameters.FocusBackground="{DynamicResource AccentForeground}"
+                                        Command="{Binding EditCommand}" />
+                    <Button Content="{StaticResource CancelGeometry}" ToolTip="{x:Static strings:ControlResources.Remove}"
+                                        Command="{Binding RemoveCommand}" />
+                </collections:UiCollection>
+            </Setter.Value>
+        </Setter>
         <Setter Property="DoubleClickCommand" Value="{Binding OpenCommand}" />
         <Setter Property="parameters:ControlParameters.InputBindings">
             <Setter.Value>
@@ -590,9 +703,19 @@
                 </InputBindingCollection>
             </Setter.Value>
         </Setter>
-
+        <!--<Style.Triggers>
+            <DataTrigger Binding="{Binding SelectedItems.Count, Converter={StaticResource IsGreaterThanConverter}, UpdateSourceTrigger=PropertyChanged, ConverterParameter=1}" Value="True">
+                <Setter Property="parameters:ControlParameters.InputBindings">
+                    <Setter.Value>
+                        <InputBindingCollection>
+                            <KeyBinding Key="Delete" Command="{Binding RemoveSelectedItemsCommand}" />
+                        </InputBindingCollection>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Style.Triggers>-->
     </Style>
-    
+
     <Style TargetType="{x:Type controls:ExtendedListView}" BasedOn="{StaticResource ItemsListViewStyle}" />
 
     <!-- Columns -->

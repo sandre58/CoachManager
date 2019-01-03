@@ -25,11 +25,10 @@ namespace My.CoachManager.Presentation.Prism.Resources.Converters
                 return DependencyProperty.UnsetValue;
             }
 
-            var number = (double)value;
+            var number = double.Parse(value.ToString());
             double comparand;
 
-            var argument = parameter as string;
-            if (argument != null)
+            if (parameter is string argument)
             {
                 var successfulConverted = double.TryParse(argument, out comparand);
                 if (successfulConverted)
@@ -44,7 +43,7 @@ namespace My.CoachManager.Presentation.Prism.Resources.Converters
             if ((parameter is byte) || (parameter is short) || (parameter is int) || (parameter is long) ||
                 (parameter is float) || (parameter is double) || (parameter is decimal))
             {
-                comparand = (double)parameter;
+                comparand = double.Parse(parameter.ToString());
                 return number < comparand;
             }
 

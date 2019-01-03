@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using My.CoachManager.Application.Dtos;
+﻿using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
@@ -7,6 +6,7 @@ using My.CoachManager.Presentation.Prism.Models.Aggregates;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Resources;
 using My.CoachManager.Presentation.Prism.Modules.Administration.Views;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
+using System.Linq;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {
@@ -65,7 +65,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         protected override void LoadDataCore()
         {
             var result = _rosterService.GetRosters();
-            
+
             Items = result.Select(RosterFactory.Get).ToItemsObservableCollection();
         }
 

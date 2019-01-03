@@ -1,8 +1,9 @@
-﻿namespace My.CoachManager.Presentation.Prism.Core.Models
+﻿using System;
+
+namespace My.CoachManager.Presentation.Prism.Core.Models
 {
     public class SelectModel : ModelBase, ISelectable
     {
-
         /// <summary>
         /// Initialize a new instance of <see cref="SelectModel"/>
         /// </summary>
@@ -21,5 +22,17 @@
         /// </summary>
         public bool IsSelected { get; set; }
 
+        /// <summary>
+        /// Calls when selection Changed.
+        /// </summary>
+        public event EventHandler SelectedChanged;
+
+        /// <summary>
+        /// Calls when selection Changed.
+        /// </summary>
+        protected void OnIsSelectedChanged()
+        {
+            SelectedChanged?.Invoke(this, new EventArgs());
+        }
     }
 }

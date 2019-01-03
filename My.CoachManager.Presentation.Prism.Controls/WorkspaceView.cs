@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -12,13 +12,13 @@ namespace My.CoachManager.Presentation.Prism.Controls
         /// </summary>
         public WorkspaceView()
         {
-            Commands = new ObservableCollection<CommandButton>();
+            Commands = new List<FrameworkElement>();
         }
 
         /// <summary>
         /// Identifies the BackgroundContent dependency property.
         /// </summary>
-        public static readonly DependencyProperty CommandsProperty = DependencyProperty.Register("Commands", typeof(ObservableCollection<CommandButton>), typeof(WorkspaceView));
+        public static readonly DependencyProperty CommandsProperty = DependencyProperty.Register("Commands", typeof(List<FrameworkElement>), typeof(WorkspaceView));
 
         /// <summary>
         /// Identifies the BackgroundContent dependency property.
@@ -98,11 +98,11 @@ namespace My.CoachManager.Presentation.Prism.Controls
         /// <summary>
         /// Get or set commands in Application Bar.
         /// </summary>
-        public ObservableCollection<CommandButton> Commands
+        public List<FrameworkElement> Commands
         {
             get
             {
-                return (ObservableCollection<CommandButton>)GetValue(CommandsProperty);
+                return (List<FrameworkElement>)GetValue(CommandsProperty);
             }
 
             set

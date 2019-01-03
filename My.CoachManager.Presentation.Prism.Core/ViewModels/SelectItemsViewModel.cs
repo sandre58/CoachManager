@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using Microsoft.Practices.ObjectBuilder2;
+﻿using Microsoft.Practices.ObjectBuilder2;
 using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
@@ -12,11 +8,15 @@ using My.CoachManager.Presentation.Prism.Core.Models.Filters;
 using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Commands;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
     public abstract class SelectItemsViewModel<TModel> : DialogViewModel, ISelectItemsViewModel<TModel>
-    where TModel : class, ISelectable 
+    where TModel : class, ISelectable
     {
         #region Members
 
@@ -43,7 +43,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         IList ISelectItemsViewModel.SelectedItems
         {
             get => SelectedItems as IList;
-            set => SelectedItems =  value as IList<TModel>;
+            set => SelectedItems = value as IList<TModel>;
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         public TModel SelectedItem
         {
-            get => SelectedItems != null ? SelectedItems.FirstOrDefault() : default(TModel);
+            get => SelectedItems?.FirstOrDefault();
             set => SelectedItems = new List<TModel> { value };
         }
 
@@ -150,6 +150,18 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         #endregion Members
 
+        #region Constructors
+
+        /// <summary>
+        /// Initialise a new instance of <see cref="ListViewModel{TEntityModel}"/>
+        /// </summary>
+        protected SelectItemsViewModel()
+        {
+            SelectionMode = SelectionMode.Single;
+        }
+
+        #endregion Constructors
+
         #region Methods
 
         #region Initialization
@@ -164,7 +176,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
             Title = ControlResources.SelectItems;
             Items = new ObservableItemsCollection<TModel>();
-            SelectionMode = SelectionMode.Single;
         }
 
         /// <inheritdoc />
@@ -226,11 +237,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual void SelectAll(bool? value)
         {
-            if(SelectionMode == SelectionMode.Multiple)
-            Items.Where(x => x.IsSelectable).ForEach(x =>
-            {
-                if (value != null) x.IsSelected = value.Value;
-            });
+            if (SelectionMode == SelectionMode.Multiple)
+                Items.Where(x => x.IsSelectable).ForEach(x =>
+                {
+                    if (value != null) x.IsSelected = value.Value;
+                });
         }
 
         #endregion SelectAll
@@ -288,19 +299,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             {
                 Filters.Items = new FilteredCollectionView<TModel>(Items.ToObservableCollection());
             }
-            Items.CollectionChanged += ItemsCollectionChanged;
+            Items.ForEach(x => x.SelectedChanged += Item_SelectedChanged);
             SelectAllCommand.RaiseCanExecuteChanged();
         }
-
-        private void ItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            SelectCommand.RaiseCanExecuteChanged();
-
-            RaisePropertyChanged(() => AreAllSelected);
-            RaisePropertyChanged(() => SelectedItems);
-            RaisePropertyChanged(() => SelectedItem);
-        }
-
 
         /// <summary>
         /// Calls when selected item change.
@@ -311,7 +312,47 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
                 ? ControlResources.SelectItems
                 : ControlResources.SelectItem;
 
-            SelectAllCommand.RaiseCanExecuteChanged();
+            SelectAllCommand?.RaiseCanExecuteChanged();
+            RaisePropertyChanged(() => AreAllSelected);
+            RaisePropertyChanged(() => SelectedItems);
+            RaisePropertyChanged(() => SelectedItem);
+        }
+
+        /// <summary>
+        /// Calls when selection Changed.
+        /// </summary>
+        private void Item_SelectedChanged(object sender, EventArgs e)
+        {
+            if (sender is ISelectable selected && SelectionMode == SelectionMode.Single)
+            {
+                Items.ForEach(x => x.SelectedChanged -= Item_SelectedChanged);
+
+                if (selected.IsSelected)
+                {
+                    var itemsToChange = SelectedItems.ToList();
+
+                    itemsToChange.Where(x => !x.Equals(selected)).ForEach(x => x.IsSelected = false);
+                }
+                else
+                {
+                    if (!SelectedItems.Any())
+                    {
+                        selected.IsSelected = true;
+                    }
+                }
+
+                Items.ForEach(x => x.SelectedChanged += Item_SelectedChanged);
+            }
+
+            OnSelectionChanged();
+        }
+
+        /// <summary>
+        /// Calls when selection Changed.
+        /// </summary>
+        protected virtual void OnSelectionChanged()
+        {
+            SelectCommand.RaiseCanExecuteChanged();
             RaisePropertyChanged(() => AreAllSelected);
             RaisePropertyChanged(() => SelectedItems);
             RaisePropertyChanged(() => SelectedItem);

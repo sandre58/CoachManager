@@ -1,4 +1,6 @@
-﻿namespace My.CoachManager.Presentation.Prism.Core.Models
+﻿using System;
+
+namespace My.CoachManager.Presentation.Prism.Core.Models
 {
     /// <summary>
     /// Services to allow changes to an entity to be selectable.
@@ -14,5 +16,10 @@
         /// Gets or sets the selected Value.
         /// </summary>
         bool IsSelected { get; set; }
+
+        /// <summary>
+        /// Calls when selection Changed.
+        /// </summary>
+        event EventHandler SelectedChanged;
     }
 }

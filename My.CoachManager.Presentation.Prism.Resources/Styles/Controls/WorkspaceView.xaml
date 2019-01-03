@@ -200,7 +200,9 @@
                         </Grid>
 
                         <!-- Commands -->
-                        <controls:ApplicationBar x:Name="Commands" Grid.Row="1" Grid.Column="0" ItemsSource="{TemplateBinding Commands}" Style="{TemplateBinding ApplicationBarStyle}" Visibility="{TemplateBinding Commands, Converter={StaticResource AnyToVisibilityConverter}}" />
+                        <controls:ApplicationBar x:Name="Commands" Grid.Row="1" Grid.Column="0" ItemsSource="{TemplateBinding Commands}"
+                                                 Style="{TemplateBinding ApplicationBarStyle}"
+                                                 Visibility="{TemplateBinding Commands, Converter={StaticResource AnyToVisibilityConverter}}" />
 
                         <!-- Content -->
                         <ScrollViewer x:Name="Content" Grid.Row="2" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" Margin="{TemplateBinding Padding}">
@@ -255,6 +257,18 @@
                     <KeyBinding Key="N" Modifiers="Control" Command="{Binding AddCommand}" />
                     <KeyBinding Key="F" Modifiers="Control" Command="{Binding Filters.ShowFiltersCommand}" />
                 </InputBindingCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ApplicationBarStyle">
+            <Setter.Value>
+                <Style TargetType="controls:ApplicationBar" BasedOn="{StaticResource {x:Type controls:ApplicationBar}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding SelectedItems, Converter={StaticResource AnyToBooleanConverter}}" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+                            <Setter Property="BorderThickness" Value="0,3,0,0" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
             </Setter.Value>
         </Setter>
     </Style>

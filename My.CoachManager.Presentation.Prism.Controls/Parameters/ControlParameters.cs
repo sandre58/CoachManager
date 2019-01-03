@@ -1,9 +1,9 @@
-﻿using System.ComponentModel;
+﻿using My.CoachManager.Presentation.Prism.Controls.ContentControls;
+using My.CoachManager.Presentation.Prism.Controls.Helpers;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using My.CoachManager.Presentation.Prism.Controls.ContentControls;
-using My.CoachManager.Presentation.Prism.Controls.Helpers;
 
 namespace My.CoachManager.Presentation.Prism.Controls.Parameters
 {
@@ -414,7 +414,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
                     (sender, e) =>
                     {
                         var element = sender as UIElement;
-                        if (element == null) return;
+                        if (!(element != null)) return;
                         element.InputBindings.Clear();
                         element.InputBindings.AddRange((InputBindingCollection)e.NewValue);
                     }));
@@ -429,7 +429,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
             element.SetValue(InputBindingsProperty, inputBindings);
         }
 
-        #endregion
+        #endregion InputBindings
 
         #region DisableInputBindings
 
@@ -458,6 +458,6 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
             element.SetValue(DisableInputBindingsProperty, inputBindings);
         }
 
-        #endregion
+        #endregion DisableInputBindings
     }
 }

@@ -193,7 +193,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.DragAndDrop
         /// </summary>
         /// <param name="dependencyObject">The dependency object.</param>
         /// <param name="value">if set to <c>true</c> the content is being dragged.</param>
-        private static void SetIsDragging(DependencyObject dependencyObject, bool value)
+        public static void SetIsDragging(DependencyObject dependencyObject, bool value)
         {
             dependencyObject.SetValue(IsDraggingPropertyKey, value);
         }

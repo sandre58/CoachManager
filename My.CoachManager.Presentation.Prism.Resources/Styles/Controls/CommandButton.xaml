@@ -86,10 +86,10 @@
                             <Setter TargetName="ellipse" Property="Fill" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.PressedBackground)}" />
                         </Trigger>
                         <MultiTrigger>
-                        <MultiTrigger.Conditions>
-                            <Condition Property="IsFocused" Value="True" />
-                            <Condition Property="IsMouseOver" Value="True" />
-                        </MultiTrigger.Conditions>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsFocused" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
                                 <Setter TargetName="ellipse" Property="Stroke" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:ControlParameters.FocusBorderBrush)}" />
                             </MultiTrigger.Setters>
@@ -149,10 +149,12 @@
     <!-- Buttons for application bar -->
     <Style x:Key="CommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonBaseStyle}">
         <Setter Property="ButtonDiameter" Value="{DynamicResource VeryLargeDiameter}" />
+        <Setter Property="Visibility" Value="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </Style>
 
     <Style x:Key="ColorCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource ColorCommandButtonStyle}">
         <Setter Property="ButtonDiameter" Value="{DynamicResource VeryLargeDiameter}" />
+        <Setter Property="Visibility" Value="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </Style>
 
     <Style x:Key="ValidateCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource ColorCommandButtonApplicationBarStyle}">
@@ -175,6 +177,11 @@
         <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Negative}" />
         <Setter Property="IconData" Value="{StaticResource TrashGeometry}" />
         <Setter Property="Content" Value="{x:Static strings:ControlResources.Delete}" />
+    </Style>
+
+    <Style x:Key="EditCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonApplicationBarStyle}">
+        <Setter Property="IconData" Value="{StaticResource EditGeometry}" />
+        <Setter Property="Content" Value="{x:Static strings:ControlResources.Edit}" />
     </Style>
 
     <Style x:Key="RefreshCommandButtonApplicationBarStyle" TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonApplicationBarStyle}">

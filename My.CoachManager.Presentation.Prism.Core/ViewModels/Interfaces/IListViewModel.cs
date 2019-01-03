@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using My.CoachManager.CrossCutting.Core.Collections;
+﻿using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.Presentation.Prism.Core.Enums;
 using My.CoachManager.Presentation.Prism.Core.Models;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
 {
@@ -17,12 +17,12 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
         /// <summary>
         /// Gets or sets the selected items.
         /// </summary>
-        new IEnumerable<TEntityModel> SelectedItems { get; set; }
+        new IEnumerable<TEntityModel> SelectedItems { get; }
 
         /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
-        TEntityModel SelectedItem { get; set; }
+        TEntityModel SelectedItem { get; }
     }
 
     public interface IListViewModel : INavigatableWorkspaceViewModel
@@ -35,7 +35,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
         /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
-        IEnumerable SelectedItems { get; set; }
+        IEnumerable SelectedItems { get; }
 
         /// <summary>
         /// Gets or sets selection mode.

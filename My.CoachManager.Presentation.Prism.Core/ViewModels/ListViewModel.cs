@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Windows;
-using Microsoft.Practices.ObjectBuilder2;
+﻿using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Exceptions;
@@ -17,6 +11,11 @@ using My.CoachManager.Presentation.Prism.Core.Models.Filters;
 using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Commands;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
@@ -41,6 +40,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// Gets or sets the edit command.
         /// </summary>
         public DelegateCommand<TEntityModel> EditCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets the edit command.
+        /// </summary>
+        public DelegateCommand EditSelectedItemCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the remove command.
@@ -68,7 +72,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
             AddCommand = new DelegateCommand(Add, CanAdd);
             RemoveCommand = new DelegateCommand<TEntityModel>(Remove, CanRemove);
-            RemoveSelectedItemsCommand = new DelegateCommand(RemoveSelectedItems, CanRemoveSelectedItems);
+            RemoveSelectedItemsCommand = new DelegateCommand(Remove, CanRemove);
+            EditSelectedItemCommand = new DelegateCommand(Edit, CanEdit);
             EditCommand = new DelegateCommand<TEntityModel>(Edit, CanEdit);
             OpenCommand = new DelegateCommand<TEntityModel>(Open, CanOpen);
         }
@@ -185,6 +190,26 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         #endregion Edit
 
+        #region Edit
+
+        /// <summary>
+        /// Edit Item.
+        /// </summary>
+        protected virtual void Edit()
+        {
+            Edit(SelectedItem);
+        }
+
+        /// <summary>
+        /// Can Edit item.
+        /// </summary>
+        protected virtual bool CanEdit()
+        {
+            return Mode == ScreenMode.Read && SelectedItems != null && SelectedItems.Count() == 1 && !IsReadOnly;
+        }
+
+        #endregion Edit
+
         #region Remove
 
         /// <summary>
@@ -237,14 +262,14 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         #endregion Remove
 
-        #region RemoveSelectedItems
+        #region Remove
 
         /// <summary>
         /// Remove Item.
         /// </summary>
-        protected virtual void RemoveSelectedItems()
+        protected virtual void Remove()
         {
-            if (!CanRemoveSelectedItems()) return;
+            if (!CanRemove()) return;
 
             if (DialogManager.ShowWarningDialog(MessageResources.ConfirmationRemovingItems, MessageDialogButtons.YesNo) != DialogResult.Yes) return;
 
@@ -252,7 +277,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             {
                 var itemToDelete = SelectedItems.ToList();
                 itemToDelete.ForEach(RemoveItemCore);
-                OnRemoveSelectedItemsCompleted();
+                OnRemoveCompleted();
             }
             catch (BusinessException e)
             {
@@ -267,7 +292,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Can Edit item.
         /// </summary>
-        protected virtual bool CanRemoveSelectedItems()
+        protected virtual bool CanRemove()
         {
             return Mode == ScreenMode.Read && SelectedItems != null && SelectedItems.Any();
         }
@@ -275,20 +300,21 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Called after the edit action;
         /// </summary>
-        protected virtual void OnRemoveSelectedItemsCompleted()
+        protected virtual void OnRemoveCompleted()
         {
             Refresh();
         }
 
-        #endregion RemoveSelectedItems
+        #endregion Remove
 
         #region Properties Changed
 
-        protected override void OnItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        protected override void OnSelectionChanged()
         {
-            base.OnItemsCollectionChanged(sender, e);
+            base.OnSelectionChanged();
 
             RemoveSelectedItemsCommand.RaiseCanExecuteChanged();
+            EditSelectedItemCommand.RaiseCanExecuteChanged();
         }
 
         #endregion Properties Changed
@@ -324,7 +350,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         IEnumerable IListViewModel.SelectedItems
         {
             get => SelectedItems;
-            set => SelectedItems = (IEnumerable<TEntityModel>)value;
         }
 
         /// <summary>
@@ -332,18 +357,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         public IEnumerable<TEntityModel> SelectedItems
         {
-            get { return Items?.Where(x => x.IsSelected); }
-            set
-            {
-                Items.ForEach(x => x.IsSelected = false);
-
-                var items = Items.Where(x => x.IsSelectable).ToArray();
-                foreach (var item in value)
-                {
-                    var toModify = items.Single(x => x.Equals(item));
-                    toModify.IsSelected = true;
-                }
-            }
+            get { return Items?.Where(x => x.IsSelected).ToList(); }
         }
 
         /// <inheritdoc />
@@ -353,7 +367,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         public TEntityModel SelectedItem
         {
             get => SelectedItems?.FirstOrDefault();
-            set => SelectedItems = new List<TEntityModel> { value };
         }
 
         /// <summary>
@@ -375,7 +388,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Gets or sets selection mode.
         /// </summary>
-        public SelectionMode SelectionMode { get; set; }
+        public SelectionMode SelectionMode
+        { get; set; }
 
         /// <inheritdoc />
         /// <summary>
@@ -412,6 +426,18 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         #endregion Members
 
+        #region Constructors
+
+        /// <summary>
+        /// Initialise a new instance of <see cref="ListViewModel{TEntityModel}"/>
+        /// </summary>
+        protected ListViewModel()
+        {
+            SelectionMode = SelectionMode.Multiple;
+        }
+
+        #endregion Constructors
+
         #region Methods
 
         #region Initialization
@@ -426,7 +452,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
             Items = new ObservableItemsCollection<TEntityModel>();
 
-            SelectionMode = SelectionMode.Multiple;
             IsReadOnly = false;
         }
 
@@ -524,11 +549,34 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             {
                 Filters.Items = new FilteredCollectionView<TEntityModel>(Items.ToObservableCollection());
             }
-            Items.CollectionChanged += OnItemsCollectionChanged;
+
+            Items.ForEach(x => x.SelectedChanged += Item_SelectedChanged);
             SelectAllCommand.RaiseCanExecuteChanged();
         }
 
-        protected virtual void OnItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        /// <summary>
+        /// Calls when selection Changed.
+        /// </summary>
+        private void Item_SelectedChanged(object sender, EventArgs e)
+        {
+            if (sender is ISelectable selected && (SelectionMode == SelectionMode.Single && selected.IsSelected))
+            {
+                Items.ForEach(x => x.SelectedChanged -= Item_SelectedChanged);
+
+                var itemsToChange = SelectedItems.ToList();
+
+                itemsToChange.Where(x => !x.Equals(selected)).ForEach(x => x.IsSelected = false);
+
+                Items.ForEach(x => x.SelectedChanged += Item_SelectedChanged);
+            }
+
+            OnSelectionChanged();
+        }
+
+        /// <summary>
+        /// Calls when selection Changed.
+        /// </summary>
+        protected virtual void OnSelectionChanged()
         {
             RaisePropertyChanged(() => AreAllSelected);
             RaisePropertyChanged(() => SelectedItems);
