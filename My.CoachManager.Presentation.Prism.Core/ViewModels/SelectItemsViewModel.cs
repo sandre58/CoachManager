@@ -148,6 +148,21 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         public DelegateCommand CancelCommand { get; private set; }
 
+        /// <summary>
+        /// Gets or sets select command.
+        /// </summary>
+        public DelegateCommand<TModel> SelectItemCommand { get; private set; }
+
+        /// <summary>
+        /// Gets or sets select command.
+        /// </summary>
+        public DelegateCommand<IEnumerable<TModel>> SelectItemsCommand { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the edit command.
+        /// </summary>
+        public DelegateCommand<TModel> OpenCommand { get; set; }
+
         #endregion Members
 
         #region Constructors
@@ -189,6 +204,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             SelectCommand = new DelegateCommand(Select, CanSelect);
             CancelCommand = new DelegateCommand(Cancel, CanCancel);
             SelectAllCommand = new DelegateCommand<bool?>(SelectAll, CanSelectAll);
+            SelectItemCommand = new DelegateCommand<TModel>(SelectItem, CanSelectItem);
+            SelectItemsCommand = new DelegateCommand<IEnumerable<TModel>>(SelectItems, CanSelectItems);
+            OpenCommand = new DelegateCommand<TModel>(Open, CanOpen);
         }
 
         #endregion Initialization
@@ -266,6 +284,74 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         }
 
         #endregion Select
+
+        #region Open
+
+        /// <summary>
+        /// Open Item.
+        /// </summary>
+        protected virtual void Open(TModel item)
+        {
+            if (item != null)
+            {
+                SelectItem(item);
+                Select();
+            }
+        }
+
+        /// <summary>
+        /// Can Open item.
+        /// </summary>
+        protected virtual bool CanOpen(TModel item)
+        {
+            return true;
+        }
+
+        #endregion Open
+
+        #region SelectItem
+
+        /// <summary>
+        /// Can select an item.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual bool CanSelectItem(TModel item)
+        {
+            return item != null && item.IsSelectable;
+        }
+
+        /// <summary>
+        /// Select an item.
+        /// </summary>
+        public virtual void SelectItem(TModel item)
+        {
+            if (item == null || !item.IsSelectable) return;
+
+            item.IsSelected = true;
+        }
+
+        #endregion SelectItem
+
+        #region SelectItems
+
+        /// <summary>
+        /// Can select items.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual bool CanSelectItems(IEnumerable<TModel> items)
+        {
+            return items.Any(x => x.IsSelectable);
+        }
+
+        /// <summary>
+        /// Select items.
+        /// </summary>
+        public virtual void SelectItems(IEnumerable<TModel> items)
+        {
+            items?.ForEach(SelectItem);
+        }
+
+        #endregion SelectItems
 
         #region Cancel
 

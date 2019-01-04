@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace My.CoachManager.Presentation.Prism.Controls
+namespace My.CoachManager.Presentation.Prism.Controls.GridViews.Columns
 {
     public class ExtendedGridViewColumn : GridViewColumn
     {

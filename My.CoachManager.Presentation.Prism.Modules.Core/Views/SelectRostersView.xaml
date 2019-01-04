@@ -10,6 +10,7 @@
              xmlns:models="clr-namespace:My.CoachManager.Presentation.Prism.Models;assembly=My.CoachManager.Presentation.Prism.Models"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Core.ViewModels"
+             xmlns:columns="clr-namespace:My.CoachManager.Presentation.Prism.Controls.GridViews.Columns;assembly=My.CoachManager.Presentation.Prism.Controls"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:SelectRostersViewModel}"
@@ -17,27 +18,27 @@
 
     <controls:WorkspaceView Style="{StaticResource SelectWorkspaceDialogViewStyle}">
 
-        <controls:ExtendedListView ItemsSource="{Binding Items}" Style="{StaticResource ListViewBaseStyle}">
+        <controls:ExtendedListView ItemsSource="{Binding Items}">
             <controls:ExtendedListView.View>
                 <controls:ExtendedGridView>
 
                     <!-- Name -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static entities:RosterResources.Name}" Width="300"
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:RosterResources.Name}" Width="300"
                                                      PropertyName="Name">
-                        <controls:ExtendedGridViewColumn.CellTemplate>
+                        <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:RosterModel">
                                 <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" FontWeight="DemiBold" />
                             </DataTemplate>
-                        </controls:ExtendedGridViewColumn.CellTemplate>
-                    </controls:ExtendedGridViewColumn>
+                        </columns:ExtendedGridViewColumn.CellTemplate>
+                    </columns:ExtendedGridViewColumn>
 
                     <!-- Category -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static entities:RosterResources.Category}"
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:RosterResources.Category}"
                                                      DisplayMemberBinding="{Binding Category.Label}"
                                                      PropertyName="Category" />
 
                     <!-- Season -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static entities:RosterResources.Season}"
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:RosterResources.Season}"
                                                      DisplayMemberBinding="{Binding Season.Label}"
                                                      PropertyName="Season" />
 

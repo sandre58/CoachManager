@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using My.CoachManager.Presentation.Prism.Controls.GridViews.Columns;
 using My.CoachManager.Presentation.Prism.Controls.Parameters;
 
 namespace My.CoachManager.Presentation.Prism.Controls

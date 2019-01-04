@@ -91,7 +91,9 @@
   <ItemGroup>
     <Compile Include="AdornedControl.cs" />
     <Compile Include="Collections\UiCollection.cs" />
+    <Compile Include="ExtendedListViewItem.cs" />
     <Compile Include="ExtendedListView.cs" />
+    <Compile Include="GridViews\Columns\ActionsGridViewColumn.cs" />
     <Compile Include="HeaderPanel.cs" />
     <Compile Include="Clipper.cs" />
     <Compile Include="HyperlinkButton.cs" />
@@ -111,7 +113,7 @@
     <Compile Include="DropDownButton.cs" />
     <Compile Include="DropDownMenuButton.cs" />
     <Compile Include="ExtendedDataGrid.cs" />
-    <Compile Include="ExtendedGridViewColumn.cs" />
+    <Compile Include="GridViews\Columns\ExtendedGridViewColumn.cs" />
     <Compile Include="Extensions\CommandBindingExtension.cs" />
     <Compile Include="Extensions\EnumExtension.cs" />
     <Compile Include="Flyout.cs" />

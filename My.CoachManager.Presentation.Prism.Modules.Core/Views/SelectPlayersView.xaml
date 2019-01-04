@@ -10,6 +10,7 @@
              xmlns:models="clr-namespace:My.CoachManager.Presentation.Prism.Models;assembly=My.CoachManager.Presentation.Prism.Models"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Core.ViewModels"
+             xmlns:columns="clr-namespace:My.CoachManager.Presentation.Prism.Controls.GridViews.Columns;assembly=My.CoachManager.Presentation.Prism.Controls"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:SelectPlayersViewModel}"
@@ -17,14 +18,14 @@
 
     <controls:WorkspaceView Style="{StaticResource SelectWorkspaceDialogViewStyle}">
 
-        <controls:ExtendedListView ItemsSource="{Binding Filters.Items}" Style="{StaticResource ListViewBaseStyle}">
+        <controls:ExtendedListView ItemsSource="{Binding Filters.Items}">
             <controls:ExtendedListView.View>
                 <controls:ExtendedGridView VisibleColumns="{Binding Parameters.DisplayedColumns}">
 
                     <!-- Photo -->
-                    <controls:ExtendedGridViewColumn 
+                    <columns:ExtendedGridViewColumn 
                             PropertyName="Photo"  CanUserHideColumn="False" Width="100">
-                        <controls:ExtendedGridViewColumn.CellTemplate>
+                        <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
                                 <controls:ImageContent Style="{StaticResource RoundedImageStyle}" Width="45" Height="45" Image="{Binding Photo, Converter={StaticResource BytesToImageConverter}}" HorizontalAlignment="Center">
                                     <Grid>
@@ -37,46 +38,46 @@
                                     </DataTrigger>
                                 </DataTemplate.Triggers>
                             </DataTemplate>
-                        </controls:ExtendedGridViewColumn.CellTemplate>
-                    </controls:ExtendedGridViewColumn>
+                        </columns:ExtendedGridViewColumn.CellTemplate>
+                    </columns:ExtendedGridViewColumn>
 
                     <!-- Name -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.LastName}" 
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.LastName}" 
                                                          PropertyName="LastName" CanUserHideColumn="False" Width="150" >
-                        <controls:ExtendedGridViewColumn.CellTemplate>
+                        <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
                                 <StackPanel>
                                     <TextBlock Text="{Binding LastName, Converter={StaticResource ToUpperConverter}}" FontWeight="Bold" />
                                     <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
                                 </StackPanel>
                             </DataTemplate>
-                        </controls:ExtendedGridViewColumn.CellTemplate>
-                    </controls:ExtendedGridViewColumn>
+                        </columns:ExtendedGridViewColumn.CellTemplate>
+                    </columns:ExtendedGridViewColumn>
 
                     <!-- Age -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Age}"
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Age}"
                                                          PropertyName="Age" Width="60">
-                        <controls:ExtendedGridViewColumn.CellTemplate>
+                        <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
                                 <TextBlock HorizontalAlignment="Center" Text="{Binding Age, StringFormat={x:Static entities:PersonResources.AgeFormat}, TargetNullValue=''}" />
                             </DataTemplate>
-                        </controls:ExtendedGridViewColumn.CellTemplate>
-                    </controls:ExtendedGridViewColumn>
+                        </columns:ExtendedGridViewColumn.CellTemplate>
+                    </columns:ExtendedGridViewColumn>
 
                     <!-- Birthdate -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Birthdate}"
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Birthdate}"
                                                          PropertyName="Birthdate" Width="110" 
                                                          DisplayMemberBinding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}"/>
 
                     <!-- Category -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.CategoryAbbr}"
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.CategoryAbbr}"
                                                          PropertyName="Category" Width="80"
                                                          DisplayMemberBinding="{Binding Category.Label}"/>
 
                     <!-- Gender -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Gender}"
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Gender}"
                                                          PropertyName="Gender" Width="80">
-                        <controls:ExtendedGridViewColumn.CellTemplate>
+                        <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
                                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <controls:Icon Size="Custom" Height="25" Foreground="{DynamicResource Male}"  Content="{DynamicResource GenderMaleGeometry}"
@@ -85,20 +86,20 @@
                                                Visibility="{Binding Gender, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static enum:GenderType.Female}}" />
                                 </Grid>
                             </DataTemplate>
-                        </controls:ExtendedGridViewColumn.CellTemplate>
-                    </controls:ExtendedGridViewColumn>
+                        </columns:ExtendedGridViewColumn.CellTemplate>
+                    </columns:ExtendedGridViewColumn>
 
                     <!-- Country -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.CountryAbbr}"
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.CountryAbbr}"
                                                          PropertyName="Country" Width="70">
-                        <controls:ExtendedGridViewColumn.CellTemplate>
+                        <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
                                 <Grid>
                                     <Image Source="{Binding Country.FullPath}" Width="20" ToolTip="{Binding Country.Label}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </DataTemplate>
-                        </controls:ExtendedGridViewColumn.CellTemplate>
-                    </controls:ExtendedGridViewColumn>
+                        </columns:ExtendedGridViewColumn.CellTemplate>
+                    </columns:ExtendedGridViewColumn>
 
                 </controls:ExtendedGridView>
             </controls:ExtendedListView.View>

@@ -1,9 +1,11 @@
-﻿using My.CoachManager.Presentation.Prism.Controls.Collections;
+﻿using System.Collections;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using My.CoachManager.Presentation.Prism.Controls.GridViews.Columns;
+using My.CoachManager.Presentation.Prism.Core.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
@@ -181,29 +183,47 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         #endregion IsSorting
 
-        #region ItemCommands
+        #region ButtonCommands
 
         /// <summary>
         /// Identifies the BackgroundContent dependency property.
         /// </summary>
-        public static readonly DependencyProperty ItemCommandsProperty = DependencyProperty.Register("ItemCommands", typeof(UiCollection), typeof(ExtendedListView), new PropertyMetadata(new UiCollection()));
+        public static readonly DependencyProperty ButtonCommandsProperty = DependencyProperty.Register("ButtonCommands", typeof(IEnumerable), typeof(ExtendedListView), new PropertyMetadata(new CommandsCollection()));
 
         /// <summary>
         /// Get or set commands in Application Bar.
         /// </summary>
-        public UiCollection ItemCommands
+        public IEnumerable ButtonCommands
         {
-            get
-            {
-                return (UiCollection)GetValue(ItemCommandsProperty);
-            }
+            get => (IEnumerable)GetValue(ButtonCommandsProperty);
 
-            set
-            {
-                SetValue(ItemCommandsProperty, value);
-            }
+            set => SetValue(ButtonCommandsProperty, value);
         }
 
-        #endregion ItemCommands
+        #endregion ButtonCommands
+
+        #region ContextMenuCommands
+
+        /// <summary>
+        /// Identifies the BackgroundContent dependency property.
+        /// </summary>
+        public static readonly DependencyProperty ContextMenuCommandsProperty = DependencyProperty.Register("ContextMenuCommands", typeof(IEnumerable), typeof(ExtendedListView), new PropertyMetadata(new CommandsCollection()));
+
+        /// <summary>
+        /// Get or set commands in Application Bar.
+        /// </summary>
+        public IEnumerable ContextMenuCommands
+        {
+            get => (IEnumerable)GetValue(ContextMenuCommandsProperty);
+
+            set => SetValue(ContextMenuCommandsProperty, value);
+        }
+
+        #endregion ContextMenuCommands
+
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            return new ExtendedListViewItem();
+        }
     }
 }

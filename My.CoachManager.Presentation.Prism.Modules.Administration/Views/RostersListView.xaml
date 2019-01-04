@@ -7,8 +7,8 @@
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
              xmlns:mvvm="http://prismlibrary.com/"
-             xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:models="clr-namespace:My.CoachManager.Presentation.Prism.Models;assembly=My.CoachManager.Presentation.Prism.Models"
+             xmlns:columns="clr-namespace:My.CoachManager.Presentation.Prism.Controls.GridViews.Columns;assembly=My.CoachManager.Presentation.Prism.Controls"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:RostersListViewModel}"
@@ -20,22 +20,22 @@
             <controls:ExtendedListView.View>
                 <controls:ExtendedGridView VisibleColumns="{Binding Parameters.DisplayedColumns}">
                     <!-- Name -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static strings:RosterResources.Name}" Width="300"
+                    <columns:ExtendedGridViewColumn Header="{x:Static strings:RosterResources.Name}" Width="300"
                                                      PropertyName="Name">
-                        <controls:ExtendedGridViewColumn.CellTemplate>
+                        <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:RosterModel">
                                 <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" FontWeight="DemiBold" />
                             </DataTemplate>
-                        </controls:ExtendedGridViewColumn.CellTemplate>
-                    </controls:ExtendedGridViewColumn>
+                        </columns:ExtendedGridViewColumn.CellTemplate>
+                    </columns:ExtendedGridViewColumn>
 
                     <!-- Category -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static strings:RosterResources.Category}"
+                    <columns:ExtendedGridViewColumn Header="{x:Static strings:RosterResources.Category}"
                                                      DisplayMemberBinding="{Binding Category.Label}"
                                                      PropertyName="Category" />
 
                     <!-- Season -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static strings:RosterResources.Season}"
+                    <columns:ExtendedGridViewColumn Header="{x:Static strings:RosterResources.Season}"
                                                      DisplayMemberBinding="{Binding Season.Label}"
                                                      PropertyName="Season" />
 
@@ -45,8 +45,10 @@
 
         <controls:WorkspaceView.Commands>
             <controls:CommandButton DockPanel.Dock="Right"  Style="{StaticResource AddCommandButtonApplicationBarStyle}" Command="{Binding AddCommand}" />
-            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource DeleteCommandButtonApplicationBarStyle}" Command="{Binding RemoveSelectedItemsCommand}" />
             <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource RefreshCommandButtonApplicationBarStyle}" Command="{Binding RefreshCommand}" />
+            <Separator DockPanel.Dock="Right" Style="{StaticResource VerticalSeparatorStyle}" />
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource EditCommandButtonApplicationBarStyle}" Command="{Binding EditSelectedItemCommand}" />
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource DeleteCommandButtonApplicationBarStyle}" Command="{Binding RemoveSelectedItemsCommand}" />
         </controls:WorkspaceView.Commands>
     </controls:WorkspaceView>
 </UserControl>

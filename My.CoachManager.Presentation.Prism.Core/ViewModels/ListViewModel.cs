@@ -16,6 +16,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using My.CoachManager.Presentation.Prism.Core.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
@@ -29,35 +30,58 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Gets or sets the add command.
         /// </summary>
-        public DelegateCommand AddCommand { get; set; }
+        public DelegateKeyCommand AddCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the edit command.
         /// </summary>
-        public DelegateCommand<TEntityModel> OpenCommand { get; set; }
+        public DelegateKeyCommand<TEntityModel> OpenCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the edit command.
         /// </summary>
-        public DelegateCommand<TEntityModel> EditCommand { get; set; }
+        public DelegateKeyCommand<TEntityModel> EditCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the edit command.
         /// </summary>
-        public DelegateCommand EditSelectedItemCommand { get; set; }
+        public DelegateKeyCommand EditSelectedItemCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the remove command.
         /// </summary>
-        public DelegateCommand<TEntityModel> RemoveCommand { get; set; }
+        public DelegateKeyCommand<TEntityModel> RemoveCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the remove command.
         /// </summary>
-        public DelegateCommand RemoveSelectedItemsCommand { get; set; }
+        public DelegateKeyCommand RemoveSelectedItemsCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets item buttons commands.
+        /// </summary>
+        public CommandsCollection ItemButtonCommands { get; set; }
+
+        /// <summary>
+        /// Gets or sets item context menu commands.
+        /// </summary>
+        public CommandsCollection ItemContextMenuCommands { get; set; }
 
         #endregion Members
 
+        #region Constructors
+        
+        /// <summary>
+        /// Initialise a new instance of <see cref="ListViewModel{TEntityModel}"/>
+        /// </summary>
+        protected ListViewModel()
+        {
+            ItemButtonCommands = new CommandsCollection();
+            ItemContextMenuCommands = new CommandsCollection();
+        }
+
+        #endregion Constructors
+        
         #region Methods
 
         #region Initialization
@@ -70,12 +94,25 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             base.InitializeCommand();
 
-            AddCommand = new DelegateCommand(Add, CanAdd);
-            RemoveCommand = new DelegateCommand<TEntityModel>(Remove, CanRemove);
-            RemoveSelectedItemsCommand = new DelegateCommand(Remove, CanRemove);
-            EditSelectedItemCommand = new DelegateCommand(Edit, CanEdit);
-            EditCommand = new DelegateCommand<TEntityModel>(Edit, CanEdit);
-            OpenCommand = new DelegateCommand<TEntityModel>(Open, CanOpen);
+            AddCommand = new DelegateKeyCommand(Add, CanAdd);
+            RemoveCommand = new DelegateKeyCommand<TEntityModel>(Remove, CanRemove)
+            {
+                Header = ControlResources.Remove,
+                ColorName = "Negative",
+                IconName = "CancelGeometry"
+            };
+            RemoveSelectedItemsCommand = new DelegateKeyCommand(Remove, CanRemove);
+            EditSelectedItemCommand = new DelegateKeyCommand(Edit, CanEdit);
+            EditCommand = new DelegateKeyCommand<TEntityModel>(Edit, CanEdit)
+            {
+                Header = ControlResources.Edit,
+                IconName = "EditPageGeometry"
+            };
+            OpenCommand = new DelegateKeyCommand<TEntityModel>(Open, CanOpen);
+
+            ItemButtonCommands.Add(EditCommand);
+
+            ItemContextMenuCommands.Add(RemoveCommand);
         }
 
         #endregion Initialization
@@ -159,6 +196,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         protected virtual void Edit(TEntityModel item)
         {
             var x = item ?? SelectedItem;
+            if(x == null) return;
             if (!CanEdit(x)) return;
 
             var view = ServiceLocator.Current.GetInstance<TEditView>();
@@ -176,7 +214,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual bool CanEdit(TEntityModel item)
         {
-            return Mode == ScreenMode.Read && item != null && !IsReadOnly;
+            return Mode == ScreenMode.Read && !IsReadOnly;
         }
 
         /// <summary>
@@ -218,6 +256,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         protected virtual void Remove(TEntityModel item)
         {
             var x = item ?? SelectedItem;
+            if (x == null) return;
             if (!CanRemove(x)) return;
 
             if (DialogManager.ShowWarningDialog(MessageResources.ConfirmationRemovingItem, MessageDialogButtons.YesNo) != DialogResult.Yes) return;
@@ -248,7 +287,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual bool CanRemove(TEntityModel item)
         {
-            return Mode == ScreenMode.Read && item != null && !IsReadOnly;
+            return Mode == ScreenMode.Read && !IsReadOnly;
         }
 
         /// <summary>
@@ -319,8 +358,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         #endregion Properties Changed
 
-        #endregion Methods
-    }
+            #endregion Methods
+        }
 
     public abstract class ListViewModel<TEntityModel> : NavigatableWorkspaceViewModel, IListViewModel<TEntityModel>
     where TEntityModel : class, ISelectable, IEntityModel, IModifiable, IValidatable, new()
@@ -431,10 +470,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="ListViewModel{TEntityModel}"/>
         /// </summary>
-        protected ListViewModel()
-        {
-            SelectionMode = SelectionMode.Multiple;
-        }
+        protected ListViewModel() => SelectionMode = SelectionMode.Multiple;
 
         #endregion Constructors
 

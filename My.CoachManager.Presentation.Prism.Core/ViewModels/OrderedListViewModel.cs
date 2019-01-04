@@ -100,8 +100,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         private void ActivateOrder()
         {
             SelectAll(false);
-            Reorder();
             CanOrder = true;
+            Reorder();
             Mode = ScreenMode.Edition;
         }
 
@@ -361,8 +361,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         protected virtual void OnCanOrderChanged()
         {
             AddCommand.RaiseCanExecuteChanged();
-            EditCommand.RaiseCanExecuteChanged();
-            RemoveCommand.RaiseCanExecuteChanged();
             RefreshCommand.RaiseCanExecuteChanged();
             MoveAboveCommand.RaiseCanExecuteChanged();
             MoveBelowCommand.RaiseCanExecuteChanged();

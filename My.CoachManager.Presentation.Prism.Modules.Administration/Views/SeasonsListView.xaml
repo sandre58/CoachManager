@@ -8,6 +8,7 @@
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:models="clr-namespace:My.CoachManager.Presentation.Prism.Models;assembly=My.CoachManager.Presentation.Prism.Models"
+             xmlns:columns="clr-namespace:My.CoachManager.Presentation.Prism.Controls.GridViews.Columns;assembly=My.CoachManager.Presentation.Prism.Controls"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:SeasonsListViewModel}"
@@ -20,27 +21,27 @@
                 <controls:ExtendedGridView VisibleColumns="{Binding Parameters.DisplayedColumns}">
 
                     <!-- Order -->
-                    <controls:ExtendedGridViewColumn Header="Order" Width="75" CanUserHideColumn="False"
+                    <columns:ExtendedGridViewColumn Header="Order" Width="75" CanUserHideColumn="False"
                                                      PropertyName="Order" CellTemplate="{StaticResource OrderListViewColumnTemplate}" HeaderTemplate="{StaticResource OrderListViewColumnHeaderTemplate}" />
 
                     
                     <!-- Label -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static strings:ReferenceResources.Label}" Width="300"
+                    <columns:ExtendedGridViewColumn Header="{x:Static strings:ReferenceResources.Label}" Width="300"
                                                      PropertyName="Label">
-                        <controls:ExtendedGridViewColumn.CellTemplate>
+                        <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:SeasonModel">
                                 <TextBlock HorizontalAlignment="Center" Text="{Binding Label}" FontWeight="DemiBold" />
                             </DataTemplate>
-                        </controls:ExtendedGridViewColumn.CellTemplate>
-                    </controls:ExtendedGridViewColumn>
+                        </columns:ExtendedGridViewColumn.CellTemplate>
+                    </columns:ExtendedGridViewColumn>
 
                     <!-- Start Date -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static strings:SeasonResources.StartDate}" Width="300"
+                    <columns:ExtendedGridViewColumn Header="{x:Static strings:SeasonResources.StartDate}" Width="300"
                                                      PropertyName="StartDate"
                                                      DisplayMemberBinding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}}"/>
 
                     <!-- End Date -->
-                    <controls:ExtendedGridViewColumn Header="{x:Static strings:SeasonResources.EndDate}" Width="300"
+                    <columns:ExtendedGridViewColumn Header="{x:Static strings:SeasonResources.EndDate}" Width="300"
                                                      PropertyName="EndDate"
                                                      DisplayMemberBinding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}}"/>
 
@@ -50,8 +51,10 @@
         
         <controls:WorkspaceView.Commands>
             <controls:CommandButton DockPanel.Dock="Right"  Style="{StaticResource AddCommandButtonApplicationBarStyle}" Command="{Binding AddCommand}" />
-            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource DeleteCommandButtonApplicationBarStyle}" Command="{Binding RemoveSelectedItemsCommand}" />
             <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource RefreshCommandButtonApplicationBarStyle}" Command="{Binding RefreshCommand}" />
+            <Separator DockPanel.Dock="Right" Style="{StaticResource VerticalSeparatorStyle}" />
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource EditCommandButtonApplicationBarStyle}" Command="{Binding EditSelectedItemCommand}" />
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource DeleteCommandButtonApplicationBarStyle}" Command="{Binding RemoveSelectedItemsCommand}" />
         </controls:WorkspaceView.Commands>
     </controls:WorkspaceView>
 </UserControl>

@@ -7,7 +7,7 @@
                     xmlns:dragAndDrop="clr-namespace:My.CoachManager.Presentation.Prism.Controls.DragAndDrop;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:enum="clr-namespace:My.CoachManager.Presentation.Prism.Core.Enums;assembly=My.CoachManager.Presentation.Prism.Core"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
-                    xmlns:collections="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Collections;assembly=My.CoachManager.Presentation.Prism.Controls">
+                    xmlns:commands="clr-namespace:My.CoachManager.Presentation.Prism.Core.Commands;assembly=My.CoachManager.Presentation.Prism.Core">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Converters.xaml" />
@@ -38,7 +38,7 @@
     </Style>
 
     <!-- Item Style -->
-    <ControlTemplate x:Key="ListViewItemTemplate" TargetType="{x:Type ListViewItem}">
+    <ControlTemplate x:Key="ListViewItemTemplate" TargetType="{x:Type controls:ExtendedListViewItem}">
         <Border x:Name="Border"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
@@ -69,27 +69,51 @@
                     </Grid>
 
                     <!-- Actions -->
-                    <Grid  Visibility="{Binding ItemCommands, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, Converter={StaticResource AnyToVisibilityConverter}}">
-                        <ItemsControl x:Name="ActionsPanel" Visibility="Hidden" ItemsSource="{Binding ItemCommands, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
+                    <StackPanel Orientation="Horizontal" x:Name="ActionsPanel" Visibility="Hidden">
+                        <ItemsControl Visibility="{Binding ButtonCommands, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource AnyToVisibilityConverter}}"
+                                          ItemsSource="{TemplateBinding ButtonCommands}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="commands:IKeyCommand">
+                                        <Button Width="17" Margin="{StaticResource SmallHorizontalMargin}" Style="{StaticResource IconButtonStyle}"
+                                            parameters:ControlParameters.PressedForeground="{DynamicResource AccentForeground}" 
+                                            parameters:ControlParameters.FocusBackground="{DynamicResource AccentForeground}"
+                                            Focusable="False"
+                                                CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListViewItem}}}"
+                                            Command="{Binding}"
+                                            Content="{Binding Icon}"
+                                            ToolTip="{Binding Header}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
 
-                            <ItemsControl.Resources>
-                                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonStyle}">
-                                    <Setter Property="Width" Value="17" />
-                                    <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource AccentForeground}" />
-                                    <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource AccentForeground}" />
-                                    <Setter Property="CommandParameter" Value="{Binding}" />
-                                    <Setter Property="Focusable" Value="False" />
-                                    <Setter Property="Margin" Value="{StaticResource SmallHorizontalMargin}" />
-                                    <!--<Setter Property="Visibility" Value="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource NullToVisibilityConverter}}" />-->
+                        <controls:DropDownMenuButton x:Name="Menu" Content="{StaticResource ToolbarGeometry}"
+                                                     Height="17" Margin="{StaticResource SmallHorizontalMargin}" Style="{StaticResource IconDropDownMenuButtonStyle}"
+                                                     parameters:ControlParameters.PressedForeground="{DynamicResource AccentForeground}" 
+                                                     parameters:ControlParameters.FocusBackground="{DynamicResource AccentForeground}"
+                                                     Focusable="False"
+                                                     ShowArrow="False"
+                                                     ItemsSource="{TemplateBinding ContextMenuCommands}"
+                                                     Visibility="{Binding ContextMenuCommands, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource AnyToVisibilityConverter}}">
+                            <controls:DropDownMenuButton.ItemContainerStyle>
+                                <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
+                                    <Setter Property="Header" Value="{Binding Header}" />
+                                    <Setter Property="Icon" Value="{Binding Icon}" />
+                                    <Setter Property="Command" Value="{Binding}" />
+                                    <Setter Property="CommandParameter" Value="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListViewItem}}}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Color, Converter={StaticResource NullToBooleanConverter}}" Value="False">
+                                            <Setter Property="parameters:ControlParameters.FocusBackground" Value="{Binding Color}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
                                 </Style>
-                            </ItemsControl.Resources>
-                        </ItemsControl>
-                    </Grid>
+                            </controls:DropDownMenuButton.ItemContainerStyle>
+                        </controls:DropDownMenuButton>
+                    </StackPanel>
                 </StackPanel>
 
                 <!-- Content -->
@@ -140,10 +164,15 @@
                     <Setter TargetName="ActionsPanel" Property="Visibility" Value="Hidden" />
                 </MultiDataTrigger.Setters>
             </MultiDataTrigger>
+            <Trigger  SourceName="Menu" Property="IsExpanded" Value="True">
+                <Setter TargetName="ActionsColumn" Property="Visibility" Value="Visible" />
+                <Setter TargetName="ActionsPanel" Property="Visibility" Value="Visible" />
+                <Setter TargetName="SelectionCheckBox" Property="Visibility" Value="Visible" />
+            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-
-    <ControlTemplate  x:Key="DraggableListViewItemTemplate" TargetType="{x:Type ListViewItem}">
+    
+    <ControlTemplate  x:Key="DraggableListViewItemTemplate" TargetType="{x:Type controls:ExtendedListViewItem}">
         <Border x:Name="Border"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
@@ -174,57 +203,21 @@
 
                         <SelectiveScrollingGrid>
                             <SelectiveScrollingGrid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                             </SelectiveScrollingGrid.ColumnDefinitions>
-
-                            <!-- Selection -->
-                            <Grid x:Name="SelectionColumn" Width="{StaticResource SelectionColumnWidth}" Visibility="Collapsed">
-                                <CheckBox x:Name="SelectionCheckBox" IsChecked="{Binding IsSelected}" IsEnabled="{Binding IsSelectable}"
-                              Style="{StaticResource CircleCheckBoxStyle}"
-                              HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding DataContext.SelectedItems,
-                                Converter={StaticResource AnyToVisibilityConverter},
-                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, UpdateSourceTrigger=PropertyChanged}" />
-                            </Grid>
-
                             <!-- Content -->
-                            <GridViewRowPresenter Grid.Column="1" x:Name="PART_RowPresenter"
+                            <GridViewRowPresenter x:Name="PART_RowPresenter"
                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                       Margin="{TemplateBinding Padding}"
                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                       SelectiveScrollingGrid.SelectiveScrollingOrientation="Horizontal" />
-                            <ContentPresenter Grid.Column="1" x:Name="PART_ContentPresenter"
+                            <ContentPresenter x:Name="PART_ContentPresenter"
                                   Margin="{TemplateBinding Padding}"
                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                   Visibility="Collapsed" />
 
-                            <!-- Actions -->
-                            <DockPanel x:Name="ActionsColumns" Grid.ColumnSpan="2" Grid.Column="0" Visibility="Hidden">
-                                <Grid DockPanel.Dock="Right" HorizontalAlignment="Right" Width="{StaticResource ActionColumnWidth}">
-                                    <StackPanel x:Name="ActionsPanel" HorizontalAlignment="Center" Orientation="Horizontal" Visibility="Collapsed">
-                                        <Button Margin="{StaticResource DefaultHorizontalMargin}" Style="{StaticResource IconButtonStyle}"
-                                        Width="20" Height="20"
-                                        Content="{StaticResource EditPageGeometry}" ToolTip="{x:Static strings:ControlResources.Edit}"
-                                        parameters:ControlParameters.PressedForeground="{DynamicResource AccentForeground}"
-                                        parameters:ControlParameters.FocusBackground="{DynamicResource AccentForeground}"
-                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
-                                        CommandParameter="{Binding}"
-                                    Focusable="False"
-                                        Visibility="{Binding DataContext.EditCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Converter={StaticResource NullToVisibilityConverter}}" />
-                                        <Button Margin="{StaticResource DefaultHorizontalMargin}" Style="{StaticResource IconButtonStyle}"
-                                        Width="20" Height="20"
-                                        Content="{StaticResource CancelGeometry}" ToolTip="{x:Static strings:ControlResources.Remove}"
-                                        parameters:ControlParameters.PressedForeground="{DynamicResource AccentForeground}"
-                                        parameters:ControlParameters.FocusBackground="{DynamicResource AccentForeground}"
-                                        Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
-                                        CommandParameter="{Binding}"
-                                        Focusable="False"
-                                        Visibility="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Converter={StaticResource NullToVisibilityConverter}}" />
-                                    </StackPanel>
-                                </Grid>
-                            </DockPanel>
                         </SelectiveScrollingGrid>
 
                         <Grid dragAndDrop:DragViewer.Format="{TemplateBinding parameters:DragAndDropParameters.MoveDragFormat}"
@@ -256,37 +249,15 @@
                 <Setter TargetName="PART_ContentPresenter" Property="Visibility" Value="Visible" />
                 <Setter TargetName="PART_RowPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding CustomSelectionMode, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}" Value="{x:Static enum:SelectionMode.Multiple}" />
-                    <Condition Binding="{Binding CanOrder, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}" Value="False" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter TargetName="SelectionColumn" Property="Visibility" Value="Visible" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="SelectionCheckBox" Property="Visibility" Value="Visible" />
-                <Setter TargetName="ActionsPanel" Property="Visibility" Value="Visible" />
-            </Trigger>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, Converter={StaticResource AnyToBooleanConverter}}" Value="False" />
-                    <Condition Binding="{Binding CanOrder, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}" Value="False" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter TargetName="ActionsColumns" Property="Visibility" Value="Visible" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="ListViewItemStyle" TargetType="{x:Type ListViewItem}">
+    <Style x:Key="ListViewItemStyle" TargetType="{x:Type controls:ExtendedListViewItem}">
         <Style.Resources>
             <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType=ListViewItem}}" Value="True">
-                        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" />
+                        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type controls:ExtendedListViewItem}}}" />
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
@@ -294,7 +265,7 @@
                 <Setter Property="Focusable" Value="False" />
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType=ListViewItem}}" Value="True">
-                        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" />
+                        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type controls:ExtendedListViewItem}}}" />
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
@@ -318,6 +289,8 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template" Value="{StaticResource ListViewItemTemplate}" />
+        <Setter Property="ButtonCommands" Value="{Binding ButtonCommands, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}" />
+        <Setter Property="ContextMenuCommands" Value="{Binding ContextMenuCommands, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}" />
 
         <Style.Triggers>
 
@@ -369,7 +342,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="DraggableListViewItemStyle" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource ListViewItemStyle}">
+    <Style x:Key="DraggableListViewItemStyle" TargetType="{x:Type controls:ExtendedListViewItem}" BasedOn="{StaticResource ListViewItemStyle}">
         <Setter Property="Template" Value="{StaticResource DraggableListViewItemTemplate}" />
     </Style>
 
@@ -669,7 +642,7 @@
                 <Setter Property="SelectionMode" Value="Single" />
                 <Setter Property="ItemContainerStyle">
                     <Setter.Value>
-                        <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource DraggableListViewItemStyle}">
+                        <Style TargetType="{x:Type controls:ExtendedListViewItem}" BasedOn="{StaticResource DraggableListViewItemStyle}">
                             <Setter Property="parameters:DragAndDropParameters.MoveAboveCommand" Value="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=MoveAboveCommand}" />
                             <Setter Property="parameters:DragAndDropParameters.MoveBelowCommand" Value="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=MoveBelowCommand}" />
                             <Setter Property="parameters:DragAndDropParameters.MoveDragFormat" Value="ListViewMoveDragFormat" />
@@ -680,51 +653,15 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="ItemsListViewStyle" TargetType="{x:Type controls:ExtendedListView}" BasedOn="{StaticResource ListViewBaseStyle}">
-        <Setter Property="ItemCommands">
-            <Setter.Value>
-                <collections:UiCollection>
-                    <Button Content="{StaticResource EditPageGeometry}" ToolTip="{x:Static strings:ControlResources.Edit}"
-                                        parameters:ControlParameters.FocusBackground="{DynamicResource AccentForeground}"
-                                        Command="{Binding EditCommand}" />
-                    <Button Content="{StaticResource CancelGeometry}" ToolTip="{x:Static strings:ControlResources.Remove}"
-                                        Command="{Binding RemoveCommand}" />
-                </collections:UiCollection>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="DoubleClickCommand" Value="{Binding OpenCommand}" />
-        <Setter Property="parameters:ControlParameters.InputBindings">
-            <Setter.Value>
-                <InputBindingCollection>
-                    <KeyBinding Key="Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}" />
-                    <KeyBinding Key="Enter" Command="{Binding OpenCommand}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}" />
-                    <KeyBinding Key="E" Modifiers="Control" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}" />
-                    <KeyBinding Key="Space" Command="{Binding SelectItemCommand}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}" />
-                </InputBindingCollection>
-            </Setter.Value>
-        </Setter>
-        <!--<Style.Triggers>
-            <DataTrigger Binding="{Binding SelectedItems.Count, Converter={StaticResource IsGreaterThanConverter}, UpdateSourceTrigger=PropertyChanged, ConverterParameter=1}" Value="True">
-                <Setter Property="parameters:ControlParameters.InputBindings">
-                    <Setter.Value>
-                        <InputBindingCollection>
-                            <KeyBinding Key="Delete" Command="{Binding RemoveSelectedItemsCommand}" />
-                        </InputBindingCollection>
-                    </Setter.Value>
-                </Setter>
-            </DataTrigger>
-        </Style.Triggers>-->
-    </Style>
-
-    <Style TargetType="{x:Type controls:ExtendedListView}" BasedOn="{StaticResource ItemsListViewStyle}" />
+    <Style TargetType="{x:Type controls:ExtendedListView}" BasedOn="{StaticResource ListViewBaseStyle}" />
 
     <!-- Columns -->
     <DataTemplate x:Key="OrderListViewColumnTemplate">
         <controls:Icon x:Name="Icon" Size="Small" Content="{StaticResource DragVerticalGeometry}" HorizontalAlignment="Center" VerticalAlignment="Center"
-                       Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}}"
-                       IsEnabled="{Binding Path=DataContext.CanOrder, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}" />
+                       Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListViewItem}}}"
+                       IsEnabled="{Binding Path=CanOrder, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedListView}}" />
         <DataTemplate.Triggers>
-            <DataTrigger Binding="{Binding Path=DataContext.CanOrder, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}" Value="True">
+            <DataTrigger Binding="{Binding Path=CanOrder, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedListView}}" Value="True">
                 <Setter TargetName="Icon" Property="Cursor" Value="SizeAll" />
             </DataTrigger>
         </DataTemplate.Triggers>
@@ -744,11 +681,11 @@
                             VerticalAlignment="Center"
                                 IconData="{StaticResource ListReorderGeometry}"
                                 ToolTip="{x:Static strings:ControlResources.ActivateOrder}"
-                                Command="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=ActivateOrderCommand}"
-                                Visibility="{Binding Path=DataContext.CanOrder, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}" />
+                                Command="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedListView}, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=ActivateOrderCommand}"
+                                Visibility="{Binding Path=CanOrder, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedListView}, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}" />
 
             <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                    Visibility="{Binding Path=DataContext.CanOrder, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    Visibility="{Binding Path=CanOrder, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedListView}, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <controls:CommandButton
                                 ButtonDiameter="25"
                                 Margin="2,0"
@@ -758,7 +695,7 @@
                                 parameters:ControlParameters.Color="{DynamicResource Positive}"
                                 IconData="{StaticResource OkGeometry}"
                                 ToolTip="{x:Static strings:ControlResources.ValidateOrder}"
-                                Command="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=ValidateOrderCommand}" />
+                                Command="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedListView}, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=ValidateOrderCommand}" />
 
                 <controls:CommandButton
                                 ButtonDiameter="25"
@@ -769,8 +706,9 @@
                                 parameters:ControlParameters.Color="{DynamicResource Negative}"
                                 IconData="{StaticResource CancelGeometry}"
                                 ToolTip="{x:Static strings:ControlResources.CancelOrder}"
-                                Command="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=CancelOrderCommand}" />
+                                Command="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedListView}, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=CancelOrderCommand}" />
             </StackPanel>
         </Grid>
     </DataTemplate>
+    
 </ResourceDictionary>
