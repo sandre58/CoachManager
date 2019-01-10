@@ -42,7 +42,13 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// Add players in rosters.
         /// </summary>
         /// <returns></returns>
-        void AddPlayers(int rosterId, IEnumerable<int> playerIds);
+        void AddPlayers(int squadId, IEnumerable<int> playerIds);
+
+        /// <summary>
+        /// Add players in squad.
+        /// </summary>
+        /// <returns></returns>
+        void MovePlayersInSquad(int squadId, IEnumerable<int> playerIds);
 
         /// <summary>
         /// Remove players in rosters.

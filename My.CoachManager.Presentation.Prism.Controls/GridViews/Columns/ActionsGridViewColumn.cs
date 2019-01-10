@@ -1,24 +1,17 @@
 ﻿using System.Windows;
-using My.CoachManager.Presentation.Prism.Controls.Collections;
 
 namespace My.CoachManager.Presentation.Prism.Controls.GridViews.Columns
 {
     public class ActionsGridViewColumn : ExtendedGridViewColumn
     {
-        #region ButtonCommands
-
-        public static readonly DependencyProperty ButtonCommandsProperty = DependencyProperty.Register(
-            "ButtonCommands",
-            typeof(UiCollection),
-            typeof(ActionsGridViewColumn),
-            new PropertyMetadata(new UiCollection()));
-
-        public UiCollection ButtonCommands
+        public ActionsGridViewColumn()
         {
-            get => (UiCollection)GetValue(ButtonCommandsProperty);
-            set => SetValue(ButtonCommandsProperty, value);
+            Header = " ";
+            CellTemplate = (DataTemplate)Application.Current.FindResource("ActionsListViewColumnTemplate");
+            HeaderTemplate = (DataTemplate)Application.Current.FindResource("SelectionListViewColumnHeaderTemplate");
+            HeaderContainerStyle = (Style)Application.Current.FindResource("DisabledGridViewColumnHeaderStyle");
+            CanUserHideColumn = false;
+            Width = 85;
         }
-
-        #endregion
     }
 }

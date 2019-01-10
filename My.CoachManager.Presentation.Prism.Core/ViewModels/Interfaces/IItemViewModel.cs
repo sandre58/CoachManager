@@ -5,11 +5,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
     public interface IItemViewModel
     {
         /// <summary>
-        /// Load an item by id.
-        /// </summary>
-        void LoadItemById(int id);
-
-        /// <summary>
         /// Gets or sets item.
         /// </summary>
         IEntityModel Item { get; set; }

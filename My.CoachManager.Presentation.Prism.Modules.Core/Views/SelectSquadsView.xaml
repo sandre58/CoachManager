@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="My.CoachManager.Presentation.Prism.Modules.Core.Views.SelectSquadsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:entities="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:models="clr-namespace:My.CoachManager.Presentation.Prism.Models;assembly=My.CoachManager.Presentation.Prism.Models"
+             xmlns:mvvm="http://prismlibrary.com/"
+             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Core.ViewModels"
+             xmlns:columns="clr-namespace:My.CoachManager.Presentation.Prism.Controls.GridViews.Columns;assembly=My.CoachManager.Presentation.Prism.Controls"
+             mc:Ignorable="d"
+             mvvm:ViewModelLocator.AutoWireViewModel="True"
+             d:DataContext="{d:DesignInstance Type=viewModels:SelectSquadsViewModel}"
+             Height="700" Width="800">
+
+    <controls:WorkspaceView Style="{StaticResource SelectWorkspaceDialogViewStyle}">
+
+        <controls:ExtendedListView ItemsSource="{Binding Items}">
+            <controls:ExtendedListView.View>
+                <controls:ExtendedGridView>
+
+                    <!-- Name -->
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:SquadResources.Name}" Width="300"
+                                                     PropertyName="Name">
+                        <columns:ExtendedGridViewColumn.CellTemplate>
+                            <DataTemplate DataType="models:RosterModel">
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" FontWeight="DemiBold" />
+                            </DataTemplate>
+                        </columns:ExtendedGridViewColumn.CellTemplate>
+                    </columns:ExtendedGridViewColumn>
+
+                </controls:ExtendedGridView>
+            </controls:ExtendedListView.View>
+        </controls:ExtendedListView>
+        
+        <controls:WorkspaceView.Commands>
+            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CancelCommand}" Style="{StaticResource CancelCommandButtonApplicationBarStyle}" IsCancel="True" />
+            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding SelectCommand}" Style="{StaticResource SelectCommandButtonApplicationBarStyle}" IsDefault="True" />
+            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding RefreshCommand}" Style="{StaticResource RefreshCommandButtonApplicationBarStyle}" />
+        </controls:WorkspaceView.Commands>
+    </controls:WorkspaceView>
+</UserControl>

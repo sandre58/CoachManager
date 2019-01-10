@@ -89,10 +89,12 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionsListViewItemControl.cs" />
     <Compile Include="AdornedControl.cs" />
     <Compile Include="Collections\UiCollection.cs" />
     <Compile Include="ExtendedListViewItem.cs" />
     <Compile Include="ExtendedListView.cs" />
+    <Compile Include="GridViews\Columns\SelectionGridViewColumn.cs" />
     <Compile Include="GridViews\Columns\ActionsGridViewColumn.cs" />
     <Compile Include="HeaderPanel.cs" />
     <Compile Include="Clipper.cs" />
@@ -147,6 +149,7 @@
     <Compile Include="IThumb.cs" />
     <Compile Include="ExtendedThumb.cs" />
     <Compile Include="LinearClipper.cs" />
+    <Compile Include="MultiCheckboxes.cs" />
     <Compile Include="MultiComboBox.cs" />
     <Compile Include="Native\NativeConstants.cs" />
     <Compile Include="Notifications\ToastPosition.cs" />

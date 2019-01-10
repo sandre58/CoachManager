@@ -123,9 +123,10 @@
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="RenderOptions.ClearTypeHint" Value="Enabled" />
         <Setter Property="Template" Value="{DynamicResource {ComponentResourceKey ResourceId=SubmenuItemTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}" />
+        <Setter Property="Padding" Value="7 5 8 6" />
         <Style.Triggers>
             <Trigger Property="Role" Value="TopLevelHeader">
-                <Setter Property="Padding" Value="7 5 8 6" />
+                <Setter Property="Padding" Value="2 6 2 6" />
                 <Setter Property="Template" Value="{DynamicResource {ComponentResourceKey ResourceId=TopLevelHeaderTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}" />
             </Trigger>
             <Trigger Property="Role" Value="TopLevelItem">
@@ -136,14 +137,13 @@
                 <Setter Property="Padding" Value="2 6 2 6" />
                 <Setter Property="Template" Value="{DynamicResource {ComponentResourceKey ResourceId=SubmenuHeaderTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}" />
             </Trigger>
-            <Trigger Property="Role" Value="SubmenuItem">
-                <Setter Property="Padding" Value="2 6 2 6" />
-            </Trigger>
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Foreground" Value="{Binding Path=(parameters:ControlParameters.FocusForeground), RelativeSource={RelativeSource Self}}" />
             </Trigger>
         </Style.Triggers>
     </Style>
+    
+    <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MenuItemStyle}" />
 
     <ContextMenu x:Key="TextBoxContextMenuStyle" Style="{StaticResource ContextMenuStyle}">
         <MenuItem Style="{DynamicResource MenuItemStyle}" Command="ApplicationCommands.Cut" />
@@ -258,8 +258,8 @@
     </Style>
     
     <DataTemplate x:Key="IconTemplate">
-        <controls:Icon Size="Custom" Height="15" Content="{Binding}" Foreground="{Binding Path=(parameters:ControlParameters.Foreground), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}}" />
-        </DataTemplate>
+        <controls:Icon Size="Custom" Height="15" Content="{Binding}" Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}}" />
+     </DataTemplate>
 
     <ControlTemplate x:Key="{ComponentResourceKey ResourceId=SubmenuContent, TypeInTargetAssembly={x:Type FrameworkElement}}" TargetType="{x:Type ContentControl}">
         <Border Background="{DynamicResource Transparent}"
@@ -525,11 +525,14 @@
                     <ColumnDefinition Width="17" />
                 </Grid.ColumnDefinitions>
                 <ContentPresenter x:Name="Icon"
-                                  Margin="1"
+                                  Margin="5 0 0 0"
                                   VerticalAlignment="Center"
-                                  ContentSource="Icon"
+                                  Content="{TemplateBinding Icon}"
                                   ContentTemplate="{StaticResource IconTemplate}"
                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                <!--<controls:Icon Grid.Column="0" Content="{TemplateBinding Icon}" x:Name="Icon"
+                               Margin="1"
+                               VerticalAlignment="Center" />-->
                 <Path Grid.Column="0" x:Name="GlyphPanel"
                       Margin="5 0 0 0"
                       HorizontalAlignment="Center"

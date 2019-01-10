@@ -5,10 +5,10 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:converters="clr-namespace:My.CoachManager.Presentation.Prism.Resources.Converters"
                     xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Core.ViewModels;assembly=My.CoachManager.Presentation.Prism.Core"
-                    xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
                     xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:interfaces="clr-namespace:My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;assembly=My.CoachManager.Presentation.Prism.Core"
+                    xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
                     mc:Ignorable="d">
 
     <ResourceDictionary.MergedDictionaries>
@@ -62,26 +62,26 @@
                                    FontSize="{StaticResource NormalFontSize}"
                                    Text="{Binding SelectedItems.Count, StringFormat={x:Static strings:ControlResources.CountSelectedItemsToUpper}}"
                                    Foreground="{DynamicResource Accent}"
-                                   Style="{StaticResource SmallHeaderStyle}"
+                                   Style="{StaticResource VerySmallHeaderStyle}"
                                    Visibility="{Binding SelectedItems, Converter={StaticResource AnyToVisibilityConverter}}" />
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock x:Name="FilteredCountTextBlock"
                                     FontSize="{StaticResource MediumFontSize}" Margin="0"
                                        Text="{Binding Filters.Items.Count}"
                                        Foreground="{DynamicResource Positive}"
-                                       Style="{StaticResource SmallHeaderStyle}"
+                                       Style="{StaticResource VerySmallHeaderStyle}"
                                        Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}" />
                                 <TextBlock x:Name="SeparatorCountTextBlock"
                                     FontSize="{StaticResource MediumFontSize}" Margin="0"
                                        Text="/"
                                        Foreground="{DynamicResource Positive}"
-                                       Style="{StaticResource SmallHeaderStyle}"
+                                       Style="{StaticResource VerySmallHeaderStyle}"
                                        Visibility="{Binding Filters, Converter={StaticResource NullToVisibilityConverter}}" />
                                 <TextBlock x:Name="CountTextBlock" Margin="0"
                                        FontSize="{StaticResource MediumFontSize}"
                                        Text="{Binding Items.Count, StringFormat={x:Static strings:ControlResources.CountItemsToUpper}}"
                                        Foreground="{DynamicResource Positive}"
-                                       Style="{StaticResource SmallHeaderStyle}" />
+                                       Style="{StaticResource VerySmallHeaderStyle}" />
                             </StackPanel>
                         </StackPanel>
                     </DockPanel>

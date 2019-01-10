@@ -153,6 +153,9 @@
   <data name="ShoesSize" xml:space="preserve">
     <value>Pointure</value>
   </data>
+  <data name="Squad" xml:space="preserve">
+    <value>Equipe</value>
+  </data>
   <data name="Weight" xml:space="preserve">
     <value>Poids</value>
   </data>

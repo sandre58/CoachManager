@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:behaviours="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Behaviours;assembly=My.CoachManager.Presentation.Prism.Controls"
-                    xmlns:global="clr-namespace:My.CoachManager.Presentation.Prism.Core.Commands;assembly=My.CoachManager.Presentation.Prism.Core">
+                    xmlns:global="clr-namespace:My.CoachManager.Presentation.Prism.Core.Commands;assembly=My.CoachManager.Presentation.Prism.Core"
+                    xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Converters.xaml" />
@@ -81,10 +82,11 @@
                                        Content="{Binding Path=Icon, RelativeSource={RelativeSource AncestorType={x:Type controls:NavigationExpander}}}"
                                        Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type controls:NavigationExpander}}}"
                                        VerticalAlignment="Center" HorizontalAlignment="Center" />
-            <TextBlock Grid.Column="1" x:Name="Header"
-                                   Text="{Binding Path=Header, RelativeSource={RelativeSource AncestorType={x:Type controls:NavigationExpander}}, Converter={StaticResource ToUpperConverter}}"
-                                   FontSize="{Binding Path=FontSize, RelativeSource={RelativeSource AncestorType={x:Type controls:NavigationExpander}}}"
-                                   VerticalAlignment="Center" Margin="{StaticResource MediumHorizontalMargin}" />
+            <ContentControl Content="{Binding Path=Header, RelativeSource={RelativeSource AncestorType={x:Type controls:NavigationExpander}}}"
+                            Grid.Column="1" x:Name="Header" 
+                            parameters:ControlParameters.CharacterCasing="Upper" 
+                            VerticalAlignment="Center" Margin="{StaticResource MediumHorizontalMargin}"
+                            TextBlock.FontSize="{Binding Path=FontSize, RelativeSource={RelativeSource AncestorType={x:Type controls:NavigationExpander}}}"/>
         </Grid>
         <DataTemplate.Triggers>
             <MultiDataTrigger>
@@ -159,10 +161,7 @@
                                        Content="{Binding Path=Icon, RelativeSource={RelativeSource TemplatedParent}}"
                                        Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"
                                        VerticalAlignment="Center" HorizontalAlignment="Center" />
-                <TextBlock Grid.Column="1" x:Name="Header"
-                                   Text="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToUpperConverter}}"
-                                   FontSize="{Binding Path=FontSize, RelativeSource={RelativeSource TemplatedParent}}"
-                                   VerticalAlignment="Center" Margin="{StaticResource MediumHorizontalMargin}" />
+                <ContentControl Content="{TemplateBinding Content}" Grid.Column="1" x:Name="Header" parameters:ControlParameters.CharacterCasing="Upper" VerticalAlignment="Center" Margin="{StaticResource MediumHorizontalMargin}" />
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
@@ -238,7 +237,6 @@
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource LightMenuForeground}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Margin" Value="30,0,0,0" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />

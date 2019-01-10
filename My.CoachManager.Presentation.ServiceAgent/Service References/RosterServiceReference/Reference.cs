@@ -46,10 +46,16 @@ namespace My.CoachManager.Presentation.ServiceAgent.RosterServiceReference {
         System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.RosterPlayerDto[]> GetPlayersAsync(int rosterId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/AddPlayers", ReplyAction="http://tempuri.org/IRosterService/AddPlayersResponse")]
-        void AddPlayers(int rosterId, int[] playerIds);
+        void AddPlayers(int squadId, int[] playerIds);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/AddPlayers", ReplyAction="http://tempuri.org/IRosterService/AddPlayersResponse")]
-        System.Threading.Tasks.Task AddPlayersAsync(int rosterId, int[] playerIds);
+        System.Threading.Tasks.Task AddPlayersAsync(int squadId, int[] playerIds);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/MovePlayersInSquad", ReplyAction="http://tempuri.org/IRosterService/MovePlayersInSquadResponse")]
+        void MovePlayersInSquad(int squadId, int[] playerIds);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/MovePlayersInSquad", ReplyAction="http://tempuri.org/IRosterService/MovePlayersInSquadResponse")]
+        System.Threading.Tasks.Task MovePlayersInSquadAsync(int squadId, int[] playerIds);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/RemovePlayers", ReplyAction="http://tempuri.org/IRosterService/RemovePlayersResponse")]
         void RemovePlayers(int rosterId, int[] playerIds);
@@ -68,6 +74,36 @@ namespace My.CoachManager.Presentation.ServiceAgent.RosterServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/UpdatePlayer", ReplyAction="http://tempuri.org/IRosterService/UpdatePlayerResponse")]
         System.Threading.Tasks.Task<int> UpdatePlayerAsync(My.CoachManager.Application.Dtos.RosterPlayerDto dto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/GetSquads", ReplyAction="http://tempuri.org/IRosterService/GetSquadsResponse")]
+        My.CoachManager.Application.Dtos.SquadDto[] GetSquads(int rosterId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/GetSquads", ReplyAction="http://tempuri.org/IRosterService/GetSquadsResponse")]
+        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.SquadDto[]> GetSquadsAsync(int rosterId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/SaveSquad", ReplyAction="http://tempuri.org/IRosterService/SaveSquadResponse")]
+        int SaveSquad(My.CoachManager.Application.Dtos.SquadDto dto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/SaveSquad", ReplyAction="http://tempuri.org/IRosterService/SaveSquadResponse")]
+        System.Threading.Tasks.Task<int> SaveSquadAsync(My.CoachManager.Application.Dtos.SquadDto dto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/RemoveSquad", ReplyAction="http://tempuri.org/IRosterService/RemoveSquadResponse")]
+        void RemoveSquad(My.CoachManager.Application.Dtos.SquadDto dto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/RemoveSquad", ReplyAction="http://tempuri.org/IRosterService/RemoveSquadResponse")]
+        System.Threading.Tasks.Task RemoveSquadAsync(My.CoachManager.Application.Dtos.SquadDto dto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/GetSquadById", ReplyAction="http://tempuri.org/IRosterService/GetSquadByIdResponse")]
+        My.CoachManager.Application.Dtos.SquadDto GetSquadById(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/GetSquadById", ReplyAction="http://tempuri.org/IRosterService/GetSquadByIdResponse")]
+        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.SquadDto> GetSquadByIdAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/GetRosterFromSquad", ReplyAction="http://tempuri.org/IRosterService/GetRosterFromSquadResponse")]
+        My.CoachManager.Application.Dtos.RosterDto GetRosterFromSquad(int squadId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/GetRosterFromSquad", ReplyAction="http://tempuri.org/IRosterService/GetRosterFromSquadResponse")]
+        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.RosterDto> GetRosterFromSquadAsync(int squadId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -137,12 +173,20 @@ namespace My.CoachManager.Presentation.ServiceAgent.RosterServiceReference {
             return base.Channel.GetPlayersAsync(rosterId);
         }
         
-        public void AddPlayers(int rosterId, int[] playerIds) {
-            base.Channel.AddPlayers(rosterId, playerIds);
+        public void AddPlayers(int squadId, int[] playerIds) {
+            base.Channel.AddPlayers(squadId, playerIds);
         }
         
-        public System.Threading.Tasks.Task AddPlayersAsync(int rosterId, int[] playerIds) {
-            return base.Channel.AddPlayersAsync(rosterId, playerIds);
+        public System.Threading.Tasks.Task AddPlayersAsync(int squadId, int[] playerIds) {
+            return base.Channel.AddPlayersAsync(squadId, playerIds);
+        }
+        
+        public void MovePlayersInSquad(int squadId, int[] playerIds) {
+            base.Channel.MovePlayersInSquad(squadId, playerIds);
+        }
+        
+        public System.Threading.Tasks.Task MovePlayersInSquadAsync(int squadId, int[] playerIds) {
+            return base.Channel.MovePlayersInSquadAsync(squadId, playerIds);
         }
         
         public void RemovePlayers(int rosterId, int[] playerIds) {
@@ -167,6 +211,46 @@ namespace My.CoachManager.Presentation.ServiceAgent.RosterServiceReference {
         
         public System.Threading.Tasks.Task<int> UpdatePlayerAsync(My.CoachManager.Application.Dtos.RosterPlayerDto dto) {
             return base.Channel.UpdatePlayerAsync(dto);
+        }
+        
+        public My.CoachManager.Application.Dtos.SquadDto[] GetSquads(int rosterId) {
+            return base.Channel.GetSquads(rosterId);
+        }
+        
+        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.SquadDto[]> GetSquadsAsync(int rosterId) {
+            return base.Channel.GetSquadsAsync(rosterId);
+        }
+        
+        public int SaveSquad(My.CoachManager.Application.Dtos.SquadDto dto) {
+            return base.Channel.SaveSquad(dto);
+        }
+        
+        public System.Threading.Tasks.Task<int> SaveSquadAsync(My.CoachManager.Application.Dtos.SquadDto dto) {
+            return base.Channel.SaveSquadAsync(dto);
+        }
+        
+        public void RemoveSquad(My.CoachManager.Application.Dtos.SquadDto dto) {
+            base.Channel.RemoveSquad(dto);
+        }
+        
+        public System.Threading.Tasks.Task RemoveSquadAsync(My.CoachManager.Application.Dtos.SquadDto dto) {
+            return base.Channel.RemoveSquadAsync(dto);
+        }
+        
+        public My.CoachManager.Application.Dtos.SquadDto GetSquadById(int id) {
+            return base.Channel.GetSquadById(id);
+        }
+        
+        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.SquadDto> GetSquadByIdAsync(int id) {
+            return base.Channel.GetSquadByIdAsync(id);
+        }
+        
+        public My.CoachManager.Application.Dtos.RosterDto GetRosterFromSquad(int squadId) {
+            return base.Channel.GetRosterFromSquad(squadId);
+        }
+        
+        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.RosterDto> GetRosterFromSquadAsync(int squadId) {
+            return base.Channel.GetRosterFromSquadAsync(squadId);
         }
     }
 }

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Specialized;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
-using System.Windows.Media;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
-    [ContentProperty("ItemsSource")]
+    [ContentProperty("Items")]
     [TemplatePart(Name = "PART_Button", Type = typeof(Button)),
      TemplatePart(Name = "PART_Menu", Type = typeof(ContextMenu))]
     public class DropDownMenuButton : ItemsControl
@@ -24,7 +21,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             remove { RemoveHandler(ClickEvent, value); }
         }
 
-        public static readonly DependencyProperty IsExpandedProperty = DependencyProperty.Register("IsExpanded", typeof(bool), typeof(DropDownMenuButton), new FrameworkPropertyMetadata(new PropertyChangedCallback(IsExpandedPropertyChangedCallback)));
+        public static readonly DependencyProperty IsExpandedProperty = DependencyProperty.Register("IsExpanded", typeof(bool), typeof(DropDownMenuButton), new FrameworkPropertyMetadata(IsExpandedPropertyChangedCallback));
 
         private static void IsExpandedPropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
@@ -185,7 +182,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             set { SetValue(ArrowVisibilityProperty, value); }
         }
 
-        private System.Windows.Controls.Button _clickButton;
+        private Button _clickButton;
         private ContextMenu _menu;
 
         static DropDownMenuButton()
@@ -203,100 +200,11 @@ namespace My.CoachManager.Presentation.Prism.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            _clickButton = EnforceInstance<System.Windows.Controls.Button>("PART_Button");
+            _clickButton = EnforceInstance<Button>("PART_Button");
             _menu = EnforceInstance<ContextMenu>("PART_Menu");
             InitializeVisualElementsContainer();
-            if (_menu != null && Items != null && ItemsSource == null)
-            {
-                foreach (var newItem in Items)
-                {
-                    TryRemoveVisualFromOldTree(newItem);
-                    _menu.Items.Add(newItem);
-                }
-            }
         }
 
-        private void TryRemoveVisualFromOldTree(object newItem)
-        {
-            var visual = newItem as Visual;
-            if (visual != null)
-            {
-                var fe = LogicalTreeHelper.GetParent(visual) as FrameworkElement ?? VisualTreeHelper.GetParent(visual) as FrameworkElement;
-                if (Equals(this, fe))
-                {
-                    RemoveLogicalChild(visual);
-                    RemoveVisualChild(visual);
-                }
-            }
-        }
-
-        /// <summary>Invoked when the <see cref="P:System.Windows.Controls.ItemsControl.Items" /> property changes.</summary>
-        /// <param name="e">Information about the change.</param>
-        protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
-        {
-            base.OnItemsChanged(e);
-            if (_menu == null || ItemsSource != null || _menu.ItemsSource != null)
-            {
-                return;
-            }
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    if (e.NewItems != null)
-                    {
-                        foreach (var newItem in e.NewItems)
-                        {
-                            TryRemoveVisualFromOldTree(newItem);
-                            _menu.Items.Add(newItem);
-                        }
-                    }
-                    break;
-
-                case NotifyCollectionChangedAction.Remove:
-                    if (e.OldItems != null)
-                    {
-                        foreach (var oldItem in e.OldItems)
-                        {
-                            _menu.Items.Remove(oldItem);
-                        }
-                    }
-                    break;
-
-                case NotifyCollectionChangedAction.Move:
-                case NotifyCollectionChangedAction.Replace:
-                    if (e.OldItems != null)
-                    {
-                        foreach (var oldItem in e.OldItems)
-                        {
-                            _menu.Items.Remove(oldItem);
-                        }
-                    }
-                    if (e.NewItems != null)
-                    {
-                        foreach (var newItem in e.NewItems)
-                        {
-                            TryRemoveVisualFromOldTree(newItem);
-                            _menu.Items.Add(newItem);
-                        }
-                    }
-                    break;
-
-                case NotifyCollectionChangedAction.Reset:
-                    if (Items != null)
-                    {
-                        _menu.Items.Clear();
-                        foreach (var newItem in Items)
-                        {
-                            TryRemoveVisualFromOldTree(newItem);
-                            _menu.Items.Add(newItem);
-                        }
-                    }
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
 
         //Get element from name. If it exist then element instance return, if not, new will be created
         private T EnforceInstance<T>(string partName) where T : FrameworkElement, new()

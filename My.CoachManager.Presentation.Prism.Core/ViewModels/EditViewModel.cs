@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using My.CoachManager.CrossCutting.Core.Exceptions;
+using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.ComponentModel;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Models;
-using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Commands;
 
@@ -235,7 +235,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Load an item by id.
         /// </summary>
-        public virtual void LoadItemById(int id)
+        public virtual void LoadId(int id)
         {
             _activeId = id;
             Mode = id == 0 ? ScreenMode.Creation : ScreenMode.Edition;

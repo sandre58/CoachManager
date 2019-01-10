@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace My.CoachManager.Presentation.Prism.Core.Resources {
+namespace My.CoachManager.CrossCutting.Core.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("My.CoachManager.Presentation.Prism.Core.Resources.MessageResources", typeof(MessageResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("My.CoachManager.CrossCutting.Core.Resources.MessageResources", typeof(MessageResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -174,6 +174,15 @@ namespace My.CoachManager.Presentation.Prism.Core.Resources {
         public static string Ready {
             get {
                 return ResourceManager.GetString("Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Des changements ont été effectués. L&apos;application va redémarrer..
+        /// </summary>
+        public static string Restart {
+            get {
+                return ResourceManager.GetString("Restart", resourceCulture);
             }
         }
         

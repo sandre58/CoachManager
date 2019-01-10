@@ -7,7 +7,7 @@
         xmlns:dialog="clr-namespace:My.CoachManager.Presentation.Prism.Core.Dialog;assembly=My.CoachManager.Presentation.Prism.Core"
                        xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.ViewModels"
         xmlns:mvvm="http://prismlibrary.com/"
-        xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
+        xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
         WindowStartupLocation="CenterOwner"
         Focusable="True"
         Topmost="True"

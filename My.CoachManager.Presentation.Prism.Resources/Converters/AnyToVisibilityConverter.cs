@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -34,8 +35,15 @@ namespace My.CoachManager.Presentation.Prism.Resources.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var enumerable = (IEnumerable<object>)value;
-            return (value == null || !enumerable.Any()) ? Visibility.Collapsed : Visibility.Visible;
+            switch (value)
+            {
+                case IEnumerable<object> enumerable:
+                    return !enumerable.Any() ? Visibility.Collapsed : Visibility.Visible;
+                case ICollection collection:
+                    return collection.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+
+            return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

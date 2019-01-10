@@ -3,12 +3,13 @@ using System.Linq;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
+using My.CoachManager.Presentation.Prism.Modules.Roster.Views;
 using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 {
-    public class RosterPlayerViewModel : ItemViewModel<RosterPlayerModel>
+    public class RosterPlayerViewModel : ItemViewModel<RosterPlayerModel, RosterPlayerEditView>
     {
         #region Fields
 
@@ -29,7 +30,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         #region Constructors
 
         /// <summary>
-        /// Initialise a new instance of <see cref="RosterViewModel"/>.
+        /// Initialise a new instance of <see cref="SquadViewModel"/>.
         /// </summary>
         public RosterPlayerViewModel(IRosterService rosterService, IPositionService positionService)
         {

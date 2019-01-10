@@ -32,20 +32,33 @@
 
     <!-- Header -->
 
+    <Style x:Key="LargeHeaderStyle" TargetType="TextBlock">
+        <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="FontSize" Value="{DynamicResource MediumHeaderFontSize}" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    
     <Style x:Key="HeaderStyle" TargetType="TextBlock">
         <Setter Property="TextWrapping" Value="NoWrap" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
-        <Setter Property="FontSize" Value="{DynamicResource HeaderFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource SmallHeaderFontSize}" />
         <Setter Property="Focusable" Value="False" />
-    </Style>
-
-    <Style x:Key="MediumHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource HeaderStyle}">
-        <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}" />
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
 
+    <Style x:Key="MediumHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource HeaderStyle}">
+        <Setter Property="FontSize" Value="{DynamicResource LargeFontSize}" />
+    </Style>
+
     <Style x:Key="SmallHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource MediumHeaderStyle}">
+        <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}" />
+    </Style>
+
+    <Style x:Key="VerySmallHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource MediumHeaderStyle}">
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
     </Style>
 

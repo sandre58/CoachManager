@@ -96,6 +96,11 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interactivity\WorkspaceDialogAction.cs" />
+    <Compile Include="Resources\MenuResources.Designer.cs">
+      <DependentUpon>MenuResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\CoachManagerResources.Designer.cs">
       <DependentUpon>CoachManagerResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -265,6 +270,11 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MenuResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MenuResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\CoachManagerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

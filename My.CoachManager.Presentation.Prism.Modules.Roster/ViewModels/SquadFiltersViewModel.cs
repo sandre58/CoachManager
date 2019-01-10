@@ -10,18 +10,19 @@ using My.CoachManager.Presentation.Prism.Models.Filters;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 {
-    public class RosterFiltersViewModel : ListFiltersViewModel
+    public class SquadFiltersViewModel : ListFiltersViewModel
     {
 
         #region Initialisation
 
         /// <summary>
-        /// Initialise a new instance of <see cref="RosterFiltersViewModel"/>.
+        /// Initialise a new instance of <see cref="SquadFiltersViewModel"/>.
         /// </summary>
-        public RosterFiltersViewModel(IEnumerable<CategoryModel> categories, IEnumerable<PositionModel> positions, IEnumerable<CountryModel> countries)
+        public SquadFiltersViewModel(IEnumerable<CategoryModel> categories, IEnumerable<PositionModel> positions, IEnumerable<CountryModel> countries, IEnumerable<SquadModel> squads)
         {
             SpeedFilter = new FilterViewModel(new StringFilter("FullName"), PersonResources.FullName, LogicalOperator.Or);
 
+            AddAllowedFilter(PlayerResources.Squad, () => new SquadsFilter("SquadId", squads));
             AddAllowedFilter(PersonResources.FullName, () => new StringFilter("FullName"));
             AddAllowedFilter(PlayerResources.Category, () => new SelectedLabelablesFilter("CategoryId", categories));
             AddAllowedFilter(PersonResources.Age, () => new IntegerFilter("Age", ComplexComparableOperator.IsBetween, 16, 35)

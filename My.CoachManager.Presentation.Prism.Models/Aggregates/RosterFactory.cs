@@ -48,6 +48,7 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 CategoryId = dto.CategoryId,
                 Category = CategoryFactory.Get(dto.Category),
                 Season = SeasonFactory.Get(dto.Season),
+                Squads = dto.Squads != null ? dto.Squads.Select(SquadFactory.Get).ToObservableCollection() : new ObservableCollection<SquadModel>(),
                 CreatedBy = dto.CreatedBy,
                 CreatedDate = dto.CreatedDate,
                 ModifiedBy = dto.ModifiedBy,
@@ -98,6 +99,8 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 Phones = dto.Player.Phones != null ? dto.Player.Phones.Select(ContactFactory.GetContact<PhoneModel>).ToList().ToItemsObservableCollection() : new ObservableItemsCollection<PhoneModel>(),
                 Positions = dto.Player.Positions != null ? dto.Player.Positions.Select(PlayerFactory.GetPosition).ToList().ToObservableCollection() : new ObservableCollection<PlayerPositionModel>(),
                 PlayerId = dto.PlayerId,
+                SquadId = dto.SquadId,
+                Squad = SquadFactory.Get(dto.Squad),
                 CreatedBy = dto.CreatedBy,
                 CreatedDate = dto.CreatedDate,
                 ModifiedBy = dto.ModifiedBy,
@@ -127,6 +130,7 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 LicenseState = item.LicenseState,
                 Number = item.Number,
                 RosterId = item.RosterId,
+                SquadId = item.SquadId,
                 Player = PlayerFactory.Get(item, crudStatus)
             };
             player.Player.Id = item.PlayerId;

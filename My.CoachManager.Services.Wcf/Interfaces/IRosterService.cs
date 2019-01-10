@@ -50,7 +50,14 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        void AddPlayers(int rosterId, IEnumerable<int> playerIds);
+        void AddPlayers(int squadId, IEnumerable<int> playerIds);
+
+        /// <summary>
+        /// Add players in squad.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        void MovePlayersInSquad(int squadId, IEnumerable<int> playerIds);
 
         /// <summary>
         /// Remove players in rosters.
@@ -72,5 +79,41 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// <returns></returns>
         [OperationContract]
         int UpdatePlayer(RosterPlayerDto dto);
+
+        /// <summary>
+        /// Get all dtos list.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        IList<SquadDto> GetSquads(int rosterId);
+
+        /// <summary>
+        /// Create a dto.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        int SaveSquad(SquadDto dto);
+
+        /// <summary>
+        /// Remove a dto.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        void RemoveSquad(SquadDto dto);
+
+        /// <summary>
+        /// Gets a dto.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        SquadDto GetSquadById(int id);
+
+        /// <summary>
+        /// Gets Roster From Squad
+        /// </summary>
+        /// <param name="squadId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        RosterDto GetRosterFromSquad(int squadId);
     }
 }

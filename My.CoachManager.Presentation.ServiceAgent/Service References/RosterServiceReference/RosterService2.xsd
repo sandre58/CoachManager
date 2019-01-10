@@ -17,6 +17,7 @@
           <xs:element minOccurs="0" name="Players" nillable="true" type="tns:ArrayOfRosterPlayerDto" />
           <xs:element minOccurs="0" name="Season" nillable="true" type="tns:SeasonDto" />
           <xs:element minOccurs="0" name="SeasonId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="Squads" nillable="true" type="tns:ArrayOfSquadDto" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -82,6 +83,8 @@
           <xs:element minOccurs="0" name="PlayerId" type="xs:int" />
           <xs:element minOccurs="0" name="Roster" nillable="true" type="tns:RosterDto" />
           <xs:element minOccurs="0" name="RosterId" type="xs:int" />
+          <xs:element minOccurs="0" name="Squad" nillable="true" type="tns:SquadDto" />
+          <xs:element minOccurs="0" name="SquadId" type="xs:int" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -215,6 +218,18 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="PositionDto" nillable="true" type="tns:PositionDto" />
+  <xs:complexType name="SquadDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EntityDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Roster" nillable="true" type="tns:RosterDto" />
+          <xs:element minOccurs="0" name="RosterId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SquadDto" nillable="true" type="tns:SquadDto" />
   <xs:complexType name="SeasonDto">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:ReferenceDto">
@@ -226,4 +241,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="SeasonDto" nillable="true" type="tns:SeasonDto" />
+  <xs:complexType name="ArrayOfSquadDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SquadDto" nillable="true" type="tns:SquadDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSquadDto" nillable="true" type="tns:ArrayOfSquadDto" />
 </xs:schema>

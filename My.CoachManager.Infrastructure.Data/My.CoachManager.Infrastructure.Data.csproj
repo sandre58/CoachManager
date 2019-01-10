@@ -172,6 +172,10 @@
     <Compile Include="Migrations\20181217091536_Rating.designer.cs">
       <DependentUpon>20181217091536_Rating.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190107094414_Injuries.cs" />
+    <Compile Include="Migrations\20190107094414_Injuries.designer.cs">
+      <DependentUpon>20190107094414_Injuries.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DataContextModelSnapshot.cs" />
     <Compile Include="ModelBuilderExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

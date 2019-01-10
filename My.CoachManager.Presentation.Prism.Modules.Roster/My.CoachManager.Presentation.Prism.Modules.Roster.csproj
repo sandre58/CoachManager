@@ -88,16 +88,28 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\SquadResources.Designer.cs">
+      <DependentUpon>SquadResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\RosterResources.Designer.cs">
       <DependentUpon>RosterResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="ViewModels\RosterFiltersViewModel.cs" />
+    <Compile Include="ViewModels\SquadEditViewModel.cs" />
+    <Compile Include="ViewModels\SquadFiltersViewModel.cs" />
     <Compile Include="ViewModels\RosterPlayerViewModel.cs" />
     <Compile Include="ViewModels\RosterPlayerEditViewModel.cs" />
-    <Compile Include="ViewModels\RosterViewModel.cs" />
-    <Compile Include="ViewModels\RosterParametersViewModel.cs" />
+    <Compile Include="ViewModels\SquadViewModel.cs" />
+    <Compile Include="ViewModels\SquadParametersViewModel.cs" />
+    <Compile Include="Views\SquadEditView.xaml.cs">
+      <DependentUpon>SquadEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SquadsNavigationView.xaml.cs">
+      <DependentUpon>SquadsNavigationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RosterPlayerEditView.xaml.Club.xaml.cs">
       <DependentUpon>RosterPlayerEditView.xaml.Club.xaml</DependentUpon>
     </Compile>
@@ -107,8 +119,8 @@
     <Compile Include="Views\RosterPlayerView.xaml.cs">
       <DependentUpon>RosterPlayerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RosterView.xaml.cs">
-      <DependentUpon>RosterView.xaml</DependentUpon>
+    <Compile Include="Views\SquadView.xaml.cs">
+      <DependentUpon>SquadView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RosterNavigationView.xaml.cs">
       <DependentUpon>RosterNavigationView.xaml</DependentUpon>
@@ -122,6 +134,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\SquadEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SquadsNavigationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\RosterPlayerEditView.xaml.Club.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -134,7 +154,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\RosterView.xaml">
+    <Page Include="Views\SquadView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -164,6 +184,11 @@
     <EmbeddedResource Include="Resources\RosterPlayerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RosterPlayerResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SquadResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SquadResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\RosterResources.resx">

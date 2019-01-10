@@ -5,13 +5,13 @@ using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Enums;
 using My.CoachManager.Presentation.Prism.Core.Models;
 using My.CoachManager.Presentation.Prism.Core.Models.Filters;
-using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Commands;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using My.CoachManager.CrossCutting.Core.Resources;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {

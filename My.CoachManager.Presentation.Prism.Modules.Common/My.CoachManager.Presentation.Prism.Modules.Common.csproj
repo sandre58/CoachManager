@@ -194,6 +194,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\My.CoachManager.CrossCutting.Core\My.CoachManager.CrossCutting.Core.csproj">
+      <Project>{69F4E1A5-ACAE-4431-9723-3DB4DE847BC9}</Project>
+      <Name>My.CoachManager.CrossCutting.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Controls\My.CoachManager.Presentation.Prism.Controls.csproj">
       <Project>{a554f212-3f08-4aef-b9aa-fa01a7491a7f}</Project>
       <Name>My.CoachManager.Presentation.Prism.Controls</Name>

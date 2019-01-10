@@ -44,5 +44,15 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// </summary>
         [Display(Name = "IsMutation", ResourceType = typeof(PlayerResources))]
         public bool IsMutation { get; set; }
+
+        /// <summary>
+        /// Gets or sets a the squad Id.
+        /// </summary>
+        public int SquadId { get; set; }
+
+        /// <summary>
+        /// Gets or sets a the squad.
+        /// </summary>
+        public SquadModel Squad { get; set; }
     }
 }

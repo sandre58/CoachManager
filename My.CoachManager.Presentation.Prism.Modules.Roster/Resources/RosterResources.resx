@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="RosterMenu" xml:space="preserve">
-    <value>Effectif</value>
+  <data name="EditSquad" xml:space="preserve">
+    <value>Editer le nom de l'équipe</value>
   </data>
-  <data name="RosterTitle" xml:space="preserve">
+  <data name="RosterMenu" xml:space="preserve">
     <value>Effectif</value>
   </data>
 </root>

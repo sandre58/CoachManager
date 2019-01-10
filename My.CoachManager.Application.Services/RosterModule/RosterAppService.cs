@@ -25,6 +25,7 @@ namespace My.CoachManager.Application.Services.RosterModule
         private readonly IRosterDomainService _rosterDomainService;
 
         private readonly IPlayerAppService _playerAppService;
+        private readonly ISquadAppService _squadAppService;
 
         #endregion ---- Fields ----
 
@@ -38,13 +39,20 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// <param name="crudDomainService"></param>
         /// <param name="rosterDomainService"></param>
         /// <param name="playerAppService"></param>
-        public RosterAppService(IRepository<Roster> rosterRepository, IRepository<RosterPlayer> playerRosterRepository, ICrudDomainService<Roster, RosterDto> crudDomainService, IRosterDomainService rosterDomainService, IPlayerAppService playerAppService)
+        /// <param name="squadAppService"></param>
+        public RosterAppService(IRepository<Roster> rosterRepository, 
+            IRepository<RosterPlayer> playerRosterRepository, 
+            ICrudDomainService<Roster, RosterDto> crudDomainService, 
+            IRosterDomainService rosterDomainService,
+            IPlayerAppService playerAppService,
+            ISquadAppService squadAppService)
         {
             _rosterRepository = rosterRepository;
             _playerRosterRepository = playerRosterRepository;
             _crudDomainService = crudDomainService;
             _rosterDomainService = rosterDomainService;
             _playerAppService = playerAppService;
+            _squadAppService = squadAppService;
         }
 
         #endregion ---- Constructors ----
@@ -58,7 +66,18 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// <returns></returns>
         public int SaveRoster(RosterDto dto)
         {
-            return _crudDomainService.Save(dto, RosterFactory.CreateEntity, RosterFactory.UpdateEntity, x => _rosterDomainService.Validate(x));
+            var result = _crudDomainService.Save(dto, RosterFactory.CreateEntity, RosterFactory.UpdateEntity, x => _rosterDomainService.Validate(x));
+
+            if (result == 1)
+            {
+                if (!dto.Squads.Any())
+                {
+                   //result = _squadAppService.SaveSquad(SquadFactory.CreateDto(dto.Id, dto.Category.Label + " A"));
+                }
+            }
+
+            return result;
+
         }
 
         /// <inheritdoc />
@@ -78,7 +97,7 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// <returns></returns>
         public RosterDto GetRosterById(int id)
         {
-            var entity = _rosterRepository.GetEntity(id);
+            var entity = _rosterRepository.GetEntity(id, x => x.Squads, x => x.Season);
             return entity != null ? RosterFactory.Get(entity) : null;
         }
 
@@ -119,11 +138,31 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// Add players in rosters.
         /// </summary>
         /// <returns></returns>
-        public void AddPlayers(int rosterId, IEnumerable<int> playerIds)
+        public void AddPlayers(int squadId, IEnumerable<int> playerIds)
         {
+            var squad = _squadAppService.GetSquadById(squadId);
+
             foreach (var id in playerIds)
             {
-                _playerRosterRepository.Add(RosterFactory.CreatePlayer(rosterId, id));
+                _playerRosterRepository.Add(RosterFactory.CreatePlayer(squad.RosterId, squadId, id));
+            }
+
+            _playerRosterRepository.UnitOfWork.Commit();
+        }
+
+        /// <summary>
+        /// Add players in squad.
+        /// </summary>
+        /// <returns></returns>
+        public void MovePlayersInSquad(int squadId, IEnumerable<int> playerIds)
+        {
+            var squad = _squadAppService.GetSquadById(squadId);
+
+            foreach (var id in playerIds)
+            {
+                var player = _playerRosterRepository.GetEntity(id);
+                RosterFactory.UpdateSquadPlayer(squadId, player);
+                _playerRosterRepository.Modify(player);
             }
 
             _playerRosterRepository.UnitOfWork.Commit();
@@ -162,6 +201,7 @@ namespace My.CoachManager.Application.Services.RosterModule
                 .Include(x => x.Player)
                 .ThenInclude(x => x.Positions)
                 .ThenInclude(x => x.Position)
+                .Include(x => x.Squad)
                 .FirstOrDefault(x => x.Id == id);
 
             return RosterFactory.GetPlayer(player);

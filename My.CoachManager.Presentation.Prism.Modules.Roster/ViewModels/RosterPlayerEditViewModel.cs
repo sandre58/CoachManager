@@ -23,7 +23,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         #region Constructors
 
         /// <summary>
-        /// Initialise a new instance of <see cref="RosterViewModel"/>.
+        /// Initialise a new instance of <see cref="SquadViewModel"/>.
         /// </summary>
         public RosterPlayerEditViewModel(IRosterService rosterService, ICategoryService categoryService, IAddressService addressService, IPositionService positionService, IPersonService personService)
             : base(personService, categoryService, addressService, positionService)

@@ -10,7 +10,7 @@
              xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.Views"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
              xmlns:mvvm="http://prismlibrary.com/"
-             xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
+             xmlns:strings1="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:CategoryEditViewModel}"
              d:DesignHeight="350" d:DesignWidth="600">

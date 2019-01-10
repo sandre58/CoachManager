@@ -8,10 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace My.CoachManager.Presentation.Prism.Core.Resources {
-    using System;
-    
-    
+namespace My.CoachManager.CrossCutting.Core.Resources {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -39,7 +36,7 @@ namespace My.CoachManager.Presentation.Prism.Core.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("My.CoachManager.Presentation.Prism.Core.Resources.ControlResources", typeof(ControlResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("My.CoachManager.CrossCutting.Core.Resources.ControlResources", typeof(ControlResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -129,4 +129,7 @@
   <data name="Season" xml:space="preserve">
     <value>Saison</value>
   </data>
+  <data name="Squads" xml:space="preserve">
+    <value>Equipes</value>
+  </data>
 </root>

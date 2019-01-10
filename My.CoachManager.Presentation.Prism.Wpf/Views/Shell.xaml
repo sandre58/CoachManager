@@ -85,7 +85,7 @@
                            RenderOptions.BitmapScalingMode="Fant" />
 
                     <!-- Text -->
-                    <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
+                    <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="125"
                           Margin="{StaticResource VeryLargeHorizontalMargin}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -93,7 +93,7 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0"  Text="{x:Static strings:CoachManagerResources.ApplicationTitlePart1}"
-                                   Style="{StaticResource HeaderStyle}"
+                                   Style="{StaticResource LargeHeaderStyle}"
                                    FontFamily="{StaticResource HeaderFontFamily}"
                                    Foreground="{DynamicResource MenuForeground}"
                                    FontStyle="Italic"
@@ -101,7 +101,7 @@
                                    Typography.Capitals="AllSmallCaps" />
 
                         <TextBlock  Grid.Row="1"  Text="{x:Static strings:CoachManagerResources.ApplicationTitlePart2}"
-                                     Style="{StaticResource HeaderStyle}"
+                                     Style="{StaticResource LargeHeaderStyle}"
                                      FontFamily="{StaticResource HeaderFontFamily}"
                                      Foreground="{DynamicResource MenuForeground}"
                                      FontStyle="Italic"

@@ -253,6 +253,8 @@
     <Compile Include="PositionModule\IPositionAppService.cs" />
     <Compile Include="PersonModule\CountryAppService.cs" />
     <Compile Include="PersonModule\ICountryAppService.cs" />
+    <Compile Include="RosterModule\ISquadAppService.cs" />
+    <Compile Include="RosterModule\SquadAppService.cs" />
     <Compile Include="SeasonModule\SeasonAppService.cs" />
     <Compile Include="SeasonModule\ISeasonAppService.cs" />
     <Compile Include="CategoryModule\ICategoryAppService.cs" />

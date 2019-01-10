@@ -1,4 +1,5 @@
-﻿using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
+﻿using System.Linq;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
@@ -13,6 +14,16 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         public virtual bool KeepAlive => true;
 
+        /// <summary>
+        /// Gets navigation parameters.
+        /// </summary>
+        public NavigationParameters NavigationParameters { get; private set; }
+
+        /// <summary>
+        /// Gets navigation id.
+        /// </summary>
+        public int NavigationId { get; private set; }
+
         #endregion Members
 
         #region Methods
@@ -24,17 +35,19 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <param name="navigationContext">The navigation context.</param>
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            //if (State == ScreenState.NotLoaded)
-            //{
-            OnNavigatedToCore(navigationContext);
-            //}
+            NavigationParameters = navigationContext.Parameters;
+            if (NavigationParameters.Any(x => x.Key == "Id"))
+            {
+                NavigationId = int.Parse(NavigationParameters["Id"].ToString());
+            }
+            OnNavigatedToCore(NavigationParameters);
         }
 
         /// <summary>
         /// Called when the implementer has been navigated to.
         /// </summary>
-        /// <param name="navigationContext">The navigation context.</param>
-        protected virtual void OnNavigatedToCore(NavigationContext navigationContext)
+        /// <param name="navigationParameters">The navigation context.</param>
+        protected virtual void OnNavigatedToCore(NavigationParameters navigationParameters)
         {
             Refresh();
         }
@@ -47,7 +60,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <returns>True if this instance accepts the navigation request; otherwise, False.</returns>
         public virtual bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            return true;
+            return NavigationParameters.ToString().Equals(navigationContext.Parameters.ToString());
         }
 
         /// <inheritdoc />
@@ -59,15 +72,15 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             if (Mode == ScreenMode.Creation || Mode == ScreenMode.Edition)
             {
-                OnNavigatedFromCore(navigationContext);
+                OnNavigatedFromCore(navigationContext.Parameters);
             }
         }
 
         /// <summary>
         /// Called when the implementer is being navigated away from.
         /// </summary>
-        /// <param name="navigationContext">The navigation context.</param>
-        protected virtual void OnNavigatedFromCore(NavigationContext navigationContext)
+        /// <param name="navigationParameters">The navigation context.</param>
+        protected virtual void OnNavigatedFromCore(NavigationParameters navigationParameters)
         {
         }
 

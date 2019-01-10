@@ -169,6 +169,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Equipe.
+        /// </summary>
+        public static string Squad {
+            get {
+                return ResourceManager.GetString("Squad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Poids.
         /// </summary>
         public static string Weight {

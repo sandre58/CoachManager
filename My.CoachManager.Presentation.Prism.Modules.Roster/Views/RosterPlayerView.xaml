@@ -101,7 +101,7 @@
                                                Size="Custom" Height="100" Width="100"
                                                VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Foreground="{DynamicResource MainMenu}" />
-                                <TextBlock Text="{Binding Item.Number}"
+                                <TextBlock Text="{Binding Item.Number, IsAsync=True}"
                                     FontSize="{StaticResource LargeHeaderFontSize}" 
                                            FontFamily="{StaticResource NumberFontFamily}" 
                                            Foreground="{DynamicResource MenuForeground}" 
@@ -110,21 +110,29 @@
                             
                             <StackPanel Orientation="Vertical">
 
-                                <!-- Category -->
-                                <TextBlock Text="{Binding Item.Category.Label, Converter={StaticResource ToUpperConverter}}" FontSize="{StaticResource LargeFontSize}" Margin="{StaticResource MediumBottomMargin}" />
-                                
+                                <StackPanel Orientation="Horizontal" Margin="{StaticResource MediumBottomMargin}">
+                                    
+                                    <!-- Category -->
+                                    <TextBlock Text="{Binding Item.Category.Label, IsAsync=True, Converter={StaticResource ToUpperConverter}}" FontSize="{StaticResource LargeFontSize}"  />
+
+                                    <TextBlock Text="-" Foreground="{DynamicResource GrayForeground}" />
+                                    
+                                    <!-- Squad -->
+                                    <TextBlock Text="{Binding Item.Squad.Name}" />
+                                </StackPanel>
+
                                 <!-- License -->
                                 <StackPanel Orientation="Horizontal" Margin="{StaticResource DefaultVerticalMargin}">
                                     <controls:Icon x:Name="LicenseIcon" Width="25" Height="25" Size="Custom" Content="{StaticResource LicenseGeometry}" 
                                                    Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center"
                                                    Style="{StaticResource SmallEllipseIconBaseStyle}"
-                                                   ToolTip="{Binding Item.LicenseState, Converter={StaticResource EnumToStringConverter}}" />
+                                                   ToolTip="{Binding Item.LicenseState, IsAsync=True, Converter={StaticResource EnumToStringConverter}}" />
 
-                                    <TextBlock Text="{Binding Item.LicenseNumber, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0:# ### ### ###\}}" Foreground="{DynamicResource GrayForeground}" />
+                                    <TextBlock Text="{Binding Item.LicenseNumber, IsAsync=True, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0:# ### ### ###\}}" Foreground="{DynamicResource GrayForeground}" />
 
                                     <controls:Icon HorizontalAlignment="Center"
                                                    Size="Custom" Height="25" Width="25" Foreground="{DynamicResource Warning}" Margin="{StaticResource DefaultHorizontalMargin}" Content="{DynamicResource WarningGeometry}"
-                                                   Visibility="{Binding Item.IsMutation, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                   Visibility="{Binding Item.IsMutation, IsAsync=True, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                    ToolTip="{x:Static entities:PlayerResources.IsMutation}" />
                                 </StackPanel>
 
@@ -150,15 +158,15 @@
                             <StackPanel Orientation="Vertical">
                                 
                                 <!-- Laterality -->
-                                <controls:HeaderPanel Header="{x:Static resources:RosterPlayerResources.Laterality}" Content="{Binding Item.Laterality, Converter={StaticResource EnumToStringConverter}, TargetNullValue={x:Static resources1:GlobalResources.UnknownMale}}"
+                                <controls:HeaderPanel Header="{x:Static resources:RosterPlayerResources.Laterality}" Content="{Binding Item.Laterality, IsAsync=True, Converter={StaticResource EnumToStringConverter}, TargetNullValue={x:Static resources1:GlobalResources.UnknownMale}}"
                                                       Style="{StaticResource LabelStyle}"/>
                                 
                                 <!-- Height -->
-                                <controls:HeaderPanel Header="{x:Static entities:PlayerResources.Height}" Content="{Binding Item.Height, Converter={StaticResource ToFormatConverter}, ConverterParameter={x:Static entities:PlayerResources.HeightFormat}, TargetNullValue={x:Static resources1:GlobalResources.UnknownFemale}}"
+                                <controls:HeaderPanel Header="{x:Static entities:PlayerResources.Height}" Content="{Binding Item.Height, IsAsync=True, Converter={StaticResource ToFormatConverter}, ConverterParameter={x:Static entities:PlayerResources.HeightFormat}, TargetNullValue={x:Static resources1:GlobalResources.UnknownFemale}}"
                                                       Style="{StaticResource LabelStyle}"/>
                                 
                                 <!-- Weight -->
-                                <controls:HeaderPanel Header="{x:Static entities:PlayerResources.Weight}" Content="{Binding Item.Weight, Converter={StaticResource ToFormatConverter}, ConverterParameter={x:Static entities:PlayerResources.WeightFormat}, TargetNullValue={x:Static resources1:GlobalResources.UnknownMale}}"
+                                <controls:HeaderPanel Header="{x:Static entities:PlayerResources.Weight}" Content="{Binding Item.Weight, IsAsync=True, Converter={StaticResource ToFormatConverter}, ConverterParameter={x:Static entities:PlayerResources.WeightFormat}, TargetNullValue={x:Static resources1:GlobalResources.UnknownMale}}"
                                                       Style="{StaticResource LabelStyle}"/>
 
                             </StackPanel>
@@ -166,12 +174,12 @@
                             <StackPanel Orientation="Vertical" Margin="{StaticResource VeryLargeLeftMargin}">
 
                                 <!-- Size -->
-                                <controls:HeaderPanel Header="{x:Static entities:PersonResources.Size}" Content="{Binding Item.Size, TargetNullValue={x:Static resources1:GlobalResources.UnknownFemale}}"
+                                <controls:HeaderPanel Header="{x:Static entities:PersonResources.Size}" Content="{Binding Item.Size, IsAsync=True, TargetNullValue={x:Static resources1:GlobalResources.UnknownFemale}}"
                                                       Style="{StaticResource LabelStyle}"/>
 
                                 <!-- Shoes Size -->
                                 <controls:HeaderPanel Header="{x:Static entities:PlayerResources.ShoesSize}" 
-                                                      Content="{Binding Item.ShoesSize, TargetNullValue={x:Static resources1:GlobalResources.UnknownFemale}}"
+                                                      Content="{Binding Item.ShoesSize, IsAsync=True, TargetNullValue={x:Static resources1:GlobalResources.UnknownFemale}}"
                                                       Style="{StaticResource LabelStyle}"/>
 
                             </StackPanel>
@@ -181,18 +189,18 @@
                 </StackPanel>
 
                 <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding Item.Gender}" Value="{x:Static enum:GenderType.Female}">
+                    <DataTrigger Binding="{Binding Item.Gender, IsAsync=True}" Value="{x:Static enum:GenderType.Female}">
                         <Setter TargetName="PhotoIcon" Property="Content" Value="{StaticResource FemalePeopleGeometry}" />
                     </DataTrigger>
-                    <DataTrigger Binding="{Binding Item.LicenseState}" Value="{x:Static enum:LicenseState.Given}">
+                    <DataTrigger Binding="{Binding Item.LicenseState, IsAsync=True}" Value="{x:Static enum:LicenseState.Given}">
                         <Setter TargetName="LicenseIcon" Property="Content" Value="{StaticResource LicenseGivenGeometry}" />
                         <Setter TargetName="LicenseIcon" Property="Foreground" Value="{DynamicResource Poor}" />
                     </DataTrigger>
-                    <DataTrigger Binding="{Binding Item.LicenseState}" Value="{x:Static enum:LicenseState.Back}">
+                    <DataTrigger Binding="{Binding Item.LicenseState, IsAsync=True}" Value="{x:Static enum:LicenseState.Back}">
                         <Setter TargetName="LicenseIcon" Property="Content" Value="{StaticResource LicenseBackGeometry}" />
                         <Setter TargetName="LicenseIcon" Property="Foreground" Value="{DynamicResource Average}" />
                     </DataTrigger>
-                    <DataTrigger Binding="{Binding Item.LicenseState}" Value="{x:Static enum:LicenseState.Paid}">
+                    <DataTrigger Binding="{Binding Item.LicenseState, IsAsync=True}" Value="{x:Static enum:LicenseState.Paid}">
                         <Setter TargetName="LicenseIcon" Property="Content" Value="{StaticResource PaidGeometry}" />
                         <Setter TargetName="LicenseIcon" Property="Foreground" Value="{DynamicResource Great}" />
                     </DataTrigger>
@@ -233,5 +241,10 @@
             </TabItem>
             <TabItem Header="{x:Static resources:RosterPlayerResources.Positions}"></TabItem>
         </TabControl>
+
+        <controls:WorkspaceView.Commands>
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource EditCommandButtonApplicationBarStyle}" Command="{Binding EditCommand}" />
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource RefreshCommandButtonApplicationBarStyle}" Command="{Binding RefreshCommand}" />
+        </controls:WorkspaceView.Commands>
     </controls:WorkspaceView>
 </UserControl>

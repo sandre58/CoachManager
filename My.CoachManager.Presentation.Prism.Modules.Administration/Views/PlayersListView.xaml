@@ -55,7 +55,7 @@
 
                     <!-- Age -->
                     <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Age}"
-                                                         PropertyName="Age" Width="60">
+                                                         PropertyName="Age" Width="70">
                         <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
                                 <TextBlock HorizontalAlignment="Center" Text="{Binding Age, StringFormat={x:Static entities:PersonResources.AgeFormat}, TargetNullValue=''}" />
@@ -78,12 +78,15 @@
                                                      PropertyName="Position" Width="180">
                         <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
+                                <StackPanel Orientation="Horizontal">
                                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <controls:PositionsSelector ItemsSource="{Binding Positions}"
                                                                 Margin="{StaticResource DefaultMargin}"
-                                                                ItemHeight="16" Height="90" Width="130" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                                ItemHeight="7" Height="64" Width="48" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center"
                                                                 ItemContainerStyle="{StaticResource PlayerPositionStyle}" />
                                 </Grid>
+                                    <TextBlock Text="{Binding NaturalPositions}" />
+                                </StackPanel>
                             </DataTemplate>
                         </columns:ExtendedGridViewColumn.CellTemplate>
                     </columns:ExtendedGridViewColumn>

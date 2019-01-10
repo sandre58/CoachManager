@@ -45,6 +45,12 @@
   <wsdl:message name="IRosterService_AddPlayers_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddPlayersResponse" />
   </wsdl:message>
+  <wsdl:message name="IRosterService_MovePlayersInSquad_InputMessage">
+    <wsdl:part name="parameters" element="tns:MovePlayersInSquad" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_MovePlayersInSquad_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MovePlayersInSquadResponse" />
+  </wsdl:message>
   <wsdl:message name="IRosterService_RemovePlayers_InputMessage">
     <wsdl:part name="parameters" element="tns:RemovePlayers" />
   </wsdl:message>
@@ -62,6 +68,36 @@
   </wsdl:message>
   <wsdl:message name="IRosterService_UpdatePlayer_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_GetSquads_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSquads" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_GetSquads_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSquadsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_SaveSquad_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSquad" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_SaveSquad_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSquadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_RemoveSquad_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveSquad" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_RemoveSquad_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveSquadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_GetSquadById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSquadById" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_GetSquadById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSquadByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_GetRosterFromSquad_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRosterFromSquad" />
+  </wsdl:message>
+  <wsdl:message name="IRosterService_GetRosterFromSquad_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRosterFromSquadResponse" />
   </wsdl:message>
   <wsdl:portType name="IRosterService">
     <wsdl:operation name="GetRosters">
@@ -88,6 +124,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/AddPlayers" message="tns:IRosterService_AddPlayers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/AddPlayersResponse" message="tns:IRosterService_AddPlayers_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="MovePlayersInSquad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/MovePlayersInSquad" message="tns:IRosterService_MovePlayersInSquad_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/MovePlayersInSquadResponse" message="tns:IRosterService_MovePlayersInSquad_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="RemovePlayers">
       <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/RemovePlayers" message="tns:IRosterService_RemovePlayers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/RemovePlayersResponse" message="tns:IRosterService_RemovePlayers_OutputMessage" />
@@ -99,6 +139,26 @@
     <wsdl:operation name="UpdatePlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/UpdatePlayer" message="tns:IRosterService_UpdatePlayer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/UpdatePlayerResponse" message="tns:IRosterService_UpdatePlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSquads">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetSquads" message="tns:IRosterService_GetSquads_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/GetSquadsResponse" message="tns:IRosterService_GetSquads_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveSquad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/SaveSquad" message="tns:IRosterService_SaveSquad_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/SaveSquadResponse" message="tns:IRosterService_SaveSquad_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSquad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/RemoveSquad" message="tns:IRosterService_RemoveSquad_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/RemoveSquadResponse" message="tns:IRosterService_RemoveSquad_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSquadById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetSquadById" message="tns:IRosterService_GetSquadById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/GetSquadByIdResponse" message="tns:IRosterService_GetSquadById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRosterFromSquad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRosterService/GetRosterFromSquad" message="tns:IRosterService_GetRosterFromSquad_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRosterService/GetRosterFromSquadResponse" message="tns:IRosterService_GetRosterFromSquad_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IRosterService" type="tns:IRosterService">
@@ -157,6 +217,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="MovePlayersInSquad">
+      <soap:operation soapAction="http://tempuri.org/IRosterService/MovePlayersInSquad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="RemovePlayers">
       <soap:operation soapAction="http://tempuri.org/IRosterService/RemovePlayers" style="document" />
       <wsdl:input>
@@ -177,6 +246,51 @@
     </wsdl:operation>
     <wsdl:operation name="UpdatePlayer">
       <soap:operation soapAction="http://tempuri.org/IRosterService/UpdatePlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSquads">
+      <soap:operation soapAction="http://tempuri.org/IRosterService/GetSquads" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveSquad">
+      <soap:operation soapAction="http://tempuri.org/IRosterService/SaveSquad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSquad">
+      <soap:operation soapAction="http://tempuri.org/IRosterService/RemoveSquad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSquadById">
+      <soap:operation soapAction="http://tempuri.org/IRosterService/GetSquadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRosterFromSquad">
+      <soap:operation soapAction="http://tempuri.org/IRosterService/GetRosterFromSquad" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

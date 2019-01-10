@@ -535,7 +535,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:SelectorItem}">
+    <Style x:Key="SelectorItemComboboxStyle" TargetType="{x:Type controls:SelectorItem}">
 
         <Setter Property="HorizontalContentAlignment"
               Value="{Binding Path=HorizontalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type controls:SelectorControl}}}" />
@@ -612,6 +612,7 @@
                 <ControlTemplate TargetType="{x:Type controls:MultiComboBox}">
                     <ControlTemplate.Resources>
                         <Style BasedOn="{StaticResource SmallScrollBarStyle}" TargetType="{x:Type ScrollBar}" />
+                        <Style BasedOn="{StaticResource SelectorItemComboboxStyle}" TargetType="{x:Type controls:SelectorItem}" />
                         <Storyboard x:Key="EnterGotFocus">
                             <DoubleAnimation Duration="0:0:0.2"
                                              Storyboard.TargetName="PART_WatermarkMessage"

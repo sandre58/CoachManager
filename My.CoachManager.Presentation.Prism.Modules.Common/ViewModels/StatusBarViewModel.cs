@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
+using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Events;
-using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Modules.Common.Resources;
 using Prism.Events;

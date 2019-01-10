@@ -1,8 +1,10 @@
-﻿using My.CoachManager.Application.Dtos;
+﻿using System.Linq;
+using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.CategoryModule.Aggregate;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.PersonModule.Aggregate;
 using My.CoachManager.Domain.SeasonModule.Aggregate;
+using My.CoachManager.Domain.SquadModule.Aggregate;
 
 namespace My.CoachManager.Domain.RosterModule.Aggregate
 {
@@ -61,6 +63,7 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
                 CategoryId = item.CategoryId,
                 Category = CategoryFactory.Get(item.Category),
                 Season = SeasonFactory.Get(item.Season),
+                Squads = item.Squads.Select(SquadFactory.Get).ToList(),
                 CreatedDate = item.CreatedDate,
                 CreatedBy = item.CreatedBy,
                 ModifiedDate = item.ModifiedDate,
@@ -72,7 +75,7 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
         /// Create the entity from the DTO.
         /// </summary>
         /// <returns>The entity.</returns>
-        public static RosterPlayer CreatePlayer(int rosterId, int playerId)
+        public static RosterPlayer CreatePlayer(int rosterId, int squadId, int playerId)
         {
             if (rosterId == 0) return null;
             if (playerId == 0) return null;
@@ -80,9 +83,12 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
             return new RosterPlayer
             {
                 PlayerId = playerId,
-                RosterId = rosterId
+                RosterId = rosterId,
+                SquadId = squadId
             };
         }
+
+
 
         /// <summary>
         /// Convert the entity to DTO.
@@ -102,6 +108,8 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
                 Number = item.Number,
                 Player = PlayerFactory.Get(item.Player),
                 RosterId = item.RosterId,
+                SquadId = item.SquadId,
+                Squad = SquadFactory.Get(item.Squad),
                 CreatedDate = item.CreatedDate,
                 CreatedBy = item.CreatedBy,
                 ModifiedDate = item.ModifiedDate,
@@ -119,6 +127,18 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
             entity.IsMutation = item.IsMutation;
             entity.LicenseState = item.LicenseState;
             entity.Number = item.Number;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Updates the entity.
+        /// </summary>
+        /// <param name="squadId"></param>
+        /// <param name="entity">The entity.</param>
+        public static bool UpdateSquadPlayer(int squadId, RosterPlayer entity)
+        {
+            entity.SquadId = squadId;
 
             return true;
         }

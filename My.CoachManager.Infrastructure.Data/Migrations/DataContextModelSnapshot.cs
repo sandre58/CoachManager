@@ -443,6 +443,49 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     );
                 });
 
+            modelBuilder.Entity("My.CoachManager.Domain.Entities.Injury", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Availability");
+
+                    b.Property<string>("Condition")
+                        .IsRequired();
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Description");
+
+                    b.Property<DateTime>("ExpectedReturn");
+
+                    b.Property<string>("ModifiedBy");
+
+                    b.Property<DateTime?>("ModifiedDate");
+
+                    b.Property<int?>("PlayerId")
+                        .IsRequired();
+
+                    b.Property<int?>("PlayerId1");
+
+                    b.Property<int>("Type");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlayerId");
+
+                    b.HasIndex("PlayerId1");
+
+                    b.ToTable("Injuries");
+                });
+
             modelBuilder.Entity("My.CoachManager.Domain.Entities.Person", b =>
                 {
                     b.Property<int>("Id")
@@ -663,11 +706,15 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
 
                     b.Property<int>("RosterId");
 
+                    b.Property<int>("SquadId");
+
                     b.HasKey("Id");
 
                     b.HasAlternateKey("RosterId", "PlayerId");
 
                     b.HasIndex("PlayerId");
+
+                    b.HasIndex("SquadId");
 
                     b.ToTable("RosterPlayers");
                 });
@@ -716,6 +763,68 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                         new { Id = 1, Code = "17/18", EndDate = new DateTime(2018, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), Label = "2017/2018", Order = 2, StartDate = new DateTime(2017, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                         new { Id = 2, Code = "18/19", EndDate = new DateTime(2019, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), Label = "2018/2019", Order = 1, StartDate = new DateTime(2018, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                     );
+                });
+
+            modelBuilder.Entity("My.CoachManager.Domain.Entities.Squad", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("ModifiedBy");
+
+                    b.Property<DateTime?>("ModifiedDate");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<int>("RosterId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RosterId");
+
+                    b.ToTable("Squads");
+                });
+
+            modelBuilder.Entity("My.CoachManager.Domain.Entities.Training", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<bool>("IsCancelled");
+
+                    b.Property<string>("ModifiedBy");
+
+                    b.Property<DateTime?>("ModifiedDate");
+
+                    b.Property<string>("Place");
+
+                    b.Property<int?>("RosterId")
+                        .IsRequired();
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RosterId");
+
+                    b.ToTable("Trainings");
                 });
 
             modelBuilder.Entity("My.CoachManager.Domain.Entities.User", b =>
@@ -838,6 +947,18 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("My.CoachManager.Domain.Entities.Injury", b =>
+                {
+                    b.HasOne("My.CoachManager.Domain.Entities.Player", "Player")
+                        .WithMany()
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("My.CoachManager.Domain.Entities.Player")
+                        .WithMany("Injuries")
+                        .HasForeignKey("PlayerId1");
+                });
+
             modelBuilder.Entity("My.CoachManager.Domain.Entities.Person", b =>
                 {
                     b.HasOne("My.CoachManager.Domain.Entities.Address", "Address")
@@ -888,6 +1009,27 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                         .WithMany("Players")
                         .HasForeignKey("RosterId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("My.CoachManager.Domain.Entities.Squad", "Squad")
+                        .WithMany()
+                        .HasForeignKey("SquadId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("My.CoachManager.Domain.Entities.Squad", b =>
+                {
+                    b.HasOne("My.CoachManager.Domain.Entities.Roster", "Roster")
+                        .WithMany()
+                        .HasForeignKey("RosterId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("My.CoachManager.Domain.Entities.Training", b =>
+                {
+                    b.HasOne("My.CoachManager.Domain.Entities.Roster", "Roster")
+                        .WithMany()
+                        .HasForeignKey("RosterId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("My.CoachManager.Domain.Entities.Player", b =>

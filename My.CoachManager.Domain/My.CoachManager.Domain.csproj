@@ -195,6 +195,11 @@
     <Compile Include="ReferenceModule\Aggregate\ReferenceValidator.cs" />
     <Compile Include="ReferenceModule\Services\IReferenceDomainService.cs" />
     <Compile Include="ReferenceModule\Services\ReferenceDomainService.cs" />
+    <Compile Include="SquadModule\Aggregate\RosterFactory.cs" />
+    <Compile Include="SquadModule\Aggregate\RosterSelectBuilder.cs" />
+    <Compile Include="SquadModule\Aggregate\RosterValidator.cs" />
+    <Compile Include="SquadModule\Services\IRosterDomainService.cs" />
+    <Compile Include="SquadModule\Services\RosterDomainService.cs" />
     <Compile Include="RosterModule\Aggregate\RosterValidator.cs" />
     <Compile Include="RosterModule\Aggregate\RosterFactory.cs" />
     <Compile Include="RosterModule\Services\IRosterDomainService.cs" />

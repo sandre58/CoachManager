@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Core.Resources.Entities;
 using My.CoachManager.Presentation.Prism.Core.Models;
@@ -17,6 +18,7 @@ namespace My.CoachManager.Presentation.Prism.Models
         public RosterModel()
         {
             Players = new ObservableCollection<RosterPlayerModel>();
+            Squads = new ObservableCollection<SquadModel>();
         }
 
         /// <summary>
@@ -57,5 +59,16 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// </summary>
         [Display(Name = "Players", ResourceType = typeof(RosterResources))]
         public ObservableCollection<RosterPlayerModel> Players { get; set; }
+
+        /// <summary>
+        /// Gets or set the players.
+        /// </summary>
+        [Display(Name = "Squads", ResourceType = typeof(RosterResources))]
+        public ObservableCollection<SquadModel> Squads { get; set; }
+
+        /// <summary>
+        /// Gets or set the mainSquad.
+        /// </summary>
+        public SquadModel MainSquad => Squads?.FirstOrDefault();
     }
 }

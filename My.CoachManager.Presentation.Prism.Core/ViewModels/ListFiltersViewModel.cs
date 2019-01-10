@@ -134,7 +134,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Apply filters.
         /// </summary>
-        private void ApplyFilters()
+        public void ApplyFilters()
         {
             FilterItems(Filters.Where(x => x.IsEnabled));
         }
@@ -171,9 +171,19 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// Add a filter.
         /// </summary>
         /// <param name="filter"></param>
+        /// <param name="title"></param>
+        public void AddFilter(IFilter filter, string title)
+        {
+            Filters.Add(new FilterViewModel(filter, title));
+        }
+
+        /// <summary>
+        /// Add a filter.
+        /// </summary>
+        /// <param name="filter"></param>
         private void AddFilter(Tuple<Func<IFilter>, string> filter)
         {
-            Filters.Add(new FilterViewModel(filter.Item1.Invoke(), filter.Item2));
+            AddFilter(filter.Item1.Invoke(), filter.Item2);
         }
 
         #endregion AddFilter
@@ -202,7 +212,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             FilterItems();
             RaisePropertyChanged(() => CountActiveFilters);
-            ResetFiltersCommand?.RaiseCanExecuteChanged();
+            //ResetFiltersCommand?.RaiseCanExecuteChanged();
         }
 
         /// <summary>
@@ -218,7 +228,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual void FilterItems(IEnumerable<IFilterViewModel> filters)
         {
-            Items.ChangeFilters(filters.Select(x => new Tuple<LogicalOperator, IFilter>(x.Operator, x.Filter)));
+            Items?.ChangeFilters(filters.Select(x => new Tuple<LogicalOperator, IFilter>(x.Operator, x.Filter)));
         }
 
         /// <summary>

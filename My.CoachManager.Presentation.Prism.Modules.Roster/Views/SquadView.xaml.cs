@@ -3,9 +3,9 @@
     /// <summary>
     /// Logique d'interaction pour HomeView1.xaml
     /// </summary>
-    public partial class RosterView
+    public partial class SquadView
     {
-        public RosterView()
+        public SquadView()
         {
             InitializeComponent();
         }

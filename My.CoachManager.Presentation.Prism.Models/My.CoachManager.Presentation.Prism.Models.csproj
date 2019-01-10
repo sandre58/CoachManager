@@ -53,6 +53,7 @@
     <Compile Include="Aggregates\CountryFactory.cs" />
     <Compile Include="Aggregates\ContactFactory.cs" />
     <Compile Include="Aggregates\PlayerFactory.cs" />
+    <Compile Include="Aggregates\SquadFactory.cs" />
     <Compile Include="Aggregates\SeasonFactory.cs" />
     <Compile Include="Aggregates\RosterFactory.cs" />
     <Compile Include="Aggregates\CategoryFactory.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="ContactModel.cs" />
     <Compile Include="CountryModel.cs" />
     <Compile Include="EmailModel.cs" />
+    <Compile Include="Filters\SquadsFilter.cs" />
     <Compile Include="Filters\PlayerPositionFilter.cs" />
     <Compile Include="PersonModel.cs" />
     <Compile Include="PhoneModel.cs" />

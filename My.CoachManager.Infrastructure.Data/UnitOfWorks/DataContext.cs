@@ -245,7 +245,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             // Squad
             modelBuilder.Entity<Squad>()
                 .HasOne(x => x.Roster)
-                .WithMany()
+                .WithMany(x => x.Squads)
                 .HasForeignKey(x => x.RosterId)
                 .OnDelete(DeleteBehavior.Restrict);
 

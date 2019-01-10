@@ -3,7 +3,7 @@ using My.CoachManager.Presentation.Prism.Modules.Core.Enums;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 {
-    public class RosterParametersViewModel : ListParametersViewModel
+    public class SquadParametersViewModel : ListParametersViewModel
     {
         #region Constants
 
@@ -20,9 +20,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         #region Initialisation
 
         /// <summary>
-        /// Initialise a new instance of <see cref="RosterParametersViewModel"/>.
+        /// Initialise a new instance of <see cref="SquadParametersViewModel"/>.
         /// </summary>
-        public RosterParametersViewModel()
+        public SquadParametersViewModel()
         {
             AddPresetColumns(PresetPlayerColumnsType.GeneralInformations, GeneralInformationsColumns);
             AddPresetColumns(PresetPlayerColumnsType.ClubInformations, ClubInformationsColumns);

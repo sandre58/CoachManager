@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Windows;
 using Microsoft.Practices.ServiceLocation;
+using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Enums;
-using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Services;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 
 namespace My.CoachManager.Presentation.Prism.Core.Manager
 {
@@ -31,6 +32,20 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         #endregion Members
 
         #region Workspace Dialog
+
+        /// <summary>
+        /// Displays a modal dialog.
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <param name="callback">Action executed after result of dialog.</param>
+        public static void ShowEditDialog<TEditView>(int itemId, Action<IWorkspaceDialog> callback = null) where TEditView : FrameworkElement
+        {
+            var view = ServiceLocator.Current.GetInstance<TEditView>();
+            var model = view.DataContext as IEditViewModel;
+            model?.LoadId(itemId);
+
+            ShowWorkspaceDialog(view, callback);
+        }
 
         /// <summary>
         /// Displays a modal dialog.

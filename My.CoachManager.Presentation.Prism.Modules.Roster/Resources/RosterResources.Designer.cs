@@ -61,20 +61,20 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Effectif.
+        ///   Looks up a localized string similar to Editer le nom de l&apos;équipe.
         /// </summary>
-        public static string RosterMenu {
+        public static string EditSquad {
             get {
-                return ResourceManager.GetString("RosterMenu", resourceCulture);
+                return ResourceManager.GetString("EditSquad", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Effectif.
         /// </summary>
-        public static string RosterTitle {
+        public static string RosterMenu {
             get {
-                return ResourceManager.GetString("RosterTitle", resourceCulture);
+                return ResourceManager.GetString("RosterMenu", resourceCulture);
             }
         }
     }

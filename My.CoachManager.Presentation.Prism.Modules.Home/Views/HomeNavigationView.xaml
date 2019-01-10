@@ -9,4 +9,5 @@
              Content="{x:Static strings:HomeResources.HomeMenu}"
                          Target="HomeView"
              Icon="{StaticResource HomeGeometry}"
-             Style="{StaticResource NavigationItemStyle}" />
+             Style="{StaticResource NavigationItemStyle}"
+                         Color="#00B6EC"/>

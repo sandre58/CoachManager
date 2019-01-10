@@ -1,8 +1,8 @@
-﻿using My.CoachManager.Presentation.Prism.Core.Commands;
+﻿using System.Collections.Generic;
+using My.CoachManager.Presentation.Prism.Core.Commands;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Events;
 using My.CoachManager.Presentation.Prism.Core.Manager;
-using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using My.CoachManager.Presentation.Prism.Models;
@@ -14,6 +14,13 @@ using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Regions;
 using System.Windows;
+using Microsoft.Practices.ServiceLocation;
+using My.CoachManager.Application.Dtos;
+using My.CoachManager.Presentation.Prism.Core.Enums;
+using My.CoachManager.Presentation.Prism.Core.Helpers;
+using My.CoachManager.Presentation.Prism.Modules.Core.ViewModels;
+using My.CoachManager.Presentation.Prism.Modules.Roster.Views;
+using My.CoachManager.Presentation.Prism.Wpf.Resources;
 
 namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 {
@@ -78,6 +85,21 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         public DelegateCommand SetRosterCommand { get; set; }
 
         /// <summary>
+        /// Gets or sets the remove squad command.
+        /// </summary>
+        public DelegateCommand RemoveSquadCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets the add squad command.
+        /// </summary>
+        public DelegateCommand AddSquadCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets the edit squad command.
+        /// </summary>
+        public DelegateCommand<SquadModel> EditSquadCommand { get; set; }
+
+        /// <summary>
         /// Gets or sets selectable rosters.
         /// </summary>
         public RosterModel Roster { get; set; }
@@ -107,6 +129,9 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
             GoBackCommand = new DelegateCommand(GoBack, CanGoBack);
             GoForwardCommand = new DelegateCommand(GoForward, CanGoForward);
             SetRosterCommand = new DelegateCommand(SetRoster, CanSetRoster);
+            AddSquadCommand = new DelegateCommand(AddSquad, CanAddSquad);
+            RemoveSquadCommand = new DelegateCommand(RemoveSquad, CanRemoveSquad);
+            EditSquadCommand = new DelegateCommand<SquadModel>(EditSquad, CanEditSquad);
         }
 
         /// <inheritdoc />
@@ -152,6 +177,16 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
             var result = _rosterService.GetRosterById(SettingsManager.GetRosterId());
 
             Roster = RosterFactory.Get(result);
+        }
+
+        protected override void OnLoadDataCompleted()
+        {
+            base.OnLoadDataCompleted();
+
+            if (Roster.Squads.Count == 0)
+            {
+                AddSquad();
+            }
         }
 
         #endregion Data
@@ -227,7 +262,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 
         #endregion GoForward
 
-        #region GoForward
+        #region SetRoster
 
         /// <summary>
         /// Go back.
@@ -236,14 +271,23 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         {
             DialogManager.ShowSelectItemsDialog<SelectRostersView>(dialog =>
             {
-                var model = dialog.Content.DataContext as ISelectItemsViewModel;
+                var model = dialog.Content.DataContext as ISelectItemsViewModel<RosterModel>;
+
                 if (dialog.Result == DialogResult.Ok)
                 {
                     if (model != null)
-                        NotificationManager.ShowSuccess(string.Format(MessageResources.ItemsAdded,
-                            model.SelectedItems.Count));
+                    {
+                        SettingsManager.SaveRoster(model.SelectedItem.Id);
+                        ApplicationHelper.Restart();
+                    }
                 }
-            });
+            },
+            SelectionMode.Single,
+            new List<RosterModel> { 
+                new RosterModel
+                {
+                    Id = SettingsManager.GetRosterId()
+                }});
         }
 
         /// <summary>
@@ -256,6 +300,105 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         }
 
         #endregion GoForward
+
+        #region AddSquad
+
+        /// <summary>
+        /// Add squad.
+        /// </summary>
+        private void AddSquad()
+        {
+            DialogManager.ShowEditDialog<SquadEditView>(0, dialog =>
+            {
+                if (dialog.Result == DialogResult.Ok)
+                {
+                    ApplicationHelper.Restart();
+                }
+            });
+        }
+
+        /// <summary>
+        /// Can add squad.
+        /// </summary>
+        /// <returns></returns>
+        private bool CanAddSquad()
+        {
+            return true;
+        }
+
+        #endregion AddSquad
+
+        #region EditSquad
+
+        /// <summary>
+        /// Edit squad.
+        /// </summary>
+        private void EditSquad(SquadModel item)
+        {
+            DialogManager.ShowEditDialog<SquadEditView>(item.Id, dialog =>
+            {
+                if (dialog.Result == DialogResult.Ok)
+                {
+                    ApplicationHelper.Restart();
+                }
+            });
+        }
+
+        /// <summary>
+        /// Can edit squad.
+        /// </summary>
+        /// <returns></returns>
+        private bool CanEditSquad(SquadModel item)
+        {
+            return true;
+        }
+
+        #endregion AddSquad
+
+        #region RemoveSquad
+
+        /// <summary>
+        /// Remove squad.
+        /// </summary>
+        private void RemoveSquad()
+        {
+            var view = ServiceLocator.Current.GetInstance<SelectSquadsView>();
+            if (view.DataContext is SelectSquadsViewModel model)
+            {
+                model.RosterId = Roster.Id;
+
+                DialogManager.ShowSelectItemsDialog(view, dialog =>
+                {
+                    if (dialog.Result == DialogResult.Ok)
+                    {
+                        if (Roster.Squads.Count > 1)
+                        {
+                            if (DialogManager.ShowWarningDialog(MenuResources.ConfirmationRemoveSquadMessage, MessageDialogButtons.YesNo) ==
+                                DialogResult.Yes)
+                            {
+                                _rosterService.RemoveSquad(SquadFactory.Get(model.SelectedItem, CrudStatus.Deleted));
+                                ApplicationHelper.Restart();
+                            }
+                        }
+                        else
+                        {
+                            NotificationManager.ShowError(MenuResources.RemoveSquadCountMessage);
+                        }
+                    }
+                });
+            }
+        }
+
+        /// <summary>
+        /// Can remove squad.
+        /// </summary>
+        /// <returns></returns>
+        private bool CanRemoveSquad()
+        {
+            return Roster.Squads.Count > 1;
+        }
+
+        #endregion AddSquad
 
         #endregion Methods
     }

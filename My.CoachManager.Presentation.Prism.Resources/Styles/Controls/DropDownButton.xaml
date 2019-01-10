@@ -165,6 +165,7 @@
                                     VerticalAlignment="Stretch"
                                     HorizontalContentAlignment="Stretch"
                                     VerticalContentAlignment="Stretch"
+                                    Style="{StaticResource ButtonBaseStyle}"
                                     Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
@@ -190,7 +191,7 @@
                                                                    VerticalAlignment="Center"
                                                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                                   Content="{Binding Content, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                   Content="{Binding Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:DropDownMenuButton}}}"
                                                                    ContentStringFormat="{TemplateBinding ContentStringFormat}"
                                                                    ContentTemplate="{TemplateBinding ContentTemplate}"
                                                                    ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
@@ -212,6 +213,7 @@
                             </DockPanel>
                             <Button.ContextMenu>
                                 <ContextMenu x:Name="PART_Menu"
+                                                 PlacementTarget="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:DropDownMenuButton}}}"
                                                  MinWidth="{TemplateBinding ActualWidth}"
                                                  DisplayMemberPath="{TemplateBinding DisplayMemberPath}"
                                                  IsOpen="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
@@ -283,10 +285,11 @@
             <Setter.Value>
                 <DataTemplate>
                     <controls:Icon Size="Custom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                   Content="{Binding Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:DropDownMenuButton}}}"
+                                   Content="{Binding}"
                                    Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:DropDownMenuButton}}}" />
                 </DataTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
 </ResourceDictionary>

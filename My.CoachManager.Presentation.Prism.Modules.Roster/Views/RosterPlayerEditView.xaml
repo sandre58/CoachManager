@@ -8,10 +8,10 @@
              xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Roster.Resources"
              xmlns:mvvm="http://prismlibrary.com/"
-             xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels"
              xmlns:views1="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Core.Views;assembly=My.CoachManager.Presentation.Prism.Modules.Core"
              xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Roster.Views"
+             xmlns:strings1="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:RosterPlayerEditViewModel}"
              d:DesignHeight="1000" d:DesignWidth="750" MaxHeight="750">

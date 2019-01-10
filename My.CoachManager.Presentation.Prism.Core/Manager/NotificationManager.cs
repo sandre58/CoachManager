@@ -1,8 +1,8 @@
 ﻿using System;
 using My.CoachManager.Presentation.Prism.Core.Notification;
-using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using Microsoft.Practices.ServiceLocation;
+using My.CoachManager.CrossCutting.Core.Resources;
 
 namespace My.CoachManager.Presentation.Prism.Core.Manager
 {

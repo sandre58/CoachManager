@@ -9,7 +9,9 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:behaviours="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Behaviours;assembly=My.CoachManager.Presentation.Prism.Controls"
         xmlns:properties="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.Properties"
-        mc:Ignorable="d"
+        xmlns:resources="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.Resources"
+        xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
+             mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel}"
              d:DesignWidth="300"
              d:DesignHeight="700">
@@ -31,9 +33,10 @@
 
                 <!-- Header -->
                 <Border Grid.Row="0" Height="150" Background="{DynamicResource White}">
-                    <Grid Background="{DynamicResource LightMainMenu}">
+                    <Border Background="{DynamicResource LightMainMenu}">
+                        <Grid Margin="{StaticResource DefaultMargin}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
+                            <RowDefinition MaxHeight="90" Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
@@ -41,19 +44,8 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <!-- Title -->
-                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                                   Text="{Binding Source={x:Static properties:Settings.Default}, Path=ClubName, Mode=OneWay}"
-                                   Style="{StaticResource HeaderStyle}"
-                                   Foreground="{DynamicResource MenuForeground}"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Center"
-                                   Typography.Capitals="AllSmallCaps"
-                                   Margin="{StaticResource LargeHorizontalMargin}"
-                                   Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}" />
-
                         <!-- Logo -->
-                        <Grid Grid.Row="1" Grid.Column="0" Margin="{StaticResource LargeMargin}" HorizontalAlignment="Left"
+                        <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"
                               Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <Ellipse Fill="{DynamicResource MenuForeground}" Stroke="{DynamicResource MenuForeground}" StrokeThickness="1" />
                             <Image
@@ -61,7 +53,7 @@
                                 SnapsToDevicePixels="False"
                                 RenderOptions.BitmapScalingMode="Fant"  Margin="{StaticResource MediumMargin}" />
                         </Grid>
-                        <Grid Grid.Row="1" Grid.Column="0" Margin="{StaticResource DefaultMargin}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
                               Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
                             <Ellipse Fill="{DynamicResource MenuForeground}" Stroke="{DynamicResource MenuForeground}" StrokeThickness="1" />
                             <Image
@@ -70,15 +62,44 @@
                                 RenderOptions.BitmapScalingMode="Fant"  Margin="{StaticResource DefaultMargin}" />
                         </Grid>
 
+                        <!-- Title -->
+                        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" 
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Margin="{StaticResource DefaultMargin}"
+                                    Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <TextBlock 
+                                Text="{Binding Source={x:Static properties:Settings.Default}, Path=ClubName, Mode=OneWay, Converter={StaticResource ToUpperConverter}}"
+                                Style="{StaticResource HeaderStyle}"
+                                Foreground="{DynamicResource MenuForeground}" />
+                            <TextBlock Text="{Binding Roster.Name, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource SmallHeaderStyle}" Foreground="{DynamicResource Accent}" />
+                            <TextBlock Text="{Binding Roster.Season.Label, StringFormat={x:Static resources:MenuResources.Season}}" Foreground="{DynamicResource GrayForeground}" Margin="0" />
+                        </StackPanel>
+
                         <!-- Informations -->
-                        <Grid Grid.Row="1" Grid.Column="1" Margin="{StaticResource LargeVerticalMargin}"
+                        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="{StaticResource MediumTopMargin}"
                               Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
-                                <Button Content="Changer d'effectif" Command="{Binding SetRosterCommand}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Roster.Squads.Count, StringFormat={x:Static resources:MenuResources.SquadCount}}" FontStyle="Italic" />
+                                    <Button Style="{StaticResource RemoveButtonStyle}"
+                                            Width="18" Height="18"
+                                            Command="{Binding RemoveSquadCommand}"
+                                            ToolTip="{x:Static resources:MenuResources.RemoveSquad}" Margin="{StaticResource DefaultHorizontalMargin}" />
+                                    <Button Style="{StaticResource AddButtonStyle}"
+                                            Width="18" Height="18"
+                                            Command="{Binding AddSquadCommand}"
+                                            ToolTip="{x:Static resources:MenuResources.AddSquad}" Margin="{StaticResource DefaultHorizontalMargin}" />
+                                    </StackPanel>
+                                
+                                <controls:HyperlinkButton Content="{x:Static resources:MenuResources.SetRoster}" 
+                                                          Command="{Binding SetRosterCommand}" 
+                                                          Style="{StaticResource ArrowHyperlinkButtonStyle}" Margin="{StaticResource MediumTopMargin}" HorizontalAlignment="Right"/>
                             </StackPanel>
                         </Grid>
 
                     </Grid>
+                    </Border>
                 </Border>
 
                 <!-- Navigation Region -->

@@ -1,19 +1,87 @@
 ﻿using System.ComponentModel;
-using System.Linq;
+using System.Windows;
+using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Models;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
-using Prism.Regions;
+using Prism.Commands;
+using PropertyChanged;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
+
+    public abstract class ItemViewModel<TModel, TEditView> : ItemViewModel<TModel>
+        where TModel : class, IEntityModel, IValidatable, IModifiable, INotifyPropertyChanged, new()
+        where TEditView : FrameworkElement
+    {
+        #region Members
+
+        /// <summary>
+        /// Gets or sets the edit command.
+        /// </summary>
+        public DelegateCommand EditCommand { get; set; }
+
+        #endregion
+
+        #region Methods
+
+        #region Initialization
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes commands.
+        /// </summary>
+        protected override void InitializeCommand()
+        {
+            base.InitializeCommand();
+
+            EditCommand = new DelegateCommand(Edit, CanEdit);
+        }
+
+        #endregion Initialization
+
+        #region Edit
+
+        /// <summary>
+        /// Edit Item.
+        /// </summary>
+        protected virtual void Edit()
+        {
+            if (Item == null) return;
+            if (!CanEdit()) return;
+
+            DialogManager.ShowEditDialog<TEditView>(Item.Id, dialog =>
+            {
+                OnEditCompleted(dialog.Result);
+            });
+        }
+
+        /// <summary>
+        /// Can Edit item.
+        /// </summary>
+        protected virtual bool CanEdit()
+        {
+            return Mode == ScreenMode.Read;
+        }
+
+        /// <summary>
+        /// Called after the edit action.
+        /// </summary>
+        /// <param name="result">The dialog result.</param>
+        protected virtual void OnEditCompleted(DialogResult result)
+        {
+            if (result == DialogResult.Ok) Refresh();
+        }
+
+        #endregion Edit
+
+        #endregion
+    }
+
+
     public abstract class ItemViewModel<TModel> : NavigatableWorkspaceViewModel, IItemViewModel<TModel>
         where TModel : class, IEntityModel, IValidatable, IModifiable, INotifyPropertyChanged, new()
     {
-        #region Fields
-
-        private int _activeId;
-
-        #endregion Fields
 
         #region Members
 
@@ -31,6 +99,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Get or set Item.
         /// </summary>
+        [DoNotCheckEquality]
         public TModel Item { get; set; }
 
         #endregion Members
@@ -56,21 +125,12 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         /// <inheritdoc />
         /// <summary>
-        /// Load an item by id.
-        /// </summary>
-        public virtual void LoadItemById(int id)
-        {
-            _activeId = id;
-            Refresh();
-        }
-
-        /// <inheritdoc />
-        /// <summary>
         /// Save.
         /// </summary>
         protected override void LoadDataCore()
         {
-            Item = _activeId > 0 ? LoadItemCore(_activeId) : new TModel();
+            var item = NavigationId > 0 ? LoadItemCore(NavigationId) : new TModel();
+            Item = item;
         }
 
         /// <summary>
@@ -89,23 +149,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         #endregion Data
 
-        #region Navigation
-
-        /// <summary>
-        /// Called when the implementer has been navigated to.
-        /// </summary>
-        /// <param name="navigationContext">The navigation context.</param>
-        protected override void OnNavigatedToCore(NavigationContext navigationContext)
-        {
-            if (navigationContext.Parameters.Any(x => x.Key.ToUpper() == "ID"))
-            {
-                LoadItemById(int.Parse(navigationContext.Parameters.First(x => x.Key.ToUpper() == "ID").Value.ToString()));
-            }
-            
-        }
-
-        #endregion
-
         #region PropertyChanged
 
         /// <summary>
@@ -113,8 +156,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual void OnItemChanged()
         {
-            if (Item != null) _activeId = Item.Id;
-
             Item?.ResetModified();
         }
 

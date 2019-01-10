@@ -95,5 +95,14 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
                 return ResourceManager.GetString("Season", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Equipes.
+        /// </summary>
+        public static string Squads {
+            get {
+                return ResourceManager.GetString("Squads", resourceCulture);
+            }
+        }
     }
 }

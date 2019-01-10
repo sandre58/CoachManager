@@ -1,11 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using My.CoachManager.CrossCutting.Core.Exceptions;
+using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Commands;
 using My.CoachManager.Presentation.Prism.Core.ComponentModel;
-using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
-using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {

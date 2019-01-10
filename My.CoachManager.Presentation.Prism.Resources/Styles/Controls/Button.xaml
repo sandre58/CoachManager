@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
-                    xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core">
+                    xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Converters.xaml" />
@@ -208,6 +208,21 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ArrowHyperlinkButtonStyle" TargetType="{x:Type controls:HyperlinkButton}" BasedOn="{StaticResource {x:Type controls:HyperlinkButton}}">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock TextDecorations="Underline" Text="{Binding}" />
+                        <controls:Icon Size="Custom" Content="{StaticResource ArrowRightGeometry}" Height="10"
+                                       Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HyperlinkButton}}}"
+                                       Margin="5,2,0,0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- Specific for controls -->
     <Style x:Key="TextBoxButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource IconButtonStyle}">
         <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ButtonWidth)}" />
@@ -234,17 +249,17 @@
     <Style x:Key="TextBoxColorCircleButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxCircleButtonStyle}">
         <Setter Property="Background">
             <Setter.Value>
-                <SolidColorBrush Color="{Binding Path=(parameters:ControlParameters.Color), RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}}" Opacity="{DynamicResource ColorOpacity}" />
+                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" Opacity="{DynamicResource ColorOpacity}" />
             </Setter.Value>
         </Setter>
         <Setter Property="parameters:ControlParameters.MouseOverBackground">
             <Setter.Value>
-                <SolidColorBrush Color="{Binding Path=(parameters:ControlParameters.Color), RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}}" Opacity="1" />
+                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" Opacity="1" />
             </Setter.Value>
         </Setter>
         <Setter Property="parameters:ControlParameters.PressedBackground">
             <Setter.Value>
-                <SolidColorBrush Color="{Binding Path=(parameters:ControlParameters.Color), RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}}" Opacity="1" />
+                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" Opacity="1" />
             </Setter.Value>
         </Setter>
         <Setter Property="Foreground" Value="{DynamicResource White}" />
@@ -256,10 +271,6 @@
         <Setter Property="Content" Value="{StaticResource CancelGeometry}" />
         <Setter Property="ToolTip" Value="{x:Static strings:ControlResources.ClearText}" />
         <Setter Property="parameters:TextBoxParameters.IsClearTextButtonBehaviorEnabled" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(parameters:TextBoxParameters.ClearTextButton), Mode=OneWay}" />
-    </Style>
-
-    <Style x:Key="AddButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxCircleButtonStyle}">
-        <Setter Property="Content" Value="{StaticResource PlusGeometry}" />
     </Style>
 
     <Style x:Key="DatePickerButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxButtonStyle}">
@@ -276,7 +287,16 @@
 
     <Style x:Key="RemoveButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxColorCircleButtonStyle}">
         <Setter Property="Content" Value="{StaticResource MinusGeometry}" />
-        <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource NegativeColor}" />
+        <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Negative}" />
+    </Style>
+
+    <Style x:Key="AddButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxColorCircleButtonStyle}">
+        <Setter Property="Content" Value="{StaticResource PlusGeometry}" />
+        <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Positive}" />
+    </Style>
+
+    <Style x:Key="EditButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxCircleButtonStyle}">
+        <Setter Property="Content" Value="{StaticResource EditGeometry}" />
     </Style>
 
     <Style TargetType="{x:Type RepeatButton}" BasedOn="{StaticResource TextButtonStyle}" />

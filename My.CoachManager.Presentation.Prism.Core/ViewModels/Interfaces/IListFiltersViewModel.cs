@@ -67,5 +67,15 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
         /// Gets or sets the Remove command.
         /// </summary>
         DelegateCommand<IFilter> RemoveFilterCommand { get; set; }
+
+        /// <summary>
+        /// Apply Filters.
+        /// </summary>
+        void ApplyFilters();
+
+        /// <summary>
+        /// Add a filter.
+        /// </summary>
+        void AddFilter(IFilter filter, string title);
     }
 }

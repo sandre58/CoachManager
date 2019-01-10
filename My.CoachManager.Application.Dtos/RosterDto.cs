@@ -44,6 +44,12 @@ namespace My.CoachManager.Application.Dtos
         /// </summary>
         [DataMember]
         public IEnumerable<RosterPlayerDto> Players { get; set; }
-        
+
+        /// <summary>
+        /// Gets or set the squads.
+        /// </summary>
+        [DataMember]
+        public IEnumerable<SquadDto> Squads { get; set; }
+
     }
 }

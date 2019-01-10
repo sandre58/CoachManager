@@ -11,7 +11,6 @@
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:resources="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
-             xmlns:strings1="clr-namespace:My.CoachManager.Presentation.Prism.Core.Resources;assembly=My.CoachManager.Presentation.Prism.Core"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:SeasonEditViewModel}"
              d:DesignHeight="350" d:DesignWidth="600">
@@ -52,7 +51,7 @@
         <controls:WorkspaceView.Commands>
             <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CancelCommand}" Style="{StaticResource CancelCommandButtonApplicationBarStyle}" IsCancel="True" />
             <controls:CommandButton DockPanel.Dock="Right" Command="{Binding SaveCommand}" Style="{StaticResource ValidateCommandButtonApplicationBarStyle}" IsDefault="True" />
-            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding RefreshCommand}" IconData="{StaticResource RefreshGeometry}" Content="{x:Static strings1:ControlResources.Refresh}" />
+            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding RefreshCommand}" IconData="{StaticResource RefreshGeometry}" Content="{x:Static resources:ControlResources.Refresh}" />
         </controls:WorkspaceView.Commands>
     </controls:WorkspaceView>
 </UserControl>

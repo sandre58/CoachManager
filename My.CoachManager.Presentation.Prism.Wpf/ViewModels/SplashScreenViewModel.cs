@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using My.CoachManager.Presentation.Prism.Core.Resources;
+using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Wpf.Resources;
 

@@ -21,7 +21,7 @@
                 </Grid.ColumnDefinitions>
                 <controls:Icon  x:Name="Icon" Margin="0,0,12,0" Size="Custom" Width="25" Height="25" VerticalAlignment="Top" Opacity="0.85" />
                 <DockPanel Grid.Column="1">
-                    <TextBlock x:Name="Title" DockPanel.Dock="Top" Text="{Binding Title}" Style="{StaticResource MediumHeaderStyle}" />
+                    <TextBlock x:Name="Title" DockPanel.Dock="Top" Text="{Binding Title}" Style="{StaticResource SmallHeaderStyle}" />
                     <TextBlock x:Name="Message" Text="{Binding Message}" TextWrapping="Wrap" Margin="0,0,12,0" Opacity="0.75" />
                 </DockPanel>
             </Grid>

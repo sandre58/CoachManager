@@ -6,8 +6,21 @@
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Roster.Resources"
              mc:Ignorable="d"
-             Content="{x:Static strings:RosterResources.RosterMenu}"
-                         Target="RosterView"
-                         Color="Blue"
+                         Target="{Binding Roster.MainSquad.Id, Converter={StaticResource IdNavigationParameterConverter}, ConverterParameter=SquadView}"
+                         Color="#FA9C14"
              Icon="{StaticResource RosterGeometry}"
-             Style="{StaticResource NavigationItemStyle}" />
+             Style="{StaticResource NavigationItemStyle}" >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="{Binding Source={x:Static strings:RosterResources.RosterMenu}, Converter={StaticResource ToUpperConverter}}"/>
+        <Button Grid.Column="1" Style="{StaticResource EditButtonStyle}"
+                Width="18" Height="18"
+                Command="{Binding EditSquadCommand}"
+                CommandParameter="{Binding Roster.MainSquad}"
+                ToolTip="{x:Static strings:RosterResources.EditSquad}" />
+    </Grid>
+    </controls:NavigationItem>

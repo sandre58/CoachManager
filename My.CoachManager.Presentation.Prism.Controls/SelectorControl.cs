@@ -240,8 +240,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             if (_ignoreSelectedValuesChanged)
                 return;
 
-            var values = newValue as IList;
-            if (values != null)
+            if (newValue is IList values)
                 SelectedValue = string.Join(Delimiter, values.Cast<object>().ToList());
         }
 

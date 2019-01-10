@@ -1,5 +1,4 @@
 ﻿using Microsoft.Practices.ObjectBuilder2;
-using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Extensions;
@@ -8,7 +7,6 @@ using My.CoachManager.Presentation.Prism.Core.Enums;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Models;
 using My.CoachManager.Presentation.Prism.Core.Models.Filters;
-using My.CoachManager.Presentation.Prism.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Commands;
 using System;
@@ -16,6 +14,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
@@ -26,6 +25,16 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         where TItemView : FrameworkElement
     {
         #region Members
+
+        /// <summary>
+        /// Gets or sets the remove item message.
+        /// </summary>
+        public string ConfirmationRemoveItemMessage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the remove items message.
+        /// </summary>
+        public string ConfirmationRemoveItemsMessage { get; set; }
 
         /// <summary>
         /// Gets or sets the add command.
@@ -78,6 +87,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             ItemButtonCommands = new CommandsCollection();
             ItemContextMenuCommands = new CommandsCollection();
+            ConfirmationRemoveItemMessage = MessageResources.ConfirmationRemovingItem;
+            ConfirmationRemoveItemsMessage = MessageResources.ConfirmationRemovingItems;
         }
 
         #endregion Constructors
@@ -116,6 +127,21 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         }
 
         #endregion Initialization
+
+        #region Data
+
+        /// <summary>
+        /// Call after load data.
+        /// </summary>
+        protected override void OnLoadDataCompleted()
+        {
+            base.OnLoadDataCompleted();
+
+            Filters?.ApplyFilters();
+        }
+
+
+        #endregion
 
         #region Open
 
@@ -158,11 +184,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual void Add()
         {
-            var view = ServiceLocator.Current.GetInstance<TEditView>();
-            var model = view.DataContext as IEditViewModel<TEntityModel>;
-            model?.LoadItemById(0);
-
-            DialogManager.ShowWorkspaceDialog(view, dialog =>
+            DialogManager.ShowEditDialog<TEditView>(0, dialog =>
             {
                 OnAddCompleted(dialog.Result);
             });
@@ -199,11 +221,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             if(x == null) return;
             if (!CanEdit(x)) return;
 
-            var view = ServiceLocator.Current.GetInstance<TEditView>();
-            var model = view.DataContext as IEditViewModel<TEntityModel>;
-            model?.LoadItemById(x.Id);
-
-            DialogManager.ShowWorkspaceDialog(view, dialog =>
+            DialogManager.ShowEditDialog<TEditView>(x.Id, dialog =>
             {
                 OnEditCompleted(dialog.Result);
             });
@@ -259,7 +277,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             if (x == null) return;
             if (!CanRemove(x)) return;
 
-            if (DialogManager.ShowWarningDialog(MessageResources.ConfirmationRemovingItem, MessageDialogButtons.YesNo) != DialogResult.Yes) return;
+            if (!OnRemoveRequested(x)) return;
 
             try
             {
@@ -299,6 +317,15 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             Refresh();
         }
 
+        /// <summary>
+        /// Called before the edit action;
+        /// </summary>
+        /// <param name="item">The item.</param>
+        protected virtual bool OnRemoveRequested(TEntityModel item)
+        {
+            return DialogManager.ShowWarningDialog(ConfirmationRemoveItemMessage, MessageDialogButtons.YesNo) == DialogResult.Yes;
+        }
+
         #endregion Remove
 
         #region Remove
@@ -310,7 +337,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             if (!CanRemove()) return;
 
-            if (DialogManager.ShowWarningDialog(MessageResources.ConfirmationRemovingItems, MessageDialogButtons.YesNo) != DialogResult.Yes) return;
+            if (!OnRemoveRequested()) return;
 
             try
             {
@@ -342,6 +369,15 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         protected virtual void OnRemoveCompleted()
         {
             Refresh();
+        }
+
+
+        /// <summary>
+        /// Called before the edit action;
+        /// </summary>
+        protected virtual bool OnRemoveRequested()
+        {
+            return DialogManager.ShowWarningDialog(ConfirmationRemoveItemsMessage, MessageDialogButtons.YesNo) == DialogResult.Yes;
         }
 
         #endregion Remove
