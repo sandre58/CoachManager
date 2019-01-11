@@ -46,9 +46,14 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         public SquadModel Squad { get; set; }
 
         /// <summary>
+        /// Gets or sets model.
+        /// </summary>
+        public IEnumerable<SquadModel> OtherSquads { get; private set; }
+
+        /// <summary>
         /// Gets or sets command.
         /// </summary>
-        public DelegateCommand<int?> MovePlayerInSquadCommand { get; set; }
+        public DelegateCommand<int?> MoveSelectedPlayersInSquadCommand { get; set; }
 
         #endregion
 
@@ -81,7 +86,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         {
             base.InitializeCommand();
 
-            MovePlayerInSquadCommand = new DelegateCommand<int?>(MoveSelectedPlayersInSquad, CanMoveSelectedPlayersInSquad);
+            MoveSelectedPlayersInSquadCommand = new DelegateCommand<int?>(MoveSelectedPlayersInSquad, CanMoveSelectedPlayersInSquad);
         }
 
         #endregion Initialization
@@ -112,6 +117,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
                 var result = _rosterService.GetPlayers(Roster.Id);
 
                 Items = result.Select(RosterFactory.Get).ToItemsObservableCollection();
+                OtherSquads = Roster.Squads.Where(x => x.Id != Squad.Id).ToList();
             }
         }
 
@@ -188,9 +194,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         }
 
         #endregion Add
-
-        #region Add
-
+       
         #region MovePlayerInSquad
 
         /// <summary>
@@ -209,13 +213,11 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// </summary>
         protected bool CanMoveSelectedPlayersInSquad(int? squadId)
         {
-            return true;
+            return SelectedItems.Any();
 
         }
 
         #endregion MovePlayerInSquad
-
-        #endregion
 
         #endregion Methods
     }

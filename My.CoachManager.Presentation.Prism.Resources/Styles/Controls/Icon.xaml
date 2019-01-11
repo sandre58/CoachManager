@@ -38,6 +38,7 @@
                                       VerticalAlignment="{TemplateBinding OverlayVerticalAlignment}"
                                       Visibility="Collapsed">
                                 <Ellipse x:Name="PART_OverlayBackground"
+                                         Margin="2"
                                              Fill="{TemplateBinding OverlayBackground}"
                                              Stroke="{TemplateBinding OverlayBorderBrush}"
                                              StrokeThickness="{TemplateBinding OverlayBorderThickness}" />

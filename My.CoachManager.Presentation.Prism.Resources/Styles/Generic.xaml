@@ -25,6 +25,7 @@
         <ResourceDictionary Source="Controls/Checkbox.xaml" />
         <ResourceDictionary Source="Controls/Combobox.xaml" />
         <ResourceDictionary Source="Controls/CommandButton.xaml" />
+        <ResourceDictionary Source="Controls/DropDownCommandButton.xaml" />
         <ResourceDictionary Source="Controls/ContentControl.xaml" />
         <ResourceDictionary Source="Controls/ContextMenu.xaml" />
         <ResourceDictionary Source="Controls/Datagrid.xaml" />
@@ -60,6 +61,7 @@
         <ResourceDictionary Source="Controls/WindowCommands.xaml" />
         <ResourceDictionary Source="Controls/WorkspaceDialog.xaml" />
         <ResourceDictionary Source="Controls/WorkspaceView.xaml" />
+        <ResourceDictionary Source="Controls/SubMenu.xaml" />
 
         <!-- Specific -->
         <ResourceDictionary Source="Specific/Filter.xaml" />

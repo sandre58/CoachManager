@@ -18,7 +18,6 @@
 
         <TextBlock Text="{Binding Source={x:Static strings:RosterResources.RosterMenu}, Converter={StaticResource ToUpperConverter}}"/>
         <Button Grid.Column="1" Style="{StaticResource EditButtonStyle}"
-                Width="18" Height="18"
                 Command="{Binding EditSquadCommand}"
                 CommandParameter="{Binding Roster.MainSquad}"
                 ToolTip="{x:Static strings:RosterResources.EditSquad}" />

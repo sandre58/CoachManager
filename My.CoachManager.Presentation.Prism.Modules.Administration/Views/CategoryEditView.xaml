@@ -45,7 +45,7 @@
         <controls:WorkspaceView.Commands>
             <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CancelCommand}" Style="{StaticResource CancelCommandButtonApplicationBarStyle}" IsCancel="True" />
             <controls:CommandButton DockPanel.Dock="Right" Command="{Binding SaveCommand}" Style="{StaticResource ValidateCommandButtonApplicationBarStyle}" IsDefault="True" />
-            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding RefreshCommand}" IconData="{StaticResource RefreshGeometry}" Content="{x:Static strings1:ControlResources.Refresh}" />
+            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding RefreshCommand}" Content="{StaticResource RefreshGeometry}" Header="{x:Static strings1:ControlResources.Refresh}" />
         </controls:WorkspaceView.Commands>
     </controls:WorkspaceView>
 </UserControl>

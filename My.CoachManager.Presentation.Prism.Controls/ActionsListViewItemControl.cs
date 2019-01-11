@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -23,22 +25,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
         {
             get => (bool)GetValue(ShowSelectionProperty);
             set => SetValue(ShowSelectionProperty, value);
-        }
-
-        #endregion
-
-        #region MenuItems
-
-        public static readonly DependencyProperty MenuItemsProperty = DependencyProperty.Register(
-            "MenuItems",
-            typeof(List<MenuItem>),
-            typeof(ActionsListViewItemControl),
-            new FrameworkPropertyMetadata(new List<MenuItem>()));
-
-        public List<MenuItem> MenuItems
-        {
-            get => (List<MenuItem>)GetValue(MenuItemsProperty);
-            set => SetValue(MenuItemsProperty, value);
         }
 
         #endregion

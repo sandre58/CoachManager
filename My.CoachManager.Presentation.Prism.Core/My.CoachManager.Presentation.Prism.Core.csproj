@@ -97,9 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\Validation\CompareToPropertyAttribute.cs" />
-    <Compile Include="Commands\CommandsCollection.cs" />
-    <Compile Include="Commands\IKeyCommand.cs" />
-    <Compile Include="Commands\KeyCommand.cs" />
     <Compile Include="ComponentModel\AbortableBackgroundWorker.cs">
       <SubType>Component</SubType>
     </Compile>

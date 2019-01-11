@@ -185,6 +185,7 @@
     </Style>
 
     <Style x:Key="IconButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextButtonStyle}">
+        <Setter Property="Height" Value="17" />
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -295,8 +296,8 @@
         <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Positive}" />
     </Style>
 
-    <Style x:Key="EditButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxCircleButtonStyle}">
-        <Setter Property="Content" Value="{StaticResource EditGeometry}" />
+    <Style x:Key="EditButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource IconButtonStyle}">
+        <Setter Property="Content" Value="{StaticResource EditPageGeometry}" />
     </Style>
 
     <Style TargetType="{x:Type RepeatButton}" BasedOn="{StaticResource TextButtonStyle}" />

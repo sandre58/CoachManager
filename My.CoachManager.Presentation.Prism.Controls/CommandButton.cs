@@ -1,55 +1,39 @@
-﻿using System.Windows;
-using System.Windows.Media;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Windows;
+using System.Windows.Automation.Peers;
+using My.CoachManager.Presentation.Prism.Controls.CommandButtons;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
-    public class CommandButton : System.Windows.Controls.Button
+    public class CommandButton : CommandButtonBase
     {
-        /// <summary>
-        /// Identifies the IconData property.
-        /// </summary>
-        public static readonly DependencyProperty IconDataProperty = DependencyProperty.Register("IconData", typeof(Geometry), typeof(CommandButton));
-
-        /// <summary>
-        /// Identifies the IconData property.
-        /// </summary>
-        public static readonly DependencyProperty ButtonDiameterProperty = DependencyProperty.Register("ButtonDiameter", typeof(double), typeof(CommandButton));
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CommandButton"/> class.
-        /// </summary>
-        public CommandButton()
+        [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "We need to use static constructor for custom actions during dependency properties initialization")]
+        static CommandButton()
         {
-            DefaultStyleKey = typeof(CommandButton);
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(CommandButton), new FrameworkPropertyMetadata(typeof(CommandButton)));
         }
 
-        /// <summary>
-        /// Gets or sets the icon path data.
-        /// </summary>
-        /// <value>
-        /// The icon path data.
-        /// </value>
-        public Geometry IconData
+        protected override AutomationPeer OnCreateAutomationPeer()
         {
-            get { return (Geometry)GetValue(IconDataProperty); }
-            set { SetValue(IconDataProperty, value); }
+            return new CommandButtonAutomationPeer(this);
         }
 
-        /// <summary>
-        /// Gets or sets the icon path data.
-        /// </summary>
-        /// <value>
-        /// The icon path data.
-        /// </value>
-        public double ButtonDiameter
+        protected override void OnClick()
         {
-            get
+            if (AutomationPeer.ListenerExists(AutomationEvents.InvokePatternOnInvoked))
             {
-                var value = GetValue(ButtonDiameterProperty);
-                if (value != null) return (double)value;
-                return 0;
+                var peer = UIElementAutomationPeer.CreatePeerForElement(this);
+                if (peer != null)
+                {
+                    peer.RaiseAutomationEvent(AutomationEvents.InvokePatternOnInvoked);
+                }
             }
-            set { SetValue(ButtonDiameterProperty, value); }
+            base.OnClick();
+        }
+
+        internal void OnClickInternal()
+        {
+            OnClick();
         }
     }
 }

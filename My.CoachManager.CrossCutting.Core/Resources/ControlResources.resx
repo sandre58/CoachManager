@@ -192,6 +192,9 @@
   <data name="ModifyImage" xml:space="preserve">
     <value>Modifier l'image</value>
   </data>
+  <data name="MovingTo" xml:space="preserve">
+    <value>Déplacer vers</value>
+  </data>
   <data name="New" xml:space="preserve">
     <value>Nouveau</value>
   </data>

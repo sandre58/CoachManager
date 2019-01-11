@@ -60,6 +60,17 @@ namespace My.CoachManager.Presentation.Prism.Controls.Helpers
             return parent ?? TryFindParent<T>(parentObject);
         }
 
+        public static DependencyObject FindTopLevelParent(DependencyObject reference)
+        {
+            var parent = VisualTreeHelper.GetParent(reference);
+            if (parent != null)
+            {
+                var nextParent = VisualTreeHelper.GetParent(parent);
+                return nextParent != null ? FindTopLevelParent(parent) : parent;
+            }
+            return null;
+        }
+
         /// <summary>
         /// Finds a Child of a given item in the visual tree.
         /// </summary>

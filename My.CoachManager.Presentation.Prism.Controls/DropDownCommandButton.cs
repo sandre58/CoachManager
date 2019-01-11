@@ -11,30 +11,31 @@ using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using My.CoachManager.Presentation.Prism.Controls.Buttons;
 using My.CoachManager.Presentation.Prism.Controls.CommandButtons;
 using My.CoachManager.Presentation.Prism.Controls.Helpers;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
     [TemplatePart(Name = PopupName, Type = typeof(Popup))]
-    public class DropDownButton : Button
+    // ReSharper disable ClassWithVirtualMembersNeverInherited.Global
+    public class DropDownCommandButton : CommandButton
+    // ReSharper restore ClassWithVirtualMembersNeverInherited.Global
     {
         private const string PopupName = "PART_Popup";
 
         private Popup _popup;
 
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "We need to use static constructor for custom actions during dependency properties initialization")]
-        static DropDownButton()
+        static DropDownCommandButton()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(DropDownButton), new FrameworkPropertyMetadata(typeof(DropDownButton)));
-            EventManager.RegisterClassHandler(typeof(DropDownButton), MenuItem.ClickEvent, new RoutedEventHandler(OnMenuItemClick), true);
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(DropDownCommandButton), new FrameworkPropertyMetadata(typeof(DropDownCommandButton)));
+            EventManager.RegisterClassHandler(typeof(DropDownCommandButton), MenuItem.ClickEvent, new RoutedEventHandler(OnMenuItemClick), true);
         }
-
+        
         public static readonly DependencyProperty SubmenuProperty =
-            DependencyProperty.Register("Submenu", typeof(Submenu), typeof(DropDownButton),
+            DependencyProperty.Register("Submenu", typeof(Submenu), typeof(DropDownCommandButton),
                                         new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSubmenuChanged));
-
+        
         [Bindable(true)]
         [Category("Content")]
         [Description("Popup menu that drop down.")]
@@ -47,10 +48,10 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         private static void OnSubmenuChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            var instance = (DropDownButton)obj;
+            var instance = (DropDownCommandButton)obj;
             instance.OnSubmenuChanged((Submenu)e.OldValue, (Submenu)e.NewValue);
         }
-
+        
         protected virtual void OnSubmenuChanged(Submenu oldSubmenu, Submenu newSubmenu)
         {
             ApplyTemplate();
@@ -58,12 +59,12 @@ namespace My.CoachManager.Presentation.Prism.Controls
         }
 
         private static readonly DependencyPropertyKey HasSubmenuPropertyKey =
-            DependencyProperty.RegisterReadOnly("HasSubmenu", typeof(bool), typeof(DropDownButton),
+            DependencyProperty.RegisterReadOnly("HasSubmenu", typeof(bool), typeof(DropDownCommandButton),
                                                 new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.None,
                                                                               OnHasSubmenuChanged));
-
+        
         public static readonly DependencyProperty HasSubmenuProperty = HasSubmenuPropertyKey.DependencyProperty;
-
+        
         [Bindable(false)]
         [Browsable(false)]
         public bool HasSubmenu
@@ -74,14 +75,14 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         private static void OnHasSubmenuChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-
-            var instance = (DropDownButton)obj;
+            
+            var instance = (DropDownCommandButton)obj;
             instance.OnHasSubmenuChanged((bool)e.OldValue, (bool)e.NewValue);
         }
-
+        
         protected virtual void OnHasSubmenuChanged(bool oldHasSubmenu, bool newHasSubmenu)
         {
-            var peer = UIElementAutomationPeer.FromElement(this) as DropDownButtonAutomationPeer;
+            var peer = UIElementAutomationPeer.FromElement(this) as DropDownCommandButtonAutomationPeer;
             if (peer != null)
             {
                 peer.RaiseExpandCollapseStatePropertyChangedEvent(
@@ -90,13 +91,13 @@ namespace My.CoachManager.Presentation.Prism.Controls
             }
         }
 
-
+        
         public static readonly DependencyProperty IsDropDownOpenProperty =
-            DependencyProperty.Register("IsDropDownOpen", typeof(bool), typeof(DropDownButton),
+            DependencyProperty.Register("IsDropDownOpen", typeof(bool), typeof(DropDownCommandButton),
                                         new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                                                                       OnIsDropDownOpenChanged, CoerceIsDropDownOpen));
 
-
+        
         [Bindable(true)]
         [Category("Appearance")]
         [Description("Indicates whether drop down is open.")]
@@ -108,15 +109,15 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         private static void OnIsDropDownOpenChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-
-            var instance = (DropDownButton)obj;
+            
+            var instance = (DropDownCommandButton)obj;
             instance.OnIsDropDownOpenChanged((bool)e.OldValue, (bool)e.NewValue);
         }
 
-
+        
         protected virtual void OnIsDropDownOpenChanged(bool oldIsDropDownOpen, bool newIsDropDownOpen)
         {
-            var peer = UIElementAutomationPeer.FromElement(this) as DropDownButtonAutomationPeer;
+            var peer = UIElementAutomationPeer.FromElement(this) as DropDownCommandButtonAutomationPeer;
             if (peer != null)
             {
                 if (!HasSubmenu)
@@ -139,8 +140,8 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         private static object CoerceIsDropDownOpen(DependencyObject obj, object baseValue)
         {
-
-            var instance = (DropDownButton)obj;
+            
+            var instance = (DropDownCommandButton)obj;
             return instance.CoerceIsDropDownOpen((bool)baseValue);
         }
 
@@ -149,12 +150,12 @@ namespace My.CoachManager.Presentation.Prism.Controls
             return HasSubmenu && baseValue;
         }
 
-
+        
         [Category("Behavior")]
         [Description("Occurs when drop down is opened.")]
         public event EventHandler DropDownOpened;
 
-
+        
         protected virtual void OnDropDownOpened(EventArgs e)
         {
             if (DropDownOpened != null)
@@ -174,12 +175,12 @@ namespace My.CoachManager.Presentation.Prism.Controls
             }
         }
 
-
+        
         [Category("Behavior")]
         [Description("Occurs when drop down is closed.")]
         public event EventHandler DropDownClosed;
 
-
+        
         protected virtual void OnDropDownClosed(EventArgs e)
         {
             if (DropDownClosed != null)
@@ -197,12 +198,12 @@ namespace My.CoachManager.Presentation.Prism.Controls
             }
         }
 
-
+        
         public static readonly DependencyProperty DropDownDirectionProperty =
-            DependencyProperty.Register("DropDownDirection", typeof(DropDownDirection), typeof(DropDownButton),
+            DependencyProperty.Register("DropDownDirection", typeof(DropDownDirection), typeof(DropDownCommandButton),
                                         new FrameworkPropertyMetadata(DropDownDirection.Up, FrameworkPropertyMetadataOptions.None));
 
-
+        
         [Category("Layout")]
         [Description("The direction of the drop down.")]
         public DropDownDirection DropDownDirection
@@ -211,12 +212,12 @@ namespace My.CoachManager.Presentation.Prism.Controls
             set { SetValue(DropDownDirectionProperty, value); }
         }
 
-
+        
         public static readonly DependencyProperty MaxDropDownHeightProperty =
-            DependencyProperty.Register("MaxDropDownHeight", typeof(double), typeof(DropDownButton),
+            DependencyProperty.Register("MaxDropDownHeight", typeof(double), typeof(DropDownCommandButton),
                                         new FrameworkPropertyMetadata(300d, FrameworkPropertyMetadataOptions.None));
 
-
+        
         [Bindable(true)]
         [Category("Layout")]
         [Description("The maximum height constraint of the drop down.")]
@@ -229,7 +230,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         protected override AutomationPeer OnCreateAutomationPeer()
         {
-            return new DropDownButtonAutomationPeer(this);
+            return new DropDownCommandButtonAutomationPeer(this);
         }
 
         [SecuritySafeCritical]
@@ -301,7 +302,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         private static void OnMenuItemClick(object sender, RoutedEventArgs e)
         {
-            var instance = sender as DropDownButton;
+            var instance = sender as DropDownCommandButton;
             if (instance != null)
             {
                 instance.IsDropDownOpen = false;

@@ -20,6 +20,9 @@
             <controls:ExtendedListView.View>
                 <controls:ExtendedGridView>
 
+                    <!-- Selection -->
+                    <columns:SelectionGridViewColumn />
+
                     <!-- Name -->
                     <columns:ExtendedGridViewColumn Header="{x:Static entities:SquadResources.Name}" Width="300"
                                                      PropertyName="Name">

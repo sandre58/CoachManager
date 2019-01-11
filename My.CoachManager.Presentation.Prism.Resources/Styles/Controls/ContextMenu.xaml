@@ -110,7 +110,7 @@
     <Style TargetType="{x:Type Menu}" BasedOn="{StaticResource MenuStyle}" />
 
     <Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
-        <Setter Property="Background" Value="{DynamicResource Transparent}" />
+        <Setter Property="Background" Value="{DynamicResource Light}" />
         <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource ControlMouseOver}" />
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource ControlMouseOver}" />
         <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource ControlMouseOver}" />
@@ -134,7 +134,7 @@
                 <Setter Property="Template" Value="{DynamicResource {ComponentResourceKey ResourceId=TopLevelItemTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}" />
             </Trigger>
             <Trigger Property="Role" Value="SubmenuHeader">
-                <Setter Property="Padding" Value="2 6 2 6" />
+                <Setter Property="Padding" Value="7 5 8 6" />
                 <Setter Property="Template" Value="{DynamicResource {ComponentResourceKey ResourceId=SubmenuHeaderTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}" />
             </Trigger>
             <Trigger Property="IsChecked" Value="True">
@@ -456,11 +456,11 @@
             <Popup x:Name="PART_Popup"
                    AllowsTransparency="True"
                    Focusable="False"
-                   HorizontalOffset="-2"
+                   HorizontalOffset="1"
                    IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
                    Placement="Right"
                    PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
-                   VerticalOffset="-3">
+                   VerticalOffset="-1">
                 <Grid>
                     <Rectangle x:Name="LayoutRoot" Fill="{TemplateBinding Background}" />
                     <ContentControl x:Name="SubDark"

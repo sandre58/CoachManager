@@ -180,13 +180,13 @@
                         </Grid.ColumnDefinitions>
 
                         <controls:CommandButton
-                                ButtonDiameter="30"
+                            Style="{StaticResource SmallCommandButtonStyle}"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                                 Foreground="{TemplateBinding Foreground}"
                                 Background="{TemplateBinding Background}"
                                 parameters:ControlParameters.MouseOverBackground="{TemplateBinding Background}"
-                                IconData="{TemplateBinding Content}"
+                                Content="{TemplateBinding Content}"
                                 ToolTip="{TemplateBinding ToolTip}"
                                 Command="{TemplateBinding Command}" />
 
@@ -220,10 +220,10 @@
 
                         <controls:CommandButton
                             Grid.Column="0"
-                                ButtonDiameter="30"
+                                Style="{StaticResource SmallCommandButtonStyle}"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                                IconData="{StaticResource ListReorderGeometry}"
+                                Content="{StaticResource ListReorderGeometry}"
                                 ToolTip="{x:Static strings1:ControlResources.ActivateOrder}"
                                 Command="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=ActivateOrderCommand}"
                                 Visibility="{Binding Path=DataContext.CanOrder, RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}" />
@@ -231,24 +231,22 @@
                         <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"
                                     Visibility="{Binding Path=DataContext.CanOrder, RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <controls:CommandButton
-                                ButtonDiameter="25"
                                 Margin="2,0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Style="{StaticResource ColorCommandButtonStyle}"
+                                Style="{StaticResource SmallColorCommandButtonStyle}"
                                 parameters:ControlParameters.Color="{DynamicResource Positive}"
-                                IconData="{StaticResource OkGeometry}"
+                                Content="{StaticResource OkGeometry}"
                                 ToolTip="{x:Static strings1:ControlResources.ValidateOrder}"
                                 Command="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=ValidateOrderCommand}" />
 
                             <controls:CommandButton
-                                ButtonDiameter="25"
                                 Margin="2,0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Style="{StaticResource ColorCommandButtonStyle}"
+                                Style="{StaticResource SmallColorCommandButtonStyle}"
                                 parameters:ControlParameters.Color="{DynamicResource Negative}"
-                                IconData="{StaticResource CancelGeometry}"
+                                Content="{StaticResource CancelGeometry}"
                                 ToolTip="{x:Static strings1:ControlResources.CancelOrder}"
                                 Command="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=CancelOrderCommand}" />
                         </StackPanel>

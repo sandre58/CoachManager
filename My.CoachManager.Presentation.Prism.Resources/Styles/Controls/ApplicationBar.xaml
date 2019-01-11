@@ -7,6 +7,7 @@
         <ResourceDictionary Source="../Base/Converters.xaml" />
         <ResourceDictionary Source="../Base/Margins.xaml" />
         <ResourceDictionary Source="CommandButton.xaml" />
+        <ResourceDictionary Source="DropDownCommandButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type controls:ApplicationBar}">
@@ -63,6 +64,7 @@
 
         <Style.Resources>
             <Style TargetType="{x:Type controls:CommandButton}" BasedOn="{StaticResource CommandButtonApplicationBarStyle}" />
+            <Style TargetType="{x:Type controls:DropDownCommandButton}" BasedOn="{StaticResource DropDownCommandButtonApplicationBarStyle}" />
         </Style.Resources>
     </Style>
 </ResourceDictionary>

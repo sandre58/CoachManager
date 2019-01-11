@@ -66,8 +66,8 @@
                                 parameters:ControlParameters.FocusBorderBrush="{TemplateBinding parameters:ControlParameters.FocusBorderBrush}"
                                 parameters:ControlParameters.FocusBackground="{TemplateBinding parameters:ControlParameters.FocusBackground}"
                                 parameters:ControlParameters.CharacterCasing="{TemplateBinding parameters:ControlParameters.CharacterCasing}"
-                                IsHitTestVisible="{Binding IsOpen, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NotConverter}}"
-                                IsChecked="{Binding IsOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                IsHitTestVisible="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NotConverter}}"
+                                IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />

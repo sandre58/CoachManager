@@ -183,44 +183,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         #endregion IsSorting
 
-        #region ButtonCommands
-
-        /// <summary>
-        /// Identifies the BackgroundContent dependency property.
-        /// </summary>
-        public static readonly DependencyProperty ButtonCommandsProperty = DependencyProperty.Register("ButtonCommands", typeof(IEnumerable), typeof(ExtendedListView), new PropertyMetadata(new CommandsCollection()));
-
-        /// <summary>
-        /// Get or set commands in Application Bar.
-        /// </summary>
-        public IEnumerable ButtonCommands
-        {
-            get => (IEnumerable)GetValue(ButtonCommandsProperty);
-
-            set => SetValue(ButtonCommandsProperty, value);
-        }
-
-        #endregion ButtonCommands
-
-        #region ContextMenuCommands
-
-        /// <summary>
-        /// Identifies the BackgroundContent dependency property.
-        /// </summary>
-        public static readonly DependencyProperty ContextMenuCommandsProperty = DependencyProperty.Register("ContextMenuCommands", typeof(IEnumerable), typeof(ExtendedListView), new PropertyMetadata(new CommandsCollection()));
-
-        /// <summary>
-        /// Get or set commands in Application Bar.
-        /// </summary>
-        public IEnumerable ContextMenuCommands
-        {
-            get => (IEnumerable)GetValue(ContextMenuCommandsProperty);
-
-            set => SetValue(ContextMenuCommandsProperty, value);
-        }
-
-        #endregion ContextMenuCommands
-
         protected override DependencyObject GetContainerForItemOverride()
         {
             return new ExtendedListViewItem();

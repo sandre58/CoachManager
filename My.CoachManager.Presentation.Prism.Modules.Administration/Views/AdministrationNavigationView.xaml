@@ -9,7 +9,7 @@
              Header="{x:Static strings:AdministrationResources.AdministrationMenu}"
              Style="{StaticResource NavigationExpanderStyle}"
              Icon="{StaticResource ToolsGeometry}"
-             Color="#737373">
+             Color="#4d4d4d">
     <StackPanel>
         <controls:NavigationItem Content="{x:Static strings:AdministrationResources.PlayersMenu}" Target="PlayersListView" />
         <controls:NavigationItem Content="{x:Static strings:AdministrationResources.RostersMenu}" Target="RostersListView" />

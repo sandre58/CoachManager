@@ -1,10 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using My.CoachManager.CrossCutting.Core.Exceptions;
-using My.CoachManager.CrossCutting.Core.Resources;
-using My.CoachManager.Presentation.Prism.Core.Commands;
 using My.CoachManager.Presentation.Prism.Core.ComponentModel;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
+using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
@@ -30,7 +29,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             State = ScreenState.NotLoaded;
             Mode = ScreenMode.Read;
-            Commands = new CommandsCollection();
         }
 
         #endregion Constructors
@@ -52,18 +50,13 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Gets or sets the refresh command.
         /// </summary>
-        public DelegateKeyCommand RefreshCommand { get; set; }
+        public DelegateCommand RefreshCommand { get; set; }
 
         /// <inheritdoc />
         /// <summary>
         /// Gets if we can refresh after initialisation.
         /// </summary>
         public virtual bool RefreshOnInit => false;
-
-        /// <summary>
-        /// Gets or sets commands.
-        /// </summary>
-        public CommandsCollection Commands { get; set; }
 
         #endregion Members
 
@@ -77,13 +70,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             base.InitializeCommand();
 
-            RefreshCommand = new DelegateKeyCommand(Refresh, CanRefresh)
-            {
-                Header = ControlResources.Refresh,
-                IconName = "RefreshGeometry"
-            };
-
-            Commands.Add(RefreshCommand);
+            RefreshCommand = new DelegateCommand(Refresh, CanRefresh);
         }
 
         #endregion Initialisation

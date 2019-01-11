@@ -20,11 +20,12 @@
             <controls:ExtendedListView.View>
                 <controls:ExtendedGridView VisibleColumns="{Binding Parameters.DisplayedColumns}">
 
-                    <!-- Order -->
-                    <columns:ExtendedGridViewColumn Header="Order" Width="75" CanUserHideColumn="False"
-                                                     PropertyName="Order" CellTemplate="{StaticResource OrderListViewColumnTemplate}" HeaderTemplate="{StaticResource OrderListViewColumnHeaderTemplate}" />
-
+                    <!-- Action -->
+                    <columns:ActionsGridViewColumn />
                     
+                    <!-- Order -->
+                    <columns:OrderGridViewColumn />
+
                     <!-- Label -->
                     <columns:ExtendedGridViewColumn Header="{x:Static strings:ReferenceResources.Label}" Width="300"
                                                      PropertyName="Label">

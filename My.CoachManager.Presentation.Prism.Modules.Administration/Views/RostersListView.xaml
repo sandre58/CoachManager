@@ -19,6 +19,10 @@
         <controls:ExtendedListView ItemsSource="{Binding Items}">
             <controls:ExtendedListView.View>
                 <controls:ExtendedGridView VisibleColumns="{Binding Parameters.DisplayedColumns}">
+
+                    <!-- Action -->
+                    <columns:ActionsGridViewColumn />
+                    
                     <!-- Name -->
                     <columns:ExtendedGridViewColumn Header="{x:Static strings:RosterResources.Name}" Width="300"
                                                      PropertyName="Name">

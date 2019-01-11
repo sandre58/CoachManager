@@ -28,8 +28,8 @@
 
     <!-- Diameters -->
     <sys:Double x:Key="VerySmallDiameter">15</sys:Double>
-    <sys:Double x:Key="SmallDiameter">18</sys:Double>
-    <sys:Double x:Key="NormalDiameter">25</sys:Double>
+    <sys:Double x:Key="SmallDiameter">20</sys:Double>
+    <sys:Double x:Key="NormalDiameter">30</sys:Double>
     <sys:Double x:Key="LargeDiameter">35</sys:Double>
     <sys:Double x:Key="VeryLargeDiameter">42</sys:Double>
 </ResourceDictionary>

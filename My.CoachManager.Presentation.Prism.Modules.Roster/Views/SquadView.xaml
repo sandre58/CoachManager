@@ -10,6 +10,8 @@
              xmlns:enum="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
              xmlns:entities="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
              xmlns:columns="clr-namespace:My.CoachManager.Presentation.Prism.Controls.GridViews.Columns;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:SquadViewModel}"
@@ -22,7 +24,46 @@
                 <controls:ExtendedGridView VisibleColumns="{Binding Parameters.DisplayedColumns}">
                     
                     <!-- Action -->
-                    <columns:ActionsGridViewColumn />
+                    <columns:ActionsGridViewColumn >
+                        <columns:ActionsGridViewColumn.CellTemplate>
+                            <DataTemplate DataType="models:RosterPlayerModel">
+                                <StackPanel Orientation="Horizontal">
+
+                                    <!-- It's for save ListView DataContext -->
+                                    <Grid x:Name="ListViewDataContext" DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}" Visibility="Collapsed" />
+
+                                    <controls:ActionsListViewItemControl x:Name="ActionsControl">
+                                        <Button CommandParameter="{Binding}"
+                                                Command="{Binding DataContext.EditCommand,
+                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}"
+                                                Content="{StaticResource EditPageGeometry}"
+                                                ToolTip="{x:Static strings:ControlResources.Edit}"/>
+
+                                        <!-- Menu -->
+                                        <controls:DropDownMenuButton x:Name="Menu" Content="{StaticResource ToolbarGeometry}" >
+                                            <MenuItem Header="{x:Static strings:ControlResources.MovingTo}" Icon="{StaticResource MovingToGeometry}" ItemsSource="{Binding DataContext.OtherSquads, ElementName=ListViewDataContext}">
+                                                <MenuItem.ItemContainerStyle>
+                                                    <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
+                                                        <Setter Property="Header" Value="{Binding Name}" />
+                                                        <Setter Property="Command" Value="{Binding DataContext.MovePlayerInSquad, ElementName=ListViewDataContext}" />
+                                                        <Setter Property="CommandParameter" Value="{Binding Id}" />
+                                                    </Style>
+                                                </MenuItem.ItemContainerStyle>
+                                            </MenuItem>
+                                            <MenuItem Header="{x:Static strings:ControlResources.Remove}" Icon="{StaticResource TrashGeometry}" 
+                                                      Command="{Binding DataContext.RemoveCommand, ElementName=ListViewDataContext}"
+                                                      CommandParameter="{Binding}"
+                                                      parameters:ControlParameters.FocusBackground="{DynamicResource Negative}"/>
+                                        </controls:DropDownMenuButton>
+
+                                    </controls:ActionsListViewItemControl>
+
+
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </columns:ActionsGridViewColumn.CellTemplate>
+                        </columns:ActionsGridViewColumn>
 
                     <!-- Number -->
                     <columns:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.NumberAbbr}" 
@@ -282,7 +323,19 @@
             <Separator DockPanel.Dock="Right" Style="{StaticResource VerticalSeparatorStyle}" />
             <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource EditCommandButtonApplicationBarStyle}" Command="{Binding EditSelectedItemCommand}" />
             <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource DeleteCommandButtonApplicationBarStyle}" Command="{Binding RemoveSelectedItemsCommand}" />
-            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource DeleteCommandButtonApplicationBarStyle}" Command="{Binding MovePlayerInSquadCommand}" CommandParameter="{Binding Squad.Id}" />
+            <controls:DropDownCommandButton DockPanel.Dock="Right" Content="{StaticResource MovingToGeometry}" Header="{x:Static strings:ControlResources.MovingTo}"  >
+                <controls:DropDownCommandButton.Submenu>
+                    <controls:Submenu ItemsSource="{Binding OtherSquads}">
+                        <controls:Submenu.ItemContainerStyle>
+                            <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
+                                <Setter Property="Header" Value="{Binding Name}" />
+                                <Setter Property="Command" Value="{Binding DataContext.MoveSelectedPlayersInSquadCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:WorkspaceView}}}" />
+                                <Setter Property="CommandParameter" Value="{Binding Id}" />
+                            </Style>
+                        </controls:Submenu.ItemContainerStyle>
+                    </controls:Submenu>
+                </controls:DropDownCommandButton.Submenu>
+                </controls:DropDownCommandButton>
         </controls:WorkspaceView.Commands>
     </controls:WorkspaceView>
 </UserControl>

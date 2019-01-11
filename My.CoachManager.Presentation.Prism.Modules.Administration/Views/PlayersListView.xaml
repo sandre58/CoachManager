@@ -21,6 +21,9 @@
             <controls:ExtendedListView.View>
                 <controls:ExtendedGridView VisibleColumns="{Binding Parameters.DisplayedColumns}">
 
+                    <!-- Action -->
+                    <columns:ActionsGridViewColumn />
+
                     <!-- Photo -->
                     <columns:ExtendedGridViewColumn
                             PropertyName="Photo"  CanUserHideColumn="False" Width="100">

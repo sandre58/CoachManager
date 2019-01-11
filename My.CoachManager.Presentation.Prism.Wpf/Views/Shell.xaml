@@ -12,6 +12,7 @@
         xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.Views"
         xmlns:strings="clr-namespace:My.CoachManager.Presentation.Prism.Wpf.Resources"
         xmlns:commands="clr-namespace:My.CoachManager.Presentation.Prism.Core.Commands;assembly=My.CoachManager.Presentation.Prism.Core"
+        xmlns:commandButtons="clr-namespace:My.CoachManager.Presentation.Prism.Controls.CommandButtons;assembly=My.CoachManager.Presentation.Prism.Controls"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
         d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel}"
@@ -127,8 +128,8 @@
                                 </Grid.ColumnDefinitions>
 
                                 <StackPanel Orientation="Horizontal" Margin="{StaticResource VeryLargeHorizontalMargin}" VerticalAlignment="Center">
-                                    <controls:CommandButton Style="{StaticResource BackCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoBackCommand}" />
-                                    <controls:CommandButton Style="{StaticResource NextCommandButtonBaseStyle}" ButtonDiameter="{DynamicResource NormalDiameter}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoForwardCommand}" />
+                                    <controls:CommandButton Content="{StaticResource ArrowLeftGeometry}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoBackCommand}" />
+                                    <controls:CommandButton Content="{StaticResource ArrowRightGeometry}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoForwardCommand}" />
                                 </StackPanel>
                                 <TextBlock Grid.Column="1" Text="{Binding ActiveWorkspace.Title, Converter={StaticResource ToUpperConverter}}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Top" Style="{StaticResource HeaderStyle}" Foreground="{DynamicResource MenuForeground}" />
                             </Grid>

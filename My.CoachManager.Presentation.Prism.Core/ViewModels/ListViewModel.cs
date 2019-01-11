@@ -39,42 +39,32 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Gets or sets the add command.
         /// </summary>
-        public DelegateKeyCommand AddCommand { get; set; }
+        public DelegateCommand AddCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the edit command.
         /// </summary>
-        public DelegateKeyCommand<TEntityModel> OpenCommand { get; set; }
+        public DelegateCommand<TEntityModel> OpenCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the edit command.
         /// </summary>
-        public DelegateKeyCommand<TEntityModel> EditCommand { get; set; }
+        public DelegateCommand<TEntityModel> EditCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the edit command.
         /// </summary>
-        public DelegateKeyCommand EditSelectedItemCommand { get; set; }
+        public DelegateCommand EditSelectedItemCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the remove command.
         /// </summary>
-        public DelegateKeyCommand<TEntityModel> RemoveCommand { get; set; }
+        public DelegateCommand<TEntityModel> RemoveCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the remove command.
         /// </summary>
-        public DelegateKeyCommand RemoveSelectedItemsCommand { get; set; }
-
-        /// <summary>
-        /// Gets or sets item buttons commands.
-        /// </summary>
-        public CommandsCollection ItemButtonCommands { get; set; }
-
-        /// <summary>
-        /// Gets or sets item context menu commands.
-        /// </summary>
-        public CommandsCollection ItemContextMenuCommands { get; set; }
+        public DelegateCommand RemoveSelectedItemsCommand { get; set; }
 
         #endregion Members
 
@@ -85,8 +75,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected ListViewModel()
         {
-            ItemButtonCommands = new CommandsCollection();
-            ItemContextMenuCommands = new CommandsCollection();
             ConfirmationRemoveItemMessage = MessageResources.ConfirmationRemovingItem;
             ConfirmationRemoveItemsMessage = MessageResources.ConfirmationRemovingItems;
         }
@@ -105,25 +93,12 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             base.InitializeCommand();
 
-            AddCommand = new DelegateKeyCommand(Add, CanAdd);
-            RemoveCommand = new DelegateKeyCommand<TEntityModel>(Remove, CanRemove)
-            {
-                Header = ControlResources.Remove,
-                ColorName = "Negative",
-                IconName = "CancelGeometry"
-            };
-            RemoveSelectedItemsCommand = new DelegateKeyCommand(Remove, CanRemove);
-            EditSelectedItemCommand = new DelegateKeyCommand(Edit, CanEdit);
-            EditCommand = new DelegateKeyCommand<TEntityModel>(Edit, CanEdit)
-            {
-                Header = ControlResources.Edit,
-                IconName = "EditPageGeometry"
-            };
-            OpenCommand = new DelegateKeyCommand<TEntityModel>(Open, CanOpen);
-
-            ItemButtonCommands.Add(EditCommand);
-
-            ItemContextMenuCommands.Add(RemoveCommand);
+            AddCommand = new DelegateCommand(Add, CanAdd);
+            RemoveCommand = new DelegateCommand<TEntityModel>(Remove, CanRemove);
+            RemoveSelectedItemsCommand = new DelegateCommand(Remove, CanRemove);
+            EditSelectedItemCommand = new DelegateCommand(Edit, CanEdit);
+            EditCommand = new DelegateCommand<TEntityModel>(Edit, CanEdit);
+            OpenCommand = new DelegateCommand<TEntityModel>(Open, CanOpen);
         }
 
         #endregion Initialization
