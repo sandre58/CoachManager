@@ -53,6 +53,7 @@
     <Compile Include="Aggregates\CountryFactory.cs" />
     <Compile Include="Aggregates\ContactFactory.cs" />
     <Compile Include="Aggregates\PlayerFactory.cs" />
+    <Compile Include="Aggregates\TrainingFactory.cs" />
     <Compile Include="Aggregates\SquadFactory.cs" />
     <Compile Include="Aggregates\SeasonFactory.cs" />
     <Compile Include="Aggregates\RosterFactory.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeasonModel.cs" />
     <Compile Include="SquadModel.cs" />
+    <Compile Include="TrainingModel.cs" />
     <Compile Include="UserModel.cs" />
   </ItemGroup>
   <ItemGroup>

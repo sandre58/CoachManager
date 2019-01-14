@@ -66,17 +66,7 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// <returns></returns>
         public int SaveRoster(RosterDto dto)
         {
-            var result = _crudDomainService.Save(dto, RosterFactory.CreateEntity, RosterFactory.UpdateEntity, x => _rosterDomainService.Validate(x));
-
-            if (result == 1)
-            {
-                if (!dto.Squads.Any())
-                {
-                    //result = _squadAppService.SaveSquad(SquadFactory.CreateDto(dto.Id, dto.Category.Label + " A"));
-                }
-            }
-
-            return result;
+            return _crudDomainService.Save(dto, RosterFactory.CreateEntity, RosterFactory.UpdateEntity, x => _rosterDomainService.Validate(x));
         }
 
         /// <inheritdoc />

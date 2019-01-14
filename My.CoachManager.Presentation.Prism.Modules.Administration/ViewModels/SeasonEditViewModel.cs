@@ -32,9 +32,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
         /// <summary>
         /// Save.
         /// </summary>
-        protected override bool SaveItemCore()
+        protected override int SaveItemCore()
         {
-            return _seasonService.SaveSeason(SeasonFactory.Get(Item, Mode == ScreenMode.Creation ? CrudStatus.Created : CrudStatus.Updated)) > 0;
+            return _seasonService.SaveSeason(SeasonFactory.Get(Item, Mode == ScreenMode.Creation ? CrudStatus.Created : CrudStatus.Updated));
         }
 
         /// <inheritdoc />

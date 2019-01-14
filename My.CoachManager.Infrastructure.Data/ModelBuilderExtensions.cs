@@ -494,9 +494,7 @@ namespace My.CoachManager.Infrastructure.Data
             var result = new List<User>
             {
                new User() {Id=1, Name = "Stéphane ANDRE (Home)", Login = "andre", Password = "qRBfE9MoPFs=", Mail = "andre.cs2i@gmail.com" },
-            new User() {Id=2, Name = "Stéphane ANDRE (Merial)", Login = "E0214719", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@merial.com" },
-            new User() {Id=3, Name = "Vincent SOURDEIX (BI)", Login = "E0268620", Password = "qRBfE9MoPFs=", Mail = "vincentsourdeix@test.fr" },
-            new User() {Id=4, Name = "Stéphane ANDRE (Modis)", Login = "stephane.andre", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@modis.com" }
+            new User() {Id=2, Name = "Stéphane ANDRE (Modis)", Login = "stephane.andre", Password = "qRBfE9MoPFs=", Mail = "stephane.andre@modis.com" }
             };
 
             return result;

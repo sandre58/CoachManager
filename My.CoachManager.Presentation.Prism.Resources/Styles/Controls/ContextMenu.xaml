@@ -446,6 +446,7 @@
                 <TextBlock Grid.Column="4"
                            Margin="{TemplateBinding Padding}"
                            Text="{TemplateBinding InputGestureText}"
+                           Foreground="{DynamicResource GrayForeground}"
                            Visibility="Collapsed" />
                 <Path Grid.Column="5"
                       Margin="4 0 0 0"
@@ -458,7 +459,7 @@
                    Focusable="False"
                    HorizontalOffset="5"
                    IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                   Placement="Left"
+                   Placement="Right"
                    PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
                    VerticalOffset="5">
                 <Grid>
@@ -548,7 +549,8 @@
                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                 <TextBlock Grid.Column="4"
                            Margin="{TemplateBinding Padding}"
-                           Text="{TemplateBinding InputGestureText}" />
+                           Text="{TemplateBinding InputGestureText}"
+                           Foreground="{DynamicResource GrayForeground}"/>
             </Grid>
         </Grid>
         <ControlTemplate.Triggers>

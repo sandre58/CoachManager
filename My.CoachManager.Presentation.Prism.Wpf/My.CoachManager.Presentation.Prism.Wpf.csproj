@@ -362,6 +362,10 @@
       <Project>{fe218964-5ef0-42eb-a7d1-2afeb44d5b01}</Project>
       <Name>My.CoachManager.Presentation.Prism.Modules.Roster</Name>
     </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Modules.Training\My.CoachManager.Presentation.Prism.Modules.Training.csproj">
+      <Project>{47814DE5-8433-40E3-9C2A-A7E5E1ECE74C}</Project>
+      <Name>My.CoachManager.Presentation.Prism.Modules.Training</Name>
+    </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Prism.Resources\My.CoachManager.Presentation.Prism.Resources.csproj">
       <Project>{2d290fd9-5b64-4af4-a295-2b4cde6eb330}</Project>
       <Name>My.CoachManager.Presentation.Prism.Resources</Name>

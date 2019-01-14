@@ -224,6 +224,7 @@
     <Compile Include="RosterDto.cs" />
     <Compile Include="RosterPlayerDto.cs" />
     <Compile Include="SquadDto.cs" />
+    <Compile Include="TrainingDto.cs" />
     <Compile Include="UserDto.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -88,13 +88,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\SquadResources.Designer.cs">
-      <DependentUpon>SquadResources.resx</DependentUpon>
+    <Compile Include="Resources\RosterResources.Designer.cs">
+      <DependentUpon>RosterResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\RosterResources.Designer.cs">
-      <DependentUpon>RosterResources.resx</DependentUpon>
+    <Compile Include="Resources\SquadResources.Designer.cs">
+      <DependentUpon>SquadResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -186,14 +186,14 @@
       <LastGenOutput>RosterPlayerResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\SquadResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>SquadResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\RosterResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RosterResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SquadResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SquadResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />

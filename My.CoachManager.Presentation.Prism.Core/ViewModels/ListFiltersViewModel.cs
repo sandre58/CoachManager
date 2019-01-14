@@ -212,7 +212,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         {
             FilterItems();
             RaisePropertyChanged(() => CountActiveFilters);
-            //ResetFiltersCommand?.RaiseCanExecuteChanged();
+            ResetFiltersCommand?.RaiseCanExecuteChanged();
         }
 
         /// <summary>

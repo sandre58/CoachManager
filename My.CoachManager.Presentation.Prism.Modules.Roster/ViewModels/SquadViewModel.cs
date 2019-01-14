@@ -18,6 +18,7 @@ using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using Prism.Commands;
 using System.Collections.Generic;
 using System.Linq;
+using My.CoachManager.Presentation.Prism.Modules.Core.ViewModels;
 using SquadResources = My.CoachManager.Presentation.Prism.Modules.Roster.Resources.SquadResources;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
@@ -154,12 +155,15 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 
                 if (Filters.AllowedFilters.First(x => x.Item1.Invoke().PropertyName == "SquadId").Item1.Invoke() is SquadsFilter squadFilter)
                 {
-                    Filters.AddFilter(squadFilter, PlayerResources.Squad);
-
-                    squadFilter.Values = new List<int>
+                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
                     {
-                        NavigationId
-                    };
+                        Filters.AddFilter(squadFilter, PlayerResources.Squad);
+
+                        squadFilter.Values = new List<int>
+                        {
+                            NavigationId
+                        };
+                    });
                 }
 
                 Parameters = new SquadParametersViewModel();
@@ -181,30 +185,25 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 
         #region Add
 
-        //protected override void Add()
-        //{
-        //    DialogManager.ShowSelectItemsDialog<SelectPlayersView>(dialog =>
-        //    {
-        //        var model = dialog.Content.DataContext as ISelectItemsViewModel<PlayerModel>;
-        //        if (dialog.Result == DialogResult.Ok)
-        //        {
-        //            if (model != null)
-        //            {
-        //                _rosterService.AddPlayers(Squad.Id, model.SelectedItems.Select(x => x.Id).ToArray());
+        /// <summary>
+        /// Add a new item.
+        /// </summary>
+        protected override void Add()
+        {
+            DialogManager.ShowEditDialog<PlayerEditView>(0, dialog =>
+            {
+                if (dialog.Result == DialogResult.Ok)
+                {
+                    if (dialog.Content.DataContext is PlayerEditViewModel model)
+                    {
+                        _rosterService.AddPlayers(Squad.Id, new[] {model.Item.Id});
+                        NotificationManager.ShowSuccess(string.Format(MessageResources.ItemsAdded, 1));
+                    }
+                }
 
-        //                NotificationManager.ShowSuccess(string.Format(MessageResources.ItemsAdded,
-        //                    model.SelectedItems.Count()));
-        //            }
-        //        }
-
-        //        OnAddCompleted(dialog.Result);
-        //    },
-        //    SelectionMode.Multiple,
-        //    Items.Select(x => new PlayerModel()
-        //    {
-        //        Id = x.PlayerId
-        //    }).ToList());
-        //}
+                OnAddCompleted(dialog.Result);
+            });
+        }
 
         /// <summary>
         /// Add existing players.

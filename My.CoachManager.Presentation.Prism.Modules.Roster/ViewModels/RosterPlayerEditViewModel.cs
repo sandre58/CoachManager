@@ -36,9 +36,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 
         #region Data
 
-        protected override bool SaveItemCore()
+        protected override int SaveItemCore()
         {
-            return _rosterService.UpdatePlayer(RosterFactory.Get(Item, Mode == ScreenMode.Creation ? CrudStatus.Created : CrudStatus.Updated)) > 0;
+            return _rosterService.UpdatePlayer(RosterFactory.Get(Item, Mode == ScreenMode.Creation ? CrudStatus.Created : CrudStatus.Updated));
         }
 
         protected override RosterPlayerModel LoadItemCore(int id)

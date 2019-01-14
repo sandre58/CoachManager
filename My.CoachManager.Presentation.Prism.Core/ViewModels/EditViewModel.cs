@@ -143,7 +143,8 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             try
             {
                 var result = SaveItemCore();
-                if (!result) _saveDataBackgroundWorker.Abort();
+                if (result == 0) _saveDataBackgroundWorker.Abort();
+                Item.Id = result;
             }
             catch (Exception exception)
             {
@@ -185,7 +186,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Save.
         /// </summary>
-        protected abstract bool SaveItemCore();
+        protected abstract int SaveItemCore();
 
         /// <summary>
         /// Before Save.

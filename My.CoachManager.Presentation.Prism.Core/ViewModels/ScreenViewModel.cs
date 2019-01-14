@@ -130,7 +130,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
                 }
                 else
                 {
-                    OnExceptionOccured(exception.InnerException);
+                    OnExceptionOccured(exception.InnerException ?? exception);
                 }
             }
         }

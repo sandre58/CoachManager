@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Extensions;
-using My.CoachManager.Presentation.Prism.Core.Enums;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
@@ -9,7 +8,7 @@ using My.CoachManager.Presentation.Prism.Modules.Administration.Resources;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
-using PlayerEditView = My.CoachManager.Presentation.Prism.Modules.Administration.Views.PlayerEditView;
+using PlayerEditView = My.CoachManager.Presentation.Prism.Modules.Core.Views.PlayerEditView;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Administration.ViewModels
 {

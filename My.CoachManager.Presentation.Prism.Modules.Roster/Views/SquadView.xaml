@@ -20,6 +20,15 @@
 
     <controls:WorkspaceView>
 
+        <parameters:ControlParameters.InputBindings>
+            <InputBindingCollection>
+                <KeyBinding Key="F5" Command="{Binding RefreshCommand}" />
+                <KeyBinding Key="N" Modifiers="Control" Command="{Binding AddCommand}" />
+                <KeyBinding Key="N" Modifiers="Control+Shift" Command="{Binding AddExistingPlayersCommand}" />
+                <KeyBinding Key="F" Modifiers="Control" Command="{Binding Filters.ShowFiltersCommand}" />
+            </InputBindingCollection>
+        </parameters:ControlParameters.InputBindings>
+
         <controls:ExtendedListView ItemsSource="{Binding Filters.Items}">
             <controls:ExtendedListView.View>
                 <controls:ExtendedGridView VisibleColumns="{Binding Parameters.DisplayedColumns}">
@@ -339,8 +348,8 @@
             <controls:DropDownCommandButton DockPanel.Dock="Right" Style="{StaticResource AddDropDownCommandButtonApplicationBarStyle}">
                 <controls:DropDownCommandButton.Submenu>
                     <controls:Submenu>
-                        <MenuItem Header="{x:Static resources:SquadResources.ExistingPlayers}" Icon="{StaticResource AddPeopleSeveralGeometry}" Command="{Binding AddExistingPlayersCommand}" />
-                        <MenuItem Header="{x:Static resources:SquadResources.NewPlayer}" Icon="{StaticResource AddPeopleGeometry}" Command="{Binding AddCommand}" />
+                        <MenuItem Header="{x:Static resources:SquadResources.ExistingPlayers}" Icon="{StaticResource AddPeopleSeveralGeometry}" Command="{Binding AddExistingPlayersCommand}" InputGestureText="Ctrl+Maj+N" />
+                        <MenuItem Header="{x:Static resources:SquadResources.NewPlayer}" Icon="{StaticResource AddPeopleGeometry}" Command="{Binding AddCommand}" InputGestureText="Ctrl+N" />
                     </controls:Submenu>
                 </controls:DropDownCommandButton.Submenu>
             </controls:DropDownCommandButton>

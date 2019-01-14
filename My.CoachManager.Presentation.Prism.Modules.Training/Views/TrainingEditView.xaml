@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="My.CoachManager.Presentation.Prism.Modules.Training.Views.TrainingEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:mvvm="http://prismlibrary.com/"
+             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Training.ViewModels"
+             mvvm:ViewModelLocator.AutoWireViewModel="True"
+             d:DataContext="{d:DesignInstance Type=viewModels:TrainingEditViewModel}"
+             d:DesignHeight="1000" d:DesignWidth="750">
+
+    <controls:WorkspaceView>
+
+    </controls:WorkspaceView>
+</UserControl>

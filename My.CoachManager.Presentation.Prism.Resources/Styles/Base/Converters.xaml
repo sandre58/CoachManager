@@ -38,6 +38,7 @@
     <converters:MultipleParametersConverter x:Key="MultipleParametersConverter" />
     <converters:EqualValuesToBooleanConverter x:Key="EqualValuesToBooleanConverter" />
     <converters:EqualValuesToVisibilityConverter x:Key="EqualValuesToVisibilityConverter" />
+    <converters:CalendarDayNameConverter x:Key="CalendarDayNameConverter" />
 
     <MenuScrollingVisibilityConverter x:Key="MenuScrollingVisibilityConverter" />
 </ResourceDictionary>

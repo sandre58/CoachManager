@@ -679,7 +679,7 @@
             </Style>
             <Style TargetType="{x:Type controls:DropDownButton}" BasedOn="{StaticResource IconDropDownButtonStyle}">
                 <Setter Property="Height" Value="17" />
-                <Setter Property="PopupPlacement" Value="Left" />
+                <Setter Property="PopupPlacement" Value="Right" />
                 <Setter Property="Margin" Value="{StaticResource DefaultHorizontalMargin}" />
                 <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource AccentForeground}" />
                 <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource AccentForeground}" />

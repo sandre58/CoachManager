@@ -98,12 +98,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressService.cs" />
+    <Compile Include="Interfaces\ITrainingService.cs" />
     <Compile Include="PositionService.cs" />
     <Compile Include="CategoryService.cs" />
     <Compile Include="Interfaces\IAddressService.cs" />
     <Compile Include="Interfaces\IPersonService.cs" />
     <Compile Include="Interfaces\IPositionService.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
+    <Compile Include="TrainingService.cs" />
     <Compile Include="SeasonService.cs" />
     <Compile Include="Interfaces\IRosterService.cs" />
     <Compile Include="RosterService.cs" />

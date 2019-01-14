@@ -1,11 +1,11 @@
-﻿namespace My.CoachManager.Presentation.Prism.Modules.Administration.Views
+﻿namespace My.CoachManager.Presentation.Prism.Modules.Training.Views
 {
     /// <summary>
     /// Logique d'interaction pour CategoryEditView.xaml
     /// </summary>
-    public partial class PlayerEditView
+    public partial class TrainingEditView
     {
-        public PlayerEditView()
+        public TrainingEditView()
         {
             InitializeComponent();
         }

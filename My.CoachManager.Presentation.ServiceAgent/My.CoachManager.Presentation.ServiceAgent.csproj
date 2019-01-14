@@ -117,6 +117,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\TrainingServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\UserServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -193,6 +198,7 @@
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.SeasonDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Seasons.SeasonDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.SquadDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.TrainingDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.UserDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Users.UserDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Users.UserDto1.datasource" />
@@ -275,6 +281,19 @@
     <None Include="Service References\SeasonServiceReference\SeasonService3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\TrainingServiceReference\TrainingService.wsdl" />
+    <None Include="Service References\TrainingServiceReference\TrainingService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TrainingServiceReference\TrainingService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TrainingServiceReference\TrainingService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TrainingServiceReference\TrainingService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\UserServiceReference\UserService.wsdl" />
     <None Include="Service References\UserServiceReference\UserService1.xsd">
       <SubType>Designer</SubType>
@@ -307,6 +326,7 @@
     <WCFMetadataStorage Include="Service References\PositionServiceReference\" />
     <WCFMetadataStorage Include="Service References\RosterServiceReference\" />
     <WCFMetadataStorage Include="Service References\SeasonServiceReference\" />
+    <WCFMetadataStorage Include="Service References\TrainingServiceReference\" />
     <WCFMetadataStorage Include="Service References\UserServiceReference\" />
   </ItemGroup>
   <ItemGroup>
@@ -410,6 +430,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\PositionServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TrainingServiceReference\TrainingService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TrainingServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TrainingServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TrainingServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

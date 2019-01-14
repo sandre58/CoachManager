@@ -410,15 +410,15 @@ namespace My.CoachManager.Presentation.Prism.Controls.Parameters
 
         public static readonly DependencyProperty InputBindingsProperty =
             DependencyProperty.RegisterAttached("InputBindings", typeof(InputBindingCollection), typeof(ControlParameters),
-                new FrameworkPropertyMetadata(new InputBindingCollection(),
-                    (sender, e) =>
-                    {
-                        var element = sender as UIElement;
-                        if (!(element != null)) return;
-                        element.InputBindings.Clear();
-                        element.InputBindings.AddRange((InputBindingCollection)e.NewValue);
-                    }));
+                new FrameworkPropertyMetadata(new InputBindingCollection(), OnInputBindingsChanged));
 
+        private static void OnInputBindingsChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            if (!(o is UIElement element)) return;
+
+            element.InputBindings.Clear();
+            element.InputBindings.AddRange((InputBindingCollection)e.NewValue);
+        }
         public static InputBindingCollection GetInputBindings(UIElement element)
         {
             return (InputBindingCollection)element.GetValue(InputBindingsProperty);

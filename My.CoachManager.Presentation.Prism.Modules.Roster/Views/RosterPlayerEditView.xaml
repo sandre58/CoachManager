@@ -12,6 +12,8 @@
              xmlns:views1="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Core.Views;assembly=My.CoachManager.Presentation.Prism.Modules.Core"
              xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Roster.Views"
              xmlns:strings1="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:behaviours="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Behaviours;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:RosterPlayerEditViewModel}"
              d:DesignHeight="1000" d:DesignWidth="750" MaxHeight="750">
@@ -20,6 +22,10 @@
         <controls:WorkspaceView.HeaderTemplate>
             <DataTemplate DataType="viewModels:RosterPlayerEditViewModel">
                 <Grid>
+
+                    <i:Interaction.Behaviors>
+                        <behaviours:FocusBehavior FocusElement="{Binding ElementName=FirstName}" />
+                    </i:Interaction.Behaviors>
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -44,10 +50,8 @@
                                 HorizontalAlignment="Center" FontSize="{StaticResource SmallFontSize}"
                                 Visibility="{Binding Item.Photo, Converter={StaticResource NullToVisibilityConverter}}" />
                     </Grid>
-                    <!--<TextBlock Grid.Column="1" Text="{Binding Item.FirstName}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />
-                    <TextBlock Grid.Column="2" Text="{Binding Item.LastName, Converter={StaticResource ToUpperConverter}}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />-->
-                    <TextBox Grid.Column="1" Text="{Binding Item.FirstName}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" FontSize="{StaticResource SmallHeaderFontSize}" FontWeight="Bold" />
-                    <TextBox Grid.Column="2" Text="{Binding Item.LastName}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" FontSize="{StaticResource SmallHeaderFontSize}" FontWeight="Bold" />
+                    <TextBox x:Name="FirstName" Grid.Column="1" Width="{StaticResource SmallLargeWidth}" Text="{Binding Item.FirstName}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" FontSize="{StaticResource SmallHeaderFontSize}" FontWeight="Bold" TabIndex="0" />
+                    <TextBox Grid.Column="2" Width="{StaticResource SmallLargeWidth}" Text="{Binding Item.LastName}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" FontSize="{StaticResource SmallHeaderFontSize}" FontWeight="Bold" TabIndex="1" />
                 </Grid>
             </DataTemplate>
         </controls:WorkspaceView.HeaderTemplate>
@@ -58,31 +62,31 @@
 
             <TabItem Header="{x:Static strings:RosterPlayerResources.Club}"  parameters:ControlParameters.Icon="{StaticResource HomeGeometry}">
                 <AdornerDecorator>
-                    <views:RosterPlayerClubEditView />
+                    <views:RosterPlayerClubEditView TabIndex="2" />
                 </AdornerDecorator>
             </TabItem>
 
             <TabItem Header="{x:Static strings:RosterPlayerResources.Positions}" parameters:ControlParameters.Icon="{StaticResource TargetGeometry}">
                 <AdornerDecorator>
-                    <views1:PlayerPositionsEditView />
+                    <views1:PlayerPositionsEditView TabIndex="3" />
                 </AdornerDecorator>
             </TabItem>
 
             <TabItem Header="{x:Static strings:RosterPlayerResources.IdCard}" parameters:ControlParameters.Icon="{StaticResource IdCardGeometry}">
                 <AdornerDecorator>
-                    <views1:PlayerIdCardEditView />
+                    <views1:PlayerIdCardEditView TabIndex="4" />
                 </AdornerDecorator>
             </TabItem>
 
             <TabItem Header="{x:Static strings:RosterPlayerResources.Morphology}" parameters:ControlParameters.Icon="{StaticResource MorphologyGeometry}">
                 <AdornerDecorator>
-                    <views1:PlayerMorphologyEditView />
+                    <views1:PlayerMorphologyEditView TabIndex="5" />
                 </AdornerDecorator>
             </TabItem>
 
             <TabItem Header="{x:Static strings:RosterPlayerResources.Contacts}" parameters:ControlParameters.Icon="{StaticResource ContactsGeometry}">
                 <AdornerDecorator>
-                    <views1:PlayerContactsEditView />
+                    <views1:PlayerContactsEditView TabIndex="6" />
                 </AdornerDecorator>
             </TabItem>
         </TabControl>

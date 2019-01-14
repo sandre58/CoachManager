@@ -67,6 +67,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\CalendarDayNameConverter.cs" />
     <Compile Include="Converters\EqualValuesToVisibilityConverter.cs" />
     <Compile Include="Converters\EqualValuesToBooleanConverter.cs" />
     <Compile Include="Converters\IsGreaterThanToVisibilityConverter.cs" />

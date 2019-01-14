@@ -133,6 +133,9 @@
     <Compile Include="Views\PlayerEditView.Positions.xaml.cs">
       <DependentUpon>PlayerEditView.Positions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PlayerEditView.xaml.cs">
+      <DependentUpon>PlayerEditView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SelectSquadsView.xaml.cs">
       <DependentUpon>SelectSquadsView.xaml</DependentUpon>
     </Compile>
@@ -192,6 +195,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\PlayerEditView.Positions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PlayerEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

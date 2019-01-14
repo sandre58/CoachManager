@@ -18,6 +18,7 @@ using My.CoachManager.Presentation.Prism.Modules.Administration;
 using My.CoachManager.Presentation.Prism.Modules.Common;
 using My.CoachManager.Presentation.Prism.Modules.Home;
 using My.CoachManager.Presentation.Prism.Modules.Roster;
+using My.CoachManager.Presentation.Prism.Modules.Training;
 using My.CoachManager.Presentation.Prism.Wpf.Services;
 using My.CoachManager.Presentation.Prism.Wpf.ViewModels;
 using My.CoachManager.Presentation.Prism.Wpf.Views;
@@ -28,6 +29,7 @@ using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.SeasonServiceReference;
+using My.CoachManager.Presentation.ServiceAgent.TrainingServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.UserServiceReference;
 using Prism.Logging;
 using Prism.Modularity;
@@ -89,6 +91,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf
             Container.RegisterInstance(typeof(IPersonService), ServiceClientFactory.Create<PersonServiceClient, IPersonService>());
             Container.RegisterInstance(typeof(IAddressService), ServiceClientFactory.Create<AddressServiceClient, IAddressService>());
             Container.RegisterInstance(typeof(IPositionService), ServiceClientFactory.Create<PositionServiceClient, IPositionService>());
+            Container.RegisterInstance(typeof(ITrainingService), ServiceClientFactory.Create<TrainingServiceClient, ITrainingService>());
 
             // Register Presentation Services
             Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
@@ -126,6 +129,12 @@ namespace My.CoachManager.Presentation.Prism.Wpf
                 InitializationMode = InitializationMode.WhenAvailable,
                 ModuleName = typeof(RosterModule).Name,
                 ModuleType = typeof(RosterModule).AssemblyQualifiedName
+            });
+            ModuleCatalog.AddModule(new ModuleInfo
+            {
+                InitializationMode = InitializationMode.WhenAvailable,
+                ModuleName = typeof(TrainingModule).Name,
+                ModuleType = typeof(TrainingModule).AssemblyQualifiedName
             });
             ModuleCatalog.AddModule(new ModuleInfo
             {
