@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using My.CoachManager.CrossCutting.Core.Extensions;
+﻿using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Core.Resources.Entities;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
@@ -18,6 +16,8 @@ using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using Prism.Commands;
+using System.Collections.Generic;
+using System.Linq;
 using SquadResources = My.CoachManager.Presentation.Prism.Modules.Roster.Resources.SquadResources;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
@@ -46,16 +46,31 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         public SquadModel Squad { get; set; }
 
         /// <summary>
-        /// Gets or sets model.
+        ///
         /// </summary>
-        public IEnumerable<SquadModel> OtherSquads { get; private set; }
+        public bool CanMoveToSquadSelectedItems => SelectedItems.Any() && Roster.Squads.Count > 1;
 
         /// <summary>
         /// Gets or sets command.
         /// </summary>
-        public DelegateCommand<int?> MoveSelectedPlayersInSquadCommand { get; set; }
+        public DelegateCommand AddExistingPlayersCommand { get; set; }
 
-        #endregion
+        /// <summary>
+        ///
+        /// </summary>
+        public List<SquadModel> SquadsOfSelectedItemsToMoving => Roster?.Squads.Where(squad => SelectedItems.Select(player => player.SquadId).Any(playerSquadId => playerSquadId != squad.Id)).ToList();
+
+        /// <summary>
+        /// Gets or sets command.
+        /// </summary>
+        public DelegateCommand<SquadModel> MoveSelectedPlayersInSquadCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets command.
+        /// </summary>
+        public DelegateCommand<List<object>> MovePlayerInSquadCommand { get; set; }
+
+        #endregion Members
 
         #region Constructors
 
@@ -86,7 +101,9 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         {
             base.InitializeCommand();
 
-            MoveSelectedPlayersInSquadCommand = new DelegateCommand<int?>(MoveSelectedPlayersInSquad, CanMoveSelectedPlayersInSquad);
+            MoveSelectedPlayersInSquadCommand = new DelegateCommand<SquadModel>(MoveSelectedPlayersInSquad, CanMoveSelectedPlayersInSquad);
+            MovePlayerInSquadCommand = new DelegateCommand<List<object>>(MovePlayerInSquad);
+            AddExistingPlayersCommand = new DelegateCommand(AddExistingPlayers);
         }
 
         #endregion Initialization
@@ -117,7 +134,6 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
                 var result = _rosterService.GetPlayers(Roster.Id);
 
                 Items = result.Select(RosterFactory.Get).ToItemsObservableCollection();
-                OtherSquads = Roster.Squads.Where(x => x.Id != Squad.Id).ToList();
             }
         }
 
@@ -157,67 +173,127 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         {
             base.OnLoadDataCompleted();
 
-            if(Squad != null)
-            Title = Squad.Name;
-
-
+            if (Squad != null)
+                Title = Squad.Name;
         }
 
         #endregion Data
 
         #region Add
 
-        protected override void Add()
+        //protected override void Add()
+        //{
+        //    DialogManager.ShowSelectItemsDialog<SelectPlayersView>(dialog =>
+        //    {
+        //        var model = dialog.Content.DataContext as ISelectItemsViewModel<PlayerModel>;
+        //        if (dialog.Result == DialogResult.Ok)
+        //        {
+        //            if (model != null)
+        //            {
+        //                _rosterService.AddPlayers(Squad.Id, model.SelectedItems.Select(x => x.Id).ToArray());
+
+        //                NotificationManager.ShowSuccess(string.Format(MessageResources.ItemsAdded,
+        //                    model.SelectedItems.Count()));
+        //            }
+        //        }
+
+        //        OnAddCompleted(dialog.Result);
+        //    },
+        //    SelectionMode.Multiple,
+        //    Items.Select(x => new PlayerModel()
+        //    {
+        //        Id = x.PlayerId
+        //    }).ToList());
+        //}
+
+        /// <summary>
+        /// Add existing players.
+        /// </summary>
+        protected void AddExistingPlayers()
         {
-
             DialogManager.ShowSelectItemsDialog<SelectPlayersView>(dialog =>
-            {
-                var model = dialog.Content.DataContext as ISelectItemsViewModel<PlayerModel>;
-                if (dialog.Result == DialogResult.Ok)
                 {
-                    if (model != null)
+                    var model = dialog.Content.DataContext as ISelectItemsViewModel<PlayerModel>;
+                    if (dialog.Result == DialogResult.Ok)
                     {
-                        _rosterService.AddPlayers(Squad.Id, model.SelectedItems.Select(x => x.Id).ToArray());
+                        if (model != null)
+                        {
+                            _rosterService.AddPlayers(Squad.Id, model.SelectedItems.Select(x => x.Id).ToArray());
 
-                        NotificationManager.ShowSuccess(string.Format(MessageResources.ItemsAdded,
-                            model.SelectedItems.Count()));
+                            NotificationManager.ShowSuccess(string.Format(MessageResources.ItemsAdded,
+                                model.SelectedItems.Count()));
+                        }
                     }
-                }
 
-                OnAddCompleted(dialog.Result);
-            },
-            SelectionMode.Multiple,
-            Items.Select(x => new PlayerModel()
-            {
-                Id = x.PlayerId
-            }).ToList());
+                    OnAddCompleted(dialog.Result);
+                },
+                SelectionMode.Multiple,
+                Items.Select(x => new PlayerModel()
+                {
+                    Id = x.PlayerId
+                }).ToList());
         }
 
         #endregion Add
-       
+
         #region MovePlayerInSquad
 
         /// <summary>
         /// Move selected Players in a squad.
         /// </summary>
-        /// <param name="squadId"></param>
-        protected void MoveSelectedPlayersInSquad(int? squadId)
+        /// <param name="squad"></param>
+        protected void MoveSelectedPlayersInSquad(SquadModel squad)
         {
-            if (squadId != null)
-                _rosterService.MovePlayersInSquad(squadId.Value, SelectedItems.Select(x => x.Id).ToArray());
-            Refresh();
+            if (squad != null)
+            {
+                _rosterService.MovePlayersInSquad(squad.Id, SelectedItems.Select(x => x.Id).ToArray());
+                NotificationManager.ShowSuccess(string.Format(MessageResources.MovingPlayersToSquad, SelectedItems.Count(), squad.Name));
+                Refresh();
+            }
         }
 
         /// <summary>
         /// Can move player in squad.
         /// </summary>
-        protected bool CanMoveSelectedPlayersInSquad(int? squadId)
+        protected bool CanMoveSelectedPlayersInSquad(SquadModel squadId)
         {
             return SelectedItems.Any();
-
         }
 
         #endregion MovePlayerInSquad
+
+        #region MovePlayerInSquad
+
+        /// <summary>
+        /// Move selected Players in a squad.
+        /// </summary>
+        /// <param name="values"></param>
+        protected void MovePlayerInSquad(List<object> values)
+        {
+            if (values != null && values.Count == 2)
+            {
+                if (values[0] is RosterPlayerModel player && values[1] is SquadModel squad)
+                {
+                    _rosterService.MovePlayersInSquad(squad.Id, new[] { player.Id });
+                    NotificationManager.ShowSuccess(string.Format(MessageResources.MovingPlayerToSquad, player.FullName, squad.Name));
+                    Refresh();
+                }
+            }
+        }
+
+        #endregion MovePlayerInSquad
+
+        #region Properties Changed
+
+        protected override void OnSelectionChanged()
+        {
+            base.OnSelectionChanged();
+
+            RaisePropertyChanged(() => CanMoveToSquadSelectedItems);
+            RaisePropertyChanged(() => SquadsOfSelectedItemsToMoving);
+        }
+
+        #endregion Properties Changed
 
         #endregion Methods
     }

@@ -126,6 +126,12 @@
   <data name="EditSquad" xml:space="preserve">
     <value>Editer l'équipe</value>
   </data>
+  <data name="ExistingPlayers" xml:space="preserve">
+    <value>Des Joueurs Existants</value>
+  </data>
+  <data name="NewPlayer" xml:space="preserve">
+    <value>Un Nouveau Joueur</value>
+  </data>
   <data name="NewSquad" xml:space="preserve">
     <value>Nouvelle équipe</value>
   </data>

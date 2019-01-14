@@ -142,7 +142,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MenuItemStyle}" />
 
     <ContextMenu x:Key="TextBoxContextMenuStyle" Style="{StaticResource ContextMenuStyle}">
@@ -256,10 +256,10 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <DataTemplate x:Key="IconTemplate">
         <controls:Icon Size="Custom" Height="15" Content="{Binding}" Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}}" />
-     </DataTemplate>
+    </DataTemplate>
 
     <ControlTemplate x:Key="{ComponentResourceKey ResourceId=SubmenuContent, TypeInTargetAssembly={x:Type FrameworkElement}}" TargetType="{x:Type ContentControl}">
         <Border Background="{DynamicResource Transparent}"
@@ -301,7 +301,7 @@
                    Focusable="False"
                    HorizontalOffset="1"
                    IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                   Placement="Bottom"
+                   Placement="Right"
                    PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
                    VerticalOffset="-1">
                 <Grid>
@@ -456,11 +456,11 @@
             <Popup x:Name="PART_Popup"
                    AllowsTransparency="True"
                    Focusable="False"
-                   HorizontalOffset="1"
+                   HorizontalOffset="5"
                    IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                   Placement="Right"
+                   Placement="Left"
                    PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
-                   VerticalOffset="-1">
+                   VerticalOffset="5">
                 <Grid>
                     <Rectangle x:Name="LayoutRoot" Fill="{TemplateBinding Background}" />
                     <ContentControl x:Name="SubDark"

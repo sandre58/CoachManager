@@ -1,8 +1,8 @@
-﻿using System.Windows;
+﻿using My.CoachManager.Presentation.Prism.Controls.SubMenus;
+using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using My.CoachManager.Presentation.Prism.Controls.SubMenus;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {

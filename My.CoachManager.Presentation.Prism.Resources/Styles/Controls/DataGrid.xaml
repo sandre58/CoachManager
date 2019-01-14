@@ -18,7 +18,6 @@
         <ResourceDictionary Source="Icon.xaml" />
         <ResourceDictionary Source="ToggleButton.xaml" />
         <ResourceDictionary Source="TextBox.xaml" />
-        <ResourceDictionary Source="DropDownButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- Buttons Style -->
@@ -300,7 +299,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 
     <!-- Row Header -->
     <Style x:Key="DataGridRowHeaderStyle" TargetType="{x:Type DataGridRowHeader}">

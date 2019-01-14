@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Application.Services.PersonModule;
 using My.CoachManager.Domain.AppModule.Services;
@@ -8,6 +6,8 @@ using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.RosterModule.Aggregate;
 using My.CoachManager.Domain.RosterModule.Services;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace My.CoachManager.Application.Services.RosterModule
 {
@@ -17,7 +17,7 @@ namespace My.CoachManager.Application.Services.RosterModule
     public class RosterAppService : IRosterAppService
     {
         #region ---- Fields ----
-        
+
         private readonly IRepository<Roster> _rosterRepository;
         private readonly IRepository<RosterPlayer> _playerRosterRepository;
 
@@ -40,9 +40,9 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// <param name="rosterDomainService"></param>
         /// <param name="playerAppService"></param>
         /// <param name="squadAppService"></param>
-        public RosterAppService(IRepository<Roster> rosterRepository, 
-            IRepository<RosterPlayer> playerRosterRepository, 
-            ICrudDomainService<Roster, RosterDto> crudDomainService, 
+        public RosterAppService(IRepository<Roster> rosterRepository,
+            IRepository<RosterPlayer> playerRosterRepository,
+            ICrudDomainService<Roster, RosterDto> crudDomainService,
             IRosterDomainService rosterDomainService,
             IPlayerAppService playerAppService,
             ISquadAppService squadAppService)
@@ -72,12 +72,11 @@ namespace My.CoachManager.Application.Services.RosterModule
             {
                 if (!dto.Squads.Any())
                 {
-                   //result = _squadAppService.SaveSquad(SquadFactory.CreateDto(dto.Id, dto.Category.Label + " A"));
+                    //result = _squadAppService.SaveSquad(SquadFactory.CreateDto(dto.Id, dto.Category.Label + " A"));
                 }
             }
 
             return result;
-
         }
 
         /// <inheritdoc />
@@ -213,7 +212,6 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// <returns></returns>
         public int UpdatePlayer(RosterPlayerDto dto)
         {
-
             var entity = _playerRosterRepository.GetEntity(dto.Id);
 
             dto.PlayerId = _playerAppService.SavePlayer(dto.Player);
@@ -226,7 +224,6 @@ namespace My.CoachManager.Application.Services.RosterModule
             dto.CrudStatus = CrudStatus.Unchanged;
 
             return entity.Id;
-
         }
 
         #endregion Methods

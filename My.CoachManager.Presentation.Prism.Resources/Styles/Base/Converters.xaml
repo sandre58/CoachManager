@@ -13,6 +13,7 @@
     <converters:ToFirstLetterUpperConverter x:Key="ToFirstLetterUpperConverter" />
     <converters:ToLowerConverter x:Key="ToLowerConverter" />
     <converters:IsGreaterThanConverter x:Key="IsGreaterThanConverter" />
+    <converters:IsGreaterThanToVisibilityConverter x:Key="IsGreaterThanToVisibilityConverter" />
     <converters:ThicknessToDoubleConverter x:Key="ThicknessToDoubleConverter" />
     <converters:CoefficientConverter x:Key="CoefficientConverter" />
     <converters:AnyToVisibilityConverter x:Key="AnyToVisibilityConverter" />
@@ -34,6 +35,9 @@
     <converters:ResizeModeMinMaxButtonVisibilityConverter x:Key="ResizeModeMinMaxButtonVisibilityConverter" />
     <converters:BackgroundToForegroundConverter x:Key="BackgroundToForegroundConverter" />
     <converters:SolidColorBrushToBrushConverter x:Key="SolidColorBrushToBrushConverter" />
+    <converters:MultipleParametersConverter x:Key="MultipleParametersConverter" />
+    <converters:EqualValuesToBooleanConverter x:Key="EqualValuesToBooleanConverter" />
+    <converters:EqualValuesToVisibilityConverter x:Key="EqualValuesToVisibilityConverter" />
 
     <MenuScrollingVisibilityConverter x:Key="MenuScrollingVisibilityConverter" />
 </ResourceDictionary>

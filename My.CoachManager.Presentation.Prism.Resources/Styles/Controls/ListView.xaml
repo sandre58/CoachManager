@@ -28,15 +28,6 @@
     <system:Double x:Key="SelectionColumnWidth">35</system:Double>
     <system:Double x:Key="ActionColumnWidth">80</system:Double>
 
-    <!-- ContextMenu -->
-    <Style x:Key="GridViewContextMenuStyle" TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
-        <Setter Property="Header" Value="{Binding Header}" />
-        <Setter Property="IsCheckable" Value="True" />
-        <Setter Property="IsChecked" Value="{Binding Converter={StaticResource VisibilityToBooleanConverter}, Mode=TwoWay, Path=Visibility}" />
-        <Setter Property="Visibility" Value="{Binding CanUserHideColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-        <Setter Property="StaysOpenOnClick" Value="True" />
-    </Style>
-
     <!-- Item Style -->
     <ControlTemplate x:Key="ListViewItemTemplate" TargetType="{x:Type controls:ExtendedListViewItem}">
         <Border x:Name="Border"
@@ -73,7 +64,7 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    
+
     <ControlTemplate  x:Key="DraggableListViewItemTemplate" TargetType="{x:Type controls:ExtendedListViewItem}">
         <Border x:Name="Border"
                             Background="{TemplateBinding Background}"
@@ -119,7 +110,6 @@
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                   Visibility="Collapsed" />
-
                         </SelectiveScrollingGrid>
 
                         <Grid dragAndDrop:DragViewer.Format="{TemplateBinding parameters:DragAndDropParameters.MoveDragFormat}"
@@ -285,9 +275,9 @@
                                     Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}" />
-                        
+
                         <!-- Header -->
-                                <ContentControl DockPanel.Dock="Left" x:Name="HeaderContent"
+                        <ContentControl DockPanel.Dock="Left" x:Name="HeaderContent"
                                                 Padding="{TemplateBinding Padding}"
                                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -297,14 +287,12 @@
                                                 ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                 Typography.Capitals="SmallCaps" />
-    </Grid>
-
-                       
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style TargetType="GridViewColumnHeader">
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
@@ -510,14 +498,27 @@
                                                 <Grid Grid.Row="0" Grid.Column="1"
                                               Width="{StaticResource ActionColumnWidth}"
                                               Visibility="{Binding View.CanUserHideColumns, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                                    <controls:DropDownMenuButton Style="{StaticResource IconDropDownMenuButtonStyle}"
+                                                    <controls:DropDownButton Style="{StaticResource IconDropDownButtonStyle}"
                                                                          Content="{StaticResource ColumnChooserGeometry}"
-                                                                         ItemsSource="{Binding View.Columns, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}"
-                                                                         ItemContainerStyle="{StaticResource GridViewContextMenuStyle}"
                                                                          ShowArrow="False"
+                                                                             StayOpen="True"
                                                                          HorizontalAlignment="Center" VerticalAlignment="Center"
                                                                          Height="30"
-                                                                         Visibility="{Binding CanOrder, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}" />
+                                                                         Visibility="{Binding CanOrder, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
+                                                        <controls:DropDownButton.Submenu>
+                                                            <controls:Submenu ItemsSource="{Binding View.Columns, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}">
+                                                                <controls:Submenu.ItemContainerStyle>
+                                                                    <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
+                                                                        <Setter Property="Header" Value="{Binding Header}" />
+                                                                        <Setter Property="IsCheckable" Value="True" />
+                                                                        <Setter Property="IsChecked" Value="{Binding Converter={StaticResource VisibilityToBooleanConverter}, Mode=TwoWay, Path=Visibility}" />
+                                                                        <Setter Property="Visibility" Value="{Binding CanUserHideColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                                        <Setter Property="StaysOpenOnClick" Value="True" />
+                                                                    </Style>
+                                                                </controls:Submenu.ItemContainerStyle>
+                                                            </controls:Submenu>
+                                                        </controls:DropDownButton.Submenu>
+                                                    </controls:DropDownButton>
                                                 </Grid>
                                             </Grid>
                                         </Border>
@@ -671,14 +672,15 @@
     <Style TargetType="{x:Type controls:ActionsListViewItemControl}">
         <Style.Resources>
             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonStyle}">
-                <Setter Property="Margin" Value="{StaticResource SmallHorizontalMargin}" />
+                <Setter Property="Margin" Value="{StaticResource DefaultHorizontalMargin}" />
                 <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource AccentForeground}" />
                 <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource AccentForeground}" />
                 <Setter Property="Focusable" Value="False" />
             </Style>
-            <Style TargetType="{x:Type controls:DropDownMenuButton}" BasedOn="{StaticResource IconDropDownMenuButtonStyle}">
+            <Style TargetType="{x:Type controls:DropDownButton}" BasedOn="{StaticResource IconDropDownButtonStyle}">
                 <Setter Property="Height" Value="17" />
-                <Setter Property="Margin" Value="{StaticResource SmallHorizontalMargin}" />
+                <Setter Property="PopupPlacement" Value="Left" />
+                <Setter Property="Margin" Value="{StaticResource DefaultHorizontalMargin}" />
                 <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource AccentForeground}" />
                 <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource AccentForeground}" />
                 <Setter Property="Focusable" Value="False" />
@@ -701,12 +703,11 @@
                         <CheckBox x:Name="Selection" IsChecked="{Binding IsSelected}" IsEnabled="{Binding IsSelectable}"
                               Style="{StaticResource SmallCircleCheckBoxStyle}"
                               Height="17" Margin="0"
-                              HorizontalAlignment="Center" VerticalAlignment="Center" 
+                              HorizontalAlignment="Center" VerticalAlignment="Center"
                               Visibility="{Binding ShowSelection, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ActionsListViewItemControl}}, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                         <!-- Actions -->
                         <ItemsPresenter x:Name="Actions" />
-
                     </StackPanel>
 
                     <ControlTemplate.Triggers>
@@ -729,12 +730,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
     </Style>
 
     <DataTemplate x:Key="SelectionListViewColumnTemplate" DataType="models:SelectModel">
         <StackPanel Orientation="Horizontal">
-            <controls:ActionsListViewItemControl x:Name="ActionsControl"/>
+            <controls:ActionsListViewItemControl x:Name="ActionsControl" />
         </StackPanel>
     </DataTemplate>
 
@@ -749,21 +749,20 @@
                         Command="{Binding DataContext.EditCommand,
                                 RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}"
                         Content="{StaticResource EditPageGeometry}"
-                        ToolTip="{x:Static strings:ControlResources.Edit}"/>
+                        ToolTip="{x:Static strings:ControlResources.Edit}" />
 
                 <!-- Menu -->
-                <controls:DropDownMenuButton x:Name="Menu" Content="{StaticResource ToolbarGeometry}" >
-                    <MenuItem Header="{x:Static strings:ControlResources.Remove}" Icon="{StaticResource TrashGeometry}" 
-                              Command="{Binding DataContext.RemoveCommand, ElementName=ListViewDataContext}"
-                              CommandParameter="{Binding}"
-                              parameters:ControlParameters.FocusBackground="{DynamicResource Negative}"/>
-                </controls:DropDownMenuButton>
-
+                <controls:DropDownButton x:Name="Menu" Content="{StaticResource ToolbarGeometry}">
+                    <controls:DropDownButton.Submenu>
+                        <controls:Submenu>
+                            <MenuItem Header="{x:Static strings:ControlResources.Remove}" Icon="{StaticResource TrashGeometry}"
+                                      Command="{Binding DataContext.RemoveCommand, ElementName=ListViewDataContext}"
+                                      CommandParameter="{Binding}"
+                                      parameters:ControlParameters.FocusBackground="{DynamicResource Negative}" />
+                        </controls:Submenu>
+                    </controls:DropDownButton.Submenu>
+                </controls:DropDownButton>
             </controls:ActionsListViewItemControl>
-
-
-
         </StackPanel>
     </DataTemplate>
-
 </ResourceDictionary>

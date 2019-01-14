@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
-                    xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls">
+                    xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
+                    xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Converters.xaml" />
@@ -35,10 +36,10 @@
                           RenderOptions.ClearTypeHint="{TemplateBinding RenderOptions.ClearTypeHint}"
                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        
+
                         <Grid Grid.Row="0" Height="{TemplateBinding ButtonDiameter}" Width="{TemplateBinding ButtonDiameter}" HorizontalAlignment="Center">
                             <Ellipse x:Name="PART_Decor"
                                      Fill="{TemplateBinding Background}"
@@ -46,7 +47,7 @@
                                      StrokeThickness="{Binding BorderThickness, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ThicknessToDoubleConverter}}"
                                      Stretch="Fill"
                                      HorizontalAlignment="Stretch"
-                                     VerticalAlignment="Stretch"/>
+                                     VerticalAlignment="Stretch" />
                             <ContentPresenter x:Name="PART_ContentHost"
                                               Grid.Row="0"
                                               Content="{TemplateBinding Content}"
@@ -56,9 +57,9 @@
                                               Margin="{TemplateBinding Padding}"
                                               RecognizesAccessKey="True"
                                               HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
+                                              VerticalAlignment="Center" />
                         </Grid>
-                        
+
                         <ContentPresenter x:Name="PART_HeaderHost"
                                           Grid.Row="1"
                                           Content="{TemplateBinding Header}"
@@ -67,7 +68,7 @@
                                           ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
                                           TextBlock.Foreground="{TemplateBinding parameters:ControlParameters.Foreground}"
                                           Margin="{TemplateBinding Padding}"
-                                          HorizontalAlignment="Center"/>
+                                          HorizontalAlignment="Center" />
                         <Popup x:Name="PART_Popup"
                                Grid.Row="1"
                                AllowsTransparency="True"
@@ -75,11 +76,11 @@
                                StaysOpen="False"
                                Placement="Custom"
                                VerticalOffset="-1"
-                               MaxHeight="{TemplateBinding MaxDropDownHeight}"/>
+                               MaxHeight="{TemplateBinding MaxDropDownHeight}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Header" Value="{x:Null}">
-                            <Setter TargetName="PART_HeaderHost" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="PART_HeaderHost" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -121,7 +122,6 @@
         <Setter Property="ButtonDiameter" Value="{StaticResource LargeDiameter}" />
     </Style>
 
-
     <Style x:Key="SmallColorDropDownCommandButtonStyle" TargetType="{x:Type controls:DropDownCommandButton}" BasedOn="{StaticResource ColorDropDownCommandButtonStyle}">
         <Setter Property="ButtonDiameter" Value="{StaticResource SmallDiameter}" />
     </Style>
@@ -134,5 +134,15 @@
     <Style x:Key="ColorDropDownCommandButtonApplicationBarStyle" TargetType="{x:Type controls:DropDownCommandButton}" BasedOn="{StaticResource ColorDropDownCommandButtonStyle}">
         <Setter Property="ButtonDiameter" Value="{StaticResource VeryLargeDiameter}" />
         <Setter Property="Visibility" Value="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+    </Style>
+
+    <Style x:Key="MovingToDropDownCommandButtonApplicationBarStyle" TargetType="{x:Type controls:DropDownCommandButton}" BasedOn="{StaticResource DropDownCommandButtonApplicationBarStyle}">
+        <Setter Property="Content" Value="{StaticResource MovingToGeometry}" />
+        <Setter Property="Header" Value="{x:Static strings:ControlResources.MovingTo}" />
+    </Style>
+
+    <Style x:Key="AddDropDownCommandButtonApplicationBarStyle" TargetType="{x:Type controls:DropDownCommandButton}" BasedOn="{StaticResource DropDownCommandButtonApplicationBarStyle}">
+        <Setter Property="Content" Value="{StaticResource AddGeometry}" />
+        <Setter Property="Header" Value="{x:Static strings:ControlResources.Add}" />
     </Style>
 </ResourceDictionary>

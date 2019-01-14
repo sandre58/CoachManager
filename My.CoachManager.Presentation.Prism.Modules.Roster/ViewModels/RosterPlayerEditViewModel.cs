@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using My.CoachManager.Application.Dtos;
+﻿using My.CoachManager.Application.Dtos;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;

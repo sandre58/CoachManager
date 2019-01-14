@@ -44,10 +44,11 @@
                                 HorizontalAlignment="Center" FontSize="{StaticResource SmallFontSize}"
                                 Visibility="{Binding Item.Photo, Converter={StaticResource NullToVisibilityConverter}}" />
                     </Grid>
-                    <TextBlock Grid.Column="1" Text="{Binding Item.FirstName}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />
-                    <TextBlock Grid.Column="2" Text="{Binding Item.LastName, Converter={StaticResource ToUpperConverter}}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />
+                    <!--<TextBlock Grid.Column="1" Text="{Binding Item.FirstName}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />
+                    <TextBlock Grid.Column="2" Text="{Binding Item.LastName, Converter={StaticResource ToUpperConverter}}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />-->
+                    <TextBox Grid.Column="1" Text="{Binding Item.FirstName}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" FontSize="{StaticResource SmallHeaderFontSize}" FontWeight="Bold" />
+                    <TextBox Grid.Column="2" Text="{Binding Item.LastName}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" FontSize="{StaticResource SmallHeaderFontSize}" FontWeight="Bold" />
                 </Grid>
-
             </DataTemplate>
         </controls:WorkspaceView.HeaderTemplate>
 

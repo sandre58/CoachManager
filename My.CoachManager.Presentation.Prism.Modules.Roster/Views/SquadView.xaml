@@ -12,6 +12,7 @@
              xmlns:columns="clr-namespace:My.CoachManager.Presentation.Prism.Controls.GridViews.Columns;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
              xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:resources="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Roster.Resources"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:SquadViewModel}"
@@ -22,61 +23,79 @@
         <controls:ExtendedListView ItemsSource="{Binding Filters.Items}">
             <controls:ExtendedListView.View>
                 <controls:ExtendedGridView VisibleColumns="{Binding Parameters.DisplayedColumns}">
-                    
+
                     <!-- Action -->
-                    <columns:ActionsGridViewColumn >
+                    <columns:ActionsGridViewColumn>
                         <columns:ActionsGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:RosterPlayerModel">
                                 <StackPanel Orientation="Horizontal">
-
-                                    <!-- It's for save ListView DataContext -->
-                                    <Grid x:Name="ListViewDataContext" DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}" Visibility="Collapsed" />
 
                                     <controls:ActionsListViewItemControl x:Name="ActionsControl">
                                         <Button CommandParameter="{Binding}"
                                                 Command="{Binding DataContext.EditCommand,
                                 RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}"
                                                 Content="{StaticResource EditPageGeometry}"
-                                                ToolTip="{x:Static strings:ControlResources.Edit}"/>
+                                                ToolTip="{x:Static strings:ControlResources.Edit}" />
 
                                         <!-- Menu -->
-                                        <controls:DropDownMenuButton x:Name="Menu" Content="{StaticResource ToolbarGeometry}" >
-                                            <MenuItem Header="{x:Static strings:ControlResources.MovingTo}" Icon="{StaticResource MovingToGeometry}" ItemsSource="{Binding DataContext.OtherSquads, ElementName=ListViewDataContext}">
-                                                <MenuItem.ItemContainerStyle>
-                                                    <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
-                                                        <Setter Property="Header" Value="{Binding Name}" />
-                                                        <Setter Property="Command" Value="{Binding DataContext.MovePlayerInSquad, ElementName=ListViewDataContext}" />
-                                                        <Setter Property="CommandParameter" Value="{Binding Id}" />
-                                                    </Style>
-                                                </MenuItem.ItemContainerStyle>
-                                            </MenuItem>
-                                            <MenuItem Header="{x:Static strings:ControlResources.Remove}" Icon="{StaticResource TrashGeometry}" 
-                                                      Command="{Binding DataContext.RemoveCommand, ElementName=ListViewDataContext}"
-                                                      CommandParameter="{Binding}"
-                                                      parameters:ControlParameters.FocusBackground="{DynamicResource Negative}"/>
-                                        </controls:DropDownMenuButton>
-
+                                        <controls:DropDownButton x:Name="Menu" Content="{StaticResource ToolbarGeometry}">
+                                            <controls:DropDownButton.Submenu>
+                                                <controls:Submenu>
+                                                    <MenuItem Header="{x:Static strings:ControlResources.MovingTo}" Icon="{StaticResource MovingToGeometry}"
+                                                              ItemsSource="{Binding DataContext.Roster.Squads, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}"
+                                                              Visibility="{Binding DataContext.Roster.Squads.Count, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}, Converter={StaticResource IsGreaterThanToVisibilityConverter}, ConverterParameter=1}">
+                                                        <MenuItem.ItemContainerStyle>
+                                                            <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
+                                                                <Setter Property="Header" Value="{Binding Name}" />
+                                                                <Setter Property="Command" Value="{Binding DataContext.MovePlayerInSquadCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}" />
+                                                                <Setter Property="CommandParameter">
+                                                                    <Setter.Value>
+                                                                        <MultiBinding Converter="{StaticResource MultipleParametersConverter}">
+                                                                            <MultiBinding.Bindings>
+                                                                                <Binding Path="DataContext" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListViewItem}}" />
+                                                                                <Binding />
+                                                                            </MultiBinding.Bindings>
+                                                                        </MultiBinding>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                                <Setter Property="Visibility">
+                                                                    <Setter.Value>
+                                                                        <MultiBinding Converter="{StaticResource EqualValuesToVisibilityConverter}" ConverterParameter="inverse">
+                                                                            <MultiBinding.Bindings>
+                                                                                <Binding Path="DataContext.SquadId" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListViewItem}}" />
+                                                                                <Binding Path="Id" />
+                                                                            </MultiBinding.Bindings>
+                                                                        </MultiBinding>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </Style>
+                                                        </MenuItem.ItemContainerStyle>
+                                                    </MenuItem>
+                                                    <MenuItem Header="{x:Static strings:ControlResources.Remove}" Icon="{StaticResource TrashGeometry}"
+                                                          Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}"
+                                                          CommandParameter="{Binding}"
+                                                          parameters:ControlParameters.FocusBackground="{DynamicResource Negative}" />
+                                                </controls:Submenu>
+                                            </controls:DropDownButton.Submenu>
+                                        </controls:DropDownButton>
                                     </controls:ActionsListViewItemControl>
-
-
-
                                 </StackPanel>
                             </DataTemplate>
                         </columns:ActionsGridViewColumn.CellTemplate>
-                        </columns:ActionsGridViewColumn>
+                    </columns:ActionsGridViewColumn>
 
                     <!-- Number -->
-                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.NumberAbbr}" 
-                                                     PropertyName="Number" Width="80" >
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.NumberAbbr}"
+                                                     PropertyName="Number" Width="80">
                         <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:RosterPlayerModel">
                                 <TextBlock Text="{Binding Number}" FontSize="{StaticResource HeaderFontSize}" FontFamily="{StaticResource NumberFontFamily}" HorizontalAlignment="Center" />
                             </DataTemplate>
                         </columns:ExtendedGridViewColumn.CellTemplate>
                     </columns:ExtendedGridViewColumn>
-                    
+
                     <!-- Photo -->
-                    <columns:ExtendedGridViewColumn 
+                    <columns:ExtendedGridViewColumn
                             PropertyName="Photo"  CanUserHideColumn="False" Width="100">
                         <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:RosterPlayerModel">
@@ -95,8 +114,8 @@
                     </columns:ExtendedGridViewColumn>
 
                     <!-- Name -->
-                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.LastName}" 
-                                                         PropertyName="LastName" CanUserHideColumn="False" Width="150" >
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.LastName}"
+                                                         PropertyName="LastName" CanUserHideColumn="False" Width="150">
                         <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:RosterPlayerModel">
                                 <StackPanel>
@@ -119,13 +138,13 @@
 
                     <!-- Birthdate -->
                     <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Birthdate}"
-                                                         PropertyName="Birthdate" Width="120" 
-                                                         DisplayMemberBinding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                                         PropertyName="Birthdate" Width="120"
+                                                         DisplayMemberBinding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}" />
 
                     <!-- Category -->
                     <columns:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.CategoryAbbr}"
                                                          PropertyName="Category" Width="90"
-                                                         DisplayMemberBinding="{Binding Category.Label}"/>
+                                                         DisplayMemberBinding="{Binding Category.Label}" />
 
                     <!-- Position -->
                     <columns:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.Position}"
@@ -147,8 +166,8 @@
 
                     <!-- License Number -->
                     <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.LicenseNumber}"
-                                                         PropertyName="LicenseNumber" Width="130" 
-                                                         DisplayMemberBinding="{Binding LicenseNumber, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0:# ### ### ###\}}"/>
+                                                         PropertyName="LicenseNumber" Width="130"
+                                                         DisplayMemberBinding="{Binding LicenseNumber, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0:# ### ### ###\}}" />
 
                     <!-- License state -->
                     <columns:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.LicenseState}"
@@ -186,8 +205,8 @@
 
                     <!-- FromDate -->
                     <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.FromDate}"
-                                                     PropertyName="FromDate" Width="110" 
-                                                     DisplayMemberBinding="{Binding FromDate, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                                     PropertyName="FromDate" Width="110"
+                                                     DisplayMemberBinding="{Binding FromDate, StringFormat={}{0:dd/MM/yyyy}}" />
 
                     <!-- Gender -->
                     <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Gender}"
@@ -234,20 +253,20 @@
 
                     <!-- Phone -->
                     <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Phone}"
-                                                         PropertyName="Phone" Width="130" >
+                                                         PropertyName="Phone" Width="130">
                         <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:RosterPlayerModel">
-                                <controls:HyperlinkButton Content="{Binding Phone, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0:00 00 00 00 00\}}"/>
+                                <controls:HyperlinkButton Content="{Binding Phone, Converter={StaticResource ToFormatConverter}, ConverterParameter=\{0:00 00 00 00 00\}}" />
                             </DataTemplate>
                         </columns:ExtendedGridViewColumn.CellTemplate>
                     </columns:ExtendedGridViewColumn>
 
                     <!-- Email -->
                     <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Email}"
-                                                         PropertyName="Email" Width="175" >
+                                                         PropertyName="Email" Width="175">
                         <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:RosterPlayerModel">
-                                <controls:HyperlinkButton Content="{Binding Email}"/>
+                                <controls:HyperlinkButton Content="{Binding Email}" />
                             </DataTemplate>
                         </columns:ExtendedGridViewColumn.CellTemplate>
                     </columns:ExtendedGridViewColumn>
@@ -312,30 +331,36 @@
                             </DataTemplate>
                         </columns:ExtendedGridViewColumn.CellTemplate>
                     </columns:ExtendedGridViewColumn>
-                    
                 </controls:ExtendedGridView>
-                </controls:ExtendedListView.View>
-            </controls:ExtendedListView>
+            </controls:ExtendedListView.View>
+        </controls:ExtendedListView>
 
         <controls:WorkspaceView.Commands>
-            <controls:CommandButton DockPanel.Dock="Right"  Style="{StaticResource AddCommandButtonApplicationBarStyle}" Command="{Binding AddCommand}" />
+            <controls:DropDownCommandButton DockPanel.Dock="Right" Style="{StaticResource AddDropDownCommandButtonApplicationBarStyle}">
+                <controls:DropDownCommandButton.Submenu>
+                    <controls:Submenu>
+                        <MenuItem Header="{x:Static resources:SquadResources.ExistingPlayers}" Icon="{StaticResource AddPeopleSeveralGeometry}" Command="{Binding AddExistingPlayersCommand}" />
+                        <MenuItem Header="{x:Static resources:SquadResources.NewPlayer}" Icon="{StaticResource AddPeopleGeometry}" Command="{Binding AddCommand}" />
+                    </controls:Submenu>
+                </controls:DropDownCommandButton.Submenu>
+            </controls:DropDownCommandButton>
             <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource RefreshCommandButtonApplicationBarStyle}" Command="{Binding RefreshCommand}" />
             <Separator DockPanel.Dock="Right" Style="{StaticResource VerticalSeparatorStyle}" />
             <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource EditCommandButtonApplicationBarStyle}" Command="{Binding EditSelectedItemCommand}" />
             <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource DeleteCommandButtonApplicationBarStyle}" Command="{Binding RemoveSelectedItemsCommand}" />
-            <controls:DropDownCommandButton DockPanel.Dock="Right" Content="{StaticResource MovingToGeometry}" Header="{x:Static strings:ControlResources.MovingTo}"  >
+            <controls:DropDownCommandButton DockPanel.Dock="Right" Style="{StaticResource MovingToDropDownCommandButtonApplicationBarStyle}" IsEnabled="{Binding CanMoveToSquadSelectedItems}">
                 <controls:DropDownCommandButton.Submenu>
-                    <controls:Submenu ItemsSource="{Binding OtherSquads}">
+                    <controls:Submenu ItemsSource="{Binding SquadsOfSelectedItemsToMoving}">
                         <controls:Submenu.ItemContainerStyle>
                             <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemStyle}">
                                 <Setter Property="Header" Value="{Binding Name}" />
                                 <Setter Property="Command" Value="{Binding DataContext.MoveSelectedPlayersInSquadCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:WorkspaceView}}}" />
-                                <Setter Property="CommandParameter" Value="{Binding Id}" />
+                                <Setter Property="CommandParameter" Value="{Binding}" />
                             </Style>
                         </controls:Submenu.ItemContainerStyle>
                     </controls:Submenu>
                 </controls:DropDownCommandButton.Submenu>
-                </controls:DropDownCommandButton>
+            </controls:DropDownCommandButton>
         </controls:WorkspaceView.Commands>
     </controls:WorkspaceView>
 </UserControl>

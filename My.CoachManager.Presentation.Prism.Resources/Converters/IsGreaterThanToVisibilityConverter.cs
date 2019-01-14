@@ -14,7 +14,7 @@ namespace My.CoachManager.Presentation.Prism.Resources.Converters
     [ValueConversion(typeof(float), typeof(bool))]
     [ValueConversion(typeof(double), typeof(bool))]
     [ValueConversion(typeof(decimal), typeof(bool))]
-    public sealed class IsGreaterThanConverter : IValueConverter
+    public sealed class IsGreaterThanToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -33,7 +33,7 @@ namespace My.CoachManager.Presentation.Prism.Resources.Converters
                 var successfulConverted = double.TryParse(argument, out comparand);
                 if (successfulConverted)
                 {
-                    return number > comparand;
+                    return number > comparand ? Visibility.Visible : Visibility.Collapsed;
                 }
 
                 Trace.TraceError("Invalid parameter. Parameter must be a number.");
@@ -44,7 +44,7 @@ namespace My.CoachManager.Presentation.Prism.Resources.Converters
                 (parameter is float) || (parameter is double) || (parameter is decimal))
             {
                 comparand = double.Parse(parameter.ToString());
-                return number > comparand;
+                return number > comparand ? Visibility.Visible : Visibility.Collapsed;
             }
 
             Trace.TraceError("Invalid parameter. Parameter must be a number.");

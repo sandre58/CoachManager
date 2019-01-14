@@ -1,26 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Practices.ServiceLocation;
+using My.CoachManager.Application.Dtos;
 using My.CoachManager.Presentation.Prism.Core.Commands;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.Enums;
 using My.CoachManager.Presentation.Prism.Core.Events;
+using My.CoachManager.Presentation.Prism.Core.Helpers;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
+using My.CoachManager.Presentation.Prism.Modules.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Modules.Core.Views;
+using My.CoachManager.Presentation.Prism.Modules.Roster.Views;
+using My.CoachManager.Presentation.Prism.Wpf.Resources;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Regions;
+using System.Collections.Generic;
 using System.Windows;
-using Microsoft.Practices.ServiceLocation;
-using My.CoachManager.Application.Dtos;
-using My.CoachManager.Presentation.Prism.Core.Enums;
-using My.CoachManager.Presentation.Prism.Core.Helpers;
-using My.CoachManager.Presentation.Prism.Modules.Core.ViewModels;
-using My.CoachManager.Presentation.Prism.Modules.Roster.Views;
-using My.CoachManager.Presentation.Prism.Wpf.Resources;
 
 namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
 {
@@ -283,7 +283,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
                 }
             },
             SelectionMode.Single,
-            new List<RosterModel> { 
+            new List<RosterModel> {
                 new RosterModel
                 {
                     Id = SettingsManager.GetRosterId()
@@ -299,7 +299,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
             return true;
         }
 
-        #endregion GoForward
+        #endregion SetRoster
 
         #region AddSquad
 
@@ -353,7 +353,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
             return true;
         }
 
-        #endregion AddSquad
+        #endregion EditSquad
 
         #region RemoveSquad
 
@@ -395,10 +395,10 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// <returns></returns>
         private bool CanRemoveSquad()
         {
-            return Roster.Squads.Count > 1;
+            return Roster != null && Roster.Squads.Count > 1;
         }
 
-        #endregion AddSquad
+        #endregion RemoveSquad
 
         #endregion Methods
     }

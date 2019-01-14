@@ -122,7 +122,6 @@
     <Compile Include="Datagrids\Columns\DataGridSelectColumn.cs" />
     <Compile Include="DialogWindow.cs" />
     <Compile Include="DropDownButton.cs" />
-    <Compile Include="DropDownMenuButton.cs" />
     <Compile Include="ExtendedDataGrid.cs" />
     <Compile Include="GridViews\Columns\ExtendedGridViewColumn.cs" />
     <Compile Include="Extensions\CommandBindingExtension.cs" />

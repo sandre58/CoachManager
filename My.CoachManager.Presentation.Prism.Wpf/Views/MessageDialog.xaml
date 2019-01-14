@@ -82,12 +82,11 @@
         </ScrollViewer>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal" Margin="{StaticResource VeryLargeMargin}">
-            <Button x:Name="YesButton" Width="{StaticResource MidSmallWidth}" Height="35" 
-                    Content="{x:Static strings:ControlResources.Yes}" 
+            <Button x:Name="YesButton" Width="{StaticResource MidSmallWidth}" Height="35"
+                    Content="{x:Static strings:ControlResources.Yes}"
                     Margin="{StaticResource DefaultMargin}"
                     Command="{Binding CloseCommand}"
-                    CommandParameter="{x:Static dialog:DialogResult.Yes}"
-                    >
+                    CommandParameter="{x:Static dialog:DialogResult.Yes}">
                 <Button.Visibility>
                     <Binding Path="Buttons" Converter="{StaticResource EnumToVisibilityConverter}">
                         <Binding.ConverterParameter>
@@ -109,12 +108,11 @@
                     </Binding>
                 </Button.IsDefault>
             </Button>
-            <Button Width="{StaticResource MidSmallWidth}" Height="35" 
-                    Content="{x:Static strings:ControlResources.No}" 
+            <Button Width="{StaticResource MidSmallWidth}" Height="35"
+                    Content="{x:Static strings:ControlResources.No}"
                     Margin="{StaticResource DefaultMargin}"
                     Command="{Binding CloseCommand}"
-                    CommandParameter="{x:Static dialog:DialogResult.No}"
-            >
+                    CommandParameter="{x:Static dialog:DialogResult.No}">
                 <Button.Visibility>
                     <Binding Path="Buttons" Converter="{StaticResource EnumToVisibilityConverter}">
                         <Binding.ConverterParameter>
@@ -135,12 +133,11 @@
                     </Binding>
                 </Button.IsCancel>
             </Button>
-            <Button  x:Name="OkButton" Width="{StaticResource MidSmallWidth}" Height="35" 
-                    Content="{x:Static strings:ControlResources.Ok}" 
+            <Button  x:Name="OkButton" Width="{StaticResource MidSmallWidth}" Height="35"
+                    Content="{x:Static strings:ControlResources.Ok}"
                     Margin="{StaticResource DefaultMargin}"
                     Command="{Binding CloseCommand}"
-                    CommandParameter="{x:Static dialog:DialogResult.Ok}"
-            >
+                    CommandParameter="{x:Static dialog:DialogResult.Ok}">
                 <Button.Visibility>
                     <Binding Path="Buttons" Converter="{StaticResource EnumToVisibilityConverter}">
                         <Binding.ConverterParameter>
@@ -162,12 +159,11 @@
                     </Binding>
                 </Button.IsDefault>
             </Button>
-            <Button Width="{StaticResource MidSmallWidth}" Height="35" 
-                    Content="{x:Static strings:ControlResources.Cancel}" 
+            <Button Width="{StaticResource MidSmallWidth}" Height="35"
+                    Content="{x:Static strings:ControlResources.Cancel}"
                     Margin="{StaticResource DefaultMargin}"
                     Command="{Binding CloseCommand}"
-                    CommandParameter="{x:Static dialog:DialogResult.Cancel}"
-            >
+                    CommandParameter="{x:Static dialog:DialogResult.Cancel}">
                 <Button.Visibility>
                     <Binding Path="Buttons" Converter="{StaticResource EnumToVisibilityConverter}">
                         <Binding.ConverterParameter>
@@ -189,15 +185,14 @@
                     </Binding>
                 </Button.IsCancel>
             </Button>
-            <Button Width="{StaticResource MidSmallWidth}" Height="35" 
-                    Content="{x:Static strings:ControlResources.Retry}" 
+            <Button Width="{StaticResource MidSmallWidth}" Height="35"
+                    Content="{x:Static strings:ControlResources.Retry}"
                     Margin="{StaticResource DefaultMargin}"
-                    Visibility="Hidden"
+                    Visibility="Collapsed"
                     IsDefault="False"
                     IsCancel="False"
                     Command="{Binding CloseCommand}"
-                    CommandParameter="{x:Static dialog:DialogResult.Retry}"
-            />
+                    CommandParameter="{x:Static dialog:DialogResult.Retry}" />
         </StackPanel>
     </Grid>
 </controls:DialogWindow>

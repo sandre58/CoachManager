@@ -67,6 +67,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\EqualValuesToVisibilityConverter.cs" />
+    <Compile Include="Converters\EqualValuesToBooleanConverter.cs" />
+    <Compile Include="Converters\IsGreaterThanToVisibilityConverter.cs" />
+    <Compile Include="Converters\MultipleParametersConverter.cs" />
     <Compile Include="Converters\AnyToBooleanConverter.cs" />
     <Compile Include="Converters\VerticalRowToHorizontalColumnPositionConverter.cs" />
     <Compile Include="Converters\SolidColorBrushToBrushConverter.cs" />

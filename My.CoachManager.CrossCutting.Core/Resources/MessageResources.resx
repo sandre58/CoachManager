@@ -150,6 +150,12 @@
   <data name="ModulesLoading" xml:space="preserve">
     <value>Chargement des modules</value>
   </data>
+  <data name="MovingPlayersToSquad" xml:space="preserve">
+    <value>{0} ont été déplacés en {1} avec succès.</value>
+  </data>
+  <data name="MovingPlayerToSquad" xml:space="preserve">
+    <value>{0} a été déplacé en {1} avec succès.</value>
+  </data>
   <data name="OrderSaved" xml:space="preserve">
     <value>L'ordre d'affichage des éléments a bien été sauvegardé.</value>
   </data>

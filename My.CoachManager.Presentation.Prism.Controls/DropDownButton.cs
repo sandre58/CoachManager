@@ -1,4 +1,7 @@
-﻿using System;
+﻿using My.CoachManager.Presentation.Prism.Controls.Buttons;
+using My.CoachManager.Presentation.Prism.Controls.CommandButtons;
+using My.CoachManager.Presentation.Prism.Controls.Helpers;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -11,9 +14,6 @@ using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using My.CoachManager.Presentation.Prism.Controls.Buttons;
-using My.CoachManager.Presentation.Prism.Controls.CommandButtons;
-using My.CoachManager.Presentation.Prism.Controls.Helpers;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
@@ -30,6 +30,71 @@ namespace My.CoachManager.Presentation.Prism.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DropDownButton), new FrameworkPropertyMetadata(typeof(DropDownButton)));
             EventManager.RegisterClassHandler(typeof(DropDownButton), MenuItem.ClickEvent, new RoutedEventHandler(OnMenuItemClick), true);
         }
+
+        public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register("Orientation", typeof(Orientation), typeof(DropDownButton), new FrameworkPropertyMetadata(Orientation.Horizontal, FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        /// <summary>
+        /// Gets or sets the dimension of children stacking.
+        /// </summary>
+        public Orientation Orientation
+        {
+            get { return (Orientation)GetValue(OrientationProperty); }
+            set { SetValue(OrientationProperty, value); }
+        }
+
+        #region ShowArrow
+
+        public static readonly DependencyProperty ShowArrowProperty = DependencyProperty.Register("ShowArrow", typeof(bool), typeof(DropDownButton), new UIPropertyMetadata(true));
+
+        public bool ShowArrow
+        {
+            get
+            {
+                return (bool)GetValue(ShowArrowProperty);
+            }
+            set
+            {
+                SetValue(ShowArrowProperty, value);
+            }
+        }
+
+        #endregion ShowArrow
+
+        #region StayOpen
+
+        public static readonly DependencyProperty StayOpenProperty = DependencyProperty.Register("StayOpen", typeof(bool), typeof(DropDownButton), new UIPropertyMetadata(false));
+
+        public bool StayOpen
+        {
+            get
+            {
+                return (bool)GetValue(StayOpenProperty);
+            }
+            set
+            {
+                SetValue(StayOpenProperty, value);
+            }
+        }
+
+        #endregion StayOpen
+
+        #region PopupPlacement
+
+        public static readonly DependencyProperty PopupPlacementProperty = DependencyProperty.Register("PopupPlacement", typeof(PlacementMode), typeof(DropDownButton), new UIPropertyMetadata(PlacementMode.Bottom));
+
+        public PlacementMode PopupPlacement
+        {
+            get
+            {
+                return (PlacementMode)GetValue(PopupPlacementProperty);
+            }
+            set
+            {
+                SetValue(PopupPlacementProperty, value);
+            }
+        }
+
+        #endregion PopupPlacement
 
         public static readonly DependencyProperty SubmenuProperty =
             DependencyProperty.Register("Submenu", typeof(Submenu), typeof(DropDownButton),
@@ -74,7 +139,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         private static void OnHasSubmenuChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-
             var instance = (DropDownButton)obj;
             instance.OnHasSubmenuChanged((bool)e.OldValue, (bool)e.NewValue);
         }
@@ -90,12 +154,10 @@ namespace My.CoachManager.Presentation.Prism.Controls
             }
         }
 
-
         public static readonly DependencyProperty IsDropDownOpenProperty =
             DependencyProperty.Register("IsDropDownOpen", typeof(bool), typeof(DropDownButton),
                                         new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                                                                       OnIsDropDownOpenChanged, CoerceIsDropDownOpen));
-
 
         [Bindable(true)]
         [Category("Appearance")]
@@ -108,11 +170,9 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         private static void OnIsDropDownOpenChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-
             var instance = (DropDownButton)obj;
             instance.OnIsDropDownOpenChanged((bool)e.OldValue, (bool)e.NewValue);
         }
-
 
         protected virtual void OnIsDropDownOpenChanged(bool oldIsDropDownOpen, bool newIsDropDownOpen)
         {
@@ -131,6 +191,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 case true:
                     VisualStateManager.GoToState(this, "DropDown", true);
                     break;
+
                 case false:
                     VisualStateManager.GoToState(this, "Normal", true);
                     break;
@@ -139,7 +200,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         private static object CoerceIsDropDownOpen(DependencyObject obj, object baseValue)
         {
-
             var instance = (DropDownButton)obj;
             return instance.CoerceIsDropDownOpen((bool)baseValue);
         }
@@ -149,11 +209,9 @@ namespace My.CoachManager.Presentation.Prism.Controls
             return HasSubmenu && baseValue;
         }
 
-
         [Category("Behavior")]
         [Description("Occurs when drop down is opened.")]
         public event EventHandler DropDownOpened;
-
 
         protected virtual void OnDropDownOpened(EventArgs e)
         {
@@ -174,11 +232,9 @@ namespace My.CoachManager.Presentation.Prism.Controls
             }
         }
 
-
         [Category("Behavior")]
         [Description("Occurs when drop down is closed.")]
         public event EventHandler DropDownClosed;
-
 
         protected virtual void OnDropDownClosed(EventArgs e)
         {
@@ -197,11 +253,9 @@ namespace My.CoachManager.Presentation.Prism.Controls
             }
         }
 
-
         public static readonly DependencyProperty DropDownDirectionProperty =
             DependencyProperty.Register("DropDownDirection", typeof(DropDownDirection), typeof(DropDownButton),
                                         new FrameworkPropertyMetadata(DropDownDirection.Up, FrameworkPropertyMetadataOptions.None));
-
 
         [Category("Layout")]
         [Description("The direction of the drop down.")]
@@ -211,11 +265,9 @@ namespace My.CoachManager.Presentation.Prism.Controls
             set { SetValue(DropDownDirectionProperty, value); }
         }
 
-
         public static readonly DependencyProperty MaxDropDownHeightProperty =
             DependencyProperty.Register("MaxDropDownHeight", typeof(double), typeof(DropDownButton),
-                                        new FrameworkPropertyMetadata(300d, FrameworkPropertyMetadataOptions.None));
-
+                                        new FrameworkPropertyMetadata(double.NaN, FrameworkPropertyMetadataOptions.None));
 
         [Bindable(true)]
         [Category("Layout")]
@@ -302,7 +354,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
         private static void OnMenuItemClick(object sender, RoutedEventArgs e)
         {
             var instance = sender as DropDownButton;
-            if (instance != null)
+            if (instance != null && !instance.StayOpen)
             {
                 instance.IsDropDownOpen = false;
             }
