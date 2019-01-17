@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using My.CoachManager.Presentation.Prism.Controls.GridViews.Columns;
-using My.CoachManager.Presentation.Prism.Core.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {

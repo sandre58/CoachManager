@@ -162,7 +162,13 @@
   <data name="RequiredFieldMessage" xml:space="preserve">
     <value>Le champ "{0}" est requis.</value>
   </data>
+  <data name="StartDateLessOrEqualsThanEndDateMessage" xml:space="preserve">
+    <value>La date de début doit être inférieure ou égale à la date de fin.</value>
+  </data>
   <data name="StartDateLessThanEndDateMessage" xml:space="preserve">
     <value>La date de début doit être inférieure à la date de fin.</value>
+  </data>
+  <data name="StartTimeLessThanEndTimeMessage" xml:space="preserve">
+    <value>L'heure de début doit être inférieure à l'heure de fin.</value>
   </data>
 </root>

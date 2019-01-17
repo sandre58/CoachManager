@@ -1,4 +1,6 @@
-﻿namespace My.CoachManager.Presentation.Prism.Core.Services
+﻿using System;
+
+namespace My.CoachManager.Presentation.Prism.Core.Services
 {
     /// <summary>
     /// Interface abstracting the interaction with toast notification.
@@ -24,5 +26,15 @@
         /// Save Roster Id.
         /// </summary>
         int GetRosterId();
+
+        /// <summary>
+        /// Save Roster Id.
+        /// </summary>
+       TimeSpan GetDefaultTrainingStartTime();
+
+        /// <summary>
+        /// Save Roster Id.
+        /// </summary>
+        TimeSpan GetDefaultTrainingDuration();
     }
 }

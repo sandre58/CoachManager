@@ -226,17 +226,17 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 if (SelectedDate == null)
                 {
                     // if already null, overwrite wrong data in textbox
-                    WriteValueToTextBox();
+                    WriteValueToTextBox(GetValueForTextBox());
                 }
                 SelectedDate = null;
             }
         }
 
-        protected override void WriteValueToTextBox()
+        protected override void WriteValueToTextBox( string value)
         {
             if (!_deactivateWriteValueToTextBox)
             {
-                base.WriteValueToTextBox();
+                base.WriteValueToTextBox(value);
             }
         }
 
@@ -291,7 +291,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
             dateTimePicker._deactivateWriteValueToTextBox = false;
 
-            dateTimePicker.WriteValueToTextBox();
+            dateTimePicker.WriteValueToTextBox(dateTimePicker.GetValueForTextBox());
         }
 
         private DateTime? GetSelectedDateTimeFromGui()

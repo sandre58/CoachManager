@@ -1,4 +1,5 @@
-﻿using My.CoachManager.Presentation.Prism.Core.Services;
+﻿using System;
+using My.CoachManager.Presentation.Prism.Core.Services;
 using Microsoft.Practices.ServiceLocation;
 
 namespace My.CoachManager.Presentation.Prism.Core.Manager
@@ -56,6 +57,22 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         public static int GetRosterId()
         {
             return SettingsService.GetRosterId();
+        }
+
+        /// <summary>
+        /// Save Roster Id.
+        /// </summary>
+        public static TimeSpan GetDefaultTrainingStartTime()
+        {
+            return SettingsService.GetDefaultTrainingStartTime();
+        }
+
+        /// <summary>
+        /// Save Roster Id.
+        /// </summary>
+        public static TimeSpan GetDefaultTrainingDuration()
+        {
+            return SettingsService.GetDefaultTrainingDuration();
         }
 
         #endregion Methods

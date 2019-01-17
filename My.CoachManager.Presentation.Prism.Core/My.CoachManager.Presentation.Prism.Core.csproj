@@ -119,6 +119,7 @@
     <Compile Include="Manager\DialogManager.cs" />
     <Compile Include="Manager\NotificationManager.cs" />
     <Compile Include="Models\Filters\BooleanFilter.cs" />
+    <Compile Include="Models\IAppointment.cs" />
     <Compile Include="Models\ISelectable.cs" />
     <Compile Include="Models\ReferenceModel.cs" />
     <Compile Include="Models\ModelBase.cs" />

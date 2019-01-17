@@ -29,8 +29,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Behaviours
 
         private void SetHasTextProperty()
         {
-            if (AssociatedObject.TemplatedParent != null)
-                AssociatedObject.TemplatedParent.SetValue(TextBoxParameters.HasTextProperty, AssociatedObject.Text.Length > 0);
+            AssociatedObject.TemplatedParent?.SetValue(TextBoxParameters.HasTextProperty, AssociatedObject.Text.Length > 0);
         }
     }
 }

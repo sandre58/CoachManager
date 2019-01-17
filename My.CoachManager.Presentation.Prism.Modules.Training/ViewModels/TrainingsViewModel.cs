@@ -1,6 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Extensions;
+using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
@@ -16,6 +20,15 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.ViewModels
         private readonly ITrainingService _trainingService;
 
         #endregion Fields
+
+        #region  Members
+
+        /// <summary>
+        /// Gets or sets selected Date.
+        /// </summary>
+        public IList<DateTime> SelectedDates { get; set; }
+
+        #endregion
 
         #region Constructors
 
@@ -56,6 +69,52 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.ViewModels
         }
 
         #endregion Data
+
+        #region Add
+
+        /// <summary>
+        /// Add a new item.
+        /// </summary>
+        protected override void Add()
+        {
+            if (SelectedDates != null && SelectedDates.Count > 1)
+            {
+                
+            } else if (SelectedDates != null && SelectedDates.Count == 1)
+            {
+                var view = ServiceLocator.Current.GetInstance<TrainingEditView>();
+
+                if (view.DataContext is TrainingEditViewModel model)
+                    {
+                        model.LoadId(0);
+                        model.DefaultDate = SelectedDates.First();
+                    }
+                DialogManager.ShowWorkspaceDialog(view, dialog =>
+                {
+                    OnAddCompleted(dialog.Result);
+                });
+            }
+        }
+
+        /// <summary>
+        /// Can add a new item.
+        /// </summary>
+        /// <returns></returns>
+        protected override bool CanAdd()
+        {
+            return Mode == ScreenMode.Read && !IsReadOnly && SelectedDates != null && SelectedDates.Any();
+        }
+
+        #endregion Add
+
+        #region PropertuChanged
+
+        protected void OnSelectedDatesChanged()
+        {
+            AddCommand.RaiseCanExecuteChanged();
+        }
+
+        #endregion
 
         #endregion Methods
     }

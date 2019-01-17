@@ -21,6 +21,7 @@
     <converters:BrushToColorConverter x:Key="BrushToColorConverter" />
     <converters:NotEqualsConverter x:Key="NotEqualsConverter" />
     <converters:NotEqualToVisibilityConverter x:Key="NotEqualToVisibilityConverter" />
+    <converters:EqualsConverter x:Key="EqualsConverter" />
     <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
     <converters:EnumToStringConverter x:Key="EnumToStringConverter" />
     <converters:EnumToIntegerConverter x:Key="EnumToIntegerConverter" />
@@ -39,6 +40,13 @@
     <converters:EqualValuesToBooleanConverter x:Key="EqualValuesToBooleanConverter" />
     <converters:EqualValuesToVisibilityConverter x:Key="EqualValuesToVisibilityConverter" />
     <converters:CalendarDayNameConverter x:Key="CalendarDayNameConverter" />
+    <converters:ClockDegreeConverter x:Key="ClockDegreeConverter" TotalParts="60" />
+    <converters:ClockDegreeConverter x:Key="HourDegreeConverter" TotalParts="12" />
+    <converters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter" />
+    <converters:MathAddConverter x:Key="MathAddConverter" />
+    <converters:MathDivideConverter x:Key="MathDivideConverter" />
+    <converters:MathMultiplyConverter x:Key="MathMultiplyConverter" />
+    <converters:MathSubtractConverter x:Key="MathSubtractConverter" />
 
     <MenuScrollingVisibilityConverter x:Key="MenuScrollingVisibilityConverter" />
 </ResourceDictionary>

@@ -6,14 +6,35 @@
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Training.ViewModels"
+             xmlns:schedulers="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Schedulers;assembly=My.CoachManager.Presentation.Prism.Controls"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:TrainingsViewModel}"
              d:DesignHeight="500" d:DesignWidth="800">
 
-    <controls:WorkspaceView>
+    <controls:WorkspaceView HeaderTemplate="{x:Null}">
         <Grid>
-            <Calendar />
+            <controls:Scheduler ItemsSource="{Binding Items}" SelectedDates="{Binding SelectedDates, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionMode="MultipleRange" >
+                <controls:Scheduler.SchedulerDayStyle>
+                    <Style BasedOn="{StaticResource SchedulerDayStyle}" TargetType="{x:Type controls:SchedulerDay}">
+                        <Setter Property="ItemContainerStyle">
+                            <Setter.Value>
+                                <Style TargetType="{x:Type schedulers:SchedulerAppointment}" BasedOn="{StaticResource {x:Type schedulers:SchedulerAppointment}}">
+                                    <Setter Property="Color" Value="{DynamicResource Positive}" />
+                                    <Setter Property="Command" Value="{Binding DataContext.OpenCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:WorkspaceView}}}" />
+                                    <Setter Property="CommandParameter" Value="{Binding}" />
+                                </Style>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </controls:Scheduler.SchedulerDayStyle>
+                </controls:Scheduler>
         </Grid>
+
+        <controls:WorkspaceView.Commands>
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource RefreshCommandButtonApplicationBarStyle}" Command="{Binding RefreshCommand}" />
+            <Separator DockPanel.Dock="Right" Style="{StaticResource VerticalSeparatorStyle}" />
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource AddCommandButtonApplicationBarStyle}" Command="{Binding AddCommand}" />
+        </controls:WorkspaceView.Commands>
     </controls:WorkspaceView>
 </UserControl>

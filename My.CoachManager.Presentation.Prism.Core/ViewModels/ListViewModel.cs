@@ -15,7 +15,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using My.CoachManager.CrossCutting.Core.Resources;
-using My.CoachManager.Presentation.Prism.Core.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {

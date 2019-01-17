@@ -68,11 +68,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\CalendarDayNameConverter.cs" />
+    <Compile Include="Converters\ClockDegreeConverter.cs" />
     <Compile Include="Converters\EqualValuesToVisibilityConverter.cs" />
     <Compile Include="Converters\EqualValuesToBooleanConverter.cs" />
     <Compile Include="Converters\IsGreaterThanToVisibilityConverter.cs" />
+    <Compile Include="Converters\MarkupConverter.cs" />
+    <Compile Include="Converters\MathConverter.cs" />
     <Compile Include="Converters\MultipleParametersConverter.cs" />
     <Compile Include="Converters\AnyToBooleanConverter.cs" />
+    <Compile Include="Converters\EqualsConverter.cs" />
+    <Compile Include="Converters\TimeSpanToStringConverter.cs" />
     <Compile Include="Converters\VerticalRowToHorizontalColumnPositionConverter.cs" />
     <Compile Include="Converters\SolidColorBrushToBrushConverter.cs" />
     <Compile Include="Converters\IdNavigationParameterConverter.cs" />
@@ -612,6 +617,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\Base\Brushes.Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls\TimePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls\Scheduler.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

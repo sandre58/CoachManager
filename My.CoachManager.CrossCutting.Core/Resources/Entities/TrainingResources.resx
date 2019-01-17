@@ -117,19 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
   <data name="EndDate" xml:space="preserve">
     <value>Fin</value>
+  </data>
+  <data name="EndTime" xml:space="preserve">
+    <value>Heure de Fin</value>
   </data>
   <data name="IsCancelled" xml:space="preserve">
     <value>Est annulé</value>
   </data>
   <data name="Place" xml:space="preserve">
-    <value>Nom</value>
+    <value>Lieu</value>
   </data>
   <data name="Roster" xml:space="preserve">
     <value>Effectif</value>
   </data>
   <data name="StartDate" xml:space="preserve">
     <value>Début</value>
+  </data>
+  <data name="StartTime" xml:space="preserve">
+    <value>Heure de début</value>
   </data>
 </root>

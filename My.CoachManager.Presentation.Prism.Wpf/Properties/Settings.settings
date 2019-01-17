@@ -20,5 +20,11 @@
     <Setting Name="DefaultMenu" Type="System.String" Scope="User">
       <Value Profile="(Default)">red</Value>
     </Setting>
+    <Setting Name="DefaultTrainingStartTime" Type="System.String" Scope="User">
+      <Value Profile="(Default)">17:30</Value>
+    </Setting>
+    <Setting Name="DefaultTrainingDuration" Type="System.String" Scope="User">
+      <Value Profile="(Default)">01:30</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

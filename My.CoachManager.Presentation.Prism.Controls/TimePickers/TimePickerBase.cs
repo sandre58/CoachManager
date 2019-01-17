@@ -25,6 +25,12 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
     [TemplatePart(Name = ElementMinutePicker, Type = typeof(Selector))]
     [TemplatePart(Name = ElementAmPmSwitcher, Type = typeof(Selector))]
     [TemplatePart(Name = ElementTextBox, Type = typeof(DatePickerTextBox))]
+    [TemplatePart(Name = ElementUpHours, Type = typeof(ButtonBase))]
+    [TemplatePart(Name = ElementDownHours, Type = typeof(ButtonBase))]
+    [TemplatePart(Name = ElementDownMinutes, Type = typeof(ButtonBase))]
+    [TemplatePart(Name = ElementUpMinutes, Type = typeof(ButtonBase))]
+    [TemplatePart(Name = ElementDownSeconds, Type = typeof(ButtonBase))]
+    [TemplatePart(Name = ElementUpSeconds, Type = typeof(ButtonBase))]
     public abstract class TimePickerBase : Control
     {
         public static readonly DependencyProperty SourceHoursProperty = DependencyProperty.Register(
@@ -69,7 +75,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
             "Culture",
             typeof(CultureInfo),
             typeof(TimePickerBase),
-            new PropertyMetadata(null, OnCultureChanged));
+            new PropertyMetadata(CultureInfo.CurrentCulture, OnCultureChanged));
 
         public static readonly DependencyProperty PickerVisibilityProperty = DependencyProperty.Register(
             "PickerVisibility",
@@ -99,6 +105,12 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
         private const string ElementSecondHand = "PART_SecondHand";
         private const string ElementSecondPicker = "PART_SecondPicker";
         private const string ElementTextBox = "PART_TextBox";
+        private const string ElementUpHours = "PART_UpHours";
+        private const string ElementDownHours = "PART_DownHours";
+        private const string ElementUpMinutes = "PART_UpMinutes";
+        private const string ElementDownMinutes = "PART_DownMinutes";
+        private const string ElementUpSeconds = "PART_UpSeconds";
+        private const string ElementDownSeconds = "PART_DownSeconds";
 
         #region Do not change order of fields inside this region
 
@@ -172,6 +184,12 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
         private UIElement _secondHand;
         private Selector _secondInput;
         protected DatePickerTextBox TextBox;
+        private ButtonBase _buttonUpHours;
+        private ButtonBase _buttonDownHours;
+        private ButtonBase _buttonUpMinutes;
+        private ButtonBase _buttonDownMinutes;
+        private ButtonBase _buttonUpSeconds;
+        private ButtonBase _buttonDownSeconds;
 
         static TimePickerBase()
         {
@@ -191,8 +209,8 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
         /// </summary>
         public event EventHandler<TimePickerBaseSelectionChangedEventArgs<TimeSpan?>> SelectedTimeChanged
         {
-            add { AddHandler(SelectedTimeChangedEvent, value); }
-            remove { RemoveHandler(SelectedTimeChangedEvent, value); }
+            add => AddHandler(SelectedTimeChangedEvent, value);
+            remove => RemoveHandler(SelectedTimeChangedEvent, value);
         }
 
         /// <summary>
@@ -202,8 +220,8 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
         [DefaultValue(null)]
         public CultureInfo Culture
         {
-            get { return (CultureInfo)GetValue(CultureProperty); }
-            set { SetValue(CultureProperty, value); }
+            get => (CultureInfo)GetValue(CultureProperty);
+            set => SetValue(CultureProperty, value);
         }
 
         /// <summary>
@@ -223,7 +241,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
                     return (TimePartVisibility)value;
                 return default(TimePartVisibility);
             }
-            set { SetValue(HandVisibilityProperty, value); }
+            set => SetValue(HandVisibilityProperty, value);
         }
 
         /// <summary>
@@ -236,7 +254,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
                 var value = GetValue(IsDatePickerVisibleProperty);
                 return value != null && (bool)value;
             }
-            protected set { SetValue(IsDatePickerVisiblePropertyKey, value); }
+            protected set => SetValue(IsDatePickerVisiblePropertyKey, value);
         }
 
         /// <summary>
@@ -258,7 +276,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
                 var value = GetValue(IsClockVisibleProperty);
                 return value != null && (bool)value;
             }
-            set { SetValue(IsClockVisibleProperty, value); }
+            set => SetValue(IsClockVisibleProperty, value);
         }
 
         /// <summary>
@@ -273,7 +291,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
                 var value = GetValue(IsDropDownOpenProperty);
                 return value != null && (bool)value;
             }
-            set { SetValue(IsDropDownOpenProperty, value); }
+            set => SetValue(IsDropDownOpenProperty, value);
         }
 
         /// <summary>
@@ -289,7 +307,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
                 var value = GetValue(IsReadOnlyProperty);
                 return value != null && (bool)value;
             }
-            set { SetValue(IsReadOnlyProperty, value); }
+            set => SetValue(IsReadOnlyProperty, value);
         }
 
         /// <summary>
@@ -309,7 +327,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
                     return (TimePartVisibility)value;
                 return default(TimePartVisibility);
             }
-            set { SetValue(PickerVisibilityProperty, value); }
+            set => SetValue(PickerVisibilityProperty, value);
         }
 
         /// <summary>
@@ -320,8 +338,8 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
         /// </returns>
         public TimeSpan? SelectedTime
         {
-            get { return (TimeSpan?)GetValue(SelectedTimeProperty); }
-            set { SetValue(SelectedTimeProperty, value); }
+            get => (TimeSpan?)GetValue(SelectedTimeProperty);
+            set => SetValue(SelectedTimeProperty, value);
         }
 
         /// <summary>
@@ -335,9 +353,11 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
         [Category("Common")]
         public IEnumerable<int> SourceHours
         {
-            get { return (IEnumerable<int>)GetValue(SourceHoursProperty); }
-            set { SetValue(SourceHoursProperty, value); }
+            get => (IEnumerable<int>)GetValue(SourceHoursProperty);
+            set => SetValue(SourceHoursProperty, value);
         }
+
+        public int MaxHours => SourceHours.Max();
 
         /// <summary>
         ///     Gets or sets a collection used to generate the content for selecting the minutes.
@@ -349,9 +369,11 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
         [Category("Common")]
         public IEnumerable<int> SourceMinutes
         {
-            get { return (IEnumerable<int>)GetValue(SourceMinutesProperty); }
-            set { SetValue(SourceMinutesProperty, value); }
+            get => (IEnumerable<int>)GetValue(SourceMinutesProperty);
+            set => SetValue(SourceMinutesProperty, value);
         }
+
+        public int MaxMinutes => SourceMinutes.Max();
 
         /// <summary>
         ///     Gets or sets a collection used to generate the content for selecting the seconds.
@@ -363,29 +385,22 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
         [Category("Common")]
         public IEnumerable<int> SourceSeconds
         {
-            get { return (IEnumerable<int>)GetValue(SourceSecondsProperty); }
-            set { SetValue(SourceSecondsProperty, value); }
+            get => (IEnumerable<int>)GetValue(SourceSecondsProperty);
+            set => SetValue(SourceSecondsProperty, value);
         }
+
+        public int MaxSeconds => SourceSeconds.Max();
 
         /// <summary>
         ///     Gets a value indicating whether the <see cref="DateTimeFormatInfo.AMDesignator" /> that is specified by the
         ///     <see cref="CultureInfo" />
         ///     set by the <see cref="Culture" /> (<see cref="FrameworkElement.Language" /> if null) has not a value.
         /// </summary>
-        public bool IsMilitaryTime
-        {
-            get { return string.IsNullOrEmpty(SpecificCultureInfo.DateTimeFormat.AMDesignator); }
-        }
+        public bool IsMilitaryTime => string.IsNullOrEmpty(SpecificCultureInfo.DateTimeFormat.AMDesignator);
 
-        protected internal Popup Popup
-        {
-            get { return _popup; }
-        }
+        protected internal Popup Popup => _popup;
 
-        protected CultureInfo SpecificCultureInfo
-        {
-            get { return Culture ?? Language.GetSpecificCulture(); }
-        }
+        protected CultureInfo SpecificCultureInfo => Culture ?? Language.GetSpecificCulture();
 
         /// <summary>
         ///     When overridden in a derived class, is invoked whenever application code or internal processes call
@@ -407,12 +422,18 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
             _minuteHand = GetTemplateChild(ElementMinuteHand) as FrameworkElement;
             _secondHand = GetTemplateChild(ElementSecondHand) as FrameworkElement;
             TextBox = GetTemplateChild(ElementTextBox) as DatePickerTextBox;
+            _buttonDownHours = GetTemplateChild(ElementDownHours) as ButtonBase;
+            _buttonDownMinutes = GetTemplateChild(ElementDownMinutes) as ButtonBase;
+            _buttonDownSeconds = GetTemplateChild(ElementDownSeconds) as ButtonBase;
+            _buttonUpHours = GetTemplateChild(ElementUpHours) as ButtonBase;
+            _buttonUpMinutes = GetTemplateChild(ElementUpMinutes) as ButtonBase;
+            _buttonUpSeconds = GetTemplateChild(ElementUpSeconds) as ButtonBase;
 
             SetHandVisibility(HandVisibility);
             SetPickerVisibility(PickerVisibility);
 
             SetHourPartValues(SelectedTime.GetValueOrDefault());
-            WriteValueToTextBox();
+            WriteValueToTextBox(GetValueForTextBox());
 
             SetDefaultTimeOfDayValues();
             SubscribeEvents();
@@ -422,10 +443,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
 
         protected virtual void ApplyBindings()
         {
-            if (Popup != null)
-            {
-                Popup.SetBinding(Popup.IsOpenProperty, GetBinding(IsDropDownOpenProperty));
-            }
+            Popup?.SetBinding(Popup.IsOpenProperty, GetBinding(IsDropDownOpenProperty));
         }
 
         protected virtual void ApplyCulture()
@@ -468,7 +486,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
             var value = DateTime.MinValue + SelectedTime;
             if (value != null)
             {
-                var valueForTextBox = value.Value.ToString(string.Intern(SpecificCultureInfo.DateTimeFormat.LongTimePattern), SpecificCultureInfo);
+                var valueForTextBox = value.Value.ToString(string.Intern(SpecificCultureInfo.DateTimeFormat.ShortTimePattern), SpecificCultureInfo);
                 return valueForTextBox;
             }
             return string.Empty;
@@ -486,7 +504,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
                 if (SelectedTime == null)
                 {
                     // if already null, overwrite wrong data in textbox
-                    WriteValueToTextBox();
+                    WriteValueToTextBox(GetValueForTextBox());
                 }
                 SelectedTime = null;
             }
@@ -523,6 +541,66 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
                 TextBox.TextChanged += OnTextChanged;
                 TextBox.LostFocus += InternalOnTextBoxLostFocus;
             }
+
+            if (_buttonUpHours != null)
+            {
+                _buttonUpHours.Click += _buttonUpHours_Click;
+            }
+
+            if (_buttonUpSeconds != null)
+            {
+                _buttonUpSeconds.Click += _buttonUpSeconds_Click;
+            }
+
+            if (_buttonUpMinutes != null)
+            {
+                _buttonUpMinutes.Click += _buttonUpMinutes_Click;
+            }
+
+            if (_buttonDownHours != null)
+            {
+                _buttonDownHours.Click += _buttonDownHours_Click;
+            }
+
+            if (_buttonDownMinutes != null)
+            {
+                _buttonDownMinutes.Click += _buttonDownMinutes_Click;
+            }
+
+            if (_buttonDownSeconds != null)
+            {
+                _buttonDownSeconds.Click += _buttonDownSeconds_Click;
+            }
+        }
+
+        private void _buttonUpHours_Click(object sender, RoutedEventArgs e)
+        {
+            IncrementSelector(_hourInput);
+        }
+
+        private void _buttonDownHours_Click(object sender, RoutedEventArgs e)
+        {
+            DecrementSelector(_hourInput);
+        }
+
+        private void _buttonUpMinutes_Click(object sender, RoutedEventArgs e)
+        {
+            IncrementSelector(_minuteInput);
+        }
+
+        private void _buttonDownMinutes_Click(object sender, RoutedEventArgs e)
+        {
+            DecrementSelector(_minuteInput);
+        }
+
+        private void _buttonUpSeconds_Click(object sender, RoutedEventArgs e)
+        {
+            IncrementSelector(_secondInput);
+        }
+
+        private void _buttonDownSeconds_Click(object sender, RoutedEventArgs e)
+        {
+            DecrementSelector(_secondInput);
         }
 
         protected virtual void UnSubscribeEvents()
@@ -540,12 +618,12 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
             }
         }
 
-        protected virtual void WriteValueToTextBox()
+        protected virtual void WriteValueToTextBox(string value)
         {
             if (TextBox != null)
             {
                 _deactivateTextChangedEvent = true;
-                TextBox.Text = GetValueForTextBox();
+                TextBox.Text = value;
                 _deactivateTextChangedEvent = false;
             }
         }
@@ -586,9 +664,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
 
         private static object CoerceSourceHours(DependencyObject d, object basevalue)
         {
-            var timePickerBase = d as TimePickerBase;
-            var hourList = basevalue as IEnumerable<int>;
-            if (timePickerBase != null && hourList != null)
+            if (d is TimePickerBase timePickerBase && basevalue is IEnumerable<int> hourList)
             {
                 if (!timePickerBase.IsMilitaryTime)
                 {
@@ -698,12 +774,12 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
 
             timePartPickerBase.OnSelectedTimeChanged(new TimePickerBaseSelectionChangedEventArgs<TimeSpan?>(SelectedTimeChangedEvent, (TimeSpan?)e.OldValue, (TimeSpan?)e.NewValue));
 
-            timePartPickerBase.WriteValueToTextBox();
+            timePartPickerBase.WriteValueToTextBox(timePartPickerBase.GetValueForTextBox());
         }
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!_deactivateTextChangedEvent)
+           if (!_deactivateTextChangedEvent)
             {
                 _textInputChanged = true;
             }
@@ -730,6 +806,34 @@ namespace My.CoachManager.Presentation.Prism.Controls.TimePickers
         private static bool IsValueSelected(Selector selector)
         {
             return selector != null && selector.SelectedItem != null;
+        }
+
+        private static void IncrementSelector(Selector selector)
+        {
+            if (selector != null)
+            {
+                if (selector.SelectedValue == null || selector.SelectedIndex >= selector.Items.Count - 1)
+                {
+                    selector.SelectedIndex = 0;
+                }else if (selector.SelectedIndex < selector.Items.Count)
+                {
+                    selector.SelectedIndex = selector.SelectedIndex + 1;
+                }
+            }
+        }
+
+        private static void DecrementSelector(Selector selector)
+        {
+            if (selector != null)
+            {
+                if (selector.SelectedValue == null || selector.SelectedIndex == 0)
+                {
+                    selector.SelectedIndex = selector.Items.Count - 1;
+                } else if (selector.SelectedIndex > 0)
+                {
+                    selector.SelectedIndex = selector.SelectedIndex - 1;
+                }
+            }
         }
 
         private static void SetDefaultTimeOfDayValue(Selector selector)

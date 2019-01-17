@@ -279,6 +279,10 @@
         <Setter Property="Content" Value="{StaticResource CalendarGeometry}" />
     </Style>
 
+    <Style x:Key="TimePickerButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxButtonStyle}">
+        <Setter Property="Content" Value="{StaticResource ClockGeometry}" />
+    </Style>
+
     <Style x:Key="PlusNumericUpDownButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxButtonStyle}">
         <Setter Property="Content" Value="{StaticResource PlusGeometry}" />
     </Style>
