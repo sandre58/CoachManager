@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using My.CoachManager.Application.Dtos;
+using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Application.Services.TrainingModule
 {
@@ -31,5 +33,12 @@ namespace My.CoachManager.Application.Services.TrainingModule
         /// </summary>
         /// <returns></returns>
         TrainingDto GetTrainingById(int id);
+
+        /// <summary>
+        /// Add trainings between two date.
+        /// </summary>
+        /// <returns></returns>
+         IList<TrainingDto> AddTrainings(int rosterId, DateTime startDate, DateTime endDate, TimeSpan startTime,
+            TimeSpan endTime, string place, IList<DayOfWeek> days);
     }
 }

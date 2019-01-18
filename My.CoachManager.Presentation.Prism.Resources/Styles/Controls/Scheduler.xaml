@@ -27,6 +27,9 @@
     
     <Style TargetType="{x:Type calendars:SchedulerAppointment}" BasedOn="{StaticResource ButtonBaseStyle}">
         <Setter Property="Color" Value="{DynamicResource DarkAccent}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="CommandParameter" Value="{Binding}" />
+        <Setter Property="Command" Value="{Binding AppointmentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Scheduler}}}" />
         <Setter Property="BorderBrush" Value="{Binding Color, RelativeSource={RelativeSource Self}}" />
         <Setter Property="Background" >
             <Setter.Value>
@@ -51,7 +54,6 @@
         <Setter Property="BorderThickness" Value="5,0,0,0" />
         <Setter Property="ContentTemplate" Value="{StaticResource AppointmentDataTemplate}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
     </Style>
 
     <Style x:Key="SchedulerDayStyle" TargetType="{x:Type controls:SchedulerDay}">
@@ -80,14 +82,26 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
                             <ContentPresenter Grid.Row="0" x:Name="NormalText"
                                               Margin="{StaticResource DefaultMargin}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               Content="{TemplateBinding Content}"
                                               TextElement.Foreground="{TemplateBinding Foreground}"/>
+                            
+                            <DockPanel Grid.Row="0" Grid.Column="1" Margin="{StaticResource DefaultMargin}">
+                                <Button x:Name="AddButton" DockPanel.Dock="Right" Style="{StaticResource AddButtonStyle}" HorizontalAlignment="Right"
+                                        Width="18" Height="18" Visibility="Collapsed"
+                                        Command="{Binding AddCommand, RelativeSource={RelativeSource FindAncestor, AncestorType= {x:Type controls:Scheduler}}}"
+                                        CommandParameter="{Binding}"/>
+                            </DockPanel>
 
-                            <ScrollViewer Grid.Row="1" Padding="{TemplateBinding Padding}"
+                            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Padding="{TemplateBinding Padding}"
                                 CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
                                 HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
@@ -99,6 +113,14 @@
                         </Grid>
                     </Border>
 
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="AddButton" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <DataTrigger Binding="{Binding AddCommand, RelativeSource={RelativeSource FindAncestor, AncestorType= {x:Type controls:Scheduler}}}" Value="{x:Null}">
+                            <Setter TargetName="AddButton" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

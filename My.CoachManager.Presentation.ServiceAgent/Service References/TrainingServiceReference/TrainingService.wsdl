@@ -6,6 +6,7 @@
       <xsd:import schemaLocation="http://localhost:62863/Services/TrainingService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:62863/Services/TrainingService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" />
       <xsd:import schemaLocation="http://localhost:62863/Services/TrainingService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/TrainingService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ITrainingService_GetTrainings_InputMessage">
@@ -32,6 +33,12 @@
   <wsdl:message name="ITrainingService_GetTrainingById_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetTrainingByIdResponse" />
   </wsdl:message>
+  <wsdl:message name="ITrainingService_AddTrainings_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddTrainings" />
+  </wsdl:message>
+  <wsdl:message name="ITrainingService_AddTrainings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddTrainingsResponse" />
+  </wsdl:message>
   <wsdl:portType name="ITrainingService">
     <wsdl:operation name="GetTrainings">
       <wsdl:input wsaw:Action="http://tempuri.org/ITrainingService/GetTrainings" message="tns:ITrainingService_GetTrainings_InputMessage" />
@@ -48,6 +55,10 @@
     <wsdl:operation name="GetTrainingById">
       <wsdl:input wsaw:Action="http://tempuri.org/ITrainingService/GetTrainingById" message="tns:ITrainingService_GetTrainingById_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITrainingService/GetTrainingByIdResponse" message="tns:ITrainingService_GetTrainingById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddTrainings">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITrainingService/AddTrainings" message="tns:ITrainingService_AddTrainings_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITrainingService/AddTrainingsResponse" message="tns:ITrainingService_AddTrainings_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITrainingService" type="tns:ITrainingService">
@@ -81,6 +92,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetTrainingById">
       <soap:operation soapAction="http://tempuri.org/ITrainingService/GetTrainingById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddTrainings">
+      <soap:operation soapAction="http://tempuri.org/ITrainingService/AddTrainings" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

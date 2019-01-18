@@ -26,16 +26,16 @@ namespace My.CoachManager.Presentation.Prism.Controls
             }
             else
             {
-                WriteValueToTextBox(GetValueForTextBox());
-                //if (string.IsNullOrEmpty(((DatePickerTextBox)sender).Text))
-                //{
-                //    //SetCurrentValue(SelectedTimeProperty, null);
-                //    WriteValueToTextBox(GetValueForTextBox());
-                //}
-                //else
-                //{
-                //    WriteValueToTextBox(GetValueForTextBox());
-                //}
+                //WriteValueToTextBox(GetValueForTextBox());
+                if (string.IsNullOrEmpty(((DatePickerTextBox)sender).Text))
+                {
+                    SetCurrentValue(SelectedTimeProperty, null);
+                    //WriteValueToTextBox(GetValueForTextBox());
+                }
+                else
+                {
+                    WriteValueToTextBox(GetValueForTextBox());
+                }
             }
         }
     }

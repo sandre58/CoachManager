@@ -1,4 +1,5 @@
-﻿using My.CoachManager.Application.Dtos;
+﻿using System;
+using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.RosterModule.Aggregate;
 
@@ -26,6 +27,24 @@ namespace My.CoachManager.Domain.TrainingModule.Aggregate
                 IsCancelled = item.IsCancelled,
                 Place = item.Place,
                 StartDate = item.StartDate
+            };
+        }
+
+        /// <summary>
+        /// Create the entity from the DTO.
+        /// </summary>
+        /// <returns>The entity.</returns>
+        public static Training CreateTraining(int rosterId, DateTime date, TimeSpan startTime, TimeSpan endTime, string place)
+        {
+            var startDate = new DateTime(date.Year, date.Month, date.Day, startTime.Hours, startTime.Minutes, startTime.Seconds);
+            var endDate = new DateTime(date.Year, date.Month, date.Day, endTime.Hours, endTime.Minutes, endTime.Seconds);
+            return new Training
+            {
+                RosterId = rosterId,
+                StartDate = startDate,
+                EndDate = endDate,
+                IsCancelled = false,
+                Place = place,
             };
         }
 

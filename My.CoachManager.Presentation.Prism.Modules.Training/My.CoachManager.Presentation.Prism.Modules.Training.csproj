@@ -99,9 +99,13 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="TrainingModule.cs" />
+    <Compile Include="ViewModels\TrainingsAddViewModel.cs" />
     <Compile Include="ViewModels\TrainingEditViewModel.cs" />
     <Compile Include="ViewModels\TrainingViewModel.cs" />
     <Compile Include="ViewModels\TrainingsViewModel.cs" />
+    <Compile Include="Views\TrainingsAddView.xaml.cs">
+      <DependentUpon>TrainingsAddView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TrainingNavigationView.xaml.cs">
       <DependentUpon>TrainingNavigationView.xaml</DependentUpon>
     </Compile>
@@ -135,6 +139,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TrainingsAddView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

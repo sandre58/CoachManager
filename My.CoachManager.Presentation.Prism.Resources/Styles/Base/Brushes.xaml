@@ -22,4 +22,5 @@
     <SolidColorBrush x:Key="Poor" Color="{DynamicResource PoorColor}" presentationOptions:Freeze="true" />
     <SolidColorBrush x:Key="Bad" Color="{DynamicResource BadColor}" presentationOptions:Freeze="true" />
     <SolidColorBrush x:Key="VeryBad" Color="{DynamicResource VeryBadColor}" presentationOptions:Freeze="true" />
+    <SolidColorBrush x:Key="Orange" Color="{DynamicResource OrangeColor}" presentationOptions:Freeze="true" />
 </ResourceDictionary>

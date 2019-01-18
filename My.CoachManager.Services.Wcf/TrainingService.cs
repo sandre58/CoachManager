@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CommonServiceLocator;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Application.Services.TrainingModule;
@@ -49,6 +50,17 @@ namespace My.CoachManager.Services.Wcf
         public IList<TrainingDto> GetTrainings()
         {
             return ServiceLocator.Current.GetInstance<ITrainingAppService>().GetTrainings();
+        }
+
+        /// <summary>
+        /// Add trainings between two date.
+        /// </summary>
+        /// <returns></returns>
+        public IList<TrainingDto> AddTrainings(int rosterId, DateTime startDate, DateTime endDate, TimeSpan startTime,
+            TimeSpan endTime, string place, IList<DayOfWeek> days)
+        {
+            return ServiceLocator.Current.GetInstance<ITrainingAppService>().AddTrainings(rosterId, startDate, endDate, startTime,
+            endTime, place, days);
         }
     }
 }

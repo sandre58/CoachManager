@@ -191,6 +191,11 @@ namespace My.CoachManager.CrossCutting.Core.Extensions
                     });
         }
 
+        public static List<T> Rotate<T>(this List<T> list, int offset)
+        {
+            return list.Skip(offset).Concat(list.Take(offset)).ToList();
+        }
+
         #endregion Public Methods and Operators
     }
 }

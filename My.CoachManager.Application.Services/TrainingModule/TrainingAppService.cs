@@ -1,4 +1,5 @@
-﻿using My.CoachManager.Application.Dtos;
+﻿using System;
+using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.AppModule.Services;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
@@ -6,6 +7,8 @@ using My.CoachManager.Domain.TrainingModule.Aggregate;
 using My.CoachManager.Domain.TrainingModule.Services;
 using System.Collections.Generic;
 using System.Linq;
+using My.CoachManager.CrossCutting.Core.Exceptions;
+using My.CoachManager.CrossCutting.Core.Resources;
 
 namespace My.CoachManager.Application.Services.TrainingModule
 {
@@ -83,6 +86,44 @@ namespace My.CoachManager.Application.Services.TrainingModule
         public IList<TrainingDto> GetTrainings()
         {
             return _trainingRepository.GetAll(TrainingSelectBuilder.SelectTrainings()).ToList();
+        }
+
+        /// <summary>
+        /// Load all items.
+        /// </summary>
+        /// <returns></returns>
+        public IList<TrainingDto> AddTrainings(int rosterId, DateTime startDate, DateTime endDate, TimeSpan startTime, TimeSpan endTime, string place, IList<DayOfWeek> days)
+        {
+            var dates = new List<DateTime>();
+            var trainings = new List<Training>();
+
+            for (DateTime date = startDate; date < endDate; date = date.AddDays(1))
+            {
+                if (days.Contains(date.DayOfWeek))
+                {
+                    dates.Add(date);
+                }
+            }
+
+            foreach (var date in dates)
+            {
+                var training = TrainingFactory.CreateTraining(rosterId, date, startTime, endTime, place);
+
+                var result = _trainingDomainService.Validate(training);
+
+                    if (!result.IsValid)
+                    {
+                        throw new ValidationBusinessException(ValidationMessageResources.InvalidFields, result.Errors.Select(x => x.ErrorMessage).ToList());
+                    }
+
+                _trainingRepository.Add(training);
+
+                trainings.Add(training);
+            }
+            
+            _trainingRepository.UnitOfWork.Commit();
+
+            return trainings.Select(TrainingFactory.Get).ToList();
         }
 
         #endregion Methods

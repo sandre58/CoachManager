@@ -23,6 +23,7 @@
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="TrainingService.xsd" MetadataType="Schema" ID="d4d70575-ab1e-44a1-8b80-67db09f3e530" SourceId="1" SourceUrl="http://localhost:62863/Services/TrainingService.svc?xsd=xsd0" />
+    <MetadataFile FileName="TrainingService4.xsd" MetadataType="Schema" ID="8c3dc8b3-556c-4236-97e7-f7ac89664704" SourceId="1" SourceUrl="http://localhost:62863/Services/TrainingService.svc?xsd=xsd4" />
     <MetadataFile FileName="TrainingService1.xsd" MetadataType="Schema" ID="1bd8780e-9cb3-47a2-98ea-69708f6bd35a" SourceId="1" SourceUrl="http://localhost:62863/Services/TrainingService.svc?xsd=xsd3" />
     <MetadataFile FileName="TrainingService.wsdl" MetadataType="Wsdl" ID="6495cbe5-1f07-4d89-b1d7-4809a386a0af" SourceId="1" SourceUrl="http://localhost:62863/Services/TrainingService.svc?wsdl" />
     <MetadataFile FileName="TrainingService2.xsd" MetadataType="Schema" ID="11abd37a-6c8f-4aeb-9f0e-05eb3eecc05f" SourceId="1" SourceUrl="http://localhost:62863/Services/TrainingService.svc?xsd=xsd1" />

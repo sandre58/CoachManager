@@ -119,7 +119,7 @@ namespace My.CoachManager.CrossCutting.Core.Helpers
                 GregorianCalendar foundCal = null;
                 DateTimeFormatInfo dtfi = null;
 
-                foreach (System.Globalization.Calendar cal in culture.OptionalCalendars)
+                foreach (Calendar cal in culture.OptionalCalendars)
                 {
                     if (cal is GregorianCalendar)
                     {

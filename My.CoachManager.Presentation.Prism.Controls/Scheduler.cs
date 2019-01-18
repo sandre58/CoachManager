@@ -99,6 +99,50 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         #region Public Properties
 
+        #region AppointmentCommand
+
+        /// <summary>
+        /// Gets or sets the style for displaying a SchedulerButton.
+        /// </summary>
+        public ICommand AppointmentCommand
+        {
+            get => (ICommand)GetValue(AppointmentCommandProperty);
+            set => SetValue(AppointmentCommandProperty, value);
+        }
+
+        /// <summary>
+        /// Identifies the SchedulerButtonStyle dependency property.
+        /// </summary>
+        public static readonly DependencyProperty AppointmentCommandProperty =
+            DependencyProperty.Register(
+                "AppointmentCommand",
+                typeof(ICommand),
+                typeof(Scheduler));
+
+        #endregion AppointmentCommand
+
+        #region AddCommand
+
+        /// <summary>
+        /// Gets or sets the style for displaying a SchedulerButton.
+        /// </summary>
+        public ICommand AddCommand
+        {
+            get => (ICommand)GetValue(AddCommandProperty);
+            set => SetValue(AddCommandProperty, value);
+        }
+
+        /// <summary>
+        /// Identifies the SchedulerButtonStyle dependency property.
+        /// </summary>
+        public static readonly DependencyProperty AddCommandProperty =
+            DependencyProperty.Register(
+                "AddCommand",
+                typeof(ICommand),
+                typeof(Scheduler));
+
+        #endregion AddCommand
+
         #region BlackoutDates
 
         /// <summary>

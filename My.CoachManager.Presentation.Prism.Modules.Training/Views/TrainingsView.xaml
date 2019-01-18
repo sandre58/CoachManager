@@ -7,22 +7,78 @@
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Training.ViewModels"
              xmlns:schedulers="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Schedulers;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:models="clr-namespace:My.CoachManager.Presentation.Prism.Models;assembly=My.CoachManager.Presentation.Prism.Models"
+             xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:TrainingsViewModel}"
              d:DesignHeight="500" d:DesignWidth="800">
+    
+    <UserControl.Resources>
+        
+        <DataTemplate x:Key="TrainingDataTemplate" DataType="{x:Type models:TrainingModel}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <DockPanel Grid.Row="0" Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding StartDate, StringFormat=HH\\:mm}" FontWeight="Bold" />
+                        <TextBlock Text="-" Margin="0" />
+                        <TextBlock Text="{Binding EndDate, StringFormat=HH\\:mm}" FontWeight="Bold" />
+                        <TextBlock Text=":" Visibility="{Binding Title, Converter={StaticResource NullToVisibilityConverter}}" />
+                        <TextBlock Text="{Binding Title}" />
+                    </StackPanel>
+
+                    <controls:ActionsListViewItemControl DockPanel.Dock="Right" HorizontalAlignment="Right" ShowSelection="False">
+                        <Button CommandParameter="{Binding}"
+                                Command="{Binding DataContext.EditCommand,
+                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:WorkspaceView}}}"
+                                Content="{StaticResource EditPageGeometry}"
+                                ToolTip="{x:Static strings:ControlResources.Edit}" />
+
+                        <!-- Menu -->
+                        <controls:DropDownButton x:Name="Menu" Content="{StaticResource ToolbarGeometry}">
+                            <controls:DropDownButton.Submenu>
+                                <controls:Submenu>
+                                    <MenuItem Header="{x:Static strings:ControlResources.Remove}" Icon="{StaticResource TrashGeometry}"
+                                              Command="{Binding DataContext.RemoveCommand,
+                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:WorkspaceView}}}"
+                                              CommandParameter="{Binding}"
+                                              parameters:ControlParameters.FocusBackground="{DynamicResource Negative}" />
+                                </controls:Submenu>
+                            </controls:DropDownButton.Submenu>
+                        </controls:DropDownButton>
+                    </controls:ActionsListViewItemControl>
+                </DockPanel>
+                
+                <controls:Icon Size="Large" Grid.Column="0" Grid.Row="1" Content="{StaticResource TrainingGeometry}" Margin="{StaticResource DefaultMargin}" Foreground="{DynamicResource Orange}" />
+
+            </Grid>
+        </DataTemplate>
+        
+    </UserControl.Resources>
 
     <controls:WorkspaceView HeaderTemplate="{x:Null}">
         <Grid>
-            <controls:Scheduler ItemsSource="{Binding Items}" SelectedDates="{Binding SelectedDates, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionMode="MultipleRange" >
+            <controls:Scheduler ItemsSource="{Binding Items}" SelectedDates="{Binding SelectedDates, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionMode="SingleRange"
+                                AppointmentCommand="{Binding OpenCommand}"
+                                AddCommand="{Binding AddToDateCommand}">
                 <controls:Scheduler.SchedulerDayStyle>
                     <Style BasedOn="{StaticResource SchedulerDayStyle}" TargetType="{x:Type controls:SchedulerDay}">
                         <Setter Property="ItemContainerStyle">
                             <Setter.Value>
                                 <Style TargetType="{x:Type schedulers:SchedulerAppointment}" BasedOn="{StaticResource {x:Type schedulers:SchedulerAppointment}}">
                                     <Setter Property="Color" Value="{DynamicResource Positive}" />
-                                    <Setter Property="Command" Value="{Binding DataContext.OpenCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:WorkspaceView}}}" />
-                                    <Setter Property="CommandParameter" Value="{Binding}" />
+                                    <Setter Property="ContentTemplate" Value="{StaticResource TrainingDataTemplate}" />
                                 </Style>
                             </Setter.Value>
                         </Setter>

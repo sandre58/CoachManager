@@ -4,6 +4,7 @@ using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
+using My.CoachManager.Presentation.Prism.Modules.Training.Resources;
 using My.CoachManager.Presentation.ServiceAgent.TrainingServiceReference;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Training.ViewModels
@@ -33,6 +34,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.ViewModels
         public TrainingEditViewModel(ITrainingService trainingService)
         {
             _trainingService = trainingService;
+            NewItemMessage = TrainingResources.NewTraining;
+            EditItemMessage = TrainingResources.EditTraining;
         }
 
         #endregion Constructors
@@ -70,6 +73,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.ViewModels
                 Item.StartTime = SettingsManager.GetDefaultTrainingStartTime();
                 Item.EndTime = SettingsManager.GetDefaultTrainingStartTime()
                     .Add(SettingsManager.GetDefaultTrainingDuration());
+
+                Item.ResetModified();
             }
         }
 

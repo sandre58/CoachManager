@@ -400,7 +400,7 @@
                     <Grid>
                         <ScrollViewer VerticalScrollBarVisibility="Auto">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                                <controls:SelectorItem x:Name="PART_All" Content="{TemplateBinding TextAll}" />
+                                <controls:SelectorItem x:Name="PART_All" Content="{TemplateBinding TextAll}" Visibility="{Binding ShowAll, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MultiCheckboxes}}, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 <ItemsPresenter Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </StackPanel>
                         </ScrollViewer>

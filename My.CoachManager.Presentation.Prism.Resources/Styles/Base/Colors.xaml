@@ -31,6 +31,7 @@
     <Color x:Key="TransparentColor">#00ffffff</Color>
     <Color x:Key="WhiteColor">#ffffff</Color>
     <Color x:Key="BlackColor">#000000</Color>
+    <Color x:Key="OrangeColor">#ff9900</Color>
 
     <!-- OPACITY -->
     <sys:Double x:Key="DisabledOpacity">0.5</sys:Double>

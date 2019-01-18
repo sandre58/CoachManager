@@ -8,6 +8,7 @@ using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Models;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Commands;
+using PropertyChanged;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
@@ -25,12 +26,30 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         #endregion Fields
 
+        #region Constructors
+
+        public EditViewModel()
+        {
+            SavingSuccessMessage = MessageResources.SavingSuccess;
+            NewItemMessage = ControlResources.Creation;
+            EditItemMessage = ControlResources.Edition;
+        }
+
+#endregion
+
         #region Members
+
+        public string SavingSuccessMessage { get; set; }
+
+        public string NewItemMessage { get; set; }
+
+        public string EditItemMessage { get; set; }
 
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets item.
         /// </summary>
+        [DoNotCheckEquality]
         IEntityModel IItemViewModel.Item
         {
             get => Item;
@@ -41,6 +60,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Get or set Item.
         /// </summary>
+        [DoNotCheckEquality]
         public TModel Item { get; set; }
 
         /// <summary>
@@ -125,7 +145,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <param name="e">The <see cref="RunWorkerCompletedEventArgs"/> instance containing the event data.</param>
         private void OnBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Error == null)
+            if (e.Error == null && !e.Cancelled)
             {
                 OnSaveCompleted();
                 Mode = ScreenMode.Edition;
@@ -143,7 +163,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             try
             {
                 var result = SaveItemCore();
-                if (result == 0) _saveDataBackgroundWorker.Abort();
+                // if (result == 0) _saveDataBackgroundWorker.Abort();
                 Item.Id = result;
             }
             catch (Exception exception)
@@ -200,7 +220,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual void OnSaveCompleted()
         {
-            NotificationManager.ShowSuccess(MessageResources.SavingSuccess);
+            NotificationManager.ShowSuccess(SavingSuccessMessage);
             Close(DialogResult.Ok);
         }
 
@@ -295,7 +315,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected override void OnModeChanged()
         {
-            Title = Mode == ScreenMode.Edition ? ControlResources.Edition : ControlResources.Creation;
+            Title = Mode == ScreenMode.Edition ? EditItemMessage : NewItemMessage;
         }
 
         #endregion Properties Changed

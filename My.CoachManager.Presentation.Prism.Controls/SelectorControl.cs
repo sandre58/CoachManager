@@ -50,6 +50,21 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         #region Properties
 
+        public static readonly DependencyProperty ShowAllProperty = DependencyProperty.Register("ShowAll", typeof(bool), typeof(SelectorControl), new PropertyMetadata(true));
+
+        [TypeConverter(typeof(CommandConverter))]
+        public bool ShowAll
+        {
+            get
+            {
+                return (bool)GetValue(ShowAllProperty);
+            }
+            set
+            {
+                SetValue(ShowAllProperty, value);
+            }
+        }
+
         public static readonly DependencyProperty TextAllProperty = DependencyProperty.Register("TextAll", typeof(string), typeof(SelectorControl), new PropertyMetadata(GlobalResources.AllMales));
 
         [TypeConverter(typeof(CommandConverter))]

@@ -61,11 +61,56 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} entrainements ont été ajoutés avec succès..
+        /// </summary>
+        public static string AddedTrainingsSuccessMessage {
+            get {
+                return ResourceManager.GetString("AddedTrainingsSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Editer l&apos;entrainement.
+        /// </summary>
+        public static string EditTraining {
+            get {
+                return ResourceManager.GetString("EditTraining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nouvel entrainement.
+        /// </summary>
+        public static string NewTraining {
+            get {
+                return ResourceManager.GetString("NewTraining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ajouter des entrainements.
+        /// </summary>
+        public static string NewTrainings {
+            get {
+                return ResourceManager.GetString("NewTrainings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Entrainement.
         /// </summary>
         public static string TrainingMenu {
             get {
                 return ResourceManager.GetString("TrainingMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entrainements.
+        /// </summary>
+        public static string TrainingsTitle {
+            get {
+                return ResourceManager.GetString("TrainingsTitle", resourceCulture);
             }
         }
     }

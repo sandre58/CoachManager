@@ -38,6 +38,12 @@ namespace My.CoachManager.Presentation.ServiceAgent.TrainingServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrainingService/GetTrainingById", ReplyAction="http://tempuri.org/ITrainingService/GetTrainingByIdResponse")]
         System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.TrainingDto> GetTrainingByIdAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrainingService/AddTrainings", ReplyAction="http://tempuri.org/ITrainingService/AddTrainingsResponse")]
+        My.CoachManager.Application.Dtos.TrainingDto[] AddTrainings(int rosterId, System.DateTime startDate, System.DateTime endDate, System.TimeSpan startTime, System.TimeSpan endTime, string place, System.DayOfWeek[] days);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrainingService/AddTrainings", ReplyAction="http://tempuri.org/ITrainingService/AddTrainingsResponse")]
+        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.TrainingDto[]> AddTrainingsAsync(int rosterId, System.DateTime startDate, System.DateTime endDate, System.TimeSpan startTime, System.TimeSpan endTime, string place, System.DayOfWeek[] days);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -97,6 +103,14 @@ namespace My.CoachManager.Presentation.ServiceAgent.TrainingServiceReference {
         
         public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.TrainingDto> GetTrainingByIdAsync(int id) {
             return base.Channel.GetTrainingByIdAsync(id);
+        }
+        
+        public My.CoachManager.Application.Dtos.TrainingDto[] AddTrainings(int rosterId, System.DateTime startDate, System.DateTime endDate, System.TimeSpan startTime, System.TimeSpan endTime, string place, System.DayOfWeek[] days) {
+            return base.Channel.AddTrainings(rosterId, startDate, endDate, startTime, endTime, place, days);
+        }
+        
+        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.TrainingDto[]> AddTrainingsAsync(int rosterId, System.DateTime startDate, System.DateTime endDate, System.TimeSpan startTime, System.TimeSpan endTime, string place, System.DayOfWeek[] days) {
+            return base.Channel.AddTrainingsAsync(rosterId, startDate, endDate, startTime, endTime, place, days);
         }
     }
 }

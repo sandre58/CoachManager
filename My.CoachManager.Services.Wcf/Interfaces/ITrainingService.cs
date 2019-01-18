@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using My.CoachManager.Application.Dtos;
 
@@ -37,5 +38,13 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// <returns></returns>
         [OperationContract]
         TrainingDto GetTrainingById(int id);
+
+        /// <summary>
+        /// Add trainings between two date.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        IList<TrainingDto> AddTrainings(int rosterId, DateTime startDate, DateTime endDate, TimeSpan startTime,
+            TimeSpan endTime, string place, IList<DayOfWeek> days);
     }
 }

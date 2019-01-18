@@ -89,6 +89,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// <summary>
         /// Gets or sets item.
         /// </summary>
+        [DoNotCheckEquality]
         IEntityModel IItemViewModel.Item
         {
             get => Item;
