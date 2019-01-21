@@ -1,4 +1,5 @@
-﻿using System;
+﻿using My.CoachManager.CrossCutting.Core.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Security;
@@ -7,7 +8,6 @@ using System.Windows.Automation;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 using System.Windows.Controls;
-using My.CoachManager.CrossCutting.Core.Helpers;
 
 namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
 {
@@ -160,7 +160,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
         }
 
         /// <summary>
-        /// Called by GetClassName that gets a human readable name that, in addition to AutomationControlType, 
+        /// Called by GetClassName that gets a human readable name that, in addition to AutomationControlType,
         /// differentiates the control represented by this AutomationPeer.
         /// </summary>
         /// <returns>The string that contains the name.</returns>
@@ -212,7 +212,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
         }
 
         ///<SecurityNote>
-        /// Security Critical - Calls a Security Critical operation AddParentInfo which adds parent peer and provides 
+        /// Security Critical - Calls a Security Critical operation AddParentInfo which adds parent peer and provides
         ///                     security critical Hwnd value for this peer created asynchronously.
         /// SecurityTreatAsSafe - It's being called from this object which is real parent for the item peer.
         /// </SecurityNote>
@@ -274,7 +274,6 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
                 //}
                 //else
                 //    WeakRefElementProxyStorage.Remove(dateTimeCalendarModePairKey);
-
             }
 
             return returnPeer;
@@ -288,7 +287,6 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             if (GetPeerFromWeakRefStorage(key) == null)
                 WeakRefElementProxyStorage.Add(key, wr);
         }
-
 
         internal void RaiseSelectionEvents(SelectionChangedEventArgs e)
         {
@@ -442,7 +440,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             //        }
             //}
 
-            // 
+            //
 
             return String.Empty;
         }
@@ -583,12 +581,12 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             if (isSelected)
             {
                 // If SelectedDatesInternal is empty or startDate is beyond last SelectedDate
-                if (!OwningScheduler.SelectedDatesInternal.MaximumDate.HasValue || OwningScheduler.SelectedDatesInternal.MaximumDate <= startDate)
+                if (OwningScheduler.SelectedDatesInternal.MaximumDate == DateTime.MinValue || OwningScheduler.SelectedDatesInternal.MaximumDate <= startDate)
                 {
                     return null;
                 }
                 // startDate is before first SelectedDate
-                if (OwningScheduler.SelectedDatesInternal.MinimumDate.HasValue && startDate < OwningScheduler.SelectedDatesInternal.MinimumDate)
+                if (OwningScheduler.SelectedDatesInternal.MinimumDate != DateTime.MinValue && startDate < OwningScheduler.SelectedDatesInternal.MinimumDate)
                 {
                     return OwningScheduler.SelectedDatesInternal.MinimumDate;
                 }
@@ -672,13 +670,12 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
         }
 
         #region Private Data
+
         private Dictionary<DateTimeCalendarModePair, DateTimeAutomationPeer> _dataChildren = new Dictionary<DateTimeCalendarModePair, DateTimeAutomationPeer>();
         private readonly Dictionary<DateTimeCalendarModePair, WeakReference> _weakRefElementProxyStorage = new Dictionary<DateTimeCalendarModePair, WeakReference>();
 
         #endregion Private Data
-
     }
-
 
     internal struct DateTimeCalendarModePair
     {
@@ -688,7 +685,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             _date = date;
         }
 
-        CalendarMode _buttonMode;
-        DateTime _date;
+        private CalendarMode _buttonMode;
+        private DateTime _date;
     }
 }

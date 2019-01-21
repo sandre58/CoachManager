@@ -1,9 +1,9 @@
-﻿using System;
+﻿using My.CoachManager.CrossCutting.Core.Helpers;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading;
-using My.CoachManager.CrossCutting.Core.Helpers;
 
 namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
 {
@@ -127,17 +127,13 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
                     // Moving Forwards.
                     // The DateRanges require start <= end
                     currentDate = DateTimeHelper.AddDays(range.End, dayInterval);
-
                 }
                 else
                 {
                     //Moving backwards.
                     currentDate = DateTimeHelper.AddDays(range.Start, dayInterval);
                 }
-
             } while (currentDate != null && ((range = GetContainingDateRange((DateTime)currentDate)) != null));
-
-
 
             return currentDate;
         }
@@ -162,7 +158,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             }
 
             base.ClearItems();
-            _owner.UpdateCellItems();
+            //_owner.UpdateCellItems();
         }
 
         /// <summary>
@@ -181,7 +177,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             {
                 RegisterItem(item);
                 base.InsertItem(index, item);
-                _owner.UpdateCellItems();
+                //_owner.UpdateCellItems();
             }
             else
             {
@@ -206,7 +202,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             }
 
             base.RemoveItem(index);
-            _owner.UpdateCellItems();
+            //_owner.UpdateCellItems();
         }
 
         /// <summary>
@@ -234,7 +230,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
                 UnRegisterItem(oldItem);
                 RegisterItem(Items[index]);
 
-                _owner.UpdateCellItems();
+                //_owner.UpdateCellItems();
             }
             else
             {
@@ -296,7 +292,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
         {
             if (sender is SchedulerDateRange)
             {
-                _owner.UpdateCellItems();
+                //_owner.UpdateCellItems();
             }
         }
 
@@ -352,7 +348,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             }
             return null;
         }
-        #endregion Private Methods
 
+        #endregion Private Methods
     }
 }

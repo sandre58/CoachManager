@@ -1,4 +1,6 @@
-﻿using System;
+﻿using My.CoachManager.CrossCutting.Core.Helpers;
+using My.CoachManager.Presentation.Prism.Controls.Schedulers;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -6,8 +8,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using My.CoachManager.CrossCutting.Core.Helpers;
-using My.CoachManager.Presentation.Prism.Controls.Schedulers;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
@@ -21,6 +21,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
     public sealed class SchedulerPanel : Control
     {
         #region Constants
+
         private const string ElementRoot = "PART_Root";
         private const string ElementHeaderButton = "PART_HeaderButton";
         private const string ElementPreviousButton = "PART_PreviousButton";
@@ -165,9 +166,11 @@ namespace My.CoachManager.Presentation.Prism.Controls
                     case CalendarMode.Year:
                         UpdateYearMode();
                         break;
+
                     case CalendarMode.Decade:
                         UpdateDecadeMode();
                         break;
+
                     case CalendarMode.Month:
                         UpdateMonthMode();
                         break;
@@ -219,7 +222,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             }
         }
 
-        #endregion
+        #endregion Protected Methods
 
         #region Internal Methods
 
@@ -277,7 +280,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         internal IEnumerable<SchedulerDay> GetSchedulerDays()
         {
-            // 
+            //
             int count = Rows * Cols;
             if (MonthView != null)
             {
@@ -362,7 +365,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             return null;
         }
 
-        private IEnumerable<SchedulerItem> GetSchedulerButtons()
+        internal IEnumerable<SchedulerItem> GetSchedulerButtons()
         {
             foreach (UIElement element in YearView.Children)
             {
@@ -464,7 +467,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
                     {
                         // this is selection with Mouse, we do not guarantee the range does not include BlackOutDates.
                         // Use the internal AddRange that omits BlackOutDates based on the SelectionMode
-                        Owner.SelectedDatesInternal.AddRangeInternal(Owner.HoverStart.Value, selectedDate);
+                        Owner.SelectedDatesInternal.AddRange(Owner.HoverStart.Value, selectedDate);
                     }
 
                     Owner.OnDayClick(selectedDate);
@@ -526,10 +529,10 @@ namespace My.CoachManager.Presentation.Prism.Controls
                     case CalendarSelectionMode.SingleRange:
                         {
                             DateTime? lastDate = Owner.CurrentDate;
-                            Owner.SelectedDatesInternal.ClearInternal(true /*fireChangeNotification*/);
+                            Owner.SelectedDatesInternal.Clear();
                             if (shift)
                             {
-                                Owner.SelectedDatesInternal.AddRangeInternal(lastDate.Value, clickedDate);
+                                Owner.SelectedDatesInternal.AddRange(lastDate.Value, clickedDate);
                             }
                             else
                             {
@@ -545,12 +548,12 @@ namespace My.CoachManager.Presentation.Prism.Controls
                         {
                             if (!ctrl)
                             {
-                                Owner.SelectedDatesInternal.ClearInternal(true /*fireChangeNotification*/);
+                                Owner.SelectedDatesInternal.Clear();
                             }
 
                             if (shift)
                             {
-                                Owner.SelectedDatesInternal.AddRangeInternal(Owner.CurrentDate, clickedDate);
+                                Owner.SelectedDatesInternal.AddRange(Owner.CurrentDate, clickedDate);
                             }
                             else
                             {
@@ -627,7 +630,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
                     case CalendarSelectionMode.SingleRange:
                         {
-                            Owner.SelectedDatesInternal.ClearInternal();
+                            Owner.SelectedDatesInternal.Clear();
 
                             if (shift)
                             {
@@ -648,7 +651,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
                         {
                             if (!ctrl)
                             {
-                                Owner.SelectedDatesInternal.ClearInternal();
+                                Owner.SelectedDatesInternal.Clear();
                             }
 
                             if (shift)
@@ -668,7 +671,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 }
 
                 Owner.CurrentDate = selectedDate;
-                Owner.UpdateCellItems();
+                //Owner.UpdateCellItems();
             }
         }
 
@@ -716,10 +719,9 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
                 Owner.HoverEnd = selectedDate;
                 Owner.CurrentDate = selectedDate;
-                Owner.UpdateCellItems();
+                //Owner.UpdateCellItems();
             }
         }
-
 
         private void Cell_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -765,7 +767,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
                     case CalendarSelectionMode.SingleRange:
                         {
                             // Update SelectedDatesInternal
-                            Owner.SelectedDatesInternal.ClearInternal();
+                            Owner.SelectedDatesInternal.Clear();
                             EndDrag(ctrl, selectedDate);
                             break;
                         }
@@ -794,9 +796,9 @@ namespace My.CoachManager.Presentation.Prism.Controls
             if (sender is SchedulerItem b)
             {
                 _isMonthPressed = true;
-                Mouse.Capture(this, CaptureMode.SubTree);
+                //Mouse.Capture(this, CaptureMode.SubTree);
 
-                Owner?.OnSchedulerButtonPressed(b, false);
+                Owner?.OnSchedulerItemPressed(b, false);
             }
         }
 
@@ -804,7 +806,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
         {
             if (sender is SchedulerItem b)
             {
-                Owner?.OnSchedulerButtonPressed(b, true);
+                Owner?.OnSchedulerItemPressed(b, true);
             }
         }
 
@@ -814,7 +816,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             {
                 if (_isMonthPressed)
                 {
-                    Owner?.OnSchedulerButtonPressed(b, false);
+                    Owner?.OnSchedulerItemPressed(b, false);
                 }
             }
         }
@@ -823,7 +825,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
         {
             if (sender is SchedulerItem b)
             {
-                Owner.OnSchedulerButtonPressed(b, true);
+                Owner.OnSchedulerItemPressed(b, true);
             }
         }
 
@@ -896,7 +898,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 {
                     for (int j = 0; j < YearCols; j++)
                     {
-                        var monthCell = new SchedulerItem {Owner = Owner};
+                        var monthCell = new SchedulerItem { Owner = Owner };
 
                         monthCell.SetValue(Grid.RowProperty, i);
                         monthCell.SetValue(Grid.ColumnProperty, j);
@@ -906,7 +908,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
                         monthCell.AddHandler(MouseLeftButtonUpEvent, new MouseButtonEventHandler(Month_MouseLeftButtonUp), true);
                         monthCell.AddHandler(MouseEnterEvent, new MouseEventHandler(Month_MouseEnter), true);
                         monthCell.AddHandler(PreviewKeyDownEvent, new RoutedEventHandler(CellOrMonth_PreviewKeyDown), true);
-                        monthCell.MouseDown +=MonthCellOnMouseDown;
+                        monthCell.MouseDown += MonthCellOnMouseDown;
                         YearView.Children.Add(monthCell);
                     }
                 }
@@ -919,7 +921,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
         {
             if (MonthView != null)
             {
-
                 string[] shortestDayNames = DateTimeHelper.GetDateFormat(DateTimeHelper.GetCulture()).ShortestDayNames;
 
                 for (int childIndex = 0; childIndex < Cols; childIndex++)
@@ -963,8 +964,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
                     SetMonthModeDayButtonState(childButton, dateToAdd);
                     childButton.DataContext = dateToAdd;
                     childButton.SetContentInternal(DateTimeHelper.ToDayString(dateToAdd, culture));
-
-                   childButton.ItemsSource = Owner.GetAppointmentsByDate(dateToAdd);
                 }
                 else
                 {
@@ -1132,7 +1131,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             }
         }
 
-        #endregion
+        #endregion Month Mode Display
 
         #region Year Mode Display
 
@@ -1334,7 +1333,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 return _dayTitleTemplateResourceKey;
             }
         }
-        
-        #endregion
+
+        #endregion Resource Keys
     }
 }

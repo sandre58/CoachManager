@@ -1,4 +1,7 @@
-﻿using System;
+﻿using My.CoachManager.CrossCutting.Core.Helpers;
+using My.CoachManager.Presentation.Prism.Controls.Schedulers;
+using My.CoachManager.Presentation.Prism.Core.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,9 +11,6 @@ using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
-using My.CoachManager.CrossCutting.Core.Helpers;
-using My.CoachManager.Presentation.Prism.Controls.Schedulers;
-using My.CoachManager.Presentation.Prism.Core.Models;
 using SelectedDatesCollection = My.CoachManager.Presentation.Prism.Controls.Schedulers.SelectedDatesCollection;
 
 namespace My.CoachManager.Presentation.Prism.Controls
@@ -37,6 +37,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
         #endregion Constants
 
         #region Data
+
         private DateTime? _hoverStart;
         private DateTime? _hoverEnd;
         private bool _isShiftPressed;
@@ -195,7 +196,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             typeof(Scheduler));
 
         #endregion SchedulerDayStyle
-        
+
         #region SchedulerItemStyle
 
         /// <summary>
@@ -219,6 +220,22 @@ namespace My.CoachManager.Presentation.Prism.Controls
         #endregion SchedulerItemStyle
 
         #region DisplayDate
+
+        internal DateTime DisplayDateInternal
+        {
+            get;
+            private set;
+        }
+
+        internal DateTime DisplayDateEndInternal => DisplayDateEnd.GetValueOrDefault(DateTime.MaxValue);
+
+        internal DateTime DisplayDateStartInternal => DisplayDateStart.GetValueOrDefault(DateTime.MinValue);
+
+        internal DateTime CurrentDate
+        {
+            get => _currentDate.GetValueOrDefault(DisplayDateInternal);
+            set => _currentDate = value;
+        }
 
         /// <summary>
         /// Gets or sets the date to display.
@@ -251,7 +268,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             Debug.Assert(c != null);
 
             c.DisplayDateInternal = DateTimeHelper.DiscardDayTime((DateTime)e.NewValue);
-            c.UpdateCellItems();
+            // c.UpdateCellItems();
             c.OnDisplayDateChanged(new SchedulerDateChangedEventArgs((DateTime)e.OldValue, (DateTime)e.NewValue));
         }
 
@@ -529,7 +546,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             {
                 int i = DateTimeHelper.CompareYearMonth(c.DisplayDateInternal, DateTime.Today);
 
-                if (i > -2 && i < 2)
+                if (i <= -2 || i >= 2)
                 {
                     c.UpdateCellItems();
                 }
@@ -539,6 +556,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
         #endregion IsTodayHighlighted
 
         #region Language
+
         private static void OnLanguageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             Scheduler c = d as Scheduler;
@@ -552,7 +570,8 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 }
             }
         }
-        #endregion
+
+        #endregion Language
 
         #region SelectedDate
 
@@ -588,21 +607,19 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
             if (c.SelectionMode != CalendarSelectionMode.None || e.NewValue == null)
             {
-                DateTime? addedDate;
-
-                addedDate = (DateTime?)e.NewValue;
+                var addedDate = (DateTime?)e.NewValue;
 
                 if (IsValidDateSelection(c, addedDate))
                 {
                     if (!addedDate.HasValue)
                     {
-                        c.SelectedDatesInternal.ClearInternal(true /*fireChangeNotification*/);
+                        c.SelectedDatesInternal.Clear();
                     }
                     else
                     {
                         if (!(c.SelectedDatesInternal.Count > 0 && c.SelectedDatesInternal[0] == addedDate.Value))
                         {
-                            c.SelectedDatesInternal.ClearInternal();
+                            c.SelectedDatesInternal.Clear();
                             c.SelectedDatesInternal.Add(addedDate.Value);
                         }
                     }
@@ -614,8 +631,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
                         {
                             c.CurrentDate = addedDate.Value;
                         }
-
-                        c.UpdateCellItems();
                     }
                 }
                 else
@@ -632,7 +647,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
         #endregion SelectedDate
 
         #region SelectedDatesInternal
-        
+
         /// <summary>
         /// Gets the dates that are currently selected.
         /// </summary>
@@ -651,7 +666,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
         {
             get => (IList<DateTime>)GetValue(SelectedDatesProperty);
             set => SetValue(SelectedDatesProperty, value);
-        } 
+        }
 
         #endregion SelectedDatesInternal
 
@@ -683,7 +698,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             Debug.Assert(c != null);
 
             c.HoverStart = c.HoverEnd = null;
-            c.SelectedDatesInternal.ClearInternal(true /*fireChangeNotification*/);
+            c.SelectedDatesInternal.Clear();
             c.OnSelectionModeChanged(EventArgs.Empty);
         }
 
@@ -711,22 +726,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
             set;
         }
 
-        internal DateTime DisplayDateInternal
-        {
-            get;
-            private set;
-        }
-
-        internal DateTime DisplayDateEndInternal => DisplayDateEnd.GetValueOrDefault(DateTime.MaxValue);
-
-        internal DateTime DisplayDateStartInternal => DisplayDateStart.GetValueOrDefault(DateTime.MinValue);
-
-        internal DateTime CurrentDate
-        {
-            get => _currentDate.GetValueOrDefault(DisplayDateInternal);
-            set => _currentDate = value;
-        }
-
         internal DateTime? HoverStart
         {
             get => SelectionMode == CalendarSelectionMode.None ? null : _hoverStart;
@@ -748,10 +747,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
         internal DateTime DisplayYear => new DateTime(DisplayDate.Year, 1, 1);
 
         #endregion Internal Properties
-
-        #region Private Properties
-
-        #endregion Private Properties
 
         #region Public Methods
 
@@ -776,7 +771,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
             }
 
             CurrentDate = DisplayDate;
-            UpdateCellItems();
         }
 
         /// <summary>
@@ -897,50 +891,51 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 CurrentDate = selectedDate;
             }
 
-            if (DateTimeHelper.CompareYearMonth(selectedDate, DisplayDateInternal) != 0)
-            {
-                MoveDisplayTo(selectedDate);
-            }
-            else
-            {
-                UpdateCellItems();
-                FocusDate(selectedDate);
-            }
+            //if (DateTimeHelper.CompareYearMonth(selectedDate, DisplayDateInternal) != 0)
+            //{
+            //    MoveDisplayTo(selectedDate);
+            //}
+            //else
+            //{
+            //UpdateCellItems();
+            //UpdateSelection();
+            FocusDate(selectedDate);
+            //}
         }
 
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
             base.OnMouseWheel(e);
 
-            switch (DisplayMode)
-            {
-                case CalendarMode.Month:
-                {
-                    var value = e.Delta < 0 ? 1 : -1;
-                    DateTime? selectedDate = BlackoutDates.GetNonBlackoutDate(DateTimeHelper.AddMonths(CurrentDate, value), value);
-                    ProcessSelection(false, selectedDate);
-                    break;
-                }
+            //switch (DisplayMode)
+            //{
+            //    case CalendarMode.Month:
+            //        {
+            //            var value = e.Delta < 0 ? 1 : -1;
+            //            DateTime? selectedDate = BlackoutDates.GetNonBlackoutDate(DateTimeHelper.AddMonths(CurrentDate, value), value);
+            //            ProcessSelection(false, selectedDate);
+            //            break;
+            //        }
 
-                case CalendarMode.Year:
-                {
-                    var value = e.Delta < 0 ? 1 : -1;
-                        DateTime? selectedMonth = DateTimeHelper.AddYears(DisplayDate, value);
-                    OnSelectedMonthChanged(selectedMonth);
-                    break;
-                }
+            //    case CalendarMode.Year:
+            //        {
+            //            var value = e.Delta < 0 ? 1 : -1;
+            //            DateTime? selectedMonth = DateTimeHelper.AddYears(DisplayDate, value);
+            //            OnSelectedMonthChanged(selectedMonth);
+            //            break;
+            //        }
 
-                case CalendarMode.Decade:
-                {
-                    var value = e.Delta < 0 ? 10 : -10;
-                        DateTime? selectedYear = DateTimeHelper.AddYears(DisplayDate, value);
-                    OnSelectedYearChanged(selectedYear);
-                    break;
-                }
-            }
+            //    case CalendarMode.Decade:
+            //        {
+            //            var value = e.Delta < 0 ? 10 : -10;
+            //            DateTime? selectedYear = DateTimeHelper.AddYears(DisplayDate, value);
+            //            OnSelectedYearChanged(selectedYear);
+            //            break;
+            //        }
+            //}
         }
 
-        internal void OnSchedulerButtonPressed(SchedulerItem b, bool switchDisplayMode)
+        internal void OnSchedulerItemPressed(SchedulerItem b, bool switchDisplayMode)
         {
             if (b.DataContext is DateTime)
             {
@@ -1088,6 +1083,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 CoerceFromSelection();
 
                 SelectedDates = SelectedDatesInternal.ToList();
+                SelectedDate = SelectedDatesInternal.FirstOrDefault();
                 OnSelectedDatesChanged(e);
             }
         }
@@ -1121,6 +1117,8 @@ namespace My.CoachManager.Presentation.Prism.Controls
                         Debug.Assert(false);
                         break;
                 }
+
+                UpdateAppointments();
             }
         }
 
@@ -1140,7 +1138,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
         {
             if (HoverStart != null)
             {
-                SelectedDatesInternal.ClearInternal();
+                SelectedDatesInternal.Clear();
 
                 // In keyboard selection, we are sure that the collection does not include any blackout days
                 SelectedDatesInternal.AddRange(HoverStart.Value, CurrentDate);
@@ -1249,7 +1247,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 MonthControl.FocusDate(date);
             }
         }
-
 
         /// <summary>
         ///     Called when this element gets focus.
@@ -1407,26 +1404,26 @@ namespace My.CoachManager.Presentation.Prism.Controls
             switch (DisplayMode)
             {
                 case CalendarMode.Month:
-                {
                     {
-                        DateTime? selectedDate = new DateTime(DisplayDateInternal.Year, DisplayDateInternal.Month, 1);
-
-                        if (DateTimeHelper.CompareYearMonth(DateTime.MaxValue, selectedDate.Value) > 0)
                         {
-                            // since DisplayDate is not equal to DateTime.MaxValue we are sure selectedDate is not null
-                            selectedDate = DateTimeHelper.AddMonths(selectedDate.Value, 1).Value;
-                            selectedDate = DateTimeHelper.AddDays(selectedDate.Value, -1).Value;
-                        }
-                        else
-                        {
-                            selectedDate = DateTime.MaxValue;
+                            DateTime? selectedDate = new DateTime(DisplayDateInternal.Year, DisplayDateInternal.Month, 1);
+
+                            if (DateTimeHelper.CompareYearMonth(DateTime.MaxValue, selectedDate.Value) > 0)
+                            {
+                                // since DisplayDate is not equal to DateTime.MaxValue we are sure selectedDate is not null
+                                selectedDate = DateTimeHelper.AddMonths(selectedDate.Value, 1).Value;
+                                selectedDate = DateTimeHelper.AddDays(selectedDate.Value, -1).Value;
+                            }
+                            else
+                            {
+                                selectedDate = DateTime.MaxValue;
+                            }
+
+                            ProcessSelection(shift, selectedDate);
                         }
 
-                        ProcessSelection(shift, selectedDate);
+                        break;
                     }
-
-                    break;
-                }
 
                 case CalendarMode.Year:
                     {
@@ -1472,7 +1469,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             {
                 case CalendarMode.Month:
                     {
-                        // 
+                        //
                         DateTime? selectedDate = new DateTime(DisplayDateInternal.Year, DisplayDateInternal.Month, 1);
                         ProcessSelection(shift, selectedDate);
                         break;
@@ -1615,7 +1612,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             {
                 if (SelectionMode == CalendarSelectionMode.SingleRange || SelectionMode == CalendarSelectionMode.MultipleRange)
                 {
-                    SelectedDatesInternal.ClearInternal();
+                    SelectedDatesInternal.Clear();
                     if (shift)
                     {
                         _isShiftPressed = true;
@@ -1668,7 +1665,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
                     OnDayClick(lastSelectedDate.Value);
                 }
 
-                UpdateCellItems();
+                //UpdateCellItems();
             }
         }
 
@@ -1733,12 +1730,52 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         #endregion Private Methods
 
-
         protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
         {
             base.OnItemsSourceChanged(oldValue, newValue);
 
-            UpdateCellItems();
+            UpdateAppointments();
+        }
+
+        protected void UpdateAppointments()
+        {
+            if (MonthControl != null)
+            {
+                switch (DisplayMode)
+                {
+                    case CalendarMode.Month:
+                        var days = MonthControl.GetSchedulerDays();
+
+                        foreach (var item in days)
+                        {
+                            item.ItemsSource = GetAppointmentsByDate((DateTime)item.DataContext);
+                        }
+                        break;
+
+                    case CalendarMode.Year:
+                        var months = MonthControl.GetSchedulerButtons();
+
+                        foreach (var item in months)
+                        {
+                            var date = (DateTime)item.DataContext;
+                            item.ItemsSource = GetAppointmentsByMonth(date.Month);
+                        }
+                        break;
+
+                    case CalendarMode.Decade:
+                        var years = MonthControl.GetSchedulerButtons();
+
+                        foreach (var item in years)
+                        {
+                            var date = (DateTime)item.DataContext;
+                            item.ItemsSource = GetAppointmentsByYear(date.Year);
+                        }
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
         }
 
         internal IList<IAppointment> GetAppointments()
@@ -1746,8 +1783,8 @@ namespace My.CoachManager.Presentation.Prism.Controls
             var list = new List<IAppointment>();
             foreach (var item in Items)
             {
-                if(item is IAppointment appointment)
-                list.Add(appointment);
+                if (item is IAppointment appointment)
+                    list.Add(appointment);
             }
 
             return list;

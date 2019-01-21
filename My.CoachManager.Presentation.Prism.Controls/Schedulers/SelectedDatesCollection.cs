@@ -1,11 +1,12 @@
-﻿using System;
+﻿using My.CoachManager.CrossCutting.Core.Helpers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Windows.Controls;
-using My.CoachManager.CrossCutting.Core.Helpers;
 
 namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
 {
@@ -15,13 +16,12 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
     public sealed class SelectedDatesCollection : ObservableCollection<DateTime>
     {
         #region Data
+
         private readonly Collection<DateTime> _addedItems;
         private readonly Collection<DateTime> _removedItems;
         private readonly Thread _dispatcherThread;
         private bool _isAddingRange;
         private readonly Scheduler _owner;
-        private DateTime? _maximumDate;
-        private DateTime? _minimumDate;
 
         #endregion Data
 
@@ -37,63 +37,13 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             _removedItems = new Collection<DateTime>();
         }
 
-        #region Internal Properties
+        #region Properties
 
-        internal DateTime? MinimumDate
-        {
-            get
-            {
-                if (Count < 1)
-                {
-                    return null;
-                }
+        public DateTime? MaximumDate => this.Max();
 
-                if (!_minimumDate.HasValue)
-                {
-                    DateTime result = this[0];
-                    foreach (DateTime selectedDate in this)
-                    {
-                        if (DateTime.Compare(selectedDate, result) < 0)
-                        {
-                            result = selectedDate;
-                        }
-                    }
+        public DateTime? MinimumDate => this.Min();
 
-                    _maximumDate = result;
-                }
-
-                return _minimumDate;
-            }
-        }
-
-        internal DateTime? MaximumDate
-        {
-            get
-            {
-                if (Count < 1)
-                {
-                    return null;
-                }
-
-                if (!_maximumDate.HasValue)
-                {
-                    DateTime result = this[0];
-                    foreach (DateTime selectedDate in this)
-                    {
-                        if (DateTime.Compare(selectedDate, result) > 0)
-                        {
-                            result = selectedDate;
-                        }
-                    }
-
-                    _maximumDate = result;
-                }
-
-                return _maximumDate;
-            }
-        }
-
-        #endregion
+        #endregion Properties
 
         #region Public methods
 
@@ -109,18 +59,21 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             // If SchedulerSelectionMode.SingleRange and a user programmatically tries to add multiple ranges, we will throw away the old range and replace it with the new one.
             if (_owner.SelectionMode == CalendarSelectionMode.SingleRange && Count > 0)
             {
-                ClearInternal();
+                Clear();
             }
 
             foreach (DateTime current in GetDaysInRange(start, end))
             {
-                Add(current);
+                if (Scheduler.IsValidDateSelection(_owner, current))
+                {
+                    Add(current);
+                }
             }
 
             EndAddRange();
         }
 
-        #endregion Public Methods
+        #endregion Public methods
 
         #region Protected methods
 
@@ -129,15 +82,15 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
         /// </summary>
         protected override void ClearItems()
         {
-            if (!IsValidThread())
+            if (Count > 0)
             {
-                throw new NotSupportedException();
+                foreach (DateTime item in this)
+                {
+                    _removedItems.Add(item);
+                }
+
+                base.ClearItems();
             }
-
-            // Turn off highlight
-            _owner.HoverStart = null;
-
-            ClearInternal(true /*fireChangeNotification*/);
         }
 
         /// <summary>
@@ -168,13 +121,6 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
                     }
 
                     base.InsertItem(index, item);
-                    UpdateMinMax(item);
-
-                    // The event fires after SelectedDate changes
-                    if (index == 0 && !(_owner.SelectedDate.HasValue && DateTime.Compare(_owner.SelectedDate.Value, item) == 0))
-                    {
-                        _owner.SelectedDate = item;
-                    }
 
                     if (!_isAddingRange)
                     {
@@ -182,12 +128,6 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
 
                         RaiseSelectionChanged(_removedItems, addedItems);
                         _removedItems.Clear();
-                        int monthDifference = DateTimeHelper.CompareYearMonth(item, _owner.DisplayDateInternal);
-
-                        if (monthDifference < 2 && monthDifference > -2)
-                        {
-                            _owner.UpdateCellItems();
-                        }
                     }
                     else
                     {
@@ -215,37 +155,16 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             if (index >= Count)
             {
                 base.RemoveItem(index);
-                ClearMinMax();
             }
             else
             {
                 Collection<DateTime> addedItems = new Collection<DateTime>();
                 Collection<DateTime> removedItems = new Collection<DateTime>();
-                int monthDifference = DateTimeHelper.CompareYearMonth(this[index], _owner.DisplayDateInternal);
 
                 removedItems.Add(this[index]);
                 base.RemoveItem(index);
-                ClearMinMax();
-
-                // The event fires after SelectedDate changes
-                if (index == 0)
-                {
-                    if (Count > 0)
-                    {
-                        _owner.SelectedDate = this[0];
-                    }
-                    else
-                    {
-                        _owner.SelectedDate = null;
-                    }
-                }
 
                 RaiseSelectionChanged(removedItems, addedItems);
-
-                if (monthDifference < 2 && monthDifference > -2)
-                {
-                    _owner.UpdateCellItems();
-                }
             }
         }
 
@@ -269,7 +188,6 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
                 if (index >= Count)
                 {
                     base.SetItem(index, item);
-                    UpdateMinMax(item);
                 }
                 else
                 {
@@ -277,24 +195,10 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
                     {
                         removedItems.Add(this[index]);
                         base.SetItem(index, item);
-                        UpdateMinMax(item);
 
                         addedItems.Add(item);
 
-                        // The event fires after SelectedDate changes
-                        if (index == 0 && !(_owner.SelectedDate.HasValue && DateTime.Compare(_owner.SelectedDate.Value, item) == 0))
-                        {
-                            _owner.SelectedDate = item;
-                        }
-
                         RaiseSelectionChanged(removedItems, addedItems);
-
-                        int monthDifference = DateTimeHelper.CompareYearMonth(item, _owner.DisplayDateInternal);
-
-                        if (monthDifference < 2 && monthDifference > -2)
-                        {
-                            _owner.UpdateCellItems();
-                        }
                     }
                 }
             }
@@ -304,109 +208,44 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
 
         #region Internal Methods
 
-        /// <summary>
-        /// Adds a range of dates to the Scheduler SelectedDatesInternal.
-        /// </summary>
-        /// <remarks>
-        /// Helper version of AddRange for mouse drag selection. 
-        /// This version guarantees no exceptions will be thrown by removing blackout days from the range before adding to the collection      
-        /// </remarks>
-        internal void AddRangeInternal(DateTime start, DateTime end)
-        {
-            BeginAddRange();
+        //internal void Toggle(DateTime date)
+        //{
+        //    if (Scheduler.IsValidDateSelection(_owner, date))
+        //    {
+        //        switch (_owner.SelectionMode)
+        //        {
+        //            case CalendarSelectionMode.SingleDate:
+        //                {
+        //                    if (!_owner.SelectedDate.HasValue || DateTimeHelper.CompareDays(_owner.SelectedDate.Value, date) != 0)
+        //                    {
+        //                        _owner.SelectedDate = date;
+        //                    }
+        //                    else
+        //                    {
+        //                        _owner.SelectedDate = null;
+        //                    }
 
-            // In Mouse Selection we allow the user to be able to add multiple ranges in one action in MultipleRange Mode
-            // In SingleRange Mode, we only add the first selected range
-            DateTime lastAddedDate = start;
-            foreach (DateTime current in GetDaysInRange(start, end))
-            {
-                if (Scheduler.IsValidDateSelection(_owner, current))
-                {
-                    Add(current);
-                    lastAddedDate = current;
-                }
-                else
-                {
-                    if (_owner.SelectionMode == CalendarSelectionMode.SingleRange)
-                    {
-                        _owner.CurrentDate = lastAddedDate;
-                        break;
-                    }
-                }
-            }
+        //                    break;
+        //                }
 
-            EndAddRange();
-        }
+        //            case CalendarSelectionMode.MultipleRange:
+        //                {
+        //                    if (!Remove(date))
+        //                    {
+        //                        Add(date);
+        //                    }
 
-        internal void ClearInternal(bool fireChangeNotification = false)
-        {
-            if (Count > 0)
-            {
-                foreach (DateTime item in this)
-                {
-                    _removedItems.Add(item);
-                }
+        //                    break;
+        //                }
 
-                base.ClearItems();
-                ClearMinMax();
-
-                if (fireChangeNotification)
-                {
-                    if (_owner.SelectedDate != null)
-                    {
-                        _owner.SelectedDate = null;
-                    }
-
-                    if (_removedItems.Count > 0)
-                    {
-                        Collection<DateTime> addedItems = new Collection<DateTime>();
-                        RaiseSelectionChanged(_removedItems, addedItems);
-                        _removedItems.Clear();
-                    }
-
-                    _owner.UpdateCellItems();
-                }
-            }
-        }
-
-        internal void Toggle(DateTime date)
-        {
-            if (Scheduler.IsValidDateSelection(_owner, date))
-            {
-                switch (_owner.SelectionMode)
-                {
-                    case CalendarSelectionMode.SingleDate:
-                        {
-                            if (!_owner.SelectedDate.HasValue || DateTimeHelper.CompareDays(_owner.SelectedDate.Value, date) != 0)
-                            {
-                                _owner.SelectedDate = date;
-                            }
-                            else
-                            {
-                                _owner.SelectedDate = null;
-                            }
-
-                            break;
-                        }
-
-                    case CalendarSelectionMode.MultipleRange:
-                        {
-                            if (!Remove(date))
-                            {
-                                Add(date);
-                            }
-
-                            break;
-                        }
-
-                    default:
-                        {
-                            Debug.Assert(false);
-                            break;
-                        }
-                }
-            }
-        }
+        //            default:
+        //                {
+        //                    Debug.Assert(false);
+        //                    break;
+        //                }
+        //        }
+        //    }
+        //}
 
         #endregion Internal Methods
 
@@ -431,7 +270,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             RaiseSelectionChanged(_removedItems, _addedItems);
             _removedItems.Clear();
             _addedItems.Clear();
-            _owner.UpdateCellItems();
+            //_owner.UpdateCellItems();
         }
 
         private bool CheckSelectionMode()
@@ -450,37 +289,16 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             // in order to provide the removed items without an additional event, we are calling ClearInternal
             if (_owner.SelectionMode == CalendarSelectionMode.SingleRange && !_isAddingRange && Count > 0)
             {
-                ClearInternal();
+                Clear();
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         private bool IsValidThread()
         {
             return Thread.CurrentThread == _dispatcherThread;
-        }
-
-        private void UpdateMinMax(DateTime date)
-        {
-            if ((!_maximumDate.HasValue) || (date > _maximumDate.Value))
-            {
-                _maximumDate = date;
-            }
-
-            if ((!_minimumDate.HasValue) || (date < _minimumDate.Value))
-            {
-                _minimumDate = date;
-            }
-        }
-
-        private void ClearMinMax()
-        {
-            _maximumDate = null;
-            _minimumDate = null;
         }
 
         private static IEnumerable<DateTime> GetDaysInRange(DateTime start, DateTime end)
