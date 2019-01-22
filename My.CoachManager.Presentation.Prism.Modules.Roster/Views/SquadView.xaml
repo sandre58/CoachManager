@@ -39,7 +39,7 @@
                             <DataTemplate DataType="models:RosterPlayerModel">
                                 <StackPanel Orientation="Horizontal">
 
-                                    <controls:ActionsListViewItemControl x:Name="ActionsControl">
+                                    <controls:ToolbarControl x:Name="ActionsControl" Style="{StaticResource ToolbarControlForListViewItemStyle}">
                                         <Button CommandParameter="{Binding}"
                                                 Command="{Binding DataContext.EditCommand,
                                 RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}"
@@ -87,7 +87,7 @@
                                                 </controls:Submenu>
                                             </controls:DropDownButton.Submenu>
                                         </controls:DropDownButton>
-                                    </controls:ActionsListViewItemControl>
+                                    </controls:ToolbarControl>
                                 </StackPanel>
                             </DataTemplate>
                         </columns:ActionsGridViewColumn.CellTemplate>

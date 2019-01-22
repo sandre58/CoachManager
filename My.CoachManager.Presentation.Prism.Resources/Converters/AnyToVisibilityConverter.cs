@@ -35,15 +35,13 @@ namespace My.CoachManager.Presentation.Prism.Resources.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch (value)
+            var enumerable = (IEnumerable<object>)value;
+            if (parameter != null && parameter.ToString() == "inverse")
             {
-                case IEnumerable<object> enumerable:
-                    return !enumerable.Any() ? Visibility.Collapsed : Visibility.Visible;
-                case ICollection collection:
-                    return collection.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
+                return enumerable == null || !enumerable.Any() ? Visibility.Visible : Visibility.Collapsed;
             }
+            return enumerable != null && enumerable.Any() ? Visibility.Visible : Visibility.Collapsed;
 
-            return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

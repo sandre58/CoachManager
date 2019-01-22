@@ -90,7 +90,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionsListViewItemControl.cs" />
+    <Compile Include="ToolbarControl.cs" />
     <Compile Include="AdornedControl.cs" />
     <Compile Include="Buttons\DropDownButtonAutomationPeer.cs" />
     <Compile Include="Schedulers\DateTimeAutomationPeer.cs" />

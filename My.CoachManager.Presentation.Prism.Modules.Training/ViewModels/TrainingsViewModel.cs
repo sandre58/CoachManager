@@ -158,6 +158,25 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.ViewModels
 
         #endregion Add
 
+        #region Open
+
+        /// <summary>
+        /// Open Item.
+        /// </summary>
+        protected override void Open(TrainingModel item)
+        {
+            if (SelectedItems.Any())
+            {
+                item.IsSelected = !item.IsSelected;
+            }
+            else
+            {
+                base.Open(item);
+            }
+        }
+
+        #endregion Open
+
         #region PropertuChanged
 
         protected void OnSelectedDatesChanged()

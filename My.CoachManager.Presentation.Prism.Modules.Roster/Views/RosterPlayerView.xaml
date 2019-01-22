@@ -10,6 +10,7 @@
              xmlns:entities="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
              xmlns:resources="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Roster.Resources"
              xmlns:resources1="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:views="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Roster.Views"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:RosterPlayerViewModel}"
@@ -240,6 +241,9 @@
                 </ContentControl>
             </TabItem>
             <TabItem Header="{x:Static resources:RosterPlayerResources.Positions}"></TabItem>
+            <TabItem Header="{x:Static resources:RosterPlayerResources.Injuries}">
+                <views:RosterPlayerInjuriesView />
+            </TabItem>
         </TabControl>
 
         <controls:WorkspaceView.Commands>

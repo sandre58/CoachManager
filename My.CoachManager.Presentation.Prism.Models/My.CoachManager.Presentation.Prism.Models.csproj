@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregates\AddressFactory.cs" />
+    <Compile Include="Aggregates\InjuryFactory.cs" />
     <Compile Include="Aggregates\PositionFactory.cs" />
     <Compile Include="Aggregates\CountryFactory.cs" />
     <Compile Include="Aggregates\ContactFactory.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="EmailModel.cs" />
     <Compile Include="Filters\SquadsFilter.cs" />
     <Compile Include="Filters\PlayerPositionFilter.cs" />
+    <Compile Include="InjuryModel.cs" />
     <Compile Include="PersonModel.cs" />
     <Compile Include="PhoneModel.cs" />
     <Compile Include="PlayerModel.cs" />

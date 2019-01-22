@@ -120,6 +120,9 @@
   <data name="AddedTrainingsSuccessMessage" xml:space="preserve">
     <value>{0} entrainements ont été ajoutés avec succès.</value>
   </data>
+  <data name="Attendance" xml:space="preserve">
+    <value>Présences</value>
+  </data>
   <data name="EditTraining" xml:space="preserve">
     <value>Editer l'entrainement</value>
   </data>
@@ -129,10 +132,13 @@
   <data name="NewTrainings" xml:space="preserve">
     <value>Ajouter des entrainements</value>
   </data>
-  <data name="TrainingMenu" xml:space="preserve">
-    <value>Entrainement</value>
+  <data name="TrainingsMenu" xml:space="preserve">
+    <value>Entrainements</value>
   </data>
   <data name="TrainingsTitle" xml:space="preserve">
     <value>Entrainements</value>
+  </data>
+  <data name="TrainingTitle" xml:space="preserve">
+    <value>Séance du {0}</value>
   </data>
 </root>

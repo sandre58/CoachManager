@@ -645,7 +645,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             {
                 if (OwningScheduler.SelectionMode == CalendarSelectionMode.SingleDate)
                 {
-                    OwningScheduler.SelectedDate = Date;
+                    OwningScheduler.SelectedDateInternal = Date;
                 }
                 else
                 {
@@ -683,7 +683,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             {
                 if (EnsureSelection() && OwningScheduler.SelectionMode == CalendarSelectionMode.SingleDate)
                 {
-                    OwningScheduler.SelectedDate = Date;
+                    OwningScheduler.SelectedDateInternal = Date;
                 }
             }
             else if (owningButton != null && owningButton.IsEnabled)

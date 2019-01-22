@@ -1,52 +1,49 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Enums;
-using My.CoachManager.Domain.Core;
+using My.CoachManager.CrossCutting.Core.Resources;
+using My.CoachManager.CrossCutting.Core.Resources.Entities;
+using My.CoachManager.Presentation.Prism.Core.Models;
 
-namespace My.CoachManager.Domain.Entities
+namespace My.CoachManager.Presentation.Prism.Models
 {
     /// <summary>
     /// Provides properties for a injury Entity.
     /// </summary>
-    public class Injury : Entity
+    public class InjuryModel : EntityModel
     {
 
         /// <summary>
         /// Gets or sets the condition.
         /// </summary>
-        [Required]
+        [Display(Name = "Condition", ResourceType = typeof(InjuryResources))]
+        [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public virtual string Condition { get; set; }
-
-        /// <summary>
-        /// Gets or sets the player id.
-        /// </summary>
-        [Required]
-        public int? PlayerId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the player.
-        /// </summary>
-        public virtual Player Player { get; set; }
 
         /// <summary>
         /// Gets or sets the type.
         /// </summary>
-        [Required]
+        [Display(Name = "Type", ResourceType = typeof(InjuryResources))]
+        [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         public virtual InjuryType Type { get; set; }
 
         /// <summary>
         /// Gets or sets the description.
         /// </summary>
+        [Display(Name = "Description", ResourceType = typeof(InjuryResources))]
         public virtual string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the date.
         /// </summary>
+        [Display(Name = "Date", ResourceType = typeof(InjuryResources))]
         public virtual DateTime Date { get; set; }
 
         /// <summary>
         /// Gets or sets the expected return date.
         /// </summary>
+        [Display(Name = "ExpectedReturn", ResourceType = typeof(InjuryResources))]
         public virtual DateTime? ExpectedReturn { get; set; }
+
     }
 }

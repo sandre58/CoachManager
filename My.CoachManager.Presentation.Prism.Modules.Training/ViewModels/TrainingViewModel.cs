@@ -1,6 +1,7 @@
 ﻿using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
+using My.CoachManager.Presentation.Prism.Modules.Training.Resources;
 using My.CoachManager.Presentation.Prism.Modules.Training.Views;
 using My.CoachManager.Presentation.ServiceAgent.TrainingServiceReference;
 
@@ -31,6 +32,13 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.ViewModels
         protected override TrainingModel LoadItemCore(int id)
         {
             return TrainingFactory.Get(_trainingService.GetTrainingById(id));
+        }
+
+        protected override void OnLoadDataCompleted()
+        {
+            base.OnLoadDataCompleted();
+
+            Title = string.Format(TrainingResources.TrainingTitle, Item.Date.ToLongDateString());
         }
 
         #endregion Data

@@ -61,6 +61,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Enums {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dos.
+        /// </summary>
+        public static string Back {
+            get {
+                return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tête.
         /// </summary>
         public static string Head {

@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.Resources {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -36,8 +39,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("My.CoachManager.Presentation.Prism.Modules.Roster.Resources.RosterPlayerResourc" +
-                            "es", typeof(RosterPlayerResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("My.CoachManager.Presentation.Prism.Modules.Roster.Resources.RosterPlayerResources" +
+                            "", typeof(RosterPlayerResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -91,6 +94,15 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.Resources {
         public static string IdCard {
             get {
                 return ResourceManager.GetString("IdCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blessures.
+        /// </summary>
+        public static string Injuries {
+            get {
+                return ResourceManager.GetString("Injuries", resourceCulture);
             }
         }
         

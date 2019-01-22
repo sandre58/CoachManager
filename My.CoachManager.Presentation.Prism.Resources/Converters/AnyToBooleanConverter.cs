@@ -29,6 +29,10 @@ namespace My.CoachManager.Presentation.Prism.Resources.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var enumerable = (IEnumerable<object>)value;
+            if (parameter != null && parameter.ToString() == "inverse")
+            {
+                return enumerable == null || !enumerable.Any();
+            }
             return enumerable != null && enumerable.Any();
         }
 

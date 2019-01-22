@@ -178,13 +178,13 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
                 {
                     DateTime focusedDate;
                     // Focus should have moved to either SelectedDate or DisplayDate
-                    if (owner.SelectedDate.HasValue && DateTimeHelper.CompareYearMonth(owner.SelectedDate.Value, owner.DisplayDateInternal) == 0)
+                    if (owner.SelectedDateInternal.HasValue && DateTimeHelper.CompareYearMonth(owner.SelectedDateInternal.Value, owner.DisplayDateInternal) == 0)
                     {
-                        focusedDate = owner.SelectedDate.Value;
+                        focusedDate = owner.SelectedDateInternal.Value;
                     }
                     else
                     {
-                        focusedDate = owner.DisplayDate;
+                        focusedDate = owner.DisplayDateInternal;
                     }
 
                     DateTimeAutomationPeer focusedItem = GetOrCreateDateTimeAutomationPeer(focusedDate, owner.DisplayMode, /*addParentInfo*/ false);
@@ -562,7 +562,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
         {
             DateTime? nextDate = null;
 
-            DateTime startDate = (currentDatePeer != null) ? currentDatePeer.Date : OwningScheduler.DisplayDate;
+            DateTime startDate = (currentDatePeer != null) ? currentDatePeer.Date : OwningScheduler.DisplayDateInternal;
 
             if (currentMode == CalendarMode.Month)
                 nextDate = startDate.AddDays(1);
@@ -576,7 +576,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
 
         private DateTime? GetNextSelectedDate(DateTimeAutomationPeer currentDatePeer, bool isSelected)
         {
-            DateTime startDate = (currentDatePeer != null) ? currentDatePeer.Date : OwningScheduler.DisplayDate;
+            DateTime startDate = (currentDatePeer != null) ? currentDatePeer.Date : OwningScheduler.DisplayDateInternal;
 
             if (isSelected)
             {

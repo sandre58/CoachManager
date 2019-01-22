@@ -104,6 +104,9 @@
     <Compile Include="ViewModels\RosterPlayerEditViewModel.cs" />
     <Compile Include="ViewModels\SquadViewModel.cs" />
     <Compile Include="ViewModels\SquadParametersViewModel.cs" />
+    <Compile Include="Views\RosterPlayerView.xaml.Injuries.xaml.cs">
+      <DependentUpon>RosterPlayerView.xaml.Injuries.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SquadEditView.xaml.cs">
       <DependentUpon>SquadEditView.xaml</DependentUpon>
     </Compile>
@@ -134,6 +137,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\RosterPlayerView.xaml.Injuries.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\SquadEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -10,5 +10,5 @@
                          Color="#007913"
              Icon="{StaticResource TrainingGeometry}"
              Style="{StaticResource NavigationItemStyle}"
-                         Content="{x:Static strings:TrainingResources.TrainingMenu}">
+                         Content="{x:Static strings:TrainingResources.TrainingsMenu}">
 </controls:NavigationItem>

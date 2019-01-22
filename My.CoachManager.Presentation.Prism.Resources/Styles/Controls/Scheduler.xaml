@@ -13,7 +13,24 @@
 <ResourceDictionary Source="Button.xaml" />
         <ResourceDictionary Source="CommandButton.xaml" />
         <ResourceDictionary Source="ScrollBar.xaml" />
+        <ResourceDictionary Source="ToolbarControl.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="ToolbarControlForSchedulerAppointmentStyle" TargetType="{x:Type controls:ToolbarControl}" BasedOn="{StaticResource {x:Type controls:ToolbarControl}}">
+        <Setter Property="Direction" Value="RightToLeft" />
+        <Setter Property="PlacementTarget" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type calendars:SchedulerAppointment}}}" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type calendars:SchedulerAppointment}}}" Value="False">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:Scheduler}}, Converter={StaticResource AnyToBooleanConverter}}" Value="True">
+                <Setter Property="Visibility" Value="Visible" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:Scheduler}}, Converter={StaticResource AnyToBooleanConverter}}" Value="True">
+                <Setter Property="ShowActions" Value="False" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 
     <DataTemplate x:Key="AppointmentDataTemplate" DataType="{x:Type models:IAppointment}">
         <StackPanel Orientation="Horizontal">
@@ -26,8 +43,13 @@
     </DataTemplate>
     
     <Style TargetType="{x:Type calendars:SchedulerAppointment}" BasedOn="{StaticResource ButtonBaseStyle}">
+        <Style.Resources>
+            <Style TargetType="{x:Type controls:ToolbarControl}" BasedOn="{StaticResource ToolbarControlForSchedulerAppointmentStyle}" />
+        </Style.Resources>
         <Setter Property="Color" Value="{DynamicResource DarkAccent}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="IsTabStop" Value="True" />
         <Setter Property="CommandParameter" Value="{Binding}" />
         <Setter Property="Command" Value="{Binding AppointmentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Scheduler}}}" />
         <Setter Property="BorderBrush" Value="{Binding Color, RelativeSource={RelativeSource Self}}" />
@@ -69,7 +91,8 @@
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="MinWidth" Value="5" />
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="IsTabStop" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:SchedulerDay}">
@@ -102,6 +125,7 @@
                             </DockPanel>
 
                             <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Padding="{TemplateBinding Padding}"
+                                          Focusable="False"
                                 CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
                                 HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
@@ -177,6 +201,7 @@
     <Style x:Key="SchedulerItemStyle" TargetType="{x:Type controls:SchedulerItem}">
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Control}" />
+        <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="BorderThickness" Value="0,0,1,1" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" />
@@ -206,6 +231,7 @@
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           TextElement.Foreground="{DynamicResource NormalForeground}"
+                                        Foreground="{TemplateBinding Foreground}"
                                           parameters:ControlParameters.CharacterCasing="FirstLetterUpper"
                                          Content="{TemplateBinding Content}" />
                     </Grid>
@@ -250,10 +276,17 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource LightControlMouseOver}" />
             </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Accent}" />
+                <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+            </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style x:Key="SchedulerPanelStyle" TargetType="{x:Type controls:SchedulerPanel}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:SchedulerPanel}">
@@ -289,18 +322,15 @@
                                 <StackPanel Orientation="Horizontal" Margin="{StaticResource LargeHorizontalMargin}">
                                     <controls:CommandButton x:Name="PART_PreviousButton"
                                             Content="{StaticResource ArrowLeftGeometry}"
-                                            Focusable="False"
                                                             Margin="{StaticResource SmallHorizontalMargin}"/>
                                     <controls:CommandButton x:Name="PART_NextButton"
                                                             Content="{StaticResource ArrowRightGeometry}"
-                                            Focusable="False"
                                                             Margin="{StaticResource SmallHorizontalMargin}" />
                                 </StackPanel>
                                 <Button x:Name="PART_HeaderButton"
                                         Style="{StaticResource TextButtonStyle}"
                                         FontFamily="{DynamicResource NormalFontFamily}"
-                                        FontSize="{DynamicResource SmallHeaderFontSize}"
-                                        Focusable="False" >
+                                        FontSize="{DynamicResource SmallHeaderFontSize}" >
                                     <Button.ContentTemplate>
                                         <DataTemplate>
                                             <ContentControl Content="{Binding}" parameters:ControlParameters.CharacterCasing="FirstLetterUpper" />
@@ -373,11 +403,14 @@
         <Setter Property="Foreground" Value="{DynamicResource Control}" />
         <Setter Property="Background" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Control}" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderThickness" Value="0" /> 
         <Setter Property="SchedulerItemStyle" Value="{StaticResource SchedulerItemStyle}" />
         <Setter Property="SchedulerDayStyle" Value="{StaticResource SchedulerDayStyle}" />
         <Setter Property="SchedulerPanelStyle" Value="{StaticResource SchedulerPanelStyle}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:Scheduler}">

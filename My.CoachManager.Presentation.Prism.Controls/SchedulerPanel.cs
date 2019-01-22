@@ -44,7 +44,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         private readonly System.Globalization.Calendar _scheduler = new GregorianCalendar();
         private DataTemplate _dayTitleTemplate;
-        private bool _isMonthPressed;
         private bool _isDayPressed;
 
         #endregion Data
@@ -75,18 +74,13 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         #region Private Properties
 
-        /// <summary>
-        /// Gets a value indicating whether the Scheduler is displayed in months, years or decades.
-        /// </summary>
-        private CalendarMode DisplayMode => Owner?.DisplayMode ?? CalendarMode.Month;
-
         internal Button HeaderButton { get; private set; }
 
         internal Button NextButton { get; private set; }
 
         internal Button PreviousButton { get; private set; }
 
-        private DateTime DisplayDate => Owner?.DisplayDate ?? DateTime.Today;
+        private DateTime DisplayDate => Owner?.DisplayDateInternal ?? DateTime.Today;
 
         #endregion Private Properties
 
@@ -198,8 +192,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             {
                 ReleaseMouseCapture();
             }
-
-            _isMonthPressed = false;
+            
             _isDayPressed = false;
 
             // In Month mode, we may need to end a drag selection even if  the mouse up isn't on the Scheduler.
@@ -218,7 +211,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
             if (!IsMouseCaptured)
             {
                 _isDayPressed = false;
-                _isMonthPressed = false;
             }
         }
 
@@ -295,19 +287,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
             }
         }
 
-        internal SchedulerDay GetFocusedSchedulerDay()
-        {
-            foreach (SchedulerDay b in GetSchedulerDays())
-            {
-                if (b != null && b.IsFocused)
-                {
-                    return b;
-                }
-            }
-
-            return null;
-        }
-
         internal SchedulerDay GetSchedulerDay(DateTime date)
         {
             foreach (SchedulerDay b in GetSchedulerDays())
@@ -352,19 +331,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
             return null;
         }
 
-        internal SchedulerItem GetFocusedSchedulerButton()
-        {
-            foreach (SchedulerItem b in GetSchedulerButtons())
-            {
-                if (b != null && b.IsFocused)
-                {
-                    return b;
-                }
-            }
-
-            return null;
-        }
-
         internal IEnumerable<SchedulerItem> GetSchedulerButtons()
         {
             foreach (UIElement element in YearView.Children)
@@ -376,37 +342,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
             }
         }
 
-        internal void FocusDate(DateTime date)
-        {
-            FrameworkElement focusTarget = null;
-
-            switch (DisplayMode)
-            {
-                case CalendarMode.Month:
-                    {
-                        focusTarget = GetSchedulerDay(date);
-                        break;
-                    }
-
-                case CalendarMode.Year:
-                case CalendarMode.Decade:
-                    {
-                        focusTarget = GetSchedulerButton(date, DisplayMode);
-                        break;
-                    }
-
-                default:
-                    {
-                        Debug.Assert(false);
-                        break;
-                    }
-            }
-
-            if (focusTarget != null && !focusTarget.IsFocused)
-            {
-                focusTarget.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
-            }
-        }
 
         #endregion Internal Methods
 
@@ -419,7 +354,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
             // Adjust the decade value if the mouse move selection is on,
             // such that if first or last year among the children are selected
             // then return the current selected decade as is.
-            if (_isMonthPressed && YearView != null)
+            if (YearView != null)
             {
                 UIElementCollection yearViewChildren = YearView.Children;
                 int count = yearViewChildren.Count;
@@ -449,28 +384,21 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
         private void EndDrag(bool ctrl, DateTime selectedDate)
         {
-            if (Owner != null)
+            if (Owner?.HoverStart != null)
             {
-                Owner.CurrentDate = selectedDate;
-
-                if (Owner.HoverStart.HasValue)
+                if (
+                    ctrl &&
+                    DateTime.Compare(Owner.HoverStart.Value, selectedDate) == 0 &&
+                    (Owner.SelectionMode == CalendarSelectionMode.SingleDate || Owner.SelectionMode == CalendarSelectionMode.MultipleRange))
                 {
-                    if (
-                        ctrl &&
-                        DateTime.Compare(Owner.HoverStart.Value, selectedDate) == 0 &&
-                        (Owner.SelectionMode == CalendarSelectionMode.SingleDate || Owner.SelectionMode == CalendarSelectionMode.MultipleRange))
-                    {
-                        // Ctrl + single click = toggle
-                        Owner.SelectedDatesInternal.Toggle(selectedDate);
-                    }
-                    else
-                    {
-                        // this is selection with Mouse, we do not guarantee the range does not include BlackOutDates.
-                        // Use the internal AddRange that omits BlackOutDates based on the SelectionMode
-                        Owner.SelectedDatesInternal.AddRange(Owner.HoverStart.Value, selectedDate);
-                    }
-
-                    Owner.OnDayClick(selectedDate);
+                    // Ctrl + single click = toggle
+                    //Owner.Toggle(selectedDate);
+                }
+                else
+                {
+                    // this is selection with Mouse, we do not guarantee the range does not include BlackOutDates.
+                    // Use the internal AddRange that omits BlackOutDates based on the SelectionMode
+                    Owner.SelectedDatesInternal.AddRange(Owner.HoverStart.Value, selectedDate);
                 }
             }
         }
@@ -482,101 +410,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
             Owner?.OnDayOrMonthPreviewKeyDown(e);
         }
 
-        private void DayCell_MouseDown(object sender, RoutedEventArgs e)
-        {
-            if (Owner == null)
-            {
-                return;
-            }
-
-            SchedulerDay b = sender as SchedulerDay;
-            Debug.Assert(b != null);
-
-            if (!(b.DataContext is DateTime))
-            {
-                return;
-            }
-
-            // If the day is a blackout day selection is not allowed
-            if (!b.IsBlackedOut)
-            {
-                DateTime clickedDate = (DateTime)b.DataContext;
-                bool ctrl, shift;
-
-                SchedulerKeyboardHelper.GetMetaKeyState(out ctrl, out shift);
-
-                switch (Owner.SelectionMode)
-                {
-                    case CalendarSelectionMode.None:
-                        {
-                            break;
-                        }
-
-                    case CalendarSelectionMode.SingleDate:
-                        {
-                            if (!ctrl)
-                            {
-                                Owner.SelectedDate = clickedDate;
-                            }
-                            else
-                            {
-                                Owner.SelectedDatesInternal.Toggle(clickedDate);
-                            }
-
-                            break;
-                        }
-
-                    case CalendarSelectionMode.SingleRange:
-                        {
-                            DateTime? lastDate = Owner.CurrentDate;
-                            Owner.SelectedDatesInternal.Clear();
-                            if (shift)
-                            {
-                                Owner.SelectedDatesInternal.AddRange(lastDate.Value, clickedDate);
-                            }
-                            else
-                            {
-                                Owner.SelectedDate = clickedDate;
-                                Owner.HoverStart = null;
-                                Owner.HoverEnd = null;
-                            }
-
-                            break;
-                        }
-
-                    case CalendarSelectionMode.MultipleRange:
-                        {
-                            if (!ctrl)
-                            {
-                                Owner.SelectedDatesInternal.Clear();
-                            }
-
-                            if (shift)
-                            {
-                                Owner.SelectedDatesInternal.AddRange(Owner.CurrentDate, clickedDate);
-                            }
-                            else
-                            {
-                                if (!ctrl)
-                                {
-                                    Owner.SelectedDate = clickedDate;
-                                }
-                                else
-                                {
-                                    Owner.SelectedDatesInternal.Toggle(clickedDate);
-                                    Owner.HoverStart = null;
-                                    Owner.HoverEnd = null;
-                                }
-                            }
-
-                            break;
-                        }
-                }
-
-                Owner.OnDayClick(clickedDate);
-            }
-        }
-
         private void Cell_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (!(sender is SchedulerDay b))
@@ -584,10 +417,13 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 return;
             }
 
+
             if (Owner == null || !(b.DataContext is DateTime))
             {
                 return;
             }
+
+            DateTime clickedDate = (DateTime)b.DataContext;
 
             if (b.IsBlackedOut)
             {
@@ -598,80 +434,83 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 _isDayPressed = true;
                 //Mouse.Capture(this, CaptureMode.SubTree);
 
-                //b.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
+                b.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
 
-                bool ctrl, shift;
-                SchedulerKeyboardHelper.GetMetaKeyState(out ctrl, out shift);
-
-                DateTime selectedDate = (DateTime)b.DataContext;
-                Debug.Assert(selectedDate != null);
+                SchedulerKeyboardHelper.GetMetaKeyState(out var ctrl, out var shift);
 
                 switch (Owner.SelectionMode)
                 {
                     case CalendarSelectionMode.None:
-                        {
-                            break;
-                        }
+                    {
+                        break;
+                    }
 
                     case CalendarSelectionMode.SingleDate:
+                    {
+                        if (!ctrl)
                         {
-                            Owner.DatePickerDisplayDateFlag = true;
-                            if (!ctrl)
-                            {
-                                Owner.SelectedDate = selectedDate;
-                            }
-                            else
-                            {
-                                Owner.SelectedDatesInternal.Toggle(selectedDate);
-                            }
-
-                            break;
+                            Owner.SelectedDateInternal = clickedDate;
                         }
+                        else
+                        {
+                            Owner.Toggle(clickedDate);
+                        }
+
+                        break;
+                    }
 
                     case CalendarSelectionMode.SingleRange:
+                    {
+                        Owner.SelectedDatesInternal.ClearInternal();
+
+                        if (shift)
                         {
-                            Owner.SelectedDatesInternal.Clear();
-
-                            if (shift)
+                            if (!Owner.HoverStart.HasValue)
                             {
-                                if (!Owner.HoverStart.HasValue)
-                                {
-                                    Owner.HoverStart = Owner.HoverEnd = Owner.CurrentDate;
-                                }
+                                Owner.HoverStart = Owner.HoverEnd = Owner.CurrentDate;
                             }
-                            else
-                            {
-                                Owner.HoverStart = Owner.HoverEnd = selectedDate;
-                            }
-
-                            break;
                         }
+                        else
+                        {
+                            Owner.SelectedDateInternal = clickedDate;
+                                Owner.HoverStart = Owner.HoverEnd = clickedDate;
+                        }
+
+
+                        break;
+                    }
 
                     case CalendarSelectionMode.MultipleRange:
+                    {
+                        if (!ctrl)
                         {
-                            if (!ctrl)
-                            {
-                                Owner.SelectedDatesInternal.Clear();
-                            }
+                            Owner.SelectedDatesInternal.Clear();
+                        }
 
-                            if (shift)
+                        if (shift)
+                        {
+                            if (!Owner.HoverStart.HasValue)
                             {
-                                if (!Owner.HoverStart.HasValue)
-                                {
-                                    Owner.HoverStart = Owner.HoverEnd = Owner.CurrentDate;
-                                }
+                                Owner.HoverStart = Owner.HoverEnd = Owner.CurrentDate;
                             }
+                        }
+                        else
+                        {
+                            if (ctrl)
+                            {
+                                Owner.Toggle(clickedDate);
+                                Owner.HoverStart = Owner.HoverEnd = clickedDate;
+                                }
                             else
                             {
-                                Owner.HoverStart = Owner.HoverEnd = selectedDate;
-                            }
+                                Owner.SelectedDateInternal = clickedDate;
+                                Owner.HoverStart = Owner.HoverEnd = clickedDate;
+                                }
+                        }
 
                             break;
-                        }
+                    }
                 }
-
-                Owner.CurrentDate = selectedDate;
-                //Owner.UpdateCellItems();
             }
         }
 
@@ -702,7 +541,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 {
                     case CalendarSelectionMode.SingleDate:
                         {
-                            Owner.DatePickerDisplayDateFlag = true;
                             Owner.HoverStart = Owner.HoverEnd = null;
                             if (Owner.SelectedDatesInternal.Count == 0)
                             {
@@ -718,8 +556,11 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 }
 
                 Owner.HoverEnd = selectedDate;
-                Owner.CurrentDate = selectedDate;
-                //Owner.UpdateCellItems();
+
+                if (Owner.HoverStart.HasValue)
+                {
+                    Owner.SelectedDatesInternal.AddRange(Owner.HoverStart.Value, Owner.HoverEnd.Value);
+                }
             }
         }
 
@@ -745,18 +586,18 @@ namespace My.CoachManager.Presentation.Prism.Controls
                 return;
             }
 
+            b.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
             FinishSelection((DateTime)b.DataContext);
             e.Handled = true;
         }
 
         private void FinishSelection(DateTime selectedDate)
         {
-            bool ctrl, shift;
-            SchedulerKeyboardHelper.GetMetaKeyState(out ctrl, out shift);
+            Owner.OnDayClick(selectedDate);
+            SchedulerKeyboardHelper.GetMetaKeyState(out var ctrl, out var _);
 
             if (Owner.SelectionMode == CalendarSelectionMode.None || Owner.SelectionMode == CalendarSelectionMode.SingleDate)
             {
-                Owner.OnDayClick(selectedDate);
                 return;
             }
 
@@ -767,7 +608,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
                     case CalendarSelectionMode.SingleRange:
                         {
                             // Update SelectedDatesInternal
-                            Owner.SelectedDatesInternal.Clear();
+                            Owner.SelectedDatesInternal.ClearInternal();
                             EndDrag(ctrl, selectedDate);
                             break;
                         }
@@ -780,52 +621,13 @@ namespace My.CoachManager.Presentation.Prism.Controls
                         }
                 }
             }
-            else
-            {
-                // If the day is blacked out but also a trailing day we should be able to switch months
-                SchedulerDay b = GetSchedulerDay(selectedDate);
-                if (b != null && b.IsInactive && b.IsBlackedOut)
-                {
-                    Owner.OnDayClick(selectedDate);
-                }
-            }
-        }
-
-        private void Month_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is SchedulerItem b)
-            {
-                _isMonthPressed = true;
-                //Mouse.Capture(this, CaptureMode.SubTree);
-
-                Owner?.OnSchedulerItemPressed(b, false);
-            }
         }
 
         private void Month_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (sender is SchedulerItem b)
             {
-                Owner?.OnSchedulerItemPressed(b, true);
-            }
-        }
-
-        private void Month_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (sender is SchedulerItem b)
-            {
-                if (_isMonthPressed)
-                {
-                    Owner?.OnSchedulerItemPressed(b, false);
-                }
-            }
-        }
-
-        private void MonthCellOnMouseDown(object sender, RoutedEventArgs e)
-        {
-            if (sender is SchedulerItem b)
-            {
-                Owner.OnSchedulerItemPressed(b, true);
+                Owner?.OnSchedulerItemPressed(b);
             }
         }
 
@@ -844,7 +646,6 @@ namespace My.CoachManager.Presentation.Prism.Controls
                     Owner.SetCurrentValue(Scheduler.DisplayModeProperty, CalendarMode.Decade);
                 }
 
-                FocusDate(DisplayDate);
             }
         }
 
@@ -881,11 +682,10 @@ namespace My.CoachManager.Presentation.Prism.Controls
                         dayCell.SetValue(Grid.ColumnProperty, j);
                         dayCell.SetBinding(StyleProperty, GetOwnerBinding("SchedulerDayStyle"));
 
-                        dayCell.AddHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(Cell_MouseLeftButtonDown), true);
-                        dayCell.AddHandler(MouseLeftButtonUpEvent, new MouseButtonEventHandler(Cell_MouseLeftButtonUp), true);
-                        dayCell.AddHandler(MouseEnterEvent, new MouseEventHandler(Cell_MouseEnter), true);
-                        dayCell.MouseDown += DayCell_MouseDown;
-                        dayCell.AddHandler(PreviewKeyDownEvent, new RoutedEventHandler(CellOrMonth_PreviewKeyDown), true);
+                        dayCell.MouseLeftButtonDown += Cell_MouseLeftButtonDown;
+                        dayCell.MouseLeftButtonUp += Cell_MouseLeftButtonUp;
+                        dayCell.MouseEnter += Cell_MouseEnter;
+                        dayCell.PreviewKeyDown += CellOrMonth_PreviewKeyDown;
 
                         MonthView.Children.Add(dayCell);
                     }
@@ -902,13 +702,10 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
                         monthCell.SetValue(Grid.RowProperty, i);
                         monthCell.SetValue(Grid.ColumnProperty, j);
-                        monthCell.SetBinding(StyleProperty, GetOwnerBinding("SchedulerButtonStyle"));
+                        monthCell.SetBinding(StyleProperty, GetOwnerBinding("SchedulerItemStyle"));
 
-                        monthCell.AddHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(Month_MouseLeftButtonDown), true);
-                        monthCell.AddHandler(MouseLeftButtonUpEvent, new MouseButtonEventHandler(Month_MouseLeftButtonUp), true);
-                        monthCell.AddHandler(MouseEnterEvent, new MouseEventHandler(Month_MouseEnter), true);
-                        monthCell.AddHandler(PreviewKeyDownEvent, new RoutedEventHandler(CellOrMonth_PreviewKeyDown), true);
-                        monthCell.MouseDown += MonthCellOnMouseDown;
+                        monthCell.MouseLeftButtonUp += Month_MouseLeftButtonUp;
+                        monthCell.PreviewKeyDown += CellOrMonth_PreviewKeyDown;
                         YearView.Children.Add(monthCell);
                     }
                 }
@@ -1156,7 +953,7 @@ namespace My.CoachManager.Presentation.Prism.Controls
 
                     if (Owner != null)
                     {
-                        childButton.HasSelectedDays = (Owner.DisplayDate.Year == year);
+                        childButton.HasSelectedDays = (Owner.DisplayDateInternal.Year == year);
 
                         if (year < Owner.DisplayDateStartInternal.Year || year > Owner.DisplayDateEndInternal.Year)
                         {

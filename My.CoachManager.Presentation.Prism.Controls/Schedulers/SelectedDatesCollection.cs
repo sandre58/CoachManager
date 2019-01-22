@@ -39,9 +39,9 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
 
         #region Properties
 
-        public DateTime? MaximumDate => this.Max();
+        public DateTime? MaximumDate => Count > 0 ? this.Max() : (DateTime?) null;
 
-        public DateTime? MinimumDate => this.Min();
+        public DateTime? MinimumDate => Count > 0 ? this.Min() : (DateTime?)null;
 
         #endregion Properties
 
@@ -59,7 +59,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             // If SchedulerSelectionMode.SingleRange and a user programmatically tries to add multiple ranges, we will throw away the old range and replace it with the new one.
             if (_owner.SelectionMode == CalendarSelectionMode.SingleRange && Count > 0)
             {
-                Clear();
+                ClearInternal();
             }
 
             foreach (DateTime current in GetDaysInRange(start, end))
@@ -82,6 +82,17 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
         /// </summary>
         protected override void ClearItems()
         {
+            ClearInternal();
+
+            RaiseSelectionChanged(_removedItems, new List<object>());
+            _removedItems.Clear();
+        }
+
+        /// <summary>
+        /// Clears all the items of the SelectedDatesInternal.
+        /// </summary>
+        internal void ClearInternal()
+        {
             if (Count > 0)
             {
                 foreach (DateTime item in this)
@@ -91,6 +102,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
 
                 base.ClearItems();
             }
+
         }
 
         /// <summary>
@@ -206,49 +218,6 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
 
         #endregion Protected methods
 
-        #region Internal Methods
-
-        //internal void Toggle(DateTime date)
-        //{
-        //    if (Scheduler.IsValidDateSelection(_owner, date))
-        //    {
-        //        switch (_owner.SelectionMode)
-        //        {
-        //            case CalendarSelectionMode.SingleDate:
-        //                {
-        //                    if (!_owner.SelectedDate.HasValue || DateTimeHelper.CompareDays(_owner.SelectedDate.Value, date) != 0)
-        //                    {
-        //                        _owner.SelectedDate = date;
-        //                    }
-        //                    else
-        //                    {
-        //                        _owner.SelectedDate = null;
-        //                    }
-
-        //                    break;
-        //                }
-
-        //            case CalendarSelectionMode.MultipleRange:
-        //                {
-        //                    if (!Remove(date))
-        //                    {
-        //                        Add(date);
-        //                    }
-
-        //                    break;
-        //                }
-
-        //            default:
-        //                {
-        //                    Debug.Assert(false);
-        //                    break;
-        //                }
-        //        }
-        //    }
-        //}
-
-        #endregion Internal Methods
-
         #region Private Methods
 
         private void RaiseSelectionChanged(IList removedItems, IList addedItems)
@@ -289,7 +258,7 @@ namespace My.CoachManager.Presentation.Prism.Controls.Schedulers
             // in order to provide the removed items without an additional event, we are calling ClearInternal
             if (_owner.SelectionMode == CalendarSelectionMode.SingleRange && !_isAddingRange && Count > 0)
             {
-                Clear();
+                ClearInternal();
                 return true;
             }
 

@@ -310,7 +310,6 @@
     <Compile Include="Constants\RoleConstants.cs" />
     <Compile Include="Constants\SqlConstants.cs" />
     <Compile Include="Cryptography\TripleDesEncryptor.cs" />
-    <Compile Include="Enums\Availability.cs" />
     <Compile Include="Enums\InjuryType.cs" />
     <Compile Include="Enums\BinaryOperator.cs" />
     <Compile Include="Enums\ComplexComparableOperator.cs" />

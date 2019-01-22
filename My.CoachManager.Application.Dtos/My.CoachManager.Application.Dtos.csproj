@@ -208,6 +208,7 @@
     <Compile Include="CrudStatus.cs" />
     <Compile Include="AddressDto.cs" />
     <Compile Include="CategoryDto.cs" />
+    <Compile Include="InjuryDto.cs" />
     <Compile Include="PlayerPositionDto.cs" />
     <Compile Include="SeasonDto.cs" />
     <Compile Include="PositionDto.cs" />

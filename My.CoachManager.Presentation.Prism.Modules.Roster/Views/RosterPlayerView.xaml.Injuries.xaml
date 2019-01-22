@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="My.CoachManager.Presentation.Prism.Modules.Roster.Views.RosterPlayerInjuriesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels"
+             xmlns:enums="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Enums;assembly=My.CoachManager.CrossCutting.Core"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=viewModels:RosterPlayerViewModel}"
+             d:DesignHeight="500" d:DesignWidth="800">
+    
+    <UserControl.Resources>
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="Background" Value="Red" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="LeftCol" Width="20" />
+                                <ColumnDefinition x:Name="RightCol" Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid x:Name="PART_CHECKBOX">
+                                <Rectangle Margin="-6, 0" Fill="{DynamicResource Transparent}" />
+                                <Ellipse x:Name="normal" Width="20"
+                                         Opacity="0"
+                                     Height="20" Fill="{TemplateBinding Background}"
+                                     Stroke="{TemplateBinding BorderBrush}"
+                                     StrokeThickness="{TemplateBinding BorderThickness}" >
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect BlurRadius="30" ShadowDepth="10" Color="Red"/>
+                                    </Ellipse.Effect>
+                                    </Ellipse>
+                            </Grid>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="normal" Property="Opacity" Value="{StaticResource ColorOpacity}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="normal" Property="Opacity" Value="1" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="normal" Property="Opacity" Value="1" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="{DynamicResource DisabledOpacity}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+
+        <StackPanel Orientation="Horizontal">
+
+            <Grid Width="140" Height="400">
+                <Image Source="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/male-behind.png" />
+
+                <Canvas>
+
+                    <CheckBox Canvas.Left="20" Canvas.Top="75" ToolTip="{x:Static enums:InjuryTypeResources.LeftShoulder}" />
+                    <CheckBox Canvas.Right="20" Canvas.Top="75" ToolTip="{x:Static enums:InjuryTypeResources.LeftShoulder}" />
+                    
+                    <CheckBox Canvas.Left="10" Canvas.Top="115" ToolTip="{x:Static enums:InjuryTypeResources.LeftArm}" />
+                    <CheckBox Canvas.Right="10" Canvas.Top="115" ToolTip="{x:Static enums:InjuryTypeResources.RightArm}" />
+
+                    <CheckBox Canvas.Left="10" Canvas.Top="155" ToolTip="{x:Static enums:InjuryTypeResources.LeftElbow}" />
+                    <CheckBox Canvas.Right="10" Canvas.Top="155" ToolTip="{x:Static enums:InjuryTypeResources.RightElbow}" />
+
+                    <CheckBox Canvas.Left="5" Canvas.Top="190" ToolTip="{x:Static enums:InjuryTypeResources.LeftWrist}" />
+                    <CheckBox Canvas.Right="5" Canvas.Top="190" ToolTip="{x:Static enums:InjuryTypeResources.RightWrist}" />
+
+                    <CheckBox Canvas.Left="10" Canvas.Top="215" ToolTip="{x:Static enums:InjuryTypeResources.LeftHand}" />
+                    <CheckBox Canvas.Right="10" Canvas.Top="215" ToolTip="{x:Static enums:InjuryTypeResources.RightHand}" />
+
+                    <CheckBox Canvas.Left="40" Canvas.Bottom="130" ToolTip="{x:Static enums:InjuryTypeResources.LeftThigh}" />
+                    <CheckBox Canvas.Right="40" Canvas.Bottom="130" ToolTip="{x:Static enums:InjuryTypeResources.RightThigh}" />
+                    
+                    <CheckBox Canvas.Left="40" Canvas.Bottom="90" ToolTip="{x:Static enums:InjuryTypeResources.LeftKnee}" />
+                    <CheckBox Canvas.Right="40" Canvas.Bottom="90" ToolTip="{x:Static enums:InjuryTypeResources.RightKnee}" />
+
+                    <CheckBox Canvas.Left="42" Canvas.Bottom="45" ToolTip="{x:Static enums:InjuryTypeResources.LeftShin}" />
+                    <CheckBox Canvas.Right="42" Canvas.Bottom="45" ToolTip="{x:Static enums:InjuryTypeResources.RightShin}" />
+                    
+                    <CheckBox Canvas.Left="42" Canvas.Bottom="15" ToolTip="{x:Static enums:InjuryTypeResources.LeftAnkle}" />
+                    <CheckBox Canvas.Right="42" Canvas.Bottom="15" ToolTip="{x:Static enums:InjuryTypeResources.RightAnkle}" />
+
+                    <CheckBox Canvas.Left="20" Canvas.Bottom="5" ToolTip="{x:Static enums:InjuryTypeResources.LeftFoot}" />
+                    <CheckBox Canvas.Right="20" Canvas.Bottom="5" ToolTip="{x:Static enums:InjuryTypeResources.RightFoot}" />
+
+                    <CheckBox Canvas.Left="62" Canvas.Top="150" ToolTip="{x:Static enums:InjuryTypeResources.Back}" />
+
+                </Canvas>
+            </Grid>
+            
+            <Grid Width="140" Height="400">
+                <Image Source="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/male-face.png" />
+
+                <Canvas>
+                    <!-- Head -->
+                    <CheckBox Canvas.Left="62" Canvas.Top="15" ToolTip="{x:Static enums:InjuryTypeResources.Head}" />
+                    <CheckBox Canvas.Left="62" Canvas.Top="60" ToolTip="{x:Static enums:InjuryTypeResources.Neck}" />
+                    <CheckBox Canvas.Left="62" Canvas.Top="100" ToolTip="{x:Static enums:InjuryTypeResources.Torso}" />
+                    <CheckBox Canvas.Left="62" Canvas.Top="150" ToolTip="{x:Static enums:InjuryTypeResources.Stomach}" />
+                </Canvas>
+            </Grid>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

@@ -6,12 +6,21 @@
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Training.ViewModels"
+             xmlns:resources="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Training.Resources"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:TrainingViewModel}"
              d:DesignHeight="500" d:DesignWidth="800">
 
     <controls:WorkspaceView Style="{StaticResource ItemWorkspaceViewStyle}">
+        <TabControl>
+            <TabItem Header="{x:Static resources:TrainingResources.Attendance}">
+            </TabItem>
+        </TabControl>
 
+        <controls:WorkspaceView.Commands>
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource EditCommandButtonApplicationBarStyle}" Command="{Binding EditCommand}" />
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource RefreshCommandButtonApplicationBarStyle}" Command="{Binding RefreshCommand}" />
+        </controls:WorkspaceView.Commands>
     </controls:WorkspaceView>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace My.CoachManager.Presentation.Prism.Controls
 {
@@ -84,6 +85,61 @@ namespace My.CoachManager.Presentation.Prism.Controls
         {
             get => (bool)GetValue(IsInactiveProperty);
             internal set => SetValue(IsInactivePropertyKey, value);
+        }
+
+        #endregion IsInactive
+
+        #region IsInactive
+
+        internal static readonly DependencyPropertyKey IsPressedPropertyKey = DependencyProperty.RegisterReadOnly(
+            "IsPressed",
+            typeof(bool),
+            typeof(SchedulerItem),
+            new FrameworkPropertyMetadata(false));
+
+        /// <summary>
+        /// Dependency property field for IsInactive property
+        /// </summary>
+        public static readonly DependencyProperty IsPressedProperty = IsPressedPropertyKey.DependencyProperty;
+
+        /// <summary>
+        /// True if the SchedulerButton represents
+        ///     a month that falls outside the current year
+        ///     or
+        ///     a year that falls outside the current decade
+        /// </summary>
+        public bool IsPressed
+        {
+            get => (bool)GetValue(IsPressedProperty);
+            internal set => SetValue(IsPressedPropertyKey, value);
+        }
+
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseDown(e);
+
+            SetValue(IsPressedPropertyKey, true);
+        }
+
+        protected override void OnMouseLeave(MouseEventArgs e)
+        {
+            base.OnMouseLeave(e);
+
+            SetValue(IsPressedPropertyKey, false);
+        }
+
+        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonUp(e);
+
+            SetValue(IsPressedPropertyKey, false);
+        }
+
+        protected override void OnMouseEnter(MouseEventArgs e)
+        {
+            base.OnMouseEnter(e);
+
+            SetValue(IsPressedPropertyKey, e.LeftButton == MouseButtonState.Pressed);
         }
 
         #endregion IsInactive

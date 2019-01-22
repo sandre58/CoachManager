@@ -1,52 +1,49 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 using My.CoachManager.CrossCutting.Core.Enums;
-using My.CoachManager.Domain.Core;
 
-namespace My.CoachManager.Domain.Entities
+namespace My.CoachManager.Application.Dtos
 {
     /// <summary>
     /// Provides properties for a injury Entity.
     /// </summary>
-    public class Injury : Entity
+    public class InjuryDto : EntityDto
     {
 
         /// <summary>
         /// Gets or sets the condition.
         /// </summary>
-        [Required]
+        [DataMember]
         public virtual string Condition { get; set; }
 
         /// <summary>
         /// Gets or sets the player id.
         /// </summary>
-        [Required]
+        [DataMember]
         public int? PlayerId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the player.
-        /// </summary>
-        public virtual Player Player { get; set; }
 
         /// <summary>
         /// Gets or sets the type.
         /// </summary>
-        [Required]
+        [DataMember]
         public virtual InjuryType Type { get; set; }
 
         /// <summary>
         /// Gets or sets the description.
         /// </summary>
+        [DataMember]
         public virtual string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the date.
         /// </summary>
+        [DataMember]
         public virtual DateTime Date { get; set; }
 
         /// <summary>
         /// Gets or sets the expected return date.
         /// </summary>
+        [DataMember]
         public virtual DateTime? ExpectedReturn { get; set; }
     }
 }

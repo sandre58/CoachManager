@@ -64,6 +64,7 @@
         <ResourceDictionary Source="Controls/SubMenu.xaml" />
         <ResourceDictionary Source="Controls/Scheduler.xaml" />
         <ResourceDictionary Source="Controls/TimePicker.xaml" />
+        <ResourceDictionary Source="Controls/ToolbarControl.xaml" />
 
         <!-- Specific -->
         <ResourceDictionary Source="Specific/Filter.xaml" />

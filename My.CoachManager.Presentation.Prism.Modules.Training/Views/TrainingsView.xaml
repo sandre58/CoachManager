@@ -38,7 +38,7 @@
                         <TextBlock Text="{Binding Title}" />
                     </StackPanel>
 
-                    <controls:ActionsListViewItemControl DockPanel.Dock="Right" HorizontalAlignment="Right" ShowSelection="False">
+                    <controls:ToolbarControl DockPanel.Dock="Right" HorizontalAlignment="Right">
                         <Button CommandParameter="{Binding}"
                                 Command="{Binding DataContext.EditCommand,
                                 RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:WorkspaceView}}}"
@@ -57,7 +57,7 @@
                                 </controls:Submenu>
                             </controls:DropDownButton.Submenu>
                         </controls:DropDownButton>
-                    </controls:ActionsListViewItemControl>
+                    </controls:ToolbarControl>
                 </DockPanel>
                 
                 <controls:Icon Size="Large" Grid.Column="0" Grid.Row="1" Content="{StaticResource TrainingGeometry}" Margin="{StaticResource DefaultMargin}" Foreground="{DynamicResource Orange}" />
@@ -88,9 +88,11 @@
         </Grid>
 
         <controls:WorkspaceView.Commands>
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource AddCommandButtonApplicationBarStyle}" Command="{Binding AddCommand}" />
             <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource RefreshCommandButtonApplicationBarStyle}" Command="{Binding RefreshCommand}" />
             <Separator DockPanel.Dock="Right" Style="{StaticResource VerticalSeparatorStyle}" />
-            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource AddCommandButtonApplicationBarStyle}" Command="{Binding AddCommand}" />
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource EditCommandButtonApplicationBarStyle}" Command="{Binding EditSelectedItemCommand}" />
+            <controls:CommandButton DockPanel.Dock="Right" Style="{StaticResource DeleteCommandButtonApplicationBarStyle}" Command="{Binding RemoveSelectedItemsCommand}" />
         </controls:WorkspaceView.Commands>
     </controls:WorkspaceView>
 </UserControl>

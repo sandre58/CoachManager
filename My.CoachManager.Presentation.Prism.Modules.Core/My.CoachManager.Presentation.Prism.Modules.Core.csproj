@@ -107,11 +107,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ViewModels\InjuryEditViewModel.cs" />
     <Compile Include="ViewModels\PlayerEditViewModel.cs" />
     <Compile Include="ViewModels\SelectPlayersFiltersViewModel.cs" />
     <Compile Include="ViewModels\SelectSquadsViewModel.cs" />
     <Compile Include="ViewModels\SelectRostersViewModel.cs" />
     <Compile Include="ViewModels\SelectPlayersViewModel.cs" />
+    <Compile Include="Views\InjuryEditView.xaml.cs">
+      <DependentUpon>InjuryEditView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlayerEditView.Club.xaml.cs">
       <DependentUpon>PlayerEditView.Club.xaml</DependentUpon>
     </Compile>
@@ -167,6 +171,10 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\InjuryEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

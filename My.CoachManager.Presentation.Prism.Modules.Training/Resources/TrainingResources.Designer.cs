@@ -70,6 +70,15 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Présences.
+        /// </summary>
+        public static string Attendance {
+            get {
+                return ResourceManager.GetString("Attendance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Editer l&apos;entrainement.
         /// </summary>
         public static string EditTraining {
@@ -97,11 +106,11 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Entrainement.
+        ///   Looks up a localized string similar to Entrainements.
         /// </summary>
-        public static string TrainingMenu {
+        public static string TrainingsMenu {
             get {
-                return ResourceManager.GetString("TrainingMenu", resourceCulture);
+                return ResourceManager.GetString("TrainingsMenu", resourceCulture);
             }
         }
         
@@ -111,6 +120,15 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.Resources {
         public static string TrainingsTitle {
             get {
                 return ResourceManager.GetString("TrainingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Séance du {0}.
+        /// </summary>
+        public static string TrainingTitle {
+            get {
+                return ResourceManager.GetString("TrainingTitle", resourceCulture);
             }
         }
     }

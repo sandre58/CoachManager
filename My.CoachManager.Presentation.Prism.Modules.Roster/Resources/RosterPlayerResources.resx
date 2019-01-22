@@ -141,4 +141,7 @@
   <data name="Laterality" xml:space="preserve">
     <value>Meilleur Pied</value>
   </data>
+  <data name="Injuries" xml:space="preserve">
+    <value>Blessures</value>
+  </data>
 </root>
