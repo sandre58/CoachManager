@@ -16,12 +16,6 @@ namespace My.CoachManager.Application.Dtos
         public int? RosterId { get; set; }
 
         /// <summary>
-        /// Gets or sets the roster.
-        /// </summary>
-        [DataMember]
-        public virtual RosterDto Roster { get; set; }
-
-        /// <summary>
         /// Gets or sets the place.
         /// </summary>
         [DataMember]

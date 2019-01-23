@@ -6,6 +6,7 @@ using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Enums;
 using My.CoachManager.Presentation.Prism.Core.Services;
+using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 
 namespace My.CoachManager.Presentation.Prism.Core.Manager
@@ -36,13 +37,13 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// <summary>
         /// Displays a modal dialog.
         /// </summary>
-        /// <param name="itemId"></param>
+        /// <param name="parameters"></param>
         /// <param name="callback">Action executed after result of dialog.</param>
-        public static void ShowEditDialog<TEditView>(int itemId, Action<IWorkspaceDialog> callback = null) where TEditView : FrameworkElement
+        public static void ShowEditDialog<TEditView>(ItemParameters parameters, Action<IWorkspaceDialog> callback = null) where TEditView : FrameworkElement
         {
             var view = ServiceLocator.Current.GetInstance<TEditView>();
-            var model = view.DataContext as IEditViewModel;
-            model?.LoadId(itemId);
+
+            SetParameters(view, parameters);
 
             ShowWorkspaceDialog(view, callback);
         }
@@ -52,8 +53,10 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// </summary>
         /// <param name="view">The view to include in workspace dialog.</param>
         /// <param name="callback">Action executed after result of dialog.</param>
-        public static void ShowWorkspaceDialog(FrameworkElement view, Action<IWorkspaceDialog> callback = null)
+        /// <param name="parameters"></param>
+        public static void ShowWorkspaceDialog(FrameworkElement view, Action<IWorkspaceDialog> callback = null, IScreenParameters parameters = null)
         {
+            SetParameters(view, parameters);
             DialogService.ShowWorkspaceDialog(view, callback);
         }
 
@@ -61,10 +64,11 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// Displays a modal dialog.
         /// </summary>
         /// <param name="callback">Action executed after result of dialog.</param>
-        public static void ShowWorkspaceDialog<TView>(Action<IWorkspaceDialog> callback = null) where TView : FrameworkElement
+        /// <param name="parameters"></param>
+        public static void ShowWorkspaceDialog<TView>(Action<IWorkspaceDialog> callback = null, IScreenParameters parameters = null) where TView : FrameworkElement
         {
             var view = ServiceLocator.Current.GetInstance<TView>();
-            ShowWorkspaceDialog(view, callback);
+            ShowWorkspaceDialog(view, callback, parameters);
         }
 
         /// <summary>
@@ -72,10 +76,11 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// </summary>
         /// <param name="typeView">The view to include in workspace dialog.</param>
         /// <param name="callback">Action executed after result of dialog.</param>
-        public static void ShowWorkspaceDialog(Type typeView, Action<IWorkspaceDialog> callback = null)
+        /// <param name="parameters"></param>
+        public static void ShowWorkspaceDialog(Type typeView, Action<IWorkspaceDialog> callback = null, IScreenParameters parameters = null)
         {
             var view = ServiceLocator.Current.GetInstance(typeView) as FrameworkElement;
-            ShowWorkspaceDialog(view, callback);
+            ShowWorkspaceDialog(view, callback, parameters);
         }
 
         #endregion
@@ -89,9 +94,17 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// <param name="callback">Action executed after result of dialog.</param>
         /// <param name="selectionMode"></param>
         /// <param name="notSelectableItems"></param>
-        public static void ShowSelectItemsDialog(FrameworkElement view, Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null)
+        /// <param name="parameters"></param>
+        public static void ShowSelectItemsDialog(FrameworkElement view, Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null, ListParameters parameters = null)
         {
-            DialogService.ShowSelectItemsDialog(view, callback, selectionMode, notSelectableItems);
+            if (!(view.DataContext is ISelectItemsViewModel model)) return;
+
+            model.SelectionMode = selectionMode;
+
+            if (notSelectableItems != null)
+                model.NotSelectableItems = notSelectableItems;
+
+            ShowWorkspaceDialog(view, callback, parameters);
         }
 
         /// <summary>
@@ -100,10 +113,11 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// <param name="callback">Action executed after result of dialog.</param>
         /// <param name="selectionMode"></param>
         /// <param name="notSelectableItems"></param>
-        public static void ShowSelectItemsDialog<TView>(Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null) where TView : FrameworkElement
+        /// <param name="parameters"></param>
+        public static void ShowSelectItemsDialog<TView>(Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null, ListParameters parameters = null) where TView : FrameworkElement
         {
             var view = ServiceLocator.Current.GetInstance<TView>();
-            ShowSelectItemsDialog(view, callback, selectionMode, notSelectableItems);
+            ShowSelectItemsDialog(view, callback, selectionMode, notSelectableItems, parameters);
         }
 
         /// <summary>
@@ -113,10 +127,11 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
         /// <param name="callback">Action executed after result of dialog.</param>
         /// <param name="selectionMode"></param>
         /// <param name="notSelectableItems"></param>
-        public static void ShowSelectItemsDialog(Type typeView, Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null)
+        /// <param name="parameters"></param>
+        public static void ShowSelectItemsDialog(Type typeView, Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null, ListParameters parameters = null)
         {
             var view = ServiceLocator.Current.GetInstance(typeView) as FrameworkElement;
-            ShowSelectItemsDialog(view, callback, selectionMode, notSelectableItems);
+            ShowSelectItemsDialog(view, callback, selectionMode, notSelectableItems, parameters);
         }
 
         #endregion
@@ -270,6 +285,29 @@ namespace My.CoachManager.Presentation.Prism.Core.Manager
             return DialogService.ShowLoginDialog(loginAction, login, password);
         }
 
-#endregion
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Sets parameters.
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="parameters"></param>
+        /// <param name="refresh"></param>
+        private static void SetParameters(FrameworkElement view, IScreenParameters parameters, bool refresh = true)
+        {
+            if (parameters != null && view.DataContext is IScreenViewModel model)
+            {
+                model.Parameters = parameters;
+            }
+
+            if (refresh && view.DataContext is IRefreshable refreshable)
+            {
+                refreshable.Refresh();
+            }
+        }
+
+        #endregion
     }
 }

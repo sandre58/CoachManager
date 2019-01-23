@@ -20,16 +20,6 @@ namespace My.CoachManager.Presentation.Prism.Core.Services
         void ShowWorkspaceDialog(FrameworkElement view, Action<IWorkspaceDialog> callback = null);
 
         /// <summary>
-        /// Displays a modal dialog.
-        /// </summary>
-        /// <param name="selectionMode"></param>
-        /// <param name="view"></param>
-        /// <param name="callback">Action executed after result of dialog.</param>
-        /// <param name="notSelectableItems"></param>
-        void ShowSelectItemsDialog(FrameworkElement view, Action<IWorkspaceDialog> callback = null,
-            SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null);
-
-        /// <summary>
         /// Displays a message dialog.
         /// </summary>
         /// <param name="title">Title of window.</param>

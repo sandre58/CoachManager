@@ -158,7 +158,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual void Add()
         {
-            DialogManager.ShowEditDialog<TEditView>(0, dialog =>
+            DialogManager.ShowEditDialog<TEditView>(ItemParameters.New, dialog =>
             {
                 OnAddCompleted(dialog.Result);
             });
@@ -195,7 +195,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             if(x == null) return;
             if (!CanEdit(x)) return;
 
-            DialogManager.ShowEditDialog<TEditView>(x.Id, dialog =>
+            DialogManager.ShowEditDialog<TEditView>(new ItemParameters(x.Id), dialog =>
             {
                 OnEditCompleted(dialog.Result);
             });
@@ -445,12 +445,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// Gets or sets a value indicates the list is in read only.
         /// </summary>
         public bool IsReadOnly { get; set; }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets or sets list parameters.
-        /// </summary>
-        public ListParametersViewModel Parameters { get; set; }
 
         /// <inheritdoc />
         /// <summary>

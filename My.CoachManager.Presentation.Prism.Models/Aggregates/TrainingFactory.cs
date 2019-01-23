@@ -1,4 +1,5 @@
-﻿using My.CoachManager.Application.Dtos;
+﻿using System;
+using My.CoachManager.Application.Dtos;
 
 namespace My.CoachManager.Presentation.Prism.Models.Aggregates
 {
@@ -21,7 +22,6 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
             {
                 CrudStatus = crudStatus,
                 Id = item.Id,
-                RosterId = item.RosterId,
                 EndDate = item.EndDate,
                 IsCancelled = item.IsCancelled,
                 Place = item.Place,
@@ -41,12 +41,10 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
             var result = new TrainingModel
             {
                 Id = dto.Id,
-                RosterId = dto.RosterId,
                 EndDate = dto.EndDate,
                 IsCancelled = dto.IsCancelled,
                 Place = dto.Place,
                 StartDate = dto.StartDate,
-                Roster =RosterFactory.Get(dto.Roster),
                 CreatedBy = dto.CreatedBy,
                 CreatedDate = dto.CreatedDate,
                 ModifiedBy = dto.ModifiedBy,
@@ -56,5 +54,26 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
 
             return result;
         }
+
+        /// <summary>
+        /// Convert the DTO to model.
+        /// </summary>
+        /// <returns>The model.</returns>
+        public static TrainingModel Create(DateTime? startDate, DateTime? endDate, TimeSpan startTime, TimeSpan endTime, string place)
+        {
+            var result = new TrainingModel
+            {
+                EndDate = endDate ?? new DateTime(),
+                Place = place,
+                StartDate = startDate ?? new DateTime(),
+                StartTime = startTime,
+                EndTime = endTime
+            };
+            result.ResetModified();
+
+            return result;
+        }
+
+        public static TrainingModel Empty => new TrainingModel();
     }
 }

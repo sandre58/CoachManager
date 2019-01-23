@@ -39,4 +39,35 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="PositionType" nillable="true" type="tns:PositionType" />
+  <xs:simpleType name="InjuryType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Other" />
+      <xs:enumeration value="Head" />
+      <xs:enumeration value="Neck" />
+      <xs:enumeration value="Torso" />
+      <xs:enumeration value="Back" />
+      <xs:enumeration value="LeftElbow" />
+      <xs:enumeration value="RightElbow" />
+      <xs:enumeration value="LeftWrist" />
+      <xs:enumeration value="RightWrist" />
+      <xs:enumeration value="LeftShoulder" />
+      <xs:enumeration value="RightShoulder" />
+      <xs:enumeration value="LeftHand" />
+      <xs:enumeration value="RightHand" />
+      <xs:enumeration value="LeftThigh" />
+      <xs:enumeration value="RightThigh" />
+      <xs:enumeration value="LeftKnee" />
+      <xs:enumeration value="RightKnee" />
+      <xs:enumeration value="LeftAnkle" />
+      <xs:enumeration value="RightAnkle" />
+      <xs:enumeration value="LeftFoot" />
+      <xs:enumeration value="RightFoot" />
+      <xs:enumeration value="LeftShin" />
+      <xs:enumeration value="RightShin" />
+      <xs:enumeration value="Stomach" />
+      <xs:enumeration value="LeftArm" />
+      <xs:enumeration value="RightArm" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="InjuryType" nillable="true" type="tns:InjuryType" />
 </xs:schema>

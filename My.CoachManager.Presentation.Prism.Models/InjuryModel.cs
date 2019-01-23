@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Core.Resources.Entities;
+using My.CoachManager.Presentation.Prism.Core.Attributes.Validation;
 using My.CoachManager.Presentation.Prism.Core.Models;
 
 namespace My.CoachManager.Presentation.Prism.Models
@@ -12,6 +13,24 @@ namespace My.CoachManager.Presentation.Prism.Models
     /// </summary>
     public class InjuryModel : EntityModel
     {
+        /// <summary>
+        /// Initialise a new instance of <see cref="InjuryModel"/>.
+        /// </summary>
+        public InjuryModel()
+        {
+            Rules.Add(nameof(Date), ValidationMessageResources.StartDateLessOrEqualsThanEndDateMessage, o =>
+            {
+                var item = (InjuryModel)o;
+                return item.ExpectedReturn == null || item.Date.Date <= item.ExpectedReturn.Value.Date;
+            });
+
+            Rules.Add(nameof(ExpectedReturn), ValidationMessageResources.StartDateLessOrEqualsThanEndDateMessage, o =>
+            {
+                var item = (InjuryModel)o;
+                return item.ExpectedReturn == null || item.Date.Date <= item.ExpectedReturn.Value.Date;
+            });
+        }
+
 
         /// <summary>
         /// Gets or sets the condition.
@@ -37,12 +56,14 @@ namespace My.CoachManager.Presentation.Prism.Models
         /// Gets or sets the date.
         /// </summary>
         [Display(Name = "Date", ResourceType = typeof(InjuryResources))]
+        [ValidateProperty(nameof(ExpectedReturn))]
         public virtual DateTime Date { get; set; }
 
         /// <summary>
         /// Gets or sets the expected return date.
         /// </summary>
         [Display(Name = "ExpectedReturn", ResourceType = typeof(InjuryResources))]
+        [ValidateProperty(nameof(Date))]
         public virtual DateTime? ExpectedReturn { get; set; }
 
     }

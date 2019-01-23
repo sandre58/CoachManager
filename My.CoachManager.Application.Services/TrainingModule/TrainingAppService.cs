@@ -52,8 +52,9 @@ namespace My.CoachManager.Application.Services.TrainingModule
         /// Save a dto.
         /// </summary>
         /// <returns></returns>
-        public int SaveTraining(TrainingDto dto)
+        public int SaveTraining(int rosterId, TrainingDto dto)
         {
+            dto.RosterId = rosterId;
            return _crudDomainService.Save(dto, TrainingFactory.CreateEntity, TrainingFactory.UpdateEntity, x => _trainingDomainService.Validate(x));
         }
 
@@ -83,9 +84,11 @@ namespace My.CoachManager.Application.Services.TrainingModule
         /// Load all items.
         /// </summary>
         /// <returns></returns>
-        public IList<TrainingDto> GetTrainings()
+        public IList<TrainingDto> GetTrainings(int rosterId)
         {
-            return _trainingRepository.GetAll(TrainingSelectBuilder.SelectTrainings()).ToList();
+            return _trainingRepository.Query
+                .Where(x => x.RosterId == rosterId)
+                .Select(TrainingSelectBuilder.SelectTrainings()).ToList();
         }
 
         /// <summary>

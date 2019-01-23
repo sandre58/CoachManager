@@ -48,11 +48,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
         bool IsReadOnly { get; set; }
 
         /// <summary>
-        /// Gets or sets list parameters.
-        /// </summary>
-        ListParametersViewModel Parameters { get; set; }
-
-        /// <summary>
         /// Gets or sets list filters.
         /// </summary>
         IListFiltersViewModel Filters { get; set; }

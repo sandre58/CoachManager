@@ -81,7 +81,6 @@
           <xs:element minOccurs="0" name="Number" nillable="true" type="xs:int" />
           <xs:element minOccurs="0" name="Player" nillable="true" type="tns:PlayerDto" />
           <xs:element minOccurs="0" name="PlayerId" type="xs:int" />
-          <xs:element minOccurs="0" name="Roster" nillable="true" type="tns:RosterDto" />
           <xs:element minOccurs="0" name="RosterId" type="xs:int" />
           <xs:element minOccurs="0" name="Squad" nillable="true" type="tns:SquadDto" />
           <xs:element minOccurs="0" name="SquadId" type="xs:int" />
@@ -223,7 +222,6 @@
       <xs:extension base="tns:EntityDto">
         <xs:sequence>
           <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Roster" nillable="true" type="tns:RosterDto" />
           <xs:element minOccurs="0" name="RosterId" type="xs:int" />
         </xs:sequence>
       </xs:extension>

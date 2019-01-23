@@ -304,6 +304,7 @@
     <Compile Include="Collections\ObservableItemsCollection.cs" />
     <Compile Include="Configurations\ConfigurationManagerBase.cs" />
     <Compile Include="Constants\ContactConstants.cs" />
+    <Compile Include="Constants\InjuryConstants.cs" />
     <Compile Include="Constants\PositionConstants.cs" />
     <Compile Include="Constants\PlayerConstants.cs" />
     <Compile Include="Constants\PermissionConstants.cs" />

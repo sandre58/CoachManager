@@ -6,69 +6,82 @@
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
              xmlns:mvvm="http://prismlibrary.com/"
+             xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
              xmlns:strings1="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
-             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Core.ViewModels"
-             xmlns:enums="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Enums;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:viewModels1="clr-namespace:My.CoachManager.Presentation.Prism.Modules.Core.ViewModels;assembly=My.CoachManager.Presentation.Prism.Modules.Core"
+             xmlns:extensions="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Extensions;assembly=My.CoachManager.Presentation.Prism.Controls"
+             xmlns:enum="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
-             d:DataContext="{d:DesignInstance viewModels:PlayerEditViewModel}"
-             d:DesignHeight="1000" d:DesignWidth="750" MaxHeight="750">
+             d:DataContext="{d:DesignInstance Type=viewModels1:InjuryEditViewModel}"
+             d:DesignHeight="1000" d:DesignWidth="750">
 
-    <controls:WorkspaceView Padding="0" Width="750" Height="600">
+    <controls:WorkspaceView MinHeight="500" MinWidth="600">
+        <Grid parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
 
-        <StackPanel Orientation="Horizontal">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-            <Grid Width="140" Height="400">
-                <Image Source="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/male-behind.png" />
+                <controls:Icon Grid.Column="0" Grid.Row="0" Size="Medium" Content="{StaticResource InformationGeometry}" HorizontalAlignment="Center" />
 
-                <Canvas>
-
-                    <CheckBox Canvas.Left="20" Canvas.Top="75" ToolTip="{x:Static enums:InjuryTypeResources.LeftShoulder}" />
-                    <CheckBox Canvas.Right="20" Canvas.Top="75" ToolTip="{x:Static enums:InjuryTypeResources.LeftShoulder}" />
-
-                    <CheckBox Canvas.Left="10" Canvas.Top="115" ToolTip="{x:Static enums:InjuryTypeResources.LeftArm}" />
-                    <CheckBox Canvas.Right="10" Canvas.Top="115" ToolTip="{x:Static enums:InjuryTypeResources.RightArm}" />
-
-                    <CheckBox Canvas.Left="10" Canvas.Top="155" ToolTip="{x:Static enums:InjuryTypeResources.LeftElbow}" />
-                    <CheckBox Canvas.Right="10" Canvas.Top="155" ToolTip="{x:Static enums:InjuryTypeResources.RightElbow}" />
-
-                    <CheckBox Canvas.Left="5" Canvas.Top="190" ToolTip="{x:Static enums:InjuryTypeResources.LeftWrist}" />
-                    <CheckBox Canvas.Right="5" Canvas.Top="190" ToolTip="{x:Static enums:InjuryTypeResources.RightWrist}" />
-
-                    <CheckBox Canvas.Left="10" Canvas.Top="215" ToolTip="{x:Static enums:InjuryTypeResources.LeftHand}" />
-                    <CheckBox Canvas.Right="10" Canvas.Top="215" ToolTip="{x:Static enums:InjuryTypeResources.RightHand}" />
-
-                    <CheckBox Canvas.Left="40" Canvas.Bottom="130" ToolTip="{x:Static enums:InjuryTypeResources.LeftThigh}" />
-                    <CheckBox Canvas.Right="40" Canvas.Bottom="130" ToolTip="{x:Static enums:InjuryTypeResources.RightThigh}" />
-
-                    <CheckBox Canvas.Left="40" Canvas.Bottom="90" ToolTip="{x:Static enums:InjuryTypeResources.LeftKnee}" />
-                    <CheckBox Canvas.Right="40" Canvas.Bottom="90" ToolTip="{x:Static enums:InjuryTypeResources.RightKnee}" />
-
-                    <CheckBox Canvas.Left="42" Canvas.Bottom="45" ToolTip="{x:Static enums:InjuryTypeResources.LeftShin}" />
-                    <CheckBox Canvas.Right="42" Canvas.Bottom="45" ToolTip="{x:Static enums:InjuryTypeResources.RightShin}" />
-
-                    <CheckBox Canvas.Left="42" Canvas.Bottom="15" ToolTip="{x:Static enums:InjuryTypeResources.LeftAnkle}" />
-                    <CheckBox Canvas.Right="42" Canvas.Bottom="15" ToolTip="{x:Static enums:InjuryTypeResources.RightAnkle}" />
-
-                    <CheckBox Canvas.Left="20" Canvas.Bottom="5" ToolTip="{x:Static enums:InjuryTypeResources.LeftFoot}" />
-                    <CheckBox Canvas.Right="20" Canvas.Bottom="5" ToolTip="{x:Static enums:InjuryTypeResources.RightFoot}" />
-
-                    <CheckBox Canvas.Left="62" Canvas.Top="150" ToolTip="{x:Static enums:InjuryTypeResources.Back}" />
-
-                </Canvas>
+                <TextBox Grid.Column="1" Text="{Binding Item.Condition, IsAsync=True}" Width="{StaticResource VeryLargeWidth}" />
             </Grid>
 
-            <Grid Width="140" Height="400">
-                <Image Source="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/male-face.png" />
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                
+                <Grid>
+                    <controls:InjuryTypeSelector SelectedType="{Binding Item.Type, IsAsync=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
 
-                <Canvas>
-                    <!-- Head -->
-                    <CheckBox Canvas.Left="62" Canvas.Top="15" ToolTip="{x:Static enums:InjuryTypeResources.Head}" />
-                    <CheckBox Canvas.Left="62" Canvas.Top="60" ToolTip="{x:Static enums:InjuryTypeResources.Neck}" />
-                    <CheckBox Canvas.Left="62" Canvas.Top="100" ToolTip="{x:Static enums:InjuryTypeResources.Torso}" />
-                    <CheckBox Canvas.Left="62" Canvas.Top="150" ToolTip="{x:Static enums:InjuryTypeResources.Stomach}" />
-                </Canvas>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <controls:Icon Grid.Column="0" Grid.Row="0" Size="Medium" Content="{StaticResource CalendarGeometry}" HorizontalAlignment="Center" />
+                    <DatePicker Grid.Row="0" Grid.Column="1" 
+                                SelectedDate="{Binding Item.Date, IsAsync=True}" 
+                                parameters:TextBoxParameters.Watermark="{x:Static strings:InjuryResources.Date}"
+                                Width="{StaticResource SmallLargeWidth}" />
+
+                    <controls:Icon Grid.Column="0" Grid.Row="1" Size="Medium" Content="{StaticResource CalendarReturnGeometry}" HorizontalAlignment="Center" />
+                    <DatePicker Grid.Row="1" Grid.Column="1" 
+                                SelectedDate="{Binding Item.ExpectedReturn, IsAsync=True}" 
+                                parameters:TextBoxParameters.Watermark="{x:Static strings:InjuryResources.ExpectedReturn}"
+                                Width="{StaticResource SmallLargeWidth}"/>
+
+                    <controls:Icon Grid.Column="0" Grid.Row="2" Size="Medium" Content="{StaticResource DescriptionGeometry}" HorizontalAlignment="Center" />
+                    <TextBox Grid.Row="2" Grid.Column="1" 
+                                parameters:TextBoxParameters.Watermark="{x:Static strings:InjuryResources.Description}"
+                             HorizontalAlignment="Stretch"
+                               TextWrapping="Wrap"
+                               AcceptsReturn="True"
+                               Height="100"
+                               Style="{StaticResource TextBoxBaseStyle}" />
+
+                </Grid>
+
             </Grid>
-        </StackPanel>
+        </Grid>
 
         <controls:WorkspaceView.Commands>
             <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CancelCommand}" Style="{StaticResource CancelCommandButtonApplicationBarStyle}" IsCancel="True" />

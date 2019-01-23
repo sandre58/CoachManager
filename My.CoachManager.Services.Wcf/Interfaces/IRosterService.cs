@@ -92,7 +92,7 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        int SaveSquad(SquadDto dto);
+        int SaveSquad(int rosterId, SquadDto dto);
 
         /// <summary>
         /// Remove a dto.

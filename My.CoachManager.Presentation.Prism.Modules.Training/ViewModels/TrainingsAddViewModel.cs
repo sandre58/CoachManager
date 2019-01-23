@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.CrossCutting.Core.Helpers;
 using My.CoachManager.Presentation.Prism.Core.Dialog;
 using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
+using My.CoachManager.Presentation.Prism.Models.Aggregates;
 using My.CoachManager.Presentation.Prism.Modules.Training.Resources;
 using My.CoachManager.Presentation.ServiceAgent.TrainingServiceReference;
 
@@ -21,11 +23,6 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.ViewModels
         #endregion Fields
 
         #region  Members
-
-        /// <summary>
-        /// Gets or sets defaultdate.
-        /// </summary>
-        public DateTime? DefaultEndDate { get; set; }
 
         /// <summary>
         /// Get or sets days.
@@ -66,7 +63,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.ViewModels
             var firstDayOfWeek = DateTimeHelper.GetDateFormat(DateTimeHelper.GetCulture()).FirstDayOfWeek;
             var allDays = AllDays.ToList();
             var days = Days.Select(x => (DayOfWeek)((allDays.IndexOf(x.ToString()) + (int)firstDayOfWeek) % AllDays.Count));
-            CountTrainingsAdd = _trainingService.AddTrainings(SettingsManager.GetRosterId(), Item.StartDate, Item.EndDate, Item.StartTime, Item.EndTime, Item.Place, days.ToArray()).Length;
+            CountTrainingsAdd = _trainingService.AddTrainings(Thread.CurrentPrincipal.Identity.GetRosterId(), Item.StartDate, Item.EndDate, Item.StartTime, Item.EndTime, Item.Place, days.ToArray()).Length;
             return 0;
         }
 
@@ -82,15 +79,12 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.ViewModels
         {
             Days = new List<object>();
 
-                    return new TrainingModel()
-                    {
-                        RosterId = SettingsManager.GetRosterId(),
-                        StartDate = DefaultDate ?? new DateTime(),
-                        EndDate = DefaultEndDate ?? new DateTime(),
-                        StartTime = SettingsManager.GetDefaultTrainingStartTime(),
-                        EndTime = SettingsManager.GetDefaultTrainingStartTime()
-                            .Add(SettingsManager.GetDefaultTrainingDuration())
-                    };
+            if (Parameters is TrainingsAddParameters p)
+            {
+                return TrainingFactory.Create(p.Date, p.EndDate, p.StartTime, p.StartTime.Add(p.Duration), string.Empty);
+            }
+
+            return TrainingFactory.Empty;
         }
 
         /// <summary>

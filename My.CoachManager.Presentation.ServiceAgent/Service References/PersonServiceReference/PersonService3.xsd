@@ -184,4 +184,19 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="PositionDto" nillable="true" type="tns:PositionDto" />
+  <xs:complexType name="InjuryDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EntityDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Condition" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ExpectedReturn" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="PlayerId" nillable="true" type="xs:int" />
+          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" minOccurs="0" name="Type" type="q5:InjuryType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="InjuryDto" nillable="true" type="tns:InjuryDto" />
 </xs:schema>

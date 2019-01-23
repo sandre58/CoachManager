@@ -17,8 +17,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
     {
         #region Fields
 
-        private int _activeId;
-
         /// <summary>
         /// The laod data background worker.
         /// </summary>
@@ -33,6 +31,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             SavingSuccessMessage = MessageResources.SavingSuccess;
             NewItemMessage = ControlResources.Creation;
             EditItemMessage = ControlResources.Edition;
+            Parameters = ItemParameters.New;
         }
 
 #endregion
@@ -168,6 +167,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             }
             catch (Exception exception)
             {
+                doWorkEventArgs.Cancel = true;
                 if (exception.InnerException is ValidationBusinessException validationBusinessException)
                 {
                     foreach (var error in validationBusinessException.Errors)
@@ -254,23 +254,16 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         /// <inheritdoc />
         /// <summary>
-        /// Load an item by id.
-        /// </summary>
-        public virtual void LoadId(int id)
-        {
-            _activeId = id;
-            Mode = id == 0 ? ScreenMode.Creation : ScreenMode.Edition;
-            Refresh();
-        }
-
-        /// <inheritdoc />
-        /// <summary>
         /// Save.
         /// </summary>
         protected override void LoadDataCore()
         {
             Item = new TModel();
-            if (_activeId > 0) Item = LoadItemCore(_activeId);
+
+            if (Parameters is ItemParameters p)
+            {
+                if (p.Id > 0) Item = LoadItemCore(p.Id);
+            }
         }
 
         /// <summary>
@@ -278,6 +271,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected override void OnLoadDataCompleted()
         {
+            Mode = Item.Id == 0 ? ScreenMode.Creation : ScreenMode.Edition;
             Item?.ResetModified();
         }
 
@@ -296,7 +290,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         protected virtual void OnItemChanged()
         {
-            if (Item != null && Item.Id > 0) _activeId = Item.Id;
+            if (Item != null && Item.Id > 0)
+            {
+                if(Parameters is ItemParameters p)
+                p.Id = Item.Id;
+            }
             if (Item != null) Item.PropertyChanged += OnItemPropertyChanged;
             SaveCommand.RaiseCanExecuteChanged();
             Item?.ResetModified();

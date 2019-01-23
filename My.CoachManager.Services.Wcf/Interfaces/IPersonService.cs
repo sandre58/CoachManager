@@ -53,5 +53,26 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// <returns></returns>>
         [OperationContract]
         CategoryDto GetCategoryFromBirthdate(DateTime date);
+
+        /// <summary>
+        /// Get a player.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        InjuryDto GetInjuryById(int id);
+
+        /// <summary>
+        /// Create a dto.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        int SaveInjury(int playerId, InjuryDto dto);
+
+        /// <summary>
+        /// Create a dto.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        void RemoveInjury(InjuryDto dto);
     }
 }

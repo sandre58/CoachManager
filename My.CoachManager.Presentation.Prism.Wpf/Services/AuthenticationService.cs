@@ -3,6 +3,7 @@ using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Cryptography;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.CrossCutting.Core.Security;
+using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.Services;
 using My.CoachManager.Presentation.ServiceAgent.UserServiceReference;
 
@@ -97,7 +98,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
             {
                 return new Principal()
                 {
-                    Identity = new Identity(user.Login, user.Name, user.Mail)
+                    Identity = new Identity(user.Login, user.Name, user.Mail, SettingsManager.GetRosterId())
                 };
             }
 

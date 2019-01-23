@@ -18,11 +18,13 @@ namespace My.CoachManager.CrossCutting.Core.Security
         /// <param name="login"></param>
         /// <param name="name"></param>
         /// <param name="email"></param>
-        public Identity(string login, string name, string email)
+        /// <param name="rosterId"></param>
+        public Identity(string login, string name, string email, int rosterId)
         {
             Login = login;
             Name = name;
             Email = email;
+            RosterId = rosterId;
         }
 
         #endregion Constructors and Destructors
@@ -42,17 +44,22 @@ namespace My.CoachManager.CrossCutting.Core.Security
         /// </summary>
         public string Email { get; private set; }
 
+        /// <summary>
+        /// Gets the roster id.
+        /// </summary>
+        public int RosterId { get; private set; }
+
         #region IIdentity Members
 
         /// <summary>
         /// Get the authentification type.
         /// </summary>
-        public string AuthenticationType { get { return AuthenticationTypeName; } }
+        public string AuthenticationType => AuthenticationTypeName;
 
         /// <summary>
         /// Gets a value indicates if he is identified.
         /// </summary>
-        public bool IsAuthenticated { get { return !string.IsNullOrEmpty(Name); } }
+        public bool IsAuthenticated => !string.IsNullOrEmpty(Name);
 
         #endregion IIdentity Members
     }

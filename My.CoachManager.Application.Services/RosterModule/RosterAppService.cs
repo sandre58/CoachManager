@@ -133,7 +133,7 @@ namespace My.CoachManager.Application.Services.RosterModule
 
             foreach (var id in playerIds)
             {
-                _playerRosterRepository.Add(RosterFactory.CreatePlayer(squad.RosterId, squadId, id));
+                    _playerRosterRepository.Add(RosterFactory.CreatePlayer(squad.RosterId, squadId, id));
             }
 
             _playerRosterRepository.UnitOfWork.Commit();
@@ -145,8 +145,6 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// <returns></returns>
         public void MovePlayersInSquad(int squadId, IEnumerable<int> playerIds)
         {
-            var squad = _squadAppService.GetSquadById(squadId);
-
             foreach (var id in playerIds)
             {
                 var player = _playerRosterRepository.GetEntity(id);

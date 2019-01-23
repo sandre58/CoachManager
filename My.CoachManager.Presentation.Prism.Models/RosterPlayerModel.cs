@@ -10,16 +10,6 @@ namespace My.CoachManager.Presentation.Prism.Models
     /// </summary>
     public class RosterPlayerModel : PlayerModel
     {
-        /// <summary>
-        /// Gets or sets the player's roster id.
-        /// </summary>
-        [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        public int RosterId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the player's roster.
-        /// </summary>
-        public RosterModel Roster { get; set; }
 
         /// <summary>
         /// Gets or sets the player id.

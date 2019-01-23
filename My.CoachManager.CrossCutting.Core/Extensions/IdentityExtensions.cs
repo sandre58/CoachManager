@@ -20,6 +20,16 @@ namespace My.CoachManager.CrossCutting.Core.Extensions
             return value.Contains("\\") ? value.Split('\\')[1] : value;
         }
 
+        [Pure]
+        public static int GetRosterId(this IIdentity identity)
+        {
+            if (identity is Identity id)
+            {
+                return id.RosterId;
+            }
+            return 0;
+        }
+
         #endregion Public Methods and Operators
     }
 }

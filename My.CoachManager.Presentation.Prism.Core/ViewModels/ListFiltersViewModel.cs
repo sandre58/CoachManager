@@ -88,7 +88,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         #region Constructors
 
         /// <summary>
-        /// Initialise a new instance of <see cref="ListParametersViewModel"/>.
+        /// Initialise a new instance of <see cref="ListParameters"/>.
         /// </summary>
         public ListFiltersViewModel()
         {

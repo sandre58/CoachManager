@@ -82,10 +82,10 @@ namespace My.CoachManager.Presentation.ServiceAgent.RosterServiceReference {
         System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.SquadDto[]> GetSquadsAsync(int rosterId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/SaveSquad", ReplyAction="http://tempuri.org/IRosterService/SaveSquadResponse")]
-        int SaveSquad(My.CoachManager.Application.Dtos.SquadDto dto);
+        int SaveSquad(int rosterId, My.CoachManager.Application.Dtos.SquadDto dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/SaveSquad", ReplyAction="http://tempuri.org/IRosterService/SaveSquadResponse")]
-        System.Threading.Tasks.Task<int> SaveSquadAsync(My.CoachManager.Application.Dtos.SquadDto dto);
+        System.Threading.Tasks.Task<int> SaveSquadAsync(int rosterId, My.CoachManager.Application.Dtos.SquadDto dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRosterService/RemoveSquad", ReplyAction="http://tempuri.org/IRosterService/RemoveSquadResponse")]
         void RemoveSquad(My.CoachManager.Application.Dtos.SquadDto dto);
@@ -221,12 +221,12 @@ namespace My.CoachManager.Presentation.ServiceAgent.RosterServiceReference {
             return base.Channel.GetSquadsAsync(rosterId);
         }
         
-        public int SaveSquad(My.CoachManager.Application.Dtos.SquadDto dto) {
-            return base.Channel.SaveSquad(dto);
+        public int SaveSquad(int rosterId, My.CoachManager.Application.Dtos.SquadDto dto) {
+            return base.Channel.SaveSquad(rosterId, dto);
         }
         
-        public System.Threading.Tasks.Task<int> SaveSquadAsync(My.CoachManager.Application.Dtos.SquadDto dto) {
-            return base.Channel.SaveSquadAsync(dto);
+        public System.Threading.Tasks.Task<int> SaveSquadAsync(int rosterId, My.CoachManager.Application.Dtos.SquadDto dto) {
+            return base.Channel.SaveSquadAsync(rosterId, dto);
         }
         
         public void RemoveSquad(My.CoachManager.Application.Dtos.SquadDto dto) {

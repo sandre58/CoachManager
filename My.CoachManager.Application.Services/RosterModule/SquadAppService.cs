@@ -47,8 +47,9 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// Save a dto.
         /// </summary>
         /// <returns></returns>
-        public int SaveSquad(SquadDto dto)
+        public int SaveSquad(int rosterId, SquadDto dto)
         {
+            dto.RosterId = rosterId;
             return _crudDomainService.Save(dto, SquadFactory.CreateEntity, SquadFactory.UpdateEntity, x => _squadDomainService.Validate(x));
         }
 

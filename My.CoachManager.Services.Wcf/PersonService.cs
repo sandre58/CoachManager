@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CommonServiceLocator;
 using My.CoachManager.Application.Dtos;
+using My.CoachManager.Application.Services.InjuryModule;
 using My.CoachManager.Application.Services.PersonModule;
 using My.CoachManager.Services.Wcf.Interfaces;
 
@@ -68,6 +69,33 @@ namespace My.CoachManager.Services.Wcf
         public CategoryDto GetCategoryFromBirthdate(DateTime date)
         {
             return ServiceLocator.Current.GetInstance<IPlayerAppService>().GetCategoryFromBirthdate(date);
+        }
+
+        /// <summary>
+        /// Get a player.
+        /// </summary>
+        /// <returns></returns>
+        public InjuryDto GetInjuryById(int id)
+        {
+            return ServiceLocator.Current.GetInstance<IInjuryAppService>().GetInjuryById(id);
+        }
+
+        /// <summary>
+        /// Create a dto.
+        /// </summary>
+        /// <returns></returns>
+        public int SaveInjury(int playerId, InjuryDto dto)
+        {
+            return ServiceLocator.Current.GetInstance<IInjuryAppService>().SaveInjury(playerId, dto);
+        }
+
+        /// <summary>
+        /// Create a dto.
+        /// </summary>
+        /// <returns></returns>
+        public void RemoveInjury(InjuryDto dto)
+        {
+           ServiceLocator.Current.GetInstance<IInjuryAppService>().RemoveInjury(dto);
         }
     }
 }

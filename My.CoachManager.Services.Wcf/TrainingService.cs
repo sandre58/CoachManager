@@ -17,9 +17,9 @@ namespace My.CoachManager.Services.Wcf
         /// Save a dto.
         /// </summary>
         /// <returns></returns>
-        public int SaveTraining(TrainingDto dto)
+        public int SaveTraining(int rosterId, TrainingDto dto)
         {
-            return ServiceLocator.Current.GetInstance<ITrainingAppService>().SaveTraining(dto);
+            return ServiceLocator.Current.GetInstance<ITrainingAppService>().SaveTraining(rosterId,dto);
         }
 
         /// <inheritdoc />
@@ -47,9 +47,9 @@ namespace My.CoachManager.Services.Wcf
         /// Load all items.
         /// </summary>
         /// <returns></returns>
-        public IList<TrainingDto> GetTrainings()
+        public IList<TrainingDto> GetTrainings(int rosterId)
         {
-            return ServiceLocator.Current.GetInstance<ITrainingAppService>().GetTrainings();
+            return ServiceLocator.Current.GetInstance<ITrainingAppService>().GetTrainings(rosterId);
         }
 
         /// <summary>

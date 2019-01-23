@@ -55,6 +55,10 @@
     </UserControl.Resources>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Horizontal">
 
@@ -110,6 +114,8 @@
                 </Canvas>
             </Grid>
         </StackPanel>
+        
+        <Button Grid.Column="1" Content="Ajouter une blessure" VerticalAlignment="Top" Command="{Binding AddInjuryCommand}" />
 
     </Grid>
 </UserControl>

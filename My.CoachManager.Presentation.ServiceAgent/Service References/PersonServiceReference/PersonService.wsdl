@@ -44,6 +44,24 @@
   <wsdl:message name="IPersonService_GetCategoryFromBirthdate_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCategoryFromBirthdateResponse" />
   </wsdl:message>
+  <wsdl:message name="IPersonService_GetInjuryById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInjuryById" />
+  </wsdl:message>
+  <wsdl:message name="IPersonService_GetInjuryById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInjuryByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPersonService_SaveInjury_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveInjury" />
+  </wsdl:message>
+  <wsdl:message name="IPersonService_SaveInjury_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveInjuryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPersonService_RemoveInjury_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveInjury" />
+  </wsdl:message>
+  <wsdl:message name="IPersonService_RemoveInjury_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveInjuryResponse" />
+  </wsdl:message>
   <wsdl:portType name="IPersonService">
     <wsdl:operation name="GetCountries">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/GetCountries" message="tns:IPersonService_GetCountries_InputMessage" />
@@ -68,6 +86,18 @@
     <wsdl:operation name="GetCategoryFromBirthdate">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/GetCategoryFromBirthdate" message="tns:IPersonService_GetCategoryFromBirthdate_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/GetCategoryFromBirthdateResponse" message="tns:IPersonService_GetCategoryFromBirthdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInjuryById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/GetInjuryById" message="tns:IPersonService_GetInjuryById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/GetInjuryByIdResponse" message="tns:IPersonService_GetInjuryById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveInjury">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/SaveInjury" message="tns:IPersonService_SaveInjury_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/SaveInjuryResponse" message="tns:IPersonService_SaveInjury_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveInjury">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonService/RemoveInjury" message="tns:IPersonService_RemoveInjury_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonService/RemoveInjuryResponse" message="tns:IPersonService_RemoveInjury_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IPersonService" type="tns:IPersonService">
@@ -119,6 +149,33 @@
     </wsdl:operation>
     <wsdl:operation name="GetCategoryFromBirthdate">
       <soap:operation soapAction="http://tempuri.org/IPersonService/GetCategoryFromBirthdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInjuryById">
+      <soap:operation soapAction="http://tempuri.org/IPersonService/GetInjuryById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveInjury">
+      <soap:operation soapAction="http://tempuri.org/IPersonService/SaveInjury" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveInjury">
+      <soap:operation soapAction="http://tempuri.org/IPersonService/RemoveInjury" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

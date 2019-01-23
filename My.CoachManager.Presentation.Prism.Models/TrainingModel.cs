@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Reflection;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Core.Resources.Entities;
 using My.CoachManager.Presentation.Prism.Core.Attributes.Validation;
@@ -43,18 +42,6 @@ namespace My.CoachManager.Presentation.Prism.Models
                 return item.StartDate.Date != item.EndDate.Date || item.StartTime < item.EndTime;
             });
         }
-
-        /// <summary>
-        /// Gets or sets the roster id.
-        /// </summary>
-        [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        [Display(Name = "Roster", ResourceType = typeof(TrainingResources))]
-        public int? RosterId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the roster.
-        /// </summary>
-        public virtual RosterModel Roster { get; set; }
 
         /// <summary>
         /// Gets or sets the place.

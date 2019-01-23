@@ -18,7 +18,7 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        int SaveSquad(SquadDto dto);
+        int SaveSquad(int rosterId, SquadDto dto);
 
         /// <summary>
         /// Remove a dto.

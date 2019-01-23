@@ -58,6 +58,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         public virtual bool RefreshOnInit => false;
 
+        /// <summary>
+        /// Gets or sets parameters.
+        /// </summary>
+        public IScreenParameters Parameters { get; set; }
+
         #endregion Members
 
         #region Initialisation

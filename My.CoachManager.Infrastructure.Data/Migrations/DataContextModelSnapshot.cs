@@ -449,8 +449,6 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Availability");
-
                     b.Property<string>("Condition")
                         .IsRequired();
 
@@ -464,7 +462,7 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<DateTime>("ExpectedReturn");
+                    b.Property<DateTime?>("ExpectedReturn");
 
                     b.Property<string>("ModifiedBy");
 
@@ -864,9 +862,7 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
 
                     b.HasData(
                         new { Id = 1, Login = "andre", Mail = "andre.cs2i@gmail.com", Name = "Stéphane ANDRE (Home)", Password = "qRBfE9MoPFs=" },
-                        new { Id = 2, Login = "E0214719", Mail = "stephane.andre@merial.com", Name = "Stéphane ANDRE (Merial)", Password = "qRBfE9MoPFs=" },
-                        new { Id = 3, Login = "E0268620", Mail = "vincentsourdeix@test.fr", Name = "Vincent SOURDEIX (BI)", Password = "qRBfE9MoPFs=" },
-                        new { Id = 4, Login = "stephane.andre", Mail = "stephane.andre@modis.com", Name = "Stéphane ANDRE (Modis)", Password = "qRBfE9MoPFs=" }
+                        new { Id = 2, Login = "stephane.andre", Mail = "stephane.andre@modis.com", Name = "Stéphane ANDRE (Modis)", Password = "qRBfE9MoPFs=" }
                     );
                 });
 
@@ -1019,7 +1015,7 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
             modelBuilder.Entity("My.CoachManager.Domain.Entities.Squad", b =>
                 {
                     b.HasOne("My.CoachManager.Domain.Entities.Roster", "Roster")
-                        .WithMany()
+                        .WithMany("Squads")
                         .HasForeignKey("RosterId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });

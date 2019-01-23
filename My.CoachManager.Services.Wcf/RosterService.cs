@@ -119,9 +119,9 @@ namespace My.CoachManager.Services.Wcf
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        public int SaveSquad(SquadDto dto)
+        public int SaveSquad(int rosterId, SquadDto dto)
         {
-            return ServiceLocator.Current.GetInstance<ISquadAppService>().SaveSquad(dto);
+            return ServiceLocator.Current.GetInstance<ISquadAppService>().SaveSquad(rosterId, dto);
         }
 
         /// <summary>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Windows;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Win32;
@@ -41,26 +40,6 @@ namespace My.CoachManager.Presentation.Prism.Wpf.Services
             };
 
             ServiceLocator.Current.GetInstance<IEventAggregator>().GetEvent<ShowWorkspaceDialogRequestEvent>().Publish(new DialogEventArgs(dialog, callback));
-
-        }
-
-        /// <summary>
-        /// Displays a modal dialog.
-        /// </summary>
-        /// <param name="selectionMode"></param>
-        /// <param name="view"></param>
-        /// <param name="callback">Action executed after result of dialog.</param>
-        /// <param name="notSelectableItems"></param>
-        public void ShowSelectItemsDialog(FrameworkElement view, Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null)
-        {
-            if (!(view.DataContext is ISelectItemsViewModel model)) return;
-
-            model.SelectionMode = selectionMode;
-
-            if(notSelectableItems != null)
-            model.NotSelectableItems = notSelectableItems;
-
-            ShowWorkspaceDialog(view, callback);
 
         }
 

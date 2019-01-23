@@ -169,6 +169,7 @@
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Data.PositionsListDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Data.SeasonDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Data.SeasonsListDto.datasource" />
+    <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.InjuryDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Person.CityDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Person.CountryDto.datasource" />
     <None Include="Properties\DataSources\My.CoachManager.Application.Dtos.Person.PlayerDto.datasource" />
@@ -292,9 +293,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\TrainingServiceReference\TrainingService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TrainingServiceReference\TrainingService4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\UserServiceReference\UserService.wsdl" />

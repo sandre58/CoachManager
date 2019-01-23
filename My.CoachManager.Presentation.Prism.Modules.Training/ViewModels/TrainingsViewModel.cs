@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Practices.ServiceLocation;
+using System.Threading;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.Manager;
@@ -86,7 +86,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.ViewModels
         /// <returns></returns>
         protected override void LoadDataCore()
         {
-                var result = _trainingService.GetTrainings();
+                var result = _trainingService.GetTrainings(Thread.CurrentPrincipal.Identity.GetRosterId());
 
                 Items = result.Select(TrainingFactory.Get).ToItemsObservableCollection();
         }
@@ -100,17 +100,15 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.ViewModels
         /// </summary>
         protected virtual void Add(DateTime? date)
         {
-            var view = ServiceLocator.Current.GetInstance<TrainingEditView>();
-
-                if (view.DataContext is TrainingEditViewModel model)
-                {
-                    model.LoadId(0);
-                    model.DefaultDate = date;
-                }
-                DialogManager.ShowWorkspaceDialog(view, dialog =>
-                {
-                    OnAddCompleted(dialog.Result);
-                });
+            DialogManager.ShowEditDialog<TrainingEditView>(new TrainingEditParameters(0)
+            {
+                Date = date,
+                Duration = SettingsManager.GetDefaultTrainingDuration(),
+                StartTime = SettingsManager.GetDefaultTrainingStartTime()
+            }, dialog =>
+            {
+                OnAddCompleted(dialog.Result);
+            });
         }
 
         /// <summary>
@@ -129,15 +127,13 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.ViewModels
         {
             if (SelectedDates != null && SelectedDates.Count > 1)
             {
-                var view = ServiceLocator.Current.GetInstance<TrainingsAddView>();
-
-                if (view.DataContext is TrainingsAddViewModel model)
+                DialogManager.ShowEditDialog<TrainingsAddView>(new TrainingsAddParameters(1)
                 {
-                    model.DefaultDate = SelectedDates.OrderBy(x => x.Date).First();
-                    model.DefaultEndDate = SelectedDates.OrderBy(x => x.Date).Last();
-                    model.LoadId(1);
-                }
-                DialogManager.ShowWorkspaceDialog(view, dialog =>
+                    Date = SelectedDates.OrderBy(x => x.Date).First(),
+                    EndDate = SelectedDates.OrderBy(x => x.Date).Last(),
+                    Duration = SettingsManager.GetDefaultTrainingDuration(),
+                    StartTime = SettingsManager.GetDefaultTrainingStartTime()
+                }, dialog =>
                 {
                     OnAddCompleted(dialog.Result);
                 });

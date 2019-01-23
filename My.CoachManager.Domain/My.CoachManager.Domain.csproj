@@ -177,6 +177,10 @@
     <Compile Include="AddressModule\Aggregate\AddressOrderBuilder.cs" />
     <Compile Include="AppModule\Services\CrudDomainService.cs" />
     <Compile Include="AppModule\Services\ICrudDomainService.cs" />
+    <Compile Include="InjuryModule\Aggregates\InjuryFactory.cs" />
+    <Compile Include="InjuryModule\Aggregates\InjuryValidator.cs" />
+    <Compile Include="InjuryModule\Services\IInjuryDomainService.cs" />
+    <Compile Include="InjuryModule\Services\InjuryDomainService.cs" />
     <Compile Include="PositionModule\Aggregate\PositionFactory.cs" />
     <Compile Include="PositionModule\Aggregate\PositionSelectBuilder.cs" />
     <Compile Include="CategoryModule\Aggregate\CategoryFactory.cs" />

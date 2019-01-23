@@ -53,11 +53,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces
         object SelectedItem { get; set; }
 
         /// <summary>
-        /// Gets or sets list parameters.
-        /// </summary>
-        ListParametersViewModel Parameters { get; set; }
-
-        /// <summary>
         /// Gets or sets list filters.
         /// </summary>
         IListFiltersViewModel Filters { get; set; }

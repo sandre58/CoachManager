@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using My.CoachManager.Presentation.Prism.Core.Models;
+using My.CoachManager.Presentation.Prism.Core.ViewModels.Interfaces;
 using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 {
-    public class ListParametersViewModel : ModelBase
+    public class ListParameters : ModelBase, IScreenParameters
     {
         #region Members
 
@@ -29,9 +30,9 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         #region Constructors
 
         /// <summary>
-        /// Initialise a new instance of <see cref="ListParametersViewModel"/>.
+        /// Initialise a new instance of <see cref="ListParameters"/>.
         /// </summary>
-        public ListParametersViewModel()
+        public ListParameters()
         {
             DisplayedColumns = new ObservableCollection<string>();
             PresetColumns = new Dictionary<object, string[]>();

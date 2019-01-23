@@ -69,5 +69,6 @@
         <!-- Specific -->
         <ResourceDictionary Source="Specific/Filter.xaml" />
         <ResourceDictionary Source="Specific/PositionSelector.xaml" />
+        <ResourceDictionary Source="Specific/InjuryTypeSelector.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

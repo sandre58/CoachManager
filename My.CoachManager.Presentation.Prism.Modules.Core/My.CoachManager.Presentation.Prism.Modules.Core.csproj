@@ -102,6 +102,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Resources\InjuryResources.Designer.cs">
+      <DependentUpon>InjuryResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\PlayerResources.Designer.cs">
       <DependentUpon>PlayerResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -113,6 +118,7 @@
     <Compile Include="ViewModels\SelectSquadsViewModel.cs" />
     <Compile Include="ViewModels\SelectRostersViewModel.cs" />
     <Compile Include="ViewModels\SelectPlayersViewModel.cs" />
+    <Compile Include="ViewModels\InjuryEditParameters.cs" />
     <Compile Include="Views\InjuryEditView.xaml.cs">
       <DependentUpon>InjuryEditView.xaml</DependentUpon>
     </Compile>
@@ -152,6 +158,11 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\InjuryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InjuryResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\PlayerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -16,16 +16,16 @@ namespace My.CoachManager.Presentation.ServiceAgent.TrainingServiceReference {
     public interface ITrainingService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrainingService/GetTrainings", ReplyAction="http://tempuri.org/ITrainingService/GetTrainingsResponse")]
-        My.CoachManager.Application.Dtos.TrainingDto[] GetTrainings();
+        My.CoachManager.Application.Dtos.TrainingDto[] GetTrainings(int rosterId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrainingService/GetTrainings", ReplyAction="http://tempuri.org/ITrainingService/GetTrainingsResponse")]
-        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.TrainingDto[]> GetTrainingsAsync();
+        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.TrainingDto[]> GetTrainingsAsync(int rosterId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrainingService/SaveTraining", ReplyAction="http://tempuri.org/ITrainingService/SaveTrainingResponse")]
-        int SaveTraining(My.CoachManager.Application.Dtos.TrainingDto dto);
+        int SaveTraining(int rosterId, My.CoachManager.Application.Dtos.TrainingDto dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrainingService/SaveTraining", ReplyAction="http://tempuri.org/ITrainingService/SaveTrainingResponse")]
-        System.Threading.Tasks.Task<int> SaveTrainingAsync(My.CoachManager.Application.Dtos.TrainingDto dto);
+        System.Threading.Tasks.Task<int> SaveTrainingAsync(int rosterId, My.CoachManager.Application.Dtos.TrainingDto dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrainingService/RemoveTraining", ReplyAction="http://tempuri.org/ITrainingService/RemoveTrainingResponse")]
         void RemoveTraining(My.CoachManager.Application.Dtos.TrainingDto dto);
@@ -73,20 +73,20 @@ namespace My.CoachManager.Presentation.ServiceAgent.TrainingServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public My.CoachManager.Application.Dtos.TrainingDto[] GetTrainings() {
-            return base.Channel.GetTrainings();
+        public My.CoachManager.Application.Dtos.TrainingDto[] GetTrainings(int rosterId) {
+            return base.Channel.GetTrainings(rosterId);
         }
         
-        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.TrainingDto[]> GetTrainingsAsync() {
-            return base.Channel.GetTrainingsAsync();
+        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.TrainingDto[]> GetTrainingsAsync(int rosterId) {
+            return base.Channel.GetTrainingsAsync(rosterId);
         }
         
-        public int SaveTraining(My.CoachManager.Application.Dtos.TrainingDto dto) {
-            return base.Channel.SaveTraining(dto);
+        public int SaveTraining(int rosterId, My.CoachManager.Application.Dtos.TrainingDto dto) {
+            return base.Channel.SaveTraining(rosterId, dto);
         }
         
-        public System.Threading.Tasks.Task<int> SaveTrainingAsync(My.CoachManager.Application.Dtos.TrainingDto dto) {
-            return base.Channel.SaveTrainingAsync(dto);
+        public System.Threading.Tasks.Task<int> SaveTrainingAsync(int rosterId, My.CoachManager.Application.Dtos.TrainingDto dto) {
+            return base.Channel.SaveTrainingAsync(rosterId, dto);
         }
         
         public void RemoveTraining(My.CoachManager.Application.Dtos.TrainingDto dto) {

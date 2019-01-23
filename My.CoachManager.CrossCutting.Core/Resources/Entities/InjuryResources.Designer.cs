@@ -79,6 +79,231 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pubalgie.
+        /// </summary>
+        public static string DefaultInjuryBack {
+            get {
+                return ResourceManager.GetString("DefaultInjuryBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contusion à la tête.
+        /// </summary>
+        public static string DefaultInjuryHead {
+            get {
+                return ResourceManager.GetString("DefaultInjuryHead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entorse de la cheville gauche.
+        /// </summary>
+        public static string DefaultInjuryLeftAnkle {
+            get {
+                return ResourceManager.GetString("DefaultInjuryLeftAnkle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fracture du bras gauche.
+        /// </summary>
+        public static string DefaultInjuryLeftArm {
+            get {
+                return ResourceManager.GetString("DefaultInjuryLeftArm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fracture du coude gauche.
+        /// </summary>
+        public static string DefaultInjuryLeftElbow {
+            get {
+                return ResourceManager.GetString("DefaultInjuryLeftElbow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fracture du pied gauche.
+        /// </summary>
+        public static string DefaultInjuryLeftFoot {
+            get {
+                return ResourceManager.GetString("DefaultInjuryLeftFoot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contusion à la main gauche.
+        /// </summary>
+        public static string DefaultInjuryLeftHand {
+            get {
+                return ResourceManager.GetString("DefaultInjuryLeftHand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entorse du genou gauche.
+        /// </summary>
+        public static string DefaultInjuryLeftKnee {
+            get {
+                return ResourceManager.GetString("DefaultInjuryLeftKnee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fracture du tibia gauche.
+        /// </summary>
+        public static string DefaultInjuryLeftShin {
+            get {
+                return ResourceManager.GetString("DefaultInjuryLeftShin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Luxation de l&apos;épaule gauche.
+        /// </summary>
+        public static string DefaultInjuryLeftShoulder {
+            get {
+                return ResourceManager.GetString("DefaultInjuryLeftShoulder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Déchirure à la cuisse gauche.
+        /// </summary>
+        public static string DefaultInjuryLeftThigh {
+            get {
+                return ResourceManager.GetString("DefaultInjuryLeftThigh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entorse du poignet gauche.
+        /// </summary>
+        public static string DefaultInjuryLeftWrist {
+            get {
+                return ResourceManager.GetString("DefaultInjuryLeftWrist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Douleurs aux cervicales.
+        /// </summary>
+        public static string DefaultInjuryNeck {
+            get {
+                return ResourceManager.GetString("DefaultInjuryNeck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entorse de la cheville droite.
+        /// </summary>
+        public static string DefaultInjuryRightAnkle {
+            get {
+                return ResourceManager.GetString("DefaultInjuryRightAnkle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fracture du bras droit.
+        /// </summary>
+        public static string DefaultInjuryRightArm {
+            get {
+                return ResourceManager.GetString("DefaultInjuryRightArm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fracture du coude droit.
+        /// </summary>
+        public static string DefaultInjuryRightElbow {
+            get {
+                return ResourceManager.GetString("DefaultInjuryRightElbow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fracture du pied droit.
+        /// </summary>
+        public static string DefaultInjuryRightFoot {
+            get {
+                return ResourceManager.GetString("DefaultInjuryRightFoot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contusion à la main droite.
+        /// </summary>
+        public static string DefaultInjuryRightHand {
+            get {
+                return ResourceManager.GetString("DefaultInjuryRightHand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entorse du genou droit.
+        /// </summary>
+        public static string DefaultInjuryRightKnee {
+            get {
+                return ResourceManager.GetString("DefaultInjuryRightKnee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fracture du tibia droit.
+        /// </summary>
+        public static string DefaultInjuryRightShin {
+            get {
+                return ResourceManager.GetString("DefaultInjuryRightShin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Luxation de l&apos;épaule droite.
+        /// </summary>
+        public static string DefaultInjuryRightShoulder {
+            get {
+                return ResourceManager.GetString("DefaultInjuryRightShoulder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Déchirure à la cuisse droite.
+        /// </summary>
+        public static string DefaultInjuryRightThigh {
+            get {
+                return ResourceManager.GetString("DefaultInjuryRightThigh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entorse du poignet droit.
+        /// </summary>
+        public static string DefaultInjuryRightWrist {
+            get {
+                return ResourceManager.GetString("DefaultInjuryRightWrist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mal au ventre.
+        /// </summary>
+        public static string DefaultInjuryStomach {
+            get {
+                return ResourceManager.GetString("DefaultInjuryStomach", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Côtes fracturées.
+        /// </summary>
+        public static string DefaultInjuryTorso {
+            get {
+                return ResourceManager.GetString("DefaultInjuryTorso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
@@ -88,7 +313,7 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Date re retour estimée.
+        ///   Looks up a localized string similar to Date de retour estimée.
         /// </summary>
         public static string ExpectedReturn {
             get {

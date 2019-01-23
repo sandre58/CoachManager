@@ -20,7 +20,6 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
             {
                 Id = dto.Id,
                 Name = dto.Name,
-                RosterId = dto.RosterId,
                 CreatedBy = dto.CreatedBy,
                 CreatedDate = dto.CreatedDate,
                 ModifiedBy = dto.ModifiedBy,
@@ -45,8 +44,7 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
             {
                 CrudStatus = crudStatus,
                 Id = item.Id,
-                Name = item.Name,
-                RosterId = item.RosterId
+                Name = item.Name
             };
         }
     }

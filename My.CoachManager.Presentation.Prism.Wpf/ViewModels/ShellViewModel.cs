@@ -308,7 +308,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// </summary>
         private void AddSquad()
         {
-            DialogManager.ShowEditDialog<SquadEditView>(0, dialog =>
+            DialogManager.ShowEditDialog<SquadEditView>(ItemParameters.New, dialog =>
             {
                 if (dialog.Result == DialogResult.Ok)
                 {
@@ -335,7 +335,7 @@ namespace My.CoachManager.Presentation.Prism.Wpf.ViewModels
         /// </summary>
         private void EditSquad(SquadModel item)
         {
-            DialogManager.ShowEditDialog<SquadEditView>(item.Id, dialog =>
+            DialogManager.ShowEditDialog<SquadEditView>(new ItemParameters(item.Id), dialog =>
             {
                 if (dialog.Result == DialogResult.Ok)
                 {

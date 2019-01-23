@@ -18,6 +18,7 @@ using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using Prism.Commands;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using My.CoachManager.Presentation.Prism.Modules.Core.ViewModels;
 using SquadResources = My.CoachManager.Presentation.Prism.Modules.Roster.Resources.SquadResources;
 
@@ -131,7 +132,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
             if (NavigationId > 0)
             {
                 Squad = SquadFactory.Get(_rosterService.GetSquadById(NavigationId));
-                Roster = RosterFactory.Get(_rosterService.GetRosterById(Squad.RosterId));
+                Roster = RosterFactory.Get(_rosterService.GetRosterById(Thread.CurrentPrincipal.Identity.GetRosterId()));
                 var result = _rosterService.GetPlayers(Roster.Id);
 
                 Items = result.Select(RosterFactory.Get).ToItemsObservableCollection();
@@ -190,7 +191,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// </summary>
         protected override void Add()
         {
-            DialogManager.ShowEditDialog<PlayerEditView>(0, dialog =>
+            DialogManager.ShowEditDialog<PlayerEditView>(ItemParameters.New, dialog =>
             {
                 if (dialog.Result == DialogResult.Ok)
                 {

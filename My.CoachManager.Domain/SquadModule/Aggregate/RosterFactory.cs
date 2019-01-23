@@ -26,21 +26,6 @@ namespace My.CoachManager.Domain.SquadModule.Aggregate
         }
 
         /// <summary>
-        /// Create the entity from the DTO.
-        /// </summary>
-        /// <returns>The entity.</returns>
-        public static Squad CreateEntity(int rosterId, string name)
-        {
-            if (rosterId == 0) return null;
-
-            return new Squad
-            {
-                RosterId = rosterId,
-                Name = name
-            };
-        }
-
-        /// <summary>
         /// Updates the entity.
         /// </summary>
         /// <param name="item">The item.</param>

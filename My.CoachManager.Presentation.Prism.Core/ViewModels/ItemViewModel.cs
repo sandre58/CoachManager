@@ -50,7 +50,7 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             if (Item == null) return;
             if (!CanEdit()) return;
 
-            DialogManager.ShowEditDialog<TEditView>(Item.Id, dialog =>
+            DialogManager.ShowEditDialog<TEditView>(new ItemParameters(Item.Id), dialog =>
             {
                 OnEditCompleted(dialog.Result);
             });

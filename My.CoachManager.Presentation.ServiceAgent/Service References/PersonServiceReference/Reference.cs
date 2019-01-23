@@ -50,6 +50,24 @@ namespace My.CoachManager.Presentation.ServiceAgent.PersonServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/GetCategoryFromBirthdate", ReplyAction="http://tempuri.org/IPersonService/GetCategoryFromBirthdateResponse")]
         System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.CategoryDto> GetCategoryFromBirthdateAsync(System.DateTime date);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/GetInjuryById", ReplyAction="http://tempuri.org/IPersonService/GetInjuryByIdResponse")]
+        My.CoachManager.Application.Dtos.InjuryDto GetInjuryById(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/GetInjuryById", ReplyAction="http://tempuri.org/IPersonService/GetInjuryByIdResponse")]
+        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.InjuryDto> GetInjuryByIdAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/SaveInjury", ReplyAction="http://tempuri.org/IPersonService/SaveInjuryResponse")]
+        int SaveInjury(int playerId, My.CoachManager.Application.Dtos.InjuryDto dto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/SaveInjury", ReplyAction="http://tempuri.org/IPersonService/SaveInjuryResponse")]
+        System.Threading.Tasks.Task<int> SaveInjuryAsync(int playerId, My.CoachManager.Application.Dtos.InjuryDto dto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/RemoveInjury", ReplyAction="http://tempuri.org/IPersonService/RemoveInjuryResponse")]
+        void RemoveInjury(My.CoachManager.Application.Dtos.InjuryDto dto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonService/RemoveInjury", ReplyAction="http://tempuri.org/IPersonService/RemoveInjuryResponse")]
+        System.Threading.Tasks.Task RemoveInjuryAsync(My.CoachManager.Application.Dtos.InjuryDto dto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -125,6 +143,30 @@ namespace My.CoachManager.Presentation.ServiceAgent.PersonServiceReference {
         
         public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.CategoryDto> GetCategoryFromBirthdateAsync(System.DateTime date) {
             return base.Channel.GetCategoryFromBirthdateAsync(date);
+        }
+        
+        public My.CoachManager.Application.Dtos.InjuryDto GetInjuryById(int id) {
+            return base.Channel.GetInjuryById(id);
+        }
+        
+        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.InjuryDto> GetInjuryByIdAsync(int id) {
+            return base.Channel.GetInjuryByIdAsync(id);
+        }
+        
+        public int SaveInjury(int playerId, My.CoachManager.Application.Dtos.InjuryDto dto) {
+            return base.Channel.SaveInjury(playerId, dto);
+        }
+        
+        public System.Threading.Tasks.Task<int> SaveInjuryAsync(int playerId, My.CoachManager.Application.Dtos.InjuryDto dto) {
+            return base.Channel.SaveInjuryAsync(playerId, dto);
+        }
+        
+        public void RemoveInjury(My.CoachManager.Application.Dtos.InjuryDto dto) {
+            base.Channel.RemoveInjury(dto);
+        }
+        
+        public System.Threading.Tasks.Task RemoveInjuryAsync(My.CoachManager.Application.Dtos.InjuryDto dto) {
+            return base.Channel.RemoveInjuryAsync(dto);
         }
     }
 }

@@ -1,5 +1,6 @@
-﻿using My.CoachManager.Application.Dtos;
-using My.CoachManager.Presentation.Prism.Core.Manager;
+﻿using System.Threading;
+using My.CoachManager.Application.Dtos;
+using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
@@ -36,8 +37,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// </summary>
         protected override int SaveItemCore()
         {
-            Item.RosterId = SettingsManager.GetRosterId();
-            return _rosterService.SaveSquad(SquadFactory.Get(Item, Mode == ScreenMode.Creation ? CrudStatus.Created : CrudStatus.Updated));
+            return _rosterService.SaveSquad(Thread.CurrentPrincipal.Identity.GetRosterId(), SquadFactory.Get(Item, Mode == ScreenMode.Creation ? CrudStatus.Created : CrudStatus.Updated));
         }
 
         /// <inheritdoc />

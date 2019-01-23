@@ -1,11 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
+using My.CoachManager.Presentation.Prism.Core.Dialog;
+using My.CoachManager.Presentation.Prism.Core.Manager;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
+using My.CoachManager.Presentation.Prism.Modules.Core.ViewModels;
+using My.CoachManager.Presentation.Prism.Modules.Core.Views;
 using My.CoachManager.Presentation.Prism.Modules.Roster.Views;
 using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
+using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 {
@@ -25,6 +32,11 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// </summary>
         public IEnumerable<PlayerPositionModel> Positions { get; set; }
 
+        /// <summary>
+        /// Gets or sets Add injury command.
+        /// </summary>
+        public ICommand AddInjuryCommand { get; set; }
+
         #endregion
 
         #region Constructors
@@ -39,6 +51,21 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         }
 
         #endregion Constructors
+
+        #region Initialization
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes commands.
+        /// </summary>
+        protected override void InitializeCommand()
+        {
+            base.InitializeCommand();
+
+            AddInjuryCommand = new DelegateCommand(AddInjury, CanAddInjury);
+        }
+
+        #endregion Initialization
 
         #region Data
 
@@ -71,11 +98,39 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 
         #endregion Data
 
-            #region PropertyChanged
+        #region AddInjury
 
-            /// <summary>
-            /// Calls when Item changes.
-            /// </summary>
+        /// <summary>
+        /// Edit Item.
+        /// </summary>
+        protected virtual void AddInjury()
+        {
+            DialogManager.ShowEditDialog<InjuryEditView>(new InjuryEditParameters(0)
+            {
+                PlayerId = Item.Id,
+                Date = DateTime.Today
+            }, dialog =>
+            {
+                if(dialog.Result == DialogResult.Ok)
+                Refresh();
+            });
+        }
+
+        /// <summary>
+        /// Can Edit item.
+        /// </summary>
+        protected virtual bool CanAddInjury()
+        {
+            return Mode == ScreenMode.Read;
+        }
+
+        #endregion
+
+        #region PropertyChanged
+
+        /// <summary>
+        /// Calls when Item changes.
+        /// </summary>
         protected override void OnItemChanged()
         {
             base.OnItemChanged();

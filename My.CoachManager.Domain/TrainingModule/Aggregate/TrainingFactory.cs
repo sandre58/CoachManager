@@ -1,7 +1,6 @@
 ﻿using System;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.Entities;
-using My.CoachManager.Domain.RosterModule.Aggregate;
 
 namespace My.CoachManager.Domain.TrainingModule.Aggregate
 {
@@ -78,7 +77,6 @@ namespace My.CoachManager.Domain.TrainingModule.Aggregate
             {
                 Id = item.Id,
                 RosterId = item.RosterId,
-                Roster = RosterFactory.Get(item.Roster),
                 EndDate = item.EndDate,
                 IsCancelled = item.IsCancelled,
                 Place = item.Place,

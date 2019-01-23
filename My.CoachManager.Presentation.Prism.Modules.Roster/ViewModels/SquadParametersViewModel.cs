@@ -3,7 +3,7 @@ using My.CoachManager.Presentation.Prism.Modules.Core.Enums;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
 {
-    public class SquadParametersViewModel : ListParametersViewModel
+    public class SquadParametersViewModel : ListParameters
     {
         #region Constants
 

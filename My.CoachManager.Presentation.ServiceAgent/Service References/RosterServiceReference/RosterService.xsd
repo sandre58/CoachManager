@@ -152,6 +152,7 @@
   <xs:element name="SaveSquad">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="rosterId" type="xs:int" />
         <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" minOccurs="0" name="dto" nillable="true" type="q12:SquadDto" />
       </xs:sequence>
     </xs:complexType>

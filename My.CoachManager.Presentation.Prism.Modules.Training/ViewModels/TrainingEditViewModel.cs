@@ -1,6 +1,6 @@
-﻿using System;
+﻿using System.Threading;
 using My.CoachManager.Application.Dtos;
-using My.CoachManager.Presentation.Prism.Core.Manager;
+using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Prism.Core.ViewModels;
 using My.CoachManager.Presentation.Prism.Models;
 using My.CoachManager.Presentation.Prism.Models.Aggregates;
@@ -16,15 +16,6 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.ViewModels
         private readonly ITrainingService _trainingService;
 
         #endregion Fields
-
-        #region Members
-
-        /// <summary>
-        /// Gets or sets defaultdate.
-        /// </summary>
-        public DateTime? DefaultDate { get; set; }
-
-        #endregion
 
         #region Constructors
 
@@ -46,7 +37,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.ViewModels
 
         protected override int SaveItemCore()
         {
-            return _trainingService.SaveTraining(TrainingFactory.Get(Item, Mode == ScreenMode.Creation ? CrudStatus.Created : CrudStatus.Updated));
+            return _trainingService.SaveTraining(Thread.CurrentPrincipal.Identity.GetRosterId(), TrainingFactory.Get(Item, Mode == ScreenMode.Creation ? CrudStatus.Created : CrudStatus.Updated));
         }
 
         protected override TrainingModel LoadItemCore(int id)
@@ -61,18 +52,19 @@ namespace My.CoachManager.Presentation.Prism.Modules.Training.ViewModels
         {
             base.OnLoadDataCompleted();
 
-            Item.RosterId = SettingsManager.GetRosterId();
-
             if (Mode == ScreenMode.Creation)
             {
-                if (DefaultDate.HasValue)
+                if (Parameters is TrainingEditParameters p)
                 {
-                    Item.Date = DefaultDate.Value;
-                }
+                    if (p.Date.HasValue)
+                    {
+                        Item.Date = p.Date.Value;
+                    }
 
-                Item.StartTime = SettingsManager.GetDefaultTrainingStartTime();
-                Item.EndTime = SettingsManager.GetDefaultTrainingStartTime()
-                    .Add(SettingsManager.GetDefaultTrainingDuration());
+                    Item.StartTime = p.StartTime;
+                    Item.EndTime = p.StartTime
+                        .Add(p.Duration);
+                }
 
                 Item.ResetModified();
             }

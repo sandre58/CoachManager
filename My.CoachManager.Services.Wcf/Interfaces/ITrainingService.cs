@@ -16,14 +16,14 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        IList<TrainingDto> GetTrainings();
+        IList<TrainingDto> GetTrainings(int rosterId);
 
         /// <summary>
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        int SaveTraining(TrainingDto dto);
+        int SaveTraining(int rosterId, TrainingDto dto);
 
         /// <summary>
         /// Remove a dto.

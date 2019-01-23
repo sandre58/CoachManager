@@ -129,7 +129,6 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 IsMutation = item.IsMutation,
                 LicenseState = item.LicenseState,
                 Number = item.Number,
-                RosterId = item.RosterId,
                 SquadId = item.SquadId,
                 Player = PlayerFactory.Get(item, crudStatus)
             };

@@ -117,12 +117,6 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
 
         /// <inheritdoc />
         /// <summary>
-        /// Gets or sets list parameters.
-        /// </summary>
-        public ListParametersViewModel Parameters { get; set; }
-
-        /// <inheritdoc />
-        /// <summary>
         /// Gets or sets list filters parameters.
         /// </summary>
         public IListFiltersViewModel Filters { get; set; }

@@ -14,13 +14,13 @@ namespace My.CoachManager.Application.Services.TrainingModule
         /// Get all dtos list.
         /// </summary>
         /// <returns></returns>
-        IList<TrainingDto> GetTrainings();
+        IList<TrainingDto> GetTrainings(int rosterId);
 
         /// <summary>
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        int SaveTraining(TrainingDto dto);
+        int SaveTraining(int rosterId, TrainingDto dto);
 
         /// <summary>
         /// Remove a dto.

@@ -13,5 +13,10 @@
         /// </summary>
         /// <remarks></remarks>
         ScreenMode Mode { get; set; }
+
+        /// <summary>
+        /// Gets or sets parameters.
+        /// </summary>
+        IScreenParameters Parameters { get; set; }
     }
 }
