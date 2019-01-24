@@ -1,10 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using My.CoachManager.CrossCutting.Core.Enums;
+﻿using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Core.Resources.Entities;
 using My.CoachManager.Presentation.Prism.Core.Attributes.Validation;
 using My.CoachManager.Presentation.Prism.Core.Models;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace My.CoachManager.Presentation.Prism.Models
 {
@@ -30,7 +30,6 @@ namespace My.CoachManager.Presentation.Prism.Models
                 return item.ExpectedReturn == null || item.Date.Date <= item.ExpectedReturn.Value.Date;
             });
         }
-
 
         /// <summary>
         /// Gets or sets the condition.
@@ -66,5 +65,11 @@ namespace My.CoachManager.Presentation.Prism.Models
         [ValidateProperty(nameof(Date))]
         public virtual DateTime? ExpectedReturn { get; set; }
 
+        /// <summary>
+        /// Gets or sets the severity.
+        /// </summary>
+        [Display(Name = "Severity", ResourceType = typeof(InjuryResources))]
+        [Required]
+        public virtual InjurySeverity Severity { get; set; }
     }
 }

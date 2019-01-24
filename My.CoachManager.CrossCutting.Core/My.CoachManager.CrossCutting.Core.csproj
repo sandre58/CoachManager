@@ -311,6 +311,7 @@
     <Compile Include="Constants\RoleConstants.cs" />
     <Compile Include="Constants\SqlConstants.cs" />
     <Compile Include="Cryptography\TripleDesEncryptor.cs" />
+    <Compile Include="Enums\InjurySeverity.cs" />
     <Compile Include="Enums\InjuryType.cs" />
     <Compile Include="Enums\BinaryOperator.cs" />
     <Compile Include="Enums\ComplexComparableOperator.cs" />
@@ -414,6 +415,11 @@
     </Compile>
     <Compile Include="Resources\Enums\AvailabilityResources.Designer.cs">
       <DependentUpon>AvailabilityResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Enums\InjurySeverityResources.Designer.cs">
+      <DependentUpon>InjurySeverityResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -571,6 +577,10 @@
     <EmbeddedResource Include="Resources\Enums\AvailabilityResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AvailabilityResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Enums\InjurySeverityResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InjurySeverityResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Enums\InjuryTypeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

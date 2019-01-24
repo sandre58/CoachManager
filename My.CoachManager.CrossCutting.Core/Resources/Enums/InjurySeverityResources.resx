@@ -117,97 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Condition" xml:space="preserve">
-    <value>Résumé</value>
+  <data name="Average" xml:space="preserve">
+    <value>Moyenne</value>
   </data>
-  <data name="Date" xml:space="preserve">
-    <value>Date</value>
+  <data name="Minor" xml:space="preserve">
+    <value>Mineure</value>
   </data>
-  <data name="DefaultInjuryBack" xml:space="preserve">
-    <value>Pubalgie</value>
+  <data name="Serious" xml:space="preserve">
+    <value>Sérieuse</value>
   </data>
-  <data name="DefaultInjuryHead" xml:space="preserve">
-    <value>Contusion à la tête</value>
-  </data>
-  <data name="DefaultInjuryLeftAnkle" xml:space="preserve">
-    <value>Entorse de la cheville gauche</value>
-  </data>
-  <data name="DefaultInjuryLeftArm" xml:space="preserve">
-    <value>Fracture du bras gauche</value>
-  </data>
-  <data name="DefaultInjuryLeftElbow" xml:space="preserve">
-    <value>Fracture du coude gauche</value>
-  </data>
-  <data name="DefaultInjuryLeftFoot" xml:space="preserve">
-    <value>Fracture du pied gauche</value>
-  </data>
-  <data name="DefaultInjuryLeftHand" xml:space="preserve">
-    <value>Contusion à la main gauche</value>
-  </data>
-  <data name="DefaultInjuryLeftKnee" xml:space="preserve">
-    <value>Entorse du genou gauche</value>
-  </data>
-  <data name="DefaultInjuryLeftShin" xml:space="preserve">
-    <value>Fracture du tibia gauche</value>
-  </data>
-  <data name="DefaultInjuryLeftShoulder" xml:space="preserve">
-    <value>Luxation de l'épaule gauche</value>
-  </data>
-  <data name="DefaultInjuryLeftThigh" xml:space="preserve">
-    <value>Déchirure à la cuisse gauche</value>
-  </data>
-  <data name="DefaultInjuryLeftWrist" xml:space="preserve">
-    <value>Entorse du poignet gauche</value>
-  </data>
-  <data name="DefaultInjuryNeck" xml:space="preserve">
-    <value>Douleurs aux cervicales</value>
-  </data>
-  <data name="DefaultInjuryRightAnkle" xml:space="preserve">
-    <value>Entorse de la cheville droite</value>
-  </data>
-  <data name="DefaultInjuryRightArm" xml:space="preserve">
-    <value>Fracture du bras droit</value>
-  </data>
-  <data name="DefaultInjuryRightElbow" xml:space="preserve">
-    <value>Fracture du coude droit</value>
-  </data>
-  <data name="DefaultInjuryRightFoot" xml:space="preserve">
-    <value>Fracture du pied droit</value>
-  </data>
-  <data name="DefaultInjuryRightHand" xml:space="preserve">
-    <value>Contusion à la main droite</value>
-  </data>
-  <data name="DefaultInjuryRightKnee" xml:space="preserve">
-    <value>Entorse du genou droit</value>
-  </data>
-  <data name="DefaultInjuryRightShin" xml:space="preserve">
-    <value>Fracture du tibia droit</value>
-  </data>
-  <data name="DefaultInjuryRightShoulder" xml:space="preserve">
-    <value>Luxation de l'épaule droite</value>
-  </data>
-  <data name="DefaultInjuryRightThigh" xml:space="preserve">
-    <value>Déchirure à la cuisse droite</value>
-  </data>
-  <data name="DefaultInjuryRightWrist" xml:space="preserve">
-    <value>Entorse du poignet droit</value>
-  </data>
-  <data name="DefaultInjuryStomach" xml:space="preserve">
-    <value>Mal au ventre</value>
-  </data>
-  <data name="DefaultInjuryTorso" xml:space="preserve">
-    <value>Côtes fracturées</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="ExpectedReturn" xml:space="preserve">
-    <value>Date de retour estimée</value>
-  </data>
-  <data name="Severity" xml:space="preserve">
-    <value>Sévérité</value>
-  </data>
-  <data name="Type" xml:space="preserve">
-    <value>Type</value>
+  <data name="Slight" xml:space="preserve">
+    <value>Légère</value>
   </data>
 </root>

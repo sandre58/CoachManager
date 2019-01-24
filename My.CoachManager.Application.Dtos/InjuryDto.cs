@@ -1,6 +1,6 @@
-﻿using System;
+﻿using My.CoachManager.CrossCutting.Core.Enums;
+using System;
 using System.Runtime.Serialization;
-using My.CoachManager.CrossCutting.Core.Enums;
 
 namespace My.CoachManager.Application.Dtos
 {
@@ -9,7 +9,6 @@ namespace My.CoachManager.Application.Dtos
     /// </summary>
     public class InjuryDto : EntityDto
     {
-
         /// <summary>
         /// Gets or sets the condition.
         /// </summary>
@@ -45,5 +44,11 @@ namespace My.CoachManager.Application.Dtos
         /// </summary>
         [DataMember]
         public virtual DateTime? ExpectedReturn { get; set; }
+
+        /// <summary>
+        /// Gets or sets the severity.
+        /// </summary>
+        [DataMember]
+        public virtual InjurySeverity Severity { get; set; }
     }
 }

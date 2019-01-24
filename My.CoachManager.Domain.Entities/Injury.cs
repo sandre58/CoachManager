@@ -1,7 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using My.CoachManager.CrossCutting.Core.Enums;
+﻿using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.Domain.Core;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace My.CoachManager.Domain.Entities
 {
@@ -10,7 +10,6 @@ namespace My.CoachManager.Domain.Entities
     /// </summary>
     public class Injury : Entity
     {
-
         /// <summary>
         /// Gets or sets the condition.
         /// </summary>
@@ -48,5 +47,10 @@ namespace My.CoachManager.Domain.Entities
         /// Gets or sets the expected return date.
         /// </summary>
         public virtual DateTime? ExpectedReturn { get; set; }
+
+        /// <summary>
+        /// Gets or sets the severity.
+        /// </summary>
+        public virtual InjurySeverity Severity { get; set; }
     }
 }

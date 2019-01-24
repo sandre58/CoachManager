@@ -23,7 +23,8 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 Date = model.Date,
                 Type = model.Type,
                 Condition = model.Condition,
-                ExpectedReturn = model.ExpectedReturn
+                ExpectedReturn = model.ExpectedReturn,
+                Severity = model.Severity
             };
         }
 
@@ -44,6 +45,7 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 Type = dto.Type,
                 Condition = dto.Condition,
                 ExpectedReturn = dto.ExpectedReturn,
+                Severity = dto.Severity,
                 CreatedBy = dto.CreatedBy,
                 CreatedDate = dto.CreatedDate,
                 ModifiedBy = dto.ModifiedBy,

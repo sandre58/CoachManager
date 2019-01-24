@@ -8,7 +8,6 @@ namespace My.CoachManager.Domain.InjuryModule.Aggregates
     /// </summary>
     public static class InjuryFactory
     {
-
         /// <summary>
         /// Create the entity from the DTO.
         /// </summary>
@@ -26,7 +25,8 @@ namespace My.CoachManager.Domain.InjuryModule.Aggregates
                 PlayerId = item.PlayerId,
                 Description = item.Description,
                 Condition = item.Condition,
-                ExpectedReturn = item.ExpectedReturn
+                ExpectedReturn = item.ExpectedReturn,
+                Severity = item.Severity
             };
         }
 
@@ -44,10 +44,10 @@ namespace My.CoachManager.Domain.InjuryModule.Aggregates
             entity.Description = item.Description;
             entity.Condition = item.Condition;
             entity.ExpectedReturn = item.ExpectedReturn;
+            entity.Severity = item.Severity;
 
             return true;
         }
-
 
         /// <summary>
         /// Convert the entity to DTO.
@@ -67,6 +67,7 @@ namespace My.CoachManager.Domain.InjuryModule.Aggregates
                 Description = item.Description,
                 Condition = item.Condition,
                 ExpectedReturn = item.ExpectedReturn,
+                Severity = item.Severity,
                 CreatedDate = item.CreatedDate,
                 CreatedBy = item.CreatedBy,
                 ModifiedDate = item.ModifiedDate,

@@ -23,7 +23,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            
+
             <Grid Grid.Row="0" Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80" />
@@ -40,13 +40,14 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                
+
                 <Grid>
                     <controls:InjuryTypeSelector SelectedType="{Binding Item.Type, IsAsync=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
 
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -58,28 +59,32 @@
                     </Grid.ColumnDefinitions>
 
                     <controls:Icon Grid.Column="0" Grid.Row="0" Size="Medium" Content="{StaticResource CalendarGeometry}" HorizontalAlignment="Center" />
-                    <DatePicker Grid.Row="0" Grid.Column="1" 
-                                SelectedDate="{Binding Item.Date, IsAsync=True}" 
+                    <DatePicker Grid.Row="0" Grid.Column="1"
+                                SelectedDate="{Binding Item.Date, IsAsync=True}"
                                 parameters:TextBoxParameters.Watermark="{x:Static strings:InjuryResources.Date}"
                                 Width="{StaticResource SmallLargeWidth}" />
 
                     <controls:Icon Grid.Column="0" Grid.Row="1" Size="Medium" Content="{StaticResource CalendarReturnGeometry}" HorizontalAlignment="Center" />
-                    <DatePicker Grid.Row="1" Grid.Column="1" 
-                                SelectedDate="{Binding Item.ExpectedReturn, IsAsync=True}" 
+                    <DatePicker Grid.Row="1" Grid.Column="1"
+                                SelectedDate="{Binding Item.ExpectedReturn, IsAsync=True}"
                                 parameters:TextBoxParameters.Watermark="{x:Static strings:InjuryResources.ExpectedReturn}"
-                                Width="{StaticResource SmallLargeWidth}"/>
+                                Width="{StaticResource SmallLargeWidth}" />
 
-                    <controls:Icon Grid.Column="0" Grid.Row="2" Size="Medium" Content="{StaticResource DescriptionGeometry}" HorizontalAlignment="Center" />
-                    <TextBox Grid.Row="2" Grid.Column="1" 
+                    <controls:Icon Grid.Column="0" Grid.Row="2" Size="Medium" Content="{StaticResource MedicalGeometry}" HorizontalAlignment="Center" />
+                    <ComboBox Grid.Column="1"  Grid.Row="2"
+                              Width="{StaticResource MediumWidth}"
+                              ItemsSource="{Binding Source={extensions:Enum {x:Type enum:InjurySeverity}}}"
+                              DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Item.Severity, IsAsync=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <controls:Icon Grid.Column="0" Grid.Row="3" Size="Medium" Content="{StaticResource DescriptionGeometry}" HorizontalAlignment="Center" />
+                    <TextBox Grid.Row="3" Grid.Column="1"
                                 parameters:TextBoxParameters.Watermark="{x:Static strings:InjuryResources.Description}"
                              HorizontalAlignment="Stretch"
                                TextWrapping="Wrap"
                                AcceptsReturn="True"
                                Height="100"
                                Style="{StaticResource TextBoxBaseStyle}" />
-
                 </Grid>
-
             </Grid>
         </Grid>
 
