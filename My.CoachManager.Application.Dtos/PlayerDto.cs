@@ -33,5 +33,11 @@ namespace My.CoachManager.Application.Dtos
         /// </summary>
         [DataMember]
         public IEnumerable<PlayerPositionDto> Positions { get; set; }
+
+        /// <summary>
+        /// Gets or set the injuries.
+        /// </summary>
+        [DataMember]
+        public IEnumerable<InjuryDto> Injuries { get; set; }
     }
 }

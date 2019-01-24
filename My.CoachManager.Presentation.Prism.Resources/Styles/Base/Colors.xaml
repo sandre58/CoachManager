@@ -6,6 +6,7 @@
     <Color x:Key="ExcellentColor">#00ff00</Color>
     <Color x:Key="GreatColor">#00b300</Color>
     <Color x:Key="GoodColor">#006600</Color>
+    <Color x:Key="SlightColor">#1BA1E2</Color>
     <Color x:Key="AverageColor">#e6e600</Color>
     <Color x:Key="PoorColor">#ff9900</Color>
     <Color x:Key="BadColor">#b32d00</Color>

@@ -144,4 +144,25 @@
   <data name="Injuries" xml:space="preserve">
     <value>Blessures</value>
   </data>
+  <data name="ExpectedReturn" xml:space="preserve">
+    <value>Retour prévu dans {0}</value>
+  </data>
+  <data name="Injuried" xml:space="preserve">
+    <value>Blessé(e)</value>
+  </data>
+  <data name="InjuriesHistory" xml:space="preserve">
+    <value>Historique des blessures</value>
+  </data>
+  <data name="Medical" xml:space="preserve">
+    <value>Santé</value>
+  </data>
+  <data name="NotInjuried" xml:space="preserve">
+    <value>En forme</value>
+  </data>
+  <data name="InFettle" xml:space="preserve">
+    <value>Le joueur est en plein forme</value>
+  </data>
+  <data name="NoExpectedReturn" xml:space="preserve">
+    <value>Pas de date de retour connue</value>
+  </data>
 </root>

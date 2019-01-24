@@ -39,7 +39,7 @@
                             <DataTemplate DataType="models:RosterPlayerModel">
                                 <StackPanel Orientation="Horizontal">
 
-                                    <controls:ToolbarControl x:Name="ActionsControl" Style="{StaticResource ToolbarControlForListViewItemStyle}">
+                                    <controls:ToolbarControl x:Name="ActionsControl" Style="{StaticResource ToolbarControlForExtendedListViewItemStyle}">
                                         <Button CommandParameter="{Binding}"
                                                 Command="{Binding DataContext.EditCommand,
                                 RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}"

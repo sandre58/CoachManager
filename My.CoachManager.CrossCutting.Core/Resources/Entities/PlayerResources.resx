@@ -129,6 +129,9 @@
   <data name="HeightFormat" xml:space="preserve">
     <value>{0} cm</value>
   </data>
+  <data name="Injuries" xml:space="preserve">
+    <value>Blessures</value>
+  </data>
   <data name="IsMutation" xml:space="preserve">
     <value>Fait Mutation</value>
   </data>

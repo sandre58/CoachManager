@@ -87,6 +87,7 @@ namespace My.CoachManager.Presentation.Prism.Models.Aggregates
                 Emails = dto.Emails != null ? dto.Emails.Select(ContactFactory.GetContact<EmailModel>).ToList().ToItemsObservableCollection() : new ObservableItemsCollection<EmailModel>(),
                 Phones = dto.Phones != null ? dto.Phones.Select(ContactFactory.GetContact<PhoneModel>).ToList().ToItemsObservableCollection() : new ObservableItemsCollection<PhoneModel>(),
                 Positions = dto.Positions != null ? dto.Positions.Select(GetPosition).ToList().ToObservableCollection() : new ObservableCollection<PlayerPositionModel>(),
+                Injuries = dto.Injuries != null ? dto.Injuries.Select(InjuryFactory.Get).ToList().ToObservableCollection() : new ObservableCollection<InjuryModel>(),
                 CreatedBy = dto.CreatedBy,
                 CreatedDate = dto.CreatedDate,
                 ModifiedBy = dto.ModifiedBy,

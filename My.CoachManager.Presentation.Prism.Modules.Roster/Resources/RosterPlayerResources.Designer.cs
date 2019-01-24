@@ -80,6 +80,15 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Retour prévu dans {0}.
+        /// </summary>
+        public static string ExpectedReturn {
+            get {
+                return ResourceManager.GetString("ExpectedReturn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Général.
         /// </summary>
         public static string General {
@@ -98,11 +107,38 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Le joueur est en plein forme.
+        /// </summary>
+        public static string InFettle {
+            get {
+                return ResourceManager.GetString("InFettle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blessé(e).
+        /// </summary>
+        public static string Injuried {
+            get {
+                return ResourceManager.GetString("Injuried", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Blessures.
         /// </summary>
         public static string Injuries {
             get {
                 return ResourceManager.GetString("Injuries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Historique des blessures.
+        /// </summary>
+        public static string InjuriesHistory {
+            get {
+                return ResourceManager.GetString("InjuriesHistory", resourceCulture);
             }
         }
         
@@ -116,11 +152,38 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Santé.
+        /// </summary>
+        public static string Medical {
+            get {
+                return ResourceManager.GetString("Medical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Morphologie.
         /// </summary>
         public static string Morphology {
             get {
                 return ResourceManager.GetString("Morphology", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pas de date de retour connue.
+        /// </summary>
+        public static string NoExpectedReturn {
+            get {
+                return ResourceManager.GetString("NoExpectedReturn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to En forme.
+        /// </summary>
+        public static string NotInjuried {
+            get {
+                return ResourceManager.GetString("NotInjuried", resourceCulture);
             }
         }
         

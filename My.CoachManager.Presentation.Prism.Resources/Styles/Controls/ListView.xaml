@@ -670,7 +670,7 @@
         </Grid>
     </DataTemplate>
 
-    <Style x:Key="ToolbarControlForListViewItemStyle" TargetType="{x:Type controls:ToolbarControl}" BasedOn="{StaticResource {x:Type controls:ToolbarControl}}">
+    <Style x:Key="ToolbarControlForExtendedListViewItemStyle" TargetType="{x:Type controls:ToolbarControl}" BasedOn="{StaticResource {x:Type controls:ToolbarControl}}">
         <Setter Property="PlacementTarget" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListViewItem}}}" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ExtendedListViewItem}}}" Value="False">

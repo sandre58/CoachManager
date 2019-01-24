@@ -7,7 +7,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Core.ViewModels
     {
         public int PlayerId { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         public InjuryEditParameters(int id) : base(id)
         {

@@ -40,6 +40,7 @@
         <ResourceDictionary Source="Controls/ImagePicker.xaml" />
         <ResourceDictionary Source="Controls/ListBox.xaml" />
         <ResourceDictionary Source="Controls/ListView.xaml" />
+        <ResourceDictionary Source="Controls/ListView2.xaml" />
         <ResourceDictionary Source="Controls/Menu.xaml" />
         <ResourceDictionary Source="Controls/NumericUpDown.xaml" />
         <ResourceDictionary Source="Controls/PasswordBox.xaml" />

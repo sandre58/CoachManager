@@ -180,6 +180,14 @@
     <Compile Include="Migrations\20190123154907_Injuries_update.designer.cs">
       <DependentUpon>20190123154907_Injuries_update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190124081938_InjurySeverity.cs" />
+    <Compile Include="Migrations\20190124081938_InjurySeverity.designer.cs">
+      <DependentUpon>20190124081938_InjurySeverity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190124103522_InjuryPlayerId.cs" />
+    <Compile Include="Migrations\20190124103522_InjuryPlayerId.designer.cs">
+      <DependentUpon>20190124103522_InjuryPlayerId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DataContextModelSnapshot.cs" />
     <Compile Include="ModelBuilderExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

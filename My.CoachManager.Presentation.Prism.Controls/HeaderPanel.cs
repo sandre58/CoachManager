@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace My.CoachManager.Presentation.Prism.Controls
@@ -22,6 +23,14 @@ namespace My.CoachManager.Presentation.Prism.Controls
         {
             get { return (Geometry)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
+        }
+
+        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register("Command", typeof(ICommand), typeof(HeaderPanel), new PropertyMetadata());
+
+        public ICommand Command
+        {
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
         }
 
         #endregion Properties

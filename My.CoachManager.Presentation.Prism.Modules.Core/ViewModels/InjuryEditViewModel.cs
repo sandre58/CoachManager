@@ -54,8 +54,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Core.ViewModels
             {
                 Item.PropertyChanged += OnItemPropertyChanged;
 
-                var date = Parameters is InjuryEditParameters p ? p.Date : DateTime.Today.Date;
-                Item.Date = date;
+                if(Parameters is InjuryEditParameters p && p.Date.HasValue)
+                Item.Date = p.Date.Value;
             }
 
             base.OnLoadDataCompleted();

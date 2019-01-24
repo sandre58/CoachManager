@@ -179,7 +179,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             // Injury
             modelBuilder.Entity<Injury>()
                 .HasOne(x => x.Player)
-                .WithMany()
+                .WithMany(x => x.Injuries)
                 .HasForeignKey(x => x.PlayerId);
 
             modelBuilder.Entity<Injury>()

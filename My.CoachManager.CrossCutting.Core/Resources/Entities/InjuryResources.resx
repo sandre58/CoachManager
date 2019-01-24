@@ -202,7 +202,16 @@
     <value>Description</value>
   </data>
   <data name="ExpectedReturn" xml:space="preserve">
-    <value>Date de retour estimée</value>
+    <value>Date de retour</value>
+  </data>
+  <data name="ExpectedReturnInDays" xml:space="preserve">
+    <value>{0} jour(s)</value>
+  </data>
+  <data name="ExpectedReturnInMonth" xml:space="preserve">
+    <value>{0} mois</value>
+  </data>
+  <data name="ExpectedReturnInWeeks" xml:space="preserve">
+    <value>{0} semaine(s)</value>
   </data>
   <data name="Severity" xml:space="preserve">
     <value>Sévérité</value>

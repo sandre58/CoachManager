@@ -9,10 +9,16 @@
         <ResourceDictionary Source="../Base/Margins.xaml" />
         <ResourceDictionary Source="../Base/Geometry.xaml" />
         <ResourceDictionary Source="../Base/Fonts.xaml" />
+        <ResourceDictionary Source="TextBlock.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- Normal buttons -->
     <Style x:Key="ButtonBaseStyle" TargetType="{x:Type ButtonBase}">
+        <Style.Resources>
+            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="Margin" Value="0" />
+            </Style>
+        </Style.Resources>
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource DarkControl}" />
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
@@ -28,6 +34,7 @@
         <Setter Property="parameters:ControlParameters.CornerRadius" Value="0" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels"  Value="True" />
@@ -160,6 +167,93 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="IconAndTextButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource ButtonBaseStyle}">
+        <Setter Property="Background" Value="{DynamicResource DarkControl}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource DarkControlMouseOver}" />
+        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{DynamicResource DarkControl}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Ellipse Grid.Column="0" x:Name="Base" Fill="{TemplateBinding Background}"
+                                 Height="18" Width="18"
+                                StrokeThickness="{Binding BorderThickness.Left, RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}}"
+                                Stroke="{TemplateBinding BorderBrush}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        <controls:Icon Grid.Column="0" Size="Custom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                       Content="{Binding (parameters:ControlParameters.Icon), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}"
+                                       Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}"/>
+                        
+                        <Border Grid.Column="1" Padding="{TemplateBinding Padding}">
+                            <ContentControl x:Name="PART_ContentPresenter"
+                                        Focusable="False"
+                                        IsTabStop="False"
+                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                   Content="{TemplateBinding Content}"
+                                                   ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                   ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                   parameters:ControlParameters.CharacterCasing="{TemplateBinding parameters:ControlParameters.CharacterCasing}"
+                                                   ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                   TextBlock.FontWeight="Bold" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.FocusBackground)}" />
+                <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.FocusBorderBrush)}" />
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.FocusForeground)}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.MouseOverBackground)}" />
+                <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.MouseOverBorderBrush)}" />
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.MouseOverForeground)}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedBackground)}" />
+                <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedBorderBrush)}" />
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedForeground)}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="{DynamicResource DisabledOpacity}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="IconAndTextColorButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource IconAndTextButtonStyle}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" Opacity="{DynamicResource ColorOpacity}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="parameters:ControlParameters.MouseOverBackground">
+            <Setter.Value>
+                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" Opacity="1" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="parameters:ControlParameters.PressedBackground">
+            <Setter.Value>
+                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" Opacity="1" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource White}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource White}" />
+        <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource White}" />
+    </Style>
+
+
     <Style x:Key="CircleIconButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource CircleButtonStyle}">
         <Setter Property="ContentTemplate">
             <Setter.Value>
@@ -174,19 +268,21 @@
 
     <!-- Text button -->
     <Style x:Key="TextButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource ButtonBaseStyle}">
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Transparent}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource NormalForeground}" />
+        <Setter Property="Padding" Value="0,0,0,2" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
         <Setter Property="Foreground" Value="{DynamicResource DarkControlPressed}" />
         <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource Transparent}" />
-        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource Dark}" />
         <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource Transparent}" />
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource Accent}" />
-        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource Accent}" />
         <Setter Property="parameters:ControlParameters.CharacterCasing" Value="Normal" />
         <Setter Property="FontWeight" Value="Normal" />
     </Style>
 
     <Style x:Key="IconButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextButtonStyle}">
         <Setter Property="Height" Value="17" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -201,6 +297,7 @@
     <!-- HyperLink -->
     <Style TargetType="{x:Type controls:HyperlinkButton}" BasedOn="{StaticResource TextButtonStyle}">
         <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -301,6 +398,11 @@
         <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Positive}" />
     </Style>
 
+    <Style x:Key="AddTextAndIconButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource IconAndTextColorButtonStyle}">
+        <Setter Property="parameters:ControlParameters.Icon" Value="{StaticResource PlusGeometry}" />
+        <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Positive}" />
+    </Style>
+
     <Style x:Key="EditButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource IconButtonStyle}">
         <Setter Property="Content" Value="{StaticResource EditPageGeometry}" />
     </Style>
@@ -316,6 +418,7 @@
         <Setter Property="parameters:ControlParameters.PressedBackground" Value="{DynamicResource AccentControlPressed}" />
         <Setter Property="parameters:ControlParameters.CharacterCasing" Value="Normal" />
         <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="MaxWidth" Value="34" />
         <Setter Property="MaxHeight" Value="34" />

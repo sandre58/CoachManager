@@ -285,5 +285,53 @@ namespace My.CoachManager.CrossCutting.Core.Helpers
 
             return result;
         }
+
+        public static int NumberOfDays(DateTime dateFrom, DateTime dateTo)
+        {
+           
+            return Math.Abs((dateFrom - dateTo).Days);
+        }
+
+        public static int NumberOfWeeks(DateTime dateFrom, DateTime dateTo)
+        {
+            TimeSpan span = dateTo.Subtract(dateFrom);
+
+            if (span.Days <= 7)
+            {
+                if (dateFrom.DayOfWeek > dateTo.DayOfWeek)
+                {
+                    return 2;
+                }
+
+                return 1;
+            }
+
+            int days = span.Days - 7 + (int)dateFrom.DayOfWeek;
+            int weekCount = 1;
+            int dayCount = 0;
+
+            for (weekCount = 1; dayCount < days; weekCount++)
+            {
+                dayCount += 7;
+            }
+
+            return Math.Abs(weekCount);
+        }
+
+        public static int NumberOfMonth(DateTime dateFrom, DateTime dateTo)
+        {
+            DateTime earlyDate = (dateFrom > dateTo) ? dateTo.Date : dateFrom.Date;
+            DateTime lateDate = (dateFrom > dateTo) ? dateFrom.Date : dateTo.Date;
+
+            // Start with 1 month's difference and keep incrementing
+            // until we overshoot the late date
+            int monthsDiff = 1;
+            while (earlyDate.AddMonths(monthsDiff) <= lateDate)
+            {
+                monthsDiff++;
+            }
+
+            return Math.Abs(monthsDiff - 1);
+        }
     }
 }

@@ -19,6 +19,7 @@
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource AccentForeground}" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Padding" Value="8 0 8 0" />
+        <Setter Property="BorderThickness" Value="0" />
     </Style>
 
     <Style TargetType="{x:Type controls:WindowCommands}">

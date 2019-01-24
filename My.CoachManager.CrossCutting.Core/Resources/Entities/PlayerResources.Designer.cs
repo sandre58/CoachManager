@@ -97,6 +97,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Blessures.
+        /// </summary>
+        public static string Injuries {
+            get {
+                return ResourceManager.GetString("Injuries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fait Mutation.
         /// </summary>
         public static string IsMutation {

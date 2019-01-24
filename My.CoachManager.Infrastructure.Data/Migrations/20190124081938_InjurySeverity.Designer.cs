@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.Infrastructure.Data.UnitOfWorks;
@@ -10,9 +11,10 @@ using My.CoachManager.Infrastructure.Data.UnitOfWorks;
 namespace My.CoachManager.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20190124081938_InjurySeverity")]
+    partial class InjurySeverity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -471,6 +473,8 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     b.Property<int?>("PlayerId")
                         .IsRequired();
 
+                    b.Property<int?>("PlayerId1");
+
                     b.Property<int>("Severity");
 
                     b.Property<int>("Type");
@@ -478,6 +482,8 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PlayerId");
+
+                    b.HasIndex("PlayerId1");
 
                     b.ToTable("Injuries");
                 });
@@ -944,9 +950,13 @@ namespace My.CoachManager.Infrastructure.Data.Migrations
             modelBuilder.Entity("My.CoachManager.Domain.Entities.Injury", b =>
                 {
                     b.HasOne("My.CoachManager.Domain.Entities.Player", "Player")
-                        .WithMany("Injuries")
+                        .WithMany()
                         .HasForeignKey("PlayerId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("My.CoachManager.Domain.Entities.Player")
+                        .WithMany("Injuries")
+                        .HasForeignKey("PlayerId1");
                 });
 
             modelBuilder.Entity("My.CoachManager.Domain.Entities.Person", b =>

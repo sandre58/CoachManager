@@ -3,6 +3,7 @@ using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.AddressModule.Aggregate;
 using My.CoachManager.Domain.CategoryModule.Aggregate;
 using My.CoachManager.Domain.Entities;
+using My.CoachManager.Domain.InjuryModule.Aggregates;
 using My.CoachManager.Domain.PositionModule.Aggregate;
 
 namespace My.CoachManager.Domain.PersonModule.Aggregate
@@ -104,6 +105,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                 Emails = player.Contacts.OfType<Email>().Select(ContactFactory.GetContact<EmailDto>),
                 Phones = player.Contacts.OfType<Phone>().Select(ContactFactory.GetContact<PhoneDto>),
                 Positions = player.Positions.Select(GetPosition).OrderBy(x => x.Position.Order),
+                Injuries = player.Injuries.Select(InjuryFactory.Get).OrderBy(x => x.Date),
                 Height = player.Height,
                 Weight = player.Weight,
                 ShoesSize = player.ShoesSize,

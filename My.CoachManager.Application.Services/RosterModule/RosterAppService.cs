@@ -188,6 +188,8 @@ namespace My.CoachManager.Application.Services.RosterModule
                 .Include(x => x.Player)
                 .ThenInclude(x => x.Positions)
                 .ThenInclude(x => x.Position)
+                .Include(x => x.Player)
+                .ThenInclude(x => x.Injuries)
                 .Include(x => x.Squad)
                 .FirstOrDefault(x => x.Id == id);
 

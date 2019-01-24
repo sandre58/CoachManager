@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using My.CoachManager.CrossCutting.Core.Constants;
@@ -17,6 +18,7 @@ namespace My.CoachManager.Presentation.Prism.Models
         {
             Laterality = PlayerConstants.DefaultLaterality;
             Positions = new ObservableCollection<PlayerPositionModel>();
+            Injuries = new ObservableCollection<InjuryModel>();
         }
 
         /// <summary>
@@ -64,6 +66,12 @@ namespace My.CoachManager.Presentation.Prism.Models
         public ObservableCollection<PlayerPositionModel> Positions { get; set; }
 
         /// <summary>
+        /// Gets or set the injuries.
+        /// </summary>
+        [Display(Name = "Injuries", ResourceType = typeof(PlayerResources))]
+        public ObservableCollection<InjuryModel> Injuries { get; set; }
+
+        /// <summary>
         /// Get natural position
         /// </summary>
         public string NaturalPositions
@@ -85,6 +93,22 @@ namespace My.CoachManager.Presentation.Prism.Models
                 if (Positions == null || Positions.Count <= 0) return string.Empty;
                 return string.Join(", ", Positions.Where(x => x.Rating > 3).OrderBy(x => x.Position.Order).Select(x => x.Position.Code));
             }
+        }
+
+        /// <summary>
+        /// Get Is injuried.
+        /// </summary>
+        public bool IsInjuried
+        {
+            get { return Injuries?.Any(x => DateTime.Today >= x.Date && (!x.ExpectedReturn.HasValue || DateTime.Today <= x.ExpectedReturn)) ?? false; }
+        }
+
+        /// <summary>
+        /// Get Is injuried.
+        /// </summary>
+        public InjuryModel Injury
+        {
+            get { return Injuries != null ? Injuries.FirstOrDefault(x => DateTime.Today >= x.Date && (!x.ExpectedReturn.HasValue || DateTime.Today <= x.ExpectedReturn)) : new InjuryModel(); }
         }
     }
 }

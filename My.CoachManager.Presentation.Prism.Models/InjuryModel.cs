@@ -5,6 +5,7 @@ using My.CoachManager.Presentation.Prism.Core.Attributes.Validation;
 using My.CoachManager.Presentation.Prism.Core.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
+using My.CoachManager.CrossCutting.Core.Helpers;
 
 namespace My.CoachManager.Presentation.Prism.Models
 {
@@ -64,6 +65,26 @@ namespace My.CoachManager.Presentation.Prism.Models
         [Display(Name = "ExpectedReturn", ResourceType = typeof(InjuryResources))]
         [ValidateProperty(nameof(Date))]
         public virtual DateTime? ExpectedReturn { get; set; }
+
+        /// <summary>
+        /// Gets or sets the expected return date.
+        /// </summary>
+        public virtual string ExpectedReturnLabel
+        {
+            get
+            {
+                if (!ExpectedReturn.HasValue) return string.Empty;
+
+                var valueInDays = DateTimeHelper.NumberOfDays(Date, ExpectedReturn.Value);
+                if (valueInDays <= 0) return string.Format(InjuryResources.ExpectedReturnInDays, valueInDays);
+
+                var valueInWeeks = DateTimeHelper.NumberOfWeeks(Date, ExpectedReturn.Value);
+                if (valueInWeeks <= 7) return string.Format(InjuryResources.ExpectedReturnInWeeks, valueInWeeks);
+
+                var valueInMonths = DateTimeHelper.NumberOfMonth(Date, ExpectedReturn.Value);
+                return string.Format(InjuryResources.ExpectedReturnInMonth, valueInMonths);
+            }
+        }
 
         /// <summary>
         /// Gets or sets the severity.
