@@ -62,6 +62,15 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ajouter une blessure.
+        /// </summary>
+        public static string Addinjury {
+            get {
+                return ResourceManager.GetString("Addinjury", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Club.
         /// </summary>
         public static string Club {

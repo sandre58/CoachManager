@@ -109,6 +109,15 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
                             Order = y.Position.Order
                         } : null
                     }),
+                    Injuries = x.Player.Injuries.Select(y => new InjuryDto()
+                    {
+                        Id = y.Id,
+                        Date = y.Date,
+                        Type = y.Type,
+                        ExpectedReturn = y.ExpectedReturn,
+                        Condition = y.Condition,
+                        Severity = y.Severity
+                    }),
                     Height = x.Player.Height,
                     Weight = x.Player.Weight,
                     ShoesSize = x.Player.ShoesSize,

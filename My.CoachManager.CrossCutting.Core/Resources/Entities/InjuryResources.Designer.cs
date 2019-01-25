@@ -81,6 +81,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         /// <summary>
         ///   Looks up a localized string similar to Pubalgie.
         /// </summary>
+        public static string DefaultInjuryAdductors {
+            get {
+                return ResourceManager.GetString("DefaultInjuryAdductors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Douleurs au dos.
+        /// </summary>
         public static string DefaultInjuryBack {
             get {
                 return ResourceManager.GetString("DefaultInjuryBack", resourceCulture);
@@ -111,6 +120,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         public static string DefaultInjuryLeftArm {
             get {
                 return ResourceManager.GetString("DefaultInjuryLeftArm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Elongation du mollet gauche.
+        /// </summary>
+        public static string DefaultInjuryLeftCalf {
+            get {
+                return ResourceManager.GetString("DefaultInjuryLeftCalf", resourceCulture);
             }
         }
         
@@ -210,6 +228,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         public static string DefaultInjuryRightArm {
             get {
                 return ResourceManager.GetString("DefaultInjuryRightArm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Elongation du mollet droit.
+        /// </summary>
+        public static string DefaultInjuryRightCalf {
+            get {
+                return ResourceManager.GetString("DefaultInjuryRightCalf", resourceCulture);
             }
         }
         

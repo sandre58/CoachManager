@@ -62,6 +62,12 @@ namespace My.CoachManager.CrossCutting.Core.Constants
                     return InjuryResources.DefaultInjuryLeftArm;
                 case InjuryType.RightArm:
                     return InjuryResources.DefaultInjuryRightArm;
+                case InjuryType.LeftCalf:
+                    return InjuryResources.DefaultInjuryLeftCalf;
+                case InjuryType.RightCalf:
+                    return InjuryResources.DefaultInjuryRightCalf;
+                case InjuryType.Adductors:
+                    return InjuryResources.DefaultInjuryAdductors;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }

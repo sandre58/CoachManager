@@ -61,6 +61,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Enums {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adducteurs.
+        /// </summary>
+        public static string Adductors {
+            get {
+                return ResourceManager.GetString("Adductors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dos.
         /// </summary>
         public static string Back {
@@ -93,6 +102,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Enums {
         public static string LeftArm {
             get {
                 return ResourceManager.GetString("LeftArm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mollet gauche.
+        /// </summary>
+        public static string LeftCalf {
+            get {
+                return ResourceManager.GetString("LeftCalf", resourceCulture);
             }
         }
         
@@ -201,6 +219,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Enums {
         public static string RightArm {
             get {
                 return ResourceManager.GetString("RightArm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mollet Droit.
+        /// </summary>
+        public static string RightCalf {
+            get {
+                return ResourceManager.GetString("RightCalf", resourceCulture);
             }
         }
         

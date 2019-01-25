@@ -119,6 +119,8 @@ namespace My.CoachManager.Application.Services.RosterModule
                 .Include(x => x.Player)
                     .ThenInclude(x => x.Positions)
                     .ThenInclude(x => x.Position)
+                .Include(x => x.Player)
+                    .ThenInclude(x => x.Injuries)
                 .Where(x => x.RosterId == rosterId)
                 .Select(RosterSelectBuilder.SelectRosterPlayers()).ToList();
         }

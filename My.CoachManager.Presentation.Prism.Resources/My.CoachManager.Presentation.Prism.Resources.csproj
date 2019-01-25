@@ -460,8 +460,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pictures\Countries\index.html" />
-    <Resource Include="Pictures\male-behind.png" />
-    <Resource Include="Pictures\male-face.png" />
+    <Resource Include="Pictures\female.png" />
+    <Resource Include="Pictures\male.png" />
     <Resource Include="Pictures\ground_horizontal.jpg" />
     <Resource Include="Pictures\ground.jpg" />
     <Resource Include="Pictures\Countries\zw.png" />

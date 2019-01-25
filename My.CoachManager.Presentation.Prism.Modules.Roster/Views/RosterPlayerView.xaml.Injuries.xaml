@@ -28,7 +28,7 @@
 
         <!-- Is Injuried -->
         <controls:HeaderPanel Grid.Column="0" Grid.Row="0" Header="{x:Static resources:RosterPlayerResources.Injuried}"
-                              Visibility="{Binding Item.IsInjuried, IsAsync=True, Converter={StaticResource BooleanToVisibilityConverter}}">
+                              Visibility="{Binding Item.IsInjuried, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource BooleanToVisibilityConverter}}">
             <controls:HeaderPanel.Style>
                 <Style TargetType="{x:Type controls:HeaderPanel}" BasedOn="{StaticResource {x:Type controls:HeaderPanel}}">
                     <Style.Triggers>
@@ -65,7 +65,7 @@
 
         <!-- Is not injuried -->
         <controls:HeaderPanel Grid.Column="0" Grid.Row="0" Header="{x:Static resources:RosterPlayerResources.NotInjuried}" Style="{StaticResource PositiveHeaderPanelStyle}"
-                              Visibility="{Binding Item.IsInjuried, IsAsync=True, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
+                              Visibility="{Binding Item.IsInjuried, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
             <StackPanel>
                 <TextBlock Text="{x:Static resources:RosterPlayerResources.InFettle}" Style="{StaticResource HeaderStyle}" Margin="{StaticResource MediumVerticalMargin}" />
             </StackPanel>
@@ -80,10 +80,10 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" Content="Ajouter une blessure" HorizontalAlignment="Right" Command="{Binding AddInjuryCommand}" 
+                <Button Grid.Row="0" Content="{x:Static resources:RosterPlayerResources.Addinjury}" HorizontalAlignment="Right" Command="{Binding AddInjuryCommand}" 
                         Style="{StaticResource AddTextAndIconButtonStyle}" Margin="{StaticResource DefaultVerticalMargin}" />
 
-                    <ListView Grid.Row="1" ItemsSource="{Binding Item.Injuries, IsAsync=True}" SelectedItem="{Binding SelectedInjury, IsAsync=True, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView Grid.Row="1" ItemsSource="{Binding Item.Injuries, IsAsync=True}" SelectedItem="{Binding SelectedInjury, IsAsync=True, Mode=TwoWay}">
 
                     <parameters:ControlParameters.InputBindings>
                         <InputBindingCollection>
@@ -156,10 +156,55 @@
                     <RowDefinition Height="420" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <controls:InjuryTypeSelector Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" SelectedType="{Binding SelectedInjury.Type, IsAsync=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
+                <controls:InjuryTypeSelector Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" SelectedType="{Binding SelectedInjury.Type, IsAsync=True, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"
+                                             IsFemale="{Binding Item.Gender, IsAsync=True, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:GenderType.Female}}">
+                    <controls:InjuryTypeSelector.Style>
+                        <Style TargetType="{x:Type controls:InjuryTypeSelector}" BasedOn="{StaticResource {x:Type controls:InjuryTypeSelector}}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedInjury.Severity, IsAsync=True}" Value="{x:Static enum:InjurySeverity.Serious}">
+                                    <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource VeryBad}" />
+                                </DataTrigger>
 
-                <StackPanel Grid.Row="1" Grid.Column="0" >
-                    <TextBlock Foreground="{DynamicResource Negative}" Text="{Binding SelectedInjury.Condition, IsAsync=True, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource HeaderStyle}" />
+                                <DataTrigger Binding="{Binding SelectedInjury.Severity, IsAsync=True}" Value="{x:Static enum:InjurySeverity.Average}">
+                                    <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Bad}" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding SelectedInjury.Severity, IsAsync=True}" Value="{x:Static enum:InjurySeverity.Minor}">
+                                    <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Poor}" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding SelectedInjury.Severity, IsAsync=True}" Value="{x:Static enum:InjurySeverity.Slight}">
+                                    <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Slight}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </controls:InjuryTypeSelector.Style>
+                    </controls:InjuryTypeSelector>
+
+                <StackPanel Grid.Row="1" Grid.Column="0" Margin="{StaticResource MediumVerticalMargin}">
+                    <TextBlock Text="{Binding SelectedInjury.Condition, IsAsync=True, Converter={StaticResource ToUpperConverter}}" >
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource HeaderStyle}">
+                            <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SelectedInjury.Severity, IsAsync=True}" Value="{x:Static enum:InjurySeverity.Serious}">
+                                        <Setter Property="Foreground" Value="{DynamicResource VeryBad}" />
+                                </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding SelectedInjury.Severity, IsAsync=True}" Value="{x:Static enum:InjurySeverity.Average}">
+                                        <Setter Property="Foreground" Value="{DynamicResource Bad}" />
+                                </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding SelectedInjury.Severity, IsAsync=True}" Value="{x:Static enum:InjurySeverity.Minor}">
+                                        <Setter Property="Foreground" Value="{DynamicResource Poor}" />
+                                </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding SelectedInjury.Severity, IsAsync=True}" Value="{x:Static enum:InjurySeverity.Slight}">
+                                        <Setter Property="Foreground" Value="{DynamicResource Slight}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
                     <TextBlock Text="{Binding SelectedInjury.Description}" />
                 </StackPanel>
 

@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InjuryTypeSelector.cs" />
+    <Compile Include="RelativeCanvas.cs" />
     <Compile Include="ToolbarControl.cs" />
     <Compile Include="AdornedControl.cs" />
     <Compile Include="Buttons\DropDownButtonAutomationPeer.cs" />

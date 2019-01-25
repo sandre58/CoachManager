@@ -81,6 +81,15 @@ namespace My.CoachManager.CrossCutting.Core.Enums
         LeftArm,
 
         [Display(Name = "RightArm", ResourceType = typeof(InjuryTypeResources))]
-        RightArm
+        RightArm,
+
+        [Display(Name = "LeftCalf", ResourceType = typeof(InjuryTypeResources))]
+        LeftCalf,
+
+        [Display(Name = "RightCalf", ResourceType = typeof(InjuryTypeResources))]
+        RightCalf,
+
+        [Display(Name = "Adductors", ResourceType = typeof(InjuryTypeResources))]
+        Adductors
     }
 }

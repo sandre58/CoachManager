@@ -24,6 +24,11 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
         /// </summary>
         public int NavigationId { get; private set; }
 
+        /// <summary>
+        /// Gets selectedTabIndex.
+        /// </summary>
+        public int SelectedTabIndex { get; set; }
+
         #endregion Members
 
         #region Methods
@@ -39,6 +44,10 @@ namespace My.CoachManager.Presentation.Prism.Core.ViewModels
             if (NavigationParameters.Any(x => x.Key == "Id"))
             {
                 NavigationId = int.Parse(NavigationParameters["Id"].ToString());
+            }
+            if (NavigationParameters.Any(x => x.Key == "Tab"))
+            {
+                SelectedTabIndex = int.Parse(NavigationParameters["Tab"].ToString());
             }
             OnNavigatedToCore(NavigationParameters);
         }

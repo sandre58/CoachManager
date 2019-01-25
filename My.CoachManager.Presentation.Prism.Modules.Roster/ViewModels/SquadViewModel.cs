@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using My.CoachManager.Presentation.Prism.Modules.Core.ViewModels;
+using My.CoachManager.Presentation.Prism.Modules.Roster.Enums;
 using SquadResources = My.CoachManager.Presentation.Prism.Modules.Roster.Resources.SquadResources;
 
 namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
@@ -72,6 +73,11 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// </summary>
         public DelegateCommand<List<object>> MovePlayerInSquadCommand { get; set; }
 
+        /// <summary>
+        /// Gets or sets command.
+        /// </summary>
+        public DelegateCommand<RosterPlayerModel> OpenItemInInjuryTabCommand { get; set; }
+
         #endregion Members
 
         #region Constructors
@@ -106,6 +112,7 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
             MoveSelectedPlayersInSquadCommand = new DelegateCommand<SquadModel>(MoveSelectedPlayersInSquad, CanMoveSelectedPlayersInSquad);
             MovePlayerInSquadCommand = new DelegateCommand<List<object>>(MovePlayerInSquad);
             AddExistingPlayersCommand = new DelegateCommand(AddExistingPlayers);
+            OpenItemInInjuryTabCommand = new DelegateCommand<RosterPlayerModel>(OpenItemInInjuryTab, CanOpenItemInInjuryTab);
         }
 
         #endregion Initialization
@@ -282,6 +289,30 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         }
 
         #endregion MovePlayerInSquad
+
+        #region OpenItemInInjuryTab
+
+        /// <summary>
+        /// Open Item.
+        /// </summary>
+        protected virtual void OpenItemInInjuryTab(RosterPlayerModel item)
+        {
+            NavigationManager.NavigateTo<RosterPlayerView>(null, new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("Id", item.Id),
+                new KeyValuePair<string, object>("Tab", (int)RosterPlayerViewTab.Injuries)
+            });
+        }
+
+        /// <summary>
+        /// Can Open item.
+        /// </summary>
+        protected virtual bool CanOpenItemInInjuryTab(RosterPlayerModel item)
+        {
+            return Mode == ScreenMode.Read && item != null;
+        }
+
+        #endregion
 
         #region Properties Changed
 

@@ -50,7 +50,7 @@
                                                        Opacity="0.9"
                                                        Margin="{StaticResource LargeRightMargin}"
                                                        Content="{StaticResource GenderMaleGeometry}"
-                                                       Visibility="{Binding Item.Gender, IsAsync=True, FallbackValue=Collapsed, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static enum:GenderType.Male}}" />
+                                                       Visibility="{Binding Item.Gender, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static enum:GenderType.Male}}" />
                                     <controls:Icon HorizontalAlignment="Left" Size="Custom" Height="25" Foreground="{DynamicResource Female}"
                                                        Opacity="0.9"
                                                        Margin="{StaticResource LargeRightMargin}"
@@ -133,7 +133,7 @@
 
                                     <controls:Icon HorizontalAlignment="Center"
                                                    Size="Custom" Height="25" Width="25" Foreground="{DynamicResource Warning}" Margin="{StaticResource DefaultHorizontalMargin}" Content="{DynamicResource WarningGeometry}"
-                                                   Visibility="{Binding Item.IsMutation, IsAsync=True, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                   Visibility="{Binding Item.IsMutation, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                    ToolTip="{x:Static entities:PlayerResources.IsMutation}" />
                                 </StackPanel>
 
@@ -209,7 +209,7 @@
             </DataTemplate>
         </controls:WorkspaceView.HeaderTemplate>
         
-        <TabControl>
+        <TabControl SelectedIndex="{Binding SelectedTabIndex}">
             <TabItem Header="{x:Static resources:RosterPlayerResources.Overview}">
                 <ContentControl Foreground="{DynamicResource NormalForeground}" FontSize="{DynamicResource NormalFontSize}" Cursor="{x:Null}">
                 <WrapPanel Orientation="Horizontal">

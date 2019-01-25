@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:My.CoachManager.Presentation.Prism.Controls;assembly=My.CoachManager.Presentation.Prism.Controls"
                     xmlns:enum="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
-                    xmlns:enums="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Enums;assembly=My.CoachManager.CrossCutting.Core">
+                    xmlns:enums="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Enums;assembly=My.CoachManager.CrossCutting.Core"
+                    xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Prism.Controls.Parameters;assembly=My.CoachManager.Presentation.Prism.Controls">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Converters.xaml" />
@@ -10,10 +11,11 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="InjuryRadioButtonStyle" TargetType="{x:Type RadioButton}">
-        <Setter Property="Background" Value="{DynamicResource Negative}" />
-        <Setter Property="Opacity" Value="0" />
+        <Setter Property="Background" Value="{DynamicResource HeaderBackground}" />
+        <Setter Property="Opacity" Value="0.4" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="0" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
@@ -37,17 +39,26 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:InjuryTypeSelector}, Path=(parameters:ControlParameters.Color)}" />
                             <Setter Property="Opacity" Value="{DynamicResource ColorOpacity}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:InjuryTypeSelector}, Path=(parameters:ControlParameters.Color)}" />
                             <Setter Property="Opacity" Value="1" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:InjuryTypeSelector}, Path=(parameters:ControlParameters.Color)}" />
                             <Setter Property="Opacity" Value="1" />
                         </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="{DynamicResource DisabledOpacity}" />
-                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Opacity" Value="0" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -58,14 +69,96 @@
         <Style.Resources>
             <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource InjuryRadioButtonStyle}" />
         </Style.Resources>
+        <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Negative}" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:InjuryTypeSelector}">
                     <Grid>
+                        <Image x:Name="Image" Source="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/male.png" Stretch="Uniform" Opacity="0.5" />
+                        <controls:RelativeCanvas Height="{Binding ElementName=Image, Path=ActualHeight}" Width="{Binding ElementName=Image, Path=ActualWidth}">
+
+                            <RadioButton Canvas.Left="35" Canvas.Top="2" Style="{StaticResource RadioButtonStyle}" Content="{x:Static enums:InjuryTypeResources.Other}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.Other}, UpdateSourceTrigger=PropertyChanged}"
+                                         Visibility="{Binding IsEnabled, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                            
+                            <RadioButton Canvas.Left="21" Canvas.Top="2" ToolTip="{x:Static enums:InjuryTypeResources.Head}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.Head}, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Canvas.Left="72.5" Canvas.Top="11" ToolTip="{x:Static enums:InjuryTypeResources.Neck}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.Neck}, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Canvas.Left="21" Canvas.Top="25" ToolTip="{x:Static enums:InjuryTypeResources.Torso}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.Torso}, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Canvas.Left="21" Canvas.Top="37" ToolTip="{x:Static enums:InjuryTypeResources.Stomach}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.Stomach}, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Canvas.Left="21" Canvas.Top="50" ToolTip="{x:Static enums:InjuryTypeResources.Adductors}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.Adductors}, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Canvas.Left="27" Canvas.Top="81" ToolTip="{x:Static enums:InjuryTypeResources.LeftShin}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.LeftShin}, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Canvas.Left="15" Canvas.Top="81" ToolTip="{x:Static enums:InjuryTypeResources.RightShin}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.RightShin}, UpdateSourceTrigger=PropertyChanged}" />
+
+
+                            <RadioButton Canvas.Left="60" Canvas.Top="16" ToolTip="{x:Static enums:InjuryTypeResources.LeftShoulder}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.LeftShoulder}, UpdateSourceTrigger=PropertyChanged}"/>
+                            <RadioButton Canvas.Left="85" Canvas.Top="16" ToolTip="{x:Static enums:InjuryTypeResources.RightShoulder}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.RightShoulder}, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <RadioButton Canvas.Left="55" Canvas.Top="25" ToolTip="{x:Static enums:InjuryTypeResources.LeftArm}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.LeftArm}, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Canvas.Left="90" Canvas.Top="25" ToolTip="{x:Static enums:InjuryTypeResources.RightArm}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.RightArm}, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <RadioButton Canvas.Left="53" Canvas.Top="32" ToolTip="{x:Static enums:InjuryTypeResources.LeftElbow}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.LeftElbow}, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Canvas.Left="93" Canvas.Top="32" ToolTip="{x:Static enums:InjuryTypeResources.RightElbow}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.RightElbow}, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <RadioButton Canvas.Left="52" Canvas.Top="45" ToolTip="{x:Static enums:InjuryTypeResources.LeftWrist}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.LeftWrist}, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Canvas.Left="94" Canvas.Top="45" ToolTip="{x:Static enums:InjuryTypeResources.RightWrist}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.RightWrist}, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <RadioButton Canvas.Left="52" Canvas.Top="52" ToolTip="{x:Static enums:InjuryTypeResources.LeftHand}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.LeftHand}, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Canvas.Left="94" Canvas.Top="52" ToolTip="{x:Static enums:InjuryTypeResources.RightHand}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.RightHand}, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <RadioButton Canvas.Left="68" Canvas.Top="60" ToolTip="{x:Static enums:InjuryTypeResources.LeftThigh}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.LeftThigh}, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Canvas.Left="77" Canvas.Top="60" ToolTip="{x:Static enums:InjuryTypeResources.RightThigh}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.RightThigh}, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <RadioButton Canvas.Left="66" Canvas.Top="68" ToolTip="{x:Static enums:InjuryTypeResources.LeftKnee}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.LeftKnee}, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Canvas.Left="79" Canvas.Top="68" ToolTip="{x:Static enums:InjuryTypeResources.RightKnee}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.RightKnee}, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <RadioButton Canvas.Left="66" Canvas.Top="81" ToolTip="{x:Static enums:InjuryTypeResources.LeftCalf}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.LeftCalf}, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Canvas.Left="79" Canvas.Top="81" ToolTip="{x:Static enums:InjuryTypeResources.RightCalf}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.RightCalf}, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <RadioButton Canvas.Left="67" Canvas.Top="90" ToolTip="{x:Static enums:InjuryTypeResources.LeftAnkle}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.LeftAnkle}, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Canvas.Left="78" Canvas.Top="90" ToolTip="{x:Static enums:InjuryTypeResources.RightAnkle}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.RightAnkle}, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <RadioButton Canvas.Left="60" Canvas.Top="92" ToolTip="{x:Static enums:InjuryTypeResources.LeftFoot}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.LeftFoot}, UpdateSourceTrigger=PropertyChanged}" />
+                            <RadioButton Canvas.Left="85" Canvas.Top="92" ToolTip="{x:Static enums:InjuryTypeResources.RightFoot}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.RightFoot}, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <RadioButton Canvas.Left="72.5" Canvas.Top="37" ToolTip="{x:Static enums:InjuryTypeResources.Back}"
+                                         IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.Back}, UpdateSourceTrigger=PropertyChanged}" />
+
+                        </controls:RelativeCanvas>
+                    </Grid>
+                    <!--<Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
@@ -142,9 +235,8 @@
                         <Grid Grid.Row="1" Width="140" Height="400" Grid.Column="1">
                         <Image Source="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/male-face.png" />
 
-                        <Canvas>
-                            <!-- Head -->
-                            <RadioButton Canvas.Left="62" Canvas.Top="15" ToolTip="{x:Static enums:InjuryTypeResources.Head}"
+                            <Canvas>
+                                <RadioButton Canvas.Left="62" Canvas.Top="15" ToolTip="{x:Static enums:InjuryTypeResources.Head}"
                                          IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.Head}, UpdateSourceTrigger=PropertyChanged}" />
                             <RadioButton Canvas.Left="62" Canvas.Top="60" ToolTip="{x:Static enums:InjuryTypeResources.Neck}"
                                          IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.Neck}, UpdateSourceTrigger=PropertyChanged}" />
@@ -154,7 +246,12 @@
                                          IsChecked="{Binding SelectedType, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:InjuryTypeSelector}}, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:InjuryType.Stomach}, UpdateSourceTrigger=PropertyChanged}" />
                         </Canvas>
                     </Grid>
-                    </Grid>
+                    </Grid>-->
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFemale" Value="True">
+                            <Setter TargetName="Image" Property="Source" Value="pack://application:,,,/My.CoachManager.Presentation.Prism.Resources;component/Pictures/female.png" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

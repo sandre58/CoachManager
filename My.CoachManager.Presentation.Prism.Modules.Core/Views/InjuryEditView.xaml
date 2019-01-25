@@ -14,9 +14,9 @@
              xmlns:enum="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels1:InjuryEditViewModel}"
-             d:DesignHeight="1000" d:DesignWidth="750">
+             d:DesignHeight="600" d:DesignWidth="800">
 
-    <controls:WorkspaceView MinHeight="500" MinWidth="600">
+    <controls:WorkspaceView MinHeight="500" MinWidth="800">
         <Grid parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
 
             <Grid.RowDefinitions>
@@ -37,12 +37,12 @@
 
             <Grid Grid.Row="1" Grid.Column="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="6*" />
+                    <ColumnDefinition Width="4*" />
                 </Grid.ColumnDefinitions>
 
                 <Grid>
-                    <controls:InjuryTypeSelector SelectedType="{Binding Item.Type, IsAsync=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <controls:InjuryTypeSelector SelectedType="{Binding Item.Type, IsAsync=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="400" />
                 </Grid>
 
                 <Grid Grid.Column="1">
@@ -55,7 +55,7 @@
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <controls:Icon Grid.Column="0" Grid.Row="0" Size="Medium" Content="{StaticResource CalendarGeometry}" HorizontalAlignment="Center" />

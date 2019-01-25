@@ -165,4 +165,7 @@
   <data name="NoExpectedReturn" xml:space="preserve">
     <value>Pas de date de retour connue</value>
   </data>
+  <data name="Addinjury" xml:space="preserve">
+    <value>Ajouter une blessure</value>
+  </data>
 </root>

@@ -123,8 +123,11 @@
   <data name="Date" xml:space="preserve">
     <value>Date</value>
   </data>
-  <data name="DefaultInjuryBack" xml:space="preserve">
+  <data name="DefaultInjuryAdductors" xml:space="preserve">
     <value>Pubalgie</value>
+  </data>
+  <data name="DefaultInjuryBack" xml:space="preserve">
+    <value>Douleurs au dos</value>
   </data>
   <data name="DefaultInjuryHead" xml:space="preserve">
     <value>Contusion à la tête</value>
@@ -134,6 +137,9 @@
   </data>
   <data name="DefaultInjuryLeftArm" xml:space="preserve">
     <value>Fracture du bras gauche</value>
+  </data>
+  <data name="DefaultInjuryLeftCalf" xml:space="preserve">
+    <value>Elongation du mollet gauche</value>
   </data>
   <data name="DefaultInjuryLeftElbow" xml:space="preserve">
     <value>Fracture du coude gauche</value>
@@ -167,6 +173,9 @@
   </data>
   <data name="DefaultInjuryRightArm" xml:space="preserve">
     <value>Fracture du bras droit</value>
+  </data>
+  <data name="DefaultInjuryRightCalf" xml:space="preserve">
+    <value>Elongation du mollet droit</value>
   </data>
   <data name="DefaultInjuryRightElbow" xml:space="preserve">
     <value>Fracture du coude droit</value>

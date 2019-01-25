@@ -184,7 +184,8 @@ namespace My.CoachManager.Presentation.Prism.Modules.Roster.ViewModels
         /// </summary>
         protected virtual void RemoveInjury(InjuryModel injury)
         {
-            if(DialogManager.ShowWarningDialog(MessageResources.ConfirmationRemovingItem, MessageDialogButtons.YesNo) != DialogResult.Yes) return;
+            SelectedInjury = Item.Injury;
+            if (DialogManager.ShowWarningDialog(MessageResources.ConfirmationRemovingItem, MessageDialogButtons.YesNo) != DialogResult.Yes) return;
 
             try
             {

@@ -92,10 +92,59 @@
                             </DataTemplate>
                         </columns:ActionsGridViewColumn.CellTemplate>
                     </columns:ActionsGridViewColumn>
+                    
+                    <!-- Infos -->
+                    <columns:ExtendedGridViewColumn CanUserHideColumn="False" Width="60">
+                        <columns:ExtendedGridViewColumn.CellTemplate>
+                            <DataTemplate DataType="models:RosterPlayerModel">
+
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                    <!-- IsInjuried -->
+                                    <Button Width="30" Height="30" 
+                                            Content="{StaticResource AmbulanceGeometry}" 
+                                            CommandParameter="{Binding}"
+                                            Command="{Binding DataContext.OpenItemInInjuryTabCommand,
+                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}"
+                                            Visibility="{Binding IsInjuried, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TextBoxColorCircleButtonStyle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Injury.Severity, IsAsync=True}" Value="{x:Static enum:InjurySeverity.Serious}">
+                                                    <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource VeryBad}" />
+                                                </DataTrigger>
+
+                                                    <DataTrigger Binding="{Binding Injury.Severity, IsAsync=True}" Value="{x:Static enum:InjurySeverity.Average}">
+                                                    <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Bad}" />
+                                                </DataTrigger>
+
+                                                    <DataTrigger Binding="{Binding Injury.Severity, IsAsync=True}" Value="{x:Static enum:InjurySeverity.Minor}">
+                                                    <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Poor}" />
+                                                </DataTrigger>
+
+                                                    <DataTrigger Binding="{Binding Injury.Severity, IsAsync=True}" Value="{x:Static enum:InjurySeverity.Slight}">
+                                                    <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource Slight}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                                </Style>
+                                        </Button.Style>
+                                        <Button.ToolTip>
+                                            <Grid>
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Injury.Condition, IsAsync=True}" Style="{StaticResource SmallHeaderStyle}" Margin="{StaticResource DefaultVerticalMargin}" />
+                                                    <TextBlock Text="{Binding Injury.ExpectedReturnLabel, IsAsync=True, StringFormat={x:Static resources:RosterPlayerResources.ExpectedReturn}}" Margin="{StaticResource DefaultVerticalMargin}"
+                                                               Visibility="{Binding Injury.ExpectedReturnLabel, IsAsync=True, Converter={StaticResource NullToVisibilityConverter}}"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Button.ToolTip>
+                                        </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </columns:ExtendedGridViewColumn.CellTemplate>
+                    </columns:ExtendedGridViewColumn>
 
                     <!-- Number -->
                     <columns:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.NumberAbbr}"
-                                                     PropertyName="Number" Width="80">
+                                                     PropertyName="Number" Width="65">
                         <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:RosterPlayerModel">
                                 <TextBlock Text="{Binding Number}" FontSize="{StaticResource HeaderFontSize}" FontFamily="{StaticResource NumberFontFamily}" HorizontalAlignment="Center" />
