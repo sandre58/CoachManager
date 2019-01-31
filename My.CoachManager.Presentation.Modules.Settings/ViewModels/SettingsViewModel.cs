@@ -1,7 +1,5 @@
-﻿using My.CoachManager.Presentation.Core.Commands;
-using My.CoachManager.Presentation.Core.Events;
+﻿using My.CoachManager.Presentation.Core.Events;
 using My.CoachManager.Presentation.Core.ViewModels;
-using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Modules.Settings.ViewModels
 {

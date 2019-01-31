@@ -184,20 +184,21 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
                         
                         <Ellipse Grid.Column="0" x:Name="ellipse" Fill="{TemplateBinding Background}"
                                  Height="18" Width="18"
                                 StrokeThickness="{Binding BorderThickness.Left, RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}}"
                                 Stroke="{TemplateBinding BorderBrush}"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            <Border Grid.Column="0" Padding="{TemplateBinding Padding}" Height="18" Width="18">
+                            <Border x:Name="icon" Grid.Column="0" Padding="{TemplateBinding Padding}" Height="18" Width="18">
                         <controls:Icon Size="Custom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                        Content="{Binding (parameters:ControlParameters.Icon), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}"
                                        Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}"/>
                         </Border>
 
-                        <Border Grid.Column="1">
+                        <Border Grid.Column="1" x:Name="content">
                             <ContentControl x:Name="PART_ContentPresenter"
                                         Focusable="False"
                                         IsTabStop="False"
@@ -216,14 +217,19 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
                             <Setter TargetName="PART_ContentPresenter" Property="Foreground" Value="{DynamicResource NormalForeground}" />
-                            <Setter TargetName="Base" Property="BorderBrush" Value="{DynamicResource Accent}" />
-                            <Setter TargetName="Base" Property="BorderThickness" Value="0,0,0,1" />
+                            <Setter TargetName="content" Property="BorderBrush" Value="{DynamicResource Accent}" />
+                            <Setter TargetName="content" Property="BorderThickness" Value="0,0,0,1" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="PART_ContentPresenter" Property="Foreground" Value="{DynamicResource NormalForeground}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="PART_ContentPresenter" Property="Foreground" Value="{DynamicResource Accent}" />
+                        </Trigger>
+
+                        <Trigger Property="parameters:ButtonParameters.ButtonAlignment" Value="Right">
+                            <Setter TargetName="ellipse" Property="Grid.Column" Value="2" />
+                            <Setter TargetName="icon" Property="Grid.Column" Value="2" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

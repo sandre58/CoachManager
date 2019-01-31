@@ -93,6 +93,7 @@
     <Compile Include="Helpers\KeyboardHelper.cs" />
     <Compile Include="ItemsListView.cs" />
     <Compile Include="InjuryTypeSelector.cs" />
+    <Compile Include="Parameters\ButtonParameters.cs" />
     <Compile Include="RelativeCanvas.cs" />
     <Compile Include="ToolbarControl.cs" />
     <Compile Include="AdornedControl.cs" />

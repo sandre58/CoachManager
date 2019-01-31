@@ -97,7 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\Validation\CompareToPropertyAttribute.cs" />
-    <Compile Include="Commands\PlayerCommand.cs" />
     <Compile Include="ComponentModel\AbortableBackgroundWorker.cs">
       <SubType>Component</SubType>
     </Compile>

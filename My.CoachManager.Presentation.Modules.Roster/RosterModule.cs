@@ -1,11 +1,9 @@
 ﻿using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using My.CoachManager.Presentation.Core;
-using My.CoachManager.Presentation.Core.Commands;
 using My.CoachManager.Presentation.Core.Manager;
 using My.CoachManager.Presentation.Modules.Roster.Views;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
-using Prism.Commands;
 using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
@@ -27,11 +25,6 @@ namespace My.CoachManager.Presentation.Modules.Roster
 
         public void Initialize()
         {
-            PlayerCommands.NavigateToPlayerCommand.RegisterCommand(new DelegateCommand<int?>(x =>
-            {
-                if (x != null) NavigationManager.NavigateTo<RosterPlayerView>(x.Value);
-            }));
-
             var squads = _rosterService.GetSquads(SettingsManager.GetRosterId());
 
             // Register the navigation view
