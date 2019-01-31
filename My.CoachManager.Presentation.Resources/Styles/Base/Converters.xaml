@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:My.CoachManager.Presentation.Resources.Converters">
+
+    <converters:IdNavigationParameterConverter x:Key="IdNavigationParameterConverter" />
+    <converters:VerticalRowToHorizontalColumnPositionConverter x:Key="VerticalRowToHorizontalColumnPositionConverter" />
+    <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converters:VisibilityToBooleanConverter x:Key="VisibilityToBooleanConverter" />
+    <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+    <converters:NullToBooleanConverter x:Key="NullToBooleanConverter" />
+    <converters:ToUpperConverter x:Key="ToUpperConverter" />
+    <converters:ToFirstLetterUpperConverter x:Key="ToFirstLetterUpperConverter" />
+    <converters:ToLowerConverter x:Key="ToLowerConverter" />
+    <converters:IsGreaterThanConverter x:Key="IsGreaterThanConverter" />
+    <converters:IsGreaterThanToVisibilityConverter x:Key="IsGreaterThanToVisibilityConverter" />
+    <converters:ThicknessToDoubleConverter x:Key="ThicknessToDoubleConverter" />
+    <converters:CoefficientConverter x:Key="CoefficientConverter" />
+    <converters:AnyToVisibilityConverter x:Key="AnyToVisibilityConverter" />
+    <converters:AnyToBooleanConverter x:Key="AnyToBooleanConverter" />
+    <converters:BrushToColorConverter x:Key="BrushToColorConverter" />
+    <converters:NotEqualsConverter x:Key="NotEqualsConverter" />
+    <converters:NotEqualToVisibilityConverter x:Key="NotEqualToVisibilityConverter" />
+    <converters:EqualsConverter x:Key="EqualsConverter" />
+    <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+    <converters:EnumToStringConverter x:Key="EnumToStringConverter" />
+    <converters:EnumToIntegerConverter x:Key="EnumToIntegerConverter" />
+    <converters:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter" />
+    <converters:NotConverter x:Key="NotConverter" />
+    <converters:ObjectToPropertyConverter x:Key="ObjectToPropertyConverter" />
+    <converters:BytesToImageConverter x:Key="BytesToImageConverter" />
+    <converters:ToFormatConverter x:Key="ToFormatConverter" />
+    <converters:ResizeModeMinMaxButtonVisibilityConverter x:Key="ResizeModeMinMaxButtonVisibilityConverter" />
+    <converters:MultipleParametersConverter x:Key="MultipleParametersConverter" />
+    <converters:EqualValuesToBooleanConverter x:Key="EqualValuesToBooleanConverter" />
+    <converters:EqualValuesToVisibilityConverter x:Key="EqualValuesToVisibilityConverter" />
+    <converters:CalendarDayNameConverter x:Key="CalendarDayNameConverter" />
+    <converters:ClockDegreeConverter x:Key="ClockDegreeConverter" TotalParts="60" />
+    <converters:ClockDegreeConverter x:Key="HourDegreeConverter" TotalParts="12" />
+    <converters:MathAddConverter x:Key="MathAddConverter" />
+    <converters:MathDivideConverter x:Key="MathDivideConverter" />
+    <converters:MathMultiplyConverter x:Key="MathMultiplyConverter" />
+    <converters:MathSubtractConverter x:Key="MathSubtractConverter" />
+
+    <MenuScrollingVisibilityConverter x:Key="MenuScrollingVisibilityConverter" />
+</ResourceDictionary>

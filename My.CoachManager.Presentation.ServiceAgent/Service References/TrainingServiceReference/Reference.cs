@@ -44,6 +44,18 @@ namespace My.CoachManager.Presentation.ServiceAgent.TrainingServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrainingService/AddTrainings", ReplyAction="http://tempuri.org/ITrainingService/AddTrainingsResponse")]
         System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.TrainingDto[]> AddTrainingsAsync(int rosterId, System.DateTime startDate, System.DateTime endDate, System.TimeSpan startTime, System.TimeSpan endTime, string place, System.DayOfWeek[] days);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrainingService/SaveTrainingAttendances", ReplyAction="http://tempuri.org/ITrainingService/SaveTrainingAttendancesResponse")]
+        int SaveTrainingAttendances(int trainingId, My.CoachManager.Application.Dtos.TrainingAttendanceDto[] attendances);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrainingService/SaveTrainingAttendances", ReplyAction="http://tempuri.org/ITrainingService/SaveTrainingAttendancesResponse")]
+        System.Threading.Tasks.Task<int> SaveTrainingAttendancesAsync(int trainingId, My.CoachManager.Application.Dtos.TrainingAttendanceDto[] attendances);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrainingService/GetPlayersForTraining", ReplyAction="http://tempuri.org/ITrainingService/GetPlayersForTrainingResponse")]
+        My.CoachManager.Application.Dtos.RosterPlayerDto[] GetPlayersForTraining(int trainingId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrainingService/GetPlayersForTraining", ReplyAction="http://tempuri.org/ITrainingService/GetPlayersForTrainingResponse")]
+        System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.RosterPlayerDto[]> GetPlayersForTrainingAsync(int trainingId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +123,22 @@ namespace My.CoachManager.Presentation.ServiceAgent.TrainingServiceReference {
         
         public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.TrainingDto[]> AddTrainingsAsync(int rosterId, System.DateTime startDate, System.DateTime endDate, System.TimeSpan startTime, System.TimeSpan endTime, string place, System.DayOfWeek[] days) {
             return base.Channel.AddTrainingsAsync(rosterId, startDate, endDate, startTime, endTime, place, days);
+        }
+        
+        public int SaveTrainingAttendances(int trainingId, My.CoachManager.Application.Dtos.TrainingAttendanceDto[] attendances) {
+            return base.Channel.SaveTrainingAttendances(trainingId, attendances);
+        }
+        
+        public System.Threading.Tasks.Task<int> SaveTrainingAttendancesAsync(int trainingId, My.CoachManager.Application.Dtos.TrainingAttendanceDto[] attendances) {
+            return base.Channel.SaveTrainingAttendancesAsync(trainingId, attendances);
+        }
+        
+        public My.CoachManager.Application.Dtos.RosterPlayerDto[] GetPlayersForTraining(int trainingId) {
+            return base.Channel.GetPlayersForTraining(trainingId);
+        }
+        
+        public System.Threading.Tasks.Task<My.CoachManager.Application.Dtos.RosterPlayerDto[]> GetPlayersForTrainingAsync(int trainingId) {
+            return base.Channel.GetPlayersForTrainingAsync(trainingId);
         }
     }
 }

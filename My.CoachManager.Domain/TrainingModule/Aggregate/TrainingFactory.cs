@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.Entities;
+using My.CoachManager.Domain.RosterModule.Aggregate;
 
 namespace My.CoachManager.Domain.TrainingModule.Aggregate
 {
@@ -43,7 +45,7 @@ namespace My.CoachManager.Domain.TrainingModule.Aggregate
                 StartDate = startDate,
                 EndDate = endDate,
                 IsCancelled = false,
-                Place = place,
+                Place = place
             };
         }
 
@@ -80,11 +82,55 @@ namespace My.CoachManager.Domain.TrainingModule.Aggregate
                 EndDate = item.EndDate,
                 IsCancelled = item.IsCancelled,
                 Place = item.Place,
+                Attendances = item.Attendances.Select(Get).ToList(),
                 StartDate = item.StartDate,
                 CreatedDate = item.CreatedDate,
                 CreatedBy = item.CreatedBy,
                 ModifiedDate = item.ModifiedDate,
                 ModifiedBy = item.ModifiedBy
+            };
+        }
+
+        /// <summary>
+        /// Convert the entity to DTO.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns>Result of the convert to DTO.</returns>
+        public static TrainingAttendanceDto Get(TrainingAttendance item)
+        {
+            if (item == null) return null;
+
+            return new TrainingAttendanceDto
+            {
+                Id = item.Id,
+                RosterPlayer = RosterFactory.GetPlayer(item.RosterPlayer),
+                RosterPlayerId = item.RosterPlayerId,
+                Attendance = item.Attendance,
+                Reason = item.Reason,
+                CreatedDate = item.CreatedDate,
+                CreatedBy = item.CreatedBy,
+                ModifiedDate = item.ModifiedDate,
+                ModifiedBy = item.ModifiedBy
+            };
+        }
+
+        /// <summary>
+        /// Create the entity from the DTO.
+        /// </summary>
+        /// <param name="trainingId"></param>
+        /// <param name="item">The item.</param>
+        /// <returns>The entity.</returns>
+        public static TrainingAttendance CreateAttendance(int trainingId, TrainingAttendanceDto item)
+        {
+            if (item == null) return null;
+
+            return new TrainingAttendance
+            {
+                Id = item.Id,
+                Attendance = item.Attendance,
+                RosterPlayerId = item.RosterPlayerId,
+                Reason = item.Reason,
+                TrainingId = trainingId
             };
         }
 

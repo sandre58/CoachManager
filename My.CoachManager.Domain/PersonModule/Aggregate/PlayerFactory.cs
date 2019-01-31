@@ -82,6 +82,8 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
         /// <returns></returns>
         public static PlayerDto Get(Player player)
         {
+            if (player == null) return null;
+
             return new PlayerDto()
             {
                 Id = player.Id,

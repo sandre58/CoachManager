@@ -188,6 +188,18 @@
     <Compile Include="Migrations\20190124103522_InjuryPlayerId.designer.cs">
       <DependentUpon>20190124103522_InjuryPlayerId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190129100109_TrainingAttendance.cs" />
+    <Compile Include="Migrations\20190129100109_TrainingAttendance.designer.cs">
+      <DependentUpon>20190129100109_TrainingAttendance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190129100307_TrainingAttendance2.cs" />
+    <Compile Include="Migrations\20190129100307_TrainingAttendance2.designer.cs">
+      <DependentUpon>20190129100307_TrainingAttendance2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190130122552_RosterPlayerInTraining.cs" />
+    <Compile Include="Migrations\20190130122552_RosterPlayerInTraining.designer.cs">
+      <DependentUpon>20190130122552_RosterPlayerInTraining.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DataContextModelSnapshot.cs" />
     <Compile Include="ModelBuilderExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

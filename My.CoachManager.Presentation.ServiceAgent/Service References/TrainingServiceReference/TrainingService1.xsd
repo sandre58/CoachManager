@@ -1,21 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/System" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="ArrayOfDayOfWeek">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="DayOfWeek" type="tns:DayOfWeek" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfDayOfWeek" nillable="true" type="tns:ArrayOfDayOfWeek" />
-  <xs:simpleType name="DayOfWeek">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Attendance">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Sunday" />
-      <xs:enumeration value="Monday" />
-      <xs:enumeration value="Tuesday" />
-      <xs:enumeration value="Wednesday" />
-      <xs:enumeration value="Thursday" />
-      <xs:enumeration value="Friday" />
-      <xs:enumeration value="Saturday" />
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Present" />
+      <xs:enumeration value="Absent" />
+      <xs:enumeration value="Apology" />
+      <xs:enumeration value="Injured" />
+      <xs:enumeration value="InSelection" />
     </xs:restriction>
   </xs:simpleType>
-  <xs:element name="DayOfWeek" nillable="true" type="tns:DayOfWeek" />
+  <xs:element name="Attendance" nillable="true" type="tns:Attendance" />
+  <xs:simpleType name="GenderType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Male" />
+      <xs:enumeration value="Female" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="GenderType" nillable="true" type="tns:GenderType" />
+  <xs:simpleType name="InjurySeverity">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Slight" />
+      <xs:enumeration value="Minor" />
+      <xs:enumeration value="Average" />
+      <xs:enumeration value="Serious" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="InjurySeverity" nillable="true" type="tns:InjurySeverity" />
+  <xs:simpleType name="InjuryType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Other" />
+      <xs:enumeration value="Head" />
+      <xs:enumeration value="Neck" />
+      <xs:enumeration value="Torso" />
+      <xs:enumeration value="Back" />
+      <xs:enumeration value="LeftElbow" />
+      <xs:enumeration value="RightElbow" />
+      <xs:enumeration value="LeftWrist" />
+      <xs:enumeration value="RightWrist" />
+      <xs:enumeration value="LeftShoulder" />
+      <xs:enumeration value="RightShoulder" />
+      <xs:enumeration value="LeftHand" />
+      <xs:enumeration value="RightHand" />
+      <xs:enumeration value="LeftThigh" />
+      <xs:enumeration value="RightThigh" />
+      <xs:enumeration value="LeftKnee" />
+      <xs:enumeration value="RightKnee" />
+      <xs:enumeration value="LeftAnkle" />
+      <xs:enumeration value="RightAnkle" />
+      <xs:enumeration value="LeftFoot" />
+      <xs:enumeration value="RightFoot" />
+      <xs:enumeration value="LeftShin" />
+      <xs:enumeration value="RightShin" />
+      <xs:enumeration value="Stomach" />
+      <xs:enumeration value="LeftArm" />
+      <xs:enumeration value="RightArm" />
+      <xs:enumeration value="LeftCalf" />
+      <xs:enumeration value="RightCalf" />
+      <xs:enumeration value="Adductors" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="InjuryType" nillable="true" type="tns:InjuryType" />
+  <xs:simpleType name="Laterality">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="RightHander" />
+      <xs:enumeration value="LeftHander" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Laterality" nillable="true" type="tns:Laterality" />
+  <xs:simpleType name="PositionSide">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Left" />
+      <xs:enumeration value="Center" />
+      <xs:enumeration value="Right" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PositionSide" nillable="true" type="tns:PositionSide" />
+  <xs:simpleType name="PositionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="GoalKeeper" />
+      <xs:enumeration value="Sweeper" />
+      <xs:enumeration value="FullBack" />
+      <xs:enumeration value="CenterBack" />
+      <xs:enumeration value="WingBack" />
+      <xs:enumeration value="DefensiveMidfielder" />
+      <xs:enumeration value="Midfielder" />
+      <xs:enumeration value="AttackingMidfielder" />
+      <xs:enumeration value="Winger" />
+      <xs:enumeration value="Forward" />
+      <xs:enumeration value="Striker" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PositionType" nillable="true" type="tns:PositionType" />
+  <xs:simpleType name="LicenseState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Given" />
+      <xs:enumeration value="Back" />
+      <xs:enumeration value="Paid" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="LicenseState" nillable="true" type="tns:LicenseState" />
 </xs:schema>

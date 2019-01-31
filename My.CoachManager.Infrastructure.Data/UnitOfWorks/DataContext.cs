@@ -42,6 +42,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Squad> Squads { get; set; }
         public DbSet<Training> Trainings { get; set; }
+        public DbSet<TrainingAttendance> TrainingAttendances { get; set; }
         public DbSet<User> Users { get; set; }
 
         #endregion Properties
@@ -261,6 +262,27 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Training>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<TrainingAttendance>()
+                .HasAlternateKey(x => new { x.TrainingId, x.RosterPlayerId });
+
+            modelBuilder.Entity<TrainingAttendance>()
+                .HasOne(x => x.Training)
+                .WithMany(x => x.Attendances)
+                .HasForeignKey(x => x.TrainingId);
+
+            modelBuilder.Entity<TrainingAttendance>()
+                .HasOne(x => x.RosterPlayer)
+                .WithMany(x => x.TrainingAttendances)
+                .HasForeignKey(x => x.RosterPlayerId);
+
+            modelBuilder.Entity<TrainingAttendance>()
+                .Property(x => x.Attendance)
+                .HasDefaultValue(TrainingConstants.DefaultAttendance);
+
+            modelBuilder.Entity<TrainingAttendance>()
                 .Property(x => x.CreatedDate)
                 .HasDefaultValueSql("getdate()");
 

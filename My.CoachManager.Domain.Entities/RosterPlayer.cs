@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.Domain.Core;
 
@@ -9,6 +10,14 @@ namespace My.CoachManager.Domain.Entities
     /// </summary>
     public class RosterPlayer : Entity
     {
+        /// <summary>
+        /// Initalize a new instance of <see cref="Player"/>.
+        /// </summary>
+        public RosterPlayer()
+        {
+            TrainingAttendances = new List<TrainingAttendance>();
+        }
+
         /// <summary>
         /// Gets or sets the player's roster id.
         /// </summary>
@@ -56,5 +65,10 @@ namespace My.CoachManager.Domain.Entities
         /// Gets or sets a value indicates if the player is in mutation.
         /// </summary>
         public bool IsMutation { get; set; }
+
+        /// <summary>
+        /// Gets or sets the training attendances.
+        /// </summary>
+        public ICollection<TrainingAttendance> TrainingAttendances { get; set; }
     }
 }

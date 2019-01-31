@@ -50,39 +50,39 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Services.Co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{65E6F15A-E231-4A23-867E-6C6EFB5A3679}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Wpf", "My.CoachManager.Presentation.Prism.Wpf\My.CoachManager.Presentation.Prism.Wpf.csproj", "{E517CE44-0704-4BDF-8894-F90434C68931}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Wpf", "My.CoachManager.Presentation.Wpf\My.CoachManager.Presentation.Wpf.csproj", "{E517CE44-0704-4BDF-8894-F90434C68931}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Core", "My.CoachManager.Presentation.Prism.Core\My.CoachManager.Presentation.Prism.Core.csproj", "{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Core", "My.CoachManager.Presentation.Core\My.CoachManager.Presentation.Core.csproj", "{3F11E745-D328-4654-A3C9-4BFC9BF6B9AB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Documents", "0 - Documents", "{462223FC-0CEE-48FA-BACE-648767F8E8F3}"
 	ProjectSection(SolutionItems) = preProject
 		Documents\Prism5forWPF.pdf = Documents\Prism5forWPF.pdf
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Modules.Administration", "My.CoachManager.Presentation.Prism.Modules.Administration\My.CoachManager.Presentation.Prism.Modules.Administration.csproj", "{4CA93004-D321-4897-A8AD-EF368D5BD57E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Modules.Administration", "My.CoachManager.Presentation.Modules.Administration\My.CoachManager.Presentation.Modules.Administration.csproj", "{4CA93004-D321-4897-A8AD-EF368D5BD57E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Modules.Home", "My.CoachManager.Presentation.Prism.Modules.Home\My.CoachManager.Presentation.Prism.Modules.Home.csproj", "{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Modules.Home", "My.CoachManager.Presentation.Modules.Home\My.CoachManager.Presentation.Modules.Home.csproj", "{B72A3D9C-EFA7-43A8-A01E-CDEEB9F59C28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Resources", "My.CoachManager.Presentation.Prism.Resources\My.CoachManager.Presentation.Prism.Resources.csproj", "{2D290FD9-5B64-4AF4-A295-2B4CDE6EB330}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Resources", "My.CoachManager.Presentation.Resources\My.CoachManager.Presentation.Resources.csproj", "{2D290FD9-5B64-4AF4-A295-2B4CDE6EB330}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Controls", "My.CoachManager.Presentation.Prism.Controls\My.CoachManager.Presentation.Prism.Controls.csproj", "{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Controls", "My.CoachManager.Presentation.Controls\My.CoachManager.Presentation.Controls.csproj", "{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.SkinManager", "My.CoachManager.Presentation.Prism.SkinManager\My.CoachManager.Presentation.Prism.SkinManager.csproj", "{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.SkinManager", "My.CoachManager.Presentation.SkinManager\My.CoachManager.Presentation.SkinManager.csproj", "{55A0BCD1-8EF9-49A7-8CA2-BFB7167E62C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Models", "My.CoachManager.Presentation.Prism.Models\My.CoachManager.Presentation.Prism.Models.csproj", "{C2647100-4BD2-49F0-8A22-A0CD1EA37C1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Models", "My.CoachManager.Presentation.Models\My.CoachManager.Presentation.Models.csproj", "{C2647100-4BD2-49F0-8A22-A0CD1EA37C1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Modules.Common", "My.CoachManager.Presentation.Prism.Modules.Common\My.CoachManager.Presentation.Prism.Modules.Common.csproj", "{E4990450-8387-40F8-B2DA-A9BADB0EDBCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Modules.Settings", "My.CoachManager.Presentation.Modules.Settings\My.CoachManager.Presentation.Modules.Settings.csproj", "{E4990450-8387-40F8-B2DA-A9BADB0EDBCF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CE9840EB-3FE1-4C10-AE12-8159D69FFCAC}"
 	ProjectSection(SolutionItems) = preProject
 		memo.txt = memo.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Modules.Roster", "My.CoachManager.Presentation.Prism.Modules.Roster\My.CoachManager.Presentation.Prism.Modules.Roster.csproj", "{FE218964-5EF0-42EB-A7D1-2AFEB44D5B01}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Modules.Roster", "My.CoachManager.Presentation.Modules.Roster\My.CoachManager.Presentation.Modules.Roster.csproj", "{FE218964-5EF0-42EB-A7D1-2AFEB44D5B01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Modules.Core", "My.CoachManager.Presentation.Prism.Modules.Core\My.CoachManager.Presentation.Prism.Modules.Core.csproj", "{9904BC67-A287-4FCE-9607-730B15E3F105}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Modules.Shared", "My.CoachManager.Presentation.Modules.Shared\My.CoachManager.Presentation.Modules.Shared.csproj", "{9904BC67-A287-4FCE-9607-730B15E3F105}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Prism.Modules.Training", "My.CoachManager.Presentation.Prism.Modules.Training\My.CoachManager.Presentation.Prism.Modules.Training.csproj", "{47814DE5-8433-40E3-9C2A-A7E5E1ECE74C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.CoachManager.Presentation.Modules.Training", "My.CoachManager.Presentation.Modules.Training\My.CoachManager.Presentation.Modules.Training.csproj", "{47814DE5-8433-40E3-9C2A-A7E5E1ECE74C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

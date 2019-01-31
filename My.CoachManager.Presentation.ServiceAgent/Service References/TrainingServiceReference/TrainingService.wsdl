@@ -5,7 +5,8 @@
       <xsd:import schemaLocation="http://localhost:62863/Services/TrainingService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:62863/Services/TrainingService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:62863/Services/TrainingService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.Application.Dtos" />
-      <xsd:import schemaLocation="http://localhost:62863/Services/TrainingService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/TrainingService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/My.CoachManager.CrossCutting.Core.Enums" />
+      <xsd:import schemaLocation="http://localhost:62863/Services/TrainingService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ITrainingService_GetTrainings_InputMessage">
@@ -38,6 +39,18 @@
   <wsdl:message name="ITrainingService_AddTrainings_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddTrainingsResponse" />
   </wsdl:message>
+  <wsdl:message name="ITrainingService_SaveTrainingAttendances_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveTrainingAttendances" />
+  </wsdl:message>
+  <wsdl:message name="ITrainingService_SaveTrainingAttendances_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveTrainingAttendancesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITrainingService_GetPlayersForTraining_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayersForTraining" />
+  </wsdl:message>
+  <wsdl:message name="ITrainingService_GetPlayersForTraining_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayersForTrainingResponse" />
+  </wsdl:message>
   <wsdl:portType name="ITrainingService">
     <wsdl:operation name="GetTrainings">
       <wsdl:input wsaw:Action="http://tempuri.org/ITrainingService/GetTrainings" message="tns:ITrainingService_GetTrainings_InputMessage" />
@@ -58,6 +71,14 @@
     <wsdl:operation name="AddTrainings">
       <wsdl:input wsaw:Action="http://tempuri.org/ITrainingService/AddTrainings" message="tns:ITrainingService_AddTrainings_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITrainingService/AddTrainingsResponse" message="tns:ITrainingService_AddTrainings_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveTrainingAttendances">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITrainingService/SaveTrainingAttendances" message="tns:ITrainingService_SaveTrainingAttendances_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITrainingService/SaveTrainingAttendancesResponse" message="tns:ITrainingService_SaveTrainingAttendances_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayersForTraining">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITrainingService/GetPlayersForTraining" message="tns:ITrainingService_GetPlayersForTraining_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITrainingService/GetPlayersForTrainingResponse" message="tns:ITrainingService_GetPlayersForTraining_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITrainingService" type="tns:ITrainingService">
@@ -100,6 +121,24 @@
     </wsdl:operation>
     <wsdl:operation name="AddTrainings">
       <soap:operation soapAction="http://tempuri.org/ITrainingService/AddTrainings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveTrainingAttendances">
+      <soap:operation soapAction="http://tempuri.org/ITrainingService/SaveTrainingAttendances" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayersForTraining">
+      <soap:operation soapAction="http://tempuri.org/ITrainingService/GetPlayersForTraining" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

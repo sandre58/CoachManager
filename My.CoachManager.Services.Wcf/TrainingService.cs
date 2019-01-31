@@ -62,5 +62,24 @@ namespace My.CoachManager.Services.Wcf
             return ServiceLocator.Current.GetInstance<ITrainingAppService>().AddTrainings(rosterId, startDate, endDate, startTime,
             endTime, place, days);
         }
+
+        /// <summary>
+        /// Save a dto.
+        /// </summary>
+        /// <returns></returns>
+        public int SaveTrainingAttendances(int trainingId, IList<TrainingAttendanceDto> attendances)
+        {
+            return ServiceLocator.Current.GetInstance<ITrainingAppService>().SaveTrainingAttendances(trainingId, attendances);
+        }
+
+        /// <summary>
+        /// Gets players for a specific training.
+        /// </summary>
+        /// <param name="trainingId"></param>
+        /// <returns></returns>
+        public IList<RosterPlayerDto> GetPlayersForTraining(int trainingId)
+        {
+            return ServiceLocator.Current.GetInstance<ITrainingAppService>().GetPlayersForTraining(trainingId);
+        }
     }
 }

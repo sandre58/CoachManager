@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace My.CoachManager.Application.Dtos
@@ -38,5 +39,10 @@ namespace My.CoachManager.Application.Dtos
         /// </summary>
         [DataMember]
         public virtual bool IsCancelled { get; set; }
+
+        /// <summary>
+        /// Gets or sets the training attendances.
+        /// </summary>
+        public IEnumerable<TrainingAttendanceDto> Attendances { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using My.CoachManager.Domain.Core;
 
@@ -9,6 +10,13 @@ namespace My.CoachManager.Domain.Entities
     /// </summary>
     public class Training : Entity
     {
+        /// <summary>
+        /// Initalize a new instance of <see cref="Player"/>.
+        /// </summary>
+        public Training()
+        {
+            Attendances = new List<TrainingAttendance>();
+        }
 
         /// <summary>
         /// Gets or sets the roster id.
@@ -42,5 +50,10 @@ namespace My.CoachManager.Domain.Entities
         /// Gets or sets the is cancelled value.
         /// </summary>
         public virtual bool IsCancelled { get; set; }
+
+        /// <summary>
+        /// Gets or sets the training attendances.
+        /// </summary>
+        public ICollection<TrainingAttendance> Attendances { get; set; }
     }
 }

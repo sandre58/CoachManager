@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="My.CoachManager.Presentation.Modules.Roster.Views.RosterPlayerOverviewView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Modules.Roster.ViewModels"
+             xmlns:controls="clr-namespace:My.CoachManager.Presentation.Controls;assembly=My.CoachManager.Presentation.Controls"
+             xmlns:resources="clr-namespace:My.CoachManager.Presentation.Modules.Roster.Resources"
+             xmlns:enum="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=viewModels:RosterPlayerViewModel}"
+             d:DesignHeight="500" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Is Injuried -->
+        <controls:HeaderPanel Grid.Column="0" Grid.Row="0" Header="{x:Static resources:RosterPlayerResources.Injuried}"
+                              Icon="{StaticResource AmbulanceGeometry}"
+                              Command="{Binding GotToTabCommand}"
+                              CommandParameter="2"
+                              Visibility="{Binding Item.IsInjured, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <controls:HeaderPanel.Style>
+                <Style TargetType="{x:Type controls:HeaderPanel}" BasedOn="{StaticResource {x:Type controls:HeaderPanel}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Item.Injury.Severity, IsAsync=True}" Value="{x:Static enum:InjurySeverity.Serious}">
+                            <Setter Property="Background" Value="{DynamicResource VeryBad}" />
+                            <Setter Property="Foreground" Value="{DynamicResource White}" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Item.Injury.Severity, IsAsync=True}" Value="{x:Static enum:InjurySeverity.Average}">
+                            <Setter Property="Background" Value="{DynamicResource Bad}" />
+                            <Setter Property="Foreground" Value="{DynamicResource White}" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Item.Injury.Severity, IsAsync=True}" Value="{x:Static enum:InjurySeverity.Minor}">
+                            <Setter Property="Background" Value="{DynamicResource Poor}" />
+                            <Setter Property="Foreground" Value="{DynamicResource White}" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Item.Injury.Severity, IsAsync=True}" Value="{x:Static enum:InjurySeverity.Slight}">
+                            <Setter Property="Background" Value="{DynamicResource Slight}" />
+                            <Setter Property="Foreground" Value="{DynamicResource White}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </controls:HeaderPanel.Style>
+            <StackPanel>
+                <TextBlock Text="{Binding Item.Injury.Condition, IsAsync=True}" Style="{StaticResource HeaderStyle}" Margin="{StaticResource MediumVerticalMargin}" />
+                <TextBlock Text="{Binding Item.Injury.ExpectedReturnLabel, IsAsync=True, StringFormat={x:Static resources:RosterPlayerResources.ExpectedReturn}}" Margin="{StaticResource MediumVerticalMargin}" Style="{StaticResource SmallHeaderStyle}" FontWeight="Normal"
+                           Visibility="{Binding Item.Injury.ExpectedReturnLabel, IsAsync=True, Converter={StaticResource NullToVisibilityConverter}}"/>
+                <TextBlock Text="{x:Static resources:RosterPlayerResources.NoExpectedReturn}" Margin="{StaticResource MediumVerticalMargin}" Style="{StaticResource SmallHeaderStyle}" FontWeight="Normal"
+                           Visibility="{Binding Item.Injury.ExpectedReturnLabel, IsAsync=True, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=inverse}"/>
+            </StackPanel>
+        </controls:HeaderPanel>
+
+        <!-- Is not injuried -->
+        <controls:HeaderPanel Grid.Column="0" Grid.Row="0" Header="{x:Static resources:RosterPlayerResources.NotInjuried}" Style="{StaticResource PositiveHeaderPanelStyle}"
+                              Icon="{StaticResource HeartGeometry}"
+                              Command="{Binding GotToTabCommand}"
+                              CommandParameter="2"
+                              Visibility="{Binding Item.IsInjured, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
+            <StackPanel>
+                <TextBlock Text="{x:Static resources:RosterPlayerResources.InFettle}" Style="{StaticResource HeaderStyle}" Margin="{StaticResource MediumVerticalMargin}" />
+            </StackPanel>
+        </controls:HeaderPanel>
+
+        <!-- Positions -->
+        <controls:HeaderPanel Grid.Column="0" Grid.Row="1"
+                              Header="{x:Static resources:RosterPlayerResources.Positions}"
+                              Icon="{StaticResource TargetGeometry}"
+                              Command="{Binding GotToTabCommand}"
+                              CommandParameter="1">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <controls:PositionsSelector ItemsSource="{Binding Positions}" 
+                                            Height="190"
+                                            Width="280"
+                                            ItemHeight="28"
+                                            Orientation="Horizontal"
+                                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                                            ItemContainerStyle="{StaticResource PlayerPositionStyle}"/>
+                <TextBlock Grid.Row="1" Text="{Binding Item.NaturalPositions}" 
+                           HorizontalAlignment="Center" Margin="{StaticResource LargeMargin}" Foreground="{DynamicResource GrayForeground}"
+                           FontSize="{StaticResource MediumFontSize}"/>
+            </Grid>
+        </controls:HeaderPanel>
+
+    </Grid>
+</UserControl>

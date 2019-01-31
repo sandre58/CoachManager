@@ -7,6 +7,7 @@ using My.CoachManager.Domain.TrainingModule.Aggregate;
 using My.CoachManager.Domain.TrainingModule.Services;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 
@@ -20,6 +21,7 @@ namespace My.CoachManager.Application.Services.TrainingModule
         #region ---- Fields ----
 
         private readonly IRepository<Training> _trainingRepository;
+        private readonly IRepository<RosterPlayer> _rosterPlayerRepository;
 
         private readonly ICrudDomainService<Training, TrainingDto> _crudDomainService;
         private readonly ITrainingDomainService _trainingDomainService;
@@ -34,13 +36,16 @@ namespace My.CoachManager.Application.Services.TrainingModule
         /// <param name="trainingRepository"></param>
         /// <param name="crudDomainService"></param>
         /// <param name="trainingDomainService"></param>
+        /// <param name="rosterPlayerRepository"></param>
         public TrainingAppService(IRepository<Training> trainingRepository,
             ICrudDomainService<Training, TrainingDto> crudDomainService,
-            ITrainingDomainService trainingDomainService)
+            ITrainingDomainService trainingDomainService,
+            IRepository<RosterPlayer> rosterPlayerRepository)
         {
             _trainingRepository = trainingRepository;
             _crudDomainService = crudDomainService;
             _trainingDomainService = trainingDomainService;
+            _rosterPlayerRepository = rosterPlayerRepository;
         }
 
         #endregion ---- Constructors ----
@@ -75,7 +80,16 @@ namespace My.CoachManager.Application.Services.TrainingModule
         /// <returns></returns>
         public TrainingDto GetTrainingById(int id)
         {
-            var entity = _trainingRepository.GetEntity(id);
+            var entity = _trainingRepository
+                .Query
+                .Include(x => x.Attendances)
+                    .ThenInclude(x => x.RosterPlayer)
+                        .ThenInclude(x => x.Player)
+                            .ThenInclude(x => x.Category)
+                .Include(x => x.Attendances)
+                    .ThenInclude(x => x.RosterPlayer)
+                        .ThenInclude(x => x.Squad)
+                .FirstOrDefault(x => x.Id == id);
             return entity != null ? TrainingFactory.Get(entity) : null;
         }
 
@@ -127,6 +141,41 @@ namespace My.CoachManager.Application.Services.TrainingModule
             _trainingRepository.UnitOfWork.Commit();
 
             return trainings.Select(TrainingFactory.Get).ToList();
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Save a dto.
+        /// </summary>
+        /// <returns></returns>
+        public int SaveTrainingAttendances(int trainingId, IList<TrainingAttendanceDto> attendances)
+        {
+            var training = _trainingRepository.GetEntity(trainingId);
+            training.Attendances = new List<TrainingAttendance>(attendances.Select(x => TrainingFactory.CreateAttendance(trainingId, x)));
+
+            _trainingRepository.Modify(training);
+            _trainingRepository.UnitOfWork.Commit();
+
+            return training.Id;
+
+        }
+    
+        /// <summary>
+        /// Gets players for a specific training.
+        /// </summary>
+        /// <param name="trainingId"></param>
+        /// <returns></returns>
+        public IList<RosterPlayerDto> GetPlayersForTraining(int trainingId)
+        {
+            var training = _trainingRepository.GetEntity(trainingId);
+
+            var players = _rosterPlayerRepository.Query
+                .Include(x => x.Player)
+                    .ThenInclude(x => x.Category)
+                .Include(x => x.Squad)
+                .Where(x => x.RosterId == training.RosterId && (!x.Player.FromDate.HasValue || x.Player.FromDate <= training.EndDate));
+
+            return players.Select(TrainingSelectBuilder.SelectPlayersForTraining()).ToList();
         }
 
         #endregion Methods

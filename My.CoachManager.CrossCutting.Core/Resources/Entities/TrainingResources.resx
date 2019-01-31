@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Attendance" xml:space="preserve">
+    <value>Présence</value>
+  </data>
   <data name="Date" xml:space="preserve">
     <value>Date</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="Place" xml:space="preserve">
     <value>Lieu</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>Raison</value>
   </data>
   <data name="Roster" xml:space="preserve">
     <value>Effectif</value>

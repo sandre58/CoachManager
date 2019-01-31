@@ -1,0 +1,112 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:extensions="clr-namespace:My.CoachManager.Presentation.Controls.Extensions;assembly=My.CoachManager.Presentation.Controls"
+                    xmlns:enums="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
+                    xmlns:controls="clr-namespace:My.CoachManager.Presentation.Controls;assembly=My.CoachManager.Presentation.Controls"
+                    xmlns:resources="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
+                    xmlns:filters="clr-namespace:My.CoachManager.Presentation.Models.Filters;assembly=My.CoachManager.Presentation.Models">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source= "pack://application:,,,/My.CoachManager.Presentation.Resources;component/Styles/Base/Margins.xaml" />
+        <ResourceDictionary Source= "pack://application:,,,/My.CoachManager.Presentation.Resources;component/Styles/Base/Sizes.xaml" />
+        <ResourceDictionary Source= "pack://application:,,,/My.CoachManager.Presentation.Resources;component/Styles/Base/Converters.xaml" />
+        <ResourceDictionary Source= "pack://application:,,,/My.CoachManager.Presentation.Resources;component/Styles/Controls/Combobox.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <DataTemplate DataType="{x:Type filters:PlayerPositionFilter}">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <ComboBox Grid.Column="0"
+                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      Width="{StaticResource SmallLargeWidth}"
+                      ItemsSource="{Binding AllowedValues}"
+                      DisplayMemberPath="Label" SelectedValuePath="Id" SelectedValue="{Binding PositionId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <ComboBox Grid.Column="1"
+                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      Width="{StaticResource MediumWidth}"
+                      ItemsSource="{Binding Source={extensions:Enum {x:Type enums:ComplexComparableOperator}}}"
+                      DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
+            <controls:Rating x:Name="From" Grid.Column="2"
+                             Value="{Binding From, Converter={StaticResource CoefficientConverter}, ConverterParameter={StaticResource CoefficientRatingBy5}, Mode=TwoWay}" 
+                             ItemCount="{Binding Maximum}"
+                             ItemsSource="{Binding Source={extensions:Enum {x:Type enums:PositionRating}}}"
+                             HorizontalAlignment="Center" 
+                             VerticalAlignment="Center">
+                <controls:Rating.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Display}" />
+                    </DataTemplate>
+                </controls:Rating.ItemTemplate>
+            </controls:Rating>
+            <TextBlock x:Name="And" Grid.Column="3" Text="{x:Static resources:GlobalResources.And}" />
+            <controls:Rating x:Name="To" Grid.Column="4"
+                             Value="{Binding To, Converter={StaticResource CoefficientConverter}, ConverterParameter={StaticResource CoefficientRatingBy5}, Mode=TwoWay}" 
+                             ItemCount="{Binding Maximum}"
+                             ItemsSource="{Binding Source={extensions:Enum {x:Type enums:PositionRating}}}"
+                             HorizontalAlignment="Center" 
+                             VerticalAlignment="Center">
+                <controls:Rating.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Display}" />
+                    </DataTemplate>
+                </controls:Rating.ItemTemplate>
+            </controls:Rating>
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.EqualsTo}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="To" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.GreaterEqualThan}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="To" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.GreaterThan}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="To" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.LessEqualThan}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="From" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.LessThan}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="From" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Operator}" Value="{x:Static enums:ComplexComparableOperator.NotEqualsTo}">
+                <Setter TargetName="And" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="To" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type filters:SquadsFilter}">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <ComboBox Grid.Column="0"
+                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      Width="{StaticResource MediumWidth}"
+                      ItemsSource="{Binding Source={extensions:Enum {x:Type enums:BinaryOperator}}}"
+                      DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
+            <controls:MultiCheckboxes Grid.Column="1" VerticalAlignment="Center"
+                                      ItemsSource="{Binding AllowedValues}"
+                                      DisplayMemberPath="Name" ValueMemberPath="Id" SelectedValues="{Binding Values, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

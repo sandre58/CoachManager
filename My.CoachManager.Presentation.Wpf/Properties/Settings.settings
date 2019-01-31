@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My.CoachManager.Presentation.Wpf.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ClubName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">US Beaumont</Value>
+    </Setting>
+    <Setting Name="DefaultAccent" Type="System.String" Scope="User">
+      <Value Profile="(Default)">gold</Value>
+    </Setting>
+    <Setting Name="DefaultTheme" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dark</Value>
+    </Setting>
+    <Setting Name="ClubLogo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">../Images/beaumont.png</Value>
+    </Setting>
+    <Setting Name="RosterId" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DefaultMenu" Type="System.String" Scope="User">
+      <Value Profile="(Default)">red</Value>
+    </Setting>
+    <Setting Name="DefaultTrainingStartTime" Type="System.String" Scope="User">
+      <Value Profile="(Default)">17:30</Value>
+    </Setting>
+    <Setting Name="DefaultTrainingDuration" Type="System.String" Scope="User">
+      <Value Profile="(Default)">01:30</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

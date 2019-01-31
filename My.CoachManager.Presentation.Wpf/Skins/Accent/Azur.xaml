@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source= "pack://application:,,,/My.CoachManager.Presentation.Resources;component/Styles/Base/Brushes.Accent.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- ACCENT -->
+    <Color x:Key="LightAccentColor">#38BAFF</Color>
+    <Color x:Key="AccentColor">#03B6F2</Color>
+    <Color x:Key="DarkAccentColor">#0086C9</Color>
+    <Color x:Key="AccentTextColor">#ffffff</Color>
+</ResourceDictionary>

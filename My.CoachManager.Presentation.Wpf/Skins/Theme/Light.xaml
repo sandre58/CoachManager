@@ -1,0 +1,44 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source= "pack://application:,,,/My.CoachManager.Presentation.Resources;component/Styles/Base/Brushes.Theme.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- BASE COLOR -->
+    <Color x:Key="LightColor">#ffffff</Color>
+    <Color x:Key="DarkColor">#333333</Color>
+    <Color x:Key="VeryDarkColor">#000000</Color>
+    <Color x:Key="DisabledColor">#FFB8B5B2</Color>
+
+    <!-- VARIATIONS -->
+    <Color x:Key="LightVariation1Color">#11ffffff</Color>
+    <Color x:Key="LightVariation2Color">#22ffffff</Color>
+    <Color x:Key="LightVariation3Color">#44ffffff</Color>
+    <Color x:Key="LightVariation4Color">#66ffffff</Color>
+    <Color x:Key="LightVariation5Color">#88ffffff</Color>
+    <Color x:Key="LightVariation6Color">#A1ffffff</Color>
+    <Color x:Key="LightVariation7Color">#C1ffffff</Color>
+    <Color x:Key="LightVariation8Color">#D1ffffff</Color>
+    <Color x:Key="LightVariation9Color">#E1ffffff</Color>
+
+    <Color x:Key="Variation1Color">#11555555</Color>
+    <Color x:Key="Variation2Color">#22555555</Color>
+    <Color x:Key="Variation3Color">#44555555</Color>
+    <Color x:Key="Variation4Color">#66555555</Color>
+    <Color x:Key="Variation5Color">#88555555</Color>
+    <Color x:Key="Variation6Color">#A1555555</Color>
+    <Color x:Key="Variation7Color">#C1555555</Color>
+    <Color x:Key="Variation8Color">#D1555555</Color>
+    <Color x:Key="Variation9Color">#E1555555</Color>
+
+    <Color x:Key="DarkVariation1Color">#11333333</Color>
+    <Color x:Key="DarkVariation2Color">#22333333</Color>
+    <Color x:Key="DarkVariation3Color">#44333333</Color>
+    <Color x:Key="DarkVariation4Color">#66333333</Color>
+    <Color x:Key="DarkVariation5Color">#88333333</Color>
+    <Color x:Key="DarkVariation6Color">#A1333333</Color>
+    <Color x:Key="DarkVariation7Color">#C1333333</Color>
+    <Color x:Key="DarkVariation8Color">#D1333333</Color>
+    <Color x:Key="DarkVariation9Color">#E1333333</Color>
+</ResourceDictionary>

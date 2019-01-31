@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="My.CoachManager.Presentation.Modules.Training.Views.TrainingAttendancesEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             xmlns:controls="clr-namespace:My.CoachManager.Presentation.Controls;assembly=My.CoachManager.Presentation.Controls"
+             xmlns:mvvm="http://prismlibrary.com/"
+             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Modules.Training.ViewModels"
+             xmlns:strings1="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:columns="clr-namespace:My.CoachManager.Presentation.Controls.GridViews.Columns;assembly=My.CoachManager.Presentation.Controls"
+             xmlns:enum="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:models="clr-namespace:My.CoachManager.Presentation.Models;assembly=My.CoachManager.Presentation.Models"
+             xmlns:entities="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Controls.Parameters;assembly=My.CoachManager.Presentation.Controls"
+             xmlns:resources="clr-namespace:My.CoachManager.Presentation.Modules.Training.Resources"
+             mvvm:ViewModelLocator.AutoWireViewModel="True"
+             d:DataContext="{d:DesignInstance Type=viewModels:TrainingAttendancesEditViewModel}"
+             d:DesignHeight="700" d:DesignWidth="950">
+
+    <controls:WorkspaceView Height="700" Width="950">
+
+        <controls:ExtendedListView ItemsSource="{Binding Item.Attendances, IsAsync=True}" ItemContainerStyle="{StaticResource NotSelectableListViewItemStyle}" CanSort="True">
+            <controls:ExtendedListView.View>
+                <controls:ExtendedGridView>
+
+                    <!-- Photo -->
+                    <columns:ExtendedGridViewColumn
+                            PropertyName="Player.Photo"  CanUserHideColumn="False" Width="60">
+                        <columns:ExtendedGridViewColumn.CellTemplate>
+                            <DataTemplate DataType="models:TrainingAttendanceModel">
+                                <controls:ImageContent Style="{StaticResource RoundedPlayerPhotoStyle}" Width="30" Height="30" Content="{Binding Player, IsAsync=True}"/>
+                            </DataTemplate>
+                        </columns:ExtendedGridViewColumn.CellTemplate>
+                    </columns:ExtendedGridViewColumn>
+
+                    <!-- Name -->
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.LastName}"
+                                                         PropertyName="Player.FullName" DisplayMemberBinding="{Binding Player.FullName}" Width="160"/>
+
+                    <!-- Category -->
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.CategoryAbbr}"
+                                                    PropertyName="Player.Category.Order" DisplayMemberBinding="{Binding Player.Category.Label}" Width="60"/>
+
+                    <!-- Squad -->
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.Squad}"
+                                                    PropertyName="Player.Squad.Name" DisplayMemberBinding="{Binding Player.Squad.Name}" Width="80"/>
+
+                    <!-- Attendance -->
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:TrainingResources.Attendance}"
+                                                         PropertyName="Attendance" Width="550">
+                        <columns:ExtendedGridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <controls:DropDownButton Content="{x:Static resources:TrainingResources.EditAttencance}" Style="{StaticResource TextDropDownButtonStyle}" VerticalAlignment="Center">
+                                    <controls:DropDownButton.Submenu>
+                                        <controls:Submenu>
+                                            <MenuItem Header="{x:Static resources:TrainingResources.Unknown}" Icon="{StaticResource QuestionGeometry}"
+                                                          Command="{Binding DataContext.ToggleAttendanceToCommand,
+                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:WorkspaceView}}}"
+                                                          CommandParameter="{x:Static enum:Attendance.Unknown}" />
+                                            <MenuItem Header="{x:Static resources:TrainingResources.Presents}" Icon="{StaticResource OkGeometry}"
+                                                          Command="{Binding DataContext.ToggleAttendanceToCommand,
+                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:WorkspaceView}}}"
+                                                          CommandParameter="{x:Static enum:Attendance.Present}" />
+                                            <MenuItem Header="{x:Static resources:TrainingResources.Absents}" Icon="{StaticResource CancelGeometry}"
+                                                          Command="{Binding DataContext.ToggleAttendanceToCommand,
+                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:WorkspaceView}}}"
+                                                          CommandParameter="{x:Static enum:Attendance.Absent}" />
+                                            <MenuItem Header="{x:Static resources:TrainingResources.Injured}" Icon="{StaticResource AmbulanceGeometry}"
+                                                          Command="{Binding DataContext.ToggleAttendanceToCommand,
+                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:WorkspaceView}}}"
+                                                          CommandParameter="{x:Static enum:Attendance.Injured}" />
+                                            <MenuItem Header="{x:Static resources:TrainingResources.Resting}" Icon="{StaticResource SleepGeometry}"
+                                                          Command="{Binding DataContext.ToggleAttendanceToCommand,
+                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:WorkspaceView}}}"
+                                                          CommandParameter="{x:Static enum:Attendance.Resting}" />
+                                            <MenuItem Header="{x:Static resources:TrainingResources.InSelections}" Icon="{StaticResource FootballGeometry}"
+                                                          Command="{Binding DataContext.ToggleAttendanceToCommand,
+                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:WorkspaceView}}}"
+                                                          CommandParameter="{x:Static enum:Attendance.InSelection}" />
+                                            <MenuItem Header="{x:Static resources:TrainingResources.Apologied}" Icon="{StaticResource NoteGeometry}"
+                                                          Command="{Binding DataContext.ToggleAttendanceToCommand,
+                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:WorkspaceView}}}"
+                                                          CommandParameter="{x:Static enum:Attendance.Apology}" />
+                                        </controls:Submenu>
+                                    </controls:DropDownButton.Submenu>
+                                </controls:DropDownButton>
+                            </DataTemplate>
+                        </columns:ExtendedGridViewColumn.HeaderTemplate>
+                        <columns:ExtendedGridViewColumn.CellTemplate>
+                            <DataTemplate DataType="models:TrainingAttendanceModel">
+                                <StackPanel Orientation="Horizontal">
+                                    <RadioButton Style="{StaticResource IconRadioButtonStyle}" ToolTip="{Binding Source={x:Static enum:Attendance.Unknown}, Converter={StaticResource EnumToStringConverter}}"
+                             parameters:ControlParameters.Icon="{DynamicResource QuestionGeometry}" parameters:ControlParameters.FocusBackground="{DynamicResource Neutral}"
+                             parameters:ControlParameters.PressedBackground="{DynamicResource Neutral}" Height="{StaticResource MidSmallHeight}" VerticalAlignment="Center" Margin="{StaticResource MediumHorizontalMargin}"
+                             IsChecked="{Binding Attendance, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:Attendance.Unknown}, UpdateSourceTrigger=PropertyChanged}" />
+                                    <RadioButton Style="{StaticResource IconRadioButtonStyle}" ToolTip="{Binding Source={x:Static enum:Attendance.Present}, Converter={StaticResource EnumToStringConverter}}"
+                             parameters:ControlParameters.Icon="{DynamicResource OkGeometry}" parameters:ControlParameters.FocusBackground="{DynamicResource Positive}"
+                             parameters:ControlParameters.PressedBackground="{DynamicResource Positive}" Height="{StaticResource MidSmallHeight}" VerticalAlignment="Center" Margin="{StaticResource MediumHorizontalMargin}"
+                             IsChecked="{Binding Attendance, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:Attendance.Present}, UpdateSourceTrigger=PropertyChanged}" />
+                                    <RadioButton Style="{StaticResource IconRadioButtonStyle}" ToolTip="{Binding Source={x:Static enum:Attendance.Absent}, Converter={StaticResource EnumToStringConverter}}"
+                             parameters:ControlParameters.Icon="{DynamicResource CancelGeometry}" parameters:ControlParameters.FocusBackground="{DynamicResource Negative}"
+                             parameters:ControlParameters.PressedBackground="{DynamicResource Negative}" Height="{StaticResource MidSmallHeight}" VerticalAlignment="Center" Margin="{StaticResource MediumHorizontalMargin}"
+                             IsChecked="{Binding Attendance, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:Attendance.Absent}, UpdateSourceTrigger=PropertyChanged}" />
+                                    <RadioButton Style="{StaticResource IconRadioButtonStyle}" ToolTip="{Binding Source={x:Static enum:Attendance.Injured}, Converter={StaticResource EnumToStringConverter}}"
+                             parameters:ControlParameters.Icon="{DynamicResource AmbulanceGeometry}" parameters:ControlParameters.FocusBackground="{DynamicResource Warning}"
+                             parameters:ControlParameters.PressedBackground="{DynamicResource Warning}" Height="{StaticResource MidSmallHeight}" VerticalAlignment="Center" Margin="{StaticResource MediumHorizontalMargin}"
+                             IsChecked="{Binding Attendance, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:Attendance.Injured}, UpdateSourceTrigger=PropertyChanged}" />
+                                    <RadioButton Style="{StaticResource IconRadioButtonStyle}" ToolTip="{Binding Source={x:Static enum:Attendance.Resting}, Converter={StaticResource EnumToStringConverter}}"
+                                                 parameters:ControlParameters.Icon="{DynamicResource SleepGeometry}" parameters:ControlParameters.FocusBackground="{DynamicResource Information}"
+                                                 parameters:ControlParameters.PressedBackground="{DynamicResource Information}" Height="{StaticResource MidSmallHeight}" VerticalAlignment="Center" Margin="{StaticResource MediumHorizontalMargin}"
+                                                 IsChecked="{Binding Attendance, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:Attendance.Resting}, UpdateSourceTrigger=PropertyChanged}" />
+                                    <RadioButton Style="{StaticResource IconRadioButtonStyle}" ToolTip="{Binding Source={x:Static enum:Attendance.InSelection}, Converter={StaticResource EnumToStringConverter}}"
+                                                 parameters:ControlParameters.Icon="{DynamicResource FootballGeometry}" parameters:ControlParameters.FocusBackground="{DynamicResource Information}"
+                                                 parameters:ControlParameters.PressedBackground="{DynamicResource Information}" Height="{StaticResource MidSmallHeight}" VerticalAlignment="Center" Margin="{StaticResource MediumHorizontalMargin}"
+                                                 IsChecked="{Binding Attendance, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:Attendance.InSelection}, UpdateSourceTrigger=PropertyChanged}" />
+                                    <RadioButton Style="{StaticResource IconRadioButtonStyle}" ToolTip="{Binding Source={x:Static enum:Attendance.Apology}, Converter={StaticResource EnumToStringConverter}}"
+                                                 parameters:ControlParameters.Icon="{DynamicResource NoteGeometry}" parameters:ControlParameters.FocusBackground="{DynamicResource Warning}"
+                                                 parameters:ControlParameters.PressedBackground="{DynamicResource Warning}" Height="{StaticResource MidSmallHeight}" VerticalAlignment="Center" Margin="{StaticResource MediumHorizontalMargin}"
+                                                 IsChecked="{Binding Attendance, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enum:Attendance.Apology}, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBox Text="{Binding Reason, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" Width="{StaticResource LargeWidth}"
+                                             Visibility="{Binding Attendance, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static enum:Attendance.Apology}}"
+                                             parameters:TextBoxParameters.Watermark="{x:Static entities:TrainingResources.Reason}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </columns:ExtendedGridViewColumn.CellTemplate>
+                        </columns:ExtendedGridViewColumn>
+
+                </controls:ExtendedGridView>
+            </controls:ExtendedListView.View>
+        </controls:ExtendedListView>
+
+        <controls:WorkspaceView.Commands>
+            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CancelCommand}" Style="{StaticResource CancelCommandButtonApplicationBarStyle}" IsCancel="True" />
+            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding SaveCommand}" Style="{StaticResource ValidateCommandButtonApplicationBarStyle}" IsDefault="True" />
+            <controls:CommandButton DockPanel.Dock="Right" Command="{Binding RefreshCommand}" Content="{StaticResource RefreshGeometry}" Header="{x:Static strings1:ControlResources.Refresh}" />
+        </controls:WorkspaceView.Commands>
+    </controls:WorkspaceView>
+</UserControl>

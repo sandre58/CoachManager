@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source= "pack://application:,,,/My.CoachManager.Presentation.Resources;component/Styles/Base/Brushes.Menu.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- MENU -->
+    <Color x:Key="MenuTextColor">#000000</Color>
+    <Color x:Key="MainMenuColor">#e37a02</Color>
+    <Color x:Key="SecondMenuColor">#fda035</Color>
+</ResourceDictionary>

@@ -162,6 +162,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TrainingAttendance.cs" />
     <Compile Include="Training.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Injury.cs" />

@@ -305,6 +305,7 @@
     <Compile Include="Configurations\ConfigurationManagerBase.cs" />
     <Compile Include="Constants\ContactConstants.cs" />
     <Compile Include="Constants\InjuryConstants.cs" />
+    <Compile Include="Constants\TrainingConstants.cs" />
     <Compile Include="Constants\PositionConstants.cs" />
     <Compile Include="Constants\PlayerConstants.cs" />
     <Compile Include="Constants\PermissionConstants.cs" />
@@ -312,6 +313,7 @@
     <Compile Include="Constants\SqlConstants.cs" />
     <Compile Include="Cryptography\TripleDesEncryptor.cs" />
     <Compile Include="Enums\InjurySeverity.cs" />
+    <Compile Include="Enums\Attendance.cs" />
     <Compile Include="Enums\InjuryType.cs" />
     <Compile Include="Enums\BinaryOperator.cs" />
     <Compile Include="Enums\ComplexComparableOperator.cs" />
@@ -413,8 +415,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\Enums\AvailabilityResources.Designer.cs">
-      <DependentUpon>AvailabilityResources.resx</DependentUpon>
+    <Compile Include="Resources\Enums\AttendanceResources.Designer.cs">
+      <DependentUpon>AttendanceResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -574,9 +576,9 @@
       <LastGenOutput>ReferenceResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Enums\AvailabilityResources.resx">
+    <EmbeddedResource Include="Resources\Enums\AttendanceResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AvailabilityResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>AttendanceResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Enums\InjurySeverityResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

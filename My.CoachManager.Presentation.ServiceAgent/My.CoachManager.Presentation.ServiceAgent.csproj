@@ -295,6 +295,9 @@
     <None Include="Service References\TrainingServiceReference\TrainingService3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\TrainingServiceReference\TrainingService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\UserServiceReference\UserService.wsdl" />
     <None Include="Service References\UserServiceReference\UserService1.xsd">
       <SubType>Designer</SubType>
