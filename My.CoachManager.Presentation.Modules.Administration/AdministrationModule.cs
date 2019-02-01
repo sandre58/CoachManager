@@ -32,7 +32,10 @@ namespace My.CoachManager.Presentation.Modules.Administration
             _container.RegisterTypeForNavigation<PlayersListView>();
 
             // Register dialog views
-            _container.RegisterType<IPlayerEditView, PlayerEditView>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IPlayerEditView, PlayerEditView>(new PerResolveLifetimeManager());
+            _container.RegisterType<ICategoryEditView, CategoryEditView>(new PerResolveLifetimeManager());
+            _container.RegisterType<ISeasonEditView, SeasonEditView>(new PerResolveLifetimeManager());
+            _container.RegisterType<IRosterEditView, RosterEditView>(new PerResolveLifetimeManager());
         }
     }
 }

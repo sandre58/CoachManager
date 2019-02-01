@@ -5,12 +5,12 @@ using My.CoachManager.Presentation.Core.ViewModels;
 using My.CoachManager.Presentation.Models;
 using My.CoachManager.Presentation.Models.Aggregates;
 using My.CoachManager.Presentation.Modules.Administration.Resources;
-using My.CoachManager.Presentation.Modules.Administration.Views;
+using My.CoachManager.Presentation.Modules.Shared.Interfaces;
 using My.CoachManager.Presentation.ServiceAgent.SeasonServiceReference;
 
 namespace My.CoachManager.Presentation.Modules.Administration.ViewModels
 {
-    public class SeasonsListViewModel : OrderedListViewModel<SeasonModel, SeasonEditView, SeasonEditView>
+    public class SeasonsListViewModel : OrderedListViewModel<SeasonModel, ISeasonEditView,ISeasonEditView>
     {
         #region Fields
 

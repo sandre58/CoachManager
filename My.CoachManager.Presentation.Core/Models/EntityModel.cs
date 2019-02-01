@@ -118,6 +118,21 @@ namespace My.CoachManager.Presentation.Core.Models
             type.GetProperties().Select(x => x.GetValue(this)).OfType<ICollection>().ToList().SelectMany(x => x.OfType<IModifiable>()).ForEach(x => x.ResetModified());
         }
 
+        /// <summary>
+        /// Set AllProperties.
+        /// </summary>
+        /// <param name="other"></param>
+        public virtual void SetProperties(object other)
+        {
+            var props = GetType().GetProperties().Where(x => x.CanWrite);
+
+            foreach (var prop in props)
+            {
+                var newValue = prop.GetValue(other);
+                prop.SetValue(this, newValue);
+            }
+        }
+
         #endregion
 
         #region IPropertyChanged

@@ -11,5 +11,11 @@
         /// Gets if the object is modified.
         /// </summary>
         bool IsModified();
+
+        /// <summary>
+        /// Set AllProperties.
+        /// </summary>
+        /// <param name="other"></param>
+        void SetProperties(object other);
     }
 }

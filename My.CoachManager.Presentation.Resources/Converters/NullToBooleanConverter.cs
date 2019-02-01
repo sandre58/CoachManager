@@ -23,14 +23,13 @@ namespace My.CoachManager.Presentation.Resources.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var flag = value == null;
-            if (value is string)
+            if (value is string s)
             {
-                flag = string.IsNullOrEmpty((string)value);
+                flag = string.IsNullOrEmpty(s);
             }
 
-            if (value is Array)
+            if (value is Array array)
             {
-                var array = (Array)value;
                 flag = array.Length == 0;
             }
 

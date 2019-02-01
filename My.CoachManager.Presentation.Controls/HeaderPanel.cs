@@ -41,6 +41,21 @@ namespace My.CoachManager.Presentation.Controls
             set { SetValue(CommandParameterProperty, value); }
         }
 
+        public static readonly DependencyProperty HeaderForegroundProperty = DependencyProperty.Register("HeaderForeground", typeof(SolidColorBrush), typeof(HeaderPanel), new PropertyMetadata());
+
+        public SolidColorBrush HeaderForeground
+        {
+            get { return (SolidColorBrush)GetValue(HeaderForegroundProperty); }
+            set { SetValue(HeaderForegroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty HeaderFontSizeProperty = DependencyProperty.Register("HeaderFontSize", typeof(double), typeof(HeaderPanel), new PropertyMetadata(12.0));
+
+        public double HeaderFontSize
+        {
+            get { return (double)GetValue(HeaderFontSizeProperty); }
+            set { SetValue(HeaderFontSizeProperty, value); }
+        }
         #endregion Properties
     }
 }

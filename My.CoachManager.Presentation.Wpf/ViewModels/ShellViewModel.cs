@@ -11,7 +11,6 @@ using My.CoachManager.Presentation.Models;
 using My.CoachManager.Presentation.Models.Aggregates;
 using My.CoachManager.Presentation.Modules.Shared.ViewModels;
 using My.CoachManager.Presentation.Modules.Shared.Views;
-using My.CoachManager.Presentation.Modules.Roster.Views;
 using My.CoachManager.Presentation.Wpf.Resources;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using Prism.Commands;
@@ -21,6 +20,7 @@ using Prism.Regions;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using My.CoachManager.Presentation.Modules.Shared.Interfaces;
 using My.CoachManager.Presentation.Wpf.Views;
 
 namespace My.CoachManager.Presentation.Wpf.ViewModels
@@ -317,7 +317,7 @@ namespace My.CoachManager.Presentation.Wpf.ViewModels
         /// </summary>
         private void AddSquad()
         {
-            DialogManager.ShowEditDialog<SquadEditView>(0, dialog =>
+            DialogManager.ShowEditDialog<ISquadEditView>(0, dialog =>
             {
                 if (dialog.Result == DialogResult.Ok)
                 {
@@ -344,7 +344,7 @@ namespace My.CoachManager.Presentation.Wpf.ViewModels
         /// </summary>
         private void EditSquad(SquadModel item)
         {
-            DialogManager.ShowEditDialog<SquadEditView>(item.Id, dialog =>
+            DialogManager.ShowEditDialog<ISquadEditView>(item.Id, dialog =>
             {
                 if (dialog.Result == DialogResult.Ok)
                 {

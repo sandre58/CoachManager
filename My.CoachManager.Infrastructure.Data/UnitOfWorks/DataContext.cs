@@ -42,6 +42,8 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Squad> Squads { get; set; }
         public DbSet<Training> Trainings { get; set; }
+        public DbSet<Exercice> Exercices { get; set; }
+        public DbSet<ExerciceTemplate> ExerciceTemplates { get; set; }
         public DbSet<TrainingAttendance> TrainingAttendances { get; set; }
         public DbSet<User> Users { get; set; }
 
@@ -283,6 +285,44 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 .HasDefaultValue(TrainingConstants.DefaultAttendance);
 
             modelBuilder.Entity<TrainingAttendance>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
+            // ExerciceTemplate
+            modelBuilder.Entity<ExerciceTemplate>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
+            // Exercice
+            modelBuilder.Entity<Exercice>()
+                .HasOne(x => x.Training)
+                .WithMany(x => x.Exercices)
+                .HasForeignKey(x => x.TrainingId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Exercice>()
+                .HasOne(x => x.Template)
+                .WithMany()
+                .HasForeignKey(x => x.TemplateId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Exercice>()
+                .Property<string>("Goals")
+                .HasField("_goals");
+
+            modelBuilder.Entity<Exercice>()
+                .Property<string>("Variables")
+                .HasField("_variables");
+
+            modelBuilder.Entity<Exercice>()
+                .Property<string>("Instructions")
+                .HasField("_instructions");
+
+            modelBuilder.Entity<Exercice>()
+                .Property<string>("Methods")
+                .HasField("_methods");
+
+            modelBuilder.Entity<Exercice>()
                 .Property(x => x.CreatedDate)
                 .HasDefaultValueSql("getdate()");
 

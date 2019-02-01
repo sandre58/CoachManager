@@ -88,6 +88,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\ISquadEditView.cs" />
+    <Compile Include="Interfaces\IInjuryEditView.cs" />
+    <Compile Include="Interfaces\ISeasonEditView.cs" />
+    <Compile Include="Interfaces\IRosterEditView.cs" />
+    <Compile Include="Interfaces\ICategoryEditView.cs" />
     <Compile Include="Interfaces\IPlayerEditView.cs" />
     <Compile Include="Interfaces\IRosterPlayerEditView.cs" />
     <Compile Include="Managers\PlayerManager.cs" />

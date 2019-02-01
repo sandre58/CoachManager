@@ -11,7 +11,7 @@ using My.CoachManager.Presentation.Core.Manager;
 using My.CoachManager.Presentation.Core.ViewModels;
 using My.CoachManager.Presentation.Models;
 using My.CoachManager.Presentation.Models.Aggregates;
-using My.CoachManager.Presentation.Modules.Roster.Views;
+using My.CoachManager.Presentation.Modules.Shared.Interfaces;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
@@ -20,7 +20,7 @@ using InjuryEditView = My.CoachManager.Presentation.Modules.Roster.Views.InjuryE
 
 namespace My.CoachManager.Presentation.Modules.Roster.ViewModels
 {
-    public class RosterPlayerViewModel : ItemViewModel<RosterPlayerModel, RosterPlayerEditView>
+    public class RosterPlayerViewModel : ItemViewModel<RosterPlayerModel, IRosterPlayerEditView>
     {
         #region Fields
 

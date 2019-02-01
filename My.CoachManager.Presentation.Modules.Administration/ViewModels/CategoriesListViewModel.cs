@@ -1,17 +1,16 @@
 ﻿using System.Linq;
 using My.CoachManager.Application.Dtos;
-using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Core.ViewModels;
 using My.CoachManager.Presentation.Models;
 using My.CoachManager.Presentation.Models.Aggregates;
 using My.CoachManager.Presentation.Modules.Administration.Resources;
-using My.CoachManager.Presentation.Modules.Administration.Views;
+using My.CoachManager.Presentation.Modules.Shared.Interfaces;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 
 namespace My.CoachManager.Presentation.Modules.Administration.ViewModels
 {
-    public class CategoriesListViewModel : OrderedListViewModel<CategoryModel, CategoryEditView, CategoryEditView>
+    public class CategoriesListViewModel : OrderedListViewModel<CategoryModel, ICategoryEditView, ICategoryEditView>
     {
         #region Fields
 

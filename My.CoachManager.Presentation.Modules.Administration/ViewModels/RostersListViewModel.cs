@@ -4,14 +4,14 @@ using My.CoachManager.Presentation.Core.ViewModels;
 using My.CoachManager.Presentation.Models;
 using My.CoachManager.Presentation.Models.Aggregates;
 using My.CoachManager.Presentation.Modules.Administration.Resources;
-using My.CoachManager.Presentation.Modules.Administration.Views;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using System.Linq;
+using My.CoachManager.Presentation.Modules.Shared.Interfaces;
 
 namespace My.CoachManager.Presentation.Modules.Administration.ViewModels
 {
     /// <inheritdoc />
-    public class RostersListViewModel : ListViewModel<RosterModel, RosterEditView, RosterEditView>
+    public class RostersListViewModel : ListViewModel<RosterModel, IRosterEditView, IRosterEditView>
     {
         #region Fields
 

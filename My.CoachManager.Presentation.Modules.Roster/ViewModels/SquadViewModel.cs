@@ -25,7 +25,7 @@ using SquadResources = My.CoachManager.Presentation.Modules.Roster.Resources.Squ
 
 namespace My.CoachManager.Presentation.Modules.Roster.ViewModels
 {
-    public class SquadViewModel : ListViewModel<RosterPlayerModel, RosterPlayerEditView, RosterPlayerView>
+    public class SquadViewModel : ListViewModel<RosterPlayerModel, IRosterPlayerEditView, RosterPlayerView>
     {
         #region Fields
 

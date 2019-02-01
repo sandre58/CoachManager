@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.Entities
@@ -16,6 +17,7 @@ namespace My.CoachManager.Domain.Entities
         public Training()
         {
             Attendances = new List<TrainingAttendance>();
+            Exercices = new List<Exercice>();
         }
 
         /// <summary>
@@ -52,8 +54,23 @@ namespace My.CoachManager.Domain.Entities
         public virtual bool IsCancelled { get; set; }
 
         /// <summary>
+        /// Gets or sets the theme.
+        /// </summary>
+        public virtual string Theme { get; set; }
+
+        /// <summary>
+        /// Gets or sets the stage.
+        /// </summary>
+        public virtual Stage Stage { get; set; }
+
+        /// <summary>
         /// Gets or sets the training attendances.
         /// </summary>
         public ICollection<TrainingAttendance> Attendances { get; set; }
+
+        /// <summary>
+        /// Gets or sets the training exercices.
+        /// </summary>
+        public ICollection<Exercice> Exercices { get; set; }
     }
 }

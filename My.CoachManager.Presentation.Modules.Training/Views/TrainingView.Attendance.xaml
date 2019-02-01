@@ -38,7 +38,9 @@
 
             <!-- Unknown -->
             <controls:HeaderPanel Grid.Column="0"
-                                      Header="{x:Static resources:TrainingResources.Unknown}"
+                                      HeaderForeground="{DynamicResource Neutral}"
+                                      Header="{Binding Item.Unknown.Count, IsAsync=True}"
+                                  ContentStringFormat="{x:Static resources:TrainingResources.PresentsWithCount}"
                                       Icon="{StaticResource QuestionGeometry}"
                                       Visibility="{Binding Item.Unknown, IsAsync=True, FallbackValue=Hidden,  Converter={StaticResource AnyToVisibilityConverter}}">
                 <ItemsControl ItemsSource="{Binding Item.Unknown, IsAsync=True}">
@@ -49,7 +51,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
+                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource MediumMargin}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -57,7 +59,9 @@
 
             <!-- Presents -->
             <controls:HeaderPanel Grid.Column="1"
-                                  Header="{x:Static resources:TrainingResources.Presents}"
+                                  HeaderForeground="{DynamicResource Positive}"
+                                  Header="{Binding Item.Presents.Count, IsAsync=True}"
+                                  HeaderStringFormat="{Binding Source={x:Static resources:TrainingResources.PresentsWithCount}, Converter={StaticResource ToUpperConverter}}"
                                   Icon="{StaticResource OkGeometry}"
                 Visibility="{Binding Item.Presents, IsAsync=True, FallbackValue=Hidden,  Converter={StaticResource AnyToVisibilityConverter}}">
                 <ItemsControl ItemsSource="{Binding Item.Presents, IsAsync=True}">
@@ -68,7 +72,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
+                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource MediumMargin}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -76,7 +80,9 @@
 
             <!-- Absents -->
             <controls:HeaderPanel Grid.Column="2"
-                Header="{x:Static resources:TrainingResources.Absents}"
+                                  Header="{Binding Item.Absents.Count, IsAsync=True}"
+                                  HeaderStringFormat="{Binding Source={x:Static resources:TrainingResources.AbsentsWithCount}, Converter={StaticResource ToUpperConverter}}"
+                                  HeaderForeground="{DynamicResource Negative}"
                 Icon="{StaticResource CancelGeometry}"
                 Visibility="{Binding Item.Absents, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource AnyToVisibilityConverter}}">
                 <ItemsControl ItemsSource="{Binding Item.Absents, IsAsync=True}">
@@ -87,7 +93,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
+                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource MediumMargin}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -95,7 +101,9 @@
 
             <!-- Injured -->
             <controls:HeaderPanel Grid.Column="3"
-                Header="{x:Static resources:TrainingResources.Injured}"
+                                  Header="{Binding Item.Injured.Count, IsAsync=True}"
+                                  HeaderStringFormat="{Binding Source={x:Static resources:TrainingResources.InjuredWithCount}, Converter={StaticResource ToUpperConverter}}"
+                                  HeaderForeground="{DynamicResource Warning}"
                 Icon="{StaticResource AmbulanceGeometry}"
                 Visibility="{Binding Item.Injured, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource AnyToVisibilityConverter}}">
                 <ItemsControl ItemsSource="{Binding Item.Injured, IsAsync=True}">
@@ -106,7 +114,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
+                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource MediumMargin}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -114,7 +122,9 @@
 
             <!-- Resting -->
             <controls:HeaderPanel Grid.Column="4"
-                                      Header="{x:Static resources:TrainingResources.Resting}"
+                                  Header="{Binding Item.Resting.Count, IsAsync=True}"
+                                  HeaderStringFormat="{Binding Source={x:Static resources:TrainingResources.RestingWithCount}, Converter={StaticResource ToUpperConverter}}"
+                                  HeaderForeground="{DynamicResource Information}"
                                       Icon="{StaticResource SleepGeometry}"
                                       Visibility="{Binding Item.Resting, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource AnyToVisibilityConverter}}">
                 <ItemsControl ItemsSource="{Binding Item.Resting, IsAsync=True}">
@@ -125,7 +135,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
+                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource MediumMargin}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -133,7 +143,9 @@
 
             <!-- InSelections -->
             <controls:HeaderPanel Grid.Column="5"
-                Header="{x:Static resources:TrainingResources.InSelections}"
+                                  Header="{Binding Item.InSelections.Count, IsAsync=True}"
+                                  HeaderStringFormat="{Binding Source={x:Static resources:TrainingResources.InSelectionsWithCount}, Converter={StaticResource ToUpperConverter}}"
+                                  HeaderForeground="{DynamicResource Information}"
                 Icon="{StaticResource FootballGeometry}"
                 Visibility="{Binding Item.InSelections, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource AnyToVisibilityConverter}}">
                 <ItemsControl ItemsSource="{Binding Item.InSelections, IsAsync=True}">
@@ -144,7 +156,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
+                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource MediumMargin}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -152,7 +164,9 @@
 
             <!-- Apologied -->
             <controls:HeaderPanel Grid.Column="6"
-                Header="{x:Static resources:TrainingResources.Apologied}"
+                                  Header="{Binding Item.Apologied.Count, IsAsync=True}"
+                                  HeaderStringFormat="{Binding Source={x:Static resources:TrainingResources.ApologiedWithCount}, Converter={StaticResource ToUpperConverter}}"
+                                  HeaderForeground="{DynamicResource Warning}"
                 Icon="{StaticResource NoteGeometry}"
                 Visibility="{Binding Item.Apologied, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource AnyToVisibilityConverter}}">
                 <ItemsControl ItemsSource="{Binding Item.Apologied, IsAsync=True}">
@@ -163,7 +177,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
+                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource MediumMargin}" ToolTip="{Binding Reason}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

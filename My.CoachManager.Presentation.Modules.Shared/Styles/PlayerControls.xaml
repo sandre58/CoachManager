@@ -3,8 +3,8 @@
                     xmlns:controls="clr-namespace:My.CoachManager.Presentation.Controls;assembly=My.CoachManager.Presentation.Controls"
                     xmlns:models="clr-namespace:My.CoachManager.Presentation.Models;assembly=My.CoachManager.Presentation.Models"
                     xmlns:enum="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
-                    xmlns:manager="clr-namespace:My.CoachManager.Presentation.Core.Manager;assembly=My.CoachManager.Presentation.Core"
-                    xmlns:managers="clr-namespace:My.CoachManager.Presentation.Modules.Shared.Managers">
+                    xmlns:managers="clr-namespace:My.CoachManager.Presentation.Modules.Shared.Managers"
+                    xmlns:resources="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source= "pack://application:,,,/My.CoachManager.Presentation.Resources;component/Styles/Base/Converters.xaml" />
@@ -65,16 +65,25 @@
                         <controls:Badged Badge="{Binding Category.Code}">
                             <controls:ImageContent Style="{StaticResource RoundedPlayerPhotoStyle}" Width="60" Height="60" Content="{Binding}" Padding="{StaticResource MediumMargin}" />
                         </controls:Badged>
-                        <!--<Button Content="{Binding FullName}" Style="{StaticResource TextButtonStyle}"
-                                Command="{x:Static manager:NavigationManager.NavigateCommand}"
-                                CommandParameter="{Binding Id, Converter={StaticResource IdNavigationParameterConverter}, ConverterParameter=RosterPlayerView}"
-                                HorizontalAlignment="Center" />-->
-                        <Button Content="{Binding FullName}" Style="{StaticResource TextButtonStyle}"
-                                Command="{x:Static managers:PlayerManager.EditPlayerCommand}"
+                        <Button Style="{StaticResource TextButtonStyle}"
+                                Command="{x:Static managers:PlayerManager.NavigateToPlayerCommand}"
                                 CommandParameter="{Binding}"
-                                HorizontalAlignment="Center" />
+                                HorizontalAlignment="Center" >
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding FirstName}" />
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding LastName}" />
+                            </StackPanel>
+                            </Button>
                     </StackPanel>
                 </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContextMenu">
+            <Setter.Value>
+                <ContextMenu>
+                    <MenuItem Background="{DynamicResource HeaderBackground}" Foreground="{DynamicResource Accent}" Icon="{StaticResource MalePeopleGeometry}" Header="{Binding Player.FullName}" Command="{x:Static managers:PlayerManager.NavigateToPlayerCommand}" CommandParameter="{Binding Player}" />
+                    <MenuItem Icon="{StaticResource EditBoxGeometry}" Header="{x:Static resources:ControlResources.Edit}" Command="{x:Static managers:PlayerManager.EditPlayerCommand}" CommandParameter="{Binding Player}" />
+                </ContextMenu>
             </Setter.Value>
         </Setter>
     </Style>

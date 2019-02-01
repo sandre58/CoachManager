@@ -22,7 +22,7 @@
                 <StackPanel Orientation="Horizontal" Margin="{StaticResource LargeHorizontalMargin}">
                     
                     <!-- Photo -->
-                    <controls:ImageContent Style="{StaticResource PlayerPhotoStyle}" Content="{Binding Item}"
+                    <controls:ImageContent Style="{StaticResource PlayerPhotoStyle}" Content="{Binding Item, IsAsync=True}"
                                            Background="Transparent"
                                            BorderBrush="Transparent"
                                            BorderThickness="0"

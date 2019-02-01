@@ -526,53 +526,14 @@
     </Style>
 
     <DataTemplate x:Key="CommandHeaderTemplate">
-        <StackPanel Orientation="Horizontal" Visibility="{Binding HasHeader, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <controls:Icon Width="25" Height="25" Size="Custom" Content="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}}"
-                           Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}}"
-                           Visibility="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}, Converter={StaticResource NullToVisibilityConverter}}" />
-            <Button  Style="{StaticResource TextButtonStyle}" Margin="{StaticResource DefaultHorizontalMargin}"
+        <Button  Style="{StaticResource TextButtonStyle}"
                      FontSize="{StaticResource MediumFontSize}" FontWeight="SemiBold" Focusable="False" Command="{Binding Command, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}}"
                      CommandParameter="{Binding CommandParameter, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Converter={StaticResource ToUpperConverter}}" />
-                    <controls:Icon Size="Custom" Width="9" Content="{StaticResource ChevronRightGeometry}" Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType=Button}}" Margin="{StaticResource DefaultLeftMargin}" />
-                </StackPanel>
-            </Button>
-        </StackPanel>
-    </DataTemplate>
-
-    <DataTemplate x:Key="HeaderTemplate">
-        <StackPanel Orientation="Horizontal" Visibility="{Binding HasHeader, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <controls:Icon Width="25" Height="25" Size="Custom" Content="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}}"
-                           Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}}"
-                           Visibility="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}, Converter={StaticResource NullToVisibilityConverter}}" />
-            <TextBlock Text="{Binding Converter={StaticResource ToUpperConverter}}" Foreground="{DynamicResource DarkControlPressed}" FontSize="{StaticResource MediumFontSize}" FontWeight="SemiBold" Focusable="False"
-                       Margin="{StaticResource DefaultHorizontalMargin}"/>
-        </StackPanel>
-    </DataTemplate>
-
-    <DataTemplate x:Key="LabelHeaderTemplate">
-        <StackPanel Orientation="Horizontal" Visibility="{Binding HasHeader, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <controls:Icon Width="25" Height="25" Size="Custom" Content="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}}"
-                           Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}}"
-                           Visibility="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}, Converter={StaticResource NullToVisibilityConverter}}" />
-            <TextBlock Text="{Binding Converter={StaticResource ToUpperConverter}}"
-                       Foreground="{DynamicResource GrayForeground}"
-                       FontSize="{StaticResource LabelFontSize}"
-                       FontWeight="SemiBold" />
-        </StackPanel>
-    </DataTemplate>
-
-    <DataTemplate x:Key="LargeLabelHeaderTemplate">
-        <StackPanel Orientation="Horizontal" Visibility="{Binding HasHeader, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <controls:Icon Width="25" Height="25" Size="Custom" Content="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}}"
-                           Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}}"
-                           Visibility="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}, Converter={StaticResource NullToVisibilityConverter}}" />
-            <TextBlock Text="{Binding Converter={StaticResource ToUpperConverter}}"
-                       Foreground="{DynamicResource GrayForeground}"
-                       FontSize="{StaticResource NormalFontSize}"
-                       FontWeight="SemiBold" />
-        </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ContentControl Content="{Binding}" parameters:ControlParameters.CharacterCasing="Upper" ContentStringFormat="{Binding ContentStringFormat, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}}" />
+                <controls:Icon Size="Custom" Width="9" Content="{StaticResource ChevronRightGeometry}" Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType=Button}}" Margin="{StaticResource DefaultLeftMargin}" />
+            </StackPanel>
+        </Button>
     </DataTemplate>
 
     <Style TargetType="{x:Type controls:HeaderPanel}" BasedOn="{StaticResource {x:Type ContentControl}}">
@@ -580,14 +541,18 @@
         <Setter Property="FontSize" Value="{StaticResource NormalFontSize}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Transparent}" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
+        <Setter Property="HeaderForeground" Value="{DynamicResource NormalForeground}" />
+        <Setter Property="HeaderFontSize" Value="{StaticResource MediumFontSize}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
-        <Setter Property="HeaderTemplate" Value="{StaticResource CommandHeaderTemplate}" />
         <Setter Property="parameters:ControlParameters.CornerRadius" Value="10" />
+        <Setter Property="HeaderTemplate" Value="{StaticResource CommandHeaderTemplate}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:HeaderPanel}">
-                    <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Padding="{StaticResource DefaultMargin}" CornerRadius="{TemplateBinding parameters:ControlParameters.CornerRadius}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" 
+                            Padding="{StaticResource DefaultMargin}" 
+                            CornerRadius="{TemplateBinding parameters:ControlParameters.CornerRadius}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="40" />
@@ -597,27 +562,51 @@
                             </Grid.RowDefinitions>
 
                             <!-- Header -->
-                            <Grid>
-                                <ContentControl Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" />
-                            </Grid>
+                            <StackPanel Orientation="Horizontal" Visibility="{Binding HasHeader, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <controls:Icon Width="25" Height="25" Size="Custom" Content="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}}"
+                                               Foreground="{Binding HeaderForeground, RelativeSource={RelativeSource TemplatedParent}}" Margin="{StaticResource MediumRightMargin}" 
+                                               Visibility="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:HeaderPanel}}, Converter={StaticResource NullToVisibilityConverter}}" />
+                                <ContentControl x:Name="Header" Focusable="False"
+                                                IsTabStop="False"
+                                                Padding="{TemplateBinding Padding}"
+                                                Content="{TemplateBinding Header}"
+                                                ContentStringFormat="{TemplateBinding HeaderStringFormat}"
+                                                ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                                parameters:ControlParameters.CharacterCasing="Upper"
+                                                ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                TextBlock.FontWeight="SemiBold"
+                                                TextBlock.FontSize="{TemplateBinding HeaderFontSize}"
+                                                Foreground="{TemplateBinding HeaderForeground}" />
+                            </StackPanel>
 
                             <!-- Separator -->
                             <Separator Grid.Row="1" Style="{StaticResource HorizontalSeparatorStyle}" />
 
                             <!-- Content -->
                             <Grid Grid.Row="2" Margin="{StaticResource LargeMargin}">
-                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                <ContentPresenter Focusable="False"
+                                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                Content="{TemplateBinding Content}"
+                                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                TextBlock.FontWeight="{TemplateBinding FontWeight}"
+                                                TextBlock.FontSize="{TemplateBinding FontSize}" />
                             </Grid>
                         </Grid>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Command" Value="{x:Null}">
+                            <Setter Property="HeaderTemplate" Value="{x:Null}" />
+                            <Setter TargetName="Header" Property="Opacity" Value="0.8" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="Command" Value="{x:Null}">
-                <Setter Property="HeaderTemplate" Value="{StaticResource HeaderTemplate}" />
-            </Trigger>
-        </Style.Triggers>
     </Style>
     
     <Style x:Key="NegativeHeaderPanelStyle" TargetType="{x:Type controls:HeaderPanel}" BasedOn="{StaticResource {x:Type controls:HeaderPanel}}">
@@ -633,19 +622,40 @@
     <Style x:Key="LabelStyle" TargetType="{x:Type controls:HeaderPanel}" BasedOn="{StaticResource {x:Type ContentControl}}">
         <Setter Property="FontSize" Value="{StaticResource NormalFontSize}" />
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
+        <Setter Property="HeaderForeground" Value="{DynamicResource GrayForeground}" />
+        <Setter Property="HeaderFontSize" Value="{StaticResource LabelFontSize}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Transparent}" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Margin" Value="{StaticResource MediumBottomMargin}" />
-        <Setter Property="HeaderTemplate" Value="{StaticResource LabelHeaderTemplate}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:HeaderPanel}">
                     <Border
                         Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
                         <StackPanel Orientation="Vertical">
-                            <ContentControl Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" />
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            <ContentControl Focusable="False"
+                                            IsTabStop="False"
+                                            Padding="{TemplateBinding Padding}"
+                                            Content="{TemplateBinding Header}"
+                                            ContentStringFormat="{TemplateBinding HeaderStringFormat}"
+                                            ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                            parameters:ControlParameters.CharacterCasing="Upper"
+                                            ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                            TextBlock.FontWeight="SemiBold"
+                                            TextBlock.FontSize="{TemplateBinding HeaderFontSize}"
+                                            Foreground="{TemplateBinding HeaderForeground}" />
+                            <ContentPresenter Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Content="{TemplateBinding Content}"
+                                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              TextBlock.FontWeight="{TemplateBinding FontWeight}"
+                                              TextBlock.FontSize="{TemplateBinding FontSize}" />
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
@@ -655,6 +665,6 @@
 
     <Style x:Key="LargeLabelStyle" TargetType="{x:Type controls:HeaderPanel}" BasedOn="{StaticResource LabelStyle}">
         <Setter Property="FontSize" Value="{StaticResource MediumFontSize}" />
-        <Setter Property="HeaderTemplate" Value="{StaticResource LargeLabelHeaderTemplate}" />
+        <Setter Property="HeaderFontSize" Value="{StaticResource NormalFontSize}" />
     </Style>
 </ResourceDictionary>

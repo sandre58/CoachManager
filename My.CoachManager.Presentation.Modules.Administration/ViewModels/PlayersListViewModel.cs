@@ -5,14 +5,14 @@ using My.CoachManager.Presentation.Core.ViewModels;
 using My.CoachManager.Presentation.Models;
 using My.CoachManager.Presentation.Models.Aggregates;
 using My.CoachManager.Presentation.Modules.Administration.Resources;
+using My.CoachManager.Presentation.Modules.Shared.Interfaces;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
-using PlayerEditView = My.CoachManager.Presentation.Modules.Administration.Views.PlayerEditView;
 
 namespace My.CoachManager.Presentation.Modules.Administration.ViewModels
 {
-    public class PlayersListViewModel : ListViewModel<PlayerModel, PlayerEditView, PlayerEditView>
+    public class PlayersListViewModel : ListViewModel<PlayerModel, IPlayerEditView, IPlayerEditView>
     {
         #region Fields
 

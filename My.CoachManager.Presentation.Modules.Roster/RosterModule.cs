@@ -39,7 +39,8 @@ namespace My.CoachManager.Presentation.Modules.Roster
             _container.RegisterTypeForNavigation<RosterPlayerView>();
 
             // Register dialog views
-            _container.RegisterType<IRosterPlayerEditView, RosterPlayerEditView>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IRosterPlayerEditView, RosterPlayerEditView>(new PerResolveLifetimeManager());
+            _container.RegisterType<ISquadEditView, SquadEditView>(new PerResolveLifetimeManager());
         }
     }
 }

@@ -70,6 +70,15 @@ namespace My.CoachManager.Presentation.Modules.Training.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Absent(s) ({0} joueur(s)).
+        /// </summary>
+        public static string AbsentsWithCount {
+            get {
+                return ResourceManager.GetString("AbsentsWithCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} entrainements ont été ajoutés avec succès..
         /// </summary>
         public static string AddedTrainingsSuccessMessage {
@@ -84,6 +93,15 @@ namespace My.CoachManager.Presentation.Modules.Training.Resources {
         public static string Apologied {
             get {
                 return ResourceManager.GetString("Apologied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excusé(s) ({0} joueur(s)).
+        /// </summary>
+        public static string ApologiedWithCount {
+            get {
+                return ResourceManager.GetString("ApologiedWithCount", resourceCulture);
             }
         }
         
@@ -133,11 +151,29 @@ namespace My.CoachManager.Presentation.Modules.Training.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Blessé(s) ({0} joueur(s)).
+        /// </summary>
+        public static string InjuredWithCount {
+            get {
+                return ResourceManager.GetString("InjuredWithCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to En sélection.
         /// </summary>
         public static string InSelections {
             get {
                 return ResourceManager.GetString("InSelections", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to En sélection ({0} joueur(s)).
+        /// </summary>
+        public static string InSelectionsWithCount {
+            get {
+                return ResourceManager.GetString("InSelectionsWithCount", resourceCulture);
             }
         }
         
@@ -169,11 +205,29 @@ namespace My.CoachManager.Presentation.Modules.Training.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Présent(s) ({0} joueur(s)).
+        /// </summary>
+        public static string PresentsWithCount {
+            get {
+                return ResourceManager.GetString("PresentsWithCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Au repos.
         /// </summary>
         public static string Resting {
             get {
                 return ResourceManager.GetString("Resting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Au repos ({0} joueur(s)).
+        /// </summary>
+        public static string RestingWithCount {
+            get {
+                return ResourceManager.GetString("RestingWithCount", resourceCulture);
             }
         }
         
@@ -210,6 +264,15 @@ namespace My.CoachManager.Presentation.Modules.Training.Resources {
         public static string Unknown {
             get {
                 return ResourceManager.GetString("Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Présence inconnue ({0} joueur(s)).
+        /// </summary>
+        public static string UnknownWithCount {
+            get {
+                return ResourceManager.GetString("UnknownWithCount", resourceCulture);
             }
         }
     }
