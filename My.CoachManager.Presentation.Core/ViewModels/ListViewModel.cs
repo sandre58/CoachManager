@@ -2,8 +2,10 @@
 using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Extensions;
+using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Core.Dialog;
 using My.CoachManager.Presentation.Core.Enums;
+using My.CoachManager.Presentation.Core.Interfaces;
 using My.CoachManager.Presentation.Core.Manager;
 using My.CoachManager.Presentation.Core.Models;
 using My.CoachManager.Presentation.Core.Models.Filters;
@@ -13,15 +15,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
-using My.CoachManager.CrossCutting.Core.Resources;
 
 namespace My.CoachManager.Presentation.Core.ViewModels
 {
     public abstract class ListViewModel<TEntityModel, TEditView, TItemView> : ListViewModel<TEntityModel>
         where TEntityModel : class, ISelectable, IEntityModel, IModifiable, IValidatable, new()
-        where TEditView : FrameworkElement
-        where TItemView : FrameworkElement
+        where TEditView : IFrameworkElement
+        where TItemView : IFrameworkElement
     {
         #region Members
 
@@ -68,7 +68,7 @@ namespace My.CoachManager.Presentation.Core.ViewModels
         #endregion Members
 
         #region Constructors
-        
+
         /// <summary>
         /// Initialise a new instance of <see cref="ListViewModel{TEntityModel}"/>
         /// </summary>
@@ -79,7 +79,7 @@ namespace My.CoachManager.Presentation.Core.ViewModels
         }
 
         #endregion Constructors
-        
+
         #region Methods
 
         #region Initialization
@@ -114,8 +114,7 @@ namespace My.CoachManager.Presentation.Core.ViewModels
             Filters?.ApplyFilters();
         }
 
-
-        #endregion
+        #endregion Data
 
         #region Open
 
@@ -192,7 +191,7 @@ namespace My.CoachManager.Presentation.Core.ViewModels
         protected virtual void Edit(TEntityModel item)
         {
             var x = item ?? SelectedItem;
-            if(x == null) return;
+            if (x == null) return;
             if (!CanEdit(x)) return;
 
             DialogManager.ShowEditDialog<TEditView>(x.Id, dialog =>
@@ -345,7 +344,6 @@ namespace My.CoachManager.Presentation.Core.ViewModels
             Refresh();
         }
 
-
         /// <summary>
         /// Called before the edit action;
         /// </summary>
@@ -368,8 +366,8 @@ namespace My.CoachManager.Presentation.Core.ViewModels
 
         #endregion Properties Changed
 
-            #endregion Methods
-        }
+        #endregion Methods
+    }
 
     public abstract class ListViewModel<TEntityModel> : NavigatableWorkspaceViewModel, IListViewModel<TEntityModel>
     where TEntityModel : class, ISelectable, IEntityModel, IModifiable, IValidatable, new()

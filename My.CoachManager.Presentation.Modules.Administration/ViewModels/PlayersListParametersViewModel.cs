@@ -1,5 +1,5 @@
 ﻿using My.CoachManager.Presentation.Core.ViewModels;
-using My.CoachManager.Presentation.Modules.Shared.Enums;
+using My.CoachManager.Presentation.Modules.Administration.Enums;
 
 namespace My.CoachManager.Presentation.Modules.Administration.ViewModels
 {

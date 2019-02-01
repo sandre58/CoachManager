@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Windows;
-using Microsoft.Practices.ServiceLocation;
+﻿using Microsoft.Practices.ServiceLocation;
 using Microsoft.Win32;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Core.Dialog;
-using My.CoachManager.Presentation.Core.Enums;
 using My.CoachManager.Presentation.Core.Events;
+using My.CoachManager.Presentation.Core.Interfaces;
 using My.CoachManager.Presentation.Core.Services;
 using My.CoachManager.Presentation.Core.ViewModels.Interfaces;
-using My.CoachManager.Presentation.Wpf.ViewModels;
 using My.CoachManager.Presentation.Wpf.ViewModels.Dialogs;
-using My.CoachManager.Presentation.Wpf.Views;
 using Prism.Events;
+using System;
 using CustomDialog = My.CoachManager.Presentation.Wpf.Views.Dialogs.CustomDialog;
 using LoginDialog = My.CoachManager.Presentation.Wpf.Views.Dialogs.LoginDialog;
 using MessageDialog = My.CoachManager.Presentation.Wpf.Views.Dialogs.MessageDialog;
@@ -26,7 +22,6 @@ namespace My.CoachManager.Presentation.Wpf.Services
     /// </summary>
     public class DialogService : IDialogService
     {
-
         #region IDialogService Members
 
         /// <inheritdoc />
@@ -35,16 +30,14 @@ namespace My.CoachManager.Presentation.Wpf.Services
         /// </summary>
         /// <param name="view">The view to include in workspace dialog.</param>
         /// <param name="callback">Action executed after result of dialog.</param>
-        public void ShowWorkspaceDialog(FrameworkElement view, Action<IWorkspaceDialog> callback = null)
+        public void ShowWorkspaceDialog(IFrameworkElement view, Action<IWorkspaceDialog> callback = null)
         {
-
             var dialog = new Dialog()
             {
                 Content = view
             };
 
             ServiceLocator.Current.GetInstance<IEventAggregator>().GetEvent<ShowWorkspaceDialogRequestEvent>().Publish(new DialogEventArgs(dialog, callback));
-
         }
 
         /// <inheritdoc />
@@ -65,11 +58,10 @@ namespace My.CoachManager.Presentation.Wpf.Services
                 Type = style
             };
             vm.Initialize();
-            
-            var result = DialogResult.None; 
+
+            var result = DialogResult.None;
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
-
                 var dialog = new MessageDialog
                 {
                     DataContext = vm
@@ -77,9 +69,9 @@ namespace My.CoachManager.Presentation.Wpf.Services
 
                 dialog.ShowDialog();
 
-                result = ((IDialogViewModel) dialog.DataContext).DialogResult;
+                result = ((IDialogViewModel)dialog.DataContext).DialogResult;
             });
-            
+
             return result;
         }
 
@@ -89,12 +81,11 @@ namespace My.CoachManager.Presentation.Wpf.Services
         /// </summary>
         /// <param name="view">The view to include in workspace dialog.</param>
         /// <param name="title">Title of window.</param>
-        public DialogResult ShowCustomDialog(FrameworkElement view, string title)
+        public DialogResult ShowCustomDialog(IFrameworkElement view, string title)
         {
             var result = DialogResult.None;
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
-
                 var dialog = new CustomDialog
                 {
                     Content = view,
@@ -132,19 +123,19 @@ namespace My.CoachManager.Presentation.Wpf.Services
             return string.Empty;
         }
 
-/// <summary>
-/// Show the dialog to provide Username and password.
-/// </summary>
-/// <param name="loginAction">Action to log in.</param>
-/// <param name="login">The login.</param>
-/// <param name="password">The password.</param>
-/// <returns>Item 1 : IsConnected ; Item2 : Error</returns>
-        public DialogResult ShowLoginDialog(Func<string, string, Tuple<bool, string>> loginAction, string login = "", string password  ="")
+        /// <summary>
+        /// Show the dialog to provide Username and password.
+        /// </summary>
+        /// <param name="loginAction">Action to log in.</param>
+        /// <param name="login">The login.</param>
+        /// <param name="password">The password.</param>
+        /// <returns>Item 1 : IsConnected ; Item2 : Error</returns>
+        public DialogResult ShowLoginDialog(Func<string, string, Tuple<bool, string>> loginAction, string login = "", string password = "")
         {
             var vm = new LoginViewModel();
             vm.Initialize();
 
-            if(!string.IsNullOrEmpty(login)) vm.UserName = login;
+            if (!string.IsNullOrEmpty(login)) vm.UserName = login;
             if (!string.IsNullOrEmpty(password)) vm.Password = password;
 
             vm.Title = ControlResources.Authentification;
@@ -153,7 +144,6 @@ namespace My.CoachManager.Presentation.Wpf.Services
             var result = DialogResult.None;
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
-
                 var dialog = new LoginDialog
                 {
                     DataContext = vm

@@ -3,6 +3,7 @@ using Microsoft.Practices.Unity;
 using My.CoachManager.Presentation.Core;
 using My.CoachManager.Presentation.Core.Manager;
 using My.CoachManager.Presentation.Modules.Roster.Views;
+using My.CoachManager.Presentation.Modules.Shared.Interfaces;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
 using Prism.Modularity;
 using Prism.Regions;
@@ -28,14 +29,17 @@ namespace My.CoachManager.Presentation.Modules.Roster
             var squads = _rosterService.GetSquads(SettingsManager.GetRosterId());
 
             // Register the navigation view
-            if(squads.Length == 1)
-            _regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion, () => ServiceLocator.Current.GetInstance<RosterNavigationView>());
-            else if(squads.Length > 1)
-            _regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion, () => ServiceLocator.Current.GetInstance<SquadsNavigationView>());
+            if (squads.Length == 1)
+                _regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion, () => ServiceLocator.Current.GetInstance<RosterNavigationView>());
+            else if (squads.Length > 1)
+                _regionManager.RegisterViewWithRegion(RegionNames.NavigationRegion, () => ServiceLocator.Current.GetInstance<SquadsNavigationView>());
 
             // Register the workspace view
             _container.RegisterTypeForNavigation<SquadView>();
             _container.RegisterTypeForNavigation<RosterPlayerView>();
+
+            // Register dialog views
+            _container.RegisterType<IRosterPlayerEditView, RosterPlayerEditView>(new ContainerControlledLifetimeManager());
         }
     }
 }

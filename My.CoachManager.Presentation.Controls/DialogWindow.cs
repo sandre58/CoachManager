@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows;
-using My.CoachManager.Presentation.Core.ViewModels;
+﻿using My.CoachManager.Presentation.Core.Interfaces;
 using My.CoachManager.Presentation.Core.ViewModels.Interfaces;
+using System;
+using System.Windows;
 
 namespace My.CoachManager.Presentation.Controls
 {
-    public class DialogWindow : ExtendedWindow
+    public class DialogWindow : ExtendedWindow, IFrameworkElement
     {
         /// <summary>
         /// The original main window.

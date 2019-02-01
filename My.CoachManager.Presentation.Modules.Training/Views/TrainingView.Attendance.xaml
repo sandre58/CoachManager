@@ -13,162 +13,161 @@
              d:DesignHeight="500" d:DesignWidth="800">
 
     <Grid>
-        
+
         <!-- No attendances -->
-        <controls:CommandButton ButtonDiameter="300" 
-                                Header="{x:Static resources:TrainingResources.EditAttencance}" Content="{StaticResource EditBoxGeometry}" 
+        <controls:CommandButton ButtonDiameter="300"
+                                Header="{x:Static resources:TrainingResources.EditAttencance}" Content="{StaticResource EditBoxGeometry}"
                                 FontSize="{StaticResource MediumHeaderFontSize}"
                                 Command="{Binding EditAttendancesCommand}"
                                 VerticalAlignment="Center" HorizontalAlignment="Center"
-                                Visibility="{Binding Item.Attendances, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource AnyToVisibilityConverter}, ConverterParameter=inverse}"/>
-        
+                                Visibility="{Binding Item.Attendances, IsAsync=True, FallbackValue=Collapsed, Converter={StaticResource AnyToVisibilityConverter}, ConverterParameter=inverse}" />
+
         <!-- Attendances -->
-        <ContentControl>
-            <Grid>
+        <Grid
+                Visibility="{Binding Item.Attendances, IsAsync=True, FallbackValue=Collapsed, Converter={StaticResource AnyToVisibilityConverter}}">
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-                <!-- Unknown -->
-                <controls:HeaderPanel Grid.Column="0"
+            <!-- Unknown -->
+            <controls:HeaderPanel Grid.Column="0"
                                       Header="{x:Static resources:TrainingResources.Unknown}"
                                       Icon="{StaticResource QuestionGeometry}"
                                       Visibility="{Binding Item.Unknown, IsAsync=True, FallbackValue=Hidden,  Converter={StaticResource AnyToVisibilityConverter}}">
-                    <ItemsControl ItemsSource="{Binding Item.Unknown, IsAsync=True}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Vertical" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </controls:HeaderPanel>
-                
-                <!-- Presents -->
-                <controls:HeaderPanel Grid.Column="1"
+                <ItemsControl ItemsSource="{Binding Item.Unknown, IsAsync=True}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </controls:HeaderPanel>
+
+            <!-- Presents -->
+            <controls:HeaderPanel Grid.Column="1"
                                   Header="{x:Static resources:TrainingResources.Presents}"
                                   Icon="{StaticResource OkGeometry}"
                 Visibility="{Binding Item.Presents, IsAsync=True, FallbackValue=Hidden,  Converter={StaticResource AnyToVisibilityConverter}}">
-                    <ItemsControl ItemsSource="{Binding Item.Presents, IsAsync=True}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Horizontal" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </controls:HeaderPanel>
+                <ItemsControl ItemsSource="{Binding Item.Presents, IsAsync=True}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </controls:HeaderPanel>
 
-                <!-- Absents -->
-                <controls:HeaderPanel Grid.Column="2"
+            <!-- Absents -->
+            <controls:HeaderPanel Grid.Column="2"
                 Header="{x:Static resources:TrainingResources.Absents}"
                 Icon="{StaticResource CancelGeometry}"
                 Visibility="{Binding Item.Absents, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource AnyToVisibilityConverter}}">
-                    <ItemsControl ItemsSource="{Binding Item.Absents, IsAsync=True}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Vertical" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </controls:HeaderPanel>
+                <ItemsControl ItemsSource="{Binding Item.Absents, IsAsync=True}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </controls:HeaderPanel>
 
-                <!-- Injured -->
-                <controls:HeaderPanel Grid.Column="3"
+            <!-- Injured -->
+            <controls:HeaderPanel Grid.Column="3"
                 Header="{x:Static resources:TrainingResources.Injured}"
                 Icon="{StaticResource AmbulanceGeometry}"
                 Visibility="{Binding Item.Injured, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource AnyToVisibilityConverter}}">
-                    <ItemsControl ItemsSource="{Binding Item.Injured, IsAsync=True}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Vertical" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </controls:HeaderPanel>
+                <ItemsControl ItemsSource="{Binding Item.Injured, IsAsync=True}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </controls:HeaderPanel>
 
-                <!-- Resting -->
-                <controls:HeaderPanel Grid.Column="4"
+            <!-- Resting -->
+            <controls:HeaderPanel Grid.Column="4"
                                       Header="{x:Static resources:TrainingResources.Resting}"
                                       Icon="{StaticResource SleepGeometry}"
                                       Visibility="{Binding Item.Resting, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource AnyToVisibilityConverter}}">
-                    <ItemsControl ItemsSource="{Binding Item.Resting, IsAsync=True}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Vertical" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </controls:HeaderPanel>
+                <ItemsControl ItemsSource="{Binding Item.Resting, IsAsync=True}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </controls:HeaderPanel>
 
-                <!-- InSelections -->
-                <controls:HeaderPanel Grid.Column="5"
+            <!-- InSelections -->
+            <controls:HeaderPanel Grid.Column="5"
                 Header="{x:Static resources:TrainingResources.InSelections}"
                 Icon="{StaticResource FootballGeometry}"
                 Visibility="{Binding Item.InSelections, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource AnyToVisibilityConverter}}">
-                    <ItemsControl ItemsSource="{Binding Item.InSelections, IsAsync=True}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Vertical" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </controls:HeaderPanel>
+                <ItemsControl ItemsSource="{Binding Item.InSelections, IsAsync=True}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </controls:HeaderPanel>
 
-                <!-- Apologied -->
-                <controls:HeaderPanel Grid.Column="6"
+            <!-- Apologied -->
+            <controls:HeaderPanel Grid.Column="6"
                 Header="{x:Static resources:TrainingResources.Apologied}"
                 Icon="{StaticResource NoteGeometry}"
                 Visibility="{Binding Item.Apologied, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource AnyToVisibilityConverter}}">
-                    <ItemsControl ItemsSource="{Binding Item.Apologied, IsAsync=True}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Vertical" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </controls:HeaderPanel>
-            </Grid>
-        </ContentControl>
+                <ItemsControl ItemsSource="{Binding Item.Apologied, IsAsync=True}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl Style="{StaticResource PlayerThumbnailStyle}" Content="{Binding Player, IsAsync=True}" Margin="{StaticResource DefaultMargin}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </controls:HeaderPanel>
+        </Grid>
     </Grid>
 </UserControl>

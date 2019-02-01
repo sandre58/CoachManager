@@ -9,8 +9,10 @@ using My.CoachManager.Presentation.Core.ViewModels.Interfaces;
 using My.CoachManager.Presentation.Models;
 using My.CoachManager.Presentation.Models.Aggregates;
 using My.CoachManager.Presentation.Models.Filters;
-using My.CoachManager.Presentation.Modules.Shared.Views;
+using My.CoachManager.Presentation.Modules.Roster.Enums;
 using My.CoachManager.Presentation.Modules.Roster.Views;
+using My.CoachManager.Presentation.Modules.Shared.Interfaces;
+using My.CoachManager.Presentation.Modules.Shared.Views;
 using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
@@ -19,8 +21,6 @@ using Prism.Commands;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using My.CoachManager.Presentation.Modules.Shared.ViewModels;
-using My.CoachManager.Presentation.Modules.Roster.Enums;
 using SquadResources = My.CoachManager.Presentation.Modules.Roster.Resources.SquadResources;
 
 namespace My.CoachManager.Presentation.Modules.Roster.ViewModels
@@ -198,13 +198,13 @@ namespace My.CoachManager.Presentation.Modules.Roster.ViewModels
         /// </summary>
         protected override void Add()
         {
-            DialogManager.ShowEditDialog<PlayerEditView>(0, dialog =>
+            DialogManager.ShowEditDialog<IPlayerEditView>(0, dialog =>
             {
                 if (dialog.Result == DialogResult.Ok)
                 {
-                    if (dialog.Content.DataContext is PlayerEditViewModel model)
+                    if (dialog.Content.DataContext is IEditViewModel model)
                     {
-                        _rosterService.AddPlayers(Squad.Id, new[] {model.Item.Id});
+                        _rosterService.AddPlayers(Squad.Id, new[] { model.Item.Id });
                         NotificationManager.ShowSuccess(string.Format(MessageResources.ItemsAdded, 1));
                     }
                 }
@@ -312,7 +312,7 @@ namespace My.CoachManager.Presentation.Modules.Roster.ViewModels
             return Mode == ScreenMode.Read && item != null;
         }
 
-        #endregion
+        #endregion OpenItemInInjuryTab
 
         #region Properties Changed
 

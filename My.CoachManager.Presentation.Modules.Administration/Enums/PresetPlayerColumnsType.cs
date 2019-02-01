@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using My.CoachManager.Presentation.Modules.Shared.Resources;
+﻿using My.CoachManager.Presentation.Modules.Administration.Resources;
+using System.ComponentModel.DataAnnotations;
 
-namespace My.CoachManager.Presentation.Modules.Shared.Enums
+namespace My.CoachManager.Presentation.Modules.Administration.Enums
 {
     public enum PresetPlayerColumnsType
     {

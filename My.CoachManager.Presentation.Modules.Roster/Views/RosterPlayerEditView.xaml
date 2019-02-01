@@ -9,11 +9,11 @@
              xmlns:strings="clr-namespace:My.CoachManager.Presentation.Modules.Roster.Resources"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Modules.Roster.ViewModels"
-             xmlns:views1="clr-namespace:My.CoachManager.Presentation.Modules.Shared.Views;assembly=My.CoachManager.Presentation.Modules.Shared"
              xmlns:views="clr-namespace:My.CoachManager.Presentation.Modules.Roster.Views"
              xmlns:strings1="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
              xmlns:behaviours="clr-namespace:My.CoachManager.Presentation.Controls.Behaviours;assembly=My.CoachManager.Presentation.Controls"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:playerEditView="clr-namespace:My.CoachManager.Presentation.Modules.Shared.Views.PlayerEditView;assembly=My.CoachManager.Presentation.Modules.Shared"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:RosterPlayerEditViewModel}"
              d:DesignHeight="1000" d:DesignWidth="750" MaxHeight="750">
@@ -68,25 +68,25 @@
 
             <TabItem Header="{x:Static strings:RosterPlayerResources.Positions}" parameters:ControlParameters.Icon="{StaticResource TargetGeometry}">
                 <AdornerDecorator>
-                    <views1:PlayerPositionsEditView TabIndex="3" />
+                    <playerEditView:PlayerPositionsEditView TabIndex="3" />
                 </AdornerDecorator>
             </TabItem>
 
             <TabItem Header="{x:Static strings:RosterPlayerResources.IdCard}" parameters:ControlParameters.Icon="{StaticResource IdCardGeometry}">
                 <AdornerDecorator>
-                    <views1:PlayerIdCardEditView TabIndex="4" />
+                    <playerEditView:PlayerIdCardEditView TabIndex="4" />
                 </AdornerDecorator>
             </TabItem>
 
             <TabItem Header="{x:Static strings:RosterPlayerResources.Morphology}" parameters:ControlParameters.Icon="{StaticResource MorphologyGeometry}">
                 <AdornerDecorator>
-                    <views1:PlayerMorphologyEditView TabIndex="5" />
+                    <playerEditView:PlayerMorphologyEditView TabIndex="5" />
                 </AdornerDecorator>
             </TabItem>
 
             <TabItem Header="{x:Static strings:RosterPlayerResources.Contacts}" parameters:ControlParameters.Icon="{StaticResource ContactsGeometry}">
                 <AdornerDecorator>
-                    <views1:PlayerContactsEditView TabIndex="6" />
+                    <playerEditView:PlayerContactsEditView TabIndex="6" />
                 </AdornerDecorator>
             </TabItem>
         </TabControl>

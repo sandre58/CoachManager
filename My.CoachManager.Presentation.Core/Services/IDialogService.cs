@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Windows;
-using My.CoachManager.Presentation.Core.Dialog;
-using My.CoachManager.Presentation.Core.Enums;
+﻿using My.CoachManager.Presentation.Core.Dialog;
+using My.CoachManager.Presentation.Core.Interfaces;
+using System;
 
 namespace My.CoachManager.Presentation.Core.Services
 {
@@ -17,7 +15,7 @@ namespace My.CoachManager.Presentation.Core.Services
         /// </summary>
         /// <param name="view">The view to include in workspace dialog.</param>
         /// <param name="callback">Action executed after result of dialog.</param>
-        void ShowWorkspaceDialog(FrameworkElement view, Action<IWorkspaceDialog> callback = null);
+        void ShowWorkspaceDialog(IFrameworkElement view, Action<IWorkspaceDialog> callback = null);
 
         /// <summary>
         /// Displays a message dialog.
@@ -35,7 +33,7 @@ namespace My.CoachManager.Presentation.Core.Services
         /// </summary>
         /// <param name="view">The view to include in workspace dialog.</param>
         /// <param name="title">Title of window.</param>
-        DialogResult ShowCustomDialog(FrameworkElement view, string title);
+        DialogResult ShowCustomDialog(IFrameworkElement view, string title);
 
         /// <summary>
         /// Show the dialog for open a file.

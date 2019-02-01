@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using My.CoachManager.CrossCutting.Core.Collections;
+﻿using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Core.DragAndDrop;
+using My.CoachManager.Presentation.Core.Interfaces;
 using My.CoachManager.Presentation.Core.Manager;
 using My.CoachManager.Presentation.Core.Models;
 using Prism.Commands;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace My.CoachManager.Presentation.Core.ViewModels
 {
     public abstract class OrderedListViewModel<TEntityViewModel, TEditView, TItemView> : ListViewModel<TEntityViewModel, TEditView, TItemView>
         where TEntityViewModel : class, ISelectable, IOrderable, IEntityModel, IValidatable, IModifiable, new()
-        where TEditView : FrameworkElement
-        where TItemView : FrameworkElement
+        where TEditView : IFrameworkElement
+        where TItemView : IFrameworkElement
     {
         #region Members
 
@@ -239,7 +239,7 @@ namespace My.CoachManager.Presentation.Core.ViewModels
 
         #endregion Move Above
 
-        #region  Selection
+        #region Selection
 
         /// <summary>
         /// Can Select All ?
@@ -251,7 +251,7 @@ namespace My.CoachManager.Presentation.Core.ViewModels
         }
 
         /// <summary>
-        /// Can select an item. 
+        /// Can select an item.
         /// </summary>
         /// <returns></returns>
         protected override bool CanSelectItem(TEntityViewModel item)
@@ -260,7 +260,7 @@ namespace My.CoachManager.Presentation.Core.ViewModels
         }
 
         /// <summary>
-        /// Can select items. 
+        /// Can select items.
         /// </summary>
         /// <returns></returns>
         protected override bool CanSelectItems(IEnumerable<TEntityViewModel> items)
@@ -268,7 +268,7 @@ namespace My.CoachManager.Presentation.Core.ViewModels
             return base.CanSelectItems(items) && !CanOrder;
         }
 
-        #endregion
+        #endregion Selection
 
         #region Privates methods
 

@@ -88,7 +88,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Enums\PresetPlayerColumnsType.cs" />
+    <Compile Include="Interfaces\IPlayerEditView.cs" />
+    <Compile Include="Interfaces\IRosterPlayerEditView.cs" />
+    <Compile Include="Managers\PlayerManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -102,39 +104,31 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Resources\PlayerResources.Designer.cs">
-      <DependentUpon>PlayerResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="ViewModels\PlayerEditViewModel.cs" />
     <Compile Include="ViewModels\SelectPlayersFiltersViewModel.cs" />
     <Compile Include="ViewModels\SelectSquadsViewModel.cs" />
     <Compile Include="ViewModels\SelectRostersViewModel.cs" />
     <Compile Include="ViewModels\SelectPlayersViewModel.cs" />
-    <Compile Include="Views\PlayerEditView.Club.xaml.cs">
+    <Compile Include="Views\PlayerEditView\PlayerEditView.Club.xaml.cs">
       <DependentUpon>PlayerEditView.Club.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PlayerEditView.Contacts.xaml.cs">
+    <Compile Include="Views\PlayerEditView\PlayerEditView.Contacts.xaml.cs">
       <DependentUpon>PlayerEditView.Contacts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PlayerEditView.Emails.xaml.cs">
+    <Compile Include="Views\PlayerEditView\PlayerEditView.Emails.xaml.cs">
       <DependentUpon>PlayerEditView.Emails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PlayerEditView.IdCard.xaml.cs">
+    <Compile Include="Views\PlayerEditView\PlayerEditView.IdCard.xaml.cs">
       <DependentUpon>PlayerEditView.IdCard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PlayerEditView.Morphology.xaml.cs">
+    <Compile Include="Views\PlayerEditView\PlayerEditView.Morphology.xaml.cs">
       <DependentUpon>PlayerEditView.Morphology.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PlayerEditView.Phones.xaml.cs">
+    <Compile Include="Views\PlayerEditView\PlayerEditView.Phones.xaml.cs">
       <DependentUpon>PlayerEditView.Phones.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PlayerEditView.Positions.xaml.cs">
+    <Compile Include="Views\PlayerEditView\PlayerEditView.Positions.xaml.cs">
       <DependentUpon>PlayerEditView.Positions.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PlayerEditView.xaml.cs">
-      <DependentUpon>PlayerEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SelectSquadsView.xaml.cs">
       <DependentUpon>SelectSquadsView.xaml</DependentUpon>
@@ -148,11 +142,6 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\PlayerResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>PlayerResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
@@ -194,35 +183,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PlayerEditView.Club.xaml">
+    <Page Include="Views\PlayerEditView\PlayerEditView.Club.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PlayerEditView.Contacts.xaml">
+    <Page Include="Views\PlayerEditView\PlayerEditView.Contacts.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PlayerEditView.Emails.xaml">
+    <Page Include="Views\PlayerEditView\PlayerEditView.Emails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PlayerEditView.IdCard.xaml">
+    <Page Include="Views\PlayerEditView\PlayerEditView.IdCard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PlayerEditView.Morphology.xaml">
+    <Page Include="Views\PlayerEditView\PlayerEditView.Morphology.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PlayerEditView.Phones.xaml">
+    <Page Include="Views\PlayerEditView\PlayerEditView.Phones.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PlayerEditView.Positions.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\PlayerEditView.xaml">
+    <Page Include="Views\PlayerEditView\PlayerEditView.Positions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

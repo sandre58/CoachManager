@@ -6,7 +6,6 @@
     /// </summary>
     public partial class MessageDialog
     {
- 
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the <see cref="T:My.CoachManager.Presentation.Wpf.Views.Dialogs.MessageDialog" /> class.

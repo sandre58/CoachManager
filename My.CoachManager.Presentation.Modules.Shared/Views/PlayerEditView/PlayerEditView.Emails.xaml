@@ -1,4 +1,4 @@
-﻿<ItemsControl x:Class="My.CoachManager.Presentation.Modules.Shared.Views.PlayerEmailsEditView"
+﻿<ItemsControl x:Class="My.CoachManager.Presentation.Modules.Shared.Views.PlayerEditView.PlayerEmailsEditView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -9,6 +9,7 @@
              xmlns:models="clr-namespace:My.CoachManager.Presentation.Models;assembly=My.CoachManager.Presentation.Models"
               xmlns:views1="clr-namespace:My.CoachManager.Presentation.Modules.Shared.Views"
               xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
+              xmlns:playerEditView="clr-namespace:My.CoachManager.Presentation.Modules.Shared.Views.PlayerEditView"
               mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <ItemsControl.ItemsPanel>
@@ -37,7 +38,7 @@
 
                 <ComboBox Grid.Column="2"
                               IsTextSearchEnabled="True"
-                              ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views1:PlayerEmailsEditView}}, Path=DataContext.AllEmailLabels}"
+                              ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type playerEditView:PlayerEmailsEditView}}, Path=DataContext.AllEmailLabels}"
                               Text="{Binding Label, UpdateSourceTrigger=PropertyChanged}"
                               Width="120"
                               parameters:TextBoxParameters.Watermark="{x:Static entities:ContactResources.Label}"
@@ -49,7 +50,7 @@
                                     Style="{StaticResource RemoveButtonStyle}"
                                     Width="18" Height="18"
                                     ToolTip="{x:Static strings:ControlResources.RemoveContact}"
-                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views1:PlayerEmailsEditView}}, Path=DataContext.RemoveEmailCommand}"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type playerEditView:PlayerEmailsEditView}}, Path=DataContext.RemoveEmailCommand}"
                                     CommandParameter="{Binding}"
                         Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
@@ -57,7 +58,7 @@
                                     Style="{StaticResource AddButtonStyle}"
                                     Width="18" Height="18"
                                     ToolTip="{x:Static strings:ControlResources.AddContact}"
-                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views1:PlayerEmailsEditView}}, Path=DataContext.AddEmailCommand}"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type playerEditView:PlayerEmailsEditView}}, Path=DataContext.AddEmailCommand}"
                         CommandParameter="{Binding}"
                         Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" />
             </Grid>

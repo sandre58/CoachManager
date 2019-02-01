@@ -1,11 +1,11 @@
-﻿namespace My.CoachManager.Presentation.Modules.Shared.Views
+﻿namespace My.CoachManager.Presentation.Modules.Shared.Views.PlayerEditView
 {
     /// <summary>
     /// Logique d'interaction pour CategoryEditView.xaml
     /// </summary>
-    public partial class PlayerClubEditView
+    public partial class PlayerIdCardEditView
     {
-        public PlayerClubEditView()
+        public PlayerIdCardEditView()
         {
             InitializeComponent();
         }

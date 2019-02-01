@@ -15,7 +15,7 @@
       <Value Profile="(Default)">../Images/beaumont.png</Value>
     </Setting>
     <Setting Name="RosterId" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="DefaultMenu" Type="System.String" Scope="User">
       <Value Profile="(Default)">red</Value>

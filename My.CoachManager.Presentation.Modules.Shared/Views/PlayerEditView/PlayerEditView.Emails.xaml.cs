@@ -1,11 +1,11 @@
-﻿namespace My.CoachManager.Presentation.Modules.Shared.Views
+﻿namespace My.CoachManager.Presentation.Modules.Shared.Views.PlayerEditView
 {
     /// <summary>
     /// Logique d'interaction pour PersonEditView.xaml
     /// </summary>
-    public partial class PlayerPhonesEditView
+    public partial class PlayerEmailsEditView
     {
-        public PlayerPhonesEditView()
+        public PlayerEmailsEditView()
         {
             InitializeComponent();
         }

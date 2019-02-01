@@ -1,5 +1,5 @@
 ﻿using My.CoachManager.Presentation.Core.ViewModels;
-using My.CoachManager.Presentation.Modules.Shared.Enums;
+using My.CoachManager.Presentation.Modules.Roster.Enums;
 
 namespace My.CoachManager.Presentation.Modules.Roster.ViewModels
 {
@@ -24,11 +24,11 @@ namespace My.CoachManager.Presentation.Modules.Roster.ViewModels
         /// </summary>
         public SquadParametersViewModel()
         {
-            AddPresetColumns(PresetPlayerColumnsType.GeneralInformations, GeneralInformationsColumns);
-            AddPresetColumns(PresetPlayerColumnsType.ClubInformations, ClubInformationsColumns);
-            AddPresetColumns(PresetPlayerColumnsType.BodyInformations, BodyInformationsColumns);
+            AddPresetColumns(PresetRosterPlayersColumnsType.GeneralInformations, GeneralInformationsColumns);
+            AddPresetColumns(PresetRosterPlayersColumnsType.ClubInformations, ClubInformationsColumns);
+            AddPresetColumns(PresetRosterPlayersColumnsType.BodyInformations, BodyInformationsColumns);
 
-            ChangeDisplayedColumns(PresetPlayerColumnsType.ClubInformations);
+            ChangeDisplayedColumns(PresetRosterPlayersColumnsType.ClubInformations);
         }
 
         #endregion Initialisation

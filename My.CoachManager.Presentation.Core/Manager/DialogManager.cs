@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Windows;
-using Microsoft.Practices.ObjectBuilder2;
+﻿using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.ServiceLocation;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Core.Constants;
 using My.CoachManager.Presentation.Core.Dialog;
 using My.CoachManager.Presentation.Core.Enums;
+using My.CoachManager.Presentation.Core.Interfaces;
 using My.CoachManager.Presentation.Core.Services;
 using My.CoachManager.Presentation.Core.ViewModels.Interfaces;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace My.CoachManager.Presentation.Core.Manager
 {
@@ -42,7 +42,7 @@ namespace My.CoachManager.Presentation.Core.Manager
         /// <param name="id"></param>
         /// <param name="callback">Action executed after result of dialog.</param>
         /// <param name="parameters"></param>
-        public static void ShowEditDialog<TEditView>(int id, Action<IWorkspaceDialog> callback = null, IEnumerable<KeyValuePair<string, object>> parameters = null) where TEditView : FrameworkElement
+        public static void ShowEditDialog<TEditView>(int id, Action<IWorkspaceDialog> callback = null, IEnumerable<KeyValuePair<string, object>> parameters = null) where TEditView : IFrameworkElement
         {
             var view = ServiceLocator.Current.GetInstance<TEditView>();
             var p = new List<KeyValuePair<string, object>>(parameters ?? new List<KeyValuePair<string, object>>())
@@ -58,7 +58,7 @@ namespace My.CoachManager.Presentation.Core.Manager
         /// </summary>
         /// <param name="callback">Action executed after result of dialog.</param>
         /// <param name="parameters"></param>
-        public static void ShowWorkspaceDialog<TView>(Action<IWorkspaceDialog> callback = null, IEnumerable<KeyValuePair<string, object>> parameters = null) where TView : FrameworkElement
+        public static void ShowWorkspaceDialog<TView>(Action<IWorkspaceDialog> callback = null, IEnumerable<KeyValuePair<string, object>> parameters = null) where TView : IFrameworkElement
         {
             var view = ServiceLocator.Current.GetInstance<TView>();
             ShowWorkspaceDialog(view, callback, parameters);
@@ -72,7 +72,7 @@ namespace My.CoachManager.Presentation.Core.Manager
         /// <param name="parameters"></param>
         public static void ShowWorkspaceDialog(Type typeView, Action<IWorkspaceDialog> callback = null, IEnumerable<KeyValuePair<string, object>> parameters = null)
         {
-            var view = ServiceLocator.Current.GetInstance(typeView) as FrameworkElement;
+            var view = ServiceLocator.Current.GetInstance(typeView) as IFrameworkElement;
             ShowWorkspaceDialog(view, callback, parameters);
         }
 
@@ -82,13 +82,13 @@ namespace My.CoachManager.Presentation.Core.Manager
         /// <param name="view">The view to include in workspace dialog.</param>
         /// <param name="callback">Action executed after result of dialog.</param>
         /// <param name="parameters"></param>
-        public static void ShowWorkspaceDialog(FrameworkElement view, Action<IWorkspaceDialog> callback = null, IEnumerable<KeyValuePair<string, object>> parameters = null)
+        public static void ShowWorkspaceDialog(IFrameworkElement view, Action<IWorkspaceDialog> callback = null, IEnumerable<KeyValuePair<string, object>> parameters = null)
         {
             SetParameters(view, parameters);
             DialogService.ShowWorkspaceDialog(view, callback);
         }
 
-        #endregion
+        #endregion Workspace Dialog
 
         #region Select Items Dialog
 
@@ -99,7 +99,7 @@ namespace My.CoachManager.Presentation.Core.Manager
         /// <param name="selectionMode"></param>
         /// <param name="notSelectableItems"></param>
         /// <param name="parameters"></param>
-        public static void ShowSelectItemsDialog<TView>(Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null, IEnumerable<KeyValuePair<string, object>> parameters = null) where TView : FrameworkElement
+        public static void ShowSelectItemsDialog<TView>(Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null, IEnumerable<KeyValuePair<string, object>> parameters = null) where TView : IFrameworkElement
         {
             var view = ServiceLocator.Current.GetInstance<TView>();
             ShowSelectItemsDialog(view, callback, selectionMode, notSelectableItems, parameters);
@@ -115,7 +115,7 @@ namespace My.CoachManager.Presentation.Core.Manager
         /// <param name="parameters"></param>
         public static void ShowSelectItemsDialog(Type typeView, Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null, IEnumerable<KeyValuePair<string, object>> parameters = null)
         {
-            var view = ServiceLocator.Current.GetInstance(typeView) as FrameworkElement;
+            var view = ServiceLocator.Current.GetInstance(typeView) as IFrameworkElement;
             ShowSelectItemsDialog(view, callback, selectionMode, notSelectableItems, parameters);
         }
 
@@ -127,7 +127,7 @@ namespace My.CoachManager.Presentation.Core.Manager
         /// <param name="selectionMode"></param>
         /// <param name="notSelectableItems"></param>
         /// <param name="parameters"></param>
-        public static void ShowSelectItemsDialog(FrameworkElement view, Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null, IEnumerable<KeyValuePair<string, object>> parameters = null)
+        public static void ShowSelectItemsDialog(IFrameworkElement view, Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null, IEnumerable<KeyValuePair<string, object>> parameters = null)
         {
             if (!(view.DataContext is ISelectItemsViewModel model)) return;
 
@@ -139,7 +139,7 @@ namespace My.CoachManager.Presentation.Core.Manager
             ShowWorkspaceDialog(view, callback, parameters);
         }
 
-        #endregion
+        #endregion Select Items Dialog
 
         #region Message Dialog
 
@@ -217,7 +217,7 @@ namespace My.CoachManager.Presentation.Core.Manager
             return DialogService.ShowMessageDialog(title, message, style, buttons);
         }
 
-        #endregion
+        #endregion Message Dialog
 
         #region Custom Dialog
 
@@ -226,7 +226,7 @@ namespace My.CoachManager.Presentation.Core.Manager
         /// </summary>
         /// <param name="view">The view to include in workspace dialog.</param>
         /// <param name="title">Title of window.</param>
-        public static DialogResult ShowCustomDialog(FrameworkElement view, string title)
+        public static DialogResult ShowCustomDialog(IFrameworkElement view, string title)
         {
             return DialogService.ShowCustomDialog(view, title);
         }
@@ -235,7 +235,7 @@ namespace My.CoachManager.Presentation.Core.Manager
         /// Displays a modal dialog.
         /// </summary>
         /// <param name="title">Title of window.</param>
-        public static DialogResult ShowCustomDialog<TView>(string title) where TView : FrameworkElement
+        public static DialogResult ShowCustomDialog<TView>(string title) where TView : IFrameworkElement
         {
             var view = ServiceLocator.Current.GetInstance<TView>();
             return ShowCustomDialog(view, title);
@@ -248,11 +248,11 @@ namespace My.CoachManager.Presentation.Core.Manager
         /// <param name="title">Title of window.</param>
         public static DialogResult ShowCustomDialog(Type typeView, string title)
         {
-            var view = ServiceLocator.Current.GetInstance(typeView) as FrameworkElement;
+            var view = ServiceLocator.Current.GetInstance(typeView) as IFrameworkElement;
             return ShowCustomDialog(view, title);
         }
 
-        #endregion
+        #endregion Custom Dialog
 
         #region OpenFile Dialog
 
@@ -274,7 +274,7 @@ namespace My.CoachManager.Presentation.Core.Manager
             return ShowOpenFileDialog(DialogResources.AllImages, multiselect, initialDirectory, restoreDirectory);
         }
 
-        #endregion
+        #endregion OpenFile Dialog
 
         #region Login Dialog
 
@@ -290,7 +290,7 @@ namespace My.CoachManager.Presentation.Core.Manager
             return DialogService.ShowLoginDialog(loginAction, login, password);
         }
 
-        #endregion
+        #endregion Login Dialog
 
         #region Methods
 
@@ -300,11 +300,11 @@ namespace My.CoachManager.Presentation.Core.Manager
         /// <param name="view"></param>
         /// <param name="parameters"></param>
         /// <param name="refresh"></param>
-        private static void SetParameters(FrameworkElement view, IEnumerable<KeyValuePair<string, object>> parameters = null, bool refresh = true)
+        private static void SetParameters(IFrameworkElement view, IEnumerable<KeyValuePair<string, object>> parameters = null, bool refresh = true)
         {
             if (parameters != null && view.DataContext is IDialogViewModel model)
             {
-               parameters.ForEach(x => model.SetParameter(x.Key, x.Value));
+                parameters.ForEach(x => model.SetParameter(x.Key, x.Value));
             }
 
             if (refresh && view.DataContext is IRefreshable refreshable)
@@ -313,6 +313,6 @@ namespace My.CoachManager.Presentation.Core.Manager
             }
         }
 
-        #endregion
+        #endregion Methods
     }
 }

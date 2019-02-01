@@ -1,9 +1,11 @@
-﻿namespace My.CoachManager.Presentation.Modules.Roster.Views
+﻿using My.CoachManager.Presentation.Core.Interfaces;
+
+namespace My.CoachManager.Presentation.Modules.Roster.Views
 {
     /// <summary>
     /// Logique d'interaction pour CategoryEditView.xaml
     /// </summary>
-    public partial class SquadEditView
+    public partial class SquadEditView : IFrameworkElement
     {
         public SquadEditView()
         {

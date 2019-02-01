@@ -3,7 +3,8 @@
                     xmlns:controls="clr-namespace:My.CoachManager.Presentation.Controls;assembly=My.CoachManager.Presentation.Controls"
                     xmlns:models="clr-namespace:My.CoachManager.Presentation.Models;assembly=My.CoachManager.Presentation.Models"
                     xmlns:enum="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
-                    xmlns:manager="clr-namespace:My.CoachManager.Presentation.Core.Manager;assembly=My.CoachManager.Presentation.Core">
+                    xmlns:manager="clr-namespace:My.CoachManager.Presentation.Core.Manager;assembly=My.CoachManager.Presentation.Core"
+                    xmlns:managers="clr-namespace:My.CoachManager.Presentation.Modules.Shared.Managers">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source= "pack://application:,,,/My.CoachManager.Presentation.Resources;component/Styles/Base/Converters.xaml" />
@@ -33,7 +34,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style x:Key="RoundedPlayerPhotoStyle" TargetType="{x:Type controls:ImageContent}" BasedOn="{StaticResource RoundedImageStyle}">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Image" Value="{Binding Content.Photo, RelativeSource={RelativeSource Self}, Converter={StaticResource BytesToImageConverter}}" />
@@ -45,9 +46,9 @@
                     </Grid>
 
                     <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding Gender}" Value="{x:Static enum:GenderType.Female}">
-                        <Setter TargetName="Icon" Property="Content" Value="{StaticResource FemalePeopleGeometry}" />
-                    </DataTrigger>
+                        <DataTrigger Binding="{Binding Gender}" Value="{x:Static enum:GenderType.Female}">
+                            <Setter TargetName="Icon" Property="Content" Value="{StaticResource FemalePeopleGeometry}" />
+                        </DataTrigger>
                     </DataTemplate.Triggers>
                 </DataTemplate>
             </Setter.Value>
@@ -62,16 +63,19 @@
                 <DataTemplate DataType="{x:Type models:RosterPlayerModel}">
                     <StackPanel Orientation="Vertical">
                         <controls:Badged Badge="{Binding Category.Code}">
-                            <controls:ImageContent Style="{StaticResource RoundedPlayerPhotoStyle}" Width="60" Height="60" Content="{Binding}" Padding="{StaticResource MediumMargin}"/>
+                            <controls:ImageContent Style="{StaticResource RoundedPlayerPhotoStyle}" Width="60" Height="60" Content="{Binding}" Padding="{StaticResource MediumMargin}" />
                         </controls:Badged>
-                        <Button Content="{Binding FullName}" Style="{StaticResource TextButtonStyle}" 
-                                Command="{x:Static manager:NavigationManager.NavigateCommand}" 
+                        <!--<Button Content="{Binding FullName}" Style="{StaticResource TextButtonStyle}"
+                                Command="{x:Static manager:NavigationManager.NavigateCommand}"
                                 CommandParameter="{Binding Id, Converter={StaticResource IdNavigationParameterConverter}, ConverterParameter=RosterPlayerView}"
+                                HorizontalAlignment="Center" />-->
+                        <Button Content="{Binding FullName}" Style="{StaticResource TextButtonStyle}"
+                                Command="{x:Static managers:PlayerManager.EditPlayerCommand}"
+                                CommandParameter="{Binding}"
                                 HorizontalAlignment="Center" />
                     </StackPanel>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>

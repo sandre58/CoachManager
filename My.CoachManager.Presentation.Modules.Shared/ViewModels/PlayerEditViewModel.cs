@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using Microsoft.Practices.ObjectBuilder2;
-using My.CoachManager.Application.Dtos;
+﻿using Microsoft.Practices.ObjectBuilder2;
 using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Extensions;
@@ -16,60 +11,13 @@ using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 using Prism.Commands;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
 
 namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
 {
-
-    public class PlayerEditViewModel : PlayerEditViewModel<PlayerModel>
-    {
-
-        #region Fields
-
-        private readonly IPersonService _personService;
-
-        #endregion Fields
-
-        #region Constructors
-
-        /// <summary>
-        /// Initialise a new instance of <see cref="PlayerEditViewModel"/>.
-        /// </summary>
-        public PlayerEditViewModel(IPersonService personService, ICategoryService categoryService, IAddressService addressService, IPositionService positionService) : base(personService, categoryService, addressService, positionService)
-        {
-            _personService = personService;
-        }
-
-        #endregion Constructors
-
-        #region Methods
-
-        #region Data
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Load an item from data source.
-        /// </summary>
-        /// <param name="id"></param>
-        protected override PlayerModel LoadItemCore(int id)
-        {
-            return PlayerFactory.Get(_personService.GetPlayerById(id));
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Save.
-        /// </summary>
-        protected override int SaveItemCore()
-        {
-            return _personService.SavePlayer(PlayerFactory.Get(Item, Mode == ScreenMode.Creation ? CrudStatus.Created : CrudStatus.Updated));
-        }
-
-        #endregion Data
-
-        #endregion Methods
-
-    }
-
     public abstract class PlayerEditViewModel<TPlayerEntity> : EditViewModel<TPlayerEntity>
         where TPlayerEntity : PlayerModel, new()
     {
@@ -91,9 +39,9 @@ namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
         #region Constructors
 
         /// <summary>
-            /// Initialise a new instance of <see cref="PlayerEditViewModel{T}"/>.
-            /// </summary>
-            protected PlayerEditViewModel(IPersonService personService, ICategoryService categoryService, IAddressService addressService, IPositionService positionService)
+        /// Initialise a new instance of <see cref="PlayerEditViewModel{T}"/>.
+        /// </summary>
+        protected PlayerEditViewModel(IPersonService personService, ICategoryService categoryService, IAddressService addressService, IPositionService positionService)
         {
             _personService = personService;
             _categoryService = categoryService;
@@ -328,7 +276,7 @@ namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
             return Phones.Count > 1 || !string.IsNullOrEmpty(phone.Value);
         }
 
-        #endregion
+        #endregion Phones
 
         #region Emails
 
@@ -373,7 +321,7 @@ namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
             return Emails.Count > 1 || !string.IsNullOrEmpty(mail.Value);
         }
 
-        #endregion
+        #endregion Emails
 
         private void Contacts_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -388,9 +336,9 @@ namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
             AddPhoneCommand?.RaiseCanExecuteChanged();
         }
 
-        #endregion
+        #endregion Contacts
 
-        #region  Positions
+        #region Positions
 
         /// <summary>
         /// Raises when positions changed.
@@ -420,7 +368,7 @@ namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
             return position != null;
         }
 
-        #endregion
+        #endregion Positions
 
         #region Data
 
@@ -434,7 +382,6 @@ namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
 
             AllCities = AllAdresses.Select(c => c.City).Distinct().OrderBy(x => x);
             AllPostalCodes = AllAdresses.Select(c => c.PostalCode).Distinct().OrderBy(x => x);
-
         }
 
         /// <summary>

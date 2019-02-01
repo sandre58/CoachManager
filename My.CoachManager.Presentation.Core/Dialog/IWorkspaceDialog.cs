@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿using My.CoachManager.Presentation.Core.Interfaces;
 using Prism.Interactivity.InteractionRequest;
 
 namespace My.CoachManager.Presentation.Core.Dialog
@@ -10,9 +10,9 @@ namespace My.CoachManager.Presentation.Core.Dialog
         /// </summary>
         DialogResult Result { get; }
 
-            /// <summary>
-            /// Gets content.
-            /// </summary>
-        new FrameworkElement Content { get; }
+        /// <summary>
+        /// Gets content.
+        /// </summary>
+        new IFrameworkElement Content { get; }
     }
 }

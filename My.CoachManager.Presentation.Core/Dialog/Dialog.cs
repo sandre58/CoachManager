@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using My.CoachManager.Presentation.Core.ViewModels;
+﻿using My.CoachManager.Presentation.Core.Interfaces;
 using My.CoachManager.Presentation.Core.ViewModels.Interfaces;
 using Prism.Interactivity.InteractionRequest;
 
@@ -20,14 +19,14 @@ namespace My.CoachManager.Presentation.Core.Dialog
         object INotification.Content
         {
             get => Content;
-            set => Content = (FrameworkElement)value;
+            set => Content = (IFrameworkElement)value;
         }
 
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets the content.
         /// </summary>
-        public FrameworkElement Content { get; set; }
+        public IFrameworkElement Content { get; set; }
 
         /// <inheritdoc />
         /// <summary>
@@ -42,6 +41,5 @@ namespace My.CoachManager.Presentation.Core.Dialog
                 return dialog?.DialogResult ?? DialogResult.None;
             }
         }
-
     }
 }

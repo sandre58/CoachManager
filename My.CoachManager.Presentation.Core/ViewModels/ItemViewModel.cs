@@ -1,18 +1,17 @@
-﻿using System.ComponentModel;
-using System.Windows;
-using My.CoachManager.Presentation.Core.Dialog;
+﻿using My.CoachManager.Presentation.Core.Dialog;
+using My.CoachManager.Presentation.Core.Interfaces;
 using My.CoachManager.Presentation.Core.Manager;
 using My.CoachManager.Presentation.Core.Models;
 using My.CoachManager.Presentation.Core.ViewModels.Interfaces;
 using Prism.Commands;
 using PropertyChanged;
+using System.ComponentModel;
 
 namespace My.CoachManager.Presentation.Core.ViewModels
 {
-
     public abstract class ItemViewModel<TModel, TEditView> : ItemViewModel<TModel>
         where TModel : class, IEntityModel, IValidatable, IModifiable, INotifyPropertyChanged, new()
-        where TEditView : FrameworkElement
+        where TEditView : IFrameworkElement
     {
         #region Members
 
@@ -21,7 +20,7 @@ namespace My.CoachManager.Presentation.Core.ViewModels
         /// </summary>
         public DelegateCommand EditCommand { get; set; }
 
-        #endregion
+        #endregion Members
 
         #region Methods
 
@@ -75,14 +74,12 @@ namespace My.CoachManager.Presentation.Core.ViewModels
 
         #endregion Edit
 
-        #endregion
+        #endregion Methods
     }
-
 
     public abstract class ItemViewModel<TModel> : NavigatableWorkspaceViewModel, IItemViewModel<TModel>
         where TModel : class, IEntityModel, IValidatable, IModifiable, INotifyPropertyChanged, new()
     {
-
         #region Members
 
         /// <inheritdoc />

@@ -2,6 +2,7 @@
 using Microsoft.Practices.Unity;
 using My.CoachManager.Presentation.Core;
 using My.CoachManager.Presentation.Modules.Administration.Views;
+using My.CoachManager.Presentation.Modules.Shared.Interfaces;
 using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
@@ -29,6 +30,9 @@ namespace My.CoachManager.Presentation.Modules.Administration
             _container.RegisterTypeForNavigation<SeasonsListView>();
             _container.RegisterTypeForNavigation<CategoriesListView>();
             _container.RegisterTypeForNavigation<PlayersListView>();
+
+            // Register dialog views
+            _container.RegisterType<IPlayerEditView, PlayerEditView>(new ContainerControlledLifetimeManager());
         }
     }
 }

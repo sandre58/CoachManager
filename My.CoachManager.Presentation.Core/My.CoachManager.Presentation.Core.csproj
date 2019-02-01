@@ -101,6 +101,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Constants\ParametersConstants.cs" />
+    <Compile Include="Interfaces\IFrameworkElement.cs" />
     <Compile Include="Enums\SelectionMode.cs" />
     <Compile Include="Events\ToggleSettingsRequestEvent.cs" />
     <Compile Include="Events\UpdateStatusBarMessageRequestEvent.cs" />
