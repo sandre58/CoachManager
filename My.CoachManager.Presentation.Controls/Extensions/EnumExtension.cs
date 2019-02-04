@@ -1,9 +1,8 @@
-﻿using System;
+﻿using My.CoachManager.CrossCutting.Core.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Markup;
-using My.CoachManager.CrossCutting.Core.Extensions;
-using My.CoachManager.CrossCutting.Core.Helpers;
 
 namespace My.CoachManager.Presentation.Controls.Extensions
 {
@@ -85,7 +84,7 @@ namespace My.CoachManager.Presentation.Controls.Extensions
                 Type invalidEnumType = value.Select(v => Nullable.GetUnderlyingType(v.GetType()) ?? v.GetType()).FirstOrDefault(e => e.IsEnum == false || e != EnumType);
                 if (invalidEnumType != null)
                 {
-                    throw new ArgumentException(StringHelper.InvariantFormat("Wrong type : {0} instead of {1}", invalidEnumType.Name, EnumType.Name));
+                    throw new ArgumentException("Wrong type : {0} instead of {1}".InvariantFormat(invalidEnumType.Name, EnumType.Name));
                 }
 
                 _enumsToExclude = value;

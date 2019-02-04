@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.Domain.Core;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace My.CoachManager.Domain.Entities
 {
@@ -20,6 +21,8 @@ namespace My.CoachManager.Domain.Entities
             Variables = new List<string>();
             Methods = new List<string>();
             Stages = new List<Stage>();
+            Categories = new List<Category>();
+            Type = ExerciceConstants.DefaultType;
         }
 
         /// <summary>
@@ -34,7 +37,7 @@ namespace My.CoachManager.Domain.Entities
         public virtual string Theme { get; set; }
 
         /// <summary>
-        /// Gets or sets the stage.
+        /// Gets or sets the stages.
         /// </summary>
         public ICollection<Stage> Stages { get; set; }
 
@@ -62,6 +65,11 @@ namespace My.CoachManager.Domain.Entities
         /// Gets or sets the variables.
         /// </summary>
         public ICollection<string> Methods { get; set; }
+
+        /// <summary>
+        /// Gets or sets the categories.
+        /// </summary>
+        public ICollection<Category> Categories { get; set; }
 
         /// <summary>
         /// Gets or sets the duration.

@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.Domain.Core;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace My.CoachManager.Domain.Entities
 {
@@ -18,6 +19,7 @@ namespace My.CoachManager.Domain.Entities
         {
             Attendances = new List<TrainingAttendance>();
             Exercices = new List<Exercice>();
+            Stage = ExerciceConstants.DefaultStage;
         }
 
         /// <summary>
@@ -61,7 +63,7 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the stage.
         /// </summary>
-        public virtual Stage Stage { get; set; }
+        public Stage Stage { get; set; }
 
         /// <summary>
         /// Gets or sets the training attendances.

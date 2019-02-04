@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - Home|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +43,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - Merial|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -50,6 +53,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - Modis|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -59,6 +63,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
@@ -156,49 +161,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LoggerProvider.cs" />
-    <Compile Include="Migrations\20180810095106_CreateDatabase.cs" />
-    <Compile Include="Migrations\20180810095106_CreateDatabase.designer.cs">
-      <DependentUpon>20180810095106_CreateDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20181212082210_Positions.cs" />
-    <Compile Include="Migrations\20181212082210_Positions.designer.cs">
-      <DependentUpon>20181212082210_Positions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20181214133429_Positions2.cs" />
-    <Compile Include="Migrations\20181214133429_Positions2.designer.cs">
-      <DependentUpon>20181214133429_Positions2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20181217091536_Rating.cs" />
-    <Compile Include="Migrations\20181217091536_Rating.designer.cs">
-      <DependentUpon>20181217091536_Rating.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190107094414_Injuries.cs" />
-    <Compile Include="Migrations\20190107094414_Injuries.designer.cs">
-      <DependentUpon>20190107094414_Injuries.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190123154907_Injuries_update.cs" />
-    <Compile Include="Migrations\20190123154907_Injuries_update.designer.cs">
-      <DependentUpon>20190123154907_Injuries_update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190124081938_InjurySeverity.cs" />
-    <Compile Include="Migrations\20190124081938_InjurySeverity.designer.cs">
-      <DependentUpon>20190124081938_InjurySeverity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190124103522_InjuryPlayerId.cs" />
-    <Compile Include="Migrations\20190124103522_InjuryPlayerId.designer.cs">
-      <DependentUpon>20190124103522_InjuryPlayerId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190129100109_TrainingAttendance.cs" />
-    <Compile Include="Migrations\20190129100109_TrainingAttendance.designer.cs">
-      <DependentUpon>20190129100109_TrainingAttendance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190129100307_TrainingAttendance2.cs" />
-    <Compile Include="Migrations\20190129100307_TrainingAttendance2.designer.cs">
-      <DependentUpon>20190129100307_TrainingAttendance2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190130122552_RosterPlayerInTraining.cs" />
-    <Compile Include="Migrations\20190130122552_RosterPlayerInTraining.designer.cs">
-      <DependentUpon>20190130122552_RosterPlayerInTraining.cs</DependentUpon>
+    <Compile Include="Migrations\20190202161614_Initialise.cs" />
+    <Compile Include="Migrations\20190202161614_Initialise.designer.cs">
+      <DependentUpon>20190202161614_Initialise.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DataContextModelSnapshot.cs" />
     <Compile Include="ModelBuilderExtensions.cs" />

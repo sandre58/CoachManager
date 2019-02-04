@@ -6,7 +6,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using My.CoachManager.CrossCutting.Core.Helpers;
 
 namespace My.CoachManager.CrossCutting.Core.Configurations
 {
@@ -124,13 +123,6 @@ namespace My.CoachManager.CrossCutting.Core.Configurations
         /// <param name="fullPath">The full path of the configuration file.</param>
         protected static void LoadConfigurationFromFile(string key, string fullPath)
         {
-            ParameterHelper.Requires<NullReferenceException>(
-                !string.IsNullOrWhiteSpace(key),
-                "Could not load the configuration with null Key.");
-            ParameterHelper.Requires<NullReferenceException>(
-                !string.IsNullOrWhiteSpace(fullPath),
-                "Could not load the configuration with null full Path.");
-
             if (!Container.Keys.Contains(key))
             {
                 var configFileMap = new ExeConfigurationFileMap { ExeConfigFilename = fullPath };
@@ -255,10 +247,6 @@ namespace My.CoachManager.CrossCutting.Core.Configurations
         /// <returns>AppSetting value for the given key.</returns>
         private static T GetAppSettingFromConfiguration<T>(string appSettingKeyName)
         {
-            ParameterHelper.Requires<NullReferenceException>(
-                !string.IsNullOrWhiteSpace(appSettingKeyName),
-                "Could not load the configuration with null appSettingKeyName.");
-
             // check if exists container containing the app setting key
             if (!Container.Any(container => IsGoodAppSettingConfiguration<T>(container, appSettingKeyName)))
             {
@@ -282,10 +270,6 @@ namespace My.CoachManager.CrossCutting.Core.Configurations
         /// <param name="value">Value to set for AppSetting key.</param>
         private static void SetAppSettingFromConfiguration<T>(string appSettingKeyName, T value)
         {
-            ParameterHelper.Requires<NullReferenceException>(
-                !string.IsNullOrWhiteSpace(appSettingKeyName),
-                "Could not load the configuration with null appSettingKeyName.");
-
             // Gets the first container defining
             bool existsExactConfiguration = Container.Any(container => IsGoodAppSettingConfiguration<T>(container, appSettingKeyName, true, true));
             bool existsConfiguration = existsExactConfiguration ? existsExactConfiguration : Container.Any(container => IsGoodAppSettingConfiguration<T>(container, appSettingKeyName, true, false));
@@ -327,10 +311,6 @@ namespace My.CoachManager.CrossCutting.Core.Configurations
         /// </exception>
         private static string GetConnectionStringFromConfiguration(string connectionStringName)
         {
-            ParameterHelper.Requires<NullReferenceException>(
-                !string.IsNullOrWhiteSpace(connectionStringName),
-                "Could not load the configuration with null connectionStringName.");
-
             if (!Container.Any(container => IsGoodConnectionStringConfiguration(container, connectionStringName)))
             {
                 Trace.TraceError("Connection String key=\"{0}\" not found", connectionStringName);
@@ -407,10 +387,6 @@ namespace My.CoachManager.CrossCutting.Core.Configurations
         private static TConfig GetConfigSectionFromConfiguration<TConfig>(string configSectionName)
             where TConfig : ConfigurationSection
         {
-            ParameterHelper.Requires<NullReferenceException>(
-                !string.IsNullOrWhiteSpace(configSectionName),
-                "Could not load the configuration with null configSectionName.");
-
             return GetAllConfigSectionFromConfiguration<TConfig>(configSectionName).First().Value;
         }
 
@@ -426,10 +402,6 @@ namespace My.CoachManager.CrossCutting.Core.Configurations
         private static IDictionary<string, TConfig> GetAllConfigSectionFromConfiguration<TConfig>(string configSectionName)
             where TConfig : ConfigurationSection
         {
-            ParameterHelper.Requires<NullReferenceException>(
-                !string.IsNullOrWhiteSpace(configSectionName),
-                "Could not load the configuration with null configSectionName.");
-
             var result = new Dictionary<string, TConfig>();
 
             var validConfigurationFile = Container.Where(container => IsGoodSectionConfiguration<TConfig>(container, configSectionName));

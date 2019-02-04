@@ -1,28 +1,47 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using My.CoachManager.CrossCutting.Core.Constants;
+using My.CoachManager.CrossCutting.Core.Enums;
+using My.CoachManager.CrossCutting.Core.Extensions;
+using My.CoachManager.CrossCutting.Core.Generators;
+using My.CoachManager.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using My.CoachManager.CrossCutting.Core.Enums;
-using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Infrastructure.Data
 {
     public static class ModelBuilderExtensions
     {
+        private const int NbPlayers = 150;
+        private const int NbRosters = 5;
+
         /// <summary>
         /// Seeds data.
         /// </summary>
         /// <param name="modelBuilder"></param>
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Category>().HasData(GetCategories().ToArray());
+            var categories = GetCategories().ToArray();
+            var players = GetPlayers(categories, NbPlayers).ToArray();
+            var addresses = GetAddresses(NbPlayers).ToArray();
+            var contacts = GetContacts(players).ToArray();
+            var playerPositions = GetPlayerPositions(players).ToArray();
+            var rosters = GetRosters(categories, NbRosters).ToArray();
+            var squads = GetSquads(rosters).ToArray();
+            var rosterPlayers = GetRosterPlayers(players, rosters, squads).ToArray();
+
+            modelBuilder.Entity<Category>().HasData(categories);
             modelBuilder.Entity<Position>().HasData(GetPositions().ToArray());
             modelBuilder.Entity<Season>().HasData(GetSeasons().ToArray());
             modelBuilder.Entity<Country>().HasData(GetCountries().ToArray());
-            modelBuilder.Entity<Address>().HasData(GetAddresses().ToArray());
-            modelBuilder.Entity<Player>().HasData(GetPlayers().ToArray());
-            modelBuilder.Entity<Email>().HasData(GetContacts().OfType<Email>().ToArray());
-            modelBuilder.Entity<Phone>().HasData(GetContacts().OfType<Phone>().ToArray());
+            modelBuilder.Entity<Address>().HasData(addresses);
+            modelBuilder.Entity<Player>().HasData(players);
+            modelBuilder.Entity<Email>().HasData(contacts.OfType<Email>().ToArray());
+            modelBuilder.Entity<Phone>().HasData(contacts.OfType<Phone>().ToArray());
+            modelBuilder.Entity<PlayerPosition>().HasData(playerPositions);
+            modelBuilder.Entity<Roster>().HasData(rosters);
+            modelBuilder.Entity<Squad>().HasData(squads);
+            modelBuilder.Entity<RosterPlayer>().HasData(rosterPlayers);
             modelBuilder.Entity<User>().HasData(GetUsers().ToArray());
         }
 
@@ -364,44 +383,35 @@ namespace My.CoachManager.Infrastructure.Data
         /// <summary>
         /// Seeds players.
         /// </summary>
-        private static IList<Player> GetPlayers()
+        private static IList<Player> GetPlayers(IList<Category> categories, int nbPlayers)
         {
-            var result = new List<Player>
+            var result = new List<Player>();
+            for (int i = 1; i <= nbPlayers; i++)
             {
-            new Player()
-            {
-                Id = 1,
-                CategoryId = 13,
-                Birthdate = new DateTime(1989, 12, 5),
-                FromDate = new DateTime(2007, 12, 7),
-                CountryId = 76,
-                FirstName = "Stéphane",
-                Gender = GenderType.Female,
-                LastName = "André",
-                Laterality = Laterality.LeftHander,
-                PlaceOfBirth = "Nevers",
-                ShoesSize = 44,
-                Size = "L",
-                Height = 175,
-                Weight = 75
-            },
+                var year = RandomGenerator.Int(1970, 2013);
+                var gender = RandomGenerator.Enum<GenderType>();
+                var player = new Player()
+                {
+                    Id = i,
+                    AddressId = i,
+                    CategoryId = GetCategoryIdFromYear(categories, year),
+                    Birthdate = new DateTime(year, RandomGenerator.Int(1, 12), RandomGenerator.Int(1, 27)),
+                    FromDate = new DateTime(RandomGenerator.Int(year + 6, DateTime.Today.Year - 1), 8, 1),
+                    CountryId = 76,
+                    FirstName = NameGenerator.GenerateFirstName(gender).FirstCharToUpper(),
+                    Gender = gender,
+                    LastName = NameGenerator.GenerateLastName().FirstCharToUpper(),
+                    Laterality = RandomGenerator.Enum<Laterality>(),
+                    PlaceOfBirth = RandomGenerator.String2(5, 20).FirstCharToUpper(),
+                    ShoesSize = RandomGenerator.Number(30, 50),
+                    Height = RandomGenerator.Number(130, 200),
+                    Weight = RandomGenerator.Number(40, 100),
+                    Size = RandomGenerator.ArrayElement(PlayerConstants.DefaultSizes),
+                    LicenseNumber = string.Join("", RandomGenerator.Digits(10))
+                };
 
-            new Player()
-            {
-                Id = 2,
-                CategoryId = 3,
-                Birthdate = new DateTime(1986, 12, 4),
-                AddressId = 1,
-                CountryId = 76,
-                FirstName = "Vincent",
-                Gender = GenderType.Male,
-                LastName = "Sourdeix",
-                Laterality = Laterality.RightHander,
-                PlaceOfBirth = "Tulle",
-                ShoesSize = 42,
-                Size = "L",
-                LicenseNumber = "123456789"
-            }};
+                result.Add(player);
+            }
 
             return result;
         }
@@ -409,18 +419,21 @@ namespace My.CoachManager.Infrastructure.Data
         /// <summary>
         /// Seeds addresses.
         /// </summary>
-        private static IList<Address> GetAddresses()
+        private static IList<Address> GetAddresses(int nbPlayers)
         {
-            var result = new List<Address>
+            var result = new List<Address>();
+            for (int i = 1; i <= nbPlayers; i++)
             {
-                new Address()
+                var address = new Address
                 {
-                    Id = 1,
-                    Row1 = "Impasse du Babory",
-                    PostalCode = "63270",
-                    City = "Vic le comte"
-                }
-            };
+                    Id = i,
+                    Row1 = "Rue " + i,
+                    PostalCode = RandomGenerator.String2(5, "0123456789"),
+                    City = RandomGenerator.String2(5, 20).FirstCharToUpper()
+                };
+
+                result.Add(address);
+            }
 
             return result;
         }
@@ -428,60 +441,167 @@ namespace My.CoachManager.Infrastructure.Data
         /// <summary>
         /// Seeds contacts.
         /// </summary>
-        private static IList<Contact> GetContacts()
+        private static IList<Contact> GetContacts(IList<Player> players)
         {
-            var result = new List<Contact>
+            var id = 1;
+            var result = new List<Contact>();
+            foreach (var player in players)
             {
-                new Email
-                {
-                    Id = 1,
-                    PersonId = 1,
-                    Label = "Test",
-                    Default = true,
-                    Value = "andre.cs2i@gmail.com"
-                },
-                new Email
-                {
-                    Id = 2,
-                    PersonId = 1,
-                    Label = "Test2",
-                    Default = false,
-                    Value = "vincentsourdeix@gmail.com"
-                },
-                new Phone
-                {
-                    Id = 3,
-                    PersonId = 1,
-                    Label = "Test",
-                    Default = true,
-                    Value = "0664411391"
-                },
+                var nbPhones = RandomGenerator.Int(0, 3);
 
-                new Email
+                for (int i = 0; i < nbPhones; i++)
                 {
-                    Id = 4,
-                    PersonId = 2,
-                    Label = "Principale",
-                    Default = true,
-                    Value = "visourdeix@gmail.com"
-                },
-                new Email
-                {
-                    Id = 5,
-                    PersonId = 2,
-                    Label = "Pub",
-                    Default = false,
-                    Value = "vincentsourdeix@gmail.com"
-                },
-                new Phone
-                {
-                    Id = 6,
-                    PersonId = 2,
-                    Label = "Portable",
-                    Default = true,
-                    Value = "0679189256"
+                    var phone = new Phone
+                    {
+                        Id = id,
+                        PersonId = player.Id,
+                        Label = string.Empty,
+                        Default = RandomGenerator.Bool(),
+                        Value = RandomGenerator.PhoneNumber()
+                    };
+
+                    id++;
+                    result.Add(phone);
                 }
-            };
+
+                var nbMails = RandomGenerator.Int(0, 3);
+
+                for (int i = 0; i < nbMails; i++)
+                {
+                    var mail = new Email
+                    {
+                        Id = id,
+                        PersonId = player.Id,
+                        Label = string.Empty,
+                        Default = RandomGenerator.Bool(),
+                        Value = player.FirstName.ToLower() + "." + player.LastName.ToLower() + i + "@coachmanager.com"
+                    };
+
+                    id++;
+                    result.Add(mail);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Seeds contacts.
+        /// </summary>
+        private static IList<PlayerPosition> GetPlayerPositions(IList<Player> players)
+        {
+            var id = 1;
+            var result = new List<PlayerPosition>();
+            foreach (var player in players)
+            {
+                var nbPositions = RandomGenerator.Int(1, 4);
+
+                for (int i = 0; i < nbPositions; i++)
+                {
+                    var positionId = RandomGenerator.Int(1, 17);
+
+                    if (!result.Any(x => x.PlayerId == player.Id && x.PositionId == positionId))
+                    {
+                        var isNatural = RandomGenerator.Bool();
+                        var position = new PlayerPosition
+                        {
+                            Id = id,
+                            PlayerId = player.Id,
+                            IsNatural = isNatural,
+                            PositionId = positionId,
+                            Rating = isNatural
+                                ? PositionConstants.MaxRating
+                                : RandomGenerator.Int(1, PositionConstants.MaxRating)
+                        };
+
+                        id++;
+                        result.Add(position);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Seeds players.
+        /// </summary>
+        private static IList<Roster> GetRosters(IList<Category> categories, int nbRosters)
+        {
+            var result = new List<Roster>();
+            for (int i = 1; i <= nbRosters; i++)
+            {
+                var seasonId = RandomGenerator.Number(1, 2);
+                var categoryId =
+                    RandomGenerator.ListItem(categories.Where(x => !result.Any(r => r.SeasonId == seasonId && r.CategoryId == x.Id)).ToList()).Id;
+                var roster = new Roster
+                {
+                    Id = i,
+                    CategoryId = categoryId,
+                    Name = "Effectif " + i,
+                    SeasonId = seasonId,
+                };
+
+                result.Add(roster);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Seeds players.
+        /// </summary>
+        private static IList<Squad> GetSquads(IList<Roster> rosters)
+        {
+            var id = 1;
+            var result = new List<Squad>();
+            foreach (var roster in rosters)
+            {
+                var nbSquads = RandomGenerator.Int(1, 3);
+
+                for (int i = 1; i <= nbSquads; i++)
+                {
+                    var squad = new Squad
+                    {
+                        Id = id,
+                        RosterId = roster.Id,
+                        Name = "Equipe" + i
+                    };
+
+                    id++;
+                    result.Add(squad);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Seeds contacts.
+        /// </summary>
+        private static IList<RosterPlayer> GetRosterPlayers(IList<Player> players, IList<Roster> rosters, IList<Squad> squads)
+        {
+            var id = 1;
+            var result = new List<RosterPlayer>();
+            foreach (var player in players)
+            {
+                var rosterId = RandomGenerator.ListItem(rosters).Id;
+                var squadId = RandomGenerator.ListItem(squads.Where(x => x.RosterId == rosterId).ToList()).Id;
+
+                var rosterPlayer = new RosterPlayer
+                {
+                    Id = id,
+                    RosterId = rosterId,
+                    PlayerId = player.Id,
+                    IsMutation = RandomGenerator.Bool(),
+                    LicenseState = RandomGenerator.Enum<LicenseState>(),
+                    Number = RandomGenerator.Number(1, 30),
+                    SquadId = squadId
+                };
+
+                id++;
+                result.Add(rosterPlayer);
+            }
 
             return result;
         }
@@ -498,6 +618,12 @@ namespace My.CoachManager.Infrastructure.Data
             };
 
             return result;
+        }
+
+        private static int GetCategoryIdFromYear(IList<Category> categories, int year)
+        {
+            var cats = categories.Where(x => x.Year != null && x.Year.Value >= year).OrderBy(x => x.Year.Value).ToList();
+            return cats.Any() ? cats.First().Id : 1;
         }
     }
 }

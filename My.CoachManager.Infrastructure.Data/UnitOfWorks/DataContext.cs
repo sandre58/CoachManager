@@ -1,10 +1,4 @@
-﻿using My.CoachManager.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading;
-using CommonServiceLocator;
+﻿using CommonServiceLocator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -14,7 +8,13 @@ using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.Domain.Core;
+using My.CoachManager.Domain.Entities;
 using My.CoachManager.Infrastructure.Data.Core;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Threading;
 using ILogger = My.CoachManager.CrossCutting.Logging.ILogger;
 
 namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
@@ -76,7 +76,6 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             // Address
             modelBuilder.Entity<Address>()
                 .HasOne(s => s.Country)
@@ -116,7 +115,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 .WithMany(x => x.Contacts)
                 .HasForeignKey(x => x.PersonId)
                 .OnDelete(DeleteBehavior.Cascade);
-            
+
             modelBuilder.Entity<Contact>()
                 .Property(x => x.CreatedDate)
                 .HasDefaultValueSql("getdate()");
@@ -264,6 +263,10 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Training>()
+                .Property(x => x.Stage)
+                .HasDefaultValue(ExerciceConstants.DefaultStage);
+
+            modelBuilder.Entity<Training>()
                 .Property(x => x.CreatedDate)
                 .HasDefaultValueSql("getdate()");
 
@@ -290,6 +293,47 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
 
             // ExerciceTemplate
             modelBuilder.Entity<ExerciceTemplate>()
+                .Property(e => e.Goals)
+                .HasConversion(
+                    v => string.Join(";", v),
+                    v => v.Split(';'));
+
+            modelBuilder.Entity<ExerciceTemplate>()
+                .Property(e => e.Variables)
+                .HasConversion(
+                    v => string.Join(";", v),
+                    v => v.Split(';'));
+
+            modelBuilder.Entity<ExerciceTemplate>()
+                .Property(e => e.Instructions)
+                .HasConversion(
+                    v => string.Join(";", v),
+                    v => v.Split(';'));
+
+            modelBuilder.Entity<ExerciceTemplate>()
+                .Property(e => e.Methods)
+                .HasConversion(
+                    v => string.Join(";", v),
+                    v => v.Split(';'));
+
+            modelBuilder.Entity<ExerciceTemplate>()
+                .Property(e => e.Stages)
+                .HasConversion(
+                    v => string.Join(";", v.Select(x => (int)x)),
+                    v => v.Split(';').Select(x => (Stage)Enum.Parse(typeof(Stage), x)).ToList());
+
+            modelBuilder.Entity<ExerciceTemplate>()
+                .Property(x => x.Type)
+                .HasDefaultValue(ExerciceConstants.DefaultType);
+
+            modelBuilder.Entity<ExerciceTemplate>()
+                .Property(x => x.Duration)
+                .HasDefaultValue(ExerciceConstants.DefaultDuration);
+
+            modelBuilder.Entity<ExerciceTemplate>()
+                .HasMany(x => x.Categories);
+
+            modelBuilder.Entity<ExerciceTemplate>()
                 .Property(x => x.CreatedDate)
                 .HasDefaultValueSql("getdate()");
 
@@ -307,20 +351,36 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Exercice>()
-                .Property<string>("Goals")
-                .HasField("_goals");
+                .Property(e => e.Goals)
+                .HasConversion(
+                    v => string.Join(";", v),
+                    v => v.Split(';'));
 
             modelBuilder.Entity<Exercice>()
-                .Property<string>("Variables")
-                .HasField("_variables");
+                .Property(e => e.Variables)
+                .HasConversion(
+                    v => string.Join(";", v),
+                    v => v.Split(';'));
 
             modelBuilder.Entity<Exercice>()
-                .Property<string>("Instructions")
-                .HasField("_instructions");
+                .Property(e => e.Instructions)
+                .HasConversion(
+                    v => string.Join(";", v),
+                    v => v.Split(';'));
 
             modelBuilder.Entity<Exercice>()
-                .Property<string>("Methods")
-                .HasField("_methods");
+                .Property(e => e.Methods)
+                .HasConversion(
+                    v => string.Join(";", v),
+                    v => v.Split(';'));
+
+            modelBuilder.Entity<Exercice>()
+                .Property(x => x.Type)
+                .HasDefaultValue(ExerciceConstants.DefaultType);
+
+            modelBuilder.Entity<Exercice>()
+                .Property(x => x.Duration)
+                .HasDefaultValue(ExerciceConstants.DefaultDuration);
 
             modelBuilder.Entity<Exercice>()
                 .Property(x => x.CreatedDate)
@@ -338,7 +398,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             modelBuilder.Entity<User>()
                 .Property(x => x.CreatedDate)
                 .HasDefaultValueSql("getdate()");
-            
+
             // Seed
             modelBuilder.Seed();
 
@@ -370,7 +430,6 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                         HandleException(ex);
                     }
                 }
-                
             });
 
             return result;
@@ -393,7 +452,6 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             {
                 if ((dbUpdateEx.InnerException is SqlException sqlException))
                 {
-
                     ServiceLocator.Current.GetInstance<ILogger>().Error(sqlException);
                     switch (sqlException.Number)
                     {
@@ -450,7 +508,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             where TEntity : class
         {
             Update(item);
-       }
+        }
 
         #endregion ----- IQueryableUnitOfWork Methods -----
 
@@ -624,7 +682,6 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             return newValue;
         }
 
-        #endregion
-
+        #endregion Methods
     }
 }

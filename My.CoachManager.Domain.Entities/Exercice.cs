@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.Domain.Core;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace My.CoachManager.Domain.Entities
 {
@@ -11,11 +11,6 @@ namespace My.CoachManager.Domain.Entities
     /// </summary>
     public class Exercice : Entity, IOrderable
     {
-        private string _goals;
-        private string _instructions;
-        private string _variables;
-        private string _methods;
-
         /// <summary>
         /// Initalize a new instance of <see cref="Exercice"/>.
         /// </summary>
@@ -25,6 +20,7 @@ namespace My.CoachManager.Domain.Entities
             Instructions = new List<string>();
             Variables = new List<string>();
             Methods = new List<string>();
+            Type = ExerciceConstants.DefaultType;
         }
 
         /// <summary>
@@ -41,7 +37,7 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the template id.
         /// </summary>
-        public int TemplateId { get; set; }
+        public int? TemplateId { get; set; }
 
         /// <summary>
         /// Gets or sets the template.
@@ -68,42 +64,22 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the goals.
         /// </summary>
-        [NotMapped]
-        public ICollection<string> Goals
-        {
-            get => _goals.Split(';');
-            set => _goals = string.Join(";", value);
-        }
+        public ICollection<string> Goals { get; set; }
 
         /// <summary>
         /// Gets or sets the instructions.
         /// </summary>
-        [NotMapped]
-        public ICollection<string> Instructions
-        {
-            get => _instructions.Split(';');
-            set => _instructions = string.Join(";", value);
-        }
+        public ICollection<string> Instructions { get; set; }
 
         /// <summary>
         /// Gets or sets the variables.
         /// </summary>
-        [NotMapped]
-        public ICollection<string> Variables
-        {
-            get => _variables.Split(';');
-            set => _variables = string.Join(";", value);
-        }
+        public ICollection<string> Variables { get; set; }
 
         /// <summary>
         /// Gets or sets the variables.
         /// </summary>
-        [NotMapped]
-        public ICollection<string> Methods
-        {
-            get => _methods.Split(';');
-            set => _methods = string.Join(";", value);
-        }
+        public ICollection<string> Methods { get; set; }
 
         /// <summary>
         /// Gets or sets the duration.

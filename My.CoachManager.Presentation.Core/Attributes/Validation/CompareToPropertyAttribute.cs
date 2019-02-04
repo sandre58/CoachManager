@@ -1,7 +1,7 @@
-﻿using System;
+﻿using My.CoachManager.CrossCutting.Core.Enums;
+using My.CoachManager.CrossCutting.Core.Extensions;
+using System;
 using System.ComponentModel.DataAnnotations;
-using My.CoachManager.CrossCutting.Core.Enums;
-using My.CoachManager.CrossCutting.Core.Helpers;
 
 namespace My.CoachManager.Presentation.Core.Attributes.Validation
 {
@@ -56,7 +56,7 @@ namespace My.CoachManager.Presentation.Core.Attributes.Validation
 
             if (otherValue == null) return null;
 
-            if (!ComparableHelper.Compare(value as IComparable, otherValue as IComparable, Operator))
+            if (!(value as IComparable).Compare(otherValue as IComparable, Operator))
             {
                 return new ValidationResult(FormatErrorMessage(ErrorMessage));
             }
