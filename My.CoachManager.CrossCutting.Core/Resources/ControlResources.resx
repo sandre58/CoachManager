@@ -162,6 +162,12 @@
   <data name="CountSelectedItemsToUpper" xml:space="preserve">
     <value>{0} ELEMENT(S) SELECTIONNE(S)</value>
   </data>
+  <data name="CreatedBy" xml:space="preserve">
+    <value>Créé par :</value>
+  </data>
+  <data name="CreatedFrom" xml:space="preserve">
+    <value>Créé le :</value>
+  </data>
   <data name="Creation" xml:space="preserve">
     <value>Création</value>
   </data>
@@ -188,6 +194,12 @@
   </data>
   <data name="Minimize" xml:space="preserve">
     <value>Réduire</value>
+  </data>
+  <data name="ModifiedBy" xml:space="preserve">
+    <value>Modifié par :</value>
+  </data>
+  <data name="ModifiedFrom" xml:space="preserve">
+    <value>Modifié le :</value>
   </data>
   <data name="ModifyImage" xml:space="preserve">
     <value>Modifier l'image</value>

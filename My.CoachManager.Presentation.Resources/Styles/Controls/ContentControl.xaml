@@ -12,6 +12,7 @@
         <ResourceDictionary Source="CommandButton.xaml" />
         <ResourceDictionary Source="Button.xaml" />
         <ResourceDictionary Source="Separator.xaml" />
+        <ResourceDictionary Source="ScrollBar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type ContentControl}">
@@ -537,6 +538,9 @@
     </DataTemplate>
 
     <Style TargetType="{x:Type controls:HeaderPanel}" BasedOn="{StaticResource {x:Type ContentControl}}">
+        <Style.Resources>
+            <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource SmallScrollBarStyle}" />
+        </Style.Resources>
         <Setter Property="Background" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="FontSize" Value="{StaticResource NormalFontSize}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Transparent}" />

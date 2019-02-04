@@ -21,8 +21,8 @@
                 <ControlTemplate TargetType="{x:Type controls:WorkspaceDialog}">
                     <Border Background="{TemplateBinding OverlayBackground}">
                         <Border VerticalAlignment="Center" HorizontalAlignment="Center"
-                                Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                                Margin="{StaticResource MediumMargin}" Effect="{StaticResource CenterShadow}">
+                                    Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                                    Margin="{StaticResource MediumMargin}" Effect="{StaticResource CenterShadow}">
                             <Grid>
                                 <ContentPresenter Focusable="False" />
                             </Grid>

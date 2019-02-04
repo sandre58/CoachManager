@@ -22,12 +22,12 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <!-- Is Injuried -->
-        <controls:HeaderPanel Grid.Column="0" Grid.Row="0" Header="{x:Static resources:RosterPlayerResources.Injuried}"
+        <controls:HeaderPanel Grid.Column="0" Grid.Row="0" Header="{x:Static resources:RosterPlayerResources.Injuried}" MinHeight="200"  MinWidth="350"
                               Visibility="{Binding Item.IsInjured, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource BooleanToVisibilityConverter}}">
             <controls:HeaderPanel.Style>
                 <Style TargetType="{x:Type controls:HeaderPanel}" BasedOn="{StaticResource {x:Type controls:HeaderPanel}}">
@@ -64,7 +64,7 @@
         </controls:HeaderPanel>
 
         <!-- Is not injuried -->
-        <controls:HeaderPanel Grid.Column="0" Grid.Row="0" Header="{x:Static resources:RosterPlayerResources.NotInjuried}" Style="{StaticResource PositiveHeaderPanelStyle}"
+        <controls:HeaderPanel Grid.Column="0" Grid.Row="0" Header="{x:Static resources:RosterPlayerResources.NotInjuried}" Style="{StaticResource PositiveHeaderPanelStyle}" MinHeight="130" MinWidth="350"
                               Visibility="{Binding Item.IsInjured, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
             <StackPanel>
                 <TextBlock Text="{x:Static resources:RosterPlayerResources.InFettle}" Style="{StaticResource HeaderStyle}" Margin="{StaticResource MediumVerticalMargin}" />
@@ -72,7 +72,7 @@
         </controls:HeaderPanel>
 
         <!-- Injuries -->
-        <controls:HeaderPanel Grid.Column="0" Grid.Row="1" Header="{x:Static resources:RosterPlayerResources.InjuriesHistory}">
+        <controls:HeaderPanel Grid.Column="0" Grid.Row="1" Header="{x:Static resources:RosterPlayerResources.InjuriesHistory}" MinHeight="200" MinWidth="400">
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -146,7 +146,7 @@
         </controls:HeaderPanel>
 
         <!-- Medical -->
-        <controls:HeaderPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Header="{x:Static resources:RosterPlayerResources.Medical}">
+        <controls:HeaderPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Header="{x:Static resources:RosterPlayerResources.Medical}" MinHeight="550"  MinWidth="350">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*" />

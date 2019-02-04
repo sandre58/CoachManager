@@ -16,9 +16,9 @@
              xmlns:resources="clr-namespace:My.CoachManager.Presentation.Modules.Training.Resources"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:TrainingAttendancesEditViewModel}"
-             d:DesignHeight="700" d:DesignWidth="950">
+             MaxHeight="700" MaxWidth="970">
 
-    <controls:WorkspaceView Height="700" Width="950">
+    <controls:WorkspaceView ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
         <controls:ExtendedListView ItemsSource="{Binding Item.Attendances, IsAsync=True}" ItemContainerStyle="{StaticResource NotSelectableListViewItemStyle}" CanSort="True">
             <controls:ExtendedListView.View>

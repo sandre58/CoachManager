@@ -22,7 +22,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Is Injuried -->
-        <controls:HeaderPanel Grid.Column="0" Grid.Row="0" Header="{x:Static resources:RosterPlayerResources.Injuried}"
+        <controls:HeaderPanel Grid.Column="0" Grid.Row="0" Header="{x:Static resources:RosterPlayerResources.Injuried}" MinHeight="200" MinWidth="350"
                               Icon="{StaticResource AmbulanceGeometry}"
                               Command="{Binding GotToTabCommand}"
                               CommandParameter="2"
@@ -63,7 +63,7 @@
 
         <!-- Is not injuried -->
         <controls:HeaderPanel Grid.Column="0" Grid.Row="0" Header="{x:Static resources:RosterPlayerResources.NotInjuried}" Style="{StaticResource PositiveHeaderPanelStyle}"
-                              Icon="{StaticResource HeartGeometry}"
+                              Icon="{StaticResource HeartGeometry}" MinHeight="130" MinWidth="350"
                               Command="{Binding GotToTabCommand}"
                               CommandParameter="2"
                               Visibility="{Binding Item.IsInjured, IsAsync=True, FallbackValue=Hidden, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
@@ -73,7 +73,7 @@
         </controls:HeaderPanel>
 
         <!-- Positions -->
-        <controls:HeaderPanel Grid.Column="0" Grid.Row="1"
+        <controls:HeaderPanel Grid.Column="0" Grid.Row="1" MinHeight="320" MinWidth="350"
                               Header="{x:Static resources:RosterPlayerResources.Positions}"
                               Icon="{StaticResource TargetGeometry}"
                               Command="{Binding GotToTabCommand}"

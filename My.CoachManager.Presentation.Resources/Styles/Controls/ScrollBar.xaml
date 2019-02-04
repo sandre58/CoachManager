@@ -57,14 +57,14 @@
     <Style x:Key="ScrollBarLineLeftButtonStyle" TargetType="{x:Type RepeatButton}" BasedOn="{StaticResource ScrollBarLineDownButtonStyle}">
         <Setter Property="LayoutTransform">
             <Setter.Value>
-                <RotateTransform Angle="-90" />
+                <RotateTransform Angle="90" />
             </Setter.Value>
         </Setter>
     </Style>
     <Style x:Key="ScrollBarLineRightButtonStyle" TargetType="{x:Type RepeatButton}" BasedOn="{StaticResource ScrollBarLineDownButtonStyle}">
         <Setter Property="LayoutTransform">
             <Setter.Value>
-                <RotateTransform Angle="90" />
+                <RotateTransform Angle="-90" />
             </Setter.Value>
         </Setter>
     </Style>

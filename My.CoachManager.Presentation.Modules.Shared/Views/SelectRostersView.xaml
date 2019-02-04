@@ -12,7 +12,7 @@
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:SelectRostersViewModel}"
-             Height="700" Width="800">
+             MaxHeight="700" MaxWidth="800">
 
     <controls:WorkspaceView Style="{StaticResource SelectWorkspaceDialogViewStyle}">
 

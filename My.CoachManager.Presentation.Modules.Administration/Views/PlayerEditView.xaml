@@ -16,9 +16,9 @@
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Modules.Administration.ViewModels"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance viewModels:PlayerEditViewModel}"
-             d:DesignHeight="1000" d:DesignWidth="750" MaxHeight="750">
+             d:DesignHeight="600" d:DesignWidth="750">
 
-    <controls:WorkspaceView Padding="0" Width="750" Height="600" HeaderHeight="90">
+    <controls:WorkspaceView Padding="0" HeaderHeight="90">
 
         <controls:WorkspaceView.HeaderTemplate>
             <DataTemplate DataType="viewModels:PlayerEditViewModel">
@@ -32,6 +32,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
@@ -62,6 +63,8 @@
                              Width="{StaticResource SmallLargeWidth}"
                              Text="{Binding Item.LastName, UpdateSourceTrigger=PropertyChanged}"
                              parameters:TextBoxParameters.Watermark="{x:Static entities:PersonResources.LastName}" TabIndex="1" />
+
+                    <controls:Icon Style="{StaticResource ItemInfoIconStyle}" Grid.Column="3"/>
                 </Grid>
             </DataTemplate>
         </controls:WorkspaceView.HeaderTemplate>
@@ -72,31 +75,31 @@
 
             <TabItem Header="{x:Static resources:PlayerResources.Club}"  parameters:ControlParameters.Icon="{StaticResource HomeGeometry}">
                 <AdornerDecorator>
-                    <playerEditView:PlayerClubEditView  TabIndex="2" />
+                    <playerEditView:PlayerClubEditView  TabIndex="2" Height="450" Width="550" />
                 </AdornerDecorator>
             </TabItem>
 
             <TabItem Header="{x:Static resources:PlayerResources.IdCard}" parameters:ControlParameters.Icon="{StaticResource IdCardGeometry}">
                 <AdornerDecorator>
-                    <playerEditView:PlayerIdCardEditView  TabIndex="3" />
+                    <playerEditView:PlayerIdCardEditView  TabIndex="3" Height="450" Width="550" />
                 </AdornerDecorator>
             </TabItem>
 
             <TabItem Header="{x:Static resources:PlayerResources.Contacts}" parameters:ControlParameters.Icon="{StaticResource ContactsGeometry}">
                 <AdornerDecorator>
-                    <playerEditView:PlayerContactsEditView  TabIndex="4" />
+                    <playerEditView:PlayerContactsEditView  TabIndex="4" Height="450" Width="550" />
                 </AdornerDecorator>
             </TabItem>
 
             <TabItem Header="{x:Static resources:PlayerResources.Morphology}" parameters:ControlParameters.Icon="{StaticResource MorphologyGeometry}">
                 <AdornerDecorator>
-                    <playerEditView:PlayerMorphologyEditView TabIndex="5" />
+                    <playerEditView:PlayerMorphologyEditView TabIndex="5" Height="450" Width="550" />
                 </AdornerDecorator>
             </TabItem>
 
             <TabItem Header="{x:Static resources:PlayerResources.Positions}" parameters:ControlParameters.Icon="{StaticResource TargetGeometry}">
                 <AdornerDecorator>
-                    <playerEditView:PlayerPositionsEditView  TabIndex="6" />
+                    <playerEditView:PlayerPositionsEditView  TabIndex="6" Height="450" Width="550" />
                 </AdornerDecorator>
             </TabItem>
         </TabControl>

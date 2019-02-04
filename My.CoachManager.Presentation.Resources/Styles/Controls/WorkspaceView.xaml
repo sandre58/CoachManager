@@ -24,7 +24,62 @@
         <ResourceDictionary Source="../Controls/DataGrid.xaml" />
         <ResourceDictionary Source="../Controls/Badged.xaml" />
         <ResourceDictionary Source="../Controls/Filter.xaml" />
+        <ResourceDictionary Source="../Controls/Icon.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="ItemInfoIconStyle" TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource GeometryBaseIconStyle}">
+        <Setter Property="Content" Value="{StaticResource InformationGeometry}" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Foreground" Value="{DynamicResource IconForeground}" />
+        <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
+        <Setter Property="Visibility" Value="{Binding Mode, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static viewModels:ScreenMode.Edition}}" />
+        <Setter Property="Size" Value="Small" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Vertical">
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal" Margin="{StaticResource DefaultVerticalMargin}">
+                                <TextBlock Text="{x:Static strings:ControlResources.CreatedBy}" Style="{StaticResource ReferenceStyle}" />
+                                <TextBlock Text="{Binding Item.CreatedBy}" Style="{StaticResource ReferenceStyle}" Foreground="{DynamicResource NormalForeground}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{x:Static strings:ControlResources.CreatedFrom}" Style="{StaticResource ReferenceStyle}" />
+                                <TextBlock Text="{Binding Item.CreatedDate, StringFormat={}{0:dd/MM/yyyy}}" Style="{StaticResource ReferenceStyle}" Foreground="{DynamicResource NormalForeground}" />
+                                <TextBlock Text="{x:Static strings:GlobalResources.To}" Style="{StaticResource ReferenceStyle}" />
+                                <TextBlock Text="{Binding Item.CreatedDate, StringFormat={}{0:HH:mm}}" Style="{StaticResource ReferenceStyle}" Foreground="{DynamicResource NormalForeground}" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Separator Margin="{StaticResource MediumVerticalMargin}" />
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{x:Static strings:ControlResources.ModifiedBy}" Style="{StaticResource ReferenceStyle}" />
+                                    <TextBlock Text="{Binding Item.ModifiedBy}" Style="{StaticResource ReferenceStyle}" Foreground="{DynamicResource NormalForeground}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="{StaticResource DefaultVerticalMargin}">
+                                    <TextBlock Text="{x:Static strings:ControlResources.ModifiedFrom}" Style="{StaticResource ReferenceStyle}" />
+                                    <TextBlock Text="{Binding Item.ModifiedDate, StringFormat={}{0:dd/MM/yyyy}}" Style="{StaticResource ReferenceStyle}" Foreground="{DynamicResource NormalForeground}" />
+                                    <TextBlock Text="{x:Static strings:GlobalResources.To}" Style="{StaticResource ReferenceStyle}" />
+                                    <TextBlock Text="{Binding Item.ModifiedDate, StringFormat={}{0:HH:mm}}" Style="{StaticResource ReferenceStyle}" Foreground="{DynamicResource NormalForeground}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                </Grid>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <DataTemplate x:Key="ListHeaderTemplate" DataType="{x:Type interfaces:IListViewModel}">
         <Grid>
@@ -131,7 +186,7 @@
                             </controls:Submenu>
                         </controls:DropDownButton.Submenu>
                     </controls:DropDownButton>
-                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         <ItemsControl ItemsSource="{Binding Filters.Filters}" Focusable="False">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -162,24 +217,23 @@
         </DataTemplate.Triggers>
     </DataTemplate>
 
-    <DataTemplate x:Key="ItemHeaderTemplate" DataType="{x:Type interfaces:IListViewModel}">
+    <DataTemplate x:Key="ItemHeaderTemplate" DataType="{x:Type interfaces:IItemViewModel}">
         <Grid>
         </Grid>
     </DataTemplate>
 
     <Style x:Key="WorkspaceViewBaseStyle" TargetType="{x:Type controls:WorkspaceView}">
-        <Setter Property="MinWidth" Value="320" />
         <Setter Property="ApplicationBarPosition" Value="Bottom" />
         <Setter Property="Padding" Value="5,20,5,5" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="FontSize" Value="{StaticResource NormalFontSize}" />
         <Setter Property="FontFamily" Value="{StaticResource NormalFontFamily}" />
-        <Setter Property="MinHeight" Value="320" />
         <Setter Property="HeaderHeight" Value="{x:Static system:Double.NaN}" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="HeaderBackground" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="ApplicationBarStyle" Value="{StaticResource {x:Type controls:ApplicationBar}}" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
 
         <Setter Property="parameters:ControlParameters.InputBindings">
@@ -203,7 +257,7 @@
                         <!-- Header -->
                         <Grid Grid.Row="0" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HeaderHeight}" Visibility="{TemplateBinding HeaderTemplate, Converter={StaticResource NullToVisibilityConverter}}">
                             <Border Background="{TemplateBinding HeaderBackground}" Focusable="False">
-                                <ContentControl Content="{Binding}" ContentTemplate="{TemplateBinding HeaderTemplate}" VerticalAlignment="Center" />
+                                <ContentControl Content="{Binding}" ContentTemplate="{TemplateBinding HeaderTemplate}" VerticalAlignment="Stretch" />
                             </Border>
                         </Grid>
 
@@ -213,7 +267,7 @@
                                                  Visibility="{TemplateBinding Commands, Converter={StaticResource AnyToVisibilityConverter}}" />
 
                         <!-- Content -->
-                        <ScrollViewer x:Name="Content" Grid.Row="2" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" Margin="{TemplateBinding Padding}">
+                        <ScrollViewer x:Name="Content" Grid.Row="2" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" Margin="{TemplateBinding Padding}">
                             <ContentPresenter />
                         </ScrollViewer>
 
@@ -291,12 +345,6 @@
     <DataTemplate x:Key="EditDialogHeaderTemplate" DataType="{x:Type interfaces:IEditViewModel}">
         <Grid>
 
-            <Grid.Resources>
-                <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
-                    <Setter Property="Foreground" Value="{DynamicResource Dark}" />
-                </Style>
-            </Grid.Resources>
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -305,32 +353,11 @@
 
             <controls:Icon x:Name="Icon" Width="40" Height="40" Size="Custom" Content="{StaticResource ChevronRightGeometry}" Grid.Column="0" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center"
                             Style="{StaticResource EllipseIconBaseStyle}"
+                           Foreground="{DynamicResource NormalForeground}"
                            OverlayBackground="{DynamicResource Dark}" />
             <TextBlock Grid.Column="1" Text="{Binding Title}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Center" Style="{StaticResource HeaderStyle}" />
 
-            <Grid Grid.Column="2" Visibility="{Binding Mode, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static viewModels:ScreenMode.Edition}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
-                <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                    <TextBlock Text="Créé par" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.CreatedBy}" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="le" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.CreatedDate, StringFormat={}{0:dd/MM/yyyy}}" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="à" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.CreatedDate, StringFormat={}{0:HH:mm}}" Style="{StaticResource ReferenceStyle}" />
-                </StackPanel>
-                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                    <TextBlock Text="Modifié par" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.ModifiedBy}" Style="{StaticResource ReferenceStyle}" FontWeight="Bold" />
-                    <TextBlock Text="le" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.ModifiedDate, StringFormat={}{0:dd/MM/yyyy}}" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="à" Style="{StaticResource ReferenceStyle}" />
-                    <TextBlock Text="{Binding Item.ModifiedDate, StringFormat={}{0:HH:mm}}" Style="{StaticResource ReferenceStyle}" />
-                </StackPanel>
-            </Grid>
+            <controls:Icon Style="{StaticResource ItemInfoIconStyle}" Grid.Column="2"/>
         </Grid>
         <DataTemplate.Triggers>
             <DataTrigger Binding="{Binding Mode}" Value="{x:Static viewModels:ScreenMode.Creation}">
@@ -376,6 +403,7 @@
     <Style x:Key="EditWorkspaceDialogViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource WorkspaceViewBaseStyle}">
         <Setter Property="HeaderHeight" Value="70" />
         <Setter Property="HeaderTemplate" Value="{StaticResource EditDialogHeaderTemplate}" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
 
         <Setter Property="parameters:ControlParameters.InputBindings">

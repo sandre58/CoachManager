@@ -14,7 +14,7 @@
              d:DesignHeight="500" d:DesignWidth="800">
 
     <controls:WorkspaceView Style="{StaticResource ItemWorkspaceViewStyle}">
-        <TabControl>
+        <TabControl ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
             <TabItem Header="{x:Static resources:TrainingResources.Attendance}">
                 <views:TrainingAttendanceView />
             </TabItem>

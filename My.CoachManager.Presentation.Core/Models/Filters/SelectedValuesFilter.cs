@@ -52,6 +52,8 @@ namespace My.CoachManager.Presentation.Core.Models.Filters
         /// <value>The compare to.</value>
         public IEnumerable Values { get; set; }
 
+        public bool ShowAll { get; set; } = true;
+
         #endregion Members
 
         /// <summary>

@@ -204,10 +204,10 @@
                                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <controls:PositionsSelector ItemsSource="{Binding Positions}"
                                                                     Margin="{StaticResource DefaultMargin}"
-                                                                    ItemHeight="7" Height="64" Width="48" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                                    ItemHeight="7" Height="60" Width="46" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center"
                                                                     ItemContainerStyle="{StaticResource PlayerPositionStyle}" />
                                     </Grid>
-                                    <TextBlock Text="{Binding NaturalPositions}" />
+                                    <TextBlock Text="{Binding NaturalPositions}" TextWrapping="Wrap" VerticalAlignment="Top" />
                                 </StackPanel>
                             </DataTemplate>
                         </columns:ExtendedGridViewColumn.CellTemplate>

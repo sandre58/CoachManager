@@ -10,8 +10,8 @@
              xmlns:entities="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
              xmlns:extensions="clr-namespace:My.CoachManager.Presentation.Controls.Extensions;assembly=My.CoachManager.Presentation.Controls"
              xmlns:enums="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
-             xmlns:views1="clr-namespace:My.CoachManager.Presentation.Modules.Shared.Views"
-             xmlns:playerEditView="clr-namespace:My.CoachManager.Presentation.Modules.Shared.Views.PlayerEditView">
+             xmlns:playerEditView="clr-namespace:My.CoachManager.Presentation.Modules.Shared.Views.PlayerEditView"
+             xmlns:models="clr-namespace:My.CoachManager.Presentation.Models;assembly=My.CoachManager.Presentation.Models">
 
     <Grid  parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
         <Grid HorizontalAlignment="Stretch">
@@ -21,14 +21,14 @@
             </Grid.ColumnDefinitions>
             <controls:PositionsSelector ItemsSource="{Binding AllPositions}" 
                                         Margin="{StaticResource LargeLeftMargin}"  />
-            <ItemsControl Grid.Column="1" ItemsSource="{Binding Item.Positions}" Focusable="False" IsTabStop="False" >
+            <ItemsControl Grid.Column="1" ItemsSource="{Binding Item.Positions, IsAsync=True}" Focusable="False" IsTabStop="False" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate DataType="models:PlayerPositionModel">
                         <Grid Background="{DynamicResource HeaderBackground}" Margin="{StaticResource DefaultMargin}">
 
                             <Grid.ColumnDefinitions>

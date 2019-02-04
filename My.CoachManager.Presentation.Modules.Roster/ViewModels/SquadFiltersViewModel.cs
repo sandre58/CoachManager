@@ -41,7 +41,7 @@ namespace My.CoachManager.Presentation.Modules.Roster.ViewModels
             AddAllowedFilter(PlayerResources.Position, () => new PlayerPositionFilter("Positions", ComplexComparableOperator.EqualsTo, PositionConstants.MaxRating, PositionConstants.MaxRating, positions));
             AddAllowedFilter(PersonResources.Gender, () => new EnumValuesFilter("Gender", typeof(GenderType)));
             AddAllowedFilter(PersonResources.FromDate, () => new DateFilter("FromDate", ComplexComparableOperator.LessThan, DateTime.Now, DateTime.Now));
-            AddAllowedFilter(PersonResources.Country, () => new SelectedLabelablesFilter("CountryId", countries));
+            AddAllowedFilter(PersonResources.Country, () => new SelectedLabelablesFilter("CountryId", countries) { ShowAll = false });
             AddAllowedFilter(PersonResources.Address, () => new StringFilter("FullAddress"));
             AddAllowedFilter(PlayerResources.Laterality, () => new EnumValuesFilter("Laterality", typeof(Laterality)));
             AddAllowedFilter(PlayerResources.Height, () => new IntegerFilter("Height", ComplexComparableOperator.IsBetween, 120, 195)

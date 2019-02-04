@@ -491,21 +491,21 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="BottomBorderComboBoxStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ComboBoxStyle}">
+    <Style x:Key="BottomBorderComboBoxStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource VirtualisedComboBoxStyle}">
         <Setter Property="BorderThickness" Value="0,0,0,1" />
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
     </Style>
 
     <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource BottomBorderComboBoxStyle}" />
 
-    <Style x:Key="AccentComboBoxStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ComboBoxStyle}">
+    <Style x:Key="AccentComboBoxStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource VirtualisedComboBoxStyle}">
         <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource AccentForeground}" />
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource AccentControlMouseOver}" />
         <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource AccentForeground}" />
         <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource AccentForeground}" />
     </Style>
 
-    <Style x:Key="AccentComboBoxStyle2" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ComboBoxStyle}">
+    <Style x:Key="AccentComboBoxStyle2" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource VirtualisedComboBoxStyle}">
 
         <Setter Property="Background" Value="{DynamicResource AccentControl}" />
         <Setter Property="BorderBrush" Value="{DynamicResource AccentControl}" />
@@ -767,7 +767,7 @@
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
-                                        <controls:SelectorItem x:Name="PART_All" Grid.Row="0" Content="{TemplateBinding TextAll}" />
+                                        <controls:SelectorItem x:Name="PART_All" Grid.Row="0" Content="{TemplateBinding TextAll}" Visibility="{TemplateBinding ShowAll, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                         <ItemsPresenter Grid.Row="1" Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                     </Grid>
                                 </ScrollViewer>
@@ -930,14 +930,29 @@
         </Setter>
     </Style>
 
-    <Style x:Key="BottomBorderMultiComboBoxStyle" TargetType="{x:Type controls:MultiComboBox}" BasedOn="{StaticResource MultiComboBoxStyle}">
+    <Style x:Key="VirtualisedMultiComboBoxStyle"
+           BasedOn="{StaticResource MultiComboBoxStyle}"
+           TargetType="{x:Type controls:MultiComboBox}">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel IsItemsHost="True"
+                                            IsVirtualizing="True"
+                                            KeyboardNavigation.DirectionalNavigation="Contained"
+                                            VirtualizationMode="Recycling" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BottomBorderMultiComboBoxStyle" TargetType="{x:Type controls:MultiComboBox}" BasedOn="{StaticResource VirtualisedMultiComboBoxStyle}">
         <Setter Property="BorderThickness" Value="0,0,0,1" />
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
     </Style>
 
     <Style TargetType="{x:Type controls:MultiComboBox}" BasedOn="{StaticResource BottomBorderMultiComboBoxStyle}" />
 
-    <Style x:Key="AccentMultiComboBoxStyle" TargetType="{x:Type controls:MultiComboBox}" BasedOn="{StaticResource MultiComboBoxStyle}">
+    <Style x:Key="AccentMultiComboBoxStyle" TargetType="{x:Type controls:MultiComboBox}" BasedOn="{StaticResource VirtualisedMultiComboBoxStyle}">
         <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{DynamicResource AccentForeground}" />
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{DynamicResource AccentControlMouseOver}" />
         <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource AccentForeground}" />

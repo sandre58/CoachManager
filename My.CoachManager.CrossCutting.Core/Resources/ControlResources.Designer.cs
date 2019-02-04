@@ -196,6 +196,24 @@ namespace My.CoachManager.CrossCutting.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Créé par :.
+        /// </summary>
+        public static string CreatedBy {
+            get {
+                return ResourceManager.GetString("CreatedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Créé le :.
+        /// </summary>
+        public static string CreatedFrom {
+            get {
+                return ResourceManager.GetString("CreatedFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Création.
         /// </summary>
         public static string Creation {
@@ -273,6 +291,24 @@ namespace My.CoachManager.CrossCutting.Core.Resources {
         public static string Minimize {
             get {
                 return ResourceManager.GetString("Minimize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modifié par :.
+        /// </summary>
+        public static string ModifiedBy {
+            get {
+                return ResourceManager.GetString("ModifiedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modifié le :.
+        /// </summary>
+        public static string ModifiedFrom {
+            get {
+                return ResourceManager.GetString("ModifiedFrom", resourceCulture);
             }
         }
         

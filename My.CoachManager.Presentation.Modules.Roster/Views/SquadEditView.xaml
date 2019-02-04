@@ -14,7 +14,7 @@
              d:DataContext="{d:DesignInstance Type=viewModels:SquadEditViewModel}"
              d:DesignHeight="350" d:DesignWidth="600">
 
-    <controls:WorkspaceView MinHeight="150">
+    <controls:WorkspaceView>
 
         <Grid parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
 

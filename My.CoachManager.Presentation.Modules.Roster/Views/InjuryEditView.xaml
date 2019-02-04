@@ -13,11 +13,11 @@
              xmlns:enum="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
              xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Modules.Roster.ViewModels"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
-             d:DataContext="{d:DesignInstance Type=viewModels:InjuryEditViewModel}"
-             d:DesignHeight="600" d:DesignWidth="800">
+             d:DataContext="{d:DesignInstance Type=viewModels:InjuryEditViewModel}">
 
-    <controls:WorkspaceView MinHeight="500" MinWidth="800">
-        <Grid parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
+    <controls:WorkspaceView>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}" Width="750" Height="480">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -87,6 +87,7 @@
                 </Grid>
             </Grid>
         </Grid>
+        </ScrollViewer>
 
         <controls:WorkspaceView.Commands>
             <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CancelCommand}" Style="{StaticResource CancelCommandButtonApplicationBarStyle}" IsCancel="True" />

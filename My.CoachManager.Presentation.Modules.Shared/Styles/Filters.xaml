@@ -25,13 +25,13 @@
             </Grid.ColumnDefinitions>
 
             <ComboBox Grid.Column="0"
-                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      HorizontalAlignment="Center" Style="{StaticResource VirtualisedComboBoxStyle}"
                       Width="{StaticResource SmallLargeWidth}"
                       ItemsSource="{Binding AllowedValues}"
                       DisplayMemberPath="Label" SelectedValuePath="Id" SelectedValue="{Binding PositionId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
             <ComboBox Grid.Column="1"
-                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      HorizontalAlignment="Center" Style="{StaticResource VirtualisedComboBoxStyle}"
                       Width="{StaticResource MediumWidth}"
                       ItemsSource="{Binding Source={extensions:Enum {x:Type enums:ComplexComparableOperator}}}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
@@ -99,7 +99,7 @@
             </Grid.ColumnDefinitions>
 
             <ComboBox Grid.Column="0"
-                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      HorizontalAlignment="Center" Style="{StaticResource VirtualisedComboBoxStyle}"
                       Width="{StaticResource MediumWidth}"
                       ItemsSource="{Binding Source={extensions:Enum {x:Type enums:BinaryOperator}}}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />

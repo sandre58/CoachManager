@@ -140,6 +140,10 @@
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Padding" Value="{StaticResource MediumTopMargin}" />
+        <Setter Property="params:TabControlParameters.HeaderSize" Value="Auto" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -183,12 +187,19 @@
                                         TextOptions.TextFormattingMode="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TextOptions.TextFormattingMode)}"
                                         TextOptions.TextRenderingMode="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TextOptions.TextRenderingMode)}"
                                         RenderOptions.ClearTypeHint="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(RenderOptions.ClearTypeHint)}">
-                                <ContentPresenter x:Name="PART_SelectedContentHost"
-                                                              ContentSource="SelectedContent"
-                                                              Margin="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Padding}"
-                                                              HorizontalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.HorizontalContentAlignment),Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
-                                                              VerticalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.VerticalContentAlignment),Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
-                            </Border>
+
+                                <ScrollViewer VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                              CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
+                                              HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                    <ContentPresenter x:Name="PART_SelectedContentHost"
+                                                      ContentSource="SelectedContent"
+                                                      Margin="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Padding}"
+                                                      HorizontalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.HorizontalContentAlignment),Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                                                      VerticalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.VerticalContentAlignment),Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+
+                                </ScrollViewer>
+   </Border>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -357,6 +368,8 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Padding" Value="{StaticResource MediumTopMargin}" />
         <Setter Property="params:TabControlParameters.HeaderSize" Value="Auto" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -394,12 +407,18 @@
                                         TextOptions.TextFormattingMode="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TextOptions.TextFormattingMode)}"
                                         TextOptions.TextRenderingMode="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TextOptions.TextRenderingMode)}"
                                         RenderOptions.ClearTypeHint="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(RenderOptions.ClearTypeHint)}">
-                                <ContentPresenter x:Name="PART_SelectedContentHost"
-                                                              ContentSource="SelectedContent"
-                                                              Margin="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Padding}"
-                                                              HorizontalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.HorizontalContentAlignment),Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
-                                                              VerticalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.VerticalContentAlignment),Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
-                            </Border>
+                                <ScrollViewer VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                              CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
+                                              HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                    <ContentPresenter x:Name="PART_SelectedContentHost"
+                                                      ContentSource="SelectedContent"
+                                                      Margin="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Padding}"
+                                                      HorizontalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.HorizontalContentAlignment),Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                                                      VerticalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem.(TabItem.VerticalContentAlignment),Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+
+                                </ScrollViewer>
+                                </Border>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>

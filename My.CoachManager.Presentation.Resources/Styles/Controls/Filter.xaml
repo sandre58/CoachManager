@@ -42,7 +42,7 @@
                     CommandParameter="{Binding Filter}" Margin="{StaticResource LargeMargin}" />
             <CheckBox Grid.Column="1" x:Name="IsEnabled" IsChecked="{Binding IsEnabled}" HorizontalAlignment="Center" Style="{StaticResource CircleCheckBoxStyle}" />
             <ComboBox Grid.Column="2"
-                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      HorizontalAlignment="Center" Style="{StaticResource VirtualisedComboBoxStyle}"
                       Width="60"
                       IsEnabled="{Binding ElementName=IsEnabled, Path=IsChecked}"
                       ItemsSource="{Binding Source={extensions:Enum {x:Type enums:LogicalOperator}}}"
@@ -62,7 +62,7 @@
             </Grid.ColumnDefinitions>
 
             <ComboBox Grid.Column="0" Grid.Row="0"
-                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      HorizontalAlignment="Center" Style="{StaticResource VirtualisedComboBoxStyle}"
                       Width="{StaticResource MediumWidth}"
                       ItemsSource="{Binding Source={extensions:Enum {x:Type enums:StringOperator}}}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
@@ -113,7 +113,7 @@
             </Grid.ColumnDefinitions>
 
             <ComboBox Grid.Column="0"
-                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      HorizontalAlignment="Center" Style="{StaticResource VirtualisedComboBoxStyle}"
                       Width="{StaticResource MediumWidth}"
                       ItemsSource="{Binding Source={extensions:Enum {x:Type enums:ComplexComparableOperator}}}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
@@ -170,7 +170,7 @@
             </Grid.ColumnDefinitions>
 
             <ComboBox Grid.Column="0"
-                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      HorizontalAlignment="Center" Style="{StaticResource VirtualisedComboBoxStyle}"
                       Width="{StaticResource MediumWidth}"
                       ItemsSource="{Binding Source={extensions:Enum {x:Type enums:ComplexComparableOperator}}}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
@@ -220,7 +220,7 @@
             </Grid.ColumnDefinitions>
 
             <ComboBox Grid.Column="0"
-                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      HorizontalAlignment="Center" Style="{StaticResource VirtualisedComboBoxStyle}"
                       Width="{StaticResource MediumWidth}"
                       ItemsSource="{Binding Source={extensions:Enum {x:Type enums:BinaryOperator}}}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
@@ -241,13 +241,13 @@
             </Grid.ColumnDefinitions>
 
             <ComboBox Grid.Column="0"
-                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      HorizontalAlignment="Center" Style="{StaticResource VirtualisedComboBoxStyle}"
                       Width="{StaticResource MediumWidth}"
                       ItemsSource="{Binding Source={extensions:Enum {x:Type enums:BinaryOperator}}}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
             <controls:MultiComboBox Grid.Column="1" Width="{StaticResource SmallLargeWidth}"
-                      HorizontalAlignment="Center" Style="{StaticResource MultiComboBoxStyle}"
-                      ItemsSource="{Binding AllowedValues}"
+                      HorizontalAlignment="Center" Style="{StaticResource VirtualisedMultiComboBoxStyle}"
+                      ItemsSource="{Binding AllowedValues}" ShowAll="{Binding ShowAll}"
                       DisplayMemberPath="Label" ValueMemberPath="Id" SelectedValues="{Binding Values, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
     </DataTemplate>
@@ -262,7 +262,7 @@
             </Grid.ColumnDefinitions>
 
             <ComboBox Grid.Column="0"
-                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      HorizontalAlignment="Center" Style="{StaticResource VirtualisedComboBoxStyle}"
                       Width="{StaticResource MediumWidth}"
                       ItemsSource="{Binding Source={extensions:Enum {x:Type enums:BinaryOperator}}}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
@@ -283,12 +283,12 @@
             </Grid.ColumnDefinitions>
 
             <ComboBox Grid.Column="0"
-                      HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}"
+                      HorizontalAlignment="Center" Style="{StaticResource VirtualisedComboBoxStyle}"
                       Width="{StaticResource MediumWidth}"
                       ItemsSource="{Binding Source={extensions:Enum {x:Type enums:BinaryOperator}}}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding Operator, Mode=TwoWay}" />
             <controls:MultiComboBox Grid.Column="1" Width="{StaticResource SmallLargeWidth}"
-                                    HorizontalAlignment="Center" Style="{StaticResource MultiComboBoxStyle}"
+                                    HorizontalAlignment="Center" Style="{StaticResource VirtualisedMultiComboBoxStyle}"
                                     ItemsSource="{Binding AllowedValues}"
                                     DisplayMemberPath="Item1" ValueMemberPath="Item2" SelectedValues="{Binding Values, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
