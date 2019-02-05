@@ -105,6 +105,8 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
                 IsMutation = item.IsMutation,
                 LicenseState = item.LicenseState,
                 Number = item.Number,
+                CategoryId = item.CategoryId,
+                Category = CategoryFactory.Get(item.Category),
                 Player = PlayerFactory.Get(item.Player),
                 RosterId = item.RosterId,
                 SquadId = item.SquadId,
@@ -126,6 +128,7 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
             entity.IsMutation = item.IsMutation;
             entity.LicenseState = item.LicenseState;
             entity.Number = item.Number;
+            entity.CategoryId = item.CategoryId;
 
             return true;
         }

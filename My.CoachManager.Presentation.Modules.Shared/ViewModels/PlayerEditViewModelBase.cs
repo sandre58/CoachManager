@@ -17,7 +17,7 @@ using System.Linq;
 
 namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
 {
-    public abstract class PlayerEditViewModel<TPlayerEntity> : EditViewModel<TPlayerEntity>
+    public abstract class PlayerEditViewModelBase<TPlayerEntity> : EditViewModel<TPlayerEntity>
         where TPlayerEntity : PlayerModel, new()
     {
         #region Constants
@@ -37,9 +37,9 @@ namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
         #region Constructors
 
         /// <summary>
-        /// Initialise a new instance of <see cref="PlayerEditViewModel{T}"/>.
+        /// Initialise a new instance of <see cref="PlayerEditViewModelBase{T}"/>.
         /// </summary>
-        protected PlayerEditViewModel(IPersonService personService, IAddressService addressService, IPositionService positionService)
+        protected PlayerEditViewModelBase(IPersonService personService, IAddressService addressService, IPositionService positionService)
         {
             _personService = personService;
             _addressService = addressService;

@@ -7,6 +7,7 @@ namespace My.CoachManager.Domain.Entities
     /// <summary>
     /// Provides properties for a Season Entity.
     /// </summary>
+    [Serializable]
     public class Season : Reference
     {
         /// <summary>

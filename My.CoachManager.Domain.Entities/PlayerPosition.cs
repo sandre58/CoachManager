@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Domain.Core;
@@ -8,6 +9,7 @@ namespace My.CoachManager.Domain.Entities
     /// <summary>
     /// Provides properties for a Player Position Entity.
     /// </summary>
+    [Serializable]
     public class PlayerPosition : Entity
     {
         /// <summary>

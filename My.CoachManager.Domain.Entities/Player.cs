@@ -1,4 +1,5 @@
-﻿using My.CoachManager.CrossCutting.Core.Constants;
+﻿using System;
+using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,6 +9,7 @@ namespace My.CoachManager.Domain.Entities
     /// <summary>
     /// Provides properties for a Player Entity.
     /// </summary>
+    [Serializable]
     public class Player : Person
     {
         /// <summary>

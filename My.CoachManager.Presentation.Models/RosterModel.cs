@@ -33,7 +33,7 @@ namespace My.CoachManager.Presentation.Models
         /// </summary>
         [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
         [Display(Name = "Season", ResourceType = typeof(RosterResources))]
-        public int? SeasonId { get; set; }
+        public int SeasonId { get; set; }
 
         /// <summary>
         /// Gets or sets the season.

@@ -1,4 +1,5 @@
-﻿using My.CoachManager.CrossCutting.Core.Constants;
+﻿using System;
+using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.Domain.Core;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace My.CoachManager.Domain.Entities
     /// <summary>
     /// Provides properties for a training Entity.
     /// </summary>
+    [Serializable]
     public class ExerciceTemplate : Entity
     {
         /// <summary>

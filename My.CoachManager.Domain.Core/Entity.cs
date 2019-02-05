@@ -7,6 +7,7 @@ namespace My.CoachManager.Domain.Core
     /// <summary>
     /// Provides properties for an entity.
     /// </summary>
+    [Serializable]
     public abstract class Entity : IEntity, IAuditable
     {
         /// <inheritdoc />

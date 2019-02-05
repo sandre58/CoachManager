@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using My.CoachManager.Domain.Core;
 
@@ -7,6 +8,7 @@ namespace My.CoachManager.Domain.Entities
     /// <summary>
     /// Provides properties for a Roster Entity.
     /// </summary>
+    [Serializable]
     public class Roster : Entity
     {
         /// <summary>
@@ -28,7 +30,7 @@ namespace My.CoachManager.Domain.Entities
         /// Gets or sets the season id.
         /// </summary>
         [Required]
-        public int? SeasonId { get; set; }
+        public int SeasonId { get; set; }
 
         /// <summary>
         /// Gets or sets the season.
@@ -39,7 +41,7 @@ namespace My.CoachManager.Domain.Entities
         /// Gets or sets the squad's category id.
         /// </summary>
         [Required]
-        public int? CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
         /// <summary>
         /// Gets or sets the squad's category.

@@ -418,6 +418,5 @@
 
     <Style x:Key="SelectWorkspaceDialogViewStyle" TargetType="{x:Type controls:WorkspaceView}" BasedOn="{StaticResource WorkspaceViewBaseStyle}">
         <Setter Property="HeaderTemplate" Value="{StaticResource SelectDialogHeaderTemplate}" />
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
     </Style>
 </ResourceDictionary>

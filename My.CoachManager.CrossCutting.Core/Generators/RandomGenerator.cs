@@ -32,6 +32,23 @@ namespace My.CoachManager.CrossCutting.Core.Generators
         }
 
         /// <summary>
+        /// Get an int from min to max.
+        /// </summary>
+        /// <param name="startDate">Lower bound, inclusive</param>
+        /// <param name="endDate">Upper bound, inclusive. Only int.MaxValue is exclusive.</param>
+        public static DateTime Date(DateTime startDate, DateTime endDate)
+        {
+            //lock any seed access, for thread safety.
+            lock (Locker.Value)
+            {
+                long range = endDate.Ticks - startDate.Ticks;
+                long randomTicks = startDate.Ticks + ((long)(Seed.NextDouble() * range));
+                DateTime result = new DateTime(randomTicks);
+                return result;
+            }
+        }
+
+        /// <summary>
         /// Get a random sequence of digits.
         /// </summary>
         /// <param name="count">How many</param>

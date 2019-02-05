@@ -136,7 +136,7 @@ namespace My.CoachManager.Presentation.Modules.Roster.ViewModels
                 Refresh();
             },new List<KeyValuePair<string, object>>()
             {
-                new KeyValuePair<string, object>(ParametersConstants.PlayerId, Item.Id),
+                new KeyValuePair<string, object>(ParametersConstants.PlayerId, Item.PlayerId),
                 new KeyValuePair<string, object>(ParametersConstants.Date, DateTime.Today)
             } );
         }
@@ -163,7 +163,7 @@ namespace My.CoachManager.Presentation.Modules.Roster.ViewModels
                 OnEditCompleted(dialog.Result);
             }, new List<KeyValuePair<string, object>>
                 {
-                    new KeyValuePair<string, object>(ParametersConstants.PlayerId, Item.Id)
+                    new KeyValuePair<string, object>(ParametersConstants.PlayerId, Item.PlayerId)
                 });
         }
 

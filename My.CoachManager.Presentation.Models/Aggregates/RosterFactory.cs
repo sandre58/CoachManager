@@ -27,7 +27,7 @@ namespace My.CoachManager.Presentation.Models.Aggregates
                 Id = item.Id,
                 Name = item.Name,
                 SeasonId = item.SeasonId,
-                CategoryId = item.CategoryId
+                CategoryId = item.CategoryId ?? 0
             };
         }
 

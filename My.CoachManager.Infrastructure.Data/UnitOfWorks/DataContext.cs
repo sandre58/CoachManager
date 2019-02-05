@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
+using Alachisoft.NCache.EntityFrameworkCore;
 using ILogger = My.CoachManager.CrossCutting.Logging.ILogger;
 
 namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
@@ -59,8 +60,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         {
             var loggerFactory = new LoggerFactory();
             loggerFactory.AddProvider(new LoggerProvider());
-            optionsBuilder.UseLoggerFactory(loggerFactory);
-
+            
             optionsBuilder.UseSqlServer(DbConfigurationManager.ConnectionString,
             x => x.EnableRetryOnFailure())
                 .ConfigureWarnings(x => x.Throw(RelationalEventId.QueryClientEvaluationWarning))
@@ -76,6 +76,8 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasDefaultSchema("dbo");
+
             // Address
             modelBuilder.Entity<Address>()
                 .HasOne(s => s.Country)

@@ -10,6 +10,7 @@ namespace My.CoachManager.Domain.Entities
     /// <summary>
     /// Provides properties for a training Entity.
     /// </summary>
+    [Serializable]
     public class Training : Entity
     {
         /// <summary>

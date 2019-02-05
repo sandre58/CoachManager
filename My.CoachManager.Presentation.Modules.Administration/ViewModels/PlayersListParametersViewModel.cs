@@ -8,9 +8,9 @@ namespace My.CoachManager.Presentation.Modules.Administration.ViewModels
         #region Constants
 
         private static readonly string[] GeneralInformationsColumns =
-            {"Age", "Birthdate", "Category", "Gender", "Country", "Address", "Phone", "Email"};
+            {"Age", "Birthdate", "Gender", "Country", "Address", "Phone", "Email"};
 
-        private static readonly string[] ClubInformationsColumns = { "Category", "Position", "LicenseNumber", "FromDate" };
+        private static readonly string[] ClubInformationsColumns = { "Position", "LicenseNumber", "FromDate" };
 
         private static readonly string[] BodyInformationsColumns =
             {"Laterality", "Height", "Weight", "Size", "ShoesSize"};

@@ -4,13 +4,12 @@ using My.CoachManager.Presentation.Models;
 using My.CoachManager.Presentation.Models.Aggregates;
 using My.CoachManager.Presentation.Modules.Shared.ViewModels;
 using My.CoachManager.Presentation.ServiceAgent.AddressServiceReference;
-using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 
 namespace My.CoachManager.Presentation.Modules.Administration.ViewModels
 {
-    public class PlayerEditViewModel : PlayerEditViewModel<PlayerModel>
+    public class PlayerEditViewModel : PlayerEditViewModelBase<PlayerModel>
     {
         #region Fields
 
@@ -23,7 +22,7 @@ namespace My.CoachManager.Presentation.Modules.Administration.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="PlayerEditViewModel"/>.
         /// </summary>
-        public PlayerEditViewModel(IPersonService personService, ICategoryService categoryService, IAddressService addressService, IPositionService positionService) : base(personService, addressService, positionService)
+        public PlayerEditViewModel(IPersonService personService, IAddressService addressService, IPositionService positionService) : base(personService, addressService, positionService)
         {
             _personService = personService;
         }

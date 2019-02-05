@@ -12,8 +12,8 @@ namespace My.CoachManager.Infrastructure.Data
 {
     public static class ModelBuilderExtensions
     {
-        private const int NbPlayers = 150;
-        private const int NbRosters = 5;
+        private const int NbPlayers = 500;
+        private const int NbRosters = 7;
 
         /// <summary>
         /// Seeds data.
@@ -21,6 +21,7 @@ namespace My.CoachManager.Infrastructure.Data
         /// <param name="modelBuilder"></param>
         public static void Seed(this ModelBuilder modelBuilder)
         {
+            var seasons = GetSeasons().ToArray();
             var categories = GetCategories().ToArray();
             var players = GetPlayers(NbPlayers).ToArray();
             var addresses = GetAddresses(NbPlayers).ToArray();
@@ -28,11 +29,14 @@ namespace My.CoachManager.Infrastructure.Data
             var playerPositions = GetPlayerPositions(players).ToArray();
             var rosters = GetRosters(categories, NbRosters).ToArray();
             var squads = GetSquads(rosters).ToArray();
-            var rosterPlayers = GetRosterPlayers(players, rosters, squads, categories).ToArray();
+            var rosterPlayers = GetRosterPlayers(players, rosters, squads, seasons, categories).ToArray();
+            var trainings = GetTrainings(rosters, seasons).ToArray();
+            var trainingAttendances = GetTrainingsAttendances(trainings, rosterPlayers).ToArray();
+            var injuries = GetInjuries(players).ToArray();
 
             modelBuilder.Entity<Category>().HasData(categories);
             modelBuilder.Entity<Position>().HasData(GetPositions().ToArray());
-            modelBuilder.Entity<Season>().HasData(GetSeasons().ToArray());
+            modelBuilder.Entity<Season>().HasData(seasons);
             modelBuilder.Entity<Country>().HasData(GetCountries().ToArray());
             modelBuilder.Entity<Address>().HasData(addresses);
             modelBuilder.Entity<Player>().HasData(players);
@@ -42,6 +46,9 @@ namespace My.CoachManager.Infrastructure.Data
             modelBuilder.Entity<Roster>().HasData(rosters);
             modelBuilder.Entity<Squad>().HasData(squads);
             modelBuilder.Entity<RosterPlayer>().HasData(rosterPlayers);
+            modelBuilder.Entity<Training>().HasData(trainings);
+            modelBuilder.Entity<TrainingAttendance>().HasData(trainingAttendances);
+            modelBuilder.Entity<Injury>().HasData(injuries);
             modelBuilder.Entity<User>().HasData(GetUsers().ToArray());
         }
 
@@ -424,7 +431,7 @@ namespace My.CoachManager.Infrastructure.Data
                 var address = new Address
                 {
                     Id = i,
-                    Row1 = "Rue " + i,
+                    Row1 = "Rue " + RandomGenerator.String2(5, 20).FirstCharToUpper(),
                     PostalCode = RandomGenerator.String2(5, "0123456789"),
                     City = RandomGenerator.String2(5, 20).FirstCharToUpper()
                 };
@@ -485,30 +492,83 @@ namespace My.CoachManager.Infrastructure.Data
         /// <summary>
         /// Seeds contacts.
         /// </summary>
+        private static IList<Injury> GetInjuries(IList<Player> players)
+        {
+            var id = 1;
+            var result = new List<Injury>();
+            foreach (var player in players)
+            {
+                var nbInjuries = RandomGenerator.Int(0, 7);
+
+                for (int i = 0; i < nbInjuries; i++)
+                {
+                    if (player.FromDate.HasValue)
+                    {
+                        var type = RandomGenerator.Enum<InjuryType>();
+                        var duration = RandomGenerator.Int(3, 150);
+                        var severity = InjurySeverity.Serious;
+                        var date = RandomGenerator.Date(player.FromDate.Value, DateTime.Today);
+
+                        if (duration < 7) severity = InjurySeverity.Slight;
+                        else if (duration < 10) severity = InjurySeverity.Minor;
+                        else if (duration < 20) severity = InjurySeverity.Average;
+
+                        var injury = new Injury
+                        {
+                            Id = id,
+                            PlayerId = player.Id,
+                            Condition = InjuryConstants.GetDefaultCondition(type),
+                            Date = date,
+                            ExpectedReturn = date.AddDays(duration),
+                            Severity = severity,
+                            Type = type
+                        };
+
+                        id++;
+                        result.Add(injury);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Seeds contacts.
+        /// </summary>
         private static IList<PlayerPosition> GetPlayerPositions(IList<Player> players)
         {
             var id = 1;
             var result = new List<PlayerPosition>();
             foreach (var player in players)
             {
-                var nbPositions = RandomGenerator.Int(1, 4);
+                var positionId = RandomGenerator.Int(1, 17);
+                var position = new PlayerPosition
+                {
+                    Id = id,
+                    PlayerId = player.Id,
+                    IsNatural = true,
+                    PositionId = positionId,
+                    Rating = PositionConstants.MaxRating
+                };
+
+                id++;
+                result.Add(position);
+
+                var nbPositions = RandomGenerator.Int(0, 3);
 
                 for (int i = 0; i < nbPositions; i++)
                 {
-                    var positionId = RandomGenerator.Int(1, 17);
-
+                    positionId = RandomGenerator.Int(1, 17);
                     if (!result.Any(x => x.PlayerId == player.Id && x.PositionId == positionId))
                     {
-                        var isNatural = RandomGenerator.Bool();
-                        var position = new PlayerPosition
+                        position = new PlayerPosition
                         {
                             Id = id,
                             PlayerId = player.Id,
-                            IsNatural = isNatural,
+                            IsNatural = false,
                             PositionId = positionId,
-                            Rating = isNatural
-                                ? PositionConstants.MaxRating
-                                : RandomGenerator.Int(1, PositionConstants.MaxRating)
+                            Rating = RandomGenerator.Int(1, PositionConstants.MaxRating - 1)
                         };
 
                         id++;
@@ -562,7 +622,7 @@ namespace My.CoachManager.Infrastructure.Data
                     {
                         Id = id,
                         RosterId = roster.Id,
-                        Name = "Equipe" + i
+                        Name = "Equipe " + i
                     };
 
                     id++;
@@ -576,37 +636,127 @@ namespace My.CoachManager.Infrastructure.Data
         /// <summary>
         /// Seeds contacts.
         /// </summary>
-        private static IList<RosterPlayer> GetRosterPlayers(IList<Player> players, IList<Roster> rosters, IList<Squad> squads, IList<Category> categories)
+        private static IList<RosterPlayer> GetRosterPlayers(IList<Player> players, IList<Roster> rosters, IList<Squad> squads, IList<Season> seasons, IList<Category> categories)
         {
             var id = 1;
             var result = new List<RosterPlayer>();
-            foreach (var player in players)
+
+            foreach (var roster in rosters)
             {
-                var rosterId = RandomGenerator.ListItem(rosters).Id;
-                var squadId = RandomGenerator.ListItem(squads.Where(x => x.RosterId == rosterId).ToList()).Id;
+                var squadsInRoster = squads.Where(x => x.RosterId == roster.Id).ToList();
+                var nbPlayersInRoster = RandomGenerator.Int(15, 20) * squadsInRoster.Count;
+                var categoriesIdAllowed = new List<int?> {roster.CategoryId, roster.CategoryId + 1};
 
-                var rosterPlayer = new RosterPlayer
+                for (int i = 0; i < nbPlayersInRoster; i++)
                 {
-                    Id = id,
-                    RosterId = rosterId,
-                    PlayerId = player.Id,
-                    IsMutation = RandomGenerator.Bool(),
-                    LicenseState = RandomGenerator.Enum<LicenseState>(),
-                    Number = RandomGenerator.Number(1, 30),
-                    SquadId = squadId
-                };
+                    var playerIdsAllowed = players
+                        .Where(x =>!result.Where(p => p.RosterId == roster.Id).Select(p => p.PlayerId).Contains(x.Id))
+                        .Where(x => x.Birthdate.HasValue && categoriesIdAllowed.Contains(CalculateCategoryFromDateForSeason(x.Birthdate.Value, seasons.First(s => s.Id == roster.SeasonId), categories)))
+                        .ToList();
 
-                id++;
-                result.Add(rosterPlayer);
+                    if(playerIdsAllowed.Count > 0) { 
+                    var player = RandomGenerator.ListItem(playerIdsAllowed);
+                    var squadId = RandomGenerator.ListItem(squadsInRoster).Id;
+
+                        var rosterPlayer = new RosterPlayer
+                        {
+                            Id = id,
+                            RosterId = roster.Id,
+                            PlayerId = player.Id,
+                            IsMutation = RandomGenerator.Bool(),
+                            LicenseState = RandomGenerator.Enum<LicenseState>(),
+                            Number = RandomGenerator.Number(1, nbPlayersInRoster),
+                            CategoryId = player.Birthdate.HasValue ? CalculateCategoryFromDateForSeason(player.Birthdate.Value, seasons.First(s => s.Id == roster.SeasonId), categories) : roster.CategoryId,
+                            SquadId = squadId
+                        };
+
+                        id++;
+                        result.Add(rosterPlayer);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private static IList<Training> GetTrainings(IList<Roster> rosters, IList<Season> seasons)
+        {
+            var id = 1;
+            var result = new List<Training>();
+
+            foreach (var roster in rosters)
+            {
+                var season = seasons.First(x => x.Id == roster.SeasonId);
+                IList<DateTime> dates = new List<DateTime>();
+                var days = new List<DayOfWeek> {DayOfWeek.Wednesday, DayOfWeek.Friday};
+
+                if (season.StartDate != null && season.EndDate != null)
+                {
+                    for (DateTime date = season.StartDate.Value;
+                        date < season.EndDate.Value;
+                        date = date.AddDays(1))
+                    {
+                        if (days.Contains(date.DayOfWeek))
+                        {
+                            dates.Add(date);
+                        }
+                    }
+                }
+
+                foreach (var date in dates)
+                {
+                    var training = new Training
+                    {
+                        Id = id,
+                        StartDate = new DateTime(date.Year, date.Month, date.Day, 17, 30, 0),
+                        Place = String.Empty,
+                        IsCancelled = false,
+                        RosterId = roster.Id,
+                        Stage = Stage.Other,
+                        Theme = RandomGenerator.String2(10,50),
+                        EndDate = new DateTime(date.Year, date.Month, date.Day, 19, 0, 0)
+                    };
+                    
+                    id++;
+                    result.Add(training);
+                }
+            }
+
+            return result;
+        }
+
+        private static IList<TrainingAttendance> GetTrainingsAttendances(IList<Training> trainings, IList<RosterPlayer> rosterPlayers)
+        {
+            var id = 1;
+            var result = new List<TrainingAttendance>();
+
+            foreach (var training in trainings)
+            {
+                var players = rosterPlayers.Where(x => x.RosterId == training.RosterId).ToList();
+
+                foreach (var player in players)
+                {
+                    var attendance = RandomGenerator.Enum<Attendance>();
+                    var trainingAttendance = new TrainingAttendance
+                    {
+                        Id = id,
+                        Attendance = attendance,
+                        Reason = attendance == Attendance.Apology ? RandomGenerator.String2(30,100) : string.Empty,
+                        RosterPlayerId = player.Id,
+                        TrainingId = training.Id
+                    };
+                    id++;
+                    result.Add(trainingAttendance);
+                }
             }
 
             return result;
         }
 
         /// <summary>
-        /// Seeds users and permissions.
-        /// </summary>
-        private static IList<User> GetUsers()
+            /// Seeds users and permissions.
+            /// </summary>
+            private static IList<User> GetUsers()
         {
             var result = new List<User>
             {
@@ -624,12 +774,13 @@ namespace My.CoachManager.Infrastructure.Data
         /// <param name="season"></param>
         /// <param name="categories"></param>
         /// <returns></returns>
-        private static int CalculateCategoryFromDateForSeason(DateTime date, Season season, IEnumerable<Category> categories)
+        private static int? CalculateCategoryFromDateForSeason(DateTime date, Season season, IEnumerable<Category> categories)
         {
             var toDate = season.StartDate ?? DateTime.Today;
             var diffYear = toDate.Year - date.Year;
+            var category = categories.Where(x => x.Age <= diffYear).OrderByDescending(x => x.Age).FirstOrDefault();
 
-            return categories.Where(x => x.Age <= diffYear).OrderBy(x => x.Age).First().Id;
+            return category?.Id;
         }
     }
 }

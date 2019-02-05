@@ -8,6 +8,7 @@ namespace My.CoachManager.Domain.Entities
     /// <summary>
     /// Provides properties for a injury Entity.
     /// </summary>
+    [Serializable]
     public class Injury : Entity
     {
         /// <summary>

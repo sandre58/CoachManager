@@ -6,7 +6,6 @@ using My.CoachManager.Presentation.Models;
 using My.CoachManager.Presentation.Models.Aggregates;
 using My.CoachManager.Presentation.Modules.Administration.Resources;
 using My.CoachManager.Presentation.Modules.Shared.Interfaces;
-using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 
@@ -17,7 +16,6 @@ namespace My.CoachManager.Presentation.Modules.Administration.ViewModels
         #region Fields
 
         private readonly IPersonService _personService;
-        private readonly ICategoryService _categoryService;
         private readonly IPositionService _positionService;
 
         #endregion Fields
@@ -27,10 +25,9 @@ namespace My.CoachManager.Presentation.Modules.Administration.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="CategoriesListViewModel"/>.
         /// </summary>
-        public PlayersListViewModel(IPersonService personService, ICategoryService categoryService, IPositionService positionService)
+        public PlayersListViewModel(IPersonService personService, IPositionService positionService)
         {
             _personService = personService;
-            _categoryService = categoryService;
             _positionService = positionService;
         }
 
@@ -77,11 +74,10 @@ namespace My.CoachManager.Presentation.Modules.Administration.ViewModels
         protected override void InitializeDataCore()
         {
             base.InitializeDataCore();
-
-            var categories = _categoryService.GetCategories().Select(CategoryFactory.Get);
+            
             var countries = _personService.GetCountries().Select(CountryFactory.Get);
             var positions = _positionService.GetPositions().Select(PositionFactory.Get);
-            Filters = new PlayersListFiltersViewModel(categories, positions, countries);
+            Filters = new PlayersListFiltersViewModel(positions, countries);
             ListParameters = new PlayersListParametersViewModel();
         }
 

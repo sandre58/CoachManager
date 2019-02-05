@@ -83,7 +83,7 @@
                 <Button Grid.Row="0" Content="{x:Static resources:RosterPlayerResources.Addinjury}" HorizontalAlignment="Right" Command="{Binding AddInjuryCommand}" 
                         Style="{StaticResource AddTextAndIconButtonStyle}" Margin="{StaticResource DefaultVerticalMargin}" />
 
-                    <controls:ExtendedListView Grid.Row="1" ItemsSource="{Binding Item.Injuries, IsAsync=True}" SelectedItem="{Binding SelectedInjury, IsAsync=True, Mode=TwoWay}">
+                    <controls:ExtendedListView Grid.Row="1" ItemsSource="{Binding Item.Injuries, IsAsync=True}" SelectedItem="{Binding SelectedInjury, IsAsync=True, Mode=TwoWay}" DoubleClickCommand="{Binding EditInjuryCommand}" MaxHeight="270">
 
                     <parameters:ControlParameters.InputBindings>
                         <InputBindingCollection>

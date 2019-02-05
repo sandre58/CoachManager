@@ -10,6 +10,7 @@ namespace My.CoachManager.Domain.Entities
     /// <summary>
     /// Provides properties for a Person Entity.
     /// </summary>
+    [Serializable]
     public abstract class Person : Entity
     {
         /// <summary>

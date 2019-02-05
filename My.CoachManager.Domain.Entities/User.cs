@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.Entities
@@ -6,6 +7,7 @@ namespace My.CoachManager.Domain.Entities
     /// <summary>
     /// Provides properties for a User Entity.
     /// </summary>
+    [Serializable]
     public class User : Entity
     {
         /// <summary>

@@ -19,7 +19,7 @@ namespace My.CoachManager.Application.Dtos
         /// Gets or sets the season id.
         /// </summary>
         [DataMember]
-        public int? SeasonId { get; set; }
+        public int SeasonId { get; set; }
 
         /// <summary>
         /// Gets or sets the season.
@@ -31,7 +31,7 @@ namespace My.CoachManager.Application.Dtos
         /// Gets or sets the squad's category id.
         /// </summary>
         [DataMember]
-        public int? CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
         /// <summary>
         /// Gets or sets the squad's category.

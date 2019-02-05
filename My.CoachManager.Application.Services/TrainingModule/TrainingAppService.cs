@@ -88,6 +88,9 @@ namespace My.CoachManager.Application.Services.TrainingModule
                 .Include(x => x.Attendances)
                     .ThenInclude(x => x.RosterPlayer)
                         .ThenInclude(x => x.Squad)
+                .Include(x => x.Attendances)
+                    .ThenInclude(x => x.RosterPlayer)
+                        .ThenInclude(x => x.Player)
                 .FirstOrDefault(x => x.Id == id);
             return entity != null ? TrainingFactory.Get(entity) : null;
         }

@@ -62,11 +62,6 @@
                                                          PropertyName="Birthdate" Width="110"
                                                          DisplayMemberBinding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}" />
 
-                    <!-- Category -->
-                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.CategoryAbbr}"
-                                                         PropertyName="Category" Width="80"
-                                                         DisplayMemberBinding="{Binding Category.Label}" />
-
                     <!-- Position -->
                     <columns:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.Positions}"
                                                      PropertyName="Position" Width="180">

@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace My.CoachManager.Presentation.Modules.Roster.ViewModels
 {
-    public class RosterPlayerEditViewModel : PlayerEditViewModel<RosterPlayerModel>
+    public class RosterPlayerEditViewModel : PlayerEditViewModelBase<RosterPlayerModel>
     {
         #region Fields
 

@@ -179,11 +179,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRepository.cs" />
     <Compile Include="Reference.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="IReference.cs" />
     <Compile Include="IOrderable.cs" />
-    <Compile Include="IRepository.cs" />
     <Compile Include="ISql.cs" />
     <Compile Include="IAuditable.cs" />
     <Compile Include="IEntity.cs" />

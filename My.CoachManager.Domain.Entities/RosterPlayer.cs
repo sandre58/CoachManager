@@ -1,4 +1,5 @@
-﻿using My.CoachManager.CrossCutting.Core.Enums;
+﻿using System;
+using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.Domain.Core;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,6 +9,7 @@ namespace My.CoachManager.Domain.Entities
     /// <summary>
     /// Provides properties for a Roster Player Entity.
     /// </summary>
+    [Serializable]
     public class RosterPlayer : Entity
     {
         /// <summary>
@@ -54,7 +56,6 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the category id.
         /// </summary>
-        [Required]
         public int? CategoryId { get; set; }
 
         /// <summary>
