@@ -1,7 +1,7 @@
-﻿using System;
+﻿using My.CoachManager.Application.Dtos;
+using System;
 using System.Collections.Generic;
 using System.ServiceModel;
-using My.CoachManager.Application.Dtos;
 
 namespace My.CoachManager.Services.Wcf.Interfaces
 {
@@ -11,7 +11,6 @@ namespace My.CoachManager.Services.Wcf.Interfaces
     [ServiceContract]
     public interface IPersonService
     {
-
         /// <summary>
         /// Load all items.
         /// </summary>
@@ -52,7 +51,7 @@ namespace My.CoachManager.Services.Wcf.Interfaces
         /// </summary>
         /// <returns></returns>>
         [OperationContract]
-        CategoryDto GetCategoryFromBirthdate(DateTime date);
+        CategoryDto GetCategoryFromDate(DateTime fromDate, DateTime toDate);
 
         /// <summary>
         /// Get a player.

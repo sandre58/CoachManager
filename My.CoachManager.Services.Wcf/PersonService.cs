@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using CommonServiceLocator;
+﻿using CommonServiceLocator;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Application.Services.InjuryModule;
 using My.CoachManager.Application.Services.PersonModule;
 using My.CoachManager.Services.Wcf.Interfaces;
+using System;
+using System.Collections.Generic;
 
 namespace My.CoachManager.Services.Wcf
 {
@@ -13,7 +13,6 @@ namespace My.CoachManager.Services.Wcf
     /// </summary>
     public class PersonService : IPersonService
     {
-
         /// <summary>
         /// Load all items.
         /// </summary>
@@ -66,9 +65,9 @@ namespace My.CoachManager.Services.Wcf
         /// Get category from birthdate.
         /// </summary>
         /// <returns></returns>
-        public CategoryDto GetCategoryFromBirthdate(DateTime date)
+        public CategoryDto GetCategoryFromDate(DateTime fromDate, DateTime toDate)
         {
-            return ServiceLocator.Current.GetInstance<IPlayerAppService>().GetCategoryFromBirthdate(date);
+            return ServiceLocator.Current.GetInstance<IPlayerAppService>().GetCategoryFromDate(fromDate, toDate);
         }
 
         /// <summary>
@@ -95,7 +94,7 @@ namespace My.CoachManager.Services.Wcf
         /// <returns></returns>
         public void RemoveInjury(InjuryDto dto)
         {
-           ServiceLocator.Current.GetInstance<IInjuryAppService>().RemoveInjury(dto);
+            ServiceLocator.Current.GetInstance<IInjuryAppService>().RemoveInjury(dto);
         }
     }
 }

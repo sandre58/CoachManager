@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using My.CoachManager.CrossCutting.Core.Enums;
+﻿using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Core.Resources.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace My.CoachManager.Presentation.Models
 {
@@ -10,11 +10,22 @@ namespace My.CoachManager.Presentation.Models
     /// </summary>
     public class RosterPlayerModel : PlayerModel
     {
-
         /// <summary>
         /// Gets or sets the player id.
         /// </summary>
         public int PlayerId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the category id.
+        /// </summary>
+        [Display(Name = "Category", ResourceType = typeof(PlayerResources))]
+        public int? CategoryId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the category.
+        /// </summary>
+        [Display(Name = "Category", ResourceType = typeof(PlayerResources))]
+        public CategoryModel Category { get; set; }
 
         /// <summary>
         /// Gets or sets the default player's number in the roster.

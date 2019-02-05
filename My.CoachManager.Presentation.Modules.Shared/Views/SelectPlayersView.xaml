@@ -23,20 +23,20 @@
 
                     <!-- Selection -->
                     <columns:SelectionGridViewColumn />
-                    
+
                     <!-- Photo -->
-                    <columns:ExtendedGridViewColumn 
+                    <columns:ExtendedGridViewColumn
                             PropertyName="Photo"  CanUserHideColumn="False" Width="100">
                         <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
-                                <controls:ImageContent Style="{StaticResource RoundedPlayerPhotoStyle}" Width="45" Height="45" Content="{Binding}"/>
+                                <controls:ImageContent Style="{StaticResource RoundedPlayerPhotoStyle}" Width="45" Height="45" Content="{Binding}" />
                             </DataTemplate>
                         </columns:ExtendedGridViewColumn.CellTemplate>
                     </columns:ExtendedGridViewColumn>
 
                     <!-- Name -->
-                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.LastName}" 
-                                                         PropertyName="LastName" CanUserHideColumn="False" Width="150" >
+                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.LastName}"
+                                                         PropertyName="LastName" CanUserHideColumn="False" Width="150">
                         <columns:ExtendedGridViewColumn.CellTemplate>
                             <DataTemplate DataType="models:PlayerModel">
                                 <StackPanel>
@@ -59,13 +59,8 @@
 
                     <!-- Birthdate -->
                     <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Birthdate}"
-                                                         PropertyName="Birthdate" Width="110" 
-                                                         DisplayMemberBinding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}"/>
-
-                    <!-- Category -->
-                    <columns:ExtendedGridViewColumn Header="{x:Static entities:PlayerResources.CategoryAbbr}"
-                                                         PropertyName="Category" Width="80"
-                                                         DisplayMemberBinding="{Binding Category.Label}"/>
+                                                         PropertyName="Birthdate" Width="110"
+                                                         DisplayMemberBinding="{Binding Birthdate, StringFormat={}{0:dd/MM/yyyy}}" />
 
                     <!-- Gender -->
                     <columns:ExtendedGridViewColumn Header="{x:Static entities:PersonResources.Gender}"
@@ -93,11 +88,10 @@
                             </DataTemplate>
                         </columns:ExtendedGridViewColumn.CellTemplate>
                     </columns:ExtendedGridViewColumn>
-
                 </controls:ExtendedGridView>
             </controls:ItemsListView.View>
         </controls:ItemsListView>
-        
+
         <controls:WorkspaceView.Commands>
             <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CancelCommand}" Style="{StaticResource CancelCommandButtonApplicationBarStyle}" IsCancel="True" />
             <controls:CommandButton DockPanel.Dock="Right" Command="{Binding SelectCommand}" Style="{StaticResource SelectCommandButtonApplicationBarStyle}" IsDefault="True" />

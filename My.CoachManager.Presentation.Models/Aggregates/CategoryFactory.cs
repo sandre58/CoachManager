@@ -22,7 +22,7 @@ namespace My.CoachManager.Presentation.Models.Aggregates
                 Code = model.Code,
                 Label = model.Label,
                 Description = model.Description,
-                Year = model.Year,
+                Age = model.Age,
                 Order = model.Order
             };
         }
@@ -42,7 +42,7 @@ namespace My.CoachManager.Presentation.Models.Aggregates
                 Code = dto.Code,
                 Label = dto.Label,
                 Description = dto.Description,
-                Year = dto.Year,
+                Age = dto.Age,
                 Order = dto.Order,
                 CreatedBy = dto.CreatedBy,
                 CreatedDate = dto.CreatedDate,

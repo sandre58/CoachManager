@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using My.CoachManager.Application.Dtos;
+﻿using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.CategoryModule.Aggregate;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.PersonModule.Aggregate;
 using My.CoachManager.Domain.SeasonModule.Aggregate;
 using My.CoachManager.Domain.SquadModule.Aggregate;
+using System.Linq;
 
 namespace My.CoachManager.Domain.RosterModule.Aggregate
 {
@@ -75,7 +75,7 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
         /// Create the entity from the DTO.
         /// </summary>
         /// <returns>The entity.</returns>
-        public static RosterPlayer CreatePlayer(int rosterId, int squadId, int playerId)
+        public static RosterPlayer CreatePlayer(int rosterId, int squadId, int playerId, int? categoryId)
         {
             if (rosterId == 0) return null;
             if (playerId == 0) return null;
@@ -84,11 +84,10 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
             {
                 PlayerId = playerId,
                 RosterId = rosterId,
-                SquadId = squadId
+                SquadId = squadId,
+                CategoryId = categoryId
             };
         }
-
-
 
         /// <summary>
         /// Convert the entity to DTO.
@@ -142,6 +141,5 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
 
             return true;
         }
-
     }
 }

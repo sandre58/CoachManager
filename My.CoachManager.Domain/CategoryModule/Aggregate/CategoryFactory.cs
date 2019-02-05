@@ -3,7 +3,6 @@ using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Domain.CategoryModule.Aggregate
 {
-
     /// <summary>
     /// The category factory.
     /// </summary>
@@ -25,7 +24,7 @@ namespace My.CoachManager.Domain.CategoryModule.Aggregate
                 Label = item.Label,
                 Description = item.Description,
                 Order = item.Order,
-                Year = item.Year,
+                Age = item.Age,
             };
         }
 
@@ -40,7 +39,7 @@ namespace My.CoachManager.Domain.CategoryModule.Aggregate
             entity.Label = item.Label;
             entity.Description = item.Description;
             entity.Order = item.Order;
-            entity.Year = item.Year;
+            entity.Age = item.Age;
 
             return true;
         }
@@ -61,7 +60,7 @@ namespace My.CoachManager.Domain.CategoryModule.Aggregate
                 Label = item.Label,
                 Description = item.Description,
                 Order = item.Order,
-                Year = item.Year,
+                Age = item.Age,
                 CreatedDate = item.CreatedDate,
                 CreatedBy = item.CreatedBy,
                 ModifiedDate = item.ModifiedDate,

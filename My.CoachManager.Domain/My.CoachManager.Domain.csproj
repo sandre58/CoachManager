@@ -211,11 +211,11 @@
     <Compile Include="TrainingModule\Aggregate\TrainingValidator.cs" />
     <Compile Include="TrainingModule\Services\ITrainingDomainService.cs" />
     <Compile Include="TrainingModule\Services\TrainingDomainService.cs" />
-    <Compile Include="SquadModule\Aggregate\RosterFactory.cs" />
-    <Compile Include="SquadModule\Aggregate\RosterSelectBuilder.cs" />
-    <Compile Include="SquadModule\Aggregate\RosterValidator.cs" />
-    <Compile Include="SquadModule\Services\IRosterDomainService.cs" />
-    <Compile Include="SquadModule\Services\RosterDomainService.cs" />
+    <Compile Include="SquadModule\Aggregate\SquadFactory.cs" />
+    <Compile Include="SquadModule\Aggregate\SquadSelectBuilder.cs" />
+    <Compile Include="SquadModule\Aggregate\SquadValidator.cs" />
+    <Compile Include="SquadModule\Services\ISquadDomainService.cs" />
+    <Compile Include="SquadModule\Services\SquadDomainService.cs" />
     <Compile Include="RosterModule\Aggregate\RosterValidator.cs" />
     <Compile Include="RosterModule\Aggregate\RosterFactory.cs" />
     <Compile Include="RosterModule\Services\IRosterDomainService.cs" />

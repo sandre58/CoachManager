@@ -7,7 +7,6 @@ using My.CoachManager.Presentation.Core.ViewModels;
 using My.CoachManager.Presentation.Models;
 using My.CoachManager.Presentation.Models.Aggregates;
 using My.CoachManager.Presentation.ServiceAgent.AddressServiceReference;
-using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 using Prism.Commands;
@@ -30,7 +29,6 @@ namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
         #region Fields
 
         private readonly IPersonService _personService;
-        private readonly ICategoryService _categoryService;
         private readonly IAddressService _addressService;
         private readonly IPositionService _positionService;
 
@@ -41,10 +39,9 @@ namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="PlayerEditViewModel{T}"/>.
         /// </summary>
-        protected PlayerEditViewModel(IPersonService personService, ICategoryService categoryService, IAddressService addressService, IPositionService positionService)
+        protected PlayerEditViewModel(IPersonService personService, IAddressService addressService, IPositionService positionService)
         {
             _personService = personService;
-            _categoryService = categoryService;
             _addressService = addressService;
             _positionService = positionService;
         }
@@ -374,7 +371,6 @@ namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
 
         protected override void InitializeDataCore()
         {
-            AllCategories = _categoryService.GetCategories().Select(CategoryFactory.Get);
             AllCountries = _personService.GetCountries().Select(CountryFactory.Get);
             AllAdresses = _addressService.GetCities().Select(AddressFactory.Get).ToList();
             AllPositions = _positionService.GetPositions().Select(PositionFactory.Get).ToList();
@@ -466,14 +462,6 @@ namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
                     if (!string.IsNullOrEmpty(Item.PostalCode))
                     {
                         Item.City = AllAdresses.Where(c => c.PostalCode == Item.PostalCode).Select(c => c.City).FirstOrDefault();
-                    }
-                    break;
-
-                case "Birthdate":
-                    if (Item.Birthdate.HasValue)
-                    {
-                        var category = _personService.GetCategoryFromBirthdate(Item.Birthdate.Value);
-                        Item.CategoryId = category?.Id ?? 0;
                     }
                     break;
 

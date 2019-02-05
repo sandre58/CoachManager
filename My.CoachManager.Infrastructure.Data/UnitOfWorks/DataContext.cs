@@ -151,13 +151,6 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
 
             //Player
             modelBuilder.Entity<Player>()
-                .ToTable("Players")
-                .HasOne(x => x.Category)
-                .WithMany()
-                .HasForeignKey(x => x.CategoryId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Player>()
                 .Property(x => x.Laterality)
                 .HasDefaultValue(PlayerConstants.DefaultLaterality);
 
@@ -216,6 +209,12 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
 
             modelBuilder.Entity<RosterPlayer>()
                 .HasAlternateKey(x => new { x.RosterId, x.PlayerId });
+
+            modelBuilder.Entity<RosterPlayer>()
+                .HasOne(x => x.Category)
+                .WithMany()
+                .HasForeignKey(x => x.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<RosterPlayer>()
                 .HasOne(x => x.Roster)

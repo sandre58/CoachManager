@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq.Expressions;
-using My.CoachManager.Application.Dtos;
+﻿using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.Entities;
+using System;
+using System.Linq.Expressions;
 
 namespace My.CoachManager.Domain.CategoryModule.Aggregate
 {
@@ -19,7 +19,7 @@ namespace My.CoachManager.Domain.CategoryModule.Aggregate
                 Label = x.Label,
                 Description = x.Description,
                 Order = x.Order,
-                Year = x.Year
+                Age = x.Age
             };
         }
     }

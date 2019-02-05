@@ -1,26 +1,24 @@
-﻿using System.Collections.Generic;
-using My.CoachManager.CrossCutting.Core.Enums;
+﻿using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Resources.Entities;
 using My.CoachManager.Presentation.Core.Models.Filters;
 using My.CoachManager.Presentation.Core.ViewModels;
 using My.CoachManager.Presentation.Models;
+using System.Collections.Generic;
 
 namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
 {
     public class SelectPlayersFiltersViewModel : ListFiltersViewModel
     {
-
         #region Initialisation
 
         /// <summary>
         /// Initialise a new instance of <see cref="SelectPlayersFiltersViewModel"/>.
         /// </summary>
-        public SelectPlayersFiltersViewModel(IEnumerable<CategoryModel> categories, IEnumerable<CountryModel> countries)
+        public SelectPlayersFiltersViewModel(IEnumerable<CountryModel> countries)
         {
             SpeedFilter = new FilterViewModel(new StringFilter("FullName"), PersonResources.FullName, LogicalOperator.Or);
 
             AddAllowedFilter(PersonResources.FullName, () => new StringFilter("FullName"));
-            AddAllowedFilter(PlayerResources.Category, () => new SelectedLabelablesFilter("CategoryId", categories));
             AddAllowedFilter(PersonResources.Age, () => new IntegerFilter("Age", ComplexComparableOperator.IsBetween, 16, 35)
             {
                 Minimum = 0,

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using My.CoachManager.Application.Dtos;
+using My.CoachManager.Domain.Entities;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
-using My.CoachManager.Application.Dtos;
-using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Domain.PersonModule.Aggregate
 {
@@ -29,12 +29,6 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                 Photo = x.Photo,
                 PlaceOfBirth = x.PlaceOfBirth,
                 Laterality = x.Laterality,
-                CategoryId = x.CategoryId,
-                Category = x.Category != null ? new CategoryDto()
-                {
-                    Id = x.Category.Id,
-                    Label = x.Category.Label
-                } : null,
                 CountryId = x.CountryId,
                 Country = x.Country != null ? new CountryDto()
                 {

@@ -9,6 +9,6 @@ namespace My.CoachManager.Application.Dtos
     public class CategoryDto : ReferenceDto
     {
         [DataMember]
-        public int? Year { get; set; }
+        public int? Age { get; set; }
     }
 }

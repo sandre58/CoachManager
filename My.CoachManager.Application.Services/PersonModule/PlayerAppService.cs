@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Application.Services.AddressModule;
 using My.CoachManager.CrossCutting.Core.Exceptions;
@@ -11,7 +9,9 @@ using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.PersonModule.Aggregate;
 using My.CoachManager.Domain.PersonModule.Services;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace My.CoachManager.Application.Services.PersonModule
 {
@@ -60,7 +60,6 @@ namespace My.CoachManager.Application.Services.PersonModule
         {
             return _playerRepository.GetAll(PlayerSelectBuilder.SelectPlayerDetails(), x => x.LastName).ToList();
         }
-
 
         /// <summary>
         /// Get a player.
@@ -123,9 +122,10 @@ namespace My.CoachManager.Application.Services.PersonModule
         /// Get category from birthdate.
         /// </summary>
         /// <returns></returns>
-        public CategoryDto GetCategoryFromBirthdate(DateTime date)
+        public CategoryDto GetCategoryFromDate(DateTime fromDate, DateTime toDate)
         {
-            return _categoryRepository.GetByFilter(x => x.Year >= date.Year, x => x.Year, true).ToArray().Select(CategoryFactory.Get).FirstOrDefault();
+            var diffYear = toDate.Year - fromDate.Year;
+            return _categoryRepository.GetByFilter(x => x.Age <= diffYear, x => x.Age, true).ToArray().Select(CategoryFactory.Get).FirstOrDefault();
         }
 
         #endregion Methods

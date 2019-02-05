@@ -8,6 +8,8 @@ using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PositionServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.RosterServiceReference;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace My.CoachManager.Presentation.Modules.Roster.ViewModels
 {
@@ -16,8 +18,18 @@ namespace My.CoachManager.Presentation.Modules.Roster.ViewModels
         #region Fields
 
         private readonly IRosterService _rosterService;
+        private readonly ICategoryService _categoryService;
 
         #endregion Fields
+
+        #region Memebers
+
+        /// <summary>
+        /// Gets or sets categories.
+        /// </summary>
+        public IEnumerable<CategoryModel> AllCategories { get; private set; }
+
+        #endregion Memebers
 
         #region Constructors
 
@@ -25,9 +37,10 @@ namespace My.CoachManager.Presentation.Modules.Roster.ViewModels
         /// Initialise a new instance of <see cref="SquadViewModel"/>.
         /// </summary>
         public RosterPlayerEditViewModel(IRosterService rosterService, ICategoryService categoryService, IAddressService addressService, IPositionService positionService, IPersonService personService)
-            : base(personService, categoryService, addressService, positionService)
+            : base(personService, addressService, positionService)
         {
             _rosterService = rosterService;
+            _categoryService = categoryService;
         }
 
         #endregion Constructors
@@ -35,6 +48,12 @@ namespace My.CoachManager.Presentation.Modules.Roster.ViewModels
         #region Methods
 
         #region Data
+
+        protected override void InitializeDataCore()
+        {
+            base.InitializeDataCore();
+            AllCategories = _categoryService.GetCategories().Select(CategoryFactory.Get);
+        }
 
         protected override int SaveItemCore()
         {

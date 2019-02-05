@@ -276,12 +276,12 @@
         <Setter Property="Background" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="BorderThickness" Value="5,0,0,0" />
-        <!--<Setter Property="Margin" Value="1" />-->
+        <Setter Property="Margin" Value="1" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <!--<Setter Property="MinHeight" Value="35" />-->
+        <Setter Property="MinHeight" Value="35" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template" Value="{StaticResource ListViewItemTemplate}" />
 
@@ -291,7 +291,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style x:Key="ListViewItemStyle" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource NotSelectableListViewItemStyle}">
         <Style.Resources>
             <Style TargetType="{x:Type controls:Icon}" BasedOn="{StaticResource {x:Type controls:Icon}}">
@@ -311,7 +311,7 @@
             </Style>
         </Style.Resources>
         <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource AccentForeground}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBackground" >
+        <Setter Property="parameters:ControlParameters.MouseOverBackground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource AccentColor}" Opacity="{DynamicResource ColorOpacity}" />
             </Setter.Value>
@@ -463,7 +463,6 @@
                             <controls:Icon HorizontalAlignment="Right" DockPanel.Dock="Right" x:Name="SortArrow" Width="12" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"
                                            Margin="{StaticResource DefaultHorizontalMargin}" />
                         </DockPanel>
-
                     </Grid>
 
                     <ControlTemplate.Triggers>
@@ -506,7 +505,7 @@
                             <Setter Property="Opacity" Value="{DynamicResource DisabledOpacity}" />
                         </Trigger>
                         <DataTrigger Binding="{Binding Path=CanSort, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ExtendedListView}}}" Value="False">
-                        <Setter TargetName="SortArrow" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="SortArrow" Property="Visibility" Value="Collapsed" />
                             <Setter Property="Foreground" Value="{DynamicResource DarkControlPressed}" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
@@ -514,7 +513,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style x:Key="ItemsGridViewColumnHeaderStyle" TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
         <Setter Property="Foreground" Value="{DynamicResource NormalForeground}" />
         <Setter Property="Height" Value="40" />
@@ -677,10 +676,10 @@
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
 
-                                        <Border Grid.Row="0" Grid.ColumnSpan="2" 
-                                                Background="{DynamicResource Transparent}" 
-                                                BorderBrush="{DynamicResource Control}" 
-                                                BorderThickness="0,0,0,1" 
+                                        <Border Grid.Row="0" Grid.ColumnSpan="2"
+                                                Background="{DynamicResource Transparent}"
+                                                BorderBrush="{DynamicResource Control}"
+                                                BorderThickness="0,0,0,1"
                                                 Margin="{StaticResource DefaultBottomMargin}">
 
                                             <!-- Column Header -->
@@ -694,10 +693,8 @@
                                                                 ColumnHeaderTemplateSelector="{Binding View.ColumnHeaderTemplateSelector, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
                                                                 ColumnHeaderToolTip="{Binding View.ColumnHeaderToolTip, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
                                                                 Columns="{Binding View.Columns, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
-                                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-
+                                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                         </Border>
-
 
                                         <!-- Content -->
                                         <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
@@ -741,7 +738,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style x:Key="ItemsListViewBaseStyle" TargetType="{x:Type controls:ItemsListView}" BasedOn="{StaticResource ListViewBaseStyle}">
         <Style.Resources>
             <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ItemsGridViewColumnHeaderStyle}" />
@@ -926,5 +923,4 @@
     <Style TargetType="{x:Type ListView}" BasedOn="{StaticResource ListViewBaseStyle}" />
     <Style TargetType="{x:Type controls:ExtendedListView}" BasedOn="{StaticResource ListViewBaseStyle}" />
     <Style TargetType="{x:Type controls:ItemsListView}" BasedOn="{StaticResource ItemsListViewBaseStyle}" />
-
 </ResourceDictionary>

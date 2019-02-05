@@ -22,13 +22,13 @@ namespace My.CoachManager.Infrastructure.Data
         public static void Seed(this ModelBuilder modelBuilder)
         {
             var categories = GetCategories().ToArray();
-            var players = GetPlayers(categories, NbPlayers).ToArray();
+            var players = GetPlayers(NbPlayers).ToArray();
             var addresses = GetAddresses(NbPlayers).ToArray();
             var contacts = GetContacts(players).ToArray();
             var playerPositions = GetPlayerPositions(players).ToArray();
             var rosters = GetRosters(categories, NbRosters).ToArray();
             var squads = GetSquads(rosters).ToArray();
-            var rosterPlayers = GetRosterPlayers(players, rosters, squads).ToArray();
+            var rosterPlayers = GetRosterPlayers(players, rosters, squads, categories).ToArray();
 
             modelBuilder.Entity<Category>().HasData(categories);
             modelBuilder.Entity<Position>().HasData(GetPositions().ToArray());
@@ -52,17 +52,15 @@ namespace My.CoachManager.Infrastructure.Data
         {
             var result = new List<Category>
             {
-                new Category() {Id = 1, Label = "Séniors", Code = "S", Year = 1998, Order = 1},
-                new Category() {Id = 2, Label = "Vétérans", Code = "V", Year = 1982, Order = 2}
+                new Category() {Id = 1, Label = "Séniors", Code = "S", Age = 19, Order = 1},
+                new Category() {Id = 2, Label = "Vétérans", Code = "V", Age = 35, Order = 2}
             };
 
-            var year = 1999;
             var order = 3;
             for (var i = 19; i >= 6; i--)
             {
                 var code = "U" + i;
-                result.Add(new Category() { Id = order, Label = code, Code = code, Year = year, Order = order });
-                year++;
+                result.Add(new Category() { Id = order, Label = code, Code = code, Age = i - 1, Order = order });
                 order++;
             }
 
@@ -383,7 +381,7 @@ namespace My.CoachManager.Infrastructure.Data
         /// <summary>
         /// Seeds players.
         /// </summary>
-        private static IList<Player> GetPlayers(IList<Category> categories, int nbPlayers)
+        private static IList<Player> GetPlayers(int nbPlayers)
         {
             var result = new List<Player>();
             for (int i = 1; i <= nbPlayers; i++)
@@ -394,7 +392,6 @@ namespace My.CoachManager.Infrastructure.Data
                 {
                     Id = i,
                     AddressId = i,
-                    CategoryId = GetCategoryIdFromYear(categories, year),
                     Birthdate = new DateTime(year, RandomGenerator.Int(1, 12), RandomGenerator.Int(1, 27)),
                     FromDate = new DateTime(RandomGenerator.Int(year + 6, DateTime.Today.Year - 1), 8, 1),
                     CountryId = 76,
@@ -579,7 +576,7 @@ namespace My.CoachManager.Infrastructure.Data
         /// <summary>
         /// Seeds contacts.
         /// </summary>
-        private static IList<RosterPlayer> GetRosterPlayers(IList<Player> players, IList<Roster> rosters, IList<Squad> squads)
+        private static IList<RosterPlayer> GetRosterPlayers(IList<Player> players, IList<Roster> rosters, IList<Squad> squads, IList<Category> categories)
         {
             var id = 1;
             var result = new List<RosterPlayer>();
@@ -620,10 +617,19 @@ namespace My.CoachManager.Infrastructure.Data
             return result;
         }
 
-        private static int GetCategoryIdFromYear(IList<Category> categories, int year)
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="season"></param>
+        /// <param name="categories"></param>
+        /// <returns></returns>
+        private static int CalculateCategoryFromDateForSeason(DateTime date, Season season, IEnumerable<Category> categories)
         {
-            var cats = categories.Where(x => x.Year != null && x.Year.Value >= year).OrderBy(x => x.Year.Value).ToList();
-            return cats.Any() ? cats.First().Id : 1;
+            var toDate = season.StartDate ?? DateTime.Today;
+            var diffYear = toDate.Year - date.Year;
+
+            return categories.Where(x => x.Age <= diffYear).OrderBy(x => x.Age).First().Id;
         }
     }
 }

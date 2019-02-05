@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
 using My.CoachManager.Application.Dtos;
+using My.CoachManager.CrossCutting.Core.Exceptions;
+using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Domain.AppModule.Services;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.TrainingModule.Aggregate;
 using My.CoachManager.Domain.TrainingModule.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using My.CoachManager.CrossCutting.Core.Exceptions;
-using My.CoachManager.CrossCutting.Core.Resources;
 
 namespace My.CoachManager.Application.Services.TrainingModule
 {
@@ -60,7 +60,7 @@ namespace My.CoachManager.Application.Services.TrainingModule
         public int SaveTraining(int rosterId, TrainingDto dto)
         {
             dto.RosterId = rosterId;
-           return _crudDomainService.Save(dto, TrainingFactory.CreateEntity, TrainingFactory.UpdateEntity, x => _trainingDomainService.Validate(x));
+            return _crudDomainService.Save(dto, TrainingFactory.CreateEntity, TrainingFactory.UpdateEntity, x => _trainingDomainService.Validate(x));
         }
 
         /// <inheritdoc />
@@ -84,8 +84,7 @@ namespace My.CoachManager.Application.Services.TrainingModule
                 .Query
                 .Include(x => x.Attendances)
                     .ThenInclude(x => x.RosterPlayer)
-                        .ThenInclude(x => x.Player)
-                            .ThenInclude(x => x.Category)
+                        .ThenInclude(x => x.Category)
                 .Include(x => x.Attendances)
                     .ThenInclude(x => x.RosterPlayer)
                         .ThenInclude(x => x.Squad)
@@ -128,16 +127,16 @@ namespace My.CoachManager.Application.Services.TrainingModule
 
                 var result = _trainingDomainService.Validate(training);
 
-                    if (!result.IsValid)
-                    {
-                        throw new ValidationBusinessException(ValidationMessageResources.InvalidFields, result.Errors.Select(x => x.ErrorMessage).ToList());
-                    }
+                if (!result.IsValid)
+                {
+                    throw new ValidationBusinessException(ValidationMessageResources.InvalidFields, result.Errors.Select(x => x.ErrorMessage).ToList());
+                }
 
                 _trainingRepository.Add(training);
 
                 trainings.Add(training);
             }
-            
+
             _trainingRepository.UnitOfWork.Commit();
 
             return trainings.Select(TrainingFactory.Get).ToList();
@@ -157,9 +156,8 @@ namespace My.CoachManager.Application.Services.TrainingModule
             _trainingRepository.UnitOfWork.Commit();
 
             return training.Id;
-
         }
-    
+
         /// <summary>
         /// Gets players for a specific training.
         /// </summary>
@@ -171,7 +169,7 @@ namespace My.CoachManager.Application.Services.TrainingModule
 
             var players = _rosterPlayerRepository.Query
                 .Include(x => x.Player)
-                    .ThenInclude(x => x.Category)
+                .Include(x => x.Category)
                 .Include(x => x.Squad)
                 .Where(x => x.RosterId == training.RosterId && (!x.Player.FromDate.HasValue || x.Player.FromDate <= training.EndDate));
 

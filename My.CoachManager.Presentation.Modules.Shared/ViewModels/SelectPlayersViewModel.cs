@@ -1,11 +1,10 @@
-﻿using System.Linq;
-using My.CoachManager.CrossCutting.Core.Collections;
+﻿using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.Presentation.Core.ViewModels;
 using My.CoachManager.Presentation.Models;
 using My.CoachManager.Presentation.Models.Aggregates;
-using My.CoachManager.Presentation.ServiceAgent.CategoryServiceReference;
 using My.CoachManager.Presentation.ServiceAgent.PersonServiceReference;
+using System.Linq;
 
 namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
 {
@@ -14,7 +13,6 @@ namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
         #region Fields
 
         private readonly IPersonService _personService;
-        private readonly ICategoryService _categoryService;
 
         #endregion Fields
 
@@ -23,10 +21,9 @@ namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="SelectPlayersViewModel"/>.
         /// </summary>
-        public SelectPlayersViewModel(IPersonService personService, ICategoryService categoryService)
+        public SelectPlayersViewModel(IPersonService personService)
         {
             _personService = personService;
-            _categoryService = categoryService;
         }
 
         #endregion Constructors
@@ -53,9 +50,8 @@ namespace My.CoachManager.Presentation.Modules.Shared.ViewModels
         {
             base.InitializeDataCore();
 
-            var categories = _categoryService.GetCategories().Select(CategoryFactory.Get);
             var countries = _personService.GetCountries().Select(CountryFactory.Get);
-            Filters = new SelectPlayersFiltersViewModel(categories, countries);
+            Filters = new SelectPlayersFiltersViewModel(countries);
         }
 
         #endregion Data

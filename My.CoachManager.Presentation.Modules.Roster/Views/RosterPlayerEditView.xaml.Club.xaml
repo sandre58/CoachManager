@@ -7,8 +7,7 @@
              xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Controls.Parameters;assembly=My.CoachManager.Presentation.Controls"
              xmlns:controls="clr-namespace:My.CoachManager.Presentation.Controls;assembly=My.CoachManager.Presentation.Controls"
              xmlns:entities="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
-             xmlns:enums="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
-             xmlns:constants="clr-namespace:My.CoachManager.CrossCutting.Core.Constants;assembly=My.CoachManager.CrossCutting.Core">
+             xmlns:enums="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core">
 
     <Grid  parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
         <Grid.RowDefinitions>
@@ -36,13 +35,13 @@
 
         <controls:Icon Grid.Column="0" Grid.Row="1" Size="Medium" Content="{StaticResource ClothesGeometry}" HorizontalAlignment="Center" />
 
-        <controls:ExtendedNumericUpDown Grid.Column="1" Grid.Row="1" 
+        <controls:ExtendedNumericUpDown Grid.Column="1" Grid.Row="1"
                                         Width="{StaticResource MidSmallWidth}"
                                         Value="{Binding Item.Number, UpdateSourceTrigger=PropertyChanged}"
-                                        parameters:TextBoxParameters.Watermark="{x:Static entities:PlayerResources.NumberAbbr}"/>
+                                        parameters:TextBoxParameters.Watermark="{x:Static entities:PlayerResources.NumberAbbr}" />
 
         <controls:Icon Grid.Column="0" Grid.Row="2" Size="Medium" Content="{StaticResource CalendarGeometry}" HorizontalAlignment="Center" />
-        
+
         <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Item.FromDate, UpdateSourceTrigger=PropertyChanged}" Width="{StaticResource SmallLargeWidth}"
                     parameters:TextBoxParameters.Watermark="{x:Static entities:PersonResources.FromDate}" />
 

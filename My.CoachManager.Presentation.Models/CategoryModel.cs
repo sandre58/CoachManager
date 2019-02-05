@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using My.CoachManager.CrossCutting.Core.Resources.Entities;
+﻿using My.CoachManager.CrossCutting.Core.Resources.Entities;
 using My.CoachManager.Presentation.Core.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace My.CoachManager.Presentation.Models
 {
@@ -12,7 +12,7 @@ namespace My.CoachManager.Presentation.Models
         /// <summary>
         /// Gets or sets the Year.
         /// </summary>
-        [Display(Name = "Year", ResourceType = typeof(CategoryResources))]
-        public virtual int? Year { get; set; }
+        [Display(Name = "Age", ResourceType = typeof(CategoryResources))]
+        public virtual int? Age { get; set; }
     }
 }

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using My.CoachManager.CrossCutting.Core.Constants;
+﻿using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace My.CoachManager.Domain.Entities
 {
@@ -19,17 +19,6 @@ namespace My.CoachManager.Domain.Entities
             Positions = new List<PlayerPosition>();
             Injuries = new List<Injury>();
         }
-
-        /// <summary>
-        /// Gets or sets the category id.
-        /// </summary>
-        [Required]
-        public int? CategoryId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the category.
-        /// </summary>
-        public Category Category { get; set; }
 
         /// <summary>
         /// Gets or sets the latérality.

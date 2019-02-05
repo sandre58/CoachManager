@@ -1,48 +1,46 @@
-﻿using System.Linq;
-using My.CoachManager.Application.Dtos;
+﻿using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.AddressModule.Aggregate;
-using My.CoachManager.Domain.CategoryModule.Aggregate;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.InjuryModule.Aggregates;
 using My.CoachManager.Domain.PositionModule.Aggregate;
+using System.Linq;
 
 namespace My.CoachManager.Domain.PersonModule.Aggregate
 {
     public static class PlayerFactory
-    { 
-            /// <summary>
-            /// Create the entity from the DTO.
-            /// </summary>
-            /// <param name="item">The item.</param>
-            /// <returns>The entity.</returns>
-            public static Player CreateEntity(PlayerDto item)
-            {
-                if (item == null) return null;
+    {
+        /// <summary>
+        /// Create the entity from the DTO.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns>The entity.</returns>
+        public static Player CreateEntity(PlayerDto item)
+        {
+            if (item == null) return null;
 
-                return new Player
-                {
-                    Id = item.Id,
-                    FirstName = item.FirstName,
-                    LastName = item.LastName,
-                    Birthdate = item.Birthdate,
-                    FromDate = item.FromDate,
-                    Gender = item.Gender,
-                    LicenseNumber = item.LicenseNumber,
-                    Photo = item.Photo,
-                    PlaceOfBirth = item.PlaceOfBirth,
-                    Laterality = item.Laterality,
-                    CategoryId = item.CategoryId,
-                    CountryId = item.CountryId,
-                    Height = item.Height,
-                    Weight = item.Weight,
-                    ShoesSize = item.ShoesSize,
-                    Size = item.Size,
-                    AddressId = item.AddressId,
-                    Address = AddressFactory.CreateEntity(item.Address, item.PostalCode, item.City),
-                    Contacts = item.Phones.Select(ContactFactory.CreateEntity<Phone>).Concat(item.Emails.Select(ContactFactory.CreateEntity<Email>).Cast<Contact>()).ToList(),
-                    Positions = item.Positions.Select(CreatePosition).ToList()
-                };
-            }
+            return new Player
+            {
+                Id = item.Id,
+                FirstName = item.FirstName,
+                LastName = item.LastName,
+                Birthdate = item.Birthdate,
+                FromDate = item.FromDate,
+                Gender = item.Gender,
+                LicenseNumber = item.LicenseNumber,
+                Photo = item.Photo,
+                PlaceOfBirth = item.PlaceOfBirth,
+                Laterality = item.Laterality,
+                CountryId = item.CountryId,
+                Height = item.Height,
+                Weight = item.Weight,
+                ShoesSize = item.ShoesSize,
+                Size = item.Size,
+                AddressId = item.AddressId,
+                Address = AddressFactory.CreateEntity(item.Address, item.PostalCode, item.City),
+                Contacts = item.Phones.Select(ContactFactory.CreateEntity<Phone>).Concat(item.Emails.Select(ContactFactory.CreateEntity<Email>).Cast<Contact>()).ToList(),
+                Positions = item.Positions.Select(CreatePosition).ToList()
+            };
+        }
 
         /// <summary>
         /// Updates the entity.
@@ -62,7 +60,6 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
             entity.Photo = item.Photo;
             entity.PlaceOfBirth = item.PlaceOfBirth;
             entity.Laterality = item.Laterality;
-            entity.CategoryId = item.CategoryId;
             entity.CountryId = item.CountryId;
             entity.Height = item.Height;
             entity.Weight = item.Weight;
@@ -100,9 +97,7 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
                 Photo = player.Photo,
                 PlaceOfBirth = player.PlaceOfBirth,
                 Laterality = player.Laterality,
-                CategoryId = player.CategoryId,
                 CountryId = player.CountryId,
-                Category = CategoryFactory.Get(player.Category),
                 Country = CountryFactory.Get(player.Country),
                 Emails = player.Contacts.OfType<Email>().Select(ContactFactory.GetContact<EmailDto>),
                 Phones = player.Contacts.OfType<Phone>().Select(ContactFactory.GetContact<PhoneDto>),

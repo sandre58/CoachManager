@@ -1,8 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
-using My.CoachManager.Application.Dtos;
+﻿using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Extensions;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace My.CoachManager.Presentation.Models.Aggregates
 {
@@ -35,7 +35,6 @@ namespace My.CoachManager.Presentation.Models.Aggregates
                 Photo = item.Photo,
                 PlaceOfBirth = item.PlaceOfBirth,
                 Laterality = item.Laterality,
-                CategoryId = item.CategoryId,
                 CountryId = item.CountryId,
                 Height = item.Height,
                 Weight = item.Weight,
@@ -76,8 +75,6 @@ namespace My.CoachManager.Presentation.Models.Aggregates
                 Photo = dto.Photo,
                 PlaceOfBirth = dto.PlaceOfBirth,
                 Laterality = dto.Laterality,
-                CategoryId = dto.CategoryId,
-                Category = CategoryFactory.Get(dto.Category),
                 CountryId = dto.CountryId,
                 Country = CountryFactory.Get(dto.Country),
                 Height = dto.Height,
@@ -149,12 +146,11 @@ namespace My.CoachManager.Presentation.Models.Aggregates
 
             var result = new PlayerPositionModel
             {
-             Position = position,
-             PositionId = position.Id
+                Position = position,
+                PositionId = position.Id
             };
 
             return result;
         }
-
     }
 }

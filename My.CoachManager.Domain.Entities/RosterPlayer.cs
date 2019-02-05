@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using My.CoachManager.CrossCutting.Core.Enums;
+﻿using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.Domain.Core;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace My.CoachManager.Domain.Entities
 {
@@ -50,6 +50,17 @@ namespace My.CoachManager.Domain.Entities
         /// Gets or sets the player's squad.
         /// </summary>
         public Squad Squad { get; set; }
+
+        /// <summary>
+        /// Gets or sets the category id.
+        /// </summary>
+        [Required]
+        public int? CategoryId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the category.
+        /// </summary>
+        public Category Category { get; set; }
 
         /// <summary>
         /// Gets or sets the default player's number in the roster.

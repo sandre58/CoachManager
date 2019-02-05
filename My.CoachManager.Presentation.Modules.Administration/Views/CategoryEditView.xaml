@@ -37,8 +37,8 @@
                 Grid.Column="1" Grid.Row="0"
                     Minimum="1900" Interval="1"
                     Width="{StaticResource MediumWidth}"
-                    Value="{Binding Item.Year, UpdateSourceTrigger=PropertyChanged}"
-                    parameters:TextBoxParameters.Watermark="{x:Static strings:CategoryResources.Year}" />
+                    Value="{Binding Item.Age, UpdateSourceTrigger=PropertyChanged}"
+                    parameters:TextBoxParameters.Watermark="{x:Static strings:CategoryResources.Age}" />
             </Grid>
         </Grid>
 

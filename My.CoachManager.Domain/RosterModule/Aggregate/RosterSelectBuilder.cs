@@ -1,8 +1,8 @@
-﻿using System;
+﻿using My.CoachManager.Application.Dtos;
+using My.CoachManager.Domain.Entities;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
-using My.CoachManager.Application.Dtos;
-using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Domain.RosterModule.Aggregate
 {
@@ -48,6 +48,12 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
                 PlayerId = x.PlayerId,
                 RosterId = x.RosterId,
                 SquadId = x.SquadId,
+                CategoryId = x.CategoryId,
+                Category = x.Category != null ? new CategoryDto()
+                {
+                    Id = x.Category.Id,
+                    Label = x.Category.Label
+                } : null,
                 Player = x.Player != null ? new PlayerDto()
                 {
                     Id = x.Player.Id,
@@ -64,12 +70,6 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
                     Photo = x.Player.Photo,
                     PlaceOfBirth = x.Player.PlaceOfBirth,
                     Laterality = x.Player.Laterality,
-                    CategoryId = x.Player.CategoryId,
-                    Category = x.Player.Category != null ? new CategoryDto()
-                    {
-                        Id = x.Player.Category.Id,
-                        Label = x.Player.Category.Label
-                    } : null,
                     CountryId = x.Player.CountryId,
                     Country = x.Player.Country != null ? new CountryDto()
                     {

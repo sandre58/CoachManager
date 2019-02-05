@@ -49,7 +49,7 @@ namespace My.CoachManager.Domain.CategoryModule.Services
         /// <returns></returns>
         public bool IsUsed(int id)
         {
-            return _playerRepository.Any(x => x.CategoryId == id) || _rosterRepository.Any(x => x.CategoryId == id);
+            return _rosterRepository.Any(x => x.CategoryId == id);
         }
 
         /// <summary>

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using My.CoachManager.Application.Dtos;
+using System;
 using System.Collections.Generic;
-using My.CoachManager.Application.Dtos;
 
 namespace My.CoachManager.Application.Services.PersonModule
 {
@@ -37,6 +37,6 @@ namespace My.CoachManager.Application.Services.PersonModule
         /// Get category from birthdate.
         /// </summary>
         /// <returns></returns>
-        CategoryDto GetCategoryFromBirthdate(DateTime date);
+        CategoryDto GetCategoryFromDate(DateTime fromDate, DateTime toDate);
     }
 }

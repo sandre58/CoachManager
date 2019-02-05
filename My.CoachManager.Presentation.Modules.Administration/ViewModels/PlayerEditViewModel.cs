@@ -23,7 +23,7 @@ namespace My.CoachManager.Presentation.Modules.Administration.ViewModels
         /// <summary>
         /// Initialise a new instance of <see cref="PlayerEditViewModel"/>.
         /// </summary>
-        public PlayerEditViewModel(IPersonService personService, ICategoryService categoryService, IAddressService addressService, IPositionService positionService) : base(personService, categoryService, addressService, positionService)
+        public PlayerEditViewModel(IPersonService personService, ICategoryService categoryService, IAddressService addressService, IPositionService positionService) : base(personService, addressService, positionService)
         {
             _personService = personService;
         }

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using My.CoachManager.CrossCutting.Core.Constants;
+﻿using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Core.Resources.Entities;
+using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace My.CoachManager.Presentation.Models
 {
@@ -20,19 +20,6 @@ namespace My.CoachManager.Presentation.Models
             Positions = new ObservableCollection<PlayerPositionModel>();
             Injuries = new ObservableCollection<InjuryModel>();
         }
-
-        /// <summary>
-        /// Gets or sets the category id.
-        /// </summary>
-        [Display(Name = "Category", ResourceType = typeof(PlayerResources))]
-        [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(ValidationMessageResources))]
-        public int? CategoryId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the category.
-        /// </summary>
-        [Display(Name = "Category", ResourceType = typeof(PlayerResources))]
-        public CategoryModel Category { get; set; }
 
         /// <summary>
         /// Gets or sets the latérality.

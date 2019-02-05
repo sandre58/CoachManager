@@ -1,8 +1,8 @@
-﻿using System;
+﻿using My.CoachManager.Application.Dtos;
+using My.CoachManager.Domain.Entities;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
-using My.CoachManager.Application.Dtos;
-using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Domain.TrainingModule.Aggregate
 {
@@ -40,17 +40,17 @@ namespace My.CoachManager.Domain.TrainingModule.Aggregate
                     Id = x.Squad.Id,
                     Name = x.Squad.Name
                 } : null,
+                CategoryId = x.CategoryId,
+                Category = x.Category != null ? new CategoryDto()
+                {
+                    Id = x.Category.Id,
+                    Code = x.Category.Code,
+                    Label = x.Category.Label,
+                    Order = x.Category.Order
+                } : null,
                 Player = x.Player != null ? new PlayerDto()
                 {
                     Id = x.Player.Id,
-                    CategoryId = x.Player.CategoryId,
-                    Category = x.Player.Category != null ? new CategoryDto()
-                    {
-                        Id = x.Player.Category.Id,
-                        Code = x.Player.Category.Code,
-                        Label = x.Player.Category.Label,
-                        Order = x.Player.Category.Order
-                    } : null,
                     Gender = x.Player.Gender,
                     FirstName = x.Player.FirstName,
                     LastName = x.Player.LastName,

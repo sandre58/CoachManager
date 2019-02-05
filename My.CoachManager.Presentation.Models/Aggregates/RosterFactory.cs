@@ -1,8 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
-using My.CoachManager.Application.Dtos;
+﻿using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Extensions;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace My.CoachManager.Presentation.Models.Aggregates
 {
@@ -87,8 +87,8 @@ namespace My.CoachManager.Presentation.Models.Aggregates
                 Photo = dto.Player.Photo,
                 PlaceOfBirth = dto.Player.PlaceOfBirth,
                 Laterality = dto.Player.Laterality,
-                CategoryId = dto.Player.CategoryId,
-                Category = CategoryFactory.Get(dto.Player.Category),
+                CategoryId = dto.CategoryId,
+                Category = CategoryFactory.Get(dto.Category),
                 CountryId = dto.Player.CountryId,
                 Country = CountryFactory.Get(dto.Player.Country),
                 Height = dto.Player.Height,

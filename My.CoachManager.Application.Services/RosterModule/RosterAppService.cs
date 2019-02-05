@@ -6,6 +6,7 @@ using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.RosterModule.Aggregate;
 using My.CoachManager.Domain.RosterModule.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,12 +21,13 @@ namespace My.CoachManager.Application.Services.RosterModule
 
         private readonly IRepository<Roster> _rosterRepository;
         private readonly IRepository<RosterPlayer> _playerRosterRepository;
+        private readonly IRepository<Player> _playerRepository;
+        private readonly IRepository<Squad> _squadRepository;
+        private readonly IRepository<Category> _categoryRepository;
 
         private readonly ICrudDomainService<Roster, RosterDto> _crudDomainService;
         private readonly IRosterDomainService _rosterDomainService;
-
         private readonly IPlayerAppService _playerAppService;
-        private readonly ISquadAppService _squadAppService;
 
         #endregion ---- Fields ----
 
@@ -36,23 +38,29 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// </summary>
         /// <param name="rosterRepository"></param>
         /// <param name="playerRosterRepository"></param>
+        /// <param name="playerRepository"></param>
         /// <param name="crudDomainService"></param>
         /// <param name="rosterDomainService"></param>
+        /// <param name="squadRepository"></param>
+        /// <param name="categoryRepository"></param>
         /// <param name="playerAppService"></param>
-        /// <param name="squadAppService"></param>
         public RosterAppService(IRepository<Roster> rosterRepository,
             IRepository<RosterPlayer> playerRosterRepository,
+            IRepository<Player> playerRepository,
             ICrudDomainService<Roster, RosterDto> crudDomainService,
             IRosterDomainService rosterDomainService,
-            IPlayerAppService playerAppService,
-            ISquadAppService squadAppService)
+            IRepository<Squad> squadRepository,
+            IRepository<Category> categoryRepository,
+            IPlayerAppService playerAppService)
         {
             _rosterRepository = rosterRepository;
             _playerRosterRepository = playerRosterRepository;
+            _playerRepository = playerRepository;
             _crudDomainService = crudDomainService;
             _rosterDomainService = rosterDomainService;
+            _squadRepository = squadRepository;
+            _categoryRepository = categoryRepository;
             _playerAppService = playerAppService;
-            _squadAppService = squadAppService;
         }
 
         #endregion ---- Constructors ----
@@ -112,8 +120,7 @@ namespace My.CoachManager.Application.Services.RosterModule
                     .ThenInclude(x => x.Address)
                 .Include(x => x.Player)
                     .ThenInclude(x => x.Contacts)
-                .Include(x => x.Player)
-                    .ThenInclude(x => x.Category)
+                .Include(x => x.Category)
                 .Include(x => x.Player)
                     .ThenInclude(x => x.Country)
                 .Include(x => x.Player)
@@ -131,11 +138,17 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// <returns></returns>
         public void AddPlayers(int squadId, IEnumerable<int> playerIds)
         {
-            var squad = _squadAppService.GetSquadById(squadId);
+            var squad = _squadRepository.GetEntity(squadId);
+            var roster = _rosterRepository.GetEntity(squad.RosterId);
+            var players = _playerRepository.GetByFilter(x => playerIds.Contains(x.Id)).ToList();
+            var categories = _categoryRepository.GetAll().ToList();
 
-            foreach (var id in playerIds)
+            foreach (var player in players)
             {
-                    _playerRosterRepository.Add(RosterFactory.CreatePlayer(squad.RosterId, squadId, id));
+                var categoryId = player.Birthdate.HasValue ?
+                                 CalculateCategoryFromDateForSeason(player.Birthdate.Value, roster.Season, categories) : roster.CategoryId;
+                _playerRosterRepository.Add(RosterFactory.CreatePlayer(squad.RosterId, squadId, player.Id,
+                    categoryId));
             }
 
             _playerRosterRepository.UnitOfWork.Commit();
@@ -184,7 +197,7 @@ namespace My.CoachManager.Application.Services.RosterModule
                 .Include(x => x.Player)
                 .ThenInclude(x => x.Contacts)
                 .Include(x => x.Player)
-                .ThenInclude(x => x.Category)
+                .Include(x => x.Category)
                 .Include(x => x.Player)
                 .ThenInclude(x => x.Country)
                 .Include(x => x.Player)
@@ -216,6 +229,21 @@ namespace My.CoachManager.Application.Services.RosterModule
             dto.CrudStatus = CrudStatus.Unchanged;
 
             return entity.Id;
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="season"></param>
+        /// <param name="categories"></param>
+        /// <returns></returns>
+        private int CalculateCategoryFromDateForSeason(DateTime date, Season season, IEnumerable<Category> categories)
+        {
+            var toDate = season.StartDate ?? DateTime.Today;
+            var diffYear = toDate.Year - date.Year;
+
+            return categories.Where(x => x.Age <= diffYear).OrderBy(x => x.Age).First().Id;
         }
 
         #endregion Methods

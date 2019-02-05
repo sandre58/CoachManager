@@ -10,6 +10,6 @@ namespace My.CoachManager.Domain.Entities
         /// <summary>
         /// Gets or sets the Year.
         /// </summary>
-        public int? Year { get; set; }
+        public int? Age { get; set; }
     }
 }

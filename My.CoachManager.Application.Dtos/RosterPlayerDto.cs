@@ -1,5 +1,5 @@
-﻿using System.Runtime.Serialization;
-using My.CoachManager.CrossCutting.Core.Enums;
+﻿using My.CoachManager.CrossCutting.Core.Enums;
+using System.Runtime.Serialization;
 
 namespace My.CoachManager.Application.Dtos
 {
@@ -38,6 +38,18 @@ namespace My.CoachManager.Application.Dtos
         /// </summary>
         [DataMember]
         public SquadDto Squad { get; set; }
+
+        /// <summary>
+        /// Gets or sets the category id.
+        /// </summary>
+        [DataMember]
+        public int? CategoryId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the category.
+        /// </summary>
+        [DataMember]
+        public CategoryDto Category { get; set; }
 
         /// <summary>
         /// Gets or sets the default player's number in the roster.

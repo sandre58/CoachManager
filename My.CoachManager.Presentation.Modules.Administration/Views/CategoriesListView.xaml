@@ -22,7 +22,7 @@
 
                     <!-- Action -->
                     <columns:ActionsGridViewColumn />
-                    
+
                     <!-- Order -->
                     <columns:OrderGridViewColumn />
 
@@ -36,11 +36,10 @@
                         </columns:ExtendedGridViewColumn.CellTemplate>
                     </columns:ExtendedGridViewColumn>
 
-                    <!-- Year -->
-                    <columns:ExtendedGridViewColumn Header="{x:Static strings:CategoryResources.Year}"
-                                                     DisplayMemberBinding="{Binding Year}"
+                    <!-- Age -->
+                    <columns:ExtendedGridViewColumn Header="{x:Static strings:CategoryResources.Age}"
+                                                     DisplayMemberBinding="{Binding Age}"
                                                      PropertyName="Year" />
-
                 </controls:ExtendedGridView>
             </controls:ItemsListView.View>
         </controls:ItemsListView>
