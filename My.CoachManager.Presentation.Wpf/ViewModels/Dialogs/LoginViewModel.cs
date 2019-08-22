@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using My.CoachManager.CrossCutting.Core.Resources;
-using My.CoachManager.Presentation.Core.Dialog;
-using My.CoachManager.Presentation.Core.ViewModels;
+using My.CoachManager.Presentation.Wpf.Core.Dialog;
+using My.CoachManager.Presentation.Wpf.Core.ViewModels.Base;
 
 namespace My.CoachManager.Presentation.Wpf.ViewModels.Dialogs
 {
@@ -38,7 +38,7 @@ namespace My.CoachManager.Presentation.Wpf.ViewModels.Dialogs
 
         #endregion Properties
 
-        #region Msthods
+        #region Methods
 
         public override void Close(DialogResult? dialogResult)
         {
@@ -60,5 +60,17 @@ namespace My.CoachManager.Presentation.Wpf.ViewModels.Dialogs
         }
 
         #endregion
+
+        #region Data
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Load data.
+        /// </summary>
+        protected override void LoadDataCore()
+        {
+        }
+
+        #endregion Data
     }
 }

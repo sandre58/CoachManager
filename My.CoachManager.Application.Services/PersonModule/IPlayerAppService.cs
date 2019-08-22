@@ -1,6 +1,7 @@
-﻿using My.CoachManager.Application.Dtos;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using My.CoachManager.Application.Dtos;
+using My.CoachManager.Application.Dtos.Parameters;
+using My.CoachManager.Application.Dtos.Results;
 
 namespace My.CoachManager.Application.Services.PersonModule
 {
@@ -13,7 +14,7 @@ namespace My.CoachManager.Application.Services.PersonModule
         /// Load all items.
         /// </summary>
         /// <returns></returns>
-        IList<PlayerDto> GetPlayers();
+        ListResultDto<PlayerDto> GetPlayers(PlayersListParametersDto parameters);
 
         /// <summary>
         /// Get a player.
@@ -31,7 +32,7 @@ namespace My.CoachManager.Application.Services.PersonModule
         /// Remove a dto.
         /// </summary>
         /// <returns></returns>
-        void RemovePlayer(PlayerDto dto);
+        void RemovePlayer(int id);
 
         /// <summary>
         /// Get category from birthdate.

@@ -34,9 +34,10 @@ namespace My.CoachManager.Presentation.Models.Aggregates
         /// Convert the model to DTO.
         /// </summary>
         /// <param name="item">The model.</param>
+        /// <param name="rosterId"></param>
         /// <param name="crudStatus">The crud status.</param>
         /// <returns>The DTO from the model.</returns>
-        public static SquadDto Get(SquadModel item, CrudStatus crudStatus)
+        public static SquadDto Get(SquadModel item, int rosterId, CrudStatus crudStatus)
         {
             if (item == null) return null;
 
@@ -44,7 +45,8 @@ namespace My.CoachManager.Presentation.Models.Aggregates
             {
                 CrudStatus = crudStatus,
                 Id = item.Id,
-                Name = item.Name
+                Name = item.Name,
+                RosterId = rosterId
             };
         }
     }

@@ -1,0 +1,45 @@
+﻿<controls:WorkspaceView x:Class="My.CoachManager.Presentation.Wpf.Modules.Roster.Views.SelectSquadsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:models="clr-namespace:My.CoachManager.Presentation.Models;assembly=My.CoachManager.Presentation.Models"
+             xmlns:controls="clr-namespace:My.CoachManager.Presentation.Wpf.Controls;assembly=My.CoachManager.Presentation.Wpf.Controls"
+             xmlns:columns="clr-namespace:My.CoachManager.Presentation.Wpf.Controls.GridViews.Columns;assembly=My.CoachManager.Presentation.Wpf.Controls"
+             xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Wpf.Modules.Roster.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=viewModels:SelectSquadsViewModel}"
+             d:DesignHeight="500" d:DesignWidth="800"
+             Style="{StaticResource SelectItemsWorkspaceViewStyle}"
+             Height="600" Width="800">
+
+    <!-- Commands -->
+    <controls:WorkspaceView.Commands>
+        <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CancelCommand}" Style="{StaticResource CancelCommandButtonApplicationBarStyle}" IsCancel="True" />
+        <controls:CommandButton DockPanel.Dock="Right" Command="{Binding ValidateSelectionCommand}" Style="{StaticResource SelectCommandButtonApplicationBarStyle}" IsDefault="True" />
+        <controls:CommandButton DockPanel.Dock="Right" Command="{Binding RefreshCommand}" Style="{StaticResource RefreshCommandButtonApplicationBarStyle}" />
+    </controls:WorkspaceView.Commands>
+
+    <!-- Items -->
+    <controls:ItemsListView ItemsSource="{Binding Items}">
+        <controls:ItemsListView.View>
+            <controls:ExtendedGridView VisibleColumns="{Binding ListParameters.DisplayedColumns}">
+
+                <!-- Selection -->
+                <columns:SelectionGridViewColumn />
+
+                <!-- Name -->
+                <columns:ExtendedGridViewColumn Header="{x:Static strings:SquadResources.Name}" Width="300"
+                                                PropertyName="Name">
+                    <columns:ExtendedGridViewColumn.CellTemplate>
+                        <DataTemplate DataType="models:RosterModel">
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" FontWeight="DemiBold" />
+                        </DataTemplate>
+                    </columns:ExtendedGridViewColumn.CellTemplate>
+                </columns:ExtendedGridViewColumn>
+
+            </controls:ExtendedGridView>
+        </controls:ItemsListView.View>
+    </controls:ItemsListView>
+</controls:WorkspaceView>

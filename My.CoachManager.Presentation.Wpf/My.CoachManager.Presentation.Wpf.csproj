@@ -1,19 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\PropertyChanged.Fody.3.0.1\build\PropertyChanged.Fody.props" Condition="Exists('..\packages\PropertyChanged.Fody.3.0.1\build\PropertyChanged.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E517CE44-0704-4BDF-8894-F90434C68931}</ProjectGuid>
+    <ProjectGuid>{A49C4D48-DC7E-4823-BA2A-2001BA1341CD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>My.CoachManager.Presentation.Wpf</RootNamespace>
     <AssemblyName>My.CoachManager.Presentation.Wpf</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <TargetFrameworkProfile />
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -26,7 +27,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,161 +36,165 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>
-    </StartupObject>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - Modis|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - Sopra|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug - Modis\</OutputPath>
+    <OutputPath>bin\Debug - Sopra\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
-    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions">
+      <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.http.abstractions\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Prism, Version=7.0.0.396, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.Core.7.0.0.396\lib\net45\Prism.dll</HintPath>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.6.6\lib\net45\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="Prism.Unity.Wpf, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.Unity.6.3.0\lib\net45\Prism.Unity.Wpf.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Prism, Version=7.2.0.1367, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.2.0.1367\lib\net45\Prism.dll</HintPath>
     </Reference>
-    <Reference Include="Prism.Wpf, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\Prism.Wpf.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Prism.Unity.Wpf, Version=7.2.0.1367, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Unity.7.2.0.1367\lib\net45\Prism.Unity.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="PropertyChanged, Version=2.5.9.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
-      <HintPath>..\packages\PropertyChanged.Fody.2.5.9\lib\net452\PropertyChanged.dll</HintPath>
+    <Reference Include="Prism.Wpf, Version=7.2.0.1367, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1367\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyChanged, Version=3.0.1.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.3.0.1\lib\net452\PropertyChanged.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.4.5.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.4.5.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.5.1\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1367\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=4.1.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.4.1.3\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.10.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.10.3\lib\net47\Unity.Container.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Interactivity\WorkspaceDialogAction.cs" />
-    <Compile Include="Resources\AboutResources.Designer.cs">
-      <DependentUpon>AboutResources.resx</DependentUpon>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Resources\CoachManagerResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>CoachManagerResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\MenuResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>MenuResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\CoachManagerResources.Designer.cs">
-      <DependentUpon>CoachManagerResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Resources\SkinResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SkinResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\DialogService.cs" />
-    <Compile Include="Services\SettingsService.cs" />
-    <Compile Include="Services\NotificationService.cs" />
-    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
-    <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\NotificationService.cs" />
+    <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="ViewLocationProvider.cs" />
     <Compile Include="ViewModels\Dialogs\LoginViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\MessageViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
-    <ApplicationDefinition Include="App.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </ApplicationDefinition>
     <Compile Include="ViewModels\SplashScreenViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
-    <Compile Include="Views\WindowCommands\AboutCommand.xaml.cs">
-      <DependentUpon>AboutCommand.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AboutView.xaml.cs">
-      <DependentUpon>AboutView.xaml</DependentUpon>
+    <Compile Include="Views\Dialogs\CustomDialog.xaml.cs">
+      <DependentUpon>CustomDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialogs\LoginDialog.xaml.cs">
       <DependentUpon>LoginDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Dialogs\MessageDialog.xaml.cs">
+      <DependentUpon>MessageDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shell.xaml.cs">
+      <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Dialogs\MessageDialog.xaml.cs">
-      <DependentUpon>MessageDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dialogs\CustomDialog.xaml.cs">
-      <DependentUpon>CustomDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\StatusBarView.xaml.cs">
       <DependentUpon>StatusBarView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Skins\Menu\Azur.xaml">
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interactivity\WorkspaceDialogAction.cs" />
+    <Page Include="Skins\Accent\Azur.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Skins\Menu\Blue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Skins\Menu\Gold.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Skins\Menu\Green.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Skins\Menu\Orange.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Skins\Menu\Pink.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Skins\Menu\Purple.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Skins\Menu\Red.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Skins\Menu\Yellow.xaml">
+    <Page Include="Skins\Accent\Blue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -202,23 +206,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Skins\Accent\Azur.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Skins\Accent\Pink.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Skins\Accent\Orange.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Skins\Accent\Yellow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Skins\Accent\Blue.xaml">
+    <Page Include="Skins\Accent\Pink.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -227,6 +219,46 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Skins\Accent\Red.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\Accent\Yellow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\SecondaryAccent\Azur.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\SecondaryAccent\Blue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\SecondaryAccent\Gold.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\SecondaryAccent\Green.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\SecondaryAccent\Orange.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\SecondaryAccent\Pink.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\SecondaryAccent\Purple.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\SecondaryAccent\Red.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Skins\SecondaryAccent\Yellow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -242,11 +274,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\WindowCommands\AboutCommand.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\AboutView.xaml">
+    <Page Include="Views\Dialogs\CustomDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -254,19 +282,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\MainMenuView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\SplashScreen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\Dialogs\MessageDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Dialogs\CustomDialog.xaml">
+    <Page Include="Views\MainMenuView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -274,11 +294,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Views\Shell.xaml.cs">
-      <DependentUpon>Shell.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="Views\SplashScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\StatusBarView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -302,25 +321,23 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\AboutResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AboutResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\MenuResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>MenuResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\CoachManagerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CoachManagerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MenuResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MenuResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\SkinResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SkinResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="App.Debug - Modis.config">
+    <Resource Include="FodyWeavers.xml" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="App.Debug - Sopra.config">
       <DependentUpon>App.config</DependentUpon>
       <IsTransformFile>true</IsTransformFile>
     </None>
@@ -332,16 +349,11 @@
       <DependentUpon>App.config</DependentUpon>
       <IsTransformFile>true</IsTransformFile>
     </None>
-    <None Include="NLog.config">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -351,94 +363,87 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\My.CoachManager.Application.Dtos\My.CoachManager.Application.Dtos.csproj">
-      <Project>{2A887BE7-A2F5-4CD8-9FD6-AF1ADB53B874}</Project>
+      <Project>{D652431E-B9BB-47BE-A6EB-8DE067C5100D}</Project>
       <Name>My.CoachManager.Application.Dtos</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.CrossCutting.Core\My.CoachManager.CrossCutting.Core.csproj">
-      <Project>{69f4e1a5-acae-4431-9723-3db4de847bc9}</Project>
+      <Project>{8B02EDA3-1ED0-4CBB-A90A-FE53609B1F25}</Project>
       <Name>My.CoachManager.CrossCutting.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.CrossCutting.Logging.Supervision\My.CoachManager.CrossCutting.Logging.Supervision.csproj">
-      <Project>{ff822bfd-cb92-482d-ba26-a1398012777a}</Project>
+      <Project>{0531C382-1764-454A-A99D-9D1FBD2DD160}</Project>
       <Name>My.CoachManager.CrossCutting.Logging.Supervision</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.CrossCutting.Logging\My.CoachManager.CrossCutting.Logging.csproj">
-      <Project>{381d433d-9f76-4286-b0f5-7209e477b22b}</Project>
+      <Project>{38F32D3D-BCD4-4EEB-9174-38FCF6DA9EEA}</Project>
       <Name>My.CoachManager.CrossCutting.Logging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.Controls\My.CoachManager.Presentation.Controls.csproj">
-      <Project>{A554F212-3F08-4AEF-B9AA-FA01A7491A7F}</Project>
-      <Name>My.CoachManager.Presentation.Controls</Name>
-    </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Core\My.CoachManager.Presentation.Core.csproj">
-      <Project>{3f11e745-d328-4654-a3c9-4bfc9bf6b9ab}</Project>
+      <Project>{3573a892-e81f-4ff2-a012-2adb0f7c82a2}</Project>
       <Name>My.CoachManager.Presentation.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Models\My.CoachManager.Presentation.Models.csproj">
-      <Project>{c2647100-4bd2-49f0-8a22-a0cd1ea37c1e}</Project>
+      <Project>{79484adb-7c37-40ad-bfd0-c74f65c9b578}</Project>
       <Name>My.CoachManager.Presentation.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.Modules.Administration\My.CoachManager.Presentation.Modules.Administration.csproj">
-      <Project>{4ca93004-d321-4897-a8ad-ef368d5bd57e}</Project>
-      <Name>My.CoachManager.Presentation.Modules.Administration</Name>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Wpf.Controls\My.CoachManager.Presentation.Wpf.Controls.csproj">
+      <Project>{752f14e6-5d54-40ae-ae9e-c3809e390a47}</Project>
+      <Name>My.CoachManager.Presentation.Wpf.Controls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.Modules.Home\My.CoachManager.Presentation.Modules.Home.csproj">
-      <Project>{b72a3d9c-efa7-43a8-a01e-cdeeb9f59c28}</Project>
-      <Name>My.CoachManager.Presentation.Modules.Home</Name>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Wpf.Core\My.CoachManager.Presentation.Wpf.Core.csproj">
+      <Project>{252d8fd5-9154-46a5-82e4-8f515df4ab31}</Project>
+      <Name>My.CoachManager.Presentation.Wpf.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.Modules.Roster\My.CoachManager.Presentation.Modules.Roster.csproj">
-      <Project>{fe218964-5ef0-42eb-a7d1-2afeb44d5b01}</Project>
-      <Name>My.CoachManager.Presentation.Modules.Roster</Name>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Wpf.Module.Training\My.CoachManager.Presentation.Wpf.Modules.Training.csproj">
+      <Project>{535716ae-40b9-4523-a30a-626c0024ca8f}</Project>
+      <Name>My.CoachManager.Presentation.Wpf.Modules.Training</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.Modules.Settings\My.CoachManager.Presentation.Modules.Settings.csproj">
-      <Project>{e4990450-8387-40f8-b2da-a9badb0edbcf}</Project>
-      <Name>My.CoachManager.Presentation.Modules.Settings</Name>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Wpf.Modules.About\My.CoachManager.Presentation.Wpf.Modules.About.csproj">
+      <Project>{3993cf42-aef3-486e-9b97-076e12df85dc}</Project>
+      <Name>My.CoachManager.Presentation.Wpf.Modules.About</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.Modules.Shared\My.CoachManager.Presentation.Modules.Shared.csproj">
-      <Project>{9904bc67-a287-4fce-9607-730b15e3f105}</Project>
-      <Name>My.CoachManager.Presentation.Modules.Shared</Name>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Wpf.Modules.Admin\My.CoachManager.Presentation.Wpf.Modules.Admin.csproj">
+      <Project>{ea73acf0-02c6-4daf-ae9c-8a05fe8d193e}</Project>
+      <Name>My.CoachManager.Presentation.Wpf.Modules.Admin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.Modules.Training\My.CoachManager.Presentation.Modules.Training.csproj">
-      <Project>{47814de5-8433-40e3-9c2a-a7e5e1ece74c}</Project>
-      <Name>My.CoachManager.Presentation.Modules.Training</Name>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Wpf.Modules.Home\My.CoachManager.Presentation.Wpf.Modules.Home.csproj">
+      <Project>{5fcfcee9-89d8-4098-8316-2cf66a51146c}</Project>
+      <Name>My.CoachManager.Presentation.Wpf.Modules.Home</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.Resources\My.CoachManager.Presentation.Resources.csproj">
-      <Project>{2d290fd9-5b64-4af4-a295-2b4cde6eb330}</Project>
-      <Name>My.CoachManager.Presentation.Resources</Name>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Wpf.Modules.Roster\My.CoachManager.Presentation.Wpf.Modules.Roster.csproj">
+      <Project>{393cd534-a597-4ff7-bbcd-89dcb1ecb24e}</Project>
+      <Name>My.CoachManager.Presentation.Wpf.Modules.Roster</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.ServiceAgent\My.CoachManager.Presentation.ServiceAgent.csproj">
-      <Project>{1a6aeeab-7175-4cea-90a6-68b064ab65dc}</Project>
-      <Name>My.CoachManager.Presentation.ServiceAgent</Name>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Wpf.Modules.Settings\My.CoachManager.Presentation.Wpf.Modules.Settings.csproj">
+      <Project>{e89b6f8c-4694-41fa-9585-508d83e7febf}</Project>
+      <Name>My.CoachManager.Presentation.Wpf.Modules.Settings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Presentation.SkinManager\My.CoachManager.Presentation.SkinManager.csproj">
-      <Project>{55a0bcd1-8ef9-49a7-8ca2-bfb7167e62c0}</Project>
-      <Name>My.CoachManager.Presentation.SkinManager</Name>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Wpf.Modules.Shared\My.CoachManager.Presentation.Wpf.Modules.Shared.csproj">
+      <Project>{91372CD6-918D-4F1C-9FA1-0EC9EC579D1D}</Project>
+      <Name>My.CoachManager.Presentation.Wpf.Modules.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\My.CoachManager.Services.Core\My.CoachManager.Services.Core.csproj">
-      <Project>{196ca01e-80fc-4807-9af4-ef97f1c90aae}</Project>
-      <Name>My.CoachManager.Services.Core</Name>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Wpf.Modules.User\My.CoachManager.Presentation.Wpf.Modules.User.csproj">
+      <Project>{0bc34a62-3f86-4555-90bc-82265c093164}</Project>
+      <Name>My.CoachManager.Presentation.Wpf.Modules.User</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Wpf.Resources\My.CoachManager.Presentation.Wpf.Resources.csproj">
+      <Project>{1b66bf52-53ee-4a77-8f43-8c721921cda3}</Project>
+      <Name>My.CoachManager.Presentation.Wpf.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Wpf.SkinManager\My.CoachManager.Presentation.Wpf.SkinManager.csproj">
+      <Project>{8339c1ed-e328-43ae-b44b-3e320426f443}</Project>
+      <Name>My.CoachManager.Presentation.Wpf.SkinManager</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="FodyWeavers.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\beaumont.png" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Fody.3.1.3\build\Fody.targets" Condition="Exists('..\packages\Fody.3.1.3\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.3.1.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.3.1.3\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.SlowCheetah.3.2.20\build\Microsoft.VisualStudio.SlowCheetah.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.SlowCheetah.3.2.20\build\Microsoft.VisualStudio.SlowCheetah.targets'))" />
+    <Error Condition="!Exists('..\packages\Fody.5.1.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.5.1.1\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\PropertyChanged.Fody.3.0.1\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PropertyChanged.Fody.3.0.1\build\PropertyChanged.Fody.props'))" />
   </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <Import Project="..\packages\Microsoft.VisualStudio.SlowCheetah.3.2.20\build\Microsoft.VisualStudio.SlowCheetah.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.SlowCheetah.3.2.20\build\Microsoft.VisualStudio.SlowCheetah.targets')" />
+  <Import Project="..\packages\Fody.5.1.1\build\Fody.targets" Condition="Exists('..\packages\Fody.5.1.1\build\Fody.targets')" />
 </Project>

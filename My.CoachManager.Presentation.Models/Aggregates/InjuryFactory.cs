@@ -11,9 +11,10 @@ namespace My.CoachManager.Presentation.Models.Aggregates
         /// Convert the model to DTO.
         /// </summary>
         /// <param name="model">The model.</param>
+        /// <param name="playerId"></param>
         /// <param name="crudStatus">The crud status.</param>
         /// <returns>The DTO from the model.</returns>
-        public static InjuryDto Get(InjuryModel model, CrudStatus crudStatus)
+        public static InjuryDto Get(InjuryModel model, int playerId, CrudStatus crudStatus)
         {
             return new InjuryDto
             {
@@ -24,7 +25,8 @@ namespace My.CoachManager.Presentation.Models.Aggregates
                 Type = model.Type,
                 Condition = model.Condition,
                 ExpectedReturn = model.ExpectedReturn,
-                Severity = model.Severity
+                Severity = model.Severity,
+                PlayerId = playerId
             };
         }
 

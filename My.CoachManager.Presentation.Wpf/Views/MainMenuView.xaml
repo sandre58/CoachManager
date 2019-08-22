@@ -4,110 +4,88 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:prism="http://prismlibrary.com/"
-        xmlns:core="clr-namespace:My.CoachManager.Presentation.Core;assembly=My.CoachManager.Presentation.Core"
-        xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Wpf.ViewModels"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:behaviours="clr-namespace:My.CoachManager.Presentation.Controls.Behaviours;assembly=My.CoachManager.Presentation.Controls"
-        xmlns:properties="clr-namespace:My.CoachManager.Presentation.Wpf.Properties"
+        xmlns:behaviours="clr-namespace:My.CoachManager.Presentation.Wpf.Controls.Behaviours;assembly=My.CoachManager.Presentation.Wpf.Controls"
+        xmlns:core="clr-namespace:My.CoachManager.Presentation.Wpf.Core;assembly=My.CoachManager.Presentation.Wpf.Core"
+        xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Wpf.ViewModels"
         xmlns:resources="clr-namespace:My.CoachManager.Presentation.Wpf.Resources"
-        xmlns:controls="clr-namespace:My.CoachManager.Presentation.Controls;assembly=My.CoachManager.Presentation.Controls"
-        xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Controls.Parameters;assembly=My.CoachManager.Presentation.Controls"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel}"
-             d:DesignWidth="300"
-             d:DesignHeight="700">
+        d:DesignWidth="275"
+        d:DesignHeight="700">
 
+    <i:Interaction.Behaviors>
+        <behaviours:ResizeBehavior CollapsedSize="50" ExpandedSize="275" IsExpanded="{Binding IsMenuExpended}" />
+    </i:Interaction.Behaviors>
+    
     <Grid>
-        <Border VerticalAlignment="Stretch" Background="{DynamicResource MainMenu}" Effect="{DynamicResource RightShadow}">
+        <Border VerticalAlignment="Stretch" Background="{DynamicResource DarkAccent}" Effect="{DynamicResource RightShadow}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition>
-                        <i:Interaction.Behaviors>
-                            <behaviours:ToggleColumnSizeBehavior CollapsedSize="50" ExpandedSize="275" ToggleValue="{Binding IsMenuExpended}" />
-                        </i:Interaction.Behaviors>
-                    </ColumnDefinition>
-                </Grid.ColumnDefinitions>
 
                 <!-- Header -->
-                <Border Grid.Row="0" Height="150" Background="{DynamicResource White}">
-                    <Border Background="{DynamicResource LightMainMenu}">
-                        <Grid Margin="{StaticResource DefaultMargin}">
+                <Grid Margin="{StaticResource DefaultMargin}" Height="100">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Large Logo -->
+                        <Image
+                            Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"
+                            Source="pack://application:,,,/My.CoachManager.Presentation.Wpf.Resources;component/Pictures/CoachManager.png"
+                            SnapsToDevicePixels="False"
+                            RenderOptions.BitmapScalingMode="Fant" Margin="{StaticResource MediumMargin}"
+                            Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                    <!-- Small Logo -->
+                    <Image Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Source="pack://application:,,,/My.CoachManager.Presentation.Wpf.Resources;component/Pictures/CoachManager.png"
+                        SnapsToDevicePixels="False"
+                        RenderOptions.BitmapScalingMode="Fant"  Margin="{StaticResource DefaultMargin}"
+                        Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}"/>
+
+                    <!-- Text -->
+                    <Grid Grid.Row="0" Grid.Column="1" 
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          Margin="{StaticResource DefaultMargin}"
+                          Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Grid.RowDefinitions>
-                            <RowDefinition MaxHeight="90" Height="*" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition MaxWidth="90" Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
 
-                        <!-- Logo -->
-                        <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"
-                              Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <Ellipse Fill="{DynamicResource MenuForeground}" Stroke="{DynamicResource MenuForeground}" StrokeThickness="1" />
-                            <Image
-                                Source="{Binding Source={x:Static properties:Settings.Default}, Path=ClubLogo, Mode=OneWay}"
-                                SnapsToDevicePixels="False"
-                                RenderOptions.BitmapScalingMode="Fant"  Margin="{StaticResource MediumMargin}" />
-                        </Grid>
-                        <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
-                              Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}">
-                            <Ellipse Fill="{DynamicResource MenuForeground}" Stroke="{DynamicResource MenuForeground}" StrokeThickness="1" />
-                            <Image
-                                Source="{Binding Source={x:Static properties:Settings.Default}, Path=ClubLogo, Mode=OneWay}"
-                                SnapsToDevicePixels="False"
-                                RenderOptions.BitmapScalingMode="Fant"  Margin="{StaticResource DefaultMargin}" />
-                        </Grid>
+                        <TextBlock Grid.Row="0"  Text="{x:Static resources:CoachManagerResources.ApplicationTitlePart1}"
+                                   Style="{StaticResource LargeHeaderStyle}"
+                                   FontFamily="{StaticResource HeaderFontFamily}"
+                                   Foreground="{DynamicResource AccentForeground}"
+                                   FontStyle="Italic"
+                                   VerticalAlignment="Bottom"
+                                   Typography.Capitals="AllSmallCaps" />
 
-                        <!-- Title -->
-                        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" 
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    Margin="{StaticResource DefaultMargin}"
-                                    Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <TextBlock 
-                                Text="{Binding Source={x:Static properties:Settings.Default}, Path=ClubName, Mode=OneWay, Converter={StaticResource ToUpperConverter}}"
-                                Style="{StaticResource HeaderStyle}"
-                                Foreground="{DynamicResource MenuForeground}" />
-                            <TextBlock Text="{Binding Roster.Name, Converter={StaticResource ToUpperConverter}}" Style="{StaticResource SmallHeaderStyle}" Foreground="{DynamicResource Accent}" />
-                            <TextBlock Text="{Binding Roster.Season.Label, StringFormat={x:Static resources:MenuResources.Season}}" Foreground="{DynamicResource GrayForeground}" Margin="0" />
-                        </StackPanel>
-
-                        <!-- Informations -->
-                        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="{StaticResource MediumTopMargin}"
-                              Visibility="{Binding IsMenuExpended, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Roster.Squads.Count, StringFormat={x:Static resources:MenuResources.SquadCount}}" FontStyle="Italic" />
-                                    <Button Style="{StaticResource RemoveButtonStyle}"
-                                            Width="18" Height="18"
-                                            Command="{Binding RemoveSquadCommand}"
-                                            ToolTip="{x:Static resources:MenuResources.RemoveSquad}" Margin="{StaticResource DefaultHorizontalMargin}" />
-                                    <Button Style="{StaticResource AddButtonStyle}"
-                                            Width="18" Height="18"
-                                            Command="{Binding AddSquadCommand}"
-                                            ToolTip="{x:Static resources:MenuResources.AddSquad}" Margin="{StaticResource DefaultHorizontalMargin}" />
-                                    </StackPanel>
-
-                                    <Button Style="{StaticResource IconAndTextButtonStyle}" 
-                                            Command="{Binding SetRosterCommand}" 
-                                            parameters:ButtonParameters.ButtonAlignment="Right"
-                                            parameters:ControlParameters.Icon="{StaticResource ArrowRightGeometry}"
-                                            Content="{x:Static resources:MenuResources.SetRoster}"  Margin="{StaticResource MediumTopMargin}" HorizontalAlignment="Right"/>
-                                
-                            </StackPanel>
-                        </Grid>
-
+                        <TextBlock  Grid.Row="1"  Text="{x:Static resources:CoachManagerResources.ApplicationTitlePart2}"
+                                    Style="{StaticResource LargeHeaderStyle}"
+                                    FontFamily="{StaticResource HeaderFontFamily}"
+                                    Foreground="{DynamicResource AccentForeground}"
+                                    FontStyle="Italic"
+                                    VerticalAlignment="top"
+                                    Typography.Capitals="AllSmallCaps" />
                     </Grid>
-                    </Border>
-                </Border>
 
-                <!-- Navigation Region -->
-                <ItemsControl Grid.Row="1" Grid.Column="0" prism:RegionManager.RegionName="{x:Static core:RegionNames.NavigationRegion}" Focusable="False" Margin="{StaticResource VeryVeryLargeVerticalMargin}" />
+                </Grid>
+
+                <!-- Top Navigation Region -->
+                <ItemsControl Grid.Row="1" Grid.Column="0" prism:RegionManager.RegionName="{x:Static core:RegionNames.TopNavigationRegion}" Focusable="False" Margin="{StaticResource VeryVeryLargeVerticalMargin}" />
+
+                <!-- Bottom Navigation Region -->
+                <ItemsControl Grid.Row="2" Grid.Column="0" prism:RegionManager.RegionName="{x:Static core:RegionNames.BottomNavigationRegion}" Focusable="False" />
+
             </Grid>
         </Border>
         
@@ -119,6 +97,6 @@
                       Width="30" Height="30"
                       VerticalAlignment="Bottom"
                       HorizontalAlignment="Right"
-                      Margin="0 0 -15 40" />
+                      Margin="0 0 -15 60" />
     </Grid>
 </UserControl>

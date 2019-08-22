@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Windows;
 
 namespace My.CoachManager.CrossCutting.Core.Helpers
 {
@@ -211,23 +210,6 @@ namespace My.CoachManager.CrossCutting.Core.Helpers
         public static DateTime LastDayOfMonth(this DateTime value)
         {
             return new DateTime(value.Year, value.Month, value.DaysInMonth());
-        }
-
-        // This is specifically for Calendar.  It switches which year is at the beginning or end of the string.
-        public static string ToDecadeRangeString(int decade, FrameworkElement fe)
-        {
-            string result = string.Empty;
-            DateTimeFormatInfo format = GetDateFormat(GetCulture());
-
-            if (format != null)
-            {
-                bool isRightToLeft = fe.FlowDirection == FlowDirection.RightToLeft;
-                int decadeRight = isRightToLeft ? decade : (decade + 9);
-                int decadeLeft = isRightToLeft ? (decade + 9) : decade;
-                result = decadeLeft.ToString(format) + "-" + decadeRight.ToString(format);
-            }
-
-            return result;
         }
 
         public static string ToYearMonthPatternString(DateTime? date, CultureInfo culture)

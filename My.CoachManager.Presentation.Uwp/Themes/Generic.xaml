@@ -1,0 +1,17 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <ResourceDictionary.MergedDictionaries>
+
+        <ResourceDictionary Source="_Converters.xaml"/>
+        <ResourceDictionary Source="_Geometries.xaml"/>
+        <ResourceDictionary Source="_FontSizes.xaml"/>
+        <ResourceDictionary Source="_Margins.xaml"/>
+
+        <ResourceDictionary Source="../Styles/ContentControl.xaml"/>
+        <ResourceDictionary Source="../Styles/NavigationView.xaml"/>
+        <ResourceDictionary Source="../Styles/TextBlock.xaml"/>
+        <ResourceDictionary Source="../Styles/WorkspaceView.xaml"/>
+        <ResourceDictionary Source="../Styles/DataListView.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

@@ -1,8 +1,9 @@
-﻿using My.CoachManager.Application.Dtos;
-using My.CoachManager.Domain.Entities;
-using System;
+﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+
+using My.CoachManager.Application.Dtos;
+using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Domain.RosterModule.Aggregate
 {

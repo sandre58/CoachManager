@@ -1,4 +1,5 @@
 ﻿using System;
+
 using My.CoachManager.CrossCutting.Core.Enums;
 
 namespace My.CoachManager.Presentation.Core.Models.Filters
@@ -8,12 +9,12 @@ namespace My.CoachManager.Presentation.Core.Models.Filters
     /// </summary>
     public class DateFilter : ComparableFilter<DateTime>
     {
-        public DateFilter(string propertyName) : base(propertyName)
+        public DateFilter(string propertyName, bool isFixed = false) : base(propertyName,isFixed)
         {
         }
 
-        public DateFilter(string propertyName, ComplexComparableOperator comparaison, DateTime from, DateTime to) : base(
-            propertyName, comparaison, from, to)
+        public DateFilter(string propertyName, ComplexComparableOperator comparaison, DateTime from, DateTime to, bool isFixed = false) : base(
+            propertyName, comparaison, from, to,isFixed)
         {
         }
 

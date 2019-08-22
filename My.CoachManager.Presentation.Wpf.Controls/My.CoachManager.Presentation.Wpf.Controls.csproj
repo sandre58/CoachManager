@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{752F14E6-5D54-40AE-AE9E-C3809E390A47}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>My.CoachManager.Presentation.Wpf.Controls</RootNamespace>
+    <AssemblyName>My.CoachManager.Presentation.Wpf.Controls</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - Sopra|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug - Sopra\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Prism, Version=7.2.0.1367, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.2.0.1367\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=7.2.0.1367, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1367\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1367\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdornedControl.cs" />
+    <Compile Include="AdornedControls\AdornerPlacement.cs" />
+    <Compile Include="AdornedControls\FrameworkElementAdorner.cs" />
+    <Compile Include="ApplicationBar.cs" />
+    <Compile Include="Badged.cs" />
+    <Compile Include="BadgedBase.cs" />
+    <Compile Include="Behaviours\FadeBehavior.cs" />
+    <Compile Include="Behaviours\FocusBehavior.cs" />
+    <Compile Include="Behaviours\MainMenuExpanderBehavior.cs" />
+    <Compile Include="Behaviours\PasswordBoxBindingBehavior.cs" />
+    <Compile Include="Behaviours\ReloadBehavior.cs" />
+    <Compile Include="Behaviours\SlideBehavior.cs" />
+    <Compile Include="Behaviours\StylizedBehaviorCollection.cs" />
+    <Compile Include="Behaviours\StylizedBehaviors.cs" />
+    <Compile Include="Behaviours\ResizeBehavior.cs" />
+    <Compile Include="Buttons\ButtonsAlignment.cs" />
+    <Compile Include="Buttons\DropDownButtonAutomationPeer.cs" />
+    <Compile Include="Clipper.cs" />
+    <Compile Include="CommandButton.cs" />
+    <Compile Include="CommandButtonBase.cs" />
+    <Compile Include="CommandButtons\CommandButtonAutomationPeer.cs" />
+    <Compile Include="CommandButtons\CommandButtonBaseAutomationPeer.cs" />
+    <Compile Include="CommandButtons\DropDownCommandButtonAutomationPeer.cs" />
+    <Compile Include="CommandButtons\DropDownDirection.cs" />
+    <Compile Include="Commands\SystemCommands.cs" />
+    <Compile Include="ContentControls\CharacterCasing.cs" />
+    <Compile Include="DialogWindow.cs" />
+    <Compile Include="DragAndDrop\DragCommand.cs" />
+    <Compile Include="DragAndDrop\DragManager.cs" />
+    <Compile Include="DragAndDrop\DragViewer.cs" />
+    <Compile Include="DropDownButton.cs" />
+    <Compile Include="DropDownCommandButton.cs" />
+    <Compile Include="ExtendedContentControl.cs" />
+    <Compile Include="ExtendedDateTimePicker.cs" />
+    <Compile Include="ExtendedGridView.cs" />
+    <Compile Include="ExtendedListView.cs" />
+    <Compile Include="ExtendedNumericUpDown.cs" />
+    <Compile Include="ExtendedProgressBar.cs" />
+    <Compile Include="ExtendedThumb.cs" />
+    <Compile Include="ExtendedTimePicker.cs" />
+    <Compile Include="ExtendedWindow.cs" />
+    <Compile Include="Extensions\CommandBindingExtension.cs" />
+    <Compile Include="Extensions\DispatcherObjectExtensions.cs" />
+    <Compile Include="Extensions\EnumExtension.cs" />
+    <Compile Include="Flyout.cs" />
+    <Compile Include="FlyoutsControl.cs" />
+    <Compile Include="Flyouts\FlyoutTheme.cs" />
+    <Compile Include="Flyouts\Position.cs" />
+    <Compile Include="GridViews\Columns\ActionsGridViewColumn.cs" />
+    <Compile Include="GridViews\Columns\ExtendedGridViewColumn.cs" />
+    <Compile Include="GridViews\Columns\OrderGridViewColumn.cs" />
+    <Compile Include="GridViews\Columns\SelectionGridViewColumn.cs" />
+    <Compile Include="HeaderPanel.cs" />
+    <Compile Include="Helpers\CommandHelpers.cs" />
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\DpiHelper.cs" />
+    <Compile Include="Helpers\Helper.cs" />
+    <Compile Include="Helpers\InteractionHelper.cs" />
+    <Compile Include="Helpers\KeyboardHelper.cs" />
+    <Compile Include="Helpers\TreeHelper.cs" />
+    <Compile Include="Helpers\ValueChangeHelper.cs" />
+    <Compile Include="Helpers\VisualStates.cs" />
+    <Compile Include="Helpers\XamlHelper.cs" />
+    <Compile Include="HyperlinkButton.cs" />
+    <Compile Include="Icon.cs" />
+    <Compile Include="ImageContent.cs" />
+    <Compile Include="ImagePicker.cs" />
+    <Compile Include="InjuryTypeSelector.cs" />
+    <Compile Include="ItemsListView.cs" />
+    <Compile Include="IThumb.cs" />
+    <Compile Include="LinearClipper.cs" />
+    <Compile Include="MultiCheckboxes.cs" />
+    <Compile Include="MultiComboBox.cs" />
+    <Compile Include="Native\ErrorCodes.cs" />
+    <Compile Include="Native\MonitorDpiType.cs" />
+    <Compile Include="Native\NativeConstants.cs" />
+    <Compile Include="Native\NativeMethods.cs" />
+    <Compile Include="Native\OSVersionHelper.cs" />
+    <Compile Include="Native\RECT.cs" />
+    <Compile Include="Native\SafeLibraryHandle.cs" />
+    <Compile Include="Native\UnsafeNativeMethods.cs" />
+    <Compile Include="NavigationExpander.cs" />
+    <Compile Include="NavigationItem.cs" />
+    <Compile Include="NotificationPopup.cs" />
+    <Compile Include="Notifications\IToastManager.cs" />
+    <Compile Include="Notifications\ToastManager.cs" />
+    <Compile Include="Notifications\ToastPosition.cs" />
+    <Compile Include="NumericUpDowns\NumericUpDownChangedRoutedEventArgs.cs" />
+    <Compile Include="NumericUpDowns\NumericUpDownChangedRoutedEventHandler.cs" />
+    <Compile Include="Parameters\ButtonParameters.cs" />
+    <Compile Include="Parameters\ComboBoxParameters.cs" />
+    <Compile Include="Parameters\Commands\CommandBinding.cs" />
+    <Compile Include="Parameters\Commands\CommandBindingCollection.cs" />
+    <Compile Include="Parameters\Commands\EventCommand.CommandBindings.cs" />
+    <Compile Include="Parameters\Commands\EventCommand.cs" />
+    <Compile Include="Parameters\Commands\Internal\ActionExecutionStrategy.cs" />
+    <Compile Include="Parameters\Commands\Internal\CommandBehaviorBinding.cs" />
+    <Compile Include="Parameters\Commands\Internal\CommandExecutionStrategy.cs" />
+    <Compile Include="Parameters\Commands\Internal\EventHandlerGenerator.cs" />
+    <Compile Include="Parameters\Commands\Internal\IExecutionStrategy.cs" />
+    <Compile Include="Parameters\Commands\KeyCommand.cs" />
+    <Compile Include="Parameters\ControlParameters.cs" />
+    <Compile Include="Parameters\DragAndDropParameters.cs" />
+    <Compile Include="Parameters\GridParameters.cs" />
+    <Compile Include="Parameters\PanelParameters.cs" />
+    <Compile Include="Parameters\PasswordParameters.cs" />
+    <Compile Include="Parameters\ScrollBarParameters.cs" />
+    <Compile Include="Parameters\ScrollViewerParameters.cs" />
+    <Compile Include="Parameters\TabControlParameters.cs" />
+    <Compile Include="Parameters\TextBoxParameters.cs" />
+    <Compile Include="Parameters\ToggleButtonParameters.cs" />
+    <Compile Include="Parameters\UiElementParameters.cs" />
+    <Compile Include="PositionsSelector.cs" />
+    <Compile Include="ProgressRing.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rating.cs" />
+    <Compile Include="RatingItem.cs" />
+    <Compile Include="Ratings\ItemsControlHelper.cs" />
+    <Compile Include="Ratings\IUpdateVisualState.cs" />
+    <Compile Include="Ratings\RatingAutomationPeer.cs" />
+    <Compile Include="Ratings\RatingItemAutomationPeer.cs" />
+    <Compile Include="Ratings\RatingSelectionMode.cs" />
+    <Compile Include="RelativeCanvas.cs" />
+    <Compile Include="ReversibleStackPanel.cs" />
+    <Compile Include="Scheduler.cs" />
+    <Compile Include="SchedulerDay.cs" />
+    <Compile Include="SchedulerItem.cs" />
+    <Compile Include="SchedulerPanel.cs" />
+    <Compile Include="Schedulers\DateTimeAutomationPeer.cs" />
+    <Compile Include="Schedulers\SchedulerAppointment.cs" />
+    <Compile Include="Schedulers\SchedulerAutomationPeer.cs" />
+    <Compile Include="Schedulers\SchedulerBlackoutDatesCollection.cs" />
+    <Compile Include="Schedulers\SchedulerDateChangedEventArgs.cs" />
+    <Compile Include="Schedulers\SchedulerDateRange.cs" />
+    <Compile Include="Schedulers\SchedulerDateRangeChangingEventArgs.cs" />
+    <Compile Include="Schedulers\SchedulerKeyboardHelper.cs" />
+    <Compile Include="Schedulers\SchedulerSelectionEventArgs.cs" />
+    <Compile Include="Schedulers\SelectedDatesCollection.cs" />
+    <Compile Include="SelectorControl.cs" />
+    <Compile Include="SelectorItem.cs" />
+    <Compile Include="SplitView.cs" />
+    <Compile Include="SplitViews\GridLengthAnimation.cs" />
+    <Compile Include="SplitViews\SplitViewDisplayMode.cs" />
+    <Compile Include="SplitViews\SplitViewPaneClosingEventArgs.cs" />
+    <Compile Include="SplitViews\SplitViewPanePlacement.cs" />
+    <Compile Include="SplitViews\SplitViewTemplateSettings.cs" />
+    <Compile Include="SubMenu.cs" />
+    <Compile Include="SubMenus\SubmenuAutomationPeer.cs" />
+    <Compile Include="ThumbContentControl.cs" />
+    <Compile Include="TimePicker.cs" />
+    <Compile Include="TimePickers\AmPmComparer.cs" />
+    <Compile Include="TimePickers\TimePartVisibility.cs" />
+    <Compile Include="TimePickers\TimePickerBase.cs" />
+    <Compile Include="TimePickers\TimePickerBaseSelectionChangedEventArgs.cs" />
+    <Compile Include="Toast.cs" />
+    <Compile Include="ToastArea.cs" />
+    <Compile Include="ToggleCommandButton.cs" />
+    <Compile Include="ToolbarControl.cs" />
+    <Compile Include="TransitioningContentControl.cs" />
+    <Compile Include="WindowButtonCommands.cs" />
+    <Compile Include="WindowCommands.cs" />
+    <Compile Include="Windows\CloseCommand.cs" />
+    <Compile Include="Windows\ClosingWindowEventHandlerArgs.cs" />
+    <Compile Include="Windows\DpiAwareWindow.cs" />
+    <Compile Include="Windows\DpiInformation.cs" />
+    <Compile Include="Windows\NotificationPosition.cs" />
+    <Compile Include="Windows\ProcessDpiAwareness.cs" />
+    <Compile Include="Windows\PropertyChangeNotifier.cs" />
+    <Compile Include="Windows\SideAlignement.cs" />
+    <Compile Include="Windows\WindowCommandsOverlayBehavior.cs" />
+    <Compile Include="WorkspaceDialog.cs" />
+    <Compile Include="WorkspaceView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\My.CoachManager.CrossCutting.Core\My.CoachManager.CrossCutting.Core.csproj">
+      <Project>{8B02EDA3-1ED0-4CBB-A90A-FE53609B1F25}</Project>
+      <Name>My.CoachManager.CrossCutting.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.CrossCutting.Logging\My.CoachManager.CrossCutting.Logging.csproj">
+      <Project>{38F32D3D-BCD4-4EEB-9174-38FCF6DA9EEA}</Project>
+      <Name>My.CoachManager.CrossCutting.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Core\My.CoachManager.Presentation.Core.csproj">
+      <Project>{3573A892-E81F-4FF2-A012-2ADB0F7C82A2}</Project>
+      <Name>My.CoachManager.Presentation.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.Presentation.Wpf.Core\My.CoachManager.Presentation.Wpf.Core.csproj">
+      <Project>{252D8FD5-9154-46A5-82E4-8F515DF4AB31}</Project>
+      <Name>My.CoachManager.Presentation.Wpf.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

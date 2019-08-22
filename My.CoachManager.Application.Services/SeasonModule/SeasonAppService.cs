@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.Domain.AppModule.Services;
-using My.CoachManager.Domain.SeasonModule.Aggregate;
-using My.CoachManager.Domain.SeasonModule.Services;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.ReferenceModule.Aggregate;
+using My.CoachManager.Domain.SeasonModule.Aggregate;
+using My.CoachManager.Domain.SeasonModule.Services;
 
 namespace My.CoachManager.Application.Services.SeasonModule
 {
@@ -60,14 +61,23 @@ namespace My.CoachManager.Application.Services.SeasonModule
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        public void RemoveSeason(SeasonDto dto)
+        public void RemoveSeason(int id)
         {
-            if (_seasonDomainService.IsUsed(dto.Id))
+            if (_seasonDomainService.IsUsed(id))
             {
-                throw new IsUsedException(dto.Label);
+                throw new IsUsedException(GetLabel(id));
             }
 
-            _crudDomainService.Remove(dto);
+            _crudDomainService.Remove(id);
+        }
+
+        /// <summary>
+        /// Gets a dto.
+        /// </summary>
+        /// <returns></returns>
+        private string GetLabel(int id)
+        {
+            return _seasonRepository.Query.Where(x => x.Id == id).Select(x => x.Label).FirstOrDefault();
         }
 
         /// <inheritdoc />

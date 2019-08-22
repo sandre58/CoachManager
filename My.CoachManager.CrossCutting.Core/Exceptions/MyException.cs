@@ -1,8 +1,8 @@
-﻿namespace My.CoachManager.CrossCutting.Core.Exceptions
-{
-    using System;
-    using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
+namespace My.CoachManager.CrossCutting.Core.Exceptions
+{
     /// <summary>
     /// Abstract class used for Exceptions.
     /// </summary>
@@ -29,12 +29,12 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="MyException"/> class with serialized data.
         /// </summary>
-        /// <param name="info">The <see cref="System.Runtime.Serialization.SerializationInfo"/> that holds the serialized
+        /// <param name="info">The <see cref="SerializationInfo"/> that holds the serialized
         /// object data about the exception being thrown.</param>
-        /// <param name="context">The <see cref="System.Runtime.Serialization.StreamingContext"/> that contains contextual
+        /// <param name="context">The <see cref="StreamingContext"/> that contains contextual
         /// information about the source or destination.</param>
-        /// <exception cref="System.ArgumentNullException">The info parameter is null.</exception>
-        /// <exception cref="System.Runtime.Serialization.SerializationException">The class name is null or <see cref="System.Exception.HResult"/> is zero (0).</exception>
+        /// <exception cref="ArgumentNullException">The info parameter is null.</exception>
+        /// <exception cref="SerializationException">The class name is null or <see cref="System.Exception.HResult"/> is zero (0).</exception>
         protected MyException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
@@ -51,5 +51,6 @@
             : base(message, innerException)
         {
         }
+
     }
 }

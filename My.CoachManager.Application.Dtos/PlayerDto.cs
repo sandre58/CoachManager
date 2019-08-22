@@ -1,6 +1,7 @@
-﻿using My.CoachManager.CrossCutting.Core.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+
+using My.CoachManager.CrossCutting.Core.Enums;
 
 namespace My.CoachManager.Application.Dtos
 {

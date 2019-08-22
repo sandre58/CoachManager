@@ -12,17 +12,15 @@ namespace My.CoachManager.CrossCutting.Core.Extensions
 
         public static string ToDisplay(this Enum value)
         {
-            var displayAttribute = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DisplayAttribute), false).FirstOrDefault() as DisplayAttribute;
             return
-                (displayAttribute != null)
+                (value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DisplayAttribute), false).FirstOrDefault() is DisplayAttribute displayAttribute)
                     ? new ResourceManager(displayAttribute.ResourceType).GetString(displayAttribute.Name)
                     : value.ToString();
         }
 
         public static string ToDescription(this Enum value)
         {
-            var descriptionAttribute = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as DescriptionAttribute;
-            return descriptionAttribute != null ? descriptionAttribute.Description : value.ToString();
+            return value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() is DescriptionAttribute descriptionAttribute ? descriptionAttribute.Description : value.ToString();
         }
 
         #endregion Public Methods and Operators

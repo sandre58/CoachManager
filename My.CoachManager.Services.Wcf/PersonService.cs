@@ -1,10 +1,12 @@
-﻿using CommonServiceLocator;
+﻿using System;
+using System.Collections.Generic;
+
+using CommonServiceLocator;
+
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Application.Services.InjuryModule;
 using My.CoachManager.Application.Services.PersonModule;
 using My.CoachManager.Services.Wcf.Interfaces;
-using System;
-using System.Collections.Generic;
 
 namespace My.CoachManager.Services.Wcf
 {

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Extensions;
 using My.CoachManager.CrossCutting.Core.Resources;
@@ -131,7 +132,7 @@ namespace My.CoachManager.Presentation.Models
         /// <summary>
         /// Gets or sets the training attendances.
         /// </summary>
-        public ObservableCollection<TrainingAttendanceModel> Apologied
+        public ObservableCollection<TrainingAttendanceModel> Apologized
         {
             get { return Attendances != null ? Attendances.Where(x => x.Attendance == Attendance.Apology).ToObservableCollection() : new ObservableCollection<TrainingAttendanceModel>(); }
         }
@@ -191,9 +192,6 @@ namespace My.CoachManager.Presentation.Models
         /// <summary>
         /// Gets IsPerformed value.
         /// </summary>
-        public bool IsPerformed
-        {
-            get { return !IsCancelled && EndDate < DateTime.Now; }
-        }
+        public bool IsPerformed => !IsCancelled && EndDate < DateTime.Now;
     }
 }

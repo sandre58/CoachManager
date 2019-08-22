@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Country.xaml" />
+        <ResourceDictionary Source="Player.xaml" />
+        <ResourceDictionary Source="Position.xaml" />
+        <ResourceDictionary Source="Injury.xaml" />
+        <ResourceDictionary Source="Filters.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

@@ -35,7 +35,7 @@ namespace My.CoachManager.Domain.InjuryModule.Aggregates
         /// </summary>
         /// <param name="item">The item.</param>
         /// <param name="entity">The entity.</param>
-        public static bool UpdateEntity(InjuryDto item, Injury entity)
+        public static void UpdateEntity(InjuryDto item, Injury entity)
         {
             entity.Id = item.Id;
             entity.Type = item.Type;
@@ -45,8 +45,6 @@ namespace My.CoachManager.Domain.InjuryModule.Aggregates
             entity.Condition = item.Condition;
             entity.ExpectedReturn = item.ExpectedReturn;
             entity.Severity = item.Severity;
-
-            return true;
         }
 
         /// <summary>

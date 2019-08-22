@@ -1,4 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+using Microsoft.EntityFrameworkCore;
+
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.CrossCutting.Core.Resources;
@@ -7,9 +12,6 @@ using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.TrainingModule.Aggregate;
 using My.CoachManager.Domain.TrainingModule.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace My.CoachManager.Application.Services.TrainingModule
 {
@@ -68,9 +70,9 @@ namespace My.CoachManager.Application.Services.TrainingModule
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        public void RemoveTraining(TrainingDto dto)
+        public void RemoveTraining(int id)
         {
-            _crudDomainService.Remove(dto);
+            _crudDomainService.Remove(id);
         }
 
         /// <inheritdoc />
@@ -152,8 +154,12 @@ namespace My.CoachManager.Application.Services.TrainingModule
         /// <returns></returns>
         public int SaveTrainingAttendances(int trainingId, IList<TrainingAttendanceDto> attendances)
         {
-            var training = _trainingRepository.GetEntity(trainingId);
-            training.Attendances = new List<TrainingAttendance>(attendances.Select(x => TrainingFactory.CreateAttendance(trainingId, x)));
+            var training = _trainingRepository.GetEntity(trainingId, query =>
+                {
+                    return query.Include(x => x.Attendances);
+                });
+
+            TrainingFactory.UpdateEntityAttendances(attendances, training);
 
             _trainingRepository.Modify(training);
             _trainingRepository.UnitOfWork.Commit();

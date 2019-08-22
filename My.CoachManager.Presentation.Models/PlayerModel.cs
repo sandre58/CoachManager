@@ -1,11 +1,13 @@
-﻿using My.CoachManager.CrossCutting.Core.Constants;
-using My.CoachManager.CrossCutting.Core.Enums;
-using My.CoachManager.CrossCutting.Core.Resources;
-using My.CoachManager.CrossCutting.Core.Resources.Entities;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+
+using My.CoachManager.CrossCutting.Core.Constants;
+using My.CoachManager.CrossCutting.Core.Enums;
+using My.CoachManager.CrossCutting.Core.Resources;
+using My.CoachManager.CrossCutting.Core.Resources.Entities;
 
 namespace My.CoachManager.Presentation.Models
 {
@@ -59,36 +61,27 @@ namespace My.CoachManager.Presentation.Models
         public ObservableCollection<InjuryModel> Injuries { get; set; }
 
         /// <summary>
+        /// Get main positions
+        /// </summary>
+        public IEnumerable<PositionModel> NaturalPositions => Positions?.Where(x => x.IsNatural).Select(x => x.Position);
+
+        /// <summary>
+        /// Get main positions
+        /// </summary>
+        public PositionModel NaturalPosition => NaturalPositions?.FirstOrDefault();
+
+        /// <summary>
         /// Get natural position
         /// </summary>
-        public string NaturalPositions
-        {
-            get
-            {
-                if (Positions == null || Positions.Count <= 0) return string.Empty;
-                return string.Join(" / ", Positions.Where(x => x.IsNatural).OrderBy(x => x.Position.Order).Select(x => x.Position.Label));
-            }
-        }
+        public string NaturalPositionsLiteral => NaturalPositions != null ? string.Join(" / ", NaturalPositions?.OrderBy(x => x.Order).Select(x => x.Label)) : string.Empty;
 
         /// <summary>
-        /// Get a string shows main positions.
-        /// </summary>
-        public string PositionsLiteral
-        {
-            get
-            {
-                if (Positions == null || Positions.Count <= 0) return string.Empty;
-                return string.Join(", ", Positions.Where(x => x.Rating > 3).OrderBy(x => x.Position.Order).Select(x => x.Position.Code));
-            }
-        }
-
-        /// <summary>
-        /// Get Is injuried.
+        /// Get Is Injured.
         /// </summary>
         public bool IsInjured => IsInjuredAtDate(DateTime.Today);
 
         /// <summary>
-        /// Get Is injuried.
+        /// Get Is Injured.
         /// </summary>
         public InjuryModel Injury
         {

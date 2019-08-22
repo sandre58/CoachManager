@@ -16,8 +16,9 @@ namespace My.CoachManager.Presentation.Core.Models.Filters
         /// </summary>
         /// <param name="propertyName">The property info.</param>
         /// <param name="allowedValues"></param>
-        public SelectedLabelableFilter(string propertyName, IEnumerable<IReferenceModel> allowedValues)
-            : base(propertyName, allowedValues)
+        /// <param name="isFixed"></param>
+        public SelectedLabelableFilter(string propertyName, IEnumerable<IReferenceModel> allowedValues, bool isFixed = false)
+            : base(propertyName, allowedValues,isFixed)
         {
         }
 

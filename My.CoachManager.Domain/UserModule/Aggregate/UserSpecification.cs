@@ -1,4 +1,5 @@
 ﻿using My.CoachManager.Domain.Core.Specification;
+using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Domain.UserModule.Aggregate
 {
@@ -8,12 +9,12 @@ namespace My.CoachManager.Domain.UserModule.Aggregate
         /// Specification exist in other customer.
         /// </summary>
         /// <returns>The specification for getting if exist in other customer.</returns>
-        public static ISpecification<Entities.User> GetUserByCredentials(string login, string password)
+        public static ISpecification<User> GetUserByCredentials(string login, string password)
         {
-            Specification<Entities.User> specification = new TrueSpecification<Entities.User>();
+            Specification<User> specification = new TrueSpecification<User>();
 
-            specification &= new DirectSpecification<Entities.User>(x => x.Login == login);
-            specification &= new DirectSpecification<Entities.User>(x => x.Password == password);
+            specification &= new DirectSpecification<User>(x => x.Login == login);
+            specification &= new DirectSpecification<User>(x => x.Password == password);
 
             return specification;
         }
@@ -22,11 +23,11 @@ namespace My.CoachManager.Domain.UserModule.Aggregate
         /// Specification exist in other customer.
         /// </summary>
         /// <returns>The specification for getting if exist in other customer.</returns>
-        public static ISpecification<Entities.User> GetUserByLogin(string login)
+        public static ISpecification<User> GetUserByLogin(string login)
         {
-            Specification<Entities.User> specification = new TrueSpecification<Entities.User>();
+            Specification<User> specification = new TrueSpecification<User>();
 
-            specification &= new DirectSpecification<Entities.User>(x => x.Login == login);
+            specification &= new DirectSpecification<User>(x => x.Login == login);
 
             return specification;
         }

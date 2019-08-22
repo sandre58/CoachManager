@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 using Microsoft.EntityFrameworkCore;
+
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.AppModule.Services;
 using My.CoachManager.Domain.Core;
@@ -58,9 +60,9 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        public void RemoveSquad(SquadDto dto)
+        public void RemoveSquad(int id)
         {
-            _crudDomainService.Remove(dto);
+            _crudDomainService.Remove(id);
         }
 
         /// <inheritdoc />

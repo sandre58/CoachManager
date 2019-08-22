@@ -35,5 +35,6 @@ namespace My.CoachManager.Presentation.Core.Models.Filters
         /// 	<c>true</c> if the specified target is matching the criteria; otherwise, <c>false</c>.
         /// </returns>
         bool IsMatch(object target);
+        
     }
 }

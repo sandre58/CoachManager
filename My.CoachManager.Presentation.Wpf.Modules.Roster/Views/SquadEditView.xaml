@@ -1,0 +1,45 @@
+﻿<controls:WorkspaceView x:Class="My.CoachManager.Presentation.Wpf.Modules.Roster.Views.SquadEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             xmlns:controls="clr-namespace:My.CoachManager.Presentation.Wpf.Controls;assembly=My.CoachManager.Presentation.Wpf.Controls"
+             xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Wpf.Controls.Parameters;assembly=My.CoachManager.Presentation.Wpf.Controls"
+             xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:resources="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Wpf.Modules.Roster.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:behaviours="clr-namespace:My.CoachManager.Presentation.Wpf.Controls.Behaviours;assembly=My.CoachManager.Presentation.Wpf.Controls"
+             d:DataContext="{d:DesignInstance Type=viewModels:SquadEditViewModel}"
+             d:DesignHeight="350" d:DesignWidth="600"
+             Style="{StaticResource EditWorkspaceViewStyle}">
+
+    <!-- Commands -->
+    <controls:WorkspaceView.Commands>
+        <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CancelCommand}" Style="{StaticResource CancelCommandButtonApplicationBarStyle}" IsCancel="True" />
+        <controls:CommandButton DockPanel.Dock="Right" Command="{Binding SaveCommand}" Style="{StaticResource ValidateCommandButtonApplicationBarStyle}" IsDefault="True" />
+        <controls:CommandButton DockPanel.Dock="Right" Command="{Binding RefreshCommand}" Content="{StaticResource RefreshGeometry}" Header="{x:Static strings:ControlResources.Refresh}" />
+    </controls:WorkspaceView.Commands>
+
+    <!-- Content -->
+    <Grid parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
+        <i:Interaction.Behaviors>
+            <behaviours:FocusBehavior FocusElement="{Binding ElementName=SquadName}" />
+        </i:Interaction.Behaviors>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <controls:Icon Grid.Column="0" Grid.Row="0" Size="Medium" Content="{DynamicResource InformationGeometry}" HorizontalAlignment="Center" />
+
+        <Grid Grid.Row="0" Grid.Column="1">
+            <TextBox x:Name="SquadName" Width="{StaticResource LargeWidth}" Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged}" parameters:TextBoxParameters.Watermark="{x:Static resources:SquadResources.Name}" />
+        </Grid>
+    </Grid>
+</controls:WorkspaceView>

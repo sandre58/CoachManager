@@ -117,25 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Address" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
   <data name="City" xml:space="preserve">
     <value>Ville</value>
   </data>
-  <data name="Country" xml:space="preserve">
-    <value>Pays</value>
-  </data>
-  <data name="Latitude" xml:space="preserve">
-    <value>Latitude</value>
-  </data>
-  <data name="Longitude" xml:space="preserve">
-    <value>Longitude</value>
-  </data>
   <data name="PostalCode" xml:space="preserve">
     <value>Code Postal</value>
-  </data>
-  <data name="Row1" xml:space="preserve">
-    <value>Ligne 1</value>
-  </data>
-  <data name="Row2" xml:space="preserve">
-    <value>Ligne 2</value>
   </data>
 </root>

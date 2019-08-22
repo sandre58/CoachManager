@@ -1,7 +1,7 @@
 ﻿using System;
-using My.CoachManager.Presentation.Controls.Notifications;
-using My.CoachManager.Presentation.Core.Notification;
-using My.CoachManager.Presentation.Core.Services;
+using My.CoachManager.Presentation.Wpf.Controls.Notifications;
+using My.CoachManager.Presentation.Wpf.Core.Notification;
+using My.CoachManager.Presentation.Wpf.Core.Services;
 
 namespace My.CoachManager.Presentation.Wpf.Services
 {

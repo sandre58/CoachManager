@@ -1,8 +1,7 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using Microsoft.Extensions.Logging;
-using NLog;
+﻿using Microsoft.Extensions.Logging;
 using Prism.Logging;
+using System;
+using System.Runtime.CompilerServices;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace My.CoachManager.CrossCutting.Logging.Supervision
@@ -10,15 +9,9 @@ namespace My.CoachManager.CrossCutting.Logging.Supervision
     /// <summary>
     /// Class representing a Logger.
     /// </summary>
-    public sealed class Logger : LoggerBase, ILoggerFacade,Microsoft.Extensions.Logging.ILogger
+    public sealed class Logger : LoggerBase, ILoggerFacade, Microsoft.Extensions.Logging.ILogger
     {
-
-        /// <summary>
-        /// The instance.
-        /// </summary>
-        private static Logger _instance;
-
-        private static NLog.Logger _logger;
+        private readonly NLog.Logger _logger;
 
         #region ----- Constructors -----
 
@@ -27,18 +20,21 @@ namespace My.CoachManager.CrossCutting.Logging.Supervision
         /// </summary>
         public Logger()
         {
-            _logger = LogManager.GetCurrentClassLogger();
+            _logger = NLog.LogManager.GetCurrentClassLogger();
         }
 
         /// <summary>
-        /// Create the logger.
+        /// Initializes a new instance of the <see cref="Logger"/> class.
         /// </summary>
-        /// <returns>The <see cref="Logger"/>.</returns>
-        public static Logger CreateLogger()
+        public Logger(string name)
         {
-            return _instance ?? (_instance = new Logger());
+            _logger = NLog.LogManager.GetLogger(name);
         }
 
+        public static void LoadConfiguration(string configFile)
+        {
+            NLog.LogManager.LoadConfiguration(configFile);
+        }
 
         #endregion ----- Constructors -----
 
@@ -46,74 +42,68 @@ namespace My.CoachManager.CrossCutting.Logging.Supervision
         /// Information the specified message.
         /// </summary>
         /// <param name="message">The resource.</param>
-        /// <param name="loggingContext">Logging Context information (used ToString method).</param>
         /// <param name="memberName">The member name.</param>
         /// <param name="sourceFilePath">The source file path.</param>
-        public override void Info(string message, LoggingContext loggingContext = null, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "")
+        public override void Info(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "")
         {
-            _logger.Info(message, GetLoggingContext(loggingContext));
+            _logger.Info(message);
         }
 
         /// <summary>
         /// Traces the specified message.
         /// </summary>
         /// <param name="message">The resource.</param>
-        /// <param name="loggingContext">Logging Context information (used ToString method).</param>
         /// <param name="memberName">The member name.</param>
         /// <param name="sourceFilePath">The source file path.</param>
-        public override void Trace(string message, LoggingContext loggingContext = null, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "")
+        public override void Trace(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "")
         {
-            _logger.Trace(message, GetLoggingContext(loggingContext));
+            _logger.Trace(message);
         }
 
         /// <summary>
         /// Debugs the specified message.
         /// </summary>
         /// <param name="message">The resource.</param>
-        /// <param name="loggingContext">Logging Context information (used ToString method).</param>
         /// <param name="memberName">The member name.</param>
         /// <param name="sourceFilePath">The source file path.</param>
-        public override void Debug(string message, LoggingContext loggingContext = null, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "")
+        public override void Debug(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "")
         {
-            _logger.Debug(message, GetLoggingContext(loggingContext));
+            _logger.Debug(message);
         }
 
         /// <summary>
         /// Warnings the specified message.
         /// </summary>
         /// <param name="message">The resource.</param>
-        /// <param name="loggingContext">Logging Context information (used ToString method).</param>
         /// <param name="memberName">The member name.</param>
         /// <param name="sourceFilePath">The source file path.</param>
-        public override void Warning(string message, LoggingContext loggingContext = null, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "")
+        public override void Warning(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "")
         {
-            _logger.Warn(message, GetLoggingContext(loggingContext));
+            _logger.Warn(message);
         }
 
         /// <summary>
         /// Log Application Error.
         /// </summary>
         /// <param name="ex">Non managed exception.</param>
-        /// <param name="loggingContext">The logging context.</param>
         /// <param name="memberName">The member name.</param>
         /// <param name="sourceFilePath">The source file path.</param>
-        public override void Error(Exception ex, LoggingContext loggingContext = null, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "")
+        public override void Error(Exception ex, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "")
         {
             var message = "";
-            _logger.Error(ex, message, GetLoggingContext(loggingContext));
+            _logger.Error(ex, message);
         }
 
         /// <summary>
         /// Log Critical Error that can crash application.
         /// </summary>
         /// <param name="ex">Critical non managed exception.</param>
-        /// <param name="loggingContext">The logging context.</param>
         /// <param name="memberName">The member name.</param>
         /// <param name="sourceFilePath">The source file path.</param>
-        public override void Fatal(Exception ex, LoggingContext loggingContext = null, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "")
+        public override void Fatal(Exception ex, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "")
         {
             var message = "";
-            _logger.Fatal(ex, message, GetLoggingContext(loggingContext));
+            _logger.Fatal(ex, message);
         }
 
         #region ILoggerFacade
@@ -124,7 +114,6 @@ namespace My.CoachManager.CrossCutting.Logging.Supervision
         /// <param name="message">The message.</param>
         /// <param name="category">The category.</param>
         /// <param name="priority">The priority.</param>
-        [Obsolete]
         public void Log(string message, Category category, Priority priority)
         {
             if (string.IsNullOrWhiteSpace(message))
@@ -202,6 +191,6 @@ namespace My.CoachManager.CrossCutting.Logging.Supervision
             return null;
         }
 
-        #endregion
+        #endregion ILogger
     }
 }

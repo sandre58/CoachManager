@@ -22,7 +22,7 @@ namespace My.CoachManager.Presentation.Wpf.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class SkinResources {
+    public class SkinResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace My.CoachManager.Presentation.Wpf.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("My.CoachManager.Presentation.Wpf.Resources.SkinResources", typeof(SkinResources).Assembly);
@@ -51,7 +51,7 @@ namespace My.CoachManager.Presentation.Wpf.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace My.CoachManager.Presentation.Wpf.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Défaut.
         /// </summary>
-        internal static string _default {
+        public static string _default {
             get {
                 return ResourceManager.GetString("_default", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace My.CoachManager.Presentation.Wpf.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Bleu Ciel.
         /// </summary>
-        internal static string azur {
+        public static string azur {
             get {
                 return ResourceManager.GetString("azur", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace My.CoachManager.Presentation.Wpf.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Bleu.
         /// </summary>
-        internal static string blue {
+        public static string blue {
             get {
                 return ResourceManager.GetString("blue", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace My.CoachManager.Presentation.Wpf.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Sombre.
         /// </summary>
-        internal static string dark {
+        public static string dark {
             get {
                 return ResourceManager.GetString("dark", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace My.CoachManager.Presentation.Wpf.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Bleu foncé.
         /// </summary>
-        internal static string darkblue {
+        public static string darkblue {
             get {
                 return ResourceManager.GetString("darkblue", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace My.CoachManager.Presentation.Wpf.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Or.
         /// </summary>
-        internal static string gold {
+        public static string gold {
             get {
                 return ResourceManager.GetString("gold", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace My.CoachManager.Presentation.Wpf.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Vert.
         /// </summary>
-        internal static string green {
+        public static string green {
             get {
                 return ResourceManager.GetString("green", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace My.CoachManager.Presentation.Wpf.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Clair.
         /// </summary>
-        internal static string light {
+        public static string light {
             get {
                 return ResourceManager.GetString("light", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace My.CoachManager.Presentation.Wpf.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Orange.
         /// </summary>
-        internal static string orange {
+        public static string orange {
             get {
                 return ResourceManager.GetString("orange", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace My.CoachManager.Presentation.Wpf.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Rose.
         /// </summary>
-        internal static string pink {
+        public static string pink {
             get {
                 return ResourceManager.GetString("pink", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace My.CoachManager.Presentation.Wpf.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Violet.
         /// </summary>
-        internal static string purple {
+        public static string purple {
             get {
                 return ResourceManager.GetString("purple", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace My.CoachManager.Presentation.Wpf.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Rouge.
         /// </summary>
-        internal static string red {
+        public static string red {
             get {
                 return ResourceManager.GetString("red", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace My.CoachManager.Presentation.Wpf.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Jaune.
         /// </summary>
-        internal static string yellow {
+        public static string yellow {
             get {
                 return ResourceManager.GetString("yellow", resourceCulture);
             }

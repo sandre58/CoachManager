@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source= "pack://application:,,,/My.CoachManager.Presentation.Wpf.Resources;component/Styles/Base/Brushes.SecondaryAccent.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- ACCENT -->
+    <Color x:Key="LightSecondaryAccentColor">#38BAFF</Color>
+    <Color x:Key="SecondaryAccentColor">#0A8CFF</Color>
+    <Color x:Key="DarkSecondaryAccentColor">#043694</Color>
+    <Color x:Key="SecondaryAccentTextColor">#ffffff</Color>
+</ResourceDictionary>

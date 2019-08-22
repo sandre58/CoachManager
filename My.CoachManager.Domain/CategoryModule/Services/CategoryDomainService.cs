@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+
 using My.CoachManager.Domain.CategoryModule.Aggregate;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
@@ -9,9 +10,9 @@ namespace My.CoachManager.Domain.CategoryModule.Services
     public class CategoryDomainService : ReferenceDomainService<Category>, ICategoryDomainService
     {
         #region Fields
-
-        private readonly IRepository<Player> _playerRepository;
+        
         private readonly IRepository<Roster> _rosterRepository;
+        private readonly IRepository<RosterPlayer> _rosterPlayerRepository;
 
         #endregion Fields
 
@@ -20,9 +21,9 @@ namespace My.CoachManager.Domain.CategoryModule.Services
         /// <summary>
         /// Initialise a new instance of <see cref="CategoryDomainService"/>.
         /// </summary>
-        public CategoryDomainService(IRepository<Category> categoryRepository, IRepository<Player> playerRepository, IRepository<Roster> rosterRepository) : base(categoryRepository)
+        public CategoryDomainService(IRepository<Category> categoryRepository, IRepository<RosterPlayer> rosterPlayerRepository, IRepository<Roster> rosterRepository) : base(categoryRepository)
         {
-            _playerRepository = playerRepository;
+            _rosterPlayerRepository = rosterPlayerRepository;
             _rosterRepository = rosterRepository;
         }
 
@@ -49,7 +50,8 @@ namespace My.CoachManager.Domain.CategoryModule.Services
         /// <returns></returns>
         public bool IsUsed(int id)
         {
-            return _rosterRepository.Any(x => x.CategoryId == id);
+            return _rosterRepository.Any(x => x.CategoryId == id) || 
+                   _rosterPlayerRepository.Any(x => x.CategoryId.HasValue && x.CategoryId.Value == id);
         }
 
         /// <summary>

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using My.CoachManager.Application.Dtos;
+﻿using My.CoachManager.Application.Dtos;
+using System.Collections.Generic;
 
 namespace My.CoachManager.Application.Services.RosterModule
 {
@@ -24,7 +24,7 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// Remove a dto.
         /// </summary>
         /// <returns></returns>
-        void RemoveRoster(RosterDto dto);
+        void RemoveRoster(int id);
 
         /// <summary>
         /// Gets a dto.

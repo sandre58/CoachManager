@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+
 using FluentValidation.Results;
+
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.ReferenceModule.Aggregate;
 

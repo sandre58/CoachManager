@@ -18,9 +18,11 @@ namespace My.CoachManager.Presentation.Core.Models.Filters
         /// Initializes a new instance of the <see cref="T:My.CoachManager.Presentation.Core.Models.Filters.Filter" /> class.
         /// </summary>
         /// <param name="propertyName">The property info.</param>
-        protected Filter(string propertyName) : this()
+        /// <param name="isFixed"></param>
+        protected Filter(string propertyName, bool isFixed = false) : this()
         {
             PropertyName = propertyName ?? throw new ArgumentNullException(nameof(propertyName));
+            IsFixed = isFixed;
         }
 
         protected Filter()
@@ -37,6 +39,11 @@ namespace My.CoachManager.Presentation.Core.Models.Filters
         /// </summary>
         /// <value>The property info.</value>
         public string PropertyName { get; set; }
+
+        /// <summary>
+        /// Gets or sets if it's fixed.
+        /// </summary>
+        public bool IsFixed { get; }
 
         #endregion Members
 

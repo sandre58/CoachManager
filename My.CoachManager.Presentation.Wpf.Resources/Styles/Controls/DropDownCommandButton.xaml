@@ -1,0 +1,148 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:My.CoachManager.Presentation.Wpf.Controls;assembly=My.CoachManager.Presentation.Wpf.Controls"
+                    xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Wpf.Controls.Parameters;assembly=My.CoachManager.Presentation.Wpf.Controls"
+                    xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Base/Converters.xaml" />
+        <ResourceDictionary Source="../Base/Margins.xaml" />
+        <ResourceDictionary Source="../Base/Sizes.xaml" />
+        <ResourceDictionary Source="../Base/Geometry.xaml" />
+        <ResourceDictionary Source="SubMenu.xaml" />
+        <ResourceDictionary Source="CommandButton.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate x:Key="IconTemplate">
+        <controls:Icon Size="Custom"
+                       Height="{Binding Path=ButtonDiameter, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:CommandButtonBase}}, Converter={StaticResource CoefficientConverter}, ConverterParameter='0,6'}"
+                       Width="{Binding Path=ButtonDiameter, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:CommandButtonBase}}, Converter={StaticResource CoefficientConverter}, ConverterParameter='0,6'}"
+                       Content="{Binding}" Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:CommandButtonBase}}}" />
+    </DataTemplate>
+
+    <Style x:Key="{x:Type controls:DropDownCommandButton}" TargetType="{x:Type controls:DropDownCommandButton}" BasedOn="{StaticResource {x:Type controls:CommandButtonBase}}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:DropDownCommandButton}">
+                    <Grid Background="{DynamicResource Transparent}"
+                          TextBlock.Foreground="{TemplateBinding Foreground}"
+                          TextBlock.FontFamily="{TemplateBinding FontFamily}"
+                          TextBlock.FontSize="{TemplateBinding FontSize}"
+                          TextBlock.FontStretch="{TemplateBinding FontStretch}"
+                          TextBlock.FontStyle="{TemplateBinding FontStyle}"
+                          TextBlock.FontWeight="{TemplateBinding FontWeight}"
+                          TextOptions.TextFormattingMode="{TemplateBinding TextOptions.TextFormattingMode}"
+                          TextOptions.TextRenderingMode="{TemplateBinding TextOptions.TextRenderingMode}"
+                          RenderOptions.ClearTypeHint="{TemplateBinding RenderOptions.ClearTypeHint}"
+                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Height="{TemplateBinding ButtonDiameter}" Width="{TemplateBinding ButtonDiameter}" HorizontalAlignment="Center">
+                            <Ellipse x:Name="PART_Decor"
+                                     Fill="{TemplateBinding Background}"
+                                     Stroke="{TemplateBinding BorderBrush}"
+                                     StrokeThickness="{Binding BorderThickness, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ThicknessToDoubleConverter}}"
+                                     Stretch="Fill"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch" />
+                            <ContentPresenter x:Name="PART_ContentHost"
+                                              Grid.Row="0"
+                                              Content="{TemplateBinding Content}"
+                                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                              Margin="{TemplateBinding Padding}"
+                                              RecognizesAccessKey="True"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Grid>
+
+                        <ContentPresenter x:Name="PART_HeaderHost"
+                                          Grid.Row="1"
+                                          Content="{TemplateBinding Header}"
+                                          ContentStringFormat="{TemplateBinding HeaderStringFormat}"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                          TextBlock.Foreground="{TemplateBinding parameters:ControlParameters.Foreground}"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="Center" />
+                        <Popup x:Name="PART_Popup"
+                               Grid.Row="1"
+                               AllowsTransparency="True"
+                               IsOpen="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsDropDownOpen, Mode=TwoWay}"
+                               StaysOpen="False"
+                               Placement="Custom"
+                               VerticalOffset="-1"
+                               MaxHeight="{TemplateBinding MaxDropDownHeight}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Header" Value="{x:Null}">
+                            <Setter TargetName="PART_HeaderHost" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsDropDownOpen" Value="True">
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedForeground)}" />
+                <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedBorderBrush)}" />
+                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.PressedBackground)}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ColorDropDownCommandButtonStyle" TargetType="{x:Type controls:DropDownCommandButton}" BasedOn="{StaticResource {x:Type controls:DropDownCommandButton}}">
+        <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource SecondaryAccent}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
+        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
+        <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
+        <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
+        <Setter Property="parameters:ControlParameters.FocusForeground">
+            <Setter.Value>
+                <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SmallDropDownCommandButtonStyle" TargetType="{x:Type controls:DropDownCommandButton}" BasedOn="{StaticResource  {x:Type controls:DropDownCommandButton}}">
+        <Setter Property="ButtonDiameter" Value="{StaticResource SmallDiameter}" />
+    </Style>
+
+    <Style x:Key="LargeDropDownCommandButtonStyle" TargetType="{x:Type controls:DropDownCommandButton}" BasedOn="{StaticResource  {x:Type controls:DropDownCommandButton}}">
+        <Setter Property="ButtonDiameter" Value="{StaticResource LargeDiameter}" />
+    </Style>
+
+    <Style x:Key="SmallColorDropDownCommandButtonStyle" TargetType="{x:Type controls:DropDownCommandButton}" BasedOn="{StaticResource ColorDropDownCommandButtonStyle}">
+        <Setter Property="ButtonDiameter" Value="{StaticResource SmallDiameter}" />
+    </Style>
+
+    <Style x:Key="DropDownCommandButtonApplicationBarStyle" TargetType="{x:Type controls:DropDownCommandButton}" BasedOn="{StaticResource  {x:Type controls:DropDownCommandButton}}">
+        <Setter Property="ButtonDiameter" Value="{StaticResource VeryLargeDiameter}" />
+        <Setter Property="Visibility" Value="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+    </Style>
+
+    <Style x:Key="ColorDropDownCommandButtonApplicationBarStyle" TargetType="{x:Type controls:DropDownCommandButton}" BasedOn="{StaticResource ColorDropDownCommandButtonStyle}">
+        <Setter Property="ButtonDiameter" Value="{StaticResource VeryLargeDiameter}" />
+        <Setter Property="Visibility" Value="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+    </Style>
+
+    <Style x:Key="MovingToDropDownCommandButtonApplicationBarStyle" TargetType="{x:Type controls:DropDownCommandButton}" BasedOn="{StaticResource DropDownCommandButtonApplicationBarStyle}">
+        <Setter Property="Content" Value="{StaticResource MovingToGeometry}" />
+        <Setter Property="Header" Value="{x:Static strings:ControlResources.MovingTo}" />
+    </Style>
+
+    <Style x:Key="AddDropDownCommandButtonApplicationBarStyle" TargetType="{x:Type controls:DropDownCommandButton}" BasedOn="{StaticResource DropDownCommandButtonApplicationBarStyle}">
+        <Setter Property="Content" Value="{StaticResource AddGeometry}" />
+        <Setter Property="Header" Value="{x:Static strings:ControlResources.Add}" />
+    </Style>
+</ResourceDictionary>

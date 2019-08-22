@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.Entities;
 

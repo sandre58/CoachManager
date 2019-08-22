@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using My.CoachManager.Application.Dtos;
 
 namespace My.CoachManager.Application.Services.RosterModule
@@ -24,7 +25,7 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// Remove a dto.
         /// </summary>
         /// <returns></returns>
-        void RemoveSquad(SquadDto dto);
+        void RemoveSquad(int id);
 
         /// <summary>
         /// Gets a dto.

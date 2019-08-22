@@ -1,4 +1,5 @@
 ﻿using System;
+
 using My.CoachManager.CrossCutting.Core.Enums;
 
 namespace My.CoachManager.Presentation.Core.Models.Filters
@@ -16,8 +17,9 @@ namespace My.CoachManager.Presentation.Core.Models.Filters
         /// Initializes a new instance of the <see cref="ComparableFilter&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="propertyName">The property info.</param>
-        public ComparableFilter(string propertyName)
-            : base(propertyName)
+        /// <param name="isFixed"></param>
+        public ComparableFilter(string propertyName, bool isFixed = false)
+            : base(propertyName, isFixed)
         { }
 
         /// <summary>
@@ -27,8 +29,9 @@ namespace My.CoachManager.Presentation.Core.Models.Filters
         /// <param name="comparableOperator"></param>
         /// <param name="from">From.</param>
         /// <param name="to">To.</param>
-        public ComparableFilter(string propertyName, ComplexComparableOperator comparableOperator, T from, T to)
-            : this(propertyName)
+        /// <param name="isFixed"></param>
+        public ComparableFilter(string propertyName, ComplexComparableOperator comparableOperator, T from, T to, bool isFixed = false)
+            : this(propertyName,isFixed)
         {
             if (to == null)
             {

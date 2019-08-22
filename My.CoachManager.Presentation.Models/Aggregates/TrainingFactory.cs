@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Extensions;
@@ -16,9 +17,10 @@ namespace My.CoachManager.Presentation.Models.Aggregates
         /// Convert the model to DTO.
         /// </summary>
         /// <param name="item">The model.</param>
+        /// <param name="rosterId"></param>
         /// <param name="crudStatus">The crud status.</param>
         /// <returns>The DTO from the model.</returns>
-        public static TrainingDto Get(TrainingModel item, CrudStatus crudStatus)
+        public static TrainingDto Get(TrainingModel item, int rosterId, CrudStatus crudStatus)
         {
             if (item == null) return null;
 
@@ -29,7 +31,8 @@ namespace My.CoachManager.Presentation.Models.Aggregates
                 EndDate = item.EndDate,
                 IsCancelled = item.IsCancelled,
                 Place = item.Place,
-                StartDate = item.StartDate
+                StartDate = item.StartDate,
+                RosterId = rosterId
             };
         }
 

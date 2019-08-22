@@ -1,9 +1,10 @@
-﻿using My.CoachManager.Application.Dtos;
+﻿using System.Collections.Generic;
+using System.Linq;
+using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.AddressModule.Aggregate;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.InjuryModule.Aggregates;
 using My.CoachManager.Domain.PositionModule.Aggregate;
-using System.Linq;
 
 namespace My.CoachManager.Domain.PersonModule.Aggregate
 {
@@ -47,8 +48,9 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
         /// </summary>
         /// <param name="item">The item.</param>
         /// <param name="entity">The entity.</param>
-        public static bool UpdateEntity(PlayerDto item, Player entity)
+        public static void UpdateEntity(PlayerDto item, Player entity)
         {
+ 
             entity.Id = item.Id;
             entity.FirstName = item.FirstName;
             entity.LastName = item.LastName;
@@ -66,11 +68,20 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
             entity.ShoesSize = item.ShoesSize;
             entity.Size = item.Size;
             entity.Description = item.Description;
-            entity.Contacts = item.Phones.Select(ContactFactory.CreateEntity<Phone>)
-                .Concat(item.Emails.Select(ContactFactory.CreateEntity<Email>).Cast<Contact>()).ToList();
-            entity.Positions = item.Positions.Select(CreatePosition).ToList();
+            FactoryHelper.UpdateListEntity(item.Positions, entity.Positions, CreatePosition, UpdatePosition);
 
-            return true;
+            var contactDtos = new List<ContactDto>();
+            contactDtos.AddRange(item.Emails);
+            contactDtos.AddRange(item.Phones);
+
+            FactoryHelper.UpdateListEntity(contactDtos, entity.Contacts,
+                    x =>
+                    {
+                        if (x is PhoneDto) return ContactFactory.CreateEntity<Phone>(x, item.Id);
+
+                        return ContactFactory.CreateEntity<Email>(x, item.Id);
+                    }, 
+                    (x,y) => ContactFactory.UpdateEntity(x,y));
         }
 
         /// <summary>
@@ -80,8 +91,8 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
         public static PlayerDto Get(Player player)
         {
             if (player == null) return null;
-
-            return new PlayerDto()
+            
+            return new PlayerDto
             {
                 Id = player.Id,
                 FirstName = player.FirstName,
@@ -135,10 +146,23 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
         }
 
         /// <summary>
-        /// Convert the DTO to model.
+        /// Updates the entity.
         /// </summary>
-        /// <returns>The model.</returns>
-        public static PlayerPositionDto GetPosition(PlayerPosition position)
+        /// <param name="item">The item.</param>
+        /// <param name="entity">The entity.</param>
+        public static void UpdatePosition(PlayerPositionDto item, PlayerPosition entity)
+        {
+            entity.PositionId = item.PositionId;
+            entity.PlayerId = item.PlayerId;
+            entity.IsNatural = item.IsNatural;
+            entity.Rating = item.Rating;
+        }
+
+        /// <summary>
+            /// Convert the DTO to model.
+            /// </summary>
+            /// <returns>The model.</returns>
+            public static PlayerPositionDto GetPosition(PlayerPosition position)
         {
             if (position == null) return null;
 

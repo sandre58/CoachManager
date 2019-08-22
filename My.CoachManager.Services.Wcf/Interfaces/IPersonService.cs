@@ -1,7 +1,8 @@
-﻿using My.CoachManager.Application.Dtos;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+
+using My.CoachManager.Application.Dtos;
 
 namespace My.CoachManager.Services.Wcf.Interfaces
 {

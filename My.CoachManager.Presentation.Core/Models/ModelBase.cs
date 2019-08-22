@@ -5,12 +5,13 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reactive.Linq;
 using System.Reflection;
-using Microsoft.Practices.ObjectBuilder2;
+
 using My.CoachManager.Presentation.Core.Attributes.Validation;
 using My.CoachManager.Presentation.Core.Rules;
+
 using Prism.Mvvm;
+
 using PropertyChanged;
 
 namespace My.CoachManager.Presentation.Core.Models
@@ -36,24 +37,6 @@ namespace My.CoachManager.Presentation.Core.Models
         /// <value>The rules this instance must satisfy.</value>
         protected RuleCollection Rules { get; } = new RuleCollection();
 
-        /// <summary>
-        /// Gets the when errors changed observable event. Occurs when the validation errors have changed for a property or for the entire object.
-        /// </summary>
-        /// <value>
-        /// The when errors changed observable event.
-        /// </value>
-        public IObservable<string> WhenErrorsChanged
-        {
-            get
-            {
-                return Observable
-                    .FromEventPattern<DataErrorsChangedEventArgs>(
-                        h => ErrorsChanged += h,
-                        h => ErrorsChanged -= h)
-                    .Select(x => x.EventArgs.PropertyName);
-            }
-        }
-
         #endregion Members
 
         #region Constructors
@@ -62,7 +45,7 @@ namespace My.CoachManager.Presentation.Core.Models
         {
             ValidationErrors = new Dictionary<string, List<ValidationResult>>();
 
-            this.PropertyChanged += ModelBase_PropertyChanged;
+            PropertyChanged += ModelBase_PropertyChanged;
         }
 
         private void ModelBase_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -180,7 +163,7 @@ namespace My.CoachManager.Presentation.Core.Models
         {
             var validationResults = new List<ValidationResult>();
 
-            TypeDescriptor.AddProviderTransparent(new AssociatedMetadataTypeTypeDescriptionProvider(GetType()), GetType());
+            //TypeDescriptor.AddProviderTransparent(new AssociatedMetadataTypeTypeDescriptionProvider(GetType()), GetType());
 
             // Validation by Metadata
             Validator.TryValidateProperty(value, new ValidationContext(this) { MemberName = propertyName }, validationResults);
@@ -251,25 +234,25 @@ namespace My.CoachManager.Presentation.Core.Models
         protected virtual void OnPropertyChanged(string propertyName, object before, object after)
         {
             var prop = GetType().GetProperty(propertyName);
-            if (prop != null)
-            {
-                // The property exists
-                var isPublic = (prop.GetGetMethod(true) ?? prop.GetSetMethod(true)).IsPublic;
-                if (isPublic)
+                if (prop != null)
                 {
-                    ValidateProperty(propertyName, after);
-
-                    // Validate other property defined by [ValidateProperty(<PropertyName>)] attributes.
-                    prop.GetCustomAttributes().OfType<ValidatePropertyAttribute>().ForEach(x =>
+                    // The property exists
+                    var isPublic = (prop.GetGetMethod(true) ?? prop.GetSetMethod(true)).IsPublic;
+                    if (isPublic)
                     {
-                        var property = GetType().GetProperty(x.PropertyName);
-                        var value = property?.GetValue(this);
-                        ValidateProperty(x.PropertyName, value);
-                    });
-                }
-            }
+                        ValidateProperty(propertyName, after);
 
-            RaisePropertyChanged(propertyName);
+                        // Validate other property defined by [ValidateProperty(<PropertyName>)] attributes.
+                        foreach (var attr in prop.GetCustomAttributes().OfType<ValidatePropertyAttribute>())
+                        {
+                            var property = GetType().GetProperty(attr.PropertyName);
+                            var value = property?.GetValue(this);
+                            ValidateProperty(attr.PropertyName, value);
+                        }
+                    }
+                }
+
+                RaisePropertyChanged(propertyName);
         }
 
         #endregion IPropertyChanged

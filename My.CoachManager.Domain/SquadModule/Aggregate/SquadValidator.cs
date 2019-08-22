@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+
 using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Domain.SquadModule.Aggregate

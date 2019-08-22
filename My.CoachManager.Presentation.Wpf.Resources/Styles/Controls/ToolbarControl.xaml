@@ -1,0 +1,89 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Wpf.Controls.Parameters;assembly=My.CoachManager.Presentation.Wpf.Controls"
+                    xmlns:controls="clr-namespace:My.CoachManager.Presentation.Wpf.Controls;assembly=My.CoachManager.Presentation.Wpf.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Base/Converters.xaml" />
+        <ResourceDictionary Source="../Base/Margins.xaml" />
+        <ResourceDictionary Source="../Base/Geometry.xaml" />
+        <ResourceDictionary Source="Button.xaml" />
+        <ResourceDictionary Source="DropDownButton.xaml" />
+        <ResourceDictionary Source="Checkbox.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type controls:ToolbarControl}">
+        <Style.Resources>
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonStyle}">
+                <Setter Property="Margin" Value="{StaticResource DefaultHorizontalMargin}" />
+                <Setter Property="Focusable" Value="False" />
+            </Style>
+            <Style TargetType="{x:Type controls:DropDownButton}" BasedOn="{StaticResource IconDropDownButtonStyle}">
+                <Setter Property="Height" Value="17" />
+                <Setter Property="PopupPlacement" Value="Right" />
+                <Setter Property="Margin" Value="{StaticResource DefaultHorizontalMargin}" />
+                <Setter Property="Focusable" Value="False" />
+                <Setter Property="ShowArrow" Value="False" />
+            </Style>
+        </Style.Resources>
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ToolbarControl}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Selection -->
+                        <CheckBox Grid.Column="0" x:Name="Selection" IsChecked="{Binding IsSelected}" IsEnabled="{Binding IsSelectable}"
+                              Style="{StaticResource SmallCircleCheckBoxStyle}"
+                              Height="17" Margin="0"
+                              HorizontalAlignment="Center" VerticalAlignment="Center"
+                              Visibility="{Binding ShowSelection, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ToolbarControl}}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                        <!-- Actions -->
+                        <ItemsPresenter Grid.Column="1" x:Name="Actions"
+                                        Visibility="{Binding ShowActions, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ToolbarControl}}, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                                        Margin="{StaticResource DefaultRightMargin}"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=Menu, Path=IsExpanded}" Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <Trigger Property="Direction" Value="RightToLeft">
+                            <Setter TargetName="Selection" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="Actions" Property="Grid.Column" Value="0" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AccentToolbarControlStyle" TargetType="{x:Type controls:ToolbarControl}" BasedOn="{StaticResource {x:Type controls:ToolbarControl}}">
+        <Style.Resources>
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource SecondaryAccentIconButtonStyle}">
+                <Setter Property="Margin" Value="{StaticResource DefaultHorizontalMargin}" />
+                <Setter Property="Focusable" Value="False" />
+            </Style>
+            <Style TargetType="{x:Type controls:DropDownButton}" BasedOn="{StaticResource SecondaryAccentIconDropDownButtonStyle}">
+                <Setter Property="Height" Value="17" />
+                <Setter Property="PopupPlacement" Value="Right" />
+                <Setter Property="Margin" Value="{StaticResource DefaultHorizontalMargin}" />
+                <Setter Property="Focusable" Value="False" />
+                <Setter Property="ShowArrow" Value="False" />
+            </Style>
+        </Style.Resources>
+    </Style>
+
+</ResourceDictionary>

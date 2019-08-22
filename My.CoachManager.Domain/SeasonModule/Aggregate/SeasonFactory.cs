@@ -34,7 +34,7 @@ namespace My.CoachManager.Domain.SeasonModule.Aggregate
         /// </summary>
         /// <param name="item">The item.</param>
         /// <param name="entity">The entity.</param>
-        public static bool UpdateEntity(SeasonDto item, Season entity)
+        public static void UpdateEntity(SeasonDto item, Season entity)
         {
             entity.Code = item.Code;
             entity.Label = item.Label;
@@ -42,8 +42,6 @@ namespace My.CoachManager.Domain.SeasonModule.Aggregate
             entity.Order = item.Order;
             entity.StartDate = item.StartDate;
             entity.EndDate = item.EndDate;
-
-            return true;
         }
 
         /// <summary>

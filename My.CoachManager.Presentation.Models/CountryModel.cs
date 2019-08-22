@@ -1,5 +1,5 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+
 using My.CoachManager.CrossCutting.Core.Resources.Entities;
 using My.CoachManager.Presentation.Core.Models;
 
@@ -12,7 +12,7 @@ namespace My.CoachManager.Presentation.Models
     {
         #region Constants
 
-        private const string FolderPath = "pack://application:,,,/My.CoachManager.Presentation.Resources;component/Pictures/Countries/";
+        private const string FolderPath = "pack://application:,,,/My.CoachManager.Presentation.Wpf.Resources;component/Pictures/Countries/";
 
         #endregion Constants
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Application.Services.PersonModule;
+using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.Domain.AppModule.Services;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
@@ -86,9 +87,23 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        public void RemoveRoster(RosterDto dto)
+        public void RemoveRoster(int id)
         {
-            _crudDomainService.Remove(dto);
+            if (_rosterDomainService.IsUsed(id))
+            {
+                throw new IsUsedException(GetName(id));
+            }
+
+            _crudDomainService.Remove(id);
+        }
+
+        /// <summary>
+        /// Gets a dto.
+        /// </summary>
+        /// <returns></returns>
+        private string GetName(int id)
+        {
+            return _rosterRepository.Query.Where(x => x.Id == id).Select(x => x.Name).FirstOrDefault();
         }
 
         /// <inheritdoc />
@@ -98,7 +113,10 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// <returns></returns>
         public RosterDto GetRosterById(int id)
         {
-            var entity = _rosterRepository.GetEntity(id, x => x.Squads, x => x.Season);
+            var entity = _rosterRepository.GetEntity(id,
+                query => query
+                    .Include(x => x.Squads)
+                    .Include(x => x.Season));
             return entity != null ? RosterFactory.Get(entity) : null;
         }
 
@@ -109,7 +127,10 @@ namespace My.CoachManager.Application.Services.RosterModule
         /// <returns></returns>
         public IList<RosterDto> GetRosters()
         {
-            return _rosterRepository.GetAll(RosterSelectBuilder.SelectRosters(), x => x.Category, x => x.Season).ToList();
+            return _rosterRepository.GetAll(RosterSelectBuilder.SelectRosters(),
+                query => query
+                    .Include(x => x.Category)
+                    .Include(x => x.Season)).ToList();
         }
 
         /// <inheritdoc />
@@ -129,10 +150,11 @@ namespace My.CoachManager.Application.Services.RosterModule
                     .ThenInclude(x => x.Country)
                 .Include(x => x.Player)
                     .ThenInclude(x => x.Positions)
-                    .ThenInclude(x => x.Position)
+                        .ThenInclude(x => x.Position)
                 .Include(x => x.Player)
                     .ThenInclude(x => x.Injuries)
                 .Where(x => x.RosterId == rosterId)
+                .OrderBy(x => x.Player.LastName).ThenBy(x => x.Player.FirstName)
                 .Select(RosterSelectBuilder.SelectRosterPlayers()).ToList();
         }
 
@@ -197,19 +219,12 @@ namespace My.CoachManager.Application.Services.RosterModule
         public RosterPlayerDto GetRosterPlayerById(int id)
         {
             var player = _playerRosterRepository.Query
-                .Include(x => x.Player)
-                .ThenInclude(x => x.Address)
-                .Include(x => x.Player)
-                .ThenInclude(x => x.Contacts)
-                .Include(x => x.Player)
                 .Include(x => x.Category)
-                .Include(x => x.Player)
-                .ThenInclude(x => x.Country)
-                .Include(x => x.Player)
-                .ThenInclude(x => x.Positions)
-                .ThenInclude(x => x.Position)
-                .Include(x => x.Player)
-                .ThenInclude(x => x.Injuries)
+                .Include(x => x.Player).ThenInclude(x => x.Address)
+                .Include(x => x.Player).ThenInclude(x => x.Contacts)
+                .Include(x => x.Player).ThenInclude(x => x.Country)
+                .Include(x => x.Player).ThenInclude(x => x.Positions).ThenInclude(x => x.Position)
+                .Include(x => x.Player).ThenInclude(x => x.Injuries)
                 .Include(x => x.Squad)
                 .FirstOrDefault(x => x.Id == id);
 
@@ -248,7 +263,9 @@ namespace My.CoachManager.Application.Services.RosterModule
             var toDate = season.StartDate ?? DateTime.Today;
             var diffYear = toDate.Year - date.Year;
 
-            return categories.Where(x => x.Age <= diffYear).OrderByDescending(x => x.Age).First().Id;
+            var category = categories.Where(x => x.Age <= diffYear).OrderByDescending(x => x.Age).FirstOrDefault();
+
+            return category?.Id ?? 0;
         }
 
         #endregion Methods

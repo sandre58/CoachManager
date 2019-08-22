@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Core.Specification;
 using My.CoachManager.Infrastructure.Data.Core.Extensions;
@@ -305,12 +304,12 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <summary>
         /// Get All Elements.
         /// </summary>
-        /// <param name="includes">Includes Parameters.</param>
+        /// <param name="action">action Parameters.</param>
         /// <returns>All TEntity.</returns>
-        public virtual IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TEntity> GetAll(Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
             // Call Private Methods
-            return GetFilteredElements<int, TEntity>(x => x, null, null, true, 0, 0, false, null, includes).Item1;
+            return GetFilteredElements<int, TEntity>(x => x, null, null, true, 0, 0, false, null, action).Item1;
         }
 
         /// <summary>
@@ -318,18 +317,12 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="selectResult">Lambda Expression for Select on query.</param>
-        /// <param name="includes">Includes Parameters.</param>
+        /// <param name="action">action Parameters.</param>
         /// <returns>All TEntity.</returns>
-        public virtual IEnumerable<TResult> GetAll<TResult>(Expression<Func<TEntity, TResult>> selectResult, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TResult> GetAll<TResult>(Expression<Func<TEntity, TResult>> selectResult, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
             // Call Private Methods
-            return GetFilteredElements<int, TResult>(selectResult, null, null, true, 0, 0, false, null, includes).Item1;
+            return GetFilteredElements<int, TResult>(selectResult, null, null, true, 0, 0, false, null, action).Item1;
         }
 
         /// <summary>
@@ -338,36 +331,24 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <typeparam name="TKey">Type of Ordered Field.</typeparam>
         /// <param name="orderByExpression">Ordered Expression.</param>
         /// <param name="ascending">Direction of sort.</param>
-        /// <param name="includes">Includes Parameters.</param>
+        /// <param name="action">action Parameters.</param>
         /// <returns>List of Elements.</returns>
-        public virtual IEnumerable<TEntity> GetAll<TKey>(Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TEntity> GetAll<TKey>(Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (orderByExpression == null)
-            {
-                throw new ArgumentNullException(nameof(orderByExpression));
-            }
-
             // Call Private Methods
-            return GetFilteredElements(x => x, null, orderByExpression, ascending, 0, 0, false, null, includes).Item1;
+            return GetFilteredElements(x => x, null, orderByExpression, ascending, 0, 0, false, null, action).Item1;
         }
 
         /// <summary>
         /// Get All Elements Ordered By.
         /// </summary>
         /// <param name="order">Ordered Expression.</param>
-        /// <param name="includes">Includes Parameters.</param>
+        /// <param name="action">action Parameters.</param>
         /// <returns>List of Elements.</returns>
-        public virtual IEnumerable<TEntity> GetAll(QueryOrder<TEntity> order, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TEntity> GetAll(QueryOrder<TEntity> order, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-
             // Call Private Methods
-            return GetFilteredElements<int, TEntity>(x => x, null, null, true, 0, 0, false, order, includes).Item1;
+            return GetFilteredElements<int, TEntity>(x => x, null, null, true, 0, 0, false, order, action).Item1;
         }
 
         /// <summary>
@@ -378,23 +359,12 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="selectResult">Lambda Expression for Select on query.</param>
         /// <param name="orderByExpression">Ordered Expression.</param>
         /// <param name="ascending">Direction of sort.</param>
-        /// <param name="includes">Includes Parameters.</param>
+        /// <param name="action">action Parameters.</param>
         /// <returns>List of Elements.</returns>
-        public virtual IEnumerable<TResult> GetAll<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TResult> GetAll<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (orderByExpression == null)
-            {
-                throw new ArgumentNullException(nameof(orderByExpression));
-            }
-
-            // Call Private Methods
-            return GetFilteredElements(selectResult, null, orderByExpression, ascending, 0, 0, false, null, includes).Item1;
+ // Call Private Methods
+            return GetFilteredElements(selectResult, null, orderByExpression, ascending, 0, 0, false, null, action).Item1;
         }
 
         /// <summary>
@@ -403,23 +373,12 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="selectResult">Lambda Expression for Select on query.</param>
         /// <param name="order">Ordered Expression.</param>
-        /// <param name="includes">Includes Parameters.</param>
+        /// <param name="action">action Parameters.</param>
         /// <returns>List of Elements.</returns>
-        public virtual IEnumerable<TResult> GetAll<TResult>(Expression<Func<TEntity, TResult>> selectResult, QueryOrder<TEntity> order, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TResult> GetAll<TResult>(Expression<Func<TEntity, TResult>> selectResult, QueryOrder<TEntity> order, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-
             // Call Private Methods
-            return GetFilteredElements<int, TResult>(selectResult, null, null, false, 0, 0, false, order, includes).Item1;
+            return GetFilteredElements<int, TResult>(selectResult, null, null, false, 0, 0, false, order, action).Item1;
         }
 
         /// <summary>
@@ -430,28 +389,12 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="ascending">Direction of sort.</param>
         /// <param name="pageIndex">Index of Page.</param>
         /// <param name="pageCount">Number of Elements by Page.</param>
-        /// <param name="includes">Includes Parameters.</param>
+        /// <param name="action">action Parameters.</param>
         /// <returns>List Of Elements.</returns>
-        public virtual IEnumerable<TEntity> GetAll<TKey>(Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TEntity> GetAll<TKey>(Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (orderByExpression == null)
-            {
-                throw new ArgumentNullException(nameof(orderByExpression));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            // Call Private Methods
-            return GetFilteredElements(x => x, null, orderByExpression, ascending, pageIndex, pageCount, false, null, includes).Item1;
+ // Call Private Methods
+            return GetFilteredElements(x => x, null, orderByExpression, ascending, pageIndex, pageCount, false, null, action).Item1;
         }
 
         /// <summary>
@@ -460,28 +403,12 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="order">Ordered Expression.</param>
         /// <param name="pageIndex">Index of Page.</param>
         /// <param name="pageCount">Number of Elements by Page.</param>
-        /// <param name="includes">Includes Parameters.</param>
+        /// <param name="action">action Parameters.</param>
         /// <returns>List Of Elements.</returns>
-        public virtual IEnumerable<TEntity> GetAll(QueryOrder<TEntity> order, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TEntity> GetAll(QueryOrder<TEntity> order, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            // Call Private Methods
-            return GetFilteredElements<int, TEntity>(x => x, null, null, false, pageIndex, pageCount, false, order, includes).Item1;
+ // Call Private Methods
+            return GetFilteredElements<int, TEntity>(x => x, null, null, false, pageIndex, pageCount, false, order, action).Item1;
         }
 
         /// <summary>
@@ -492,27 +419,12 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="ascending">Direction of sort.</param>
         /// <param name="pageIndex">Index of Page.</param>
         /// <param name="pageCount">Number of Elements by Page.</param>
-        /// <param name="includes">Includes Parameters.</param>
+        /// <param name="action">action Parameters.</param>
         /// <returns>List Of Elements and Number of Element.</returns>
-        public virtual Tuple<IEnumerable<TEntity>, int> GetAllAndCount<TKey>(Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public virtual Tuple<IEnumerable<TEntity>, int> GetAllAndCount<TKey>(Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            if (orderByExpression == null)
-            {
-                throw new ArgumentNullException(nameof(orderByExpression));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            // Call Private Method
-            return GetFilteredElements(x => x, null, orderByExpression, ascending, pageIndex, pageCount, true, null, includes);
+ // Call Private Method
+            return GetFilteredElements(x => x, null, orderByExpression, ascending, pageIndex, pageCount, true, null, action);
         }
 
         /// <summary>
@@ -521,27 +433,12 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="order">Ordered Expression.</param>
         /// <param name="pageIndex">Index of Page.</param>
         /// <param name="pageCount">Number of Elements by Page.</param>
-        /// <param name="includes">Includes Parameters.</param>
+        /// <param name="action">action Parameters.</param>
         /// <returns>List Of Elements and Number of Element.</returns>
-        public virtual Tuple<IEnumerable<TEntity>, int> GetAllAndCount(QueryOrder<TEntity> order, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public virtual Tuple<IEnumerable<TEntity>, int> GetAllAndCount(QueryOrder<TEntity> order, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            // Call Private Method
-            return GetFilteredElements<int, TEntity>(x => x, null, null, false, pageIndex, pageCount, true, order, includes);
+   // Call Private Method
+            return GetFilteredElements<int, TEntity>(x => x, null, null, false, pageIndex, pageCount, true, order, action);
         }
 
         /// <summary>
@@ -554,33 +451,12 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="ascending">Direction of sort.</param>
         /// <param name="pageIndex">Index of Page.</param>
         /// <param name="pageCount">Number of Elements by Page.</param>
-        /// <param name="includes">Includes Parameters.</param>
+        /// <param name="action">action Parameters.</param>
         /// <returns>List Of Elements.</returns>
-        public virtual IEnumerable<TResult> GetAll<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TResult> GetAll<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (orderByExpression == null)
-            {
-                throw new ArgumentNullException(nameof(orderByExpression));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            // Call Private Methods
-            return GetFilteredElements(selectResult, null, orderByExpression, ascending, pageIndex, pageCount, false, null, includes).Item1;
+  // Call Private Methods
+            return GetFilteredElements(selectResult, null, orderByExpression, ascending, pageIndex, pageCount, false, null, action).Item1;
         }
 
         /// <summary>
@@ -591,33 +467,12 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="order">Ordered Expression.</param>
         /// <param name="pageIndex">Index of Page.</param>
         /// <param name="pageCount">Number of Elements by Page.</param>
-        /// <param name="includes">Includes Parameters.</param>
+        /// <param name="action">action Parameters.</param>
         /// <returns>List Of Elements.</returns>
-        public virtual IEnumerable<TResult> GetAll<TResult>(Expression<Func<TEntity, TResult>> selectResult, QueryOrder<TEntity> order, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
-        {
-            // Checking arguments for this query
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
+        public virtual IEnumerable<TResult> GetAll<TResult>(Expression<Func<TEntity, TResult>> selectResult, QueryOrder<TEntity> order, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
+        { 
             // Call Private Methods
-            return GetFilteredElements<int, TResult>(selectResult, null, null, false, pageIndex, pageCount, false, order, includes).Item1;
+            return GetFilteredElements<int, TResult>(selectResult, null, null, false, pageIndex, pageCount, false, order, action).Item1;
         }
 
         #endregion ----- Get All Methods -----
@@ -625,100 +480,60 @@ namespace My.CoachManager.Infrastructure.Data.Core
         #region ----- Get Methods With Filter -----
 
         /// <summary>
-        /// Get Elements of Entity By filter, with Includes.
+        /// Get Elements of Entity By filter, with action.
         /// </summary>
         /// <param name="filter">Lambda Expression for filtering Query in where parameters.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Entity Object.</returns>
-        public virtual IEnumerable<TEntity> GetByFilter(Expression<Func<TEntity, bool>> filter, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TEntity> GetByFilter(Expression<Func<TEntity, bool>> filter, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking query arguments
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
-
             // Call Private Methode
-            return GetFilteredElements<int, TEntity>(x => x, filter, null, true, 0, 0, false, null, includes).Item1;
+            return GetFilteredElements<int, TEntity>(x => x, filter, null, true, 0, 0, false, null, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements with Selected Columns of Entity By filter, with Includes.
+        /// Get Elements with Selected Columns of Entity By filter, with action.
         /// </summary>
         /// <typeparam name="TResult">Type of Selected return.</typeparam>
         /// <param name="selectResult">Lambda Expression for Select on query.</param>
         /// <param name="filter">Lambda Expression for filtering Query in where parameters.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Selected column of Entity Object.</returns>
-        public virtual IEnumerable<TResult> GetByFilter<TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TResult> GetByFilter<TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking query arguments
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
-
             // Call Private Methode
-            return GetFilteredElements<int, TResult>(selectResult, filter, null, true, 0, 0, false, null, includes).Item1;
+            return GetFilteredElements<int, TResult>(selectResult, filter, null, true, 0, 0, false, null, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements of Entity By filter, with Ordering and Includes.
+        /// Get Elements of Entity By filter, with Ordering and action.
         /// </summary>
         /// <typeparam name="TKey">Type of Ordering.</typeparam>
         /// <param name="filter">Lambda Expression for filtering Query in where parameters.</param>
         /// <param name="orderByExpression">Lambda Expression for Ordering Query.</param>
         /// <param name="ascending">Direction of Ordering.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Entity Object.</returns>
-        public virtual IEnumerable<TEntity> GetByFilter<TKey>(Expression<Func<TEntity, bool>> filter, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TEntity> GetByFilter<TKey>(Expression<Func<TEntity, bool>> filter, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking query arguments
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
-
-            if (orderByExpression == null)
-            {
-                throw new ArgumentNullException(nameof(orderByExpression));
-            }
-
             // Call Private Methode
-            return GetFilteredElements(x => x, filter, orderByExpression, ascending, 0, 0, false, null, includes).Item1;
+            return GetFilteredElements(x => x, filter, orderByExpression, ascending, 0, 0, false, null, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements of Entity By filter, with Ordering and Includes.
+        /// Get Elements of Entity By filter, with Ordering and action.
         /// </summary>
         /// <param name="filter">Lambda Expression for filtering Query in where parameters.</param>
         /// <param name="order">Lambda Expression for Ordering Query.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Entity Object.</returns>
-        public virtual IEnumerable<TEntity> GetByFilter(Expression<Func<TEntity, bool>> filter, QueryOrder<TEntity> order, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TEntity> GetByFilter(Expression<Func<TEntity, bool>> filter, QueryOrder<TEntity> order, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking query arguments
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
-
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-
-            // Call Private Methode
-            return GetFilteredElements<int, TEntity>(x => x, filter, null, false, 0, 0, false, order, includes).Item1;
+            return GetFilteredElements<int, TEntity>(x => x, filter, null, false, 0, 0, false, order, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements with Selected Columns of Entity By filter, with Ordering and Includes.
+        /// Get Elements with Selected Columns of Entity By filter, with Ordering and action.
         /// </summary>
         /// <typeparam name="TKey">Type of Ordering.</typeparam>
         /// <typeparam name="TResult">Type of Selected return.</typeparam>
@@ -726,63 +541,29 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="filter">Lambda Expression for filtering Query in where parameters.</param>
         /// <param name="orderByExpression">Lambda Expression for Ordering Query.</param>
         /// <param name="ascending">Direction of Ordering.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Selected column of Entity Object.</returns>
-        public virtual IEnumerable<TResult> GetByFilter<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TResult> GetByFilter<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking query arguments
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
-
-            if (orderByExpression == null)
-            {
-                throw new ArgumentNullException(nameof(orderByExpression));
-            }
-
-            // Call Private Method
-            return GetFilteredElements(selectResult, filter, orderByExpression, ascending, 0, 0, false, null, includes).Item1;
+            return GetFilteredElements(selectResult, filter, orderByExpression, ascending, 0, 0, false, null, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements with Selected Columns of Entity By filter, with Ordering and Includes.
+        /// Get Elements with Selected Columns of Entity By filter, with Ordering and action.
         /// </summary>
         /// <typeparam name="TResult">Type of Selected return.</typeparam>
         /// <param name="selectResult">Lambda Expression for Select on query.</param>
         /// <param name="filter">Lambda Expression for filtering Query in where parameters.</param>
         /// <param name="order">Lambda Expression for Ordering Query.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Selected column of Entity Object.</returns>
-        public virtual IEnumerable<TResult> GetByFilter<TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, QueryOrder<TEntity> order, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TResult> GetByFilter<TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, QueryOrder<TEntity> order, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking query arguments
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
-
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-
-            // Call Private Method
-            return GetFilteredElements<int, TResult>(selectResult, filter, null, false, 0, 0, false, order, includes).Item1;
+            return GetFilteredElements<int, TResult>(selectResult, filter, null, false, 0, 0, false, order, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements Entity By filter, with Ordering, Paging and Includes.
+        /// Get Elements Entity By filter, with Ordering, Paging and action.
         /// </summary>
         /// <typeparam name="TKey">Type of Ordering.</typeparam>
         /// <param name="filter">Lambda Expression for filtering Query in where parameters.</param>
@@ -790,73 +571,31 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="ascending">Direction of Ordering.</param>
         /// <param name="pageIndex">Index of page.</param>
         /// <param name="pageCount">Number of elements in each page.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Entity Object.</returns>
-        public virtual IEnumerable<TEntity> GetByFilter<TKey>(Expression<Func<TEntity, bool>> filter, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
-        {
-            // Checking query arguments
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            if (orderByExpression == null)
-            {
-                throw new ArgumentNullException(nameof(orderByExpression));
-            }
-
+        public virtual IEnumerable<TEntity> GetByFilter<TKey>(Expression<Func<TEntity, bool>> filter, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
+        { 
             // Call Private Method
-            return GetFilteredElements(x => x, filter, orderByExpression, ascending, pageIndex, pageCount, false, null, includes).Item1;
+            return GetFilteredElements(x => x, filter, orderByExpression, ascending, pageIndex, pageCount, false, null, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements Entity By filter, with Ordering, Paging and Includes.
+        /// Get Elements Entity By filter, with Ordering, Paging and action.
         /// </summary>
         /// <param name="filter">Lambda Expression for filtering Query in where parameters.</param>
         /// <param name="order">Lambda Expression for Ordering Query.</param>
         /// <param name="pageIndex">Index of page.</param>
         /// <param name="pageCount">Number of elements in each page.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Entity Object.</returns>
-        public virtual IEnumerable<TEntity> GetByFilter(Expression<Func<TEntity, bool>> filter, QueryOrder<TEntity> order, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TEntity> GetByFilter(Expression<Func<TEntity, bool>> filter, QueryOrder<TEntity> order, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking query arguments
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-
             // Call Private Method
-            return GetFilteredElements<int, TEntity>(x => x, filter, null, false, pageIndex, pageCount, false, order, includes).Item1;
+            return GetFilteredElements<int, TEntity>(x => x, filter, null, false, pageIndex, pageCount, false, order, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements Entity By filter, with Ordering, Paging and Includes.
+        /// Get Elements Entity By filter, with Ordering, Paging and action.
         /// </summary>
         /// <typeparam name="TKey">Type of Ordering.</typeparam>
         /// <param name="filter">Lambda Expression for filtering Query in where parameters.</param>
@@ -864,73 +603,31 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="ascending">Direction of Ordering.</param>
         /// <param name="pageIndex">Index of page.</param>
         /// <param name="pageCount">Number of elements in each page.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Entity Object and count of Element.</returns>
-        public virtual Tuple<IEnumerable<TEntity>, int> GetByFilterAndCount<TKey>(Expression<Func<TEntity, bool>> filter, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public virtual Tuple<IEnumerable<TEntity>, int> GetByFilterAndCount<TKey>(Expression<Func<TEntity, bool>> filter, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking query arguments
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            if (orderByExpression == null)
-            {
-                throw new ArgumentNullException(nameof(orderByExpression));
-            }
-
             // Call Private Method
-            return GetFilteredElements(x => x, filter, orderByExpression, ascending, pageIndex, pageCount, true, null, includes);
+            return GetFilteredElements(x => x, filter, orderByExpression, ascending, pageIndex, pageCount, true, null, action);
         }
 
         /// <summary>
-        /// Get Elements Entity By filter, with Ordering, Paging and Includes.
+        /// Get Elements Entity By filter, with Ordering, Paging and action.
         /// </summary>
         /// <param name="filter">Lambda Expression for filtering Query in where parameters.</param>
         /// <param name="order">Lambda Expression for Ordering Query.</param>
         /// <param name="pageIndex">Index of page.</param>
         /// <param name="pageCount">Number of elements in each page.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Entity Object and count of Element.</returns>
-        public virtual Tuple<IEnumerable<TEntity>, int> GetByFilterAndCount(Expression<Func<TEntity, bool>> filter, QueryOrder<TEntity> order, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public virtual Tuple<IEnumerable<TEntity>, int> GetByFilterAndCount(Expression<Func<TEntity, bool>> filter, QueryOrder<TEntity> order, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking query arguments
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-
             // Call Private Method
-            return GetFilteredElements<int, TEntity>(x => x, filter, null, false, pageIndex, pageCount, true, order, includes);
+            return GetFilteredElements<int, TEntity>(x => x, filter, null, false, pageIndex, pageCount, true, order, action);
         }
 
         /// <summary>
-        /// Get Elements with Selected Columns of Entity By filter, with Ordering, Paging and Includes.
+        /// Get Elements with Selected Columns of Entity By filter, with Ordering, Paging and action.
         /// </summary>
         /// <typeparam name="TKey">Type of Ordering.</typeparam>
         /// <typeparam name="TResult">Type of Selected return.</typeparam>
@@ -940,42 +637,16 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="ascending">Direction of Ordering.</param>
         /// <param name="pageIndex">Index of page.</param>
         /// <param name="pageCount">Number of elements in each page.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Selected column of Entity Object.</returns>
-        public virtual IEnumerable<TResult> GetByFilter<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TResult> GetByFilter<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking query arguments
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
-
-            if (orderByExpression == null)
-            {
-                throw new ArgumentNullException(nameof(orderByExpression));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
             // Call Private Method
-            return GetFilteredElements(selectResult, filter, orderByExpression, ascending, pageIndex, pageCount, false, null, includes).Item1;
+            return GetFilteredElements(selectResult, filter, orderByExpression, ascending, pageIndex, pageCount, false, null, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements with Selected Columns of Entity By filter, with Ordering, Paging and Includes.
+        /// Get Elements with Selected Columns of Entity By filter, with Ordering, Paging and action.
         /// </summary>
         /// <typeparam name="TResult">Type of Selected return.</typeparam>
         /// <param name="selectResult">Lambda Expression for Select on query.</param>
@@ -983,42 +654,15 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="order">Lambda Expression for Ordering Query.</param>
         /// <param name="pageIndex">Index of page.</param>
         /// <param name="pageCount">Number of elements in each page.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Selected column of Entity Object.</returns>
-        public virtual IEnumerable<TResult> GetByFilter<TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, QueryOrder<TEntity> order, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TResult> GetByFilter<TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, QueryOrder<TEntity> order, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking query arguments
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
-
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            // Call Private Method
-            return GetFilteredElements<int, TResult>(selectResult, filter, null, false, pageIndex, pageCount, false, order, includes).Item1;
+            return GetFilteredElements<int, TResult>(selectResult, filter, null, false, pageIndex, pageCount, false, order, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements Entity By filter, with Ordering, Paging and Includes.
+        /// Get Elements Entity By filter, with Ordering, Paging and action.
         /// </summary>
         /// <typeparam name="TKey">Type of Ordering.</typeparam>
         /// <typeparam name="TResult">Type of Selected return.</typeparam>
@@ -1028,38 +672,11 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="ascending">Direction of Ordering.</param>
         /// <param name="pageIndex">Index of page.</param>
         /// <param name="pageCount">Number of elements in each page.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Entity Object and count of Element.</returns>
-        public Tuple<IEnumerable<TResult>, int> GetByFilterAndCount<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public Tuple<IEnumerable<TResult>, int> GetByFilterAndCount<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking query arguments
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
-
-            if (orderByExpression == null)
-            {
-                throw new ArgumentNullException(nameof(orderByExpression));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            // Call Private Method
-            return GetFilteredElements(selectResult, filter, orderByExpression, ascending, pageIndex, pageCount, true, null, includes);
+            return GetFilteredElements(selectResult, filter, orderByExpression, ascending, pageIndex, pageCount, true, null, action);
         }
 
         /// <summary>
@@ -1071,63 +688,25 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="order">The order.</param>
         /// <param name="pageIndex">Index of the page.</param>
         /// <param name="pageCount">The page count.</param>
-        /// <param name="includes">The includes.</param>
+        /// <param name="action">The action.</param>
         /// <returns>List of Elements with selected Columns of Entity Object and count.</returns>
-        public Tuple<IEnumerable<TResult>, int> GetByFilterAndCount<TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, QueryOrder<TEntity> order, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public Tuple<IEnumerable<TResult>, int> GetByFilterAndCount<TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, QueryOrder<TEntity> order, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking query arguments
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
-
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
             // Call Private Method
-            return GetFilteredElements<int, TResult>(selectResult, filter, null, false, pageIndex, pageCount, true, order, includes);
+            return GetFilteredElements<int, TResult>(selectResult, filter, null, false, pageIndex, pageCount, true, order, action);
         }
 
         /// <summary>
-        /// Get Elements Entity By filter, with Ordering, Paging and Includes.
+        /// Get Elements Entity By filter, with Ordering, Paging and action.
         /// </summary>
         /// <typeparam name="TResult">Type of Selected return.</typeparam>
         /// <param name="selectResult">Lambda Expression for Select on query.</param>
         /// <param name="filter">Lambda Expression for filtering Query in where parameters.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Entity Object and count of Element.</returns>
-        public Tuple<IEnumerable<TResult>, int> GetByFilterAndCount<TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, params Expression<Func<TEntity, object>>[] includes)
+        public Tuple<IEnumerable<TResult>, int> GetByFilterAndCount<TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking query arguments
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
-
-            // Call Private Method
-            return GetFilteredElements(selectResult, filter, f => f, true, 0, 0, true, null, includes);
+            return GetFilteredElements(selectResult, filter, f => f, true, 0, 0, true, null, action);
         }
 
         #endregion ----- Get Methods With Filter -----
@@ -1135,95 +714,57 @@ namespace My.CoachManager.Infrastructure.Data.Core
         #region ----- Get Methods With Specification -----
 
         /// <summary>
-        /// Get Elements of Entity By Specification Pattern, with Includes.
+        /// Get Elements of Entity By Specification Pattern, with action.
         /// </summary>
         /// <param name="specification">Specification Used for Filtering Query.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Elements of Entity Object.</returns>
-        public virtual IEnumerable<TEntity> GetBySpec(ISpecification<TEntity> specification, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TEntity> GetBySpec(ISpecification<TEntity> specification, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            if (specification == null)
-            {
-                throw new ArgumentNullException(nameof(specification));
-            }
-
-            return GetBySpecElements<int, TEntity>(x => x, specification, null, true, 0, 0, false, null, includes).Item1;
+            return GetBySpecElements<int, TEntity>(x => x, specification, null, true, 0, 0, false, null, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements with selected Columns of Entity By Specification Pattern, with Includes.
+        /// Get Elements with selected Columns of Entity By Specification Pattern, with action.
         /// </summary>
         /// <typeparam name="TResult">Type of Selected return.</typeparam>
         /// <param name="selectResult">Lambda Expression for Select on query.</param>
         /// <param name="specification">Specification Used for Filtering Query.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Elements with selected Columns of Entity Object.</returns>
-        public virtual IEnumerable<TResult> GetBySpec<TResult>(Expression<Func<TEntity, TResult>> selectResult, ISpecification<TEntity> specification, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TResult> GetBySpec<TResult>(Expression<Func<TEntity, TResult>> selectResult, ISpecification<TEntity> specification, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking query arguments
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (specification == null)
-            {
-                throw new ArgumentNullException(nameof(specification));
-            }
-
-            return GetBySpecElements<int, TResult>(selectResult, specification, null, true, 0, 0, false, null, includes).Item1;
+            return GetBySpecElements<int, TResult>(selectResult, specification, null, true, 0, 0, false, null, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements of Entity By Specification Pattern, with Ordering and Includes.
+        /// Get Elements of Entity By Specification Pattern, with Ordering and action.
         /// </summary>
         /// <typeparam name="TKey">Type of Ordering.</typeparam>
         /// <param name="specification">Specification Used for Filtering Query.</param>
         /// <param name="orderByExpression">Lambda Expression for Ordering Query.</param>
         /// <param name="ascending">Direction of Ordering.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Elements of Entity Object.</returns>
-        public virtual IEnumerable<TEntity> GetBySpec<TKey>(ISpecification<TEntity> specification, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TEntity> GetBySpec<TKey>(ISpecification<TEntity> specification, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (specification == null)
-            {
-                throw new ArgumentNullException(nameof(specification));
-            }
-
-            if (orderByExpression == null)
-            {
-                throw new ArgumentNullException(nameof(orderByExpression));
-            }
-
-            return GetBySpecElements(x => x, specification, orderByExpression, ascending, 0, 0, false, null, includes).Item1;
+            return GetBySpecElements(x => x, specification, orderByExpression, ascending, 0, 0, false, null, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements of Entity By Specification Pattern, with Ordering and Includes.
+        /// Get Elements of Entity By Specification Pattern, with Ordering and action.
         /// </summary>
         /// <param name="specification">Specification Used for Filtering Query.</param>
         /// <param name="order">Lambda Expression for Ordering Query.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Elements of Entity Object.</returns>
-        public virtual IEnumerable<TEntity> GetBySpec(ISpecification<TEntity> specification, QueryOrder<TEntity> order, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TEntity> GetBySpec(ISpecification<TEntity> specification, QueryOrder<TEntity> order, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (specification == null)
-            {
-                throw new ArgumentNullException(nameof(specification));
-            }
-
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-
-            return GetBySpecElements<int, TEntity>(x => x, specification, null, false, 0, 0, false, order, includes).Item1;
+            return GetBySpecElements<int, TEntity>(x => x, specification, null, false, 0, 0, false, order, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements with selected Columns of Entity By Specification Pattern, with Ordering and Includes.
+        /// Get Elements with selected Columns of Entity By Specification Pattern, with Ordering and action.
         /// </summary>
         /// <typeparam name="TKey">Type of Ordering.</typeparam>
         /// <typeparam name="TResult">Type of Selected return.</typeparam>
@@ -1231,61 +772,29 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="specification">Specification Used for Filtering Query.</param>
         /// <param name="orderByExpression">Lambda Expression for Ordering Query.</param>
         /// <param name="ascending">Direction of Ordering.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Elements with selected Columns of Entity Object.</returns>
-        public virtual IEnumerable<TResult> GetBySpec<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, ISpecification<TEntity> specification, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TResult> GetBySpec<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, ISpecification<TEntity> specification, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (specification == null)
-            {
-                throw new ArgumentNullException(nameof(specification));
-            }
-
-            if (orderByExpression == null)
-            {
-                throw new ArgumentNullException(nameof(orderByExpression));
-            }
-
-            return GetBySpecElements(selectResult, specification, orderByExpression, ascending, 0, 0, false, null, includes).Item1;
+            return GetBySpecElements(selectResult, specification, orderByExpression, ascending, 0, 0, false, null, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements with selected Columns of Entity By Specification Pattern, with Ordering and Includes.
+        /// Get Elements with selected Columns of Entity By Specification Pattern, with Ordering and action.
         /// </summary>
         /// <typeparam name="TResult">Type of Selected return.</typeparam>
         /// <param name="selectResult">Lambda Expression for Select on query.</param>
         /// <param name="specification">Specification Used for Filtering Query.</param>
         /// <param name="order">Lambda Expression for Ordering Query.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Elements with selected Columns of Entity Object.</returns>
-        public virtual IEnumerable<TResult> GetBySpec<TResult>(Expression<Func<TEntity, TResult>> selectResult, ISpecification<TEntity> specification, QueryOrder<TEntity> order, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TResult> GetBySpec<TResult>(Expression<Func<TEntity, TResult>> selectResult, ISpecification<TEntity> specification, QueryOrder<TEntity> order, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (specification == null)
-            {
-                throw new ArgumentNullException(nameof(specification));
-            }
-
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-
-            return GetBySpecElements<int, TResult>(selectResult, specification, null, false, 0, 0, false, order, includes).Item1;
+            return GetBySpecElements<int, TResult>(selectResult, specification, null, false, 0, 0, false, order, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements of Entity By Specification Pattern, with Ordering, Paging and Includes.
+        /// Get Elements of Entity By Specification Pattern, with Ordering, Paging and action.
         /// </summary>
         /// <typeparam name="TKey">Type of Ordering.</typeparam>
         /// <param name="specification">Specification Used for Filtering Query.</param>
@@ -1293,71 +802,29 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="ascending">Direction of Ordering.</param>
         /// <param name="pageIndex">Index of page.</param>
         /// <param name="pageCount">Number of elements in each page.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Elements of Entity Object.</returns>
-        public virtual IEnumerable<TEntity> GetBySpec<TKey>(ISpecification<TEntity> specification, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TEntity> GetBySpec<TKey>(ISpecification<TEntity> specification, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (specification == null)
-            {
-                throw new ArgumentNullException(nameof(specification));
-            }
-
-            if (orderByExpression == null)
-            {
-                throw new ArgumentNullException(nameof(orderByExpression));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            return GetBySpecElements(x => x, specification, orderByExpression, ascending, pageIndex, pageCount, false, null, includes).Item1;
+            return GetBySpecElements(x => x, specification, orderByExpression, ascending, pageIndex, pageCount, false, null, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements of Entity By Specification Pattern, with Ordering, Paging and Includes.
+        /// Get Elements of Entity By Specification Pattern, with Ordering, Paging and action.
         /// </summary>
         /// <param name="specification">Specification Used for Filtering Query.</param>
         /// <param name="order">Lambda Expression for Ordering Query.</param>
         /// <param name="pageIndex">Index of page.</param>
         /// <param name="pageCount">Number of elements in each page.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Elements of Entity Object.</returns>
-        public virtual IEnumerable<TEntity> GetBySpec(ISpecification<TEntity> specification, QueryOrder<TEntity> order, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TEntity> GetBySpec(ISpecification<TEntity> specification, QueryOrder<TEntity> order, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (specification == null)
-            {
-                throw new ArgumentNullException(nameof(specification));
-            }
-
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            return GetBySpecElements<int, TEntity>(x => x, specification, null, false, pageIndex, pageCount, false, order, includes).Item1;
+            return GetBySpecElements<int, TEntity>(x => x, specification, null, false, pageIndex, pageCount, false, order, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements with selected Columns of Entity By Specification Pattern, with Ordering, Paging and Includes.
+        /// Get Elements with selected Columns of Entity By Specification Pattern, with Ordering, Paging and action.
         /// </summary>
         /// <typeparam name="TKey">Type of Ordering.</typeparam>
         /// <typeparam name="TResult">Type of Selected return.</typeparam>
@@ -1367,41 +834,15 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="ascending">Direction of Ordering.</param>
         /// <param name="pageIndex">Index of page.</param>
         /// <param name="pageCount">Number of elements in each page.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Elements with selected Columns of Entity Object.</returns>
-        public virtual IEnumerable<TResult> GetBySpec<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, ISpecification<TEntity> specification, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TResult> GetBySpec<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, ISpecification<TEntity> specification, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (specification == null)
-            {
-                throw new ArgumentNullException(nameof(specification));
-            }
-
-            if (orderByExpression == null)
-            {
-                throw new ArgumentNullException(nameof(orderByExpression));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            return GetBySpecElements(selectResult, specification, orderByExpression, ascending, pageIndex, pageCount, false, null, includes).Item1;
+            return GetBySpecElements(selectResult, specification, orderByExpression, ascending, pageIndex, pageCount, false, null, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements with selected Columns of Entity By Specification Pattern, with Ordering, Paging and Includes.
+        /// Get Elements with selected Columns of Entity By Specification Pattern, with Ordering, Paging and action.
         /// </summary>
         /// <typeparam name="TResult">Type of Selected return.</typeparam>
         /// <param name="selectResult">Lambda Expression for Select on query.</param>
@@ -1409,41 +850,15 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="order">Lambda Expression for Ordering Query.</param>
         /// <param name="pageIndex">Index of page.</param>
         /// <param name="pageCount">Number of elements in each page.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Elements with selected Columns of Entity Object.</returns>
-        public virtual IEnumerable<TResult> GetBySpec<TResult>(Expression<Func<TEntity, TResult>> selectResult, ISpecification<TEntity> specification, QueryOrder<TEntity> order, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public virtual IEnumerable<TResult> GetBySpec<TResult>(Expression<Func<TEntity, TResult>> selectResult, ISpecification<TEntity> specification, QueryOrder<TEntity> order, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (specification == null)
-            {
-                throw new ArgumentNullException(nameof(specification));
-            }
-
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            return GetBySpecElements<int, TResult>(selectResult, specification, null, false, pageIndex, pageCount, false, order, includes).Item1;
+            return GetBySpecElements<int, TResult>(selectResult, specification, null, false, pageIndex, pageCount, false, order, action).Item1;
         }
 
         /// <summary>
-        /// Get Elements with selected Columns of Entity By Specification Pattern, with Ordering, Paging and Includes.
+        /// Get Elements with selected Columns of Entity By Specification Pattern, with Ordering, Paging and action.
         /// </summary>
         /// <typeparam name="TKey">Type of Ordering.</typeparam>
         /// <typeparam name="TResult">Type of Selected return.</typeparam>
@@ -1453,37 +868,11 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="ascending">Direction of Ordering.</param>
         /// <param name="pageIndex">Index of page.</param>
         /// <param name="pageCount">Number of elements in each page.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Elements with selected Columns of Entity Object and count.</returns>
-        public virtual Tuple<IEnumerable<TResult>, int> GetBySpecAndCount<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, ISpecification<TEntity> specification, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public virtual Tuple<IEnumerable<TResult>, int> GetBySpecAndCount<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, ISpecification<TEntity> specification, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (specification == null)
-            {
-                throw new ArgumentNullException(nameof(specification));
-            }
-
-            if (orderByExpression == null)
-            {
-                throw new ArgumentNullException(nameof(orderByExpression));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            return GetBySpecElements(selectResult, specification, orderByExpression, ascending, pageIndex, pageCount, true, null, includes);
+            return GetBySpecElements(selectResult, specification, orderByExpression, ascending, pageIndex, pageCount, true, null, action);
         }
 
         /// <summary>
@@ -1495,37 +884,11 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="order">The order.</param>
         /// <param name="pageIndex">Index of the page.</param>
         /// <param name="pageCount">The page count.</param>
-        /// <param name="includes">The includes.</param>
+        /// <param name="action">The action.</param>
         /// <returns>List of Elements with selected Columns of Entity Object and count.</returns>
-        public virtual Tuple<IEnumerable<TResult>, int> GetBySpecAndCount<TResult>(Expression<Func<TEntity, TResult>> selectResult, ISpecification<TEntity> specification, QueryOrder<TEntity> order, int pageIndex, int pageCount, params Expression<Func<TEntity, object>>[] includes)
+        public virtual Tuple<IEnumerable<TResult>, int> GetBySpecAndCount<TResult>(Expression<Func<TEntity, TResult>> selectResult, ISpecification<TEntity> specification, QueryOrder<TEntity> order, int pageIndex, int pageCount, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Checking arguments for this query
-            if (selectResult == null)
-            {
-                throw new ArgumentNullException(nameof(selectResult));
-            }
-
-            if (specification == null)
-            {
-                throw new ArgumentNullException(nameof(specification));
-            }
-
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-
-            if (pageIndex < 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageIndexArgumentException, nameof(pageIndex));
-            }
-
-            if (pageCount <= 0)
-            {
-                throw new ArgumentException(ValidationMessageResources.RepositoryPageCountArgumentException, nameof(pageCount));
-            }
-
-            return GetBySpecElements<int, TResult>(selectResult, specification, null, false, pageIndex, pageCount, true, order, includes);
+            return GetBySpecElements<int, TResult>(selectResult, specification, null, false, pageIndex, pageCount, true, order, action);
         }
 
         #endregion ----- Get Methods With Specification -----
@@ -1549,7 +912,7 @@ namespace My.CoachManager.Infrastructure.Data.Core
         }
 
         /// <summary>
-        /// Get Elements with selected Columns of Entity By filter, with Ordering, Paging and Includes.
+        /// Get Elements with selected Columns of Entity By filter, with Ordering, Paging and action.
         /// </summary>
         /// <typeparam name="TKey">Type of Ordering.</typeparam>
         /// <typeparam name="TResult">Type of Selected return.</typeparam>
@@ -1561,9 +924,9 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="pageCount">Number of elements in each page.</param>
         /// <param name="getFilteredCount">If true, Launch a count on objectSet Query after filtering and before pagination.</param>
         /// <param name="order">The order.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Selected column of Entity Object, Count of records (0 if not used).</returns>
-        protected virtual Tuple<IEnumerable<TResult>, int> GetFilteredElements<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, bool getFilteredCount, QueryOrder<TEntity> order, params Expression<Func<TEntity, object>>[] includes)
+        protected virtual Tuple<IEnumerable<TResult>, int> GetFilteredElements<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, bool>> filter, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, bool getFilteredCount, QueryOrder<TEntity> order, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
             // Create IObjectSet for this particular type and query this
             IQueryable<TEntity> objectSet = CreateSet();
@@ -1577,15 +940,15 @@ namespace My.CoachManager.Infrastructure.Data.Core
             var count = 0;
             if (getFilteredCount)
             {
-                count = objectSet.Select(selectResult).Count();
+                count = objectSet.Count();
             }
 
             // Return List of Entity Object and count
-            return GetElements(objectSet, count, selectResult, orderByExpression, ascending, pageIndex, pageCount, order, includes);
+            return GetElements(objectSet, count, selectResult, orderByExpression, ascending, pageIndex, pageCount, order, action);
         }
 
         /// <summary>
-        /// Get Elements with selected Columns of Entity By Specification Pattern, with Ordering, Paging and Includes.
+        /// Get Elements with selected Columns of Entity By Specification Pattern, with Ordering, Paging and action.
         /// </summary>
         /// <typeparam name="TKey">Type of Ordering.</typeparam>
         /// <typeparam name="TResult">Type of Selected return.</typeparam>
@@ -1597,9 +960,9 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="pageCount">Number of elements in each page.</param>
         /// <param name="getFilteredCount">If true, Launch a count on objectSet Query after filtering and before pagination.</param>
         /// <param name="order">The order.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Selected column of Entity Object, Count of records (0 if not used).</returns>
-        protected virtual Tuple<IEnumerable<TResult>, int> GetBySpecElements<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, ISpecification<TEntity> specification, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, bool getFilteredCount, QueryOrder<TEntity> order, params Expression<Func<TEntity, object>>[] includes)
+        protected virtual Tuple<IEnumerable<TResult>, int> GetBySpecElements<TKey, TResult>(Expression<Func<TEntity, TResult>> selectResult, ISpecification<TEntity> specification, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, bool getFilteredCount, QueryOrder<TEntity> order, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
             // Create IObjectSet for this particular type and query this
             IQueryable<TEntity> objectSet = CreateSet();
@@ -1617,7 +980,7 @@ namespace My.CoachManager.Infrastructure.Data.Core
             }
 
             // Return List of Entity Object and count
-            return GetElements(objectSet, count, selectResult, orderByExpression, ascending, pageIndex, pageCount, order, includes);
+            return GetElements(objectSet, count, selectResult, orderByExpression, ascending, pageIndex, pageCount, order, action);
         }
 
         /// <summary>
@@ -1633,13 +996,10 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// <param name="pageIndex">Index of page.</param>
         /// <param name="pageCount">Number of elements in each page.</param>
         /// <param name="order">The order.</param>
-        /// <param name="includes">Array of String for adding include in query.</param>
+        /// <param name="action">Array of String for adding include in query.</param>
         /// <returns>List of Selected column of Entity Object, Count of records (0 if not used).</returns>
-        private Tuple<IEnumerable<TResult>, int> GetElements<TKey, TResult>(IQueryable<TEntity> objectSet, int count, Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, QueryOrder<TEntity> order, params Expression<Func<TEntity, object>>[] includes)
+        private Tuple<IEnumerable<TResult>, int> GetElements<TKey, TResult>(IQueryable<TEntity> objectSet, int count, Expression<Func<TEntity, TResult>> selectResult, Expression<Func<TEntity, TKey>> orderByExpression, bool ascending, int pageIndex, int pageCount, QueryOrder<TEntity> order, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            // Add All Include Object in Query
-            objectSet = objectSet.Include(includes);
-
             // Ordering Query
             if (orderByExpression != null)
             {
@@ -1654,7 +1014,12 @@ namespace My.CoachManager.Infrastructure.Data.Core
             // Cut Result for Paging
             if (pageIndex >= 0 && pageCount > 0)
             {
-                objectSet = objectSet.Skip(pageIndex * pageCount).Take(pageCount);
+                objectSet = objectSet.Skip((pageIndex-1) * pageCount).Take(pageCount);
+            }
+
+            if (action != null)
+            {
+                objectSet = action(objectSet);
             }
 
             var result = objectSet.Select(selectResult);
@@ -1671,11 +1036,11 @@ namespace My.CoachManager.Infrastructure.Data.Core
         /// Get Element by it's ID.
         /// </summary>
         /// <param name="id">Primary Key.</param>
-        /// <param name="includes">Includes Parameters.</param>
+        /// <param name="action">action Parameters.</param>
         /// <returns>Single or Default TEntity.</returns>
-        public virtual TEntity GetEntity(int id, params Expression<Func<TEntity, object>>[] includes)
+        public virtual TEntity GetEntity(int id, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null)
         {
-            return GetFilteredElements<int, TEntity>(x => x, x => x.Id.Equals(id), null, true, 0, 0, false, null, includes).Item1.SingleOrDefault();
+            return GetFilteredElements<int, TEntity>(x => x, x => x.Id.Equals(id), null, true, 0, 0, false, null, action).Item1.SingleOrDefault();
         }
 
         #endregion ----- Get Methods -----

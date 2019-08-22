@@ -43,6 +43,7 @@ namespace My.CoachManager.Application.Dtos
         /// <summary>
         /// Gets or sets the training attendances.
         /// </summary>
+        [DataMember]
         public IEnumerable<TrainingAttendanceDto> Attendances { get; set; }
     }
 }

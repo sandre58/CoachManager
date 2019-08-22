@@ -33,15 +33,13 @@ namespace My.CoachManager.Domain.CategoryModule.Aggregate
         /// </summary>
         /// <param name="item">The item.</param>
         /// <param name="entity">The entity.</param>
-        public static bool UpdateEntity(CategoryDto item, Category entity)
+        public static void UpdateEntity(CategoryDto item, Category entity)
         {
             entity.Code = item.Code;
             entity.Label = item.Label;
             entity.Description = item.Description;
             entity.Order = item.Order;
             entity.Age = item.Age;
-
-            return true;
         }
 
         /// <summary>

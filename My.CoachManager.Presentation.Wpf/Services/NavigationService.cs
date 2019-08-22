@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
-using My.CoachManager.Presentation.Core;
-using My.CoachManager.Presentation.Core.Services;
+using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.Presentation.Wpf.Core;
+using My.CoachManager.Presentation.Wpf.Core.Services;
+using My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;
 using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Wpf.Services
@@ -17,6 +20,7 @@ namespace My.CoachManager.Presentation.Wpf.Services
 
         private readonly IRegionManager _regionManager;
         private IRegionNavigationService _regionNavigationService;
+        private Stopwatch _watch;
 
         #endregion Fields
 
@@ -62,13 +66,13 @@ namespace My.CoachManager.Presentation.Wpf.Services
         /// <summary>
         /// Gets active view.
         /// </summary>
-        public object ActiveView
+        public INavigableWorkspaceViewModel ActiveView
         {
             get
             {
                 if (_regionManager.Regions.ContainsRegionWithName(RegionNames.WorkspaceRegion))
                 {
-                    return _regionManager.Regions[RegionNames.WorkspaceRegion].ActiveViews.FirstOrDefault();
+                    return (INavigableWorkspaceViewModel)_regionManager.Regions[RegionNames.WorkspaceRegion].ActiveViews.FirstOrDefault();
                 }
                 return null;
             }
@@ -84,7 +88,7 @@ namespace My.CoachManager.Presentation.Wpf.Services
         /// </summary>
         /// <param name="pagePath">The Uri.</param>
         /// <param name="callback">Action when navigation is completed.</param>
-        /// <param name="parameters">The optionals parameters.</param>
+        /// <param name="parameters">The optional parameters.</param>
         public void NavigateTo(string pagePath, Action<NavigationResult> callback = null, NavigationParameters parameters = null)
         {
             if (!string.IsNullOrEmpty(pagePath))
@@ -94,9 +98,9 @@ namespace My.CoachManager.Presentation.Wpf.Services
                 if (!Equals(newUri, activeUri))
                 {
                     _regionManager.RequestNavigate(RegionNames.WorkspaceRegion, newUri, e =>
-                    {
-                        callback?.Invoke(e);
-                    });
+                        {
+                            callback?.Invoke(e);
+                        });
                 }
             }
         }
@@ -149,16 +153,23 @@ namespace My.CoachManager.Presentation.Wpf.Services
                 if (_regionManager.Regions.ContainsRegionWithName(RegionNames.WorkspaceRegion))
                 {
                     _regionNavigationService = _regionManager.Regions[RegionNames.WorkspaceRegion].NavigationService;
-                    _regionNavigationService.Navigated += delegate(object o, RegionNavigationEventArgs args)
-                    {
-                        Navigated?.Invoke(o, args);
-                    };
                     _regionNavigationService.Navigating += delegate (object o, RegionNavigationEventArgs args)
                     {
+                        _watch = new Stopwatch();
+                        _watch.Start();
+                        LogManager.Trace($"Navigating to {args.Uri}");
                         Navigating?.Invoke(o, args);
+                    };
+                    _regionNavigationService.Navigated += delegate (object o, RegionNavigationEventArgs args)
+                    {
+                        _watch?.Stop();
+                        LogManager.Trace($"Navigated to {args.Uri} : {_watch?.Elapsed}");
+                        Navigated?.Invoke(o, args);
                     };
                     _regionNavigationService.NavigationFailed += delegate (object o, RegionNavigationFailedEventArgs args)
                     {
+                        _watch?.Stop();
+                        LogManager.Trace($"Fail to navigate to {args.Uri} : {args.Error.Message}");
                         NavigationFailed?.Invoke(o, args);
                     };
                 }

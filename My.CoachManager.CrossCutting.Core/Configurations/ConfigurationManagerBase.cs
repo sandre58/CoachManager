@@ -111,7 +111,6 @@ namespace My.CoachManager.CrossCutting.Core.Configurations
         /// <param name="configSectionName">Name of configuration section.</param>
         /// <returns>Instance of Configuration Section.</returns>
         protected static IDictionary<string, TConfig> GetAllConfigSections<TConfig>(string configSectionName)
-            where TConfig : ConfigurationSection
         {
             return GetAllConfigSectionFromConfiguration<TConfig>(configSectionName);
         }
@@ -251,7 +250,7 @@ namespace My.CoachManager.CrossCutting.Core.Configurations
             if (!Container.Any(container => IsGoodAppSettingConfiguration<T>(container, appSettingKeyName)))
             {
                 Trace.TraceError("AppSetting key=\"{0}\" is not found", appSettingKeyName);
-                throw new ConfigurationErrorsException(String.Format(CultureInfo.InvariantCulture, "AppSetting key=\"{0}\" is not found", appSettingKeyName));
+                throw new Exception(String.Format(CultureInfo.InvariantCulture, "AppSetting key=\"{0}\" is not found", appSettingKeyName));
             }
 
             // get the app setting key value
@@ -277,7 +276,7 @@ namespace My.CoachManager.CrossCutting.Core.Configurations
             if (!existsConfiguration)
             {
                 Trace.TraceError("AppSetting key=\"{0}\" is not found", appSettingKeyName);
-                throw new ConfigurationErrorsException(String.Format(CultureInfo.InvariantCulture, "AppSetting key=\"{0}\" is not found", appSettingKeyName));
+                throw new Exception(String.Format(CultureInfo.InvariantCulture, "AppSetting key=\"{0}\" is not found", appSettingKeyName));
             }
 
             var configuration = Container.First(container => IsGoodAppSettingConfiguration<T>(container, appSettingKeyName, true, existsExactConfiguration)).Value;
@@ -314,7 +313,7 @@ namespace My.CoachManager.CrossCutting.Core.Configurations
             if (!Container.Any(container => IsGoodConnectionStringConfiguration(container, connectionStringName)))
             {
                 Trace.TraceError("Connection String key=\"{0}\" not found", connectionStringName);
-                throw new ConfigurationErrorsException(String.Format(CultureInfo.InvariantCulture, "Connection String key=\"{0}\" not found", connectionStringName));
+                throw new Exception(String.Format(CultureInfo.InvariantCulture, "Connection String key=\"{0}\" not found", connectionStringName));
             }
 
             var configuration = Container.First(container => IsGoodConnectionStringConfiguration(container, connectionStringName)).Value;
@@ -400,7 +399,6 @@ namespace My.CoachManager.CrossCutting.Core.Configurations
         /// Throw when a configuration exception occurs.
         /// </exception>
         private static IDictionary<string, TConfig> GetAllConfigSectionFromConfiguration<TConfig>(string configSectionName)
-            where TConfig : ConfigurationSection
         {
             var result = new Dictionary<string, TConfig>();
 
@@ -416,7 +414,7 @@ namespace My.CoachManager.CrossCutting.Core.Configurations
             if (result.Count == 0)
             {
                 Trace.TraceError("Config Section key=\"{0}\" not found", configSectionName);
-                throw new ConfigurationErrorsException(String.Format(CultureInfo.InvariantCulture, "Config Section key=\"{0}\" not found", configSectionName));
+                throw new Exception(String.Format(CultureInfo.InvariantCulture, "Config Section key=\"{0}\" not found", configSectionName));
             }
 
             return result;

@@ -1,8 +1,9 @@
-﻿using My.CoachManager.Application.Dtos;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+
+using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.CrossCutting.Core.Extensions;
-using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace My.CoachManager.Presentation.Models.Aggregates
 {

@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using My.CoachManager.CrossCutting.Core.Resources;
-using My.CoachManager.Presentation.Core.Events;
-using My.CoachManager.Presentation.Core.ViewModels;
+using My.CoachManager.Presentation.Wpf.Core.Events;
+using My.CoachManager.Presentation.Wpf.Core.ViewModels.Base;
 using My.CoachManager.Presentation.Wpf.Resources;
 using Prism.Events;
 
@@ -35,15 +35,15 @@ namespace My.CoachManager.Presentation.Wpf.ViewModels
         /// <summary>
         /// Launch on constructor for initialize all Data.
         /// </summary>
-        protected override void InitializeData()
+        protected override void Initialize()
         {
-            base.InitializeData();
+            base.Initialize();
 
             var assembly = Assembly.GetEntryAssembly();
 
-            var copyrightAttr = assembly.GetCustomAttribute<AssemblyCopyrightAttribute>();
+            var copyrightAttr = assembly?.GetCustomAttribute<AssemblyCopyrightAttribute>();
 
-            Version = string.Format(CoachManagerResources.Version, assembly.GetName().Version);
+            Version = string.Format(CoachManagerResources.Version, assembly?.GetName().Version);
             Copyright = (copyrightAttr != null) ? copyrightAttr.Copyright : "";
 
             Message = MessageResources.Ready;

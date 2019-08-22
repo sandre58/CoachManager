@@ -1,4 +1,5 @@
 ﻿using System;
+
 using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.Entities

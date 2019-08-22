@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.TrainingModule.Aggregate;
 

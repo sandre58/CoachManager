@@ -192,4 +192,7 @@
   <data name="UnknownFromDate" xml:space="preserve">
     <value>Pas de date d'arrivée connue</value>
   </data>
+  <data name="YearOfBirth" xml:space="preserve">
+    <value>Année de naissance</value>
+  </data>
 </root>

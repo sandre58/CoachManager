@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using My.CoachManager.Presentation.Core.Models.Filters;
 
 namespace My.CoachManager.Presentation.Models.Filters

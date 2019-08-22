@@ -1,11 +1,12 @@
-﻿using System.Security.Principal;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
+using System.Security.Principal;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Cryptography;
-using My.CoachManager.CrossCutting.Core.Extensions;
-using My.CoachManager.CrossCutting.Core.Security;
-using My.CoachManager.Presentation.Core.Manager;
-using My.CoachManager.Presentation.Core.Services;
-using My.CoachManager.Presentation.ServiceAgent.UserServiceReference;
+using My.CoachManager.Presentation.Core.Helpers;
+using My.CoachManager.Presentation.Wpf.Core.Services;
+using My.CoachManager.Presentation.Wpf.Modules.Shared;
+using My.CoachManager.Presentation.Wpf.Properties;
 
 namespace My.CoachManager.Presentation.Wpf.Services
 {
@@ -16,20 +17,6 @@ namespace My.CoachManager.Presentation.Wpf.Services
     /// </summary>
     public class AuthenticationService : IAuthenticationService
     {
-        #region Fields
-        
-        private readonly IUserService _userService;
-
-        #endregion Fields
-
-        #region Constructor
-
-        public AuthenticationService(IUserService userService)
-        {
-            _userService = userService;
-        }
-
-        #endregion Constructor
 
         #region Public Methods
 
@@ -55,8 +42,9 @@ namespace My.CoachManager.Presentation.Wpf.Services
         public IPrincipal AuthenticateByWindowsCredentials()
         {
             var currentWindowsIdentity = WindowsIdentity.GetCurrent();
-            var login = currentWindowsIdentity.GetLogin();
-            var user = GetAuthenticatedUser(login);
+            var login = currentWindowsIdentity.Name;
+            var username = login.Contains("\\") ? login.Split('\\')[1] : login;
+            var user = GetAuthenticatedUser(username);
 
             return GetPrincipalFromUser(user);
         }
@@ -74,7 +62,7 @@ namespace My.CoachManager.Presentation.Wpf.Services
         private UserDto GetAuthenticatedUser(string login, string password)
         {
             var hashPassword = TripleDesEncryptor.Encrypt(password, login);
-            return _userService.GetUserByLoginAndPassword(login, hashPassword);
+            return ApiHelper.GetData<UserDto>(ApiConstants.ApiUsers, login, hashPassword);
         }
 
         /// <summary>
@@ -84,7 +72,7 @@ namespace My.CoachManager.Presentation.Wpf.Services
         /// <returns></returns>
         private UserDto GetAuthenticatedUser(string login)
         {
-            return _userService.GetUserByLogin(login);
+            return ApiHelper.GetData<UserDto>(ApiConstants.ApiUsers, login);
         }
 
         /// <summary>
@@ -96,10 +84,16 @@ namespace My.CoachManager.Presentation.Wpf.Services
         {
             if (user != null)
             {
-                return new Principal()
+                IList<Claim> claimCollection = new List<Claim>
                 {
-                    Identity = new Identity(user.Login, user.Name, user.Mail, SettingsManager.GetRosterId())
+                    new Claim(ClaimTypes.Name, user.Login)
+                    , new Claim(ClaimTypes.GivenName, user.Name)
+                    , new Claim(ClaimTypes.Email, user.Mail)
+                    , new Claim("RosterId", Settings.Default.RosterId.ToString())
                 };
+
+                var claimsIdentity = new ClaimsIdentity(claimCollection, "Admin");
+                return new ClaimsPrincipal(claimsIdentity);
             }
 
             return null;

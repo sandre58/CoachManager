@@ -12,7 +12,7 @@ namespace My.CoachManager.Presentation.Wpf.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.1.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -32,15 +32,13 @@ namespace My.CoachManager.Presentation.Wpf.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("gold")]
-        public string DefaultAccent {
+        [global::System.Configuration.DefaultSettingValueAttribute("pack://application:,,,/My.CoachManager.Presentation.Wpf.Resources;component/Pictu" +
+            "res/beaumont.png")]
+        public string ClubLogo {
             get {
-                return ((string)(this["DefaultAccent"]));
-            }
-            set {
-                this["DefaultAccent"] = value;
+                return ((string)(this["ClubLogo"]));
             }
         }
         
@@ -56,18 +54,9 @@ namespace My.CoachManager.Presentation.Wpf.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("../Images/beaumont.png")]
-        public string ClubLogo {
-            get {
-                return ((string)(this["ClubLogo"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int RosterId {
             get {
                 return ((int)(this["RosterId"]));
@@ -80,21 +69,21 @@ namespace My.CoachManager.Presentation.Wpf.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("red")]
-        public string DefaultMenu {
+        public string DefaultSecondaryAccent {
             get {
-                return ((string)(this["DefaultMenu"]));
+                return ((string)(this["DefaultSecondaryAccent"]));
             }
             set {
-                this["DefaultMenu"] = value;
+                this["DefaultSecondaryAccent"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("17:30")]
-        public string DefaultTrainingStartTime {
+        [global::System.Configuration.DefaultSettingValueAttribute("17:30:00")]
+        public global::System.TimeSpan DefaultTrainingStartTime {
             get {
-                return ((string)(this["DefaultTrainingStartTime"]));
+                return ((global::System.TimeSpan)(this["DefaultTrainingStartTime"]));
             }
             set {
                 this["DefaultTrainingStartTime"] = value;
@@ -103,13 +92,52 @@ namespace My.CoachManager.Presentation.Wpf.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("01:30")]
-        public string DefaultTrainingDuration {
+        [global::System.Configuration.DefaultSettingValueAttribute("01:30:00")]
+        public global::System.TimeSpan DefaultTrainingDuration {
             get {
-                return ((string)(this["DefaultTrainingDuration"]));
+                return ((global::System.TimeSpan)(this["DefaultTrainingDuration"]));
             }
             set {
                 this["DefaultTrainingDuration"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("blue")]
+        public string DefaultAccent {
+            get {
+                return ((string)(this["DefaultAccent"]));
+            }
+            set {
+                this["DefaultAccent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("France")]
+        public string DefaultCountry {
+            get {
+                return ((string)(this["DefaultCountry"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,5,10,20,30,50,100")]
+        public string ItemsPerPageList {
+            get {
+                return ((string)(this["ItemsPerPageList"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int ItemsPerPage {
+            get {
+                return ((int)(this["ItemsPerPage"]));
             }
         }
     }

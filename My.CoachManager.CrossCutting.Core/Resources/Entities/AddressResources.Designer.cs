@@ -61,6 +61,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adresse.
+        /// </summary>
+        public static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ville.
         /// </summary>
         public static string City {
@@ -70,56 +79,11 @@ namespace My.CoachManager.CrossCutting.Core.Resources.Entities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pays.
-        /// </summary>
-        public static string Country {
-            get {
-                return ResourceManager.GetString("Country", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Latitude.
-        /// </summary>
-        public static string Latitude {
-            get {
-                return ResourceManager.GetString("Latitude", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Longitude.
-        /// </summary>
-        public static string Longitude {
-            get {
-                return ResourceManager.GetString("Longitude", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Code Postal.
         /// </summary>
         public static string PostalCode {
             get {
                 return ResourceManager.GetString("PostalCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ligne 1.
-        /// </summary>
-        public static string Row1 {
-            get {
-                return ResourceManager.GetString("Row1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ligne 2.
-        /// </summary>
-        public static string Row2 {
-            get {
-                return ResourceManager.GetString("Row2", resourceCulture);
             }
         }
     }

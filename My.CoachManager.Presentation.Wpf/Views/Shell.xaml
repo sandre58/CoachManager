@@ -4,23 +4,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:prism="http://prismlibrary.com/"
-        xmlns:core="clr-namespace:My.CoachManager.Presentation.Core;assembly=My.CoachManager.Presentation.Core"
-        xmlns:controls="clr-namespace:My.CoachManager.Presentation.Controls;assembly=My.CoachManager.Presentation.Controls"
-                         xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Wpf.ViewModels"
+        xmlns:core="clr-namespace:My.CoachManager.Presentation.Wpf.Core;assembly=My.CoachManager.Presentation.Wpf.Core"
+        xmlns:controls="clr-namespace:My.CoachManager.Presentation.Wpf.Controls;assembly=My.CoachManager.Presentation.Wpf.Controls"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:interactivity="clr-namespace:My.CoachManager.Presentation.Wpf.Interactivity"
         xmlns:views="clr-namespace:My.CoachManager.Presentation.Wpf.Views"
-        xmlns:strings="clr-namespace:My.CoachManager.Presentation.Wpf.Resources"
+        xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Wpf.ViewModels"
+        xmlns:resources="clr-namespace:My.CoachManager.Presentation.Wpf.Resources"
+        xmlns:commands="clr-namespace:My.CoachManager.Presentation.Wpf.Modules.Shared.Commands;assembly=My.CoachManager.Presentation.Wpf.Modules.Shared"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
         d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel}"
-        Title="{x:Static strings:CoachManagerResources.ApplicationTitle}"
+        Title="{x:Static resources:CoachManagerResources.ApplicationTitle}"
         Icon="{StaticResource IcoImageSource}"
-        WindowState="Maximized"
-                         ShowIconOnTitleBar="False"
-                         ShowTitleOnTitleBar="False"
-        Style="{StaticResource ModernWindowStyle}" IsTitleOverlay="True">
+        WindowState="Maximized" ShowIconOnTitleBar="False" ShowTitleOnTitleBar="False" IsTitleOverlay="True"
+        Style="{StaticResource ModernWindowStyle}">
 
+    <!-- Interactions : Dialogs -->
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding WorkspaceDialogInteractionRequest}">
             <interactivity:WorkspaceDialogAction WorkspaceDialog="{Binding ElementName=WorkspaceDialog}" />
@@ -29,112 +29,85 @@
     
     <!-- HotKeys -->
     <controls:ExtendedWindow.InputBindings>
-        <KeyBinding Key="F1" Command="{Binding ShowAboutCommand}" />
-        <KeyBinding Key="F2" Command="{Binding ToggleSettingsCommand}" />
+        <KeyBinding Key="F1" Command="{x:Static commands:AppCommandsManager.ShowAboutCommand}" />
+        <KeyBinding Key="F2" Command="{x:Static commands:AppCommandsManager.ToggleSettingsCommand}" />
     </controls:ExtendedWindow.InputBindings>
 
-    <!-- Commands -->
+    <!-- Right Commands -->
     <controls:ExtendedWindow.RightWindowCommands>
-        <controls:WindowCommands prism:RegionManager.RegionName="{x:Static core:RegionNames.ToolbarRegion}" Foreground="{DynamicResource MenuForeground}" />
+        <controls:WindowCommands prism:RegionManager.RegionName="{x:Static core:RegionNames.ToolbarRegion}" >
+            <controls:WindowCommands.Style>
+                <Style TargetType="{x:Type controls:WindowCommands}" BasedOn="{StaticResource WindowCommandsStyle}">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ActiveWorkspace, Converter={StaticResource NullToBooleanConverter}}" Value="False" />
+                                <Condition Binding="{Binding ActiveTitle, Converter={StaticResource NullToBooleanConverter}}" Value="False" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.Setters>
+                                <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="controls:WindowCommands">
+                                            <ItemsPresenter />
+                                            <ControlTemplate.Resources>
+                                                <ResourceDictionary>
+                                                    <Style BasedOn="{StaticResource AccentWindowCommandsControlStyle}" TargetType="{x:Type Button}" />
+                                                    <Style BasedOn="{StaticResource AccentWindowCommandsControlStyle}" TargetType="{x:Type ToggleButton}" />
+                                                </ResourceDictionary>
+                                            </ControlTemplate.Resources>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </controls:WindowCommands.Style>
+            </controls:WindowCommands>
     </controls:ExtendedWindow.RightWindowCommands>
+    
+    <!-- Windows Commands (Min, Max, Close) -->
+    <controls:ExtendedWindow.WindowButtonCommands>
+        <controls:WindowButtonCommands >
+            <controls:WindowButtonCommands.Style>
+                <Style TargetType="{x:Type controls:WindowButtonCommands}" BasedOn="{StaticResource {x:Type controls:WindowButtonCommands}}">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ActiveWorkspace, Converter={StaticResource NullToBooleanConverter}}" Value="False" />
+                                <Condition Binding="{Binding ActiveTitle, Converter={StaticResource NullToBooleanConverter}}" Value="False" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.Setters>
+                                <Setter Property="ButtonsStyle" Value="{StaticResource AccentSystemButtonStyle}" />
+                                <Setter Property="CloseButtonStyle" Value="{StaticResource AccentSystemCloseButtonStyle}" />
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </controls:WindowButtonCommands.Style>
+            </controls:WindowButtonCommands>
+    </controls:ExtendedWindow.WindowButtonCommands>
 
     <!-- Flyouts -->
     <controls:ExtendedWindow.Flyouts>
         <controls:FlyoutsControl prism:RegionManager.RegionName="{x:Static core:RegionNames.FlyoutsRegion}" />
     </controls:ExtendedWindow.Flyouts>
 
+    <!-- Content -->
     <Grid>
         <Grid x:Name="Main">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!-- Main Region -->
-            <controls:TransitioningContentControl Grid.Row="2" Grid.Column="1" prism:RegionManager.RegionName="{x:Static core:RegionNames.WorkspaceRegion}" />
+            <!-- Main Region (Content) -->
+            <controls:TransitioningContentControl Grid.Column="1" prism:RegionManager.RegionName="{x:Static core:RegionNames.WorkspaceRegion}" />
 
-            <!-- Left Region -->
-            <views:MainMenuView Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" />
+            <!-- Left Region (Menu) -->
+            <views:MainMenuView Grid.Column="0" />
 
-            <!--Header -->
-            <Border Focusable="False" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Height="100"
-                    Background="{DynamicResource SecondMenu}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-
-                    <!-- Logo -->
-                    <Image Grid.Column="0" Grid.RowSpan="2"
-                           Source="pack://application:,,,/My.CoachManager.Presentation.Resources;component/Pictures/CoachManager.png"
-                           SnapsToDevicePixels="False"
-                           Height="70"
-                           Margin="{StaticResource MediumLeftMargin}"
-                           RenderOptions.BitmapScalingMode="Fant" />
-
-                    <!-- Text -->
-                    <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="125"
-                          Margin="{StaticResource VeryLargeHorizontalMargin}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0"  Text="{x:Static strings:CoachManagerResources.ApplicationTitlePart1}"
-                                   Style="{StaticResource LargeHeaderStyle}"
-                                   FontFamily="{StaticResource HeaderFontFamily}"
-                                   Foreground="{DynamicResource MenuForeground}"
-                                   FontStyle="Italic"
-                                   VerticalAlignment="Bottom"
-                                   Typography.Capitals="AllSmallCaps" />
-
-                        <TextBlock  Grid.Row="1"  Text="{x:Static strings:CoachManagerResources.ApplicationTitlePart2}"
-                                     Style="{StaticResource LargeHeaderStyle}"
-                                     FontFamily="{StaticResource HeaderFontFamily}"
-                                     Foreground="{DynamicResource MenuForeground}"
-                                     FontStyle="Italic"
-                                     VerticalAlignment="top"
-                                     Typography.Capitals="AllSmallCaps" />
-                    </Grid>
-
-                    <!-- Worspace Header -->
-                    <Border Grid.Row="1" Grid.Column="2" Background="{DynamicResource HeaderBackground}"
-                            Visibility="{Binding ActiveWorkspace, Converter={StaticResource NullToVisibilityConverter}}">
-                        <Grid>
-                            <Polygon
-                                     Points="0,0 0,1 1,0"
-                                     Fill="{DynamicResource SecondMenu}"
-                                     Width="80"
-                                     Height="80"
-                                HorizontalAlignment="Left"
-                                     Stretch="Fill" />
-                            <Grid  VerticalAlignment="Center" Margin="60 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <StackPanel Orientation="Horizontal" Margin="{StaticResource VeryLargeHorizontalMargin}" VerticalAlignment="Center">
-                                    <controls:CommandButton Content="{StaticResource ArrowLeftGeometry}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoBackCommand}" />
-                                    <controls:CommandButton Content="{StaticResource ArrowRightGeometry}" Margin="{StaticResource SmallHorizontalMargin}" VerticalAlignment="Center" Command="{Binding GoForwardCommand}" />
-                                </StackPanel>
-                                <TextBlock Grid.Column="1" Text="{Binding ActiveWorkspace.Title, Converter={StaticResource ToUpperConverter}}" Margin="{StaticResource MediumHorizontalMargin}" VerticalAlignment="Top" Style="{StaticResource HeaderStyle}" Foreground="{DynamicResource MenuForeground}" />
-                            </Grid>
-                        </Grid>
-                    </Border>
-                </Grid>
-            </Border>
         </Grid>
 
         <!-- Dialog Region -->
@@ -143,6 +116,7 @@
 
     <!-- Status Bar -->
     <controls:ExtendedWindow.StatusBar>
-        <views:StatusBarView  Focusable="False" IsTabStop="False"/>
+        <views:StatusBarView  />
     </controls:ExtendedWindow.StatusBar>
+    
 </controls:ExtendedWindow>

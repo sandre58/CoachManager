@@ -1,10 +1,11 @@
-﻿using My.CoachManager.Application.Dtos;
+﻿using System.Linq;
+
+using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.CategoryModule.Aggregate;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.PersonModule.Aggregate;
 using My.CoachManager.Domain.SeasonModule.Aggregate;
 using My.CoachManager.Domain.SquadModule.Aggregate;
-using System.Linq;
 
 namespace My.CoachManager.Domain.RosterModule.Aggregate
 {
@@ -36,14 +37,12 @@ namespace My.CoachManager.Domain.RosterModule.Aggregate
         /// </summary>
         /// <param name="item">The item.</param>
         /// <param name="entity">The entity.</param>
-        public static bool UpdateEntity(RosterDto item, Roster entity)
+        public static void UpdateEntity(RosterDto item, Roster entity)
         {
             entity.Id = item.Id;
             entity.CategoryId = item.CategoryId;
             entity.SeasonId = item.SeasonId;
             entity.Name = item.Name;
-
-            return true;
         }
 
         /// <summary>

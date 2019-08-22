@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Runtime.Serialization;
+
 using My.CoachManager.CrossCutting.Core.Extensions;
 
 namespace My.CoachManager.Presentation.Core.Models.Filters
@@ -16,8 +17,9 @@ namespace My.CoachManager.Presentation.Core.Models.Filters
         /// Initializes a new instance of the <see cref="EnumValueFilter"/> class.
         /// </summary>
         /// <param name="propertyName">The property info.</param>
-        public EnumValuesFilter(string propertyName)
-            : base(propertyName)
+        /// <param name="isFixed"></param>
+        public EnumValuesFilter(string propertyName, bool isFixed = false)
+            : base(propertyName,isFixed)
         {
         }
 
@@ -26,8 +28,9 @@ namespace My.CoachManager.Presentation.Core.Models.Filters
         /// </summary>
         /// <param name="propertyName">The property info.</param>
         /// <param name="enumType"></param>
-        public EnumValuesFilter(string propertyName, Type enumType)
-            : base(propertyName)
+        /// <param name="isFixed"></param>
+        public EnumValuesFilter(string propertyName, Type enumType, bool isFixed = false)
+            : base(propertyName,isFixed)
         {
             var enumValues = Enum.GetValues(enumType);
 

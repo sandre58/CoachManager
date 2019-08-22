@@ -1,4 +1,5 @@
 ﻿using System;
+
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Resources.Entities;
 

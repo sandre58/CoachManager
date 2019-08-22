@@ -1,0 +1,108 @@
+﻿<Page
+    x:Class="My.CoachManager.Presentation.Uwp.Views.CategoriesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prismMvvm="using:Prism.Windows.Mvvm"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:controls1="using:My.CoachManager.Presentation.Uwp.Controls"
+    xmlns:administration="using:My.CoachManager.Presentation.Uwp.ViewModels"
+    prismMvvm:ViewModelLocator.AutoWireViewModel="True" 
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=administration:CategoriesViewModel}">
+
+    <controls1:WorkspaceView x:Uid="/Workspaces/Categories">
+        <controls1:WorkspaceView.CommandBar>
+            <CommandBar>
+                <AppBarButton x:Uid="/Controls/AppBarButton_Edit" Icon="Edit" />
+                <AppBarButton x:Uid="/Controls/AppBarButton_New" Icon="Add"/>
+                <AppBarButton x:Uid="/Controls/AppBarButton_Refresh" Icon="Refresh" Command="{Binding RefreshCommand}" />
+            </CommandBar>
+        </controls1:WorkspaceView.CommandBar>
+        
+        <controls1:WorkspaceView.RightContent>
+            <StackPanel Width="280">
+                <TextBlock Text="Autres éléments" Style="{StaticResource SubtitleTextBlockStyle}" />
+                
+                <StackPanel Orientation="Vertical">
+                    <HyperlinkButton>
+                        <RelativePanel>
+                            <PathIcon x:Name="IconImage"  />
+                            <TextBlock
+                                AutomationProperties.AccessibilityView="Raw"
+                                Foreground="{ThemeResource HyperlinkButtonForeground}"
+                                RelativePanel.RightOf="IconImage"
+                                Text="Joueurs"
+                                TextWrapping="Wrap" />
+                        </RelativePanel>
+                    </HyperlinkButton>
+
+                    <HyperlinkButton>
+                        <RelativePanel>
+                            <PathIcon x:Name="IconImage1" />
+                            <TextBlock
+                                AutomationProperties.AccessibilityView="Raw"
+                                Foreground="{ThemeResource HyperlinkButtonForeground}"
+                                RelativePanel.RightOf="IconImage1"
+                                Text="Positions"
+                                TextWrapping="Wrap" />
+                        </RelativePanel>
+                    </HyperlinkButton>
+                </StackPanel>
+
+            </StackPanel>
+        </controls1:WorkspaceView.RightContent>
+        
+        
+        <Grid>
+
+            <ListView ItemsSource="{Binding Items}" CanDragItems="True" CanReorderItems="True" AllowDrop="True">
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid Padding="12" Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
+                            <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="1" Text="Code"  Style="{ThemeResource CaptionTextBlockStyle}" />
+                            <TextBlock Grid.Column="2" Text="Label"  Style="{ThemeResource CaptionTextBlockStyle}" />
+                            <TextBlock Grid.Column="3" Text="Age"  Style="{ThemeResource CaptionTextBlockStyle}" />
+                            </Grid>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        
+                        <controls1:ListViewItemControl>
+                            <!--<controls1:ListViewItemControl.AppBarButtons>
+                                <AppBarButton Icon="Edit" Label="Test" />
+                            </controls1:ListViewItemControl.AppBarButtons>-->
+                            <Grid  AutomationProperties.Name="{Binding Label}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox IsChecked="{Binding IsSelected}" />
+                                <TextBlock Grid.Column="1" Text="{Binding Code}" VerticalAlignment="Center" />
+                                <TextBlock Grid.Column="2" Text="{Binding Label}" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" />
+                                <TextBlock Grid.Column="3" Text="{Binding Age}" VerticalAlignment="Center" />
+                            </Grid>
+                        </controls1:ListViewItemControl>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </controls1:WorkspaceView>
+    
+</Page>
+
+
+

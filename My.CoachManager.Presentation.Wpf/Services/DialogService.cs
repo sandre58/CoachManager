@@ -1,14 +1,13 @@
-﻿using Microsoft.Practices.ServiceLocation;
+﻿using System;
+using CommonServiceLocator;
 using Microsoft.Win32;
 using My.CoachManager.CrossCutting.Core.Resources;
-using My.CoachManager.Presentation.Core.Dialog;
-using My.CoachManager.Presentation.Core.Events;
-using My.CoachManager.Presentation.Core.Interfaces;
-using My.CoachManager.Presentation.Core.Services;
-using My.CoachManager.Presentation.Core.ViewModels.Interfaces;
+using My.CoachManager.Presentation.Wpf.Core.Dialog;
+using My.CoachManager.Presentation.Wpf.Core.Events;
+using My.CoachManager.Presentation.Wpf.Core.Services;
+using My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;
 using My.CoachManager.Presentation.Wpf.ViewModels.Dialogs;
 using Prism.Events;
-using System;
 using CustomDialog = My.CoachManager.Presentation.Wpf.Views.Dialogs.CustomDialog;
 using LoginDialog = My.CoachManager.Presentation.Wpf.Views.Dialogs.LoginDialog;
 using MessageDialog = My.CoachManager.Presentation.Wpf.Views.Dialogs.MessageDialog;
@@ -30,7 +29,7 @@ namespace My.CoachManager.Presentation.Wpf.Services
         /// </summary>
         /// <param name="view">The view to include in workspace dialog.</param>
         /// <param name="callback">Action executed after result of dialog.</param>
-        public void ShowWorkspaceDialog(IFrameworkElement view, Action<IWorkspaceDialog> callback = null)
+        public void ShowWorkspaceDialog(IWorkspaceDialogViewModel view, Action<IWorkspaceDialog> callback = null)
         {
             var dialog = new Dialog()
             {
@@ -57,7 +56,6 @@ namespace My.CoachManager.Presentation.Wpf.Services
                 Buttons = buttons,
                 Type = style
             };
-            vm.Initialize();
 
             var result = DialogResult.None;
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
@@ -81,7 +79,7 @@ namespace My.CoachManager.Presentation.Wpf.Services
         /// </summary>
         /// <param name="view">The view to include in workspace dialog.</param>
         /// <param name="title">Title of window.</param>
-        public DialogResult ShowCustomDialog(IFrameworkElement view, string title)
+        public DialogResult ShowCustomDialog(IDialogViewModel view, string title)
         {
             var result = DialogResult.None;
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
@@ -90,7 +88,7 @@ namespace My.CoachManager.Presentation.Wpf.Services
                 {
                     Content = view,
                     Title = title,
-                    DataContext = view.DataContext as IDialogViewModel
+                    DataContext = view
                 };
 
                 dialog.ShowDialog();
@@ -133,7 +131,6 @@ namespace My.CoachManager.Presentation.Wpf.Services
         public DialogResult ShowLoginDialog(Func<string, string, Tuple<bool, string>> loginAction, string login = "", string password = "")
         {
             var vm = new LoginViewModel();
-            vm.Initialize();
 
             if (!string.IsNullOrEmpty(login)) vm.UserName = login;
             if (!string.IsNullOrEmpty(password)) vm.Password = password;

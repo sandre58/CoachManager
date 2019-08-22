@@ -124,11 +124,38 @@ namespace My.CoachManager.CrossCutting.Core.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à {0} élément(s) ont été ajouté(s).
+        ///   Recherche une chaîne localisée semblable à L&apos;élément a été ajouté avec succès.
+        /// </summary>
+        public static string ItemAdded {
+            get {
+                return ResourceManager.GetString("ItemAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à L&apos;élément a été supprimé avec succès.
+        /// </summary>
+        public static string ItemRemoved {
+            get {
+                return ResourceManager.GetString("ItemRemoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à {0} élément(s) ont été ajouté(s) avec succès.
         /// </summary>
         public static string ItemsAdded {
             get {
                 return ResourceManager.GetString("ItemsAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à {0} élément(s) ont été supprimé(s) avec succès.
+        /// </summary>
+        public static string ItemsRemoved {
+            get {
+                return ResourceManager.GetString("ItemsRemoved", resourceCulture);
             }
         }
         
@@ -160,7 +187,7 @@ namespace My.CoachManager.CrossCutting.Core.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à {0} ont été déplacés en {1} avec succès..
+        ///   Recherche une chaîne localisée semblable à {0} joueurs ont été déplacés en {1} avec succès..
         /// </summary>
         public static string MovingPlayersToSquad {
             get {
@@ -205,6 +232,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Chargement de l&apos;effectif.
+        /// </summary>
+        public static string RosterLoading {
+            get {
+                return ResourceManager.GetString("RosterLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à L&apos;élément a bien été sauvegardé..
         /// </summary>
         public static string SavingSuccess {
@@ -219,6 +255,15 @@ namespace My.CoachManager.CrossCutting.Core.Resources {
         public static string SkinLoading {
             get {
                 return ResourceManager.GetString("SkinLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Une erreur innatendue est arrivée. L&apos;opération a été annulée. Veuillez contacter l&apos;administrateur..
+        /// </summary>
+        public static string UnexpectedError {
+            get {
+                return ResourceManager.GetString("UnexpectedError", resourceCulture);
             }
         }
         

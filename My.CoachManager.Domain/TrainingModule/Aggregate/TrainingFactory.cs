@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.RosterModule.Aggregate;
@@ -54,7 +56,7 @@ namespace My.CoachManager.Domain.TrainingModule.Aggregate
         /// </summary>
         /// <param name="item">The item.</param>
         /// <param name="entity">The entity.</param>
-        public static bool UpdateEntity(TrainingDto item, Training entity)
+        public static void UpdateEntity(TrainingDto item, Training entity)
         {
             entity.Id = item.Id;
             entity.RosterId = item.RosterId;
@@ -62,8 +64,16 @@ namespace My.CoachManager.Domain.TrainingModule.Aggregate
             entity.IsCancelled = item.IsCancelled;
             entity.StartDate = item.StartDate;
             entity.Place = item.Place;
+        }
 
-            return true;
+        /// <summary>
+        /// Updates the entity.
+        /// </summary>
+        /// <param name="items"></param>
+        /// <param name="entity">The entity.</param>
+        public static void UpdateEntityAttendances(IEnumerable<TrainingAttendanceDto> items, Training entity)
+        {
+            FactoryHelper.UpdateListEntity(items, entity.Attendances, x => CreateAttendance(entity.Id, x), UpdateAttendance);
         }
 
         /// <summary>
@@ -134,5 +144,16 @@ namespace My.CoachManager.Domain.TrainingModule.Aggregate
             };
         }
 
+        /// <summary>
+        /// Updates the entity.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <param name="entity">The entity.</param>
+        public static void UpdateAttendance(TrainingAttendanceDto item, TrainingAttendance entity)
+        {
+            entity.Id = item.Id;
+            entity.Attendance = item.Attendance;
+            entity.Reason = item.Reason;
+        }
     }
 }

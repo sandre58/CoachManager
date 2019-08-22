@@ -23,6 +23,6 @@ namespace My.CoachManager.Application.Services.InjuryModule
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        void RemoveInjury(InjuryDto dto);
+        void RemoveInjury(int id);
     }
 }

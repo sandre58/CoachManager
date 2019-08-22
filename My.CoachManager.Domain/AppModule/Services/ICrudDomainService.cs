@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentValidation.Results;
+
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Domain.Core;
 
@@ -22,7 +24,8 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// <param name="createFactory">The create factory.</param>
         /// <param name="modifyFactory">The modify factory.</param>
         /// <param name="validateEntity"></param>
-        void Save(IEnumerable<TBaseDto> entitiesBase, Func<TBaseDto, TEntity> createFactory, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null);
+        /// <param name="action"></param>
+        void Save(IEnumerable<TBaseDto> entitiesBase, Func<TBaseDto, TEntity> createFactory, Action<TBaseDto, TEntity> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null);
 
         /// <summary>
         /// Save in database the entity base.
@@ -31,10 +34,11 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// <param name="createFactory">The create factory.</param>
         /// <param name="modifyFactory">The modify factory.</param>
         /// <param name="validateEntity"></param>
+        /// <param name="action"></param>
         int Save(
             TBaseDto entityBase,
             Func<TBaseDto, TEntity> createFactory,
-            Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null);
+            Action<TBaseDto, TEntity> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null);
 
         /// <summary>
         /// Add in database the entity base.
@@ -50,7 +54,8 @@ namespace My.CoachManager.Domain.AppModule.Services
         /// <param name="entityBase">The entity base.</param>
         /// <param name="modifyFactory">The modify factory.</param>
         /// <param name="validateEntity"></param>
-        int Modify(TBaseDto entityBase, Func<TBaseDto, TEntity, bool> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null);
+        /// <param name="action"></param>
+        int Modify(TBaseDto entityBase, Action<TBaseDto, TEntity> modifyFactory, Func<TEntity, ValidationResult> validateEntity = null, Func<IQueryable<TEntity>, IQueryable<TEntity>> action = null);
 
         /// <summary>
         /// Remove in database the entity base.

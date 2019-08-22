@@ -35,12 +35,7 @@ namespace My.CoachManager.Domain.Core.Specification
         /// <param name="matchingCriteria">The matching criteria.</param>
         public DirectSpecification(Expression<Func<TEntity, bool>> matchingCriteria)
         {
-            if (matchingCriteria == null)
-            {
-                throw new ArgumentNullException("matchingCriteria");
-            }
-
-            _matchingCriteria = matchingCriteria;
+            _matchingCriteria = matchingCriteria ?? throw new ArgumentNullException(nameof(matchingCriteria));
         }
 
         #endregion ----- Constructor -----

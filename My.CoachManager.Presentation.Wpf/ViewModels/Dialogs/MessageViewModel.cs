@@ -1,5 +1,5 @@
-﻿using My.CoachManager.Presentation.Core.Dialog;
-using My.CoachManager.Presentation.Core.ViewModels;
+﻿using My.CoachManager.Presentation.Wpf.Core.Dialog;
+using My.CoachManager.Presentation.Wpf.Core.ViewModels.Base;
 
 namespace My.CoachManager.Presentation.Wpf.ViewModels.Dialogs
 {
@@ -26,5 +26,17 @@ namespace My.CoachManager.Presentation.Wpf.ViewModels.Dialogs
         public MessageDialogType Type { get; set; }
 
         #endregion Properties
+
+        #region Data
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Load data.
+        /// </summary>
+        protected override void LoadDataCore()
+        {
+        }
+
+        #endregion Data
     }
 }

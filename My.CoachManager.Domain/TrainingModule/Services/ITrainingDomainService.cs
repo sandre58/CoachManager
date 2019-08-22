@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+
 using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Domain.TrainingModule.Services

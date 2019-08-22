@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.Presentation.Core.Models.Filters;

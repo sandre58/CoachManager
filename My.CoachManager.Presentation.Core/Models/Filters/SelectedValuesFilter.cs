@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+
 using My.CoachManager.CrossCutting.Core.Enums;
 
 namespace My.CoachManager.Presentation.Core.Models.Filters
@@ -20,8 +21,9 @@ namespace My.CoachManager.Presentation.Core.Models.Filters
         /// Initializes a new instance of the <see cref="SelectedValuesFilter{T}"/> class.
         /// </summary>
         /// <param name="propertyName">The property info.</param>
-        public SelectedValuesFilter(string propertyName)
-            : base(propertyName)
+        /// <param name="isFixed"></param>
+        public SelectedValuesFilter(string propertyName, bool isFixed = false)
+            : base(propertyName,null,isFixed)
         {
         }
 
@@ -30,8 +32,9 @@ namespace My.CoachManager.Presentation.Core.Models.Filters
         /// </summary>
         /// <param name="propertyName">The property info.</param>
         /// <param name="allowedValues"></param>
-        public SelectedValuesFilter(string propertyName, IEnumerable<TAllowedValues> allowedValues)
-            : base(propertyName, allowedValues)
+        /// <param name="isFixed"></param>
+        public SelectedValuesFilter(string propertyName, IEnumerable<TAllowedValues> allowedValues, bool isFixed = false)
+            : base(propertyName, allowedValues,isFixed)
         {
         }
 

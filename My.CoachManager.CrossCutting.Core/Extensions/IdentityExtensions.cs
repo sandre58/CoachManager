@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.Contracts;
+using System.Security.Claims;
 using System.Security.Principal;
-using My.CoachManager.CrossCutting.Core.Security;
 
 namespace My.CoachManager.CrossCutting.Core.Extensions
 {
@@ -9,25 +9,18 @@ namespace My.CoachManager.CrossCutting.Core.Extensions
         #region Public Methods and Operators
 
         [Pure]
-        public static string GetLogin(this IIdentity identity)
+        public static int GetRosterId(this IPrincipal principal)
         {
-            var value = identity.Name;
-            if (identity.GetType() == typeof(Identity))
-            {
-                var ident = (Identity)identity;
-                value = ident.Login;
-            }
-            return value.Contains("\\") ? value.Split('\\')[1] : value;
+            return int.Parse(GetClaim(principal, "RosterId"));
         }
 
-        [Pure]
-        public static int GetRosterId(this IIdentity identity)
+        public static string GetClaim(this IPrincipal principal, string type)
         {
-            if (identity is Identity id)
+            if (principal is ClaimsPrincipal p)
             {
-                return id.RosterId;
+                return p.FindFirst(type).Value;
             }
-            return 0;
+            return string.Empty;
         }
 
         #endregion Public Methods and Operators

@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+
 using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Domain.Core;
 

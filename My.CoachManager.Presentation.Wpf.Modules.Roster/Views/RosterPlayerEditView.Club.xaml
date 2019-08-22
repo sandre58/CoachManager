@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="My.CoachManager.Presentation.Wpf.Modules.Roster.Views.RosterPlayerClubEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Wpf.Modules.Roster.ViewModels"
+             xmlns:controls="clr-namespace:My.CoachManager.Presentation.Wpf.Controls;assembly=My.CoachManager.Presentation.Wpf.Controls"
+             xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Wpf.Controls.Parameters;assembly=My.CoachManager.Presentation.Wpf.Controls"
+             xmlns:entities="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:enums="clr-namespace:My.CoachManager.CrossCutting.Core.Enums;assembly=My.CoachManager.CrossCutting.Core"
+             d:DataContext="{d:DesignInstance Type=viewModels:RosterPlayerEditViewModel}">
+
+    <Grid  parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <controls:Icon Grid.Column="0" Grid.Row="0" Size="Medium" Content="{StaticResource CategoryGeometry}" HorizontalAlignment="Center" />
+
+        <ComboBox Grid.Column="1" Grid.Row="0"
+                      IsTextSearchEnabled="True"
+                      ItemsSource="{Binding AllCategories}"
+                      DisplayMemberPath="Label"
+                      SelectedValuePath="Id"
+                      SelectedValue="{Binding Item.CategoryId, UpdateSourceTrigger=PropertyChanged}"
+                      Width="{StaticResource MidSmallWidth}"
+                      parameters:TextBoxParameters.Watermark="{x:Static entities:PlayerResources.Category}" />
+
+        <controls:Icon Grid.Column="0" Grid.Row="1" Size="Medium" Content="{StaticResource ClothesGeometry}" HorizontalAlignment="Center" />
+
+        <controls:ExtendedNumericUpDown Grid.Column="1" Grid.Row="1"
+                                        Width="{StaticResource MidSmallWidth}"
+                                        Value="{Binding Item.Number, UpdateSourceTrigger=PropertyChanged}"
+                                        parameters:TextBoxParameters.Watermark="{x:Static entities:PlayerResources.NumberAbbr}" />
+
+        <controls:Icon Grid.Column="0" Grid.Row="2" Size="Medium" Content="{StaticResource CalendarGeometry}" HorizontalAlignment="Center" />
+
+        <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Item.FromDate, UpdateSourceTrigger=PropertyChanged}" Width="{StaticResource SmallLargeWidth}"
+                    parameters:TextBoxParameters.Watermark="{x:Static entities:PersonResources.FromDate}" />
+
+        <controls:Icon Grid.Column="0" Grid.Row="3" Size="Medium" Content="{StaticResource LicenseGeometry}" HorizontalAlignment="Center" />
+
+        <Grid Grid.Column="1" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="0" Grid.Column="0"
+                Width="{StaticResource MediumWidth}"
+                Text="{Binding Item.LicenseNumber, UpdateSourceTrigger=PropertyChanged}"
+                parameters:TextBoxParameters.Watermark="{x:Static entities:PersonResources.LicenseNumber}"
+                parameters:TextBoxParameters.Mask="PositiveInteger" MaxLength="10" />
+            <CheckBox Grid.Row="1" Grid.Column="0" IsChecked="{Binding Item.IsMutation}" Content="{x:Static entities:PlayerResources.IsMutation}" />
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+                <RadioButton Style="{StaticResource IconRadioButtonStyle}" Content="{Binding Source={x:Static enums:LicenseState.Unknown}, Converter={StaticResource EnumToStringConverter}}"
+                             parameters:ControlParameters.Icon="{DynamicResource QuestionGeometry}" parameters:ControlParameters.FocusBackground="{StaticResource Neutral}"
+                             parameters:ControlParameters.PressedBackground="{StaticResource Neutral}"
+                             IsChecked="{Binding Item.LicenseState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:LicenseState.Unknown}, UpdateSourceTrigger=PropertyChanged}" />
+                <RadioButton Style="{StaticResource IconRadioButtonStyle}" Content="{Binding Source={x:Static enums:LicenseState.Given}, Converter={StaticResource EnumToStringConverter}}"
+                             parameters:ControlParameters.Icon="{DynamicResource LicenseGivenGeometry}" parameters:ControlParameters.FocusBackground="{StaticResource Poor}"
+                             parameters:ControlParameters.PressedBackground="{StaticResource Poor}"
+                             IsChecked="{Binding Item.LicenseState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:LicenseState.Given}, UpdateSourceTrigger=PropertyChanged}" />
+                <RadioButton Style="{StaticResource IconRadioButtonStyle}" Content="{Binding Source={x:Static enums:LicenseState.Back}, Converter={StaticResource EnumToStringConverter}}"
+                             parameters:ControlParameters.Icon="{DynamicResource LicenseBackGeometry}" parameters:ControlParameters.FocusBackground="{StaticResource Average}"
+                             parameters:ControlParameters.PressedBackground="{StaticResource Average}"
+                             IsChecked="{Binding Item.LicenseState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:LicenseState.Back}, UpdateSourceTrigger=PropertyChanged}" />
+                <RadioButton Style="{StaticResource IconRadioButtonStyle}" Content="{Binding Source={x:Static enums:LicenseState.Paid}, Converter={StaticResource EnumToStringConverter}}"
+                             parameters:ControlParameters.Icon="{DynamicResource PaidGeometry}" parameters:ControlParameters.FocusBackground="{StaticResource Great}"
+                             parameters:ControlParameters.PressedBackground="{StaticResource Great}"
+                             IsChecked="{Binding Item.LicenseState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:LicenseState.Paid}, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Grid>
+
+        <controls:Icon Grid.Column="0" Grid.Row="4" Size="Medium" Content="{StaticResource DescriptionGeometry}" HorizontalAlignment="Center" />
+
+        <TextBox Grid.Column="1" Grid.Row="4"
+                     HorizontalAlignment="Stretch"
+                     Text="{Binding Item.Description, UpdateSourceTrigger=PropertyChanged}"
+                     parameters:TextBoxParameters.Watermark="{x:Static entities:PersonResources.Description}"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     Height="100"
+                     Style="{StaticResource TextBoxBaseStyle}" />
+    </Grid>
+</UserControl>

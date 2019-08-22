@@ -3,39 +3,40 @@ using My.CoachManager.Application.Dtos;
 
 namespace My.CoachManager.Application.Services.CategoryModule
 {
-    /// <summary>
-    /// Interface defining the category application services.
-    /// </summary>
     public interface ICategoryAppService
     {
-        /// <summary>
-        /// Get all dtos list.
-        /// </summary>
-        /// <returns></returns>
-        IList<CategoryDto> GetCategories();
+        #region Methods
 
         /// <summary>
-        /// Create a dto.
+        /// Save a dto.
         /// </summary>
         /// <returns></returns>
         int SaveCategory(CategoryDto dto);
 
         /// <summary>
-        /// Remove a dto.
+        /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        void RemoveCategory(CategoryDto dto);
-
+        void RemoveCategory(int id);
+        
         /// <summary>
         /// Gets a dto.
         /// </summary>
         /// <returns></returns>
         CategoryDto GetCategoryById(int id);
-
+        
         /// <summary>
-        /// Update Orders.
+        /// Load all items.
+        /// </summary>
+        /// <returns></returns>
+        IList<CategoryDto> GetCategories();
+        
+        /// <summary>
+        /// Update items Orders.
         /// </summary>
         /// <param name="values"></param>
         void UpdateOrders(IDictionary<int, int> values);
+
+        #endregion Methods
     }
 }

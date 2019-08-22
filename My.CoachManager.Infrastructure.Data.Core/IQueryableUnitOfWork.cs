@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Infrastructure.Data.Core

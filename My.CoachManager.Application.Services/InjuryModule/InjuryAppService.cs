@@ -61,9 +61,9 @@ namespace My.CoachManager.Application.Services.InjuryModule
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        public void RemoveInjury(InjuryDto dto)
+        public void RemoveInjury(int id)
         {
-            _crudDomainService.Remove(dto);
+            _crudDomainService.Remove(id);
         }
 
         #endregion Methods

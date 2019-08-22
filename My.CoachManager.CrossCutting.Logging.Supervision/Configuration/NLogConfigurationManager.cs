@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+
 using My.CoachManager.CrossCutting.Core.Configurations;
 
 namespace My.CoachManager.CrossCutting.Logging.Supervision.Configuration

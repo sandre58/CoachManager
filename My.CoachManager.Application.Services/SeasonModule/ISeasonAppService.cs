@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using My.CoachManager.Application.Dtos;
 
 namespace My.CoachManager.Application.Services.SeasonModule
@@ -24,7 +25,7 @@ namespace My.CoachManager.Application.Services.SeasonModule
         /// Remove a dto.
         /// </summary>
         /// <returns></returns>
-        void RemoveSeason(SeasonDto dto);
+        void RemoveSeason(int id);
 
         /// <summary>
         /// Gets a dto.

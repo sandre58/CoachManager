@@ -1,6 +1,4 @@
-using System;
-
-namespace My.CoachManager.Presentation.Core.Models
+﻿namespace My.CoachManager.Presentation.Core.Models
 {
     /// <inheritdoc cref="IEntityModel" />
     /// <summary>

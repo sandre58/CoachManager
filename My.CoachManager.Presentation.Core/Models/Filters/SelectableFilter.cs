@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+
 using My.CoachManager.CrossCutting.Core.Enums;
 
 namespace My.CoachManager.Presentation.Core.Models.Filters
@@ -19,8 +20,9 @@ namespace My.CoachManager.Presentation.Core.Models.Filters
         /// </summary>
         /// <param name="propertyName">The property info.</param>
         /// <param name="allowedValues"></param>
-        public SelectableFilter(string propertyName, IEnumerable<TAllowedValues> allowedValues = null)
-            : base(propertyName)
+        /// <param name="isFixed"></param>
+        public SelectableFilter(string propertyName, IEnumerable<TAllowedValues> allowedValues = null, bool isFixed = false)
+            : base(propertyName,isFixed)
         {
             Operator = BinaryOperator.Is;
             AllowedValues = allowedValues;

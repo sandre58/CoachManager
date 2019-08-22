@@ -10,6 +10,7 @@ using System.Linq;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
+
 using My.CoachManager.Services.Core.ErrorHandlers;
 using My.CoachManager.Services.Core.MessageInspectors;
 

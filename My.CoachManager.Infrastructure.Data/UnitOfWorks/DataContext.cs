@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Logging;
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Exceptions;
@@ -15,7 +14,6 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
-using Alachisoft.NCache.EntityFrameworkCore;
 using ILogger = My.CoachManager.CrossCutting.Logging.ILogger;
 
 namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
@@ -24,8 +22,16 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
     /// <summary>
     /// Database Context for Entity Framework Core
     /// </summary>
-    public sealed class DataContext : DbContext, IQueryableUnitOfWork
+    public class DataContext : DbContext, IQueryableUnitOfWork
     {
+        public DataContext(DbContextOptions options) : base(options)
+        {
+        }
+
+        public DataContext()
+        {
+        }
+
         #region Properties
 
         public DbSet<Address> Adresses { get; set; }
@@ -58,15 +64,8 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.AddProvider(new LoggerProvider());
-            
-            optionsBuilder.UseSqlServer(DbConfigurationManager.ConnectionString,
-            x => x.EnableRetryOnFailure())
-                .ConfigureWarnings(x => x.Throw(RelationalEventId.QueryClientEvaluationWarning))
-                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
-                .UseLoggerFactory(loggerFactory);
-
+            optionsBuilder
+                .ConfigureWarnings(x => x.Throw(RelationalEventId.QueryClientEvaluationWarning));
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -400,9 +399,6 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                 .Property(x => x.CreatedDate)
                 .HasDefaultValueSql("getdate()");
 
-            // Seed
-            modelBuilder.Seed();
-
             base.OnModelCreating(modelBuilder);
         }
 
@@ -442,9 +438,10 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         /// <param name="exception"></param>
         private void HandleException(Exception exception)
         {
-            if (exception is DbUpdateConcurrencyException concurrencyEx)
+            //ServiceLocator.Current.GetInstance<ILogger>().Error(exception);
+
+            if (exception is DbUpdateConcurrencyException)
             {
-                ServiceLocator.Current.GetInstance<ILogger>().Error(concurrencyEx);
                 // A custom exception of yours for concurrency issues
                 throw new ConcurrencyException();
             }
@@ -453,7 +450,6 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
             {
                 if ((dbUpdateEx.InnerException is SqlException sqlException))
                 {
-                    ServiceLocator.Current.GetInstance<ILogger>().Error(sqlException);
                     switch (sqlException.Number)
                     {
                         case 2627: // Unique constraint error
@@ -470,8 +466,6 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
                     }
                 }
             }
-
-            ServiceLocator.Current.GetInstance<ILogger>().Error(exception);
         }
 
         #endregion ----- Overrides Methods -----
@@ -521,7 +515,7 @@ namespace My.CoachManager.Infrastructure.Data.UnitOfWorks
         /// </summary>
         public void Commit()
         {
-            var identityName = Thread.CurrentPrincipal.Identity.Name;
+            var identityName = Thread.CurrentPrincipal != null ? Thread.CurrentPrincipal.Identity.Name : "Unknown";
             var now = DateTime.UtcNow;
 
             var addedAuditedEntities = ChangeTracker.Entries<IAuditable>()

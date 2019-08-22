@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using My.CoachManager.Application.Dtos;
-using My.CoachManager.Domain.Entities;
 
 namespace My.CoachManager.Application.Services.TrainingModule
 {
@@ -26,7 +26,7 @@ namespace My.CoachManager.Application.Services.TrainingModule
         /// Remove a dto.
         /// </summary>
         /// <returns></returns>
-        void RemoveTraining(TrainingDto dto);
+        void RemoveTraining(int id);
 
         /// <summary>
         /// Gets a dto.

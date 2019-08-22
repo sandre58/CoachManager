@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.Domain.AppModule.Services;
@@ -59,14 +60,14 @@ namespace My.CoachManager.Application.Services.CategoryModule
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        public void RemoveCategory(CategoryDto dto)
+        public void RemoveCategory(int id)
         {
-            if (_categoryDomainService.IsUsed(dto.Id))
+            if (_categoryDomainService.IsUsed(id))
             {
-                throw new IsUsedException(dto.Label);
+                throw new IsUsedException(GetLabel(id));
             }
 
-            _crudDomainService.Remove(dto);
+            _crudDomainService.Remove(id);
         }
 
         /// <inheritdoc />
@@ -78,6 +79,15 @@ namespace My.CoachManager.Application.Services.CategoryModule
         {
             var entity = _categoryRepository.GetEntity(id);
             return entity != null ? CategoryFactory.Get(entity) : null;
+        }
+
+        /// <summary>
+        /// Gets a dto.
+        /// </summary>
+        /// <returns></returns>
+        private string GetLabel(int id)
+        {
+            return _categoryRepository.Query.Where(x => x.Id == id).Select(x => x.Label).FirstOrDefault();
         }
 
         /// <inheritdoc />

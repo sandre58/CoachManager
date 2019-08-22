@@ -12,8 +12,9 @@
         /// Initializes a new instance of the <see cref="StringFilter"/> class.
         /// </summary>
         /// <param name="propertyName">The property info.</param>
-        public BooleanFilter(string propertyName)
-            : base(propertyName)
+        /// <param name="isFixed"></param>
+        public BooleanFilter(string propertyName, bool isFixed = false)
+            : base(propertyName, isFixed)
         {
         }
 

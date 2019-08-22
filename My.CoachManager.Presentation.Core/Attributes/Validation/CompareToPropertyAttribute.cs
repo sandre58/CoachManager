@@ -1,7 +1,8 @@
-﻿using My.CoachManager.CrossCutting.Core.Enums;
-using My.CoachManager.CrossCutting.Core.Extensions;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+
+using My.CoachManager.CrossCutting.Core.Enums;
+using My.CoachManager.CrossCutting.Core.Extensions;
 
 namespace My.CoachManager.Presentation.Core.Attributes.Validation
 {

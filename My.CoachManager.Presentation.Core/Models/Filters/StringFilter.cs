@@ -1,4 +1,5 @@
 ﻿using System;
+
 using My.CoachManager.CrossCutting.Core.Enums;
 
 namespace My.CoachManager.Presentation.Core.Models.Filters
@@ -17,8 +18,9 @@ namespace My.CoachManager.Presentation.Core.Models.Filters
         /// <param name="propertyName">The property info.</param>
         /// <param name="filterMode">The filter mode.</param>
         /// <param name="caseSensitive"></param>
-        public StringFilter(string propertyName, StringOperator filterMode = StringOperator.Contains, bool caseSensitive = false)
-            : base(propertyName)
+        /// <param name="isFixed"></param>
+        public StringFilter(string propertyName, StringOperator filterMode = StringOperator.Contains, bool caseSensitive = false, bool isFixed = false)
+            : base(propertyName,isFixed)
         {
             Operator = filterMode;
             CaseSensitive = caseSensitive;

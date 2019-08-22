@@ -1,0 +1,87 @@
+﻿<controls:WorkspaceView x:Class="My.CoachManager.Presentation.Wpf.Modules.Training.Views.TrainingEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             xmlns:controls="clr-namespace:My.CoachManager.Presentation.Wpf.Controls;assembly=My.CoachManager.Presentation.Wpf.Controls"
+             xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Wpf.Controls.Parameters;assembly=My.CoachManager.Presentation.Wpf.Controls"
+             xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:resources="clr-namespace:My.CoachManager.CrossCutting.Core.Resources.Entities;assembly=My.CoachManager.CrossCutting.Core"
+             xmlns:viewModels1="clr-namespace:My.CoachManager.Presentation.Wpf.Modules.Training.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewModels1:TrainingEditViewModel}"
+             d:DesignHeight="350" d:DesignWidth="600"
+             Style="{StaticResource EditWorkspaceViewStyle}">
+
+    <!-- Commands -->
+    <controls:WorkspaceView.Commands>
+        <controls:CommandButton DockPanel.Dock="Right" Command="{Binding CancelCommand}" Style="{StaticResource CancelCommandButtonApplicationBarStyle}" IsCancel="True" />
+        <controls:CommandButton DockPanel.Dock="Right" Command="{Binding SaveCommand}" Style="{StaticResource ValidateCommandButtonApplicationBarStyle}" IsDefault="True" />
+        <controls:CommandButton DockPanel.Dock="Right" Command="{Binding RefreshCommand}" Content="{StaticResource RefreshGeometry}" Header="{x:Static strings:ControlResources.Refresh}" />
+    </controls:WorkspaceView.Commands>
+    
+    <!-- Content -->
+    <Grid parameters:PanelParameters.ItemsMargin="{StaticResource FieldMargin}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <controls:Icon Grid.Column="0" Grid.Row="0" Size="Medium" Content="{StaticResource CalendarGeometry}" HorizontalAlignment="Center" />
+
+                <DatePicker
+                    Grid.Column="1" Grid.Row="0"
+                    Width="{StaticResource MediumWidth}"
+                    SelectedDate="{Binding Item.Date, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
+                    parameters:TextBoxParameters.Watermark="{x:Static resources:TrainingResources.Date}" />
+
+                <CheckBox Grid.Column="3" IsChecked="{Binding Item.IsCancelled, IsAsync=True}" Content="{x:Static resources:TrainingResources.IsCancelled}" />
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <controls:Icon Grid.Column="0" Grid.Row="0" Size="Medium" Content="{StaticResource ClockGeometry}" HorizontalAlignment="Center" />
+
+                <controls:TimePicker
+                    Grid.Column="1" Grid.Row="0" Width="120"
+                    SelectedTime="{Binding Item.StartTime, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
+                    parameters:TextBoxParameters.Watermark="{x:Static resources:TrainingResources.StartTime}" />
+
+                <TextBlock Grid.Column="2" Grid.Row="0" Text="{x:Static strings:GlobalResources.To}" HorizontalAlignment="Center" />
+
+                <controls:TimePicker
+                    Grid.Column="3" Grid.Row="0" Width="120"
+                    SelectedTime="{Binding Item.EndTime, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
+                    parameters:TextBoxParameters.Watermark="{x:Static resources:TrainingResources.EndTime}" />
+
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <controls:Icon Grid.Column="0" Grid.Row="0" Size="Medium" Content="{StaticResource LocationGeometry}" HorizontalAlignment="Center" />
+
+                <TextBox Grid.Column="1" Width="{StaticResource SmallLargeWidth}" Text="{Binding Item.Place, IsAsync=True}" 
+                         parameters:TextBoxParameters.Watermark="{x:Static resources:TrainingResources.Place}"/>
+            </Grid>
+        </Grid>
+</controls:WorkspaceView>

@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My.CoachManager.Presentation.Wpf.SkinManager.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DefaultMenu" Type="System.String" Scope="User">
+      <Value Profile="(Default)">red</Value>
+    </Setting>
+    <Setting Name="DefaultTheme" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dark</Value>
+    </Setting>
+    <Setting Name="DefaultAccent" Type="System.String" Scope="User">
+      <Value Profile="(Default)">gold</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

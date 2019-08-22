@@ -30,13 +30,11 @@ namespace My.CoachManager.Domain.SquadModule.Aggregate
         /// </summary>
         /// <param name="item">The item.</param>
         /// <param name="entity">The entity.</param>
-        public static bool UpdateEntity(SquadDto item, Squad entity)
+        public static void UpdateEntity(SquadDto item, Squad entity)
         {
             entity.Id = item.Id;
             entity.RosterId = item.RosterId;
             entity.Name = item.Name;
-
-            return true;
         }
 
         /// <summary>

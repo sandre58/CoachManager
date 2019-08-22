@@ -37,5 +37,10 @@ namespace My.CoachManager.CrossCutting.Core.Extensions
         {
             return string.Format(CultureInfo.CurrentUICulture, format, args);
         }
+
+            public static string TextAfter(this string value, string search)
+            {
+                return value.Substring(value.IndexOf(search, StringComparison.Ordinal) + search.Length);
+            }
     }
 }

@@ -139,7 +139,7 @@
     <value>Une erreur est survenue lors de la récupération des données. Veuillez contacter l'administrateur.</value>
   </data>
   <data name="ItemsAdded" xml:space="preserve">
-    <value>{0} élément(s) ont été ajouté(s)</value>
+    <value>{0} élément(s) ont été ajouté(s) avec succès</value>
   </data>
   <data name="Loading" xml:space="preserve">
     <value>Chargement des données...</value>
@@ -151,7 +151,7 @@
     <value>Chargement des modules</value>
   </data>
   <data name="MovingPlayersToSquad" xml:space="preserve">
-    <value>{0} ont été déplacés en {1} avec succès.</value>
+    <value>{0} joueurs ont été déplacés en {1} avec succès.</value>
   </data>
   <data name="MovingPlayerToSquad" xml:space="preserve">
     <value>{0} a été déplacé en {1} avec succès.</value>
@@ -177,5 +177,20 @@ Utilisateur connecté : {0}</value>
   </data>
   <data name="UserConnection" xml:space="preserve">
     <value>Connexion de l'utilisateur</value>
+  </data>
+  <data name="RosterLoading" xml:space="preserve">
+    <value>Chargement de l'effectif</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>Une erreur innatendue est arrivée. L'opération a été annulée. Veuillez contacter l'administrateur.</value>
+  </data>
+  <data name="ItemsRemoved" xml:space="preserve">
+    <value>{0} élément(s) ont été supprimé(s) avec succès</value>
+  </data>
+  <data name="ItemRemoved" xml:space="preserve">
+    <value>L'élément a été supprimé avec succès</value>
+  </data>
+  <data name="ItemAdded" xml:space="preserve">
+    <value>L'élément a été ajouté avec succès</value>
   </data>
 </root>

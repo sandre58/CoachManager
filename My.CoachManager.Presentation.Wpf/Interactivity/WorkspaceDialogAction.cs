@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Interactivity;
-using My.CoachManager.Presentation.Controls;
-using My.CoachManager.Presentation.Core.Dialog;
-using My.CoachManager.Presentation.Core.ViewModels.Interfaces;
+using My.CoachManager.Presentation.Wpf.Controls;
+using My.CoachManager.Presentation.Wpf.Core.Dialog;
 using Prism.Interactivity.InteractionRequest;
 
 namespace My.CoachManager.Presentation.Wpf.Interactivity
@@ -83,7 +82,7 @@ namespace My.CoachManager.Presentation.Wpf.Interactivity
                 });
             }
 
-            ((IDialogViewModel)dialog.Content.DataContext).CloseRequest += Handler;
+            dialog.Content.CloseRequest += Handler;
 
             return wrapper;
         }

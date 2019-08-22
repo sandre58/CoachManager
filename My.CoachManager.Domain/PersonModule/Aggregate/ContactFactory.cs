@@ -28,11 +28,27 @@ namespace My.CoachManager.Domain.PersonModule.Aggregate
         }
 
         /// <summary>
-        /// Convert the DTO to model.
+        /// Updates the entity.
         /// </summary>
-        /// <param name="contact"></param>
-        /// <returns>The model.</returns>
-        public static TContactDto GetContact<TContactDto>(Contact contact) where TContactDto : ContactDto, new()
+        /// <param name="item">The item.</param>
+        /// <param name="entity">The entity.</param>
+        public static bool UpdateEntity<TContact, TContactDto>(TContactDto item, TContact entity) 
+            where TContact : Contact
+        where TContactDto : ContactDto
+        {
+            entity.Default = item.Default;
+            entity.Label = item.Label;
+            entity.Value = item.Value;
+
+            return true;
+        }
+
+        /// <summary>
+            /// Convert the DTO to model.
+            /// </summary>
+            /// <param name="contact"></param>
+            /// <returns>The model.</returns>
+            public static TContactDto GetContact<TContactDto>(Contact contact) where TContactDto : ContactDto, new()
         {
             if (contact == null) return null;
 

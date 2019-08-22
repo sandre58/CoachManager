@@ -13,10 +13,7 @@ namespace My.CoachManager.Presentation.ServiceAgent
         /// <value>
         /// The name of the WCF user.
         /// </value>
-        public static string WcfUserName
-        {
-            get { return GetAppSettingKey<string>("WCFUserName"); }
-        }
+        public static string WcfUserName => string.Empty; // GetAppSettingKey<string>("WCFUserName");
 
         /// <summary>
         /// Gets the WCF user password.
@@ -24,9 +21,6 @@ namespace My.CoachManager.Presentation.ServiceAgent
         /// <value>
         /// The WCF user password.
         /// </value>
-        public static string WcfUserPassword
-        {
-            get { return GetAppSettingKey<string>("WCFUserPassword"); }
-        }
+        public static string WcfUserPassword => string.Empty; // GetAppSettingKey<string>("WCFUserPassword");
     }
 }

@@ -1,0 +1,20 @@
+﻿<controls:NavigationExpander x:Class="My.CoachManager.Presentation.Wpf.Modules.Admin.Views.AdminNavigationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:My.CoachManager.Presentation.Wpf.Controls;assembly=My.CoachManager.Presentation.Wpf.Controls"
+             xmlns:strings="clr-namespace:My.CoachManager.Presentation.Wpf.Modules.Admin.Resources"
+             mc:Ignorable="d"
+             Header="{x:Static strings:AdminResources.AdminMenu}"
+             Style="{StaticResource NavigationExpanderStyle}"
+             Icon="{StaticResource ToolsGeometry}"
+             Color="LightGray"
+             Margin="0">
+    <StackPanel>
+        <controls:NavigationItem Content="{x:Static strings:AdminResources.PlayersMenu}" Target="PlayersListViewModel" />
+        <controls:NavigationItem Content="{x:Static strings:AdminResources.RostersMenu}" Target="RostersListViewModel" />
+        <controls:NavigationItem Content="{x:Static strings:AdminResources.SeasonsMenu}" Target="SeasonsListViewModel" />
+        <controls:NavigationItem Content="{x:Static strings:AdminResources.CategoriesMenu}" Target="CategoriesListViewModel" />
+    </StackPanel>
+</controls:NavigationExpander>

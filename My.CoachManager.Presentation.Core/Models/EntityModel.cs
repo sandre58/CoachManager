@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
-using Microsoft.Practices.ObjectBuilder2;
 
 namespace My.CoachManager.Presentation.Core.Models
 {
@@ -115,7 +114,12 @@ namespace My.CoachManager.Presentation.Core.Models
             var type = GetType();
             type.GetProperties().Select(x => x.GetValue(this)).OfType<IModifiable>().ToList()
                     .ForEach(x => x.ResetModified());
-            type.GetProperties().Select(x => x.GetValue(this)).OfType<ICollection>().ToList().SelectMany(x => x.OfType<IModifiable>()).ForEach(x => x.ResetModified());
+
+            foreach (var item in type.GetProperties().Select(x => x.GetValue(this)).OfType<ICollection>().ToList().SelectMany(x => x.OfType<IModifiable>()))
+            {
+               item.ResetModified();
+
+            }
         }
 
         /// <summary>

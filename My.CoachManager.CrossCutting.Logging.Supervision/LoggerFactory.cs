@@ -2,11 +2,14 @@
 {
     public static class LoggerFactory
     {
-        private static ILogger _logger;
-
-        public static ILogger GetLogger()
+        public static ILogger CreateLogger(string categoryName)
         {
-            return _logger ?? (_logger = Logger.CreateLogger());
+            return new Logger(categoryName);
+        }
+
+        public static ILogger CreateLogger()
+        {
+            return new Logger();
         }
     }
 }

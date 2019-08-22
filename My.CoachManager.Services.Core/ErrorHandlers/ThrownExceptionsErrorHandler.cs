@@ -4,13 +4,13 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
+using CommonServiceLocator;
+using My.CoachManager.CrossCutting.Logging;
 using System;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
-using CommonServiceLocator;
-using My.CoachManager.CrossCutting.Logging;
 
 namespace My.CoachManager.Services.Core.ErrorHandlers
 {
@@ -45,7 +45,7 @@ namespace My.CoachManager.Services.Core.ErrorHandlers
 
             // Generate fault message manually
             MessageFault msgFault = MessageFault.CreateFault(
-                new FaultCode("Sender..."), new FaultReason(error.Message), error, new NetDataContractSerializer());
+                new FaultCode("Sender..."), new FaultReason(error.Message), error, new DataContractSerializer(error.GetType()));
 
             fault = Message.CreateMessage(version, msgFault, null);
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+
 using My.CoachManager.CrossCutting.Core.Resources;
 
 namespace My.CoachManager.CrossCutting.Core.Exceptions

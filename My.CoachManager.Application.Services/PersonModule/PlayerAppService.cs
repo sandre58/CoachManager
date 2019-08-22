@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using My.CoachManager.Application.Dtos;
+using My.CoachManager.Application.Dtos.Parameters;
+using My.CoachManager.Application.Dtos.Results;
 using My.CoachManager.Application.Services.AddressModule;
 using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.Domain.AddressModule.Aggregate;
@@ -10,7 +12,7 @@ using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.PersonModule.Aggregate;
 using My.CoachManager.Domain.PersonModule.Services;
 using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace My.CoachManager.Application.Services.PersonModule
@@ -56,9 +58,28 @@ namespace My.CoachManager.Application.Services.PersonModule
         /// Load all items.
         /// </summary>
         /// <returns></returns>
-        public IList<PlayerDto> GetPlayers()
+        public ListResultDto<PlayerDto> GetPlayers(PlayersListParametersDto parameters)
         {
-            return _playerRepository.GetAll(PlayerSelectBuilder.SelectPlayerDetails(), x => x.LastName).ToList();
+            var result = _playerRepository.GetBySpecAndCount(PlayerSelectBuilder.SelectPlayerDetails(),
+                PlayerSpecification.IsMatch(parameters),
+                PlayerOrderBuilder.OrderByProperty(parameters.SortProperty, parameters.SortDirection == ListSortDirection.Descending),
+                parameters.Page,
+                parameters.Count,
+                query =>
+                {
+                    return query
+                        .Include(x => x.Address)
+                        .Include(x => x.Contacts);
+                });
+
+            var count = _playerRepository.Query.Count();
+
+            return new ListResultDto<PlayerDto>
+            {
+                Items = result.Item1.ToList(),
+                Count = result.Item2,
+                AllItemsCount = count
+            };
         }
 
         /// <summary>
@@ -100,22 +121,42 @@ namespace My.CoachManager.Application.Services.PersonModule
                 }
             }
 
-            return _crudDomainService.Save(dto, PlayerFactory.CreateEntity, PlayerFactory.UpdateEntity, x => _playerDomainService.Validate(x));
+            return _crudDomainService.Save(dto, PlayerFactory.CreateEntity, PlayerFactory.UpdateEntity, x => _playerDomainService.Validate(x),
+                query => { return query.Include(x => x.Positions).Include(x => x.Contacts); });
         }
 
         /// <summary>
         /// Create a dto.
         /// </summary>
         /// <returns></returns>
-        public void RemovePlayer(PlayerDto dto)
+        public void RemovePlayer(int id)
         {
-            if (_playerDomainService.IsUsed(dto.Id))
+            if (_playerDomainService.IsUsed(id))
             {
-                throw new IsUsedException(dto.FirstName + " " + dto.LastName);
+                throw new IsUsedException(GetName(id));
             }
 
-            if (dto.AddressId != null) _addressAppService.RemoveAddress(dto.AddressId.Value);
-            _crudDomainService.Remove(dto);
+            var addressId = GetAddressId(id);
+            if (addressId != null) _addressAppService.RemoveAddress(addressId.Value);
+            _crudDomainService.Remove(id);
+        }
+
+        /// <summary>
+        /// Gets a dto.
+        /// </summary>
+        /// <returns></returns>
+        private string GetName(int id)
+        {
+            return _playerRepository.Query.Where(x => x.Id == id).Select(x => x.FirstName + " " + x.LastName).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Gets a dto.
+        /// </summary>
+        /// <returns></returns>
+        private int? GetAddressId(int id)
+        {
+            return _playerRepository.Query.Where(x => x.Id == id).Select(x => x.AddressId).FirstOrDefault();
         }
 
         /// <summary>

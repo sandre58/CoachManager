@@ -13,7 +13,6 @@ namespace My.CoachManager.Presentation.ServiceAgent
         /// <typeparam name="TClient">The type of the service client.</typeparam>
         /// <typeparam name="TService">The type of the service.</typeparam>
         /// <returns>The instance of the specified service client type.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "No parameters needed.")]
         public static TClient Create<TClient, TService>()
             where TService : class
             where TClient : ClientBase<TService>, new()

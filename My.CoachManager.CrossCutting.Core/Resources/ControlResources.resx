@@ -171,6 +171,9 @@
   <data name="Creation" xml:space="preserve">
     <value>Création</value>
   </data>
+  <data name="CurrentPage" xml:space="preserve">
+    <value>Page</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Supprimer</value>
   </data>
@@ -183,8 +186,23 @@
   <data name="Edition" xml:space="preserve">
     <value>Edition</value>
   </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtrer</value>
+  </data>
+  <data name="FirstPage" xml:space="preserve">
+    <value>Première page</value>
+  </data>
   <data name="HideFilters" xml:space="preserve">
     <value>Cacher les filtres</value>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>Elément(s)</value>
+  </data>
+  <data name="ItemsPerPage" xml:space="preserve">
+    <value>Nombre d'éléments à afficher</value>
+  </data>
+  <data name="LastPage" xml:space="preserve">
+    <value>Dernière page</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Connexion</value>
@@ -210,14 +228,23 @@
   <data name="New" xml:space="preserve">
     <value>Nouveau</value>
   </data>
+  <data name="NextPage" xml:space="preserve">
+    <value>Page suivante</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>Non</value>
+  </data>
+  <data name="NoModifications" xml:space="preserve">
+    <value>Aucune modification</value>
   </data>
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Mot de passe</value>
+  </data>
+  <data name="PreviousPage" xml:space="preserve">
+    <value>Page précédente</value>
   </data>
   <data name="Refresh" xml:space="preserve">
     <value>Rafraîchir</value>
@@ -258,6 +285,9 @@
   <data name="ShowFilters" xml:space="preserve">
     <value>Afficher les filtres</value>
   </data>
+  <data name="ShowHideColumns" xml:space="preserve">
+    <value>Afficher/Masquer les colonnes</value>
+  </data>
   <data name="ShowItems" xml:space="preserve">
     <value>Afficher les éléments</value>
   </data>
@@ -268,7 +298,7 @@
     <value>Se connecter</value>
   </data>
   <data name="SpeedSearch" xml:space="preserve">
-    <value>Recherche rapide : </value>
+    <value>Recherche rapide</value>
   </data>
   <data name="SuffixCount" xml:space="preserve">
     <value> ({0})</value>

@@ -102,7 +102,7 @@ namespace My.CoachManager.Services.Core.MessageInspectors
                 }
 
                 // Deserialize the fault.
-                var serializer = new NetDataContractSerializer();
+                var serializer = new DataContractSerializer(typeof(Exception));
                 try
                 {
                     return serializer.ReadObject(reader);

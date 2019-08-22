@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="using:My.CoachManager.Presentation.Uwp.Converters">
+
+    <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+    <converters:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter" />
+    <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+    <converters:StringToFormatConverter x:Key="StringToFormatConverter" />
+</ResourceDictionary>

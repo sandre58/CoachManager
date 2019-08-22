@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.Domain.Core;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace My.CoachManager.Domain.Entities
 {

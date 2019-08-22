@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using CommonServiceLocator;
+
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.Application.Services.TrainingModule;
 using My.CoachManager.Services.Wcf.Interfaces;

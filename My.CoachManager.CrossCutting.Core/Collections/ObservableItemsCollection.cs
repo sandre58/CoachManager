@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -13,7 +14,6 @@ namespace My.CoachManager.CrossCutting.Core.Collections
     [DebuggerDisplay("Count = {" + nameof(Count) + "}")]
     public class ObservableItemsCollection<T> : ObservableCollection<T>
     {
-
         #region Constructors
 
         public ObservableItemsCollection()
@@ -26,12 +26,12 @@ namespace My.CoachManager.CrossCutting.Core.Collections
             Initialize();
         }
 
-
         private void Initialize()
         {
             CollectionChanged += ObservableCollectionCollectionChanged;
         }
-        #endregion
+
+        #endregion Constructors
 
         #region Methods
 
@@ -52,12 +52,18 @@ namespace My.CoachManager.CrossCutting.Core.Collections
             if (Contains((T)sender))
             {
                 var args = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, sender, sender,
-                    IndexOf((T) sender));
-                OnCollectionChanged(args);
+                    IndexOf((T)sender));
+
+                try
+                {
+                    OnCollectionChanged(args);
+                }
+                catch (Exception)
+                {
+                }
             }
         }
 
-        #endregion
-
+        #endregion Methods
     }
 }

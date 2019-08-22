@@ -54,7 +54,7 @@ namespace My.CoachManager.Domain.AddressModule.Aggregate
         /// </summary>
         /// <param name="item">The item.</param>
         /// <param name="entity">The entity.</param>
-        public static bool UpdateEntity(AddressDto item, Address entity)
+        public static void UpdateEntity(AddressDto item, Address entity)
         {
             entity.CountryId = item.CountryId;
             entity.City = item.City;
@@ -63,8 +63,6 @@ namespace My.CoachManager.Domain.AddressModule.Aggregate
             entity.Longitude = item.Longitude;
             entity.Row1 = item.Row1;
             entity.Row2 = item.Row2;
-
-            return true;
         }
 
         /// <summary>

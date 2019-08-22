@@ -19,6 +19,16 @@ namespace My.CoachManager.Domain.RosterModule.Services
             return validator.Validate(entity);
         }
 
+        /// <summary>
+        /// Check if the category is used by others properties.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool IsUsed(int id)
+        {
+            return false;
+        }
+
         #endregion Methods
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using My.CoachManager.CrossCutting.Core.Resources;
-using My.CoachManager.Presentation.Core.ViewModels;
+using My.CoachManager.Presentation.Wpf.Core.ViewModels.Base;
 using My.CoachManager.Presentation.Wpf.Resources;
 
 namespace My.CoachManager.Presentation.Wpf.ViewModels
@@ -27,17 +27,15 @@ namespace My.CoachManager.Presentation.Wpf.ViewModels
 
         #endregion Members
 
-        #region Initialisation
+        #region Constructors
 
 
         /// <inheritdoc />
         /// <summary>
         /// Launch on constructor for initialize all Data.
         /// </summary>
-        protected override void InitializeData()
+        public SplashScreenViewModel()
         {
-            base.InitializeData();
-
             var assembly = Assembly.GetEntryAssembly();
 
             var copyrightAttr = assembly.GetCustomAttribute<AssemblyCopyrightAttribute>();
