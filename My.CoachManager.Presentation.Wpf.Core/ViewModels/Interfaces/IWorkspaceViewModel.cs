@@ -1,6 +1,6 @@
 ﻿namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces
 {
-    public interface IWorkspaceViewModel : IScreenViewModel
+    public interface IWorkspaceViewModel
     {
         /// <summary>
         /// Gets or sets the title.
@@ -11,5 +11,11 @@
         /// Gets or sets show header.
         /// </summary>
         bool ShowHeader { get; set; }
+
+        /// <summary>
+        /// Get or set the mode.
+        /// </summary>
+        /// <remarks></remarks>
+        ScreenMode Mode { get; }
     }
 }

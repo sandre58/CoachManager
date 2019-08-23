@@ -1,4 +1,4 @@
-﻿using Prism.Commands;
+﻿using GalaSoft.MvvmLight.Command;
 
 namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces
 {
@@ -27,27 +27,27 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces
         /// <summary>
         /// Gets or sets Hide MoveToPreviousPage Command.
         /// </summary>
-        DelegateCommand MoveToPreviousPageCommand { get; set; }
-        
+        RelayCommand MoveToPreviousPageCommand { get; set; }
+
         /// <summary>
         /// Gets or sets Hide MoveToNextPage Command.
         /// </summary>
-        DelegateCommand MoveToNextPageCommand { get; set; }
+        RelayCommand MoveToNextPageCommand { get; set; }
 
         /// <summary>
         /// Gets or sets Hide MoveToFirstPageCommand Command.
         /// </summary>
-        DelegateCommand MoveToFirstPageCommand { get; set; }
+        RelayCommand MoveToFirstPageCommand { get; set; }
 
         /// <summary>
         /// Gets or sets Hide MoveToLastPageCommand Command.
         /// </summary>
-        DelegateCommand MoveToLastPageCommand { get; set; }
+        RelayCommand MoveToLastPageCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the Move to page command.
         /// </summary>
-        DelegateCommand<int?> MoveToPageCommand { get; set; }
+        RelayCommand<int?> MoveToPageCommand { get; set; }
 
     }
 }

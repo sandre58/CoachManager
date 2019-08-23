@@ -57,9 +57,9 @@
                     </Grid>
 
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=Menu, Path=IsExpanded}" Value="True">
+                        <!--<DataTrigger Binding="{Binding ElementName=Menu, Path=IsExpanded}" Value="True">
                             <Setter Property="Visibility" Value="Visible" />
-                        </DataTrigger>
+                        </DataTrigger>-->
                         <Trigger Property="Direction" Value="RightToLeft">
                             <Setter TargetName="Selection" Property="Grid.Column" Value="1" />
                             <Setter TargetName="Actions" Property="Grid.Column" Value="0" />

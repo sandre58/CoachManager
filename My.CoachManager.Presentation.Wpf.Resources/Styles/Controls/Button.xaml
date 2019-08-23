@@ -2,13 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Wpf.Controls.Parameters;assembly=My.CoachManager.Presentation.Wpf.Controls"
                     xmlns:controls="clr-namespace:My.CoachManager.Presentation.Wpf.Controls;assembly=My.CoachManager.Presentation.Wpf.Controls"
-                    xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core">
+                    xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Resources;assembly=My.CoachManager.CrossCutting.Resources">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Converters.xaml" />
         <ResourceDictionary Source="../Base/Margins.xaml" />
         <ResourceDictionary Source="../Base/Geometry.xaml" />
         <ResourceDictionary Source="../Base/Fonts.xaml" />
+        <ResourceDictionary Source="../Base/Colors.xaml" />
         <ResourceDictionary Source="TextBlock.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
@@ -107,24 +108,12 @@
     <Style x:Key="ColorButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource ButtonBaseStyle}">
         <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
         <Setter Property="Foreground" Value="{DynamicResource White}" />
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" Opacity="{DynamicResource ColorOpacity}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBackground">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" Opacity="1" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
         <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource White}" />
         <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource White}" />
-        <Setter Property="parameters:ControlParameters.FocusBackground">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" Opacity="{DynamicResource ColorOpacity}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
     </Style>
 
     <Style x:Key="SmallButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource ButtonBaseStyle}">
@@ -329,26 +318,10 @@
     </Style>
 
     <Style x:Key="IconAndTextColorButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource IconAndTextButtonStyle}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" Opacity="{DynamicResource ColorOpacity}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="parameters:ControlParameters.FocusBackground">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" Opacity="{DynamicResource ColorOpacity}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="parameters:ControlParameters.MouseOverBackground">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" Opacity="1" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="parameters:ControlParameters.PressedBackground">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" Opacity="1" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
+        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
+        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
         <Setter Property="Foreground" Value="{DynamicResource White}" />
         <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource White}" />
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource White}" />
@@ -406,21 +379,9 @@
     </Style>
 
     <Style x:Key="TextBoxColorCircleButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource TextBoxCircleButtonStyle}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" Opacity="{DynamicResource ColorOpacity}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="parameters:ControlParameters.MouseOverBackground">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" Opacity="1" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="parameters:ControlParameters.PressedBackground">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ButtonBase}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" Opacity="1" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
+        <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
+        <Setter Property="parameters:ControlParameters.PressedBackground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
         <Setter Property="Foreground" Value="{DynamicResource White}" />
         <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource White}" />
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{DynamicResource White}" />

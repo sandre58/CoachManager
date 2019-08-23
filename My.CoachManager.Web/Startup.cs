@@ -61,7 +61,7 @@ namespace My.CoachManager.Web
             services.AddSingleton(logger);
 
             // Configure database.
-            services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Sopra"))
+            services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Home"))
                 .UseLoggerFactory(loggerFactory));
 
             // Register types

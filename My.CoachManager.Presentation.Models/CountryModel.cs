@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using My.CoachManager.CrossCutting.Core.Resources.Entities;
+using My.CoachManager.CrossCutting.Resources.Entities;
 using My.CoachManager.Presentation.Core.Models;
 
 namespace My.CoachManager.Presentation.Models

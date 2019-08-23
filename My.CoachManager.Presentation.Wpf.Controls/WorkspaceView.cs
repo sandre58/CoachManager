@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace My.CoachManager.Presentation.Wpf.Controls
 {
-    public class WorkspaceView : HeaderedContentControl
+    public class WorkspaceView : Page
     {
 
         static WorkspaceView()
@@ -19,7 +19,6 @@ namespace My.CoachManager.Presentation.Wpf.Controls
         /// </summary>
         public WorkspaceView()
         {
-            DefaultStyleKey = typeof(WorkspaceView);
             Commands = new List<FrameworkElement>();
         }
 
@@ -95,6 +94,24 @@ namespace My.CoachManager.Presentation.Wpf.Controls
 
         #endregion
 
+        #region Header
+
+        /// <summary>
+        /// Identifies the <see cref="Header"/> property.
+        /// </summary>
+        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register("Header", typeof(object), typeof(WorkspaceView));
+
+        /// <summary>
+        /// Identifies the <see cref="Header"/> property.
+        /// </summary>
+        public object Header
+        {
+            get => GetValue(HeaderProperty);
+            set => SetValue(HeaderProperty, value);
+        }
+
+        #endregion
+
         #region HeaderControlTemplate
 
         /// <summary>
@@ -109,6 +126,60 @@ namespace My.CoachManager.Presentation.Wpf.Controls
         {
             get => (ControlTemplate)GetValue(HeaderControlTemplateProperty);
             set => SetValue(HeaderControlTemplateProperty, value);
+        }
+
+        #endregion
+
+        #region HeaderTemplate
+
+        /// <summary>
+        /// Identifies the <see cref="HeaderTemplate"/> property.
+        /// </summary>
+        public static readonly DependencyProperty HeaderTemplateProperty = DependencyProperty.Register("HeaderTemplate", typeof(DataTemplate), typeof(WorkspaceView));
+
+        /// <summary>
+        /// Identifies the <see cref="HeaderTemplate"/> property.
+        /// </summary>
+        public DataTemplate HeaderTemplate
+        {
+            get => (DataTemplate)GetValue(HeaderTemplateProperty);
+            set => SetValue(HeaderTemplateProperty, value);
+        }
+
+        #endregion
+
+        #region HeaderTemplateSelector
+
+        /// <summary>
+        /// Identifies the <see cref="HeaderTemplateSelector"/> property.
+        /// </summary>
+        public static readonly DependencyProperty HeaderTemplateSelectorProperty = DependencyProperty.Register("HeaderTemplateSelector", typeof(DataTemplateSelector), typeof(WorkspaceView));
+
+        /// <summary>
+        /// Identifies the <see cref="HeaderTemplateSelector"/> property.
+        /// </summary>
+        public DataTemplateSelector HeaderTemplateSelector
+        {
+            get => (DataTemplateSelector)GetValue(HeaderTemplateSelectorProperty);
+            set => SetValue(HeaderTemplateSelectorProperty, value);
+        }
+
+        #endregion
+
+        #region HeaderVisibility
+
+        /// <summary>
+        /// Identifies the <see cref="HeaderVisibility"/> property.
+        /// </summary>
+        public static readonly DependencyProperty HeaderVisibilityProperty = DependencyProperty.Register("HeaderVisibility", typeof(Visibility), typeof(WorkspaceView), new PropertyMetadata(System.Windows.Visibility.Visible));
+
+        /// <summary>
+        /// Identifies the <see cref="HeaderVisibility"/> property.
+        /// </summary>
+        public Visibility HeaderVisibility
+        {
+            get => (Visibility)GetValue(HeaderVisibilityProperty);
+            set => SetValue(HeaderVisibilityProperty, value);
         }
 
         #endregion

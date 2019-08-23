@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.CrossCutting.Core.Helpers;
-using My.CoachManager.CrossCutting.Core.Resources;
-using My.CoachManager.CrossCutting.Core.Resources.Entities;
+using My.CoachManager.CrossCutting.Resources;
+using My.CoachManager.CrossCutting.Resources.Entities;
 using My.CoachManager.Presentation.Core.Attributes.Validation;
 using My.CoachManager.Presentation.Core.Models;
 

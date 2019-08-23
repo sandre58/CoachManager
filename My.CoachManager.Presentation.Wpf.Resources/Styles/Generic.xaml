@@ -12,7 +12,6 @@
         <ResourceDictionary Source="Base/Converters.xaml" />
         <ResourceDictionary Source="Base/Fonts.xaml" />
         <ResourceDictionary Source="Base/Geometry.xaml" />
-        <ResourceDictionary Source="Base/Images.xaml" />
         <ResourceDictionary Source="Base/Margins.xaml" />
         <ResourceDictionary Source="Base/Shadows.xaml" />
         <ResourceDictionary Source="Base/Sizes.xaml" />
@@ -58,13 +57,12 @@
         <ResourceDictionary Source="Controls/Tooltip.xaml" />
         <ResourceDictionary Source="Controls/Window.xaml" />
         <ResourceDictionary Source="Controls/WindowCommands.xaml" />
-        <ResourceDictionary Source="Controls/WorkspaceDialog.xaml" />
-        <ResourceDictionary Source="Controls/WorkspaceView.xaml" />
         <ResourceDictionary Source="Controls/SubMenu.xaml" />
         <ResourceDictionary Source="Controls/Scheduler.xaml" />
         <ResourceDictionary Source="Controls/TimePicker.xaml" />
         <ResourceDictionary Source="Controls/ToolbarControl.xaml" />
         <ResourceDictionary Source="Controls/Filter.xaml" />
+        <ResourceDictionary Source="Controls/WorkspaceView.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

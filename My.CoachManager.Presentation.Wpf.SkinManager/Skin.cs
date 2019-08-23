@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Resources;
 using System.Windows;
 
 namespace My.CoachManager.Presentation.Wpf.SkinManager
@@ -49,7 +51,7 @@ namespace My.CoachManager.Presentation.Wpf.SkinManager
             }
             else
             {
-                var resourceManager = SkinManager.ResourceManager;
+                var resourceManager = new ResourceManager(Assembly.GetEntryAssembly()?.GetName().Name + ".Resources.Strings.SkinResources", Assembly.GetEntryAssembly() ?? throw new InvalidOperationException());
                 var lb = resourceManager.GetString(name);
 
                 if (lb != "")

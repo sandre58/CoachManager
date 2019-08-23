@@ -5,7 +5,7 @@
                     xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System"
                     xmlns:enum="clr-namespace:My.CoachManager.Presentation.Wpf.Core.Enums;assembly=My.CoachManager.Presentation.Wpf.Core"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
-                    xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
+                    xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Resources;assembly=My.CoachManager.CrossCutting.Resources"
                     xmlns:models="clr-namespace:My.CoachManager.Presentation.Core.Models;assembly=My.CoachManager.Presentation.Core"
                     xmlns:columns="clr-namespace:My.CoachManager.Presentation.Wpf.Controls.GridViews.Columns;assembly=My.CoachManager.Presentation.Wpf.Controls">
 
@@ -36,13 +36,13 @@
             <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type ListViewItem}}}" Value="False">
                 <Setter Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ItemsListView}}, Converter={StaticResource AnyToBooleanConverter}}" Value="True">
+            <DataTrigger Binding="{Binding SelectionMode, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ItemsListView}}}" Value="{x:Static SelectionMode.Multiple}">
                 <Setter Property="Visibility" Value="Visible" />
             </DataTrigger>
             <DataTrigger Binding="{Binding CanOrder, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ItemsListView}}}" Value="True">
                 <Setter Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ItemsListView}}, Converter={StaticResource AnyToBooleanConverter}}" Value="True">
+            <DataTrigger Binding="{Binding SelectionMode, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ItemsListView}}}" Value="{x:Static SelectionMode.Multiple}">
                 <Setter Property="ShowActions" Value="False" />
             </DataTrigger>
         </Style.Triggers>
@@ -53,13 +53,13 @@
             <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type ListViewItem}}}" Value="False">
                 <Setter Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ItemsListView}}, Converter={StaticResource AnyToBooleanConverter}}" Value="True">
+            <DataTrigger Binding="{Binding SelectionMode, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ItemsListView}}}" Value="{x:Static SelectionMode.Multiple}">
                 <Setter Property="Visibility" Value="Visible" />
             </DataTrigger>
             <DataTrigger Binding="{Binding CanOrder, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ItemsListView}}}" Value="True">
                 <Setter Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ItemsListView}}, Converter={StaticResource AnyToBooleanConverter}}" Value="True">
+            <DataTrigger Binding="{Binding SelectionMode, RelativeSource={RelativeSource  FindAncestor, AncestorType={x:Type controls:ItemsListView}}}" Value="{x:Static SelectionMode.Multiple}">
                 <Setter Property="ShowActions" Value="False" />
             </DataTrigger>
         </Style.Triggers>
@@ -131,7 +131,7 @@
 
     <DataTemplate x:Key="SelectionListViewColumnTemplate" DataType="models:SelectModel">
         <StackPanel Orientation="Horizontal">
-            <controls:ToolbarControl x:Name="ActionsControl" Style="{StaticResource ToolbarControlForItemsListViewItemStyle}" />
+            <controls:ToolbarControl x:Name="ActionsControl" />
         </StackPanel>
 
         <DataTemplate.Triggers>
@@ -144,7 +144,7 @@
     <DataTemplate x:Key="ActionsListViewColumnTemplate" DataType="models:SelectModel">
         <StackPanel Orientation="Horizontal">
 
-            <controls:ToolbarControl x:Name="ActionsControl" Style="{StaticResource ToolbarControlForItemsListViewItemStyle}">
+            <controls:ToolbarControl x:Name="ActionsControl">
                 <Button CommandParameter="{Binding}"
                         Command="{Binding EditCommand,
                                 RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ItemsListView}}}"
@@ -175,6 +175,11 @@
 
     <!-- ListItem Styles -->
     <Style x:Key="ItemsListViewItemStyle" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource ListViewItemStyle}">
+
+        <Style.Resources>
+            <Style TargetType="{x:Type controls:ToolbarControl}" BasedOn="{StaticResource ToolbarControlForItemsListViewItemStyle}" />
+        </Style.Resources>
+
         <Setter Property="Background" Value="{DynamicResource Transparent}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource Dark}" />
@@ -350,13 +355,11 @@
     <Style x:Key="ItemsListViewBaseStyle" TargetType="{x:Type controls:ItemsListView}" BasedOn="{StaticResource ListViewBaseStyle}">
         <Style.Resources>
             <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource ItemsGridViewColumnHeaderStyle}" />
-            <Style TargetType="{x:Type controls:ToolbarControl}" BasedOn="{StaticResource ToolbarControlForListViewItemStyle}" />
         </Style.Resources>
         <Setter Property="DoubleClickCommand" Value="{Binding OpenItemCommand}" />
         <Setter Property="EditCommand" Value="{Binding EditItemCommand}" />
         <Setter Property="RemoveCommand" Value="{Binding RemoveItemCommand}" />
         <Setter Property="CanOrder" Value="{Binding CanOrder, FallbackValue=False}" />
-        <Setter Property="CanSort" Value="{Binding CanSort, FallbackValue=True}" />
         <Setter Property="CustomSelectionMode" Value="{Binding SelectionMode}" />
         <Setter Property="SelectionMode" Value="Multiple" />
         <Setter Property="BorderBrush" Value="{DynamicResource DarkSecondaryAccent}" />
@@ -367,8 +370,8 @@
         <Setter Property="parameters:ControlParameters.InputBindings">
             <Setter.Value>
                 <InputBindingCollection>
-                    <KeyBinding Key="Delete" Command="{Binding RemoveItemCommand}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}" />
-                    <KeyBinding Key="Enter" Command="{Binding OpenItemCommand}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}" />
+                    <KeyBinding Key="Delete" Command="{Binding RemoveCommand, RelativeSource={RelativeSource AncestorType={x:Type controls:ItemsListView}}}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}" />
+                    <KeyBinding Key="Enter" Command="{Binding DoubleClickCommand, RelativeSource={RelativeSource AncestorType={x:Type controls:ItemsListView}}}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}" />
                     <KeyBinding Key="E" Modifiers="Control" Command="{Binding EditItemCommand}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}" />
                     <KeyBinding Key="Space" Command="{Binding SelectItemCommand}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}" />
                 </InputBindingCollection>
@@ -505,13 +508,7 @@
             </MultiDataTrigger>
 
             <DataTrigger Binding="{Binding SelectedItems, Converter={StaticResource AnyToBooleanConverter}, UpdateSourceTrigger=PropertyChanged}" Value="True">
-                <Setter Property="parameters:ControlParameters.InputBindings">
-                    <Setter.Value>
-                        <InputBindingCollection>
-                            <KeyBinding Key="Delete" Command="{Binding RemoveSelectedItemsCommand}" />
-                        </InputBindingCollection>
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="RemoveCommand" Value="{Binding RemoveCommand}" />
             </DataTrigger>
 
             <Trigger Property="CanOrder" Value="true">

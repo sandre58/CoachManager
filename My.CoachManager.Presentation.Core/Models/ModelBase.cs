@@ -4,25 +4,21 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-
+using GalaSoft.MvvmLight;
 using My.CoachManager.Presentation.Core.Attributes.Validation;
 using My.CoachManager.Presentation.Core.Rules;
-
-using Prism.Mvvm;
-
 using PropertyChanged;
 
 namespace My.CoachManager.Presentation.Core.Models
 {
-    /// <inheritdoc cref="BindableBase" />
+    /// <inheritdoc cref="ViewModelBase" />
     /// <summary>
     /// The model base.
     /// </summary>
     /// <seealso cref="T:System.ComponentModel.INotifyPropertyChanged" />
     [AddINotifyPropertyChangedInterface]
-    public abstract class ModelBase : BindableBase, INotifyDataErrorInfo, IValidatable
+    public abstract class ModelBase : ViewModelBase, INotifyDataErrorInfo, IValidatable
     {
         #region Members
 
@@ -53,19 +49,6 @@ namespace My.CoachManager.Presentation.Core.Models
         }
 
         #endregion Constructors
-
-        #region Methods
-
-        /// <summary>
-        /// Raises this object's PropertyChanged event.
-        /// </summary>
-        protected void RaisePropertyChanged<T>(Expression<Func<T>> propertyExpression)
-        {
-            var propertyName = PropertySupport.ExtractPropertyName(propertyExpression);
-            RaisePropertyChanged(propertyName);
-        }
-
-        #endregion Methods
 
         #region INotifyDataErrorInfo
 

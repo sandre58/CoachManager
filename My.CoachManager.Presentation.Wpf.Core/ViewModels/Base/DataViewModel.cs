@@ -1,6 +1,6 @@
 ﻿using My.CoachManager.CrossCutting.Core.Exceptions;
 using My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;
-using Prism.Commands;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Threading.Tasks;
 using My.CoachManager.CrossCutting.Logging;
@@ -32,13 +32,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
         /// <summary>
         /// Gets or sets the refresh command.
         /// </summary>
-        public DelegateCommand RefreshCommand { get; private set; }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets if we can refresh after initialisation.
-        /// </summary>
-        public virtual bool RefreshOnInit => true;
+        public RelayCommand RefreshCommand { get; private set; }
 
         /// <summary>
         /// Initialise.
@@ -57,7 +51,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
         {
             base.Initialize();
             
-            RefreshCommand = new DelegateCommand(Refresh, CanRefresh);
+            RefreshCommand = new RelayCommand(Refresh, CanRefresh);
 
             State = ScreenState.NotLoaded;
             Mode = ScreenMode.Read;

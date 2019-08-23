@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>My.CoachManager.Presentation.Wpf.Controls</RootNamespace>
     <AssemblyName>My.CoachManager.Presentation.Wpf.Controls</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,14 +44,17 @@
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Prism, Version=7.2.0.1367, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.Core.7.2.0.1367\lib\net45\Prism.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.Wpf, Version=7.2.0.1367, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.Wpf.7.2.0.1367\lib\net45\Prism.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -70,7 +74,7 @@
     </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.Wpf.7.2.0.1367\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -86,15 +90,15 @@
     <Compile Include="ApplicationBar.cs" />
     <Compile Include="Badged.cs" />
     <Compile Include="BadgedBase.cs" />
-    <Compile Include="Behaviours\FadeBehavior.cs" />
-    <Compile Include="Behaviours\FocusBehavior.cs" />
-    <Compile Include="Behaviours\MainMenuExpanderBehavior.cs" />
-    <Compile Include="Behaviours\PasswordBoxBindingBehavior.cs" />
-    <Compile Include="Behaviours\ReloadBehavior.cs" />
-    <Compile Include="Behaviours\SlideBehavior.cs" />
-    <Compile Include="Behaviours\StylizedBehaviorCollection.cs" />
-    <Compile Include="Behaviours\StylizedBehaviors.cs" />
-    <Compile Include="Behaviours\ResizeBehavior.cs" />
+    <Compile Include="Behaviors\FadeBehavior.cs" />
+    <Compile Include="Behaviors\FocusBehavior.cs" />
+    <Compile Include="Behaviors\MainMenuExpanderBehavior.cs" />
+    <Compile Include="Behaviors\PasswordBoxBindingBehavior.cs" />
+    <Compile Include="Behaviors\ReloadBehavior.cs" />
+    <Compile Include="Behaviors\SlideBehavior.cs" />
+    <Compile Include="Behaviors\StylizedBehaviorCollection.cs" />
+    <Compile Include="Behaviors\StylizedBehaviors.cs" />
+    <Compile Include="Behaviors\ResizeBehavior.cs" />
     <Compile Include="Buttons\ButtonsAlignment.cs" />
     <Compile Include="Buttons\DropDownButtonAutomationPeer.cs" />
     <Compile Include="Clipper.cs" />
@@ -105,7 +109,8 @@
     <Compile Include="CommandButtons\DropDownCommandButtonAutomationPeer.cs" />
     <Compile Include="CommandButtons\DropDownDirection.cs" />
     <Compile Include="Commands\SystemCommands.cs" />
-    <Compile Include="ContentControls\CharacterCasing.cs" />
+    <Compile Include="ContentControls\CharacterCase.cs" />
+    <Compile Include="MessageDialog.cs" />
     <Compile Include="DialogWindow.cs" />
     <Compile Include="DragAndDrop\DragCommand.cs" />
     <Compile Include="DragAndDrop\DragManager.cs" />
@@ -265,6 +270,10 @@
     <ProjectReference Include="..\My.CoachManager.CrossCutting.Logging\My.CoachManager.CrossCutting.Logging.csproj">
       <Project>{38F32D3D-BCD4-4EEB-9174-38FCF6DA9EEA}</Project>
       <Name>My.CoachManager.CrossCutting.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\My.CoachManager.CrossCutting.Resources\My.CoachManager.CrossCutting.Resources.csproj">
+      <Project>{cb842526-2b03-4d06-a3a4-83b0acd751ea}</Project>
+      <Name>My.CoachManager.CrossCutting.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\My.CoachManager.Presentation.Core\My.CoachManager.Presentation.Core.csproj">
       <Project>{3573A892-E81F-4FF2-A012-2ADB0F7C82A2}</Project>

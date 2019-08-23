@@ -5,17 +5,15 @@
 
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using My.CoachManager.Presentation.Wpf.Controls.Helpers;
 
 namespace My.CoachManager.Presentation.Wpf.Controls
 {
-    public class WorkspaceDialog : System.Windows.Controls.ContentControl
+    public class WorkspaceDialog : Frame
     {
-        //private bool _hideRequest;
-        private bool _result = false;
-
         private IInputElement _restoreFocus;
 
         private bool _saveEnabled;
@@ -60,38 +58,23 @@ namespace My.CoachManager.Presentation.Wpf.Controls
             set => SetValue(OwnerProperty, value);
         }
 
-        public bool ShowHandlerDialog()
+        public bool Show()
         {
             if (Visibility == Visibility.Visible) return true;
             Visibility = Visibility.Visible;
 
-            if (Owner == null) return _result;
+            if (Owner == null) return false;
             _saveEnabled = Owner.IsEnabled;
             StoreFocus();
             Owner.IsEnabled = false;
 
-            //_hideRequest = false;
-            //while (!_hideRequest)
-            //{
-            //    // HACK: Stop the thread if the application is about to close
-            //    if (Dispatcher.HasShutdownStarted ||
-            //        Dispatcher.HasShutdownFinished)
-            //    {
-            //        break;
-            //    }
-
-            //    // HACK: Simulate "DoEvents"
-            //    Dispatcher.Invoke(DispatcherPriority.Background, new ThreadStart(delegate { }));
-            //    Thread.Sleep(10);
-            //}
-
-            return _result;
+            return true;
         }
 
-        public void HideHandlerDialog()
+        public void Hide()
         {
             if (Visibility != Visibility.Visible) return;
-            // _hideRequest = true;
+
             Visibility = Visibility.Collapsed;
             if (Owner != null)
             {
@@ -109,7 +92,7 @@ namespace My.CoachManager.Presentation.Wpf.Controls
             if (Owner != null)
             {
                 var window = Owner.FindVisualParent<Window>();
-                Dispatcher.BeginInvoke(new Action(() =>
+                Dispatcher?.BeginInvoke(new Action(() =>
                 {
                     _restoreFocus = thisElement ?? (_restoreFocus ?? FocusManager.GetFocusedElement(window));
                 }));
@@ -120,7 +103,7 @@ namespace My.CoachManager.Presentation.Wpf.Controls
         {
             if (_restoreFocus != null)
             {
-                Dispatcher.BeginInvoke(new Action(() =>
+                Dispatcher?.BeginInvoke(new Action(() =>
                 {
                     Keyboard.Focus(_restoreFocus);
                     _restoreFocus = null;

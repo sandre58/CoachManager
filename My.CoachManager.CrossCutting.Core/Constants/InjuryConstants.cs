@@ -1,7 +1,7 @@
 ﻿using System;
 
 using My.CoachManager.CrossCutting.Core.Enums;
-using My.CoachManager.CrossCutting.Core.Resources.Entities;
+using My.CoachManager.CrossCutting.Resources.Entities;
 
 namespace My.CoachManager.CrossCutting.Core.Constants
 {

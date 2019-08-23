@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Windows;
+using My.CoachManager.Presentation.Wpf.Core.Dialog;
 using My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;
 
 namespace My.CoachManager.Presentation.Wpf.Controls
 {
-    public class DialogWindow : ExtendedWindow
+    public class DialogWindow : ExtendedWindow, IDialogWindow
     {
         /// <summary>
         /// The original main window.
@@ -16,12 +17,21 @@ namespace My.CoachManager.Presentation.Wpf.Controls
         /// </summary>
         private bool _restoreMainWindow;
 
+        static DialogWindow()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(DialogWindow),
+                new FrameworkPropertyMetadata(typeof(DialogWindow)));
+        }
+
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the <see cref="T:My.CoachManager.Presentation.Wpf.Views.MessageDialog" /> class.
         /// </summary>
         public DialogWindow()
         {
+
+            WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
             try
             {
                 Owner = Application.Current.MainWindow;
@@ -53,7 +63,7 @@ namespace My.CoachManager.Presentation.Wpf.Controls
 
             if (DataContext == null) return;
 
-            ((IDialogViewModel)DataContext).CloseRequest += OnCloseRequest;
+            if(DataContext is IDialogViewModel vm) vm.CloseRequest += OnCloseRequest;
         }
 
         private void OnCloseRequest(object o, EventArgs ev)
@@ -80,7 +90,9 @@ namespace My.CoachManager.Presentation.Wpf.Controls
             _originalMainWindow = null;
             _restoreMainWindow = false;
 
-            ((IDialogViewModel)DataContext).CloseRequest -= OnCloseRequest;
+            if (DataContext is IDialogViewModel vm) vm.CloseRequest -= OnCloseRequest;
         }
+
     }
+
 }

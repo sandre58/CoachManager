@@ -6,6 +6,11 @@ namespace My.CoachManager.Presentation.Wpf.Controls
 {
     public class NavigationExpander : Expander
     {
+        static NavigationExpander()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(NavigationExpander), new FrameworkPropertyMetadata(typeof(NavigationExpander)));
+        }
+
         /// <summary>
         /// Identifies the Icon dependency property.
         /// </summary>
@@ -21,8 +26,8 @@ namespace My.CoachManager.Presentation.Wpf.Controls
         /// </summary>
         public object Icon
         {
-            get { return GetValue(IconProperty); }
-            set { SetValue(IconProperty, value); }
+            get => GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
         }
 
         /// <summary>
@@ -30,8 +35,8 @@ namespace My.CoachManager.Presentation.Wpf.Controls
         /// </summary>
         public Brush Color
         {
-            get { return (Brush)GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
+            get => (Brush)GetValue(ColorProperty);
+            set => SetValue(ColorProperty, value);
         }
     }
 }

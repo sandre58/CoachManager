@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using My.CoachManager.CrossCutting.Core.Configurations;
-using My.CoachManager.CrossCutting.Core.Resources;
+using My.CoachManager.CrossCutting.Resources;
 
 namespace My.CoachManager.Presentation.Wpf.Core
 {

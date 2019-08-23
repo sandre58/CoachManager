@@ -1,12 +1,12 @@
 ﻿using My.CoachManager.CrossCutting.Core.Collections;
-using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Core.Models;
 using My.CoachManager.Presentation.Wpf.Core.DragAndDrop;
 using My.CoachManager.Presentation.Wpf.Core.Manager;
-using Prism.Commands;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Threading;
+using My.CoachManager.CrossCutting.Resources;
 using My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;
 
 namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
@@ -26,27 +26,27 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         /// <summary>
         /// Gets or sets the active order command.
         /// </summary>
-        public DelegateCommand ActivateOrderCommand { get; set; }
+        public RelayCommand ActivateOrderCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the validate order command.
         /// </summary>
-        public DelegateCommand ValidateOrderCommand { get; set; }
+        public RelayCommand ValidateOrderCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the cancel order command.
         /// </summary>
-        public DelegateCommand CancelOrderCommand { get; set; }
+        public RelayCommand CancelOrderCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the move above command.
         /// </summary>
-        public DelegateCommand<DragAndDropEventArgs> MoveAboveCommand { get; set; }
+        public RelayCommand<DragAndDropEventArgs> MoveAboveCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the move below command.
         /// </summary>
-        public DelegateCommand<DragAndDropEventArgs> MoveBelowCommand { get; set; }
+        public RelayCommand<DragAndDropEventArgs> MoveBelowCommand { get; set; }
 
         #endregion Members
 
@@ -62,11 +62,11 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         {
             base.Initialize();
             
-            ActivateOrderCommand = new DelegateCommand(ActivateOrder, CanActivateOrder);
-            CancelOrderCommand = new DelegateCommand(CancelOrder, CanCancelOrder);
-            ValidateOrderCommand = new DelegateCommand(ValidateOrder, CanValidateOrder);
-            MoveAboveCommand = new DelegateCommand<DragAndDropEventArgs>(MoveAbove, CanMoveAbove);
-            MoveBelowCommand = new DelegateCommand<DragAndDropEventArgs>(MoveBelow, CanMoveBelow);
+            ActivateOrderCommand = new RelayCommand(ActivateOrder, CanActivateOrder);
+            CancelOrderCommand = new RelayCommand(CancelOrder, CanCancelOrder);
+            ValidateOrderCommand = new RelayCommand(ValidateOrder, CanValidateOrder);
+            MoveAboveCommand = new RelayCommand<DragAndDropEventArgs>(MoveAbove, CanMoveAbove);
+            MoveBelowCommand = new RelayCommand<DragAndDropEventArgs>(MoveBelow, CanMoveBelow);
 
             CanOrder = false;
             }
@@ -326,13 +326,16 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         /// </summary>
         protected virtual void OnCanOrderChanged()
         {
-            AddCommand.RaiseCanExecuteChanged();
-            RefreshCommand.RaiseCanExecuteChanged();
-            MoveAboveCommand.RaiseCanExecuteChanged();
-            MoveBelowCommand.RaiseCanExecuteChanged();
-            ActivateOrderCommand.RaiseCanExecuteChanged();
-            CancelOrderCommand.RaiseCanExecuteChanged();
-            ValidateOrderCommand.RaiseCanExecuteChanged();
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+                AddCommand.RaiseCanExecuteChanged();
+                RefreshCommand.RaiseCanExecuteChanged();
+                MoveAboveCommand.RaiseCanExecuteChanged();
+                MoveBelowCommand.RaiseCanExecuteChanged();
+                ActivateOrderCommand.RaiseCanExecuteChanged();
+                CancelOrderCommand.RaiseCanExecuteChanged();
+                ValidateOrderCommand.RaiseCanExecuteChanged();
+            });
         }
 
         #endregion PropertyChanged

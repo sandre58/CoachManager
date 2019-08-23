@@ -11,11 +11,6 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces
         ScreenState State { get; }
 
         /// <summary>
-        /// Gets if we can refresh after initialisation.
-        /// </summary>
-        bool RefreshOnInit { get; }
-
-        /// <summary>
         /// Can Refresh.
         /// </summary>
         /// <returns></returns>

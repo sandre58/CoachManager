@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
+using GalaSoft.MvvmLight.Command;
 using My.CoachManager.Presentation.Wpf.Core.Constants;
+using My.CoachManager.Presentation.Wpf.Core.Navigation;
 using My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;
-using Prism.Commands;
-using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
 {
@@ -21,18 +21,6 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
 
         #region Members
 
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets a value indicating whether this instance should be kept-alive upon deactivation.
-        /// </summary>
-        public virtual bool KeepAlive => true;
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets if we can refresh after initialization.
-        /// </summary>
-        public override bool RefreshOnInit => false;
-
         /// <summary>
         /// Gets navigation id.
         /// </summary>
@@ -46,7 +34,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
         /// <summary>
         /// Gets or sets goto tab command.
         /// </summary>
-        public DelegateCommand<object> GotToTabCommand { get; set; }
+        public RelayCommand<object> GotToTabCommand { get; set; }
 
         #endregion Members
 
@@ -62,7 +50,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
         {
             base.Initialize();
 
-            GotToTabCommand = new DelegateCommand<object>(GotToTab, CanGotToTab);
+            GotToTabCommand = new RelayCommand<object>(GotToTab, CanGotToTab);
         }
 
         #endregion Initialisation
@@ -97,21 +85,21 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
         /// <param name="navigationContext">The navigation context.</param>
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            _navigationParameters = navigationContext.Parameters;
+            if(navigationContext.Parameters != null) _navigationParameters = navigationContext.Parameters;
 
             NavigationId = GetParameter(ParametersConstants.Id, NavigationId);
             SelectedTabIndex = GetParameter(ParametersConstants.Tab, SelectedTabIndex);
 
-            OnNavigatedToCore(_navigationParameters);
+            OnNavigatedToCore(navigationContext);
         }
 
         /// <summary>
         /// Called when the implementer has been navigated to.
         /// </summary>
-        /// <param name="navigationParameters">The navigation context.</param>
-        protected virtual void OnNavigatedToCore(NavigationParameters navigationParameters)
+        /// <param name="navigationContext">The navigation context.</param>
+        protected virtual void OnNavigatedToCore(NavigationContext navigationContext)
         {
-            Refresh();
+            if(State == ScreenState.NotLoaded) Refresh();
         }
 
         /// <inheritdoc />
@@ -122,7 +110,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
         /// <returns>True if this instance accepts the navigation request; otherwise, False.</returns>
         public virtual bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            return _navigationParameters.ToString().Equals(navigationContext.Parameters.ToString());
+            return _navigationParameters != null && _navigationParameters.ToString().Equals(navigationContext.Parameters.ToString());
         }
 
         /// <inheritdoc />
@@ -134,15 +122,15 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
         {
             if (Mode == ScreenMode.Creation || Mode == ScreenMode.Edition)
             {
-                OnNavigatedFromCore(navigationContext.Parameters);
+                OnNavigatedFromCore(navigationContext);
             }
         }
         
         /// <summary>
         /// Called when the implementer is being navigated away from.
         /// </summary>
-        /// <param name="navigationParameters">The navigation context.</param>
-        protected virtual void OnNavigatedFromCore(NavigationParameters navigationParameters)
+        /// <param name="navigationContext">The navigation context.</param>
+        protected virtual void OnNavigatedFromCore(NavigationContext navigationContext)
         {
         }
 
@@ -154,9 +142,9 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
         /// <param name="key"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        public T GetParameter<T>(string key, T defaultValue = default(T))
+        public T GetParameter<T>(string key, T defaultValue = default)
         {
-            if (_navigationParameters.Any(x => x.Key == key))
+            if (_navigationParameters != null && _navigationParameters.Any(x => x.Key == key))
             {
                 var t = typeof(T);
                 if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>))
@@ -165,7 +153,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
                 return (T)Convert.ChangeType(_navigationParameters[key], t);
             }
 
-            return defaultValue != null ? defaultValue : default(T);
+            return defaultValue != null ? defaultValue : default;
         }
 
         #endregion Methods

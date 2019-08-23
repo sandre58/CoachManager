@@ -2,13 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:My.CoachManager.Presentation.Wpf.Controls;assembly=My.CoachManager.Presentation.Wpf.Controls"
                     xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Wpf.Controls.Parameters;assembly=My.CoachManager.Presentation.Wpf.Controls"
-                    xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core">
+                    xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Resources;assembly=My.CoachManager.CrossCutting.Resources">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Base/Converters.xaml" />
         <ResourceDictionary Source="../Base/Margins.xaml" />
         <ResourceDictionary Source="../Base/Sizes.xaml" />
         <ResourceDictionary Source="../Base/Geometry.xaml" />
+        <ResourceDictionary Source="../Base/Colors.xaml" />
         <ResourceDictionary Source="SubMenu.xaml" />
         <ResourceDictionary Source="CommandButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -97,21 +98,13 @@
 
     <Style x:Key="ColorDropDownCommandButtonStyle" TargetType="{x:Type controls:DropDownCommandButton}" BasedOn="{StaticResource {x:Type controls:DropDownCommandButton}}">
         <Setter Property="parameters:ControlParameters.Color" Value="{DynamicResource SecondaryAccent}" />
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
         <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
         <Setter Property="parameters:ControlParameters.PressedBackground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
         <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
         <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color)}" />
-        <Setter Property="parameters:ControlParameters.FocusForeground">
-            <Setter.Value>
-                <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="parameters:ControlParameters.FocusForeground" Value="{Binding RelativeSource={RelativeSource Self}, Path=(parameters:ControlParameters.Color), Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
     </Style>
 
     <Style x:Key="SmallDropDownCommandButtonStyle" TargetType="{x:Type controls:DropDownCommandButton}" BasedOn="{StaticResource  {x:Type controls:DropDownCommandButton}}">

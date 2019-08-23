@@ -1,11 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:My.CoachManager.Presentation.Wpf.Controls;assembly=My.CoachManager.Presentation.Wpf.Controls"
-                    xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Wpf.Controls.Parameters;assembly=My.CoachManager.Presentation.Wpf.Controls">
+                    xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Wpf.Controls.Parameters;assembly=My.CoachManager.Presentation.Wpf.Controls"
+                    xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Resources;assembly=My.CoachManager.CrossCutting.Resources">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Button.xaml" />
         <ResourceDictionary Source="../Base/Converters.xaml" />
         <ResourceDictionary Source="../Base/Margins.xaml" />
+        <ResourceDictionary Source="../Base/Sizes.xaml" />
+        <ResourceDictionary Source="../Base/Colors.xaml" />
         <ResourceDictionary Source="TextBlock.xaml" />
         <ResourceDictionary Source="Icon.xaml" />
         <ResourceDictionary Source="WindowCommands.xaml" />
@@ -240,20 +243,234 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="ModernWindowStyle" TargetType="{x:Type controls:ExtendedWindow}">
+    <ControlTemplate x:Key="MessageDialogTemplate" TargetType="{x:Type controls:MessageDialog}">
+        <Grid
+            Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}">
+            <AdornerDecorator>
+                <Grid Background="{TemplateBinding Background}" x:Name="LayoutRoot">
+                    <Grid.ColumnDefinitions>
+                        <!--  icon  -->
+                        <ColumnDefinition Width="Auto" />
+                        <!--  left window commands  -->
+                        <ColumnDefinition Width="Auto" />
+                        <!--  title  -->
+                        <ColumnDefinition Width="*" />
+                        <!--  right window commands  -->
+                        <ColumnDefinition Width="Auto" />
+                        <!--  min,max,close buttons  -->
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!--  the main window content  -->
+                    <ContentControl x:Name="Content"
+                        Grid.Row="1"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="5"
+                                    FocusVisualStyle="{x:Null}"
+                                    IsTabStop="False"
+                                    UseLayoutRounding="True">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <ScrollViewer Grid.Row="0" Focusable="False" FocusVisualStyle="{x:Null}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:Icon x:Name="PART_Image" Grid.Column="0" Size="VeryLarge" Margin="{StaticResource MediumMargin}" Visibility="Collapsed"/>
+                                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                                        <TextBlock Text="{TemplateBinding Title}" Style="{StaticResource HeaderStyle}" VerticalAlignment="Bottom" Margin="{StaticResource MediumMargin}" />
+                                        <ContentPresenter  VerticalAlignment="Top" Focusable="False" Margin="{StaticResource MediumHorizontalMargin}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </ScrollViewer>
+
+                            <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal" Margin="{StaticResource VeryLargeMargin}">
+                                <Button x:Name="PART_YesButton" Width="{StaticResource MidSmallWidth}" Height="35"
+                    Content="{x:Static strings:ControlResources.Yes}"
+                    Margin="{StaticResource DefaultMargin}">
+                                    <Button.Visibility>
+                                        <Binding Path="Button" RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource EnumToVisibilityConverter}">
+                                            <Binding.ConverterParameter>
+                                                <x:Array Type="{x:Type MessageBoxButton}">
+                                                    <x:Static Member="MessageBoxButton.YesNo" />
+                                                    <x:Static Member="MessageBoxButton.YesNoCancel" />
+                                                </x:Array>
+                                            </Binding.ConverterParameter>
+                                        </Binding>
+                                    </Button.Visibility>
+                                    <Button.IsDefault>
+                                        <Binding Path="Button" RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource EnumToBooleanConverter}">
+                                            <Binding.ConverterParameter>
+                                                <x:Array Type="{x:Type MessageBoxButton}">
+                                                    <x:Static Member="MessageBoxButton.YesNo" />
+                                                    <x:Static Member="MessageBoxButton.YesNoCancel" />
+                                                </x:Array>
+                                            </Binding.ConverterParameter>
+                                        </Binding>
+                                    </Button.IsDefault>
+                                </Button>
+                                <Button x:Name="PART_NoButton" Width="{StaticResource MidSmallWidth}" Height="35"
+                    Content="{x:Static strings:ControlResources.No}"
+                    Margin="{StaticResource DefaultMargin}">
+                                    <Button.Visibility>
+                                        <Binding Path="Button" RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource EnumToVisibilityConverter}">
+                                            <Binding.ConverterParameter>
+                                                <x:Array Type="{x:Type MessageBoxButton}">
+                                                    <x:Static Member="MessageBoxButton.YesNo" />
+                                                    <x:Static Member="MessageBoxButton.YesNoCancel" />
+                                                </x:Array>
+                                            </Binding.ConverterParameter>
+                                        </Binding>
+                                    </Button.Visibility>
+                                    <Button.IsCancel>
+                                        <Binding Path="Button" RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource EnumToBooleanConverter}">
+                                            <Binding.ConverterParameter>
+                                                <x:Array Type="{x:Type MessageBoxButton}">
+                                                    <x:Static Member="MessageBoxButton.YesNo" />
+                                                </x:Array>
+                                            </Binding.ConverterParameter>
+                                        </Binding>
+                                    </Button.IsCancel>
+                                </Button>
+                                <Button  x:Name="PART_OkButton" Width="{StaticResource MidSmallWidth}" Height="35"
+                    Content="{x:Static strings:ControlResources.Ok}"
+                    Margin="{StaticResource DefaultMargin}">
+                                    <Button.Visibility>
+                                        <Binding Path="Button" RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource EnumToVisibilityConverter}">
+                                            <Binding.ConverterParameter>
+                                                <x:Array Type="{x:Type MessageBoxButton}">
+                                                    <x:Static Member="MessageBoxButton.OKCancel" />
+                                                    <x:Static Member="MessageBoxButton.OK" />
+                                                </x:Array>
+                                            </Binding.ConverterParameter>
+                                        </Binding>
+                                    </Button.Visibility>
+                                    <Button.IsDefault>
+                                        <Binding Path="Button" RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource EnumToBooleanConverter}">
+                                            <Binding.ConverterParameter>
+                                                <x:Array Type="{x:Type MessageBoxButton}">
+                                                    <x:Static Member="MessageBoxButton.OKCancel" />
+                                                    <x:Static Member="MessageBoxButton.OK" />
+                                                </x:Array>
+                                            </Binding.ConverterParameter>
+                                        </Binding>
+                                    </Button.IsDefault>
+                                </Button>
+                                <Button x:Name="PART_CancelButton" Width="{StaticResource MidSmallWidth}" Height="35"
+                    Content="{x:Static strings:ControlResources.Cancel}"
+                    Margin="{StaticResource DefaultMargin}">
+                                    <Button.Visibility>
+                                        <Binding Path="Button" RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource EnumToVisibilityConverter}">
+                                            <Binding.ConverterParameter>
+                                                <x:Array Type="{x:Type MessageBoxButton}">
+                                                    <x:Static Member="MessageBoxButton.OKCancel" />
+                                                    <x:Static Member="MessageBoxButton.YesNoCancel" />
+                                                </x:Array>
+                                            </Binding.ConverterParameter>
+                                        </Binding>
+                                    </Button.Visibility>
+                                    <Button.IsCancel>
+                                        <Binding Path="Button" RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource EnumToBooleanConverter}">
+                                            <Binding.ConverterParameter>
+                                                <x:Array Type="{x:Type MessageBoxButton}">
+                                                    <x:Static Member="MessageBoxButton.OKCancel" />
+                                                    <x:Static Member="MessageBoxButton.YesNoCancel" />
+                                                </x:Array>
+                                            </Binding.ConverterParameter>
+                                        </Binding>
+                                    </Button.IsCancel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </ContentControl>
+
+                    <Rectangle x:Name="PART_WindowTitleBackground"
+                               Grid.Column="0"
+                               Grid.Row="0"
+                               Grid.ColumnSpan="5"
+                               Height="{Binding TitlebarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                               Fill="{TemplateBinding WindowTitleBrush}"
+                               StrokeThickness="0"
+                               Focusable="False"
+                               UseLayoutRounding="True"
+                               Visibility="{TemplateBinding ShowTitleBar, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    
+                    <controls:ExtendedThumb x:Name="PART_WindowTitleThumb"
+                                         Grid.Row="0"
+                                         Grid.Column="0"
+                                         Grid.ColumnSpan="5"
+                                         Style="{StaticResource WindowTitleThumbStyle}" />
+
+                    <!--  the title bar  -->
+                    <controls:ThumbContentControl x:Name="PART_TitleBar"
+                                                       Grid.Row="0"
+                                                       Grid.Column="2"
+                                                       parameters:ControlParameters.CharacterCasing="{TemplateBinding TitleCharacterCasing}"
+                                                       Height="{Binding TitlebarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                                       HorizontalAlignment="{TemplateBinding TitleAlignment}"
+                                                       HorizontalContentAlignment="Stretch"
+                                                       VerticalContentAlignment="Stretch"
+                                                       Content="{TemplateBinding Title}"
+                                                       ContentTemplate="{TemplateBinding TitleTemplate}"
+                                                       Foreground="{TemplateBinding TitleForeground}"
+                                                       Focusable="False"
+                                                       Visibility="{TemplateBinding ShowTitleOnTitleBar, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                    <!--  the window button commands  -->
+                    <ContentPresenter x:Name="PART_WindowButtonCommands"
+                                      Grid.Row="0"
+                                      Grid.RowSpan="2"
+                                      Grid.Column="4"
+                                      Height="{Binding TitlebarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                      VerticalAlignment="Top"
+                                      Panel.ZIndex="1"
+                                      Content="{Binding WindowButtonCommands, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                      Focusable="False"
+                                      UseLayoutRounding="True" />
+
+                </Grid>
+            </AdornerDecorator>
+
+            <!-- Main Window -->
+            <Border x:Name="PART_Border"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="{x:Null}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    UseLayoutRounding="True" />
+
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <!--  handle active/inactive state  -->
+            <Trigger Property="IsActive" Value="False">
+                <Setter TargetName="PART_Border" Property="BorderBrush" Value="{Binding Path=NonActiveBorderBrush, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                <Setter TargetName="PART_WindowTitleBackground" Property="Fill" Value="{Binding Path=NonActiveWindowTitleBrush, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+            </Trigger>
+            <Trigger Property="IsTitleOverlay" Value="True">
+                <Setter TargetName="Content" Property="Grid.Row" Value="0" />
+                <Setter TargetName="Content" Property="Grid.RowSpan" Value="2" />
+                <Setter TargetName="PART_WindowTitleBackground" Property="Fill" Value="{DynamicResource Transparent}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type controls:ExtendedWindow}">
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="TitleForeground" Value="{DynamicResource AccentForeground}" />
         <Setter Property="WindowTitleBrush" Value="{DynamicResource Transparent}" />
-        <Setter Property="NonActiveBorderBrush">
-            <Setter.Value>
-                <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedWindow}, Path=BorderBrush, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="NonActiveWindowTitleBrush">
-            <Setter.Value>
-                <SolidColorBrush Opacity="{DynamicResource ColorOpacity}" Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ExtendedWindow}, Path=WindowTitleBrush, Converter={StaticResource ObjectToPropertyConverter}, ConverterParameter=Color}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="NonActiveBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush, Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
+        <Setter Property="NonActiveWindowTitleBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=WindowTitleBrush, Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="OverlayBrush" Value="{DynamicResource Dark}" />
         <Setter Property="FontFamily" Value="{DynamicResource NormalFontFamily}" />
@@ -284,7 +501,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DialogWindowStyle" TargetType="{x:Type controls:ExtendedWindow}" BasedOn="{StaticResource ModernWindowStyle}">
+    <Style TargetType="{x:Type controls:DialogWindow}" BasedOn="{StaticResource {x:Type controls:ExtendedWindow}}">
         <Setter Property="WindowTitleBrush" Value="{DynamicResource Accent}" />
         <Setter Property="ShowMaxRestoreButton" Value="False" />
         <Setter Property="IsTitleOverlay" Value="False" />
@@ -297,5 +514,11 @@
         <Setter Property="MinWidth" Value="150" />
         <Setter Property="MinHeight" Value="100" />
         <Setter Property="SizeToContent" Value="WidthAndHeight" />
+    </Style>
+
+    <Style TargetType="{x:Type controls:MessageDialog}" BasedOn="{StaticResource {x:Type controls:DialogWindow}}">
+        <Setter Property="Topmost" Value="True" />
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="Template" Value="{StaticResource MessageDialogTemplate}" />
     </Style>
 </ResourceDictionary>

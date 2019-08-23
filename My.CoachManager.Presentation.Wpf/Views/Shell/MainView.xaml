@@ -1,0 +1,80 @@
+﻿<controls:ExtendedWindow x:Class="My.CoachManager.Presentation.Wpf.Views.Shell.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:controls="clr-namespace:My.CoachManager.Presentation.Wpf.Controls;assembly=My.CoachManager.Presentation.Wpf.Controls"
+        xmlns:shell="clr-namespace:My.CoachManager.Presentation.Wpf.ViewModels.Shell"
+        xmlns:shell1="clr-namespace:My.CoachManager.Presentation.Wpf.Views.Shell"
+        xmlns:ioc="clr-namespace:My.CoachManager.Presentation.Wpf.Core.Ioc;assembly=My.CoachManager.Presentation.Wpf.Core"
+        xmlns:strings="clr-namespace:My.CoachManager.Presentation.Wpf.Resources.Strings"
+        xmlns:commands="clr-namespace:My.CoachManager.Presentation.Wpf.Commands"
+        xmlns:settings="clr-namespace:My.CoachManager.Presentation.Wpf.Views.Settings"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=shell:MainViewModel}"
+        ioc:ViewModelLocator.AutoWireViewModel="true"
+        Title="{x:Static strings:MenuResources.ApplicationTitle}"
+        Icon="{StaticResource IcoImageSource}"
+        WindowState="Maximized" ShowIconOnTitleBar="False" ShowTitleOnTitleBar="False" IsTitleOverlay="True"
+        Style="{StaticResource {x:Type controls:ExtendedWindow}}">
+    
+    <!-- HotKeys -->
+    <controls:ExtendedWindow.InputBindings>
+        <KeyBinding Key="F1" Command="{x:Static commands:AppCommandsManager.ShowAboutCommand}" />
+        <KeyBinding Key="F2" Command="{x:Static commands:AppCommandsManager.ToggleSettingsCommand}" />
+    </controls:ExtendedWindow.InputBindings>
+
+    <!-- Right Commands -->
+    <controls:ExtendedWindow.RightWindowCommands>
+        <shell1:MainRightCommandsView />
+    </controls:ExtendedWindow.RightWindowCommands>
+    
+    <!-- Windows Commands (Min, Max, Close) -->
+    <controls:ExtendedWindow.WindowButtonCommands>
+        <controls:WindowButtonCommands>
+            <controls:WindowButtonCommands.Style>
+                <Style TargetType="{x:Type controls:WindowButtonCommands}" BasedOn="{StaticResource {x:Type controls:WindowButtonCommands}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding CurrentWorkspace.ShowHeader}" Value="True">
+                            <Setter Property="ButtonsStyle" Value="{StaticResource AccentSystemButtonStyle}" />
+                            <Setter Property="CloseButtonStyle" Value="{StaticResource AccentSystemCloseButtonStyle}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </controls:WindowButtonCommands.Style>
+            </controls:WindowButtonCommands>
+    </controls:ExtendedWindow.WindowButtonCommands>
+
+    <!-- Flyouts -->
+    <controls:ExtendedWindow.Flyouts>
+        <controls:FlyoutsControl>
+            <settings:SettingsView />
+        </controls:FlyoutsControl>
+    </controls:ExtendedWindow.Flyouts>
+
+    <!-- Content -->
+    <Grid>
+        <Grid x:Name="Main">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Main Region (Content) -->
+            <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" />
+
+            <!-- Left Region (Menu) -->
+            <shell1:MainMenuView Grid.Column="0" />
+
+        </Grid>
+
+        <!-- Dialog Region -->
+        <!--<controls:WorkspaceDialog x:Name="WorkspaceDialogFrame" Grid.Column="0" Grid.Row="0" Owner="{Binding ElementName=Main}" />-->
+    </Grid>
+
+    <!-- Status Bar -->
+    <controls:ExtendedWindow.StatusBar>
+        <shell1:StatusBarView  />
+    </controls:ExtendedWindow.StatusBar>
+    
+</controls:ExtendedWindow>

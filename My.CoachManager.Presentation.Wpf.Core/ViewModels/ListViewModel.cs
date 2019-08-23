@@ -1,17 +1,18 @@
 ﻿using My.CoachManager.CrossCutting.Core.Collections;
-using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Core.Models;
-using My.CoachManager.Presentation.Wpf.Core.Dialog;
-using My.CoachManager.Presentation.Wpf.Core.Enums;
 using My.CoachManager.Presentation.Wpf.Core.Manager;
 using My.CoachManager.Presentation.Wpf.Core.ViewModels.Base;
 using My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;
-using Prism.Commands;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Threading;
+using My.CoachManager.CrossCutting.Core.Extensions;
+using My.CoachManager.CrossCutting.Resources;
+using SelectionMode = My.CoachManager.Presentation.Wpf.Core.Enums.SelectionMode;
 
 namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
 {
@@ -35,32 +36,32 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         /// <summary>
         /// Gets or sets the add command.
         /// </summary>
-        public DelegateCommand AddCommand { get; private set; }
+        public RelayCommand AddCommand { get; private set; }
 
         /// <summary>
         /// Gets or sets the edit command.
         /// </summary>
-        public DelegateCommand<TEntityModel> OpenItemCommand { get; private set; }
+        public RelayCommand<TEntityModel> OpenItemCommand { get; private set; }
 
         /// <summary>
         /// Gets or sets the edit command.
         /// </summary>
-        public DelegateCommand<TEntityModel> EditItemCommand { get; private set; }
+        public RelayCommand<TEntityModel> EditItemCommand { get; private set; }
 
         /// <summary>
         /// Gets or sets the edit command.
         /// </summary>
-        public DelegateCommand EditCommand { get; private set; }
+        public RelayCommand EditCommand { get; private set; }
 
         /// <summary>
         /// Gets or sets the remove command.
         /// </summary>
-        public DelegateCommand<TEntityModel> RemoveItemCommand { get; private set; }
+        public RelayCommand<TEntityModel> RemoveItemCommand { get; private set; }
 
         /// <summary>
         /// Gets or sets the remove command.
         /// </summary>
-        public DelegateCommand RemoveCommand { get; private set; }
+        public RelayCommand RemoveCommand { get; private set; }
 
         #endregion Members
 
@@ -90,12 +91,12 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         {
             base.Initialize();
 
-            AddCommand = new DelegateCommand(Add, CanAdd);
-            RemoveItemCommand = new DelegateCommand<TEntityModel>(Remove, CanRemove);
-            RemoveCommand = new DelegateCommand(Remove, CanRemove);
-            EditCommand = new DelegateCommand(Edit, CanEdit);
-            EditItemCommand = new DelegateCommand<TEntityModel>(Edit, CanEdit);
-            OpenItemCommand = new DelegateCommand<TEntityModel>(Open, CanOpen);
+            AddCommand = new RelayCommand(Add, CanAdd);
+            RemoveItemCommand = new RelayCommand<TEntityModel>(Remove, CanRemove);
+            RemoveCommand = new RelayCommand(Remove, CanRemove);
+            EditCommand = new RelayCommand(Edit, CanEdit);
+            EditItemCommand = new RelayCommand<TEntityModel>(Edit, CanEdit);
+            OpenItemCommand = new RelayCommand<TEntityModel>(Open, CanOpen);
         }
 
         #endregion Initialization
@@ -141,10 +142,9 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         /// </summary>
         protected virtual void Add()
         {
-            DialogManager.ShowEditDialog<TEditView>(0, dialog =>
-            {
-                OnAddCompleted(dialog.Result);
-            });
+            var result = DialogManager.ShowEditDialog<TEditView>(0);
+
+            OnAddCompleted(result);
         }
 
         /// <summary>
@@ -160,9 +160,9 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         /// Called after the Add action.
         /// </summary>
         /// <param name="result"></param>
-        protected virtual void OnAddCompleted(DialogResult result)
+        protected virtual void OnAddCompleted(bool? result)
         {
-            if (result == DialogResult.Ok) Refresh();
+            if (result.HasValue && result.Value) Refresh();
         }
 
         #endregion Add
@@ -178,10 +178,9 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
             if (x == null) return;
             if (!CanEdit(x)) return;
 
-            DialogManager.ShowEditDialog<TEditView>(x.Id, dialog =>
-            {
-                OnEditCompleted(dialog.Result);
-            });
+            var result = DialogManager.ShowEditDialog<TEditView>(x.Id);
+
+            OnEditCompleted(result);
         }
 
         /// <summary>
@@ -196,9 +195,9 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         /// Called after the edit action.
         /// </summary>
         /// <param name="result">The dialog result.</param>
-        protected virtual void OnEditCompleted(DialogResult result)
+        protected virtual void OnEditCompleted(bool? result)
         {
-            if (result == DialogResult.Ok) Refresh();
+            if (result.HasValue && result.Value) Refresh();
         }
 
         /// <summary>
@@ -264,7 +263,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         protected virtual bool OnRemoveRequested(IList<TEntityModel> items)
         {
             var message = items.Count > 1 ? ConfirmationRemoveItemsMessage : ConfirmationRemoveItemMessage;
-            return DialogManager.ShowWarningDialog(message, MessageDialogButtons.YesNo) == DialogResult.Yes;
+            return DialogManager.ShowWarningDialog(message, MessageBoxButton.YesNo) == MessageBoxResult.Yes;
         }
 
         /// <summary>
@@ -367,10 +366,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
-        public IEnumerable<TEntityModel> SelectedItems
-        {
-            get { return Items?.Where(x => x.IsSelected).ToList(); }
-        }
+        public IEnumerable<TEntityModel> SelectedItems => Items?.Where(x => x.IsSelected);
 
         /// <inheritdoc />
         /// <summary>
@@ -431,17 +427,17 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         /// <summary>
         /// Gets or sets select all command.
         /// </summary>
-        public DelegateCommand<bool?> SelectAllCommand { get; private set; }
+        public RelayCommand<bool?> SelectAllCommand { get; private set; }
 
         /// <summary>
         /// Gets or sets select command.
         /// </summary>
-        public DelegateCommand<TEntityModel> SelectItemCommand { get; private set; }
+        public RelayCommand<TEntityModel> SelectItemCommand { get; private set; }
 
         /// <summary>
         /// Gets or sets select command.
         /// </summary>
-        public DelegateCommand<IEnumerable<TEntityModel>> SelectItemsCommand { get; private set; }
+        public RelayCommand<IEnumerable<TEntityModel>> SelectItemsCommand { get; private set; }
 
         #endregion Members
 
@@ -457,9 +453,9 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         {
             base.Initialize();
             
-            SelectItemCommand = new DelegateCommand<TEntityModel>(SelectItem, CanSelectItem);
-            SelectItemsCommand = new DelegateCommand<IEnumerable<TEntityModel>>(SelectItems, CanSelectItems);
-            SelectAllCommand = new DelegateCommand<bool?>(SelectAll, CanSelectAll);
+            SelectItemCommand = new RelayCommand<TEntityModel>(SelectItem, CanSelectItem);
+            SelectItemsCommand = new RelayCommand<IEnumerable<TEntityModel>>(SelectItems, CanSelectItems);
+            SelectAllCommand = new RelayCommand<bool?>(SelectAll, CanSelectAll);
 
             SelectionMode = SelectionMode.Multiple;
             
@@ -477,7 +473,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         /// </summary>
         protected override void OnInitializeDataCompleted()
         {
-            Application.Current.Dispatcher.Invoke(() => Filters?.ResetFilters());
+            DispatcherHelper.CheckBeginInvokeOnUI(() => Filters?.ResetFilters());
         }
 
         /// <summary>
@@ -497,6 +493,15 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
             if (Count == 0) Count = Filters?.FilteredItemsCount ?? (Items?.Count ?? 0);
 
             base.OnLoadDataCompleted();
+        }
+
+        /// <summary>
+        /// Set items list in UI thread.
+        /// </summary>
+        /// <param name="items"></param>
+        protected void SetItemsByDispatcher(IEnumerable<TEntityModel> items)
+        {
+            DispatcherHelper.CheckBeginInvokeOnUI(() => { Items = items.ToItemsObservableCollection(); });
         }
 
         #endregion Data

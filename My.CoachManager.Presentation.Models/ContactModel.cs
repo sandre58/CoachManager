@@ -1,5 +1,5 @@
-﻿using My.CoachManager.CrossCutting.Core.Resources;
-using My.CoachManager.CrossCutting.Core.Resources.Entities;
+﻿using My.CoachManager.CrossCutting.Resources;
+using My.CoachManager.CrossCutting.Resources.Entities;
 using My.CoachManager.Presentation.Core.Models;
 using System.ComponentModel.DataAnnotations;
 

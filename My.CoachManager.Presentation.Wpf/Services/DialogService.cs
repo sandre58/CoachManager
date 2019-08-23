@@ -1,159 +1,136 @@
 ﻿using System;
-using CommonServiceLocator;
-using Microsoft.Win32;
-using My.CoachManager.CrossCutting.Core.Resources;
+using System.Windows;
 using My.CoachManager.Presentation.Wpf.Core.Dialog;
-using My.CoachManager.Presentation.Wpf.Core.Events;
+using My.CoachManager.Presentation.Wpf.Core.Dialog.Factories;
+using My.CoachManager.Presentation.Wpf.Core.Dialog.FolderBrowser;
+using My.CoachManager.Presentation.Wpf.Core.Dialog.MessageBox;
+using My.CoachManager.Presentation.Wpf.Core.Dialog.OpenFile;
+using My.CoachManager.Presentation.Wpf.Core.Dialog.SaveFile;
 using My.CoachManager.Presentation.Wpf.Core.Services;
 using My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;
-using My.CoachManager.Presentation.Wpf.ViewModels.Dialogs;
-using Prism.Events;
-using CustomDialog = My.CoachManager.Presentation.Wpf.Views.Dialogs.CustomDialog;
-using LoginDialog = My.CoachManager.Presentation.Wpf.Views.Dialogs.LoginDialog;
-using MessageDialog = My.CoachManager.Presentation.Wpf.Views.Dialogs.MessageDialog;
 
 namespace My.CoachManager.Presentation.Wpf.Services
 {
-    /// <inheritdoc />
     /// <summary>
-    /// Class abstracting the interaction between view models and views when it comes to
-    /// opening dialogs using the MVVM pattern in WPF.
+    ///     Class abstracting the interaction between view models and views when it comes to
+    ///     opening dialogs using the MVVM pattern in WPF.
     /// </summary>
     public class DialogService : IDialogService
     {
+        private readonly IDialogFactory _dialogFactory;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="DialogService" /> class.
+        /// </summary>
+        public DialogService(IDialogFactory frameworkDialogFactory = null)
+        {
+            _dialogFactory = frameworkDialogFactory ?? new DefaultDialogFactory();
+        }
+
         #region IDialogService Members
 
         /// <inheritdoc />
-        /// <summary>
-        /// Displays a modal dialog.
-        /// </summary>
-        /// <param name="view">The view to include in workspace dialog.</param>
-        /// <param name="callback">Action executed after result of dialog.</param>
-        public void ShowWorkspaceDialog(IWorkspaceDialogViewModel view, Action<IWorkspaceDialog> callback = null)
+        public void Show(Type dialogType, IDialogViewModel viewModel)
         {
-            var dialog = new Dialog()
-            {
-                Content = view
-            };
+            if (viewModel == null) throw new ArgumentNullException(nameof(viewModel));
+            if (dialogType == null) throw new ArgumentNullException(nameof(dialogType));
 
-            ServiceLocator.Current.GetInstance<IEventAggregator>().GetEvent<ShowWorkspaceDialogRequestEvent>().Publish(new DialogEventArgs(dialog, callback));
+            var dialog = CreateDialog(dialogType, viewModel);
+            dialog.Show();
         }
 
         /// <inheritdoc />
-        /// <summary>
-        /// Displays a message dialog.
-        /// </summary>
-        /// <param name="title">Title of window.</param>
-        /// <param name="message">Message.</param>
-        /// <param name="style">Style of window.</param>
-        /// <param name="buttons">Buttons of window.</param>
-        public DialogResult ShowMessageDialog(string title, string message, MessageDialogType style = MessageDialogType.Information, MessageDialogButtons buttons = MessageDialogButtons.Okcancel)
+        public bool? ShowDialog(Type dialogType, IDialogViewModel viewModel)
         {
-            var vm = new MessageViewModel
-            {
-                Title = title,
-                Message = message,
-                Buttons = buttons,
-                Type = style
-            };
+            if (viewModel == null) throw new ArgumentNullException(nameof(viewModel));
+            if (dialogType == null) throw new ArgumentNullException(nameof(dialogType));
 
-            var result = DialogResult.None;
-            System.Windows.Application.Current.Dispatcher.Invoke(() =>
-            {
-                var dialog = new MessageDialog
-                {
-                    DataContext = vm
-                };
-
-                dialog.ShowDialog();
-
-                result = ((IDialogViewModel)dialog.DataContext).DialogResult;
-            });
-
-            return result;
+            var dialog = CreateDialog(dialogType, viewModel);
+            return dialog.ShowDialog();
         }
 
         /// <inheritdoc />
-        /// <summary>
-        /// Displays a message dialog.
-        /// </summary>
-        /// <param name="view">The view to include in workspace dialog.</param>
-        /// <param name="title">Title of window.</param>
-        public DialogResult ShowCustomDialog(IDialogViewModel view, string title)
+        public MessageBoxResult ShowMessageBox(
+            string messageBoxText,
+            string caption = "",
+            MessageBoxButton button = MessageBoxButton.OK,
+            MessageBoxImage icon = MessageBoxImage.None,
+            MessageBoxResult defaultResult = MessageBoxResult.None)
         {
-            var result = DialogResult.None;
-            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            var settings = new MessageBoxSettings
             {
-                var dialog = new CustomDialog
-                {
-                    Content = view,
-                    Title = title,
-                    DataContext = view
-                };
+                MessageBoxText = messageBoxText,
+                Caption = caption,
+                Button = button,
+                Icon = icon,
+                DefaultResult = defaultResult
+            };
 
-                dialog.ShowDialog();
-
-                result = ((IDialogViewModel)dialog.DataContext).DialogResult;
-            });
-
-            return result;
+            return ShowMessageBox(settings);
         }
 
         /// <inheritdoc />
-        /// <summary>
-        /// Show the dialog for open a file.
-        /// </summary>
-        public string ShowOpenFileDialog(string filter = "", bool multiselect = false, string initialDirectory = "", bool restoreDirectory = false)
+        public MessageBoxResult ShowMessageBox(
+            MessageBoxSettings settings)
         {
-            var dialog = new OpenFileDialog
-            {
-                Filter = filter,
-                Multiselect = multiselect,
-                InitialDirectory = initialDirectory,
-                RestoreDirectory = restoreDirectory
-            };
+            if (settings == null) throw new ArgumentNullException(nameof(settings));
 
-            var result = dialog.ShowDialog();
-
-            if (result.HasValue && result.Value)
-                return dialog.FileName;
-
-            return string.Empty;
+            var messageBox = _dialogFactory.CreateMessageBox(settings);
+            return messageBox.Show();
         }
 
-        /// <summary>
-        /// Show the dialog to provide Username and password.
-        /// </summary>
-        /// <param name="loginAction">Action to log in.</param>
-        /// <param name="login">The login.</param>
-        /// <param name="password">The password.</param>
-        /// <returns>Item 1 : IsConnected ; Item2 : Error</returns>
-        public DialogResult ShowLoginDialog(Func<string, string, Tuple<bool, string>> loginAction, string login = "", string password = "")
+        /// <inheritdoc />
+        public bool? ShowOpenFileDialog(
+            OpenFileDialogSettings settings)
         {
-            var vm = new LoginViewModel();
+            if (settings == null) throw new ArgumentNullException(nameof(settings));
 
-            if (!string.IsNullOrEmpty(login)) vm.UserName = login;
-            if (!string.IsNullOrEmpty(password)) vm.Password = password;
-
-            vm.Title = ControlResources.Authentification;
-            vm.LoginAction = loginAction;
-
-            var result = DialogResult.None;
-            System.Windows.Application.Current.Dispatcher.Invoke(() =>
-            {
-                var dialog = new LoginDialog
-                {
-                    DataContext = vm
-                };
-
-                dialog.ShowDialog();
-
-                result = ((IDialogViewModel)dialog.DataContext).DialogResult;
-            });
-
-            return result;
+            return _dialogFactory
+                .CreateOpenFileDialog(settings)
+                .ShowDialog();
         }
 
-        #endregion IDialogService Members
+        /// <inheritdoc />
+        public bool? ShowSaveFileDialog(
+            SaveFileDialogSettings settings)
+        {
+            if (settings == null) throw new ArgumentNullException(nameof(settings));
+
+            return _dialogFactory
+                .CreateSaveFileDialog(settings)
+                .ShowDialog();
+        }
+
+        /// <inheritdoc />
+        public bool? ShowFolderBrowserDialog(
+            FolderBrowserDialogSettings settings)
+        {
+            if (settings == null) throw new ArgumentNullException(nameof(settings));
+
+            return _dialogFactory
+                .CreateFolderBrowserDialog(settings)
+                .ShowDialog();
+        }
+
+        #endregion
+
+        #region Create Dialogs
+
+        /// <summary>
+        /// Create a dialog window.
+        /// </summary>
+        /// <param name="dialogType"></param>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
+        private IDialogWindow CreateDialog(Type dialogType, IDialogViewModel viewModel)
+        {
+            var dialog = _dialogFactory.Create(dialogType);
+            dialog.DataContext = viewModel;
+            dialog.Title = viewModel.Title;
+
+            return dialog;
+        }
+
+        #endregion
     }
 }

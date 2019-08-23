@@ -1,9 +1,9 @@
 ﻿using My.CoachManager.CrossCutting.Core.Collections;
 using My.CoachManager.Presentation.Core.Models.Filters;
-using Prism.Commands;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GalaSoft.MvvmLight.Command;
 
 namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces
 {
@@ -80,32 +80,32 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces
         /// <summary>
         /// Command to reset filters.
         /// </summary>
-        DelegateCommand ResetFiltersCommand { get; set; }
+        RelayCommand ResetFiltersCommand { get; set; }
 
         /// <summary>
         /// Gets or sets Apply Filters Command.
         /// </summary>
-        DelegateCommand ApplyFiltersCommand { get; set; }
+        RelayCommand ApplyFiltersCommand { get; set; }
 
         /// <summary>
         /// Gets or sets Show Filters Command.
         /// </summary>
-        DelegateCommand ShowFiltersCommand { get; set; }
+        RelayCommand ShowFiltersCommand { get; set; }
 
         /// <summary>
         /// Gets or sets Hide Filters Command.
         /// </summary>
-        DelegateCommand HideFiltersCommand { get; set; }
+        RelayCommand HideFiltersCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the Add command.
         /// </summary>
-        DelegateCommand<Tuple<Func<IFilter>, string>> AddFilterCommand { get; set; }
+        RelayCommand<Tuple<Func<IFilter>, string>> AddFilterCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the Remove command.
         /// </summary>
-        DelegateCommand<IFilter> RemoveFilterCommand { get; set; }
+        RelayCommand<IFilter> RemoveFilterCommand { get; set; }
 
         /// <summary>
         /// Reset filters.

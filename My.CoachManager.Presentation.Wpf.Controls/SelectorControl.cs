@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using My.CoachManager.CrossCutting.Core.Resources;
+using My.CoachManager.CrossCutting.Resources;
 using My.CoachManager.Presentation.Wpf.Controls.Helpers;
 
 namespace My.CoachManager.Presentation.Wpf.Controls

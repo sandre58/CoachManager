@@ -1,15 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
-using Prism.Logging;
 using System;
 using System.Runtime.CompilerServices;
-using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace My.CoachManager.CrossCutting.Logging.Supervision
 {
     /// <summary>
     /// Class representing a Logger.
     /// </summary>
-    public sealed class Logger : LoggerBase, ILoggerFacade, Microsoft.Extensions.Logging.ILogger
+    public sealed class Logger : LoggerBase, Microsoft.Extensions.Logging.ILogger
     {
         private readonly NLog.Logger _logger;
 
@@ -105,44 +103,7 @@ namespace My.CoachManager.CrossCutting.Logging.Supervision
             var message = "";
             _logger.Fatal(ex, message);
         }
-
-        #region ILoggerFacade
-
-        /// <summary>
-        /// The logging method.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        /// <param name="category">The category.</param>
-        /// <param name="priority">The priority.</param>
-        public void Log(string message, Category category, Priority priority)
-        {
-            if (string.IsNullOrWhiteSpace(message))
-            {
-                return;
-            }
-
-            switch (category)
-            {
-                case Category.Debug:
-                    Debug(message);
-                    break;
-
-                case Category.Info:
-                    Info(message);
-                    break;
-
-                case Category.Warn:
-                    Warning(message);
-                    break;
-
-                case Category.Exception:
-                    Error(new Exception(message));
-                    break;
-            }
-        }
-
-        #endregion ILoggerFacade
-
+        
         #region ILogger
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)

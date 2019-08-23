@@ -4,8 +4,8 @@ using System.Security.Principal;
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Cryptography;
 using My.CoachManager.Presentation.Core.Helpers;
+using My.CoachManager.Presentation.Wpf.Constants;
 using My.CoachManager.Presentation.Wpf.Core.Services;
-using My.CoachManager.Presentation.Wpf.Modules.Shared;
 using My.CoachManager.Presentation.Wpf.Properties;
 
 namespace My.CoachManager.Presentation.Wpf.Services

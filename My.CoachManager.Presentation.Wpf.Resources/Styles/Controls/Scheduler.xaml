@@ -10,7 +10,8 @@
         <ResourceDictionary Source="../Base/Converters.xaml" />
         <ResourceDictionary Source="../Base/Shadows.xaml" />
         <ResourceDictionary Source="../Base/Sizes.xaml" />
-<ResourceDictionary Source="Button.xaml" />
+        <ResourceDictionary Source="../Base/Colors.xaml" />
+        <ResourceDictionary Source="Button.xaml" />
         <ResourceDictionary Source="CommandButton.xaml" />
         <ResourceDictionary Source="ScrollBar.xaml" />
         <ResourceDictionary Source="ToolbarControl.xaml" />
@@ -48,16 +49,11 @@
         </Style.Resources>
         <Setter Property="Color" Value="{DynamicResource DarkSecondaryAccent}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="Focusable" Value="True" />
         <Setter Property="IsTabStop" Value="True" />
         <Setter Property="CommandParameter" Value="{Binding}" />
         <Setter Property="Command" Value="{Binding AppointmentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Scheduler}}}" />
         <Setter Property="BorderBrush" Value="{Binding Color, RelativeSource={RelativeSource Self}}" />
-        <Setter Property="Background" >
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding Color.Color, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type calendars:SchedulerAppointment}}}" Opacity="{DynamicResource ColorOpacity}" />
-            </Setter.Value>
-            </Setter>
+        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=Color, Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
         <Setter Property="Foreground" Value="{DynamicResource SecondaryAccentForeground}" />
         <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{DynamicResource SecondaryAccentForeground}" />
         <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{Binding Color, RelativeSource={RelativeSource Self}}" />
@@ -66,11 +62,7 @@
         <Setter Property="parameters:ControlParameters.PressedBackground" Value="{Binding Color, RelativeSource={RelativeSource Self}}" />
         <Setter Property="parameters:ControlParameters.FocusForeground" Value="{DynamicResource SecondaryAccentForeground}" />
         <Setter Property="parameters:ControlParameters.FocusBorderBrush" Value="{Binding Color, RelativeSource={RelativeSource Self}}" />
-        <Setter Property="parameters:ControlParameters.FocusBackground" >
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding Color.Color, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type calendars:SchedulerAppointment}}}" Opacity="{DynamicResource ColorOpacity}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="parameters:ControlParameters.FocusBackground" Value="{Binding RelativeSource={RelativeSource Self}, Path=Color, Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
         <Setter Property="Padding" Value="{StaticResource DefaultMargin}" />
         <Setter Property="Margin" Value="0,1,0,1" />
         <Setter Property="BorderThickness" Value="5,0,0,0" />

@@ -1,12 +1,12 @@
 ﻿using CommonServiceLocator;
 using My.CoachManager.CrossCutting.Core.Exceptions;
-using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.CrossCutting.Logging;
 using My.CoachManager.Presentation.Core.Models;
-using My.CoachManager.Presentation.Wpf.Core.Dialog;
 using My.CoachManager.Presentation.Wpf.Core.Manager;
-using Prism.Events;
 using System;
+using System.Windows;
+using GalaSoft.MvvmLight.Messaging;
+using My.CoachManager.CrossCutting.Resources;
 
 namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
 {
@@ -14,16 +14,16 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
     {
         #region Fields
 
-        private IEventAggregator _eventAggregator;
+        private IMessenger _messenger;
 
         #endregion Fields
 
         #region Members
 
         /// <summary>
-        /// Gets or sets the Prism event aggregator.
+        /// Gets or sets the Messenger.
         /// </summary>
-        protected IEventAggregator EventAggregator => _eventAggregator ?? (_eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>());
+        protected IMessenger Messenger => _messenger ?? (_messenger = ServiceLocator.Current.GetInstance<IMessenger>());
 
         /// <summary>
         /// Initialise.
@@ -80,7 +80,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
         protected virtual void OnExceptionOccured(Exception e)
         {
             LogManager.Fatal(e);
-            DialogManager.ShowErrorDialog(MessageResources.GetDataError, MessageDialogButtons.Ok);
+            DialogManager.ShowErrorDialog(MessageResources.GetDataError, MessageBoxButton.OK);
         }
 
         /// <summary>

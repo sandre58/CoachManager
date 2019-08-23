@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interactivity;
 using System.Windows.Interop;
-using My.CoachManager.Presentation.Wpf.Controls.Behaviours;
+using My.CoachManager.Presentation.Wpf.Controls.Behaviors;
 using My.CoachManager.Presentation.Wpf.Controls.Windows;
 
 namespace My.CoachManager.Presentation.Wpf.Controls

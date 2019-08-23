@@ -1,0 +1,20 @@
+﻿<controls:Flyout x:Class="My.CoachManager.Presentation.Wpf.Views.Settings.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:My.CoachManager.Presentation.Wpf.Controls;assembly=My.CoachManager.Presentation.Wpf.Controls"
+             xmlns:settings="clr-namespace:My.CoachManager.Presentation.Wpf.ViewModels.Settings"
+             xmlns:settings1="clr-namespace:My.CoachManager.Presentation.Wpf.Views.Settings"
+             xmlns:strings="clr-namespace:My.CoachManager.Presentation.Wpf.Resources.Strings"
+             mc:Ignorable="d"
+             xmlns:ioc="clr-namespace:My.CoachManager.Presentation.Wpf.Core.Ioc;assembly=My.CoachManager.Presentation.Wpf.Core"
+             ioc:ViewModelLocator.AutoWireViewModel="true"
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type=settings:SettingsViewModel, IsDesignTimeCreatable=True}"
+             Header="{x:Static strings:CommonResources.Settings}"
+             IsOpen="{Binding IsOpen}" Style="{StaticResource AccentFlyoutStyle}">
+    <Grid>
+       <settings1:SkinSettingsView Focusable="False" />
+    </Grid>
+</controls:Flyout>

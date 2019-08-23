@@ -1,61 +1,58 @@
-﻿using CommonServiceLocator;
-using My.CoachManager.Application.Dtos;
-using My.CoachManager.CrossCutting.Core.Extensions;
-using My.CoachManager.CrossCutting.Core.Resources;
-using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.CrossCutting.Logging.Supervision;
-using My.CoachManager.Presentation.Core.Helpers;
-using My.CoachManager.Presentation.Models.Aggregates;
-using My.CoachManager.Presentation.Wpf.Core;
-using My.CoachManager.Presentation.Wpf.Core.Dialog;
-using My.CoachManager.Presentation.Wpf.Core.Manager;
-using My.CoachManager.Presentation.Wpf.Core.Services;
-using My.CoachManager.Presentation.Wpf.Core.ViewModels.Base;
-using My.CoachManager.Presentation.Wpf.Modules.Shared;
-using My.CoachManager.Presentation.Wpf.Properties;
-using My.CoachManager.Presentation.Wpf.Services;
-using My.CoachManager.Presentation.Wpf.ViewModels;
-using My.CoachManager.Presentation.Wpf.Views;
-using Prism.Events;
-using Prism.Ioc;
-using Prism.Logging;
-using Prism.Modularity;
-using Prism.Mvvm;
-using Prism.Regions;
-using Prism.Regions.Behaviors;
-using Prism.Unity;
-using Prism.Unity.Ioc;
-using Prism.Unity.Regions;
-using System;
-using System.Globalization;
+﻿using System;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Threading;
+using CommonServiceLocator;
+using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
+using My.CoachManager.CrossCutting.Core.Exceptions;
+using My.CoachManager.CrossCutting.Logging;
+using My.CoachManager.CrossCutting.Logging.Supervision;
+using My.CoachManager.CrossCutting.Resources;
+using My.CoachManager.Presentation.Core.Helpers;
+using My.CoachManager.Presentation.Wpf.Core;
+using My.CoachManager.Presentation.Wpf.Core.Dialog;
+using My.CoachManager.Presentation.Wpf.Core.Ioc;
+using My.CoachManager.Presentation.Wpf.Core.Manager;
+using My.CoachManager.Presentation.Wpf.Core.Services;
+using My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;
+using My.CoachManager.Presentation.Wpf.Dialog;
+using My.CoachManager.Presentation.Wpf.Ioc;
+using My.CoachManager.Presentation.Wpf.Properties;
+using My.CoachManager.Presentation.Wpf.Services;
+using My.CoachManager.Presentation.Wpf.ViewModels.Shell;
+using My.CoachManager.Presentation.Wpf.Views.Administration;
+using My.CoachManager.Presentation.Wpf.Views.Misc;
+using My.CoachManager.Presentation.Wpf.Views.Shell;
 using Unity;
-using SplashScreen = My.CoachManager.Presentation.Wpf.Views.SplashScreen;
+using Unity.Lifetime;
+using UnityServiceLocator = My.CoachManager.Presentation.Wpf.Ioc.UnityServiceLocator;
 
 namespace My.CoachManager.Presentation.Wpf
 {
+    /// <inheritdoc />
     /// <summary>
-    /// Interaction logic for App.xaml
+    ///     Interaction logic for App.xaml
     /// </summary>
-    public partial class App
+    public sealed partial class App
     {
-        private IContainerExtension _containerExtension;
-        private IModuleCatalog _moduleCatalog;
-        private SplashScreenViewModel _splashScreenViewModel;
         private readonly ILogger _logger;
+        private SplashScreenViewModel _splashScreenViewModel;
+        private readonly IUnityContainer _iocContainer = new UnityContainer();
 
+        /// <inheritdoc />
         /// <summary>
-        /// Initialise a new instance of <see cref="App"/>.
+        ///     Initialise a new instance of <see cref="T:My.CoachManager.Presentation.Wpf.App" />.
         /// </summary>
         public App()
         {
+            DispatcherHelper.Initialize();
+
             // Configure logger
             Logger.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/NLog.config"));
             _logger = LoggerFactory.CreateLogger();
@@ -64,269 +61,58 @@ namespace My.CoachManager.Presentation.Wpf
             ShutdownMode = ShutdownMode.OnMainWindowClose;
         }
 
-        /// <summary>
-        /// The dependency injection container used to resolve objects
-        /// </summary>
-        public IContainerProvider Container => _containerExtension;
-
         protected override async void OnStartup(StartupEventArgs e)
         {
+            base.OnStartup(e);
+
             _logger.Debug("************************ Application Start ************************");
 
-            // Initialise Wep Client Helper
-            ApiHelper.InitializeHttpClient(ConfigurationManager.Server);
+            Initialize();
 
             _splashScreenViewModel = new SplashScreenViewModel();
-            var splashScreen = new SplashScreen(_splashScreenViewModel);
+            var splashScreen = new Views.Shell.SplashScreen(_splashScreenViewModel);
 
             splashScreen.Show();
 
-            base.OnStartup(e);
-            ConfigureViewModelLocator();
-            Initialize();
-            await InitializeInternal().ContinueWith(r =>
+            await Task.Run(() =>
             {
-                Dispatcher.Invoke(() =>
+                using (LogManager.TraceGroup(GetType().Name + "." + nameof(LoadData)))
+                {
+                    LoadData();
+                }
+            }).ContinueWith(x =>
+            {
+                // After
+                Dispatcher?.Invoke(() =>
                 {
                     LoadShell();
                     splashScreen.Hide();
                     OnInitialized();
                 });
-            });
-        }
 
-        /// <summary>
-        /// Run the initialization process.
-        /// </summary>
-        private async Task InitializeInternal()
-        {
-            await Task.Run(LoadData);
-        }
-
-        private void LoadData()
-        {
-            UpdateSplachMessage(MessageResources.UserConnection);
-            if (!ConnectUser()) return;
-
-            _logger.Debug("User connected : " + Thread.CurrentPrincipal.Identity.Name);
-
-            // Load Roster
-            UpdateSplachMessage(MessageResources.RosterLoading);
-            var roster = ApiHelper.GetData<RosterDto>(ApiConstants.ApiRosters, Thread.CurrentPrincipal.GetRosterId());
-            AppManager.InitializeRoster(RosterFactory.Get(roster));
-
-            _logger.Debug("Current roster : " + AppManager.Roster.Name + "[Id=" + AppManager.Roster.Id + "]");
-        }
-
-        /// <summary>
-        /// Configures the <see cref="ViewModelLocator"/> used by Prism.
-        /// </summary>
-        protected virtual void ConfigureViewModelLocator()
-        {
-            ViewModelLocationProvider.SetDefaultViewModelFactory(
-                viewModelType =>
+                // Exception
+                if (x.IsFaulted && x.Exception != null)
                 {
-                    if (!(Container.Resolve(viewModelType) is ViewModelBase viewModel))
+                    if (x.Exception.InnerException is ApiException apiException)
                     {
-                        throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "The ViewModel '{0}' isn't found", viewModelType.Name));
+                        if (apiException.CastInnerException is BusinessException businessException)
+                            OnBusinessExceptionOccured(businessException);
+                        else if (apiException.CastInnerException is ValidationBusinessException
+                            validationBusinessException)
+                            foreach (var error in validationBusinessException.Errors)
+                                OnBusinessExceptionOccured(new BusinessException(error.ToString()));
                     }
-
-                    if (viewModel is DataViewModel screenViewModel)
+                    else
                     {
-                        if (screenViewModel.RefreshOnInit)
-                            screenViewModel.Refresh();
+                        OnExceptionOccured(x.Exception.InnerException ?? x.Exception);
                     }
-                    return viewModel;
-                });
-        }
-
-        /// <summary>
-        /// Runs the initialization sequence to configure the Prism application.
-        /// </summary>
-        public virtual void Initialize()
-        {
-            _containerExtension = CreateContainerExtension();
-            _moduleCatalog = CreateModuleCatalog();
-            RegisterRequiredTypes(_containerExtension);
-            _containerExtension.FinalizeExtension();
-
-            ConfigureServiceLocator();
-
-            ConfigureModuleCatalog(_moduleCatalog);
-
-            var regionAdapterMappings = _containerExtension.Resolve<RegionAdapterMappings>();
-            ConfigureRegionAdapterMappings(regionAdapterMappings);
-
-            var defaultRegionBehaviors = _containerExtension.Resolve<IRegionBehaviorFactory>();
-            ConfigureDefaultRegionBehaviors(defaultRegionBehaviors);
-
-            RegisterFrameworkExceptionTypes();
-
-            // Load skin
-            LoadSkin();
-        }
-
-        protected void LoadShell()
-        {
-            var shell = CreateShell();
-            if (shell != null)
-            {
-                RegionManager.SetRegionManager(shell, _containerExtension.Resolve<IRegionManager>());
-                RegionManager.UpdateRegions();
-                InitializeShell(shell);
-            }
-
-            InitializeModules();
-        }
-
-        /// <summary>
-        /// Creates the container used by Prism.
-        /// </summary>
-        /// <returns>The container</returns>
-        protected IContainerExtension CreateContainerExtension()
-        {
-            return new UnityContainerExtension();
-        }
-
-        /// <summary>
-        /// Creates the <see cref="IModuleCatalog"/> used by Prism.
-        /// </summary>
-        ///  <remarks>
-        /// The base implementation returns a new ModuleCatalog.
-        /// </remarks>
-        protected virtual IModuleCatalog CreateModuleCatalog()
-        {
-            return new ConfigurationModuleCatalog();
-        }
-
-        /// <summary>
-        /// Registers all types that are required by Prism to function with the container.
-        /// </summary>
-        /// <param name="containerRegistry"></param>
-        protected virtual void RegisterRequiredTypes(IContainerRegistry containerRegistry)
-        {
-            containerRegistry.RegisterInstance(_containerExtension);
-            containerRegistry.RegisterInstance(_moduleCatalog);
-            containerRegistry.RegisterSingleton<IModuleInitializer, ModuleInitializer>();
-            containerRegistry.RegisterSingleton<IModuleManager, ModuleManager>();
-            containerRegistry.RegisterSingleton<RegionAdapterMappings>();
-            containerRegistry.RegisterSingleton<IRegionManager, RegionManager>();
-            containerRegistry.RegisterSingleton<IEventAggregator, EventAggregator>();
-            containerRegistry.RegisterSingleton<IRegionViewRegistry, RegionViewRegistry>();
-            containerRegistry.RegisterSingleton<IRegionBehaviorFactory, RegionBehaviorFactory>();
-            containerRegistry.Register<IRegionNavigationJournalEntry, RegionNavigationJournalEntry>();
-            containerRegistry.Register<IRegionNavigationJournal, RegionNavigationJournal>();
-            containerRegistry.Register<IRegionNavigationService, RegionNavigationService>();
-            containerRegistry.RegisterSingleton<IRegionNavigationContentLoader, UnityRegionNavigationContentLoader>();
-            containerRegistry.RegisterSingleton<IServiceLocator, UnityServiceLocatorAdapter>();
-
-            // Register Logger
-            containerRegistry.RegisterInstance(typeof(ILoggerFacade), _logger);
-            containerRegistry.RegisterInstance(typeof(ILogger), _logger);
-
-            // Register Presentation Services
-            containerRegistry.Register<ISettingsService, SettingsService>();
-            containerRegistry.Register<INavigationService, NavigationService>();
-            containerRegistry.Register<INotificationService, NotificationService>();
-            containerRegistry.Register<IAuthenticationService, AuthenticationService>();
-            containerRegistry.Register<IDialogService, DialogService>();
-        }
-
-        /// <summary>
-        /// Configures the <see cref="IRegionBehaviorFactory"/>.
-        /// This will be the list of default behaviors that will be added to a region.
-        /// </summary>
-        protected virtual void ConfigureDefaultRegionBehaviors(IRegionBehaviorFactory regionBehaviors)
-        {
-            if (regionBehaviors != null)
-            {
-                regionBehaviors.AddIfMissing(BindRegionContextToDependencyObjectBehavior.BehaviorKey, typeof(BindRegionContextToDependencyObjectBehavior));
-                regionBehaviors.AddIfMissing(RegionActiveAwareBehavior.BehaviorKey, typeof(RegionActiveAwareBehavior));
-                regionBehaviors.AddIfMissing(SyncRegionContextWithHostBehavior.BehaviorKey, typeof(SyncRegionContextWithHostBehavior));
-                regionBehaviors.AddIfMissing(RegionManagerRegistrationBehavior.BehaviorKey, typeof(RegionManagerRegistrationBehavior));
-                regionBehaviors.AddIfMissing(RegionMemberLifetimeBehavior.BehaviorKey, typeof(RegionMemberLifetimeBehavior));
-                regionBehaviors.AddIfMissing(ClearChildViewsRegionBehavior.BehaviorKey, typeof(ClearChildViewsRegionBehavior));
-                regionBehaviors.AddIfMissing(AutoPopulateRegionBehavior.BehaviorKey, typeof(AutoPopulateRegionBehavior));
-            }
-        }
-
-        /// <summary>
-        /// Configures the default region adapter mappings to use in the application, in order
-        /// to adapt UI controls defined in XAML to use a region and register it automatically.
-        /// May be overwritten in a derived class to add specific mappings required by the application.
-        /// </summary>
-        /// <returns>The <see cref="RegionAdapterMappings"/> instance containing all the mappings.</returns>
-        protected virtual void ConfigureRegionAdapterMappings(RegionAdapterMappings regionAdapterMappings)
-        {
-            if (regionAdapterMappings != null)
-            {
-                regionAdapterMappings.RegisterMapping(typeof(Selector), _containerExtension.Resolve<SelectorRegionAdapter>());
-                regionAdapterMappings.RegisterMapping(typeof(ItemsControl), _containerExtension.Resolve<ItemsControlRegionAdapter>());
-                regionAdapterMappings.RegisterMapping(typeof(ContentControl), _containerExtension.Resolve<ContentControlRegionAdapter>());
-            }
-        }
-
-        /// <summary>
-        /// Registers the <see cref="Type"/>s of the Exceptions that are not considered
-        /// root exceptions by the <see cref="ExceptionExtensions"/>.
-        /// </summary>
-        protected virtual void RegisterFrameworkExceptionTypes()
-        {
-            ExceptionExtensions.RegisterFrameworkExceptionType(typeof(ActivationException));
-            ExceptionExtensions.RegisterFrameworkExceptionType(typeof(ResolutionFailedException));
-        }
-
-        /// <summary>
-        /// Creates the shell or main window of the application.
-        /// </summary>
-        /// <returns>The shell of the application.</returns>
-        protected Window CreateShell()
-        {
-            var view = Container.Resolve<Shell>();
-            return view;
-        }
-
-        /// <summary>
-        /// Initializes the shell.
-        /// </summary>
-        protected virtual void InitializeShell(Window shell)
-        {
-            MainWindow = shell;
-        }
-
-        /// <summary>
-        /// Contains actions that should occur last.
-        /// </summary>
-        protected virtual void OnInitialized()
-        {
-            MainWindow?.Show();
-        }
-
-        /// <summary>
-        /// Configures the <see cref="IModuleCatalog"/> used by Prism.
-        /// </summary>
-        protected virtual void ConfigureModuleCatalog(IModuleCatalog moduleCatalog) { }
-
-        /// <summary>
-        /// Initializes the modules.
-        /// </summary>
-        protected virtual void InitializeModules()
-        {
-            var manager = _containerExtension.Resolve<IModuleManager>();
-            manager.Run();
-        }
-
-        /// <summary>
-        /// Configures the LocatorProvider for the <see cref="ServiceLocator" />.
-        /// </summary>
-        protected virtual void ConfigureServiceLocator()
-        {
-            ServiceLocator.SetLocatorProvider(() => _containerExtension.Resolve<IServiceLocator>());
+                }
+            });
         }
 
         /// <inheritdoc />
         /// <summary>
-        /// Calls on exit. Save skin.
+        ///     Calls on exit. Save skin.
         /// </summary>
         /// <param name="e"></param>
         protected override void OnExit(ExitEventArgs e)
@@ -338,98 +124,186 @@ namespace My.CoachManager.Presentation.Wpf
             _logger.Debug("************************ Application End ************************");
         }
 
+        #region SplashScreen
+
         /// <summary>
-        /// Called when [application dispatcher unhandled exception].
+        ///     Updates splash message.
         /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="DispatcherUnhandledExceptionEventArgs"/> instance containing the event data.</param>
-        private void OnAppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        /// <param name="message"></param>
+        private void UpdateSplashMessage(string message)
         {
-            // Log the unhandled exception
-            _logger.Error(e.Exception);
-            DialogManager.ShowErrorDialog(MessageResources.UnexpectedError);
-            e.Handled = true;
+            _splashScreenViewModel.UpdateMessage(message);
+        }
+
+        #endregion
+
+        #region Ioc
+
+        /// <summary>
+        /// Configure service locator.
+        /// </summary>
+        /// <param name="serviceLocator"></param>
+        private void ConfigureServiceLocator(IServiceLocator serviceLocator)
+        {
+            ViewModelProvider.ViewModelFactory = serviceLocator.GetInstance<IViewModelProvider>().GetViewModel;
+            ViewModelProvider.ViewTypeToViewModelTypeResolver = serviceLocator.GetInstance<IViewModelTypeLocator>().LocateViewModel;
+
+            ServiceLocator.SetLocatorProvider(() => serviceLocator);
         }
 
         /// <summary>
-        /// Save Skin
+        /// Registers the <see cref="Type"/>s of the Exceptions
         /// </summary>
-        private static void SaveSettings()
+        private void RegisterFrameworkExceptionTypes()
         {
-            // Skin
-            if (SkinManager.SkinManager.CurrentTheme != null) Settings.Default.DefaultTheme = SkinManager.SkinManager.CurrentTheme.Name;
-            if (SkinManager.SkinManager.CurrentAccent != null) Settings.Default.DefaultAccent = SkinManager.SkinManager.CurrentAccent.Name;
-            if (SkinManager.SkinManager.CurrentSecondaryAccent != null) Settings.Default.DefaultSecondaryAccent = SkinManager.SkinManager.CurrentSecondaryAccent.Name;
+            _iocContainer.RegisterType<ActivationException>();
+        }
+        /// <summary>
+        ///     Registers all types that are required.
+        /// </summary>
+        private void RegisterServices()
+        {
+            // Register Logger
+            _iocContainer.RegisterInstance(_logger);
 
-            Settings.Default.RosterId = AppManager.Roster.Id;
+            // Register Presentation Services
+            _iocContainer.RegisterType<IMessenger, Messenger>(new ContainerControlledLifetimeManager());
+            _iocContainer.RegisterType<IViewModelProvider, ViewModelLocationProvider>(new ContainerControlledLifetimeManager());
+            _iocContainer.RegisterType<IViewModelTypeLocator, NamingConventionDialogTypeLocator>(new ContainerControlledLifetimeManager());
+            _iocContainer.RegisterType<IDialogFactory, DialogFactory>(new ContainerControlledLifetimeManager());
+            _iocContainer.RegisterType<IDialogService, DialogService>(new ContainerControlledLifetimeManager());
+            _iocContainer.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
+            _iocContainer.RegisterType<ISettingsService, SettingsService>(new ContainerControlledLifetimeManager());
+            _iocContainer.RegisterType<INotificationService, NotificationService>(new ContainerControlledLifetimeManager());
+            _iocContainer.RegisterType<IAuthenticationService, AuthenticationService>(new ContainerControlledLifetimeManager());
 
-            Settings.Default.Save();
         }
 
         /// <summary>
-        /// Load Skin
+        /// Register view models.
         /// </summary>
-        private static void LoadSkin()
+        private void RegisterViewModels()
         {
-            SkinManager.SkinManager.ApplyTheme(Settings.Default.DefaultTheme);
-            SkinManager.SkinManager.ApplyAccent(Settings.Default.DefaultAccent);
-            SkinManager.SkinManager.ApplySecondaryAccent(Settings.Default.DefaultSecondaryAccent);
+           var types = Assembly.GetExecutingAssembly().GetTypes().Where( x => typeof(IScreenViewModel).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract).ToList();
+
+           // Register these types and use reflection to instantiate each instance...
+           foreach (var type in types)
+           {
+               var t = type;
+
+               if (typeof(IDialogViewModel).IsAssignableFrom(type))
+               {
+                   _iocContainer.RegisterType(type, t.Name, new ContainerControlledTransientManager());
+               }
+               else
+               {
+                   _iocContainer.RegisterType(type, t.Name, new ContainerControlledLifetimeManager());
+               }
+           }
+
+           _iocContainer.RegisterType<AboutView>(new ContainerControlledLifetimeManager());
+           _iocContainer.RegisterType<CategoryEditView>(new ContainerControlledLifetimeManager());
+           _iocContainer.RegisterType<SeasonEditView>(new ContainerControlledLifetimeManager());
+           _iocContainer.RegisterType<RosterEditView>(new ContainerControlledLifetimeManager());
+
         }
 
         /// <summary>
-        /// Connection of the user.
+        ///     Runs the initialization sequence to configure the application.
+        /// </summary>
+        private void Initialize()
+        {
+            // Initialise Wep Client Helper
+            ApiHelper.InitializeHttpClient(ConfigurationManager.Server);
+            
+            // Register special exceptions
+            RegisterFrameworkExceptionTypes();
+
+            // Register Services
+            RegisterServices();
+
+            // Register Services
+            RegisterViewModels();
+
+            // Service Locator
+            var locator = new UnityServiceLocator(_iocContainer);
+            ConfigureServiceLocator(locator);
+
+            // Load skin
+            LoadSkin();
+        }
+        
+        #endregion
+
+        #region Data
+
+        private void LoadData()
+        {
+            UpdateSplashMessage(MessageResources.UserConnection);
+            if (!ConnectUser()) return;
+
+            _logger.Debug("User connected : " + Thread.CurrentPrincipal.Identity.Name);
+
+            // Load Roster
+            UpdateSplashMessage(MessageResources.RosterLoading);
+            //var roster = ApiHelper.GetData<RosterDto>("Api/rosters", Thread.CurrentPrincipal.GetRosterId());
+            //AppManager.InitializeRoster(RosterFactory.Get(roster));
+
+            //_logger.Debug("Current roster : " + AppManager.Roster.Name + "[Id=" + AppManager.Roster.Id + "]");
+        }
+
+        #endregion
+
+        #region Shell
+
+        /// <summary>
+        ///     Creates the shell or main window of the application.
+        /// </summary>
+        /// <returns>The shell of the application.</returns>
+        private Window CreateShell()
+        {
+            return new MainView();
+        }
+
+        /// <summary>
+        ///     Initializes the shell.
+        /// </summary>
+        private void InitializeShell(Window shell)
+        {
+            if (shell is MainView sh) ServiceLocator.Current.GetInstance<INavigationService>().ConfigureFrame(sh.MainFrame);
+            MainWindow = shell;
+        }
+
+        /// <summary>
+        ///     Load shell.
+        /// </summary>
+        private void LoadShell()
+        {
+            var shell = CreateShell();
+            if (shell != null) InitializeShell(shell);
+        }
+
+        /// <summary>
+        ///     Contains actions that should occur last.
+        /// </summary>
+        private void OnInitialized()
+        {
+            MainWindow?.Show();
+        }
+
+        #endregion
+
+        #region User connection
+
+        /// <summary>
+        ///     Connection of the user.
         /// </summary>
         /// <returns></returns>
         private bool ConnectUser()
         {
             IPrincipal principal = null;
 
-            if (ConfigurationManager.WindowsAuthentication)
-            {
-                principal = GetConnectedUser();
-            }
-
-            if (principal == null)
-            {
-                // Get Default Credentials
-                string defaultUsername;
-                var defaultPassword = string.Empty;
-                if (Thread.CurrentPrincipal.Identity.IsAuthenticated)
-                {
-                    defaultUsername = Thread.CurrentPrincipal.Identity.Name;
-                }
-                else
-                {
-                    var currentWindowsIdentity = WindowsIdentity.GetCurrent();
-                    defaultUsername = currentWindowsIdentity.Name;
-                }
-
-                // Show Login Dialog
-                if (DialogManager.ShowLoginDialog((newLogin, newPassword) =>
-                {
-                    principal = GetConnectedUser(newLogin, newPassword, false);
-
-                    var isConnected = principal != null;
-
-                    if (!isConnected)
-                    {
-                        NotificationManager.ShowError(MessageResources.ConnectionFailed);
-                    }
-
-                    return new Tuple<bool, string>(isConnected, MessageResources.ConnectionFailed);
-                },
-                        defaultUsername.ToUpper(), defaultPassword) == DialogResult.Ok)
-                {
-                    NotificationManager.ShowSuccess(string.Format(MessageResources.UserConnected, principal.Identity.Name));
-                }
-                else
-                {
-                    Dispatcher.Invoke(() =>
-                    {
-                        Current.Shutdown();
-                    });
-                }
-            }
+            if (ConfigurationManager.WindowsAuthentication) principal = GetConnectedUser();
 
             if (principal == null) return Thread.CurrentPrincipal.Identity.IsAuthenticated;
             AppDomain.CurrentDomain.SetThreadPrincipal(principal);
@@ -439,23 +313,86 @@ namespace My.CoachManager.Presentation.Wpf
         }
 
         /// <summary>
-        /// Connection of the user.
+        ///     Connection of the user.
         /// </summary>
         /// <returns></returns>
-        private static IPrincipal GetConnectedUser(string login = "", string password = "", bool byWindowsCredentials = true)
+        private static IPrincipal GetConnectedUser(string login = "", string password = "",
+            bool byWindowsCredentials = true)
         {
-            var authentificationService = ServiceLocator.Current.GetInstance<IAuthenticationService>();
+            var authenticationService = ServiceLocator.Current.GetInstance<IAuthenticationService>();
 
-            return byWindowsCredentials ? authentificationService.AuthenticateByWindowsCredentials() : authentificationService.Authenticate(login, password);
+            return byWindowsCredentials
+                ? authenticationService.AuthenticateByWindowsCredentials()
+                : authenticationService.Authenticate(login, password);
+        }
+
+        #endregion
+
+        #region Settings
+
+        /// <summary>
+        ///     Save Skin
+        /// </summary>
+        private static void SaveSettings()
+        {
+            // Skin
+            if (SkinManager.SkinManager.CurrentTheme != null)
+                Settings.Default.DefaultTheme = SkinManager.SkinManager.CurrentTheme.Name;
+            if (SkinManager.SkinManager.CurrentAccent != null)
+                Settings.Default.DefaultAccent = SkinManager.SkinManager.CurrentAccent.Name;
+            if (SkinManager.SkinManager.CurrentSecondaryAccent != null)
+                Settings.Default.DefaultSecondaryAccent = SkinManager.SkinManager.CurrentSecondaryAccent.Name;
+
+            //Settings.Default.RosterId = AppManager.Roster.Id;
+
+            Settings.Default.Save();
         }
 
         /// <summary>
-        /// Updates splah message.
+        ///     Load Skin
         /// </summary>
-        /// <param name="message"></param>
-        private void UpdateSplachMessage(string message)
+        private static void LoadSkin()
         {
-            _splashScreenViewModel.UpdateMessage(message);
+            SkinManager.SkinManager.ApplyTheme(Settings.Default.DefaultTheme);
+            SkinManager.SkinManager.ApplyAccent(Settings.Default.DefaultAccent);
+            SkinManager.SkinManager.ApplySecondaryAccent(Settings.Default.DefaultSecondaryAccent);
         }
+
+        #endregion
+
+        #region Exception Management
+
+        /// <summary>
+        ///     Called when [application dispatcher unhandled exception].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="DispatcherUnhandledExceptionEventArgs" /> instance containing the event data.</param>
+        private void OnAppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            // Log the unhandled exception
+            OnExceptionOccured(e.Exception);
+            e.Handled = true;
+        }
+
+        /// <summary>
+        ///     Call when error occurs.
+        /// </summary>
+        /// <param name="e"></param>
+        private void OnExceptionOccured(Exception e)
+        {
+            LogManager.Fatal(e);
+            DialogManager.ShowErrorDialog(MessageResources.GetDataError, MessageBoxButton.OK);
+        }
+
+        /// <summary>
+        ///     Call when error occurs.
+        /// </summary>
+        /// <param name="e"></param>
+        private void OnBusinessExceptionOccured(BusinessException e)
+        {
+            NotificationManager.ShowError(e.Message);
+        }
+
+        #endregion
     }
 }

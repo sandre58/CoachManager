@@ -8,7 +8,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces
         where TModel : class, ISelectable, IEntityModel, IModifiable, IValidatable, new()
     {
         /// <summary>
-        /// Gets or sets not selectionnable items.
+        /// Gets or sets not selectionable items.
         /// </summary>
         new IEnumerable<TModel> NotSelectableItems { get; set; }
 

@@ -1,28 +1,50 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using My.CoachManager.CrossCutting.Logging;
-using My.CoachManager.Presentation.Wpf.Core;
+using System.Collections.Generic;
+using System.Windows.Controls;
+using My.CoachManager.Presentation.Wpf.Core.Constants;
+using My.CoachManager.Presentation.Wpf.Core.Helpers;
+using My.CoachManager.Presentation.Wpf.Core.Ioc;
+using My.CoachManager.Presentation.Wpf.Core.Navigation;
 using My.CoachManager.Presentation.Wpf.Core.Services;
 using My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;
-using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Wpf.Services
 {
     /// <inheritdoc />
     /// <summary>
-    /// The implementation of the contract <see cref="T:My.CoachManager.Presentation.Core.Services.INavigationService" />.
-    /// this class has no need on its ownself, hence explicit implementation.
+    ///     The implementation of the contract <see cref="T:My.CoachManager.Presentation.Core.Services.INavigationService" />.
+    ///     this class has no need on its own-self, hence explicit implementation.
     /// </summary>
     public class NavigationService : INavigationService
     {
         #region Fields
 
-        private readonly IRegionManager _regionManager;
-        private IRegionNavigationService _regionNavigationService;
-        private Stopwatch _watch;
+        private Frame _frame;
+        private NavigationContext _currentNavigationContext;
+        private readonly IViewModelTypeLocator _viewTypeLocator;
+        private readonly IViewModelProvider _viewModelProvider;
+        private readonly Dictionary<string, object> _pagesByKey = new Dictionary<string, object>(); 
 
-        #endregion Fields
+        #endregion
+
+        #region Members
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets current workspace.
+        /// </summary>
+        public INavigableWorkspaceViewModel CurrentWorkspace { get; private set; }
+
+        /// <inheritdoc />
+        /// <summary>
+        ///     Gets the key corresponding to the currently displayed page.
+        /// </summary>
+        /// <value>
+        ///     The current page key.
+        /// </value>
+        public string CurrentPageKey { get; private set; }
+
+        #endregion
 
         #region Events
 
@@ -30,152 +52,252 @@ namespace My.CoachManager.Presentation.Wpf.Services
         /// <summary>
         /// Raised when the region is about to be navigated to content.
         /// </summary>
-        public event EventHandler<RegionNavigationEventArgs> Navigating;
+        public event EventHandler<NavigationEventArgs> Navigating;
+
+        private void RaiseNavigating(NavigationContext navigationContext)
+        {
+            Navigating?.Invoke(this, new NavigationEventArgs(navigationContext));
+        }
 
         /// <inheritdoc />
         /// <summary>
         /// Raised when the region is navigated to content.
         /// </summary>
-        public event EventHandler<RegionNavigationEventArgs> Navigated;
+        public event EventHandler<NavigationEventArgs> Navigated;
+
+        private void RaiseNavigated(NavigationContext navigationContext)
+        {
+            Navigated?.Invoke(this, new NavigationEventArgs(navigationContext));
+        }
 
         /// <inheritdoc />
         /// <summary>
         /// Raised when a navigation request fails.
         /// </summary>
-        public event EventHandler<RegionNavigationFailedEventArgs> NavigationFailed;
+        public event EventHandler<NavigationFailedEventArgs> NavigationFailed;
+
+        private void RaiseNavigationFailed(NavigationContext navigationContext, Exception error)
+        {
+            NavigationFailed?.Invoke(this, new NavigationFailedEventArgs(navigationContext, error));
+        }
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Initialise a new instance of <see cref="NavigationService"/>.
+        ///     Initializes a new instance of the <see cref="DialogService" /> class.
         /// </summary>
-        /// <param name="regionManager"></param>
-        public NavigationService(IRegionManager regionManager)
+        public NavigationService(IViewModelTypeLocator viewTypeLocator = null, IViewModelProvider viewModelProvider = null)
         {
-            _regionManager = regionManager;
-            _regionManager.Regions.CollectionChanged += OnRegionChanged;
+            _viewTypeLocator = viewTypeLocator ?? new NamingConventionDialogTypeLocator();
+            _viewModelProvider = viewModelProvider ?? new ViewModelProvider();
         }
 
-        #endregion Constructors
-
-        #region Members
+        #endregion
+        
+        #region INavigationService
 
         /// <inheritdoc />
         /// <summary>
-        /// Gets active view.
-        /// </summary>
-        public INavigableWorkspaceViewModel ActiveView
-        {
-            get
-            {
-                if (_regionManager.Regions.ContainsRegionWithName(RegionNames.WorkspaceRegion))
-                {
-                    return (INavigableWorkspaceViewModel)_regionManager.Regions[RegionNames.WorkspaceRegion].ActiveViews.FirstOrDefault();
-                }
-                return null;
-            }
-        }
-
-        #endregion Members
-
-        #region Methods
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Navigates to specified view.
-        /// </summary>
-        /// <param name="pagePath">The Uri.</param>
-        /// <param name="callback">Action when navigation is completed.</param>
-        /// <param name="parameters">The optional parameters.</param>
-        public void NavigateTo(string pagePath, Action<NavigationResult> callback = null, NavigationParameters parameters = null)
-        {
-            if (!string.IsNullOrEmpty(pagePath))
-            {
-                var newUri = new Uri(pagePath + parameters, UriKind.Relative);
-                var activeUri = _regionNavigationService?.Journal?.CurrentEntry?.Uri;
-                if (!Equals(newUri, activeUri))
-                {
-                    _regionManager.RequestNavigate(RegionNames.WorkspaceRegion, newUri, e =>
-                        {
-                            callback?.Invoke(e);
-                        });
-                }
-            }
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Go previous page.
+        ///     Go previous page.
         /// </summary>
         public void GoBack()
         {
-            _regionNavigationService?.Journal?.GoBack();
+            EnsureFrame();
+
+            if (CanGoBack()) _frame.GoBack();
         }
 
         /// <inheritdoc />
         /// <summary>
-        /// Can go previous page.
+        ///     Can go previous page.
         /// </summary>
         public bool CanGoBack()
         {
-            return _regionNavigationService?.Journal?.CanGoBack ?? false;
+            EnsureFrame();
+
+            return _frame.CanGoBack;
         }
 
         /// <inheritdoc />
         /// <summary>
-        /// Go next page.
+        ///     Go next page.
         /// </summary>
         public void GoForward()
         {
-            _regionNavigationService?.Journal?.GoForward();
+            EnsureFrame();
+
+            if (CanGoForward()) _frame.GoForward();
         }
 
         /// <inheritdoc />
         /// <summary>
-        /// Can go next page.
+        ///     Can go next page.
         /// </summary>
         public bool CanGoForward()
         {
-            return _regionNavigationService?.Journal?.CanGoForward ?? false;
+            EnsureFrame();
+
+            return _frame.CanGoForward;
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        ///     The navigate to.
+        /// </summary>
+        /// <param name="pageKey">
+        ///     The page key.
+        /// </param>
+        public void NavigateTo(string pageKey)
+        {
+            NavigateTo(pageKey, null);
+        }
+
+        /// <inheritdoc />
+        public virtual void NavigateTo(string pageKey, object parameter)
+        {
+            var type = Type.GetType(pageKey);
+            var parameters = new NavigationParameters {{ParametersConstants.Id, parameter}};
+
+            NavigateTo(_viewModelProvider.GetViewModel(type) as INavigableWorkspaceViewModel, null, parameters);
         }
 
         /// <summary>
-        /// Calls when regions changed.
+        /// Initiates navigation to the specified target.
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <param name="navigationCallback">A callback to execute when the navigation request is completed.</param>
+        /// <param name="navigationParameters">The navigation parameters specific to the navigation request.</param>
+        public void NavigateTo(INavigableWorkspaceViewModel target, Action<NavigationResult> navigationCallback, NavigationParameters navigationParameters)
+        {
+            if (target == null) return;
+
+                DoNavigate(target, navigationCallback, navigationParameters);
+            
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Navigate.
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <param name="navigationCallback"></param>
+        /// <param name="navigationParameters"></param>
+        private void DoNavigate(INavigableWorkspaceViewModel viewModel, Action<NavigationResult> navigationCallback, NavigationParameters navigationParameters)
+        {
+            if (viewModel == null) throw new ArgumentNullException(nameof(viewModel));
+            
+            EnsureFrame();
+
+            var viewType = _viewTypeLocator.LocateView(viewModel.GetType());
+            var view = GetView(viewType);
+
+            // Navigate in Frame
+            _frame.Navigate(view, navigationParameters);
+
+            var navigationContext = new NavigationContext(viewModel, navigationParameters);
+            navigationCallback?.Invoke(new NavigationResult(navigationContext, true));
+
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        ///     Configure Frame.
+        /// </summary>
+        /// <param name="frame"></param>
+        public void ConfigureFrame(Frame frame)
+        {
+            _frame = null;
+            _frame = frame;
+
+            _frame.Navigating += OnNavigating;
+            _frame.Navigated += OnNavigated;
+            _frame.NavigationFailed += OnNavigationFailed;
+        }
+        
+        /// <summary>
+        /// Calls before navigation.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnRegionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void OnNavigating(object sender, System.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-            if (_regionNavigationService == null)
+            
+            var navigable = ViewModelHelper.GetImplementerFromViewOrViewModel<INavigableWorkspaceViewModel>(e.Content);
+
+            var navigationContext = new NavigationContext(navigable, (NavigationParameters)e.ExtraData);
+
+            if (_currentNavigationContext != navigationContext)
             {
-                if (_regionManager.Regions.ContainsRegionWithName(RegionNames.WorkspaceRegion))
-                {
-                    _regionNavigationService = _regionManager.Regions[RegionNames.WorkspaceRegion].NavigationService;
-                    _regionNavigationService.Navigating += delegate (object o, RegionNavigationEventArgs args)
-                    {
-                        _watch = new Stopwatch();
-                        _watch.Start();
-                        LogManager.Trace($"Navigating to {args.Uri}");
-                        Navigating?.Invoke(o, args);
-                    };
-                    _regionNavigationService.Navigated += delegate (object o, RegionNavigationEventArgs args)
-                    {
-                        _watch?.Stop();
-                        LogManager.Trace($"Navigated to {args.Uri} : {_watch?.Elapsed}");
-                        Navigated?.Invoke(o, args);
-                    };
-                    _regionNavigationService.NavigationFailed += delegate (object o, RegionNavigationFailedEventArgs args)
-                    {
-                        _watch?.Stop();
-                        LogManager.Trace($"Fail to navigate to {args.Uri} : {args.Error.Message}");
-                        NavigationFailed?.Invoke(o, args);
-                    };
-                }
+                _currentNavigationContext = new NavigationContext(navigable, (NavigationParameters)e.ExtraData);
+                var oldNavigable = ViewModelHelper.GetImplementerFromViewOrViewModel<INavigableWorkspaceViewModel>(_frame.Content);
+                
+                ViewModelHelper.ViewAndViewModelAction<INavigableWorkspaceViewModel>(oldNavigable, n => n.OnNavigatedFrom(navigationContext));
+
+                RaiseNavigating(navigationContext);
+
+            } else
+            {
+                e.Cancel = true;
             }
         }
 
-        #endregion Methods
+        /// <summary>
+        /// Calls after navigation.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnNavigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            CurrentPageKey = e.Content?.ToString();
+
+            CurrentWorkspace = ViewModelHelper.GetImplementerFromViewOrViewModel<INavigableWorkspaceViewModel>(e.Content);
+                
+            ViewModelHelper.ViewAndViewModelAction<INavigableWorkspaceViewModel>(CurrentWorkspace, n => n.OnNavigatedTo(_currentNavigationContext));
+
+            RaiseNavigated(_currentNavigationContext);
+        }
+
+        /// <summary>
+        /// Calls when navigation failed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnNavigationFailed(object sender, System.Windows.Navigation.NavigationFailedEventArgs e)
+        {
+            RaiseNavigationFailed(_currentNavigationContext, e.Exception);
+        }
+
+        /// <summary>
+        ///     Ensure Frame member.
+        /// </summary>
+        private void EnsureFrame()
+        {
+            if (_frame == null)
+                throw new ArgumentException(@"The frame is not defined. Have you called ConfigureFrame(Frame frame) ?");
+        }
+
+        /// <summary>
+        /// Get specified view.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private object GetView(Type type)
+        {
+            var name = type.Name;
+
+            if (!_pagesByKey.ContainsKey(name))
+            {
+                _pagesByKey.Add(name, Activator.CreateInstance(type));
+            }
+
+            return _pagesByKey[name];
+        }
+
+        #endregion
     }
 }

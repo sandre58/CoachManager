@@ -2,6 +2,10 @@
 {
     public interface IWorkspaceDialogViewModel : IDialogViewModel
     {
-
+        /// <summary>
+        /// Get or set the mode.
+        /// </summary>
+        /// <remarks></remarks>
+        ScreenMode Mode { get; }
     }
 }

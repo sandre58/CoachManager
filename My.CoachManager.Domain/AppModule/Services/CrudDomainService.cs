@@ -6,7 +6,7 @@ using FluentValidation.Results;
 
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Exceptions;
-using My.CoachManager.CrossCutting.Core.Resources;
+using My.CoachManager.CrossCutting.Resources;
 using My.CoachManager.Domain.Core;
 
 namespace My.CoachManager.Domain.AppModule.Services

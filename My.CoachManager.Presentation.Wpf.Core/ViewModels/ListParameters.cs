@@ -1,7 +1,7 @@
 ﻿using My.CoachManager.Presentation.Wpf.Core.ViewModels.Base;
-using Prism.Commands;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using GalaSoft.MvvmLight.Command;
 
 namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
 {
@@ -22,7 +22,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         /// <summary>
         /// Command to change displayed columns.
         /// </summary>
-        public DelegateCommand<object> ChangeDisplayedColumnsCommand { get; }
+        public RelayCommand<object> ChangeDisplayedColumnsCommand { get; }
 
         #endregion Members
 
@@ -35,7 +35,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         {
             DisplayedColumns = new ObservableCollection<string>();
             PresetColumns = new Dictionary<object, string[]>();
-            ChangeDisplayedColumnsCommand = new DelegateCommand<object>(ChangeDisplayedColumns);
+            ChangeDisplayedColumnsCommand = new RelayCommand<object>(ChangeDisplayedColumns);
         }
 
         #endregion Constructors

@@ -1,48 +1,15 @@
 ﻿using System;
+using System.Windows.Controls;
+using My.CoachManager.Presentation.Wpf.Core.Navigation;
 using My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;
-using Prism.Regions;
 
 namespace My.CoachManager.Presentation.Wpf.Core.Services
 {
     /// <summary>
-    /// Interface abstracting the interaction between view models and views when it comes to
-    /// opening page using the MVVM pattern in WPF.
+    /// Interface abstracting the interaction with toast notification.
     /// </summary>
-    public interface INavigationService
+    public interface INavigationService : GalaSoft.MvvmLight.Views.INavigationService
     {
-        /// <summary>
-        /// Raised when the region is about to be navigated to content.
-        /// </summary>
-        event EventHandler<RegionNavigationEventArgs> Navigating;
-
-        /// <summary>
-        /// Raised when the region is navigated to content.
-        /// </summary>
-        event EventHandler<RegionNavigationEventArgs> Navigated;
-
-        /// <summary>
-        /// Raised when a navigation request fails.
-        /// </summary>
-        event EventHandler<RegionNavigationFailedEventArgs> NavigationFailed;
-
-        /// <summary>
-        /// Gets active view.
-        /// </summary>
-        INavigableWorkspaceViewModel ActiveView { get; }
-
-        /// <summary>
-        /// Navigates to specified view.
-        /// </summary>
-        /// <param name="pagePath">The Uri.</param>
-        /// <param name="parameters">The optionals parameters.</param>
-        /// <param name="callback">Action when navigation is completed.</param>
-        void NavigateTo(string pagePath, Action<NavigationResult> callback = null, NavigationParameters parameters = null);
-
-        /// <summary>
-        /// Go previous page.
-        /// </summary>
-        void GoBack();
-
         /// <summary>
         /// Can go previous page.
         /// </summary>
@@ -57,5 +24,39 @@ namespace My.CoachManager.Presentation.Wpf.Core.Services
         /// Can go next page.
         /// </summary>
         bool CanGoForward();
+
+        /// <summary>
+        /// Initiates navigation to the specified target.
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <param name="navigationCallback">A callback to execute when the navigation request is completed.</param>
+        /// <param name="navigationParameters">The navigation parameters specific to the navigation request.</param>
+        void NavigateTo(INavigableWorkspaceViewModel target, Action<NavigationResult> navigationCallback, NavigationParameters navigationParameters);
+
+        /// <summary>
+        /// Configure Frame.
+        /// </summary>
+        /// <param name="frame"></param>
+        void ConfigureFrame(Frame frame);
+
+        /// <summary>
+        /// Raised when the region is about to be navigated to content.
+        /// </summary>
+        event EventHandler<NavigationEventArgs> Navigating;
+
+        /// <summary>
+        /// Raised when the region is navigated to content.
+        /// </summary>
+        event EventHandler<NavigationEventArgs> Navigated;
+
+        /// <summary>
+        /// Raised when a navigation request fails.
+        /// </summary>
+        event EventHandler<NavigationFailedEventArgs> NavigationFailed;
+
+        /// <summary>
+        /// Gets current workspace.
+        /// </summary>
+        INavigableWorkspaceViewModel CurrentWorkspace { get; }
     }
 }

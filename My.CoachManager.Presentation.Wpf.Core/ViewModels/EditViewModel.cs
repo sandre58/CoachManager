@@ -1,14 +1,15 @@
 ﻿using My.CoachManager.CrossCutting.Core.Exceptions;
-using My.CoachManager.CrossCutting.Core.Resources;
 using My.CoachManager.Presentation.Core.Models;
 using My.CoachManager.Presentation.Wpf.Core.Constants;
-using My.CoachManager.Presentation.Wpf.Core.Dialog;
 using My.CoachManager.Presentation.Wpf.Core.Manager;
-using My.CoachManager.Presentation.Wpf.Core.ViewModels.Base;
 using My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;
-using Prism.Commands;
 using PropertyChanged;
 using System.ComponentModel;
+using System.Windows;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Threading;
+using My.CoachManager.CrossCutting.Resources;
+using My.CoachManager.Presentation.Wpf.Core.ViewModels.Base;
 
 namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
 {
@@ -45,12 +46,12 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         /// <summary>
         /// Get or Set Save Command.
         /// </summary>
-        public DelegateCommand SaveCommand { get; set; }
+        public RelayCommand SaveCommand { get; set; }
 
         /// <summary>
         /// Get or Set Cancel Command.
         /// </summary>
-        public DelegateCommand CancelCommand { get; set; }
+        public RelayCommand CancelCommand { get; set; }
 
         #endregion Members
 
@@ -66,8 +67,8 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         {
             base.Initialize();
             
-            SaveCommand = new DelegateCommand(Save, CanSave);
-            CancelCommand = new DelegateCommand(Cancel, CanCancel);
+            SaveCommand = new RelayCommand(Save, CanSave);
+            CancelCommand = new RelayCommand(Cancel, CanCancel);
 
             SavingSuccessMessage = MessageResources.SavingSuccess;
             NewItemMessage = ControlResources.Creation;
@@ -142,7 +143,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         protected virtual void OnSaveSucceeded()
         {
             NotificationManager.ShowSuccess(SavingSuccessMessage);
-            Close(DialogResult.Ok);
+            Close(true);
         }
 
         #endregion Save
@@ -155,9 +156,9 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         protected virtual void Cancel()
         {
             if (!CanCancel()) return;
-            if (!Item.IsModified() || DialogManager.ShowWarningDialog(MessageResources.CancelModifications, MessageDialogButtons.YesNo) == DialogResult.Yes)
+            if (!Item.IsModified() || DialogManager.ShowWarningDialog(MessageResources.CancelModifications, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                Close(DialogResult.Cancel);
+                Close(false);
             }
         }
 
@@ -227,7 +228,8 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
             }
 
             if (Item != null) Item.PropertyChanged += OnItemPropertyChanged;
-            SaveCommand.RaiseCanExecuteChanged();
+
+            DispatcherHelper.CheckBeginInvokeOnUI(() => { SaveCommand.RaiseCanExecuteChanged(); });
             Item?.ResetModified();
         }
 
@@ -236,7 +238,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         /// </summary>
         private void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            SaveCommand.RaiseCanExecuteChanged();
+            DispatcherHelper.CheckBeginInvokeOnUI(() => { SaveCommand.RaiseCanExecuteChanged(); });
         }
 
         /// <inheritdoc />

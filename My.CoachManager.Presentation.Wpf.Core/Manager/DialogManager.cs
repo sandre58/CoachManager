@@ -1,13 +1,16 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Forms;
 using CommonServiceLocator;
-using My.CoachManager.CrossCutting.Core.Resources;
+using My.CoachManager.CrossCutting.Resources;
 using My.CoachManager.Presentation.Wpf.Core.Constants;
-using My.CoachManager.Presentation.Wpf.Core.Dialog;
-using My.CoachManager.Presentation.Wpf.Core.Enums;
+using My.CoachManager.Presentation.Wpf.Core.Dialog.FolderBrowser;
+using My.CoachManager.Presentation.Wpf.Core.Dialog.MessageBox;
+using My.CoachManager.Presentation.Wpf.Core.Dialog.OpenFile;
+using My.CoachManager.Presentation.Wpf.Core.Dialog.SaveFile;
+using My.CoachManager.Presentation.Wpf.Core.Ioc;
 using My.CoachManager.Presentation.Wpf.Core.Services;
-using My.CoachManager.Presentation.Wpf.Core.ViewModels;
 using My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;
 
 namespace My.CoachManager.Presentation.Wpf.Core.Manager
@@ -20,6 +23,8 @@ namespace My.CoachManager.Presentation.Wpf.Core.Manager
         #region Fields
 
         private static IDialogService _dialogService;
+        private static IViewModelTypeLocator _viewModelTypeLocator;
+        private static IViewModelProvider _viewModelProvider;
 
         #endregion Fields
 
@@ -29,126 +34,123 @@ namespace My.CoachManager.Presentation.Wpf.Core.Manager
         /// Gets Dialog Service.
         /// </summary>
         private static IDialogService DialogService => _dialogService ??
-                                                              (_dialogService = ServiceLocator.Current.GetInstance<IDialogService>());
+                                                       (_dialogService = ServiceLocator.Current.GetInstance<IDialogService>());
+
+        /// <summary>
+        /// Gets Dialog Service.
+        /// </summary>
+        private static IViewModelTypeLocator ViewModelTypeLocator => _viewModelTypeLocator ??
+                                                       (_viewModelTypeLocator = ServiceLocator.Current.GetInstance<IViewModelTypeLocator>());
+
+        /// <summary>
+        /// Gets Dialog Service.
+        /// </summary>
+        private static IViewModelProvider ViewModelProvider => _viewModelProvider ??
+                                                       (_viewModelProvider = ServiceLocator.Current.GetInstance<IViewModelProvider>());
 
         #endregion Members
 
-        #region Workspace Dialog
+        #region Show
+
+        /// <summary>
+        /// Displays a message dialog.
+        /// </summary>
+        /// <param name="viewModel">The view to include in workspace dialog.</param>
+        public static void Show(IDialogViewModel viewModel)
+        {
+            var viewType = ViewModelTypeLocator.LocateView(viewModel.GetType());
+            DialogService.Show(viewType, viewModel);
+        }
+
+        /// <summary>
+        /// Displays a modal dialog.
+        /// </summary>
+        public static void Show<TViewModel>() where TViewModel : IDialogViewModel
+        {
+            var viewType = ViewModelTypeLocator.LocateView(typeof(TViewModel));
+            var viewModel = ViewModelProvider.GetViewModel<TViewModel>();
+            DialogService.Show(viewType, viewModel);
+        }
+
+        /// <summary>
+        /// Displays a modal dialog.
+        /// </summary>
+        /// <param name="typeViewModel">The view to include in workspace dialog.</param>
+        public static void Show(Type typeViewModel)
+        {
+            var viewType = ViewModelTypeLocator.LocateView(typeViewModel);
+            var viewModel = (IDialogViewModel)ViewModelProvider.GetViewModel(typeViewModel);
+            DialogService.Show(viewType, viewModel);
+        }
+
+        #endregion
+
+        #region ShowDialog
+
+        /// <summary>
+        /// Displays a modal dialog.
+        /// </summary>
+        public static bool? ShowDialog<TViewModel>(IEnumerable<KeyValuePair<string, object>> parameters = null) where TViewModel : IDialogViewModel
+        {
+            return ShowDialog(typeof(TViewModel), parameters);
+        }
+
+        /// <summary>
+        /// Displays a modal dialog.
+        /// </summary>
+        /// <param name="typeViewModel">The view to include in workspace dialog.</param>
+        /// <param name="parameters"></param>
+        public static bool? ShowDialog(Type typeViewModel, IEnumerable<KeyValuePair<string, object>> parameters = null)
+        {
+            var viewModel = (IDialogViewModel)ViewModelProvider.GetViewModel(typeViewModel);
+            return ShowDialog(viewModel, parameters);
+        }
+
+        /// <summary>
+        /// Displays a message dialog.
+        /// </summary>
+        /// <param name="viewModel">The view to include in workspace dialog.</param>
+        /// <param name="parameters"></param>
+        public static bool? ShowDialog(IDialogViewModel viewModel, IEnumerable<KeyValuePair<string, object>> parameters = null)
+        {
+            var viewType = ViewModelTypeLocator.LocateView(viewModel.GetType());
+            SetParameters(viewModel, parameters);
+            return DialogService.ShowDialog(viewType, viewModel);
+        }
+
+        #endregion
+
+        #region ShowWorkspaceDialog
 
         /// <summary>
         /// Displays a modal dialog.
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="callback">Action executed after result of dialog.</param>
         /// <param name="parameters"></param>
-        public static void ShowEditDialog<TEditView>(int id, Action<IWorkspaceDialog> callback = null, IEnumerable<KeyValuePair<string, object>> parameters = null) where TEditView : IEditViewModel
+        public static bool? ShowEditDialog<TEditViewModel>(int id, IEnumerable<KeyValuePair<string, object>> parameters = null) where TEditViewModel : IEditViewModel
         {
-            var view = ServiceLocator.Current.GetInstance<TEditView>();
             var p = new List<KeyValuePair<string, object>>(parameters ?? new List<KeyValuePair<string, object>>())
             {
                 new KeyValuePair<string, object>(ParametersConstants.Id, id)
             };
 
-            ShowWorkspaceDialog((IWorkspaceDialogViewModel)view, callback, p);
+            return ShowDialog<TEditViewModel>(p);
         }
 
-        /// <summary>
-        /// Displays a modal dialog.
-        /// </summary>
-        /// <param name="callback">Action executed after result of dialog.</param>
-        /// <param name="parameters"></param>
-        public static void ShowWorkspaceDialog<TView>(Action<IWorkspaceDialog> callback = null, IEnumerable<KeyValuePair<string, object>> parameters = null) where TView : IWorkspaceDialogViewModel
-        {
-            var view = ServiceLocator.Current.GetInstance<TView>();
-            ShowWorkspaceDialog(view, callback, parameters);
-        }
-
-        /// <summary>
-        /// Displays a modal dialog.
-        /// </summary>
-        /// <param name="typeView">The view to include in workspace dialog.</param>
-        /// <param name="callback">Action executed after result of dialog.</param>
-        /// <param name="parameters"></param>
-        public static void ShowWorkspaceDialog(Type typeView, Action<IWorkspaceDialog> callback = null, IEnumerable<KeyValuePair<string, object>> parameters = null)
-        {
-            var view = ServiceLocator.Current.GetInstance(typeView) as IWorkspaceDialogViewModel;
-            ShowWorkspaceDialog(view, callback, parameters);
-        }
-
-        /// <summary>
-        /// Displays a modal dialog.
-        /// </summary>
-        /// <param name="view">The view to include in workspace dialog.</param>
-        /// <param name="callback">Action executed after result of dialog.</param>
-        /// <param name="parameters"></param>
-        public static void ShowWorkspaceDialog(IWorkspaceDialogViewModel view, Action<IWorkspaceDialog> callback = null, IEnumerable<KeyValuePair<string, object>> parameters = null)
-        {
-            SetParameters(view, parameters);
-            DialogService.ShowWorkspaceDialog(view, callback);
-        }
-
-        #endregion Workspace Dialog
-
-        #region Select Items Dialog
-
-        /// <summary>
-        /// Displays a modal dialog.
-        /// </summary>
-        /// <param name="callback">Action executed after result of dialog.</param>
-        /// <param name="selectionMode"></param>
-        /// <param name="notSelectableItems"></param>
-        /// <param name="parameters"></param>
-        public static void ShowSelectItemsDialog<TView>(Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null, IEnumerable<KeyValuePair<string, object>> parameters = null) where TView : ISelectItemsViewModel
-        {
-            var view = ServiceLocator.Current.GetInstance<TView>();
-            ShowSelectItemsDialog(view, callback, selectionMode, notSelectableItems, parameters);
-        }
-
-        /// <summary>
-        /// Displays a modal dialog.
-        /// </summary>
-        /// <param name="typeView">The view to include in workspace dialog.</param>
-        /// <param name="callback">Action executed after result of dialog.</param>
-        /// <param name="selectionMode"></param>
-        /// <param name="notSelectableItems"></param>
-        /// <param name="parameters"></param>
-        public static void ShowSelectItemsDialog(Type typeView, Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null, IEnumerable<KeyValuePair<string, object>> parameters = null)
-        {
-            var view = ServiceLocator.Current.GetInstance(typeView) as ISelectItemsViewModel;
-            ShowSelectItemsDialog(view, callback, selectionMode, notSelectableItems, parameters);
-        }
-
-        /// <summary>
-        /// Displays a modal dialog.
-        /// </summary>
-        /// <param name="view">The view to include in workspace dialog.</param>
-        /// <param name="callback">Action executed after result of dialog.</param>
-        /// <param name="selectionMode"></param>
-        /// <param name="notSelectableItems"></param>
-        /// <param name="parameters"></param>
-        public static void ShowSelectItemsDialog(ISelectItemsViewModel view, Action<IWorkspaceDialog> callback = null, SelectionMode selectionMode = SelectionMode.Single, IList notSelectableItems = null, IEnumerable<KeyValuePair<string, object>> parameters = null)
-        {
-            view.SelectionMode = selectionMode;
-
-            if (notSelectableItems != null)
-                view.NotSelectableItems = notSelectableItems;
-
-            ShowWorkspaceDialog(view, callback, parameters);
-        }
-
-        #endregion Select Items Dialog
-
-        #region Message Dialog
+        
+        #endregion
+        
+        #region MessageBox
 
         /// <summary>
         /// Displays a message dialog.
         /// </summary>
         /// <param name="message">Message.</param>
         /// <param name="buttons">Buttons of window.</param>
-        public static DialogResult ShowInformationDialog(string message,
-            MessageDialogButtons buttons = MessageDialogButtons.Okcancel)
+        public static MessageBoxResult ShowInformationDialog(string message,
+            MessageBoxButton buttons = MessageBoxButton.OKCancel)
         {
-            return ShowMessageDialog(DialogResources.Information, message, MessageDialogType.Information, buttons);
+            return ShowMessageBox(message, DialogResources.Information, buttons, MessageBoxImage.Information, MessageBoxResult.OK);
         }
 
         /// <summary>
@@ -156,10 +158,10 @@ namespace My.CoachManager.Presentation.Wpf.Core.Manager
         /// </summary>
         /// <param name="message">Message.</param>
         /// <param name="buttons">Buttons of window.</param>
-        public static DialogResult ShowErrorDialog(string message,
-            MessageDialogButtons buttons = MessageDialogButtons.Okcancel)
+        public static MessageBoxResult ShowErrorDialog(string message,
+            MessageBoxButton buttons = MessageBoxButton.OKCancel)
         {
-            return ShowMessageDialog(DialogResources.Error, message, MessageDialogType.Error, buttons);
+            return ShowMessageBox(message, DialogResources.Error, buttons, MessageBoxImage.Error, MessageBoxResult.OK);
         }
 
         /// <summary>
@@ -167,147 +169,150 @@ namespace My.CoachManager.Presentation.Wpf.Core.Manager
         /// </summary>
         /// <param name="message">Message.</param>
         /// <param name="buttons">Buttons of window.</param>
-        public static DialogResult ShowWarningDialog(string message,
-            MessageDialogButtons buttons = MessageDialogButtons.Okcancel)
+        public static MessageBoxResult ShowWarningDialog(string message,
+            MessageBoxButton buttons = MessageBoxButton.OKCancel)
         {
-            return ShowMessageDialog(DialogResources.Warning, message, MessageDialogType.Warning, buttons);
+            return ShowMessageBox(message, DialogResources.Warning, buttons, MessageBoxImage.Warning, MessageBoxResult.OK);
         }
 
         /// <summary>
         /// Displays a message dialog.
         /// </summary>
         /// <param name="message">Message.</param>
-        public static DialogResult ShowSuccessDialog(string message)
+        public static MessageBoxResult ShowQuestionDialog(string message)
         {
-            return ShowMessageDialog(DialogResources.Success, message, MessageDialogType.Success, MessageDialogButtons.Ok);
+            return ShowMessageBox(message, DialogResources.Question, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
         }
 
         /// <summary>
         /// Displays a message dialog.
         /// </summary>
         /// <param name="message">Message.</param>
-        public static DialogResult ShowQuestionDialog(string message)
+        public static MessageBoxResult ShowQuestionCancelDialog(string message)
         {
-            return ShowMessageDialog(DialogResources.Question, message, MessageDialogType.Question, MessageDialogButtons.YesNo);
+            return ShowMessageBox(message, DialogResources.Question, MessageBoxButton.YesNoCancel, MessageBoxImage.Question, MessageBoxResult.Yes);
+        }
+
+
+        /// <summary>
+        /// Displays a message box that has a message, title bar caption, button, and icon; and
+        /// that accepts a default message box result and returns a result.
+        /// </summary>
+        /// <param name="messageBoxText">
+        /// A <see cref="string"/> that specifies the text to display.
+        /// </param>
+        /// <param name="caption">
+        /// A <see cref="string"/> that specifies the title bar caption to display. Default value
+        /// is an empty string.
+        /// </param>
+        /// <param name="button">
+        /// A <see cref="MessageBoxButton"/> value that specifies which button or buttons to
+        /// display. Default value is <see cref="MessageBoxButton.OK"/>.
+        /// </param>
+        /// <param name="icon">
+        /// A <see cref="MessageBoxImage"/> value that specifies the icon to display. Default value
+        /// is <see cref="MessageBoxImage.None"/>.
+        /// </param>
+        /// <param name="defaultResult">
+        /// A <see cref="MessageBoxResult"/> value that specifies the default result of the
+        /// message box. Default value is <see cref="MessageBoxResult.None"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="MessageBoxResult"/> value that specifies which message box button is
+        /// clicked by the user.
+        /// </returns>
+        public static MessageBoxResult ShowMessageBox(
+            string messageBoxText,
+            string caption = "",
+            MessageBoxButton button = MessageBoxButton.OK,
+            MessageBoxImage icon = MessageBoxImage.None,
+            MessageBoxResult defaultResult = MessageBoxResult.None)
+        {
+            return DialogService.ShowMessageBox(messageBoxText, caption, button, icon, defaultResult);
         }
 
         /// <summary>
-        /// Displays a message dialog.
+        /// Displays a message box that has a message, title bar caption, button, and icon; and
+        /// that accepts a default message box result and returns a result.
         /// </summary>
-        /// <param name="message">Message.</param>
-        public static DialogResult ShowQuestionCancelDialog(string message)
+        /// <param name="settings">The settings for the message box dialog.</param>
+        /// <returns>
+        /// A <see cref="MessageBoxResult"/> value that specifies which message box button is
+        /// clicked by the user.
+        /// </returns>
+        public static MessageBoxResult ShowMessageBox(
+            MessageBoxSettings settings)
         {
-            return ShowMessageDialog(DialogResources.Question, message, MessageDialogType.Question, MessageDialogButtons.YesNoCancel);
+            return DialogService.ShowMessageBox(settings);
+        }
+
+        #endregion
+
+        #region Files
+
+        /// <summary>
+        /// Displays the <see cref="OpenFileDialog"/>.
+        /// </summary>
+        /// <param name="settings">The settings for the open file dialog.</param>
+        /// <returns>
+        /// If the user clicks the OK button of the dialog that is displayed, true is returned;
+        /// otherwise false.
+        /// </returns>
+        public static bool? ShowOpenFileDialog(
+            OpenFileDialogSettings settings)
+        {
+            return DialogService.ShowOpenFileDialog(settings);
         }
 
         /// <summary>
-        /// Displays a message dialog.
+        /// Displays the <see cref="SaveFileDialog"/>.
         /// </summary>
-        /// <param name="title">Title of window.</param>
-        /// <param name="message">Message.</param>
-        /// <param name="style">Style of window.</param>
-        /// <param name="buttons">Buttons of window.</param>
-        public static DialogResult ShowMessageDialog(string title, string message,
-            MessageDialogType style = MessageDialogType.Information,
-            MessageDialogButtons buttons = MessageDialogButtons.Okcancel)
+        /// <param name="settings">The settings for the save file dialog.</param>
+        /// <returns>
+        /// If the user clicks the OK button of the dialog that is displayed, true is returned;
+        /// otherwise false.
+        /// </returns>
+        public static bool? ShowSaveFileDialog(
+            SaveFileDialogSettings settings)
         {
-            return DialogService.ShowMessageDialog(title, message, style, buttons);
-        }
-
-        #endregion Message Dialog
-
-        #region Custom Dialog
-
-        /// <summary>
-        /// Displays a message dialog.
-        /// </summary>
-        /// <param name="view">The view to include in workspace dialog.</param>
-        /// <param name="title">Title of window.</param>
-        public static DialogResult ShowCustomDialog(IDialogViewModel view, string title)
-        {
-            return DialogService.ShowCustomDialog(view, title);
+            return DialogService.ShowSaveFileDialog(settings);
         }
 
         /// <summary>
-        /// Displays a modal dialog.
+        /// Displays the <see cref="FolderBrowserDialog"/>.
         /// </summary>
-        /// <param name="title">Title of window.</param>
-        public static DialogResult ShowCustomDialog<TView>(string title) where TView : IDialogViewModel
+        /// <param name="settings">The settings for the folder browser dialog.</param>
+        /// <returns>
+        /// If the user clicks the OK button of the dialog that is displayed, true is returned;
+        /// otherwise false.
+        /// </returns>
+        public static bool? ShowFolderBrowserDialog(
+            FolderBrowserDialogSettings settings)
         {
-            var view = ServiceLocator.Current.GetInstance<TView>();
-            return ShowCustomDialog(view, title);
+            return DialogService.ShowFolderBrowserDialog(settings);
         }
 
-        /// <summary>
-        /// Displays a modal dialog.
-        /// </summary>
-        /// <param name="typeView">The view to include in workspace dialog.</param>
-        /// <param name="title">Title of window.</param>
-        public static DialogResult ShowCustomDialog(Type typeView, string title)
-        {
-            var view = ServiceLocator.Current.GetInstance(typeView) as IDialogViewModel;
-            return ShowCustomDialog(view, title);
-        }
-
-        #endregion Custom Dialog
-
-        #region OpenFile Dialog
-
-        /// <summary>
-        /// Show the dialog for open a file.
-        /// </summary>
-        public static string ShowOpenFileDialog(string filter = "", bool multiselect = false, string initialDirectory = "",
-            bool restoreDirectory = false)
-        {
-            return DialogService.ShowOpenFileDialog(filter, multiselect, initialDirectory);
-        }
-
-        /// <summary>
-        /// Show the dialog for open a file.
-        /// </summary>
-        public static string ShowOpenImagesDialog(bool multiselect = false, string initialDirectory = "",
-            bool restoreDirectory = false)
-        {
-            return ShowOpenFileDialog(DialogResources.AllImages, multiselect, initialDirectory, restoreDirectory);
-        }
-
-        #endregion OpenFile Dialog
-
-        #region Login Dialog
-
-        /// <summary>
-        /// Show the dialog to provide Username and password.
-        /// </summary>
-        /// <param name="loginAction">Action to log in.</param>
-        /// <param name="login">The login.</param>
-        /// <param name="password">The password.</param>
-        /// <returns>Item 1 : IsConnected ; Item2 : Error</returns>
-        public static DialogResult ShowLoginDialog(Func<string, string, Tuple<bool, string>> loginAction, string login = "", string password = "")
-        {
-            return DialogService.ShowLoginDialog(loginAction, login, password);
-        }
-
-        #endregion Login Dialog
+        #endregion
 
         #region Methods
 
         /// <summary>
         /// Sets parameters.
         /// </summary>
-        /// <param name="view"></param>
+        /// <param name="viewModel"></param>
         /// <param name="parameters"></param>
         /// <param name="refresh"></param>
-        private static void SetParameters(IDialogViewModel view, IEnumerable<KeyValuePair<string, object>> parameters = null, bool refresh = true)
+        private static void SetParameters(IDialogViewModel viewModel, IEnumerable<KeyValuePair<string, object>> parameters = null, bool refresh = true)
         {
-            if (parameters != null && view != null)
+            if (parameters != null && viewModel != null)
             {
                 foreach (var x in parameters)
                 {
-                    view.SetParameter(x.Key, x.Value);
+                    viewModel.SetParameter(x.Key, x.Value);
                 }
             }
 
-            if (refresh && view is IRefreshable refreshable && refreshable.State == ScreenState.NotLoaded)
+            if (refresh && viewModel is IRefreshable refreshable)
             {
                 refreshable.Refresh();
             }

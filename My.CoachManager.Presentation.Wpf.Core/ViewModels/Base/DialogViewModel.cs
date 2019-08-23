@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using My.CoachManager.Presentation.Wpf.Core.Dialog;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Threading;
 using My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;
-using Prism.Commands;
 
 namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
 {
@@ -26,12 +26,12 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
         /// <summary>
         /// Gets or sets the result.
         /// </summary>
-        public DialogResult DialogResult { get; set; }
+        public bool? DialogResult { get; set; }
 
         /// <summary>
         /// Gets or sets close command.
         /// </summary>
-        public DelegateCommand<DialogResult?> CloseCommand { get; private set; }
+        public RelayCommand<bool?> CloseCommand { get; private set; }
 
         #endregion Members
 
@@ -58,9 +58,9 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
         {
             base.Initialize();
             
-            CloseCommand = new DelegateCommand<DialogResult?>(Close, CanClose);
+            CloseCommand = new RelayCommand<bool?>(Close, CanClose);
 
-            DialogResult = DialogResult.None;
+            DialogResult = false;
 
         }
 
@@ -73,7 +73,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
         /// </summary>
         /// <param name="dialogResult"></param>
         /// <returns></returns>
-        protected bool CanClose(DialogResult? dialogResult)
+        protected bool CanClose(bool? dialogResult)
         {
             return true;
         }
@@ -81,14 +81,14 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
         /// <summary>
         /// Closes the dialog.
         /// </summary>
-        public virtual void Close(DialogResult? dialogResult)
+        public virtual void Close(bool? dialogResult)
         {
             if (dialogResult != null)
             {
                 DialogResult = dialogResult.Value;
             }
-            
-            OnCloseRequest(EventArgs.Empty);
+
+            DispatcherHelper.CheckBeginInvokeOnUI(() => OnCloseRequest(EventArgs.Empty));
         }
 
         /// <summary>

@@ -1,6 +1,6 @@
 ﻿using System;
 using CommonServiceLocator;
-using My.CoachManager.CrossCutting.Core.Resources;
+using My.CoachManager.CrossCutting.Resources;
 using My.CoachManager.Presentation.Wpf.Core.Notification;
 using My.CoachManager.Presentation.Wpf.Core.Services;
 

@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\My.CoachManager.CrossCutting.Resources\My.CoachManager.CrossCutting.Resources.csproj" />
     <ProjectReference Include="..\My.CoachManager.Domain.Core\My.CoachManager.Domain.Core.csproj" />
   </ItemGroup>
 

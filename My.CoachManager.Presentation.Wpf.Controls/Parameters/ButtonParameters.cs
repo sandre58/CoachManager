@@ -11,7 +11,7 @@ namespace My.CoachManager.Presentation.Wpf.Controls.Parameters
     /// </summary>
     public static class ButtonParameters
     {
-        #region IconPlacement
+        #region ButtonsAlignment
 
         public static readonly DependencyProperty ButtonAlignmentProperty = DependencyProperty.RegisterAttached("ButtonAlignment", typeof(ButtonsAlignment), typeof(ButtonParameters), new FrameworkPropertyMetadata(ButtonsAlignment.Left, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
@@ -36,7 +36,7 @@ namespace My.CoachManager.Presentation.Wpf.Controls.Parameters
             element.SetValue(ButtonAlignmentProperty, value);
         }
 
-        #endregion CharacterCasing
+        #endregion ButtonsAlignment
 
     }
 }

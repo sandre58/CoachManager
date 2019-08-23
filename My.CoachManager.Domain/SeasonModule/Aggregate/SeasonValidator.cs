@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-using My.CoachManager.CrossCutting.Core.Resources;
+using My.CoachManager.CrossCutting.Resources;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;
 using My.CoachManager.Domain.ReferenceModule.Aggregate;

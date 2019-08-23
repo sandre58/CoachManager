@@ -6,7 +6,7 @@
       <Value Profile="(Default)">US Beaumont</Value>
     </Setting>
     <Setting Name="ClubLogo" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">pack://application:,,,/My.CoachManager.Presentation.Wpf.Resources;component/Pictures/beaumont.png</Value>
+      <Value Profile="(Default)">pack://application:,,,/My.CoachManager.Presentation.Wpf;component/Resources/Images/beaumont.png</Value>
     </Setting>
     <Setting Name="DefaultTheme" Type="System.String" Scope="User">
       <Value Profile="(Default)">dark</Value>

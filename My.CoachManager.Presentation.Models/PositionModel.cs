@@ -2,7 +2,7 @@
 
 using My.CoachManager.CrossCutting.Core.Constants;
 using My.CoachManager.CrossCutting.Core.Enums;
-using My.CoachManager.CrossCutting.Core.Resources.Entities;
+using My.CoachManager.CrossCutting.Resources.Entities;
 using My.CoachManager.Presentation.Core.Models;
 
 namespace My.CoachManager.Presentation.Models

@@ -4,13 +4,13 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:parameters="clr-namespace:My.CoachManager.Presentation.Wpf.Controls.Parameters;assembly=My.CoachManager.Presentation.Wpf.Controls"
-                    xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Core.Resources;assembly=My.CoachManager.CrossCutting.Core"
                     xmlns:converters="clr-namespace:My.CoachManager.Presentation.Wpf.Resources.Converters"
                     xmlns:viewModels="clr-namespace:My.CoachManager.Presentation.Wpf.Core.ViewModels;assembly=My.CoachManager.Presentation.Wpf.Core"
                     xmlns:interfaces="clr-namespace:My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;assembly=My.CoachManager.Presentation.Wpf.Core"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:selectors="clr-namespace:My.CoachManager.Presentation.Wpf.Resources.Selectors"
                     xmlns:core="clr-namespace:My.CoachManager.Presentation.Wpf.Core;assembly=My.CoachManager.Presentation.Wpf.Core"
+                    xmlns:strings="clr-namespace:My.CoachManager.CrossCutting.Resources;assembly=My.CoachManager.CrossCutting.Resources"
                     xmlns:commands="clr-namespace:My.CoachManager.Presentation.Wpf.Core.Commands;assembly=My.CoachManager.Presentation.Wpf.Core"
                     mc:Ignorable="d">
 
@@ -421,6 +421,7 @@
         <Setter Property="IsLoadingText" Value="{x:Static strings:MessageResources.Loading}" />
         <Setter Property="HeaderControlTemplate" Value="{StaticResource DefaultNavigableWorkspaceHeaderTemplate}" />
         <Setter Property="Header" Value="{Binding Title}" />
+        <Setter Property="HeaderVisibility" Value="{Binding ShowHeader, Converter={StaticResource BooleanToVisibilityConverter}}" />
         <Setter Property="TopContentBackground" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="TopContentTemplateSelector">
             <Setter.Value>
@@ -468,20 +469,18 @@
                         <ContentControl Focusable="False"
                                         IsTabStop="False"
                                         Template="{TemplateBinding HeaderControlTemplate}"
-                                        Padding="{TemplateBinding Padding}"
                                         Content="{TemplateBinding Header}"
-                                        ContentStringFormat="{TemplateBinding HeaderStringFormat}"
                                         ContentTemplate="{TemplateBinding HeaderTemplate}"
                                         ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                         Foreground="{DynamicResource AccentForeground}"
                                         TextBlock.FontWeight="Bold"
                                         TextBlock.FontSize="{DynamicResource SmallHeaderFontSize}"
-                                        Visibility="{Binding ShowHeader, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                        Visibility="{TemplateBinding HeaderVisibility}"/>
 
                         <!-- Top Content -->
                         <Border Grid.Row="1" Background="{TemplateBinding TopContentBackground}" Focusable="False"
-                                Visibility="{Binding HasContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                Visibility="{TemplateBinding Content, Converter={StaticResource NullToVisibilityConverter}}">
                             <ContentControl Focusable="False"
                                             IsTabStop="False"
                                             Content="{Binding }"

@@ -1,11 +1,8 @@
-﻿namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces
+﻿using System.ComponentModel;
+
+namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces
 {
-    public interface IScreenViewModel
+    public interface IScreenViewModel : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Get or set the mode.
-        /// </summary>
-        /// <remarks></remarks>
-        ScreenMode Mode { get; }
     }
 }

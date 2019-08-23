@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="My.CoachManager.Presentation.Wpf.Views.Shell.MainMenuView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:behaviors="clr-namespace:My.CoachManager.Presentation.Wpf.Controls.Behaviors;assembly=My.CoachManager.Presentation.Wpf.Controls"
+        xmlns:shell="clr-namespace:My.CoachManager.Presentation.Wpf.ViewModels.Shell"
+        xmlns:strings="clr-namespace:My.CoachManager.Presentation.Wpf.Resources.Strings"
+        xmlns:controls="clr-namespace:My.CoachManager.Presentation.Wpf.Controls;assembly=My.CoachManager.Presentation.Wpf.Controls"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=shell:MainViewModel}"
+        d:DesignWidth="275"
+        d:DesignHeight="700"
+        x:Name="UserControl">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="AdministrationBrush" Color="LightGray" />
+        <SolidColorBrush x:Key="HomeBrush" Color="#00B6EC" />
+
+        <!--<Style TargetType="{x:Type controls:NavigationExpander}" BasedOn="{StaticResource {x:Type controls:NavigationExpander}}">
+            <Setter Property="behaviors:StylizedBehaviors.Behaviors">
+                <Setter.Value>
+                    <behaviors:StylizedBehaviorCollection>
+                        <behaviors:MainMenuExpanderBehavior IsMenuDisplayed="{Binding IsMenuExpanded}" />
+                    </behaviors:StylizedBehaviorCollection>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
+
+    </UserControl.Resources>
+
+    <i:Interaction.Behaviors>
+        <behaviors:ResizeBehavior CollapsedSize="50" ExpandedSize="275" IsExpanded="{Binding IsMenuExpanded}" />
+    </i:Interaction.Behaviors>
+    
+    <Grid>
+        <Border VerticalAlignment="Stretch" Background="{DynamicResource DarkAccent}" Effect="{DynamicResource RightShadow}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Header -->
+                <Grid Margin="{StaticResource DefaultMargin}" Height="100">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Large Logo -->
+                        <Image
+                            Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"
+                            Source="pack://application:,,,/My.CoachManager.Presentation.Wpf.Resources;component/Pictures/CoachManager.png"
+                            SnapsToDevicePixels="False"
+                            RenderOptions.BitmapScalingMode="Fant" Margin="{StaticResource MediumMargin}"
+                            Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                    <!-- Small Logo -->
+                    <Image Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Source="pack://application:,,,/My.CoachManager.Presentation.Wpf.Resources;component/Pictures/CoachManager.png"
+                        SnapsToDevicePixels="False"
+                        RenderOptions.BitmapScalingMode="Fant"  Margin="{StaticResource DefaultMargin}"
+                        Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}"/>
+
+                    <!-- Text -->
+                    <Grid Grid.Row="0" Grid.Column="1" 
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          Margin="{StaticResource DefaultMargin}"
+                          Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"  Text="{x:Static strings:MenuResources.ApplicationTitlePart1}"
+                                   Style="{StaticResource LargeHeaderStyle}"
+                                   FontFamily="{StaticResource HeaderFontFamily}"
+                                   Foreground="{DynamicResource AccentForeground}"
+                                   FontStyle="Italic"
+                                   VerticalAlignment="Bottom"
+                                   Typography.Capitals="AllSmallCaps" />
+
+                        <TextBlock  Grid.Row="1"  Text="{x:Static strings:MenuResources.ApplicationTitlePart2}"
+                                    Style="{StaticResource LargeHeaderStyle}"
+                                    FontFamily="{StaticResource HeaderFontFamily}"
+                                    Foreground="{DynamicResource AccentForeground}"
+                                    FontStyle="Italic"
+                                    VerticalAlignment="top"
+                                    Typography.Capitals="AllSmallCaps" />
+                    </Grid>
+
+                </Grid>
+
+                <!-- Top Navigation Region -->
+                <ItemsControl Grid.Row="1" Grid.Column="0" Focusable="False" Margin="{StaticResource VeryVeryLargeVerticalMargin}">
+
+                    <!-- Home -->
+                    <controls:NavigationItem Content="{x:Static strings:MenuResources.Home}" 
+                                             Target="HomeViewModel" 
+                                             Style="{StaticResource NavigationItemStyle}"
+                                             Icon="{StaticResource HomeGeometry}"
+                                             Color="{StaticResource HomeBrush}"/>
+
+                </ItemsControl>
+
+                <!-- Bottom Navigation Region -->
+                <ItemsControl Grid.Row="2" Grid.Column="0" Focusable="False" >
+
+                    <!-- Administration -->
+                    <controls:NavigationExpander Header="{x:Static strings:MenuResources.Administration}"
+                                                 Icon="{StaticResource ToolsGeometry}"
+                                                 Color="{StaticResource AdministrationBrush}"
+                                                 Margin="0">
+                        <i:Interaction.Behaviors>
+                            <behaviors:MainMenuExpanderBehavior IsMenuDisplayed="{Binding IsMenuExpanded, Mode=TwoWay}" />
+                        </i:Interaction.Behaviors>
+
+                        <StackPanel>
+                            <controls:NavigationItem Content="{x:Static strings:MenuResources.Players}" Target="PlayersListViewModel" />
+                            <controls:NavigationItem Content="{x:Static strings:MenuResources.Rosters}" Target="RostersListViewModel" />
+                            <controls:NavigationItem Content="{x:Static strings:MenuResources.Seasons}" Target="SeasonsListViewModel" />
+                            <controls:NavigationItem Content="{x:Static strings:MenuResources.Categories}" Target="CategoriesListViewModel" />
+                        </StackPanel>
+                    </controls:NavigationExpander>
+
+                </ItemsControl>
+
+            </Grid>
+        </Border>
+        
+        <!-- Expand button -->
+        <ToggleButton
+                      IsThreeState="False"
+                      IsChecked="{Binding IsMenuExpanded}"
+                      Style="{StaticResource AccentToggleButtonStyle}"
+                      Width="30" Height="30"
+                      VerticalAlignment="Bottom"
+                      HorizontalAlignment="Right"
+                      Margin="0 0 -15 60" />
+    </Grid>
+</UserControl>

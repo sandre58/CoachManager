@@ -17,7 +17,6 @@
     <converters:CoefficientConverter x:Key="CoefficientConverter" />
     <converters:AnyToVisibilityConverter x:Key="AnyToVisibilityConverter" />
     <converters:AnyToBooleanConverter x:Key="AnyToBooleanConverter" />
-    <converters:BrushToColorConverter x:Key="BrushToColorConverter" />
     <converters:NotEqualsConverter x:Key="NotEqualsConverter" />
     <converters:NotEqualToVisibilityConverter x:Key="NotEqualToVisibilityConverter" />
     <converters:EqualsConverter x:Key="EqualsConverter" />
@@ -45,6 +44,8 @@
     <converters:IntegerToRangeConverter x:Key="IntegerToRangeConverter" />
     <converters:EnumToVisibilityWithHiddenConverter x:Key="EnumToVisibilityWithHiddenConverter" />
     <converters:BooleanToVisibilityWithHiddenConverter x:Key="BooleanToVisibilityWithHiddenConverter" />
+    <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+    <converters:CharacterCaseToCharacterCasingConverter x:Key="CharacterCaseToCharacterCasingConverter" />
 
 
     <MenuScrollingVisibilityConverter x:Key="MenuScrollingVisibilityConverter" />

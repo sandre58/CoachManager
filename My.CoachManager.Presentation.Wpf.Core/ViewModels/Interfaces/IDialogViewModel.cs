@@ -1,8 +1,8 @@
-﻿using My.CoachManager.Presentation.Wpf.Core.Dialog;
+﻿using My.CoachManager.Presentation.Wpf.Core.Services;
 
 namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces
 {
-    public interface IDialogViewModel : ICloseable, IScreenViewModel
+    public interface IDialogViewModel : ICloseable
     {
         /// <summary>
         /// Gets or sets title.
@@ -10,9 +10,11 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces
         string Title { get; set; }
 
         /// <summary>
-        /// Gets or sets the dialog result.
+        /// Gets the dialog result value, which is the value that is returned from the
+        /// <see cref="IDialogService.ShowDialog"/> and <see cref="IDialogService.ShowDialog{T}"/>
+        /// methods.
         /// </summary>
-        DialogResult DialogResult { get; set; }
+        bool? DialogResult { get; }
 
         /// <summary>
         /// Return a parameters;

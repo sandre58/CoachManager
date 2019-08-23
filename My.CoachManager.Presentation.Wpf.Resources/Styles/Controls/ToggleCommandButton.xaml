@@ -7,6 +7,7 @@
         <ResourceDictionary Source="../Base/Converters.xaml" />
         <ResourceDictionary Source="../Base/Margins.xaml" />
         <ResourceDictionary Source="../Base/Geometry.xaml" />
+        <ResourceDictionary Source="../Base/Colors.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- Command Button -->
@@ -95,16 +96,8 @@
         <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ApplicationBar}, Path=Foreground}" />
         <Setter Property="parameters:ControlParameters.Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush}" />
         <Setter Property="parameters:ControlParameters.MouseOverBackground" Value="{DynamicResource Transparent}" />
-        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=BorderBrush, Converter={StaticResource BrushToColorConverter}}" Opacity="0.6" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="parameters:ControlParameters.MouseOverForeground">
-            <Setter.Value>
-                <SolidColorBrush Color="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:CommandButton}, Path=BorderBrush, Converter={StaticResource BrushToColorConverter}}" Opacity="0.6" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="parameters:ControlParameters.MouseOverBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush, Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
+        <Setter Property="parameters:ControlParameters.MouseOverForeground" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush, Converter={StaticResource ColorToBrushConverter}, ConverterParameter={StaticResource ColorOpacity}}" />
         <Setter Property="parameters:ControlParameters.PressedBackground" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush}" />
         <Setter Property="parameters:ControlParameters.PressedBorderBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush}" />
         <Setter Property="parameters:ControlParameters.PressedForeground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:ApplicationBar}, Path=Background}" />

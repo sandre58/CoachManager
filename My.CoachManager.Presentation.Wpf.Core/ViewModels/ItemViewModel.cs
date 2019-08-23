@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel;
+using GalaSoft.MvvmLight.Command;
 using My.CoachManager.Presentation.Core.Models;
-using My.CoachManager.Presentation.Wpf.Core.Dialog;
 using My.CoachManager.Presentation.Wpf.Core.Manager;
 using My.CoachManager.Presentation.Wpf.Core.ViewModels.Base;
 using My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;
-using Prism.Commands;
 using PropertyChanged;
 
 namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
@@ -18,7 +17,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         /// <summary>
         /// Gets or sets the edit command.
         /// </summary>
-        public DelegateCommand EditCommand { get; set; }
+        public RelayCommand EditCommand { get; set; }
 
         #endregion Members
 
@@ -34,7 +33,7 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         {
             base.Initialize();
 
-            EditCommand = new DelegateCommand(Edit, CanEdit);
+            EditCommand = new RelayCommand(Edit, CanEdit);
         }
 
         #endregion Initialization
@@ -49,10 +48,10 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
             if (Item == null) return;
             if (!CanEdit()) return;
 
-            DialogManager.ShowEditDialog<TEditView>(Item.Id, dialog =>
-            {
-                OnEditCompleted(dialog.Result);
-            });
+            var result = DialogManager.ShowEditDialog<TEditView>(Item.Id);
+
+            OnEditCompleted(result);
+
         }
 
         /// <summary>
@@ -67,9 +66,9 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels
         /// Called after the edit action.
         /// </summary>
         /// <param name="result">The dialog result.</param>
-        protected virtual void OnEditCompleted(DialogResult result)
+        protected virtual void OnEditCompleted(bool? result)
         {
-            if (result == DialogResult.Ok) Refresh();
+            if (result.HasValue && result.Value) Refresh();
         }
 
         #endregion Edit

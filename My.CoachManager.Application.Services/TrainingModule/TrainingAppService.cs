@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 using My.CoachManager.Application.Dtos;
 using My.CoachManager.CrossCutting.Core.Exceptions;
-using My.CoachManager.CrossCutting.Core.Resources;
+using My.CoachManager.CrossCutting.Resources;
 using My.CoachManager.Domain.AppModule.Services;
 using My.CoachManager.Domain.Core;
 using My.CoachManager.Domain.Entities;

@@ -18,9 +18,9 @@ namespace My.CoachManager.Presentation.Wpf.SkinManager
     {
         #region Fields
 
-        private static readonly IDictionary<DispatcherObject, Theme> CurrentThemes;
-        private static readonly IDictionary<DispatcherObject, Accent> CurrentAccents;
-        private static readonly IDictionary<DispatcherObject, Accent> CurrentSecondaryAccents;
+        private static readonly IDictionary<DispatcherObject, Theme> CurrentThemes = new Dictionary<DispatcherObject, Theme>();
+        private static readonly IDictionary<DispatcherObject, Accent> CurrentAccents = new Dictionary<DispatcherObject, Accent>();
+        private static readonly IDictionary<DispatcherObject, Accent> CurrentSecondaryAccents = new Dictionary<DispatcherObject, Accent>();
 
         #endregion Fields
 
@@ -29,17 +29,17 @@ namespace My.CoachManager.Presentation.Wpf.SkinManager
         /// <summary>
         /// The available themes to be applied to a content control or the whole application.
         /// </summary>
-        public static IList<Theme> Themes { get; }
+        public static IList<Theme> Themes { get; } = RetrieveList<Theme>();
 
         /// <summary>
         /// The available accents to be applied to a content control or the whole application.
         /// </summary>
-        public static IList<Accent> Accents { get; }
+        public static IList<Accent> Accents { get; } = RetrieveList<Accent>();
 
         /// <summary>
         /// The available accents to be applied to a content control or the whole application.
         /// </summary>
-        public static IList<Accent> SecondaryAccents { get; }
+        public static IList<Accent> SecondaryAccents { get; } = RetrieveList<Accent>("SecondaryAccent");
 
         /// <summary>
         /// Gets the current theme.
@@ -86,33 +86,8 @@ namespace My.CoachManager.Presentation.Wpf.SkinManager
             }
         }
 
-        /// <summary>
-        /// Gets or sets resource manager.
-        /// </summary>
-        public static ResourceManager ResourceManager { get; }
-
         #endregion Members
-
-        #region Constructors
-
-        static SkinManager()
-        {
-            // Get the assembly that we are currently in.
-            var assembly = Assembly.GetEntryAssembly();
-            ResourceManager = new ResourceManager(assembly.GetName().Name + ".Resources.SkinResources", assembly);
-
-            CurrentThemes = new Dictionary<DispatcherObject, Theme>();
-            CurrentAccents = new Dictionary<DispatcherObject, Accent>();
-            CurrentSecondaryAccents = new Dictionary<DispatcherObject, Accent>();
-
-            // Get the list of theme names from the method above.
-            Themes = RetrieveList<Theme>();
-            Accents = RetrieveList<Accent>();
-            SecondaryAccents = RetrieveList<Accent>("SecondaryAccent");
-        }
-
-        #endregion Constructors
-
+        
         /// <summary>
         /// Retrieves the list of themes from the assembly.
         /// </summary>
@@ -125,23 +100,26 @@ namespace My.CoachManager.Presentation.Wpf.SkinManager
             Assembly assembly = Assembly.GetEntryAssembly();
 
             // Get the name of the resources file that we will load.
-            var resourceFileName = assembly.GetName().Name + ".g.resources";
-
-            // Open the manifest stream.
-            using (Stream stream = assembly.GetManifestResourceStream(resourceFileName))
+            if (assembly != null)
             {
-                var typeName = string.IsNullOrEmpty(nameFolder) ? typeof(T).Name : nameFolder;
-                // Open a resource reader to get all the resource files.
-                if (stream == null) return list;
-                using (var reader = new ResourceReader(stream))
+                var resourceFileName = assembly.GetName().Name + ".g.resources";
+
+                // Open the manifest stream.
+                using (Stream stream = assembly.GetManifestResourceStream(resourceFileName))
                 {
-                    // Returns just the resources that start in the themes folder
-                    list.AddRange(reader.Cast<DictionaryEntry>()
-                        .Where(entry =>
-                            entry.Key.ToString()
-                                .StartsWith("skins/" + typeName.ToLower() + "/")) // Get all files that are in the themes folder.
-                        .Select(entry => GetSkin<T>(assembly, entry.Key.ToString(), typeName))
-                        .OrderBy(x => x.Label)); // put it in alpha order.
+                    var typeName = string.IsNullOrEmpty(nameFolder) ? typeof(T).Name : nameFolder;
+                    // Open a resource reader to get all the resource files.
+                    if (stream == null) return list;
+                    using (var reader = new ResourceReader(stream))
+                    {
+                        // Returns just the resources that start in the themes folder
+                        list.AddRange(reader.Cast<DictionaryEntry>()
+                            .Where(entry =>
+                                entry.Key.ToString()
+                                    .StartsWith("skins/" + typeName.ToLower() + "/")) // Get all files that are in the themes folder.
+                            .Select(entry => GetSkin<T>(assembly, entry.Key.ToString(), typeName))
+                            .OrderBy(x => x.Label)); // put it in alpha order.
+                    }
                 }
             }
 

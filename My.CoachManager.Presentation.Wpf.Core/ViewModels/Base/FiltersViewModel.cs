@@ -2,12 +2,12 @@
 using My.CoachManager.CrossCutting.Core.Enums;
 using My.CoachManager.Presentation.Core.Models.Filters;
 using My.CoachManager.Presentation.Wpf.Core.ViewModels.Interfaces;
-using Prism.Commands;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
+using GalaSoft.MvvmLight.Command;
+using My.CoachManager.CrossCutting.Core.Extensions;
 
 namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
 {
@@ -82,35 +82,35 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
         /// <summary>
         /// Command to reset filters.
         /// </summary>
-        public DelegateCommand ResetFiltersCommand { get; set; }
+        public RelayCommand ResetFiltersCommand { get; set; }
 
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets Apply Filters Command.
         /// </summary>
-        public DelegateCommand ApplyFiltersCommand { get; set; }
+        public RelayCommand ApplyFiltersCommand { get; set; }
 
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets Show Filters Command.
         /// </summary>
-        public DelegateCommand ShowFiltersCommand { get; set; }
+        public RelayCommand ShowFiltersCommand { get; set; }
 
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets Hide Filters Command.
         /// </summary>
-        public DelegateCommand HideFiltersCommand { get; set; }
+        public RelayCommand HideFiltersCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the Add command.
         /// </summary>
-        public DelegateCommand<Tuple<Func<IFilter>, string>> AddFilterCommand { get; set; }
+        public RelayCommand<Tuple<Func<IFilter>, string>> AddFilterCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the Remove command.
         /// </summary>
-        public DelegateCommand<IFilter> RemoveFilterCommand { get; set; }
+        public RelayCommand<IFilter> RemoveFilterCommand { get; set; }
 
         /// <summary>
         /// Gets or sets auto filter value.
@@ -134,12 +134,12 @@ namespace My.CoachManager.Presentation.Wpf.Core.ViewModels.Base
             Filters.CollectionChanged += FiltersCollectionChanged;
             AllowedFilters = new List<Tuple<Func<IFilter>, string>>();
 
-            ShowFiltersCommand = new DelegateCommand(ShowFilters);
-            HideFiltersCommand = new DelegateCommand(HideFilters);
-            ApplyFiltersCommand = new DelegateCommand(ApplyFilters);
-            ResetFiltersCommand = new DelegateCommand(ResetFilters, CanResetFilters);
-            AddFilterCommand = new DelegateCommand<Tuple<Func<IFilter>, string>>(AddFilter);
-            RemoveFilterCommand = new DelegateCommand<IFilter>(RemoveFilter);
+            ShowFiltersCommand = new RelayCommand(ShowFilters);
+            HideFiltersCommand = new RelayCommand(HideFilters);
+            ApplyFiltersCommand = new RelayCommand(ApplyFilters);
+            ResetFiltersCommand = new RelayCommand(ResetFilters, CanResetFilters);
+            AddFilterCommand = new RelayCommand<Tuple<Func<IFilter>, string>>(AddFilter);
+            RemoveFilterCommand = new RelayCommand<IFilter>(RemoveFilter);
             OnInitializing = false;
         }
 
